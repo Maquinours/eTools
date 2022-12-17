@@ -1,0 +1,14 @@
+C:\Users\juju9\source\repos\eTools\ItemsEditor\bin\Debug\ItemsEditor.exe.config
+C:\Users\juju9\source\repos\eTools\ItemsEditor\bin\Debug\ItemsEditor.exe
+C:\Users\juju9\source\repos\eTools\ItemsEditor\bin\Debug\ItemsEditor.pdb
+C:\Users\juju9\source\repos\eTools\ItemsEditor\bin\Debug\ScanWriteStream.dll
+C:\Users\juju9\source\repos\eTools\ItemsEditor\obj\Debug\ItemsEditor.csproj.AssemblyReference.cache
+C:\Users\juju9\source\repos\eTools\ItemsEditor\obj\Debug\ItemsEditor.csproj.SuggestedBindingRedirects.cache
+C:\Users\juju9\source\repos\eTools\ItemsEditor\obj\Debug\ItemsEditor.Properties.Resources.resources
+C:\Users\juju9\source\repos\eTools\ItemsEditor\obj\Debug\ItemsEditor.csproj.GenerateResource.cache
+C:\Users\juju9\source\repos\eTools\ItemsEditor\obj\Debug\ItemsEditor.csproj.CoreCompileInputs.cache
+C:\Users\juju9\source\repos\eTools\ItemsEditor\obj\Debug\ItemsEditor.csproj.CopyComplete
+C:\Users\juju9\source\repos\eTools\ItemsEditor\obj\Debug\ItemsEditor.exe
+C:\Users\juju9\source\repos\eTools\ItemsEditor\obj\Debug\ItemsEditor.pdb
+C:\Users\juju9\source\repos\eTools\ItemsEditor\bin\Debug\Scanner.dll
+C:\Users\juju9\source\repos\eTools\ItemsEditor\bin\Debug\Scanner.pdb
