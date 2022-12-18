@@ -21,6 +21,9 @@ namespace MoversEditor
             InitializeComponent();
             Project prj = Project.GetInstance();
             prj.Load();
+            AutoCompleteStringCollection identifiersSource = new AutoCompleteStringCollection();
+            identifiersSource.AddRange(prj.GetAllMoversDefines());
+           tb_identifier.AutoCompleteCustomSource = identifiersSource;
             cb_monsterai.DataSource = prj.GetAiIdentifiers();
             cb_belligerence.DataSource = prj.GetBelligerenceIdentifiers();
             cb_class.DataSource = prj.GetClassIdentifiers();

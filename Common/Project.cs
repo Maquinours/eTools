@@ -464,6 +464,11 @@ namespace eTools
         {
             return movers[index];
         }
+
+        public string[] GetAllMoversDefines()
+        {
+            return defines.Where(x => x.Key.StartsWith("MI_")).Select(x => x.Key).ToArray();
+        }
 #endif // __MOVERS
 
         public string[] GetAiIdentifiers()

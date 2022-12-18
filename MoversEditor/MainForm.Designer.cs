@@ -132,6 +132,8 @@
             // 
             // tb_identifier
             // 
+            this.tb_identifier.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.tb_identifier.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.tb_identifier.Location = new System.Drawing.Point(139, 70);
             this.tb_identifier.Name = "tb_identifier";
             this.tb_identifier.Size = new System.Drawing.Size(174, 20);
