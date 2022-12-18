@@ -17,6 +17,9 @@ namespace eTools
 #if __ITEMS
         private List<Item> items;
 #endif // __ITEMS
+#if __MOVERS
+        private List<Mover> movers;
+#endif // __MOVERS
         private List<MainModelBrace> models;
 
         /// <summary>
@@ -33,7 +36,12 @@ namespace eTools
         {
             this.strings = new Dictionary<string, string>();
             this.defines = new Dictionary<string, int>();
+#if __ITEMS
             this.items = new List<Item>();
+#endif // __ITEMS
+#if __MOVERS
+            this.movers = new List<Mover>();
+#endif // __MOVERS
             this.models = new List<MainModelBrace>();
         }
 
@@ -41,13 +49,21 @@ namespace eTools
         {
             Settings config = Settings.GetInstance();
             config.LoadGeneral("..\\..\\..\\eTools.ini");
+#if __ITEMS
             config.LoadSpecs("..\\..\\..\\items.ini");
+#endif // __ITEMS
+#if __MOVERS
+            config.LoadSpecs("..\\..\\..\\movers.ini");
+#endif // __MOVERS
             this.LoadDefines(config.DefineFilesPaths.ToArray());
             this.LoadStrings(config.StringsFilePath);
 #if __ITEMS
             this.LoadItems(config.PropFileName);
 #endif // __ITEMS
-            this.LoadModels(config.ResourcePath + "mdlDyna.inc");
+#if __MOVERS
+            LoadMovers(config.PropFileName);
+#endif // __MOVERS
+            //this.LoadModels(config.ResourcePath + "mdlDyna.inc");
         }
 
         private void LoadDefines(string[] filesPath)
@@ -232,9 +248,13 @@ namespace eTools
                 prop.NReflect = scanner.GetNumber();
                 prop.DwSndAttack1 = scanner.GetToken(); // SND_
                 prop.DwSndAttack2 = scanner.GetToken(); // SND_
+                scanner.GetToken(); // ""
                 prop.SzIcon = scanner.GetToken();
+                scanner.GetToken(); // ""
                 prop.DwQuestId = scanner.GetToken();
+                scanner.GetToken(); // ""
                 prop.SzTextFileName = scanner.GetToken();
+                scanner.GetToken(); // ""
                 prop.SzCommand = scanner.GetToken();
                 prop.NMinLimitLevel = scanner.GetNumber();
                 prop.NMaxLimitLevel = scanner.GetNumber();
@@ -297,6 +317,198 @@ namespace eTools
         }
 #endif // __ITEMS
 
+#if __MOVERS
+        private void LoadMovers(string filePath)
+        {
+            Scanner scanner = new Scanner();
+            scanner.Load(filePath);
+            while (true)
+            {
+                Mover mover = new Mover();
+                MoverProp mp = new MoverProp();
+
+                mp.DwId = scanner.GetToken();
+                if (scanner.EndOfStream)
+                    break;
+
+                mp.SzName = scanner.GetToken();
+                mp.DwAi = scanner.GetToken();
+                mp.DwStr = scanner.GetNumber();
+                mp.DwSta = scanner.GetNumber();
+                mp.DwDex = scanner.GetNumber();
+                mp.DwInt = scanner.GetNumber();
+                mp.DwHR = scanner.GetNumber();
+                mp.DwER = scanner.GetNumber();
+                mp.DwRace = scanner.GetNumber();
+                mp.DwBelligerence = scanner.GetToken();
+                mp.DwGender = scanner.GetNumber();
+                mp.DwLevel = scanner.GetNumber();
+                mp.DwFlightLevel = scanner.GetNumber();
+                mp.DwSize = scanner.GetNumber();
+                mp.DwClass = scanner.GetToken();
+                mp.BIfParts = scanner.GetNumber(); // If mover can equip parts
+
+                if (mp.BIfParts == -1)
+                    mp.BIfParts = 0;
+
+                mp.NChaotic = scanner.GetNumber();
+                mp.DwUseable = scanner.GetNumber();
+                mp.DwActionRadius = scanner.GetNumber();
+                mp.DwAtkMin = scanner.GetNumber();
+                mp.DwAtkMax = scanner.GetNumber();
+                mp.DwAtk1 = scanner.GetToken();     // Need expert mode to change
+                mp.DwAtk2 = scanner.GetToken();     // Need expert mode to change
+                mp.DwAtk3 = scanner.GetToken();     // Need expert mode to change
+                mp.DwAtk4 = scanner.GetToken();     // Need expert mode to change
+                mp.FFrame = scanner.GetFloat();     // Need expert mode to change
+
+                mp.DwOrthograde = scanner.GetNumber(); // Useless
+                mp.DwThrustRate = scanner.GetNumber(); // Useless
+                mp.DwChestRate = scanner.GetNumber(); // Useless
+                mp.DwHeadRate = scanner.GetNumber(); // Useless
+                mp.DwArmRate = scanner.GetNumber(); // Useless
+                mp.DwLegRate = scanner.GetNumber(); // Useless
+
+                mp.DwAttackSpeed = scanner.GetNumber(); // Useless
+                mp.DwReAttackDelay = scanner.GetNumber();
+                mp.DwAddHp = scanner.GetNumber();
+                mp.DwAddMp = scanner.GetNumber();
+                mp.DwNaturalArmor = scanner.GetNumber();
+                mp.NAbrasion = scanner.GetNumber();
+                mp.NHardness = scanner.GetNumber();
+                mp.DwAdjAtkDelay = scanner.GetNumber();
+
+                mp.EElementType = scanner.GetNumber();
+                mp.WElementAtk = scanner.GetNumber(); // The atk and def value from element
+                // if (mp.WElementAtk > short.MaxValue) return false; // ERROR
+
+                mp.DwHideLevel = scanner.GetNumber(); // Expert mode
+                mp.FSpeed = scanner.GetFloat(); // Speed
+                mp.DwShelter = scanner.GetNumber(); // Useless
+                mp.DwFlying = scanner.GetNumber(); // Expert mode
+                mp.DwJumpIng = scanner.GetNumber(); // Useless
+                mp.DwAirJump = scanner.GetNumber(); // Useless
+                mp.BTaming = scanner.GetNumber(); // Useless
+                mp.DwResisMgic = scanner.GetNumber(); // Magic resist
+
+                mp.NResistElecricity = (int)(scanner.GetFloat() * 100);
+                mp.NResistFire = (int)(scanner.GetFloat() * 100);
+                mp.NResistWind = (int)(scanner.GetFloat() * 100);
+                mp.NResistWater = (int)(scanner.GetFloat() * 100);
+                mp.NResistEarth = (int)(scanner.GetFloat() * 100);
+
+                mp.DwCash = scanner.GetNumber(); // Useless
+                mp.DwSourceMaterial = scanner.GetToken(); // Useless
+                mp.DwMaterialAmount = scanner.GetNumber(); // Useless
+                mp.DwCohesion = scanner.GetNumber(); // Useless
+                mp.DwHoldingTime = scanner.GetNumber(); // Useless
+                mp.DwCorrectionValue = scanner.GetNumber(); // Taux de loot (en %)
+                mp.NExpValue = scanner.GetNumber(); // Exp sent to killer
+                mp.NFxpValue = scanner.GetNumber(); // Flight exp sent to killer (expert mode)
+                mp.NBodyState = scanner.GetNumber(); // Useless 
+                mp.DwAddAbility = scanner.GetNumber(); // Useless
+                mp.BKillable = scanner.GetNumber(); // If monster, always true, otherwise, false
+
+                mp.DwVirtItem = new string[3]; // Useless
+                mp.BVirtType = new int[3]; // Useless
+                mp.DwVirtItem[0] = scanner.GetToken();
+                mp.DwVirtItem[1] = scanner.GetToken();
+                mp.DwVirtItem[2] = scanner.GetToken();
+                mp.BVirtType[0] = scanner.GetNumber();
+                mp.BVirtType[1] = scanner.GetNumber();
+                mp.BVirtType[2] = scanner.GetNumber();
+
+                mp.DwSndAtk1 = scanner.GetToken(); // Useless
+                mp.DwSndAtk2 = scanner.GetToken(); // Useless
+
+                mp.DwSndDie1 = scanner.GetToken(); // Useless
+                mp.DwSndDie2 = scanner.GetToken(); // Useless
+
+                mp.DwSndDmg1 = scanner.GetToken(); // Useless
+                mp.DwSndDmg2 = scanner.GetToken(); // Sound used when mover take dmg (Expert mode)
+                mp.DwSndDmg3 = scanner.GetToken(); // Useless
+
+                mp.DwSndIdle1 = scanner.GetToken(); // Sound played when mover is clicked
+                mp.DwSndIdle2 = scanner.GetToken(); // Useless
+
+                mp.SzComment = scanner.GetToken(); // Comment (useless)
+
+                mp.DwAreaColor = scanner.GetToken(); // Useless
+                mp.SzNpcMark = scanner.GetToken(); // Useless
+                mp.DwMadrigalGiftPoint = scanner.GetNumber(); // Useless
+
+                mover.Prop = mp;
+                if (!this.strings.ContainsKey(mp.SzName))
+                    this.strings.Add(mp.SzName, "");          // If IDS is not defined, we add it to be defined.
+                movers.Add(mover);
+            }
+            scanner.Close();
+        }
+
+        public string[] GetAllMoversName()
+        {
+            string[] result = new string[this.movers.Count];
+            for (int i = 0; i < result.Count(); i++)
+            {
+                string ids = this.movers[i].Prop.SzName;
+                string value = this.strings[ids];
+                if (string.IsNullOrWhiteSpace(value))
+                    result[i] = ids; // If ids has no valid string, we show the ids instead
+                else
+                    result[i] = value;
+            }
+            return result;
+        }
+
+        public Mover GetMoverByIndex(int index)
+        {
+            return movers[index];
+        }
+#endif // __MOVERS
+
+        public string[] GetAiIdentifiers()
+        {
+            List<string> result = new List<string>();
+            foreach(string defineKey in defines.Keys)
+            {
+                if (defineKey.StartsWith("AII_"))
+                    result.Add(defineKey);
+            }
+            return result.ToArray();
+        }
+
+        public string[] GetBelligerenceIdentifiers()
+        {
+            List<string> result = new List<string>();
+            foreach(string defineKey in defines.Keys)
+            {
+                if (defineKey.StartsWith("BELLI_"))
+                    result.Add(defineKey);
+            }
+            return result.ToArray();
+        }
+
+        public string[] GetClassIdentifiers()
+        {
+            List<string> result = new List<string>();
+            foreach (string defineKey in defines.Keys)
+            {
+                if (defineKey.StartsWith("RANK_"))
+                    result.Add(defineKey);
+            }
+            return result.ToArray();
+        }
+
+        public string GetString(string ids)
+        {
+            return strings[ids];
+        }
+
+        public void ChangeStringValue(string ids, string newValue)
+        {
+            strings[ids] = newValue;
+        }
+
         private void LoadStrings(string filePath)
         {
             this.strings.Clear();
@@ -313,6 +525,7 @@ namespace eTools
             }
             scanner.Close();
         }
+
 
         private void LoadModels(string filePath)
         {

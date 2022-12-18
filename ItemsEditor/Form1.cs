@@ -11,12 +11,14 @@ using System.Windows.Forms;
 
 namespace ItemsEditor
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
+            Project prj = Project.GetInstance();
             InitializeComponent();
-            Project.GetInstance().Load();
+            prj.Load();
+            lb_items.DataSource = prj.GetAllItemsName();
         }
     }
 }

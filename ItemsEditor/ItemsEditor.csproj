@@ -36,9 +36,6 @@
     <Reference Include="Scanner">
       <HintPath>..\..\Scanner\Scanner\bin\Debug\Scanner.dll</HintPath>
     </Reference>
-    <Reference Include="ScanWriteStream">
-      <HintPath>..\ScanWriteStream.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -72,6 +69,9 @@
     <Compile Include="..\Common\Settings.cs">
       <Link>Common\Settings.cs</Link>
     </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
