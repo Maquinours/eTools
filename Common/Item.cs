@@ -160,4 +160,9 @@ public class Item
 {
     public ItemProp Prop { get; set; }
     public ModelElem Model { get; set; }
+    public string Name
+    {
+        get { return Project.GetInstance().GetString(Prop.SzName); }
+        set { Project.GetInstance().ChangeStringValue(Prop.SzName, value); }
+    }
 }

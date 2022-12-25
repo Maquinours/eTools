@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -15,7 +17,7 @@ namespace eTools
         private Dictionary<string, string> strings;
         private Dictionary<string, int> defines;
 #if __ITEMS
-        private List<Item> items;
+        public Item[] Items { get; private set; }
 #endif // __ITEMS
 #if __MOVERS
         private List<Mover> movers;
@@ -37,7 +39,7 @@ namespace eTools
             this.strings = new Dictionary<string, string>();
             this.defines = new Dictionary<string, int>();
 #if __ITEMS
-            this.items = new List<Item>();
+            this.Items = new Item[0];
 #endif // __ITEMS
 #if __MOVERS
             this.movers = new List<Mover>();
@@ -84,7 +86,8 @@ namespace eTools
                     string key = scanner.GetToken();
                     int value = scanner.GetNumber();
                     if (scanner.Token.StartsWith("#")) continue;
-                    this.defines.Add(key, value);
+                    if(!this.defines.ContainsKey(key))
+                        this.defines.Add(key, value);
                     scanner.GetToken();
                 }
                 scanner.Close();
@@ -94,7 +97,7 @@ namespace eTools
 #if __ITEMS
         public Item GetItemById(string dwId)
         {
-            foreach (Item it in this.items)
+            foreach (Item it in this.Items)
             {
                 if (it.Prop.DwID == dwId) return it;
             }
@@ -103,7 +106,7 @@ namespace eTools
 
         private void LoadItems(string filePath)
         {
-            this.items.Clear();
+            List<Item> itemsList = new List<Item>();
             Scanner scanner = new Scanner();
 
             scanner.Load(filePath);
@@ -298,15 +301,16 @@ namespace eTools
                 };
                 if (!this.strings.ContainsKey(prop.SzName))
                     this.strings.Add(prop.SzName, "");          // If IDS is not defined, we add it to be defined.
-                this.items.Add(item);
+                itemsList.Add(item);
             }
+            Items = itemsList.ToArray();
         }
         public string[] GetAllItemsName()
         {
-            string[] result = new string[this.items.Count];
+            string[] result = new string[this.Items.Length];
             for (int i = 0; i < result.Count(); i++)
             {
-                string ids = this.items[i].Prop.SzName;
+                string ids = this.Items[i].Prop.SzName;
                 string value = this.strings[ids];
                 if (string.IsNullOrWhiteSpace(value))
                     result[i] = ids; // If ids has no valid string, we show the ids instead
@@ -314,6 +318,27 @@ namespace eTools
                     result[i] = value;
             }
             return result;
+        }
+
+        public Item GetItemByIndex(int index)
+        {
+            return Items[index];
+        }
+
+        public string[] GetAllItemKinds1()
+        {
+            return defines.Where(x => x.Key.StartsWith("IK1_")).Select(x => x.Key).ToArray();
+
+        }
+
+        public string[] GetAllItemKinds2()
+        {
+            return defines.Where(x => x.Key.StartsWith("IK2_")).Select(x => x.Key).ToArray();
+        }
+
+        public string[] GetAllItemKinds3()
+        {
+            return defines.Where(x => x.Key.StartsWith("IK3_")).Select(x => x.Key).ToArray();
         }
 #endif // __ITEMS
 
@@ -436,13 +461,207 @@ namespace eTools
                 mp.DwAreaColor = scanner.GetToken(); // Useless
                 mp.SzNpcMark = scanner.GetToken(); // Useless
                 mp.DwMadrigalGiftPoint = scanner.GetNumber(); // Useless
-
-                mover.Prop = mp;
                 if (!this.strings.ContainsKey(mp.SzName))
                     this.strings.Add(mp.SzName, "");          // If IDS is not defined, we add it to be defined.
+                mover.Prop = mp;
                 movers.Add(mover);
             }
             scanner.Close();
+        }
+
+        public void SaveMoversprop(string filePath)
+        {
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                foreach(Mover mover in movers)
+                {
+                    MoverProp prop = mover.Prop;
+
+                    writer.Write(prop.DwId);
+                    writer.Write("\t");
+                    writer.Write(prop.SzName);
+                    writer.Write("\t");
+                    writer.Write(prop.DwAi);
+                    writer.Write("\t");
+                    writer.Write(prop.DwStr == -1 ? "=" : prop.DwStr.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwSta == -1 ? "=" : prop.DwSta.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwDex == -1 ? "=" : prop.DwDex.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwInt == -1 ? "=" : prop.DwInt.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwHR == -1 ? "=" : prop.DwHR.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwER == -1 ? "=" : prop.DwER.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwRace == -1 ? "=" : prop.DwRace.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwBelligerence);
+                    writer.Write("\t");
+                    writer.Write(prop.DwGender == -1 ? "=" : prop.DwGender.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwLevel == -1 ? "=" : prop.DwLevel.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwFlightLevel == -1 ? "=" : prop.DwFlightLevel.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwSize == -1 ? "=" : prop.DwSize.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwClass);
+                    writer.Write("\t");
+                    writer.Write(prop.BIfParts == 1 ? prop.BIfParts.ToString(new CultureInfo("en-US")) : 0.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.NChaotic == -1 ? "=" : prop.NChaotic.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwUseable == -1 ? "=" : prop.DwUseable.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwActionRadius == -1 ? "=" : prop.DwActionRadius.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwAtkMin == -1 ? "=" : prop.DwAtkMin.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwAtkMax == -1 ? "=" : prop.DwAtkMax.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwAtk1);
+                    writer.Write("\t");
+                    writer.Write(prop.DwAtk2);
+                    writer.Write("\t");
+                    writer.Write(prop.DwAtk3);
+                    writer.Write("\t");
+                    writer.Write(prop.DwAtk4);
+                    writer.Write("\t");
+                    writer.Write(prop.FFrame == -1f ? "=" : prop.FFrame.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwOrthograde == -1 ? "=" : prop.DwOrthograde.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwThrustRate == -1 ? "=" : prop.DwThrustRate.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwChestRate == -1 ? "=" : prop.DwChestRate.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwHeadRate == -1 ? "=" : prop.DwHeadRate.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwArmRate == -1 ? "=" : prop.DwArmRate.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwLegRate == -1 ? "=" : prop.DwLegRate.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwAttackSpeed == -1 ? "=" : prop.DwAttackSpeed.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwReAttackDelay == -1 ? "=" : prop.DwReAttackDelay.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwAddHp == -1 ? "=" : prop.DwAddHp.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwAddMp == -1 ? "=" : prop.DwAddMp.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwNaturalArmor == -1 ? "=" : prop.DwNaturalArmor.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.NAbrasion == -1 ? "=" : prop.NAbrasion.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.NHardness == -1 ? "=" : prop.NHardness.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwAdjAtkDelay == -1 ? "=" : prop.DwAdjAtkDelay.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.EElementType < 0 ? "0" : prop.EElementType.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.WElementAtk == -1 ? "=" : prop.WElementAtk.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwHideLevel == -1 ? "=" : prop.DwHideLevel.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.FSpeed == -1f ? "=" : prop.FSpeed.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwShelter == -1 ? "=" : prop.DwShelter.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwFlying == -1 ? "=" : prop.DwFlying.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwJumpIng == -1 ? "=" : prop.DwJumpIng.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwAirJump == -1 ? "=" : prop.DwAirJump.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.BTaming == -1 ? "=" : prop.BTaming.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwResisMgic == -1 ? "=" : prop.DwResisMgic.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+
+                    writer.Write(prop.NResistElecricity / 100f == -1 ? "=" : (prop.NResistElecricity / 100f).ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.NResistFire / 100f == -1 ? "=" : (prop.NResistFire / 100f).ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.NResistWind / 100f == -1 ? "=" : (prop.NResistWind / 100f).ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.NResistWater / 100f == -1 ? "=" : (prop.NResistWater / 100f).ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.NResistEarth / 100f == -1 ? "=" : (prop.NResistEarth / 100f).ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+
+                    writer.Write(prop.DwCash == -1 ? "=" : prop.DwCash.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwSourceMaterial);
+                    writer.Write("\t");
+                    writer.Write(prop.DwMaterialAmount == -1 ? "=" : prop.DwMaterialAmount.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwCohesion == -1 ? "=" : prop.DwCohesion.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwHoldingTime == -1 ? "=" : prop.DwHoldingTime.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwCorrectionValue == -1 ? "=" : prop.DwCorrectionValue.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.NExpValue < 0 ? "0" : prop.NExpValue.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.NFxpValue < 0 ? "0" : prop.NFxpValue.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.NBodyState == -1 ? "=" : prop.NBodyState.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.DwAddAbility == -1 ? "=" : prop.DwAddAbility.ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.BKillable == 1 ? "1" : "0");
+                    writer.Write("\t");
+
+                    writer.Write(prop.DwVirtItem[0]);
+                    writer.Write("\t");
+                    writer.Write(prop.DwVirtItem[1]);
+                    writer.Write("\t");
+                    writer.Write(prop.DwVirtItem[2]);
+                    writer.Write("\t");
+                    writer.Write(prop.BVirtType[0] == -1 ? "=" : prop.BVirtType[0].ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.BVirtType[1] == -1 ? "=" : prop.BVirtType[1].ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+                    writer.Write(prop.BVirtType[2] == -1 ? "=" : prop.BVirtType[2].ToString(new CultureInfo("en-US")));
+                    writer.Write("\t");
+
+                    writer.Write(prop.DwSndAtk1);
+                    writer.Write("\t");
+                    writer.Write(prop.DwSndAtk2);
+                    writer.Write("\t");
+
+                    writer.Write(prop.DwSndDie1);
+                    writer.Write("\t");
+                    writer.Write(prop.DwSndDie2);
+                    writer.Write("\t");
+
+                    writer.Write(prop.DwSndDmg1);
+                    writer.Write("\t");
+                    writer.Write(prop.DwSndDmg2);
+                    writer.Write("\t");
+                    writer.Write(prop.DwSndDmg3);
+                    writer.Write("\t");
+
+                    writer.Write(prop.DwSndIdle1);
+                    writer.Write("\t");
+                    writer.Write(prop.DwSndIdle2);
+                    writer.Write("\t");
+
+                    writer.Write(prop.SzComment);
+                    writer.Write("\t");
+
+                    writer.Write(prop.DwAreaColor);
+                    writer.Write("\t");
+                    writer.Write(prop.SzNpcMark);
+                    writer.Write("\t");
+                    writer.Write(prop.DwMadrigalGiftPoint < 0 ? "0" : prop.DwMadrigalGiftPoint.ToString(new CultureInfo("en-US")));
+                    writer.Write("\r\n");
+                }
+                writer.Flush();
+                writer.Close();
+            }
         }
 
         public string[] GetAllMoversName()
@@ -460,6 +679,11 @@ namespace eTools
             return result;
         }
 
+        public Mover[] GetAllMovers()
+        {
+            return movers.ToArray();
+        }
+
         public Mover GetMoverByIndex(int index)
         {
             return movers[index];
@@ -469,12 +693,20 @@ namespace eTools
         {
             return defines.Where(x => x.Key.StartsWith("MI_")).Select(x => x.Key).ToArray();
         }
+
+        public void DeleteMover(int index)
+        {
+            Mover mover = GetMoverByIndex(index);
+            movers.RemoveAt(index);
+            if (movers.FirstOrDefault(x => x.Prop.SzName == mover.Prop.SzName) == null)
+                strings.Remove(mover.Prop.SzName);
+        }
 #endif // __MOVERS
 
         public string[] GetAiIdentifiers()
         {
             List<string> result = new List<string>();
-            foreach(string defineKey in defines.Keys)
+            foreach (string defineKey in defines.Keys)
             {
                 if (defineKey.StartsWith("AII_"))
                     result.Add(defineKey);
@@ -485,7 +717,7 @@ namespace eTools
         public string[] GetBelligerenceIdentifiers()
         {
             List<string> result = new List<string>();
-            foreach(string defineKey in defines.Keys)
+            foreach (string defineKey in defines.Keys)
             {
                 if (defineKey.StartsWith("BELLI_"))
                     result.Add(defineKey);
@@ -502,6 +734,16 @@ namespace eTools
                     result.Add(defineKey);
             }
             return result.ToArray();
+        }
+
+        public string[] GetJobIdentifiers()
+        {
+            return defines.Where(x => x.Key.StartsWith("JOB_")).Select(x => x.Key).ToArray();
+        }
+
+        public string[] GetSexIdentifiers()
+        {
+            return defines.Where(x => x.Key.StartsWith("SEX_")).Select(x => x.Key).ToArray();
         }
 
         public string GetString(string ids)
@@ -615,7 +857,7 @@ namespace eTools
                     if (modelElem.DwType == this.defines["OT_ITEM"]) // If model corresponds to an item
                     {
                         Item item = this.GetItemById(modelElem.DwIndex);
-                        if(item != null)
+                        if (item != null)
                             item.Model = modelElem; // We get the item that the model is for and we set its model to the current model
                     }
 #endif // __ITEMS
