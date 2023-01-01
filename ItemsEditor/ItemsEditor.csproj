@@ -33,9 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Scanner, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Scan\Scanner\bin\Release\Scanner.dll</HintPath>
+    <Reference Include="DDSImageParser">
+      <HintPath>..\..\DDSImageParser\DDSImageParser\bin\Debug\DDSImageParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Scanner">
+      <HintPath>..\..\Scan\Scanner\bin\Debug\Scanner.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

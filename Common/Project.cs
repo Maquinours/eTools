@@ -746,6 +746,16 @@ namespace eTools
             return defines.Where(x => x.Key.StartsWith("SEX_")).Select(x => x.Key).ToArray();
         }
 
+        public string[] GetDstIdentifiers()
+        {
+            return defines.Where(x => x.Key.StartsWith("DST_")).Select(x => x.Key).ToArray();
+        }
+
+        public string[] GetElementsIdentifiers()
+        {
+            return Settings.GetInstance().Elements.Values.ToArray();
+        }
+
         public string GetString(string ids)
         {
             return strings[ids];

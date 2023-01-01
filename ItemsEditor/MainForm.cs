@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DDSImageParser;
+using System.IO;
 
 namespace ItemsEditor
 {
@@ -26,8 +28,10 @@ namespace ItemsEditor
             cb_ik1.DataSource = prj.GetAllItemKinds1();
             cb_ik2.DataSource = prj.GetAllItemKinds2();
             cb_ik3.DataSource = prj.GetAllItemKinds3();
-            cb_job.DataSource = prj.GetJobIdentifiers();
-            cb_sex.DataSource = prj.GetSexIdentifiers();
+            cb_job.DataSource = new string[] { "=" }.Concat(prj.GetJobIdentifiers()).ToArray();
+            cb_sex.DataSource = new string[] { "=" }.Concat(prj.GetSexIdentifiers()).ToArray();
+            cb_DstParamIdentifier.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
+            cb_ElementType.DataSource = prj.GetElementsIdentifiers();
         }
 
         private void lb_items_SelectedIndexChanged(object sender, EventArgs e)
@@ -43,6 +47,14 @@ namespace ItemsEditor
             tb_cost.DataBindings.Clear();
             cb_job.DataBindings.Clear();
             cb_sex.DataBindings.Clear();
+            pb_icon.DataBindings.Clear();
+            tb_icon.DataBindings.Clear();
+            tb_description.DataBindings.Clear();
+            lb_DstParams.SelectedIndex = -1;
+            lb_DstParams.Items.Clear();
+            tb_AtkMin.DataBindings.Clear();
+            tb_AtkMax.DataBindings.Clear();
+            tb_Level.DataBindings.Clear();
 
             cb_ik1.DataBindings.Add(new Binding("SelectedItem", prop, "DwItemKind1", false, DataSourceUpdateMode.OnPropertyChanged));
             cb_ik2.DataBindings.Add(new Binding("SelectedItem", prop, "DwItemKind2", false, DataSourceUpdateMode.OnPropertyChanged));
@@ -53,6 +65,28 @@ namespace ItemsEditor
             tb_cost.DataBindings.Add(new Binding("Text", prop, "DwCost", false, DataSourceUpdateMode.OnPropertyChanged));
             cb_job.DataBindings.Add(new Binding("Text", prop, "DwItemJob", false, DataSourceUpdateMode.OnPropertyChanged));
             cb_sex.DataBindings.Add(new Binding("Text", prop, "DwItemSex", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_icon.DataBindings.Add(new Binding("Text", prop, "SzIcon", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_description.DataBindings.Add(new Binding("Text", currentItem, "Description", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_AtkMin.DataBindings.Add(new Binding("Text", prop, "DwAbilityMin", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_AtkMax.DataBindings.Add(new Binding("Text", prop, "DwAbilityMax", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_Level.DataBindings.Add(new Binding("Text", prop, "DwLimitLevel1", false, DataSourceUpdateMode.OnPropertyChanged));
+
+
+            for (int i = 0; i < prop.DwDestParam.Length; i++)
+            {
+                if (prop.DwDestParam[i] != "=")
+                    lb_DstParams.Items.Add($"Stat {i} ({prop.DwDestParam[i]} + {prop.NAdjParamVal[i]})");
+                else
+                    lb_DstParams.Items.Add($"Stat {i}");
+            }
+
+            string iconPath = $"{Settings.GetInstance().IconsFolderPath}{prop.SzIcon}";
+            if (!File.Exists(iconPath))
+            {
+                pb_icon.Image = pb_icon.ErrorImage;
+            }
+            else
+                pb_icon.Image = new DDSImage(File.OpenRead(iconPath)).BitmapImage;
         }
 
         private void FormatIntTextbox(object sender, EventArgs e)
@@ -101,7 +135,7 @@ namespace ItemsEditor
                         {
                             for (int i = lb_items.SelectedIndex + 1; i != lb_items.SelectedIndex; i++)
                             {
-                                if (((string)lb_items.Items[i]).Contains(searchForm.SearchText))
+                                if (((Item)lb_items.Items[i]).Name.Contains(searchForm.SearchText))
                                 {
                                     lb_items.SelectedIndex = i;
                                     return;
@@ -113,6 +147,55 @@ namespace ItemsEditor
                         break;
                 }
             }
+        }
+
+        private void tb_icon_TextChanged(object sender, EventArgs e)
+        {
+            string filePath = $"{Settings.GetInstance().IconsFolderPath}{((TextBox)sender).Text}";
+            if (!File.Exists(filePath))
+            {
+                pb_icon.Image = pb_icon.ErrorImage;
+                return;
+            }
+            pb_icon.Image = new DDSImage(File.OpenRead(filePath)).BitmapImage;
+        }
+
+        private void lb_DstParams_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cb_DstParamIdentifier.DataBindings.Clear();
+            tb_DstParamValue.DataBindings.Clear();
+            if (lb_items.SelectedIndex == -1 || lb_DstParams.SelectedIndex == -1)
+            {
+                cb_DstParamIdentifier.ResetText();
+                cb_DstParamIdentifier.Enabled = false;
+                tb_DstParamValue.ResetText();
+                tb_DstParamValue.Enabled = false;
+                return;
+            }
+            Item item = (Item)lb_items.SelectedItem;
+            //BindingSource bs = new BindingSource();
+            cb_DstParamIdentifier.DataBindings.Add(new Binding("SelectedItem", item.Prop.DwDestParam, "", false, DataSourceUpdateMode.OnPropertyChanged));
+            cb_DstParamIdentifier.BindingContext[item.Prop.DwDestParam].Position = lb_DstParams.SelectedIndex;
+            tb_DstParamValue.DataBindings.Add(new Binding("Text", item.Prop.NAdjParamVal, "", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_DstParamValue.BindingContext[item.Prop.NAdjParamVal].Position = lb_DstParams.SelectedIndex;
+            cb_DstParamIdentifier.Enabled = true;
+            tb_DstParamValue.Enabled = true;
+            //bs.DataSource = item.Prop.DwDestParam;
+            //bs.Position = lb_DstParams.SelectedIndex;
+            //cb_DstParamIdentifier.DataSource = bs;
+            // TODO: ADD PARAM VALUE
+        }
+
+        private void cb_DstParamIdentifier_SelectedValueChanged(object sender, EventArgs e)
+        {
+            //if (lb_DstParams.SelectedIndex == -1) return;
+            //string text = $"Stat {lb_DstParams.SelectedIndex}";
+            //if (cb_DstParamIdentifier.SelectedText != "=" && int.TryParse(tb_DstParamValue.Text, out int intParamValue))
+            //{
+            //    string symbol = intParamValue >= 0 ? "+" : "";
+            //    text += $"({cb_DstParamIdentifier.Text} {symbol}{tb_DstParamValue.Text})";
+            //}
+            //lb_DstParams.Items[lb_DstParams.SelectedIndex] = text;
         }
     }
 }

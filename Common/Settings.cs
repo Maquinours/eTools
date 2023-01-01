@@ -37,6 +37,9 @@ namespace eTools
         /// Main data file that process will read and save (E.G propMover.txt)
         /// </summary>
         public string PropFileName { get; private set; }
+#if __ITEMS
+        public string IconsFolderPath { get; private set; }
+#endif
 
         private Settings()
         {
@@ -118,6 +121,11 @@ namespace eTools
                     case "PROPFILE":
                         this.PropFileName = ResourcePath + scanner.GetToken();
                         break;
+#if __ITEMS
+                    case "ICONSPATH":
+                        IconsFolderPath = scanner.GetToken();
+                        break;
+#endif // __ITEMS
                 }
             }
         }

@@ -1,4 +1,17 @@
 using eTools;
+using System;
+
+public class DestParam
+{
+    public string Param { get; set; }
+    public int Value { get; set; }
+
+    public DestParam(string param, int value)
+    {
+        Param = param;
+        Value = value;
+    }
+}
 
 public class ItemProp
 {
@@ -155,6 +168,18 @@ public class ItemProp
     public int BCanSavePotion { get; set; }
     public int BCanLooksChange { get; set; }
     public int BIsLooksChangeMaterial { get; set; }
+
+    public DestParam[] DestParams
+    {
+        get
+        {
+            return new DestParam[] { new DestParam(DwDestParam[0], NAdjParamVal[0]), new DestParam(DwDestParam[1], NAdjParamVal[1]), new DestParam(DwDestParam[2], NAdjParamVal[2]), new DestParam(DwDestParam[3], NAdjParamVal[3]), new DestParam(DwDestParam[4], NAdjParamVal[4]), new DestParam(DwDestParam[5], NAdjParamVal[5]) };
+        }
+        set
+        {
+
+        }
+    }
 }
 public class Item
 {
@@ -164,5 +189,10 @@ public class Item
     {
         get { return Project.GetInstance().GetString(Prop.SzName); }
         set { Project.GetInstance().ChangeStringValue(Prop.SzName, value); }
+    }
+    public string Description
+    {
+        get { return Project.GetInstance().GetString(Prop.SzCommand); }
+        set { Project.GetInstance().ChangeStringValue(Prop.SzCommand, value); }
     }
 }
