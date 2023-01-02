@@ -320,6 +320,13 @@ namespace eTools
             return result;
         }
 
+        public void RemoveItem(Item itemToRemove)
+        {
+            List<Item> list = new List<Item>(Items);
+            list.Remove(itemToRemove);
+            this.Items = list.ToArray();
+        }
+
         public Item GetItemByIndex(int index)
         {
             return Items[index];

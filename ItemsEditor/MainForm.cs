@@ -36,8 +36,6 @@ namespace ItemsEditor
 
         private void lb_items_SelectedIndexChanged(object sender, EventArgs e)
         {
-            currentItem = ((Item)lb_items.SelectedItem);
-            ItemProp prop = currentItem.Prop;
             cb_ik1.DataBindings.Clear();
             cb_ik2.DataBindings.Clear();
             cb_ik3.DataBindings.Clear();
@@ -55,6 +53,11 @@ namespace ItemsEditor
             tb_AtkMin.DataBindings.Clear();
             tb_AtkMax.DataBindings.Clear();
             tb_Level.DataBindings.Clear();
+
+            if (lb_items.SelectedIndex == -1) return;
+
+            currentItem = ((Item)lb_items.SelectedItem);
+            ItemProp prop = currentItem.Prop;
 
             cb_ik1.DataBindings.Add(new Binding("SelectedItem", prop, "DwItemKind1", false, DataSourceUpdateMode.OnPropertyChanged));
             cb_ik2.DataBindings.Add(new Binding("SelectedItem", prop, "DwItemKind2", false, DataSourceUpdateMode.OnPropertyChanged));
@@ -146,6 +149,17 @@ namespace ItemsEditor
                         }
                         break;
                 }
+            }
+            else if(e.KeyCode == Keys.Delete)
+            {
+                if(ActiveControl == lb_items && lb_items.SelectedItem != null)
+                {
+                    int newIndex = lb_items.SelectedIndex - 1;
+                    Project prj = Project.GetInstance();
+                    prj.RemoveItem((Item)lb_items.SelectedItem);
+                    lb_items.DataSource = prj.Items;
+                    lb_items.SelectedIndex = newIndex;
+                }   
             }
         }
 
