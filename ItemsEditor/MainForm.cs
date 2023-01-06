@@ -53,6 +53,7 @@ namespace ItemsEditor
             tb_AtkMin.DataBindings.Clear();
             tb_AtkMax.DataBindings.Clear();
             tb_Level.DataBindings.Clear();
+            tb_ModelName.DataBindings.Clear();
 
             if (lb_items.SelectedIndex == -1) return;
 
@@ -73,7 +74,7 @@ namespace ItemsEditor
             tb_AtkMin.DataBindings.Add(new Binding("Text", prop, "DwAbilityMin", false, DataSourceUpdateMode.OnPropertyChanged));
             tb_AtkMax.DataBindings.Add(new Binding("Text", prop, "DwAbilityMax", false, DataSourceUpdateMode.OnPropertyChanged));
             tb_Level.DataBindings.Add(new Binding("Text", prop, "DwLimitLevel1", false, DataSourceUpdateMode.OnPropertyChanged));
-
+            tb_ModelName.DataBindings.Add(new Binding("Text", currentItem.Model, "SzName", false, DataSourceUpdateMode.OnPropertyChanged));
 
             for (int i = 0; i < prop.DwDestParam.Length; i++)
             {

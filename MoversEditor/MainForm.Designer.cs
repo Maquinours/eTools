@@ -38,6 +38,9 @@
             this.lbl_name = new System.Windows.Forms.Label();
             this.tc_main = new System.Windows.Forms.TabControl();
             this.tp_general = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tb_ModelName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tp_pet = new System.Windows.Forms.TabPage();
             this.cb_petAI = new System.Windows.Forms.ComboBox();
             this.lbl_petAi = new System.Windows.Forms.Label();
@@ -105,8 +108,11 @@
             this.tsmi_moversadd = new System.Windows.Forms.ToolStripMenuItem();
             this.cms_lbmovers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_moverdelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tb_ModelScale = new System.Windows.Forms.TextBox();
             this.tc_main.SuspendLayout();
             this.tp_general.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.tp_pet.SuspendLayout();
             this.tp_monster.SuspendLayout();
             this.tc_monster.SuspendLayout();
@@ -199,6 +205,7 @@
             // 
             // tp_general
             // 
+            this.tp_general.Controls.Add(this.groupBox1);
             this.tp_general.Controls.Add(this.tb_name);
             this.tp_general.Controls.Add(this.cb_type);
             this.tp_general.Controls.Add(this.lbl_type);
@@ -212,6 +219,35 @@
             this.tp_general.TabIndex = 0;
             this.tp_general.Text = "Général";
             this.tp_general.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.tb_ModelScale);
+            this.groupBox1.Controls.Add(this.tb_ModelName);
+            this.groupBox1.Controls.Add(this.label2);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(97, 247);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(241, 99);
+            this.groupBox1.TabIndex = 8;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Modèle";
+            // 
+            // tb_ModelName
+            // 
+            this.tb_ModelName.Location = new System.Drawing.Point(70, 24);
+            this.tb_ModelName.Name = "tb_ModelName";
+            this.tb_ModelName.Size = new System.Drawing.Size(146, 20);
+            this.tb_ModelName.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(10, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Fichier :";
             // 
             // tp_pet
             // 
@@ -854,6 +890,22 @@
             this.tsmi_moverdelete.Text = "Supprimer";
             this.tsmi_moverdelete.Click += new System.EventHandler(this.tsmi_moverdelete_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 61);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Echelle :";
+            // 
+            // tb_ModelScale
+            // 
+            this.tb_ModelScale.Location = new System.Drawing.Point(70, 58);
+            this.tb_ModelScale.Name = "tb_ModelScale";
+            this.tb_ModelScale.Size = new System.Drawing.Size(146, 20);
+            this.tb_ModelScale.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -870,6 +922,8 @@
             this.tc_main.ResumeLayout(false);
             this.tp_general.ResumeLayout(false);
             this.tp_general.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.tp_pet.ResumeLayout(false);
             this.tp_pet.PerformLayout();
             this.tp_monster.ResumeLayout(false);
@@ -969,6 +1023,11 @@
         private System.Windows.Forms.ToolStripMenuItem tsmi_moversadd;
         private System.Windows.Forms.ContextMenuStrip cms_lbmovers;
         private System.Windows.Forms.ToolStripMenuItem tsmi_moverdelete;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox tb_ModelName;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tb_ModelScale;
     }
 }
 

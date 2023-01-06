@@ -65,7 +65,7 @@ namespace eTools
 #if __MOVERS
             LoadMovers(config.PropFileName);
 #endif // __MOVERS
-            //this.LoadModels(config.ResourcePath + "mdlDyna.inc");
+            LoadModels(config.ResourcePath + "mdlDyna.inc");
         }
 
         private void LoadDefines(string[] filesPath)
@@ -696,6 +696,15 @@ namespace eTools
             return movers[index];
         }
 
+        public Mover GetMoverById(string dwId)
+        {
+            foreach (Mover it in this.movers)
+            {
+                if (it.Prop.DwId == dwId) return it;
+            }
+            return null;
+        }
+
         public string[] GetAllMoversDefines()
         {
             return defines.Where(x => x.Key.StartsWith("MI_")).Select(x => x.Key).ToArray();
@@ -761,6 +770,11 @@ namespace eTools
         public string[] GetElementsIdentifiers()
         {
             return Settings.GetInstance().Elements.Values.ToArray();
+        }
+
+        public string[] GetModelTypesIdentifiers()
+        {
+            return defines.Where(x => x.Key.StartsWith("MODELTYPE")).Select(x => x.Key).ToArray();
         }
 
         public string GetString(string ids)
@@ -844,15 +858,15 @@ namespace eTools
                     modelElem.DwType = mainBrace.IType;
                     modelElem.DwIndex = iObject;
                     modelElem.SzName = szObject;
-                    modelElem.DwModelType = scanner.GetNumber();
+                    modelElem.DwModelType = scanner.GetToken();
                     modelElem.SzPart = scanner.GetToken();
                     modelElem.BFly = scanner.GetNumber();
-                    modelElem.DwDistant = scanner.GetNumber();
+                    modelElem.DwDistant = scanner.GetToken();
                     modelElem.BPick = scanner.GetNumber();
                     modelElem.FScale = scanner.GetFloat();
                     modelElem.BTrans = scanner.GetNumber();
                     modelElem.BShadow = scanner.GetNumber();
-                    modelElem.NTextureEx = scanner.GetNumber();
+                    modelElem.NTextureEx = scanner.GetToken();
                     modelElem.BRenderFlag = scanner.GetNumber();
 
                     scanner.GetToken();
@@ -870,6 +884,14 @@ namespace eTools
                         scanner.GetToken();
                     }
                     currBrace.Models.Add(modelElem); // We add the current model to the current brace
+#if __MOVERS
+                    if(modelElem.DwType == this.defines["OT_MOVER"]) // If model corresponds to a mover
+                    {
+                        Mover mover = this.GetMoverById(modelElem.DwIndex);
+                        if(mover != null)
+                            mover.Model = modelElem; // We get the mover that the model is for and we set its model to the current model
+                    }
+#endif // __MOVERS
 #if __ITEMS
                     if (modelElem.DwType == this.defines["OT_ITEM"]) // If model corresponds to an item
                     {

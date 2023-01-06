@@ -32,7 +32,10 @@ namespace MoversEditor
 
         private void lb_movers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MoverProp prop = ((Mover)lb_movers.SelectedItem).Prop;
+            Mover currentItem = ((Mover)lb_movers.SelectedItem);
+            MoverProp prop = currentItem.Prop;
+
+
             tb_name.Text = Project.GetInstance().GetString(prop.SzName);
             tb_identifier.Text = ((Mover)lb_movers.SelectedItem).Prop.DwId;
             tb_str.Text = prop.DwStr.ToString();
@@ -61,6 +64,10 @@ namespace MoversEditor
             tb_resistearth.Text = prop.NResistEarth.ToString();
             tb_expvalue.Text = prop.NExpValue.ToString();
             cb_monsterai.SelectedItem = prop.DwAi;
+            tb_ModelName.DataBindings.Clear();
+            tb_ModelName.DataBindings.Add(new Binding("Text", currentItem.Model, "SzName", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_ModelScale.DataBindings.Clear();
+            tb_ModelScale.DataBindings.Add(new Binding("Text", currentItem.Model, "FScale", false, DataSourceUpdateMode.OnPropertyChanged));
         }
 
         private int FormatTextboxInteger(TextBox tb)

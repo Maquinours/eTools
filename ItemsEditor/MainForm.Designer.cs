@@ -69,6 +69,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.cb_job = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.tb_ModelName = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_icon)).BeginInit();
@@ -290,6 +291,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.tb_ModelName);
             this.tabPage2.Controls.Add(this.gb_dstParams);
             this.tabPage2.Controls.Add(this.cb_ElementType);
             this.tabPage2.Controls.Add(this.label15);
@@ -480,6 +482,13 @@
             this.label7.TabIndex = 5;
             this.label7.Text = "Classe :";
             // 
+            // tb_ModelName
+            // 
+            this.tb_ModelName.Location = new System.Drawing.Point(49, 384);
+            this.tb_ModelName.Name = "tb_ModelName";
+            this.tb_ModelName.Size = new System.Drawing.Size(100, 20);
+            this.tb_ModelName.TabIndex = 21;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -546,6 +555,7 @@
         private System.Windows.Forms.GroupBox gb_dstParams;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox tb_ModelName;
     }
 }
 
