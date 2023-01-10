@@ -19,19 +19,26 @@ namespace ItemsEditor
         private SearchForm searchForm;
         public MainForm()
         {
-            Project prj = Project.GetInstance();
-            searchForm = new SearchForm();
             InitializeComponent();
-            prj.Load();
-            lb_items.DataSource = prj.Items;
-            lb_items.DisplayMember = "Name";
-            cb_ik1.DataSource = prj.GetAllItemKinds1();
-            cb_ik2.DataSource = prj.GetAllItemKinds2();
-            cb_ik3.DataSource = prj.GetAllItemKinds3();
-            cb_job.DataSource = new string[] { "=" }.Concat(prj.GetJobIdentifiers()).ToArray();
-            cb_sex.DataSource = new string[] { "=" }.Concat(prj.GetSexIdentifiers()).ToArray();
-            cb_DstParamIdentifier.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
-            cb_ElementType.DataSource = prj.GetElementsIdentifiers();
+            try
+            {
+                Project prj = Project.GetInstance();
+                searchForm = new SearchForm();
+                prj.Load();
+                lb_items.DataSource = prj.Items;
+                lb_items.DisplayMember = "Name";
+                cb_ik1.DataSource = prj.GetAllItemKinds1();
+                cb_ik2.DataSource = prj.GetAllItemKinds2();
+                cb_ik3.DataSource = prj.GetAllItemKinds3();
+                cb_job.DataSource = new string[] { "=" }.Concat(prj.GetJobIdentifiers()).ToArray();
+                cb_sex.DataSource = new string[] { "=" }.Concat(prj.GetSexIdentifiers()).ToArray();
+                cb_DstParamIdentifier.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
+                cb_ElementType.DataSource = prj.GetElementsIdentifiers();
+            }
+            catch (FileNotFoundException e)
+            {
+                MessageBox.Show($"Le fichier {e.Message} n'a pas été trouvé.");
+            }
         }
 
         private void lb_items_SelectedIndexChanged(object sender, EventArgs e)
@@ -151,16 +158,16 @@ namespace ItemsEditor
                         break;
                 }
             }
-            else if(e.KeyCode == Keys.Delete)
+            else if (e.KeyCode == Keys.Delete)
             {
-                if(ActiveControl == lb_items && lb_items.SelectedItem != null)
+                if (ActiveControl == lb_items && lb_items.SelectedItem != null)
                 {
                     int newIndex = lb_items.SelectedIndex - 1;
                     Project prj = Project.GetInstance();
                     prj.RemoveItem((Item)lb_items.SelectedItem);
                     lb_items.DataSource = prj.Items;
                     lb_items.SelectedIndex = newIndex;
-                }   
+                }
             }
         }
 
