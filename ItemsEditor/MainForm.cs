@@ -39,6 +39,10 @@ namespace ItemsEditor
             {
                 MessageBox.Show($"Le fichier \"{e.Message}\" n'a pas été trouvé.");
             }
+            catch(IOException e)
+            {
+                MessageBox.Show($"Le fichier \"{e.Message}\" ne peut pas être lu. Vérifiez qu'il n'est pas ouvert par un autre programme.");
+            }
         }
 
         private void lb_items_SelectedIndexChanged(object sender, EventArgs e)
