@@ -37,7 +37,7 @@ namespace ItemsEditor
             }
             catch (FileNotFoundException e)
             {
-                MessageBox.Show($"Le fichier {e.Message} n'a pas été trouvé.");
+                MessageBox.Show($"Le fichier \"{e.Message}\" n'a pas été trouvé.");
             }
         }
 

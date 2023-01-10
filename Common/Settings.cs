@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -46,14 +47,14 @@ namespace eTools
             this.ResourcePath = string.Empty;
             this.Elements = new Dictionary<int, string>();
             this.DefineFilesPaths = new List<string>();
-            this.StringsFilePath= string.Empty;
+            this.StringsFilePath = string.Empty;
             this.PropFileName = string.Empty;
             this.ResourceVersion = string.Empty;
         }
 
         public static Settings GetInstance()
         {
-            if(_instance == null)
+            if (_instance == null)
                 _instance = new Settings();
             return _instance;
         }
@@ -66,18 +67,18 @@ namespace eTools
         {
             Scanner scanner = new Scanner();
             scanner.Load(filePath);
-            while(true)
+            while (true)
             {
                 scanner.GetToken();
-                if(scanner.EndOfStream) break;
-                switch(scanner.Token) 
+                if (scanner.EndOfStream) break;
+                switch (scanner.Token)
                 {
                     case "RESOURCEPATH":
                         this.ResourcePath = scanner.GetToken();
                         break;
                     case "ELEMENTS":
                         scanner.GetToken(); // {
-                        while(true)
+                        while (true)
                         {
                             string str = scanner.GetToken();
                             if (str == "}") break;
@@ -100,15 +101,15 @@ namespace eTools
         {
             Scanner scanner = new Scanner();
             scanner.Load(filePath);
-            while(true)
+            while (true)
             {
                 scanner.GetToken();
                 if (scanner.EndOfStream) break;
-                switch(scanner.Token)
+                switch (scanner.Token)
                 {
                     case "DEFINES":
                         scanner.GetToken(); // {
-                        while(true)
+                        while (true)
                         {
                             string definePath = scanner.GetToken();
                             if (definePath == "}") break;
@@ -127,6 +128,41 @@ namespace eTools
                         break;
 #endif // __ITEMS
                 }
+            }
+        }
+
+        public void SaveGeneral(string filePath)
+        {
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.WriteLine($"RESOURCEPATH\t\"{ResourcePath}\"");
+                writer.WriteLine($"VER\t{ResourceVersion}");
+                writer.WriteLine("ELEMENTS");
+                writer.WriteLine("{");
+                foreach (KeyValuePair<int, string> element in Elements.ToArray())
+                {
+                    writer.WriteLine($"{element.Value}\t{element.Key}");
+                }
+                writer.WriteLine("}");
+            }
+        }
+
+        public void SaveSpecs(string filePath)
+        {
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                writer.WriteLine($"PROPFILE\t{Path.GetFileName(PropFileName)}");
+#if __ITEMS
+                writer.WriteLine($"ICONSPATH\t{IconsFolderPath}");
+#endif // __ITEMS
+                writer.WriteLine($"STRINGS\t\"{Path.GetFileName(StringsFilePath)}\"");
+                writer.WriteLine("DEFINES");
+                writer.WriteLine("{");
+                foreach(string defineFile in DefineFilesPaths)
+                {
+                    writer.WriteLine($"\"{Path.GetFileName(defineFile)}\"");
+                }
+                writer.WriteLine("}");
             }
         }
     }

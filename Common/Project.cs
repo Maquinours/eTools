@@ -903,5 +903,53 @@ namespace eTools
                 }
             }
         }
+
+        private void SaveModels(string filePath)
+        {
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                foreach(MainModelBrace brace in models)
+                {
+                    SaveModelBrace(brace, writer);
+                }
+            }
+        }
+
+        private void SaveModelBrace(ModelBrace brace, StreamWriter writer)
+        {
+            writer.Write($"\"{brace.SzName}\"");
+            if (brace is MainModelBrace mainModelBrace)
+                writer.Write($"\t{mainModelBrace.IType}");
+            writer.Write("\r\n{\r\n");
+            foreach(ModelBrace br in brace.Braces)
+            {
+                SaveModelBrace(br, writer);
+            }
+            foreach(ModelElem elem in brace.Models)
+            {
+                writer.Write($"\"{elem.SzName}\"\t");
+                writer.Write($"{elem.DwIndex}\t");
+                writer.Write($"{elem.DwModelType}\t");
+                writer.Write($"\"{elem.SzPart}\"\t");
+                writer.Write($"{elem.BFly}\t");
+                writer.Write($"{elem.DwDistant}\t");
+                writer.Write($"{elem.BPick}\t");
+                writer.Write($"{elem.FScale}f\t");
+                writer.Write($"{elem.BTrans}\t");
+                writer.Write($"{elem.BShadow}\t");
+                writer.Write($"{elem.NTextureEx}\t");
+                writer.Write($"{elem.BRenderFlag}\r\n");
+                if(elem.Motions.Count > 0)
+                {
+                    writer.Write("{\r\n");
+                    foreach(Motion motion in elem.Motions)
+                    {
+                        writer.Write($"{motion.SzMotion}\t");
+                        writer.Write($"{motion.IMotion}\r\n");
+                    }
+                    writer.Write("}\r\n");
+                }
+            }
+        }
     }
 }
