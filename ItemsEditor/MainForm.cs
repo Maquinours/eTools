@@ -35,13 +35,10 @@ namespace ItemsEditor
                 cb_DstParamIdentifier.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
                 cb_ElementType.DataSource = prj.GetElementsIdentifiers();
             }
-            catch (FileNotFoundException e)
+            catch (Exception e)
             {
-                MessageBox.Show($"Le fichier \"{e.Message}\" n'a pas été trouvé.");
-            }
-            catch(IOException e)
-            {
-                MessageBox.Show($"Le fichier \"{e.Message}\" ne peut pas être lu. Vérifiez qu'il n'est pas ouvert par un autre programme.");
+                MessageBox.Show(e.Message);
+                Environment.Exit(3);
             }
         }
 

@@ -25,7 +25,7 @@ namespace eTools
         /// <summary>
         /// Version of the game
         /// </summary>
-        public string ResourceVersion { get; private set; }
+        public int ResourceVersion { get; private set; }
         /// <summary>
         /// .h files paths that process will read (files containing defines) (E.G defineObj.h)
         /// </summary>
@@ -49,7 +49,7 @@ namespace eTools
             this.DefineFilesPaths = new List<string>();
             this.StringsFilePath = string.Empty;
             this.PropFileName = string.Empty;
-            this.ResourceVersion = string.Empty;
+            this.ResourceVersion = -1;
         }
 
         public static Settings GetInstance()
@@ -65,6 +65,9 @@ namespace eTools
         /// <param name="filePath">Path of general config file</param>
         public void LoadGeneral(string filePath)
         {
+            ResourcePath = string.Empty;
+            Elements.Clear();
+            ResourceVersion = -1;
             Scanner scanner = new Scanner();
             scanner.Load(filePath);
             while (true)
@@ -87,7 +90,7 @@ namespace eTools
                         }
                         break;
                     case "VER":
-                        this.ResourceVersion = scanner.GetToken();
+                        this.ResourceVersion = scanner.GetNumber();
                         break;
                 }
             }
@@ -99,6 +102,13 @@ namespace eTools
         /// <param name="filePath">Path of the current editor config file</param>
         public void LoadSpecs(string filePath)
         {
+            DefineFilesPaths.Clear();
+            StringsFilePath = string.Empty;
+            PropFileName = string.Empty;
+#if __ITEMS
+            IconsFolderPath = string.Empty;
+#endif // __ITEMS
+
             Scanner scanner = new Scanner();
             scanner.Load(filePath);
             while (true)

@@ -13,16 +13,33 @@ namespace eTools
 {
     internal sealed class Project
     {
+        #region Properties
+        /// <summary>
+        /// Instance of the Project singleton
+        /// </summary>
         private static Project _instance;
+        /// <summary>
+        /// List of strings (IDS => value)
+        /// </summary>
         private Dictionary<string, string> strings;
+        /// <summary>
+        /// List of defines (identifier => ID)
+        /// </summary>
         private Dictionary<string, int> defines;
 #if __ITEMS
         public Item[] Items { get; private set; }
 #endif // __ITEMS
 #if __MOVERS
+        /// <summary>
+        /// List of movers
+        /// </summary>
         private List<Mover> movers;
 #endif // __MOVERS
+        /// <summary>
+        /// List of models
+        /// </summary>
         private List<MainModelBrace> models;
+        #endregion
 
         /// <summary>
         /// Get the instance of the project singleton.
@@ -34,6 +51,10 @@ namespace eTools
                 _instance = new Project();
             return _instance;
         }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
         private Project()
         {
             this.strings = new Dictionary<string, string>();
@@ -47,6 +68,10 @@ namespace eTools
             this.models = new List<MainModelBrace>();
         }
 
+        #region Public Main Methods
+        /// <summary>
+        /// Load all data from files to project.
+        /// </summary>
         public void Load()
         {
             Settings config = Settings.GetInstance();
@@ -68,6 +93,16 @@ namespace eTools
             LoadModels(config.ResourcePath + "mdlDyna.inc");
         }
 
+        public void Save()
+        {
+            Settings config = Settings.GetInstance();
+#if __MOVERS
+            SaveMoversprop(config.PropFileName);
+#endif // __MOVERS
+        }
+        #endregion
+
+        #region Private Global Load Methods
         private void LoadDefines(string[] filesPath)
         {
             this.defines.Clear();
@@ -86,14 +121,40 @@ namespace eTools
                     string key = scanner.GetToken();
                     int value = scanner.GetNumber();
                     if (scanner.Token.StartsWith("#")) continue;
-                    if(!this.defines.ContainsKey(key))
+                    if (!this.defines.ContainsKey(key))
                         this.defines.Add(key, value);
                     scanner.GetToken();
                 }
                 scanner.Close();
             }
         }
+        private void LoadStrings(string filePath)
+        {
+            this.strings.Clear();
 
+            Scanner scanner = new Scanner();
+            scanner.Load(filePath);
+
+            while (true)
+            {
+                string index = scanner.GetToken();
+
+                if (scanner.EndOfStream) break;
+
+                /* The index must start with "IDS_" to be a valid string. If the file find token starting with
+                 * something different, then the file is incorrectly formatted.
+                 * */
+                if (!index.StartsWith("IDS_"))
+                    throw new IncorrectlyFormattedFileException(filePath);
+
+                string value = scanner.GetLine();
+                this.strings.Add(index, value);
+            }
+            scanner.Close();
+        }
+        #endregion
+
+        #region Items specific Methods
 #if __ITEMS
         public Item GetItemById(string dwId)
         {
@@ -295,6 +356,14 @@ namespace eTools
                 prop.BCanLooksChange = scanner.GetNumber();
                 prop.BIsLooksChangeMaterial = scanner.GetNumber();
 
+                /* It is possible to be at the end of stream there if there is no blank at the end of the
+                 * line. So we check if the token is empty. If so, we can say that scanner was at the end
+                 * of the stream (excluding blanks) before trying to get the latest value. So the file is
+                 * incorrecty formatted.
+                 * */
+                if (scanner.Token == "" && scanner.EndOfStream)
+                    throw new IncorrectlyFormattedFileException(filePath);
+
                 Item item = new Item
                 {
                     Prop = prop
@@ -348,10 +417,14 @@ namespace eTools
             return defines.Where(x => x.Key.StartsWith("IK3_")).Select(x => x.Key).ToArray();
         }
 #endif // __ITEMS
+        #endregion
 
+        #region Movers specific methods
 #if __MOVERS
         private void LoadMovers(string filePath)
         {
+            movers.Clear();
+
             Scanner scanner = new Scanner();
             scanner.Load(filePath);
             while (true)
@@ -468,6 +541,15 @@ namespace eTools
                 mp.DwAreaColor = scanner.GetToken(); // Useless
                 mp.SzNpcMark = scanner.GetToken(); // Useless
                 mp.DwMadrigalGiftPoint = scanner.GetNumber(); // Useless
+
+                /* It is possible to be at the end of stream there if there is no blank at the end of the
+                 * line. So we check if the token is empty. If so, we can say that scanner was at the end
+                 * of the stream (excluding blanks) before trying to get the latest value. So the file is
+                 * incorrecty formatted.
+                 * */
+                if (scanner.Token == "" && scanner.EndOfStream)
+                    throw new IncorrectlyFormattedFileException(filePath);
+
                 if (!this.strings.ContainsKey(mp.SzName))
                     this.strings.Add(mp.SzName, "");          // If IDS is not defined, we add it to be defined.
                 mover.Prop = mp;
@@ -480,7 +562,7 @@ namespace eTools
         {
             using (StreamWriter writer = new StreamWriter(filePath))
             {
-                foreach(Mover mover in movers)
+                foreach (Mover mover in movers)
                 {
                     MoverProp prop = mover.Prop;
 
@@ -587,15 +669,15 @@ namespace eTools
                     writer.Write(prop.DwResisMgic == -1 ? "=" : prop.DwResisMgic.ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
 
-                    writer.Write(prop.NResistElecricity / 100f == -1 ? "=" : (prop.NResistElecricity / 100f).ToString(new CultureInfo("en-US")));
+                    writer.Write(prop.NResistElecricity == -1 ? "=" : (prop.NResistElecricity / 100f).ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
-                    writer.Write(prop.NResistFire / 100f == -1 ? "=" : (prop.NResistFire / 100f).ToString(new CultureInfo("en-US")));
+                    writer.Write(prop.NResistFire == -1 ? "=" : (prop.NResistFire / 100f).ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
-                    writer.Write(prop.NResistWind / 100f == -1 ? "=" : (prop.NResistWind / 100f).ToString(new CultureInfo("en-US")));
+                    writer.Write(prop.NResistWind == -1 ? "=" : (prop.NResistWind / 100f).ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
-                    writer.Write(prop.NResistWater / 100f == -1 ? "=" : (prop.NResistWater / 100f).ToString(new CultureInfo("en-US")));
+                    writer.Write(prop.NResistWater == -1 ? "=" : (prop.NResistWater / 100f).ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
-                    writer.Write(prop.NResistEarth / 100f == -1 ? "=" : (prop.NResistEarth / 100f).ToString(new CultureInfo("en-US")));
+                    writer.Write(prop.NResistEarth == -1 ? "=" : (prop.NResistEarth / 100f).ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
 
                     writer.Write(prop.DwCash == -1 ? "=" : prop.DwCash.ToString(new CultureInfo("en-US")));
@@ -671,19 +753,115 @@ namespace eTools
             }
         }
 
-        public string[] GetAllMoversName()
+        public void AddNewMover()
         {
-            string[] result = new string[this.movers.Count];
-            for (int i = 0; i < result.Count(); i++)
+            int[] stringIntKeys = strings.Select(x => int.Parse(x.Key.Substring(x.Key.Length - 6))).ToArray();
+            int txtIntKey = stringIntKeys.Length > 0 ? stringIntKeys.Max() : 0;
+
+            MoverProp prop = new MoverProp();
+            prop.DwId = "MI_";
+            prop.SzName = $"IDS_PROPMOVER_TXT_{txtIntKey:D6}";
+            prop.DwAi = "AII_NONE";
+            prop.DwStr = -1;
+            prop.DwSta = -1;
+            prop.DwDex = -1;
+            prop.DwInt = -1;
+            prop.DwHR = -1;
+            prop.DwER = -1;
+            prop.DwRace = -1;
+            prop.DwBelligerence = "BELLI_PEACEFUL";
+            prop.DwGender = -1;
+            prop.DwLevel = -1;
+            prop.DwFlightLevel = -1;
+            prop.DwSize = -1;
+            prop.DwClass = "RANK_CITIZEN";
+            prop.BIfParts = 0;
+            prop.NChaotic = -1;
+            prop.DwUseable = -1;
+            prop.DwActionRadius = -1;
+            prop.DwAtkMin = -1;
+            prop.DwAtkMax = -1;
+            prop.DwAtk1 = "=";
+            prop.DwAtk2 = "=";
+            prop.DwAtk3 = "=";
+            prop.DwAtk4 = "=";
+            prop.FFrame = -1;
+            prop.DwOrthograde = -1;
+            prop.DwThrustRate = -1;
+            prop.DwChestRate = -1;
+            prop.DwHeadRate = -1;
+            prop.DwArmRate = -1;
+            prop.DwLegRate = -1;
+            prop.DwAttackSpeed = -1;
+            prop.DwReAttackDelay = -1;
+            prop.DwAddHp = -1;
+            prop.DwAddMp = -1;
+            prop.DwNaturalArmor = -1;
+            prop.NAbrasion = -1;
+            prop.NHardness = -1;
+            prop.DwAdjAtkDelay = -1;
+            prop.EElementType = 0;
+            prop.WElementAtk = 0;
+            prop.DwHideLevel = 0;
+            prop.FSpeed = 0.1f;
+            prop.DwShelter = -1;
+            prop.DwFlying = 0;
+            prop.DwJumpIng = -1;
+            prop.DwAirJump = -1;
+            prop.BTaming = -1;
+            prop.DwResisMgic = 0;
+
+            prop.NResistElecricity = 0;
+            prop.NResistFire = 0;
+            prop.NResistWind = 0;
+            prop.NResistWater = 0;
+            prop.NResistEarth = 0;
+
+            prop.DwCash = -1;
+            prop.DwSourceMaterial = "=";
+            prop.DwMaterialAmount = -1;
+            prop.DwCohesion = -1;
+            prop.DwHoldingTime = -1;
+            prop.DwCorrectionValue = -1;
+            prop.NExpValue = 0;
+            prop.NFxpValue = 0;
+            prop.NBodyState = -1;
+            prop.DwAddAbility = -1;
+            prop.BKillable = 0;
+
+
+            prop.DwVirtItem = new string[3];
+            prop.BVirtType = new int[3];
+            prop.DwVirtItem[0] = "=";
+            prop.DwVirtItem[1] = "=";
+            prop.DwVirtItem[2] = "=";
+            prop.BVirtType[0] = -1;
+            prop.BVirtType[1] = -1;
+            prop.BVirtType[2] = -1;
+
+            prop.DwSndAtk1 = "=";
+            prop.DwSndAtk2 = "=";
+
+            prop.DwSndDie1 = "=";
+            prop.DwSndDie2 = "=";
+
+            prop.DwSndDmg1 = "=";
+            prop.DwSndDmg2 = "=";
+            prop.DwSndDmg3 = "=";
+
+            prop.DwSndIdle1 = "=";
+            prop.DwSndIdle2 = "=";
+
+            prop.SzComment = $"IDS_PROPMOVER_TXT_{txtIntKey + 1:D6}";
+            prop.SzNpcMark = "=";
+            prop.DwMadrigalGiftPoint = 0;
+
+
+            Mover mover = new Mover()
             {
-                string ids = this.movers[i].Prop.SzName;
-                string value = this.strings[ids];
-                if (string.IsNullOrWhiteSpace(value))
-                    result[i] = ids; // If ids has no valid string, we show the ids instead
-                else
-                    result[i] = value;
-            }
-            return result;
+                Prop = prop
+            };
+            movers.Add(mover);
         }
 
         public Mover[] GetAllMovers()
@@ -691,67 +869,42 @@ namespace eTools
             return movers.ToArray();
         }
 
-        public Mover GetMoverByIndex(int index)
-        {
-            return movers[index];
-        }
-
         public Mover GetMoverById(string dwId)
         {
-            foreach (Mover it in this.movers)
+            try
             {
-                if (it.Prop.DwId == dwId) return it;
+                return movers.First(x => x.Prop.DwId == dwId);
             }
-            return null;
+            catch (InvalidOperationException) // If no mover find
+            {
+                return null;
+            }
         }
 
+        public void DeleteMover(Mover mover)
+        {
+            movers.Remove(mover);
+        }
+#endif // __MOVERS
+        #endregion
+
+        #region Public methods to get and/or set common values
         public string[] GetAllMoversDefines()
         {
             return defines.Where(x => x.Key.StartsWith("MI_")).Select(x => x.Key).ToArray();
         }
-
-        public void DeleteMover(int index)
-        {
-            Mover mover = GetMoverByIndex(index);
-            movers.RemoveAt(index);
-            if (movers.FirstOrDefault(x => x.Prop.SzName == mover.Prop.SzName) == null)
-                strings.Remove(mover.Prop.SzName);
-        }
-#endif // __MOVERS
-
         public string[] GetAiIdentifiers()
         {
-            List<string> result = new List<string>();
-            foreach (string defineKey in defines.Keys)
-            {
-                if (defineKey.StartsWith("AII_"))
-                    result.Add(defineKey);
-            }
-            return result.ToArray();
+            return defines.Where(x => x.Key.StartsWith("AII_")).Select(x => x.Key).ToArray();
         }
-
         public string[] GetBelligerenceIdentifiers()
         {
-            List<string> result = new List<string>();
-            foreach (string defineKey in defines.Keys)
-            {
-                if (defineKey.StartsWith("BELLI_"))
-                    result.Add(defineKey);
-            }
-            return result.ToArray();
+            return defines.Where(x => x.Key.StartsWith("BELLI_")).Select(x => x.Key).ToArray();
         }
-
         public string[] GetClassIdentifiers()
         {
-            List<string> result = new List<string>();
-            foreach (string defineKey in defines.Keys)
-            {
-                if (defineKey.StartsWith("RANK_"))
-                    result.Add(defineKey);
-            }
-            return result.ToArray();
+            return defines.Where(x => x.Key.StartsWith("RANK_")).Select(x => x.Key).ToArray();
         }
-
         public string[] GetJobIdentifiers()
         {
             return defines.Where(x => x.Key.StartsWith("JOB_")).Select(x => x.Key).ToArray();
@@ -771,10 +924,27 @@ namespace eTools
         {
             return Settings.GetInstance().Elements.Values.ToArray();
         }
-
         public string[] GetModelTypesIdentifiers()
         {
             return defines.Where(x => x.Key.StartsWith("MODELTYPE")).Select(x => x.Key).ToArray();
+        }
+
+        public ModelBrace[] GetMoverModelBraces()
+        {
+            if (!defines.ContainsKey("OT_MOVER")) throw new MissingDefineException("OT_MOVER");
+
+            return GetBracesByType(defines["OT_MOVER"]);
+        }
+
+        public string GetElementNameById(int id)
+        {
+            if (Settings.GetInstance().Elements.ContainsKey(id))
+                return Settings.GetInstance().Elements[id];
+            return null;
+        }
+        public int GetElementIdByName(string name)
+        {
+            return Settings.GetInstance().Elements.Where(x => x.Value == name).Select(x => x.Key).DefaultIfEmpty(0).First();
         }
 
         public string GetString(string ids)
@@ -786,27 +956,17 @@ namespace eTools
         {
             strings[ids] = newValue;
         }
+        #endregion
 
-        private void LoadStrings(string filePath)
-        {
-            this.strings.Clear();
-
-            Scanner scanner = new Scanner();
-            scanner.Load(filePath);
-
-            while (true)
-            {
-                string index = scanner.GetToken();
-                if (scanner.EndOfStream) break;
-                string value = scanner.GetLine();
-                this.strings.Add(index, value);
-            }
-            scanner.Close();
-        }
-
-
+        #region Models specific methods
         private void LoadModels(string filePath)
         {
+#if __MOVERS
+            if (!defines.ContainsKey("OT_MOVER")) throw new MissingDefineException("OT_MOVER");
+#endif // __MOVERS
+#if __ITEMS
+            if (!defines.ContainsKey("OT_ITEM")) throw new MissingDefineException("OT_ITEM");
+#endif // __ITEMS
             this.models.Clear();
             Scanner scanner = new Scanner();
             scanner.Load(filePath);
@@ -828,6 +988,8 @@ namespace eTools
                 ModelBrace currBrace = mainBrace;
                 while (currBraces.Count > 0)
                 {
+                    if (scanner.EndOfStream)
+                        throw new IncorrectlyFormattedFileException(filePath);
                     if (scanner.Token == "}") // End of current brace
                     {
                         currBraces.RemoveAt(currBraces.Count - 1);
@@ -875,6 +1037,8 @@ namespace eTools
                         while (true)
                         {
                             Motion motion = new Motion();
+                            if (scanner.EndOfStream)
+                                throw new IncorrectlyFormattedFileException(filePath);
                             motion.SzMotion = scanner.GetToken(); // motion name or }
                             if (motion.SzMotion == "}")
                                 break;
@@ -885,10 +1049,10 @@ namespace eTools
                     }
                     currBrace.Models.Add(modelElem); // We add the current model to the current brace
 #if __MOVERS
-                    if(modelElem.DwType == this.defines["OT_MOVER"]) // If model corresponds to a mover
+                    if (modelElem.DwType == this.defines["OT_MOVER"]) // If model corresponds to a mover
                     {
                         Mover mover = this.GetMoverById(modelElem.DwIndex);
-                        if(mover != null)
+                        if (mover != null)
                             mover.Model = modelElem; // We get the mover that the model is for and we set its model to the current model
                     }
 #endif // __MOVERS
@@ -908,7 +1072,7 @@ namespace eTools
         {
             using (StreamWriter writer = new StreamWriter(filePath))
             {
-                foreach(MainModelBrace brace in models)
+                foreach (MainModelBrace brace in models)
                 {
                     SaveModelBrace(brace, writer);
                 }
@@ -921,11 +1085,11 @@ namespace eTools
             if (brace is MainModelBrace mainModelBrace)
                 writer.Write($"\t{mainModelBrace.IType}");
             writer.Write("\r\n{\r\n");
-            foreach(ModelBrace br in brace.Braces)
+            foreach (ModelBrace br in brace.Braces)
             {
                 SaveModelBrace(br, writer);
             }
-            foreach(ModelElem elem in brace.Models)
+            foreach (ModelElem elem in brace.Models)
             {
                 writer.Write($"\"{elem.SzName}\"\t");
                 writer.Write($"{elem.DwIndex}\t");
@@ -939,10 +1103,10 @@ namespace eTools
                 writer.Write($"{elem.BShadow}\t");
                 writer.Write($"{elem.NTextureEx}\t");
                 writer.Write($"{elem.BRenderFlag}\r\n");
-                if(elem.Motions.Count > 0)
+                if (elem.Motions.Count > 0)
                 {
                     writer.Write("{\r\n");
-                    foreach(Motion motion in elem.Motions)
+                    foreach (Motion motion in elem.Motions)
                     {
                         writer.Write($"{motion.SzMotion}\t");
                         writer.Write($"{motion.IMotion}\r\n");
@@ -951,5 +1115,27 @@ namespace eTools
                 }
             }
         }
+
+        private ModelBrace[] GetBracesByType(int type)
+        {
+            List<ModelBrace> braces = new List<ModelBrace>();
+            foreach(MainModelBrace mainBrace in models)
+            {
+                if (mainBrace.IType != type) continue;
+                GetBracesRecursively(braces, mainBrace);
+            }
+
+            return braces.ToArray();
+        }
+
+        private void GetBracesRecursively(List<ModelBrace> braces, ModelBrace brace)
+        {
+            braces.Add(brace);
+            foreach(ModelBrace subBrace in brace.Braces)
+            {
+                GetBracesRecursively(braces, subBrace);
+            }
+        }
+#endregion
     }
 }

@@ -90,5 +90,15 @@ public class Mover
 {
     public MoverProp Prop { get; set; }
     public ModelElem Model { get; set; }
-    public string Name { get { return Project.GetInstance().GetString(Prop.SzName); } }
+    public string Name
+    {
+        get { return Project.GetInstance().GetString(Prop.SzName); }
+        set { Project.GetInstance().ChangeStringValue(Prop.SzName, value); }
+    }
+
+    public string ElementType
+    {
+        get { return Project.GetInstance().GetElementNameById(Prop.EElementType); }
+        set { Prop.EElementType = Project.GetInstance().GetElementIdByName(value); }
+    }
 }

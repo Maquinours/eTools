@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,17 +18,39 @@ namespace MoversEditor
         public MainForm()
         {
             InitializeComponent();
-            Project prj = Project.GetInstance();
-            prj.Load();
-            AutoCompleteStringCollection identifiersSource = new AutoCompleteStringCollection();
-            identifiersSource.AddRange(prj.GetAllMoversDefines());
-            tb_identifier.AutoCompleteCustomSource = identifiersSource;
-            cb_monsterai.DataSource = prj.GetAiIdentifiers();
-            cb_belligerence.DataSource = prj.GetBelligerenceIdentifiers();
-            cb_class.DataSource = prj.GetClassIdentifiers();
-            cb_elementtype.DataSource = Settings.GetInstance().Elements.Values.ToArray();
-            lb_movers.DataSource = new BindingSource(prj.GetAllMovers(), "");
-            lb_movers.DisplayMember = "Name";
+            LoadFormData();
+        }
+
+        private void LoadFormData()
+        {
+            try
+            {
+                Project prj = Project.GetInstance();
+                prj.Load();
+                AutoCompleteStringCollection identifiersSource = new AutoCompleteStringCollection();
+                identifiersSource.AddRange(prj.GetAllMoversDefines());
+                tb_identifier.AutoCompleteCustomSource = identifiersSource;
+                cb_monsterai.DataSource = prj.GetAiIdentifiers();
+                cb_belligerence.DataSource = prj.GetBelligerenceIdentifiers();
+                cb_class.DataSource = prj.GetClassIdentifiers();
+                cb_elementtype.DataSource = Settings.GetInstance().Elements.Values.ToArray();
+                lb_movers.DataSource = new BindingSource(prj.GetAllMovers(), "");
+                lb_movers.DisplayMember = "Name";
+                cb_ModelBrace.DataSource = prj.GetMoverModelBraces();
+                cb_ModelBrace.DisplayMember = "SzName";
+            }
+            catch (Exception e)
+            {
+                switch (MessageBox.Show(e.Message, "Loading error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error))
+                {
+                    case DialogResult.Retry:
+                        LoadFormData();
+                        break;
+                    case DialogResult.Cancel:
+                        Environment.Exit(3);
+                        break;
+                }
+            }
         }
 
         private void lb_movers_SelectedIndexChanged(object sender, EventArgs e)
@@ -35,276 +58,152 @@ namespace MoversEditor
             Mover currentItem = ((Mover)lb_movers.SelectedItem);
             MoverProp prop = currentItem.Prop;
 
-
-            tb_name.Text = Project.GetInstance().GetString(prop.SzName);
-            tb_identifier.Text = ((Mover)lb_movers.SelectedItem).Prop.DwId;
-            tb_str.Text = prop.DwStr.ToString();
-            tb_sta.Text = prop.DwSta.ToString();
-            tb_dex.Text = prop.DwDex.ToString();
-            tb_int.Text = prop.DwInt.ToString();
-            tb_hr.Text = prop.DwHR.ToString();
-            tb_er.Text = prop.DwER.ToString();
-            cb_belligerence.SelectedItem = prop.DwBelligerence.ToString();
-            tb_level.Text = prop.DwLevel.ToString();
-            cb_class.SelectedItem = prop.DwClass.ToString();
-            tb_atkmin.Text = prop.DwAtkMin.ToString();
-            tb_atkmax.Text = prop.DwAtkMax.ToString();
-            tb_reattackdelay.Text = prop.DwReAttackDelay.ToString();
-            tb_addhp.Text = prop.DwAddHp.ToString();
-            tb_addmp.Text = prop.DwAddMp.ToString();
-            tb_naturalarmor.Text = prop.DwNaturalArmor.ToString();
-            cb_elementtype.SelectedItem = Settings.GetInstance().Elements[prop.EElementType];
-            tb_elementatk.Text = prop.WElementAtk.ToString();
-            tb_fspeed.Text = prop.FSpeed.ToString();
-            tb_resismgic.Text = prop.DwResisMgic.ToString();
-            tb_resistelecricity.Text = prop.NResistElecricity.ToString();
-            tb_resistfire.Text = prop.NResistFire.ToString();
-            tb_resistwater.Text = prop.NResistWater.ToString();
-            tb_resistwind.Text = prop.NResistWind.ToString();
-            tb_resistearth.Text = prop.NResistEarth.ToString();
-            tb_expvalue.Text = prop.NExpValue.ToString();
-            cb_monsterai.SelectedItem = prop.DwAi;
+            tb_name.DataBindings.Clear();
+            tb_identifier.DataBindings.Clear();
+            tb_str.DataBindings.Clear();
+            tb_sta.DataBindings.Clear();
+            tb_dex.DataBindings.Clear();
+            tb_int.DataBindings.Clear();
+            tb_hr.DataBindings.Clear();
+            tb_er.DataBindings.Clear();
+            cb_belligerence.DataBindings.Clear();
+            tb_level.DataBindings.Clear();
+            cb_class.DataBindings.Clear();
+            tb_atkmin.DataBindings.Clear();
+            tb_atkmax.DataBindings.Clear();
+            tb_reattackdelay.DataBindings.Clear();
+            tb_addhp.DataBindings.Clear();
+            tb_addmp.DataBindings.Clear();
+            tb_naturalarmor.DataBindings.Clear();
+            cb_elementtype.DataBindings.Clear();
+            tb_elementatk.DataBindings.Clear();
+            tb_fspeed.DataBindings.Clear();
+            tb_resismgic.DataBindings.Clear();
+            tb_resistelecricity.DataBindings.Clear();
+            tb_resistfire.DataBindings.Clear();
+            tb_resistwater.DataBindings.Clear();
+            tb_resistwind.DataBindings.Clear();
+            tb_resistearth.DataBindings.Clear();
+            tb_expvalue.DataBindings.Clear();
+            cb_monsterai.DataBindings.Clear();
             tb_ModelName.DataBindings.Clear();
-            tb_ModelName.DataBindings.Add(new Binding("Text", currentItem.Model, "SzName", false, DataSourceUpdateMode.OnPropertyChanged));
             tb_ModelScale.DataBindings.Clear();
+
+            tb_name.DataBindings.Add(new Binding("Text", currentItem, "Name", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_identifier.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwId", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_str.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwStr", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_sta.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwSta", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_dex.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwDex", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_int.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwInt", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_hr.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwHR", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_er.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwER", false, DataSourceUpdateMode.OnPropertyChanged));
+            cb_belligerence.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwBelligerence", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_level.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwLevel", false, DataSourceUpdateMode.OnPropertyChanged));
+            cb_class.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwClass", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_atkmin.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAtkMin", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_atkmax.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAtkMax", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_reattackdelay.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwReAttackDelay", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_addhp.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAddHp", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_addmp.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAddMp", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_naturalarmor.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwNaturalArmor", false, DataSourceUpdateMode.OnPropertyChanged));
+            cb_elementtype.DataBindings.Add(new Binding("Text", currentItem, "ElementType", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_elementatk.DataBindings.Add(new Binding("Text", currentItem.Prop, "WElementAtk", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_fspeed.DataBindings.Add(new Binding("Text", currentItem.Prop, "FSpeed", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_resismgic.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwResisMgic", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_resistelecricity.DataBindings.Add(new Binding("Text", currentItem.Prop, "NResistElecricity", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_resistfire.DataBindings.Add(new Binding("Text", currentItem.Prop, "NResistFire", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_resistwater.DataBindings.Add(new Binding("Text", currentItem.Prop, "NResistWater", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_resistwind.DataBindings.Add(new Binding("Text", currentItem.Prop, "NResistWind", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_resistearth.DataBindings.Add(new Binding("Text", currentItem.Prop, "NResistEarth", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_expvalue.DataBindings.Add(new Binding("Text", currentItem.Prop, "NExpValue", false, DataSourceUpdateMode.OnPropertyChanged));
+            cb_monsterai.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAi", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_ModelName.DataBindings.Add(new Binding("Text", currentItem.Model, "SzName", false, DataSourceUpdateMode.OnPropertyChanged));
             tb_ModelScale.DataBindings.Add(new Binding("Text", currentItem.Model, "FScale", false, DataSourceUpdateMode.OnPropertyChanged));
         }
 
-        private int FormatTextboxInteger(TextBox tb)
+        private void FormatIntTextbox(object sender, EventArgs e)
         {
-            string tempStr = "";
-            string finalStr = "";
-            for (int i = 0; i < tb.Text.Length; i++)
+            if (!(sender is TextBox)) return;
+
+            TextBox tb = (TextBox)sender;
+            int value = 0;
+            char sign = '+';
+            foreach (char c in tb.Text)
             {
-                if (char.IsDigit(tb.Text[i]) || (i == 0 && tb.Text[i] == '-'))
+                if (char.IsDigit(c))
                 {
-                    tempStr += tb.Text[i];
+                    long newValue = (long)value * 10 + (c - 48);
+                    if (sign == '-' && newValue > 0) newValue *= -1;
+                    if (newValue > int.MaxValue || newValue < int.MinValue)
+                        break;
+                    value = (int)newValue;
+                }
+                else if (c == '-' && value == 0) sign = '-';
+            }
+
+            int oldSelection = tb.SelectionStart; // Save the old selection
+            int oldTextLength = tb.TextLength; // Save the old textLength
+            tb.Text = value.ToString("N0");
+
+            /* We set the new selection depending on the old selection and the difference between
+             * the old text length and the new text length caused by the thousanders. This way,
+             * the selection does not really change for the user
+             */
+            tb.Select(oldSelection + tb.TextLength - oldTextLength, 0);
+        }
+
+        private void FormatFloatTextbox(object sender, EventArgs e)
+        {
+            if (!(sender is TextBox)) return;
+
+            TextBox tb = (TextBox)sender;
+            char separator = Convert.ToChar(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+
+            char sign = '+';
+            float value = 0;
+
+            int i = 0;
+            for (; i < tb.TextLength; i++)
+            {
+                char c = tb.Text[i];
+                if (char.IsDigit(c))
+                {
+                    float newValue = value * 10 + (c - 48);
+                    if (sign == '-' && newValue > 0) newValue *= -1;
+                    if (float.IsInfinity(newValue)) break;
+                    value = newValue;
+
+                }
+                else if (c == '-' && value == 0) sign = '-';
+                else if (c == separator) break;
+            }
+
+            int divider = 10;
+            for (; i < tb.TextLength && divider <= 1000000; i++)
+            {
+                char c = tb.Text[i];
+                if (char.IsDigit(c))
+                {
+                    float newValue = value + ((c - 48) / (float)divider);
+                    if (float.IsInfinity(newValue)) break;
+                    value = newValue;
+                    divider *= 10;
                 }
             }
 
-            // Remove last character while value is greater than int32
-            while (tempStr.Length > 0 && Int64.Parse(tempStr) > int.MaxValue)
-            {
-                tempStr = tempStr.Remove(tempStr.Length - 1);
-            }
-
-            int value = tempStr.Length > 0 ? int.Parse(tempStr) : 0;
-            tempStr = value.ToString();
-            for (int i = 0; i < tempStr.Length; i++)
-            {
-                finalStr += tempStr[i];
-                if ((tempStr.Length - i) % 3 == 1 && i != tempStr.Length - 1)
-                    finalStr += " ";
-            }
-            if (finalStr != tb.Text)
-                tb.Text = finalStr;
-
-            tb.Select(tb.Text.Length, 0);
-            return value;
-        }
-
-        private float FormatTextboxFloat(TextBox tb)
-        {
-            string tempStr = "";
-            string finalStr = "";
-            for (int i = 0; i < tb.Text.Length; i++)
-            {
-                if (char.IsDigit(tb.Text[i]) || tb.Text[i] == ',' || tb.Text[i] == '.' || (i == 0 && tb.Text[i] == '-'))
-                {
-                    tempStr += tb.Text[i];
-                }
-            }
-
-            float value = tempStr.Length > 0 ? float.Parse(tempStr) : 0;
-            tempStr = value.ToString();
-            for (int i = 0; i < tempStr.Length; i++)
-            {
-                finalStr += tempStr[i];
-                if ((tempStr.Length - i) % 3 == 1 && i != tempStr.Length - 1)
-                    finalStr += " ";
-            }
-            if (finalStr != tb.Text)
-                tb.Text = finalStr;
-
-            tb.Select(tb.Text.Length, 0);
-            return value;
-        }
-
-        private void tb_name_TextChanged(object sender, EventArgs e)
-        {
-            Project.GetInstance().ChangeStringValue(((Mover)lb_movers.SelectedItem).Prop.SzName, tb_name.Text);
-            ((BindingSource)lb_movers.DataSource).ResetBindings(false);
-        }
-
-        private void tb_identifier_TextChanged(object sender, EventArgs e)
-        {
-            if (tb_identifier.Text == string.Empty)
-            {
-                tb_identifier.Text = "MI_";
-                tb_identifier.Select(3, 0);
-            }
-            ((Mover)lb_movers.SelectedItem).Prop.DwId = tb_identifier.Text;
-        }
-
-        private void cb_belligerence_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwBelligerence = cb_belligerence.SelectedText;
-        }
-
-        private void tb_level_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwLevel = FormatTextboxInteger(tb_level);
-        }
-
-        private void cb_class_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwClass = cb_class.SelectedText;
-        }
-
-        private void tb_expvalue_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.NExpValue = FormatTextboxInteger(tb_expvalue);
-        }
-
-        private void tb_str_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwStr = FormatTextboxInteger(tb_str);
-        }
-
-        private void tb_dex_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwDex = FormatTextboxInteger(tb_dex);
-        }
-
-        private void tb_sta_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwSta = FormatTextboxInteger(tb_sta);
-        }
-
-        private void tb_int_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwInt = FormatTextboxInteger(tb_int);
-        }
-
-        private void tb_hr_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwHR = FormatTextboxInteger(tb_hr);
-        }
-
-        private void tb_er_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwER = FormatTextboxInteger(tb_er);
-        }
-
-        private void tb_addhp_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwAddHp = FormatTextboxInteger(tb_addhp);
-        }
-
-        private void tb_addmp_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwAddMp = FormatTextboxInteger(tb_addmp);
-        }
-
-        private void tb_naturalarmor_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwNaturalArmor = FormatTextboxInteger(tb_naturalarmor);
-        }
-
-        private void tb_resismgic_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwResisMgic = FormatTextboxInteger(tb_resismgic);
-        }
-
-        private void tb_reattackdelay_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwReAttackDelay = FormatTextboxInteger(tb_reattackdelay);
-        }
-
-        private void tb_atkmax_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwAtkMax = FormatTextboxInteger(tb_atkmax);
-        }
-
-        private void tb_atkmin_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwAtkMin = FormatTextboxInteger(tb_atkmin);
-        }
-
-        private void tb_speed_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.FSpeed = FormatTextboxFloat(tb_fspeed);
-        }
-
-        private void tb_elementatk_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.WElementAtk = FormatTextboxInteger(tb_elementatk);
-        }
-
-        private void tb_resistwater_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.NResistWater = FormatTextboxInteger(tb_resistwater);
-        }
-
-        private void tb_resistfire_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.NResistFire = FormatTextboxInteger(tb_resistfire);
-        }
-
-        private void tb_resistwind_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.NResistWind = FormatTextboxInteger(tb_resistwind);
-        }
-
-        private void tb_resistearth_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.NResistEarth = FormatTextboxInteger(tb_resistearth);
-        }
-
-        private void tb_resistelecricity_TextChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.NResistElecricity = FormatTextboxInteger(tb_resistelecricity);
-        }
-
-        private void cb_elementtype_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.EElementType = Settings.GetInstance().Elements.FirstOrDefault(x => x.Value == cb_elementtype.SelectedText).Key;
+            int oldSelection = tb.SelectionStart; // Save the old selection
+            int oldTextLength = tb.TextLength; // Save the old textLength
+            tb.Text = value.ToString("N6");
+            /* We set the new selection depending on the old selection and the difference between
+             * the old text length and the new text length caused by the thousanders. This way,
+             * the selection does not really change for the user
+             */
+            tb.Select(oldSelection + tb.TextLength - oldTextLength, 0);
         }
 
         private void cb_type_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (((Mover)lb_movers.SelectedItem) == null) return;
-        }
-
-        private void cb_monsterai_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
-            ((Mover)lb_movers.SelectedItem).Prop.DwAi = cb_monsterai.SelectedText;
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
@@ -317,6 +216,8 @@ namespace MoversEditor
 
         private void tsmi_moverdelete_Click(object sender, EventArgs e)
         {
+            if (lb_movers.SelectedItem == null) return;
+            Project.GetInstance().DeleteMover((Mover)lb_movers.SelectedItem);
         }
 
         private void lb_movers_MouseDown(object sender, MouseEventArgs e)
@@ -327,6 +228,14 @@ namespace MoversEditor
                 if (lb_movers.SelectedIndex != -1)
                     cms_lbmovers.Show(Cursor.Position);
             }
+        }
+
+        private void tb_name_TextChanged(object sender, EventArgs e)
+        {
+            // Not sure it will work. Value will maybe change after the textChanged
+            int topIndex = lb_movers.TopIndex; // Save the top index for after.
+            ((BindingSource)lb_movers.DataSource).ResetBindings(false);
+            lb_movers.TopIndex = topIndex; // We reset the position of the listbox to the old one.
         }
     }
 }
