@@ -88,6 +88,7 @@ namespace MoversEditor
             cb_monsterai.DataBindings.Clear();
             tb_ModelName.DataBindings.Clear();
             tb_ModelScale.DataBindings.Clear();
+            cb_ModelBrace.DataBindings.Clear();
 
             tb_name.DataBindings.Add(new Binding("Text", currentItem, "Name", false, DataSourceUpdateMode.OnPropertyChanged));
             tb_identifier.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwId", false, DataSourceUpdateMode.OnPropertyChanged));
@@ -119,6 +120,7 @@ namespace MoversEditor
             cb_monsterai.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAi", false, DataSourceUpdateMode.OnPropertyChanged));
             tb_ModelName.DataBindings.Add(new Binding("Text", currentItem.Model, "SzName", false, DataSourceUpdateMode.OnPropertyChanged));
             tb_ModelScale.DataBindings.Add(new Binding("Text", currentItem.Model, "FScale", false, DataSourceUpdateMode.OnPropertyChanged));
+            cb_ModelBrace.DataBindings.Add(new Binding("SelectedItem", currentItem.Model, "Brace", false, DataSourceUpdateMode.OnPropertyChanged));
         }
 
         private void FormatIntTextbox(object sender, EventArgs e)
@@ -193,7 +195,7 @@ namespace MoversEditor
 
             int oldSelection = tb.SelectionStart; // Save the old selection
             int oldTextLength = tb.TextLength; // Save the old textLength
-            tb.Text = value.ToString("N6");
+            tb.Text = value.ToString(".0##");
             /* We set the new selection depending on the old selection and the difference between
              * the old text length and the new text length caused by the thousanders. This way,
              * the selection does not really change for the user
@@ -236,6 +238,22 @@ namespace MoversEditor
             int topIndex = lb_movers.TopIndex; // Save the top index for after.
             ((BindingSource)lb_movers.DataSource).ResetBindings(false);
             lb_movers.TopIndex = topIndex; // We reset the position of the listbox to the old one.
+        }
+
+        private void tb_ModelScale_KeyPress(object sender, KeyPressEventArgs e)
+        {
+        }
+
+        private void tb_ModelScale_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (!(sender is TextBox) || e.Control) return;
+            TextBox tb = (TextBox)sender;
+
+            char separator = Convert.ToChar(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
+
+            if ((tb.SelectedText.Contains(separator) && tb.SelectionStart + tb.SelectionLength < tb.TextLength)
+                || (e.KeyCode == Keys.Back && tb.SelectionLength == 0 && tb.Text[tb.SelectionStart - 1] == separator))
+                e.SuppressKeyPress = true;
         }
     }
 }

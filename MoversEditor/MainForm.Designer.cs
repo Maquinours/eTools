@@ -132,10 +132,10 @@
             this.lb_movers.Dock = System.Windows.Forms.DockStyle.Left;
             this.lb_movers.FormattingEnabled = true;
             this.lb_movers.ItemHeight = 20;
-            this.lb_movers.Location = new System.Drawing.Point(0, 33);
+            this.lb_movers.Location = new System.Drawing.Point(0, 36);
             this.lb_movers.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lb_movers.Name = "lb_movers";
-            this.lb_movers.Size = new System.Drawing.Size(330, 898);
+            this.lb_movers.Size = new System.Drawing.Size(330, 895);
             this.lb_movers.TabIndex = 0;
             this.lb_movers.SelectedIndexChanged += new System.EventHandler(this.lb_movers_SelectedIndexChanged);
             this.lb_movers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lb_movers_MouseDown);
@@ -206,11 +206,11 @@
             this.tc_main.Controls.Add(this.tp_pet);
             this.tc_main.Controls.Add(this.tp_monster);
             this.tc_main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tc_main.Location = new System.Drawing.Point(330, 33);
+            this.tc_main.Location = new System.Drawing.Point(330, 36);
             this.tc_main.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tc_main.Name = "tc_main";
             this.tc_main.SelectedIndex = 0;
-            this.tc_main.Size = new System.Drawing.Size(687, 898);
+            this.tc_main.Size = new System.Drawing.Size(687, 895);
             this.tc_main.TabIndex = 8;
             // 
             // tp_general
@@ -226,7 +226,7 @@
             this.tp_general.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tp_general.Name = "tp_general";
             this.tp_general.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tp_general.Size = new System.Drawing.Size(679, 865);
+            this.tp_general.Size = new System.Drawing.Size(679, 862);
             this.tp_general.TabIndex = 0;
             this.tp_general.Text = "Général";
             this.tp_general.UseVisualStyleBackColor = true;
@@ -256,6 +256,8 @@
             this.tb_ModelScale.Size = new System.Drawing.Size(217, 26);
             this.tb_ModelScale.TabIndex = 1;
             this.tb_ModelScale.TextChanged += new System.EventHandler(this.FormatFloatTextbox);
+            this.tb_ModelScale.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_ModelScale_KeyDown);
+            this.tb_ModelScale.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_ModelScale_KeyPress);
             // 
             // tb_ModelName
             // 
@@ -937,7 +939,7 @@
             this.tsmi_movers});
             this.ms_main.Location = new System.Drawing.Point(0, 0);
             this.ms_main.Name = "ms_main";
-            this.ms_main.Size = new System.Drawing.Size(1017, 33);
+            this.ms_main.Size = new System.Drawing.Size(1017, 36);
             this.ms_main.TabIndex = 9;
             this.ms_main.Text = "Movers";
             // 

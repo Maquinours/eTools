@@ -1128,6 +1128,23 @@ namespace eTools
             return braces.ToArray();
         }
 
+        public ModelBrace GetBraceByModel(ModelElem model)
+        {
+            foreach(ModelBrace brace in GetBracesByType(model.DwType))
+            {
+                foreach (ModelElem tempModel in brace.Models)
+                    if (tempModel == model)
+                        return brace;
+            }
+            return null;
+        }
+
+        public void SetBraceToModel(ModelElem model, ModelBrace brace)
+        {
+            GetBraceByModel(model).Models.Remove(model); // Remove old
+            brace.Models.Add(model); // Add to new
+        }
+
         private void GetBracesRecursively(List<ModelBrace> braces, ModelBrace brace)
         {
             braces.Add(brace);

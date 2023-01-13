@@ -8,7 +8,7 @@ namespace eTools
         public string IMotion { get; set; }
     }
 
-    internal class ModelBrace
+    public class ModelBrace
     {
         public string SzName { get; set; }
         public List<ModelBrace> Braces { get; set; }
@@ -43,6 +43,12 @@ namespace eTools
         public int BRenderFlag { get; set; }
 
         public List<Motion> Motions { get; set; }
+
+        public ModelBrace Brace
+        {
+            get { return Project.GetInstance().GetBraceByModel(this); }
+            set { Project.GetInstance().SetBraceToModel(this, value); }
+        }
 
         public ModelElem()
         {
