@@ -1,4 +1,18 @@
 using eTools;
+using System;
+
+public enum MoverTypes
+{
+    NPC,
+    CHARACTER,
+    MONSTER,
+    PET
+}
+
+public class MoverType
+{
+    public string[] Identifiers { get; set; }
+}
 
 public class MoverProp
 {
@@ -100,5 +114,10 @@ public class Mover
     {
         get { return Project.GetInstance().GetElementNameById(Prop.EElementType); }
         set { Prop.EElementType = Project.GetInstance().GetElementIdByName(value); }
+    }
+    public string Type
+    {
+        get { return Project.GetInstance().GetMoverType(this).ToString(); }
+        set { Project.GetInstance().SetMoverType(this, (MoverTypes)Enum.Parse(typeof(MoverTypes), value)); }
     }
 }

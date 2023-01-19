@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -23,6 +24,7 @@ namespace MoversEditor
 
         private void LoadFormData()
         {
+            //UseWaitCursor = true;
             try
             {
                 Project prj = Project.GetInstance();
@@ -34,13 +36,29 @@ namespace MoversEditor
                 cb_belligerence.DataSource = prj.GetBelligerenceIdentifiers();
                 cb_class.DataSource = prj.GetClassIdentifiers();
                 cb_elementtype.DataSource = Settings.GetInstance().Elements.Values.ToArray();
-                lb_movers.DataSource = new BindingSource(prj.GetAllMovers(), "");
-                lb_movers.DisplayMember = "Name";
                 cb_ModelBrace.DataSource = prj.GetMoverModelBraces();
                 cb_ModelBrace.DisplayMember = "SzName";
+                cb_type.DataSource = prj.GetAllMoversTypes();
+                lb_movers.DataSource = new BindingSource(prj.GetAllMovers(), "");
+                lb_movers.DisplayMember = "Name";
+                //UseWaitCursor = false;
+            }
+            catch(Exception e) when (e is FileNotFoundException || e is DirectoryNotFoundException)
+            {
+                FileNotFoundForm fnff = new FileNotFoundForm(e.Message);
+                switch(fnff.ShowDialog())
+                {
+                    case DialogResult.Retry:
+                        LoadFormData();
+                        break;
+                    case DialogResult.Cancel:
+                        Environment.Exit(3);
+                        break;
+                }
             }
             catch (Exception e)
             {
+                //UseWaitCursor = false;
                 switch (MessageBox.Show(e.Message, "Loading error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error))
                 {
                     case DialogResult.Retry:
@@ -56,7 +74,7 @@ namespace MoversEditor
         private void lb_movers_SelectedIndexChanged(object sender, EventArgs e)
         {
             Mover currentItem = ((Mover)lb_movers.SelectedItem);
-            MoverProp prop = currentItem.Prop;
+            if (currentItem == null) return;
 
             tb_name.DataBindings.Clear();
             tb_identifier.DataBindings.Clear();
@@ -89,6 +107,7 @@ namespace MoversEditor
             tb_ModelName.DataBindings.Clear();
             tb_ModelScale.DataBindings.Clear();
             cb_ModelBrace.DataBindings.Clear();
+            cb_type.DataBindings.Clear();
 
             tb_name.DataBindings.Add(new Binding("Text", currentItem, "Name", false, DataSourceUpdateMode.OnPropertyChanged));
             tb_identifier.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwId", false, DataSourceUpdateMode.OnPropertyChanged));
@@ -121,6 +140,7 @@ namespace MoversEditor
             tb_ModelName.DataBindings.Add(new Binding("Text", currentItem.Model, "SzName", false, DataSourceUpdateMode.OnPropertyChanged));
             tb_ModelScale.DataBindings.Add(new Binding("Text", currentItem.Model, "FScale", false, DataSourceUpdateMode.OnPropertyChanged));
             cb_ModelBrace.DataBindings.Add(new Binding("SelectedItem", currentItem.Model, "Brace", false, DataSourceUpdateMode.OnPropertyChanged));
+            cb_type.DataBindings.Add(new Binding("SelectedItem", currentItem, "Type", false, DataSourceUpdateMode.OnPropertyChanged));
         }
 
         private void FormatIntTextbox(object sender, EventArgs e)
@@ -195,25 +215,59 @@ namespace MoversEditor
 
             int oldSelection = tb.SelectionStart; // Save the old selection
             int oldTextLength = tb.TextLength; // Save the old textLength
-            tb.Text = value.ToString(".0##");
+            tb.Text = value.ToString("0.0##");
             /* We set the new selection depending on the old selection and the difference between
              * the old text length and the new text length caused by the thousanders. This way,
              * the selection does not really change for the user
              */
-            tb.Select(oldSelection + tb.TextLength - oldTextLength, 0);
+            tb.Select(new[] { oldSelection + tb.TextLength - oldTextLength, 0 }.Max(), 0);
         }
 
         private void cb_type_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (((Mover)lb_movers.SelectedItem) == null) return;
+            if (((Mover)lb_movers.SelectedItem) == null || !Enum.TryParse((string)cb_type.SelectedValue, out MoverTypes type)) return;
+            Mover mover = (Mover)lb_movers.SelectedItem;
+            Project prj = Project.GetInstance();
+
+            TabPage tp = type == MoverTypes.MONSTER ? tp_monster : null;
+            if (tc_main.TabPages.Count > 1 && tc_main.TabPages[1] != tp)
+                tc_main.TabPages.RemoveAt(1);
+            if (tp != null)
+                tc_main.TabPages.Add(tp);
+            cb_monsterai.DataSource = prj.GetAllAllowedAiByType(type);
+            cb_belligerence.DataSource = prj.GetAllAllowedBelliByType(type);
+            cb_class.DataSource = prj.GetAllAllowedClassByType(type);
+
+            cb_monsterai.Enabled = cb_monsterai.Items.Count > 1;
+            cb_belligerence.Enabled = cb_belligerence.Items.Count > 1;
+            cb_class.Enabled = cb_class.Items.Count > 1;
+            tb_level.Enabled = type == MoverTypes.MONSTER;
+            tb_expvalue.Enabled = type == MoverTypes.MONSTER;
         }
 
-        private void MainForm_KeyDown(object sender, KeyEventArgs e)
+        private void Search()
         {
+            SearchForm form = new SearchForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                Mover selectedMover = lb_movers.Items.Cast<Mover>().ToArray().FirstOrDefault(x => x.Name.ToLower().Contains(form.Value.ToLower()));
+                if (selectedMover != null)
+                    lb_movers.SelectedItem = selectedMover;
+            }
+        }
+
+        private void AddMover()
+        {
+            Project prj = Project.GetInstance();
+            Project.GetInstance().AddNewMover();
+            lb_movers.DataSource = new BindingSource(prj.GetAllMovers(), "");
+            lb_movers.DisplayMember = "Name";
+            lb_movers.SelectedIndex = lb_movers.Items.Count - 1;
         }
 
         private void tsmi_moversadd_Click(object sender, EventArgs e)
         {
+            AddMover();
         }
 
         private void tsmi_moverdelete_Click(object sender, EventArgs e)
@@ -232,18 +286,6 @@ namespace MoversEditor
             }
         }
 
-        private void tb_name_TextChanged(object sender, EventArgs e)
-        {
-            // Not sure it will work. Value will maybe change after the textChanged
-            int topIndex = lb_movers.TopIndex; // Save the top index for after.
-            ((BindingSource)lb_movers.DataSource).ResetBindings(false);
-            lb_movers.TopIndex = topIndex; // We reset the position of the listbox to the old one.
-        }
-
-        private void tb_ModelScale_KeyPress(object sender, KeyPressEventArgs e)
-        {
-        }
-
         private void tb_ModelScale_KeyDown(object sender, KeyEventArgs e)
         {
             if (!(sender is TextBox) || e.Control) return;
@@ -254,6 +296,28 @@ namespace MoversEditor
             if ((tb.SelectedText.Contains(separator) && tb.SelectionStart + tb.SelectionLength < tb.TextLength)
                 || (e.KeyCode == Keys.Back && tb.SelectionLength == 0 && tb.Text[tb.SelectionStart - 1] == separator))
                 e.SuppressKeyPress = true;
+        }
+
+        private void tsmi_reload_Click(object sender, EventArgs e)
+        {
+            LoadFormData();
+        }
+
+        private void tsmi_save_Click(object sender, EventArgs e)
+        {
+            //UseWaitCursor = true;
+            Project.GetInstance().Save();
+            //UseWaitCursor = false;
+        }
+
+        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new SettingsForm().ShowDialog();
+        }
+
+        private void rechercherToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Search();
         }
     }
 }

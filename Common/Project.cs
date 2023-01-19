@@ -75,12 +75,12 @@ namespace eTools
         public void Load()
         {
             Settings config = Settings.GetInstance();
-            config.LoadGeneral("..\\..\\..\\eTools.ini");
+            config.LoadGeneral("eTools\\eTools.ini");
 #if __ITEMS
             config.LoadSpecs("..\\..\\..\\items.ini");
 #endif // __ITEMS
 #if __MOVERS
-            config.LoadSpecs("..\\..\\..\\movers.ini");
+            config.LoadSpecs("eTools\\movers.ini");
 #endif // __MOVERS
             this.LoadDefines(config.DefineFilesPaths.ToArray());
             this.LoadStrings(config.StringsFilePath);
@@ -99,6 +99,8 @@ namespace eTools
 #if __MOVERS
             SaveMoversprop(config.PropFileName);
 #endif // __MOVERS
+            SaveModels(config.ResourcePath + "mdlDyna.inc");
+            SaveStrings(config.StringsFilePath);
         }
         #endregion
 
@@ -127,6 +129,10 @@ namespace eTools
                 }
                 scanner.Close();
             }
+            if (!defines.ContainsKey("BELLI_PEACEFUL")) // Must have BELLI_PEACEFUL
+                throw new MissingDefineException("BELLI_PEACEFUL");
+            if (!defines.ContainsKey("RANK_CITIZEN")) // Must have RANK_CITIZEN
+                throw new MissingDefineException("RANK_CITIZEN");
         }
         private void LoadStrings(string filePath)
         {
@@ -151,6 +157,15 @@ namespace eTools
                 this.strings.Add(index, value);
             }
             scanner.Close();
+        }
+
+        private void SaveStrings(string filePath)
+        {
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                foreach (KeyValuePair<string, string> str in strings)
+                    writer.Write($"{str.Key}\t{str.Value}\r\n");
+            }
         }
         #endregion
 
@@ -437,6 +452,8 @@ namespace eTools
                     break;
 
                 mp.SzName = scanner.GetToken();
+                if(!mp.SzName.StartsWith("IDS_"))
+                    throw new IncorrectlyFormattedFileException(filePath);
                 mp.DwAi = scanner.GetToken();
                 mp.DwStr = scanner.GetNumber();
                 mp.DwSta = scanner.GetNumber();
@@ -552,6 +569,8 @@ namespace eTools
 
                 if (!this.strings.ContainsKey(mp.SzName))
                     this.strings.Add(mp.SzName, "");          // If IDS is not defined, we add it to be defined.
+                if(!this.strings.ContainsKey(mp.SzComment))
+                    this.strings.Add(mp.SzComment, "");          // If IDS is not defined, we add it to be defined.
                 mover.Prop = mp;
                 movers.Add(mover);
             }
@@ -566,11 +585,11 @@ namespace eTools
                 {
                     MoverProp prop = mover.Prop;
 
-                    writer.Write(prop.DwId);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwId) ? "=" : prop.DwId);
                     writer.Write("\t");
-                    writer.Write(prop.SzName);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.SzName) ? "=" : prop.SzName);
                     writer.Write("\t");
-                    writer.Write(prop.DwAi);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwAi) ? "=" : prop.DwAi);
                     writer.Write("\t");
                     writer.Write(prop.DwStr == -1 ? "=" : prop.DwStr.ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
@@ -586,7 +605,7 @@ namespace eTools
                     writer.Write("\t");
                     writer.Write(prop.DwRace == -1 ? "=" : prop.DwRace.ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
-                    writer.Write(prop.DwBelligerence);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwBelligerence) ? "=" : prop.DwBelligerence);
                     writer.Write("\t");
                     writer.Write(prop.DwGender == -1 ? "=" : prop.DwGender.ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
@@ -596,7 +615,7 @@ namespace eTools
                     writer.Write("\t");
                     writer.Write(prop.DwSize == -1 ? "=" : prop.DwSize.ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
-                    writer.Write(prop.DwClass);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwClass) ? "=" : prop.DwClass);
                     writer.Write("\t");
                     writer.Write(prop.BIfParts == 1 ? prop.BIfParts.ToString(new CultureInfo("en-US")) : 0.ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
@@ -610,13 +629,13 @@ namespace eTools
                     writer.Write("\t");
                     writer.Write(prop.DwAtkMax == -1 ? "=" : prop.DwAtkMax.ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
-                    writer.Write(prop.DwAtk1);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwAtk1) ? "=" : prop.DwAtk1);
                     writer.Write("\t");
-                    writer.Write(prop.DwAtk2);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwAtk2) ? "=" : prop.DwAtk2);
                     writer.Write("\t");
-                    writer.Write(prop.DwAtk3);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwAtk3) ? "=" : prop.DwAtk3);
                     writer.Write("\t");
-                    writer.Write(prop.DwAtk4);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwAtk4) ? "=" : prop.DwAtk4);
                     writer.Write("\t");
                     writer.Write(prop.FFrame == -1f ? "=" : prop.FFrame.ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
@@ -682,7 +701,7 @@ namespace eTools
 
                     writer.Write(prop.DwCash == -1 ? "=" : prop.DwCash.ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
-                    writer.Write(prop.DwSourceMaterial);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwSourceMaterial) ? "=" : prop.DwSourceMaterial);
                     writer.Write("\t");
                     writer.Write(prop.DwMaterialAmount == -1 ? "=" : prop.DwMaterialAmount.ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
@@ -703,11 +722,11 @@ namespace eTools
                     writer.Write(prop.BKillable == 1 ? "1" : "0");
                     writer.Write("\t");
 
-                    writer.Write(prop.DwVirtItem[0]);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwVirtItem[0]) ? "=" : prop.DwVirtItem[0]);
                     writer.Write("\t");
-                    writer.Write(prop.DwVirtItem[1]);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwVirtItem[1]) ? "=" : prop.DwVirtItem[1]);
                     writer.Write("\t");
-                    writer.Write(prop.DwVirtItem[2]);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwVirtItem[2]) ? "=" : prop.DwVirtItem[2]);
                     writer.Write("\t");
                     writer.Write(prop.BVirtType[0] == -1 ? "=" : prop.BVirtType[0].ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
@@ -716,34 +735,34 @@ namespace eTools
                     writer.Write(prop.BVirtType[2] == -1 ? "=" : prop.BVirtType[2].ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
 
-                    writer.Write(prop.DwSndAtk1);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwSndAtk1) ? "=" : prop.DwSndAtk1);
                     writer.Write("\t");
-                    writer.Write(prop.DwSndAtk2);
-                    writer.Write("\t");
-
-                    writer.Write(prop.DwSndDie1);
-                    writer.Write("\t");
-                    writer.Write(prop.DwSndDie2);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwSndAtk2) ? "=" : prop.DwSndAtk2);
                     writer.Write("\t");
 
-                    writer.Write(prop.DwSndDmg1);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwSndDie1) ? "=" : prop.DwSndDie1);
                     writer.Write("\t");
-                    writer.Write(prop.DwSndDmg2);
-                    writer.Write("\t");
-                    writer.Write(prop.DwSndDmg3);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwSndDie2) ? "=" : prop.DwSndDie2);
                     writer.Write("\t");
 
-                    writer.Write(prop.DwSndIdle1);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwSndDmg1) ? "=" : prop.DwSndDmg1);
                     writer.Write("\t");
-                    writer.Write(prop.DwSndIdle2);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwSndDmg2) ? "=" : prop.DwSndDmg2);
+                    writer.Write("\t");
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwSndDmg3) ? "=" : prop.DwSndDmg3);
                     writer.Write("\t");
 
-                    writer.Write(prop.SzComment);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwSndIdle1) ? "=" : prop.DwSndIdle1);
+                    writer.Write("\t");
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwSndIdle2) ? "=" : prop.DwSndIdle2);
                     writer.Write("\t");
 
-                    writer.Write(prop.DwAreaColor);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.SzComment) ? "=" : prop.SzComment);
                     writer.Write("\t");
-                    writer.Write(prop.SzNpcMark);
+
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwAreaColor) ? "=" : prop.DwAreaColor);
+                    writer.Write("\t");
+                    writer.Write(string.IsNullOrWhiteSpace(prop.SzNpcMark) ? "=" : prop.SzNpcMark);
                     writer.Write("\t");
                     writer.Write(prop.DwMadrigalGiftPoint < 0 ? "0" : prop.DwMadrigalGiftPoint.ToString(new CultureInfo("en-US")));
                     writer.Write("\r\n");
@@ -756,112 +775,186 @@ namespace eTools
         public void AddNewMover()
         {
             int[] stringIntKeys = strings.Select(x => int.Parse(x.Key.Substring(x.Key.Length - 6))).ToArray();
-            int txtIntKey = stringIntKeys.Length > 0 ? stringIntKeys.Max() : 0;
-
-            MoverProp prop = new MoverProp();
-            prop.DwId = "MI_";
-            prop.SzName = $"IDS_PROPMOVER_TXT_{txtIntKey:D6}";
-            prop.DwAi = "AII_NONE";
-            prop.DwStr = -1;
-            prop.DwSta = -1;
-            prop.DwDex = -1;
-            prop.DwInt = -1;
-            prop.DwHR = -1;
-            prop.DwER = -1;
-            prop.DwRace = -1;
-            prop.DwBelligerence = "BELLI_PEACEFUL";
-            prop.DwGender = -1;
-            prop.DwLevel = -1;
-            prop.DwFlightLevel = -1;
-            prop.DwSize = -1;
-            prop.DwClass = "RANK_CITIZEN";
-            prop.BIfParts = 0;
-            prop.NChaotic = -1;
-            prop.DwUseable = -1;
-            prop.DwActionRadius = -1;
-            prop.DwAtkMin = -1;
-            prop.DwAtkMax = -1;
-            prop.DwAtk1 = "=";
-            prop.DwAtk2 = "=";
-            prop.DwAtk3 = "=";
-            prop.DwAtk4 = "=";
-            prop.FFrame = -1;
-            prop.DwOrthograde = -1;
-            prop.DwThrustRate = -1;
-            prop.DwChestRate = -1;
-            prop.DwHeadRate = -1;
-            prop.DwArmRate = -1;
-            prop.DwLegRate = -1;
-            prop.DwAttackSpeed = -1;
-            prop.DwReAttackDelay = -1;
-            prop.DwAddHp = -1;
-            prop.DwAddMp = -1;
-            prop.DwNaturalArmor = -1;
-            prop.NAbrasion = -1;
-            prop.NHardness = -1;
-            prop.DwAdjAtkDelay = -1;
-            prop.EElementType = 0;
-            prop.WElementAtk = 0;
-            prop.DwHideLevel = 0;
-            prop.FSpeed = 0.1f;
-            prop.DwShelter = -1;
-            prop.DwFlying = 0;
-            prop.DwJumpIng = -1;
-            prop.DwAirJump = -1;
-            prop.BTaming = -1;
-            prop.DwResisMgic = 0;
-
-            prop.NResistElecricity = 0;
-            prop.NResistFire = 0;
-            prop.NResistWind = 0;
-            prop.NResistWater = 0;
-            prop.NResistEarth = 0;
-
-            prop.DwCash = -1;
-            prop.DwSourceMaterial = "=";
-            prop.DwMaterialAmount = -1;
-            prop.DwCohesion = -1;
-            prop.DwHoldingTime = -1;
-            prop.DwCorrectionValue = -1;
-            prop.NExpValue = 0;
-            prop.NFxpValue = 0;
-            prop.NBodyState = -1;
-            prop.DwAddAbility = -1;
-            prop.BKillable = 0;
-
-
-            prop.DwVirtItem = new string[3];
-            prop.BVirtType = new int[3];
-            prop.DwVirtItem[0] = "=";
-            prop.DwVirtItem[1] = "=";
-            prop.DwVirtItem[2] = "=";
-            prop.BVirtType[0] = -1;
-            prop.BVirtType[1] = -1;
-            prop.BVirtType[2] = -1;
-
-            prop.DwSndAtk1 = "=";
-            prop.DwSndAtk2 = "=";
-
-            prop.DwSndDie1 = "=";
-            prop.DwSndDie2 = "=";
-
-            prop.DwSndDmg1 = "=";
-            prop.DwSndDmg2 = "=";
-            prop.DwSndDmg3 = "=";
-
-            prop.DwSndIdle1 = "=";
-            prop.DwSndIdle2 = "=";
-
-            prop.SzComment = $"IDS_PROPMOVER_TXT_{txtIntKey + 1:D6}";
-            prop.SzNpcMark = "=";
-            prop.DwMadrigalGiftPoint = 0;
-
+            int txtIntKey = stringIntKeys.Length > 0 ? stringIntKeys.Max() + 1 : 0;
 
             Mover mover = new Mover()
             {
-                Prop = prop
+                Prop = new MoverProp
+                {
+                    DwId = "MI_",
+                    SzName = $"IDS_PROPMOVER_TXT_{txtIntKey:D6}",
+                    DwAi = "AII_NONE",
+                    DwStr = -1,
+                    DwSta = -1,
+                    DwDex = -1,
+                    DwInt = -1,
+                    DwHR = -1,
+                    DwER = -1,
+                    DwRace = -1,
+                    DwBelligerence = "BELLI_PEACEFUL",
+                    DwGender = -1,
+                    DwLevel = -1,
+                    DwFlightLevel = -1,
+                    DwSize = -1,
+                    DwClass = "RANK_CITIZEN",
+                    BIfParts = 0,
+                    NChaotic = -1,
+                    DwUseable = -1,
+                    DwActionRadius = -1,
+                    DwAtkMin = -1,
+                    DwAtkMax = -1,
+                    DwAtk1 = "=",
+                    DwAtk2 = "=",
+                    DwAtk3 = "=",
+                    DwAtk4 = "=",
+                    FFrame = -1,
+                    DwOrthograde = -1,
+                    DwThrustRate = -1,
+                    DwChestRate = -1,
+                    DwHeadRate = -1,
+                    DwArmRate = -1,
+                    DwLegRate = -1,
+                    DwAttackSpeed = -1,
+                    DwReAttackDelay = -1,
+                    DwAddHp = -1,
+                    DwAddMp = -1,
+                    DwNaturalArmor = -1,
+                    NAbrasion = -1,
+                    NHardness = -1,
+                    DwAdjAtkDelay = -1,
+                    EElementType = 0,
+                    WElementAtk = 0,
+                    DwHideLevel = 0,
+                    FSpeed = 0.1f,
+                    DwShelter = -1,
+                    DwFlying = 0,
+                    DwJumpIng = -1,
+                    DwAirJump = -1,
+                    BTaming = -1,
+                    DwResisMgic = 0,
+
+                    NResistElecricity = 0,
+                    NResistFire = 0,
+                    NResistWind = 0,
+                    NResistWater = 0,
+                    NResistEarth = 0,
+
+                    DwCash = -1,
+                    DwSourceMaterial = "=",
+                    DwMaterialAmount = -1,
+                    DwCohesion = -1,
+                    DwHoldingTime = -1,
+                    DwCorrectionValue = -1,
+                    NExpValue = 0,
+                    NFxpValue = 0,
+                    NBodyState = -1,
+                    DwAddAbility = -1,
+                    BKillable = 0,
+
+
+                    DwVirtItem = new string[3]
+                {
+                    "=",
+                    "=",
+                    "="
+                },
+                    BVirtType = new int[3]
+                {
+                    -1,
+                    -1,
+                    -1
+                },
+                    DwSndAtk1 = "=",
+                    DwSndAtk2 = "=",
+
+                    DwSndDie1 = "=",
+                    DwSndDie2 = "=",
+
+                    DwSndDmg1 = "=",
+                    DwSndDmg2 = "=",
+                    DwSndDmg3 = "=",
+
+                    DwSndIdle1 = "=",
+                    DwSndIdle2 = "=",
+
+                    SzComment = $"IDS_PROPMOVER_TXT_{txtIntKey + 1:D6}",
+                    SzNpcMark = "=",
+                    DwMadrigalGiftPoint = 0
+                },
+                Model = new ModelElem
+                {
+                    DwType = defines["OT_MOVER"],
+                    SzName = "",
+                    DwIndex = "MI_",
+                    DwModelType = "MODELTYPE_ANIMATED_MESH",
+                    SzPart = "",
+                    BFly = 0,
+                    DwDistant = "MD_MID",
+                    BPick = 0,
+                    FScale = 1f,
+                    BTrans = 0,
+                    BShadow = 1,
+                    NTextureEx = "ATEX_NONE",
+                    BRenderFlag = 1
+                }
             };
             movers.Add(mover);
+            strings.Add($"IDS_PROPMOVER_TXT_{txtIntKey:D6}", "");
+            strings.Add($"IDS_PROPMOVER_TXT_{txtIntKey + 1:D6}", "");
+            mover.Model.Brace = GetBracesByType(defines["OT_MOVER"]).First();
+        }
+
+        public string[] GetMoversName()
+        {
+            return movers.Select(x => x.Name).ToArray();
+        }
+
+        public void SetMoverType(Mover mover,  MoverTypes type)
+        {
+            switch(type)
+            {
+                case MoverTypes.NPC:
+                case MoverTypes.CHARACTER:
+                    mover.Prop.DwBelligerence = "BELLI_PEACEFUL";
+                    mover.Prop.DwClass = "RANK_CITIZEN";
+                    mover.Prop.BKillable = 0;
+                    break;
+                case MoverTypes.MONSTER:
+                    mover.Prop.DwBelligerence = GetBelligerenceIdentifiers().Where(x => x != "BELLI_PEACEFUL").First(); // TODO: Can error if there is only BELLI_PEACEFUL defined
+                    mover.Prop.DwClass = GetClassIdentifiers().Where(x => x != "RANK_CITIZEN").First();
+                    break;
+            }
+            mover.Prop.DwAi = Settings.GetInstance().Types[type].Identifiers.First();
+        }
+
+        public MoverTypes GetMoverType(Mover mover)
+        {
+            return Settings.GetInstance().Types.First(x => x.Value.Identifiers.Contains(mover.Prop.DwAi)).Key;
+        }
+
+        public string[] GetAllMoversTypes()
+        {
+            return Enum.GetNames(typeof(MoverTypes));
+        }
+
+        public string[] GetAllAllowedAiByType(MoverTypes type)
+        {
+            string[] allowed = Settings.GetInstance().Types[type].Identifiers;
+            return GetAiIdentifiers().Where(x => allowed.Contains(x)).ToArray();
+        }
+
+        public string[] GetAllAllowedBelliByType(MoverTypes type)
+        {
+            return type == MoverTypes.MONSTER ?
+                GetBelligerenceIdentifiers().Where(x => x != "BELLI_PEACEFUL").ToArray() :
+                new string[] { "BELLI_PEACEFUL" };
+        }
+
+        public string[] GetAllAllowedClassByType(MoverTypes type)
+        {
+            return type == MoverTypes.MONSTER ?
+                GetClassIdentifiers().Where(x => x != "RANK_CITIZEN" && x != "RANK_MAX").ToArray() :
+                new string[] { "RANK_CITIZEN" };
         }
 
         public Mover[] GetAllMovers()
@@ -988,8 +1081,6 @@ namespace eTools
                 ModelBrace currBrace = mainBrace;
                 while (currBraces.Count > 0)
                 {
-                    if (scanner.EndOfStream)
-                        throw new IncorrectlyFormattedFileException(filePath);
                     if (scanner.Token == "}") // End of current brace
                     {
                         currBraces.RemoveAt(currBraces.Count - 1);
@@ -1000,6 +1091,8 @@ namespace eTools
                         }
                         continue;
                     }
+                    if (scanner.EndOfStream)
+                        throw new IncorrectlyFormattedFileException(filePath);
                     szObject = scanner.Token;
                     scanner.GetToken();
                     if (scanner.Token == "{") // Start of a new brace
@@ -1066,6 +1159,7 @@ namespace eTools
 #endif // __ITEMS
                 }
             }
+            scanner.Close();
         }
 
         private void SaveModels(string filePath)
@@ -1074,23 +1168,24 @@ namespace eTools
             {
                 foreach (MainModelBrace brace in models)
                 {
-                    SaveModelBrace(brace, writer);
+                    SaveModelBrace(brace, writer, 0);
                 }
             }
         }
 
-        private void SaveModelBrace(ModelBrace brace, StreamWriter writer)
+        private void SaveModelBrace(ModelBrace brace, StreamWriter writer, int indent)
         {
-            writer.Write($"\"{brace.SzName}\"");
+            writer.Write($"{new string('\t', indent)}\"{brace.SzName}\"");
             if (brace is MainModelBrace mainModelBrace)
                 writer.Write($"\t{mainModelBrace.IType}");
-            writer.Write("\r\n{\r\n");
+            writer.Write($"\r\n{new string('\t', indent)}{{\r\n");
             foreach (ModelBrace br in brace.Braces)
             {
-                SaveModelBrace(br, writer);
+                SaveModelBrace(br, writer, indent + 1);
             }
             foreach (ModelElem elem in brace.Models)
             {
+                writer.Write(new string('\t', indent + 1));
                 writer.Write($"\"{elem.SzName}\"\t");
                 writer.Write($"{elem.DwIndex}\t");
                 writer.Write($"{elem.DwModelType}\t");
@@ -1098,22 +1193,24 @@ namespace eTools
                 writer.Write($"{elem.BFly}\t");
                 writer.Write($"{elem.DwDistant}\t");
                 writer.Write($"{elem.BPick}\t");
-                writer.Write($"{elem.FScale}f\t");
+                writer.Write($"{elem.FScale.ToString(new CultureInfo("en-US"))}f\t");
                 writer.Write($"{elem.BTrans}\t");
                 writer.Write($"{elem.BShadow}\t");
                 writer.Write($"{elem.NTextureEx}\t");
                 writer.Write($"{elem.BRenderFlag}\r\n");
                 if (elem.Motions.Count > 0)
                 {
-                    writer.Write("{\r\n");
+                    writer.Write($"{new string('\t', indent + 1)}{{\r\n");
                     foreach (Motion motion in elem.Motions)
                     {
-                        writer.Write($"{motion.SzMotion}\t");
+                        writer.Write(new string('\t', indent + 2));
+                        writer.Write($"\"{motion.SzMotion}\"\t");
                         writer.Write($"{motion.IMotion}\r\n");
                     }
-                    writer.Write("}\r\n");
+                    writer.Write($"{new string('\t', indent + 1)}}}\r\n");
                 }
             }
+            writer.Write($"{new string('\t', indent)}}}\r\n");
         }
 
         private ModelBrace[] GetBracesByType(int type)
@@ -1141,7 +1238,9 @@ namespace eTools
 
         public void SetBraceToModel(ModelElem model, ModelBrace brace)
         {
-            GetBraceByModel(model).Models.Remove(model); // Remove old
+            ModelBrace oldBrace = GetBraceByModel(model);
+            if(oldBrace != null)
+                oldBrace.Models.Remove(model); // Remove old
             brace.Models.Add(model); // Add to new
         }
 

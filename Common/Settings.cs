@@ -17,7 +17,7 @@ namespace eTools
         /// <summary>
         /// The path of the resource folder where the process will read & save files
         /// </summary>
-        public string ResourcePath { get; private set; }
+        public string ResourcePath { get; set; }
         /// <summary>
         /// Elements id with name (should be same as SAI79::ePropType in game source)
         /// </summary>
@@ -33,14 +33,17 @@ namespace eTools
         /// <summary>
         /// .txt file path that process will read and save (file containing names & descriptions) (E.G propMover.txt.txt)
         /// </summary>
-        public string StringsFilePath { get; private set; }
+        public string StringsFilePath { get; set; }
         /// <summary>
         /// Main data file that process will read and save (E.G propMover.txt)
         /// </summary>
-        public string PropFileName { get; private set; }
+        public string PropFileName { get; set; }
 #if __ITEMS
         public string IconsFolderPath { get; private set; }
-#endif
+#endif // __ITEMS
+#if __MOVERS
+        public Dictionary<MoverTypes, MoverType> Types { get; set; }
+#endif // __MOBERS
 
         private Settings()
         {
@@ -50,6 +53,9 @@ namespace eTools
             this.StringsFilePath = string.Empty;
             this.PropFileName = string.Empty;
             this.ResourceVersion = -1;
+#if __MOVERS
+            Types = new Dictionary<MoverTypes, MoverType>();
+#endif // __MOVERS
         }
 
         public static Settings GetInstance()
@@ -94,6 +100,7 @@ namespace eTools
                         break;
                 }
             }
+            scanner.Close();
         }
 
         /// <summary>
@@ -108,6 +115,9 @@ namespace eTools
 #if __ITEMS
             IconsFolderPath = string.Empty;
 #endif // __ITEMS
+#if __MOVERS
+            Types.Clear();
+#endif // __MOVERS
 
             Scanner scanner = new Scanner();
             scanner.Load(filePath);
@@ -137,8 +147,30 @@ namespace eTools
                         IconsFolderPath = scanner.GetToken();
                         break;
 #endif // __ITEMS
+#if __MOVERS
+                    case "TYPES":
+                        scanner.GetToken(); // {
+                        while(scanner.GetToken() != "}")
+                        {
+                            if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+                            string type = scanner.Token;
+                            List<string> identifiers = new List<string>();
+                            scanner.GetToken(); // {
+                            while(scanner.GetToken() != "}")
+                            {
+                                if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+                                string identifier = scanner.Token;
+                                if(!identifier.StartsWith("AII_")) throw new IncorrectlyFormattedFileException(filePath);
+                                identifiers.Add(identifier);
+                            }
+                            MoverType moverType = new MoverType() { Identifiers = identifiers.ToArray() };
+                            Types.Add((MoverTypes)Enum.Parse(typeof(MoverTypes), type), moverType);
+                        }
+                        break;
+#endif // __MOVERS
                 }
             }
+            scanner.Close();
         }
 
         public void SaveGeneral(string filePath)
@@ -161,7 +193,7 @@ namespace eTools
         {
             using (StreamWriter writer = new StreamWriter(filePath))
             {
-                writer.WriteLine($"PROPFILE\t{Path.GetFileName(PropFileName)}");
+                writer.WriteLine($"PROPFILE\t\"{Path.GetFileName(PropFileName)}\"");
 #if __ITEMS
                 writer.WriteLine($"ICONSPATH\t{IconsFolderPath}");
 #endif // __ITEMS
@@ -170,9 +202,24 @@ namespace eTools
                 writer.WriteLine("{");
                 foreach(string defineFile in DefineFilesPaths)
                 {
-                    writer.WriteLine($"\"{Path.GetFileName(defineFile)}\"");
+                    writer.WriteLine($"\t\"{Path.GetFileName(defineFile)}\"");
                 }
                 writer.WriteLine("}");
+#if __MOVERS
+                writer.WriteLine("TYPES");
+                writer.WriteLine("{");
+                foreach(KeyValuePair<MoverTypes, MoverType> type in Types)
+                {
+                    writer.WriteLine($"\t{Enum.GetName(typeof(MoverTypes), type.Key)}");
+                    writer.WriteLine("\t{");
+                    foreach(string identifier in type.Value.Identifiers)
+                    {
+                        writer.WriteLine($"\t\t{identifier}");
+                    }
+                    writer.WriteLine("\t}");
+                }
+                writer.WriteLine("}");
+#endif // __MOVERS
             }
         }
     }
