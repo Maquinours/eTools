@@ -150,17 +150,17 @@ namespace eTools
 #if __MOVERS
                     case "TYPES":
                         scanner.GetToken(); // {
-                        while(scanner.GetToken() != "}")
+                        while (scanner.GetToken() != "}")
                         {
                             if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
                             string type = scanner.Token;
                             List<string> identifiers = new List<string>();
                             scanner.GetToken(); // {
-                            while(scanner.GetToken() != "}")
+                            while (scanner.GetToken() != "}")
                             {
                                 if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
                                 string identifier = scanner.Token;
-                                if(!identifier.StartsWith("AII_")) throw new IncorrectlyFormattedFileException(filePath);
+                                if (!identifier.StartsWith("AII_")) throw new IncorrectlyFormattedFileException(filePath);
                                 identifiers.Add(identifier);
                             }
                             MoverType moverType = new MoverType() { Identifiers = identifiers.ToArray() };
@@ -175,6 +175,11 @@ namespace eTools
 
         public void SaveGeneral(string filePath)
         {
+            FileInfo fi = new FileInfo(filePath);
+            if (!fi.Directory.Exists)
+            {
+                System.IO.Directory.CreateDirectory(fi.DirectoryName);
+            }
             using (StreamWriter writer = new StreamWriter(filePath))
             {
                 writer.WriteLine($"RESOURCEPATH\t\"{ResourcePath}\"");
@@ -183,7 +188,7 @@ namespace eTools
                 writer.WriteLine("{");
                 foreach (KeyValuePair<int, string> element in Elements.ToArray())
                 {
-                    writer.WriteLine($"{element.Value}\t{element.Key}");
+                    writer.WriteLine($"\t{element.Value}\t{element.Key}");
                 }
                 writer.WriteLine("}");
             }
@@ -191,6 +196,11 @@ namespace eTools
 
         public void SaveSpecs(string filePath)
         {
+            FileInfo fi = new FileInfo(filePath);
+            if (!fi.Directory.Exists)
+            {
+                System.IO.Directory.CreateDirectory(fi.DirectoryName);
+            }
             using (StreamWriter writer = new StreamWriter(filePath))
             {
                 writer.WriteLine($"PROPFILE\t\"{Path.GetFileName(PropFileName)}\"");
@@ -200,7 +210,7 @@ namespace eTools
                 writer.WriteLine($"STRINGS\t\"{Path.GetFileName(StringsFilePath)}\"");
                 writer.WriteLine("DEFINES");
                 writer.WriteLine("{");
-                foreach(string defineFile in DefineFilesPaths)
+                foreach (string defineFile in DefineFilesPaths)
                 {
                     writer.WriteLine($"\t\"{Path.GetFileName(defineFile)}\"");
                 }
@@ -208,11 +218,11 @@ namespace eTools
 #if __MOVERS
                 writer.WriteLine("TYPES");
                 writer.WriteLine("{");
-                foreach(KeyValuePair<MoverTypes, MoverType> type in Types)
+                foreach (KeyValuePair<MoverTypes, MoverType> type in Types)
                 {
                     writer.WriteLine($"\t{Enum.GetName(typeof(MoverTypes), type.Key)}");
                     writer.WriteLine("\t{");
-                    foreach(string identifier in type.Value.Identifiers)
+                    foreach (string identifier in type.Value.Identifiers)
                     {
                         writer.WriteLine($"\t\t{identifier}");
                     }
@@ -221,6 +231,33 @@ namespace eTools
                 writer.WriteLine("}");
 #endif // __MOVERS
             }
+        }
+
+        public void LoadDefaultData()
+        {
+            ResourcePath = "./";
+            ResourceVersion = 19;
+            Elements = new Dictionary<int, string>()
+            {
+                {0, "NONE" },
+                {1, "FIRE" },
+                {2, "WATER" },
+                {3, "ELECTRICITY" },
+                {4, "WIND" },
+                {5, "EARTH" },
+            };
+#if __MOVERS
+            PropFileName = ResourcePath + "propMover.txt";
+            StringsFilePath = ResourcePath + "propMover.txt.txt";
+            DefineFilesPaths = new List<string> { ResourcePath + "defineObj.h", ResourcePath + "define.h", ResourcePath + "defineNeuz.h", ResourcePath + "defineAttribute.h" };
+            Types = new Dictionary<MoverTypes, MoverType>()
+            {
+                { MoverTypes.NPC, new MoverType(){ Identifiers = new string[] { "AII_NONE" } } },
+                { MoverTypes.CHARACTER, new MoverType(){ Identifiers = new string[] { "AII_MOVER" }} },
+                { MoverTypes.MONSTER, new MoverType() { Identifiers = new string[] { "AII_MONSTER", "AII_CLOCKWORKS", "AII_BIGMUSCLE", "AII_KRRR", "AII_BEAR", "AII_METEONYKER", "AII_AGGRO_NORMAL", "AII_PARTY_AGGRO_LEADER", "AII_PARTY_AGGRO_SUB", "AII_ARENA_REAPER" } } },
+                { MoverTypes.PET, new MoverType() { Identifiers = new string[] {"AII_PET", "AII_EGG", "AII_FIGHTINGPET"}} }
+            };
+#endif // __MOVERS
         }
     }
 }

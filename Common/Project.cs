@@ -75,12 +75,26 @@ namespace eTools
         public void Load()
         {
             Settings config = Settings.GetInstance();
-            config.LoadGeneral("eTools\\eTools.ini");
+
+            if (!File.Exists("eTools\\eTools.ini"))
+            {
+                config.LoadDefaultData();
+                config.SaveGeneral("eTools\\eTools.ini");
+            }
+            else
+                config.LoadGeneral("eTools\\eTools.ini");
 #if __ITEMS
             config.LoadSpecs("..\\..\\..\\items.ini");
 #endif // __ITEMS
 #if __MOVERS
-            config.LoadSpecs("eTools\\movers.ini");
+            if (!File.Exists("eTools\\movers.ini"))
+            {
+                config.LoadDefaultData();
+                config.LoadGeneral("eTools\\eTools.ini");
+                config.SaveSpecs("eTools\\movers.ini");
+            }
+            else
+                config.LoadSpecs("eTools\\movers.ini");
 #endif // __MOVERS
             this.LoadDefines(config.DefineFilesPaths.ToArray());
             this.LoadStrings(config.StringsFilePath);
@@ -454,7 +468,7 @@ namespace eTools
                     break;
 
                 mp.SzName = scanner.GetToken();
-                if(!mp.SzName.StartsWith("IDS_"))
+                if (!mp.SzName.StartsWith("IDS_"))
                     throw new IncorrectlyFormattedFileException(filePath);
                 mp.DwAi = scanner.GetToken();
                 mp.DwStr = scanner.GetNumber();
@@ -571,7 +585,7 @@ namespace eTools
 
                 if (!this.strings.ContainsKey(mp.SzName))
                     this.strings.Add(mp.SzName, "");          // If IDS is not defined, we add it to be defined.
-                if(!this.strings.ContainsKey(mp.SzComment))
+                if (!this.strings.ContainsKey(mp.SzComment))
                     this.strings.Add(mp.SzComment, "");          // If IDS is not defined, we add it to be defined.
                 mover.Prop = mp;
                 movers.Add(mover);
@@ -911,9 +925,9 @@ namespace eTools
             return movers.Select(x => x.Name).ToArray();
         }
 
-        public void SetMoverType(Mover mover,  MoverTypes type)
+        public void SetMoverType(Mover mover, MoverTypes type)
         {
-            switch(type)
+            switch (type)
             {
                 case MoverTypes.NPC:
                 case MoverTypes.CHARACTER:
@@ -1223,7 +1237,7 @@ namespace eTools
         private ModelBrace[] GetBracesByType(int type)
         {
             List<ModelBrace> braces = new List<ModelBrace>();
-            foreach(MainModelBrace mainBrace in models)
+            foreach (MainModelBrace mainBrace in models)
             {
                 if (mainBrace.IType != type) continue;
                 GetBracesRecursively(braces, mainBrace);
@@ -1234,7 +1248,7 @@ namespace eTools
 
         public ModelBrace GetBraceByModel(ModelElem model)
         {
-            foreach(ModelBrace brace in GetBracesByType(model.DwType))
+            foreach (ModelBrace brace in GetBracesByType(model.DwType))
             {
                 foreach (ModelElem tempModel in brace.Models)
                     if (tempModel == model)
@@ -1246,7 +1260,7 @@ namespace eTools
         public void SetBraceToModel(ModelElem model, ModelBrace brace)
         {
             ModelBrace oldBrace = GetBraceByModel(model);
-            if(oldBrace != null)
+            if (oldBrace != null)
                 oldBrace.Models.Remove(model); // Remove old
             brace.Models.Add(model); // Add to new
         }
@@ -1254,11 +1268,11 @@ namespace eTools
         private void GetBracesRecursively(List<ModelBrace> braces, ModelBrace brace)
         {
             braces.Add(brace);
-            foreach(ModelBrace subBrace in brace.Braces)
+            foreach (ModelBrace subBrace in brace.Braces)
             {
                 GetBracesRecursively(braces, subBrace);
             }
         }
-#endregion
+        #endregion
     }
 }
