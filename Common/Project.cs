@@ -133,6 +133,8 @@ namespace eTools
                 throw new MissingDefineException("BELLI_PEACEFUL");
             if (!defines.ContainsKey("RANK_CITIZEN")) // Must have RANK_CITIZEN
                 throw new MissingDefineException("RANK_CITIZEN");
+            if (!defines.ContainsKey("RANK_LOW")) // Must have RANK_LOW
+                throw new MissingDefineException("RANK_LOW");
         }
         private void LoadStrings(string filePath)
         {
@@ -919,6 +921,11 @@ namespace eTools
                     mover.Prop.DwClass = "RANK_CITIZEN";
                     mover.Prop.BKillable = 0;
                     break;
+                case MoverTypes.PET:
+                    mover.Prop.DwBelligerence = "BELLI_PEACEFUL";
+                    mover.Prop.DwClass = "RANK_LOW";
+                    mover.Prop.BKillable = 0;
+                    break;
                 case MoverTypes.MONSTER:
                     mover.Prop.DwBelligerence = GetBelligerenceIdentifiers().Where(x => x != "BELLI_PEACEFUL").First(); // TODO: Can error if there is only BELLI_PEACEFUL defined
                     mover.Prop.DwClass = GetClassIdentifiers().Where(x => x != "RANK_CITIZEN").First();
@@ -954,7 +961,7 @@ namespace eTools
         {
             return type == MoverTypes.MONSTER ?
                 GetClassIdentifiers().Where(x => x != "RANK_CITIZEN" && x != "RANK_MAX").ToArray() :
-                new string[] { "RANK_CITIZEN" };
+                type == MoverTypes.NPC ? new string[] { "RANK_CITIZEN" } : new string[] { "RANK_LOW" };
         }
 
         public Mover[] GetAllMovers()

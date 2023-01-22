@@ -178,6 +178,7 @@
             // 
             resources.ApplyResources(this.tb_ModelScale, "tb_ModelScale");
             this.tb_ModelScale.Name = "tb_ModelScale";
+            this.tb_ModelScale.TextChanged += new System.EventHandler(this.FormatFloatTextbox);
             // 
             // tb_ModelName
             // 
@@ -231,6 +232,7 @@
             // 
             resources.ApplyResources(this.tb_expvalue, "tb_expvalue");
             this.tb_expvalue.Name = "tb_expvalue";
+            this.tb_expvalue.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lbl_expvalue
             // 
@@ -253,6 +255,7 @@
             // 
             resources.ApplyResources(this.tb_level, "tb_level");
             this.tb_level.Name = "tb_level";
+            this.tb_level.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lbl_level
             // 
@@ -357,6 +360,7 @@
             // 
             resources.ApplyResources(this.tb_resistearth, "tb_resistearth");
             this.tb_resistearth.Name = "tb_resistearth";
+            this.tb_resistearth.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // cb_elementtype
             // 
@@ -379,6 +383,7 @@
             // 
             resources.ApplyResources(this.tb_resistwater, "tb_resistwater");
             this.tb_resistwater.Name = "tb_resistwater";
+            this.tb_resistwater.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lbl_resistwater
             // 
@@ -389,11 +394,13 @@
             // 
             resources.ApplyResources(this.tb_elementatk, "tb_elementatk");
             this.tb_elementatk.Name = "tb_elementatk";
+            this.tb_elementatk.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // tb_resistwind
             // 
             resources.ApplyResources(this.tb_resistwind, "tb_resistwind");
             this.tb_resistwind.Name = "tb_resistwind";
+            this.tb_resistwind.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lbl_elementatk
             // 
@@ -409,6 +416,7 @@
             // 
             resources.ApplyResources(this.tb_resistelecricity, "tb_resistelecricity");
             this.tb_resistelecricity.Name = "tb_resistelecricity";
+            this.tb_resistelecricity.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lbl_resistelecricity
             // 
@@ -419,6 +427,7 @@
             // 
             resources.ApplyResources(this.tb_resistfire, "tb_resistfire");
             this.tb_resistfire.Name = "tb_resistfire";
+            this.tb_resistfire.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lbl_resistfire
             // 
@@ -451,11 +460,13 @@
             // 
             resources.ApplyResources(this.tb_int, "tb_int");
             this.tb_int.Name = "tb_int";
+            this.tb_int.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // tb_dex
             // 
             resources.ApplyResources(this.tb_dex, "tb_dex");
             this.tb_dex.Name = "tb_dex";
+            this.tb_dex.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lbl_er
             // 
@@ -471,11 +482,13 @@
             // 
             resources.ApplyResources(this.tb_hr, "tb_hr");
             this.tb_hr.Name = "tb_hr";
+            this.tb_hr.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // tb_str
             // 
             resources.ApplyResources(this.tb_str, "tb_str");
             this.tb_str.Name = "tb_str";
+            this.tb_str.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lbl_hr
             // 
@@ -491,11 +504,13 @@
             // 
             resources.ApplyResources(this.tb_er, "tb_er");
             this.tb_er.Name = "tb_er";
+            this.tb_er.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // tb_sta
             // 
             resources.ApplyResources(this.tb_sta, "tb_sta");
             this.tb_sta.Name = "tb_sta";
+            this.tb_sta.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lbl_int
             // 
@@ -511,6 +526,7 @@
             // 
             resources.ApplyResources(this.tb_addmp, "tb_addmp");
             this.tb_addmp.Name = "tb_addmp";
+            this.tb_addmp.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lbl_addhp
             // 
@@ -521,6 +537,7 @@
             // 
             resources.ApplyResources(this.tb_addhp, "tb_addhp");
             this.tb_addhp.Name = "tb_addhp";
+            this.tb_addhp.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lbl_addmp
             // 
@@ -549,6 +566,7 @@
             // 
             resources.ApplyResources(this.tb_resismgic, "tb_resismgic");
             this.tb_resismgic.Name = "tb_resismgic";
+            this.tb_resismgic.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lbl_resismgic
             // 
@@ -559,6 +577,7 @@
             // 
             resources.ApplyResources(this.tb_atkmin, "tb_atkmin");
             this.tb_atkmin.Name = "tb_atkmin";
+            this.tb_atkmin.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lbl_atkmin
             // 
@@ -574,6 +593,7 @@
             // 
             resources.ApplyResources(this.tb_atkmax, "tb_atkmax");
             this.tb_atkmax.Name = "tb_atkmax";
+            this.tb_atkmax.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // tb_reattackdelay
             // 
@@ -594,11 +614,13 @@
             // 
             resources.ApplyResources(this.tb_naturalarmor, "tb_naturalarmor");
             this.tb_naturalarmor.Name = "tb_naturalarmor";
+            this.tb_naturalarmor.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // tb_fspeed
             // 
             resources.ApplyResources(this.tb_fspeed, "tb_fspeed");
             this.tb_fspeed.Name = "tb_fspeed";
+            this.tb_fspeed.TextChanged += new System.EventHandler(this.FormatFloatTextbox);
             // 
             // lbl_speed
             // 
