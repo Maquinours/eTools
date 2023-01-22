@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
+  <asmv1:assemblyIdentity name="MoversEditor.exe" version="1.0.0.1" publicKeyToken="0685e46849621987" language="neutral" processorArchitecture="msil" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="MoversEditor" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <commandLine file="MoversEditor.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet version="1" class="System.Security.NamedPermissionSet" Name="LocalIntranet" Description="Default rights given to applications on the local intranet" Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!-- Options du manifeste de contrôle de compte d'utilisateur
+             Si vous souhaitez modifier le niveau du contrôle de compte d'utilisateur Windows, remplacez le 
+             nœud requestedExecutionLevel par l'une des propositions suivantes.
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+            La spécification de l'élément requestedExecutionLevel désactive la virtualisation de fichiers et du Registre. 
+            Supprimez cet élément si votre application a besoin de la virtualisation pour des
+            raisons de compatibilité descendante.
+        -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="4.0.30319.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="MoversEditor.exe" size="363488">
+      <assemblyIdentity name="MoversEditor" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>9nf6EbJMeZX/ObjiVvfyiyVbkIAuI2wNxozQ5UzDCDw=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="en\MoversEditor.resources.dll" size="214528">
+      <assemblyIdentity name="MoversEditor.resources" version="1.0.0.0" language="en" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>6XJKg/8y594p4h9StinWAzRTC/oVJBGD8dgwqeJj34w=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="fr\MoversEditor.resources.dll" size="204800">
+      <assemblyIdentity name="MoversEditor.resources" version="1.0.0.0" language="fr" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>TsT6CQ4+qTL1cK3TEN0FXTSolLUJJ8qmn0hcqu7dizE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Scanner.dll" size="7680">
+      <assemblyIdentity name="Scanner" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>EGpLJ1FG8hbDYO32Ocr+Upk3zcoeey+Aq6NyEsdK45Y=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="MoversEditor.exe.config" size="187">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>+CM46OnHRrXZXNLMx7+U3V3iubiYL//d8hGOR13lDhU=</dsig:DigestValue>
+    </hash>
+  </file>
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- Liste des versions de Windows pour lesquelles cette application a été testée,
+           et sur lesquelles elle doit fonctionner. Décommentez éléments appropriés,
+           et Windows va automatiquement sélectionner l'environnement le plus compatible. -->
+      <!-- Windows Vista -->
+      <!--<supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />-->
+      <!-- Windows 7 -->
+      <!--<supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />-->
+      <!-- Windows 8 -->
+      <!--<supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}" />-->
+      <!-- Windows 8.1 -->
+      <!--<supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}" />-->
+      <!-- Windows 10 -->
+      <!--<supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />-->
+    </application>
+  </compatibility>
+<publisherIdentity name="CN=DESKTOP-H5P6UHV\juju9" issuerKeyHash="f0decdb3231edf25eff328544d2ec0644094fcf8" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>P8ickhc5yTiOd+vYOs0pyK4Yoh9QL27k2JDmEm+GPOk=</DigestValue></Reference></SignedInfo><SignatureValue>NnC7FmuovvS3/VKGr3tgpPaFm38zjFLgrPXyftd+0ViuyPcGp8aVWZECbnBBvhjNRhP3YEuoP86LDtyS4Yn1UmwImI1NwW/ptC/VksM02pYd5HURyoPRxv3p9uGEGNV235+LRgfi4K8BkBFRkYPiLhA7B6RlJU85Sg6DNv+pdEM=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>yIxpCh/+96dehRMzIhUe3Zu/eYA1fBEezB8TPLxbDRhTa9glNDDQc4ZHodx5zNXooGkZfpXpov5spqNCnuh5CjFbQUqNZhmH7HnXIbvsfXrFksq4S2i5Xk1SR70vi6AFZjg0XKC81GnZqKa845oULAHyw3Eiw1AHGlIJubzpP1k=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="e93c866f12e690d8e46e2f501fa218aec829cd3ad8eb778e38c93917929cc83f" Description="" Url=""><as:assemblyIdentity name="MoversEditor.exe" version="1.0.0.1" publicKeyToken="0685e46849621987" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=DESKTOP-H5P6UHV\juju9</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha256" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" /><DigestValue>MtOa0kU51Lmm0TZlojH5sO9m+53xlJ4D2jjjZssyRIQ=</DigestValue></Reference></SignedInfo><SignatureValue>g2C7/gQepMhMqZio2lpZj/rHxpwYC+pBRGYRjsXl4BKF0wJ9BMK6QrNMJFjCFp2cg88jNWzUsvqEiYzxxpu4FURUcIfmCKX0lMy8dTgTHBFOj9Th8SdiDpQ4CCHVIGuMSW06ElX1ZiuA1xke4uhXEJrNjYRSIfOjw13n0dXfyS0=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>yIxpCh/+96dehRMzIhUe3Zu/eYA1fBEezB8TPLxbDRhTa9glNDDQc4ZHodx5zNXooGkZfpXpov5spqNCnuh5CjFbQUqNZhmH7HnXIbvsfXrFksq4S2i5Xk1SR70vi6AFZjg0XKC81GnZqKa845oULAHyw3Eiw1AHGlIJubzpP1k=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB7TCCAVagAwIBAgIQT4LCM7gd5r5Koy+ePM/CyDANBgkqhkiG9w0BAQsFADA1MTMwMQYDVQQDHioARABFAFMASwBUAE8AUAAtAEgANQBQADYAVQBIAFYAXABqAHUAagB1ADkwHhcNMjMwMTIyMTA0NjAyWhcNMjQwMTIyMTY0NjAyWjA1MTMwMQYDVQQDHioARABFAFMASwBUAE8AUAAtAEgANQBQADYAVQBIAFYAXABqAHUAagB1ADkwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMiMaQof/venXoUTMyIVHt2bv3mANXwRHswfEzy8Ww0YU2vYJTQw0HOGR6HceczV6KBpGX6V6aL+bKajQp7oeQoxW0FKjWYZh+x51yG77H16xZLKuEtouV5NUke9L4ugBWY4NFygvNRp2aimvOOaFCwB8sNxIsNQBxpSCbm86T9ZAgMBAAEwDQYJKoZIhvcNAQELBQADgYEAPtH++rPUuoXjUMFBSiZpXhXZOS3NqTBTbH7mhree8fV/kqEDTxjbQyZq2JpJ61ojRaLvicCOLZHFIW0sJdLXq/xwbUquCn9tyGtiLoQTD9iLNoWlBO5kTGIXd4iah7A7GXWznFOZnF/NVwLkgNSjBaXwSJK1zMM1w+oCAv9rybs=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

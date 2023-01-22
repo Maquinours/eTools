@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileNotFoundForm));
             this.lb_error = new System.Windows.Forms.Label();
             this.bt_retry = new System.Windows.Forms.Button();
             this.bt_cancel = new System.Windows.Forms.Button();
@@ -36,54 +37,39 @@
             // 
             // lb_error
             // 
-            this.lb_error.Location = new System.Drawing.Point(12, 9);
+            resources.ApplyResources(this.lb_error, "lb_error");
             this.lb_error.Name = "lb_error";
-            this.lb_error.Size = new System.Drawing.Size(418, 52);
-            this.lb_error.TabIndex = 0;
-            this.lb_error.Text = "label1";
-            this.lb_error.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // bt_retry
             // 
+            resources.ApplyResources(this.bt_retry, "bt_retry");
             this.bt_retry.DialogResult = System.Windows.Forms.DialogResult.Retry;
-            this.bt_retry.Location = new System.Drawing.Point(12, 64);
             this.bt_retry.Name = "bt_retry";
-            this.bt_retry.Size = new System.Drawing.Size(75, 23);
-            this.bt_retry.TabIndex = 1;
-            this.bt_retry.Text = "Réessayer";
             this.bt_retry.UseVisualStyleBackColor = true;
             // 
             // bt_cancel
             // 
+            resources.ApplyResources(this.bt_cancel, "bt_cancel");
             this.bt_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bt_cancel.Location = new System.Drawing.Point(355, 64);
             this.bt_cancel.Name = "bt_cancel";
-            this.bt_cancel.Size = new System.Drawing.Size(75, 23);
-            this.bt_cancel.TabIndex = 1;
-            this.bt_cancel.Text = "Annuler";
             this.bt_cancel.UseVisualStyleBackColor = true;
             // 
             // bt_settings
             // 
-            this.bt_settings.Location = new System.Drawing.Point(185, 64);
+            resources.ApplyResources(this.bt_settings, "bt_settings");
             this.bt_settings.Name = "bt_settings";
-            this.bt_settings.Size = new System.Drawing.Size(75, 23);
-            this.bt_settings.TabIndex = 1;
-            this.bt_settings.Text = "Paramètres";
             this.bt_settings.UseVisualStyleBackColor = true;
             this.bt_settings.Click += new System.EventHandler(this.bt_settings_Click);
             // 
             // FileNotFoundForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(442, 99);
             this.Controls.Add(this.bt_settings);
             this.Controls.Add(this.bt_cancel);
             this.Controls.Add(this.bt_retry);
             this.Controls.Add(this.lb_error);
             this.Name = "FileNotFoundForm";
-            this.Text = "FileNotFoundForm";
             this.ResumeLayout(false);
 
         }
