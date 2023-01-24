@@ -75,26 +75,12 @@ namespace eTools
         public void Load()
         {
             Settings config = Settings.GetInstance();
-
-            if (!File.Exists("eTools\\eTools.ini"))
-            {
-                config.LoadDefaultData();
-                config.SaveGeneral("eTools\\eTools.ini");
-            }
-            else
-                config.LoadGeneral("eTools\\eTools.ini");
+            config.LoadGeneral();
 #if __ITEMS
-            config.LoadSpecs("..\\..\\..\\items.ini");
+            config.LoadSpecs();
 #endif // __ITEMS
 #if __MOVERS
-            if (!File.Exists("eTools\\movers.ini"))
-            {
-                config.LoadDefaultData();
-                config.LoadGeneral("eTools\\eTools.ini");
-                config.SaveSpecs("eTools\\movers.ini");
-            }
-            else
-                config.LoadSpecs("eTools\\movers.ini");
+            config.LoadSpecs();
 #endif // __MOVERS
             this.LoadDefines(config.DefineFilesPaths.ToArray());
             this.LoadStrings(config.StringsFilePath);

@@ -43,8 +43,8 @@ namespace MoversEditor
             settings.ResourcePath = tb_ResourcesPath.Text;
             settings.PropFileName = settings.ResourcePath + tb_PropFileName.Text;
             settings.StringsFilePath = settings.ResourcePath + tb_StringFileName.Text;
-            settings.SaveGeneral("eTools\\eTools.ini");
-            settings.SaveSpecs("eTools\\movers.ini");
+            settings.SaveGeneral();
+            settings.SaveSpecs();
             DialogResult = DialogResult.OK;
             Close();
         }

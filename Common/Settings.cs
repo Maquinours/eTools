@@ -68,9 +68,15 @@ namespace eTools
         /// <summary>
         /// Load the general config file
         /// </summary>
-        /// <param name="filePath">Path of general config file</param>
-        public void LoadGeneral(string filePath)
+        public void LoadGeneral()
         {
+            string filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\eTools\\eTools.ini";
+            if (!File.Exists(filePath))
+            {
+                LoadDefaultData();
+                SaveGeneral();
+                return;
+            }
             ResourcePath = string.Empty;
             Elements.Clear();
             ResourceVersion = -1;
@@ -106,9 +112,21 @@ namespace eTools
         /// <summary>
         /// Load the current editor config file
         /// </summary>
-        /// <param name="filePath">Path of the current editor config file</param>
-        public void LoadSpecs(string filePath)
+        public void LoadSpecs()
         {
+            string filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\eTools\\";
+#if __MOVERS
+            filePath += "movers.ini";
+#endif // __MOVERS
+#if __ITEMS
+            filePath += "items.ini";
+#endif // __ITEMS
+            if (!File.Exists(filePath))
+            {
+                LoadDefaultData();
+                LoadGeneral();
+                SaveSpecs();
+            }
             DefineFilesPaths.Clear();
             StringsFilePath = string.Empty;
             PropFileName = string.Empty;
@@ -173,8 +191,9 @@ namespace eTools
             scanner.Close();
         }
 
-        public void SaveGeneral(string filePath)
+        public void SaveGeneral()
         {
+            string filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\eTools\\eTools.ini";
             FileInfo fi = new FileInfo(filePath);
             if (!fi.Directory.Exists)
             {
@@ -194,8 +213,15 @@ namespace eTools
             }
         }
 
-        public void SaveSpecs(string filePath)
+        public void SaveSpecs()
         {
+            string filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\eTools\\";
+#if __MOVERS
+            filePath += "movers.ini";
+#endif // __MOVERS
+#if __ITEMS
+            filePath += "items.ini";
+#endif // __ITEMS
             FileInfo fi = new FileInfo(filePath);
             if (!fi.Directory.Exists)
             {
