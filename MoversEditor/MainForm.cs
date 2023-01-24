@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Deployment.Application;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -19,7 +20,6 @@ namespace MoversEditor
         public MainForm()
         {
             InitializeComponent();
-            LoadFormData();
         }
 
         private void LoadFormData()
@@ -43,10 +43,10 @@ namespace MoversEditor
                 lb_movers.DisplayMember = "Name";
                 //UseWaitCursor = false;
             }
-            catch(Exception e) when (e is FileNotFoundException || e is DirectoryNotFoundException)
+            catch (Exception e) when (e is FileNotFoundException || e is DirectoryNotFoundException)
             {
                 FileNotFoundForm fnff = new FileNotFoundForm(e.Message);
-                switch(fnff.ShowDialog())
+                switch (fnff.ShowDialog())
                 {
                     case DialogResult.Retry:
                         LoadFormData();
@@ -69,6 +69,11 @@ namespace MoversEditor
                         break;
                 }
             }
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            LoadFormData();
         }
 
         private void lb_movers_SelectedIndexChanged(object sender, EventArgs e)

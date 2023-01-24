@@ -712,8 +712,11 @@
             this.Controls.Add(this.tc_main);
             this.Controls.Add(this.lb_movers);
             this.Controls.Add(this.ms_main);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.ms_main;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.tc_main.ResumeLayout(false);
             this.tp_general.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);

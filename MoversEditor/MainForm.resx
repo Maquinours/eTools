@@ -306,9 +306,6 @@
   <data name="tsmi_reload.Text" xml:space="preserve">
     <value>Recharger</value>
   </data>
-  <data name="&gt;&gt;lbl_addhp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="lbl_dex.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -329,6 +326,9 @@
   </data>
   <data name="&gt;&gt;tb_addhp.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="&gt;&gt;lbl_name.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="lbl_hr.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -933,8 +933,8 @@
   <data name="tb_addhp.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 20</value>
   </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
+  <data name="tb_ModelName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 45</value>
   </data>
   <data name="lbl_naturalarmor.TabIndex" type="System.Int32, mscorlib">
     <value>57</value>
@@ -1077,8 +1077,8 @@
   <data name="rechercherToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 22</value>
   </data>
-  <data name="&gt;&gt;lbl_name.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="tb_level.TabIndex" type="System.Int32, mscorlib">
+    <value>69</value>
   </data>
   <data name="lbl_addhp.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1110,8 +1110,8 @@
   <data name="lbl_addhp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="tb_level.TabIndex" type="System.Int32, mscorlib">
-    <value>69</value>
+  <data name="lbl_er.Text" xml:space="preserve">
+    <value>Esquiver  :</value>
   </data>
   <data name="lbl_resistearth.Text" xml:space="preserve">
     <value>Resi. Terre. :</value>
@@ -4713,8 +4713,8 @@
   <data name="&gt;&gt;tsmi_moversadd.Name" xml:space="preserve">
     <value>tsmi_moversadd</value>
   </data>
-  <data name="lbl_er.Text" xml:space="preserve">
-    <value>Esquiver  :</value>
+  <data name="&gt;&gt;lbl_er.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="lbl_expvalue.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 13</value>
@@ -4763,9 +4763,6 @@
   </data>
   <data name="lbl_monsterai.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
-  </data>
-  <data name="tb_addhp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>62, 113</value>
   </data>
   <data name="&gt;&gt;lbl_addmp.ZOrder" xml:space="preserve">
     <value>15</value>
@@ -4950,9 +4947,6 @@
   <data name="lbl_resismgic.TabIndex" type="System.Int32, mscorlib">
     <value>67</value>
   </data>
-  <data name="tb_ModelName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 45</value>
-  </data>
   <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
     <value>tp_general</value>
   </data>
@@ -5076,6 +5070,9 @@
   <data name="lbl_level.TabIndex" type="System.Int32, mscorlib">
     <value>68</value>
   </data>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
+  </data>
   <data name="tp_monster.Text" xml:space="preserve">
     <value>Monstre</value>
   </data>
@@ -5135,6 +5132,9 @@
   </data>
   <data name="&gt;&gt;tsmi_movers.Name" xml:space="preserve">
     <value>tsmi_movers</value>
+  </data>
+  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="&gt;&gt;cb_belligerence.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -5208,8 +5208,8 @@
   <data name="lbl_type.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;lbl_addhp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lbl_addmp.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -5400,8 +5400,8 @@
   <data name="tb_str.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="&gt;&gt;lbl_er.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="optionsToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+O</value>
   </data>
   <data name="lbl_name.Text" xml:space="preserve">
     <value>Nom :</value>
@@ -5511,8 +5511,8 @@
   <data name="lbl_er.Location" type="System.Drawing.Point, System.Drawing">
     <value>225, 84</value>
   </data>
-  <data name="optionsToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+O</value>
+  <data name="tb_addhp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>62, 113</value>
   </data>
   <data name="tb_name.Location" type="System.Drawing.Point, System.Drawing">
     <value>129, 33</value>

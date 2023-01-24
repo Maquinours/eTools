@@ -41,12 +41,21 @@ namespace MoversEditor
         {
             Settings settings = Settings.GetInstance();
             settings.ResourcePath = tb_ResourcesPath.Text;
-            settings.PropFileName = tb_PropFileName.Text;
-            settings.StringsFilePath = tb_StringFileName.Text;
+            settings.PropFileName = settings.ResourcePath + tb_PropFileName.Text;
+            settings.StringsFilePath = settings.ResourcePath + tb_StringFileName.Text;
             settings.SaveGeneral("eTools\\eTools.ini");
             settings.SaveSpecs("eTools\\movers.ini");
             DialogResult = DialogResult.OK;
             Close();
+        }
+
+        private void bt_selectPropFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                tb_PropFileName.Text = Path.GetFileName(ofd.FileName);
+            }
         }
     }
 }

@@ -38,6 +38,8 @@
             this.bt_cancel = new System.Windows.Forms.Button();
             this.bt_apply = new System.Windows.Forms.Button();
             this.bt_selectFolder = new System.Windows.Forms.Button();
+            this.bt_selectPropFile = new System.Windows.Forms.Button();
+            this.bt_selectStringFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -118,6 +120,26 @@
             this.bt_selectFolder.UseVisualStyleBackColor = true;
             this.bt_selectFolder.Click += new System.EventHandler(this.bt_selectfolder_Click);
             // 
+            // bt_selectPropFile
+            // 
+            this.bt_selectPropFile.Location = new System.Drawing.Point(284, 46);
+            this.bt_selectPropFile.Name = "bt_selectPropFile";
+            this.bt_selectPropFile.Size = new System.Drawing.Size(26, 20);
+            this.bt_selectPropFile.TabIndex = 5;
+            this.bt_selectPropFile.Text = "...";
+            this.bt_selectPropFile.UseVisualStyleBackColor = true;
+            this.bt_selectPropFile.Click += new System.EventHandler(this.bt_selectPropFile_Click);
+            // 
+            // bt_selectStringFile
+            // 
+            this.bt_selectStringFile.Location = new System.Drawing.Point(284, 73);
+            this.bt_selectStringFile.Name = "bt_selectStringFile";
+            this.bt_selectStringFile.Size = new System.Drawing.Size(26, 20);
+            this.bt_selectStringFile.TabIndex = 5;
+            this.bt_selectStringFile.Text = "...";
+            this.bt_selectStringFile.UseVisualStyleBackColor = true;
+            this.bt_selectStringFile.Click += new System.EventHandler(this.bt_selectfolder_Click);
+            // 
             // SettingsForm
             // 
             this.AcceptButton = this.bt_apply;
@@ -125,6 +147,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.bt_cancel;
             this.ClientSize = new System.Drawing.Size(312, 152);
+            this.Controls.Add(this.bt_selectStringFile);
+            this.Controls.Add(this.bt_selectPropFile);
             this.Controls.Add(this.bt_selectFolder);
             this.Controls.Add(this.bt_apply);
             this.Controls.Add(this.bt_cancel);
@@ -153,5 +177,7 @@
         private System.Windows.Forms.Button bt_cancel;
         private System.Windows.Forms.Button bt_apply;
         private System.Windows.Forms.Button bt_selectFolder;
+        private System.Windows.Forms.Button bt_selectPropFile;
+        private System.Windows.Forms.Button bt_selectStringFile;
     }
 }
