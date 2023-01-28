@@ -117,6 +117,7 @@
             this.cms_lbmovers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_moverdelete = new System.Windows.Forms.ToolStripMenuItem();
             this.lb_movers = new System.Windows.Forms.ListBox();
+            this.bt_SelectModelFile = new System.Windows.Forms.Button();
             this.tc_main.SuspendLayout();
             this.tp_general.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -158,6 +159,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.bt_SelectModelFile);
             this.groupBox1.Controls.Add(this.bt_motions);
             this.groupBox1.Controls.Add(this.cb_ModelBrace);
             this.groupBox1.Controls.Add(this.tb_ModelScale);
@@ -715,6 +717,13 @@
             this.lb_movers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lb_movers_KeyDown);
             this.lb_movers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lb_movers_MouseDown);
             // 
+            // bt_SelectModelFile
+            // 
+            resources.ApplyResources(this.bt_SelectModelFile, "bt_SelectModelFile");
+            this.bt_SelectModelFile.Name = "bt_SelectModelFile";
+            this.bt_SelectModelFile.UseVisualStyleBackColor = true;
+            this.bt_SelectModelFile.Click += new System.EventHandler(this.bt_SelectModelFile_Click);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -840,6 +849,7 @@
         private System.Windows.Forms.Label lbl_speed;
         private System.Windows.Forms.ListBox lb_movers;
         private System.Windows.Forms.Button bt_motions;
+        private System.Windows.Forms.Button bt_SelectModelFile;
     }
 }
 

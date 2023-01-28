@@ -343,5 +343,23 @@ namespace MoversEditor
             lb_movers.DataSource = new BindingSource(Project.GetInstance().GetAllMovers(), "");
             lb_movers.DisplayMember = "Name";
         }
+
+        private void bt_SelectModelFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog()
+            {
+                InitialDirectory = $"{Settings.GetInstance().ResourcePath}Model\\",
+                Filter = "o3d files | mvr_*.o3d",
+                CheckFileExists = true,
+            };
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                if (!ofd.SafeFileName.StartsWith("mvr_")
+                    || !ofd.SafeFileName.EndsWith(".o3d")
+                    || !File.Exists(ofd.FileName))
+                    return;
+                tb_ModelName.Text = Path.GetFileNameWithoutExtension(ofd.FileName).Remove(0, 4);
+            }
+        }
     }
 }

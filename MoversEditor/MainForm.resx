@@ -118,13 +118,37 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="bt_SelectModelFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>290, 43</value>
+  </data>
+  <data name="bt_SelectModelFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 23</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="bt_SelectModelFile.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="bt_SelectModelFile.Text" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="&gt;&gt;bt_SelectModelFile.Name" xml:space="preserve">
+    <value>bt_SelectModelFile</value>
+  </data>
+  <data name="&gt;&gt;bt_SelectModelFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;bt_SelectModelFile.Parent" xml:space="preserve">
+    <value>groupBox1</value>
+  </data>
+  <data name="&gt;&gt;bt_SelectModelFile.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="bt_motions.Location" type="System.Drawing.Point, System.Drawing">
     <value>171, 157</value>
   </data>
   <data name="bt_motions.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="bt_motions.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
@@ -141,7 +165,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;bt_motions.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="cb_ModelBrace.Location" type="System.Drawing.Point, System.Drawing">
     <value>171, 111</value>
@@ -166,7 +190,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;cb_ModelBrace.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="tb_ModelScale.Location" type="System.Drawing.Point, System.Drawing">
     <value>171, 79</value>
@@ -187,13 +211,13 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;tb_ModelScale.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="tb_ModelName.Location" type="System.Drawing.Point, System.Drawing">
     <value>171, 45</value>
   </data>
   <data name="tb_ModelName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
+    <value>120, 20</value>
   </data>
   <data name="tb_ModelName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -208,7 +232,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;tb_ModelName.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="label3.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -238,7 +262,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="label2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -268,7 +292,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="label1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -298,7 +322,7 @@
     <value>groupBox1</value>
   </data>
   <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
     <value>24, 371</value>
