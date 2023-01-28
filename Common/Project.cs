@@ -1029,6 +1029,11 @@ namespace eTools
             return defines.Where(x => x.Key.StartsWith("MODELTYPE")).Select(x => x.Key).ToArray();
         }
 
+        public string[] GetMotionsIdentifiers()
+        {
+            return defines.Where(x => x.Key.StartsWith("MTI_")).Select(x => x.Key).ToArray();
+        }
+
         public ModelBrace[] GetMoverModelBraces()
         {
             if (!defines.ContainsKey("OT_MOVER")) throw new MissingDefineException("OT_MOVER");
@@ -1257,6 +1262,23 @@ namespace eTools
             foreach (ModelBrace subBrace in brace.Braces)
             {
                 GetBracesRecursively(braces, subBrace);
+            }
+        }
+
+        public void GenerateMotions(ModelElem model)
+        {
+            string[] aniFiles = Directory.GetFiles(Settings.GetInstance().ResourcePath + "Model\\", $"mvr_{model.SzName}*.ani").Select(x => Path.GetFileNameWithoutExtension(x).Replace($"mvr_{model.SzName}_", "")).ToArray();
+            string[] motionIdentifiers = GetMotionsIdentifiers();
+            foreach (string file in aniFiles)
+            {
+                string identifier = motionIdentifiers.FirstOrDefault(x => x.Remove(0, 4).ToLower() == file.ToLower());
+                if (string.IsNullOrEmpty(identifier) || model.Motions.Count(x => x.IMotion == identifier) > 0) continue;
+                Motion newMotion = new Motion()
+                {
+                    SzMotion = file,
+                    IMotion = identifier
+                };
+                model.Motions.Add(newMotion);
             }
         }
         #endregion

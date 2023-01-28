@@ -34,6 +34,7 @@
             this.tp_general = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_motions = new System.Windows.Forms.Button();
             this.cb_ModelBrace = new System.Windows.Forms.ComboBox();
             this.tb_ModelScale = new System.Windows.Forms.TextBox();
             this.tb_ModelName = new System.Windows.Forms.TextBox();
@@ -133,45 +134,53 @@
             // 
             // tc_main
             // 
-            resources.ApplyResources(this.tc_main, "tc_main");
             this.tc_main.Controls.Add(this.tp_general);
             this.tc_main.Controls.Add(this.tp_monster);
+            resources.ApplyResources(this.tc_main, "tc_main");
             this.tc_main.Name = "tc_main";
             this.tc_main.SelectedIndex = 0;
             // 
             // tp_general
             // 
-            resources.ApplyResources(this.tp_general, "tp_general");
             this.tp_general.Controls.Add(this.groupBox3);
+            resources.ApplyResources(this.tp_general, "tp_general");
             this.tp_general.Name = "tp_general";
             this.tp_general.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
-            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Controls.Add(this.groupBox1);
             this.groupBox3.Controls.Add(this.groupBox5);
             this.groupBox3.Controls.Add(this.groupBox4);
+            resources.ApplyResources(this.groupBox3, "groupBox3");
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.TabStop = false;
             // 
             // groupBox1
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
+            this.groupBox1.Controls.Add(this.bt_motions);
             this.groupBox1.Controls.Add(this.cb_ModelBrace);
             this.groupBox1.Controls.Add(this.tb_ModelScale);
             this.groupBox1.Controls.Add(this.tb_ModelName);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
+            resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
             // 
+            // bt_motions
+            // 
+            resources.ApplyResources(this.bt_motions, "bt_motions");
+            this.bt_motions.Name = "bt_motions";
+            this.bt_motions.UseVisualStyleBackColor = true;
+            this.bt_motions.Click += new System.EventHandler(this.bt_motions_Click);
+            // 
             // cb_ModelBrace
             // 
-            resources.ApplyResources(this.cb_ModelBrace, "cb_ModelBrace");
             this.cb_ModelBrace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_ModelBrace.FormattingEnabled = true;
+            resources.ApplyResources(this.cb_ModelBrace, "cb_ModelBrace");
             this.cb_ModelBrace.Name = "cb_ModelBrace";
             // 
             // tb_ModelScale
@@ -202,7 +211,6 @@
             // 
             // groupBox5
             // 
-            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Controls.Add(this.cb_monsterai);
             this.groupBox5.Controls.Add(this.lbl_monsterai);
             this.groupBox5.Controls.Add(this.tb_expvalue);
@@ -213,14 +221,15 @@
             this.groupBox5.Controls.Add(this.lbl_level);
             this.groupBox5.Controls.Add(this.cb_class);
             this.groupBox5.Controls.Add(this.lbl_class);
+            resources.ApplyResources(this.groupBox5, "groupBox5");
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.TabStop = false;
             // 
             // cb_monsterai
             // 
-            resources.ApplyResources(this.cb_monsterai, "cb_monsterai");
             this.cb_monsterai.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_monsterai.FormattingEnabled = true;
+            resources.ApplyResources(this.cb_monsterai, "cb_monsterai");
             this.cb_monsterai.Name = "cb_monsterai";
             // 
             // lbl_monsterai
@@ -241,9 +250,9 @@
             // 
             // cb_belligerence
             // 
-            resources.ApplyResources(this.cb_belligerence, "cb_belligerence");
             this.cb_belligerence.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_belligerence.FormattingEnabled = true;
+            resources.ApplyResources(this.cb_belligerence, "cb_belligerence");
             this.cb_belligerence.Name = "cb_belligerence";
             // 
             // lbl_belligerence
@@ -264,9 +273,9 @@
             // 
             // cb_class
             // 
-            resources.ApplyResources(this.cb_class, "cb_class");
             this.cb_class.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_class.FormattingEnabled = true;
+            resources.ApplyResources(this.cb_class, "cb_class");
             this.cb_class.Name = "cb_class";
             // 
             // lbl_class
@@ -276,13 +285,13 @@
             // 
             // groupBox4
             // 
-            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Controls.Add(this.tb_name);
             this.groupBox4.Controls.Add(this.cb_type);
             this.groupBox4.Controls.Add(this.lbl_type);
             this.groupBox4.Controls.Add(this.tb_identifier);
             this.groupBox4.Controls.Add(this.lbl_name);
             this.groupBox4.Controls.Add(this.lbl_identifier);
+            resources.ApplyResources(this.groupBox4, "groupBox4");
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.TabStop = false;
             // 
@@ -293,8 +302,8 @@
             // 
             // cb_type
             // 
-            resources.ApplyResources(this.cb_type, "cb_type");
             this.cb_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cb_type, "cb_type");
             this.cb_type.Name = "cb_type";
             this.cb_type.SelectedIndexChanged += new System.EventHandler(this.cb_type_SelectedIndexChanged);
             // 
@@ -305,9 +314,9 @@
             // 
             // tb_identifier
             // 
-            resources.ApplyResources(this.tb_identifier, "tb_identifier");
             this.tb_identifier.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.tb_identifier.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            resources.ApplyResources(this.tb_identifier, "tb_identifier");
             this.tb_identifier.Name = "tb_identifier";
             // 
             // lbl_name
@@ -322,23 +331,22 @@
             // 
             // tp_monster
             // 
-            resources.ApplyResources(this.tp_monster, "tp_monster");
             this.tp_monster.Controls.Add(this.groupBox2);
+            resources.ApplyResources(this.tp_monster, "tp_monster");
             this.tp_monster.Name = "tp_monster";
             this.tp_monster.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Controls.Add(this.gb_monsterstatselements);
             this.groupBox2.Controls.Add(this.gb_moverstatsbasic);
             this.groupBox2.Controls.Add(this.gb_monsterstatsmiscs);
+            resources.ApplyResources(this.groupBox2, "groupBox2");
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
             // gb_monsterstatselements
             // 
-            resources.ApplyResources(this.gb_monsterstatselements, "gb_monsterstatselements");
             this.gb_monsterstatselements.Controls.Add(this.tb_resistearth);
             this.gb_monsterstatselements.Controls.Add(this.cb_elementtype);
             this.gb_monsterstatselements.Controls.Add(this.lbl_resistearth);
@@ -353,6 +361,7 @@
             this.gb_monsterstatselements.Controls.Add(this.lbl_resistelecricity);
             this.gb_monsterstatselements.Controls.Add(this.tb_resistfire);
             this.gb_monsterstatselements.Controls.Add(this.lbl_resistfire);
+            resources.ApplyResources(this.gb_monsterstatselements, "gb_monsterstatselements");
             this.gb_monsterstatselements.Name = "gb_monsterstatselements";
             this.gb_monsterstatselements.TabStop = false;
             // 
@@ -364,9 +373,9 @@
             // 
             // cb_elementtype
             // 
-            resources.ApplyResources(this.cb_elementtype, "cb_elementtype");
             this.cb_elementtype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cb_elementtype.FormattingEnabled = true;
+            resources.ApplyResources(this.cb_elementtype, "cb_elementtype");
             this.cb_elementtype.Name = "cb_elementtype";
             // 
             // lbl_resistearth
@@ -436,7 +445,6 @@
             // 
             // gb_moverstatsbasic
             // 
-            resources.ApplyResources(this.gb_moverstatsbasic, "gb_moverstatsbasic");
             this.gb_moverstatsbasic.Controls.Add(this.tb_int);
             this.gb_moverstatsbasic.Controls.Add(this.tb_dex);
             this.gb_moverstatsbasic.Controls.Add(this.lbl_er);
@@ -453,6 +461,7 @@
             this.gb_moverstatsbasic.Controls.Add(this.lbl_addhp);
             this.gb_moverstatsbasic.Controls.Add(this.tb_addhp);
             this.gb_moverstatsbasic.Controls.Add(this.lbl_addmp);
+            resources.ApplyResources(this.gb_moverstatsbasic, "gb_moverstatsbasic");
             this.gb_moverstatsbasic.Name = "gb_moverstatsbasic";
             this.gb_moverstatsbasic.TabStop = false;
             // 
@@ -546,7 +555,6 @@
             // 
             // gb_monsterstatsmiscs
             // 
-            resources.ApplyResources(this.gb_monsterstatsmiscs, "gb_monsterstatsmiscs");
             this.gb_monsterstatsmiscs.Controls.Add(this.tb_resismgic);
             this.gb_monsterstatsmiscs.Controls.Add(this.lbl_resismgic);
             this.gb_monsterstatsmiscs.Controls.Add(this.tb_atkmin);
@@ -559,6 +567,7 @@
             this.gb_monsterstatsmiscs.Controls.Add(this.tb_naturalarmor);
             this.gb_monsterstatsmiscs.Controls.Add(this.tb_fspeed);
             this.gb_monsterstatsmiscs.Controls.Add(this.lbl_speed);
+            resources.ApplyResources(this.gb_monsterstatsmiscs, "gb_monsterstatsmiscs");
             this.gb_monsterstatsmiscs.Name = "gb_monsterstatsmiscs";
             this.gb_monsterstatsmiscs.TabStop = false;
             // 
@@ -629,72 +638,72 @@
             // 
             // ms_main
             // 
-            resources.ApplyResources(this.ms_main, "ms_main");
             this.ms_main.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.ms_main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmi_movers,
             this.fichierToolStripMenuItem,
             this.optionsToolStripMenuItem});
+            resources.ApplyResources(this.ms_main, "ms_main");
             this.ms_main.Name = "ms_main";
             // 
             // tsmi_movers
             // 
-            resources.ApplyResources(this.tsmi_movers, "tsmi_movers");
             this.tsmi_movers.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmi_moversadd,
             this.rechercherToolStripMenuItem});
             this.tsmi_movers.Name = "tsmi_movers";
+            resources.ApplyResources(this.tsmi_movers, "tsmi_movers");
             // 
             // tsmi_moversadd
             // 
-            resources.ApplyResources(this.tsmi_moversadd, "tsmi_moversadd");
             this.tsmi_moversadd.Name = "tsmi_moversadd";
+            resources.ApplyResources(this.tsmi_moversadd, "tsmi_moversadd");
             this.tsmi_moversadd.Click += new System.EventHandler(this.tsmi_moversadd_Click);
             // 
             // rechercherToolStripMenuItem
             // 
-            resources.ApplyResources(this.rechercherToolStripMenuItem, "rechercherToolStripMenuItem");
             this.rechercherToolStripMenuItem.Name = "rechercherToolStripMenuItem";
+            resources.ApplyResources(this.rechercherToolStripMenuItem, "rechercherToolStripMenuItem");
             this.rechercherToolStripMenuItem.Click += new System.EventHandler(this.rechercherToolStripMenuItem_Click);
             // 
             // fichierToolStripMenuItem
             // 
-            resources.ApplyResources(this.fichierToolStripMenuItem, "fichierToolStripMenuItem");
             this.fichierToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmi_reload,
             this.tsmi_save});
             this.fichierToolStripMenuItem.Name = "fichierToolStripMenuItem";
+            resources.ApplyResources(this.fichierToolStripMenuItem, "fichierToolStripMenuItem");
             // 
             // tsmi_reload
             // 
-            resources.ApplyResources(this.tsmi_reload, "tsmi_reload");
             this.tsmi_reload.Name = "tsmi_reload";
+            resources.ApplyResources(this.tsmi_reload, "tsmi_reload");
             this.tsmi_reload.Click += new System.EventHandler(this.tsmi_reload_Click);
             // 
             // tsmi_save
             // 
-            resources.ApplyResources(this.tsmi_save, "tsmi_save");
             this.tsmi_save.Name = "tsmi_save";
+            resources.ApplyResources(this.tsmi_save, "tsmi_save");
             this.tsmi_save.Click += new System.EventHandler(this.tsmi_save_Click);
             // 
             // optionsToolStripMenuItem
             // 
-            resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
             // 
             // cms_lbmovers
             // 
-            resources.ApplyResources(this.cms_lbmovers, "cms_lbmovers");
             this.cms_lbmovers.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.cms_lbmovers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmi_moverdelete});
             this.cms_lbmovers.Name = "cms_lbmovers";
+            resources.ApplyResources(this.cms_lbmovers, "cms_lbmovers");
             // 
             // tsmi_moverdelete
             // 
-            resources.ApplyResources(this.tsmi_moverdelete, "tsmi_moverdelete");
             this.tsmi_moverdelete.Name = "tsmi_moverdelete";
+            resources.ApplyResources(this.tsmi_moverdelete, "tsmi_moverdelete");
             this.tsmi_moverdelete.Click += new System.EventHandler(this.tsmi_moverdelete_Click);
             // 
             // lb_movers
@@ -703,6 +712,7 @@
             this.lb_movers.FormattingEnabled = true;
             this.lb_movers.Name = "lb_movers";
             this.lb_movers.SelectedIndexChanged += new System.EventHandler(this.lb_movers_SelectedIndexChanged);
+            this.lb_movers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lb_movers_KeyDown);
             this.lb_movers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lb_movers_MouseDown);
             // 
             // MainForm
@@ -829,6 +839,7 @@
         private System.Windows.Forms.TextBox tb_fspeed;
         private System.Windows.Forms.Label lbl_speed;
         private System.Windows.Forms.ListBox lb_movers;
+        private System.Windows.Forms.Button bt_motions;
     }
 }
 

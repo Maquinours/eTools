@@ -38,9 +38,7 @@ namespace MoversEditor
                 cb_elementtype.DataSource = Settings.GetInstance().Elements.Values.ToArray();
                 cb_ModelBrace.DataSource = prj.GetMoverModelBraces();
                 cb_ModelBrace.DisplayMember = "SzName";
-                cb_type.DataSource = prj.GetAllMoversTypes();
-                lb_movers.DataSource = new BindingSource(prj.GetAllMovers(), "");
-                lb_movers.DisplayMember = "Name";
+                SetListBoxDataSource();
                 //UseWaitCursor = false;
             }
             catch (Exception e) when (e is FileNotFoundException || e is DirectoryNotFoundException)
@@ -263,10 +261,8 @@ namespace MoversEditor
 
         private void AddMover()
         {
-            Project prj = Project.GetInstance();
             Project.GetInstance().AddNewMover();
-            lb_movers.DataSource = new BindingSource(prj.GetAllMovers(), "");
-            lb_movers.DisplayMember = "Name";
+            SetListBoxDataSource();
             lb_movers.SelectedIndex = lb_movers.Items.Count - 1;
         }
 
@@ -279,6 +275,7 @@ namespace MoversEditor
         {
             if (lb_movers.SelectedItem == null) return;
             Project.GetInstance().DeleteMover((Mover)lb_movers.SelectedItem);
+            SetListBoxDataSource();
         }
 
         private void lb_movers_MouseDown(object sender, MouseEventArgs e)
@@ -323,6 +320,28 @@ namespace MoversEditor
         private void rechercherToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Search();
+        }
+
+        private void bt_motions_Click(object sender, EventArgs e)
+        {
+            if (!(lb_movers.SelectedItem is Mover mover)) return;
+            new MotionsForm(mover).ShowDialog();
+        }
+
+        private void lb_movers_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                if (lb_movers.SelectedItem == null) return;
+                Project.GetInstance().DeleteMover((Mover)lb_movers.SelectedItem);
+                SetListBoxDataSource();
+            }
+        }
+
+        private void SetListBoxDataSource()
+        {
+            lb_movers.DataSource = new BindingSource(Project.GetInstance().GetAllMovers(), "");
+            lb_movers.DisplayMember = "Name";
         }
     }
 }
