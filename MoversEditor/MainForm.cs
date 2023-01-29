@@ -38,6 +38,7 @@ namespace MoversEditor
                 cb_elementtype.DataSource = Settings.GetInstance().Elements.Values.ToArray();
                 cb_ModelBrace.DataSource = prj.GetMoverModelBraces();
                 cb_ModelBrace.DisplayMember = "SzName";
+                cb_type.DataSource = Settings.GetInstance().Types.Keys.ToArray();
                 SetListBoxDataSource();
                 //UseWaitCursor = false;
             }
@@ -228,8 +229,7 @@ namespace MoversEditor
 
         private void cb_type_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (((Mover)lb_movers.SelectedItem) == null || !Enum.TryParse((string)cb_type.SelectedValue, out MoverTypes type)) return;
-            Mover mover = (Mover)lb_movers.SelectedItem;
+            if (!(lb_movers.SelectedItem is Mover mover) || !(cb_type.SelectedItem is MoverTypes type)) return;
             Project prj = Project.GetInstance();
 
             TabPage tp = type == MoverTypes.MONSTER ? tp_monster : null;

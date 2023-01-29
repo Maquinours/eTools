@@ -115,9 +115,9 @@ public class Mover
         get { return Project.GetInstance().GetElementNameById(Prop.EElementType); }
         set { Prop.EElementType = Project.GetInstance().GetElementIdByName(value); }
     }
-    public string Type
+    public MoverTypes Type
     {
-        get { return Project.GetInstance().GetMoverType(this).ToString(); }
-        set { Project.GetInstance().SetMoverType(this, (MoverTypes)Enum.Parse(typeof(MoverTypes), value)); }
+        get { return Project.GetInstance().GetMoverType(this); }
+        set { Project.GetInstance().SetMoverType(this, value); }
     }
 }
