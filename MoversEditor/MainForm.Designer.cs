@@ -34,6 +34,7 @@
             this.tp_general = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.bt_SelectModelFile = new System.Windows.Forms.Button();
             this.bt_motions = new System.Windows.Forms.Button();
             this.cb_ModelBrace = new System.Windows.Forms.ComboBox();
             this.tb_ModelScale = new System.Windows.Forms.TextBox();
@@ -117,7 +118,7 @@
             this.cms_lbmovers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_moverdelete = new System.Windows.Forms.ToolStripMenuItem();
             this.lb_movers = new System.Windows.Forms.ListBox();
-            this.bt_SelectModelFile = new System.Windows.Forms.Button();
+            this.lb_IdentifierAlreadyUsed = new System.Windows.Forms.Label();
             this.tc_main.SuspendLayout();
             this.tp_general.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -170,6 +171,13 @@
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            // 
+            // bt_SelectModelFile
+            // 
+            resources.ApplyResources(this.bt_SelectModelFile, "bt_SelectModelFile");
+            this.bt_SelectModelFile.Name = "bt_SelectModelFile";
+            this.bt_SelectModelFile.UseVisualStyleBackColor = true;
+            this.bt_SelectModelFile.Click += new System.EventHandler(this.bt_SelectModelFile_Click);
             // 
             // bt_motions
             // 
@@ -287,6 +295,7 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.lb_IdentifierAlreadyUsed);
             this.groupBox4.Controls.Add(this.tb_name);
             this.groupBox4.Controls.Add(this.cb_type);
             this.groupBox4.Controls.Add(this.lbl_type);
@@ -320,6 +329,8 @@
             this.tb_identifier.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             resources.ApplyResources(this.tb_identifier, "tb_identifier");
             this.tb_identifier.Name = "tb_identifier";
+            this.tb_identifier.TextChanged += new System.EventHandler(this.tb_identifier_TextChanged);
+            this.tb_identifier.Validating += new System.ComponentModel.CancelEventHandler(this.tb_identifier_Validating);
             // 
             // lbl_name
             // 
@@ -717,12 +728,11 @@
             this.lb_movers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lb_movers_KeyDown);
             this.lb_movers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lb_movers_MouseDown);
             // 
-            // bt_SelectModelFile
+            // lb_IdentifierAlreadyUsed
             // 
-            resources.ApplyResources(this.bt_SelectModelFile, "bt_SelectModelFile");
-            this.bt_SelectModelFile.Name = "bt_SelectModelFile";
-            this.bt_SelectModelFile.UseVisualStyleBackColor = true;
-            this.bt_SelectModelFile.Click += new System.EventHandler(this.bt_SelectModelFile_Click);
+            resources.ApplyResources(this.lb_IdentifierAlreadyUsed, "lb_IdentifierAlreadyUsed");
+            this.lb_IdentifierAlreadyUsed.ForeColor = System.Drawing.Color.Red;
+            this.lb_IdentifierAlreadyUsed.Name = "lb_IdentifierAlreadyUsed";
             // 
             // MainForm
             // 
@@ -850,6 +860,7 @@
         private System.Windows.Forms.ListBox lb_movers;
         private System.Windows.Forms.Button bt_motions;
         private System.Windows.Forms.Button bt_SelectModelFile;
+        private System.Windows.Forms.Label lb_IdentifierAlreadyUsed;
     }
 }
 

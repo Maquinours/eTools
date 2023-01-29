@@ -361,5 +361,18 @@ namespace MoversEditor
                 tb_ModelName.Text = Path.GetFileNameWithoutExtension(ofd.FileName).Remove(0, 4);
             }
         }
+
+        private void tb_identifier_Validating(object sender, CancelEventArgs e)
+        {
+            if (!(lb_movers.SelectedItem is Mover mover)) return;
+            if (Project.GetInstance().GetAllMovers().FirstOrDefault(x => x != mover && x.Prop.DwId == tb_identifier.Text) == null) return;
+            e.Cancel = true;
+            lb_IdentifierAlreadyUsed.Visible = true;
+        }
+
+        private void tb_identifier_TextChanged(object sender, EventArgs e)
+        {
+            lb_IdentifierAlreadyUsed.Visible = false;
+        }
     }
 }
