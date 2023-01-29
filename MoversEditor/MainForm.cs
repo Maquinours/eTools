@@ -231,7 +231,7 @@ namespace MoversEditor
         {
             if (!(lb_movers.SelectedItem is Mover mover) || !(cb_type.SelectedItem is MoverTypes type)) return;
             Project prj = Project.GetInstance();
-
+            mover.Type = type;
             TabPage tp = type == MoverTypes.MONSTER ? tp_monster : null;
             if (tc_main.TabPages.Count > 1 && tc_main.TabPages[1] != tp)
                 tc_main.TabPages.RemoveAt(1);
