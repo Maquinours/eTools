@@ -1267,7 +1267,7 @@ namespace eTools
 
         public void GenerateMotions(ModelElem model)
         {
-            string[] aniFiles = Directory.GetFiles(Settings.GetInstance().ResourcePath + "Model\\", $"mvr_{model.SzName}*.ani").Select(x => Path.GetFileNameWithoutExtension(x).Replace($"mvr_{model.SzName}_", "")).ToArray();
+            string[] aniFiles = GetAvalaibleMotionsFilesByModel(model);
             string[] motionIdentifiers = GetMotionsIdentifiers();
             foreach (string file in aniFiles)
             {
@@ -1280,6 +1280,11 @@ namespace eTools
                 };
                 model.Motions.Add(newMotion);
             }
+        }
+
+        public string[] GetAvalaibleMotionsFilesByModel(ModelElem model)
+        {
+            return Directory.GetFiles(Settings.GetInstance().ResourcePath + "Model\\", $"mvr_{model.SzName}*.ani").Select(x => Path.GetFileNameWithoutExtension(x).Remove(0, $"mvr_{model.SzName}_".Length)).ToArray();
         }
         #endregion
     }

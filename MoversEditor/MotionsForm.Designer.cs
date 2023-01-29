@@ -40,7 +40,7 @@
             this.cms_lbMotions = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmi_DeleteMotion = new System.Windows.Forms.ToolStripMenuItem();
             this.bt_AddMotion = new System.Windows.Forms.Button();
-            this.cb_SelectMotionFile = new System.Windows.Forms.Button();
+            this.bt_SelectMotionFile = new System.Windows.Forms.Button();
             this.cms_lbMotions.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,6 +68,8 @@
             // 
             // tb_SzMotion
             // 
+            this.tb_SzMotion.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.tb_SzMotion.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.tb_SzMotion.Enabled = false;
             this.tb_SzMotion.Location = new System.Drawing.Point(209, 90);
             this.tb_SzMotion.Name = "tb_SzMotion";
@@ -126,23 +128,23 @@
             this.bt_AddMotion.UseVisualStyleBackColor = true;
             this.bt_AddMotion.Click += new System.EventHandler(this.bt_AddMotion_Click);
             // 
-            // cb_SelectMotionFile
+            // bt_SelectMotionFile
             // 
-            this.cb_SelectMotionFile.Enabled = false;
-            this.cb_SelectMotionFile.Location = new System.Drawing.Point(280, 88);
-            this.cb_SelectMotionFile.Name = "cb_SelectMotionFile";
-            this.cb_SelectMotionFile.Size = new System.Drawing.Size(29, 23);
-            this.cb_SelectMotionFile.TabIndex = 5;
-            this.cb_SelectMotionFile.Text = "...";
-            this.cb_SelectMotionFile.UseVisualStyleBackColor = true;
-            this.cb_SelectMotionFile.Click += new System.EventHandler(this.cb_SelectMotionFile_Click);
+            this.bt_SelectMotionFile.Enabled = false;
+            this.bt_SelectMotionFile.Location = new System.Drawing.Point(280, 88);
+            this.bt_SelectMotionFile.Name = "bt_SelectMotionFile";
+            this.bt_SelectMotionFile.Size = new System.Drawing.Size(29, 23);
+            this.bt_SelectMotionFile.TabIndex = 5;
+            this.bt_SelectMotionFile.Text = "...";
+            this.bt_SelectMotionFile.UseVisualStyleBackColor = true;
+            this.bt_SelectMotionFile.Click += new System.EventHandler(this.bt_SelectMotionFile_Click);
             // 
             // MotionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(321, 117);
-            this.Controls.Add(this.cb_SelectMotionFile);
+            this.Controls.Add(this.bt_SelectMotionFile);
             this.Controls.Add(this.cb_IMotion);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -174,6 +176,6 @@
         private System.Windows.Forms.ContextMenuStrip cms_lbMotions;
         private System.Windows.Forms.ToolStripMenuItem tsmi_DeleteMotion;
         private System.Windows.Forms.Button bt_AddMotion;
-        private System.Windows.Forms.Button cb_SelectMotionFile;
+        private System.Windows.Forms.Button bt_SelectMotionFile;
     }
 }

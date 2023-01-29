@@ -18,7 +18,16 @@ namespace MoversEditor
         public MotionsForm(Mover currentMover)
         {
             InitializeComponent();
+            if(currentMover is null || currentMover.Model is null)
+            {
+                this.Close();
+                return;
+            }
             CurrentMover = currentMover;
+            Project prj = Project.GetInstance();
+            AutoCompleteStringCollection filesSource = new AutoCompleteStringCollection();
+            filesSource.AddRange(prj.GetAvalaibleMotionsFilesByModel(CurrentMover.Model));
+            tb_SzMotion.AutoCompleteCustomSource = filesSource;
             cb_IMotion.DataSource = Project.GetInstance().GetMotionsIdentifiers();
             cb_IMotion.SelectedIndex = -1;
             this.Text = $"Motions ({CurrentMover.Name})";
@@ -35,7 +44,7 @@ namespace MoversEditor
                 cb_IMotion.Enabled = false;
                 tb_SzMotion.Text = string.Empty;
                 tb_SzMotion.Enabled = false;
-                cb_SelectMotionFile.Enabled = false;
+                bt_SelectMotionFile.Enabled = false;
                 return;
             }
             cb_IMotion.DataSource = Project.GetInstance().GetMotionsIdentifiers().Where(x => x == motion.IMotion || !CurrentMover.Model.Motions.Select(y => y.IMotion).Contains(x)).ToArray();
@@ -43,7 +52,7 @@ namespace MoversEditor
             tb_SzMotion.DataBindings.Add(new Binding("Text", motion, "SzMotion", false, DataSourceUpdateMode.OnPropertyChanged));
             cb_IMotion.Enabled = true;
             tb_SzMotion.Enabled = true;
-            cb_SelectMotionFile.Enabled = true;
+            bt_SelectMotionFile.Enabled = true;
         }
 
         private void bt_GenerateMotions_Click(object sender, EventArgs e)
@@ -94,7 +103,7 @@ namespace MoversEditor
             lb_Motions.SelectedIndex = lb_Motions.Items.Count - 1;
         }
 
-        private void cb_SelectMotionFile_Click(object sender, EventArgs e)
+        private void bt_SelectMotionFile_Click(object sender, EventArgs e)
         {
             if (!(lb_Motions.SelectedItem is Motion motion)) return;
             OpenFileDialog ofd = new OpenFileDialog()
