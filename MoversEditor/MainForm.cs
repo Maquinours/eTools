@@ -114,7 +114,7 @@ namespace MoversEditor
             cb_type.DataBindings.Clear();
 
             tb_name.DataBindings.Add(new Binding("Text", currentItem, "Name", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_identifier.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwId", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_identifier.DataBindings.Add(new Binding("Text", currentItem, "Id", false, DataSourceUpdateMode.OnValidation));
             tb_str.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwStr", true, DataSourceUpdateMode.OnPropertyChanged));
             tb_sta.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwSta", true, DataSourceUpdateMode.OnPropertyChanged));
             tb_dex.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwDex", true, DataSourceUpdateMode.OnPropertyChanged));

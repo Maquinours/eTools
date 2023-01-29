@@ -104,6 +104,12 @@ public class Mover
 {
     public MoverProp Prop { get; set; }
     public ModelElem Model { get; set; }
+    public string Id
+    {
+        get { return this.Prop.DwId; }
+        set { this.Prop.DwId = value; this.Model.DwIndex = value; }
+    }
+
     public string Name
     {
         get { return Project.GetInstance().GetString(Prop.SzName); }
