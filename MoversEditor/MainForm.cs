@@ -350,8 +350,8 @@ namespace MoversEditor
             };
             if(ofd.ShowDialog() == DialogResult.OK)
             {
-                if (!ofd.SafeFileName.StartsWith("mvr_")
-                    || !ofd.SafeFileName.EndsWith(".o3d")
+                if (!ofd.SafeFileName.ToLower().StartsWith("mvr_")
+                    || !ofd.SafeFileName.ToLower().EndsWith(".o3d")
                     || !File.Exists(ofd.FileName))
                     return;
                 tb_ModelName.Text = Path.GetFileNameWithoutExtension(ofd.FileName).Remove(0, 4);

@@ -118,8 +118,8 @@ namespace MoversEditor
             };
             if (ofd.ShowDialog() == DialogResult.OK)
             {
-                if (!ofd.SafeFileName.StartsWith($"mvr_{CurrentMover.Model.SzName}_")
-                    || !ofd.SafeFileName.EndsWith(".ani")
+                if (!ofd.SafeFileName.ToLower().StartsWith($"mvr_{CurrentMover.Model.SzName}_".ToLower())
+                    || !ofd.SafeFileName.ToLower().EndsWith(".ani".ToLower())
                     || !File.Exists(ofd.FileName))
                     return;
                 tb_SzMotion.Text = Path.GetFileNameWithoutExtension(ofd.FileName).Remove(0, $"mvr_{CurrentMover.Model.SzName}_".Length);
