@@ -273,9 +273,7 @@ namespace MoversEditor
 
         private void tsmi_moverdelete_Click(object sender, EventArgs e)
         {
-            if (lb_movers.SelectedItem == null) return;
-            Project.GetInstance().DeleteMover((Mover)lb_movers.SelectedItem);
-            SetListBoxDataSource();
+            DeleteCurrentMover();
         }
 
         private void lb_movers_MouseDown(object sender, MouseEventArgs e)
@@ -332,9 +330,7 @@ namespace MoversEditor
         {
             if (e.KeyCode == Keys.Delete)
             {
-                if (lb_movers.SelectedItem == null) return;
-                Project.GetInstance().DeleteMover((Mover)lb_movers.SelectedItem);
-                SetListBoxDataSource();
+                DeleteCurrentMover();
             }
         }
 
@@ -373,6 +369,15 @@ namespace MoversEditor
         private void tb_identifier_TextChanged(object sender, EventArgs e)
         {
             lb_IdentifierAlreadyUsed.Visible = false;
+        }
+
+        private void DeleteCurrentMover()
+        {
+            if (!(lb_movers.SelectedItem is Mover mover)) return;
+            Project.GetInstance().DeleteMover(mover);
+            int indexSave = lb_movers.SelectedIndex;
+            SetListBoxDataSource();
+            lb_movers.SelectedIndex = indexSave < lb_movers.Items.Count ? indexSave : lb_movers.Items.Count - 1;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace MoversEditor
         public MotionsForm(Mover currentMover)
         {
             InitializeComponent();
-            if(currentMover is null || currentMover.Model is null)
+            if (currentMover is null || currentMover.Model is null)
             {
                 this.Close();
                 return;
@@ -74,16 +74,19 @@ namespace MoversEditor
 
         private void tsmi_DeleteMotion_Click(object sender, EventArgs e)
         {
-            if (!(lb_Motions.SelectedItem is Motion motion)) return;
-            CurrentMover.Model.Motions.Remove(motion);
-            SetListBoxDataSource();
+            DeleteCurrentMotion();
         }
 
         private void lb_Motions_KeyDown(object sender, KeyEventArgs e)
         {
-            if (!(lb_Motions.SelectedItem is Motion motion)) return;
-            CurrentMover.Model.Motions.Remove(motion);
-            SetListBoxDataSource();
+            switch (e.KeyCode)
+            {
+                case Keys.Delete:
+                    {
+                        DeleteCurrentMotion();
+                        break;
+                    }
+            }
         }
 
         private void SetListBoxDataSource()
@@ -121,6 +124,15 @@ namespace MoversEditor
                     return;
                 tb_SzMotion.Text = Path.GetFileNameWithoutExtension(ofd.FileName).Remove(0, $"mvr_{CurrentMover.Model.SzName}_".Length);
             }
+        }
+
+        private void DeleteCurrentMotion()
+        {
+            if (!(lb_Motions.SelectedItem is Motion motion)) return;
+            CurrentMover.Model.Motions.Remove(motion);
+            int indexSave = lb_Motions.SelectedIndex;
+            SetListBoxDataSource();
+            lb_Motions.SelectedIndex = indexSave < lb_Motions.Items.Count ? indexSave : lb_Motions.Items.Count - 1;
         }
     }
 }
