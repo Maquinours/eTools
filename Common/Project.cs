@@ -163,7 +163,7 @@ namespace eTools
 
         private void SaveStrings(string filePath)
         {
-            using (StreamWriter writer = new StreamWriter(filePath))
+            using (StreamWriter writer = new StreamWriter(new FileStream(filePath, FileMode.Open), Encoding.Unicode))
             {
                 foreach (KeyValuePair<string, string> str in strings)
                     writer.Write($"{str.Key}\t{str.Value}\r\n");
@@ -581,7 +581,7 @@ namespace eTools
 
         public void SaveMoversprop(string filePath)
         {
-            using (StreamWriter writer = new StreamWriter(filePath))
+            using (StreamWriter writer = new StreamWriter(new FileStream(filePath, FileMode.Open), Encoding.UTF8))
             {
                 foreach (Mover mover in movers)
                 {
@@ -929,6 +929,7 @@ namespace eTools
                 case MoverTypes.MONSTER:
                     mover.Prop.DwBelligerence = GetBelligerenceIdentifiers().Where(x => x != "BELLI_PEACEFUL").First(); // TODO: Can error if there is only BELLI_PEACEFUL defined
                     mover.Prop.DwClass = GetClassIdentifiers().Where(x => x != "RANK_CITIZEN").First();
+                    mover.Prop.BKillable = 1;
                     break;
             }
             mover.Prop.DwAi = Settings.GetInstance().Types[type].Identifiers.First();
@@ -1176,7 +1177,7 @@ namespace eTools
 
         private void SaveModels(string filePath)
         {
-            using (StreamWriter writer = new StreamWriter(filePath))
+            using (StreamWriter writer = new StreamWriter(new FileStream(filePath, FileMode.Open), Encoding.Unicode))
             {
                 foreach (MainModelBrace brace in models)
                 {
