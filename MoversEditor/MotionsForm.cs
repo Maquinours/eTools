@@ -30,7 +30,7 @@ namespace MoversEditor
             tb_SzMotion.AutoCompleteCustomSource = filesSource;
             cb_IMotion.DataSource = Project.GetInstance().GetMotionsIdentifiers();
             cb_IMotion.SelectedIndex = -1;
-            this.Text = $"Motions ({CurrentMover.Name})";
+            this.Text = $"{this.Text} ({CurrentMover.Name})";
             SetListBoxDataSource();
         }
 

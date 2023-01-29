@@ -157,7 +157,7 @@
             this.MaximizeBox = false;
             this.Name = "MotionsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Motions";
+            this.Text = "Animations";
             this.cms_lbMotions.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
