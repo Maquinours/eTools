@@ -69,6 +69,8 @@
             this.Controls.Add(this.bt_cancel);
             this.Controls.Add(this.bt_retry);
             this.Controls.Add(this.lb_error);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "FileNotFoundForm";
             this.ResumeLayout(false);
 

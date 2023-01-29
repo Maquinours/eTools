@@ -158,7 +158,9 @@
             this.Controls.Add(this.tb_PropFileName);
             this.Controls.Add(this.tb_ResourcesPath);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "SettingsForm";
             this.Text = "Paramètres";
             this.ResumeLayout(false);

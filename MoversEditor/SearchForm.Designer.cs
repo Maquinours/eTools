@@ -64,6 +64,8 @@
             this.Controls.Add(this.bt_accept);
             this.Controls.Add(this.bt_cancel);
             this.Controls.Add(this.tb_value);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "SearchForm";
             this.ResumeLayout(false);
             this.PerformLayout();

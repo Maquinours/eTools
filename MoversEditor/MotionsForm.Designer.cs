@@ -150,7 +150,9 @@
             this.Controls.Add(this.bt_AddMotion);
             this.Controls.Add(this.bt_GenerateMotions);
             this.Controls.Add(this.lb_Motions);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "MotionsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Motions";
