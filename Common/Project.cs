@@ -163,7 +163,7 @@ namespace eTools
 
         private void SaveStrings(string filePath)
         {
-            using (StreamWriter writer = new StreamWriter(new FileStream(filePath, FileMode.Open), Encoding.Unicode))
+            using (StreamWriter writer = new StreamWriter(filePath, false, new UnicodeEncoding()))
             {
                 foreach (KeyValuePair<string, string> str in strings)
                     writer.Write($"{str.Key}\t{str.Value}\r\n");
@@ -581,7 +581,7 @@ namespace eTools
 
         public void SaveMoversprop(string filePath)
         {
-            using (StreamWriter writer = new StreamWriter(new FileStream(filePath, FileMode.Open), Encoding.UTF8))
+            using (StreamWriter writer = new StreamWriter(filePath, false, new UTF8Encoding(false)))
             {
                 foreach (Mover mover in movers)
                 {
@@ -920,16 +920,25 @@ namespace eTools
                     mover.Prop.DwBelligerence = "BELLI_PEACEFUL";
                     mover.Prop.DwClass = "RANK_CITIZEN";
                     mover.Prop.BKillable = 0;
+                    mover.Prop.DwAtk1 = "=";
+                    mover.Prop.DwAtk2 = "=";
+                    mover.Prop.DwAtk3 = "=";
                     break;
                 case MoverTypes.PET:
                     mover.Prop.DwBelligerence = "BELLI_PEACEFUL";
                     mover.Prop.DwClass = "RANK_LOW";
                     mover.Prop.BKillable = 0;
+                    mover.Prop.DwAtk1 = "=";
+                    mover.Prop.DwAtk2 = "=";
+                    mover.Prop.DwAtk3 = "=";
                     break;
                 case MoverTypes.MONSTER:
                     mover.Prop.DwBelligerence = GetBelligerenceIdentifiers().Where(x => x != "BELLI_PEACEFUL").First(); // TODO: Can error if there is only BELLI_PEACEFUL defined
                     mover.Prop.DwClass = GetClassIdentifiers().Where(x => x != "RANK_CITIZEN").First();
                     mover.Prop.BKillable = 1;
+                    mover.Prop.DwAtk1 = "II_WEA_MOB_MONSTER2_ATK1";
+                    mover.Prop.DwAtk2 = "II_WEA_MOB_MONSTER2_ATK2";
+                    mover.Prop.DwAtk3 = "II_WEA_MOB_MONSTER2_ATK3";
                     break;
             }
             mover.Prop.DwAi = Settings.GetInstance().Types[type].Identifiers.First();
@@ -1177,7 +1186,7 @@ namespace eTools
 
         private void SaveModels(string filePath)
         {
-            using (StreamWriter writer = new StreamWriter(new FileStream(filePath, FileMode.Open), Encoding.Unicode))
+            using (StreamWriter writer = new StreamWriter(filePath, false, new UnicodeEncoding()))
             {
                 foreach (MainModelBrace brace in models)
                 {
