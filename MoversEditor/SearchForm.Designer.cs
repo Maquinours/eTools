@@ -36,22 +36,22 @@
             // 
             // tb_value
             // 
-            resources.ApplyResources(this.tb_value, "tb_value");
             this.tb_value.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.tb_value.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            resources.ApplyResources(this.tb_value, "tb_value");
             this.tb_value.Name = "tb_value";
             // 
             // bt_cancel
             // 
-            resources.ApplyResources(this.bt_cancel, "bt_cancel");
             this.bt_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.bt_cancel, "bt_cancel");
             this.bt_cancel.Name = "bt_cancel";
             this.bt_cancel.UseVisualStyleBackColor = true;
             // 
             // bt_accept
             // 
-            resources.ApplyResources(this.bt_accept, "bt_accept");
             this.bt_accept.DialogResult = System.Windows.Forms.DialogResult.OK;
+            resources.ApplyResources(this.bt_accept, "bt_accept");
             this.bt_accept.Name = "bt_accept";
             this.bt_accept.UseVisualStyleBackColor = true;
             // 

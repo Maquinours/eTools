@@ -42,15 +42,15 @@
             // 
             // bt_retry
             // 
-            resources.ApplyResources(this.bt_retry, "bt_retry");
             this.bt_retry.DialogResult = System.Windows.Forms.DialogResult.Retry;
+            resources.ApplyResources(this.bt_retry, "bt_retry");
             this.bt_retry.Name = "bt_retry";
             this.bt_retry.UseVisualStyleBackColor = true;
             // 
             // bt_cancel
             // 
-            resources.ApplyResources(this.bt_cancel, "bt_cancel");
             this.bt_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.bt_cancel, "bt_cancel");
             this.bt_cancel.Name = "bt_cancel";
             this.bt_cancel.UseVisualStyleBackColor = true;
             // 
