@@ -231,7 +231,7 @@ namespace eTools
             {
                 writer.WriteLine($"PROPFILE\t\"{Path.GetFileName(PropFileName)}\"");
 #if __ITEMS
-                writer.WriteLine($"ICONSPATH\t{IconsFolderPath}");
+                writer.WriteLine($"ICONSPATH\t\"{IconsFolderPath}\"");
 #endif // __ITEMS
                 writer.WriteLine($"STRINGS\t\"{Path.GetFileName(StringsFilePath)}\"");
                 writer.WriteLine("DEFINES");
@@ -261,9 +261,12 @@ namespace eTools
 
         public void LoadDefaultData()
         {
-            ResourcePath = "./";
-            ResourceVersion = 19;
-            Elements = new Dictionary<int, string>()
+            if (string.IsNullOrWhiteSpace(ResourcePath))
+                ResourcePath = "./";
+            if (ResourceVersion < 0)
+                ResourceVersion = 19;
+            if (Elements.Count == 0)
+                Elements = new Dictionary<int, string>()
             {
                 {0, "NONE" },
                 {1, "FIRE" },
@@ -284,6 +287,19 @@ namespace eTools
                 { MoverTypes.PET, new MoverType() { Identifiers = new string[] {"AII_PET", "AII_EGG", "AII_FIGHTINGPET"}} }
             };
 #endif // __MOVERS
+#if __ITEMS
+            PropFileName = ResourcePath + "spec_Item.txt";
+            StringsFilePath = ResourcePath + "propItem.txt.txt";
+            DefineFilesPaths = new List<string>
+            {
+                ResourcePath + "defineObj.h",
+                ResourcePath + "define.h",
+                ResourcePath + "defineItemKind.h",
+                ResourcePath + "defineJob.h",
+                ResourcePath + "defineAttribute.h",
+            };
+            IconsFolderPath = ResourcePath + "Item\\";
+#endif // __ITEMS
         }
     }
 }

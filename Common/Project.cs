@@ -387,6 +387,8 @@ namespace eTools
                 };
                 if (!this.strings.ContainsKey(prop.SzName))
                     this.strings.Add(prop.SzName, "");          // If IDS is not defined, we add it to be defined.
+                if (!this.strings.ContainsKey(prop.SzCommand))
+                    this.strings.Add(prop.SzCommand, "");
                 itemsList.Add(item);
             }
             Items = itemsList.ToArray();
@@ -450,6 +452,7 @@ namespace eTools
                 MoverProp mp = new MoverProp();
 
                 mp.DwId = scanner.GetToken();
+                
                 if (scanner.EndOfStream)
                     break;
 
