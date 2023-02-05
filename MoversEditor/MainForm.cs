@@ -306,8 +306,28 @@ namespace MoversEditor
         private void tsmi_save_Click(object sender, EventArgs e)
         {
             //UseWaitCursor = true;
-            Project.GetInstance().Save();
+            Save();
             //UseWaitCursor = false;
+        }
+
+        private void Save()
+        {
+            try
+            {
+                Project.GetInstance().Save();
+            }
+            catch (Exception ex)
+            {
+                switch (MessageBox.Show(ex.Message, "Save error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error))
+                {
+                    case DialogResult.Retry:
+                        Save();
+                        break;
+                    case DialogResult.Cancel:
+                        Environment.Exit(3);
+                        break;
+                }
+            }
         }
 
         private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -348,7 +368,7 @@ namespace MoversEditor
                 Filter = "o3d files | mvr_*.o3d",
                 CheckFileExists = true,
             };
-            if(ofd.ShowDialog() == DialogResult.OK)
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
                 if (!ofd.SafeFileName.ToLower().StartsWith("mvr_")
                     || !ofd.SafeFileName.ToLower().EndsWith(".o3d")
