@@ -204,7 +204,7 @@
     <value>1</value>
   </data>
   <data name="bt_settings.Text" xml:space="preserve">
-    <value>Parameters</value>
+    <value>Settings</value>
   </data>
   <data name="&gt;&gt;bt_settings.Name" xml:space="preserve">
     <value>bt_settings</value>
