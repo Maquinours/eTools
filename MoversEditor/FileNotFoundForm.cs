@@ -15,10 +15,10 @@ namespace MoversEditor
         public FileNotFoundForm(string errorText)
         {
             InitializeComponent();
-            lb_error.Text = errorText;
+            lblError.Text = errorText;
         }
 
-        private void bt_settings_Click(object sender, EventArgs e)
+        private void BtnSettings_Click(object sender, EventArgs e)
         {
             new SettingsForm().ShowDialog();
         }

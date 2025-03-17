@@ -118,104 +118,104 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lb_error.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblError.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 9</value>
   </data>
-  <data name="lb_error.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblError.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 52</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lb_error.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblError.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="lb_error.Text" xml:space="preserve">
+  <data name="lblError.Text" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="lb_error.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="lblError.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;lb_error.Name" xml:space="preserve">
-    <value>lb_error</value>
+  <data name="&gt;&gt;lblError.Name" xml:space="preserve">
+    <value>lblError</value>
   </data>
-  <data name="&gt;&gt;lb_error.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblError.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lb_error.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblError.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lb_error.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblError.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="bt_retry.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnRetry.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 64</value>
   </data>
-  <data name="bt_retry.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnRetry.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="bt_retry.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnRetry.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="bt_retry.Text" xml:space="preserve">
+  <data name="btnRetry.Text" xml:space="preserve">
     <value>Retry</value>
   </data>
-  <data name="&gt;&gt;bt_retry.Name" xml:space="preserve">
-    <value>bt_retry</value>
+  <data name="&gt;&gt;btnRetry.Name" xml:space="preserve">
+    <value>btnRetry</value>
   </data>
-  <data name="&gt;&gt;bt_retry.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnRetry.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bt_retry.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnRetry.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;bt_retry.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnRetry.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="bt_cancel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>355, 64</value>
   </data>
-  <data name="bt_cancel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="bt_cancel.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="bt_cancel.Text" xml:space="preserve">
+  <data name="btnCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="&gt;&gt;bt_cancel.Name" xml:space="preserve">
-    <value>bt_cancel</value>
+  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
+    <value>btnCancel</value>
   </data>
-  <data name="&gt;&gt;bt_cancel.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bt_cancel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;bt_cancel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="bt_settings.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnSettings.Location" type="System.Drawing.Point, System.Drawing">
     <value>185, 64</value>
   </data>
-  <data name="bt_settings.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnSettings.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="bt_settings.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnSettings.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="bt_settings.Text" xml:space="preserve">
+  <data name="btnSettings.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="&gt;&gt;bt_settings.Name" xml:space="preserve">
-    <value>bt_settings</value>
+  <data name="&gt;&gt;btnSettings.Name" xml:space="preserve">
+    <value>btnSettings</value>
   </data>
-  <data name="&gt;&gt;bt_settings.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnSettings.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bt_settings.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnSettings.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;bt_settings.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnSettings.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">

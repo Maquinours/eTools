@@ -29,46 +29,46 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileNotFoundForm));
-            this.lb_error = new System.Windows.Forms.Label();
-            this.bt_retry = new System.Windows.Forms.Button();
-            this.bt_cancel = new System.Windows.Forms.Button();
-            this.bt_settings = new System.Windows.Forms.Button();
+            this.lblError = new System.Windows.Forms.Label();
+            this.btnRetry = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnSettings = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // lb_error
+            // lblError
             // 
-            resources.ApplyResources(this.lb_error, "lb_error");
-            this.lb_error.Name = "lb_error";
+            resources.ApplyResources(this.lblError, "lblError");
+            this.lblError.Name = "lblError";
             // 
-            // bt_retry
+            // btnRetry
             // 
-            this.bt_retry.DialogResult = System.Windows.Forms.DialogResult.Retry;
-            resources.ApplyResources(this.bt_retry, "bt_retry");
-            this.bt_retry.Name = "bt_retry";
-            this.bt_retry.UseVisualStyleBackColor = true;
+            this.btnRetry.DialogResult = System.Windows.Forms.DialogResult.Retry;
+            resources.ApplyResources(this.btnRetry, "btnRetry");
+            this.btnRetry.Name = "btnRetry";
+            this.btnRetry.UseVisualStyleBackColor = true;
             // 
-            // bt_cancel
+            // btnCancel
             // 
-            this.bt_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.bt_cancel, "bt_cancel");
-            this.bt_cancel.Name = "bt_cancel";
-            this.bt_cancel.UseVisualStyleBackColor = true;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // bt_settings
+            // btnSettings
             // 
-            resources.ApplyResources(this.bt_settings, "bt_settings");
-            this.bt_settings.Name = "bt_settings";
-            this.bt_settings.UseVisualStyleBackColor = true;
-            this.bt_settings.Click += new System.EventHandler(this.bt_settings_Click);
+            resources.ApplyResources(this.btnSettings, "btnSettings");
+            this.btnSettings.Name = "btnSettings";
+            this.btnSettings.UseVisualStyleBackColor = true;
+            this.btnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
             // 
             // FileNotFoundForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.bt_settings);
-            this.Controls.Add(this.bt_cancel);
-            this.Controls.Add(this.bt_retry);
-            this.Controls.Add(this.lb_error);
+            this.Controls.Add(this.btnSettings);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnRetry);
+            this.Controls.Add(this.lblError);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FileNotFoundForm";
@@ -78,9 +78,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Label lb_error;
-        private System.Windows.Forms.Button bt_retry;
-        private System.Windows.Forms.Button bt_cancel;
-        private System.Windows.Forms.Button bt_settings;
+        private System.Windows.Forms.Label lblError;
+        private System.Windows.Forms.Button btnRetry;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnSettings;
     }
 }
