@@ -49,11 +49,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DDSImageParser">
-      <HintPath>..\..\DDSImageParser\DDSImageParser\bin\Debug\DDSImageParser.dll</HintPath>
+      <HintPath>..\libs\DDSImageParser.dll</HintPath>
     </Reference>
-    <Reference Include="Scanner, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Scanner.dll</HintPath>
+    <Reference Include="Scanner">
+      <HintPath>..\libs\Scanner.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
