@@ -287,18 +287,6 @@ namespace MoversEditor
             }
         }
 
-        private void tb_ModelScale_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (!(sender is TextBox) || e.Control) return;
-            TextBox tb = (TextBox)sender;
-
-            char separator = Convert.ToChar(Thread.CurrentThread.CurrentCulture.NumberFormat.NumberDecimalSeparator);
-
-            if ((tb.SelectedText.Contains(separator) && tb.SelectionStart + tb.SelectionLength < tb.TextLength)
-                || (e.KeyCode == Keys.Back && tb.SelectionLength == 0 && tb.Text[tb.SelectionStart - 1] == separator))
-                e.SuppressKeyPress = true;
-        }
-
         private void tsmi_reload_Click(object sender, EventArgs e)
         {
             LoadFormData();
