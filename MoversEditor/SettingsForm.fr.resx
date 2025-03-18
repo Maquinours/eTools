@@ -118,6 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblFolder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 24</value>
+  </data>
+  <data name="lblFolder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 13</value>
+  </data>
+  <data name="lblFolder.Text" xml:space="preserve">
+    <value>Dossier ressources :</value>
+  </data>
+  <data name="lblPropFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>46, 50</value>
+  </data>
+  <data name="lblPropFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 13</value>
+  </data>
+  <data name="lblPropFile.Text" xml:space="preserve">
+    <value>Fichier prop :</value>
+  </data>
+  <data name="lblStringFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>44, 76</value>
+  </data>
+  <data name="lblStringFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 13</value>
+  </data>
+  <data name="lblStringFile.Text" xml:space="preserve">
+    <value>Fichier texte :</value>
+  </data>
+  <data name="btnCancel.Text" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="btnApply.Text" xml:space="preserve">
+    <value>Appliquer</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAvgAAAAEAIAAoEAMAFgAAACgAAAC+AAAAAAIAAAEAIAAAAAAAAPgCAMMOAADDDgAAAAAAAAAA
@@ -3468,5 +3501,8 @@
         ///////////////////////8/8Af///////////////////////////8/+A/////////////////////
         ///////8
 </value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Paramètres</value>
   </data>
 </root>
