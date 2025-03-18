@@ -54,7 +54,19 @@ namespace MoversEditor
             OpenFileDialog ofd = new OpenFileDialog();
             if(ofd.ShowDialog() == DialogResult.OK)
             {
+
+                tbResourcesPath.Text = Path.GetDirectoryName(ofd.FileName) + "\\";
                 tbPropFileName.Text = Path.GetFileName(ofd.FileName);
+            }
+        }
+
+        private void BtnSelectStringFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                tbResourcesPath.Text = Path.GetDirectoryName(ofd.FileName) + "\\";
+                tbStringFileName.Text = Path.GetFileName(ofd.FileName);
             }
         }
     }

@@ -105,7 +105,7 @@
             resources.ApplyResources(this.btnSelectStringFile, "btnSelectStringFile");
             this.btnSelectStringFile.Name = "btnSelectStringFile";
             this.btnSelectStringFile.UseVisualStyleBackColor = true;
-            this.btnSelectStringFile.Click += new System.EventHandler(this.BtnSelectFolder_Click);
+            this.btnSelectStringFile.Click += new System.EventHandler(this.BtnSelectStringFile_Click);
             // 
             // SettingsForm
             // 
