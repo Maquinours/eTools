@@ -30,837 +30,837 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.tc_main = new System.Windows.Forms.TabControl();
-            this.tp_general = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.bt_SelectModelFile = new System.Windows.Forms.Button();
-            this.bt_motions = new System.Windows.Forms.Button();
-            this.cb_ModelBrace = new System.Windows.Forms.ComboBox();
-            this.tb_ModelScale = new System.Windows.Forms.TextBox();
-            this.tb_ModelName = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.cb_monsterai = new System.Windows.Forms.ComboBox();
-            this.lbl_monsterai = new System.Windows.Forms.Label();
-            this.tb_expvalue = new System.Windows.Forms.TextBox();
-            this.lbl_expvalue = new System.Windows.Forms.Label();
-            this.cb_belligerence = new System.Windows.Forms.ComboBox();
-            this.lbl_belligerence = new System.Windows.Forms.Label();
-            this.tb_level = new System.Windows.Forms.TextBox();
-            this.lbl_level = new System.Windows.Forms.Label();
-            this.cb_class = new System.Windows.Forms.ComboBox();
-            this.lbl_class = new System.Windows.Forms.Label();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.lb_IdentifierAlreadyUsed = new System.Windows.Forms.Label();
-            this.tb_name = new System.Windows.Forms.TextBox();
-            this.cb_type = new System.Windows.Forms.ComboBox();
-            this.lbl_type = new System.Windows.Forms.Label();
-            this.tb_identifier = new System.Windows.Forms.TextBox();
-            this.lbl_name = new System.Windows.Forms.Label();
-            this.lbl_identifier = new System.Windows.Forms.Label();
-            this.tp_monster = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.gb_monsterstatselements = new System.Windows.Forms.GroupBox();
-            this.tb_resistearth = new System.Windows.Forms.TextBox();
-            this.cb_elementtype = new System.Windows.Forms.ComboBox();
-            this.lbl_resistearth = new System.Windows.Forms.Label();
-            this.lbl_elementtype = new System.Windows.Forms.Label();
-            this.tb_resistwater = new System.Windows.Forms.TextBox();
-            this.lbl_resistwater = new System.Windows.Forms.Label();
-            this.tb_elementatk = new System.Windows.Forms.TextBox();
-            this.tb_resistwind = new System.Windows.Forms.TextBox();
-            this.lbl_elementatk = new System.Windows.Forms.Label();
-            this.lbl_resistwind = new System.Windows.Forms.Label();
-            this.tb_resistelecricity = new System.Windows.Forms.TextBox();
-            this.lbl_resistelecricity = new System.Windows.Forms.Label();
-            this.tb_resistfire = new System.Windows.Forms.TextBox();
-            this.lbl_resistfire = new System.Windows.Forms.Label();
-            this.gb_moverstatsbasic = new System.Windows.Forms.GroupBox();
-            this.tb_int = new System.Windows.Forms.TextBox();
-            this.tb_dex = new System.Windows.Forms.TextBox();
-            this.lbl_er = new System.Windows.Forms.Label();
-            this.lbl_str = new System.Windows.Forms.Label();
-            this.tb_hr = new System.Windows.Forms.TextBox();
-            this.tb_str = new System.Windows.Forms.TextBox();
-            this.lbl_hr = new System.Windows.Forms.Label();
-            this.lbl_sta = new System.Windows.Forms.Label();
-            this.tb_er = new System.Windows.Forms.TextBox();
-            this.tb_sta = new System.Windows.Forms.TextBox();
-            this.lbl_int = new System.Windows.Forms.Label();
-            this.lbl_dex = new System.Windows.Forms.Label();
-            this.tb_addmp = new System.Windows.Forms.TextBox();
-            this.lbl_addhp = new System.Windows.Forms.Label();
-            this.tb_addhp = new System.Windows.Forms.TextBox();
-            this.lbl_addmp = new System.Windows.Forms.Label();
-            this.gb_monsterstatsmiscs = new System.Windows.Forms.GroupBox();
-            this.tb_resismgic = new System.Windows.Forms.TextBox();
-            this.lbl_resismgic = new System.Windows.Forms.Label();
-            this.tb_atkmin = new System.Windows.Forms.TextBox();
-            this.lbl_atkmin = new System.Windows.Forms.Label();
-            this.lbl_atkmax = new System.Windows.Forms.Label();
-            this.tb_atkmax = new System.Windows.Forms.TextBox();
-            this.tb_reattackdelay = new System.Windows.Forms.TextBox();
-            this.lbl_reattackdelay = new System.Windows.Forms.Label();
-            this.lbl_naturalarmor = new System.Windows.Forms.Label();
-            this.tb_naturalarmor = new System.Windows.Forms.TextBox();
-            this.tb_fspeed = new System.Windows.Forms.TextBox();
-            this.lbl_speed = new System.Windows.Forms.Label();
-            this.ms_main = new System.Windows.Forms.MenuStrip();
-            this.tsmi_movers = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_moversadd = new System.Windows.Forms.ToolStripMenuItem();
-            this.rechercherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fichierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_reload = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmi_save = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cms_lbmovers = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmi_moverdelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.lb_movers = new System.Windows.Forms.ListBox();
-            this.tc_main.SuspendLayout();
-            this.tp_general.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.tp_monster.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.gb_monsterstatselements.SuspendLayout();
-            this.gb_moverstatsbasic.SuspendLayout();
-            this.gb_monsterstatsmiscs.SuspendLayout();
-            this.ms_main.SuspendLayout();
-            this.cms_lbmovers.SuspendLayout();
+            this.tcMain = new System.Windows.Forms.TabControl();
+            this.tpGeneral = new System.Windows.Forms.TabPage();
+            this.gbConfiguration = new System.Windows.Forms.GroupBox();
+            this.gbModel = new System.Windows.Forms.GroupBox();
+            this.btnSelectModelFile = new System.Windows.Forms.Button();
+            this.btnMotions = new System.Windows.Forms.Button();
+            this.cbModelBrace = new System.Windows.Forms.ComboBox();
+            this.tbModelScale = new System.Windows.Forms.TextBox();
+            this.tbModelFile = new System.Windows.Forms.TextBox();
+            this.lblModelBrace = new System.Windows.Forms.Label();
+            this.lblModelScale = new System.Windows.Forms.Label();
+            this.lblModelFile = new System.Windows.Forms.Label();
+            this.gbMisc = new System.Windows.Forms.GroupBox();
+            this.cbAI = new System.Windows.Forms.ComboBox();
+            this.lblAI = new System.Windows.Forms.Label();
+            this.tbExperience = new System.Windows.Forms.TextBox();
+            this.lblExperience = new System.Windows.Forms.Label();
+            this.cbBelligerence = new System.Windows.Forms.ComboBox();
+            this.lblBelligerence = new System.Windows.Forms.Label();
+            this.tbLevel = new System.Windows.Forms.TextBox();
+            this.lblLevel = new System.Windows.Forms.Label();
+            this.cbClass = new System.Windows.Forms.ComboBox();
+            this.lblClass = new System.Windows.Forms.Label();
+            this.gbMain = new System.Windows.Forms.GroupBox();
+            this.lblIdentifierAlreadyUsed = new System.Windows.Forms.Label();
+            this.tbName = new System.Windows.Forms.TextBox();
+            this.cbType = new System.Windows.Forms.ComboBox();
+            this.lblType = new System.Windows.Forms.Label();
+            this.tbIdentifier = new System.Windows.Forms.TextBox();
+            this.lblName = new System.Windows.Forms.Label();
+            this.lblIdentifier = new System.Windows.Forms.Label();
+            this.tpMonster = new System.Windows.Forms.TabPage();
+            this.gbStats = new System.Windows.Forms.GroupBox();
+            this.gbStatsElements = new System.Windows.Forms.GroupBox();
+            this.tbEarthResist = new System.Windows.Forms.TextBox();
+            this.cbElementType = new System.Windows.Forms.ComboBox();
+            this.lblEarthResist = new System.Windows.Forms.Label();
+            this.lblElementType = new System.Windows.Forms.Label();
+            this.tbWaterResist = new System.Windows.Forms.TextBox();
+            this.lblWaterResist = new System.Windows.Forms.Label();
+            this.tbElementAtk = new System.Windows.Forms.TextBox();
+            this.tbWindResist = new System.Windows.Forms.TextBox();
+            this.lblElementAtk = new System.Windows.Forms.Label();
+            this.lblWindResist = new System.Windows.Forms.Label();
+            this.tbElectricityResist = new System.Windows.Forms.TextBox();
+            this.lblElectricityResist = new System.Windows.Forms.Label();
+            this.tbFireResist = new System.Windows.Forms.TextBox();
+            this.lblFireResist = new System.Windows.Forms.Label();
+            this.gbBasicStats = new System.Windows.Forms.GroupBox();
+            this.tbInt = new System.Windows.Forms.TextBox();
+            this.tbDex = new System.Windows.Forms.TextBox();
+            this.lblEr = new System.Windows.Forms.Label();
+            this.lblStr = new System.Windows.Forms.Label();
+            this.tbHr = new System.Windows.Forms.TextBox();
+            this.tbStr = new System.Windows.Forms.TextBox();
+            this.lblHit = new System.Windows.Forms.Label();
+            this.lblSta = new System.Windows.Forms.Label();
+            this.tbEr = new System.Windows.Forms.TextBox();
+            this.tbSta = new System.Windows.Forms.TextBox();
+            this.lblInt = new System.Windows.Forms.Label();
+            this.lblDex = new System.Windows.Forms.Label();
+            this.tbMp = new System.Windows.Forms.TextBox();
+            this.lblHp = new System.Windows.Forms.Label();
+            this.tbHp = new System.Windows.Forms.TextBox();
+            this.lblMp = new System.Windows.Forms.Label();
+            this.gbMiscStats = new System.Windows.Forms.GroupBox();
+            this.tbMagicResist = new System.Windows.Forms.TextBox();
+            this.lblMagicResist = new System.Windows.Forms.Label();
+            this.tbAtkMin = new System.Windows.Forms.TextBox();
+            this.lblAtkMin = new System.Windows.Forms.Label();
+            this.lblAtkMax = new System.Windows.Forms.Label();
+            this.tbAtkMax = new System.Windows.Forms.TextBox();
+            this.tblAttackDelay = new System.Windows.Forms.TextBox();
+            this.lblAttackDelay = new System.Windows.Forms.Label();
+            this.lblNaturalArmor = new System.Windows.Forms.Label();
+            this.tbNaturalArmor = new System.Windows.Forms.TextBox();
+            this.tbSpeed = new System.Windows.Forms.TextBox();
+            this.lblSpeed = new System.Windows.Forms.Label();
+            this.msMain = new System.Windows.Forms.MenuStrip();
+            this.tsmiMovers = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMoversAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMoversFind = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFileReload = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFileSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsLbMovers = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiMoverDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbMovers = new System.Windows.Forms.ListBox();
+            this.tcMain.SuspendLayout();
+            this.tpGeneral.SuspendLayout();
+            this.gbConfiguration.SuspendLayout();
+            this.gbModel.SuspendLayout();
+            this.gbMisc.SuspendLayout();
+            this.gbMain.SuspendLayout();
+            this.tpMonster.SuspendLayout();
+            this.gbStats.SuspendLayout();
+            this.gbStatsElements.SuspendLayout();
+            this.gbBasicStats.SuspendLayout();
+            this.gbMiscStats.SuspendLayout();
+            this.msMain.SuspendLayout();
+            this.cmsLbMovers.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tc_main
+            // tcMain
             // 
-            resources.ApplyResources(this.tc_main, "tc_main");
-            this.tc_main.Controls.Add(this.tp_general);
-            this.tc_main.Controls.Add(this.tp_monster);
-            this.tc_main.Name = "tc_main";
-            this.tc_main.SelectedIndex = 0;
+            resources.ApplyResources(this.tcMain, "tcMain");
+            this.tcMain.Controls.Add(this.tpGeneral);
+            this.tcMain.Controls.Add(this.tpMonster);
+            this.tcMain.Name = "tcMain";
+            this.tcMain.SelectedIndex = 0;
             // 
-            // tp_general
+            // tpGeneral
             // 
-            resources.ApplyResources(this.tp_general, "tp_general");
-            this.tp_general.Controls.Add(this.groupBox3);
-            this.tp_general.Name = "tp_general";
-            this.tp_general.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.tpGeneral, "tpGeneral");
+            this.tpGeneral.Controls.Add(this.gbConfiguration);
+            this.tpGeneral.Name = "tpGeneral";
+            this.tpGeneral.UseVisualStyleBackColor = true;
             // 
-            // groupBox3
+            // gbConfiguration
             // 
-            resources.ApplyResources(this.groupBox3, "groupBox3");
-            this.groupBox3.Controls.Add(this.groupBox1);
-            this.groupBox3.Controls.Add(this.groupBox5);
-            this.groupBox3.Controls.Add(this.groupBox4);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.TabStop = false;
+            resources.ApplyResources(this.gbConfiguration, "gbConfiguration");
+            this.gbConfiguration.Controls.Add(this.gbModel);
+            this.gbConfiguration.Controls.Add(this.gbMisc);
+            this.gbConfiguration.Controls.Add(this.gbMain);
+            this.gbConfiguration.Name = "gbConfiguration";
+            this.gbConfiguration.TabStop = false;
             // 
-            // groupBox1
+            // gbModel
             // 
-            resources.ApplyResources(this.groupBox1, "groupBox1");
-            this.groupBox1.Controls.Add(this.bt_SelectModelFile);
-            this.groupBox1.Controls.Add(this.bt_motions);
-            this.groupBox1.Controls.Add(this.cb_ModelBrace);
-            this.groupBox1.Controls.Add(this.tb_ModelScale);
-            this.groupBox1.Controls.Add(this.tb_ModelName);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.TabStop = false;
+            resources.ApplyResources(this.gbModel, "gbModel");
+            this.gbModel.Controls.Add(this.btnSelectModelFile);
+            this.gbModel.Controls.Add(this.btnMotions);
+            this.gbModel.Controls.Add(this.cbModelBrace);
+            this.gbModel.Controls.Add(this.tbModelScale);
+            this.gbModel.Controls.Add(this.tbModelFile);
+            this.gbModel.Controls.Add(this.lblModelBrace);
+            this.gbModel.Controls.Add(this.lblModelScale);
+            this.gbModel.Controls.Add(this.lblModelFile);
+            this.gbModel.Name = "gbModel";
+            this.gbModel.TabStop = false;
             // 
-            // bt_SelectModelFile
+            // btnSelectModelFile
             // 
-            resources.ApplyResources(this.bt_SelectModelFile, "bt_SelectModelFile");
-            this.bt_SelectModelFile.Name = "bt_SelectModelFile";
-            this.bt_SelectModelFile.UseVisualStyleBackColor = true;
-            this.bt_SelectModelFile.Click += new System.EventHandler(this.bt_SelectModelFile_Click);
+            resources.ApplyResources(this.btnSelectModelFile, "btnSelectModelFile");
+            this.btnSelectModelFile.Name = "btnSelectModelFile";
+            this.btnSelectModelFile.UseVisualStyleBackColor = true;
+            this.btnSelectModelFile.Click += new System.EventHandler(this.BtnSelectModelFile_Click);
             // 
-            // bt_motions
+            // btnMotions
             // 
-            resources.ApplyResources(this.bt_motions, "bt_motions");
-            this.bt_motions.Name = "bt_motions";
-            this.bt_motions.UseVisualStyleBackColor = true;
-            this.bt_motions.Click += new System.EventHandler(this.bt_motions_Click);
+            resources.ApplyResources(this.btnMotions, "btnMotions");
+            this.btnMotions.Name = "btnMotions";
+            this.btnMotions.UseVisualStyleBackColor = true;
+            this.btnMotions.Click += new System.EventHandler(this.BtnMotions_Click);
             // 
-            // cb_ModelBrace
+            // cbModelBrace
             // 
-            resources.ApplyResources(this.cb_ModelBrace, "cb_ModelBrace");
-            this.cb_ModelBrace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_ModelBrace.FormattingEnabled = true;
-            this.cb_ModelBrace.Name = "cb_ModelBrace";
+            resources.ApplyResources(this.cbModelBrace, "cbModelBrace");
+            this.cbModelBrace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbModelBrace.FormattingEnabled = true;
+            this.cbModelBrace.Name = "cbModelBrace";
             // 
-            // tb_ModelScale
+            // tbModelScale
             // 
-            resources.ApplyResources(this.tb_ModelScale, "tb_ModelScale");
-            this.tb_ModelScale.Name = "tb_ModelScale";
-            this.tb_ModelScale.TextChanged += new System.EventHandler(this.FormatFloatTextbox);
+            resources.ApplyResources(this.tbModelScale, "tbModelScale");
+            this.tbModelScale.Name = "tbModelScale";
+            this.tbModelScale.TextChanged += new System.EventHandler(this.FormatFloatTextbox);
             // 
-            // tb_ModelName
+            // tbModelFile
             // 
-            resources.ApplyResources(this.tb_ModelName, "tb_ModelName");
-            this.tb_ModelName.Name = "tb_ModelName";
+            resources.ApplyResources(this.tbModelFile, "tbModelFile");
+            this.tbModelFile.Name = "tbModelFile";
             // 
-            // label3
+            // lblModelBrace
             // 
-            resources.ApplyResources(this.label3, "label3");
-            this.label3.Name = "label3";
+            resources.ApplyResources(this.lblModelBrace, "lblModelBrace");
+            this.lblModelBrace.Name = "lblModelBrace";
             // 
-            // label2
+            // lblModelScale
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.lblModelScale, "lblModelScale");
+            this.lblModelScale.Name = "lblModelScale";
             // 
-            // label1
+            // lblModelFile
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.lblModelFile, "lblModelFile");
+            this.lblModelFile.Name = "lblModelFile";
             // 
-            // groupBox5
+            // gbMisc
             // 
-            resources.ApplyResources(this.groupBox5, "groupBox5");
-            this.groupBox5.Controls.Add(this.cb_monsterai);
-            this.groupBox5.Controls.Add(this.lbl_monsterai);
-            this.groupBox5.Controls.Add(this.tb_expvalue);
-            this.groupBox5.Controls.Add(this.lbl_expvalue);
-            this.groupBox5.Controls.Add(this.cb_belligerence);
-            this.groupBox5.Controls.Add(this.lbl_belligerence);
-            this.groupBox5.Controls.Add(this.tb_level);
-            this.groupBox5.Controls.Add(this.lbl_level);
-            this.groupBox5.Controls.Add(this.cb_class);
-            this.groupBox5.Controls.Add(this.lbl_class);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.TabStop = false;
+            resources.ApplyResources(this.gbMisc, "gbMisc");
+            this.gbMisc.Controls.Add(this.cbAI);
+            this.gbMisc.Controls.Add(this.lblAI);
+            this.gbMisc.Controls.Add(this.tbExperience);
+            this.gbMisc.Controls.Add(this.lblExperience);
+            this.gbMisc.Controls.Add(this.cbBelligerence);
+            this.gbMisc.Controls.Add(this.lblBelligerence);
+            this.gbMisc.Controls.Add(this.tbLevel);
+            this.gbMisc.Controls.Add(this.lblLevel);
+            this.gbMisc.Controls.Add(this.cbClass);
+            this.gbMisc.Controls.Add(this.lblClass);
+            this.gbMisc.Name = "gbMisc";
+            this.gbMisc.TabStop = false;
             // 
-            // cb_monsterai
+            // cbAI
             // 
-            resources.ApplyResources(this.cb_monsterai, "cb_monsterai");
-            this.cb_monsterai.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_monsterai.FormattingEnabled = true;
-            this.cb_monsterai.Name = "cb_monsterai";
+            resources.ApplyResources(this.cbAI, "cbAI");
+            this.cbAI.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbAI.FormattingEnabled = true;
+            this.cbAI.Name = "cbAI";
             // 
-            // lbl_monsterai
+            // lblAI
             // 
-            resources.ApplyResources(this.lbl_monsterai, "lbl_monsterai");
-            this.lbl_monsterai.Name = "lbl_monsterai";
+            resources.ApplyResources(this.lblAI, "lblAI");
+            this.lblAI.Name = "lblAI";
             // 
-            // tb_expvalue
+            // tbExperience
             // 
-            resources.ApplyResources(this.tb_expvalue, "tb_expvalue");
-            this.tb_expvalue.Name = "tb_expvalue";
-            this.tb_expvalue.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbExperience, "tbExperience");
+            this.tbExperience.Name = "tbExperience";
+            this.tbExperience.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // lbl_expvalue
+            // lblExperience
             // 
-            resources.ApplyResources(this.lbl_expvalue, "lbl_expvalue");
-            this.lbl_expvalue.Name = "lbl_expvalue";
+            resources.ApplyResources(this.lblExperience, "lblExperience");
+            this.lblExperience.Name = "lblExperience";
             // 
-            // cb_belligerence
+            // cbBelligerence
             // 
-            resources.ApplyResources(this.cb_belligerence, "cb_belligerence");
-            this.cb_belligerence.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_belligerence.FormattingEnabled = true;
-            this.cb_belligerence.Name = "cb_belligerence";
+            resources.ApplyResources(this.cbBelligerence, "cbBelligerence");
+            this.cbBelligerence.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBelligerence.FormattingEnabled = true;
+            this.cbBelligerence.Name = "cbBelligerence";
             // 
-            // lbl_belligerence
+            // lblBelligerence
             // 
-            resources.ApplyResources(this.lbl_belligerence, "lbl_belligerence");
-            this.lbl_belligerence.Name = "lbl_belligerence";
+            resources.ApplyResources(this.lblBelligerence, "lblBelligerence");
+            this.lblBelligerence.Name = "lblBelligerence";
             // 
-            // tb_level
+            // tbLevel
             // 
-            resources.ApplyResources(this.tb_level, "tb_level");
-            this.tb_level.Name = "tb_level";
-            this.tb_level.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbLevel, "tbLevel");
+            this.tbLevel.Name = "tbLevel";
+            this.tbLevel.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // lbl_level
+            // lblLevel
             // 
-            resources.ApplyResources(this.lbl_level, "lbl_level");
-            this.lbl_level.Name = "lbl_level";
+            resources.ApplyResources(this.lblLevel, "lblLevel");
+            this.lblLevel.Name = "lblLevel";
             // 
-            // cb_class
+            // cbClass
             // 
-            resources.ApplyResources(this.cb_class, "cb_class");
-            this.cb_class.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_class.FormattingEnabled = true;
-            this.cb_class.Name = "cb_class";
+            resources.ApplyResources(this.cbClass, "cbClass");
+            this.cbClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbClass.FormattingEnabled = true;
+            this.cbClass.Name = "cbClass";
             // 
-            // lbl_class
+            // lblClass
             // 
-            resources.ApplyResources(this.lbl_class, "lbl_class");
-            this.lbl_class.Name = "lbl_class";
+            resources.ApplyResources(this.lblClass, "lblClass");
+            this.lblClass.Name = "lblClass";
             // 
-            // groupBox4
+            // gbMain
             // 
-            resources.ApplyResources(this.groupBox4, "groupBox4");
-            this.groupBox4.Controls.Add(this.lb_IdentifierAlreadyUsed);
-            this.groupBox4.Controls.Add(this.tb_name);
-            this.groupBox4.Controls.Add(this.cb_type);
-            this.groupBox4.Controls.Add(this.lbl_type);
-            this.groupBox4.Controls.Add(this.tb_identifier);
-            this.groupBox4.Controls.Add(this.lbl_name);
-            this.groupBox4.Controls.Add(this.lbl_identifier);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.TabStop = false;
+            resources.ApplyResources(this.gbMain, "gbMain");
+            this.gbMain.Controls.Add(this.lblIdentifierAlreadyUsed);
+            this.gbMain.Controls.Add(this.tbName);
+            this.gbMain.Controls.Add(this.cbType);
+            this.gbMain.Controls.Add(this.lblType);
+            this.gbMain.Controls.Add(this.tbIdentifier);
+            this.gbMain.Controls.Add(this.lblName);
+            this.gbMain.Controls.Add(this.lblIdentifier);
+            this.gbMain.Name = "gbMain";
+            this.gbMain.TabStop = false;
             // 
-            // lb_IdentifierAlreadyUsed
+            // lblIdentifierAlreadyUsed
             // 
-            resources.ApplyResources(this.lb_IdentifierAlreadyUsed, "lb_IdentifierAlreadyUsed");
-            this.lb_IdentifierAlreadyUsed.ForeColor = System.Drawing.Color.Red;
-            this.lb_IdentifierAlreadyUsed.Name = "lb_IdentifierAlreadyUsed";
+            resources.ApplyResources(this.lblIdentifierAlreadyUsed, "lblIdentifierAlreadyUsed");
+            this.lblIdentifierAlreadyUsed.ForeColor = System.Drawing.Color.Red;
+            this.lblIdentifierAlreadyUsed.Name = "lblIdentifierAlreadyUsed";
             // 
-            // tb_name
+            // tbName
             // 
-            resources.ApplyResources(this.tb_name, "tb_name");
-            this.tb_name.Name = "tb_name";
+            resources.ApplyResources(this.tbName, "tbName");
+            this.tbName.Name = "tbName";
             // 
-            // cb_type
+            // cbType
             // 
-            resources.ApplyResources(this.cb_type, "cb_type");
-            this.cb_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_type.Name = "cb_type";
-            this.cb_type.SelectedIndexChanged += new System.EventHandler(this.cb_type_SelectedIndexChanged);
+            resources.ApplyResources(this.cbType, "cbType");
+            this.cbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbType.Name = "cbType";
+            this.cbType.SelectedIndexChanged += new System.EventHandler(this.CbType_SelectedIndexChanged);
             // 
-            // lbl_type
+            // lblType
             // 
-            resources.ApplyResources(this.lbl_type, "lbl_type");
-            this.lbl_type.Name = "lbl_type";
+            resources.ApplyResources(this.lblType, "lblType");
+            this.lblType.Name = "lblType";
             // 
-            // tb_identifier
+            // tbIdentifier
             // 
-            resources.ApplyResources(this.tb_identifier, "tb_identifier");
-            this.tb_identifier.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.tb_identifier.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.tb_identifier.Name = "tb_identifier";
-            this.tb_identifier.TextChanged += new System.EventHandler(this.tb_identifier_TextChanged);
-            this.tb_identifier.Validating += new System.ComponentModel.CancelEventHandler(this.tb_identifier_Validating);
+            resources.ApplyResources(this.tbIdentifier, "tbIdentifier");
+            this.tbIdentifier.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.tbIdentifier.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.tbIdentifier.Name = "tbIdentifier";
+            this.tbIdentifier.TextChanged += new System.EventHandler(this.TbIdentifier_TextChanged);
+            this.tbIdentifier.Validating += new System.ComponentModel.CancelEventHandler(this.TbIdentifier_Validating);
             // 
-            // lbl_name
+            // lblName
             // 
-            resources.ApplyResources(this.lbl_name, "lbl_name");
-            this.lbl_name.Name = "lbl_name";
+            resources.ApplyResources(this.lblName, "lblName");
+            this.lblName.Name = "lblName";
             // 
-            // lbl_identifier
+            // lblIdentifier
             // 
-            resources.ApplyResources(this.lbl_identifier, "lbl_identifier");
-            this.lbl_identifier.Name = "lbl_identifier";
+            resources.ApplyResources(this.lblIdentifier, "lblIdentifier");
+            this.lblIdentifier.Name = "lblIdentifier";
             // 
-            // tp_monster
+            // tpMonster
             // 
-            resources.ApplyResources(this.tp_monster, "tp_monster");
-            this.tp_monster.Controls.Add(this.groupBox2);
-            this.tp_monster.Name = "tp_monster";
-            this.tp_monster.UseVisualStyleBackColor = true;
+            resources.ApplyResources(this.tpMonster, "tpMonster");
+            this.tpMonster.Controls.Add(this.gbStats);
+            this.tpMonster.Name = "tpMonster";
+            this.tpMonster.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // gbStats
             // 
-            resources.ApplyResources(this.groupBox2, "groupBox2");
-            this.groupBox2.Controls.Add(this.gb_monsterstatselements);
-            this.groupBox2.Controls.Add(this.gb_moverstatsbasic);
-            this.groupBox2.Controls.Add(this.gb_monsterstatsmiscs);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.TabStop = false;
+            resources.ApplyResources(this.gbStats, "gbStats");
+            this.gbStats.Controls.Add(this.gbStatsElements);
+            this.gbStats.Controls.Add(this.gbBasicStats);
+            this.gbStats.Controls.Add(this.gbMiscStats);
+            this.gbStats.Name = "gbStats";
+            this.gbStats.TabStop = false;
             // 
-            // gb_monsterstatselements
+            // gbStatsElements
             // 
-            resources.ApplyResources(this.gb_monsterstatselements, "gb_monsterstatselements");
-            this.gb_monsterstatselements.Controls.Add(this.tb_resistearth);
-            this.gb_monsterstatselements.Controls.Add(this.cb_elementtype);
-            this.gb_monsterstatselements.Controls.Add(this.lbl_resistearth);
-            this.gb_monsterstatselements.Controls.Add(this.lbl_elementtype);
-            this.gb_monsterstatselements.Controls.Add(this.tb_resistwater);
-            this.gb_monsterstatselements.Controls.Add(this.lbl_resistwater);
-            this.gb_monsterstatselements.Controls.Add(this.tb_elementatk);
-            this.gb_monsterstatselements.Controls.Add(this.tb_resistwind);
-            this.gb_monsterstatselements.Controls.Add(this.lbl_elementatk);
-            this.gb_monsterstatselements.Controls.Add(this.lbl_resistwind);
-            this.gb_monsterstatselements.Controls.Add(this.tb_resistelecricity);
-            this.gb_monsterstatselements.Controls.Add(this.lbl_resistelecricity);
-            this.gb_monsterstatselements.Controls.Add(this.tb_resistfire);
-            this.gb_monsterstatselements.Controls.Add(this.lbl_resistfire);
-            this.gb_monsterstatselements.Name = "gb_monsterstatselements";
-            this.gb_monsterstatselements.TabStop = false;
+            resources.ApplyResources(this.gbStatsElements, "gbStatsElements");
+            this.gbStatsElements.Controls.Add(this.tbEarthResist);
+            this.gbStatsElements.Controls.Add(this.cbElementType);
+            this.gbStatsElements.Controls.Add(this.lblEarthResist);
+            this.gbStatsElements.Controls.Add(this.lblElementType);
+            this.gbStatsElements.Controls.Add(this.tbWaterResist);
+            this.gbStatsElements.Controls.Add(this.lblWaterResist);
+            this.gbStatsElements.Controls.Add(this.tbElementAtk);
+            this.gbStatsElements.Controls.Add(this.tbWindResist);
+            this.gbStatsElements.Controls.Add(this.lblElementAtk);
+            this.gbStatsElements.Controls.Add(this.lblWindResist);
+            this.gbStatsElements.Controls.Add(this.tbElectricityResist);
+            this.gbStatsElements.Controls.Add(this.lblElectricityResist);
+            this.gbStatsElements.Controls.Add(this.tbFireResist);
+            this.gbStatsElements.Controls.Add(this.lblFireResist);
+            this.gbStatsElements.Name = "gbStatsElements";
+            this.gbStatsElements.TabStop = false;
             // 
-            // tb_resistearth
+            // tbEarthResist
             // 
-            resources.ApplyResources(this.tb_resistearth, "tb_resistearth");
-            this.tb_resistearth.Name = "tb_resistearth";
-            this.tb_resistearth.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbEarthResist, "tbEarthResist");
+            this.tbEarthResist.Name = "tbEarthResist";
+            this.tbEarthResist.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // cb_elementtype
+            // cbElementType
             // 
-            resources.ApplyResources(this.cb_elementtype, "cb_elementtype");
-            this.cb_elementtype.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_elementtype.FormattingEnabled = true;
-            this.cb_elementtype.Name = "cb_elementtype";
+            resources.ApplyResources(this.cbElementType, "cbElementType");
+            this.cbElementType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbElementType.FormattingEnabled = true;
+            this.cbElementType.Name = "cbElementType";
             // 
-            // lbl_resistearth
+            // lblEarthResist
             // 
-            resources.ApplyResources(this.lbl_resistearth, "lbl_resistearth");
-            this.lbl_resistearth.Name = "lbl_resistearth";
+            resources.ApplyResources(this.lblEarthResist, "lblEarthResist");
+            this.lblEarthResist.Name = "lblEarthResist";
             // 
-            // lbl_elementtype
+            // lblElementType
             // 
-            resources.ApplyResources(this.lbl_elementtype, "lbl_elementtype");
-            this.lbl_elementtype.Name = "lbl_elementtype";
+            resources.ApplyResources(this.lblElementType, "lblElementType");
+            this.lblElementType.Name = "lblElementType";
             // 
-            // tb_resistwater
+            // tbWaterResist
             // 
-            resources.ApplyResources(this.tb_resistwater, "tb_resistwater");
-            this.tb_resistwater.Name = "tb_resistwater";
-            this.tb_resistwater.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbWaterResist, "tbWaterResist");
+            this.tbWaterResist.Name = "tbWaterResist";
+            this.tbWaterResist.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // lbl_resistwater
+            // lblWaterResist
             // 
-            resources.ApplyResources(this.lbl_resistwater, "lbl_resistwater");
-            this.lbl_resistwater.Name = "lbl_resistwater";
+            resources.ApplyResources(this.lblWaterResist, "lblWaterResist");
+            this.lblWaterResist.Name = "lblWaterResist";
             // 
-            // tb_elementatk
+            // tbElementAtk
             // 
-            resources.ApplyResources(this.tb_elementatk, "tb_elementatk");
-            this.tb_elementatk.Name = "tb_elementatk";
-            this.tb_elementatk.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbElementAtk, "tbElementAtk");
+            this.tbElementAtk.Name = "tbElementAtk";
+            this.tbElementAtk.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // tb_resistwind
+            // tbWindResist
             // 
-            resources.ApplyResources(this.tb_resistwind, "tb_resistwind");
-            this.tb_resistwind.Name = "tb_resistwind";
-            this.tb_resistwind.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbWindResist, "tbWindResist");
+            this.tbWindResist.Name = "tbWindResist";
+            this.tbWindResist.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // lbl_elementatk
+            // lblElementAtk
             // 
-            resources.ApplyResources(this.lbl_elementatk, "lbl_elementatk");
-            this.lbl_elementatk.Name = "lbl_elementatk";
+            resources.ApplyResources(this.lblElementAtk, "lblElementAtk");
+            this.lblElementAtk.Name = "lblElementAtk";
             // 
-            // lbl_resistwind
+            // lblWindResist
             // 
-            resources.ApplyResources(this.lbl_resistwind, "lbl_resistwind");
-            this.lbl_resistwind.Name = "lbl_resistwind";
+            resources.ApplyResources(this.lblWindResist, "lblWindResist");
+            this.lblWindResist.Name = "lblWindResist";
             // 
-            // tb_resistelecricity
+            // tbElectricityResist
             // 
-            resources.ApplyResources(this.tb_resistelecricity, "tb_resistelecricity");
-            this.tb_resistelecricity.Name = "tb_resistelecricity";
-            this.tb_resistelecricity.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbElectricityResist, "tbElectricityResist");
+            this.tbElectricityResist.Name = "tbElectricityResist";
+            this.tbElectricityResist.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // lbl_resistelecricity
+            // lblElectricityResist
             // 
-            resources.ApplyResources(this.lbl_resistelecricity, "lbl_resistelecricity");
-            this.lbl_resistelecricity.Name = "lbl_resistelecricity";
+            resources.ApplyResources(this.lblElectricityResist, "lblElectricityResist");
+            this.lblElectricityResist.Name = "lblElectricityResist";
             // 
-            // tb_resistfire
+            // tbFireResist
             // 
-            resources.ApplyResources(this.tb_resistfire, "tb_resistfire");
-            this.tb_resistfire.Name = "tb_resistfire";
-            this.tb_resistfire.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbFireResist, "tbFireResist");
+            this.tbFireResist.Name = "tbFireResist";
+            this.tbFireResist.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // lbl_resistfire
+            // lblFireResist
             // 
-            resources.ApplyResources(this.lbl_resistfire, "lbl_resistfire");
-            this.lbl_resistfire.Name = "lbl_resistfire";
+            resources.ApplyResources(this.lblFireResist, "lblFireResist");
+            this.lblFireResist.Name = "lblFireResist";
             // 
-            // gb_moverstatsbasic
+            // gbBasicStats
             // 
-            resources.ApplyResources(this.gb_moverstatsbasic, "gb_moverstatsbasic");
-            this.gb_moverstatsbasic.Controls.Add(this.tb_int);
-            this.gb_moverstatsbasic.Controls.Add(this.tb_dex);
-            this.gb_moverstatsbasic.Controls.Add(this.lbl_er);
-            this.gb_moverstatsbasic.Controls.Add(this.lbl_str);
-            this.gb_moverstatsbasic.Controls.Add(this.tb_hr);
-            this.gb_moverstatsbasic.Controls.Add(this.tb_str);
-            this.gb_moverstatsbasic.Controls.Add(this.lbl_hr);
-            this.gb_moverstatsbasic.Controls.Add(this.lbl_sta);
-            this.gb_moverstatsbasic.Controls.Add(this.tb_er);
-            this.gb_moverstatsbasic.Controls.Add(this.tb_sta);
-            this.gb_moverstatsbasic.Controls.Add(this.lbl_int);
-            this.gb_moverstatsbasic.Controls.Add(this.lbl_dex);
-            this.gb_moverstatsbasic.Controls.Add(this.tb_addmp);
-            this.gb_moverstatsbasic.Controls.Add(this.lbl_addhp);
-            this.gb_moverstatsbasic.Controls.Add(this.tb_addhp);
-            this.gb_moverstatsbasic.Controls.Add(this.lbl_addmp);
-            this.gb_moverstatsbasic.Name = "gb_moverstatsbasic";
-            this.gb_moverstatsbasic.TabStop = false;
+            resources.ApplyResources(this.gbBasicStats, "gbBasicStats");
+            this.gbBasicStats.Controls.Add(this.tbInt);
+            this.gbBasicStats.Controls.Add(this.tbDex);
+            this.gbBasicStats.Controls.Add(this.lblEr);
+            this.gbBasicStats.Controls.Add(this.lblStr);
+            this.gbBasicStats.Controls.Add(this.tbHr);
+            this.gbBasicStats.Controls.Add(this.tbStr);
+            this.gbBasicStats.Controls.Add(this.lblHit);
+            this.gbBasicStats.Controls.Add(this.lblSta);
+            this.gbBasicStats.Controls.Add(this.tbEr);
+            this.gbBasicStats.Controls.Add(this.tbSta);
+            this.gbBasicStats.Controls.Add(this.lblInt);
+            this.gbBasicStats.Controls.Add(this.lblDex);
+            this.gbBasicStats.Controls.Add(this.tbMp);
+            this.gbBasicStats.Controls.Add(this.lblHp);
+            this.gbBasicStats.Controls.Add(this.tbHp);
+            this.gbBasicStats.Controls.Add(this.lblMp);
+            this.gbBasicStats.Name = "gbBasicStats";
+            this.gbBasicStats.TabStop = false;
             // 
-            // tb_int
+            // tbInt
             // 
-            resources.ApplyResources(this.tb_int, "tb_int");
-            this.tb_int.Name = "tb_int";
-            this.tb_int.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbInt, "tbInt");
+            this.tbInt.Name = "tbInt";
+            this.tbInt.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // tb_dex
+            // tbDex
             // 
-            resources.ApplyResources(this.tb_dex, "tb_dex");
-            this.tb_dex.Name = "tb_dex";
-            this.tb_dex.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbDex, "tbDex");
+            this.tbDex.Name = "tbDex";
+            this.tbDex.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // lbl_er
+            // lblEr
             // 
-            resources.ApplyResources(this.lbl_er, "lbl_er");
-            this.lbl_er.Name = "lbl_er";
+            resources.ApplyResources(this.lblEr, "lblEr");
+            this.lblEr.Name = "lblEr";
             // 
-            // lbl_str
+            // lblStr
             // 
-            resources.ApplyResources(this.lbl_str, "lbl_str");
-            this.lbl_str.Name = "lbl_str";
+            resources.ApplyResources(this.lblStr, "lblStr");
+            this.lblStr.Name = "lblStr";
             // 
-            // tb_hr
+            // tbHr
             // 
-            resources.ApplyResources(this.tb_hr, "tb_hr");
-            this.tb_hr.Name = "tb_hr";
-            this.tb_hr.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbHr, "tbHr");
+            this.tbHr.Name = "tbHr";
+            this.tbHr.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // tb_str
+            // tbStr
             // 
-            resources.ApplyResources(this.tb_str, "tb_str");
-            this.tb_str.Name = "tb_str";
-            this.tb_str.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbStr, "tbStr");
+            this.tbStr.Name = "tbStr";
+            this.tbStr.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // lbl_hr
+            // lblHit
             // 
-            resources.ApplyResources(this.lbl_hr, "lbl_hr");
-            this.lbl_hr.Name = "lbl_hr";
+            resources.ApplyResources(this.lblHit, "lblHit");
+            this.lblHit.Name = "lblHit";
             // 
-            // lbl_sta
+            // lblSta
             // 
-            resources.ApplyResources(this.lbl_sta, "lbl_sta");
-            this.lbl_sta.Name = "lbl_sta";
+            resources.ApplyResources(this.lblSta, "lblSta");
+            this.lblSta.Name = "lblSta";
             // 
-            // tb_er
+            // tbEr
             // 
-            resources.ApplyResources(this.tb_er, "tb_er");
-            this.tb_er.Name = "tb_er";
-            this.tb_er.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbEr, "tbEr");
+            this.tbEr.Name = "tbEr";
+            this.tbEr.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // tb_sta
+            // tbSta
             // 
-            resources.ApplyResources(this.tb_sta, "tb_sta");
-            this.tb_sta.Name = "tb_sta";
-            this.tb_sta.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbSta, "tbSta");
+            this.tbSta.Name = "tbSta";
+            this.tbSta.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // lbl_int
+            // lblInt
             // 
-            resources.ApplyResources(this.lbl_int, "lbl_int");
-            this.lbl_int.Name = "lbl_int";
+            resources.ApplyResources(this.lblInt, "lblInt");
+            this.lblInt.Name = "lblInt";
             // 
-            // lbl_dex
+            // lblDex
             // 
-            resources.ApplyResources(this.lbl_dex, "lbl_dex");
-            this.lbl_dex.Name = "lbl_dex";
+            resources.ApplyResources(this.lblDex, "lblDex");
+            this.lblDex.Name = "lblDex";
             // 
-            // tb_addmp
+            // tbMp
             // 
-            resources.ApplyResources(this.tb_addmp, "tb_addmp");
-            this.tb_addmp.Name = "tb_addmp";
-            this.tb_addmp.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbMp, "tbMp");
+            this.tbMp.Name = "tbMp";
+            this.tbMp.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // lbl_addhp
+            // lblHp
             // 
-            resources.ApplyResources(this.lbl_addhp, "lbl_addhp");
-            this.lbl_addhp.Name = "lbl_addhp";
+            resources.ApplyResources(this.lblHp, "lblHp");
+            this.lblHp.Name = "lblHp";
             // 
-            // tb_addhp
+            // tbHp
             // 
-            resources.ApplyResources(this.tb_addhp, "tb_addhp");
-            this.tb_addhp.Name = "tb_addhp";
-            this.tb_addhp.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbHp, "tbHp");
+            this.tbHp.Name = "tbHp";
+            this.tbHp.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // lbl_addmp
+            // lblMp
             // 
-            resources.ApplyResources(this.lbl_addmp, "lbl_addmp");
-            this.lbl_addmp.Name = "lbl_addmp";
+            resources.ApplyResources(this.lblMp, "lblMp");
+            this.lblMp.Name = "lblMp";
             // 
-            // gb_monsterstatsmiscs
+            // gbMiscStats
             // 
-            resources.ApplyResources(this.gb_monsterstatsmiscs, "gb_monsterstatsmiscs");
-            this.gb_monsterstatsmiscs.Controls.Add(this.tb_resismgic);
-            this.gb_monsterstatsmiscs.Controls.Add(this.lbl_resismgic);
-            this.gb_monsterstatsmiscs.Controls.Add(this.tb_atkmin);
-            this.gb_monsterstatsmiscs.Controls.Add(this.lbl_atkmin);
-            this.gb_monsterstatsmiscs.Controls.Add(this.lbl_atkmax);
-            this.gb_monsterstatsmiscs.Controls.Add(this.tb_atkmax);
-            this.gb_monsterstatsmiscs.Controls.Add(this.tb_reattackdelay);
-            this.gb_monsterstatsmiscs.Controls.Add(this.lbl_reattackdelay);
-            this.gb_monsterstatsmiscs.Controls.Add(this.lbl_naturalarmor);
-            this.gb_monsterstatsmiscs.Controls.Add(this.tb_naturalarmor);
-            this.gb_monsterstatsmiscs.Controls.Add(this.tb_fspeed);
-            this.gb_monsterstatsmiscs.Controls.Add(this.lbl_speed);
-            this.gb_monsterstatsmiscs.Name = "gb_monsterstatsmiscs";
-            this.gb_monsterstatsmiscs.TabStop = false;
+            resources.ApplyResources(this.gbMiscStats, "gbMiscStats");
+            this.gbMiscStats.Controls.Add(this.tbMagicResist);
+            this.gbMiscStats.Controls.Add(this.lblMagicResist);
+            this.gbMiscStats.Controls.Add(this.tbAtkMin);
+            this.gbMiscStats.Controls.Add(this.lblAtkMin);
+            this.gbMiscStats.Controls.Add(this.lblAtkMax);
+            this.gbMiscStats.Controls.Add(this.tbAtkMax);
+            this.gbMiscStats.Controls.Add(this.tblAttackDelay);
+            this.gbMiscStats.Controls.Add(this.lblAttackDelay);
+            this.gbMiscStats.Controls.Add(this.lblNaturalArmor);
+            this.gbMiscStats.Controls.Add(this.tbNaturalArmor);
+            this.gbMiscStats.Controls.Add(this.tbSpeed);
+            this.gbMiscStats.Controls.Add(this.lblSpeed);
+            this.gbMiscStats.Name = "gbMiscStats";
+            this.gbMiscStats.TabStop = false;
             // 
-            // tb_resismgic
+            // tbMagicResist
             // 
-            resources.ApplyResources(this.tb_resismgic, "tb_resismgic");
-            this.tb_resismgic.Name = "tb_resismgic";
-            this.tb_resismgic.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbMagicResist, "tbMagicResist");
+            this.tbMagicResist.Name = "tbMagicResist";
+            this.tbMagicResist.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // lbl_resismgic
+            // lblMagicResist
             // 
-            resources.ApplyResources(this.lbl_resismgic, "lbl_resismgic");
-            this.lbl_resismgic.Name = "lbl_resismgic";
+            resources.ApplyResources(this.lblMagicResist, "lblMagicResist");
+            this.lblMagicResist.Name = "lblMagicResist";
             // 
-            // tb_atkmin
+            // tbAtkMin
             // 
-            resources.ApplyResources(this.tb_atkmin, "tb_atkmin");
-            this.tb_atkmin.Name = "tb_atkmin";
-            this.tb_atkmin.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbAtkMin, "tbAtkMin");
+            this.tbAtkMin.Name = "tbAtkMin";
+            this.tbAtkMin.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // lbl_atkmin
+            // lblAtkMin
             // 
-            resources.ApplyResources(this.lbl_atkmin, "lbl_atkmin");
-            this.lbl_atkmin.Name = "lbl_atkmin";
+            resources.ApplyResources(this.lblAtkMin, "lblAtkMin");
+            this.lblAtkMin.Name = "lblAtkMin";
             // 
-            // lbl_atkmax
+            // lblAtkMax
             // 
-            resources.ApplyResources(this.lbl_atkmax, "lbl_atkmax");
-            this.lbl_atkmax.Name = "lbl_atkmax";
+            resources.ApplyResources(this.lblAtkMax, "lblAtkMax");
+            this.lblAtkMax.Name = "lblAtkMax";
             // 
-            // tb_atkmax
+            // tbAtkMax
             // 
-            resources.ApplyResources(this.tb_atkmax, "tb_atkmax");
-            this.tb_atkmax.Name = "tb_atkmax";
-            this.tb_atkmax.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbAtkMax, "tbAtkMax");
+            this.tbAtkMax.Name = "tbAtkMax";
+            this.tbAtkMax.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // tb_reattackdelay
+            // tblAttackDelay
             // 
-            resources.ApplyResources(this.tb_reattackdelay, "tb_reattackdelay");
-            this.tb_reattackdelay.Name = "tb_reattackdelay";
+            resources.ApplyResources(this.tblAttackDelay, "tblAttackDelay");
+            this.tblAttackDelay.Name = "tblAttackDelay";
             // 
-            // lbl_reattackdelay
+            // lblAttackDelay
             // 
-            resources.ApplyResources(this.lbl_reattackdelay, "lbl_reattackdelay");
-            this.lbl_reattackdelay.Name = "lbl_reattackdelay";
+            resources.ApplyResources(this.lblAttackDelay, "lblAttackDelay");
+            this.lblAttackDelay.Name = "lblAttackDelay";
             // 
-            // lbl_naturalarmor
+            // lblNaturalArmor
             // 
-            resources.ApplyResources(this.lbl_naturalarmor, "lbl_naturalarmor");
-            this.lbl_naturalarmor.Name = "lbl_naturalarmor";
+            resources.ApplyResources(this.lblNaturalArmor, "lblNaturalArmor");
+            this.lblNaturalArmor.Name = "lblNaturalArmor";
             // 
-            // tb_naturalarmor
+            // tbNaturalArmor
             // 
-            resources.ApplyResources(this.tb_naturalarmor, "tb_naturalarmor");
-            this.tb_naturalarmor.Name = "tb_naturalarmor";
-            this.tb_naturalarmor.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.tbNaturalArmor, "tbNaturalArmor");
+            this.tbNaturalArmor.Name = "tbNaturalArmor";
+            this.tbNaturalArmor.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // tb_fspeed
+            // tbSpeed
             // 
-            resources.ApplyResources(this.tb_fspeed, "tb_fspeed");
-            this.tb_fspeed.Name = "tb_fspeed";
-            this.tb_fspeed.TextChanged += new System.EventHandler(this.FormatFloatTextbox);
+            resources.ApplyResources(this.tbSpeed, "tbSpeed");
+            this.tbSpeed.Name = "tbSpeed";
+            this.tbSpeed.TextChanged += new System.EventHandler(this.FormatFloatTextbox);
             // 
-            // lbl_speed
+            // lblSpeed
             // 
-            resources.ApplyResources(this.lbl_speed, "lbl_speed");
-            this.lbl_speed.Name = "lbl_speed";
+            resources.ApplyResources(this.lblSpeed, "lblSpeed");
+            this.lblSpeed.Name = "lblSpeed";
             // 
-            // ms_main
+            // msMain
             // 
-            resources.ApplyResources(this.ms_main, "ms_main");
-            this.ms_main.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.ms_main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmi_movers,
-            this.fichierToolStripMenuItem,
-            this.optionsToolStripMenuItem});
-            this.ms_main.Name = "ms_main";
+            resources.ApplyResources(this.msMain, "msMain");
+            this.msMain.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiMovers,
+            this.tsmiFile,
+            this.tsmiSettings});
+            this.msMain.Name = "msMain";
             // 
-            // tsmi_movers
+            // tsmiMovers
             // 
-            resources.ApplyResources(this.tsmi_movers, "tsmi_movers");
-            this.tsmi_movers.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmi_moversadd,
-            this.rechercherToolStripMenuItem});
-            this.tsmi_movers.Name = "tsmi_movers";
+            resources.ApplyResources(this.tsmiMovers, "tsmiMovers");
+            this.tsmiMovers.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiMoversAdd,
+            this.tsmiMoversFind});
+            this.tsmiMovers.Name = "tsmiMovers";
             // 
-            // tsmi_moversadd
+            // tsmiMoversAdd
             // 
-            resources.ApplyResources(this.tsmi_moversadd, "tsmi_moversadd");
-            this.tsmi_moversadd.Name = "tsmi_moversadd";
-            this.tsmi_moversadd.Click += new System.EventHandler(this.tsmi_moversadd_Click);
+            resources.ApplyResources(this.tsmiMoversAdd, "tsmiMoversAdd");
+            this.tsmiMoversAdd.Name = "tsmiMoversAdd";
+            this.tsmiMoversAdd.Click += new System.EventHandler(this.TsmiMoversAdd_Click);
             // 
-            // rechercherToolStripMenuItem
+            // tsmiMoversFind
             // 
-            resources.ApplyResources(this.rechercherToolStripMenuItem, "rechercherToolStripMenuItem");
-            this.rechercherToolStripMenuItem.Name = "rechercherToolStripMenuItem";
-            this.rechercherToolStripMenuItem.Click += new System.EventHandler(this.rechercherToolStripMenuItem_Click);
+            resources.ApplyResources(this.tsmiMoversFind, "tsmiMoversFind");
+            this.tsmiMoversFind.Name = "tsmiMoversFind";
+            this.tsmiMoversFind.Click += new System.EventHandler(this.TsmiMoversFind_Click);
             // 
-            // fichierToolStripMenuItem
+            // tsmiFile
             // 
-            resources.ApplyResources(this.fichierToolStripMenuItem, "fichierToolStripMenuItem");
-            this.fichierToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmi_reload,
-            this.tsmi_save});
-            this.fichierToolStripMenuItem.Name = "fichierToolStripMenuItem";
+            resources.ApplyResources(this.tsmiFile, "tsmiFile");
+            this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiFileReload,
+            this.tsmiFileSave});
+            this.tsmiFile.Name = "tsmiFile";
             // 
-            // tsmi_reload
+            // tsmiFileReload
             // 
-            resources.ApplyResources(this.tsmi_reload, "tsmi_reload");
-            this.tsmi_reload.Name = "tsmi_reload";
-            this.tsmi_reload.Click += new System.EventHandler(this.tsmi_reload_Click);
+            resources.ApplyResources(this.tsmiFileReload, "tsmiFileReload");
+            this.tsmiFileReload.Name = "tsmiFileReload";
+            this.tsmiFileReload.Click += new System.EventHandler(this.TsmiFileReload_Click);
             // 
-            // tsmi_save
+            // tsmiFileSave
             // 
-            resources.ApplyResources(this.tsmi_save, "tsmi_save");
-            this.tsmi_save.Name = "tsmi_save";
-            this.tsmi_save.Click += new System.EventHandler(this.tsmi_save_Click);
+            resources.ApplyResources(this.tsmiFileSave, "tsmiFileSave");
+            this.tsmiFileSave.Name = "tsmiFileSave";
+            this.tsmiFileSave.Click += new System.EventHandler(this.TsmiFileSave_Click);
             // 
-            // optionsToolStripMenuItem
+            // tsmiSettings
             // 
-            resources.ApplyResources(this.optionsToolStripMenuItem, "optionsToolStripMenuItem");
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.optionsToolStripMenuItem_Click);
+            resources.ApplyResources(this.tsmiSettings, "tsmiSettings");
+            this.tsmiSettings.Name = "tsmiSettings";
+            this.tsmiSettings.Click += new System.EventHandler(this.TsmiSettings_Click);
             // 
-            // cms_lbmovers
+            // cmsLbMovers
             // 
-            resources.ApplyResources(this.cms_lbmovers, "cms_lbmovers");
-            this.cms_lbmovers.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.cms_lbmovers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmi_moverdelete});
-            this.cms_lbmovers.Name = "cms_lbmovers";
+            resources.ApplyResources(this.cmsLbMovers, "cmsLbMovers");
+            this.cmsLbMovers.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.cmsLbMovers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiMoverDelete});
+            this.cmsLbMovers.Name = "cms_lbmovers";
             // 
-            // tsmi_moverdelete
+            // tsmiMoverDelete
             // 
-            resources.ApplyResources(this.tsmi_moverdelete, "tsmi_moverdelete");
-            this.tsmi_moverdelete.Name = "tsmi_moverdelete";
-            this.tsmi_moverdelete.Click += new System.EventHandler(this.tsmi_moverdelete_Click);
+            resources.ApplyResources(this.tsmiMoverDelete, "tsmiMoverDelete");
+            this.tsmiMoverDelete.Name = "tsmiMoverDelete";
+            this.tsmiMoverDelete.Click += new System.EventHandler(this.TsmiMoverDelete_Click);
             // 
-            // lb_movers
+            // lbMovers
             // 
-            resources.ApplyResources(this.lb_movers, "lb_movers");
-            this.lb_movers.FormattingEnabled = true;
-            this.lb_movers.Name = "lb_movers";
-            this.lb_movers.SelectedIndexChanged += new System.EventHandler(this.lb_movers_SelectedIndexChanged);
-            this.lb_movers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lb_movers_KeyDown);
-            this.lb_movers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lb_movers_MouseDown);
+            resources.ApplyResources(this.lbMovers, "lbMovers");
+            this.lbMovers.FormattingEnabled = true;
+            this.lbMovers.Name = "lbMovers";
+            this.lbMovers.SelectedIndexChanged += new System.EventHandler(this.LbMovers_SelectedIndexChanged);
+            this.lbMovers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LbMovers_KeyDown);
+            this.lbMovers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LbMovers_MouseDown);
             // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tc_main);
-            this.Controls.Add(this.lb_movers);
-            this.Controls.Add(this.ms_main);
+            this.Controls.Add(this.tcMain);
+            this.Controls.Add(this.lbMovers);
+            this.Controls.Add(this.msMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MainMenuStrip = this.ms_main;
+            this.MainMenuStrip = this.msMain;
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Shown += new System.EventHandler(this.MainForm_Shown);
-            this.tc_main.ResumeLayout(false);
-            this.tp_general.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.tp_monster.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.gb_monsterstatselements.ResumeLayout(false);
-            this.gb_monsterstatselements.PerformLayout();
-            this.gb_moverstatsbasic.ResumeLayout(false);
-            this.gb_moverstatsbasic.PerformLayout();
-            this.gb_monsterstatsmiscs.ResumeLayout(false);
-            this.gb_monsterstatsmiscs.PerformLayout();
-            this.ms_main.ResumeLayout(false);
-            this.ms_main.PerformLayout();
-            this.cms_lbmovers.ResumeLayout(false);
+            this.tcMain.ResumeLayout(false);
+            this.tpGeneral.ResumeLayout(false);
+            this.gbConfiguration.ResumeLayout(false);
+            this.gbModel.ResumeLayout(false);
+            this.gbModel.PerformLayout();
+            this.gbMisc.ResumeLayout(false);
+            this.gbMisc.PerformLayout();
+            this.gbMain.ResumeLayout(false);
+            this.gbMain.PerformLayout();
+            this.tpMonster.ResumeLayout(false);
+            this.gbStats.ResumeLayout(false);
+            this.gbStatsElements.ResumeLayout(false);
+            this.gbStatsElements.PerformLayout();
+            this.gbBasicStats.ResumeLayout(false);
+            this.gbBasicStats.PerformLayout();
+            this.gbMiscStats.ResumeLayout(false);
+            this.gbMiscStats.PerformLayout();
+            this.msMain.ResumeLayout(false);
+            this.msMain.PerformLayout();
+            this.cmsLbMovers.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.TabControl tc_main;
-        private System.Windows.Forms.MenuStrip ms_main;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_movers;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_moversadd;
-        private System.Windows.Forms.ContextMenuStrip cms_lbmovers;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_moverdelete;
-        private System.Windows.Forms.ToolStripMenuItem fichierToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_reload;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_save;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rechercherToolStripMenuItem;
-        private System.Windows.Forms.TabPage tp_general;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox cb_ModelBrace;
-        private System.Windows.Forms.TextBox tb_ModelScale;
-        private System.Windows.Forms.TextBox tb_ModelName;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.ComboBox cb_monsterai;
-        private System.Windows.Forms.Label lbl_monsterai;
-        private System.Windows.Forms.TextBox tb_expvalue;
-        private System.Windows.Forms.Label lbl_expvalue;
-        private System.Windows.Forms.ComboBox cb_belligerence;
-        private System.Windows.Forms.Label lbl_belligerence;
-        private System.Windows.Forms.TextBox tb_level;
-        private System.Windows.Forms.Label lbl_level;
-        private System.Windows.Forms.ComboBox cb_class;
-        private System.Windows.Forms.Label lbl_class;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.TextBox tb_name;
-        private System.Windows.Forms.ComboBox cb_type;
-        private System.Windows.Forms.Label lbl_type;
-        private System.Windows.Forms.TextBox tb_identifier;
-        private System.Windows.Forms.Label lbl_name;
-        private System.Windows.Forms.Label lbl_identifier;
-        private System.Windows.Forms.TabPage tp_monster;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox gb_monsterstatselements;
-        private System.Windows.Forms.TextBox tb_resistearth;
-        private System.Windows.Forms.ComboBox cb_elementtype;
-        private System.Windows.Forms.Label lbl_resistearth;
-        private System.Windows.Forms.Label lbl_elementtype;
-        private System.Windows.Forms.TextBox tb_resistwater;
-        private System.Windows.Forms.Label lbl_resistwater;
-        private System.Windows.Forms.TextBox tb_elementatk;
-        private System.Windows.Forms.TextBox tb_resistwind;
-        private System.Windows.Forms.Label lbl_elementatk;
-        private System.Windows.Forms.Label lbl_resistwind;
-        private System.Windows.Forms.TextBox tb_resistelecricity;
-        private System.Windows.Forms.Label lbl_resistelecricity;
-        private System.Windows.Forms.TextBox tb_resistfire;
-        private System.Windows.Forms.Label lbl_resistfire;
-        private System.Windows.Forms.GroupBox gb_moverstatsbasic;
-        private System.Windows.Forms.TextBox tb_int;
-        private System.Windows.Forms.TextBox tb_dex;
-        private System.Windows.Forms.Label lbl_er;
-        private System.Windows.Forms.Label lbl_str;
-        private System.Windows.Forms.TextBox tb_hr;
-        private System.Windows.Forms.TextBox tb_str;
-        private System.Windows.Forms.Label lbl_hr;
-        private System.Windows.Forms.Label lbl_sta;
-        private System.Windows.Forms.TextBox tb_er;
-        private System.Windows.Forms.TextBox tb_sta;
-        private System.Windows.Forms.Label lbl_int;
-        private System.Windows.Forms.Label lbl_dex;
-        private System.Windows.Forms.TextBox tb_addmp;
-        private System.Windows.Forms.Label lbl_addhp;
-        private System.Windows.Forms.TextBox tb_addhp;
-        private System.Windows.Forms.Label lbl_addmp;
-        private System.Windows.Forms.GroupBox gb_monsterstatsmiscs;
-        private System.Windows.Forms.TextBox tb_resismgic;
-        private System.Windows.Forms.Label lbl_resismgic;
-        private System.Windows.Forms.TextBox tb_atkmin;
-        private System.Windows.Forms.Label lbl_atkmin;
-        private System.Windows.Forms.Label lbl_atkmax;
-        private System.Windows.Forms.TextBox tb_atkmax;
-        private System.Windows.Forms.TextBox tb_reattackdelay;
-        private System.Windows.Forms.Label lbl_reattackdelay;
-        private System.Windows.Forms.Label lbl_naturalarmor;
-        private System.Windows.Forms.TextBox tb_naturalarmor;
-        private System.Windows.Forms.TextBox tb_fspeed;
-        private System.Windows.Forms.Label lbl_speed;
-        private System.Windows.Forms.ListBox lb_movers;
-        private System.Windows.Forms.Button bt_motions;
-        private System.Windows.Forms.Button bt_SelectModelFile;
-        private System.Windows.Forms.Label lb_IdentifierAlreadyUsed;
+        private System.Windows.Forms.TabControl tcMain;
+        private System.Windows.Forms.MenuStrip msMain;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMovers;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMoversAdd;
+        private System.Windows.Forms.ContextMenuStrip cmsLbMovers;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMoverDelete;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFileReload;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFileSave;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSettings;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMoversFind;
+        private System.Windows.Forms.TabPage tpGeneral;
+        private System.Windows.Forms.GroupBox gbConfiguration;
+        private System.Windows.Forms.GroupBox gbModel;
+        private System.Windows.Forms.ComboBox cbModelBrace;
+        private System.Windows.Forms.TextBox tbModelScale;
+        private System.Windows.Forms.TextBox tbModelFile;
+        private System.Windows.Forms.Label lblModelBrace;
+        private System.Windows.Forms.Label lblModelScale;
+        private System.Windows.Forms.Label lblModelFile;
+        private System.Windows.Forms.GroupBox gbMisc;
+        private System.Windows.Forms.ComboBox cbAI;
+        private System.Windows.Forms.Label lblAI;
+        private System.Windows.Forms.TextBox tbExperience;
+        private System.Windows.Forms.Label lblExperience;
+        private System.Windows.Forms.ComboBox cbBelligerence;
+        private System.Windows.Forms.Label lblBelligerence;
+        private System.Windows.Forms.TextBox tbLevel;
+        private System.Windows.Forms.Label lblLevel;
+        private System.Windows.Forms.ComboBox cbClass;
+        private System.Windows.Forms.Label lblClass;
+        private System.Windows.Forms.GroupBox gbMain;
+        private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.ComboBox cbType;
+        private System.Windows.Forms.Label lblType;
+        private System.Windows.Forms.TextBox tbIdentifier;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.Label lblIdentifier;
+        private System.Windows.Forms.TabPage tpMonster;
+        private System.Windows.Forms.GroupBox gbStats;
+        private System.Windows.Forms.GroupBox gbStatsElements;
+        private System.Windows.Forms.TextBox tbEarthResist;
+        private System.Windows.Forms.ComboBox cbElementType;
+        private System.Windows.Forms.Label lblEarthResist;
+        private System.Windows.Forms.Label lblElementType;
+        private System.Windows.Forms.TextBox tbWaterResist;
+        private System.Windows.Forms.Label lblWaterResist;
+        private System.Windows.Forms.TextBox tbElementAtk;
+        private System.Windows.Forms.TextBox tbWindResist;
+        private System.Windows.Forms.Label lblElementAtk;
+        private System.Windows.Forms.Label lblWindResist;
+        private System.Windows.Forms.TextBox tbElectricityResist;
+        private System.Windows.Forms.Label lblElectricityResist;
+        private System.Windows.Forms.TextBox tbFireResist;
+        private System.Windows.Forms.Label lblFireResist;
+        private System.Windows.Forms.GroupBox gbBasicStats;
+        private System.Windows.Forms.TextBox tbInt;
+        private System.Windows.Forms.TextBox tbDex;
+        private System.Windows.Forms.Label lblEr;
+        private System.Windows.Forms.Label lblStr;
+        private System.Windows.Forms.TextBox tbHr;
+        private System.Windows.Forms.TextBox tbStr;
+        private System.Windows.Forms.Label lblHit;
+        private System.Windows.Forms.Label lblSta;
+        private System.Windows.Forms.TextBox tbEr;
+        private System.Windows.Forms.TextBox tbSta;
+        private System.Windows.Forms.Label lblInt;
+        private System.Windows.Forms.Label lblDex;
+        private System.Windows.Forms.TextBox tbMp;
+        private System.Windows.Forms.Label lblHp;
+        private System.Windows.Forms.TextBox tbHp;
+        private System.Windows.Forms.Label lblMp;
+        private System.Windows.Forms.GroupBox gbMiscStats;
+        private System.Windows.Forms.TextBox tbMagicResist;
+        private System.Windows.Forms.Label lblMagicResist;
+        private System.Windows.Forms.TextBox tbAtkMin;
+        private System.Windows.Forms.Label lblAtkMin;
+        private System.Windows.Forms.Label lblAtkMax;
+        private System.Windows.Forms.TextBox tbAtkMax;
+        private System.Windows.Forms.TextBox tblAttackDelay;
+        private System.Windows.Forms.Label lblAttackDelay;
+        private System.Windows.Forms.Label lblNaturalArmor;
+        private System.Windows.Forms.TextBox tbNaturalArmor;
+        private System.Windows.Forms.TextBox tbSpeed;
+        private System.Windows.Forms.Label lblSpeed;
+        private System.Windows.Forms.ListBox lbMovers;
+        private System.Windows.Forms.Button btnMotions;
+        private System.Windows.Forms.Button btnSelectModelFile;
+        private System.Windows.Forms.Label lblIdentifierAlreadyUsed;
     }
 }
 

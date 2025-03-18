@@ -117,243 +117,644 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="bt_motions.Text" xml:space="preserve">
-    <value>Animations</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tpGeneral.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 114</value>
+  <data name="tpGeneral.Size" type="System.Drawing.Size, System.Drawing">
+    <value>461, 569</value>
   </data>
-  <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 13</value>
-  </data>
-  <data name="label3.Text" xml:space="preserve">
-    <value>Dossier :</value>
-  </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>117, 82</value>
-  </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 13</value>
-  </data>
-  <data name="label2.Text" xml:space="preserve">
-    <value>Échelle :</value>
-  </data>
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 48</value>
-  </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 13</value>
-  </data>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Fichier :</value>
-  </data>
-  <data name="groupBox1.Text" xml:space="preserve">
-    <value>Modèle</value>
-  </data>
-  <data name="lbl_expvalue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 132</value>
-  </data>
-  <data name="lbl_expvalue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
-  </data>
-  <data name="lbl_expvalue.Text" xml:space="preserve">
-    <value>Expérience :</value>
-  </data>
-  <data name="lbl_level.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 79</value>
-  </data>
-  <data name="lbl_level.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 13</value>
-  </data>
-  <data name="lbl_level.Text" xml:space="preserve">
-    <value>Niveau :</value>
-  </data>
-  <data name="lbl_class.Text" xml:space="preserve">
-    <value>Rang :</value>
-  </data>
-  <data name="groupBox5.Text" xml:space="preserve">
-    <value>Divers</value>
-  </data>
-  <data name="lb_IdentifierAlreadyUsed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
-  </data>
-  <data name="lb_IdentifierAlreadyUsed.Text" xml:space="preserve">
-    <value>Déjà utilisé</value>
-  </data>
-  <data name="lbl_name.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 13</value>
-  </data>
-  <data name="lbl_name.Text" xml:space="preserve">
-    <value>Nom :</value>
-  </data>
-  <data name="lbl_identifier.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
-  </data>
-  <data name="lbl_identifier.Text" xml:space="preserve">
-    <value>Identifiant :</value>
-  </data>
-  <data name="groupBox4.Text" xml:space="preserve">
-    <value>Principal</value>
-  </data>
-  <data name="tp_general.Text" xml:space="preserve">
+  <data name="tpGeneral.Text" xml:space="preserve">
     <value>Général</value>
   </data>
-  <data name="lbl_resistearth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>197, 125</value>
+  <data name="tpMonster.Size" type="System.Drawing.Size, System.Drawing">
+    <value>461, 569</value>
   </data>
-  <data name="lbl_resistearth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 13</value>
-  </data>
-  <data name="lbl_resistearth.Text" xml:space="preserve">
-    <value>Rés. Terre :</value>
-  </data>
-  <data name="lbl_resistwater.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 81</value>
-  </data>
-  <data name="lbl_resistwater.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 13</value>
-  </data>
-  <data name="lbl_resistwater.Text" xml:space="preserve">
-    <value>Rés. Eau :</value>
-  </data>
-  <data name="lbl_elementatk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>202, 44</value>
-  </data>
-  <data name="lbl_elementatk.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 13</value>
-  </data>
-  <data name="lbl_elementatk.Text" xml:space="preserve">
-    <value>Valeur :</value>
-  </data>
-  <data name="lbl_resistwind.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 125</value>
-  </data>
-  <data name="lbl_resistwind.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
-  </data>
-  <data name="lbl_resistwind.Text" xml:space="preserve">
-    <value>Rés. Air :</value>
-  </data>
-  <data name="lbl_resistelecricity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, 164</value>
-  </data>
-  <data name="lbl_resistelecricity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>62, 13</value>
-  </data>
-  <data name="lbl_resistelecricity.Text" xml:space="preserve">
-    <value>Rés. Elec. :</value>
-  </data>
-  <data name="lbl_resistfire.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 77</value>
-  </data>
-  <data name="lbl_resistfire.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 13</value>
-  </data>
-  <data name="lbl_resistfire.Text" xml:space="preserve">
-    <value>Rés. Feu :</value>
-  </data>
-  <data name="gb_monsterstatselements.Text" xml:space="preserve">
-    <value>Elementaires</value>
-  </data>
-  <data name="lbl_er.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 84</value>
-  </data>
-  <data name="lbl_er.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
-  </data>
-  <data name="lbl_er.Text" xml:space="preserve">
-    <value>Esquive :</value>
-  </data>
-  <data name="lbl_str.Text" xml:space="preserve">
-    <value>FOR :</value>
-  </data>
-  <data name="lbl_hr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 84</value>
-  </data>
-  <data name="lbl_hr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 13</value>
-  </data>
-  <data name="lbl_hr.Text" xml:space="preserve">
-    <value>Toucher :</value>
-  </data>
-  <data name="lbl_sta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>36, 13</value>
-  </data>
-  <data name="lbl_sta.Text" xml:space="preserve">
-    <value>END :</value>
-  </data>
-  <data name="gb_moverstatsbasic.Text" xml:space="preserve">
-    <value>Basiques</value>
-  </data>
-  <data name="lbl_resismgic.Text" xml:space="preserve">
-    <value>Rés. Magi. :</value>
-  </data>
-  <data name="lbl_reattackdelay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 68</value>
-  </data>
-  <data name="lbl_reattackdelay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 13</value>
-  </data>
-  <data name="lbl_reattackdelay.Text" xml:space="preserve">
-    <value>Délai d'atk :</value>
-  </data>
-  <data name="lbl_naturalarmor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>31, 26</value>
-  </data>
-  <data name="lbl_naturalarmor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>46, 13</value>
-  </data>
-  <data name="lbl_naturalarmor.Text" xml:space="preserve">
-    <value>Armure :</value>
-  </data>
-  <data name="lbl_speed.Text" xml:space="preserve">
-    <value>Dépla. :</value>
-  </data>
-  <data name="gb_monsterstatsmiscs.Text" xml:space="preserve">
-    <value>Divers</value>
-  </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Statistiques</value>
-  </data>
-  <data name="tp_monster.Text" xml:space="preserve">
+  <data name="tpMonster.Text" xml:space="preserve">
     <value>Monstre</value>
   </data>
-  <data name="tsmi_moversadd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 22</value>
+  <data name="tcMain.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
-  <data name="tsmi_moversadd.Text" xml:space="preserve">
+  <data name="tcMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>469, 595</value>
+  </data>
+  <data name="gbConfiguration.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="gbConfiguration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>455, 563</value>
+  </data>
+  <data name="gbConfiguration.Text" xml:space="preserve">
+    <value>Configuration</value>
+  </data>
+  <data name="gbModel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>417, 186</value>
+  </data>
+  <data name="gbModel.Text" xml:space="preserve">
+    <value>Modèle</value>
+  </data>
+  <data name="btnSelectModelFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>27, 23</value>
+  </data>
+  <data name="btnSelectModelFile.Text" xml:space="preserve">
+    <value>...</value>
+  </data>
+  <data name="btnMotions.Text" xml:space="preserve">
+    <value>Animations</value>
+  </data>
+  <data name="cbModelBrace.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="cbModelBrace.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 21</value>
+  </data>
+  <data name="tbModelScale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="tbModelFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblModelBrace.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblModelBrace.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblModelBrace.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="lblModelBrace.Text" xml:space="preserve">
+    <value>Dossier :</value>
+  </data>
+  <data name="lblModelScale.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblModelScale.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblModelScale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="lblModelScale.Text" xml:space="preserve">
+    <value>Échelle :</value>
+  </data>
+  <data name="lblModelFile.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblModelFile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblModelFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 13</value>
+  </data>
+  <data name="lblModelFile.Text" xml:space="preserve">
+    <value>Fichier :</value>
+  </data>
+  <data name="gbMisc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>417, 171</value>
+  </data>
+  <data name="gbMisc.Text" xml:space="preserve">
+    <value>Divers</value>
+  </data>
+  <data name="cbAI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 21</value>
+  </data>
+  <data name="lblAI.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAI.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblAI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 13</value>
+  </data>
+  <data name="lblAI.Text" xml:space="preserve">
+    <value>AI :</value>
+  </data>
+  <data name="tbExperience.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="lblExperience.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblExperience.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblExperience.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 13</value>
+  </data>
+  <data name="lblExperience.Text" xml:space="preserve">
+    <value>Expérience :</value>
+  </data>
+  <data name="cbBelligerence.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 21</value>
+  </data>
+  <data name="lblBelligerence.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblBelligerence.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblBelligerence.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 13</value>
+  </data>
+  <data name="lblBelligerence.Text" xml:space="preserve">
+    <value>Belligerence :</value>
+  </data>
+  <data name="tbLevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="lblLevel.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblLevel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblLevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="lblLevel.Text" xml:space="preserve">
+    <value>Niveau :</value>
+  </data>
+  <data name="cbClass.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 21</value>
+  </data>
+  <data name="lblClass.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblClass.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblClass.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblClass.Text" xml:space="preserve">
+    <value>Rang :</value>
+  </data>
+  <data name="gbMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>417, 169</value>
+  </data>
+  <data name="gbMain.Text" xml:space="preserve">
+    <value>Principal</value>
+  </data>
+  <data name="lblIdentifierAlreadyUsed.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblIdentifierAlreadyUsed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 13</value>
+  </data>
+  <data name="lblIdentifierAlreadyUsed.Text" xml:space="preserve">
+    <value>Déjà utilisé</value>
+  </data>
+  <data name="lblIdentifierAlreadyUsed.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="tbName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 20</value>
+  </data>
+  <data name="cbType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>172, 21</value>
+  </data>
+  <data name="lblType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 13</value>
+  </data>
+  <data name="lblType.Text" xml:space="preserve">
+    <value>Type :</value>
+  </data>
+  <data name="tbIdentifier.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 20</value>
+  </data>
+  <data name="lblName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
+  </data>
+  <data name="lblName.Text" xml:space="preserve">
+    <value>Nom :</value>
+  </data>
+  <data name="lblIdentifier.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblIdentifier.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblIdentifier.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 13</value>
+  </data>
+  <data name="lblIdentifier.Text" xml:space="preserve">
+    <value>Identifiant :</value>
+  </data>
+  <data name="gbStats.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="gbStats.Size" type="System.Drawing.Size, System.Drawing">
+    <value>461, 569</value>
+  </data>
+  <data name="gbStats.Text" xml:space="preserve">
+    <value>Statistiques</value>
+  </data>
+  <data name="gbStatsElements.Size" type="System.Drawing.Size, System.Drawing">
+    <value>443, 201</value>
+  </data>
+  <data name="gbStatsElements.Text" xml:space="preserve">
+    <value>Elementaires</value>
+  </data>
+  <data name="tbEarthResist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 20</value>
+  </data>
+  <data name="cbElementType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 21</value>
+  </data>
+  <data name="lblEarthResist.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblEarthResist.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblEarthResist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="lblEarthResist.Text" xml:space="preserve">
+    <value>Rés. Terre :</value>
+  </data>
+  <data name="lblElementType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblElementType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblElementType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 13</value>
+  </data>
+  <data name="lblElementType.Text" xml:space="preserve">
+    <value>Element :</value>
+  </data>
+  <data name="tbWaterResist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 20</value>
+  </data>
+  <data name="lblWaterResist.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblWaterResist.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblWaterResist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>57, 13</value>
+  </data>
+  <data name="lblWaterResist.Text" xml:space="preserve">
+    <value>Rés. Eau :</value>
+  </data>
+  <data name="tbElementAtk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 20</value>
+  </data>
+  <data name="tbWindResist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 20</value>
+  </data>
+  <data name="lblElementAtk.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblElementAtk.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblElementAtk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>43, 13</value>
+  </data>
+  <data name="lblElementAtk.Text" xml:space="preserve">
+    <value>Valeur :</value>
+  </data>
+  <data name="lblWindResist.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblWindResist.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblWindResist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 13</value>
+  </data>
+  <data name="lblWindResist.Text" xml:space="preserve">
+    <value>Rés. Air :</value>
+  </data>
+  <data name="tbElectricityResist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 20</value>
+  </data>
+  <data name="lblElectricityResist.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblElectricityResist.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblElectricityResist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 13</value>
+  </data>
+  <data name="lblElectricityResist.Text" xml:space="preserve">
+    <value>Rés. Elec. :</value>
+  </data>
+  <data name="tbFireResist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 20</value>
+  </data>
+  <data name="lblFireResist.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFireResist.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblFireResist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 13</value>
+  </data>
+  <data name="lblFireResist.Text" xml:space="preserve">
+    <value>Rés. Feu :</value>
+  </data>
+  <data name="gbBasicStats.Size" type="System.Drawing.Size, System.Drawing">
+    <value>444, 152</value>
+  </data>
+  <data name="gbBasicStats.Text" xml:space="preserve">
+    <value>Basiques</value>
+  </data>
+  <data name="tbInt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 20</value>
+  </data>
+  <data name="tbDex.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 20</value>
+  </data>
+  <data name="lblEr.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblEr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblEr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 13</value>
+  </data>
+  <data name="lblEr.Text" xml:space="preserve">
+    <value>Esquive :</value>
+  </data>
+  <data name="lblStr.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblStr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblStr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
+  </data>
+  <data name="lblStr.Text" xml:space="preserve">
+    <value>FOR :</value>
+  </data>
+  <data name="tbHr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 20</value>
+  </data>
+  <data name="tbStr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 20</value>
+  </data>
+  <data name="lblHit.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblHit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblHit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 13</value>
+  </data>
+  <data name="lblHit.Text" xml:space="preserve">
+    <value>Toucher :</value>
+  </data>
+  <data name="lblSta.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSta.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSta.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 13</value>
+  </data>
+  <data name="lblSta.Text" xml:space="preserve">
+    <value>END :</value>
+  </data>
+  <data name="tbEr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 20</value>
+  </data>
+  <data name="tbSta.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 20</value>
+  </data>
+  <data name="lblInt.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblInt.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblInt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 13</value>
+  </data>
+  <data name="lblInt.Text" xml:space="preserve">
+    <value>INT :</value>
+  </data>
+  <data name="lblDex.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDex.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDex.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
+  </data>
+  <data name="lblDex.Text" xml:space="preserve">
+    <value>DEX :</value>
+  </data>
+  <data name="tbMp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 20</value>
+  </data>
+  <data name="lblHp.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblHp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblHp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 13</value>
+  </data>
+  <data name="lblHp.Text" xml:space="preserve">
+    <value>HP :</value>
+  </data>
+  <data name="tbHp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 20</value>
+  </data>
+  <data name="lblMp.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 13</value>
+  </data>
+  <data name="lblMp.Text" xml:space="preserve">
+    <value>MP :</value>
+  </data>
+  <data name="gbMiscStats.Size" type="System.Drawing.Size, System.Drawing">
+    <value>443, 184</value>
+  </data>
+  <data name="gbMiscStats.Text" xml:space="preserve">
+    <value>Divers</value>
+  </data>
+  <data name="tbMagicResist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 20</value>
+  </data>
+  <data name="lblMagicResist.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMagicResist.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMagicResist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 13</value>
+  </data>
+  <data name="lblMagicResist.Text" xml:space="preserve">
+    <value>Rés. Magi. :</value>
+  </data>
+  <data name="tbAtkMin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 20</value>
+  </data>
+  <data name="lblAtkMin.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAtkMin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblAtkMin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="lblAtkMin.Text" xml:space="preserve">
+    <value>Atk min :</value>
+  </data>
+  <data name="lblAtkMax.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAtkMax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblAtkMax.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 13</value>
+  </data>
+  <data name="lblAtkMax.Text" xml:space="preserve">
+    <value>Atk max :</value>
+  </data>
+  <data name="tbAtkMax.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 20</value>
+  </data>
+  <data name="tblAttackDelay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 20</value>
+  </data>
+  <data name="lblAttackDelay.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAttackDelay.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblAttackDelay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="lblAttackDelay.Text" xml:space="preserve">
+    <value>Délai d'atk :</value>
+  </data>
+  <data name="lblNaturalArmor.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNaturalArmor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblNaturalArmor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
+  </data>
+  <data name="lblNaturalArmor.Text" xml:space="preserve">
+    <value>Armure :</value>
+  </data>
+  <data name="tbNaturalArmor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 20</value>
+  </data>
+  <data name="tbSpeed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 20</value>
+  </data>
+  <data name="lblSpeed.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSpeed.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSpeed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 13</value>
+  </data>
+  <data name="lblSpeed.Text" xml:space="preserve">
+    <value>Dépla. :</value>
+  </data>
+  <data name="msMain.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 1, 0, 1</value>
+  </data>
+  <data name="msMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>690, 24</value>
+  </data>
+  <data name="msMain.Text" xml:space="preserve">
+    <value>Movers</value>
+  </data>
+  <data name="tsmiMovers.Text" xml:space="preserve">
+    <value>Movers</value>
+  </data>
+  <data name="tsmiMoversAdd.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+P</value>
+  </data>
+  <data name="tsmiMoversAdd.Text" xml:space="preserve">
     <value>Ajouter</value>
   </data>
-  <data name="rechercherToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 22</value>
+  <data name="tsmiMoversFind.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+F</value>
   </data>
-  <data name="rechercherToolStripMenuItem.Text" xml:space="preserve">
+  <data name="tsmiMoversFind.Text" xml:space="preserve">
     <value>Rechercher</value>
   </data>
-  <data name="tsmi_reload.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
-  </data>
-  <data name="tsmi_reload.Text" xml:space="preserve">
-    <value>Recharger</value>
-  </data>
-  <data name="tsmi_save.Size" type="System.Drawing.Size, System.Drawing">
-    <value>179, 22</value>
-  </data>
-  <data name="tsmi_save.Text" xml:space="preserve">
-    <value>Sauvegarder</value>
-  </data>
-  <data name="fichierToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 22</value>
-  </data>
-  <data name="fichierToolStripMenuItem.Text" xml:space="preserve">
+  <data name="tsmiFile.Text" xml:space="preserve">
     <value>Fichier</value>
   </data>
-  <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 22</value>
+  <data name="tsmiFileReload.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+R</value>
   </data>
-  <data name="optionsToolStripMenuItem.Text" xml:space="preserve">
+  <data name="tsmiFileReload.Text" xml:space="preserve">
+    <value>Recharger</value>
+  </data>
+  <data name="tsmiFileSave.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+S</value>
+  </data>
+  <data name="tsmiFileSave.Text" xml:space="preserve">
+    <value>Sauvegarder</value>
+  </data>
+  <data name="tsmiSettings.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+O</value>
+  </data>
+  <data name="tsmiSettings.Text" xml:space="preserve">
     <value>Paramètres</value>
+  </data>
+  <data name="tsmiMoverDelete.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="cmsLbMovers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 48</value>
+  </data>
+  <data name="lbMovers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="lbMovers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 595</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

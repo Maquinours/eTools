@@ -117,31 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;tb_addhp.Parent" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
-  </data>
-  <data name="&gt;&gt;tp_monster.Parent" xml:space="preserve">
-    <value>tc_main</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;tb_addhp.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
+  </data>
+  <data name="&gt;&gt;lblName.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="lbl_resistfire.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="groupBox2.Text" xml:space="preserve">
-    <value>Stats</value>
+  <data name="&gt;&gt;tbIdentifier.Parent" xml:space="preserve">
+    <value>gbMain</value>
   </data>
-  <data name="&gt;&gt;tb_str.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lbl_elementtype.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 13</value>
   </data>
   <data name="&gt;&gt;optionsToolStripMenuItem.Name" xml:space="preserve">
     <value>optionsToolStripMenuItem</value>
   </data>
+  <data name="&gt;&gt;lblEr.Name" xml:space="preserve">
+    <value>lblEr</value>
+  </data>
   <data name="tp_general.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="lbl_sta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+  <data name="btMotions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="lbl_sta.Location" type="System.Drawing.Point, System.Drawing">
     <value>30, 58</value>
@@ -155,38 +161,71 @@
   <data name="lbl_sta.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
+  <data name="&gt;&gt;lbl_addmp.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;lblAI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbHr.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
+  </data>
   <data name="tb_level.Size" type="System.Drawing.Size, System.Drawing">
     <value>146, 20</value>
   </data>
-  <data name="lbl_dex.Text" xml:space="preserve">
-    <value>DEX :</value>
+  <data name="lblElectricityResist.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
   </data>
-  <data name="lbl_elementtype.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;tbName.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbExperience.TabIndex" type="System.Int32, mscorlib">
+    <value>74</value>
+  </data>
+  <data name="&gt;&gt;lbl_sta.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
+  </data>
+  <data name="&gt;&gt;btnMotions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="groupBox5.Size" type="System.Drawing.Size, System.Drawing">
     <value>417, 171</value>
   </data>
   <data name="&gt;&gt;label1.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gbModel</value>
   </data>
   <data name="&gt;&gt;cb_ModelBrace.Name" xml:space="preserve">
     <value>cb_ModelBrace</value>
   </data>
-  <data name="&gt;&gt;tb_sta.Name" xml:space="preserve">
-    <value>tb_sta</value>
+  <data name="tbMagicResist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>281, 26</value>
   </data>
   <data name="&gt;&gt;lbl_name.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tb_expvalue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
+  <data name="&gt;&gt;gbStats.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblNaturalArmor.TabIndex" type="System.Int32, mscorlib">
+    <value>57</value>
+  </data>
+  <data name="&gt;&gt;tcMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblModelFile.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="tb_addmp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 20</value>
   </data>
   <data name="&gt;&gt;lbl_type.Parent" xml:space="preserve">
-    <value>groupBox4</value>
+    <value>gbMain</value>
   </data>
   <data name="tb_atkmax.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>
+  </data>
+  <data name="&gt;&gt;lblSta.Name" xml:space="preserve">
+    <value>lblSta</value>
   </data>
   <data name="&gt;&gt;tb_er.ZOrder" xml:space="preserve">
     <value>8</value>
@@ -194,8 +233,14 @@
   <data name="&gt;&gt;tb_sta.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="lblExperience.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 132</value>
+  </data>
   <data name="bt_SelectModelFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>27, 23</value>
+  </data>
+  <data name="&gt;&gt;btnSelectModelFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbl_name.Name" xml:space="preserve">
     <value>lbl_name</value>
@@ -206,14 +251,26 @@
   <data name="lbl_type.Text" xml:space="preserve">
     <value>Type :</value>
   </data>
+  <data name="&gt;&gt;lblElementType.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;gbMiscStats.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="lbl_resistfire.Size" type="System.Drawing.Size, System.Drawing">
     <value>52, 13</value>
+  </data>
+  <data name="&gt;&gt;lblAI.Parent" xml:space="preserve">
+    <value>gbMisc</value>
   </data>
   <data name="bt_motions.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="lbl_er.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="&gt;&gt;tbExperience.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lbl_elementatk.Text" xml:space="preserve">
     <value>Value :</value>
@@ -224,14 +281,17 @@
   <data name="&gt;&gt;tb_identifier.Name" xml:space="preserve">
     <value>tb_identifier</value>
   </data>
-  <data name="lbl_name.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;tbStr.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;lblEr.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
   </data>
   <data name="lbl_resistearth.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
+  </data>
+  <data name="&gt;&gt;tbWaterResist.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="lbl_atkmax.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
@@ -239,11 +299,17 @@
   <data name="&gt;&gt;cb_monsterai.Parent" xml:space="preserve">
     <value>groupBox5</value>
   </data>
-  <data name="&gt;&gt;fichierToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbModelScale.Parent" xml:space="preserve">
+    <value>gbModel</value>
+  </data>
+  <data name="&gt;&gt;gbStr.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
   </data>
   <data name="&gt;&gt;tb_hr.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblHp.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
   </data>
   <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
     <value>24, 19</value>
@@ -257,20 +323,32 @@
   <data name="lbl_resistearth.Location" type="System.Drawing.Point, System.Drawing">
     <value>200, 125</value>
   </data>
-  <data name="tb_expvalue.TabIndex" type="System.Int32, mscorlib">
-    <value>74</value>
+  <data name="&gt;&gt;tb_int.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tb_addmp.Parent" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
+    <value>gbBasicStats</value>
   </data>
-  <data name="&gt;&gt;tb_naturalarmor.Parent" xml:space="preserve">
-    <value>gb_monsterstatsmiscs</value>
+  <data name="&gt;&gt;tbWindResist.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lbMovers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 24</value>
+  </data>
+  <data name="&gt;&gt;tbFireResist.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
+  </data>
+  <data name="&gt;&gt;cbType.Parent" xml:space="preserve">
+    <value>gbMain</value>
   </data>
   <data name="&gt;&gt;lbl_elementtype.Parent" xml:space="preserve">
-    <value>gb_monsterstatselements</value>
+    <value>gbStatsElements</value>
   </data>
   <data name="&gt;&gt;tb_level.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbWindResist.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
   </data>
   <data name="tb_resistearth.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
@@ -279,7 +357,16 @@
     <value>tb_int</value>
   </data>
   <data name="&gt;&gt;tb_atkmin.Parent" xml:space="preserve">
-    <value>gb_monsterstatsmiscs</value>
+    <value>gbMiscStats</value>
+  </data>
+  <data name="tb_addhp.TabIndex" type="System.Int32, mscorlib">
+    <value>54</value>
+  </data>
+  <data name="&gt;&gt;lbl_int.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFile.Parent" xml:space="preserve">
+    <value>gbModel</value>
   </data>
   <data name="&gt;&gt;tb_resistwind.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -293,8 +380,11 @@
   <data name="&gt;&gt;label2.Name" xml:space="preserve">
     <value>label2</value>
   </data>
-  <data name="&gt;&gt;lbl_sta.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbInt.Name" xml:space="preserve">
+    <value>tbInt</value>
+  </data>
+  <data name="&gt;&gt;groupBox5.Parent" xml:space="preserve">
+    <value>gbConfiguration</value>
   </data>
   <data name="&gt;&gt;lbl_resistwind.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -303,17 +393,32 @@
   <data name="tsmi_reload.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+R</value>
   </data>
-  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lbl_resistfire.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;gb_monsterstatselements.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tb_int.Type" xml:space="preserve">
+  <data name="&gt;&gt;tb_atkmin.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lbl_belligerence.Parent" xml:space="preserve">
-    <value>groupBox5</value>
+  <data name="lblMp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>225, 119</value>
+  </data>
+  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
+    <value>tpMonster</value>
+  </data>
+  <data name="&gt;&gt;tbWaterResist.Name" xml:space="preserve">
+    <value>tbWaterResist</value>
+  </data>
+  <data name="lblName.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="tp_general.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="tbDex.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
   </data>
   <data name="lb_IdentifierAlreadyUsed.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -327,29 +432,71 @@
   <data name="tsmi_reload.Text" xml:space="preserve">
     <value>Reload</value>
   </data>
+  <data name="&gt;&gt;lblStr.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tb_atkmax.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
+  </data>
+  <data name="gbMisc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 194</value>
+  </data>
+  <data name="&gt;&gt;cbAI.Parent" xml:space="preserve">
+    <value>gbMisc</value>
+  </data>
+  <data name="&gt;&gt;gbModel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblModelFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbBelligerence.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cbType.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
   <data name="lbl_dex.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cb_class.Location" type="System.Drawing.Point, System.Drawing">
     <value>171, 102</value>
   </data>
+  <data name="&gt;&gt;tbSta.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="cb_class.Size" type="System.Drawing.Size, System.Drawing">
     <value>146, 21</value>
+  </data>
+  <data name="&gt;&gt;cbClass.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="lbl_expvalue.Location" type="System.Drawing.Point, System.Drawing">
     <value>134, 132</value>
   </data>
-  <data name="&gt;&gt;lbl_belligerence.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lbl_naturalarmor.Text" xml:space="preserve">
+    <value>Armor :</value>
+  </data>
+  <data name="&gt;&gt;tb_naturalarmor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbName.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
   <data name="&gt;&gt;tsmi_reload.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;tbWindResist.Name" xml:space="preserve">
+    <value>tbWindResist</value>
+  </data>
+  <data name="&gt;&gt;lbl_sta.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;tb_addhp.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;lbl_name.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="msMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="lbl_hr.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -357,14 +504,29 @@
   <data name="tb_dex.Location" type="System.Drawing.Point, System.Drawing">
     <value>266, 32</value>
   </data>
-  <data name="&gt;&gt;lbl_resismgic.Parent" xml:space="preserve">
-    <value>gb_monsterstatsmiscs</value>
+  <data name="&gt;&gt;lblNaturalArmor.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbl_hr.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
   </data>
   <data name="tb_sta.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 20</value>
   </data>
+  <data name="&gt;&gt;lblStr.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
+  </data>
   <data name="&gt;&gt;cb_elementtype.Parent" xml:space="preserve">
-    <value>gb_monsterstatselements</value>
+    <value>gbStatsElements</value>
+  </data>
+  <data name="&gt;&gt;cbElementType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbModelScale.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tsmi_save.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+S</value>
@@ -372,29 +534,41 @@
   <data name="lbl_resistwind.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 125</value>
   </data>
-  <data name="tb_int.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
+  <data name="&gt;&gt;tsmiMovers.Name" xml:space="preserve">
+    <value>tsmiMovers</value>
   </data>
   <data name="&gt;&gt;lbl_resismgic.Name" xml:space="preserve">
     <value>lbl_resismgic</value>
   </data>
+  <data name="gbConfiguration.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
   <data name="lbl_level.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 13</value>
+  </data>
+  <data name="&gt;&gt;lblEarthResist.Name" xml:space="preserve">
+    <value>lblEarthResist</value>
   </data>
   <data name="tb_reattackdelay.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 20</value>
   </data>
   <data name="&gt;&gt;lb_IdentifierAlreadyUsed.Parent" xml:space="preserve">
-    <value>groupBox4</value>
+    <value>gbMain</value>
   </data>
-  <data name="&gt;&gt;groupBox2.Parent" xml:space="preserve">
-    <value>tp_monster</value>
+  <data name="&gt;&gt;lblWaterResist.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
+  </data>
+  <data name="&gt;&gt;lbIdentifierAlreadyUsed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbl_resistwater.Parent" xml:space="preserve">
-    <value>gb_monsterstatselements</value>
+    <value>gbStatsElements</value>
   </data>
-  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;bt_SelectModelFile.Name" xml:space="preserve">
+    <value>bt_SelectModelFile</value>
+  </data>
+  <data name="&gt;&gt;tbAtkMax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tb_resistwater.TabIndex" type="System.Int32, mscorlib">
     <value>74</value>
@@ -402,14 +576,41 @@
   <data name="lbl_dex.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 13</value>
   </data>
+  <data name="&gt;&gt;cbModelBrace.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="&gt;&gt;lbl_resistwater.Name" xml:space="preserve">
     <value>lbl_resistwater</value>
+  </data>
+  <data name="&gt;&gt;tbNaturalArmor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAtkMin.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
   </data>
   <data name="tb_resismgic.TabIndex" type="System.Int32, mscorlib">
     <value>68</value>
   </data>
-  <data name="lbl_str.Text" xml:space="preserve">
-    <value>STR :</value>
+  <data name="&gt;&gt;tpGeneral.Parent" xml:space="preserve">
+    <value>tcMain</value>
+  </data>
+  <data name="&gt;&gt;cbModelBrace.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbType.Name" xml:space="preserve">
+    <value>cbType</value>
+  </data>
+  <data name="&gt;&gt;gbStats.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblMagicResist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>211, 29</value>
+  </data>
+  <data name="&gt;&gt;lblBelligerence.Parent" xml:space="preserve">
+    <value>gbMisc</value>
+  </data>
+  <data name="&gt;&gt;gbConfiguration.Name" xml:space="preserve">
+    <value>gbConfiguration</value>
   </data>
   <data name="tb_elementatk.TabIndex" type="System.Int32, mscorlib">
     <value>62</value>
@@ -417,11 +618,14 @@
   <data name="&gt;&gt;lbl_expvalue.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="lbl_int.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="btnMotions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 23</value>
   </data>
   <data name="&gt;&gt;lbl_addhp.Name" xml:space="preserve">
     <value>lbl_addhp</value>
+  </data>
+  <data name="&gt;&gt;cbElementType.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="gb_monsterstatselements.TabIndex" type="System.Int32, mscorlib">
     <value>64</value>
@@ -432,8 +636,8 @@
   <data name="tb_int.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 20</value>
   </data>
-  <data name="&gt;&gt;tb_sta.Parent" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
+  <data name="&gt;&gt;tpMonster.Parent" xml:space="preserve">
+    <value>tcMain</value>
   </data>
   <data name="lbl_str.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 13</value>
@@ -450,11 +654,26 @@
   <data name="lb_movers.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
   </data>
-  <data name="lbl_expvalue.TabIndex" type="System.Int32, mscorlib">
-    <value>73</value>
+  <data name="&gt;&gt;tb_hr.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
   </data>
-  <data name="&gt;&gt;tb_resistwind.Name" xml:space="preserve">
-    <value>tb_resistwind</value>
+  <data name="tsmiMoverDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="&gt;&gt;lblModelScale.Parent" xml:space="preserve">
+    <value>gbModel</value>
+  </data>
+  <data name="&gt;&gt;tbIdentifier.Name" xml:space="preserve">
+    <value>tbIdentifier</value>
+  </data>
+  <data name="&gt;&gt;tpGeneral.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbMovers.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="cbModelBrace.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="lbl_resistearth.TabIndex" type="System.Int32, mscorlib">
     <value>75</value>
@@ -462,29 +681,65 @@
   <data name="&gt;&gt;tb_reattackdelay.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="lbl_er.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
   <data name="lbl_addhp.TabIndex" type="System.Int32, mscorlib">
     <value>53</value>
+  </data>
+  <data name="lblEarthResist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>197, 125</value>
   </data>
   <data name="&gt;&gt;lbl_resistearth.Name" xml:space="preserve">
     <value>lbl_resistearth</value>
   </data>
+  <data name="&gt;&gt;tb_str.Name" xml:space="preserve">
+    <value>tb_str</value>
+  </data>
+  <data name="&gt;&gt;lblSta.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
+  </data>
   <data name="lbl_elementtype.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lbl_monsterai.Size" type="System.Drawing.Size, System.Drawing">
-    <value>23, 13</value>
+  <data name="gb_monsterstatselements.Size" type="System.Drawing.Size, System.Drawing">
+    <value>443, 201</value>
+  </data>
+  <data name="lbl_monsterai.Location" type="System.Drawing.Point, System.Drawing">
+    <value>142, 25</value>
+  </data>
+  <data name="&gt;&gt;fichierToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbModelScale.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
   <data name="cb_elementtype.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 21</value>
   </data>
-  <data name="&gt;&gt;lbl_dex.ZOrder" xml:space="preserve">
-    <value>11</value>
+  <data name="lblElementAtk.TabIndex" type="System.Int32, mscorlib">
+    <value>61</value>
+  </data>
+  <data name="&gt;&gt;lbl_belligerence.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;tbSta.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="&gt;&gt;lbl_elementatk.Name" xml:space="preserve">
     <value>lbl_elementatk</value>
   </data>
+  <data name="btMotions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 157</value>
+  </data>
+  <data name="&gt;&gt;tbElectricityResist.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
   <data name="&gt;&gt;tb_expvalue.Parent" xml:space="preserve">
     <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;tb_expvalue.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;cb_ModelBrace.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -499,10 +754,28 @@
     <value>136, 20</value>
   </data>
   <data name="&gt;&gt;tb_resistelecricity.Parent" xml:space="preserve">
-    <value>gb_monsterstatselements</value>
+    <value>gbStatsElements</value>
   </data>
   <data name="&gt;&gt;cb_type.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lbl_belligerence.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tbSpeed.TabIndex" type="System.Int32, mscorlib">
+    <value>64</value>
+  </data>
+  <data name="&gt;&gt;lblExperience.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;msMain.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblEarthResist.TabIndex" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
+  <data name="&gt;&gt;gbModel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lb_IdentifierAlreadyUsed.Name" xml:space="preserve">
     <value>lb_IdentifierAlreadyUsed</value>
@@ -510,23 +783,53 @@
   <data name="lbl_resistearth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;gbMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="lbl_dex.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lbl_identifier.Text" xml:space="preserve">
     <value>Identifier :</value>
   </data>
+  <data name="tpMonster.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>
+  </data>
+  <data name="&gt;&gt;tcMain.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbWaterResist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 77</value>
   </data>
   <data name="bt_SelectModelFile.Text" xml:space="preserve">
     <value>...</value>
   </data>
+  <data name="&gt;&gt;tb_naturalarmor.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
+  </data>
   <data name="&gt;&gt;tb_ModelName.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;lblInt.Name" xml:space="preserve">
+    <value>lblInt</value>
+  </data>
+  <data name="tbIdentifier.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
   <data name="lbl_name.Location" type="System.Drawing.Point, System.Drawing">
     <value>202, 17</value>
+  </data>
+  <data name="tblAttackDelay.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="&gt;&gt;lblSta.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;tp_monster.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="label3.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
@@ -537,65 +840,119 @@
   <data name="lbl_resistearth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="&gt;&gt;tbModelFile.Parent" xml:space="preserve">
+    <value>gbModel</value>
+  </data>
+  <data name="tbSta.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 55</value>
+  </data>
+  <data name="&gt;&gt;tb_resistwater.Name" xml:space="preserve">
+    <value>tb_resistwater</value>
+  </data>
   <data name="lbl_identifier.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
-  <data name="lbl_belligerence.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;lblStr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="gb_moverstatsbasic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>444, 152</value>
+  <data name="&gt;&gt;lbl_addmp.Name" xml:space="preserve">
+    <value>lbl_addmp</value>
+  </data>
+  <data name="lblModelFile.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tb_elementatk.Name" xml:space="preserve">
     <value>tb_elementatk</value>
   </data>
-  <data name="tsmi_movers.Text" xml:space="preserve">
-    <value>Movers</value>
+  <data name="&gt;&gt;lblHp.Name" xml:space="preserve">
+    <value>lblHp</value>
   </data>
-  <data name="&gt;&gt;bt_motions.Name" xml:space="preserve">
-    <value>bt_motions</value>
+  <data name="ms_main.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
   </data>
-  <data name="&gt;&gt;tb_identifier.Parent" xml:space="preserve">
-    <value>groupBox4</value>
+  <data name="&gt;&gt;lblNaturalArmor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbMovers.Name" xml:space="preserve">
+    <value>lbMovers</value>
+  </data>
+  <data name="&gt;&gt;tb_ModelName.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;tbEarthResist.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="lbl_atkmax.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="&gt;&gt;lblModelBrace.Name" xml:space="preserve">
+    <value>lblModelBrace</value>
+  </data>
+  <data name="cbElementType.TabIndex" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
   <data name="tb_int.Location" type="System.Drawing.Point, System.Drawing">
     <value>266, 58</value>
+  </data>
+  <data name="tb_naturalarmor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>83, 23</value>
   </data>
   <data name="tb_ModelName.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 20</value>
   </data>
-  <data name="lbl_reattackdelay.Text" xml:space="preserve">
-    <value>Atk delay :</value>
+  <data name="lbIdentifierAlreadyUsed.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
   </data>
-  <data name="&gt;&gt;groupBox5.Name" xml:space="preserve">
-    <value>groupBox5</value>
+  <data name="&gt;&gt;tbExperience.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;tb_resistwind.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
   </data>
   <data name="lbl_class.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 13</value>
   </data>
+  <data name="tb_level.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 76</value>
+  </data>
   <data name="lbl_addmp.TabIndex" type="System.Int32, mscorlib">
     <value>55</value>
   </data>
+  <data name="&gt;&gt;tbStr.Name" xml:space="preserve">
+    <value>tbStr</value>
+  </data>
   <data name="&gt;&gt;lbl_er.Parent" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
+    <value>gbBasicStats</value>
   </data>
   <data name="lbl_resistwater.Location" type="System.Drawing.Point, System.Drawing">
     <value>1, 81</value>
   </data>
+  <data name="&gt;&gt;tbNaturalArmor.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="&gt;&gt;tb_fspeed.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <data name="&gt;&gt;lblElementAtk.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
+  </data>
+  <data name="&gt;&gt;lblHit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;bt_motions.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="&gt;&gt;lblSpeed.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
   <data name="gb_moverstatsbasic.TabIndex" type="System.Int32, mscorlib">
     <value>62</value>
   </data>
+  <data name="msMain.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
   <data name="&gt;&gt;gb_monsterstatsmiscs.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>gbStats</value>
   </data>
   <data name="lbl_str.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -603,14 +960,29 @@
   <data name="lbl_resistwater.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lbl_atkmin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 13</value>
+  <data name="&gt;&gt;gbBasicStats.Parent" xml:space="preserve">
+    <value>gbStats</value>
+  </data>
+  <data name="&gt;&gt;tb_resistfire.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
   <data name="tb_resistwind.Location" type="System.Drawing.Point, System.Drawing">
     <value>71, 122</value>
   </data>
+  <data name="&gt;&gt;gbStr.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="groupBox2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
+  </data>
+  <data name="&gt;&gt;lblAtkMin.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;gbMain.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblElementType.Name" xml:space="preserve">
+    <value>lblElementType</value>
   </data>
   <data name="&gt;&gt;tb_name.Name" xml:space="preserve">
     <value>tb_name</value>
@@ -622,19 +994,28 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbl_str.Parent" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
+    <value>gbBasicStats</value>
   </data>
   <data name="&gt;&gt;tb_resistwater.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="lbl_naturalarmor.Text" xml:space="preserve">
-    <value>Armor :</value>
+  <data name="&gt;&gt;lbl_dex.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="lbl_resistelecricity.Text" xml:space="preserve">
     <value>Elec Res :</value>
   </data>
-  <data name="&gt;&gt;tp_monster.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="tbStr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 29</value>
+  </data>
+  <data name="&gt;&gt;lblSpeed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cbElementType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 44</value>
+  </data>
+  <data name="&gt;&gt;btnMotions.Parent" xml:space="preserve">
+    <value>gbModel</value>
   </data>
   <data name="label1.Text" xml:space="preserve">
     <value>File :</value>
@@ -648,23 +1029,50 @@
   <data name="tb_resistelecricity.TabIndex" type="System.Int32, mscorlib">
     <value>68</value>
   </data>
-  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 114</value>
+  <data name="&gt;&gt;tb_hr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbIdentifier.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="cbModelBrace.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 111</value>
+  </data>
+  <data name="&gt;&gt;tbSpeed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbDex.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbSpeed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 152</value>
+  </data>
+  <data name="&gt;&gt;tblAttackDelay.Name" xml:space="preserve">
+    <value>tblAttackDelay</value>
+  </data>
+  <data name="tb_atkmin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 20</value>
+  </data>
+  <data name="lblAtkMax.TabIndex" type="System.Int32, mscorlib">
+    <value>49</value>
   </data>
   <data name="&gt;&gt;gb_monsterstatselements.Name" xml:space="preserve">
     <value>gb_monsterstatselements</value>
   </data>
-  <data name="tb_reattackdelay.TabIndex" type="System.Int32, mscorlib">
-    <value>52</value>
+  <data name="&gt;&gt;tbDex.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
   </data>
-  <data name="tb_identifier.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+  <data name="&gt;&gt;tsmi_moversadd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tb_atkmin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tsmiFileReload.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
   </data>
-  <data name="&gt;&gt;tb_resistwind.Parent" xml:space="preserve">
-    <value>gb_monsterstatselements</value>
+  <data name="&gt;&gt;cbBelligerence.Parent" xml:space="preserve">
+    <value>gbMisc</value>
+  </data>
+  <data name="&gt;&gt;tsmi_save.Name" xml:space="preserve">
+    <value>tsmi_save</value>
   </data>
   <data name="tc_main.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -672,20 +1080,29 @@
   <data name="lbl_int.Location" type="System.Drawing.Point, System.Drawing">
     <value>225, 61</value>
   </data>
+  <data name="lbl_belligerence.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 52</value>
+  </data>
   <data name="tsmi_save.Text" xml:space="preserve">
     <value>Save</value>
   </data>
   <data name="&gt;&gt;lbl_type.Name" xml:space="preserve">
     <value>lbl_type</value>
   </data>
-  <data name="&gt;&gt;lb_movers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lblEr.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
   </data>
-  <data name="lbl_name.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+  <data name="tbEarthResist.TabIndex" type="System.Int32, mscorlib">
+    <value>76</value>
   </data>
-  <data name="&gt;&gt;lbl_belligerence.Name" xml:space="preserve">
-    <value>lbl_belligerence</value>
+  <data name="tb_identifier.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>417, 186</value>
+  </data>
+  <data name="&gt;&gt;btMotions.Name" xml:space="preserve">
+    <value>btMotions</value>
   </data>
   <data name="tb_fspeed.TabIndex" type="System.Int32, mscorlib">
     <value>64</value>
@@ -693,44 +1110,74 @@
   <data name="lbl_naturalarmor.Location" type="System.Drawing.Point, System.Drawing">
     <value>35, 26</value>
   </data>
-  <data name="&gt;&gt;lbl_sta.Parent" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
-  </data>
-  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tsmi_save.Name" xml:space="preserve">
-    <value>tsmi_save</value>
-  </data>
-  <data name="&gt;&gt;cb_ModelBrace.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="&gt;&gt;tb_ModelScale.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbMp.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;lblIdentifier.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblDex.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
+  </data>
+  <data name="tb_identifier.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 20</value>
+  </data>
+  <data name="&gt;&gt;cb_ModelBrace.Parent" xml:space="preserve">
+    <value>gbModel</value>
+  </data>
+  <data name="tb_elementatk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 20</value>
+  </data>
+  <data name="&gt;&gt;gbStats.Parent" xml:space="preserve">
+    <value>tpMonster</value>
+  </data>
   <data name="&gt;&gt;lbl_resistwind.Parent" xml:space="preserve">
-    <value>gb_monsterstatselements</value>
+    <value>gbStatsElements</value>
   </data>
   <data name="&gt;&gt;cb_class.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lbl_reattackdelay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 68</value>
+  <data name="&gt;&gt;tbElectricityResist.Name" xml:space="preserve">
+    <value>tbElectricityResist</value>
+  </data>
+  <data name="&gt;&gt;cms_lbmovers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;bt_SelectModelFile.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gbModel</value>
   </data>
-  <data name="&gt;&gt;lbl_resistwind.Name" xml:space="preserve">
-    <value>lbl_resistwind</value>
+  <data name="gbMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 19</value>
+  </data>
+  <data name="tbModelFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 45</value>
+  </data>
+  <data name="lbMovers.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblName.Name" xml:space="preserve">
+    <value>lblName</value>
   </data>
   <data name="&gt;&gt;tb_ModelName.Name" xml:space="preserve">
     <value>tb_ModelName</value>
   </data>
   <data name="&gt;&gt;lbl_int.Parent" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
+    <value>gbBasicStats</value>
   </data>
-  <data name="&gt;&gt;tb_int.Parent" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
+  <data name="lblAttackDelay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>107, 68</value>
+  </data>
+  <data name="lblIdentifier.Location" type="System.Drawing.Point, System.Drawing">
+    <value>191, 65</value>
+  </data>
+  <data name="&gt;&gt;tbIdentifier.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tbMp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>255, 116</value>
+  </data>
+  <data name="lblModelBrace.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;groupBox1.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -738,17 +1185,32 @@
   <data name="&gt;&gt;tb_reattackdelay.Name" xml:space="preserve">
     <value>tb_reattackdelay</value>
   </data>
-  <data name="cb_belligerence.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 49</value>
+  <data name="&gt;&gt;gbMisc.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="lbl_hr.Location" type="System.Drawing.Point, System.Drawing">
     <value>39, 84</value>
   </data>
-  <data name="&gt;&gt;lbl_elementtype.Name" xml:space="preserve">
-    <value>lbl_elementtype</value>
+  <data name="tsmiMoversAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="&gt;&gt;lblBelligerence.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 48</value>
   </data>
   <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="&gt;&gt;tbStr.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
+  </data>
+  <data name="tbFireResist.TabIndex" type="System.Int32, mscorlib">
+    <value>70</value>
+  </data>
+  <data name="&gt;&gt;lbIdentifierAlreadyUsed.Parent" xml:space="preserve">
+    <value>gbMain</value>
   </data>
   <data name="&gt;&gt;tb_level.ZOrder" xml:space="preserve">
     <value>6</value>
@@ -756,26 +1218,59 @@
   <data name="tb_resistwind.TabIndex" type="System.Int32, mscorlib">
     <value>72</value>
   </data>
+  <data name="&gt;&gt;tbDex.Name" xml:space="preserve">
+    <value>tbDex</value>
+  </data>
+  <data name="&gt;&gt;btnMotions.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="&gt;&gt;lbl_elementatk.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="groupBox3.Text" xml:space="preserve">
+    <value>Configuration</value>
+  </data>
   <data name="&gt;&gt;gb_moverstatsbasic.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>gbStats</value>
+  </data>
+  <data name="lblMonsterAI.TabIndex" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
+  <data name="tbHp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>62, 113</value>
   </data>
   <data name="&gt;&gt;tb_er.Parent" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
+    <value>gbBasicStats</value>
+  </data>
+  <data name="&gt;&gt;lblElectricityResist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="gb_monsterstatselements.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 367</value>
   </data>
-  <data name="&gt;&gt;tb_ModelScale.Name" xml:space="preserve">
-    <value>tb_ModelScale</value>
+  <data name="&gt;&gt;lb_movers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lbl_addmp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>225, 119</value>
+  <data name="gbMiscStats.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
   </data>
   <data name="tb_er.TabIndex" type="System.Int32, mscorlib">
     <value>40</value>
+  </data>
+  <data name="&gt;&gt;lblExperience.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblEr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbAI.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tbLevel.Parent" xml:space="preserve">
+    <value>gbMisc</value>
+  </data>
+  <data name="tp_general.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
   </data>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -783,20 +1278,38 @@
   <data name="&gt;&gt;cb_class.Parent" xml:space="preserve">
     <value>groupBox5</value>
   </data>
-  <data name="cb_monsterai.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 21</value>
+  <data name="&gt;&gt;lblLevel.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="tb_hr.Location" type="System.Drawing.Point, System.Drawing">
     <value>71, 81</value>
   </data>
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="&gt;&gt;lbl_belligerence.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lbl_int.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 13</value>
+  </data>
+  <data name="&gt;&gt;lbl_er.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lbl_str.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;lbl_atkmax.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;lblType.Name" xml:space="preserve">
+    <value>lblType</value>
+  </data>
+  <data name="&gt;&gt;lbl_resismgic.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
   </data>
   <data name="cms_lbmovers.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 26</value>
+  </data>
+  <data name="tb_hr.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="&gt;&gt;gbStr.Name" xml:space="preserve">
+    <value>gbStr</value>
   </data>
   <data name="&gt;&gt;cb_monsterai.Name" xml:space="preserve">
     <value>cb_monsterai</value>
@@ -810,29 +1323,53 @@
   <data name="lbl_expvalue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="tb_addmp.TabIndex" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
   <data name="lbl_resistwater.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 13</value>
   </data>
   <data name="tsmi_save.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 22</value>
   </data>
-  <data name="ms_main.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+  <data name="tbEr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>284, 81</value>
   </data>
-  <data name="&gt;&gt;lbl_hr.Parent" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
+  <data name="&gt;&gt;lbMovers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ms_main.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
+  <data name="&gt;&gt;lblHit.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblMp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lbl_addhp.Text" xml:space="preserve">
+    <value>HP :</value>
+  </data>
+  <data name="&gt;&gt;tb_addmp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cms_lbmovers.Name" xml:space="preserve">
+    <value>cms_lbmovers</value>
+  </data>
+  <data name="&gt;&gt;lblModelBrace.Parent" xml:space="preserve">
+    <value>gbModel</value>
   </data>
   <data name="&gt;&gt;lbl_speed.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="gbStr.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
   <data name="lbl_resistwater.Text" xml:space="preserve">
     <value>Water Res :</value>
   </data>
+  <data name="&gt;&gt;lblWaterResist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;tb_name.Parent" xml:space="preserve">
-    <value>groupBox4</value>
+    <value>gbMain</value>
   </data>
   <data name="tsmi_moversadd.Text" xml:space="preserve">
     <value>Add</value>
@@ -840,14 +1377,26 @@
   <data name="rechercherToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 22</value>
   </data>
+  <data name="lbl_int.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="lbl_belligerence.TabIndex" type="System.Int32, mscorlib">
     <value>67</value>
   </data>
-  <data name="lbl_addmp.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;lblStr.Name" xml:space="preserve">
+    <value>lblStr</value>
+  </data>
+  <data name="btnSelectModelFile.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="ms_main.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="&gt;&gt;lbl_level.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="&gt;&gt;lblDex.Name" xml:space="preserve">
+    <value>lblDex</value>
   </data>
   <data name="&gt;&gt;lbl_identifier.Name" xml:space="preserve">
     <value>lbl_identifier</value>
@@ -864,9 +1413,6 @@
   <data name="&gt;&gt;lbl_resistwind.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lbl_addhp.Text" xml:space="preserve">
-    <value>HP :</value>
-  </data>
   <data name="&gt;&gt;cb_belligerence.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
@@ -876,11 +1422,14 @@
   <data name="tsmi_moversadd.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 22</value>
   </data>
+  <data name="&gt;&gt;cbElementType.Name" xml:space="preserve">
+    <value>cbElementType</value>
+  </data>
   <data name="&gt;&gt;lbl_resismgic.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="tb_name.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 20</value>
+  <data name="&gt;&gt;tbElementAtk.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="lbl_resismgic.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -891,8 +1440,8 @@
   <data name="lbl_int.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
   </data>
-  <data name="&gt;&gt;tb_resistfire.ZOrder" xml:space="preserve">
-    <value>12</value>
+  <data name="lblDex.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
   </data>
   <data name="tb_resismgic.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
@@ -903,29 +1452,65 @@
   <data name="cb_ModelBrace.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
-  <data name="lbl_monsterai.Text" xml:space="preserve">
-    <value>AI :</value>
+  <data name="lblAI.Location" type="System.Drawing.Point, System.Drawing">
+    <value>142, 25</value>
+  </data>
+  <data name="ms_main.Text" xml:space="preserve">
+    <value>Movers</value>
+  </data>
+  <data name="&gt;&gt;lbl_elementtype.Name" xml:space="preserve">
+    <value>lbl_elementtype</value>
   </data>
   <data name="&gt;&gt;ms_main.Type" xml:space="preserve">
     <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="lblHit.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="lblHit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 84</value>
+  </data>
+  <data name="&gt;&gt;lblWaterResist.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;lblInt.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
+  </data>
+  <data name="&gt;&gt;tbEarthResist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="lb_IdentifierAlreadyUsed.Text" xml:space="preserve">
     <value>Already used</value>
   </data>
-  <data name="&gt;&gt;lbl_reattackdelay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbInt.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
   </data>
-  <data name="tp_general.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+  <data name="&gt;&gt;tb_resistfire.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
   </data>
-  <data name="tb_level.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 76</value>
+  <data name="&gt;&gt;tbAtkMin.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="&gt;&gt;cms_lbmovers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tsmiMoversFind.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>200, 117</value>
+  </data>
+  <data name="&gt;&gt;tbHr.Name" xml:space="preserve">
+    <value>tbHr</value>
   </data>
   <data name="lbl_elementtype.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 48</value>
+  </data>
+  <data name="lblSta.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="lbl_str.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 32</value>
+  </data>
+  <data name="lblClass.TabIndex" type="System.Int32, mscorlib">
+    <value>70</value>
   </data>
   <data name="lbl_speed.TabIndex" type="System.Int32, mscorlib">
     <value>63</value>
@@ -936,11 +1521,17 @@
   <data name="lbl_resistwind.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="tb_expvalue.TabIndex" type="System.Int32, mscorlib">
+    <value>74</value>
   </data>
   <data name="lbl_resistfire.Location" type="System.Drawing.Point, System.Drawing">
     <value>208, 77</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterAI.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbEarthResist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 122</value>
   </data>
   <data name="&gt;&gt;lbl_type.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -952,7 +1543,10 @@
     <value>45, 13</value>
   </data>
   <data name="&gt;&gt;lbl_addhp.Parent" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
+    <value>gbBasicStats</value>
+  </data>
+  <data name="&gt;&gt;tb_ModelScale.Name" xml:space="preserve">
+    <value>tb_ModelScale</value>
   </data>
   <data name="&gt;&gt;gb_monsterstatsmiscs.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -960,11 +1554,14 @@
   <data name="tb_str.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 20</value>
   </data>
+  <data name="&gt;&gt;tsmiFileSave.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="tb_addhp.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 20</value>
   </data>
-  <data name="tb_ModelName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 45</value>
+  <data name="&gt;&gt;label3.Name" xml:space="preserve">
+    <value>label3</value>
   </data>
   <data name="lbl_naturalarmor.TabIndex" type="System.Int32, mscorlib">
     <value>57</value>
@@ -975,29 +1572,47 @@
   <data name="&gt;&gt;tc_main.Name" xml:space="preserve">
     <value>tc_main</value>
   </data>
+  <data name="&gt;&gt;tbElectricityResist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb_name.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="lbl_resistelecricity.TabIndex" type="System.Int32, mscorlib">
     <value>67</value>
+  </data>
+  <data name="&gt;&gt;tbHp.Name" xml:space="preserve">
+    <value>tbHp</value>
   </data>
   <data name="rechercherToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+F</value>
   </data>
+  <data name="lblAI.TabIndex" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
   <data name="lbl_reattackdelay.TabIndex" type="System.Int32, mscorlib">
     <value>51</value>
+  </data>
+  <data name="&gt;&gt;tpGeneral.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="tb_resistearth.Location" type="System.Drawing.Point, System.Drawing">
     <value>266, 122</value>
   </data>
-  <data name="lbl_naturalarmor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;lblModelFile.Name" xml:space="preserve">
+    <value>lblModelFile</value>
   </data>
   <data name="tb_atkmax.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 20</value>
   </data>
+  <data name="&gt;&gt;lblInt.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
   <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="&gt;&gt;groupBox5.Parent" xml:space="preserve">
-    <value>groupBox3</value>
+  <data name="lblStr.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
   </data>
   <data name="&gt;&gt;tb_resistwind.ZOrder" xml:space="preserve">
     <value>7</value>
@@ -1005,14 +1620,26 @@
   <data name="gb_monsterstatsmiscs.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 177</value>
   </data>
+  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="&gt;&gt;cb_elementtype.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbl_sta.Name" xml:space="preserve">
     <value>lbl_sta</value>
   </data>
-  <data name="lbl_resistfire.TabIndex" type="System.Int32, mscorlib">
-    <value>69</value>
+  <data name="&gt;&gt;btnMotions.Name" xml:space="preserve">
+    <value>btnMotions</value>
+  </data>
+  <data name="tbIdentifier.Location" type="System.Drawing.Point, System.Drawing">
+    <value>131, 81</value>
+  </data>
+  <data name="&gt;&gt;tbHr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="bt_motions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 157</value>
   </data>
   <data name="&gt;&gt;ms_main.Name" xml:space="preserve">
     <value>ms_main</value>
@@ -1020,14 +1647,26 @@
   <data name="&gt;&gt;gb_monsterstatselements.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="lbl_level.Text" xml:space="preserve">
+    <value>Level :</value>
+  </data>
+  <data name="&gt;&gt;tb_resistelecricity.Name" xml:space="preserve">
+    <value>tb_resistelecricity</value>
+  </data>
+  <data name="&gt;&gt;tb_ModelScale.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;groupBox4.Name" xml:space="preserve">
     <value>groupBox4</value>
   </data>
   <data name="&gt;&gt;groupBox3.Name" xml:space="preserve">
     <value>groupBox3</value>
   </data>
-  <data name="&gt;&gt;rechercherToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lblWaterResist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 81</value>
+  </data>
+  <data name="tbAtkMax.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 108</value>
   </data>
   <data name="&gt;&gt;cb_belligerence.Parent" xml:space="preserve">
     <value>groupBox5</value>
@@ -1035,14 +1674,14 @@
   <data name="&gt;&gt;cb_class.Name" xml:space="preserve">
     <value>cb_class</value>
   </data>
-  <data name="lbl_sta.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;lblSpeed.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
   </data>
   <data name="&gt;&gt;tb_resistearth.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="&gt;&gt;lbl_addmp.Parent" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
+    <value>gbBasicStats</value>
   </data>
   <data name="lbl_atkmax.Location" type="System.Drawing.Point, System.Drawing">
     <value>229, 111</value>
@@ -1053,11 +1692,11 @@
   <data name="label2.Text" xml:space="preserve">
     <value>Scale :</value>
   </data>
-  <data name="tb_level.TabIndex" type="System.Int32, mscorlib">
-    <value>69</value>
-  </data>
   <data name="fichierToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 22</value>
+  </data>
+  <data name="tb_ModelScale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
   </data>
   <data name="&gt;&gt;gb_moverstatsbasic.ZOrder" xml:space="preserve">
     <value>1</value>
@@ -1065,23 +1704,62 @@
   <data name="&gt;&gt;lbl_sta.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+  <data name="gbMisc.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;lblEarthResist.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
+  </data>
+  <data name="&gt;&gt;lblElementType.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
   </data>
   <data name="&gt;&gt;tsmi_save.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lbl_expvalue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lblModelScale.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>690, 619</value>
+  <data name="&gt;&gt;tb_int.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
+  </data>
+  <data name="&gt;&gt;tsmiMoversAdd.Name" xml:space="preserve">
+    <value>tsmiMoversAdd</value>
+  </data>
+  <data name="lbl_atkmax.Text" xml:space="preserve">
+    <value>Atk max :</value>
+  </data>
+  <data name="&gt;&gt;tbAtkMin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbInt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbNaturalArmor.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
+  </data>
+  <data name="gbMain.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;tpMonster.Name" xml:space="preserve">
+    <value>tpMonster</value>
+  </data>
+  <data name="&gt;&gt;gbMisc.Parent" xml:space="preserve">
+    <value>gbConfiguration</value>
+  </data>
+  <data name="&gt;&gt;lblBelligerence.Name" xml:space="preserve">
+    <value>lblBelligerence</value>
   </data>
   <data name="&gt;&gt;lbl_class.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="tb_elementatk.Size" type="System.Drawing.Size, System.Drawing">
-    <value>106, 20</value>
+  <data name="&gt;&gt;tb_resismgic.Name" xml:space="preserve">
+    <value>tb_resismgic</value>
+  </data>
+  <data name="lbl_name.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblModelFile.Parent" xml:space="preserve">
+    <value>gbModel</value>
   </data>
   <data name="lbl_addhp.Size" type="System.Drawing.Size, System.Drawing">
     <value>28, 13</value>
@@ -1089,11 +1767,11 @@
   <data name="&gt;&gt;lbl_dex.Name" xml:space="preserve">
     <value>lbl_dex</value>
   </data>
-  <data name="tb_addmp.TabIndex" type="System.Int32, mscorlib">
-    <value>56</value>
+  <data name="&gt;&gt;tsmi_movers.Name" xml:space="preserve">
+    <value>tsmi_movers</value>
   </data>
-  <data name="lbl_hr.Text" xml:space="preserve">
-    <value>Hit :</value>
+  <data name="&gt;&gt;lbl_hr.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;lbl_elementtype.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1104,14 +1782,32 @@
   <data name="tc_main.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="&gt;&gt;lblAtkMax.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
+  </data>
   <data name="&gt;&gt;tb_sta.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lbl_resistelecricity.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lbl_atkmin.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
+  <data name="lblModelBrace.Location" type="System.Drawing.Point, System.Drawing">
+    <value>118, 114</value>
+  </data>
+  <data name="gbModel.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;lblElectricityResist.Name" xml:space="preserve">
+    <value>lblElectricityResist</value>
+  </data>
+  <data name="&gt;&gt;lbl_name.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;tbSpeed.Name" xml:space="preserve">
+    <value>tbSpeed</value>
+  </data>
+  <data name="cb_class.TabIndex" type="System.Int32, mscorlib">
+    <value>71</value>
   </data>
   <data name="lbl_addhp.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1119,14 +1815,14 @@
   <data name="&gt;&gt;tb_addhp.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lbl_atkmax.Name" xml:space="preserve">
-    <value>lbl_atkmax</value>
+  <data name="gbModel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 371</value>
+  </data>
+  <data name="&gt;&gt;lblInt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbl_resismgic.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tp_monster.Name" xml:space="preserve">
-    <value>tp_monster</value>
   </data>
   <data name="cb_belligerence.TabIndex" type="System.Int32, mscorlib">
     <value>72</value>
@@ -1134,26 +1830,38 @@
   <data name="tc_main.Location" type="System.Drawing.Point, System.Drawing">
     <value>221, 24</value>
   </data>
+  <data name="&gt;&gt;gb_moverstatsbasic.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="tb_fspeed.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
   </data>
-  <data name="&gt;&gt;gb_monsterstatsmiscs.Name" xml:space="preserve">
-    <value>gb_monsterstatsmiscs</value>
+  <data name="lbl_identifier.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="lbl_identifier.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;tbLevel.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblBelligerence.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="lbl_addhp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;tp_general.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbWaterResist.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
   </data>
-  <data name="lbl_resistearth.Text" xml:space="preserve">
-    <value>Earth Res :</value>
+  <data name="tb_level.TabIndex" type="System.Int32, mscorlib">
+    <value>69</value>
+  </data>
+  <data name="tb_resistfire.TabIndex" type="System.Int32, mscorlib">
+    <value>70</value>
   </data>
   <data name="&gt;&gt;lbl_atkmax.Parent" xml:space="preserve">
-    <value>gb_monsterstatsmiscs</value>
+    <value>gbMiscStats</value>
+  </data>
+  <data name="tbWindResist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 122</value>
   </data>
   <data name="tb_resistwind.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
@@ -1161,50 +1869,74 @@
   <data name="&gt;&gt;lbl_addmp.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="tbLevel.TabIndex" type="System.Int32, mscorlib">
+    <value>69</value>
   </data>
   <data name="&gt;&gt;lbl_int.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
-    <value>groupBox3</value>
+  <data name="&gt;&gt;lbMovers.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblModelScale.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;gb_monsterstatsmiscs.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="lbl_level.TabIndex" type="System.Int32, mscorlib">
+    <value>68</value>
+  </data>
   <data name="&gt;&gt;cb_type.Name" xml:space="preserve">
     <value>cb_type</value>
   </data>
-  <data name="lbl_str.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="&gt;&gt;tb_resismgic.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbInt.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="tb_resistearth.TabIndex" type="System.Int32, mscorlib">
     <value>76</value>
   </data>
-  <data name="&gt;&gt;tb_atkmax.ZOrder" xml:space="preserve">
-    <value>5</value>
+  <data name="&gt;&gt;gbStats.Name" xml:space="preserve">
+    <value>gbStats</value>
+  </data>
+  <data name="&gt;&gt;lblElementAtk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblElementType.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="groupBox2.Text" xml:space="preserve">
+    <value>Stats</value>
+  </data>
+  <data name="tbLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 76</value>
+  </data>
+  <data name="lbl_identifier.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;cb_ModelBrace.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="lbl_int.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 13</value>
+  <data name="&gt;&gt;lblWindResist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbl_naturalarmor.Parent" xml:space="preserve">
-    <value>gb_monsterstatsmiscs</value>
+    <value>gbMiscStats</value>
   </data>
-  <data name="cb_ModelBrace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 21</value>
+  <data name="lbl_atkmin.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
   </data>
   <data name="lb_movers.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="lbl_belligerence.Location" type="System.Drawing.Point, System.Drawing">
-    <value>94, 52</value>
+  <data name="&gt;&gt;lblType.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tpGeneral.Name" xml:space="preserve">
+    <value>tpGeneral</value>
   </data>
   <data name="lbl_speed.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1212,11 +1944,20 @@
   <data name="&gt;&gt;lbl_class.Name" xml:space="preserve">
     <value>lbl_class</value>
   </data>
+  <data name="&gt;&gt;tb_resistwind.Name" xml:space="preserve">
+    <value>tb_resistwind</value>
+  </data>
+  <data name="&gt;&gt;lblDex.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;lbl_monsterai.Name" xml:space="preserve">
     <value>lbl_monsterai</value>
   </data>
   <data name="&gt;&gt;lbl_monsterai.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>118, 79</value>
   </data>
   <data name="&gt;&gt;groupBox5.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -1224,14 +1965,26 @@
   <data name="lbl_type.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;groupBox1.Parent" xml:space="preserve">
+    <value>gbConfiguration</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tp_general.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="lbl_reattackdelay.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;lblElectricityResist.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="lbl_class.TabIndex" type="System.Int32, mscorlib">
     <value>70</value>
   </data>
-  <data name="tb_sta.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
+  <data name="&gt;&gt;lblMagicResist.Name" xml:space="preserve">
+    <value>lblMagicResist</value>
   </data>
   <data name="lbl_resistwater.TabIndex" type="System.Int32, mscorlib">
     <value>73</value>
@@ -1239,11 +1992,17 @@
   <data name="bt_SelectModelFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>290, 43</value>
   </data>
+  <data name="&gt;&gt;tbSpeed.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;tbModelScale.Name" xml:space="preserve">
+    <value>tbModelScale</value>
+  </data>
   <data name="lbl_int.Text" xml:space="preserve">
     <value>INT :</value>
   </data>
-  <data name="&gt;&gt;lbl_addmp.Name" xml:space="preserve">
-    <value>lbl_addmp</value>
+  <data name="&gt;&gt;cbAI.Name" xml:space="preserve">
+    <value>cbAI</value>
   </data>
   <data name="lbl_atkmin.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1254,17 +2013,41 @@
   <data name="&gt;&gt;lbl_naturalarmor.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;lbl_class.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;cbModelBrace.Name" xml:space="preserve">
+    <value>cbModelBrace</value>
+  </data>
+  <data name="&gt;&gt;tblAttackDelay.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
+  </data>
+  <data name="&gt;&gt;lblAtkMax.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;btnSelectModelFile.Name" xml:space="preserve">
+    <value>btnSelectModelFile</value>
+  </data>
+  <data name="&gt;&gt;lblLevel.Parent" xml:space="preserve">
+    <value>gbMisc</value>
+  </data>
+  <data name="tbMagicResist.TabIndex" type="System.Int32, mscorlib">
+    <value>68</value>
+  </data>
+  <data name="tbStr.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="tbInt.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
   </data>
   <data name="lbl_class.Location" type="System.Drawing.Point, System.Drawing">
     <value>126, 105</value>
   </data>
-  <data name="&gt;&gt;lbl_resistelecricity.Name" xml:space="preserve">
-    <value>lbl_resistelecricity</value>
+  <data name="bt_SelectModelFile.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+  <data name="&gt;&gt;tsmiMoversFind.Name" xml:space="preserve">
+    <value>tsmiMoversFind</value>
+  </data>
+  <data name="tbElementAtk.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
   </data>
   <data name="lbl_sta.Text" xml:space="preserve">
     <value>STA :</value>
@@ -1278,17 +2061,44 @@
   <data name="lbl_class.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;lblIdentifierAlreadyUsed.Parent" xml:space="preserve">
+    <value>gbMain</value>
+  </data>
   <data name="lbl_resistwind.TabIndex" type="System.Int32, mscorlib">
     <value>71</value>
   </data>
-  <data name="lbl_naturalarmor.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="lblMagicResist.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
+  <data name="cb_ModelBrace.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 21</value>
+  </data>
+  <data name="&gt;&gt;lblFireResist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbElementAtk.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
+  </data>
+  <data name="&gt;&gt;tpMonster.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
     <value>417, 169</value>
   </data>
+  <data name="&gt;&gt;lblFireResist.Name" xml:space="preserve">
+    <value>lblFireResist</value>
+  </data>
   <data name="&gt;&gt;tb_identifier.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="&gt;&gt;tbNaturalArmor.Name" xml:space="preserve">
+    <value>tbNaturalArmor</value>
+  </data>
+  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;label3.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="lbl_addmp.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 13</value>
@@ -1308,41 +2118,59 @@
   <data name="&gt;&gt;tb_dex.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="lbl_monsterai.Text" xml:space="preserve">
+    <value>AI :</value>
+  </data>
+  <data name="tb_reattackdelay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 65</value>
+  </data>
   <data name="tb_er.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 20</value>
   </data>
   <data name="lbl_class.Text" xml:space="preserve">
     <value>Rank :</value>
   </data>
+  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="cb_type.Size" type="System.Drawing.Size, System.Drawing">
     <value>172, 21</value>
   </data>
-  <data name="&gt;&gt;lbl_speed.Parent" xml:space="preserve">
-    <value>gb_monsterstatsmiscs</value>
+  <data name="lbl_atkmin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
   </data>
   <data name="lbl_resismgic.Location" type="System.Drawing.Point, System.Drawing">
     <value>211, 29</value>
   </data>
-  <data name="&gt;&gt;gb_moverstatsbasic.Name" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
+  <data name="lbl_sta.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="&gt;&gt;lbl_dex.Parent" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
+    <value>gbBasicStats</value>
   </data>
   <data name="tb_resistelecricity.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
   </data>
-  <data name="lbl_resismgic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 13</value>
+  <data name="&gt;&gt;lblExperience.Name" xml:space="preserve">
+    <value>lblExperience</value>
   </data>
   <data name="&gt;&gt;groupBox4.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;tb_resistwater.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbMp.Name" xml:space="preserve">
+    <value>tbMp</value>
+  </data>
+  <data name="&gt;&gt;tb_ModelScale.Parent" xml:space="preserve">
+    <value>gbModel</value>
   </data>
   <data name="ms_main.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 1, 0, 1</value>
+  </data>
+  <data name="tbNaturalArmor.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="gbMiscStats.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 177</value>
   </data>
   <data name="&gt;&gt;lbl_belligerence.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -1353,8 +2181,14 @@
   <data name="lbl_sta.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="&gt;&gt;lblLevel.Name" xml:space="preserve">
+    <value>lblLevel</value>
+  </data>
   <data name="&gt;&gt;groupBox2.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbEr.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="tsmi_moverdelete.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 22</value>
@@ -1363,19 +2197,37 @@
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tb_str.Parent" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
+    <value>gbBasicStats</value>
   </data>
   <data name="&gt;&gt;lbl_expvalue.Name" xml:space="preserve">
     <value>lbl_expvalue</value>
   </data>
+  <data name="lblElectricityResist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 164</value>
+  </data>
+  <data name="gbStats.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lblModelBrace.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="lbl_resistwind.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
   </data>
-  <data name="tp_monster.Size" type="System.Drawing.Size, System.Drawing">
-    <value>461, 569</value>
+  <data name="&gt;&gt;tbName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmsLbMovers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbClass.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;fichierToolStripMenuItem.Name" xml:space="preserve">
     <value>fichierToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;gbConfiguration.Parent" xml:space="preserve">
+    <value>tpGeneral</value>
   </data>
   <data name="tb_atkmax.Location" type="System.Drawing.Point, System.Drawing">
     <value>286, 108</value>
@@ -1389,14 +2241,20 @@
   <data name="optionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 22</value>
   </data>
-  <data name="lb_IdentifierAlreadyUsed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>68, 13</value>
+  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="lbl_resistwind.Text" xml:space="preserve">
     <value>Wind Res :</value>
   </data>
-  <data name="&gt;&gt;tb_resismgic.Parent" xml:space="preserve">
-    <value>gb_monsterstatsmiscs</value>
+  <data name="&gt;&gt;cb_belligerence.Name" xml:space="preserve">
+    <value>cb_belligerence</value>
+  </data>
+  <data name="lbl_naturalarmor.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;lblMagicResist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -4753,10 +5611,13 @@
     <value>67</value>
   </data>
   <data name="&gt;&gt;gb_monsterstatselements.Parent" xml:space="preserve">
-    <value>groupBox2</value>
+    <value>gbStats</value>
   </data>
   <data name="&gt;&gt;tsmi_moversadd.Name" xml:space="preserve">
     <value>tsmi_moversadd</value>
+  </data>
+  <data name="btMotions.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;lbl_er.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -4767,17 +5628,23 @@
   <data name="groupBox2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
-  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 186</value>
+  <data name="&gt;&gt;cbClass.Parent" xml:space="preserve">
+    <value>gbMisc</value>
+  </data>
+  <data name="&gt;&gt;lblAtkMin.Name" xml:space="preserve">
+    <value>lblAtkMin</value>
   </data>
   <data name="&gt;&gt;lbl_elementtype.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;tb_reattackdelay.Parent" xml:space="preserve">
-    <value>gb_monsterstatsmiscs</value>
+  <data name="&gt;&gt;gbBasicStats.Name" xml:space="preserve">
+    <value>gbBasicStats</value>
   </data>
-  <data name="&gt;&gt;tb_hr.Parent" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
+  <data name="&gt;&gt;gbModel.Name" xml:space="preserve">
+    <value>gbModel</value>
+  </data>
+  <data name="&gt;&gt;tb_resismgic.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tb_er.Name" xml:space="preserve">
     <value>tb_er</value>
@@ -4794,32 +5661,65 @@
   <data name="groupBox5.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="tb_naturalarmor.TabIndex" type="System.Int32, mscorlib">
-    <value>58</value>
+  <data name="lblDex.Location" type="System.Drawing.Point, System.Drawing">
+    <value>225, 35</value>
   </data>
   <data name="&gt;&gt;lbl_resistwater.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="groupBox3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="&gt;&gt;lblDex.ZOrder" xml:space="preserve">
+    <value>11</value>
   </data>
   <data name="&gt;&gt;lb_IdentifierAlreadyUsed.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="&gt;&gt;cbElementType.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
+  </data>
+  <data name="lbl_str.Text" xml:space="preserve">
+    <value>STR :</value>
+  </data>
   <data name="&gt;&gt;tb_resistearth.Name" xml:space="preserve">
     <value>tb_resistearth</value>
   </data>
-  <data name="lbl_monsterai.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;tsmiFileSave.Name" xml:space="preserve">
+    <value>tsmiFileSave</value>
   </data>
-  <data name="lb_IdentifierAlreadyUsed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 84</value>
+  <data name="&gt;&gt;tbAtkMax.Name" xml:space="preserve">
+    <value>tbAtkMax</value>
   </data>
-  <data name="&gt;&gt;lbl_addmp.ZOrder" xml:space="preserve">
-    <value>15</value>
+  <data name="&gt;&gt;bt_motions.Name" xml:space="preserve">
+    <value>bt_motions</value>
   </data>
-  <data name="&gt;&gt;lbl_resistfire.Type" xml:space="preserve">
+  <data name="tb_reattackdelay.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="lblType.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblMonsterAI.Location" type="System.Drawing.Point, System.Drawing">
+    <value>142, 25</value>
+  </data>
+  <data name="lbl_atkmax.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="tsmiFileSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="&gt;&gt;lblType.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMp.Name" xml:space="preserve">
+    <value>lblMp</value>
+  </data>
+  <data name="&gt;&gt;lblNaturalArmor.Name" xml:space="preserve">
+    <value>lblNaturalArmor</value>
+  </data>
+  <data name="&gt;&gt;lblAttackDelay.Name" xml:space="preserve">
+    <value>lblAttackDelay</value>
+  </data>
+  <data name="tbAtkMin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>83, 105</value>
   </data>
   <data name="lbl_resismgic.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -4827,32 +5727,62 @@
   <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
     <value>136, 48</value>
   </data>
+  <data name="&gt;&gt;gbConfiguration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;label1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tb_atkmin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 20</value>
+  <data name="&gt;&gt;cbModelBrace.Parent" xml:space="preserve">
+    <value>gbModel</value>
   </data>
-  <data name="&gt;&gt;lbl_reattackdelay.Parent" xml:space="preserve">
-    <value>gb_monsterstatsmiscs</value>
+  <data name="&gt;&gt;lblHp.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;lblName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblIdentifier.Parent" xml:space="preserve">
+    <value>gbMain</value>
+  </data>
+  <data name="lbl_monsterai.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;cbType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cb_belligerence.Size" type="System.Drawing.Size, System.Drawing">
     <value>146, 21</value>
   </data>
+  <data name="&gt;&gt;lbl_resistwind.Name" xml:space="preserve">
+    <value>lbl_resistwind</value>
+  </data>
+  <data name="lblFireResist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>204, 77</value>
+  </data>
   <data name="&gt;&gt;tb_fspeed.Parent" xml:space="preserve">
-    <value>gb_monsterstatsmiscs</value>
+    <value>gbMiscStats</value>
+  </data>
+  <data name="&gt;&gt;gbBasicStats.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;tb_elementatk.Parent" xml:space="preserve">
-    <value>gb_monsterstatselements</value>
+    <value>gbStatsElements</value>
   </data>
-  <data name="lbl_atkmax.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;lblEr.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
-  <data name="lb_movers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Left</value>
+  <data name="tbModelFile.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="tb_addhp.TabIndex" type="System.Int32, mscorlib">
-    <value>54</value>
+  <data name="cbBelligerence.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 49</value>
+  </data>
+  <data name="&gt;&gt;groupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbWaterResist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tb_sta.Location" type="System.Drawing.Point, System.Drawing">
     <value>71, 55</value>
@@ -4860,8 +5790,17 @@
   <data name="lbl_addmp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="cbAI.TabIndex" type="System.Int32, mscorlib">
+    <value>76</value>
+  </data>
   <data name="&gt;&gt;cb_elementtype.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="lblIdentifierAlreadyUsed.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="lblWindResist.TabIndex" type="System.Int32, mscorlib">
+    <value>71</value>
   </data>
   <data name="tb_atkmin.TabIndex" type="System.Int32, mscorlib">
     <value>48</value>
@@ -4869,20 +5808,35 @@
   <data name="lbl_resistwind.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="label3.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="&gt;&gt;tbName.Parent" xml:space="preserve">
+    <value>gbMain</value>
   </data>
   <data name="&gt;&gt;tb_resistfire.Name" xml:space="preserve">
     <value>tb_resistfire</value>
   </data>
+  <data name="lbl_elementatk.TabIndex" type="System.Int32, mscorlib">
+    <value>61</value>
+  </data>
   <data name="lbl_resistwater.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="tb_hr.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
+  <data name="&gt;&gt;lblFireResist.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
   </data>
-  <data name="&gt;&gt;tb_resismgic.Name" xml:space="preserve">
-    <value>tb_resismgic</value>
+  <data name="&gt;&gt;tbModelScale.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tbHp.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;lblFile.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;gbStatsElements.Parent" xml:space="preserve">
+    <value>gbStats</value>
+  </data>
+  <data name="&gt;&gt;lblHp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lbl_resistfire.Text" xml:space="preserve">
     <value>Fire Res :</value>
@@ -4893,26 +5847,44 @@
   <data name="tb_name.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
   </data>
-  <data name="&gt;&gt;tb_name.Type" xml:space="preserve">
+  <data name="&gt;&gt;tb_str.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;tblAttackDelay.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="&gt;&gt;tp_general.Parent" xml:space="preserve">
-    <value>tc_main</value>
+    <value>tcMain</value>
+  </data>
+  <data name="&gt;&gt;tbMagicResist.Name" xml:space="preserve">
+    <value>tbMagicResist</value>
+  </data>
+  <data name="&gt;&gt;tsmiFileReload.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lbl_monsterai.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblIdentifierAlreadyUsed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>311, 84</value>
+  </data>
   <data name="&gt;&gt;lbl_name.Parent" xml:space="preserve">
-    <value>groupBox4</value>
+    <value>gbMain</value>
   </data>
-  <data name="&gt;&gt;tb_naturalarmor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbFireResist.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
-  <data name="tb_str.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 29</value>
+  <data name="tcMain.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;lblClass.Parent" xml:space="preserve">
+    <value>gbMisc</value>
   </data>
   <data name="&gt;&gt;lbl_resistfire.Name" xml:space="preserve">
     <value>lbl_resistfire</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterAI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;cb_monsterai.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -4926,11 +5898,29 @@
   <data name="lbl_resistelecricity.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="&gt;&gt;lblNaturalArmor.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;tb_atkmax.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="lbl_dex.Location" type="System.Drawing.Point, System.Drawing">
     <value>225, 35</value>
   </data>
+  <data name="gbBasicStats.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="tbHp.TabIndex" type="System.Int32, mscorlib">
+    <value>54</value>
+  </data>
   <data name="&gt;&gt;tc_main.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblMagicResist.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
+  </data>
+  <data name="&gt;&gt;lblWindResist.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
   </data>
   <data name="&gt;&gt;groupBox2.Name" xml:space="preserve">
     <value>groupBox2</value>
@@ -4941,35 +5931,56 @@
   <data name="lb_IdentifierAlreadyUsed.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="tbAtkMin.TabIndex" type="System.Int32, mscorlib">
+    <value>48</value>
+  </data>
   <data name="&gt;&gt;lb_IdentifierAlreadyUsed.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cb_type.Parent" xml:space="preserve">
-    <value>groupBox4</value>
+  <data name="lblExperience.TabIndex" type="System.Int32, mscorlib">
+    <value>73</value>
+  </data>
+  <data name="&gt;&gt;lblType.Parent" xml:space="preserve">
+    <value>gbMain</value>
+  </data>
+  <data name="&gt;&gt;tbFireResist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox1.Name" xml:space="preserve">
     <value>groupBox1</value>
   </data>
+  <data name="&gt;&gt;tblAttackDelay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;label2.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbMain.Name" xml:space="preserve">
+    <value>gbMain</value>
+  </data>
+  <data name="&gt;&gt;lblAttackDelay.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="&gt;&gt;tsmi_moverdelete.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lbl_belligerence.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="lblElementAtk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>202, 44</value>
+  </data>
+  <data name="&gt;&gt;rechercherToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbl_speed.Name" xml:space="preserve">
     <value>lbl_speed</value>
   </data>
-  <data name="lbl_addmp.Text" xml:space="preserve">
-    <value>MP :</value>
+  <data name="cb_belligerence.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 49</value>
   </data>
   <data name="&gt;&gt;lb_movers.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="gb_monsterstatselements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>443, 201</value>
+  <data name="&gt;&gt;tp_monster.Name" xml:space="preserve">
+    <value>tp_monster</value>
   </data>
   <data name="&gt;&gt;lbl_resistearth.ZOrder" xml:space="preserve">
     <value>2</value>
@@ -4980,125 +5991,254 @@
   <data name="&gt;&gt;groupBox4.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="lblWaterResist.TabIndex" type="System.Int32, mscorlib">
+    <value>73</value>
+  </data>
   <data name="&gt;&gt;tb_level.Parent" xml:space="preserve">
     <value>groupBox5</value>
   </data>
-  <data name="&gt;&gt;tb_resistelecricity.Name" xml:space="preserve">
-    <value>tb_resistelecricity</value>
+  <data name="lbl_name.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 13</value>
   </data>
   <data name="&gt;&gt;tb_dex.Parent" xml:space="preserve">
-    <value>gb_moverstatsbasic</value>
+    <value>gbBasicStats</value>
   </data>
   <data name="&gt;&gt;bt_SelectModelFile.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tb_hr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 20</value>
+  <data name="&gt;&gt;lblAtkMax.Name" xml:space="preserve">
+    <value>lblAtkMax</value>
+  </data>
+  <data name="&gt;&gt;lblIdentifierAlreadyUsed.Name" xml:space="preserve">
+    <value>lblIdentifierAlreadyUsed</value>
   </data>
   <data name="fichierToolStripMenuItem.Text" xml:space="preserve">
     <value>File</value>
   </data>
-  <data name="bt_SelectModelFile.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+  <data name="tcMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>221, 24</value>
   </data>
-  <data name="&gt;&gt;cms_lbmovers.Name" xml:space="preserve">
-    <value>cms_lbmovers</value>
+  <data name="&gt;&gt;lbIdentifierAlreadyUsed.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="tb_resistfire.TabIndex" type="System.Int32, mscorlib">
-    <value>70</value>
-  </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
-    <value>groupBox1</value>
-  </data>
-  <data name="lbl_resismgic.TabIndex" type="System.Int32, mscorlib">
-    <value>67</value>
-  </data>
-  <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
-    <value>tp_general</value>
-  </data>
-  <data name="lbl_er.Text" xml:space="preserve">
-    <value>Dodge :</value>
-  </data>
-  <data name="&gt;&gt;lbl_dex.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="gb_monsterstatsmiscs.Text" xml:space="preserve">
-    <value>Misc</value>
-  </data>
-  <data name="&gt;&gt;tb_dex.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 371</value>
-  </data>
-  <data name="lbl_type.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="&gt;&gt;lbl_identifier.Parent" xml:space="preserve">
-    <value>groupBox4</value>
-  </data>
-  <data name="lbl_naturalarmor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 13</value>
-  </data>
-  <data name="lbl_identifier.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 65</value>
-  </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="tb_identifier.Size" type="System.Drawing.Size, System.Drawing">
-    <value>174, 20</value>
+  <data name="&gt;&gt;label3.Parent" xml:space="preserve">
+    <value>gbModel</value>
   </data>
   <data name="lbl_hr.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;tb_naturalarmor.Name" xml:space="preserve">
-    <value>tb_naturalarmor</value>
+  <data name="tbEr.TabIndex" type="System.Int32, mscorlib">
+    <value>40</value>
   </data>
-  <data name="gb_moverstatsbasic.Text" xml:space="preserve">
-    <value>Base</value>
+  <data name="tbInt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 58</value>
   </data>
-  <data name="&gt;&gt;lbl_speed.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblElectricityResist.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
+  </data>
+  <data name="&gt;&gt;cb_elementtype.Name" xml:space="preserve">
+    <value>cb_elementtype</value>
+  </data>
+  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+    <value>gbModel</value>
+  </data>
+  <data name="groupBox3.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="lbl_resismgic.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
+  <data name="&gt;&gt;tbStr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tb_ModelName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 45</value>
+  </data>
+  <data name="tbFireResist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 74</value>
+  </data>
+  <data name="&gt;&gt;msMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAtkMin.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblElementType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblInt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>225, 61</value>
+  </data>
+  <data name="lblFile.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lbl_dex.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lbl_resistearth.Text" xml:space="preserve">
+    <value>Earth Res :</value>
+  </data>
+  <data name="gb_monsterstatsmiscs.Text" xml:space="preserve">
+    <value>Misc</value>
+  </data>
+  <data name="tbElementAtk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 41</value>
+  </data>
+  <data name="&gt;&gt;btnSelectModelFile.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lbl_reattackdelay.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 371</value>
+  </data>
+  <data name="&gt;&gt;gb_monsterstatsmiscs.Name" xml:space="preserve">
+    <value>gb_monsterstatsmiscs</value>
+  </data>
+  <data name="&gt;&gt;lbl_identifier.Parent" xml:space="preserve">
+    <value>gbMain</value>
+  </data>
+  <data name="&gt;&gt;gbStatsElements.Name" xml:space="preserve">
+    <value>gbStatsElements</value>
+  </data>
+  <data name="&gt;&gt;btMotions.Parent" xml:space="preserve">
+    <value>gbModel</value>
+  </data>
+  <data name="&gt;&gt;tb_identifier.Parent" xml:space="preserve">
+    <value>gbMain</value>
+  </data>
+  <data name="lbl_naturalarmor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 13</value>
+  </data>
+  <data name="lblModelScale.Location" type="System.Drawing.Point, System.Drawing">
+    <value>117, 82</value>
+  </data>
+  <data name="cbClass.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 102</value>
+  </data>
+  <data name="&gt;&gt;tbAtkMax.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lbl_identifier.Location" type="System.Drawing.Point, System.Drawing">
+    <value>191, 65</value>
+  </data>
+  <data name="lblMp.TabIndex" type="System.Int32, mscorlib">
+    <value>55</value>
+  </data>
+  <data name="lblClass.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 105</value>
+  </data>
+  <data name="&gt;&gt;tb_sta.Name" xml:space="preserve">
+    <value>tb_sta</value>
+  </data>
+  <data name="&gt;&gt;tb_resismgic.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
+  </data>
+  <data name="tsmi_movers.Text" xml:space="preserve">
+    <value>Movers</value>
+  </data>
+  <data name="&gt;&gt;tbWindResist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblExperience.Parent" xml:space="preserve">
+    <value>gbMisc</value>
+  </data>
+  <data name="lblInt.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="&gt;&gt;tbElectricityResist.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
+  </data>
+  <data name="tb_ModelScale.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="gbStats.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="cb_elementtype.TabIndex" type="System.Int32, mscorlib">
     <value>60</value>
   </data>
-  <data name="&gt;&gt;lbl_type.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;gb_moverstatsbasic.Name" xml:space="preserve">
+    <value>gb_moverstatsbasic</value>
   </data>
-  <data name="&gt;&gt;lbl_int.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;gbBasicStats.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tpMonster.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="lblHp.TabIndex" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
+  <data name="lbl_expvalue.TabIndex" type="System.Int32, mscorlib">
+    <value>73</value>
   </data>
   <data name="&gt;&gt;lbl_identifier.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;tbName.Name" xml:space="preserve">
+    <value>tbName</value>
+  </data>
   <data name="&gt;&gt;lb_movers.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="&gt;&gt;tb_er.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="cb_monsterai.TabIndex" type="System.Int32, mscorlib">
     <value>76</value>
   </data>
+  <data name="&gt;&gt;tbHp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;groupBox5.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;tb_expvalue.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="lbl_dex.Text" xml:space="preserve">
+    <value>DEX :</value>
+  </data>
+  <data name="&gt;&gt;cmsLbMovers.Name" xml:space="preserve">
+    <value>cmsLbMovers</value>
   </data>
   <data name="&gt;&gt;lbl_reattackdelay.Name" xml:space="preserve">
     <value>lbl_reattackdelay</value>
   </data>
-  <data name="&gt;&gt;lbl_resistwater.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblEarthResist.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterAI.Name" xml:space="preserve">
+    <value>lblMonsterAI</value>
+  </data>
+  <data name="&gt;&gt;groupBox3.Parent" xml:space="preserve">
+    <value>tpGeneral</value>
+  </data>
+  <data name="label3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 114</value>
+  </data>
+  <data name="&gt;&gt;lbl_atkmax.Name" xml:space="preserve">
+    <value>lbl_atkmax</value>
   </data>
   <data name="&gt;&gt;tc_main.Type" xml:space="preserve">
     <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;lblEarthResist.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblAtkMin.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="&gt;&gt;lblModelBrace.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbl_resistfire.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
+  </data>
+  <data name="tpGeneral.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;tb_fspeed.Name" xml:space="preserve">
     <value>tb_fspeed</value>
+  </data>
+  <data name="lblLevel.TabIndex" type="System.Int32, mscorlib">
+    <value>68</value>
   </data>
   <data name="&gt;&gt;tb_str.ZOrder" xml:space="preserve">
     <value>5</value>
@@ -5106,8 +6246,20 @@
   <data name="&gt;&gt;lbl_monsterai.Parent" xml:space="preserve">
     <value>groupBox5</value>
   </data>
+  <data name="tbModelScale.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 79</value>
+  </data>
+  <data name="&gt;&gt;tbEr.Name" xml:space="preserve">
+    <value>tbEr</value>
+  </data>
+  <data name="lblIdentifier.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;lblWindResist.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="&gt;&gt;tb_resistwater.Parent" xml:space="preserve">
-    <value>gb_monsterstatselements</value>
+    <value>gbStatsElements</value>
   </data>
   <data name="&gt;&gt;tsmi_reload.Name" xml:space="preserve">
     <value>tsmi_reload</value>
@@ -5115,8 +6267,8 @@
   <data name="lbl_hr.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
   </data>
-  <data name="tb_ModelScale.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="lblStr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 32</value>
   </data>
   <data name="tb_resistwater.Location" type="System.Drawing.Point, System.Drawing">
     <value>71, 77</value>
@@ -5124,29 +6276,44 @@
   <data name="&gt;&gt;label1.Name" xml:space="preserve">
     <value>label1</value>
   </data>
-  <data name="tb_addmp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 20</value>
+  <data name="&gt;&gt;tbEarthResist.Parent" xml:space="preserve">
+    <value>gbStatsElements</value>
   </data>
-  <data name="lbl_atkmin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;lbl_reattackdelay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lbl_level.TabIndex" type="System.Int32, mscorlib">
-    <value>68</value>
+  <data name="&gt;&gt;tbMagicResist.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;label3.Name" xml:space="preserve">
-    <value>label3</value>
+  <data name="&gt;&gt;tbEarthResist.Name" xml:space="preserve">
+    <value>tbEarthResist</value>
+  </data>
+  <data name="&gt;&gt;tsmiFileReload.Name" xml:space="preserve">
+    <value>tsmiFileReload</value>
+  </data>
+  <data name="&gt;&gt;tbMagicResist.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
+  </data>
+  <data name="tb_expvalue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="&gt;&gt;tbMagicResist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="gb_moverstatsbasic.Text" xml:space="preserve">
+    <value>Base</value>
   </data>
   <data name="tp_monster.Text" xml:space="preserve">
     <value>Monster</value>
   </data>
-  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>461, 569</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>690, 619</value>
   </data>
   <data name="cb_type.Location" type="System.Drawing.Point, System.Drawing">
     <value>131, 133</value>
   </data>
-  <data name="&gt;&gt;cb_elementtype.Name" xml:space="preserve">
-    <value>cb_elementtype</value>
+  <data name="tb_name.Size" type="System.Drawing.Size, System.Drawing">
+    <value>174, 20</value>
   </data>
   <data name="cb_ModelBrace.Location" type="System.Drawing.Point, System.Drawing">
     <value>171, 111</value>
@@ -5154,50 +6321,77 @@
   <data name="tb_resistfire.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 20</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="lb_IdentifierAlreadyUsed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>311, 84</value>
+  </data>
+  <data name="&gt;&gt;lblLevel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lbl_naturalarmor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="tsmi_movers.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 22</value>
   </data>
-  <data name="lbl_level.Text" xml:space="preserve">
-    <value>Level :</value>
+  <data name="&gt;&gt;lblModelScale.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;gb_moverstatsbasic.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tsmiMoverDelete.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lbIdentifierAlreadyUsed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>311, 84</value>
+  </data>
+  <data name="gbBasicStats.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 19</value>
   </data>
   <data name="&gt;&gt;tb_resistearth.Parent" xml:space="preserve">
-    <value>gb_monsterstatselements</value>
+    <value>gbStatsElements</value>
   </data>
-  <data name="&gt;&gt;lbl_atkmin.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;tbExperience.Name" xml:space="preserve">
+    <value>tbExperience</value>
   </data>
   <data name="&gt;&gt;bt_motions.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+    <value>gbModel</value>
   </data>
   <data name="&gt;&gt;lbl_elementatk.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="tp_monster.Size" type="System.Drawing.Size, System.Drawing">
+    <value>461, 569</value>
+  </data>
+  <data name="&gt;&gt;tsmiFile.Name" xml:space="preserve">
+    <value>tsmiFile</value>
   </data>
   <data name="&gt;&gt;lbl_int.Name" xml:space="preserve">
     <value>lbl_int</value>
   </data>
-  <data name="lbl_atkmax.Text" xml:space="preserve">
-    <value>Atk max :</value>
+  <data name="&gt;&gt;tbAtkMin.Name" xml:space="preserve">
+    <value>tbAtkMin</value>
   </data>
-  <data name="lbl_elementtype.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
+  <data name="&gt;&gt;cbBelligerence.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
-  <data name="lbl_name.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;lblSta.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbMiscStats.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="gbStatsElements.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 367</value>
   </data>
   <data name="tb_resismgic.Location" type="System.Drawing.Point, System.Drawing">
     <value>281, 26</value>
   </data>
-  <data name="&gt;&gt;tsmi_movers.Name" xml:space="preserve">
-    <value>tsmi_movers</value>
+  <data name="lbl_addmp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>225, 119</value>
+  </data>
+  <data name="tbAtkMax.TabIndex" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="tbName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>129, 33</value>
   </data>
   <data name="label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -5205,35 +6399,56 @@
   <data name="&gt;&gt;cb_belligerence.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;tb_reattackdelay.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
+  </data>
   <data name="lbl_reattackdelay.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 13</value>
   </data>
-  <data name="lbl_resismgic.Text" xml:space="preserve">
-    <value>Magic Res :</value>
+  <data name="&gt;&gt;tsmiMoverDelete.Name" xml:space="preserve">
+    <value>tsmiMoverDelete</value>
   </data>
-  <data name="label3.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;tsmiSettings.Name" xml:space="preserve">
+    <value>tsmiSettings</value>
   </data>
   <data name="&gt;&gt;tb_expvalue.Name" xml:space="preserve">
     <value>tb_expvalue</value>
   </data>
+  <data name="lbl_belligerence.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="gb_moverstatsbasic.Size" type="System.Drawing.Size, System.Drawing">
+    <value>444, 152</value>
+  </data>
   <data name="lbl_speed.Location" type="System.Drawing.Point, System.Drawing">
     <value>126, 155</value>
   </data>
-  <data name="&gt;&gt;lbl_resistfire.Parent" xml:space="preserve">
-    <value>gb_monsterstatselements</value>
+  <data name="&gt;&gt;cbClass.Name" xml:space="preserve">
+    <value>cbClass</value>
+  </data>
+  <data name="lb_movers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Left</value>
   </data>
   <data name="tb_dex.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
   </data>
-  <data name="&gt;&gt;tb_ModelName.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;lblIdentifierAlreadyUsed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="tb_ModelScale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
+  <data name="&gt;&gt;groupBox5.Name" xml:space="preserve">
+    <value>groupBox5</value>
   </data>
-  <data name="&gt;&gt;tb_ModelName.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+  <data name="tb_str.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 29</value>
+  </data>
+  <data name="&gt;&gt;tbEr.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
+  </data>
+  <data name="&gt;&gt;lblAttackDelay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbAI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbl_addhp.ZOrder" xml:space="preserve">
     <value>13</value>
@@ -5241,47 +6456,95 @@
   <data name="&gt;&gt;tb_resistearth.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lbl_er.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbFireResist.Name" xml:space="preserve">
+    <value>tbFireResist</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Movers Editor</value>
   </data>
-  <data name="tb_reattackdelay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>176, 65</value>
+  <data name="&gt;&gt;tbElementAtk.Name" xml:space="preserve">
+    <value>tbElementAtk</value>
   </data>
-  <data name="lbl_monsterai.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 25</value>
+  <data name="&gt;&gt;lblHit.Name" xml:space="preserve">
+    <value>lblHit</value>
+  </data>
+  <data name="lblNaturalArmor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>31, 26</value>
+  </data>
+  <data name="&gt;&gt;lbl_speed.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
   </data>
   <data name="groupBox5.Text" xml:space="preserve">
     <value>Misc</value>
   </data>
-  <data name="&gt;&gt;bt_SelectModelFile.Name" xml:space="preserve">
-    <value>bt_SelectModelFile</value>
+  <data name="&gt;&gt;tbModelFile.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="lbl_hr.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 13</value>
   </data>
+  <data name="lblWindResist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 125</value>
+  </data>
+  <data name="lbl_monsterai.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 13</value>
+  </data>
   <data name="lbl_elementtype.Text" xml:space="preserve">
     <value>Element :</value>
   </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lbl_expvalue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbSta.Name" xml:space="preserve">
+    <value>tbSta</value>
+  </data>
+  <data name="tblAttackDelay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>176, 65</value>
+  </data>
+  <data name="&gt;&gt;gbMain.Parent" xml:space="preserve">
+    <value>gbConfiguration</value>
+  </data>
+  <data name="&gt;&gt;lbl_atkmin.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="tsmiMoversFind.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="optionsToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+O</value>
   </data>
   <data name="&gt;&gt;lbl_reattackdelay.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="cbAI.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 22</value>
+  </data>
   <data name="lbl_type.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
   </data>
-  <data name="&gt;&gt;lbl_addhp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lbl_er.Text" xml:space="preserve">
+    <value>Dodge :</value>
+  </data>
+  <data name="lblFireResist.TabIndex" type="System.Int32, mscorlib">
+    <value>69</value>
+  </data>
+  <data name="lbl_addmp.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;tb_resismgic.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="lbl_resistfire.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="&gt;&gt;tb_identifier.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;cbBelligerence.Name" xml:space="preserve">
+    <value>cbBelligerence</value>
+  </data>
+  <data name="cbClass.TabIndex" type="System.Int32, mscorlib">
+    <value>71</value>
+  </data>
+  <data name="tbElectricityResist.TabIndex" type="System.Int32, mscorlib">
+    <value>68</value>
   </data>
   <data name="gb_monsterstatsmiscs.Size" type="System.Drawing.Size, System.Drawing">
     <value>443, 184</value>
@@ -5293,40 +6556,79 @@
     <value>176, 152</value>
   </data>
   <data name="&gt;&gt;lbl_elementatk.Parent" xml:space="preserve">
-    <value>gb_monsterstatselements</value>
+    <value>gbStatsElements</value>
+  </data>
+  <data name="&gt;&gt;tcMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tp_monster.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
+  <data name="&gt;&gt;lblMp.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
+  </data>
+  <data name="&gt;&gt;btMotions.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;btnSelectModelFile.Parent" xml:space="preserve">
+    <value>gbModel</value>
+  </data>
   <data name="&gt;&gt;tb_atkmin.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="tp_general.Text" xml:space="preserve">
-    <value>General</value>
+  <data name="lblModelFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>121, 48</value>
   </data>
-  <data name="&gt;&gt;tb_addmp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;lblClass.Name" xml:space="preserve">
+    <value>lblClass</value>
+  </data>
+  <data name="&gt;&gt;lblAI.Name" xml:space="preserve">
+    <value>lblAI</value>
+  </data>
+  <data name="&gt;&gt;msMain.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="btnSelectModelFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>290, 43</value>
   </data>
   <data name="lbl_level.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="&gt;&gt;tb_hr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tbDex.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tsmiFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbl_atkmin.Name" xml:space="preserve">
+    <value>lbl_atkmin</value>
   </data>
   <data name="lbl_reattackdelay.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lbl_identifier.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;tcMain.Name" xml:space="preserve">
+    <value>tcMain</value>
   </data>
-  <data name="lbl_int.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;lbIdentifierAlreadyUsed.Name" xml:space="preserve">
+    <value>lbIdentifierAlreadyUsed</value>
+  </data>
+  <data name="lblAtkMin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 108</value>
+  </data>
+  <data name="&gt;&gt;gbStatsElements.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tsmiMovers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 22</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;tb_ModelScale.Parent" xml:space="preserve">
-    <value>groupBox1</value>
+  <data name="gbConfiguration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="lbl_reattackdelay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>113, 68</value>
   </data>
   <data name="tb_ModelName.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -5340,6 +6642,27 @@
   <data name="tb_expvalue.Location" type="System.Drawing.Point, System.Drawing">
     <value>171, 129</value>
   </data>
+  <data name="lbl_name.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="gbStr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 32</value>
+  </data>
+  <data name="&gt;&gt;tbHp.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
+  </data>
+  <data name="&gt;&gt;lblMagicResist.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbMp.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
+  </data>
+  <data name="&gt;&gt;msMain.Name" xml:space="preserve">
+    <value>msMain</value>
+  </data>
+  <data name="&gt;&gt;tpMonster.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="tp_general.Size" type="System.Drawing.Size, System.Drawing">
     <value>461, 569</value>
   </data>
@@ -5349,8 +6672,26 @@
   <data name="&gt;&gt;lbl_er.Name" xml:space="preserve">
     <value>lbl_er</value>
   </data>
+  <data name="&gt;&gt;lbl_resistelecricity.Name" xml:space="preserve">
+    <value>lbl_resistelecricity</value>
+  </data>
+  <data name="&gt;&gt;lblElementAtk.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="label3.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbSta.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
   <data name="tb_naturalarmor.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 20</value>
+  </data>
+  <data name="groupBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>461, 569</value>
+  </data>
+  <data name="tb_int.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
   </data>
   <data name="rechercherToolStripMenuItem.Text" xml:space="preserve">
     <value>Find</value>
@@ -5361,23 +6702,38 @@
   <data name="lbl_belligerence.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 13</value>
   </data>
-  <data name="tb_resistelecricity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 161</value>
+  <data name="groupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
   </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 82</value>
+  <data name="&gt;&gt;gbConfiguration.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="groupBox3.Text" xml:space="preserve">
-    <value>Configuration</value>
+  <data name="&gt;&gt;tsmiMoversAdd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tb_ModelName.Parent" xml:space="preserve">
+    <value>gbModel</value>
+  </data>
+  <data name="&gt;&gt;lblAI.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="groupBox5.Location" type="System.Drawing.Point, System.Drawing">
     <value>24, 194</value>
   </data>
   <data name="&gt;&gt;lbl_resistelecricity.Parent" xml:space="preserve">
-    <value>gb_monsterstatselements</value>
+    <value>gbStatsElements</value>
+  </data>
+  <data name="lblElementType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 48</value>
+  </data>
+  <data name="&gt;&gt;gbMisc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;groupBox4.Parent" xml:space="preserve">
-    <value>groupBox3</value>
+    <value>gbConfiguration</value>
+  </data>
+  <data name="&gt;&gt;tb_sta.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
   </data>
   <data name="&gt;&gt;tb_reattackdelay.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -5385,17 +6741,29 @@
   <data name="tb_addmp.Location" type="System.Drawing.Point, System.Drawing">
     <value>255, 116</value>
   </data>
+  <data name="&gt;&gt;lblIdentifier.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="lb_movers.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 595</value>
   </data>
-  <data name="tb_elementatk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 41</value>
+  <data name="&gt;&gt;lblMonsterAI.Parent" xml:space="preserve">
+    <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;tbSta.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
+  </data>
+  <data name="tsmiFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 22</value>
+  </data>
+  <data name="lbl_elementtype.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <data name="cb_monsterai.Location" type="System.Drawing.Point, System.Drawing">
     <value>171, 22</value>
   </data>
-  <data name="&gt;&gt;lbl_naturalarmor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="gbStatsElements.TabIndex" type="System.Int32, mscorlib">
+    <value>64</value>
   </data>
   <data name="&gt;&gt;tb_atkmax.Name" xml:space="preserve">
     <value>tb_atkmax</value>
@@ -5403,32 +6771,65 @@
   <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 13</value>
   </data>
+  <data name="tb_hr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>118, 20</value>
+  </data>
   <data name="bt_motions.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="&gt;&gt;tb_str.Name" xml:space="preserve">
-    <value>tb_str</value>
+  <data name="&gt;&gt;tb_er.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="tb_atkmin.Location" type="System.Drawing.Point, System.Drawing">
     <value>83, 105</value>
   </data>
+  <data name="&gt;&gt;lbl_atkmax.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblIdentifierAlreadyUsed.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;lbl_speed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="lbl_atkmin.Location" type="System.Drawing.Point, System.Drawing">
     <value>30, 108</value>
   </data>
-  <data name="lbl_str.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
+  <data name="&gt;&gt;tp_monster.Parent" xml:space="preserve">
+    <value>tcMain</value>
   </data>
-  <data name="bt_motions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 157</value>
+  <data name="&gt;&gt;lblAttackDelay.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
+  </data>
+  <data name="lblAttackDelay.TabIndex" type="System.Int32, mscorlib">
+    <value>51</value>
+  </data>
+  <data name="&gt;&gt;lblSpeed.Name" xml:space="preserve">
+    <value>lblSpeed</value>
+  </data>
+  <data name="lbl_sta.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="tb_elementatk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 41</value>
   </data>
   <data name="lbl_elementatk.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
   </data>
+  <data name="&gt;&gt;tbAtkMin.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
+  </data>
+  <data name="&gt;&gt;tsmiSettings.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;tb_atkmax.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tb_atkmax.Parent" xml:space="preserve">
-    <value>gb_monsterstatsmiscs</value>
+  <data name="tbWaterResist.TabIndex" type="System.Int32, mscorlib">
+    <value>74</value>
+  </data>
+  <data name="&gt;&gt;tb_naturalarmor.Name" xml:space="preserve">
+    <value>tb_naturalarmor</value>
   </data>
   <data name="tsmi_moversadd.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+P</value>
@@ -5442,26 +6843,56 @@
   <data name="lbl_level.Location" type="System.Drawing.Point, System.Drawing">
     <value>126, 79</value>
   </data>
-  <data name="&gt;&gt;lbl_hr.ZOrder" xml:space="preserve">
-    <value>6</value>
+  <data name="&gt;&gt;lbl_type.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;lbl_str.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="&gt;&gt;cb_belligerence.Name" xml:space="preserve">
-    <value>cb_belligerence</value>
+  <data name="&gt;&gt;lblFile.Name" xml:space="preserve">
+    <value>lblFile</value>
+  </data>
+  <data name="&gt;&gt;cbType.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;tp_general.Name" xml:space="preserve">
     <value>tp_general</value>
   </data>
+  <data name="lblEr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>227, 84</value>
+  </data>
+  <data name="&gt;&gt;lbl_class.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblClass.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbLevel.Name" xml:space="preserve">
+    <value>tbLevel</value>
+  </data>
   <data name="lbl_speed.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="&gt;&gt;lblModelScale.Name" xml:space="preserve">
+    <value>lblModelScale</value>
+  </data>
+  <data name="lb_IdentifierAlreadyUsed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 13</value>
+  </data>
+  <data name="&gt;&gt;lblWindResist.Name" xml:space="preserve">
+    <value>lblWindResist</value>
   </data>
   <data name="tc_main.Size" type="System.Drawing.Size, System.Drawing">
     <value>469, 595</value>
   </data>
-  <data name="bt_motions.Text" xml:space="preserve">
-    <value>Motions</value>
+  <data name="lblBelligerence.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
+  <data name="lbl_resismgic.Text" xml:space="preserve">
+    <value>Magic Res :</value>
+  </data>
+  <data name="tb_resistelecricity.Location" type="System.Drawing.Point, System.Drawing">
+    <value>164, 161</value>
   </data>
   <data name="&gt;&gt;lb_movers.Name" xml:space="preserve">
     <value>lb_movers</value>
@@ -5469,20 +6900,44 @@
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
   </data>
+  <data name="&gt;&gt;gbStatsElements.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="lbl_identifier.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 13</value>
+  </data>
+  <data name="&gt;&gt;gbMiscStats.Name" xml:space="preserve">
+    <value>gbMiscStats</value>
   </data>
   <data name="tb_str.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="optionsToolStripMenuItem.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+O</value>
+  <data name="&gt;&gt;lblHit.Parent" xml:space="preserve">
+    <value>gbBasicStats</value>
+  </data>
+  <data name="lbl_resistfire.TabIndex" type="System.Int32, mscorlib">
+    <value>69</value>
+  </data>
+  <data name="&gt;&gt;tbMp.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="tb_naturalarmor.TabIndex" type="System.Int32, mscorlib">
+    <value>58</value>
+  </data>
+  <data name="&gt;&gt;cb_type.Parent" xml:space="preserve">
+    <value>gbMain</value>
+  </data>
+  <data name="groupBox2.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="lbl_name.Text" xml:space="preserve">
     <value>Name :</value>
   </data>
-  <data name="&gt;&gt;tsmi_moversadd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;tb_resistwater.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbEr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="groupBox1.Text" xml:space="preserve">
     <value>Model</value>
@@ -5493,14 +6948,20 @@
   <data name="&gt;&gt;lbl_hr.Name" xml:space="preserve">
     <value>lbl_hr</value>
   </data>
-  <data name="&gt;&gt;tb_resistfire.Parent" xml:space="preserve">
-    <value>gb_monsterstatselements</value>
+  <data name="tbWindResist.TabIndex" type="System.Int32, mscorlib">
+    <value>72</value>
   </data>
-  <data name="&gt;&gt;tb_resismgic.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="lbl_hr.Text" xml:space="preserve">
+    <value>Hit :</value>
+  </data>
+  <data name="bt_motions.Text" xml:space="preserve">
+    <value>Motions</value>
+  </data>
+  <data name="&gt;&gt;lblFireResist.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
   <data name="&gt;&gt;lbl_atkmin.Parent" xml:space="preserve">
-    <value>gb_monsterstatsmiscs</value>
+    <value>gbMiscStats</value>
   </data>
   <data name="&gt;&gt;tb_naturalarmor.ZOrder" xml:space="preserve">
     <value>9</value>
@@ -5508,14 +6969,47 @@
   <data name="tsmi_moverdelete.Text" xml:space="preserve">
     <value>Supprimer</value>
   </data>
+  <data name="tbMp.TabIndex" type="System.Int32, mscorlib">
+    <value>56</value>
+  </data>
+  <data name="lbl_monsterai.TabIndex" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
+  <data name="&gt;&gt;tb_dex.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="lblSta.Location" type="System.Drawing.Point, System.Drawing">
+    <value>30, 58</value>
+  </data>
+  <data name="&gt;&gt;gbModel.Parent" xml:space="preserve">
+    <value>gbConfiguration</value>
+  </data>
+  <data name="lbl_int.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lbl_resistelecricity.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 13</value>
+  </data>
+  <data name="&gt;&gt;tbAtkMax.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
+  </data>
   <data name="&gt;&gt;lbl_class.Parent" xml:space="preserve">
     <value>groupBox5</value>
   </data>
-  <data name="lbl_str.Location" type="System.Drawing.Point, System.Drawing">
-    <value>30, 32</value>
+  <data name="tbNaturalArmor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>83, 23</value>
   </data>
-  <data name="ms_main.Text" xml:space="preserve">
-    <value>Movers</value>
+  <data name="lblBelligerence.Location" type="System.Drawing.Point, System.Drawing">
+    <value>94, 52</value>
+  </data>
+  <data name="lblSpeed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 155</value>
+  </data>
+  <data name="&gt;&gt;lblElementAtk.Name" xml:space="preserve">
+    <value>lblElementAtk</value>
+  </data>
+  <data name="lbl_addmp.Text" xml:space="preserve">
+    <value>MP :</value>
   </data>
   <data name="&gt;&gt;lbl_naturalarmor.Name" xml:space="preserve">
     <value>lbl_naturalarmor</value>
@@ -5525,6 +7019,18 @@
   </data>
   <data name="&gt;&gt;cb_monsterai.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;tbElementAtk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbl_belligerence.Name" xml:space="preserve">
+    <value>lbl_belligerence</value>
+  </data>
+  <data name="tsmiSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 22</value>
+  </data>
+  <data name="lblHp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 116</value>
   </data>
   <data name="lbl_type.Location" type="System.Drawing.Point, System.Drawing">
     <value>200, 117</value>
@@ -5538,23 +7044,41 @@
   <data name="&gt;&gt;lbl_identifier.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="&gt;&gt;gbMiscStats.Parent" xml:space="preserve">
+    <value>gbStats</value>
+  </data>
   <data name="lbl_elementtype.TabIndex" type="System.Int32, mscorlib">
     <value>59</value>
   </data>
   <data name="tb_resistfire.Location" type="System.Drawing.Point, System.Drawing">
     <value>266, 74</value>
   </data>
-  <data name="lbl_elementatk.TabIndex" type="System.Int32, mscorlib">
-    <value>61</value>
+  <data name="lblSpeed.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
   </data>
-  <data name="tb_er.Location" type="System.Drawing.Point, System.Drawing">
-    <value>284, 81</value>
+  <data name="&gt;&gt;lblIdentifier.Name" xml:space="preserve">
+    <value>lblIdentifier</value>
+  </data>
+  <data name="cb_monsterai.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 21</value>
+  </data>
+  <data name="&gt;&gt;tsmiMovers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="cbBelligerence.TabIndex" type="System.Int32, mscorlib">
+    <value>72</value>
+  </data>
+  <data name="tb_sta.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
   </data>
   <data name="&gt;&gt;tb_resistfire.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbl_expvalue.Parent" xml:space="preserve">
     <value>groupBox5</value>
+  </data>
+  <data name="&gt;&gt;tbLevel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbl_level.Name" xml:space="preserve">
     <value>lbl_level</value>
@@ -5568,8 +7092,14 @@
   <data name="lbl_er.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <data name="&gt;&gt;lblAtkMax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;lbl_resistearth.Parent" xml:space="preserve">
-    <value>gb_monsterstatselements</value>
+    <value>gbStatsElements</value>
+  </data>
+  <data name="&gt;&gt;lblClass.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <data name="gb_monsterstatsmiscs.TabIndex" type="System.Int32, mscorlib">
     <value>63</value>
@@ -5577,17 +7107,41 @@
   <data name="groupBox4.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
-  <data name="cb_class.TabIndex" type="System.Int32, mscorlib">
-    <value>71</value>
+  <data name="&gt;&gt;tbHr.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;lblName.Parent" xml:space="preserve">
+    <value>gbMain</value>
   </data>
   <data name="&gt;&gt;lbl_str.Name" xml:space="preserve">
     <value>lbl_str</value>
   </data>
-  <data name="tb_naturalarmor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>83, 23</value>
+  <data name="lblAtkMax.Location" type="System.Drawing.Point, System.Drawing">
+    <value>229, 111</value>
+  </data>
+  <data name="&gt;&gt;lblWaterResist.Name" xml:space="preserve">
+    <value>lblWaterResist</value>
+  </data>
+  <data name="&gt;&gt;tbSpeed.Parent" xml:space="preserve">
+    <value>gbMiscStats</value>
   </data>
   <data name="&gt;&gt;cb_type.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="&gt;&gt;tbModelFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbExperience.Parent" xml:space="preserve">
+    <value>gbMisc</value>
+  </data>
+  <data name="lbl_atkmin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnMotions.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lbl_type.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lbl_er.Location" type="System.Drawing.Point, System.Drawing">
     <value>233, 84</value>
@@ -5598,14 +7152,26 @@
   <data name="tb_name.Location" type="System.Drawing.Point, System.Drawing">
     <value>129, 33</value>
   </data>
-  <data name="&gt;&gt;lbl_atkmin.Name" xml:space="preserve">
-    <value>lbl_atkmin</value>
+  <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tsmi_moverdelete.Name" xml:space="preserve">
     <value>tsmi_moverdelete</value>
   </data>
+  <data name="label3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tbHr.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="tbExperience.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 129</value>
+  </data>
   <data name="&gt;&gt;tc_main.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="&gt;&gt;gbStr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lbl_elementatk.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -5613,26 +7179,74 @@
   <data name="&gt;&gt;rechercherToolStripMenuItem.Name" xml:space="preserve">
     <value>rechercherToolStripMenuItem</value>
   </data>
-  <data name="lbl_monsterai.TabIndex" type="System.Int32, mscorlib">
-    <value>75</value>
+  <data name="&gt;&gt;tp_monster.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lbl_resistelecricity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 13</value>
+  <data name="&gt;&gt;tb_identifier.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tb_resistwater.Name" xml:space="preserve">
-    <value>tb_resistwater</value>
+  <data name="&gt;&gt;lblMp.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;lbl_addhp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbModelFile.Name" xml:space="preserve">
+    <value>tbModelFile</value>
+  </data>
+  <data name="tpGeneral.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="&gt;&gt;lbl_resistwater.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lbl_naturalarmor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lbl_atkmax.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="tbElectricityResist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>164, 161</value>
+  </data>
+  <data name="tbDex.Location" type="System.Drawing.Point, System.Drawing">
+    <value>266, 32</value>
+  </data>
+  <data name="&gt;&gt;btMotions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="lbl_expvalue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lbl_er.TabIndex" type="System.Int32, mscorlib">
-    <value>39</value>
+  <data name="&gt;&gt;gbMisc.Name" xml:space="preserve">
+    <value>gbMisc</value>
+  </data>
+  <data name="tb_er.Location" type="System.Drawing.Point, System.Drawing">
+    <value>284, 81</value>
+  </data>
+  <data name="btnMotions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>171, 157</value>
+  </data>
+  <data name="lbl_str.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="lblName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>202, 17</value>
+  </data>
+  <data name="tbHr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 81</value>
+  </data>
+  <data name="lbl_resismgic.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 13</value>
   </data>
   <data name="lbl_elementatk.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
+  </data>
+  <data name="cbType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>131, 133</value>
+  </data>
+  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 82</value>
   </data>
   <data name="&gt;&gt;tb_addhp.Name" xml:space="preserve">
     <value>tb_addhp</value>
@@ -5640,16 +7254,22 @@
   <data name="&gt;&gt;tb_addmp.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="&gt;&gt;tp_monster.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="lbl_reattackdelay.Text" xml:space="preserve">
+    <value>Atk delay :</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>fr</value>
   </metadata>
+  <metadata name="msMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <metadata name="cms_lbmovers.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>116, 17</value>
+  </metadata>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="cmsLbMovers.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>116, 17</value>
   </metadata>
   <metadata name="ms_main.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
