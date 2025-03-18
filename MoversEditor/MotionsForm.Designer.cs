@@ -46,9 +46,10 @@
             // 
             // lbMotions
             // 
-            this.lbMotions.FormattingEnabled = true;
             resources.ApplyResources(this.lbMotions, "lbMotions");
+            this.lbMotions.FormattingEnabled = true;
             this.lbMotions.Name = "lbMotions";
+            this.toolTip1.SetToolTip(this.lbMotions, resources.GetString("lbMotions.ToolTip"));
             this.lbMotions.SelectedIndexChanged += new System.EventHandler(this.LbMotions_SelectedIndexChanged);
             this.lbMotions.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LbMotions_KeyDown);
             this.lbMotions.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LbMotions_MouseDown);
@@ -63,45 +64,51 @@
             // 
             // tbSzMotion
             // 
+            resources.ApplyResources(this.tbSzMotion, "tbSzMotion");
             this.tbSzMotion.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.tbSzMotion.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            resources.ApplyResources(this.tbSzMotion, "tbSzMotion");
             this.tbSzMotion.Name = "tbSzMotion";
+            this.toolTip1.SetToolTip(this.tbSzMotion, resources.GetString("tbSzMotion.ToolTip"));
             // 
             // lblFile
             // 
             resources.ApplyResources(this.lblFile, "lblFile");
             this.lblFile.Name = "lblFile";
+            this.toolTip1.SetToolTip(this.lblFile, resources.GetString("lblFile.ToolTip"));
             // 
             // lblIdentifier
             // 
             resources.ApplyResources(this.lblIdentifier, "lblIdentifier");
             this.lblIdentifier.Name = "lblIdentifier";
+            this.toolTip1.SetToolTip(this.lblIdentifier, resources.GetString("lblIdentifier.ToolTip"));
             // 
             // cbIdentifier
             // 
-            this.cbIdentifier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cbIdentifier, "cbIdentifier");
+            this.cbIdentifier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbIdentifier.FormattingEnabled = true;
             this.cbIdentifier.Name = "cbIdentifier";
+            this.toolTip1.SetToolTip(this.cbIdentifier, resources.GetString("cbIdentifier.ToolTip"));
             // 
             // cmsLbMotions
             // 
+            resources.ApplyResources(this.cmsLbMotions, "cmsLbMotions");
             this.cmsLbMotions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiDeleteMotion});
             this.cmsLbMotions.Name = "cms_lbMotions";
-            resources.ApplyResources(this.cmsLbMotions, "cmsLbMotions");
+            this.toolTip1.SetToolTip(this.cmsLbMotions, resources.GetString("cmsLbMotions.ToolTip"));
             // 
             // tsmiDeleteMotion
             // 
-            this.tsmiDeleteMotion.Name = "tsmiDeleteMotion";
             resources.ApplyResources(this.tsmiDeleteMotion, "tsmiDeleteMotion");
+            this.tsmiDeleteMotion.Name = "tsmiDeleteMotion";
             this.tsmiDeleteMotion.Click += new System.EventHandler(this.TsmiDeleteMotion_Click);
             // 
             // btnAdd
             // 
             resources.ApplyResources(this.btnAdd, "btnAdd");
             this.btnAdd.Name = "btnAdd";
+            this.toolTip1.SetToolTip(this.btnAdd, resources.GetString("btnAdd.ToolTip"));
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
@@ -109,6 +116,7 @@
             // 
             resources.ApplyResources(this.btnSelectMotionFile, "btnSelectMotionFile");
             this.btnSelectMotionFile.Name = "btnSelectMotionFile";
+            this.toolTip1.SetToolTip(this.btnSelectMotionFile, resources.GetString("btnSelectMotionFile.ToolTip"));
             this.btnSelectMotionFile.UseVisualStyleBackColor = true;
             this.btnSelectMotionFile.Click += new System.EventHandler(this.BtnSelectMotionFile_Click);
             // 
@@ -127,6 +135,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MotionsForm";
+            this.toolTip1.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.cmsLbMotions.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

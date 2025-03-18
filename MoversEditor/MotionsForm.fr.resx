@@ -117,29 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="lb_Motions.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="tb_SzMotion.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label1.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="label2.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cb_IMotion.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="cms_lbMotions.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="bt_AddMotion.ToolTip" xml:space="preserve">
-    <value />
-  </data>
-  <data name="bt_SelectMotionFile.ToolTip" xml:space="preserve">
-    <value />
+  <data name="btnGenerate.ToolTip" xml:space="preserve">
+    <value>Génère les motions automatiquement selon les fichiers disponibles.</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -3493,7 +3472,7 @@
         ///////8
 </value>
   </data>
-  <data name="$this.ToolTip" xml:space="preserve">
-    <value />
+  <data name="$this.Text" xml:space="preserve">
+    <value>Animations</value>
   </data>
 </root>
