@@ -27,57 +27,57 @@ namespace MoversEditor
             Project prj = Project.GetInstance();
             AutoCompleteStringCollection filesSource = new AutoCompleteStringCollection();
             filesSource.AddRange(prj.GetAvalaibleMotionsFilesByModel(CurrentMover.Model));
-            tb_SzMotion.AutoCompleteCustomSource = filesSource;
-            cb_IMotion.DataSource = Project.GetInstance().GetMotionsIdentifiers();
-            cb_IMotion.SelectedIndex = -1;
+            tbSzMotion.AutoCompleteCustomSource = filesSource;
+            cbIdentifier.DataSource = Project.GetInstance().GetMotionsIdentifiers();
+            cbIdentifier.SelectedIndex = -1;
             this.Text = $"{this.Text} ({CurrentMover.Name})";
             SetListBoxDataSource();
         }
 
-        private void lb_Motions_SelectedIndexChanged(object sender, EventArgs e)
+        private void LbMotions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cb_IMotion.DataBindings.Clear();
-            tb_SzMotion.DataBindings.Clear();
-            if (!(lb_Motions.SelectedItem is Motion motion))
+            cbIdentifier.DataBindings.Clear();
+            tbSzMotion.DataBindings.Clear();
+            if (!(lbMotions.SelectedItem is Motion motion))
             {
-                cb_IMotion.SelectedIndex = -1;
-                cb_IMotion.Enabled = false;
-                tb_SzMotion.Text = string.Empty;
-                tb_SzMotion.Enabled = false;
-                bt_SelectMotionFile.Enabled = false;
+                cbIdentifier.SelectedIndex = -1;
+                cbIdentifier.Enabled = false;
+                tbSzMotion.Text = string.Empty;
+                tbSzMotion.Enabled = false;
+                btnSelectMotionFile.Enabled = false;
                 return;
             }
-            cb_IMotion.DataSource = Project.GetInstance().GetMotionsIdentifiers().Where(x => x == motion.IMotion || !CurrentMover.Model.Motions.Select(y => y.IMotion).Contains(x)).ToArray();
-            cb_IMotion.DataBindings.Add(new Binding("SelectedItem", motion, "IMotion", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_SzMotion.DataBindings.Add(new Binding("Text", motion, "SzMotion", false, DataSourceUpdateMode.OnPropertyChanged));
-            cb_IMotion.Enabled = true;
-            tb_SzMotion.Enabled = true;
-            bt_SelectMotionFile.Enabled = true;
+            cbIdentifier.DataSource = Project.GetInstance().GetMotionsIdentifiers().Where(x => x == motion.IMotion || !CurrentMover.Model.Motions.Select(y => y.IMotion).Contains(x)).ToArray();
+            cbIdentifier.DataBindings.Add(new Binding("SelectedItem", motion, "IMotion", false, DataSourceUpdateMode.OnPropertyChanged));
+            tbSzMotion.DataBindings.Add(new Binding("Text", motion, "SzMotion", false, DataSourceUpdateMode.OnPropertyChanged));
+            cbIdentifier.Enabled = true;
+            tbSzMotion.Enabled = true;
+            btnSelectMotionFile.Enabled = true;
         }
 
-        private void bt_GenerateMotions_Click(object sender, EventArgs e)
+        private void BtnGenerate_Click(object sender, EventArgs e)
         {
             Project.GetInstance().GenerateMotions(CurrentMover.Model);
-            lb_Motions.DataSource = new BindingSource(CurrentMover.Model.Motions, "");
-            lb_Motions.DisplayMember = "IMotion";
+            lbMotions.DataSource = new BindingSource(CurrentMover.Model.Motions, "");
+            lbMotions.DisplayMember = "IMotion";
         }
 
-        private void lb_Motions_MouseDown(object sender, MouseEventArgs e)
+        private void LbMotions_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                lb_Motions.SelectedIndex = lb_Motions.IndexFromPoint(e.Location);
-                if (lb_Motions.SelectedIndex != -1)
-                    cms_lbMotions.Show(Cursor.Position);
+                lbMotions.SelectedIndex = lbMotions.IndexFromPoint(e.Location);
+                if (lbMotions.SelectedIndex != -1)
+                    cmsLbMotions.Show(Cursor.Position);
             }
         }
 
-        private void tsmi_DeleteMotion_Click(object sender, EventArgs e)
+        private void TsmiDeleteMotion_Click(object sender, EventArgs e)
         {
             DeleteCurrentMotion();
         }
 
-        private void lb_Motions_KeyDown(object sender, KeyEventArgs e)
+        private void LbMotions_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
@@ -92,23 +92,23 @@ namespace MoversEditor
         private void SetListBoxDataSource()
         {
             if (CurrentMover.Model.Motions.Count == 0)
-                lb_Motions.SelectedIndex = -1;
-            lb_Motions.DataSource = new BindingSource(CurrentMover.Model.Motions, "");
-            lb_Motions.DisplayMember = "IMotion";
+                lbMotions.SelectedIndex = -1;
+            lbMotions.DataSource = new BindingSource(CurrentMover.Model.Motions, "");
+            lbMotions.DisplayMember = "IMotion";
         }
 
-        private void bt_AddMotion_Click(object sender, EventArgs e)
+        private void BtnAdd_Click(object sender, EventArgs e)
         {
             string motionIdentifier = Project.GetInstance().GetMotionsIdentifiers().FirstOrDefault(x => !CurrentMover.Model.Motions.Select(y => y.IMotion).Contains(x));
             if (string.IsNullOrEmpty(motionIdentifier)) return;
             CurrentMover.Model.Motions.Add(new Motion() { IMotion = motionIdentifier, SzMotion = "" });
             SetListBoxDataSource();
-            lb_Motions.SelectedIndex = lb_Motions.Items.Count - 1;
+            lbMotions.SelectedIndex = lbMotions.Items.Count - 1;
         }
 
-        private void bt_SelectMotionFile_Click(object sender, EventArgs e)
+        private void BtnSelectMotionFile_Click(object sender, EventArgs e)
         {
-            if (!(lb_Motions.SelectedItem is Motion motion)) return;
+            if (!(lbMotions.SelectedItem is Motion motion)) return;
             OpenFileDialog ofd = new OpenFileDialog()
             {
                 InitialDirectory = $"{Settings.GetInstance().ResourcePath}Model\\",
@@ -122,17 +122,17 @@ namespace MoversEditor
                     || !ofd.SafeFileName.ToLower().EndsWith(".ani".ToLower())
                     || !File.Exists(ofd.FileName))
                     return;
-                tb_SzMotion.Text = Path.GetFileNameWithoutExtension(ofd.FileName).Remove(0, $"mvr_{CurrentMover.Model.SzName}_".Length);
+                tbSzMotion.Text = Path.GetFileNameWithoutExtension(ofd.FileName).Remove(0, $"mvr_{CurrentMover.Model.SzName}_".Length);
             }
         }
 
         private void DeleteCurrentMotion()
         {
-            if (!(lb_Motions.SelectedItem is Motion motion)) return;
+            if (!(lbMotions.SelectedItem is Motion motion)) return;
             CurrentMover.Model.Motions.Remove(motion);
-            int indexSave = lb_Motions.SelectedIndex;
+            int indexSave = lbMotions.SelectedIndex;
             SetListBoxDataSource();
-            lb_Motions.SelectedIndex = indexSave < lb_Motions.Items.Count ? indexSave : lb_Motions.Items.Count - 1;
+            lbMotions.SelectedIndex = indexSave < lbMotions.Items.Count ? indexSave : lbMotions.Items.Count - 1;
         }
     }
 }

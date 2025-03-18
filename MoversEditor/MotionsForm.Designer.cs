@@ -30,104 +30,104 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MotionsForm));
-            this.lb_Motions = new System.Windows.Forms.ListBox();
-            this.bt_GenerateMotions = new System.Windows.Forms.Button();
-            this.tb_SzMotion = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cb_IMotion = new System.Windows.Forms.ComboBox();
+            this.lbMotions = new System.Windows.Forms.ListBox();
+            this.btnGenerate = new System.Windows.Forms.Button();
+            this.tbSzMotion = new System.Windows.Forms.TextBox();
+            this.lblFile = new System.Windows.Forms.Label();
+            this.lblIdentifier = new System.Windows.Forms.Label();
+            this.cbIdentifier = new System.Windows.Forms.ComboBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.cms_lbMotions = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmi_DeleteMotion = new System.Windows.Forms.ToolStripMenuItem();
-            this.bt_AddMotion = new System.Windows.Forms.Button();
-            this.bt_SelectMotionFile = new System.Windows.Forms.Button();
-            this.cms_lbMotions.SuspendLayout();
+            this.cmsLbMotions = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiDeleteMotion = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnSelectMotionFile = new System.Windows.Forms.Button();
+            this.cmsLbMotions.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lb_Motions
+            // lbMotions
             // 
-            this.lb_Motions.FormattingEnabled = true;
-            resources.ApplyResources(this.lb_Motions, "lb_Motions");
-            this.lb_Motions.Name = "lb_Motions";
-            this.lb_Motions.SelectedIndexChanged += new System.EventHandler(this.lb_Motions_SelectedIndexChanged);
-            this.lb_Motions.KeyDown += new System.Windows.Forms.KeyEventHandler(this.lb_Motions_KeyDown);
-            this.lb_Motions.MouseDown += new System.Windows.Forms.MouseEventHandler(this.lb_Motions_MouseDown);
+            this.lbMotions.FormattingEnabled = true;
+            resources.ApplyResources(this.lbMotions, "lbMotions");
+            this.lbMotions.Name = "lbMotions";
+            this.lbMotions.SelectedIndexChanged += new System.EventHandler(this.LbMotions_SelectedIndexChanged);
+            this.lbMotions.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LbMotions_KeyDown);
+            this.lbMotions.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LbMotions_MouseDown);
             // 
-            // bt_GenerateMotions
+            // btnGenerate
             // 
-            resources.ApplyResources(this.bt_GenerateMotions, "bt_GenerateMotions");
-            this.bt_GenerateMotions.Name = "bt_GenerateMotions";
-            this.toolTip1.SetToolTip(this.bt_GenerateMotions, resources.GetString("bt_GenerateMotions.ToolTip"));
-            this.bt_GenerateMotions.UseVisualStyleBackColor = true;
-            this.bt_GenerateMotions.Click += new System.EventHandler(this.bt_GenerateMotions_Click);
+            resources.ApplyResources(this.btnGenerate, "btnGenerate");
+            this.btnGenerate.Name = "btnGenerate";
+            this.toolTip1.SetToolTip(this.btnGenerate, resources.GetString("btnGenerate.ToolTip"));
+            this.btnGenerate.UseVisualStyleBackColor = true;
+            this.btnGenerate.Click += new System.EventHandler(this.BtnGenerate_Click);
             // 
-            // tb_SzMotion
+            // tbSzMotion
             // 
-            this.tb_SzMotion.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.tb_SzMotion.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            resources.ApplyResources(this.tb_SzMotion, "tb_SzMotion");
-            this.tb_SzMotion.Name = "tb_SzMotion";
+            this.tbSzMotion.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.tbSzMotion.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            resources.ApplyResources(this.tbSzMotion, "tbSzMotion");
+            this.tbSzMotion.Name = "tbSzMotion";
             // 
-            // label1
+            // lblFile
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.lblFile, "lblFile");
+            this.lblFile.Name = "lblFile";
             // 
-            // label2
+            // lblIdentifier
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.lblIdentifier, "lblIdentifier");
+            this.lblIdentifier.Name = "lblIdentifier";
             // 
-            // cb_IMotion
+            // cbIdentifier
             // 
-            this.cb_IMotion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            resources.ApplyResources(this.cb_IMotion, "cb_IMotion");
-            this.cb_IMotion.FormattingEnabled = true;
-            this.cb_IMotion.Name = "cb_IMotion";
+            this.cbIdentifier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            resources.ApplyResources(this.cbIdentifier, "cbIdentifier");
+            this.cbIdentifier.FormattingEnabled = true;
+            this.cbIdentifier.Name = "cbIdentifier";
             // 
-            // cms_lbMotions
+            // cmsLbMotions
             // 
-            this.cms_lbMotions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmi_DeleteMotion});
-            this.cms_lbMotions.Name = "cms_lbMotions";
-            resources.ApplyResources(this.cms_lbMotions, "cms_lbMotions");
+            this.cmsLbMotions.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiDeleteMotion});
+            this.cmsLbMotions.Name = "cms_lbMotions";
+            resources.ApplyResources(this.cmsLbMotions, "cmsLbMotions");
             // 
-            // tsmi_DeleteMotion
+            // tsmiDeleteMotion
             // 
-            this.tsmi_DeleteMotion.Name = "tsmi_DeleteMotion";
-            resources.ApplyResources(this.tsmi_DeleteMotion, "tsmi_DeleteMotion");
-            this.tsmi_DeleteMotion.Click += new System.EventHandler(this.tsmi_DeleteMotion_Click);
+            this.tsmiDeleteMotion.Name = "tsmiDeleteMotion";
+            resources.ApplyResources(this.tsmiDeleteMotion, "tsmiDeleteMotion");
+            this.tsmiDeleteMotion.Click += new System.EventHandler(this.TsmiDeleteMotion_Click);
             // 
-            // bt_AddMotion
+            // btnAdd
             // 
-            resources.ApplyResources(this.bt_AddMotion, "bt_AddMotion");
-            this.bt_AddMotion.Name = "bt_AddMotion";
-            this.bt_AddMotion.UseVisualStyleBackColor = true;
-            this.bt_AddMotion.Click += new System.EventHandler(this.bt_AddMotion_Click);
+            resources.ApplyResources(this.btnAdd, "btnAdd");
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
-            // bt_SelectMotionFile
+            // btnSelectMotionFile
             // 
-            resources.ApplyResources(this.bt_SelectMotionFile, "bt_SelectMotionFile");
-            this.bt_SelectMotionFile.Name = "bt_SelectMotionFile";
-            this.bt_SelectMotionFile.UseVisualStyleBackColor = true;
-            this.bt_SelectMotionFile.Click += new System.EventHandler(this.bt_SelectMotionFile_Click);
+            resources.ApplyResources(this.btnSelectMotionFile, "btnSelectMotionFile");
+            this.btnSelectMotionFile.Name = "btnSelectMotionFile";
+            this.btnSelectMotionFile.UseVisualStyleBackColor = true;
+            this.btnSelectMotionFile.Click += new System.EventHandler(this.BtnSelectMotionFile_Click);
             // 
             // MotionsForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.bt_SelectMotionFile);
-            this.Controls.Add(this.cb_IMotion);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.tb_SzMotion);
-            this.Controls.Add(this.bt_AddMotion);
-            this.Controls.Add(this.bt_GenerateMotions);
-            this.Controls.Add(this.lb_Motions);
+            this.Controls.Add(this.btnSelectMotionFile);
+            this.Controls.Add(this.cbIdentifier);
+            this.Controls.Add(this.lblIdentifier);
+            this.Controls.Add(this.lblFile);
+            this.Controls.Add(this.tbSzMotion);
+            this.Controls.Add(this.btnAdd);
+            this.Controls.Add(this.btnGenerate);
+            this.Controls.Add(this.lbMotions);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "MotionsForm";
-            this.cms_lbMotions.ResumeLayout(false);
+            this.cmsLbMotions.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,16 +135,16 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox lb_Motions;
-        private System.Windows.Forms.Button bt_GenerateMotions;
-        private System.Windows.Forms.TextBox tb_SzMotion;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cb_IMotion;
+        private System.Windows.Forms.ListBox lbMotions;
+        private System.Windows.Forms.Button btnGenerate;
+        private System.Windows.Forms.TextBox tbSzMotion;
+        private System.Windows.Forms.Label lblFile;
+        private System.Windows.Forms.Label lblIdentifier;
+        private System.Windows.Forms.ComboBox cbIdentifier;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.ContextMenuStrip cms_lbMotions;
-        private System.Windows.Forms.ToolStripMenuItem tsmi_DeleteMotion;
-        private System.Windows.Forms.Button bt_AddMotion;
-        private System.Windows.Forms.Button bt_SelectMotionFile;
+        private System.Windows.Forms.ContextMenuStrip cmsLbMotions;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDeleteMotion;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnSelectMotionFile;
     }
 }
