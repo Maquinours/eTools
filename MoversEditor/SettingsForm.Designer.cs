@@ -29,101 +29,101 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
-            this.label1 = new System.Windows.Forms.Label();
-            this.tb_ResourcesPath = new System.Windows.Forms.TextBox();
-            this.tb_PropFileName = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.tb_StringFileName = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.bt_cancel = new System.Windows.Forms.Button();
-            this.bt_apply = new System.Windows.Forms.Button();
-            this.bt_selectFolder = new System.Windows.Forms.Button();
-            this.bt_selectPropFile = new System.Windows.Forms.Button();
-            this.bt_selectStringFile = new System.Windows.Forms.Button();
+            this.lblFolder = new System.Windows.Forms.Label();
+            this.tbResourcesPath = new System.Windows.Forms.TextBox();
+            this.tbPropFileName = new System.Windows.Forms.TextBox();
+            this.lblPropFile = new System.Windows.Forms.Label();
+            this.tbStringFileName = new System.Windows.Forms.TextBox();
+            this.lblStringFile = new System.Windows.Forms.Label();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnApply = new System.Windows.Forms.Button();
+            this.btnSelectFolder = new System.Windows.Forms.Button();
+            this.btnSelectPropFile = new System.Windows.Forms.Button();
+            this.btnSelectStringFile = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // lblFolder
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.lblFolder, "lblFolder");
+            this.lblFolder.Name = "lblFolder";
             // 
-            // tb_ResourcesPath
+            // tbResourcesPath
             // 
-            resources.ApplyResources(this.tb_ResourcesPath, "tb_ResourcesPath");
-            this.tb_ResourcesPath.Name = "tb_ResourcesPath";
+            resources.ApplyResources(this.tbResourcesPath, "tbResourcesPath");
+            this.tbResourcesPath.Name = "tbResourcesPath";
             // 
-            // tb_PropFileName
+            // tbPropFileName
             // 
-            resources.ApplyResources(this.tb_PropFileName, "tb_PropFileName");
-            this.tb_PropFileName.Name = "tb_PropFileName";
+            resources.ApplyResources(this.tbPropFileName, "tbPropFileName");
+            this.tbPropFileName.Name = "tbPropFileName";
             // 
-            // label2
+            // lblPropFile
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.lblPropFile, "lblPropFile");
+            this.lblPropFile.Name = "lblPropFile";
             // 
-            // tb_StringFileName
+            // tbStringFileName
             // 
-            resources.ApplyResources(this.tb_StringFileName, "tb_StringFileName");
-            this.tb_StringFileName.Name = "tb_StringFileName";
+            resources.ApplyResources(this.tbStringFileName, "tbStringFileName");
+            this.tbStringFileName.Name = "tbStringFileName";
             // 
-            // label4
+            // lblStringFile
             // 
-            resources.ApplyResources(this.label4, "label4");
-            this.label4.Name = "label4";
+            resources.ApplyResources(this.lblStringFile, "lblStringFile");
+            this.lblStringFile.Name = "lblStringFile";
             // 
-            // bt_cancel
+            // btnCancel
             // 
-            this.bt_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.bt_cancel, "bt_cancel");
-            this.bt_cancel.Name = "bt_cancel";
-            this.bt_cancel.UseVisualStyleBackColor = true;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // bt_apply
+            // btnApply
             // 
-            resources.ApplyResources(this.bt_apply, "bt_apply");
-            this.bt_apply.Name = "bt_apply";
-            this.bt_apply.UseVisualStyleBackColor = true;
-            this.bt_apply.Click += new System.EventHandler(this.bt_apply_Click);
+            resources.ApplyResources(this.btnApply, "btnApply");
+            this.btnApply.Name = "btnApply";
+            this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.BtnApply_Click);
             // 
-            // bt_selectFolder
+            // btnSelectFolder
             // 
-            resources.ApplyResources(this.bt_selectFolder, "bt_selectFolder");
-            this.bt_selectFolder.Name = "bt_selectFolder";
-            this.bt_selectFolder.UseVisualStyleBackColor = true;
-            this.bt_selectFolder.Click += new System.EventHandler(this.bt_selectfolder_Click);
+            resources.ApplyResources(this.btnSelectFolder, "btnSelectFolder");
+            this.btnSelectFolder.Name = "btnSelectFolder";
+            this.btnSelectFolder.UseVisualStyleBackColor = true;
+            this.btnSelectFolder.Click += new System.EventHandler(this.BtnSelectFolder_Click);
             // 
-            // bt_selectPropFile
+            // btnSelectPropFile
             // 
-            resources.ApplyResources(this.bt_selectPropFile, "bt_selectPropFile");
-            this.bt_selectPropFile.Name = "bt_selectPropFile";
-            this.bt_selectPropFile.UseVisualStyleBackColor = true;
-            this.bt_selectPropFile.Click += new System.EventHandler(this.bt_selectPropFile_Click);
+            resources.ApplyResources(this.btnSelectPropFile, "btnSelectPropFile");
+            this.btnSelectPropFile.Name = "btnSelectPropFile";
+            this.btnSelectPropFile.UseVisualStyleBackColor = true;
+            this.btnSelectPropFile.Click += new System.EventHandler(this.BtnSelectPropFile_Click);
             // 
-            // bt_selectStringFile
+            // btnSelectStringFile
             // 
-            resources.ApplyResources(this.bt_selectStringFile, "bt_selectStringFile");
-            this.bt_selectStringFile.Name = "bt_selectStringFile";
-            this.bt_selectStringFile.UseVisualStyleBackColor = true;
-            this.bt_selectStringFile.Click += new System.EventHandler(this.bt_selectfolder_Click);
+            resources.ApplyResources(this.btnSelectStringFile, "btnSelectStringFile");
+            this.btnSelectStringFile.Name = "btnSelectStringFile";
+            this.btnSelectStringFile.UseVisualStyleBackColor = true;
+            this.btnSelectStringFile.Click += new System.EventHandler(this.BtnSelectFolder_Click);
             // 
             // SettingsForm
             // 
-            this.AcceptButton = this.bt_apply;
+            this.AcceptButton = this.btnApply;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.bt_cancel;
-            this.Controls.Add(this.bt_selectStringFile);
-            this.Controls.Add(this.bt_selectPropFile);
-            this.Controls.Add(this.bt_selectFolder);
-            this.Controls.Add(this.bt_apply);
-            this.Controls.Add(this.bt_cancel);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.tb_StringFileName);
-            this.Controls.Add(this.tb_PropFileName);
-            this.Controls.Add(this.tb_ResourcesPath);
-            this.Controls.Add(this.label1);
+            this.CancelButton = this.btnCancel;
+            this.Controls.Add(this.btnSelectStringFile);
+            this.Controls.Add(this.btnSelectPropFile);
+            this.Controls.Add(this.btnSelectFolder);
+            this.Controls.Add(this.btnApply);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.lblStringFile);
+            this.Controls.Add(this.lblPropFile);
+            this.Controls.Add(this.tbStringFileName);
+            this.Controls.Add(this.tbPropFileName);
+            this.Controls.Add(this.tbResourcesPath);
+            this.Controls.Add(this.lblFolder);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "SettingsForm";
@@ -134,16 +134,16 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tb_ResourcesPath;
-        private System.Windows.Forms.TextBox tb_PropFileName;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tb_StringFileName;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button bt_cancel;
-        private System.Windows.Forms.Button bt_apply;
-        private System.Windows.Forms.Button bt_selectFolder;
-        private System.Windows.Forms.Button bt_selectPropFile;
-        private System.Windows.Forms.Button bt_selectStringFile;
+        private System.Windows.Forms.Label lblFolder;
+        private System.Windows.Forms.TextBox tbResourcesPath;
+        private System.Windows.Forms.TextBox tbPropFileName;
+        private System.Windows.Forms.Label lblPropFile;
+        private System.Windows.Forms.TextBox tbStringFileName;
+        private System.Windows.Forms.Label lblStringFile;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnApply;
+        private System.Windows.Forms.Button btnSelectFolder;
+        private System.Windows.Forms.Button btnSelectPropFile;
+        private System.Windows.Forms.Button btnSelectStringFile;
     }
 }

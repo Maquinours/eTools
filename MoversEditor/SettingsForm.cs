@@ -23,38 +23,38 @@ namespace MoversEditor
         public void LoadFormData()
         {
             Settings settings = Settings.GetInstance();
-            tb_ResourcesPath.Text = settings.ResourcePath;
-            tb_PropFileName.Text = Path.GetFileName(settings.PropFileName);
-            tb_StringFileName.Text = Path.GetFileName(settings.StringsFilePath);
+            tbResourcesPath.Text = settings.ResourcePath;
+            tbPropFileName.Text = Path.GetFileName(settings.PropFileName);
+            tbStringFileName.Text = Path.GetFileName(settings.StringsFilePath);
         }
 
-        private void bt_selectfolder_Click(object sender, EventArgs e)
+        private void BtnSelectFolder_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             if(fbd.ShowDialog() == DialogResult.OK)
             {
-                tb_ResourcesPath.Text =  fbd.SelectedPath + "\\";
+                tbResourcesPath.Text =  fbd.SelectedPath + "\\";
             }
         }
 
-        private void bt_apply_Click(object sender, EventArgs e)
+        private void BtnApply_Click(object sender, EventArgs e)
         {
             Settings settings = Settings.GetInstance();
-            settings.ResourcePath = tb_ResourcesPath.Text;
-            settings.PropFileName = settings.ResourcePath + tb_PropFileName.Text;
-            settings.StringsFilePath = settings.ResourcePath + tb_StringFileName.Text;
+            settings.ResourcePath = tbResourcesPath.Text;
+            settings.PropFileName = settings.ResourcePath + tbPropFileName.Text;
+            settings.StringsFilePath = settings.ResourcePath + tbStringFileName.Text;
             settings.SaveGeneral();
             settings.SaveSpecs();
             DialogResult = DialogResult.OK;
             Close();
         }
 
-        private void bt_selectPropFile_Click(object sender, EventArgs e)
+        private void BtnSelectPropFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             if(ofd.ShowDialog() == DialogResult.OK)
             {
-                tb_PropFileName.Text = Path.GetFileName(ofd.FileName);
+                tbPropFileName.Text = Path.GetFileName(ofd.FileName);
             }
         }
     }

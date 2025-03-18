@@ -118,269 +118,269 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="label1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblFolder.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="label1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblFolder.Location" type="System.Drawing.Point, System.Drawing">
     <value>21, 24</value>
   </data>
-  <data name="label1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblFolder.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
   </data>
-  <data name="label1.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblFolder.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="label1.Text" xml:space="preserve">
+  <data name="lblFolder.Text" xml:space="preserve">
     <value>Resources folder :</value>
   </data>
-  <data name="&gt;&gt;label1.Name" xml:space="preserve">
-    <value>label1</value>
+  <data name="&gt;&gt;lblFolder.Name" xml:space="preserve">
+    <value>lblFolder</value>
   </data>
-  <data name="&gt;&gt;label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblFolder.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblFolder.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblFolder.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="tb_ResourcesPath.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbResourcesPath.Location" type="System.Drawing.Point, System.Drawing">
     <value>120, 21</value>
   </data>
-  <data name="tb_ResourcesPath.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbResourcesPath.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 20</value>
   </data>
-  <data name="tb_ResourcesPath.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbResourcesPath.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;tb_ResourcesPath.Name" xml:space="preserve">
-    <value>tb_ResourcesPath</value>
+  <data name="&gt;&gt;tbResourcesPath.Name" xml:space="preserve">
+    <value>tbResourcesPath</value>
   </data>
-  <data name="&gt;&gt;tb_ResourcesPath.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbResourcesPath.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tb_ResourcesPath.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbResourcesPath.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tb_ResourcesPath.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tbResourcesPath.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="tb_PropFileName.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbPropFileName.Location" type="System.Drawing.Point, System.Drawing">
     <value>120, 47</value>
   </data>
-  <data name="tb_PropFileName.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbPropFileName.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 20</value>
   </data>
-  <data name="tb_PropFileName.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbPropFileName.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;tb_PropFileName.Name" xml:space="preserve">
-    <value>tb_PropFileName</value>
+  <data name="&gt;&gt;tbPropFileName.Name" xml:space="preserve">
+    <value>tbPropFileName</value>
   </data>
-  <data name="&gt;&gt;tb_PropFileName.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbPropFileName.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tb_PropFileName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbPropFileName.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tb_PropFileName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tbPropFileName.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="label2.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblPropFile.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblPropFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>63, 50</value>
   </data>
-  <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblPropFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
   </data>
-  <data name="label2.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblPropFile.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="label2.Text" xml:space="preserve">
+  <data name="lblPropFile.Text" xml:space="preserve">
     <value>Prop file :</value>
   </data>
-  <data name="&gt;&gt;label2.Name" xml:space="preserve">
-    <value>label2</value>
+  <data name="&gt;&gt;lblPropFile.Name" xml:space="preserve">
+    <value>lblPropFile</value>
   </data>
-  <data name="&gt;&gt;label2.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblPropFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblPropFile.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblPropFile.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="tb_StringFileName.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tbStringFileName.Location" type="System.Drawing.Point, System.Drawing">
     <value>120, 73</value>
   </data>
-  <data name="tb_StringFileName.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tbStringFileName.Size" type="System.Drawing.Size, System.Drawing">
     <value>167, 20</value>
   </data>
-  <data name="tb_StringFileName.TabIndex" type="System.Int32, mscorlib">
+  <data name="tbStringFileName.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;tb_StringFileName.Name" xml:space="preserve">
-    <value>tb_StringFileName</value>
+  <data name="&gt;&gt;tbStringFileName.Name" xml:space="preserve">
+    <value>tbStringFileName</value>
   </data>
-  <data name="&gt;&gt;tb_StringFileName.Type" xml:space="preserve">
+  <data name="&gt;&gt;tbStringFileName.Type" xml:space="preserve">
     <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tb_StringFileName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tbStringFileName.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tb_StringFileName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tbStringFileName.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="label4.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblStringFile.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblStringFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>74, 76</value>
   </data>
-  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblStringFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
   </data>
-  <data name="label4.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblStringFile.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="label4.Text" xml:space="preserve">
+  <data name="lblStringFile.Text" xml:space="preserve">
     <value>txt file :</value>
   </data>
-  <data name="&gt;&gt;label4.Name" xml:space="preserve">
-    <value>label4</value>
+  <data name="&gt;&gt;lblStringFile.Name" xml:space="preserve">
+    <value>lblStringFile</value>
   </data>
-  <data name="&gt;&gt;label4.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblStringFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;label4.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblStringFile.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;label4.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblStringFile.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="bt_cancel.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnCancel.Location" type="System.Drawing.Point, System.Drawing">
     <value>225, 120</value>
   </data>
-  <data name="bt_cancel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="bt_cancel.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="bt_cancel.Text" xml:space="preserve">
+  <data name="btnCancel.Text" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="&gt;&gt;bt_cancel.Name" xml:space="preserve">
-    <value>bt_cancel</value>
+  <data name="&gt;&gt;btnCancel.Name" xml:space="preserve">
+    <value>btnCancel</value>
   </data>
-  <data name="&gt;&gt;bt_cancel.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnCancel.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bt_cancel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnCancel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;bt_cancel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnCancel.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="bt_apply.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnApply.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 120</value>
   </data>
-  <data name="bt_apply.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnApply.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
   </data>
-  <data name="bt_apply.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnApply.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="bt_apply.Text" xml:space="preserve">
+  <data name="btnApply.Text" xml:space="preserve">
     <value>Apply</value>
   </data>
-  <data name="&gt;&gt;bt_apply.Name" xml:space="preserve">
-    <value>bt_apply</value>
+  <data name="&gt;&gt;btnApply.Name" xml:space="preserve">
+    <value>btnApply</value>
   </data>
-  <data name="&gt;&gt;bt_apply.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnApply.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bt_apply.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnApply.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;bt_apply.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnApply.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="bt_selectFolder.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnSelectFolder.Location" type="System.Drawing.Point, System.Drawing">
     <value>284, 21</value>
   </data>
-  <data name="bt_selectFolder.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnSelectFolder.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 20</value>
   </data>
-  <data name="bt_selectFolder.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnSelectFolder.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="bt_selectFolder.Text" xml:space="preserve">
+  <data name="btnSelectFolder.Text" xml:space="preserve">
     <value>...</value>
   </data>
-  <data name="&gt;&gt;bt_selectFolder.Name" xml:space="preserve">
-    <value>bt_selectFolder</value>
+  <data name="&gt;&gt;btnSelectFolder.Name" xml:space="preserve">
+    <value>btnSelectFolder</value>
   </data>
-  <data name="&gt;&gt;bt_selectFolder.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnSelectFolder.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bt_selectFolder.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnSelectFolder.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;bt_selectFolder.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnSelectFolder.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="bt_selectPropFile.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnSelectPropFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>284, 46</value>
   </data>
-  <data name="bt_selectPropFile.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnSelectPropFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 20</value>
   </data>
-  <data name="bt_selectPropFile.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnSelectPropFile.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="bt_selectPropFile.Text" xml:space="preserve">
+  <data name="btnSelectPropFile.Text" xml:space="preserve">
     <value>...</value>
   </data>
-  <data name="&gt;&gt;bt_selectPropFile.Name" xml:space="preserve">
-    <value>bt_selectPropFile</value>
+  <data name="&gt;&gt;btnSelectPropFile.Name" xml:space="preserve">
+    <value>btnSelectPropFile</value>
   </data>
-  <data name="&gt;&gt;bt_selectPropFile.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnSelectPropFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bt_selectPropFile.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnSelectPropFile.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;bt_selectPropFile.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnSelectPropFile.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="bt_selectStringFile.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnSelectStringFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>284, 73</value>
   </data>
-  <data name="bt_selectStringFile.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnSelectStringFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>26, 20</value>
   </data>
-  <data name="bt_selectStringFile.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnSelectStringFile.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="bt_selectStringFile.Text" xml:space="preserve">
+  <data name="btnSelectStringFile.Text" xml:space="preserve">
     <value>...</value>
   </data>
-  <data name="&gt;&gt;bt_selectStringFile.Name" xml:space="preserve">
-    <value>bt_selectStringFile</value>
+  <data name="&gt;&gt;btnSelectStringFile.Name" xml:space="preserve">
+    <value>btnSelectStringFile</value>
   </data>
-  <data name="&gt;&gt;bt_selectStringFile.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnSelectStringFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;bt_selectStringFile.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnSelectStringFile.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;bt_selectStringFile.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnSelectStringFile.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
