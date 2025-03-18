@@ -29,41 +29,41 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchForm));
-            this.tb_value = new System.Windows.Forms.TextBox();
-            this.bt_cancel = new System.Windows.Forms.Button();
-            this.bt_accept = new System.Windows.Forms.Button();
+            this.tbValue = new System.Windows.Forms.TextBox();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnAccept = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // tb_value
+            // tbValue
             // 
-            this.tb_value.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.tb_value.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            resources.ApplyResources(this.tb_value, "tb_value");
-            this.tb_value.Name = "tb_value";
+            this.tbValue.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.tbValue.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            resources.ApplyResources(this.tbValue, "tbValue");
+            this.tbValue.Name = "tbValue";
             // 
-            // bt_cancel
+            // btnCancel
             // 
-            this.bt_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            resources.ApplyResources(this.bt_cancel, "bt_cancel");
-            this.bt_cancel.Name = "bt_cancel";
-            this.bt_cancel.UseVisualStyleBackColor = true;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // bt_accept
+            // btnAccept
             // 
-            this.bt_accept.DialogResult = System.Windows.Forms.DialogResult.OK;
-            resources.ApplyResources(this.bt_accept, "bt_accept");
-            this.bt_accept.Name = "bt_accept";
-            this.bt_accept.UseVisualStyleBackColor = true;
+            this.btnAccept.DialogResult = System.Windows.Forms.DialogResult.OK;
+            resources.ApplyResources(this.btnAccept, "btnAccept");
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.UseVisualStyleBackColor = true;
             // 
             // SearchForm
             // 
-            this.AcceptButton = this.bt_accept;
+            this.AcceptButton = this.btnAccept;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.bt_cancel;
-            this.Controls.Add(this.bt_accept);
-            this.Controls.Add(this.bt_cancel);
-            this.Controls.Add(this.tb_value);
+            this.CancelButton = this.btnCancel;
+            this.Controls.Add(this.btnAccept);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.tbValue);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "SearchForm";
@@ -74,8 +74,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox tb_value;
-        private System.Windows.Forms.Button bt_cancel;
-        private System.Windows.Forms.Button bt_accept;
+        private System.Windows.Forms.TextBox tbValue;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnAccept;
     }
 }

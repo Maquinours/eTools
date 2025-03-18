@@ -13,13 +13,13 @@ namespace MoversEditor
 {
     public partial class SearchForm : Form
     {
-        public string Value { get { return tb_value.Text; } }
+        public string Value { get { return tbValue.Text; } }
         public SearchForm()
         {
             InitializeComponent();
             AutoCompleteStringCollection namesSource = new AutoCompleteStringCollection();
             namesSource.AddRange(Project.GetInstance().GetMoversName());
-            tb_value.AutoCompleteCustomSource = namesSource;
+            tbValue.AutoCompleteCustomSource = namesSource;
         }
     }
 }
