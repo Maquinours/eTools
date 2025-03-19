@@ -37,7 +37,6 @@
             this.btnSelectModelFile = new System.Windows.Forms.Button();
             this.btnMotions = new System.Windows.Forms.Button();
             this.cbModelBrace = new System.Windows.Forms.ComboBox();
-            this.tbModelScale = new System.Windows.Forms.TextBox();
             this.tbModelFile = new System.Windows.Forms.TextBox();
             this.lblModelBrace = new System.Windows.Forms.Label();
             this.lblModelScale = new System.Windows.Forms.Label();
@@ -45,11 +44,9 @@
             this.gbGeneralConfigurationMisc = new System.Windows.Forms.GroupBox();
             this.cbAi = new System.Windows.Forms.ComboBox();
             this.lblAi = new System.Windows.Forms.Label();
-            this.tbExperience = new System.Windows.Forms.TextBox();
             this.lblExperience = new System.Windows.Forms.Label();
             this.cbBelligerence = new System.Windows.Forms.ComboBox();
             this.lblBelligerence = new System.Windows.Forms.Label();
-            this.tbLevel = new System.Windows.Forms.TextBox();
             this.lblLevel = new System.Windows.Forms.Label();
             this.cbClass = new System.Windows.Forms.ComboBox();
             this.lblClass = new System.Windows.Forms.Label();
@@ -64,49 +61,49 @@
             this.tpMonster = new System.Windows.Forms.TabPage();
             this.gbMonsterStats = new System.Windows.Forms.GroupBox();
             this.gbMonsterStatsElementary = new System.Windows.Forms.GroupBox();
-            this.tbMonsterEarthResistance = new System.Windows.Forms.TextBox();
+            this.nudMonsterElectricityResistance = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterFireResistance = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterEarthResistance = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterWindResistance = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterWaterResistance = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterElementValue = new System.Windows.Forms.NumericUpDown();
             this.cbMonsterElementType = new System.Windows.Forms.ComboBox();
             this.lblMonsterEarthResistance = new System.Windows.Forms.Label();
             this.lblMonsterElementType = new System.Windows.Forms.Label();
-            this.tbMonsterWaterResistance = new System.Windows.Forms.TextBox();
             this.lblMonsterWaterResistance = new System.Windows.Forms.Label();
-            this.tbMonsterElementValue = new System.Windows.Forms.TextBox();
-            this.tbMonsterWindResistance = new System.Windows.Forms.TextBox();
-            this.lblMonsterElementValue = new System.Windows.Forms.Label();
+            this.lblMonsterElementRatio = new System.Windows.Forms.Label();
             this.lblMonsterWindResistance = new System.Windows.Forms.Label();
-            this.tbMonsterElectricityResistance = new System.Windows.Forms.TextBox();
             this.lblMonsterElectricityResistance = new System.Windows.Forms.Label();
-            this.tbMonsterFireResistance = new System.Windows.Forms.TextBox();
             this.lblMonsterFireResistance = new System.Windows.Forms.Label();
             this.gbMonsterStatsBase = new System.Windows.Forms.GroupBox();
-            this.tbMonsterInt = new System.Windows.Forms.TextBox();
-            this.tbMonsterDex = new System.Windows.Forms.TextBox();
+            this.nudMonsterMp = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterHp = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterHr = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterEr = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterInt = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterDex = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterSta = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterStr = new System.Windows.Forms.NumericUpDown();
             this.lblMonsterEr = new System.Windows.Forms.Label();
             this.lblMonsterStr = new System.Windows.Forms.Label();
-            this.tbMonsterHr = new System.Windows.Forms.TextBox();
-            this.tbMonsterStr = new System.Windows.Forms.TextBox();
             this.lblMonsterHr = new System.Windows.Forms.Label();
             this.lblMonsterSta = new System.Windows.Forms.Label();
-            this.tbMonsterEr = new System.Windows.Forms.TextBox();
-            this.tbMonsterSta = new System.Windows.Forms.TextBox();
             this.lblMonsterInt = new System.Windows.Forms.Label();
             this.lblMonsterDex = new System.Windows.Forms.Label();
-            this.tbMonsterMp = new System.Windows.Forms.TextBox();
             this.lblMonsterHp = new System.Windows.Forms.Label();
-            this.tbMonsterHp = new System.Windows.Forms.TextBox();
             this.lblMonsterMp = new System.Windows.Forms.Label();
             this.gbMonsterStatsMisc = new System.Windows.Forms.GroupBox();
-            this.tbMonsterMagicResist = new System.Windows.Forms.TextBox();
+            this.nudMonsterSpeed = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterAttackDelay = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterAttackMax = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterMagicResist = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterAttackMin = new System.Windows.Forms.NumericUpDown();
+            this.nudMonsterArmor = new System.Windows.Forms.NumericUpDown();
             this.lblMonsterMagicResist = new System.Windows.Forms.Label();
-            this.tbMonsterAttackMin = new System.Windows.Forms.TextBox();
             this.lblMonsterAttackMin = new System.Windows.Forms.Label();
             this.lblMonsterAttackMax = new System.Windows.Forms.Label();
-            this.tbMonsterAttackMax = new System.Windows.Forms.TextBox();
-            this.tbMonsterAttackDelay = new System.Windows.Forms.TextBox();
             this.lblMonsterAttackDelay = new System.Windows.Forms.Label();
             this.lblMonsterArmor = new System.Windows.Forms.Label();
-            this.tbMonsterArmor = new System.Windows.Forms.TextBox();
-            this.tbMonsterSpeed = new System.Windows.Forms.TextBox();
             this.lblMonsterSpeed = new System.Windows.Forms.Label();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.tsmiMovers = new System.Windows.Forms.ToolStripMenuItem();
@@ -119,6 +116,10 @@
             this.cmsLbMovers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiMoverDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.lbMovers = new System.Windows.Forms.ListBox();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.nudLevel = new System.Windows.Forms.NumericUpDown();
+            this.nudExperience = new System.Windows.Forms.NumericUpDown();
+            this.nudModelScale = new System.Windows.Forms.NumericUpDown();
             this.tcMover.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.gbGeneralConfiguration.SuspendLayout();
@@ -128,10 +129,33 @@
             this.tpMonster.SuspendLayout();
             this.gbMonsterStats.SuspendLayout();
             this.gbMonsterStatsElementary.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterElectricityResistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterFireResistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterEarthResistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterWindResistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterWaterResistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterElementValue)).BeginInit();
             this.gbMonsterStatsBase.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterMp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterHp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterHr)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterEr)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterInt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterDex)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterSta)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterStr)).BeginInit();
             this.gbMonsterStatsMisc.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterSpeed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterAttackDelay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterAttackMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterMagicResist)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterAttackMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterArmor)).BeginInit();
             this.msMain.SuspendLayout();
             this.cmsLbMovers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLevel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudExperience)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudModelScale)).BeginInit();
             this.SuspendLayout();
             // 
             // tcMover
@@ -160,10 +184,10 @@
             // 
             // gbGeneralConfigurationModel
             // 
+            this.gbGeneralConfigurationModel.Controls.Add(this.nudModelScale);
             this.gbGeneralConfigurationModel.Controls.Add(this.btnSelectModelFile);
             this.gbGeneralConfigurationModel.Controls.Add(this.btnMotions);
             this.gbGeneralConfigurationModel.Controls.Add(this.cbModelBrace);
-            this.gbGeneralConfigurationModel.Controls.Add(this.tbModelScale);
             this.gbGeneralConfigurationModel.Controls.Add(this.tbModelFile);
             this.gbGeneralConfigurationModel.Controls.Add(this.lblModelBrace);
             this.gbGeneralConfigurationModel.Controls.Add(this.lblModelScale);
@@ -193,12 +217,6 @@
             resources.ApplyResources(this.cbModelBrace, "cbModelBrace");
             this.cbModelBrace.Name = "cbModelBrace";
             // 
-            // tbModelScale
-            // 
-            resources.ApplyResources(this.tbModelScale, "tbModelScale");
-            this.tbModelScale.Name = "tbModelScale";
-            this.tbModelScale.TextChanged += new System.EventHandler(this.FormatFloatTextbox);
-            // 
             // tbModelFile
             // 
             resources.ApplyResources(this.tbModelFile, "tbModelFile");
@@ -221,13 +239,13 @@
             // 
             // gbGeneralConfigurationMisc
             // 
+            this.gbGeneralConfigurationMisc.Controls.Add(this.nudExperience);
+            this.gbGeneralConfigurationMisc.Controls.Add(this.nudLevel);
             this.gbGeneralConfigurationMisc.Controls.Add(this.cbAi);
             this.gbGeneralConfigurationMisc.Controls.Add(this.lblAi);
-            this.gbGeneralConfigurationMisc.Controls.Add(this.tbExperience);
             this.gbGeneralConfigurationMisc.Controls.Add(this.lblExperience);
             this.gbGeneralConfigurationMisc.Controls.Add(this.cbBelligerence);
             this.gbGeneralConfigurationMisc.Controls.Add(this.lblBelligerence);
-            this.gbGeneralConfigurationMisc.Controls.Add(this.tbLevel);
             this.gbGeneralConfigurationMisc.Controls.Add(this.lblLevel);
             this.gbGeneralConfigurationMisc.Controls.Add(this.cbClass);
             this.gbGeneralConfigurationMisc.Controls.Add(this.lblClass);
@@ -247,12 +265,6 @@
             resources.ApplyResources(this.lblAi, "lblAi");
             this.lblAi.Name = "lblAi";
             // 
-            // tbExperience
-            // 
-            resources.ApplyResources(this.tbExperience, "tbExperience");
-            this.tbExperience.Name = "tbExperience";
-            this.tbExperience.TextChanged += new System.EventHandler(this.FormatIntTextbox);
-            // 
             // lblExperience
             // 
             resources.ApplyResources(this.lblExperience, "lblExperience");
@@ -269,12 +281,6 @@
             // 
             resources.ApplyResources(this.lblBelligerence, "lblBelligerence");
             this.lblBelligerence.Name = "lblBelligerence";
-            // 
-            // tbLevel
-            // 
-            resources.ApplyResources(this.tbLevel, "tbLevel");
-            this.tbLevel.Name = "tbLevel";
-            this.tbLevel.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lblLevel
             // 
@@ -366,29 +372,83 @@
             // 
             // gbMonsterStatsElementary
             // 
-            this.gbMonsterStatsElementary.Controls.Add(this.tbMonsterEarthResistance);
+            this.gbMonsterStatsElementary.Controls.Add(this.nudMonsterElectricityResistance);
+            this.gbMonsterStatsElementary.Controls.Add(this.nudMonsterFireResistance);
+            this.gbMonsterStatsElementary.Controls.Add(this.nudMonsterEarthResistance);
+            this.gbMonsterStatsElementary.Controls.Add(this.nudMonsterWindResistance);
+            this.gbMonsterStatsElementary.Controls.Add(this.nudMonsterWaterResistance);
+            this.gbMonsterStatsElementary.Controls.Add(this.nudMonsterElementValue);
             this.gbMonsterStatsElementary.Controls.Add(this.cbMonsterElementType);
             this.gbMonsterStatsElementary.Controls.Add(this.lblMonsterEarthResistance);
             this.gbMonsterStatsElementary.Controls.Add(this.lblMonsterElementType);
-            this.gbMonsterStatsElementary.Controls.Add(this.tbMonsterWaterResistance);
             this.gbMonsterStatsElementary.Controls.Add(this.lblMonsterWaterResistance);
-            this.gbMonsterStatsElementary.Controls.Add(this.tbMonsterElementValue);
-            this.gbMonsterStatsElementary.Controls.Add(this.tbMonsterWindResistance);
-            this.gbMonsterStatsElementary.Controls.Add(this.lblMonsterElementValue);
+            this.gbMonsterStatsElementary.Controls.Add(this.lblMonsterElementRatio);
             this.gbMonsterStatsElementary.Controls.Add(this.lblMonsterWindResistance);
-            this.gbMonsterStatsElementary.Controls.Add(this.tbMonsterElectricityResistance);
             this.gbMonsterStatsElementary.Controls.Add(this.lblMonsterElectricityResistance);
-            this.gbMonsterStatsElementary.Controls.Add(this.tbMonsterFireResistance);
             this.gbMonsterStatsElementary.Controls.Add(this.lblMonsterFireResistance);
             resources.ApplyResources(this.gbMonsterStatsElementary, "gbMonsterStatsElementary");
             this.gbMonsterStatsElementary.Name = "gbMonsterStatsElementary";
             this.gbMonsterStatsElementary.TabStop = false;
             // 
-            // tbMonsterEarthResistance
+            // nudMonsterElectricityResistance
             // 
-            resources.ApplyResources(this.tbMonsterEarthResistance, "tbMonsterEarthResistance");
-            this.tbMonsterEarthResistance.Name = "tbMonsterEarthResistance";
-            this.tbMonsterEarthResistance.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.nudMonsterElectricityResistance, "nudMonsterElectricityResistance");
+            this.nudMonsterElectricityResistance.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterElectricityResistance.Name = "nudMonsterElectricityResistance";
+            // 
+            // nudMonsterFireResistance
+            // 
+            resources.ApplyResources(this.nudMonsterFireResistance, "nudMonsterFireResistance");
+            this.nudMonsterFireResistance.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterFireResistance.Name = "nudMonsterFireResistance";
+            // 
+            // nudMonsterEarthResistance
+            // 
+            resources.ApplyResources(this.nudMonsterEarthResistance, "nudMonsterEarthResistance");
+            this.nudMonsterEarthResistance.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterEarthResistance.Name = "nudMonsterEarthResistance";
+            // 
+            // nudMonsterWindResistance
+            // 
+            resources.ApplyResources(this.nudMonsterWindResistance, "nudMonsterWindResistance");
+            this.nudMonsterWindResistance.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterWindResistance.Name = "nudMonsterWindResistance";
+            // 
+            // nudMonsterWaterResistance
+            // 
+            resources.ApplyResources(this.nudMonsterWaterResistance, "nudMonsterWaterResistance");
+            this.nudMonsterWaterResistance.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterWaterResistance.Name = "nudMonsterWaterResistance";
+            // 
+            // nudMonsterElementValue
+            // 
+            resources.ApplyResources(this.nudMonsterElementValue, "nudMonsterElementValue");
+            this.nudMonsterElementValue.Maximum = new decimal(new int[] {
+            32767,
+            0,
+            0,
+            0});
+            this.nudMonsterElementValue.Name = "nudMonsterElementValue";
             // 
             // cbMonsterElementType
             // 
@@ -407,55 +467,26 @@
             resources.ApplyResources(this.lblMonsterElementType, "lblMonsterElementType");
             this.lblMonsterElementType.Name = "lblMonsterElementType";
             // 
-            // tbMonsterWaterResistance
-            // 
-            resources.ApplyResources(this.tbMonsterWaterResistance, "tbMonsterWaterResistance");
-            this.tbMonsterWaterResistance.Name = "tbMonsterWaterResistance";
-            this.tbMonsterWaterResistance.TextChanged += new System.EventHandler(this.FormatIntTextbox);
-            // 
             // lblMonsterWaterResistance
             // 
             resources.ApplyResources(this.lblMonsterWaterResistance, "lblMonsterWaterResistance");
             this.lblMonsterWaterResistance.Name = "lblMonsterWaterResistance";
             // 
-            // tbMonsterElementValue
+            // lblMonsterElementRatio
             // 
-            resources.ApplyResources(this.tbMonsterElementValue, "tbMonsterElementValue");
-            this.tbMonsterElementValue.Name = "tbMonsterElementValue";
-            this.tbMonsterElementValue.TextChanged += new System.EventHandler(this.FormatIntTextbox);
-            // 
-            // tbMonsterWindResistance
-            // 
-            resources.ApplyResources(this.tbMonsterWindResistance, "tbMonsterWindResistance");
-            this.tbMonsterWindResistance.Name = "tbMonsterWindResistance";
-            this.tbMonsterWindResistance.TextChanged += new System.EventHandler(this.FormatIntTextbox);
-            // 
-            // lblMonsterElementValue
-            // 
-            resources.ApplyResources(this.lblMonsterElementValue, "lblMonsterElementValue");
-            this.lblMonsterElementValue.Name = "lblMonsterElementValue";
+            resources.ApplyResources(this.lblMonsterElementRatio, "lblMonsterElementRatio");
+            this.lblMonsterElementRatio.Name = "lblMonsterElementRatio";
+            this.tooltip.SetToolTip(this.lblMonsterElementRatio, resources.GetString("lblMonsterElementRatio.ToolTip"));
             // 
             // lblMonsterWindResistance
             // 
             resources.ApplyResources(this.lblMonsterWindResistance, "lblMonsterWindResistance");
             this.lblMonsterWindResistance.Name = "lblMonsterWindResistance";
             // 
-            // tbMonsterElectricityResistance
-            // 
-            resources.ApplyResources(this.tbMonsterElectricityResistance, "tbMonsterElectricityResistance");
-            this.tbMonsterElectricityResistance.Name = "tbMonsterElectricityResistance";
-            this.tbMonsterElectricityResistance.TextChanged += new System.EventHandler(this.FormatIntTextbox);
-            // 
             // lblMonsterElectricityResistance
             // 
             resources.ApplyResources(this.lblMonsterElectricityResistance, "lblMonsterElectricityResistance");
             this.lblMonsterElectricityResistance.Name = "lblMonsterElectricityResistance";
-            // 
-            // tbMonsterFireResistance
-            // 
-            resources.ApplyResources(this.tbMonsterFireResistance, "tbMonsterFireResistance");
-            this.tbMonsterFireResistance.Name = "tbMonsterFireResistance";
-            this.tbMonsterFireResistance.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lblMonsterFireResistance
             // 
@@ -464,37 +495,105 @@
             // 
             // gbMonsterStatsBase
             // 
-            this.gbMonsterStatsBase.Controls.Add(this.tbMonsterInt);
-            this.gbMonsterStatsBase.Controls.Add(this.tbMonsterDex);
+            this.gbMonsterStatsBase.Controls.Add(this.nudMonsterMp);
+            this.gbMonsterStatsBase.Controls.Add(this.nudMonsterHp);
+            this.gbMonsterStatsBase.Controls.Add(this.nudMonsterHr);
+            this.gbMonsterStatsBase.Controls.Add(this.nudMonsterEr);
+            this.gbMonsterStatsBase.Controls.Add(this.nudMonsterInt);
+            this.gbMonsterStatsBase.Controls.Add(this.nudMonsterDex);
+            this.gbMonsterStatsBase.Controls.Add(this.nudMonsterSta);
+            this.gbMonsterStatsBase.Controls.Add(this.nudMonsterStr);
             this.gbMonsterStatsBase.Controls.Add(this.lblMonsterEr);
             this.gbMonsterStatsBase.Controls.Add(this.lblMonsterStr);
-            this.gbMonsterStatsBase.Controls.Add(this.tbMonsterHr);
-            this.gbMonsterStatsBase.Controls.Add(this.tbMonsterStr);
             this.gbMonsterStatsBase.Controls.Add(this.lblMonsterHr);
             this.gbMonsterStatsBase.Controls.Add(this.lblMonsterSta);
-            this.gbMonsterStatsBase.Controls.Add(this.tbMonsterEr);
-            this.gbMonsterStatsBase.Controls.Add(this.tbMonsterSta);
             this.gbMonsterStatsBase.Controls.Add(this.lblMonsterInt);
             this.gbMonsterStatsBase.Controls.Add(this.lblMonsterDex);
-            this.gbMonsterStatsBase.Controls.Add(this.tbMonsterMp);
             this.gbMonsterStatsBase.Controls.Add(this.lblMonsterHp);
-            this.gbMonsterStatsBase.Controls.Add(this.tbMonsterHp);
             this.gbMonsterStatsBase.Controls.Add(this.lblMonsterMp);
             resources.ApplyResources(this.gbMonsterStatsBase, "gbMonsterStatsBase");
             this.gbMonsterStatsBase.Name = "gbMonsterStatsBase";
             this.gbMonsterStatsBase.TabStop = false;
             // 
-            // tbMonsterInt
+            // nudMonsterMp
             // 
-            resources.ApplyResources(this.tbMonsterInt, "tbMonsterInt");
-            this.tbMonsterInt.Name = "tbMonsterInt";
-            this.tbMonsterInt.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.nudMonsterMp, "nudMonsterMp");
+            this.nudMonsterMp.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterMp.Name = "nudMonsterMp";
             // 
-            // tbMonsterDex
+            // nudMonsterHp
             // 
-            resources.ApplyResources(this.tbMonsterDex, "tbMonsterDex");
-            this.tbMonsterDex.Name = "tbMonsterDex";
-            this.tbMonsterDex.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            resources.ApplyResources(this.nudMonsterHp, "nudMonsterHp");
+            this.nudMonsterHp.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterHp.Name = "nudMonsterHp";
+            // 
+            // nudMonsterHr
+            // 
+            resources.ApplyResources(this.nudMonsterHr, "nudMonsterHr");
+            this.nudMonsterHr.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterHr.Name = "nudMonsterHr";
+            // 
+            // nudMonsterEr
+            // 
+            resources.ApplyResources(this.nudMonsterEr, "nudMonsterEr");
+            this.nudMonsterEr.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterEr.Name = "nudMonsterEr";
+            // 
+            // nudMonsterInt
+            // 
+            resources.ApplyResources(this.nudMonsterInt, "nudMonsterInt");
+            this.nudMonsterInt.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterInt.Name = "nudMonsterInt";
+            // 
+            // nudMonsterDex
+            // 
+            resources.ApplyResources(this.nudMonsterDex, "nudMonsterDex");
+            this.nudMonsterDex.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterDex.Name = "nudMonsterDex";
+            // 
+            // nudMonsterSta
+            // 
+            resources.ApplyResources(this.nudMonsterSta, "nudMonsterSta");
+            this.nudMonsterSta.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterSta.Name = "nudMonsterSta";
+            // 
+            // nudMonsterStr
+            // 
+            resources.ApplyResources(this.nudMonsterStr, "nudMonsterStr");
+            this.nudMonsterStr.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterStr.Name = "nudMonsterStr";
             // 
             // lblMonsterEr
             // 
@@ -506,18 +605,6 @@
             resources.ApplyResources(this.lblMonsterStr, "lblMonsterStr");
             this.lblMonsterStr.Name = "lblMonsterStr";
             // 
-            // tbMonsterHr
-            // 
-            resources.ApplyResources(this.tbMonsterHr, "tbMonsterHr");
-            this.tbMonsterHr.Name = "tbMonsterHr";
-            this.tbMonsterHr.TextChanged += new System.EventHandler(this.FormatIntTextbox);
-            // 
-            // tbMonsterStr
-            // 
-            resources.ApplyResources(this.tbMonsterStr, "tbMonsterStr");
-            this.tbMonsterStr.Name = "tbMonsterStr";
-            this.tbMonsterStr.TextChanged += new System.EventHandler(this.FormatIntTextbox);
-            // 
             // lblMonsterHr
             // 
             resources.ApplyResources(this.lblMonsterHr, "lblMonsterHr");
@@ -527,18 +614,6 @@
             // 
             resources.ApplyResources(this.lblMonsterSta, "lblMonsterSta");
             this.lblMonsterSta.Name = "lblMonsterSta";
-            // 
-            // tbMonsterEr
-            // 
-            resources.ApplyResources(this.tbMonsterEr, "tbMonsterEr");
-            this.tbMonsterEr.Name = "tbMonsterEr";
-            this.tbMonsterEr.TextChanged += new System.EventHandler(this.FormatIntTextbox);
-            // 
-            // tbMonsterSta
-            // 
-            resources.ApplyResources(this.tbMonsterSta, "tbMonsterSta");
-            this.tbMonsterSta.Name = "tbMonsterSta";
-            this.tbMonsterSta.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lblMonsterInt
             // 
@@ -550,22 +625,10 @@
             resources.ApplyResources(this.lblMonsterDex, "lblMonsterDex");
             this.lblMonsterDex.Name = "lblMonsterDex";
             // 
-            // tbMonsterMp
-            // 
-            resources.ApplyResources(this.tbMonsterMp, "tbMonsterMp");
-            this.tbMonsterMp.Name = "tbMonsterMp";
-            this.tbMonsterMp.TextChanged += new System.EventHandler(this.FormatIntTextbox);
-            // 
             // lblMonsterHp
             // 
             resources.ApplyResources(this.lblMonsterHp, "lblMonsterHp");
             this.lblMonsterHp.Name = "lblMonsterHp";
-            // 
-            // tbMonsterHp
-            // 
-            resources.ApplyResources(this.tbMonsterHp, "tbMonsterHp");
-            this.tbMonsterHp.Name = "tbMonsterHp";
-            this.tbMonsterHp.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lblMonsterMp
             // 
@@ -574,38 +637,87 @@
             // 
             // gbMonsterStatsMisc
             // 
-            this.gbMonsterStatsMisc.Controls.Add(this.tbMonsterMagicResist);
+            this.gbMonsterStatsMisc.Controls.Add(this.nudMonsterSpeed);
+            this.gbMonsterStatsMisc.Controls.Add(this.nudMonsterAttackDelay);
+            this.gbMonsterStatsMisc.Controls.Add(this.nudMonsterAttackMax);
+            this.gbMonsterStatsMisc.Controls.Add(this.nudMonsterMagicResist);
+            this.gbMonsterStatsMisc.Controls.Add(this.nudMonsterAttackMin);
+            this.gbMonsterStatsMisc.Controls.Add(this.nudMonsterArmor);
             this.gbMonsterStatsMisc.Controls.Add(this.lblMonsterMagicResist);
-            this.gbMonsterStatsMisc.Controls.Add(this.tbMonsterAttackMin);
             this.gbMonsterStatsMisc.Controls.Add(this.lblMonsterAttackMin);
             this.gbMonsterStatsMisc.Controls.Add(this.lblMonsterAttackMax);
-            this.gbMonsterStatsMisc.Controls.Add(this.tbMonsterAttackMax);
-            this.gbMonsterStatsMisc.Controls.Add(this.tbMonsterAttackDelay);
             this.gbMonsterStatsMisc.Controls.Add(this.lblMonsterAttackDelay);
             this.gbMonsterStatsMisc.Controls.Add(this.lblMonsterArmor);
-            this.gbMonsterStatsMisc.Controls.Add(this.tbMonsterArmor);
-            this.gbMonsterStatsMisc.Controls.Add(this.tbMonsterSpeed);
             this.gbMonsterStatsMisc.Controls.Add(this.lblMonsterSpeed);
             resources.ApplyResources(this.gbMonsterStatsMisc, "gbMonsterStatsMisc");
             this.gbMonsterStatsMisc.Name = "gbMonsterStatsMisc";
             this.gbMonsterStatsMisc.TabStop = false;
             // 
-            // tbMonsterMagicResist
+            // nudMonsterSpeed
             // 
-            resources.ApplyResources(this.tbMonsterMagicResist, "tbMonsterMagicResist");
-            this.tbMonsterMagicResist.Name = "tbMonsterMagicResist";
-            this.tbMonsterMagicResist.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            this.nudMonsterSpeed.DecimalPlaces = 3;
+            resources.ApplyResources(this.nudMonsterSpeed, "nudMonsterSpeed");
+            this.nudMonsterSpeed.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterSpeed.Name = "nudMonsterSpeed";
+            // 
+            // nudMonsterAttackDelay
+            // 
+            resources.ApplyResources(this.nudMonsterAttackDelay, "nudMonsterAttackDelay");
+            this.nudMonsterAttackDelay.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterAttackDelay.Name = "nudMonsterAttackDelay";
+            // 
+            // nudMonsterAttackMax
+            // 
+            resources.ApplyResources(this.nudMonsterAttackMax, "nudMonsterAttackMax");
+            this.nudMonsterAttackMax.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterAttackMax.Name = "nudMonsterAttackMax";
+            // 
+            // nudMonsterMagicResist
+            // 
+            resources.ApplyResources(this.nudMonsterMagicResist, "nudMonsterMagicResist");
+            this.nudMonsterMagicResist.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterMagicResist.Name = "nudMonsterMagicResist";
+            // 
+            // nudMonsterAttackMin
+            // 
+            resources.ApplyResources(this.nudMonsterAttackMin, "nudMonsterAttackMin");
+            this.nudMonsterAttackMin.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterAttackMin.Name = "nudMonsterAttackMin";
+            // 
+            // nudMonsterArmor
+            // 
+            resources.ApplyResources(this.nudMonsterArmor, "nudMonsterArmor");
+            this.nudMonsterArmor.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudMonsterArmor.Name = "nudMonsterArmor";
             // 
             // lblMonsterMagicResist
             // 
             resources.ApplyResources(this.lblMonsterMagicResist, "lblMonsterMagicResist");
             this.lblMonsterMagicResist.Name = "lblMonsterMagicResist";
-            // 
-            // tbMonsterAttackMin
-            // 
-            resources.ApplyResources(this.tbMonsterAttackMin, "tbMonsterAttackMin");
-            this.tbMonsterAttackMin.Name = "tbMonsterAttackMin";
-            this.tbMonsterAttackMin.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
             // lblMonsterAttackMin
             // 
@@ -617,17 +729,6 @@
             resources.ApplyResources(this.lblMonsterAttackMax, "lblMonsterAttackMax");
             this.lblMonsterAttackMax.Name = "lblMonsterAttackMax";
             // 
-            // tbMonsterAttackMax
-            // 
-            resources.ApplyResources(this.tbMonsterAttackMax, "tbMonsterAttackMax");
-            this.tbMonsterAttackMax.Name = "tbMonsterAttackMax";
-            this.tbMonsterAttackMax.TextChanged += new System.EventHandler(this.FormatIntTextbox);
-            // 
-            // tbMonsterAttackDelay
-            // 
-            resources.ApplyResources(this.tbMonsterAttackDelay, "tbMonsterAttackDelay");
-            this.tbMonsterAttackDelay.Name = "tbMonsterAttackDelay";
-            // 
             // lblMonsterAttackDelay
             // 
             resources.ApplyResources(this.lblMonsterAttackDelay, "lblMonsterAttackDelay");
@@ -637,18 +738,6 @@
             // 
             resources.ApplyResources(this.lblMonsterArmor, "lblMonsterArmor");
             this.lblMonsterArmor.Name = "lblMonsterArmor";
-            // 
-            // tbMonsterArmor
-            // 
-            resources.ApplyResources(this.tbMonsterArmor, "tbMonsterArmor");
-            this.tbMonsterArmor.Name = "tbMonsterArmor";
-            this.tbMonsterArmor.TextChanged += new System.EventHandler(this.FormatIntTextbox);
-            // 
-            // tbMonsterSpeed
-            // 
-            resources.ApplyResources(this.tbMonsterSpeed, "tbMonsterSpeed");
-            this.tbMonsterSpeed.Name = "tbMonsterSpeed";
-            this.tbMonsterSpeed.TextChanged += new System.EventHandler(this.FormatFloatTextbox);
             // 
             // lblMonsterSpeed
             // 
@@ -734,6 +823,42 @@
             this.lbMovers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LbMovers_KeyDown);
             this.lbMovers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LbMovers_MouseDown);
             // 
+            // nudLevel
+            // 
+            resources.ApplyResources(this.nudLevel, "nudLevel");
+            this.nudLevel.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudLevel.Name = "nudLevel";
+            // 
+            // nudExperience
+            // 
+            resources.ApplyResources(this.nudExperience, "nudExperience");
+            this.nudExperience.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudExperience.Name = "nudExperience";
+            // 
+            // nudModelScale
+            // 
+            this.nudModelScale.DecimalPlaces = 2;
+            this.nudModelScale.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            resources.ApplyResources(this.nudModelScale, "nudModelScale");
+            this.nudModelScale.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudModelScale.Name = "nudModelScale";
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -759,13 +884,36 @@
             this.gbMonsterStats.ResumeLayout(false);
             this.gbMonsterStatsElementary.ResumeLayout(false);
             this.gbMonsterStatsElementary.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterElectricityResistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterFireResistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterEarthResistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterWindResistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterWaterResistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterElementValue)).EndInit();
             this.gbMonsterStatsBase.ResumeLayout(false);
             this.gbMonsterStatsBase.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterMp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterHp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterHr)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterEr)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterInt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterDex)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterSta)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterStr)).EndInit();
             this.gbMonsterStatsMisc.ResumeLayout(false);
             this.gbMonsterStatsMisc.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterSpeed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterAttackDelay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterAttackMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterMagicResist)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterAttackMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMonsterArmor)).EndInit();
             this.msMain.ResumeLayout(false);
             this.msMain.PerformLayout();
             this.cmsLbMovers.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudLevel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudExperience)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudModelScale)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -787,7 +935,6 @@
         private System.Windows.Forms.GroupBox gbGeneralConfiguration;
         private System.Windows.Forms.GroupBox gbGeneralConfigurationModel;
         private System.Windows.Forms.ComboBox cbModelBrace;
-        private System.Windows.Forms.TextBox tbModelScale;
         private System.Windows.Forms.TextBox tbModelFile;
         private System.Windows.Forms.Label lblModelBrace;
         private System.Windows.Forms.Label lblModelScale;
@@ -795,11 +942,9 @@
         private System.Windows.Forms.GroupBox gbGeneralConfigurationMisc;
         private System.Windows.Forms.ComboBox cbAi;
         private System.Windows.Forms.Label lblAi;
-        private System.Windows.Forms.TextBox tbExperience;
         private System.Windows.Forms.Label lblExperience;
         private System.Windows.Forms.ComboBox cbBelligerence;
         private System.Windows.Forms.Label lblBelligerence;
-        private System.Windows.Forms.TextBox tbLevel;
         private System.Windows.Forms.Label lblLevel;
         private System.Windows.Forms.ComboBox cbClass;
         private System.Windows.Forms.Label lblClass;
@@ -813,54 +958,58 @@
         private System.Windows.Forms.TabPage tpMonster;
         private System.Windows.Forms.GroupBox gbMonsterStats;
         private System.Windows.Forms.GroupBox gbMonsterStatsElementary;
-        private System.Windows.Forms.TextBox tbMonsterEarthResistance;
         private System.Windows.Forms.ComboBox cbMonsterElementType;
         private System.Windows.Forms.Label lblMonsterEarthResistance;
         private System.Windows.Forms.Label lblMonsterElementType;
-        private System.Windows.Forms.TextBox tbMonsterWaterResistance;
         private System.Windows.Forms.Label lblMonsterWaterResistance;
-        private System.Windows.Forms.TextBox tbMonsterElementValue;
-        private System.Windows.Forms.TextBox tbMonsterWindResistance;
-        private System.Windows.Forms.Label lblMonsterElementValue;
+        private System.Windows.Forms.Label lblMonsterElementRatio;
         private System.Windows.Forms.Label lblMonsterWindResistance;
-        private System.Windows.Forms.TextBox tbMonsterElectricityResistance;
         private System.Windows.Forms.Label lblMonsterElectricityResistance;
-        private System.Windows.Forms.TextBox tbMonsterFireResistance;
         private System.Windows.Forms.Label lblMonsterFireResistance;
         private System.Windows.Forms.GroupBox gbMonsterStatsBase;
-        private System.Windows.Forms.TextBox tbMonsterInt;
-        private System.Windows.Forms.TextBox tbMonsterDex;
         private System.Windows.Forms.Label lblMonsterEr;
         private System.Windows.Forms.Label lblMonsterStr;
-        private System.Windows.Forms.TextBox tbMonsterHr;
-        private System.Windows.Forms.TextBox tbMonsterStr;
         private System.Windows.Forms.Label lblMonsterHr;
         private System.Windows.Forms.Label lblMonsterSta;
-        private System.Windows.Forms.TextBox tbMonsterEr;
-        private System.Windows.Forms.TextBox tbMonsterSta;
         private System.Windows.Forms.Label lblMonsterInt;
         private System.Windows.Forms.Label lblMonsterDex;
-        private System.Windows.Forms.TextBox tbMonsterMp;
         private System.Windows.Forms.Label lblMonsterHp;
-        private System.Windows.Forms.TextBox tbMonsterHp;
         private System.Windows.Forms.Label lblMonsterMp;
         private System.Windows.Forms.GroupBox gbMonsterStatsMisc;
-        private System.Windows.Forms.TextBox tbMonsterMagicResist;
         private System.Windows.Forms.Label lblMonsterMagicResist;
-        private System.Windows.Forms.TextBox tbMonsterAttackMin;
         private System.Windows.Forms.Label lblMonsterAttackMin;
         private System.Windows.Forms.Label lblMonsterAttackMax;
-        private System.Windows.Forms.TextBox tbMonsterAttackMax;
-        private System.Windows.Forms.TextBox tbMonsterAttackDelay;
         private System.Windows.Forms.Label lblMonsterAttackDelay;
         private System.Windows.Forms.Label lblMonsterArmor;
-        private System.Windows.Forms.TextBox tbMonsterArmor;
-        private System.Windows.Forms.TextBox tbMonsterSpeed;
         private System.Windows.Forms.Label lblMonsterSpeed;
         private System.Windows.Forms.ListBox lbMovers;
         private System.Windows.Forms.Button btnMotions;
         private System.Windows.Forms.Button btnSelectModelFile;
         private System.Windows.Forms.Label lblIdentifierAlreadyUsed;
+        private System.Windows.Forms.NumericUpDown nudMonsterStr;
+        private System.Windows.Forms.NumericUpDown nudMonsterSta;
+        private System.Windows.Forms.NumericUpDown nudMonsterInt;
+        private System.Windows.Forms.NumericUpDown nudMonsterDex;
+        private System.Windows.Forms.NumericUpDown nudMonsterMp;
+        private System.Windows.Forms.NumericUpDown nudMonsterHp;
+        private System.Windows.Forms.NumericUpDown nudMonsterHr;
+        private System.Windows.Forms.NumericUpDown nudMonsterEr;
+        private System.Windows.Forms.NumericUpDown nudMonsterSpeed;
+        private System.Windows.Forms.NumericUpDown nudMonsterAttackDelay;
+        private System.Windows.Forms.NumericUpDown nudMonsterAttackMax;
+        private System.Windows.Forms.NumericUpDown nudMonsterMagicResist;
+        private System.Windows.Forms.NumericUpDown nudMonsterAttackMin;
+        private System.Windows.Forms.NumericUpDown nudMonsterArmor;
+        private System.Windows.Forms.NumericUpDown nudMonsterElectricityResistance;
+        private System.Windows.Forms.NumericUpDown nudMonsterFireResistance;
+        private System.Windows.Forms.NumericUpDown nudMonsterEarthResistance;
+        private System.Windows.Forms.NumericUpDown nudMonsterWindResistance;
+        private System.Windows.Forms.NumericUpDown nudMonsterWaterResistance;
+        private System.Windows.Forms.NumericUpDown nudMonsterElementValue;
+        private System.Windows.Forms.ToolTip tooltip;
+        private System.Windows.Forms.NumericUpDown nudModelScale;
+        private System.Windows.Forms.NumericUpDown nudExperience;
+        private System.Windows.Forms.NumericUpDown nudLevel;
     }
 }
 

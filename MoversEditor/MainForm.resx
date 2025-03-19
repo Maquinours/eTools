@@ -117,1066 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;gbGeneralConfiguration.Name" xml:space="preserve">
-    <value>gbGeneralConfiguration</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfiguration.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfiguration.Parent" xml:space="preserve">
-    <value>tpGeneral</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfiguration.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="tpGeneral.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+  <data name="nudModelScale.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 76</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tpGeneral.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tpGeneral.Size" type="System.Drawing.Size, System.Drawing">
-    <value>461, 569</value>
+  <data name="nudModelScale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tpGeneral.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+  <data name="nudModelScale.TabIndex" type="System.Int32, mscorlib">
+    <value>78</value>
   </data>
-  <data name="tpGeneral.Text" xml:space="preserve">
-    <value>General</value>
-  </data>
-  <data name="&gt;&gt;tpGeneral.Name" xml:space="preserve">
-    <value>tpGeneral</value>
-  </data>
-  <data name="&gt;&gt;tpGeneral.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tpGeneral.Parent" xml:space="preserve">
-    <value>tcMover</value>
-  </data>
-  <data name="&gt;&gt;tpGeneral.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tbMonsterEarthResistance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>338, 114</value>
-  </data>
-  <data name="tbMonsterEarthResistance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 20</value>
-  </data>
-  <data name="tbMonsterEarthResistance.TabIndex" type="System.Int32, mscorlib">
-    <value>76</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterEarthResistance.Name" xml:space="preserve">
-    <value>tbMonsterEarthResistance</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterEarthResistance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterEarthResistance.Parent" xml:space="preserve">
-    <value>gbMonsterStatsElementary</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterEarthResistance.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="cbMonsterElementType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>70, 32</value>
-  </data>
-  <data name="cbMonsterElementType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 21</value>
-  </data>
-  <data name="cbMonsterElementType.TabIndex" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
-  <data name="&gt;&gt;cbMonsterElementType.Name" xml:space="preserve">
-    <value>cbMonsterElementType</value>
-  </data>
-  <data name="&gt;&gt;cbMonsterElementType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbMonsterElementType.Parent" xml:space="preserve">
-    <value>gbMonsterStatsElementary</value>
-  </data>
-  <data name="&gt;&gt;cbMonsterElementType.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblMonsterEarthResistance.AutoSize" type="System.Boolean, mscorlib">
+  <data name="nudModelScale.ThousandsSeparator" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblMonsterEarthResistance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="&gt;&gt;nudModelScale.Name" xml:space="preserve">
+    <value>nudModelScale</value>
   </data>
-  <data name="lblMonsterEarthResistance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 117</value>
+  <data name="&gt;&gt;nudModelScale.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="lblMonsterEarthResistance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 13</value>
-  </data>
-  <data name="lblMonsterEarthResistance.TabIndex" type="System.Int32, mscorlib">
-    <value>75</value>
-  </data>
-  <data name="lblMonsterEarthResistance.Text" xml:space="preserve">
-    <value>Earth Resistance :</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterEarthResistance.Name" xml:space="preserve">
-    <value>lblMonsterEarthResistance</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterEarthResistance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterEarthResistance.Parent" xml:space="preserve">
-    <value>gbMonsterStatsElementary</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterEarthResistance.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="lblMonsterElementType.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblMonsterElementType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblMonsterElementType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 35</value>
-  </data>
-  <data name="lblMonsterElementType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 13</value>
-  </data>
-  <data name="lblMonsterElementType.TabIndex" type="System.Int32, mscorlib">
-    <value>59</value>
-  </data>
-  <data name="lblMonsterElementType.Text" xml:space="preserve">
-    <value>Element :</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterElementType.Name" xml:space="preserve">
-    <value>lblMonsterElementType</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterElementType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterElementType.Parent" xml:space="preserve">
-    <value>gbMonsterStatsElementary</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterElementType.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tbMonsterWaterResistance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 85</value>
-  </data>
-  <data name="tbMonsterWaterResistance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 20</value>
-  </data>
-  <data name="tbMonsterWaterResistance.TabIndex" type="System.Int32, mscorlib">
-    <value>74</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterWaterResistance.Name" xml:space="preserve">
-    <value>tbMonsterWaterResistance</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterWaterResistance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterWaterResistance.Parent" xml:space="preserve">
-    <value>gbMonsterStatsElementary</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterWaterResistance.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="lblMonsterWaterResistance.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblMonsterWaterResistance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblMonsterWaterResistance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 88</value>
-  </data>
-  <data name="lblMonsterWaterResistance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 13</value>
-  </data>
-  <data name="lblMonsterWaterResistance.TabIndex" type="System.Int32, mscorlib">
-    <value>73</value>
-  </data>
-  <data name="lblMonsterWaterResistance.Text" xml:space="preserve">
-    <value>Water Resistance :</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterWaterResistance.Name" xml:space="preserve">
-    <value>lblMonsterWaterResistance</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterWaterResistance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterWaterResistance.Parent" xml:space="preserve">
-    <value>gbMonsterStatsElementary</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterWaterResistance.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tbMonsterElementValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>294, 32</value>
-  </data>
-  <data name="tbMonsterElementValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 20</value>
-  </data>
-  <data name="tbMonsterElementValue.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterElementValue.Name" xml:space="preserve">
-    <value>tbMonsterElementValue</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterElementValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterElementValue.Parent" xml:space="preserve">
-    <value>gbMonsterStatsElementary</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterElementValue.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="tbMonsterWindResistance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 114</value>
-  </data>
-  <data name="tbMonsterWindResistance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 20</value>
-  </data>
-  <data name="tbMonsterWindResistance.TabIndex" type="System.Int32, mscorlib">
-    <value>72</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterWindResistance.Name" xml:space="preserve">
-    <value>tbMonsterWindResistance</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterWindResistance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterWindResistance.Parent" xml:space="preserve">
-    <value>gbMonsterStatsElementary</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterWindResistance.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="lblMonsterElementValue.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblMonsterElementValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblMonsterElementValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 35</value>
-  </data>
-  <data name="lblMonsterElementValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 13</value>
-  </data>
-  <data name="lblMonsterElementValue.TabIndex" type="System.Int32, mscorlib">
-    <value>61</value>
-  </data>
-  <data name="lblMonsterElementValue.Text" xml:space="preserve">
-    <value>Value :</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterElementValue.Name" xml:space="preserve">
-    <value>lblMonsterElementValue</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterElementValue.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterElementValue.Parent" xml:space="preserve">
-    <value>gbMonsterStatsElementary</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterElementValue.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="lblMonsterWindResistance.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblMonsterWindResistance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblMonsterWindResistance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 117</value>
-  </data>
-  <data name="lblMonsterWindResistance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 13</value>
-  </data>
-  <data name="lblMonsterWindResistance.TabIndex" type="System.Int32, mscorlib">
-    <value>71</value>
-  </data>
-  <data name="lblMonsterWindResistance.Text" xml:space="preserve">
-    <value>Wind Resistance :</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterWindResistance.Name" xml:space="preserve">
-    <value>lblMonsterWindResistance</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterWindResistance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterWindResistance.Parent" xml:space="preserve">
-    <value>gbMonsterStatsElementary</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterWindResistance.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="tbMonsterElectricityResistance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 149</value>
-  </data>
-  <data name="tbMonsterElectricityResistance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 20</value>
-  </data>
-  <data name="tbMonsterElectricityResistance.TabIndex" type="System.Int32, mscorlib">
-    <value>68</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterElectricityResistance.Name" xml:space="preserve">
-    <value>tbMonsterElectricityResistance</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterElectricityResistance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterElectricityResistance.Parent" xml:space="preserve">
-    <value>gbMonsterStatsElementary</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterElectricityResistance.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="lblMonsterElectricityResistance.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblMonsterElectricityResistance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblMonsterElectricityResistance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 152</value>
-  </data>
-  <data name="lblMonsterElectricityResistance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 13</value>
-  </data>
-  <data name="lblMonsterElectricityResistance.TabIndex" type="System.Int32, mscorlib">
-    <value>67</value>
-  </data>
-  <data name="lblMonsterElectricityResistance.Text" xml:space="preserve">
-    <value>Electricity Resistance :</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterElectricityResistance.Name" xml:space="preserve">
-    <value>lblMonsterElectricityResistance</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterElectricityResistance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterElectricityResistance.Parent" xml:space="preserve">
-    <value>gbMonsterStatsElementary</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterElectricityResistance.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="tbMonsterFireResistance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>338, 85</value>
-  </data>
-  <data name="tbMonsterFireResistance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 20</value>
-  </data>
-  <data name="tbMonsterFireResistance.TabIndex" type="System.Int32, mscorlib">
-    <value>70</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterFireResistance.Name" xml:space="preserve">
-    <value>tbMonsterFireResistance</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterFireResistance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterFireResistance.Parent" xml:space="preserve">
-    <value>gbMonsterStatsElementary</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterFireResistance.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="lblMonsterFireResistance.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblMonsterFireResistance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblMonsterFireResistance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 88</value>
-  </data>
-  <data name="lblMonsterFireResistance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 13</value>
-  </data>
-  <data name="lblMonsterFireResistance.TabIndex" type="System.Int32, mscorlib">
-    <value>69</value>
-  </data>
-  <data name="lblMonsterFireResistance.Text" xml:space="preserve">
-    <value>Fire Resistance :</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterFireResistance.Name" xml:space="preserve">
-    <value>lblMonsterFireResistance</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterFireResistance.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterFireResistance.Parent" xml:space="preserve">
-    <value>gbMonsterStatsElementary</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterFireResistance.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="gbMonsterStatsElementary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 371</value>
-  </data>
-  <data name="gbMonsterStatsElementary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 186</value>
-  </data>
-  <data name="gbMonsterStatsElementary.TabIndex" type="System.Int32, mscorlib">
-    <value>64</value>
-  </data>
-  <data name="gbMonsterStatsElementary.Text" xml:space="preserve">
-    <value>Elementary</value>
-  </data>
-  <data name="&gt;&gt;gbMonsterStatsElementary.Name" xml:space="preserve">
-    <value>gbMonsterStatsElementary</value>
-  </data>
-  <data name="&gt;&gt;gbMonsterStatsElementary.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbMonsterStatsElementary.Parent" xml:space="preserve">
-    <value>gbMonsterStats</value>
-  </data>
-  <data name="&gt;&gt;gbMonsterStatsElementary.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterInt.Name" xml:space="preserve">
-    <value>tbMonsterInt</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterInt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterInt.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterInt.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterDex.Name" xml:space="preserve">
-    <value>tbMonsterDex</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterDex.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterDex.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterDex.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterEr.Name" xml:space="preserve">
-    <value>lblMonsterEr</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterEr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterEr.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterEr.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterStr.Name" xml:space="preserve">
-    <value>lblMonsterStr</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterStr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterStr.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterStr.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterHr.Name" xml:space="preserve">
-    <value>tbMonsterHr</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterHr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterHr.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterHr.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterStr.Name" xml:space="preserve">
-    <value>tbMonsterStr</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterStr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterStr.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterStr.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterHr.Name" xml:space="preserve">
-    <value>lblMonsterHr</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterHr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterHr.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterHr.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterSta.Name" xml:space="preserve">
-    <value>lblMonsterSta</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterSta.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterSta.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterSta.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterEr.Name" xml:space="preserve">
-    <value>tbMonsterEr</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterEr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterEr.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterEr.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterSta.Name" xml:space="preserve">
-    <value>tbMonsterSta</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterSta.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterSta.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterSta.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterInt.Name" xml:space="preserve">
-    <value>lblMonsterInt</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterInt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterInt.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterInt.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterDex.Name" xml:space="preserve">
-    <value>lblMonsterDex</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterDex.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterDex.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterDex.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterMp.Name" xml:space="preserve">
-    <value>tbMonsterMp</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterMp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterMp.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterMp.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterHp.Name" xml:space="preserve">
-    <value>lblMonsterHp</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterHp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterHp.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterHp.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterHp.Name" xml:space="preserve">
-    <value>tbMonsterHp</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterHp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterHp.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterHp.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterMp.Name" xml:space="preserve">
-    <value>lblMonsterMp</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterMp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterMp.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterMp.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="gbMonsterStatsBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 19</value>
-  </data>
-  <data name="gbMonsterStatsBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 169</value>
-  </data>
-  <data name="gbMonsterStatsBase.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
-  </data>
-  <data name="gbMonsterStatsBase.Text" xml:space="preserve">
-    <value>Base</value>
-  </data>
-  <data name="&gt;&gt;gbMonsterStatsBase.Name" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;gbMonsterStatsBase.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbMonsterStatsBase.Parent" xml:space="preserve">
-    <value>gbMonsterStats</value>
-  </data>
-  <data name="&gt;&gt;gbMonsterStatsBase.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterMagicResist.Name" xml:space="preserve">
-    <value>tbMonsterMagicResist</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterMagicResist.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterMagicResist.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterMagicResist.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterMagicResist.Name" xml:space="preserve">
-    <value>lblMonsterMagicResist</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterMagicResist.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterMagicResist.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterMagicResist.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackMin.Name" xml:space="preserve">
-    <value>tbMonsterAttackMin</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackMin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackMin.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackMin.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterAttackMin.Name" xml:space="preserve">
-    <value>lblMonsterAttackMin</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterAttackMin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterAttackMin.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterAttackMin.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterAttackMax.Name" xml:space="preserve">
-    <value>lblMonsterAttackMax</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterAttackMax.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterAttackMax.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterAttackMax.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackMax.Name" xml:space="preserve">
-    <value>tbMonsterAttackMax</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackMax.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackMax.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackMax.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackDelay.Name" xml:space="preserve">
-    <value>tbMonsterAttackDelay</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackDelay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackDelay.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackDelay.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterAttackDelay.Name" xml:space="preserve">
-    <value>lblMonsterAttackDelay</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterAttackDelay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterAttackDelay.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterAttackDelay.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterArmor.Name" xml:space="preserve">
-    <value>lblMonsterArmor</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterArmor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterArmor.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterArmor.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterArmor.Name" xml:space="preserve">
-    <value>tbMonsterArmor</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterArmor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterArmor.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterArmor.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterSpeed.Name" xml:space="preserve">
-    <value>tbMonsterSpeed</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterSpeed.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterSpeed.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterSpeed.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterSpeed.Name" xml:space="preserve">
-    <value>lblMonsterSpeed</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterSpeed.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterSpeed.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;lblMonsterSpeed.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="gbMonsterStatsMisc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 194</value>
-  </data>
-  <data name="gbMonsterStatsMisc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 171</value>
-  </data>
-  <data name="gbMonsterStatsMisc.TabIndex" type="System.Int32, mscorlib">
-    <value>63</value>
-  </data>
-  <data name="gbMonsterStatsMisc.Text" xml:space="preserve">
-    <value>Misc</value>
-  </data>
-  <data name="&gt;&gt;gbMonsterStatsMisc.Name" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;gbMonsterStatsMisc.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbMonsterStatsMisc.Parent" xml:space="preserve">
-    <value>gbMonsterStats</value>
-  </data>
-  <data name="&gt;&gt;gbMonsterStatsMisc.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="gbMonsterStats.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="gbMonsterStats.Size" type="System.Drawing.Size, System.Drawing">
-    <value>455, 563</value>
-  </data>
-  <data name="gbMonsterStats.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="gbMonsterStats.Text" xml:space="preserve">
-    <value>Stats</value>
-  </data>
-  <data name="&gt;&gt;gbMonsterStats.Name" xml:space="preserve">
-    <value>gbMonsterStats</value>
-  </data>
-  <data name="&gt;&gt;gbMonsterStats.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbMonsterStats.Parent" xml:space="preserve">
-    <value>tpMonster</value>
-  </data>
-  <data name="&gt;&gt;gbMonsterStats.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="tpMonster.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tpMonster.Size" type="System.Drawing.Size, System.Drawing">
-    <value>461, 569</value>
-  </data>
-  <data name="tpMonster.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tpMonster.Text" xml:space="preserve">
-    <value>Monster</value>
-  </data>
-  <data name="&gt;&gt;tpMonster.Name" xml:space="preserve">
-    <value>tpMonster</value>
-  </data>
-  <data name="&gt;&gt;tpMonster.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tpMonster.Parent" xml:space="preserve">
-    <value>tcMover</value>
-  </data>
-  <data name="&gt;&gt;tpMonster.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tcMover.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="tcMover.Location" type="System.Drawing.Point, System.Drawing">
-    <value>221, 24</value>
-  </data>
-  <data name="tcMover.Size" type="System.Drawing.Size, System.Drawing">
-    <value>469, 595</value>
-  </data>
-  <data name="tcMover.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;tcMover.Name" xml:space="preserve">
-    <value>tcMover</value>
-  </data>
-  <data name="&gt;&gt;tcMover.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tcMover.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tcMover.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationModel.Name" xml:space="preserve">
+  <data name="&gt;&gt;nudModelScale.Parent" xml:space="preserve">
     <value>gbGeneralConfigurationModel</value>
   </data>
-  <data name="&gt;&gt;gbGeneralConfigurationModel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationModel.Parent" xml:space="preserve">
-    <value>gbGeneralConfiguration</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationModel.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationMisc.Name" xml:space="preserve">
-    <value>gbGeneralConfigurationMisc</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationMisc.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationMisc.Parent" xml:space="preserve">
-    <value>gbGeneralConfiguration</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationMisc.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationMain.Name" xml:space="preserve">
-    <value>gbGeneralConfigurationMain</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationMain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationMain.Parent" xml:space="preserve">
-    <value>gbGeneralConfiguration</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationMain.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="gbGeneralConfiguration.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="gbGeneralConfiguration.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="gbGeneralConfiguration.Size" type="System.Drawing.Size, System.Drawing">
-    <value>455, 563</value>
-  </data>
-  <data name="gbGeneralConfiguration.TabIndex" type="System.Int32, mscorlib">
-    <value>67</value>
-  </data>
-  <data name="gbGeneralConfiguration.Text" xml:space="preserve">
-    <value>Configuration</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfiguration.Name" xml:space="preserve">
-    <value>gbGeneralConfiguration</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfiguration.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfiguration.Parent" xml:space="preserve">
-    <value>tpGeneral</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfiguration.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;btnSelectModelFile.Name" xml:space="preserve">
-    <value>btnSelectModelFile</value>
-  </data>
-  <data name="&gt;&gt;btnSelectModelFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnSelectModelFile.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationModel</value>
-  </data>
-  <data name="&gt;&gt;btnSelectModelFile.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;btnMotions.Name" xml:space="preserve">
-    <value>btnMotions</value>
-  </data>
-  <data name="&gt;&gt;btnMotions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnMotions.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationModel</value>
-  </data>
-  <data name="&gt;&gt;btnMotions.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cbModelBrace.Name" xml:space="preserve">
-    <value>cbModelBrace</value>
-  </data>
-  <data name="&gt;&gt;cbModelBrace.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbModelBrace.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationModel</value>
-  </data>
-  <data name="&gt;&gt;cbModelBrace.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;tbModelScale.Name" xml:space="preserve">
-    <value>tbModelScale</value>
-  </data>
-  <data name="&gt;&gt;tbModelScale.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbModelScale.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationModel</value>
-  </data>
-  <data name="&gt;&gt;tbModelScale.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;tbModelFile.Name" xml:space="preserve">
-    <value>tbModelFile</value>
-  </data>
-  <data name="&gt;&gt;tbModelFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbModelFile.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationModel</value>
-  </data>
-  <data name="&gt;&gt;tbModelFile.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;lblModelBrace.Name" xml:space="preserve">
-    <value>lblModelBrace</value>
-  </data>
-  <data name="&gt;&gt;lblModelBrace.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblModelBrace.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationModel</value>
-  </data>
-  <data name="&gt;&gt;lblModelBrace.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;lblModelScale.Name" xml:space="preserve">
-    <value>lblModelScale</value>
-  </data>
-  <data name="&gt;&gt;lblModelScale.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblModelScale.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationModel</value>
-  </data>
-  <data name="&gt;&gt;lblModelScale.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;lblModelFile.Name" xml:space="preserve">
-    <value>lblModelFile</value>
-  </data>
-  <data name="&gt;&gt;lblModelFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblModelFile.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationModel</value>
-  </data>
-  <data name="&gt;&gt;lblModelFile.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="gbGeneralConfigurationModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 371</value>
-  </data>
-  <data name="gbGeneralConfigurationModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 186</value>
-  </data>
-  <data name="gbGeneralConfigurationModel.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="gbGeneralConfigurationModel.Text" xml:space="preserve">
-    <value>Model</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationModel.Name" xml:space="preserve">
-    <value>gbGeneralConfigurationModel</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationModel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationModel.Parent" xml:space="preserve">
-    <value>gbGeneralConfiguration</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationModel.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;nudModelScale.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="btnSelectModelFile.Location" type="System.Drawing.Point, System.Drawing">
@@ -1201,7 +165,7 @@
     <value>gbGeneralConfigurationModel</value>
   </data>
   <data name="&gt;&gt;btnSelectModelFile.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="btnMotions.Location" type="System.Drawing.Point, System.Drawing">
     <value>171, 147</value>
@@ -1225,11 +189,12 @@
     <value>gbGeneralConfigurationModel</value>
   </data>
   <data name="&gt;&gt;btnMotions.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="cbModelBrace.Location" type="System.Drawing.Point, System.Drawing">
     <value>150, 111</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cbModelBrace.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
@@ -1249,27 +214,6 @@
     <value>gbGeneralConfigurationModel</value>
   </data>
   <data name="&gt;&gt;cbModelBrace.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tbModelScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 76</value>
-  </data>
-  <data name="tbModelScale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
-  </data>
-  <data name="tbModelScale.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tbModelScale.Name" xml:space="preserve">
-    <value>tbModelScale</value>
-  </data>
-  <data name="&gt;&gt;tbModelScale.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbModelScale.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationModel</value>
-  </data>
-  <data name="&gt;&gt;tbModelScale.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="tbModelFile.Location" type="System.Drawing.Point, System.Drawing">
@@ -1383,148 +327,76 @@
   <data name="&gt;&gt;lblModelFile.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;cbAi.Name" xml:space="preserve">
-    <value>cbAi</value>
+  <data name="gbGeneralConfigurationModel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 371</value>
   </data>
-  <data name="&gt;&gt;cbAi.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="gbGeneralConfigurationModel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>417, 186</value>
   </data>
-  <data name="&gt;&gt;cbAi.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMisc</value>
+  <data name="gbGeneralConfigurationModel.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
   </data>
-  <data name="&gt;&gt;cbAi.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="gbGeneralConfigurationModel.Text" xml:space="preserve">
+    <value>Model</value>
   </data>
-  <data name="&gt;&gt;lblAi.Name" xml:space="preserve">
-    <value>lblAi</value>
+  <data name="&gt;&gt;gbGeneralConfigurationModel.Name" xml:space="preserve">
+    <value>gbGeneralConfigurationModel</value>
   </data>
-  <data name="&gt;&gt;lblAi.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblAi.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMisc</value>
-  </data>
-  <data name="&gt;&gt;lblAi.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tbExperience.Name" xml:space="preserve">
-    <value>tbExperience</value>
-  </data>
-  <data name="&gt;&gt;tbExperience.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbExperience.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMisc</value>
-  </data>
-  <data name="&gt;&gt;tbExperience.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lblExperience.Name" xml:space="preserve">
-    <value>lblExperience</value>
-  </data>
-  <data name="&gt;&gt;lblExperience.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblExperience.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMisc</value>
-  </data>
-  <data name="&gt;&gt;lblExperience.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;cbBelligerence.Name" xml:space="preserve">
-    <value>cbBelligerence</value>
-  </data>
-  <data name="&gt;&gt;cbBelligerence.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbBelligerence.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMisc</value>
-  </data>
-  <data name="&gt;&gt;cbBelligerence.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;lblBelligerence.Name" xml:space="preserve">
-    <value>lblBelligerence</value>
-  </data>
-  <data name="&gt;&gt;lblBelligerence.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblBelligerence.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMisc</value>
-  </data>
-  <data name="&gt;&gt;lblBelligerence.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;tbLevel.Name" xml:space="preserve">
-    <value>tbLevel</value>
-  </data>
-  <data name="&gt;&gt;tbLevel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbLevel.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMisc</value>
-  </data>
-  <data name="&gt;&gt;tbLevel.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;lblLevel.Name" xml:space="preserve">
-    <value>lblLevel</value>
-  </data>
-  <data name="&gt;&gt;lblLevel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblLevel.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMisc</value>
-  </data>
-  <data name="&gt;&gt;lblLevel.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;cbClass.Name" xml:space="preserve">
-    <value>cbClass</value>
-  </data>
-  <data name="&gt;&gt;cbClass.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbClass.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMisc</value>
-  </data>
-  <data name="&gt;&gt;cbClass.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;lblClass.Name" xml:space="preserve">
-    <value>lblClass</value>
-  </data>
-  <data name="&gt;&gt;lblClass.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblClass.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMisc</value>
-  </data>
-  <data name="&gt;&gt;lblClass.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="gbGeneralConfigurationMisc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 194</value>
-  </data>
-  <data name="gbGeneralConfigurationMisc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 171</value>
-  </data>
-  <data name="gbGeneralConfigurationMisc.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="gbGeneralConfigurationMisc.Text" xml:space="preserve">
-    <value>Misc</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationMisc.Name" xml:space="preserve">
-    <value>gbGeneralConfigurationMisc</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationMisc.Type" xml:space="preserve">
+  <data name="&gt;&gt;gbGeneralConfigurationModel.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;gbGeneralConfigurationMisc.Parent" xml:space="preserve">
+  <data name="&gt;&gt;gbGeneralConfigurationModel.Parent" xml:space="preserve">
     <value>gbGeneralConfiguration</value>
   </data>
-  <data name="&gt;&gt;gbGeneralConfigurationMisc.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;gbGeneralConfigurationModel.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nudExperience.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 139</value>
+  </data>
+  <data name="nudExperience.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="nudExperience.TabIndex" type="System.Int32, mscorlib">
+    <value>78</value>
+  </data>
+  <data name="nudExperience.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudExperience.Name" xml:space="preserve">
+    <value>nudExperience</value>
+  </data>
+  <data name="&gt;&gt;nudExperience.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudExperience.Parent" xml:space="preserve">
+    <value>gbGeneralConfigurationMisc</value>
+  </data>
+  <data name="&gt;&gt;nudExperience.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nudLevel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>150, 78</value>
+  </data>
+  <data name="nudLevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>146, 20</value>
+  </data>
+  <data name="nudLevel.TabIndex" type="System.Int32, mscorlib">
+    <value>78</value>
+  </data>
+  <data name="nudLevel.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudLevel.Name" xml:space="preserve">
+    <value>nudLevel</value>
+  </data>
+  <data name="&gt;&gt;nudLevel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudLevel.Parent" xml:space="preserve">
+    <value>gbGeneralConfigurationMisc</value>
+  </data>
+  <data name="&gt;&gt;nudLevel.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="cbAi.Location" type="System.Drawing.Point, System.Drawing">
@@ -1546,7 +418,7 @@
     <value>gbGeneralConfigurationMisc</value>
   </data>
   <data name="&gt;&gt;cbAi.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="lblAi.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1576,28 +448,7 @@
     <value>gbGeneralConfigurationMisc</value>
   </data>
   <data name="&gt;&gt;lblAi.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tbExperience.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 139</value>
-  </data>
-  <data name="tbExperience.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
-  </data>
-  <data name="tbExperience.TabIndex" type="System.Int32, mscorlib">
-    <value>74</value>
-  </data>
-  <data name="&gt;&gt;tbExperience.Name" xml:space="preserve">
-    <value>tbExperience</value>
-  </data>
-  <data name="&gt;&gt;tbExperience.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbExperience.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMisc</value>
-  </data>
-  <data name="&gt;&gt;tbExperience.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lblExperience.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1627,7 +478,7 @@
     <value>gbGeneralConfigurationMisc</value>
   </data>
   <data name="&gt;&gt;lblExperience.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="cbBelligerence.Location" type="System.Drawing.Point, System.Drawing">
     <value>150, 47</value>
@@ -1648,7 +499,7 @@
     <value>gbGeneralConfigurationMisc</value>
   </data>
   <data name="&gt;&gt;cbBelligerence.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="lblBelligerence.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1678,27 +529,6 @@
     <value>gbGeneralConfigurationMisc</value>
   </data>
   <data name="&gt;&gt;lblBelligerence.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tbLevel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>150, 78</value>
-  </data>
-  <data name="tbLevel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
-  </data>
-  <data name="tbLevel.TabIndex" type="System.Int32, mscorlib">
-    <value>69</value>
-  </data>
-  <data name="&gt;&gt;tbLevel.Name" xml:space="preserve">
-    <value>tbLevel</value>
-  </data>
-  <data name="&gt;&gt;tbLevel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbLevel.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMisc</value>
-  </data>
-  <data name="&gt;&gt;tbLevel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="lblLevel.AutoSize" type="System.Boolean, mscorlib">
@@ -1782,113 +612,29 @@
   <data name="&gt;&gt;lblClass.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;lblIdentifierAlreadyUsed.Name" xml:space="preserve">
-    <value>lblIdentifierAlreadyUsed</value>
+  <data name="gbGeneralConfigurationMisc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 194</value>
   </data>
-  <data name="&gt;&gt;lblIdentifierAlreadyUsed.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="gbGeneralConfigurationMisc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>417, 171</value>
   </data>
-  <data name="&gt;&gt;lblIdentifierAlreadyUsed.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMain</value>
+  <data name="gbGeneralConfigurationMisc.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
   </data>
-  <data name="&gt;&gt;lblIdentifierAlreadyUsed.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="gbGeneralConfigurationMisc.Text" xml:space="preserve">
+    <value>Misc</value>
   </data>
-  <data name="&gt;&gt;tbName.Name" xml:space="preserve">
-    <value>tbName</value>
+  <data name="&gt;&gt;gbGeneralConfigurationMisc.Name" xml:space="preserve">
+    <value>gbGeneralConfigurationMisc</value>
   </data>
-  <data name="&gt;&gt;tbName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbName.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMain</value>
-  </data>
-  <data name="&gt;&gt;tbName.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cbType.Name" xml:space="preserve">
-    <value>cbType</value>
-  </data>
-  <data name="&gt;&gt;cbType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cbType.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMain</value>
-  </data>
-  <data name="&gt;&gt;cbType.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lblType.Name" xml:space="preserve">
-    <value>lblType</value>
-  </data>
-  <data name="&gt;&gt;lblType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblType.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMain</value>
-  </data>
-  <data name="&gt;&gt;lblType.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;tbIdentifier.Name" xml:space="preserve">
-    <value>tbIdentifier</value>
-  </data>
-  <data name="&gt;&gt;tbIdentifier.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbIdentifier.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMain</value>
-  </data>
-  <data name="&gt;&gt;tbIdentifier.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;lblName.Name" xml:space="preserve">
-    <value>lblName</value>
-  </data>
-  <data name="&gt;&gt;lblName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblName.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMain</value>
-  </data>
-  <data name="&gt;&gt;lblName.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;lblIdentifier.Name" xml:space="preserve">
-    <value>lblIdentifier</value>
-  </data>
-  <data name="&gt;&gt;lblIdentifier.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblIdentifier.Parent" xml:space="preserve">
-    <value>gbGeneralConfigurationMain</value>
-  </data>
-  <data name="&gt;&gt;lblIdentifier.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="gbGeneralConfigurationMain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 19</value>
-  </data>
-  <data name="gbGeneralConfigurationMain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>417, 169</value>
-  </data>
-  <data name="gbGeneralConfigurationMain.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="gbGeneralConfigurationMain.Text" xml:space="preserve">
-    <value>Main</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationMain.Name" xml:space="preserve">
-    <value>gbGeneralConfigurationMain</value>
-  </data>
-  <data name="&gt;&gt;gbGeneralConfigurationMain.Type" xml:space="preserve">
+  <data name="&gt;&gt;gbGeneralConfigurationMisc.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;gbGeneralConfigurationMain.Parent" xml:space="preserve">
+  <data name="&gt;&gt;gbGeneralConfigurationMisc.Parent" xml:space="preserve">
     <value>gbGeneralConfiguration</value>
   </data>
-  <data name="&gt;&gt;gbGeneralConfigurationMain.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;gbGeneralConfigurationMisc.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="lblIdentifierAlreadyUsed.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2073,47 +819,680 @@
   <data name="&gt;&gt;lblIdentifier.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="tbMonsterInt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 56</value>
+  <data name="gbGeneralConfigurationMain.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 19</value>
   </data>
-  <data name="tbMonsterInt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 20</value>
+  <data name="gbGeneralConfigurationMain.Size" type="System.Drawing.Size, System.Drawing">
+    <value>417, 169</value>
   </data>
-  <data name="tbMonsterInt.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
+  <data name="gbGeneralConfigurationMain.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
   </data>
-  <data name="&gt;&gt;tbMonsterInt.Name" xml:space="preserve">
-    <value>tbMonsterInt</value>
+  <data name="gbGeneralConfigurationMain.Text" xml:space="preserve">
+    <value>Main</value>
   </data>
-  <data name="&gt;&gt;tbMonsterInt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;gbGeneralConfigurationMain.Name" xml:space="preserve">
+    <value>gbGeneralConfigurationMain</value>
   </data>
-  <data name="&gt;&gt;tbMonsterInt.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
+  <data name="&gt;&gt;gbGeneralConfigurationMain.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tbMonsterInt.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;gbGeneralConfigurationMain.Parent" xml:space="preserve">
+    <value>gbGeneralConfiguration</value>
+  </data>
+  <data name="&gt;&gt;gbGeneralConfigurationMain.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="gbGeneralConfiguration.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="gbGeneralConfiguration.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="gbGeneralConfiguration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>455, 563</value>
+  </data>
+  <data name="gbGeneralConfiguration.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
+  <data name="gbGeneralConfiguration.Text" xml:space="preserve">
+    <value>Configuration</value>
+  </data>
+  <data name="&gt;&gt;gbGeneralConfiguration.Name" xml:space="preserve">
+    <value>gbGeneralConfiguration</value>
+  </data>
+  <data name="&gt;&gt;gbGeneralConfiguration.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbGeneralConfiguration.Parent" xml:space="preserve">
+    <value>tpGeneral</value>
+  </data>
+  <data name="&gt;&gt;gbGeneralConfiguration.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="tbMonsterDex.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 30</value>
+  <data name="tpGeneral.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
   </data>
-  <data name="tbMonsterDex.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tpGeneral.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tpGeneral.Size" type="System.Drawing.Size, System.Drawing">
+    <value>461, 569</value>
+  </data>
+  <data name="tpGeneral.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tpGeneral.Text" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="&gt;&gt;tpGeneral.Name" xml:space="preserve">
+    <value>tpGeneral</value>
+  </data>
+  <data name="&gt;&gt;tpGeneral.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tpGeneral.Parent" xml:space="preserve">
+    <value>tcMover</value>
+  </data>
+  <data name="&gt;&gt;tpGeneral.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nudMonsterElectricityResistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>232, 149</value>
+  </data>
+  <data name="nudMonsterElectricityResistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 20</value>
+  </data>
+  <data name="nudMonsterElectricityResistance.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterElectricityResistance.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterElectricityResistance.Name" xml:space="preserve">
+    <value>nudMonsterElectricityResistance</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterElectricityResistance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterElectricityResistance.Parent" xml:space="preserve">
+    <value>gbMonsterStatsElementary</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterElectricityResistance.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nudMonsterFireResistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>338, 85</value>
+  </data>
+  <data name="nudMonsterFireResistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 20</value>
+  </data>
+  <data name="nudMonsterFireResistance.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterFireResistance.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterFireResistance.Name" xml:space="preserve">
+    <value>nudMonsterFireResistance</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterFireResistance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterFireResistance.Parent" xml:space="preserve">
+    <value>gbMonsterStatsElementary</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterFireResistance.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="nudMonsterEarthResistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>338, 114</value>
+  </data>
+  <data name="nudMonsterEarthResistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 20</value>
+  </data>
+  <data name="nudMonsterEarthResistance.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterEarthResistance.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterEarthResistance.Name" xml:space="preserve">
+    <value>nudMonsterEarthResistance</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterEarthResistance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterEarthResistance.Parent" xml:space="preserve">
+    <value>gbMonsterStatsElementary</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterEarthResistance.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="nudMonsterWindResistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 114</value>
+  </data>
+  <data name="nudMonsterWindResistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 20</value>
+  </data>
+  <data name="nudMonsterWindResistance.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterWindResistance.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterWindResistance.Name" xml:space="preserve">
+    <value>nudMonsterWindResistance</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterWindResistance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterWindResistance.Parent" xml:space="preserve">
+    <value>gbMonsterStatsElementary</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterWindResistance.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="nudMonsterWaterResistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>110, 85</value>
+  </data>
+  <data name="nudMonsterWaterResistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 20</value>
+  </data>
+  <data name="nudMonsterWaterResistance.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterWaterResistance.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterWaterResistance.Name" xml:space="preserve">
+    <value>nudMonsterWaterResistance</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterWaterResistance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterWaterResistance.Parent" xml:space="preserve">
+    <value>gbMonsterStatsElementary</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterWaterResistance.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="nudMonsterElementValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>294, 32</value>
+  </data>
+  <data name="nudMonsterElementValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 20</value>
+  </data>
+  <data name="nudMonsterElementValue.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterElementValue.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterElementValue.Name" xml:space="preserve">
+    <value>nudMonsterElementValue</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterElementValue.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterElementValue.Parent" xml:space="preserve">
+    <value>gbMonsterStatsElementary</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterElementValue.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="cbMonsterElementType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 32</value>
+  </data>
+  <data name="cbMonsterElementType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 21</value>
+  </data>
+  <data name="cbMonsterElementType.TabIndex" type="System.Int32, mscorlib">
+    <value>60</value>
+  </data>
+  <data name="&gt;&gt;cbMonsterElementType.Name" xml:space="preserve">
+    <value>cbMonsterElementType</value>
+  </data>
+  <data name="&gt;&gt;cbMonsterElementType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cbMonsterElementType.Parent" xml:space="preserve">
+    <value>gbMonsterStatsElementary</value>
+  </data>
+  <data name="&gt;&gt;cbMonsterElementType.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblMonsterEarthResistance.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMonsterEarthResistance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMonsterEarthResistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 117</value>
+  </data>
+  <data name="lblMonsterEarthResistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 13</value>
+  </data>
+  <data name="lblMonsterEarthResistance.TabIndex" type="System.Int32, mscorlib">
+    <value>75</value>
+  </data>
+  <data name="lblMonsterEarthResistance.Text" xml:space="preserve">
+    <value>Earth Resistance :</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterEarthResistance.Name" xml:space="preserve">
+    <value>lblMonsterEarthResistance</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterEarthResistance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterEarthResistance.Parent" xml:space="preserve">
+    <value>gbMonsterStatsElementary</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterEarthResistance.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblMonsterElementType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMonsterElementType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMonsterElementType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 35</value>
+  </data>
+  <data name="lblMonsterElementType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 13</value>
+  </data>
+  <data name="lblMonsterElementType.TabIndex" type="System.Int32, mscorlib">
+    <value>59</value>
+  </data>
+  <data name="lblMonsterElementType.Text" xml:space="preserve">
+    <value>Element :</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterElementType.Name" xml:space="preserve">
+    <value>lblMonsterElementType</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterElementType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterElementType.Parent" xml:space="preserve">
+    <value>gbMonsterStatsElementary</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterElementType.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblMonsterWaterResistance.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMonsterWaterResistance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMonsterWaterResistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 88</value>
+  </data>
+  <data name="lblMonsterWaterResistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>98, 13</value>
+  </data>
+  <data name="lblMonsterWaterResistance.TabIndex" type="System.Int32, mscorlib">
+    <value>73</value>
+  </data>
+  <data name="lblMonsterWaterResistance.Text" xml:space="preserve">
+    <value>Water Resistance :</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterWaterResistance.Name" xml:space="preserve">
+    <value>lblMonsterWaterResistance</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterWaterResistance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterWaterResistance.Parent" xml:space="preserve">
+    <value>gbMonsterStatsElementary</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterWaterResistance.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblMonsterElementRatio.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMonsterElementRatio.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMonsterElementRatio.Location" type="System.Drawing.Point, System.Drawing">
+    <value>248, 35</value>
+  </data>
+  <data name="lblMonsterElementRatio.Size" type="System.Drawing.Size, System.Drawing">
+    <value>38, 13</value>
+  </data>
+  <data name="lblMonsterElementRatio.TabIndex" type="System.Int32, mscorlib">
+    <value>61</value>
+  </data>
+  <data name="lblMonsterElementRatio.Text" xml:space="preserve">
+    <value>Ratio :</value>
+  </data>
+  <metadata name="tooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>244, 17</value>
+  </metadata>
+  <data name="lblMonsterElementRatio.ToolTip" xml:space="preserve">
+    <value>Ratio determining the importance of the element in both attack and defense.</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterElementRatio.Name" xml:space="preserve">
+    <value>lblMonsterElementRatio</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterElementRatio.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterElementRatio.Parent" xml:space="preserve">
+    <value>gbMonsterStatsElementary</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterElementRatio.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="lblMonsterWindResistance.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMonsterWindResistance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMonsterWindResistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 117</value>
+  </data>
+  <data name="lblMonsterWindResistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 13</value>
+  </data>
+  <data name="lblMonsterWindResistance.TabIndex" type="System.Int32, mscorlib">
+    <value>71</value>
+  </data>
+  <data name="lblMonsterWindResistance.Text" xml:space="preserve">
+    <value>Wind Resistance :</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterWindResistance.Name" xml:space="preserve">
+    <value>lblMonsterWindResistance</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterWindResistance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterWindResistance.Parent" xml:space="preserve">
+    <value>gbMonsterStatsElementary</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterWindResistance.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="lblMonsterElectricityResistance.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMonsterElectricityResistance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMonsterElectricityResistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>112, 152</value>
+  </data>
+  <data name="lblMonsterElectricityResistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>114, 13</value>
+  </data>
+  <data name="lblMonsterElectricityResistance.TabIndex" type="System.Int32, mscorlib">
+    <value>67</value>
+  </data>
+  <data name="lblMonsterElectricityResistance.Text" xml:space="preserve">
+    <value>Electricity Resistance :</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterElectricityResistance.Name" xml:space="preserve">
+    <value>lblMonsterElectricityResistance</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterElectricityResistance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterElectricityResistance.Parent" xml:space="preserve">
+    <value>gbMonsterStatsElementary</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterElectricityResistance.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="lblMonsterFireResistance.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblMonsterFireResistance.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblMonsterFireResistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>246, 88</value>
+  </data>
+  <data name="lblMonsterFireResistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
+  </data>
+  <data name="lblMonsterFireResistance.TabIndex" type="System.Int32, mscorlib">
+    <value>69</value>
+  </data>
+  <data name="lblMonsterFireResistance.Text" xml:space="preserve">
+    <value>Fire Resistance :</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterFireResistance.Name" xml:space="preserve">
+    <value>lblMonsterFireResistance</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterFireResistance.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterFireResistance.Parent" xml:space="preserve">
+    <value>gbMonsterStatsElementary</value>
+  </data>
+  <data name="&gt;&gt;lblMonsterFireResistance.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="gbMonsterStatsElementary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 371</value>
+  </data>
+  <data name="gbMonsterStatsElementary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>417, 186</value>
+  </data>
+  <data name="gbMonsterStatsElementary.TabIndex" type="System.Int32, mscorlib">
+    <value>64</value>
+  </data>
+  <data name="gbMonsterStatsElementary.Text" xml:space="preserve">
+    <value>Elementary</value>
+  </data>
+  <data name="&gt;&gt;gbMonsterStatsElementary.Name" xml:space="preserve">
+    <value>gbMonsterStatsElementary</value>
+  </data>
+  <data name="&gt;&gt;gbMonsterStatsElementary.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbMonsterStatsElementary.Parent" xml:space="preserve">
+    <value>gbMonsterStats</value>
+  </data>
+  <data name="&gt;&gt;gbMonsterStatsElementary.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nudMonsterMp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 127</value>
+  </data>
+  <data name="nudMonsterMp.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 20</value>
   </data>
-  <data name="tbMonsterDex.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
+  <data name="nudMonsterMp.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
   </data>
-  <data name="&gt;&gt;tbMonsterDex.Name" xml:space="preserve">
-    <value>tbMonsterDex</value>
+  <data name="nudMonsterMp.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="&gt;&gt;tbMonsterDex.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;nudMonsterMp.Name" xml:space="preserve">
+    <value>nudMonsterMp</value>
   </data>
-  <data name="&gt;&gt;tbMonsterDex.Parent" xml:space="preserve">
+  <data name="&gt;&gt;nudMonsterMp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterMp.Parent" xml:space="preserve">
     <value>gbMonsterStatsBase</value>
   </data>
-  <data name="&gt;&gt;tbMonsterDex.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;nudMonsterMp.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="nudMonsterHp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>47, 127</value>
+  </data>
+  <data name="nudMonsterHp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 20</value>
+  </data>
+  <data name="nudMonsterHp.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterHp.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterHp.Name" xml:space="preserve">
+    <value>nudMonsterHp</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterHp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterHp.Parent" xml:space="preserve">
+    <value>gbMonsterStatsBase</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterHp.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="nudMonsterHr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>47, 101</value>
+  </data>
+  <data name="nudMonsterHr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 20</value>
+  </data>
+  <data name="nudMonsterHr.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterHr.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterHr.Name" xml:space="preserve">
+    <value>nudMonsterHr</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterHr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterHr.Parent" xml:space="preserve">
+    <value>gbMonsterStatsBase</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterHr.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="nudMonsterEr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 101</value>
+  </data>
+  <data name="nudMonsterEr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 20</value>
+  </data>
+  <data name="nudMonsterEr.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterEr.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterEr.Name" xml:space="preserve">
+    <value>nudMonsterEr</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterEr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterEr.Parent" xml:space="preserve">
+    <value>gbMonsterStatsBase</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterEr.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="nudMonsterInt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 56</value>
+  </data>
+  <data name="nudMonsterInt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 20</value>
+  </data>
+  <data name="nudMonsterInt.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterInt.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterInt.Name" xml:space="preserve">
+    <value>nudMonsterInt</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterInt.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterInt.Parent" xml:space="preserve">
+    <value>gbMonsterStatsBase</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterInt.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="nudMonsterDex.Location" type="System.Drawing.Point, System.Drawing">
+    <value>275, 30</value>
+  </data>
+  <data name="nudMonsterDex.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 20</value>
+  </data>
+  <data name="nudMonsterDex.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterDex.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterDex.Name" xml:space="preserve">
+    <value>nudMonsterDex</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterDex.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterDex.Parent" xml:space="preserve">
+    <value>gbMonsterStatsBase</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterDex.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="nudMonsterSta.Location" type="System.Drawing.Point, System.Drawing">
+    <value>47, 56</value>
+  </data>
+  <data name="nudMonsterSta.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 20</value>
+  </data>
+  <data name="nudMonsterSta.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterSta.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterSta.Name" xml:space="preserve">
+    <value>nudMonsterSta</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterSta.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterSta.Parent" xml:space="preserve">
+    <value>gbMonsterStatsBase</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterSta.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="nudMonsterStr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>47, 30</value>
+  </data>
+  <data name="nudMonsterStr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>136, 20</value>
+  </data>
+  <data name="nudMonsterStr.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterStr.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterStr.Name" xml:space="preserve">
+    <value>nudMonsterStr</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterStr.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterStr.Parent" xml:space="preserve">
+    <value>gbMonsterStatsBase</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterStr.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="lblMonsterEr.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2143,7 +1522,7 @@
     <value>gbMonsterStatsBase</value>
   </data>
   <data name="&gt;&gt;lblMonsterEr.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>8</value>
   </data>
   <data name="lblMonsterStr.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2173,49 +1552,7 @@
     <value>gbMonsterStatsBase</value>
   </data>
   <data name="&gt;&gt;lblMonsterStr.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tbMonsterHr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>47, 101</value>
-  </data>
-  <data name="tbMonsterHr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 20</value>
-  </data>
-  <data name="tbMonsterHr.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterHr.Name" xml:space="preserve">
-    <value>tbMonsterHr</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterHr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterHr.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterHr.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="tbMonsterStr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>47, 30</value>
-  </data>
-  <data name="tbMonsterStr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 20</value>
-  </data>
-  <data name="tbMonsterStr.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterStr.Name" xml:space="preserve">
-    <value>tbMonsterStr</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterStr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterStr.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterStr.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>9</value>
   </data>
   <data name="lblMonsterHr.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2245,7 +1582,7 @@
     <value>gbMonsterStatsBase</value>
   </data>
   <data name="&gt;&gt;lblMonsterHr.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>10</value>
   </data>
   <data name="lblMonsterSta.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2275,49 +1612,7 @@
     <value>gbMonsterStatsBase</value>
   </data>
   <data name="&gt;&gt;lblMonsterSta.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="tbMonsterEr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 101</value>
-  </data>
-  <data name="tbMonsterEr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 20</value>
-  </data>
-  <data name="tbMonsterEr.TabIndex" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterEr.Name" xml:space="preserve">
-    <value>tbMonsterEr</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterEr.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterEr.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterEr.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="tbMonsterSta.Location" type="System.Drawing.Point, System.Drawing">
-    <value>47, 56</value>
-  </data>
-  <data name="tbMonsterSta.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 20</value>
-  </data>
-  <data name="tbMonsterSta.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterSta.Name" xml:space="preserve">
-    <value>tbMonsterSta</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterSta.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterSta.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterSta.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="lblMonsterInt.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2347,7 +1642,7 @@
     <value>gbMonsterStatsBase</value>
   </data>
   <data name="&gt;&gt;lblMonsterInt.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="lblMonsterDex.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2377,28 +1672,7 @@
     <value>gbMonsterStatsBase</value>
   </data>
   <data name="&gt;&gt;lblMonsterDex.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="tbMonsterMp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>275, 127</value>
-  </data>
-  <data name="tbMonsterMp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 20</value>
-  </data>
-  <data name="tbMonsterMp.TabIndex" type="System.Int32, mscorlib">
-    <value>56</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterMp.Name" xml:space="preserve">
-    <value>tbMonsterMp</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterMp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterMp.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterMp.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="lblMonsterHp.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2428,27 +1702,6 @@
     <value>gbMonsterStatsBase</value>
   </data>
   <data name="&gt;&gt;lblMonsterHp.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="tbMonsterHp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>47, 127</value>
-  </data>
-  <data name="tbMonsterHp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>136, 20</value>
-  </data>
-  <data name="tbMonsterHp.TabIndex" type="System.Int32, mscorlib">
-    <value>54</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterHp.Name" xml:space="preserve">
-    <value>tbMonsterHp</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterHp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterHp.Parent" xml:space="preserve">
-    <value>gbMonsterStatsBase</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterHp.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
   <data name="lblMonsterMp.AutoSize" type="System.Boolean, mscorlib">
@@ -2481,26 +1734,173 @@
   <data name="&gt;&gt;lblMonsterMp.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="tbMonsterMagicResist.Location" type="System.Drawing.Point, System.Drawing">
-    <value>294, 32</value>
+  <data name="gbMonsterStatsBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 19</value>
   </data>
-  <data name="tbMonsterMagicResist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 20</value>
+  <data name="gbMonsterStatsBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>417, 169</value>
   </data>
-  <data name="tbMonsterMagicResist.TabIndex" type="System.Int32, mscorlib">
-    <value>68</value>
+  <data name="gbMonsterStatsBase.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
   </data>
-  <data name="&gt;&gt;tbMonsterMagicResist.Name" xml:space="preserve">
-    <value>tbMonsterMagicResist</value>
+  <data name="gbMonsterStatsBase.Text" xml:space="preserve">
+    <value>Base</value>
   </data>
-  <data name="&gt;&gt;tbMonsterMagicResist.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;gbMonsterStatsBase.Name" xml:space="preserve">
+    <value>gbMonsterStatsBase</value>
   </data>
-  <data name="&gt;&gt;tbMonsterMagicResist.Parent" xml:space="preserve">
+  <data name="&gt;&gt;gbMonsterStatsBase.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbMonsterStatsBase.Parent" xml:space="preserve">
+    <value>gbMonsterStats</value>
+  </data>
+  <data name="&gt;&gt;gbMonsterStatsBase.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="nudMonsterSpeed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>298, 128</value>
+  </data>
+  <data name="nudMonsterSpeed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 20</value>
+  </data>
+  <data name="nudMonsterSpeed.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterSpeed.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterSpeed.Name" xml:space="preserve">
+    <value>nudMonsterSpeed</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterSpeed.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterSpeed.Parent" xml:space="preserve">
     <value>gbMonsterStatsMisc</value>
   </data>
-  <data name="&gt;&gt;tbMonsterMagicResist.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;nudMonsterSpeed.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="nudMonsterAttackDelay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 128</value>
+  </data>
+  <data name="nudMonsterAttackDelay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 20</value>
+  </data>
+  <data name="nudMonsterAttackDelay.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterAttackDelay.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterAttackDelay.Name" xml:space="preserve">
+    <value>nudMonsterAttackDelay</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterAttackDelay.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterAttackDelay.Parent" xml:space="preserve">
+    <value>gbMonsterStatsMisc</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterAttackDelay.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="nudMonsterAttackMax.Location" type="System.Drawing.Point, System.Drawing">
+    <value>298, 80</value>
+  </data>
+  <data name="nudMonsterAttackMax.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 20</value>
+  </data>
+  <data name="nudMonsterAttackMax.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterAttackMax.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterAttackMax.Name" xml:space="preserve">
+    <value>nudMonsterAttackMax</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterAttackMax.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterAttackMax.Parent" xml:space="preserve">
+    <value>gbMonsterStatsMisc</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterAttackMax.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="nudMonsterMagicResist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>298, 32</value>
+  </data>
+  <data name="nudMonsterMagicResist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 20</value>
+  </data>
+  <data name="nudMonsterMagicResist.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterMagicResist.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterMagicResist.Name" xml:space="preserve">
+    <value>nudMonsterMagicResist</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterMagicResist.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterMagicResist.Parent" xml:space="preserve">
+    <value>gbMonsterStatsMisc</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterMagicResist.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="nudMonsterAttackMin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 80</value>
+  </data>
+  <data name="nudMonsterAttackMin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 20</value>
+  </data>
+  <data name="nudMonsterAttackMin.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterAttackMin.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterAttackMin.Name" xml:space="preserve">
+    <value>nudMonsterAttackMin</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterAttackMin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterAttackMin.Parent" xml:space="preserve">
+    <value>gbMonsterStatsMisc</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterAttackMin.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="nudMonsterArmor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>70, 32</value>
+  </data>
+  <data name="nudMonsterArmor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 20</value>
+  </data>
+  <data name="nudMonsterArmor.TabIndex" type="System.Int32, mscorlib">
+    <value>77</value>
+  </data>
+  <data name="nudMonsterArmor.ThousandsSeparator" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterArmor.Name" xml:space="preserve">
+    <value>nudMonsterArmor</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterArmor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterArmor.Parent" xml:space="preserve">
+    <value>gbMonsterStatsMisc</value>
+  </data>
+  <data name="&gt;&gt;nudMonsterArmor.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="lblMonsterMagicResist.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2509,7 +1909,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMonsterMagicResist.Location" type="System.Drawing.Point, System.Drawing">
-    <value>224, 35</value>
+    <value>228, 35</value>
   </data>
   <data name="lblMonsterMagicResist.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 13</value>
@@ -2530,28 +1930,7 @@
     <value>gbMonsterStatsMisc</value>
   </data>
   <data name="&gt;&gt;lblMonsterMagicResist.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tbMonsterAttackMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>70, 80</value>
-  </data>
-  <data name="tbMonsterAttackMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 20</value>
-  </data>
-  <data name="tbMonsterAttackMin.TabIndex" type="System.Int32, mscorlib">
-    <value>48</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackMin.Name" xml:space="preserve">
-    <value>tbMonsterAttackMin</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackMin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackMin.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackMin.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="lblMonsterAttackMin.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2581,7 +1960,7 @@
     <value>gbMonsterStatsMisc</value>
   </data>
   <data name="&gt;&gt;lblMonsterAttackMin.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>7</value>
   </data>
   <data name="lblMonsterAttackMax.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2590,7 +1969,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMonsterAttackMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 83</value>
+    <value>241, 82</value>
   </data>
   <data name="lblMonsterAttackMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 13</value>
@@ -2611,49 +1990,7 @@
     <value>gbMonsterStatsMisc</value>
   </data>
   <data name="&gt;&gt;lblMonsterAttackMax.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="tbMonsterAttackMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>294, 80</value>
-  </data>
-  <data name="tbMonsterAttackMax.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 20</value>
-  </data>
-  <data name="tbMonsterAttackMax.TabIndex" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackMax.Name" xml:space="preserve">
-    <value>tbMonsterAttackMax</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackMax.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackMax.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackMax.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tbMonsterAttackDelay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>70, 128</value>
-  </data>
-  <data name="tbMonsterAttackDelay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 20</value>
-  </data>
-  <data name="tbMonsterAttackDelay.TabIndex" type="System.Int32, mscorlib">
-    <value>52</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackDelay.Name" xml:space="preserve">
-    <value>tbMonsterAttackDelay</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackDelay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackDelay.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterAttackDelay.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="lblMonsterAttackDelay.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2683,7 +2020,7 @@
     <value>gbMonsterStatsMisc</value>
   </data>
   <data name="&gt;&gt;lblMonsterAttackDelay.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="lblMonsterArmor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2713,48 +2050,6 @@
     <value>gbMonsterStatsMisc</value>
   </data>
   <data name="&gt;&gt;lblMonsterArmor.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="tbMonsterArmor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>70, 32</value>
-  </data>
-  <data name="tbMonsterArmor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 20</value>
-  </data>
-  <data name="tbMonsterArmor.TabIndex" type="System.Int32, mscorlib">
-    <value>58</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterArmor.Name" xml:space="preserve">
-    <value>tbMonsterArmor</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterArmor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterArmor.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterArmor.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="tbMonsterSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>294, 128</value>
-  </data>
-  <data name="tbMonsterSpeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 20</value>
-  </data>
-  <data name="tbMonsterSpeed.TabIndex" type="System.Int32, mscorlib">
-    <value>64</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterSpeed.Name" xml:space="preserve">
-    <value>tbMonsterSpeed</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterSpeed.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterSpeed.Parent" xml:space="preserve">
-    <value>gbMonsterStatsMisc</value>
-  </data>
-  <data name="&gt;&gt;tbMonsterSpeed.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="lblMonsterSpeed.AutoSize" type="System.Boolean, mscorlib">
@@ -2764,7 +2059,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMonsterSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>244, 131</value>
+    <value>248, 131</value>
   </data>
   <data name="lblMonsterSpeed.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 13</value>
@@ -2787,9 +2082,162 @@
   <data name="&gt;&gt;lblMonsterSpeed.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="gbMonsterStatsMisc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 194</value>
+  </data>
+  <data name="gbMonsterStatsMisc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>417, 171</value>
+  </data>
+  <data name="gbMonsterStatsMisc.TabIndex" type="System.Int32, mscorlib">
+    <value>63</value>
+  </data>
+  <data name="gbMonsterStatsMisc.Text" xml:space="preserve">
+    <value>Misc</value>
+  </data>
+  <data name="&gt;&gt;gbMonsterStatsMisc.Name" xml:space="preserve">
+    <value>gbMonsterStatsMisc</value>
+  </data>
+  <data name="&gt;&gt;gbMonsterStatsMisc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbMonsterStatsMisc.Parent" xml:space="preserve">
+    <value>gbMonsterStats</value>
+  </data>
+  <data name="&gt;&gt;gbMonsterStatsMisc.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="gbMonsterStats.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="gbMonsterStats.Size" type="System.Drawing.Size, System.Drawing">
+    <value>455, 563</value>
+  </data>
+  <data name="gbMonsterStats.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="gbMonsterStats.Text" xml:space="preserve">
+    <value>Stats</value>
+  </data>
+  <data name="&gt;&gt;gbMonsterStats.Name" xml:space="preserve">
+    <value>gbMonsterStats</value>
+  </data>
+  <data name="&gt;&gt;gbMonsterStats.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;gbMonsterStats.Parent" xml:space="preserve">
+    <value>tpMonster</value>
+  </data>
+  <data name="&gt;&gt;gbMonsterStats.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tpMonster.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tpMonster.Size" type="System.Drawing.Size, System.Drawing">
+    <value>461, 569</value>
+  </data>
+  <data name="tpMonster.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tpMonster.Text" xml:space="preserve">
+    <value>Monster</value>
+  </data>
+  <data name="&gt;&gt;tpMonster.Name" xml:space="preserve">
+    <value>tpMonster</value>
+  </data>
+  <data name="&gt;&gt;tpMonster.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tpMonster.Parent" xml:space="preserve">
+    <value>tcMover</value>
+  </data>
+  <data name="&gt;&gt;tpMonster.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tcMover.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="tcMover.Location" type="System.Drawing.Point, System.Drawing">
+    <value>221, 24</value>
+  </data>
+  <data name="tcMover.Size" type="System.Drawing.Size, System.Drawing">
+    <value>469, 595</value>
+  </data>
+  <data name="tcMover.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;tcMover.Name" xml:space="preserve">
+    <value>tcMover</value>
+  </data>
+  <data name="&gt;&gt;tcMover.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tcMover.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tcMover.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <metadata name="msMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="tsmiMoversAdd.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+P</value>
+  </data>
+  <data name="tsmiMoversAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 22</value>
+  </data>
+  <data name="tsmiMoversAdd.Text" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="tsmiMoversFind.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+F</value>
+  </data>
+  <data name="tsmiMoversFind.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 22</value>
+  </data>
+  <data name="tsmiMoversFind.Text" xml:space="preserve">
+    <value>Find</value>
+  </data>
+  <data name="tsmiMovers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 22</value>
+  </data>
+  <data name="tsmiMovers.Text" xml:space="preserve">
+    <value>Movers</value>
+  </data>
+  <data name="tsmiFileReload.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+R</value>
+  </data>
+  <data name="tsmiFileReload.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 22</value>
+  </data>
+  <data name="tsmiFileReload.Text" xml:space="preserve">
+    <value>Reload</value>
+  </data>
+  <data name="tsmiFileSave.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+S</value>
+  </data>
+  <data name="tsmiFileSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>151, 22</value>
+  </data>
+  <data name="tsmiFileSave.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="tsmiFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 22</value>
+  </data>
+  <data name="tsmiFile.Text" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="tsmiSettings.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+O</value>
+  </data>
+  <data name="tsmiSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 22</value>
+  </data>
+  <data name="tsmiSettings.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="msMain.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -2817,66 +2265,15 @@
   <data name="&gt;&gt;msMain.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="tsmiMovers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 22</value>
-  </data>
-  <data name="tsmiMovers.Text" xml:space="preserve">
-    <value>Movers</value>
-  </data>
-  <data name="tsmiMoversAdd.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+P</value>
-  </data>
-  <data name="tsmiMoversAdd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 22</value>
-  </data>
-  <data name="tsmiMoversAdd.Text" xml:space="preserve">
-    <value>Add</value>
-  </data>
-  <data name="tsmiMoversFind.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+F</value>
-  </data>
-  <data name="tsmiMoversFind.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 22</value>
-  </data>
-  <data name="tsmiMoversFind.Text" xml:space="preserve">
-    <value>Find</value>
-  </data>
-  <data name="tsmiFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>37, 22</value>
-  </data>
-  <data name="tsmiFile.Text" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="tsmiFileReload.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+R</value>
-  </data>
-  <data name="tsmiFileReload.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 22</value>
-  </data>
-  <data name="tsmiFileReload.Text" xml:space="preserve">
-    <value>Reload</value>
-  </data>
-  <data name="tsmiFileSave.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+S</value>
-  </data>
-  <data name="tsmiFileSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 22</value>
-  </data>
-  <data name="tsmiFileSave.Text" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="tsmiSettings.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Ctrl+O</value>
-  </data>
-  <data name="tsmiSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 22</value>
-  </data>
-  <data name="tsmiSettings.Text" xml:space="preserve">
-    <value>Settings</value>
-  </data>
   <metadata name="cmsLbMovers.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>116, 17</value>
   </metadata>
+  <data name="tsmiMoverDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 22</value>
+  </data>
+  <data name="tsmiMoverDelete.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
   <data name="cmsLbMovers.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 26</value>
   </data>
@@ -2885,12 +2282,6 @@
   </data>
   <data name="&gt;&gt;cmsLbMovers.Type" xml:space="preserve">
     <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="tsmiMoverDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 22</value>
-  </data>
-  <data name="tsmiMoverDelete.Text" xml:space="preserve">
-    <value>Supprimer</value>
   </data>
   <data name="lbMovers.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Left</value>
@@ -6326,6 +5717,12 @@
   </data>
   <data name="&gt;&gt;tsmiMoverDelete.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tooltip.Name" xml:space="preserve">
+    <value>tooltip</value>
+  </data>
+  <data name="&gt;&gt;tooltip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>
