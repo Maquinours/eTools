@@ -324,7 +324,7 @@ namespace MoversEditor
             new SettingsForm().ShowDialog();
         }
 
-        private void TsmiMoversFind_Click(object sender, EventArgs e)
+        private void TsmiMoversSearch_Click(object sender, EventArgs e)
         {
             Search();
         }

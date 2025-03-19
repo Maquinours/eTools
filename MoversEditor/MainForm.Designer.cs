@@ -111,7 +111,7 @@
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.tsmiMovers = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiMoversAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiMoversFind = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMoversSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFileReload = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFileSave = new System.Windows.Forms.ToolStripMenuItem();
@@ -873,7 +873,7 @@
             resources.ApplyResources(this.tsmiMovers, "tsmiMovers");
             this.tsmiMovers.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiMoversAdd,
-            this.tsmiMoversFind});
+            this.tsmiMoversSearch});
             this.tsmiMovers.Name = "tsmiMovers";
             // 
             // tsmiMoversAdd
@@ -882,11 +882,11 @@
             this.tsmiMoversAdd.Name = "tsmiMoversAdd";
             this.tsmiMoversAdd.Click += new System.EventHandler(this.TsmiMoversAdd_Click);
             // 
-            // tsmiMoversFind
+            // tsmiMoversSearch
             // 
-            resources.ApplyResources(this.tsmiMoversFind, "tsmiMoversFind");
-            this.tsmiMoversFind.Name = "tsmiMoversFind";
-            this.tsmiMoversFind.Click += new System.EventHandler(this.TsmiMoversFind_Click);
+            resources.ApplyResources(this.tsmiMoversSearch, "tsmiMoversSearch");
+            this.tsmiMoversSearch.Name = "tsmiMoversSearch";
+            this.tsmiMoversSearch.Click += new System.EventHandler(this.TsmiMoversSearch_Click);
             // 
             // tsmiFile
             // 
@@ -1011,7 +1011,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiFileReload;
         private System.Windows.Forms.ToolStripMenuItem tsmiFileSave;
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings;
-        private System.Windows.Forms.ToolStripMenuItem tsmiMoversFind;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMoversSearch;
         private System.Windows.Forms.TabPage tpGeneral;
         private System.Windows.Forms.GroupBox gbGeneralConfiguration;
         private System.Windows.Forms.GroupBox gbGeneralConfigurationModel;
