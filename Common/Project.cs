@@ -21,11 +21,11 @@ namespace eTools
         /// <summary>
         /// List of strings (IDS => value)
         /// </summary>
-        private Dictionary<string, string> strings;
+        private readonly Dictionary<string, string> strings;
         /// <summary>
         /// List of defines (identifier => ID)
         /// </summary>
-        private Dictionary<string, int> defines;
+        private readonly Dictionary<string, int> defines;
 #if __ITEMS
         public Item[] Items { get; private set; }
 #endif // __ITEMS
@@ -33,12 +33,12 @@ namespace eTools
         /// <summary>
         /// List of movers
         /// </summary>
-        private List<Mover> movers;
+        private readonly List<Mover> movers;
 #endif // __MOVERS
         /// <summary>
         /// List of models
         /// </summary>
-        private List<MainModelBrace> models;
+        private readonly List<MainModelBrace> models;
         #endregion
 
         /// <summary>
@@ -190,8 +190,10 @@ namespace eTools
             scanner.Load(filePath);
             while (true)
             {
-                ItemProp prop = new ItemProp();
-                prop.NVer = scanner.GetNumber();
+                ItemProp prop = new ItemProp
+                {
+                    NVer = scanner.GetNumber()
+                };
                 if (scanner.EndOfStream)
                     break;
                 prop.DwID = scanner.GetToken();
@@ -449,10 +451,11 @@ namespace eTools
             while (true)
             {
                 Mover mover = new Mover();
-                MoverProp mp = new MoverProp();
+                MoverProp mp = new MoverProp
+                {
+                    DwId = scanner.GetToken()
+                };
 
-                mp.DwId = scanner.GetToken();
-                
                 if (scanner.EndOfStream)
                     break;
 
@@ -1092,8 +1095,10 @@ namespace eTools
             string szObject;
             while (true)
             {
-                MainModelBrace mainBrace = new MainModelBrace();
-                mainBrace.SzName = scanner.GetToken(); // Name of the main brace
+                MainModelBrace mainBrace = new MainModelBrace
+                {
+                    SzName = scanner.GetToken() // Name of the main brace
+                };
                 if (scanner.EndOfStream) break; // If there is no more brace
                 mainBrace.IType = scanner.GetNumber(); // Type of the main brace
                 scanner.GetToken(); // {
@@ -1264,8 +1269,7 @@ namespace eTools
         public void SetBraceToModel(ModelElem model, ModelBrace brace)
         {
             ModelBrace oldBrace = GetBraceByModel(model);
-            if (oldBrace != null)
-                oldBrace.Models.Remove(model); // Remove old
+            oldBrace?.Models.Remove(model); // Remove old
             brace.Models.Add(model); // Add to new
         }
 
