@@ -20,7 +20,7 @@ namespace MoversEditor
     {
         public MainForm()
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr-FR");
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-EN");
             InitializeComponent();
         }
 
