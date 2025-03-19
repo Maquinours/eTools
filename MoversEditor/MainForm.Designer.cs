@@ -160,30 +160,34 @@
             // 
             // tcMover
             // 
+            resources.ApplyResources(this.tcMover, "tcMover");
             this.tcMover.Controls.Add(this.tpGeneral);
             this.tcMover.Controls.Add(this.tpMonster);
-            resources.ApplyResources(this.tcMover, "tcMover");
             this.tcMover.Name = "tcMover";
             this.tcMover.SelectedIndex = 0;
+            this.tooltip.SetToolTip(this.tcMover, resources.GetString("tcMover.ToolTip"));
             // 
             // tpGeneral
             // 
-            this.tpGeneral.Controls.Add(this.gbGeneralConfiguration);
             resources.ApplyResources(this.tpGeneral, "tpGeneral");
+            this.tpGeneral.Controls.Add(this.gbGeneralConfiguration);
             this.tpGeneral.Name = "tpGeneral";
+            this.tooltip.SetToolTip(this.tpGeneral, resources.GetString("tpGeneral.ToolTip"));
             this.tpGeneral.UseVisualStyleBackColor = true;
             // 
             // gbGeneralConfiguration
             // 
+            resources.ApplyResources(this.gbGeneralConfiguration, "gbGeneralConfiguration");
             this.gbGeneralConfiguration.Controls.Add(this.gbGeneralConfigurationModel);
             this.gbGeneralConfiguration.Controls.Add(this.gbGeneralConfigurationMisc);
             this.gbGeneralConfiguration.Controls.Add(this.gbGeneralConfigurationMain);
-            resources.ApplyResources(this.gbGeneralConfiguration, "gbGeneralConfiguration");
             this.gbGeneralConfiguration.Name = "gbGeneralConfiguration";
             this.gbGeneralConfiguration.TabStop = false;
+            this.tooltip.SetToolTip(this.gbGeneralConfiguration, resources.GetString("gbGeneralConfiguration.ToolTip"));
             // 
             // gbGeneralConfigurationModel
             // 
+            resources.ApplyResources(this.gbGeneralConfigurationModel, "gbGeneralConfigurationModel");
             this.gbGeneralConfigurationModel.Controls.Add(this.nudModelScale);
             this.gbGeneralConfigurationModel.Controls.Add(this.btnSelectModelFile);
             this.gbGeneralConfigurationModel.Controls.Add(this.btnMotions);
@@ -192,30 +196,32 @@
             this.gbGeneralConfigurationModel.Controls.Add(this.lblModelBrace);
             this.gbGeneralConfigurationModel.Controls.Add(this.lblModelScale);
             this.gbGeneralConfigurationModel.Controls.Add(this.lblModelFile);
-            resources.ApplyResources(this.gbGeneralConfigurationModel, "gbGeneralConfigurationModel");
             this.gbGeneralConfigurationModel.Name = "gbGeneralConfigurationModel";
             this.gbGeneralConfigurationModel.TabStop = false;
+            this.tooltip.SetToolTip(this.gbGeneralConfigurationModel, resources.GetString("gbGeneralConfigurationModel.ToolTip"));
             // 
             // nudModelScale
             // 
+            resources.ApplyResources(this.nudModelScale, "nudModelScale");
             this.nudModelScale.DecimalPlaces = 2;
             this.nudModelScale.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            resources.ApplyResources(this.nudModelScale, "nudModelScale");
             this.nudModelScale.Maximum = new decimal(new int[] {
             -1,
             0,
             0,
             0});
             this.nudModelScale.Name = "nudModelScale";
+            this.tooltip.SetToolTip(this.nudModelScale, resources.GetString("nudModelScale.ToolTip"));
             // 
             // btnSelectModelFile
             // 
             resources.ApplyResources(this.btnSelectModelFile, "btnSelectModelFile");
             this.btnSelectModelFile.Name = "btnSelectModelFile";
+            this.tooltip.SetToolTip(this.btnSelectModelFile, resources.GetString("btnSelectModelFile.ToolTip"));
             this.btnSelectModelFile.UseVisualStyleBackColor = true;
             this.btnSelectModelFile.Click += new System.EventHandler(this.BtnSelectModelFile_Click);
             // 
@@ -223,38 +229,45 @@
             // 
             resources.ApplyResources(this.btnMotions, "btnMotions");
             this.btnMotions.Name = "btnMotions";
+            this.tooltip.SetToolTip(this.btnMotions, resources.GetString("btnMotions.ToolTip"));
             this.btnMotions.UseVisualStyleBackColor = true;
             this.btnMotions.Click += new System.EventHandler(this.BtnMotions_Click);
             // 
             // cbModelBrace
             // 
+            resources.ApplyResources(this.cbModelBrace, "cbModelBrace");
             this.cbModelBrace.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbModelBrace.FormattingEnabled = true;
-            resources.ApplyResources(this.cbModelBrace, "cbModelBrace");
             this.cbModelBrace.Name = "cbModelBrace";
+            this.tooltip.SetToolTip(this.cbModelBrace, resources.GetString("cbModelBrace.ToolTip"));
             // 
             // tbModelFile
             // 
             resources.ApplyResources(this.tbModelFile, "tbModelFile");
             this.tbModelFile.Name = "tbModelFile";
+            this.tooltip.SetToolTip(this.tbModelFile, resources.GetString("tbModelFile.ToolTip"));
             // 
             // lblModelBrace
             // 
             resources.ApplyResources(this.lblModelBrace, "lblModelBrace");
             this.lblModelBrace.Name = "lblModelBrace";
+            this.tooltip.SetToolTip(this.lblModelBrace, resources.GetString("lblModelBrace.ToolTip"));
             // 
             // lblModelScale
             // 
             resources.ApplyResources(this.lblModelScale, "lblModelScale");
             this.lblModelScale.Name = "lblModelScale";
+            this.tooltip.SetToolTip(this.lblModelScale, resources.GetString("lblModelScale.ToolTip"));
             // 
             // lblModelFile
             // 
             resources.ApplyResources(this.lblModelFile, "lblModelFile");
             this.lblModelFile.Name = "lblModelFile";
+            this.tooltip.SetToolTip(this.lblModelFile, resources.GetString("lblModelFile.ToolTip"));
             // 
             // gbGeneralConfigurationMisc
             // 
+            resources.ApplyResources(this.gbGeneralConfigurationMisc, "gbGeneralConfigurationMisc");
             this.gbGeneralConfigurationMisc.Controls.Add(this.nudExperience);
             this.gbGeneralConfigurationMisc.Controls.Add(this.nudLevel);
             this.gbGeneralConfigurationMisc.Controls.Add(this.cbAi);
@@ -265,9 +278,9 @@
             this.gbGeneralConfigurationMisc.Controls.Add(this.lblLevel);
             this.gbGeneralConfigurationMisc.Controls.Add(this.cbClass);
             this.gbGeneralConfigurationMisc.Controls.Add(this.lblClass);
-            resources.ApplyResources(this.gbGeneralConfigurationMisc, "gbGeneralConfigurationMisc");
             this.gbGeneralConfigurationMisc.Name = "gbGeneralConfigurationMisc";
             this.gbGeneralConfigurationMisc.TabStop = false;
+            this.tooltip.SetToolTip(this.gbGeneralConfigurationMisc, resources.GetString("gbGeneralConfigurationMisc.ToolTip"));
             // 
             // nudExperience
             // 
@@ -278,6 +291,7 @@
             0,
             0});
             this.nudExperience.Name = "nudExperience";
+            this.tooltip.SetToolTip(this.nudExperience, resources.GetString("nudExperience.ToolTip"));
             // 
             // nudLevel
             // 
@@ -288,55 +302,65 @@
             0,
             0});
             this.nudLevel.Name = "nudLevel";
+            this.tooltip.SetToolTip(this.nudLevel, resources.GetString("nudLevel.ToolTip"));
             // 
             // cbAi
             // 
+            resources.ApplyResources(this.cbAi, "cbAi");
             this.cbAi.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbAi.FormattingEnabled = true;
-            resources.ApplyResources(this.cbAi, "cbAi");
             this.cbAi.Name = "cbAi";
+            this.tooltip.SetToolTip(this.cbAi, resources.GetString("cbAi.ToolTip"));
             // 
             // lblAi
             // 
             resources.ApplyResources(this.lblAi, "lblAi");
             this.lblAi.Name = "lblAi";
+            this.tooltip.SetToolTip(this.lblAi, resources.GetString("lblAi.ToolTip"));
             // 
             // lblExperience
             // 
             resources.ApplyResources(this.lblExperience, "lblExperience");
             this.lblExperience.Name = "lblExperience";
+            this.tooltip.SetToolTip(this.lblExperience, resources.GetString("lblExperience.ToolTip"));
             // 
             // cbBelligerence
             // 
+            resources.ApplyResources(this.cbBelligerence, "cbBelligerence");
             this.cbBelligerence.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBelligerence.FormattingEnabled = true;
-            resources.ApplyResources(this.cbBelligerence, "cbBelligerence");
             this.cbBelligerence.Name = "cbBelligerence";
+            this.tooltip.SetToolTip(this.cbBelligerence, resources.GetString("cbBelligerence.ToolTip"));
             // 
             // lblBelligerence
             // 
             resources.ApplyResources(this.lblBelligerence, "lblBelligerence");
             this.lblBelligerence.Name = "lblBelligerence";
+            this.tooltip.SetToolTip(this.lblBelligerence, resources.GetString("lblBelligerence.ToolTip"));
             // 
             // lblLevel
             // 
             resources.ApplyResources(this.lblLevel, "lblLevel");
             this.lblLevel.Name = "lblLevel";
+            this.tooltip.SetToolTip(this.lblLevel, resources.GetString("lblLevel.ToolTip"));
             // 
             // cbClass
             // 
+            resources.ApplyResources(this.cbClass, "cbClass");
             this.cbClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbClass.FormattingEnabled = true;
-            resources.ApplyResources(this.cbClass, "cbClass");
             this.cbClass.Name = "cbClass";
+            this.tooltip.SetToolTip(this.cbClass, resources.GetString("cbClass.ToolTip"));
             // 
             // lblClass
             // 
             resources.ApplyResources(this.lblClass, "lblClass");
             this.lblClass.Name = "lblClass";
+            this.tooltip.SetToolTip(this.lblClass, resources.GetString("lblClass.ToolTip"));
             // 
             // gbGeneralConfigurationMain
             // 
+            resources.ApplyResources(this.gbGeneralConfigurationMain, "gbGeneralConfigurationMain");
             this.gbGeneralConfigurationMain.Controls.Add(this.lblIdentifierAlreadyUsed);
             this.gbGeneralConfigurationMain.Controls.Add(this.tbName);
             this.gbGeneralConfigurationMain.Controls.Add(this.cbType);
@@ -344,39 +368,44 @@
             this.gbGeneralConfigurationMain.Controls.Add(this.tbIdentifier);
             this.gbGeneralConfigurationMain.Controls.Add(this.lblName);
             this.gbGeneralConfigurationMain.Controls.Add(this.lblIdentifier);
-            resources.ApplyResources(this.gbGeneralConfigurationMain, "gbGeneralConfigurationMain");
             this.gbGeneralConfigurationMain.Name = "gbGeneralConfigurationMain";
             this.gbGeneralConfigurationMain.TabStop = false;
+            this.tooltip.SetToolTip(this.gbGeneralConfigurationMain, resources.GetString("gbGeneralConfigurationMain.ToolTip"));
             // 
             // lblIdentifierAlreadyUsed
             // 
             resources.ApplyResources(this.lblIdentifierAlreadyUsed, "lblIdentifierAlreadyUsed");
             this.lblIdentifierAlreadyUsed.ForeColor = System.Drawing.Color.Red;
             this.lblIdentifierAlreadyUsed.Name = "lblIdentifierAlreadyUsed";
+            this.tooltip.SetToolTip(this.lblIdentifierAlreadyUsed, resources.GetString("lblIdentifierAlreadyUsed.ToolTip"));
             // 
             // tbName
             // 
             resources.ApplyResources(this.tbName, "tbName");
             this.tbName.Name = "tbName";
+            this.tooltip.SetToolTip(this.tbName, resources.GetString("tbName.ToolTip"));
             // 
             // cbType
             // 
-            this.cbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             resources.ApplyResources(this.cbType, "cbType");
+            this.cbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbType.Name = "cbType";
+            this.tooltip.SetToolTip(this.cbType, resources.GetString("cbType.ToolTip"));
             this.cbType.SelectedIndexChanged += new System.EventHandler(this.CbType_SelectedIndexChanged);
             // 
             // lblType
             // 
             resources.ApplyResources(this.lblType, "lblType");
             this.lblType.Name = "lblType";
+            this.tooltip.SetToolTip(this.lblType, resources.GetString("lblType.ToolTip"));
             // 
             // tbIdentifier
             // 
+            resources.ApplyResources(this.tbIdentifier, "tbIdentifier");
             this.tbIdentifier.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.tbIdentifier.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            resources.ApplyResources(this.tbIdentifier, "tbIdentifier");
             this.tbIdentifier.Name = "tbIdentifier";
+            this.tooltip.SetToolTip(this.tbIdentifier, resources.GetString("tbIdentifier.ToolTip"));
             this.tbIdentifier.TextChanged += new System.EventHandler(this.TbIdentifier_TextChanged);
             this.tbIdentifier.Validating += new System.ComponentModel.CancelEventHandler(this.TbIdentifier_Validating);
             // 
@@ -384,30 +413,35 @@
             // 
             resources.ApplyResources(this.lblName, "lblName");
             this.lblName.Name = "lblName";
+            this.tooltip.SetToolTip(this.lblName, resources.GetString("lblName.ToolTip"));
             // 
             // lblIdentifier
             // 
             resources.ApplyResources(this.lblIdentifier, "lblIdentifier");
             this.lblIdentifier.Name = "lblIdentifier";
+            this.tooltip.SetToolTip(this.lblIdentifier, resources.GetString("lblIdentifier.ToolTip"));
             // 
             // tpMonster
             // 
-            this.tpMonster.Controls.Add(this.gbMonsterStats);
             resources.ApplyResources(this.tpMonster, "tpMonster");
+            this.tpMonster.Controls.Add(this.gbMonsterStats);
             this.tpMonster.Name = "tpMonster";
+            this.tooltip.SetToolTip(this.tpMonster, resources.GetString("tpMonster.ToolTip"));
             this.tpMonster.UseVisualStyleBackColor = true;
             // 
             // gbMonsterStats
             // 
+            resources.ApplyResources(this.gbMonsterStats, "gbMonsterStats");
             this.gbMonsterStats.Controls.Add(this.gbMonsterStatsElementary);
             this.gbMonsterStats.Controls.Add(this.gbMonsterStatsBase);
             this.gbMonsterStats.Controls.Add(this.gbMonsterStatsMisc);
-            resources.ApplyResources(this.gbMonsterStats, "gbMonsterStats");
             this.gbMonsterStats.Name = "gbMonsterStats";
             this.gbMonsterStats.TabStop = false;
+            this.tooltip.SetToolTip(this.gbMonsterStats, resources.GetString("gbMonsterStats.ToolTip"));
             // 
             // gbMonsterStatsElementary
             // 
+            resources.ApplyResources(this.gbMonsterStatsElementary, "gbMonsterStatsElementary");
             this.gbMonsterStatsElementary.Controls.Add(this.nudMonsterElectricityResistance);
             this.gbMonsterStatsElementary.Controls.Add(this.nudMonsterFireResistance);
             this.gbMonsterStatsElementary.Controls.Add(this.nudMonsterEarthResistance);
@@ -422,9 +456,9 @@
             this.gbMonsterStatsElementary.Controls.Add(this.lblMonsterWindResistance);
             this.gbMonsterStatsElementary.Controls.Add(this.lblMonsterElectricityResistance);
             this.gbMonsterStatsElementary.Controls.Add(this.lblMonsterFireResistance);
-            resources.ApplyResources(this.gbMonsterStatsElementary, "gbMonsterStatsElementary");
             this.gbMonsterStatsElementary.Name = "gbMonsterStatsElementary";
             this.gbMonsterStatsElementary.TabStop = false;
+            this.tooltip.SetToolTip(this.gbMonsterStatsElementary, resources.GetString("gbMonsterStatsElementary.ToolTip"));
             // 
             // nudMonsterElectricityResistance
             // 
@@ -435,6 +469,7 @@
             0,
             0});
             this.nudMonsterElectricityResistance.Name = "nudMonsterElectricityResistance";
+            this.tooltip.SetToolTip(this.nudMonsterElectricityResistance, resources.GetString("nudMonsterElectricityResistance.ToolTip"));
             // 
             // nudMonsterFireResistance
             // 
@@ -445,6 +480,7 @@
             0,
             0});
             this.nudMonsterFireResistance.Name = "nudMonsterFireResistance";
+            this.tooltip.SetToolTip(this.nudMonsterFireResistance, resources.GetString("nudMonsterFireResistance.ToolTip"));
             // 
             // nudMonsterEarthResistance
             // 
@@ -455,6 +491,7 @@
             0,
             0});
             this.nudMonsterEarthResistance.Name = "nudMonsterEarthResistance";
+            this.tooltip.SetToolTip(this.nudMonsterEarthResistance, resources.GetString("nudMonsterEarthResistance.ToolTip"));
             // 
             // nudMonsterWindResistance
             // 
@@ -465,6 +502,7 @@
             0,
             0});
             this.nudMonsterWindResistance.Name = "nudMonsterWindResistance";
+            this.tooltip.SetToolTip(this.nudMonsterWindResistance, resources.GetString("nudMonsterWindResistance.ToolTip"));
             // 
             // nudMonsterWaterResistance
             // 
@@ -475,6 +513,7 @@
             0,
             0});
             this.nudMonsterWaterResistance.Name = "nudMonsterWaterResistance";
+            this.tooltip.SetToolTip(this.nudMonsterWaterResistance, resources.GetString("nudMonsterWaterResistance.ToolTip"));
             // 
             // nudMonsterElementValue
             // 
@@ -485,28 +524,33 @@
             0,
             0});
             this.nudMonsterElementValue.Name = "nudMonsterElementValue";
+            this.tooltip.SetToolTip(this.nudMonsterElementValue, resources.GetString("nudMonsterElementValue.ToolTip"));
             // 
             // cbMonsterElementType
             // 
+            resources.ApplyResources(this.cbMonsterElementType, "cbMonsterElementType");
             this.cbMonsterElementType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMonsterElementType.FormattingEnabled = true;
-            resources.ApplyResources(this.cbMonsterElementType, "cbMonsterElementType");
             this.cbMonsterElementType.Name = "cbMonsterElementType";
+            this.tooltip.SetToolTip(this.cbMonsterElementType, resources.GetString("cbMonsterElementType.ToolTip"));
             // 
             // lblMonsterEarthResistance
             // 
             resources.ApplyResources(this.lblMonsterEarthResistance, "lblMonsterEarthResistance");
             this.lblMonsterEarthResistance.Name = "lblMonsterEarthResistance";
+            this.tooltip.SetToolTip(this.lblMonsterEarthResistance, resources.GetString("lblMonsterEarthResistance.ToolTip"));
             // 
             // lblMonsterElementType
             // 
             resources.ApplyResources(this.lblMonsterElementType, "lblMonsterElementType");
             this.lblMonsterElementType.Name = "lblMonsterElementType";
+            this.tooltip.SetToolTip(this.lblMonsterElementType, resources.GetString("lblMonsterElementType.ToolTip"));
             // 
             // lblMonsterWaterResistance
             // 
             resources.ApplyResources(this.lblMonsterWaterResistance, "lblMonsterWaterResistance");
             this.lblMonsterWaterResistance.Name = "lblMonsterWaterResistance";
+            this.tooltip.SetToolTip(this.lblMonsterWaterResistance, resources.GetString("lblMonsterWaterResistance.ToolTip"));
             // 
             // lblMonsterElementRatio
             // 
@@ -518,19 +562,23 @@
             // 
             resources.ApplyResources(this.lblMonsterWindResistance, "lblMonsterWindResistance");
             this.lblMonsterWindResistance.Name = "lblMonsterWindResistance";
+            this.tooltip.SetToolTip(this.lblMonsterWindResistance, resources.GetString("lblMonsterWindResistance.ToolTip"));
             // 
             // lblMonsterElectricityResistance
             // 
             resources.ApplyResources(this.lblMonsterElectricityResistance, "lblMonsterElectricityResistance");
             this.lblMonsterElectricityResistance.Name = "lblMonsterElectricityResistance";
+            this.tooltip.SetToolTip(this.lblMonsterElectricityResistance, resources.GetString("lblMonsterElectricityResistance.ToolTip"));
             // 
             // lblMonsterFireResistance
             // 
             resources.ApplyResources(this.lblMonsterFireResistance, "lblMonsterFireResistance");
             this.lblMonsterFireResistance.Name = "lblMonsterFireResistance";
+            this.tooltip.SetToolTip(this.lblMonsterFireResistance, resources.GetString("lblMonsterFireResistance.ToolTip"));
             // 
             // gbMonsterStatsBase
             // 
+            resources.ApplyResources(this.gbMonsterStatsBase, "gbMonsterStatsBase");
             this.gbMonsterStatsBase.Controls.Add(this.nudMonsterMp);
             this.gbMonsterStatsBase.Controls.Add(this.nudMonsterHp);
             this.gbMonsterStatsBase.Controls.Add(this.nudMonsterHr);
@@ -547,9 +595,9 @@
             this.gbMonsterStatsBase.Controls.Add(this.lblMonsterDex);
             this.gbMonsterStatsBase.Controls.Add(this.lblMonsterHp);
             this.gbMonsterStatsBase.Controls.Add(this.lblMonsterMp);
-            resources.ApplyResources(this.gbMonsterStatsBase, "gbMonsterStatsBase");
             this.gbMonsterStatsBase.Name = "gbMonsterStatsBase";
             this.gbMonsterStatsBase.TabStop = false;
+            this.tooltip.SetToolTip(this.gbMonsterStatsBase, resources.GetString("gbMonsterStatsBase.ToolTip"));
             // 
             // nudMonsterMp
             // 
@@ -560,6 +608,7 @@
             0,
             0});
             this.nudMonsterMp.Name = "nudMonsterMp";
+            this.tooltip.SetToolTip(this.nudMonsterMp, resources.GetString("nudMonsterMp.ToolTip"));
             // 
             // nudMonsterHp
             // 
@@ -570,6 +619,7 @@
             0,
             0});
             this.nudMonsterHp.Name = "nudMonsterHp";
+            this.tooltip.SetToolTip(this.nudMonsterHp, resources.GetString("nudMonsterHp.ToolTip"));
             // 
             // nudMonsterHr
             // 
@@ -580,6 +630,7 @@
             0,
             0});
             this.nudMonsterHr.Name = "nudMonsterHr";
+            this.tooltip.SetToolTip(this.nudMonsterHr, resources.GetString("nudMonsterHr.ToolTip"));
             // 
             // nudMonsterEr
             // 
@@ -590,6 +641,7 @@
             0,
             0});
             this.nudMonsterEr.Name = "nudMonsterEr";
+            this.tooltip.SetToolTip(this.nudMonsterEr, resources.GetString("nudMonsterEr.ToolTip"));
             // 
             // nudMonsterInt
             // 
@@ -600,6 +652,7 @@
             0,
             0});
             this.nudMonsterInt.Name = "nudMonsterInt";
+            this.tooltip.SetToolTip(this.nudMonsterInt, resources.GetString("nudMonsterInt.ToolTip"));
             // 
             // nudMonsterDex
             // 
@@ -610,6 +663,7 @@
             0,
             0});
             this.nudMonsterDex.Name = "nudMonsterDex";
+            this.tooltip.SetToolTip(this.nudMonsterDex, resources.GetString("nudMonsterDex.ToolTip"));
             // 
             // nudMonsterSta
             // 
@@ -620,6 +674,7 @@
             0,
             0});
             this.nudMonsterSta.Name = "nudMonsterSta";
+            this.tooltip.SetToolTip(this.nudMonsterSta, resources.GetString("nudMonsterSta.ToolTip"));
             // 
             // nudMonsterStr
             // 
@@ -630,49 +685,59 @@
             0,
             0});
             this.nudMonsterStr.Name = "nudMonsterStr";
+            this.tooltip.SetToolTip(this.nudMonsterStr, resources.GetString("nudMonsterStr.ToolTip"));
             // 
             // lblMonsterEr
             // 
             resources.ApplyResources(this.lblMonsterEr, "lblMonsterEr");
             this.lblMonsterEr.Name = "lblMonsterEr";
+            this.tooltip.SetToolTip(this.lblMonsterEr, resources.GetString("lblMonsterEr.ToolTip"));
             // 
             // lblMonsterStr
             // 
             resources.ApplyResources(this.lblMonsterStr, "lblMonsterStr");
             this.lblMonsterStr.Name = "lblMonsterStr";
+            this.tooltip.SetToolTip(this.lblMonsterStr, resources.GetString("lblMonsterStr.ToolTip"));
             // 
             // lblMonsterHr
             // 
             resources.ApplyResources(this.lblMonsterHr, "lblMonsterHr");
             this.lblMonsterHr.Name = "lblMonsterHr";
+            this.tooltip.SetToolTip(this.lblMonsterHr, resources.GetString("lblMonsterHr.ToolTip"));
             // 
             // lblMonsterSta
             // 
             resources.ApplyResources(this.lblMonsterSta, "lblMonsterSta");
             this.lblMonsterSta.Name = "lblMonsterSta";
+            this.tooltip.SetToolTip(this.lblMonsterSta, resources.GetString("lblMonsterSta.ToolTip"));
             // 
             // lblMonsterInt
             // 
             resources.ApplyResources(this.lblMonsterInt, "lblMonsterInt");
             this.lblMonsterInt.Name = "lblMonsterInt";
+            this.tooltip.SetToolTip(this.lblMonsterInt, resources.GetString("lblMonsterInt.ToolTip"));
             // 
             // lblMonsterDex
             // 
             resources.ApplyResources(this.lblMonsterDex, "lblMonsterDex");
             this.lblMonsterDex.Name = "lblMonsterDex";
+            this.tooltip.SetToolTip(this.lblMonsterDex, resources.GetString("lblMonsterDex.ToolTip"));
             // 
             // lblMonsterHp
             // 
             resources.ApplyResources(this.lblMonsterHp, "lblMonsterHp");
             this.lblMonsterHp.Name = "lblMonsterHp";
+            this.tooltip.SetToolTip(this.lblMonsterHp, resources.GetString("lblMonsterHp.ToolTip"));
             // 
             // lblMonsterMp
             // 
             resources.ApplyResources(this.lblMonsterMp, "lblMonsterMp");
             this.lblMonsterMp.Name = "lblMonsterMp";
+            this.tooltip.SetToolTip(this.lblMonsterMp, resources.GetString("lblMonsterMp.ToolTip"));
             // 
             // gbMonsterStatsMisc
             // 
+            resources.ApplyResources(this.gbMonsterStatsMisc, "gbMonsterStatsMisc");
             this.gbMonsterStatsMisc.Controls.Add(this.nudMonsterSpeed);
             this.gbMonsterStatsMisc.Controls.Add(this.nudMonsterAttackDelay);
             this.gbMonsterStatsMisc.Controls.Add(this.nudMonsterAttackMax);
@@ -685,20 +750,21 @@
             this.gbMonsterStatsMisc.Controls.Add(this.lblMonsterAttackDelay);
             this.gbMonsterStatsMisc.Controls.Add(this.lblMonsterArmor);
             this.gbMonsterStatsMisc.Controls.Add(this.lblMonsterSpeed);
-            resources.ApplyResources(this.gbMonsterStatsMisc, "gbMonsterStatsMisc");
             this.gbMonsterStatsMisc.Name = "gbMonsterStatsMisc";
             this.gbMonsterStatsMisc.TabStop = false;
+            this.tooltip.SetToolTip(this.gbMonsterStatsMisc, resources.GetString("gbMonsterStatsMisc.ToolTip"));
             // 
             // nudMonsterSpeed
             // 
-            this.nudMonsterSpeed.DecimalPlaces = 3;
             resources.ApplyResources(this.nudMonsterSpeed, "nudMonsterSpeed");
+            this.nudMonsterSpeed.DecimalPlaces = 3;
             this.nudMonsterSpeed.Maximum = new decimal(new int[] {
             -1,
             0,
             0,
             0});
             this.nudMonsterSpeed.Name = "nudMonsterSpeed";
+            this.tooltip.SetToolTip(this.nudMonsterSpeed, resources.GetString("nudMonsterSpeed.ToolTip"));
             // 
             // nudMonsterAttackDelay
             // 
@@ -709,6 +775,7 @@
             0,
             0});
             this.nudMonsterAttackDelay.Name = "nudMonsterAttackDelay";
+            this.tooltip.SetToolTip(this.nudMonsterAttackDelay, resources.GetString("nudMonsterAttackDelay.ToolTip"));
             // 
             // nudMonsterAttackMax
             // 
@@ -719,6 +786,7 @@
             0,
             0});
             this.nudMonsterAttackMax.Name = "nudMonsterAttackMax";
+            this.tooltip.SetToolTip(this.nudMonsterAttackMax, resources.GetString("nudMonsterAttackMax.ToolTip"));
             // 
             // nudMonsterMagicResist
             // 
@@ -729,6 +797,7 @@
             0,
             0});
             this.nudMonsterMagicResist.Name = "nudMonsterMagicResist";
+            this.tooltip.SetToolTip(this.nudMonsterMagicResist, resources.GetString("nudMonsterMagicResist.ToolTip"));
             // 
             // nudMonsterAttackMin
             // 
@@ -739,6 +808,7 @@
             0,
             0});
             this.nudMonsterAttackMin.Name = "nudMonsterAttackMin";
+            this.tooltip.SetToolTip(this.nudMonsterAttackMin, resources.GetString("nudMonsterAttackMin.ToolTip"));
             // 
             // nudMonsterArmor
             // 
@@ -749,105 +819,114 @@
             0,
             0});
             this.nudMonsterArmor.Name = "nudMonsterArmor";
+            this.tooltip.SetToolTip(this.nudMonsterArmor, resources.GetString("nudMonsterArmor.ToolTip"));
             // 
             // lblMonsterMagicResist
             // 
             resources.ApplyResources(this.lblMonsterMagicResist, "lblMonsterMagicResist");
             this.lblMonsterMagicResist.Name = "lblMonsterMagicResist";
+            this.tooltip.SetToolTip(this.lblMonsterMagicResist, resources.GetString("lblMonsterMagicResist.ToolTip"));
             // 
             // lblMonsterAttackMin
             // 
             resources.ApplyResources(this.lblMonsterAttackMin, "lblMonsterAttackMin");
             this.lblMonsterAttackMin.Name = "lblMonsterAttackMin";
+            this.tooltip.SetToolTip(this.lblMonsterAttackMin, resources.GetString("lblMonsterAttackMin.ToolTip"));
             // 
             // lblMonsterAttackMax
             // 
             resources.ApplyResources(this.lblMonsterAttackMax, "lblMonsterAttackMax");
             this.lblMonsterAttackMax.Name = "lblMonsterAttackMax";
+            this.tooltip.SetToolTip(this.lblMonsterAttackMax, resources.GetString("lblMonsterAttackMax.ToolTip"));
             // 
             // lblMonsterAttackDelay
             // 
             resources.ApplyResources(this.lblMonsterAttackDelay, "lblMonsterAttackDelay");
             this.lblMonsterAttackDelay.Name = "lblMonsterAttackDelay";
+            this.tooltip.SetToolTip(this.lblMonsterAttackDelay, resources.GetString("lblMonsterAttackDelay.ToolTip"));
             // 
             // lblMonsterArmor
             // 
             resources.ApplyResources(this.lblMonsterArmor, "lblMonsterArmor");
             this.lblMonsterArmor.Name = "lblMonsterArmor";
+            this.tooltip.SetToolTip(this.lblMonsterArmor, resources.GetString("lblMonsterArmor.ToolTip"));
             // 
             // lblMonsterSpeed
             // 
             resources.ApplyResources(this.lblMonsterSpeed, "lblMonsterSpeed");
             this.lblMonsterSpeed.Name = "lblMonsterSpeed";
+            this.tooltip.SetToolTip(this.lblMonsterSpeed, resources.GetString("lblMonsterSpeed.ToolTip"));
             // 
             // msMain
             // 
+            resources.ApplyResources(this.msMain, "msMain");
             this.msMain.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiMovers,
             this.tsmiFile,
             this.tsmiSettings});
-            resources.ApplyResources(this.msMain, "msMain");
             this.msMain.Name = "msMain";
+            this.tooltip.SetToolTip(this.msMain, resources.GetString("msMain.ToolTip"));
             // 
             // tsmiMovers
             // 
+            resources.ApplyResources(this.tsmiMovers, "tsmiMovers");
             this.tsmiMovers.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiMoversAdd,
             this.tsmiMoversFind});
             this.tsmiMovers.Name = "tsmiMovers";
-            resources.ApplyResources(this.tsmiMovers, "tsmiMovers");
             // 
             // tsmiMoversAdd
             // 
-            this.tsmiMoversAdd.Name = "tsmiMoversAdd";
             resources.ApplyResources(this.tsmiMoversAdd, "tsmiMoversAdd");
+            this.tsmiMoversAdd.Name = "tsmiMoversAdd";
             this.tsmiMoversAdd.Click += new System.EventHandler(this.TsmiMoversAdd_Click);
             // 
             // tsmiMoversFind
             // 
-            this.tsmiMoversFind.Name = "tsmiMoversFind";
             resources.ApplyResources(this.tsmiMoversFind, "tsmiMoversFind");
+            this.tsmiMoversFind.Name = "tsmiMoversFind";
             this.tsmiMoversFind.Click += new System.EventHandler(this.TsmiMoversFind_Click);
             // 
             // tsmiFile
             // 
+            resources.ApplyResources(this.tsmiFile, "tsmiFile");
             this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFileReload,
             this.tsmiFileSave});
             this.tsmiFile.Name = "tsmiFile";
-            resources.ApplyResources(this.tsmiFile, "tsmiFile");
             // 
             // tsmiFileReload
             // 
-            this.tsmiFileReload.Name = "tsmiFileReload";
             resources.ApplyResources(this.tsmiFileReload, "tsmiFileReload");
+            this.tsmiFileReload.Name = "tsmiFileReload";
             this.tsmiFileReload.Click += new System.EventHandler(this.TsmiFileReload_Click);
             // 
             // tsmiFileSave
             // 
-            this.tsmiFileSave.Name = "tsmiFileSave";
             resources.ApplyResources(this.tsmiFileSave, "tsmiFileSave");
+            this.tsmiFileSave.Name = "tsmiFileSave";
             this.tsmiFileSave.Click += new System.EventHandler(this.TsmiFileSave_Click);
             // 
             // tsmiSettings
             // 
-            this.tsmiSettings.Name = "tsmiSettings";
             resources.ApplyResources(this.tsmiSettings, "tsmiSettings");
+            this.tsmiSettings.Name = "tsmiSettings";
             this.tsmiSettings.Click += new System.EventHandler(this.TsmiSettings_Click);
             // 
             // cmsLbMovers
             // 
+            resources.ApplyResources(this.cmsLbMovers, "cmsLbMovers");
             this.cmsLbMovers.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.cmsLbMovers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiMoverDelete});
             this.cmsLbMovers.Name = "cms_lbmovers";
-            resources.ApplyResources(this.cmsLbMovers, "cmsLbMovers");
+            this.tooltip.SetToolTip(this.cmsLbMovers, resources.GetString("cmsLbMovers.ToolTip"));
             // 
             // tsmiMoverDelete
             // 
-            this.tsmiMoverDelete.Name = "tsmiMoverDelete";
             resources.ApplyResources(this.tsmiMoverDelete, "tsmiMoverDelete");
+            this.tsmiMoverDelete.Name = "tsmiMoverDelete";
             this.tsmiMoverDelete.Click += new System.EventHandler(this.TsmiMoverDelete_Click);
             // 
             // lbMovers
@@ -855,6 +934,7 @@
             resources.ApplyResources(this.lbMovers, "lbMovers");
             this.lbMovers.FormattingEnabled = true;
             this.lbMovers.Name = "lbMovers";
+            this.tooltip.SetToolTip(this.lbMovers, resources.GetString("lbMovers.ToolTip"));
             this.lbMovers.SelectedIndexChanged += new System.EventHandler(this.LbMovers_SelectedIndexChanged);
             this.lbMovers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LbMovers_KeyDown);
             this.lbMovers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LbMovers_MouseDown);
@@ -870,6 +950,7 @@
             this.MainMenuStrip = this.msMain;
             this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.tooltip.SetToolTip(this, resources.GetString("$this.ToolTip"));
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.tcMover.ResumeLayout(false);
             this.tpGeneral.ResumeLayout(false);

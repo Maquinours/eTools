@@ -117,7 +117,271 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="btnMotions.Text" xml:space="preserve">
+    <value>Animations</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblModelBrace.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 114</value>
+  </data>
+  <data name="lblModelBrace.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="lblModelBrace.Text" xml:space="preserve">
+    <value>Dossier :</value>
+  </data>
+  <data name="lblModelScale.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 78</value>
+  </data>
+  <data name="lblModelScale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 13</value>
+  </data>
+  <data name="lblModelScale.Text" xml:space="preserve">
+    <value>Échelle :</value>
+  </data>
+  <data name="lblModelFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 38</value>
+  </data>
+  <data name="lblModelFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 13</value>
+  </data>
+  <data name="lblModelFile.Text" xml:space="preserve">
+    <value>Fichier :</value>
+  </data>
+  <data name="gbGeneralConfigurationModel.Text" xml:space="preserve">
+    <value>Modèle</value>
+  </data>
+  <data name="lblLevel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 13</value>
+  </data>
+  <data name="lblLevel.Text" xml:space="preserve">
+    <value>Niveau</value>
+  </data>
+  <data name="lblClass.Text" xml:space="preserve">
+    <value>Rang :</value>
+  </data>
+  <data name="gbGeneralConfigurationMisc.Text" xml:space="preserve">
+    <value>Divers</value>
+  </data>
+  <data name="lblIdentifierAlreadyUsed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 13</value>
+  </data>
+  <data name="lblIdentifierAlreadyUsed.Text" xml:space="preserve">
+    <value>Déjà utilisé</value>
+  </data>
+  <data name="lblName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>35, 13</value>
+  </data>
+  <data name="lblName.Text" xml:space="preserve">
+    <value>Nom :</value>
+  </data>
+  <data name="lblIdentifier.Text" xml:space="preserve">
+    <value>Identifiant</value>
+  </data>
+  <data name="gbGeneralConfigurationMain.Text" xml:space="preserve">
+    <value>Principal</value>
+  </data>
+  <data name="tpGeneral.Text" xml:space="preserve">
+    <value>Général</value>
+  </data>
+  <data name="nudMonsterElectricityResistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>217, 149</value>
+  </data>
+  <data name="lblMonsterEarthResistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 116</value>
+  </data>
+  <data name="lblMonsterEarthResistance.Text" xml:space="preserve">
+    <value>Résistance Terre :</value>
+  </data>
+  <data name="lblMonsterWaterResistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 87</value>
+  </data>
+  <data name="lblMonsterWaterResistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 13</value>
+  </data>
+  <data name="lblMonsterWaterResistance.Text" xml:space="preserve">
+    <value>Résistance Eau :</value>
+  </data>
+  <data name="lblMonsterElementRatio.ToolTip" xml:space="preserve">
+    <value>Ratio déterminant l'importance de l'élément en attaque et en défense.</value>
+  </data>
+  <data name="lblMonsterWindResistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 116</value>
+  </data>
+  <data name="lblMonsterWindResistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 13</value>
+  </data>
+  <data name="lblMonsterWindResistance.Text" xml:space="preserve">
+    <value>Résistance Air :</value>
+  </data>
+  <data name="lblMonsterElectricityResistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>84, 151</value>
+  </data>
+  <data name="lblMonsterElectricityResistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>128, 13</value>
+  </data>
+  <data name="lblMonsterElectricityResistance.Text" xml:space="preserve">
+    <value>Résistance à l'Éléctricité :</value>
+  </data>
+  <data name="lblMonsterFireResistance.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 87</value>
+  </data>
+  <data name="lblMonsterFireResistance.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 13</value>
+  </data>
+  <data name="lblMonsterFireResistance.Text" xml:space="preserve">
+    <value>Résistance Feu :</value>
+  </data>
+  <data name="gbMonsterStatsElementary.Text" xml:space="preserve">
+    <value>Élémentaire</value>
+  </data>
+  <data name="nudMonsterHp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>65, 127</value>
+  </data>
+  <data name="nudMonsterHr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>65, 101</value>
+  </data>
+  <data name="nudMonsterSta.Location" type="System.Drawing.Point, System.Drawing">
+    <value>65, 57</value>
+  </data>
+  <data name="nudMonsterStr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>65, 30</value>
+  </data>
+  <data name="lblMonsterEr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>218, 104</value>
+  </data>
+  <data name="lblMonsterEr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 13</value>
+  </data>
+  <data name="lblMonsterEr.Text" xml:space="preserve">
+    <value>Esquive :</value>
+  </data>
+  <data name="lblMonsterStr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 33</value>
+  </data>
+  <data name="lblMonsterStr.Text" xml:space="preserve">
+    <value>FOR :</value>
+  </data>
+  <data name="lblMonsterHr.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 104</value>
+  </data>
+  <data name="lblMonsterHr.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 13</value>
+  </data>
+  <data name="lblMonsterHr.Text" xml:space="preserve">
+    <value>Toucher :</value>
+  </data>
+  <data name="lblMonsterSta.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 59</value>
+  </data>
+  <data name="lblMonsterSta.Size" type="System.Drawing.Size, System.Drawing">
+    <value>36, 13</value>
+  </data>
+  <data name="lblMonsterSta.Text" xml:space="preserve">
+    <value>END :</value>
+  </data>
+  <data name="lblMonsterHp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>31, 130</value>
+  </data>
+  <data name="gbMonsterStatsBase.Text" xml:space="preserve">
+    <value>Basique</value>
+  </data>
+  <data name="nudMonsterAttackDelay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>75, 128</value>
+  </data>
+  <data name="nudMonsterAttackMin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>75, 80</value>
+  </data>
+  <data name="nudMonsterArmor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>75, 32</value>
+  </data>
+  <data name="lblMonsterMagicResist.Location" type="System.Drawing.Point, System.Drawing">
+    <value>214, 35</value>
+  </data>
+  <data name="lblMonsterMagicResist.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 13</value>
+  </data>
+  <data name="lblMonsterMagicResist.Text" xml:space="preserve">
+    <value>Rés. magique :</value>
+  </data>
+  <data name="lblMonsterAttackMin.Location" type="System.Drawing.Point, System.Drawing">
+    <value>21, 82</value>
+  </data>
+  <data name="lblMonsterAttackDelay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 131</value>
+  </data>
+  <data name="lblMonsterAttackDelay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>63, 13</value>
+  </data>
+  <data name="lblMonsterAttackDelay.Text" xml:space="preserve">
+    <value>Délai d'atk :</value>
+  </data>
+  <data name="lblMonsterArmor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 35</value>
+  </data>
+  <data name="lblMonsterArmor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 13</value>
+  </data>
+  <data name="lblMonsterArmor.Text" xml:space="preserve">
+    <value>Armure :</value>
+  </data>
+  <data name="lblMonsterSpeed.Text" xml:space="preserve">
+    <value>Dépla. :</value>
+  </data>
+  <data name="gbMonsterStatsMisc.Text" xml:space="preserve">
+    <value>Divers</value>
+  </data>
+  <data name="gbMonsterStats.Text" xml:space="preserve">
+    <value>Statistiques</value>
+  </data>
+  <data name="tpMonster.Text" xml:space="preserve">
+    <value>Monstre</value>
+  </data>
+  <data name="tsmiMoversAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="tsmiMoversAdd.Text" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="tsmiMoversFind.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="tsmiMoversFind.Text" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
+  <data name="tsmiFileReload.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="tsmiFileReload.Text" xml:space="preserve">
+    <value>Recharger</value>
+  </data>
+  <data name="tsmiFileSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="tsmiFileSave.Text" xml:space="preserve">
+    <value>Sauvegarder</value>
+  </data>
+  <data name="tsmiFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 22</value>
+  </data>
+  <data name="tsmiFile.Text" xml:space="preserve">
+    <value>Fichier</value>
+  </data>
+  <data name="tsmiSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 22</value>
+  </data>
+  <data name="tsmiSettings.Text" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  <data name="tsmiMoverDelete.Size" type="System.Drawing.Size, System.Drawing">
+    <value>129, 22</value>
+  </data>
+  <data name="tsmiMoverDelete.Text" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="cmsLbMovers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 26</value>
+  </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAEAvgAAAAEAIAAoEAMAFgAAACgAAAC+AAAAAAIAAAEAIAAAAAAAAPgCAMMOAADDDgAAAAAAAAAA
