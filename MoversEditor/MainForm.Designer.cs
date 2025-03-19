@@ -475,10 +475,15 @@
             // 
             resources.ApplyResources(this.nudMonsterFireResistance, "nudMonsterFireResistance");
             this.nudMonsterFireResistance.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterFireResistance.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterFireResistance.Name = "nudMonsterFireResistance";
             this.tooltip.SetToolTip(this.nudMonsterFireResistance, resources.GetString("nudMonsterFireResistance.ToolTip"));
             // 
@@ -486,10 +491,15 @@
             // 
             resources.ApplyResources(this.nudMonsterEarthResistance, "nudMonsterEarthResistance");
             this.nudMonsterEarthResistance.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterEarthResistance.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterEarthResistance.Name = "nudMonsterEarthResistance";
             this.tooltip.SetToolTip(this.nudMonsterEarthResistance, resources.GetString("nudMonsterEarthResistance.ToolTip"));
             // 
@@ -497,10 +507,15 @@
             // 
             resources.ApplyResources(this.nudMonsterWindResistance, "nudMonsterWindResistance");
             this.nudMonsterWindResistance.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterWindResistance.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterWindResistance.Name = "nudMonsterWindResistance";
             this.tooltip.SetToolTip(this.nudMonsterWindResistance, resources.GetString("nudMonsterWindResistance.ToolTip"));
             // 
@@ -508,10 +523,15 @@
             // 
             resources.ApplyResources(this.nudMonsterWaterResistance, "nudMonsterWaterResistance");
             this.nudMonsterWaterResistance.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterWaterResistance.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterWaterResistance.Name = "nudMonsterWaterResistance";
             this.tooltip.SetToolTip(this.nudMonsterWaterResistance, resources.GetString("nudMonsterWaterResistance.ToolTip"));
             // 
