@@ -42,15 +42,15 @@
             // 
             // btnRetry
             // 
-            this.btnRetry.DialogResult = System.Windows.Forms.DialogResult.Retry;
             resources.ApplyResources(this.btnRetry, "btnRetry");
+            this.btnRetry.DialogResult = System.Windows.Forms.DialogResult.Retry;
             this.btnRetry.Name = "btnRetry";
             this.btnRetry.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             resources.ApplyResources(this.btnCancel, "btnCancel");
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
