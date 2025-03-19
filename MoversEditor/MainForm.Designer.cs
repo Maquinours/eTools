@@ -34,6 +34,7 @@
             this.tpGeneral = new System.Windows.Forms.TabPage();
             this.gbGeneralConfiguration = new System.Windows.Forms.GroupBox();
             this.gbGeneralConfigurationModel = new System.Windows.Forms.GroupBox();
+            this.nudModelScale = new System.Windows.Forms.NumericUpDown();
             this.btnSelectModelFile = new System.Windows.Forms.Button();
             this.btnMotions = new System.Windows.Forms.Button();
             this.cbModelBrace = new System.Windows.Forms.ComboBox();
@@ -42,6 +43,8 @@
             this.lblModelScale = new System.Windows.Forms.Label();
             this.lblModelFile = new System.Windows.Forms.Label();
             this.gbGeneralConfigurationMisc = new System.Windows.Forms.GroupBox();
+            this.nudExperience = new System.Windows.Forms.NumericUpDown();
+            this.nudLevel = new System.Windows.Forms.NumericUpDown();
             this.cbAi = new System.Windows.Forms.ComboBox();
             this.lblAi = new System.Windows.Forms.Label();
             this.lblExperience = new System.Windows.Forms.Label();
@@ -117,14 +120,14 @@
             this.tsmiMoverDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.lbMovers = new System.Windows.Forms.ListBox();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.nudLevel = new System.Windows.Forms.NumericUpDown();
-            this.nudExperience = new System.Windows.Forms.NumericUpDown();
-            this.nudModelScale = new System.Windows.Forms.NumericUpDown();
             this.tcMover.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.gbGeneralConfiguration.SuspendLayout();
             this.gbGeneralConfigurationModel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudModelScale)).BeginInit();
             this.gbGeneralConfigurationMisc.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudExperience)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLevel)).BeginInit();
             this.gbGeneralConfigurationMain.SuspendLayout();
             this.tpMonster.SuspendLayout();
             this.gbMonsterStats.SuspendLayout();
@@ -153,9 +156,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudMonsterArmor)).BeginInit();
             this.msMain.SuspendLayout();
             this.cmsLbMovers.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudLevel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudExperience)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudModelScale)).BeginInit();
             this.SuspendLayout();
             // 
             // tcMover
@@ -195,6 +195,22 @@
             resources.ApplyResources(this.gbGeneralConfigurationModel, "gbGeneralConfigurationModel");
             this.gbGeneralConfigurationModel.Name = "gbGeneralConfigurationModel";
             this.gbGeneralConfigurationModel.TabStop = false;
+            // 
+            // nudModelScale
+            // 
+            this.nudModelScale.DecimalPlaces = 2;
+            this.nudModelScale.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            resources.ApplyResources(this.nudModelScale, "nudModelScale");
+            this.nudModelScale.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudModelScale.Name = "nudModelScale";
             // 
             // btnSelectModelFile
             // 
@@ -252,6 +268,26 @@
             resources.ApplyResources(this.gbGeneralConfigurationMisc, "gbGeneralConfigurationMisc");
             this.gbGeneralConfigurationMisc.Name = "gbGeneralConfigurationMisc";
             this.gbGeneralConfigurationMisc.TabStop = false;
+            // 
+            // nudExperience
+            // 
+            resources.ApplyResources(this.nudExperience, "nudExperience");
+            this.nudExperience.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudExperience.Name = "nudExperience";
+            // 
+            // nudLevel
+            // 
+            resources.ApplyResources(this.nudLevel, "nudLevel");
+            this.nudLevel.Maximum = new decimal(new int[] {
+            -1,
+            0,
+            0,
+            0});
+            this.nudLevel.Name = "nudLevel";
             // 
             // cbAi
             // 
@@ -823,42 +859,6 @@
             this.lbMovers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LbMovers_KeyDown);
             this.lbMovers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LbMovers_MouseDown);
             // 
-            // nudLevel
-            // 
-            resources.ApplyResources(this.nudLevel, "nudLevel");
-            this.nudLevel.Maximum = new decimal(new int[] {
-            -1,
-            0,
-            0,
-            0});
-            this.nudLevel.Name = "nudLevel";
-            // 
-            // nudExperience
-            // 
-            resources.ApplyResources(this.nudExperience, "nudExperience");
-            this.nudExperience.Maximum = new decimal(new int[] {
-            -1,
-            0,
-            0,
-            0});
-            this.nudExperience.Name = "nudExperience";
-            // 
-            // nudModelScale
-            // 
-            this.nudModelScale.DecimalPlaces = 2;
-            this.nudModelScale.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            resources.ApplyResources(this.nudModelScale, "nudModelScale");
-            this.nudModelScale.Maximum = new decimal(new int[] {
-            -1,
-            0,
-            0,
-            0});
-            this.nudModelScale.Name = "nudModelScale";
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -876,8 +876,11 @@
             this.gbGeneralConfiguration.ResumeLayout(false);
             this.gbGeneralConfigurationModel.ResumeLayout(false);
             this.gbGeneralConfigurationModel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudModelScale)).EndInit();
             this.gbGeneralConfigurationMisc.ResumeLayout(false);
             this.gbGeneralConfigurationMisc.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudExperience)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLevel)).EndInit();
             this.gbGeneralConfigurationMain.ResumeLayout(false);
             this.gbGeneralConfigurationMain.PerformLayout();
             this.tpMonster.ResumeLayout(false);
@@ -911,9 +914,6 @@
             this.msMain.ResumeLayout(false);
             this.msMain.PerformLayout();
             this.cmsLbMovers.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nudLevel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudExperience)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudModelScale)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

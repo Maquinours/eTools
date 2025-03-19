@@ -2269,13 +2269,13 @@
     <value>116, 17</value>
   </metadata>
   <data name="tsmiMoverDelete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="tsmiMoverDelete.Text" xml:space="preserve">
-    <value>Supprimer</value>
+    <value>Delete</value>
   </data>
   <data name="cmsLbMovers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 26</value>
+    <value>181, 48</value>
   </data>
   <data name="&gt;&gt;cmsLbMovers.Name" xml:space="preserve">
     <value>cmsLbMovers</value>
