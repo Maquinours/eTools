@@ -20,6 +20,7 @@ namespace MoversEditor
     {
         public MainForm()
         {
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("fr-FR");
             InitializeComponent();
         }
 
@@ -32,14 +33,14 @@ namespace MoversEditor
                 prj.Load();
                 AutoCompleteStringCollection identifiersSource = new AutoCompleteStringCollection();
                 identifiersSource.AddRange(prj.GetAllMoversDefines());
-                tb_identifier.AutoCompleteCustomSource = identifiersSource;
-                cb_monsterai.DataSource = prj.GetAiIdentifiers();
-                cb_belligerence.DataSource = prj.GetBelligerenceIdentifiers();
-                cb_class.DataSource = prj.GetClassIdentifiers();
-                cb_elementtype.DataSource = Settings.GetInstance().Elements.Values.ToArray();
-                cb_ModelBrace.DataSource = prj.GetMoverModelBraces();
-                cb_ModelBrace.DisplayMember = "SzName";
-                cb_type.DataSource = Settings.GetInstance().Types.Keys.ToArray();
+                tbIdentifier.AutoCompleteCustomSource = identifiersSource;
+                cbAi.DataSource = prj.GetAiIdentifiers();
+                cbBelligerence.DataSource = prj.GetBelligerenceIdentifiers();
+                cbClass.DataSource = prj.GetClassIdentifiers();
+                cbMonsterElementType.DataSource = Settings.GetInstance().Elements.Values.ToArray();
+                cbModelBrace.DataSource = prj.GetMoverModelBraces();
+                cbModelBrace.DisplayMember = "SzName";
+                cbType.DataSource = Settings.GetInstance().Types.Keys.ToArray();
                 SetListBoxDataSource();
                 //UseWaitCursor = false;
             }
@@ -76,76 +77,76 @@ namespace MoversEditor
             LoadFormData();
         }
 
-        private void lb_movers_SelectedIndexChanged(object sender, EventArgs e)
+        private void LbMovers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Mover currentItem = ((Mover)lb_movers.SelectedItem);
+            Mover currentItem = ((Mover)lbMovers.SelectedItem);
             if (currentItem == null) return;
 
-            tb_name.DataBindings.Clear();
-            tb_identifier.DataBindings.Clear();
-            tb_str.DataBindings.Clear();
-            tb_sta.DataBindings.Clear();
-            tb_dex.DataBindings.Clear();
-            tb_int.DataBindings.Clear();
-            tb_hr.DataBindings.Clear();
-            tb_er.DataBindings.Clear();
-            cb_belligerence.DataBindings.Clear();
-            tb_level.DataBindings.Clear();
-            cb_class.DataBindings.Clear();
-            tb_atkmin.DataBindings.Clear();
-            tb_atkmax.DataBindings.Clear();
-            tb_reattackdelay.DataBindings.Clear();
-            tb_addhp.DataBindings.Clear();
-            tb_addmp.DataBindings.Clear();
-            tb_naturalarmor.DataBindings.Clear();
-            cb_elementtype.DataBindings.Clear();
-            tb_elementatk.DataBindings.Clear();
-            tb_fspeed.DataBindings.Clear();
-            tb_resismgic.DataBindings.Clear();
-            tb_resistelecricity.DataBindings.Clear();
-            tb_resistfire.DataBindings.Clear();
-            tb_resistwater.DataBindings.Clear();
-            tb_resistwind.DataBindings.Clear();
-            tb_resistearth.DataBindings.Clear();
-            tb_expvalue.DataBindings.Clear();
-            cb_monsterai.DataBindings.Clear();
-            tb_ModelName.DataBindings.Clear();
-            tb_ModelScale.DataBindings.Clear();
-            cb_ModelBrace.DataBindings.Clear();
-            cb_type.DataBindings.Clear();
+            tbName.DataBindings.Clear();
+            tbIdentifier.DataBindings.Clear();
+            tbMonsterStr.DataBindings.Clear();
+            tbMonsterSta.DataBindings.Clear();
+            tbMonsterDex.DataBindings.Clear();
+            tbMonsterInt.DataBindings.Clear();
+            tbMonsterHr.DataBindings.Clear();
+            tbMonsterEr.DataBindings.Clear();
+            cbBelligerence.DataBindings.Clear();
+            tbLevel.DataBindings.Clear();
+            cbClass.DataBindings.Clear();
+            tbMonsterAttackMin.DataBindings.Clear();
+            tbMonsterAttackMax.DataBindings.Clear();
+            tbMonsterAttackDelay.DataBindings.Clear();
+            tbMonsterHp.DataBindings.Clear();
+            tbMonsterMp.DataBindings.Clear();
+            tbMonsterArmor.DataBindings.Clear();
+            cbMonsterElementType.DataBindings.Clear();
+            tbMonsterElementValue.DataBindings.Clear();
+            tbMonsterSpeed.DataBindings.Clear();
+            tbMonsterMagicResist.DataBindings.Clear();
+            tbMonsterElectricityResistance.DataBindings.Clear();
+            tbMonsterFireResistance.DataBindings.Clear();
+            tbMonsterWaterResistance.DataBindings.Clear();
+            tbMonsterWindResistance.DataBindings.Clear();
+            tbMonsterEarthResistance.DataBindings.Clear();
+            tbExperience.DataBindings.Clear();
+            cbAi.DataBindings.Clear();
+            tbModelFile.DataBindings.Clear();
+            tbModelScale.DataBindings.Clear();
+            cbModelBrace.DataBindings.Clear();
+            cbType.DataBindings.Clear();
 
-            tb_name.DataBindings.Add(new Binding("Text", currentItem, "Name", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_identifier.DataBindings.Add(new Binding("Text", currentItem, "Id", false, DataSourceUpdateMode.OnValidation));
-            tb_str.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwStr", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_sta.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwSta", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_dex.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwDex", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_int.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwInt", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_hr.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwHR", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_er.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwER", true, DataSourceUpdateMode.OnPropertyChanged));
-            cb_belligerence.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwBelligerence", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_level.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwLevel", true, DataSourceUpdateMode.OnPropertyChanged));
-            cb_class.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwClass", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_atkmin.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAtkMin", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_atkmax.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAtkMax", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_reattackdelay.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwReAttackDelay", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_addhp.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAddHp", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_addmp.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAddMp", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_naturalarmor.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwNaturalArmor", true, DataSourceUpdateMode.OnPropertyChanged));
-            cb_elementtype.DataBindings.Add(new Binding("Text", currentItem, "ElementType", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_elementatk.DataBindings.Add(new Binding("Text", currentItem.Prop, "WElementAtk", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_fspeed.DataBindings.Add(new Binding("Text", currentItem.Prop, "FSpeed", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_resismgic.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwResisMgic", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_resistelecricity.DataBindings.Add(new Binding("Text", currentItem.Prop, "NResistElecricity", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_resistfire.DataBindings.Add(new Binding("Text", currentItem.Prop, "NResistFire", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_resistwater.DataBindings.Add(new Binding("Text", currentItem.Prop, "NResistWater", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_resistwind.DataBindings.Add(new Binding("Text", currentItem.Prop, "NResistWind", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_resistearth.DataBindings.Add(new Binding("Text", currentItem.Prop, "NResistEarth", true, DataSourceUpdateMode.OnPropertyChanged));
-            tb_expvalue.DataBindings.Add(new Binding("Text", currentItem.Prop, "NExpValue", true, DataSourceUpdateMode.OnPropertyChanged));
-            cb_monsterai.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAi", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_ModelName.DataBindings.Add(new Binding("Text", currentItem.Model, "SzName", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_ModelScale.DataBindings.Add(new Binding("Text", currentItem.Model, "FScale", true, DataSourceUpdateMode.OnPropertyChanged));
-            cb_ModelBrace.DataBindings.Add(new Binding("SelectedItem", currentItem.Model, "Brace", false, DataSourceUpdateMode.OnPropertyChanged));
-            cb_type.DataBindings.Add(new Binding("SelectedItem", currentItem, "Type", false, DataSourceUpdateMode.OnPropertyChanged));
+            tbName.DataBindings.Add(new Binding("Text", currentItem, "Name", false, DataSourceUpdateMode.OnPropertyChanged));
+            tbIdentifier.DataBindings.Add(new Binding("Text", currentItem, "Id", false, DataSourceUpdateMode.OnValidation));
+            tbMonsterStr.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwStr", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterSta.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwSta", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterDex.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwDex", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterInt.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwInt", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterHr.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwHR", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterEr.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwER", true, DataSourceUpdateMode.OnPropertyChanged));
+            cbBelligerence.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwBelligerence", false, DataSourceUpdateMode.OnPropertyChanged));
+            tbLevel.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwLevel", true, DataSourceUpdateMode.OnPropertyChanged));
+            cbClass.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwClass", false, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterAttackMin.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAtkMin", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterAttackMax.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAtkMax", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterAttackDelay.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwReAttackDelay", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterHp.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAddHp", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterMp.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAddMp", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterArmor.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwNaturalArmor", true, DataSourceUpdateMode.OnPropertyChanged));
+            cbMonsterElementType.DataBindings.Add(new Binding("Text", currentItem, "ElementType", false, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterElementValue.DataBindings.Add(new Binding("Text", currentItem.Prop, "WElementAtk", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterSpeed.DataBindings.Add(new Binding("Text", currentItem.Prop, "FSpeed", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterMagicResist.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwResisMgic", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterElectricityResistance.DataBindings.Add(new Binding("Text", currentItem.Prop, "NResistElecricity", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterFireResistance.DataBindings.Add(new Binding("Text", currentItem.Prop, "NResistFire", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterWaterResistance.DataBindings.Add(new Binding("Text", currentItem.Prop, "NResistWater", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterWindResistance.DataBindings.Add(new Binding("Text", currentItem.Prop, "NResistWind", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbMonsterEarthResistance.DataBindings.Add(new Binding("Text", currentItem.Prop, "NResistEarth", true, DataSourceUpdateMode.OnPropertyChanged));
+            tbExperience.DataBindings.Add(new Binding("Text", currentItem.Prop, "NExpValue", true, DataSourceUpdateMode.OnPropertyChanged));
+            cbAi.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAi", false, DataSourceUpdateMode.OnPropertyChanged));
+            tbModelFile.DataBindings.Add(new Binding("Text", currentItem.Model, "SzName", false, DataSourceUpdateMode.OnPropertyChanged));
+            tbModelScale.DataBindings.Add(new Binding("Text", currentItem.Model, "FScale", true, DataSourceUpdateMode.OnPropertyChanged));
+            cbModelBrace.DataBindings.Add(new Binding("SelectedItem", currentItem.Model, "Brace", false, DataSourceUpdateMode.OnPropertyChanged));
+            cbType.DataBindings.Add(new Binding("SelectedItem", currentItem, "Type", false, DataSourceUpdateMode.OnPropertyChanged));
         }
 
         private void FormatIntTextbox(object sender, EventArgs e)
@@ -228,25 +229,25 @@ namespace MoversEditor
             tb.Select(new[] { oldSelection + tb.TextLength - oldTextLength, 0 }.Max(), 0);
         }
 
-        private void cb_type_SelectedIndexChanged(object sender, EventArgs e)
+        private void CbType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!(lb_movers.SelectedItem is Mover mover) || !(cb_type.SelectedItem is MoverTypes type)) return;
+            if (!(lbMovers.SelectedItem is Mover mover) || !(cbType.SelectedItem is MoverTypes type)) return;
             Project prj = Project.GetInstance();
             mover.Type = type;
-            TabPage tp = type == MoverTypes.MONSTER ? tp_monster : null;
-            if (tc_main.TabPages.Count > 1 && tc_main.TabPages[1] != tp)
-                tc_main.TabPages.RemoveAt(1);
+            TabPage tp = type == MoverTypes.MONSTER ? tpMonster : null;
+            if (tcMover.TabPages.Count > 1 && tcMover.TabPages[1] != tp)
+                tcMover.TabPages.RemoveAt(1);
             if (tp != null)
-                tc_main.TabPages.Add(tp);
-            cb_monsterai.DataSource = prj.GetAllAllowedAiByType(type);
-            cb_belligerence.DataSource = prj.GetAllAllowedBelliByType(type);
-            cb_class.DataSource = prj.GetAllAllowedClassByType(type);
+                tcMover.TabPages.Add(tp);
+            cbAi.DataSource = prj.GetAllAllowedAiByType(type);
+            cbBelligerence.DataSource = prj.GetAllAllowedBelliByType(type);
+            cbClass.DataSource = prj.GetAllAllowedClassByType(type);
 
-            cb_monsterai.Enabled = cb_monsterai.Items.Count > 1;
-            cb_belligerence.Enabled = cb_belligerence.Items.Count > 1;
-            cb_class.Enabled = cb_class.Items.Count > 1;
-            tb_level.Enabled = type == MoverTypes.MONSTER;
-            tb_expvalue.Enabled = type == MoverTypes.MONSTER;
+            cbAi.Enabled = cbAi.Items.Count > 1;
+            cbBelligerence.Enabled = cbBelligerence.Items.Count > 1;
+            cbClass.Enabled = cbClass.Items.Count > 1;
+            tbLevel.Enabled = type == MoverTypes.MONSTER;
+            tbExperience.Enabled = type == MoverTypes.MONSTER;
         }
 
         private void Search()
@@ -254,9 +255,9 @@ namespace MoversEditor
             SearchForm form = new SearchForm();
             if (form.ShowDialog() == DialogResult.OK)
             {
-                Mover selectedMover = lb_movers.Items.Cast<Mover>().ToArray().FirstOrDefault(x => x.Name.ToLower().Contains(form.Value.ToLower()));
+                Mover selectedMover = lbMovers.Items.Cast<Mover>().ToArray().FirstOrDefault(x => x.Name.ToLower().Contains(form.Value.ToLower()));
                 if (selectedMover != null)
-                    lb_movers.SelectedItem = selectedMover;
+                    lbMovers.SelectedItem = selectedMover;
             }
         }
 
@@ -264,35 +265,35 @@ namespace MoversEditor
         {
             Project.GetInstance().AddNewMover();
             SetListBoxDataSource();
-            lb_movers.SelectedIndex = lb_movers.Items.Count - 1;
+            lbMovers.SelectedIndex = lbMovers.Items.Count - 1;
         }
 
-        private void tsmi_moversadd_Click(object sender, EventArgs e)
+        private void TsmiMoversAdd_Click(object sender, EventArgs e)
         {
             AddMover();
         }
 
-        private void tsmi_moverdelete_Click(object sender, EventArgs e)
+        private void TsmiMoverDelete_Click(object sender, EventArgs e)
         {
             DeleteCurrentMover();
         }
 
-        private void lb_movers_MouseDown(object sender, MouseEventArgs e)
+        private void LbMovers_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
-                lb_movers.SelectedIndex = lb_movers.IndexFromPoint(e.Location);
-                if (lb_movers.SelectedIndex != -1)
-                    cms_lbmovers.Show(Cursor.Position);
+                lbMovers.SelectedIndex = lbMovers.IndexFromPoint(e.Location);
+                if (lbMovers.SelectedIndex != -1)
+                    cmsLbMovers.Show(Cursor.Position);
             }
         }
 
-        private void tsmi_reload_Click(object sender, EventArgs e)
+        private void TsmiFileReload_Click(object sender, EventArgs e)
         {
             LoadFormData();
         }
 
-        private void tsmi_save_Click(object sender, EventArgs e)
+        private void TsmiFileSave_Click(object sender, EventArgs e)
         {
             //UseWaitCursor = true;
             Save();
@@ -319,23 +320,23 @@ namespace MoversEditor
             }
         }
 
-        private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TsmiSettings_Click(object sender, EventArgs e)
         {
             new SettingsForm().ShowDialog();
         }
 
-        private void rechercherToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TsmiMoversFind_Click(object sender, EventArgs e)
         {
             Search();
         }
 
-        private void bt_motions_Click(object sender, EventArgs e)
+        private void BtnMotions_Click(object sender, EventArgs e)
         {
-            if (!(lb_movers.SelectedItem is Mover mover)) return;
+            if (!(lbMovers.SelectedItem is Mover mover)) return;
             new MotionsForm(mover).ShowDialog();
         }
 
-        private void lb_movers_KeyDown(object sender, KeyEventArgs e)
+        private void LbMovers_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
             {
@@ -345,11 +346,11 @@ namespace MoversEditor
 
         private void SetListBoxDataSource()
         {
-            lb_movers.DataSource = new BindingSource(Project.GetInstance().GetAllMovers(), "");
-            lb_movers.DisplayMember = "Name";
+            lbMovers.DataSource = new BindingSource(Project.GetInstance().GetAllMovers(), "");
+            lbMovers.DisplayMember = "Name";
         }
 
-        private void bt_SelectModelFile_Click(object sender, EventArgs e)
+        private void BtnSelectModelFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog()
             {
@@ -363,30 +364,30 @@ namespace MoversEditor
                     || !ofd.SafeFileName.ToLower().EndsWith(".o3d")
                     || !File.Exists(ofd.FileName))
                     return;
-                tb_ModelName.Text = Path.GetFileNameWithoutExtension(ofd.FileName).Remove(0, 4);
+                tbModelFile.Text = Path.GetFileNameWithoutExtension(ofd.FileName).Remove(0, 4);
             }
         }
 
-        private void tb_identifier_Validating(object sender, CancelEventArgs e)
+        private void TbIdentifier_Validating(object sender, CancelEventArgs e)
         {
-            if (!(lb_movers.SelectedItem is Mover mover)) return;
-            if (Project.GetInstance().GetAllMovers().FirstOrDefault(x => x != mover && x.Prop.DwId == tb_identifier.Text) == null) return;
+            if (!(lbMovers.SelectedItem is Mover mover)) return;
+            if (Project.GetInstance().GetAllMovers().FirstOrDefault(x => x != mover && x.Prop.DwId == tbIdentifier.Text) == null) return;
             e.Cancel = true;
-            lb_IdentifierAlreadyUsed.Visible = true;
+            lblIdentifierAlreadyUsed.Visible = true;
         }
 
-        private void tb_identifier_TextChanged(object sender, EventArgs e)
+        private void TbIdentifier_TextChanged(object sender, EventArgs e)
         {
-            lb_IdentifierAlreadyUsed.Visible = false;
+            lblIdentifierAlreadyUsed.Visible = false;
         }
 
         private void DeleteCurrentMover()
         {
-            if (!(lb_movers.SelectedItem is Mover mover)) return;
+            if (!(lbMovers.SelectedItem is Mover mover)) return;
             Project.GetInstance().DeleteMover(mover);
-            int indexSave = lb_movers.SelectedIndex;
+            int indexSave = lbMovers.SelectedIndex;
             SetListBoxDataSource();
-            lb_movers.SelectedIndex = indexSave < lb_movers.Items.Count ? indexSave : lb_movers.Items.Count - 1;
+            lbMovers.SelectedIndex = indexSave < lbMovers.Items.Count ? indexSave : lbMovers.Items.Count - 1;
         }
     }
 }
