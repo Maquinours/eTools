@@ -40,6 +40,9 @@
             this.btnSelectFolder = new System.Windows.Forms.Button();
             this.btnSelectPropFile = new System.Windows.Forms.Button();
             this.btnSelectStringFile = new System.Windows.Forms.Button();
+            this.lblGameVersion = new System.Windows.Forms.Label();
+            this.nudGameVersion = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGameVersion)).BeginInit();
             this.SuspendLayout();
             // 
             // lblFolder
@@ -74,8 +77,8 @@
             // 
             // btnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -107,12 +110,39 @@
             this.btnSelectStringFile.UseVisualStyleBackColor = true;
             this.btnSelectStringFile.Click += new System.EventHandler(this.BtnSelectStringFile_Click);
             // 
+            // lblGameVersion
+            // 
+            resources.ApplyResources(this.lblGameVersion, "lblGameVersion");
+            this.lblGameVersion.Name = "lblGameVersion";
+            // 
+            // nudGameVersion
+            // 
+            resources.ApplyResources(this.nudGameVersion, "nudGameVersion");
+            this.nudGameVersion.Maximum = new decimal(new int[] {
+            22,
+            0,
+            0,
+            0});
+            this.nudGameVersion.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudGameVersion.Name = "nudGameVersion";
+            this.nudGameVersion.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
             // SettingsForm
             // 
             this.AcceptButton = this.btnApply;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
+            this.Controls.Add(this.nudGameVersion);
+            this.Controls.Add(this.lblGameVersion);
             this.Controls.Add(this.btnSelectStringFile);
             this.Controls.Add(this.btnSelectPropFile);
             this.Controls.Add(this.btnSelectFolder);
@@ -127,6 +157,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "SettingsForm";
+            ((System.ComponentModel.ISupportInitialize)(this.nudGameVersion)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,5 +176,7 @@
         private System.Windows.Forms.Button btnSelectFolder;
         private System.Windows.Forms.Button btnSelectPropFile;
         private System.Windows.Forms.Button btnSelectStringFile;
+        private System.Windows.Forms.Label lblGameVersion;
+        private System.Windows.Forms.NumericUpDown nudGameVersion;
     }
 }

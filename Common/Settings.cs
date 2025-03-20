@@ -25,7 +25,7 @@ namespace eTools
         /// <summary>
         /// Version of the game
         /// </summary>
-        public int ResourceVersion { get; private set; }
+        public int ResourceVersion { get;  set; }
         /// <summary>
         /// .h files paths that process will read (files containing defines) (E.G defineObj.h)
         /// </summary>

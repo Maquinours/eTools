@@ -563,9 +563,12 @@ namespace eTools
 
                 mp.SzComment = scanner.GetToken(); // Comment (useless)
 
-                mp.DwAreaColor = scanner.GetToken(); // Useless
-                mp.SzNpcMark = scanner.GetToken(); // Useless
-                mp.DwMadrigalGiftPoint = scanner.GetNumber(); // Useless
+                if (Settings.GetInstance().ResourceVersion >= 19)
+                {
+                    mp.DwAreaColor = scanner.GetToken(); // Useless
+                    mp.SzNpcMark = scanner.GetToken(); // Useless
+                    mp.DwMadrigalGiftPoint = scanner.GetNumber(); // Useless
+                }
 
                 /* It is possible to be at the end of stream there if there is no blank at the end of the
                  * line. So we check if the token is empty. If so, we can say that scanner was at the end

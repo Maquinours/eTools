@@ -43,6 +43,7 @@ namespace MoversEditor
             settings.ResourcePath = tbResourcesPath.Text;
             settings.PropFileName = settings.ResourcePath + tbPropFileName.Text;
             settings.StringsFilePath = settings.ResourcePath + tbStringFileName.Text;
+            settings.ResourceVersion = Decimal.ToInt32(nudGameVersion.Value);
             settings.SaveGeneral();
             settings.SaveSpecs();
             DialogResult = DialogResult.OK;
