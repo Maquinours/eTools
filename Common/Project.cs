@@ -533,7 +533,7 @@ namespace Common
                 mp.DwCohesion = scanner.GetNumber(); // Useless
                 mp.DwHoldingTime = scanner.GetNumber(); // Useless
                 mp.DwCorrectionValue = scanner.GetNumber(); // Taux de loot (en %)
-                mp.NExpValue = scanner.GetNumber(); // Exp sent to killer
+                mp.NExpValue = scanner.GetInt64(); // Exp sent to killer
                 mp.NFxpValue = scanner.GetNumber(); // Flight exp sent to killer (expert mode)
                 mp.NBodyState = scanner.GetNumber(); // Useless 
                 mp.DwAddAbility = scanner.GetNumber(); // Useless

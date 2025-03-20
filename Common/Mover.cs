@@ -78,7 +78,7 @@ namespace Common
         public int DwCohesion { get; set; }
         public int DwHoldingTime { get; set; }
         public int DwCorrectionValue { get; set; }
-        public int NExpValue { get; set; }
+        public long NExpValue { get; set; }
         public int NFxpValue { get; set; }
         public int NBodyState { get; set; }
         public int DwAddAbility { get; set; }
