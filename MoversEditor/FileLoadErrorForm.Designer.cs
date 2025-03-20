@@ -1,6 +1,6 @@
 ﻿namespace MoversEditor
 {
-    partial class FileNotFoundForm
+    partial class FileLoadErrorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileNotFoundForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileLoadErrorForm));
             this.lblError = new System.Windows.Forms.Label();
             this.btnRetry = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -42,15 +42,15 @@
             // 
             // btnRetry
             // 
-            resources.ApplyResources(this.btnRetry, "btnRetry");
             this.btnRetry.DialogResult = System.Windows.Forms.DialogResult.Retry;
+            resources.ApplyResources(this.btnRetry, "btnRetry");
             this.btnRetry.Name = "btnRetry";
             this.btnRetry.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
-            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            resources.ApplyResources(this.btnCancel, "btnCancel");
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -61,7 +61,7 @@
             this.btnSettings.UseVisualStyleBackColor = true;
             this.btnSettings.Click += new System.EventHandler(this.BtnSettings_Click);
             // 
-            // FileNotFoundForm
+            // FileLoadErrorForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -71,7 +71,7 @@
             this.Controls.Add(this.lblError);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "FileNotFoundForm";
+            this.Name = "FileLoadErrorForm";
             this.ResumeLayout(false);
 
         }

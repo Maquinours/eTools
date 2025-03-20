@@ -94,11 +94,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FileNotFoundForm.cs">
+    <Compile Include="FileLoadErrorForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FileNotFoundForm.Designer.cs">
-      <DependentUpon>FileNotFoundForm.cs</DependentUpon>
+    <Compile Include="FileLoadErrorForm.Designer.cs">
+      <DependentUpon>FileLoadErrorForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -126,11 +126,11 @@
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="FileNotFoundForm.fr.resx">
-      <DependentUpon>FileNotFoundForm.cs</DependentUpon>
+    <EmbeddedResource Include="FileLoadErrorForm.fr.resx">
+      <DependentUpon>FileLoadErrorForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FileNotFoundForm.resx">
-      <DependentUpon>FileNotFoundForm.cs</DependentUpon>
+    <EmbeddedResource Include="FileLoadErrorForm.resx">
+      <DependentUpon>FileLoadErrorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.en.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

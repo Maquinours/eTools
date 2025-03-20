@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace MoversEditor
 {
-    public partial class FileNotFoundForm : Form
+    public partial class FileLoadErrorForm : Form
     {
-        public FileNotFoundForm(string errorText)
+        public FileLoadErrorForm(string errorText)
         {
             InitializeComponent();
             lblError.Text = errorText;

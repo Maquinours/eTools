@@ -43,9 +43,9 @@ namespace MoversEditor
                 SetListBoxDataSource();
                 //UseWaitCursor = false;
             }
-            catch (Exception e) when (e is FileNotFoundException || e is DirectoryNotFoundException)
+            catch (Exception e) when (e is FileNotFoundException || e is DirectoryNotFoundException || e is MissingDefineException || e is IncorrectlyFormattedFileException)
             {
-                FileNotFoundForm fnff = new FileNotFoundForm(e.Message);
+                FileLoadErrorForm fnff = new FileLoadErrorForm(e.Message);
                 switch (fnff.ShowDialog())
                 {
                     case DialogResult.Retry:
@@ -59,7 +59,7 @@ namespace MoversEditor
             catch (Exception e)
             {
                 //UseWaitCursor = false;
-                switch (MessageBox.Show(e.Message, "Loading error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error))
+                switch (MessageBox.Show(e.Message, ErrorMessages.GetMessage("LoadingError"), MessageBoxButtons.RetryCancel, MessageBoxIcon.Error))
                 {
                     case DialogResult.Retry:
                         LoadFormData();

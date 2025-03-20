@@ -14,6 +14,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)Model.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mover.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Project.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Resources\ExceptionMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\ExceptionMessages.fr.resx" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\ExceptionMessages.resx">
+      <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
