@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 using Scan;
 
-namespace eTools
+namespace Common
 {
     internal sealed class Project
     {

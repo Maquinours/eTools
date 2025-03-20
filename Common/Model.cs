@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace eTools
+namespace Common
 {
     public class Motion
     {

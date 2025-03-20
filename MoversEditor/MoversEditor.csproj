@@ -114,21 +114,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\Common\Project.cs">
-      <Link>Common\Project.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\Mover.cs">
-      <Link>Common\Mover.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\Model.cs">
-      <Link>Common\Model.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\Settings.cs">
-      <Link>Common\Settings.cs</Link>
-    </Compile>
-    <Compile Include="..\Common\Exceptions.cs">
-      <Link>Common\Exceptions.cs</Link>
-    </Compile>
     <Compile Include="SearchForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -216,5 +201,6 @@
   <ItemGroup>
     <Content Include="Shade.ico" />
   </ItemGroup>
+  <Import Project="..\Common\Common.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

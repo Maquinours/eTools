@@ -1,7 +1,6 @@
-using eTools;
 using System;
 
-namespace eTools
+namespace Common
 {
     public class IncorrectlyFormattedFileException : Exception
     {

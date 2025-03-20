@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ItemsEditor", "ItemsEditor\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoversEditor", "MoversEditor\MoversEditor.csproj", "{A711E0BB-321F-40A7-8ACE-08D908333EE6}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Common", "Common\Common.shproj", "{D16677E1-48A8-47A3-8995-8E8FE49B80A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,5 +29,10 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9CB8A1D3-BA8D-4EFC-8077-A0A910534754}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Common\Common.projitems*{0774c49e-83e5-4aa1-bad9-014a358f79a6}*SharedItemsImports = 4
+		Common\Common.projitems*{a711e0bb-321f-40a7-8ace-08d908333ee6}*SharedItemsImports = 4
+		Common\Common.projitems*{d16677e1-48a8-47a3-8995-8e8fe49b80a5}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

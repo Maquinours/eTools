@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 using Scan;
 
-namespace eTools
+namespace Common
 {
     public class Settings
     {
