@@ -284,7 +284,7 @@ namespace eTools
                 { MoverTypes.NPC, new MoverType(){ Identifiers = new string[] { "AII_NONE" } } },
                 { MoverTypes.CHARACTER, new MoverType(){ Identifiers = new string[] { "AII_MOVER" }} },
                 { MoverTypes.MONSTER, new MoverType() { Identifiers = new string[] { "AII_MONSTER", "AII_CLOCKWORKS", "AII_BIGMUSCLE", "AII_KRRR", "AII_BEAR", "AII_METEONYKER", "AII_AGGRO_NORMAL", "AII_PARTY_AGGRO_LEADER", "AII_PARTY_AGGRO_SUB", "AII_ARENA_REAPER" } } },
-                { MoverTypes.PET, new MoverType() { Identifiers = new string[] {"AII_PET", "AII_EGG", "AII_FIGHTINGPET"}} }
+                { MoverTypes.PET, new MoverType() { Identifiers = new string[] {"AII_PET", "AII_EGG"}} }
             };
 #endif // __MOVERS
 #if __ITEMS
