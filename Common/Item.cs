@@ -1,4 +1,4 @@
-using System;
+#if __ITEMS
 
 namespace Common
 {
@@ -199,3 +199,4 @@ namespace Common
         }
     }
 }
+#endif
