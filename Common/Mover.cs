@@ -1,5 +1,4 @@
-using System;
-
+#if __MOVERS
 namespace Common
 {
     public enum MoverTypes
@@ -129,3 +128,4 @@ namespace Common
         }
     }
 }
+#endif
