@@ -26,6 +26,7 @@ namespace MoversEditor
             tbResourcesPath.Text = settings.ResourcePath;
             tbPropFileName.Text = Path.GetFileName(settings.PropFileName);
             tbStringFileName.Text = Path.GetFileName(settings.StringsFilePath);
+            nudGameVersion.Value = settings.ResourceVersion;
         }
 
         private void BtnSelectFolder_Click(object sender, EventArgs e)
