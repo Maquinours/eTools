@@ -126,7 +126,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lbMotions.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;lbMotions.Name" xml:space="preserve">
     <value>lbMotions</value>
@@ -140,9 +140,6 @@
   <data name="&gt;&gt;lbMotions.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="btnGenerate.Location" type="System.Drawing.Point, System.Drawing">
     <value>220, 12</value>
   </data>
@@ -155,6 +152,9 @@
   <data name="btnGenerate.Text" xml:space="preserve">
     <value>Generate</value>
   </data>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <data name="btnGenerate.ToolTip" xml:space="preserve">
     <value>Generate motions automatically based on the available files.</value>
   </data>
@@ -180,7 +180,7 @@
     <value>71, 20</value>
   </data>
   <data name="tbSzMotion.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;tbSzMotion.Name" xml:space="preserve">
     <value>tbSzMotion</value>
@@ -204,7 +204,7 @@
     <value>29, 13</value>
   </data>
   <data name="lblFile.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="lblFile.Text" xml:space="preserve">
     <value>File :</value>
@@ -272,20 +272,17 @@
   <data name="&gt;&gt;cbIdentifier.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <metadata name="cmsLbMotions.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>114, 17</value>
   </metadata>
   <data name="tsmiDeleteMotion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>107, 22</value>
   </data>
   <data name="tsmiDeleteMotion.Text" xml:space="preserve">
     <value>Delete</value>
   </data>
   <data name="cmsLbMotions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 48</value>
+    <value>108, 26</value>
   </data>
   <data name="&gt;&gt;cmsLbMotions.Name" xml:space="preserve">
     <value>cmsLbMotions</value>
@@ -300,7 +297,7 @@
     <value>75, 23</value>
   </data>
   <data name="btnAdd.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="btnAdd.Text" xml:space="preserve">
     <value>Add</value>
@@ -327,7 +324,7 @@
     <value>29, 23</value>
   </data>
   <data name="btnSelectMotionFile.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="btnSelectMotionFile.Text" xml:space="preserve">
     <value>...</value>

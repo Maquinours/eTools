@@ -174,7 +174,7 @@
     <value>167, 20</value>
   </data>
   <data name="tbPropFileName.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;tbPropFileName.Name" xml:space="preserve">
     <value>tbPropFileName</value>
@@ -222,7 +222,7 @@
     <value>167, 20</value>
   </data>
   <data name="tbStringFileName.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;tbStringFileName.Name" xml:space="preserve">
     <value>tbStringFileName</value>
@@ -246,7 +246,7 @@
     <value>50, 13</value>
   </data>
   <data name="lblStringFile.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="lblStringFile.Text" xml:space="preserve">
     <value>Text file :</value>
@@ -270,7 +270,7 @@
     <value>75, 23</value>
   </data>
   <data name="btnCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>12</value>
   </data>
   <data name="btnCancel.Text" xml:space="preserve">
     <value>Cancel</value>
@@ -294,7 +294,7 @@
     <value>75, 23</value>
   </data>
   <data name="btnApply.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>11</value>
   </data>
   <data name="btnApply.Text" xml:space="preserve">
     <value>Apply</value>
@@ -318,7 +318,7 @@
     <value>26, 20</value>
   </data>
   <data name="btnSelectFolder.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="btnSelectFolder.Text" xml:space="preserve">
     <value>...</value>
@@ -366,7 +366,7 @@
     <value>26, 20</value>
   </data>
   <data name="btnSelectStringFile.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="btnSelectStringFile.Text" xml:space="preserve">
     <value>...</value>
@@ -393,7 +393,7 @@
     <value>48, 13</value>
   </data>
   <data name="lblGameVersion.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="lblGameVersion.Text" xml:space="preserve">
     <value>Version :</value>
@@ -417,7 +417,7 @@
     <value>167, 20</value>
   </data>
   <data name="nudGameVersion.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;nudGameVersion.Name" xml:space="preserve">
     <value>nudGameVersion</value>
