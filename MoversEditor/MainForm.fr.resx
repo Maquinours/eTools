@@ -117,17 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="tpGeneral.Text" xml:space="preserve">
-    <value>Général</value>
+  <data name="nudModelScale.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="tpMonster.Text" xml:space="preserve">
-    <value>Monstre</value>
-  </data>
-  <data name="gbGeneralConfigurationModel.Text" xml:space="preserve">
-    <value>Modèle</value>
+  <data name="btnSelectModelFile.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="btnMotions.Text" xml:space="preserve">
     <value>Animations</value>
+  </data>
+  <data name="btnMotions.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbModelBrace.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbModelFile.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblModelBrace.Location" type="System.Drawing.Point, System.Drawing">
@@ -139,6 +145,9 @@
   <data name="lblModelBrace.Text" xml:space="preserve">
     <value>Dossier :</value>
   </data>
+  <data name="lblModelBrace.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblModelScale.Location" type="System.Drawing.Point, System.Drawing">
     <value>96, 78</value>
   </data>
@@ -147,6 +156,9 @@
   </data>
   <data name="lblModelScale.Text" xml:space="preserve">
     <value>Échelle :</value>
+  </data>
+  <data name="lblModelScale.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lblModelFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>100, 38</value>
@@ -157,8 +169,35 @@
   <data name="lblModelFile.Text" xml:space="preserve">
     <value>Fichier :</value>
   </data>
-  <data name="gbGeneralConfigurationMisc.Text" xml:space="preserve">
-    <value>Divers</value>
+  <data name="lblModelFile.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="gbGeneralConfigurationModel.Text" xml:space="preserve">
+    <value>Modèle</value>
+  </data>
+  <data name="gbGeneralConfigurationModel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="nudExperience.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="nudLevel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbAi.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblAi.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblExperience.ToolTip" xml:space="preserve">
+    <value>Quantité d'expérience accordée au joueur qui tue ce monstre.</value>
+  </data>
+  <data name="cbBelligerence.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblBelligerence.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lblLevel.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
@@ -166,11 +205,23 @@
   <data name="lblLevel.Text" xml:space="preserve">
     <value>Niveau</value>
   </data>
+  <data name="lblLevel.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbClass.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblClass.Text" xml:space="preserve">
     <value>Rang :</value>
   </data>
-  <data name="gbGeneralConfigurationMain.Text" xml:space="preserve">
-    <value>Principal</value>
+  <data name="lblClass.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="gbGeneralConfigurationMisc.Text" xml:space="preserve">
+    <value>Divers</value>
+  </data>
+  <data name="gbGeneralConfigurationMisc.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lblIdentifierAlreadyUsed.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -178,29 +229,86 @@
   <data name="lblIdentifierAlreadyUsed.Text" xml:space="preserve">
     <value>Déjà utilisé</value>
   </data>
+  <data name="lblIdentifierAlreadyUsed.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbName.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbType.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblType.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tbIdentifier.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblName.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 13</value>
   </data>
   <data name="lblName.Text" xml:space="preserve">
     <value>Nom :</value>
   </data>
+  <data name="lblName.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblIdentifier.Text" xml:space="preserve">
     <value>Identifiant</value>
   </data>
-  <data name="gbMonsterStats.Text" xml:space="preserve">
-    <value>Statistiques</value>
+  <data name="lblIdentifier.ToolTip" xml:space="preserve">
+    <value />
   </data>
-  <data name="gbMonsterStatsElementary.Text" xml:space="preserve">
-    <value>Élémentaire</value>
+  <data name="gbGeneralConfigurationMain.Text" xml:space="preserve">
+    <value>Principal</value>
+  </data>
+  <data name="gbGeneralConfigurationMain.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="gbGeneralConfiguration.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tpGeneral.Text" xml:space="preserve">
+    <value>Général</value>
+  </data>
+  <data name="tpGeneral.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="nudMonsterElectricityResistance.Location" type="System.Drawing.Point, System.Drawing">
     <value>217, 149</value>
+  </data>
+  <data name="nudMonsterElectricityResistance.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="nudMonsterFireResistance.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="nudMonsterEarthResistance.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="nudMonsterWindResistance.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="nudMonsterWaterResistance.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="nudMonsterElementValue.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="cbMonsterElementType.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lblMonsterEarthResistance.Location" type="System.Drawing.Point, System.Drawing">
     <value>238, 116</value>
   </data>
   <data name="lblMonsterEarthResistance.Text" xml:space="preserve">
     <value>Résistance Terre :</value>
+  </data>
+  <data name="lblMonsterEarthResistance.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblMonsterElementType.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lblMonsterWaterResistance.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 87</value>
@@ -210,6 +318,9 @@
   </data>
   <data name="lblMonsterWaterResistance.Text" xml:space="preserve">
     <value>Résistance Eau :</value>
+  </data>
+  <data name="lblMonsterWaterResistance.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lblMonsterElementRatio.ToolTip" xml:space="preserve">
     <value>Ratio déterminant l'importance de l'élément en attaque et en défense.</value>
@@ -223,6 +334,9 @@
   <data name="lblMonsterWindResistance.Text" xml:space="preserve">
     <value>Résistance Air :</value>
   </data>
+  <data name="lblMonsterWindResistance.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblMonsterElectricityResistance.Location" type="System.Drawing.Point, System.Drawing">
     <value>84, 151</value>
   </data>
@@ -231,6 +345,9 @@
   </data>
   <data name="lblMonsterElectricityResistance.Text" xml:space="preserve">
     <value>Résistance à l'Éléctricité :</value>
+  </data>
+  <data name="lblMonsterElectricityResistance.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lblMonsterFireResistance.Location" type="System.Drawing.Point, System.Drawing">
     <value>245, 87</value>
@@ -241,20 +358,50 @@
   <data name="lblMonsterFireResistance.Text" xml:space="preserve">
     <value>Résistance Feu :</value>
   </data>
-  <data name="gbMonsterStatsBase.Text" xml:space="preserve">
-    <value>Basique</value>
+  <data name="lblMonsterFireResistance.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="gbMonsterStatsElementary.Text" xml:space="preserve">
+    <value>Élémentaire</value>
+  </data>
+  <data name="gbMonsterStatsElementary.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="nudMonsterMp.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="nudMonsterHp.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 127</value>
   </data>
+  <data name="nudMonsterHp.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="nudMonsterHr.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 101</value>
+  </data>
+  <data name="nudMonsterHr.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="nudMonsterEr.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="nudMonsterInt.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="nudMonsterDex.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="nudMonsterSta.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 57</value>
   </data>
+  <data name="nudMonsterSta.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="nudMonsterStr.Location" type="System.Drawing.Point, System.Drawing">
     <value>65, 30</value>
+  </data>
+  <data name="nudMonsterStr.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lblMonsterEr.Location" type="System.Drawing.Point, System.Drawing">
     <value>218, 104</value>
@@ -265,11 +412,17 @@
   <data name="lblMonsterEr.Text" xml:space="preserve">
     <value>Esquive :</value>
   </data>
+  <data name="lblMonsterEr.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblMonsterStr.Location" type="System.Drawing.Point, System.Drawing">
     <value>24, 33</value>
   </data>
   <data name="lblMonsterStr.Text" xml:space="preserve">
     <value>FOR :</value>
+  </data>
+  <data name="lblMonsterStr.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lblMonsterHr.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 104</value>
@@ -280,6 +433,9 @@
   <data name="lblMonsterHr.Text" xml:space="preserve">
     <value>Toucher :</value>
   </data>
+  <data name="lblMonsterHr.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblMonsterSta.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 59</value>
   </data>
@@ -289,20 +445,56 @@
   <data name="lblMonsterSta.Text" xml:space="preserve">
     <value>END :</value>
   </data>
+  <data name="lblMonsterSta.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblMonsterInt.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblMonsterDex.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblMonsterHp.Location" type="System.Drawing.Point, System.Drawing">
     <value>31, 130</value>
   </data>
-  <data name="gbMonsterStatsMisc.Text" xml:space="preserve">
-    <value>Divers</value>
+  <data name="lblMonsterHp.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblMonsterMp.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="gbMonsterStatsBase.Text" xml:space="preserve">
+    <value>Basique</value>
+  </data>
+  <data name="gbMonsterStatsBase.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="nudMonsterSpeed.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="nudMonsterAttackDelay.Location" type="System.Drawing.Point, System.Drawing">
     <value>75, 128</value>
   </data>
+  <data name="nudMonsterAttackDelay.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="nudMonsterAttackMax.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="nudMonsterMagicResist.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="nudMonsterAttackMin.Location" type="System.Drawing.Point, System.Drawing">
     <value>75, 80</value>
   </data>
+  <data name="nudMonsterAttackMin.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="nudMonsterArmor.Location" type="System.Drawing.Point, System.Drawing">
     <value>75, 32</value>
+  </data>
+  <data name="nudMonsterArmor.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lblMonsterMagicResist.Location" type="System.Drawing.Point, System.Drawing">
     <value>214, 35</value>
@@ -313,8 +505,17 @@
   <data name="lblMonsterMagicResist.Text" xml:space="preserve">
     <value>Rés. magique :</value>
   </data>
+  <data name="lblMonsterMagicResist.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblMonsterAttackMin.Location" type="System.Drawing.Point, System.Drawing">
     <value>21, 82</value>
+  </data>
+  <data name="lblMonsterAttackMin.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblMonsterAttackMax.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="lblMonsterAttackDelay.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 131</value>
@@ -325,6 +526,9 @@
   <data name="lblMonsterAttackDelay.Text" xml:space="preserve">
     <value>Délai d'atk :</value>
   </data>
+  <data name="lblMonsterAttackDelay.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblMonsterArmor.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 35</value>
   </data>
@@ -334,20 +538,47 @@
   <data name="lblMonsterArmor.Text" xml:space="preserve">
     <value>Armure :</value>
   </data>
+  <data name="lblMonsterArmor.ToolTip" xml:space="preserve">
+    <value />
+  </data>
   <data name="lblMonsterSpeed.Text" xml:space="preserve">
     <value>Dépla. :</value>
+  </data>
+  <data name="lblMonsterSpeed.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="gbMonsterStatsMisc.Text" xml:space="preserve">
+    <value>Divers</value>
+  </data>
+  <data name="gbMonsterStatsMisc.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="gbMonsterStats.Text" xml:space="preserve">
+    <value>Statistiques</value>
+  </data>
+  <data name="gbMonsterStats.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tpMonster.Text" xml:space="preserve">
+    <value>Monstre</value>
+  </data>
+  <data name="tpMonster.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tcMover.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="tsmiMoversAdd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 22</value>
   </data>
   <data name="tsmiMoversAdd.Text" xml:space="preserve">
     <value>Ajouter</value>
   </data>
+  <data name="tsmiMoversSearch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 22</value>
+  </data>
   <data name="tsmiMoversSearch.Text" xml:space="preserve">
     <value>Rechercher</value>
-  </data>
-  <data name="tsmiFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 22</value>
-  </data>
-  <data name="tsmiFile.Text" xml:space="preserve">
-    <value>Fichier</value>
   </data>
   <data name="tsmiFileReload.Size" type="System.Drawing.Size, System.Drawing">
     <value>179, 22</value>
@@ -361,20 +592,35 @@
   <data name="tsmiFileSave.Text" xml:space="preserve">
     <value>Sauvegarder</value>
   </data>
+  <data name="tsmiFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 22</value>
+  </data>
+  <data name="tsmiFile.Text" xml:space="preserve">
+    <value>Fichier</value>
+  </data>
   <data name="tsmiSettings.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 22</value>
   </data>
   <data name="tsmiSettings.Text" xml:space="preserve">
     <value>Paramètres</value>
   </data>
-  <data name="cmsLbMovers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 26</value>
+  <data name="msMain.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="tsmiMoverDelete.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 22</value>
   </data>
   <data name="tsmiMoverDelete.Text" xml:space="preserve">
     <value>Supprimer</value>
+  </data>
+  <data name="cmsLbMovers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 26</value>
+  </data>
+  <data name="cmsLbMovers.ToolTip" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lbMovers.ToolTip" xml:space="preserve">
+    <value />
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -3726,5 +3972,8 @@
         ///////////////////////8/8Af///////////////////////////8/+A/////////////////////
         ///////8
 </value>
+  </data>
+  <data name="$this.ToolTip" xml:space="preserve">
+    <value />
   </data>
 </root>
