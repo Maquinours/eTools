@@ -12,7 +12,7 @@ A tool to modify, add, or remove movers (monsters, NPCs, pets).
 - 🔄 Import/export configuration files
 - 🔧 Compatible with all game versions
 
-📥 [Download](https://mega.nz/file/CB5RUKgA#0Sw128B9XO9yOF9QUdOW-EVxPDB5nHBwA3sBGrti12U)
+📥 [Download](https://tinyurl.com/2ce6ft5u)
 
 📖 [Learn more](https://github.com/Maquinours/eTools/tree/main/MoversEditor#readme)
 
