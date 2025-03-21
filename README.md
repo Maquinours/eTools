@@ -10,6 +10,7 @@ A tool to modify, add, or remove movers (monsters, NPCs, pets).
 - 🎨 Intuitive interface
 - 📂 Easy mover management
 - 🔄 Import/export configuration files
+- 🔧 Compatible with all game versions
 
 📥 [Download](https://mega.nz/file/uFwAGTDL#U8tPB5Lic4iXG13n2J2cUqG1LFAY9ayhRq9yXKzpOlA) 
 
