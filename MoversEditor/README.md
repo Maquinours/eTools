@@ -6,6 +6,7 @@
 - 🎨 Intuitive graphical interface  
 - 📂 Edit, add, or delete movers easily  
 - 🔄 Import/export mover configuration files
+- 🔧 Compatible with all game versions
 
 ## 📥 Download
 Download the latest version from [this link](https://mega.nz/file/CB5RUKgA#0Sw128B9XO9yOF9QUdOW-EVxPDB5nHBwA3sBGrti12U).
