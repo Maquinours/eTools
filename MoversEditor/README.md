@@ -9,7 +9,7 @@
 - 🔧 Compatible with all game versions
 
 ## 📥 Download
-Download the latest version from [this link](https://mega.nz/file/CB5RUKgA#0Sw128B9XO9yOF9QUdOW-EVxPDB5nHBwA3sBGrti12U).
+Download the latest version from [this link](https://tinyurl.com/2ce6ft5u).
 
 ## 🚀 Usage  
 1. Open **Movers Editor**  
