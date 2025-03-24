@@ -46,7 +46,7 @@
             // llblGithub
             // 
             this.llblGithub.AutoSize = true;
-            this.llblGithub.Location = new System.Drawing.Point(56, 64);
+            this.llblGithub.Location = new System.Drawing.Point(68, 64);
             this.llblGithub.Name = "llblGithub";
             this.llblGithub.Size = new System.Drawing.Size(104, 13);
             this.llblGithub.TabIndex = 1;
