@@ -308,5 +308,10 @@ namespace MoversEditor
             SetListBoxDataSource();
             lbMovers.SelectedIndex = indexSave < lbMovers.Items.Count ? indexSave : lbMovers.Items.Count - 1;
         }
+
+        private void TsmiAbout_Click(object sender, EventArgs e)
+        {
+            new AboutForm().ShowDialog();
+        }
     }
 }
