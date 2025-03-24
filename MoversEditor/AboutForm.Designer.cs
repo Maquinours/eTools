@@ -36,49 +36,32 @@
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Location = new System.Drawing.Point(28, 9);
+            resources.ApplyResources(this.lblTitle, "lblTitle");
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(193, 13);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "eTools Movers Editor v1.0.1 - By Maqui";
             // 
             // llblGithub
             // 
-            this.llblGithub.AutoSize = true;
-            this.llblGithub.Location = new System.Drawing.Point(68, 64);
+            resources.ApplyResources(this.llblGithub, "llblGithub");
             this.llblGithub.Name = "llblGithub";
-            this.llblGithub.Size = new System.Drawing.Size(104, 13);
-            this.llblGithub.TabIndex = 1;
             this.llblGithub.TabStop = true;
-            this.llblGithub.Text = "Contribute on Github";
             this.llblGithub.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LlblGithub_LinkClicked);
             // 
             // llblLicence
             // 
-            this.llblLicence.AutoSize = true;
-            this.llblLicence.LinkArea = new System.Windows.Forms.LinkArea(31, 32);
-            this.llblLicence.Location = new System.Drawing.Point(12, 35);
+            resources.ApplyResources(this.llblLicence, "llblLicence");
             this.llblLicence.Name = "llblLicence";
-            this.llblLicence.Size = new System.Drawing.Size(218, 17);
-            this.llblLicence.TabIndex = 2;
             this.llblLicence.TabStop = true;
-            this.llblLicence.Text = "This program is protected by a MIT licence";
             this.llblLicence.UseCompatibleTextRendering = true;
             this.llblLicence.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LlblLicence_LinkClicked);
             // 
             // AboutForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(242, 96);
             this.Controls.Add(this.llblLicence);
             this.Controls.Add(this.llblGithub);
             this.Controls.Add(this.lblTitle);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AboutForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "About";
             this.ResumeLayout(false);
             this.PerformLayout();
 
