@@ -767,13 +767,16 @@ namespace Common
                     writer.Write("\t");
 
                     writer.Write(string.IsNullOrWhiteSpace(prop.SzComment) ? "=" : prop.SzComment);
-                    writer.Write("\t");
 
-                    writer.Write(string.IsNullOrWhiteSpace(prop.DwAreaColor) ? "=" : prop.DwAreaColor);
-                    writer.Write("\t");
-                    writer.Write(string.IsNullOrWhiteSpace(prop.SzNpcMark) ? "=" : prop.SzNpcMark);
-                    writer.Write("\t");
-                    writer.Write(prop.DwMadrigalGiftPoint < 0 ? "0" : prop.DwMadrigalGiftPoint.ToString(new CultureInfo("en-US")));
+                    if (Settings.GetInstance().ResourceVersion >= 19)
+                    {
+                        writer.Write("\t");
+                        writer.Write(string.IsNullOrWhiteSpace(prop.DwAreaColor) ? "=" : prop.DwAreaColor);
+                        writer.Write("\t");
+                        writer.Write(string.IsNullOrWhiteSpace(prop.SzNpcMark) ? "=" : prop.SzNpcMark);
+                        writer.Write("\t");
+                        writer.Write(prop.DwMadrigalGiftPoint < 0 ? "0" : prop.DwMadrigalGiftPoint.ToString(new CultureInfo("en-US")));
+                    }
                     writer.Write("\r\n");
                 }
                 writer.Flush();
