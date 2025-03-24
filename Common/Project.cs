@@ -131,8 +131,6 @@ namespace Common
             }
             if (!defines.ContainsKey("BELLI_PEACEFUL")) // Must have BELLI_PEACEFUL
                 throw new MissingDefineException("BELLI_PEACEFUL");
-            if (!defines.ContainsKey("RANK_CITIZEN")) // Must have RANK_CITIZEN
-                throw new MissingDefineException("RANK_CITIZEN");
             if (!defines.ContainsKey("RANK_LOW")) // Must have RANK_LOW
                 throw new MissingDefineException("RANK_LOW");
         }
@@ -807,7 +805,7 @@ namespace Common
                     DwLevel = -1,
                     DwFlightLevel = -1,
                     DwSize = -1,
-                    DwClass = "RANK_CITIZEN",
+                    DwClass = GetClassIdentifiers().FirstOrDefault(x => x == "RANK_CITIZEN") ?? "=",
                     BIfParts = 0,
                     NChaotic = -1,
                     DwUseable = -1,
@@ -927,7 +925,7 @@ namespace Common
                 case MoverTypes.NPC:
                 case MoverTypes.CHARACTER:
                     mover.Prop.DwBelligerence = "BELLI_PEACEFUL";
-                    mover.Prop.DwClass = "RANK_CITIZEN";
+                    mover.Prop.DwClass = GetClassIdentifiers().FirstOrDefault(x => x == "RANK_CITIZEN") ?? "=";
                     mover.Prop.BKillable = 0;
                     mover.Prop.DwAtk1 = "=";
                     mover.Prop.DwAtk2 = "=";
@@ -980,7 +978,7 @@ namespace Common
         {
             return type == MoverTypes.MONSTER ?
                 GetClassIdentifiers().Where(x => x != "RANK_CITIZEN" && x != "RANK_MAX").ToArray() :
-                type == MoverTypes.NPC ? new string[] { "RANK_CITIZEN" } : new string[] { "RANK_LOW" };
+                type == MoverTypes.NPC ? new string[] { GetClassIdentifiers().FirstOrDefault(x => x == "RANK_CITIZEN") ?? "=" } : new string[] { "RANK_LOW" };
         }
 
         public Mover[] GetAllMovers()
