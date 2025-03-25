@@ -1203,6 +1203,25 @@ namespace Common
 #endif // __ITEMS
                 }
             }
+            foreach(Mover mover in this.movers.Where(x => x.Model == null)) // We add a default model for each mover who doesn't have any
+            {
+                mover.Model = new ModelElem
+                {
+                    DwType = defines["OT_MOVER"],
+                    SzName = "",
+                    DwIndex = mover.Prop.DwId,
+                    DwModelType = "MODELTYPE_ANIMATED_MESH",
+                    SzPart = "",
+                    BFly = 0,
+                    DwDistant = "MD_MID",
+                    BPick = 0,
+                    FScale = 1f,
+                    BTrans = 0,
+                    BShadow = 1,
+                    NTextureEx = "ATEX_NONE",
+                    BRenderFlag = 1
+                };
+            }
             scanner.Close();
         }
 
