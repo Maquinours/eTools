@@ -9,7 +9,7 @@
 - 🔧 Compatible with all game versions
 
 ## 📥 Download
-Download the latest version from [this link](https://tinyurl.com/2sauuxmx)
+Download the latest version from [this link](https://tinyurl.com/eTools-Movers-Editor-v1-0-1)
 
 ## 🚀 Usage  
 1. Open **Movers Editor**  
