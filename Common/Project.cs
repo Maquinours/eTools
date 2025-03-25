@@ -459,7 +459,13 @@ namespace Common
 
                 mp.SzName = scanner.GetToken();
                 if (!mp.SzName.StartsWith("IDS_"))
-                    throw new IncorrectlyFormattedFileException(filePath);
+                {
+                    int[] stringIntKeys = strings.Select(x => int.Parse(x.Key.Substring(x.Key.Length - 6))).ToArray();
+                    int txtIntKey = stringIntKeys.Length > 0 ? stringIntKeys.Max() + 1 : 0;
+                    string txtKey = $"IDS_PROPMOVER_TXT_{txtIntKey:D6}";
+                    this.strings.Add(txtKey, mp.SzName);
+                    mp.SzName = txtKey;
+                }
                 mp.DwAi = scanner.GetToken();
                 mp.DwStr = scanner.GetNumber();
                 mp.DwSta = scanner.GetNumber();
