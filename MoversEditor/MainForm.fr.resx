@@ -604,6 +604,12 @@
   <data name="tsmiSettings.Text" xml:space="preserve">
     <value>Paramètres</value>
   </data>
+  <data name="tsmiAbout.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 22</value>
+  </data>
+  <data name="tsmiAbout.Text" xml:space="preserve">
+    <value>À propos</value>
+  </data>
   <data name="msMain.ToolTip" xml:space="preserve">
     <value />
   </data>

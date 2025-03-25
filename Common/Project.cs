@@ -131,8 +131,6 @@ namespace Common
             }
             if (!defines.ContainsKey("BELLI_PEACEFUL")) // Must have BELLI_PEACEFUL
                 throw new MissingDefineException("BELLI_PEACEFUL");
-            if (!defines.ContainsKey("RANK_CITIZEN")) // Must have RANK_CITIZEN
-                throw new MissingDefineException("RANK_CITIZEN");
             if (!defines.ContainsKey("RANK_LOW")) // Must have RANK_LOW
                 throw new MissingDefineException("RANK_LOW");
         }
@@ -459,9 +457,19 @@ namespace Common
                 if (scanner.EndOfStream)
                     break;
 
-                mp.SzName = scanner.GetToken();
+
+                if (!mp.DwId.StartsWith("MI_"))
+                    continue;
+
+                    mp.SzName = scanner.GetToken();
                 if (!mp.SzName.StartsWith("IDS_"))
-                    throw new IncorrectlyFormattedFileException(filePath);
+                {
+                    int[] stringIntKeys = strings.Select(x => int.Parse(x.Key.Substring(x.Key.Length - 6))).ToArray();
+                    int txtIntKey = stringIntKeys.Length > 0 ? stringIntKeys.Max() + 1 : 0;
+                    string txtKey = $"IDS_PROPMOVER_TXT_{txtIntKey:D6}";
+                    this.strings.Add(txtKey, mp.SzName);
+                    mp.SzName = txtKey;
+                }
                 mp.DwAi = scanner.GetToken();
                 mp.DwStr = scanner.GetNumber();
                 mp.DwSta = scanner.GetNumber();
@@ -769,13 +777,16 @@ namespace Common
                     writer.Write("\t");
 
                     writer.Write(string.IsNullOrWhiteSpace(prop.SzComment) ? "=" : prop.SzComment);
-                    writer.Write("\t");
 
-                    writer.Write(string.IsNullOrWhiteSpace(prop.DwAreaColor) ? "=" : prop.DwAreaColor);
-                    writer.Write("\t");
-                    writer.Write(string.IsNullOrWhiteSpace(prop.SzNpcMark) ? "=" : prop.SzNpcMark);
-                    writer.Write("\t");
-                    writer.Write(prop.DwMadrigalGiftPoint < 0 ? "0" : prop.DwMadrigalGiftPoint.ToString(new CultureInfo("en-US")));
+                    if (Settings.GetInstance().ResourceVersion >= 19)
+                    {
+                        writer.Write("\t");
+                        writer.Write(string.IsNullOrWhiteSpace(prop.DwAreaColor) ? "=" : prop.DwAreaColor);
+                        writer.Write("\t");
+                        writer.Write(string.IsNullOrWhiteSpace(prop.SzNpcMark) ? "=" : prop.SzNpcMark);
+                        writer.Write("\t");
+                        writer.Write(prop.DwMadrigalGiftPoint < 0 ? "0" : prop.DwMadrigalGiftPoint.ToString(new CultureInfo("en-US")));
+                    }
                     writer.Write("\r\n");
                 }
                 writer.Flush();
@@ -807,7 +818,7 @@ namespace Common
                     DwLevel = -1,
                     DwFlightLevel = -1,
                     DwSize = -1,
-                    DwClass = "RANK_CITIZEN",
+                    DwClass = GetClassIdentifiers().FirstOrDefault(x => x == "RANK_CITIZEN") ?? "=",
                     BIfParts = 0,
                     NChaotic = -1,
                     DwUseable = -1,
@@ -927,7 +938,7 @@ namespace Common
                 case MoverTypes.NPC:
                 case MoverTypes.CHARACTER:
                     mover.Prop.DwBelligerence = "BELLI_PEACEFUL";
-                    mover.Prop.DwClass = "RANK_CITIZEN";
+                    mover.Prop.DwClass = GetClassIdentifiers().FirstOrDefault(x => x == "RANK_CITIZEN") ?? "=";
                     mover.Prop.BKillable = 0;
                     mover.Prop.DwAtk1 = "=";
                     mover.Prop.DwAtk2 = "=";
@@ -980,7 +991,7 @@ namespace Common
         {
             return type == MoverTypes.MONSTER ?
                 GetClassIdentifiers().Where(x => x != "RANK_CITIZEN" && x != "RANK_MAX").ToArray() :
-                type == MoverTypes.NPC ? new string[] { "RANK_CITIZEN" } : new string[] { "RANK_LOW" };
+                type == MoverTypes.NPC || type == MoverTypes.CHARACTER ? new string[] { GetClassIdentifiers().FirstOrDefault(x => x == "RANK_CITIZEN") ?? "=" } : new string[] { "RANK_LOW" };
         }
 
         public Mover[] GetAllMovers()
@@ -1191,6 +1202,25 @@ namespace Common
                     }
 #endif // __ITEMS
                 }
+            }
+            foreach(Mover mover in this.movers.Where(x => x.Model == null)) // We add a default model for each mover who doesn't have any
+            {
+                mover.Model = new ModelElem
+                {
+                    DwType = defines["OT_MOVER"],
+                    SzName = "",
+                    DwIndex = mover.Prop.DwId,
+                    DwModelType = "MODELTYPE_ANIMATED_MESH",
+                    SzPart = "",
+                    BFly = 0,
+                    DwDistant = "MD_MID",
+                    BPick = 0,
+                    FScale = 1f,
+                    BTrans = 0,
+                    BShadow = 1,
+                    NTextureEx = "ATEX_NONE",
+                    BRenderFlag = 1
+                };
             }
             scanner.Close();
         }

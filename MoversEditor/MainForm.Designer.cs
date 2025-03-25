@@ -116,6 +116,7 @@
             this.tsmiFileReload = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFileSave = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsLbMovers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiMoverDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.lbMovers = new System.Windows.Forms.ListBox();
@@ -884,7 +885,8 @@
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiMovers,
             this.tsmiFile,
-            this.tsmiSettings});
+            this.tsmiSettings,
+            this.tsmiAbout});
             this.msMain.Name = "msMain";
             this.tooltip.SetToolTip(this.msMain, resources.GetString("msMain.ToolTip"));
             // 
@@ -933,6 +935,12 @@
             resources.ApplyResources(this.tsmiSettings, "tsmiSettings");
             this.tsmiSettings.Name = "tsmiSettings";
             this.tsmiSettings.Click += new System.EventHandler(this.TsmiSettings_Click);
+            // 
+            // tsmiAbout
+            // 
+            resources.ApplyResources(this.tsmiAbout, "tsmiAbout");
+            this.tsmiAbout.Name = "tsmiAbout";
+            this.tsmiAbout.Click += new System.EventHandler(this.TsmiAbout_Click);
             // 
             // cmsLbMovers
             // 
@@ -1111,6 +1119,7 @@
         private System.Windows.Forms.NumericUpDown nudModelScale;
         private System.Windows.Forms.NumericUpDown nudExperience;
         private System.Windows.Forms.NumericUpDown nudLevel;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
     }
 }
 

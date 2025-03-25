@@ -81,6 +81,7 @@ namespace MoversEditor
             Mover currentItem = ((Mover)lbMovers.SelectedItem);
             if (currentItem == null) return;
 
+            cbType.DataBindings.Clear();
             tbName.DataBindings.Clear();
             tbIdentifier.DataBindings.Clear();
             nudMonsterStr.DataBindings.Clear();
@@ -112,8 +113,8 @@ namespace MoversEditor
             tbModelFile.DataBindings.Clear();
             nudModelScale.DataBindings.Clear();
             cbModelBrace.DataBindings.Clear();
-            cbType.DataBindings.Clear();
 
+            cbType.DataBindings.Add(new Binding("SelectedItem", currentItem, "Type", false, DataSourceUpdateMode.OnPropertyChanged));
             tbName.DataBindings.Add(new Binding("Text", currentItem, "Name", false, DataSourceUpdateMode.OnPropertyChanged));
             tbIdentifier.DataBindings.Add(new Binding("Text", currentItem, "Id", false, DataSourceUpdateMode.OnValidation));
             nudMonsterStr.DataBindings.Add(new Binding("Value", currentItem.Prop, "DwStr", true, DataSourceUpdateMode.OnPropertyChanged));
@@ -145,14 +146,12 @@ namespace MoversEditor
             tbModelFile.DataBindings.Add(new Binding("Text", currentItem.Model, "SzName", false, DataSourceUpdateMode.OnPropertyChanged));
             nudModelScale.DataBindings.Add(new Binding("Value", currentItem.Model, "FScale", true, DataSourceUpdateMode.OnPropertyChanged));
             cbModelBrace.DataBindings.Add(new Binding("SelectedItem", currentItem.Model, "Brace", false, DataSourceUpdateMode.OnPropertyChanged));
-            cbType.DataBindings.Add(new Binding("SelectedItem", currentItem, "Type", false, DataSourceUpdateMode.OnPropertyChanged));
         }
 
         private void CbType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!(lbMovers.SelectedItem is Mover mover) || !(cbType.SelectedItem is MoverTypes type)) return;
             Project prj = Project.GetInstance();
-            mover.Type = type;
             TabPage tp = type == MoverTypes.MONSTER ? tpMonster : null;
             if (tcMover.TabPages.Count > 1 && tcMover.TabPages[1] != tp)
                 tcMover.TabPages.RemoveAt(1);
@@ -307,6 +306,11 @@ namespace MoversEditor
             int indexSave = lbMovers.SelectedIndex;
             SetListBoxDataSource();
             lbMovers.SelectedIndex = indexSave < lbMovers.Items.Count ? indexSave : lbMovers.Items.Count - 1;
+        }
+
+        private void TsmiAbout_Click(object sender, EventArgs e)
+        {
+            new AboutForm().ShowDialog();
         }
     }
 }
