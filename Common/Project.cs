@@ -457,7 +457,11 @@ namespace Common
                 if (scanner.EndOfStream)
                     break;
 
-                mp.SzName = scanner.GetToken();
+
+                if (!mp.DwId.StartsWith("MI_"))
+                    continue;
+
+                    mp.SzName = scanner.GetToken();
                 if (!mp.SzName.StartsWith("IDS_"))
                 {
                     int[] stringIntKeys = strings.Select(x => int.Parse(x.Key.Substring(x.Key.Length - 6))).ToArray();
