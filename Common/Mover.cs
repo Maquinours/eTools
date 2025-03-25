@@ -36,8 +36,8 @@ namespace Common
         public int NChaotic { get; set; }
         public int DwUseable { get; set; }
         public int DwActionRadius { get; set; }
-        public int DwAtkMin { get; set; }
-        public int DwAtkMax { get; set; }
+        public long DwAtkMin { get; set; }
+        public long DwAtkMax { get; set; }
         public string DwAtk1 { get; set; }
         public string DwAtk2 { get; set; }
         public string DwAtk3 { get; set; }
@@ -51,7 +51,7 @@ namespace Common
         public int DwLegRate { get; set; }
         public int DwAttackSpeed { get; set; }
         public int DwReAttackDelay { get; set; }
-        public int DwAddHp { get; set; }
+        public long DwAddHp { get; set; }
         public int DwAddMp { get; set; }
         public int DwNaturalArmor { get; set; }
         public int NAbrasion { get; set; }
