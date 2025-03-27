@@ -78,9 +78,6 @@ namespace MoversEditor
 
         private void LbMovers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Mover currentItem = ((Mover)lbMovers.SelectedItem);
-            if (currentItem == null) return;
-
             cbType.DataBindings.Clear();
             tbName.DataBindings.Clear();
             tbIdentifier.DataBindings.Clear();
@@ -113,6 +110,9 @@ namespace MoversEditor
             tbModelFile.DataBindings.Clear();
             nudModelScale.DataBindings.Clear();
             cbModelBrace.DataBindings.Clear();
+
+            Mover currentItem = ((Mover)lbMovers.SelectedItem);
+            if (currentItem == null) return;
 
             cbType.DataBindings.Add(new Binding("SelectedItem", currentItem, "Type", false, DataSourceUpdateMode.OnPropertyChanged));
             tbName.DataBindings.Add(new Binding("Text", currentItem, "Name", false, DataSourceUpdateMode.OnPropertyChanged));
