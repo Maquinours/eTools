@@ -28,62 +28,52 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.tb_name = new System.Windows.Forms.TextBox();
-            this.bt_cancel = new System.Windows.Forms.Button();
-            this.bt_accept = new System.Windows.Forms.Button();
+            this.tbValue = new System.Windows.Forms.TextBox();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnAccept = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // tbValue
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(29, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Nom :";
+            this.tbValue.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.tbValue.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.tbValue.Location = new System.Drawing.Point(12, 29);
+            this.tbValue.Name = "tbValue";
+            this.tbValue.Size = new System.Drawing.Size(207, 20);
+            this.tbValue.TabIndex = 1;
             // 
-            // tb_name
+            // btnCancel
             // 
-            this.tb_name.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.tb_name.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.tb_name.Location = new System.Drawing.Point(70, 41);
-            this.tb_name.Name = "tb_name";
-            this.tb_name.Size = new System.Drawing.Size(143, 20);
-            this.tb_name.TabIndex = 1;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(144, 66);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 2;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // bt_cancel
+            // btnAccept
             // 
-            this.bt_cancel.Location = new System.Drawing.Point(32, 100);
-            this.bt_cancel.Name = "bt_cancel";
-            this.bt_cancel.Size = new System.Drawing.Size(75, 23);
-            this.bt_cancel.TabIndex = 2;
-            this.bt_cancel.Text = "Annuler";
-            this.bt_cancel.UseVisualStyleBackColor = true;
-            this.bt_cancel.Click += new System.EventHandler(this.bt_cancel_Click);
-            // 
-            // bt_accept
-            // 
-            this.bt_accept.Location = new System.Drawing.Point(138, 100);
-            this.bt_accept.Name = "bt_accept";
-            this.bt_accept.Size = new System.Drawing.Size(75, 23);
-            this.bt_accept.TabIndex = 3;
-            this.bt_accept.Text = "Accepter";
-            this.bt_accept.UseVisualStyleBackColor = true;
-            this.bt_accept.Click += new System.EventHandler(this.bt_accept_Click);
+            this.btnAccept.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnAccept.Location = new System.Drawing.Point(12, 66);
+            this.btnAccept.Name = "btnAccept";
+            this.btnAccept.Size = new System.Drawing.Size(75, 23);
+            this.btnAccept.TabIndex = 3;
+            this.btnAccept.Text = "Confirm";
+            this.btnAccept.UseVisualStyleBackColor = true;
             // 
             // SearchForm
             // 
-            this.AcceptButton = this.bt_accept;
+            this.AcceptButton = this.btnAccept;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.bt_cancel;
-            this.ClientSize = new System.Drawing.Size(241, 142);
-            this.Controls.Add(this.bt_accept);
-            this.Controls.Add(this.bt_cancel);
-            this.Controls.Add(this.tb_name);
-            this.Controls.Add(this.label1);
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(232, 101);
+            this.Controls.Add(this.btnAccept);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.tbValue);
             this.Name = "SearchForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SearchForm";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -91,10 +81,8 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox tb_name;
-        private System.Windows.Forms.Button bt_cancel;
-        private System.Windows.Forms.Button bt_accept;
+        private System.Windows.Forms.TextBox tbValue;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnAccept;
     }
 }

@@ -39,7 +39,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.tb_id = new System.Windows.Forms.TextBox();
             this.tb_name = new System.Windows.Forms.TextBox();
-            this.tb_packmax = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -48,9 +47,9 @@
             this.tb_icon = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.pb_icon = new System.Windows.Forms.PictureBox();
-            this.tb_cost = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tb_ModelName = new System.Windows.Forms.TextBox();
             this.gb_dstParams = new System.Windows.Forms.GroupBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -69,23 +68,32 @@
             this.label9 = new System.Windows.Forms.Label();
             this.cb_job = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.tb_ModelName = new System.Windows.Forms.TextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiItemsAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiItemsSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.nudPackMax = new System.Windows.Forms.NumericUpDown();
+            this.nudCost = new System.Windows.Forms.NumericUpDown();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pb_icon)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.gb_dstParams.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPackMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCost)).BeginInit();
             this.SuspendLayout();
             // 
             // lb_items
             // 
             this.lb_items.Dock = System.Windows.Forms.DockStyle.Left;
             this.lb_items.FormattingEnabled = true;
-            this.lb_items.Location = new System.Drawing.Point(0, 0);
+            this.lb_items.Location = new System.Drawing.Point(0, 24);
             this.lb_items.Name = "lb_items";
-            this.lb_items.Size = new System.Drawing.Size(255, 450);
+            this.lb_items.Size = new System.Drawing.Size(255, 426);
             this.lb_items.TabIndex = 0;
             this.lb_items.SelectedIndexChanged += new System.EventHandler(this.lb_items_SelectedIndexChanged);
+            this.lb_items.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Lb_items_KeyDown);
             // 
             // label1
             // 
@@ -173,14 +181,6 @@
             this.tb_name.Size = new System.Drawing.Size(174, 20);
             this.tb_name.TabIndex = 10;
             // 
-            // tb_packmax
-            // 
-            this.tb_packmax.Location = new System.Drawing.Point(75, 223);
-            this.tb_packmax.Name = "tb_packmax";
-            this.tb_packmax.Size = new System.Drawing.Size(174, 20);
-            this.tb_packmax.TabIndex = 12;
-            this.tb_packmax.TextChanged += new System.EventHandler(this.FormatIntTextbox);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -195,23 +195,23 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(255, 0);
+            this.tabControl1.Location = new System.Drawing.Point(255, 24);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(545, 450);
+            this.tabControl1.Size = new System.Drawing.Size(545, 426);
             this.tabControl1.TabIndex = 13;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.nudCost);
+            this.tabPage1.Controls.Add(this.nudPackMax);
             this.tabPage1.Controls.Add(this.tb_description);
             this.tabPage1.Controls.Add(this.label11);
             this.tabPage1.Controls.Add(this.tb_icon);
             this.tabPage1.Controls.Add(this.label10);
             this.tabPage1.Controls.Add(this.pb_icon);
-            this.tabPage1.Controls.Add(this.tb_cost);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.cb_ik1);
-            this.tabPage1.Controls.Add(this.tb_packmax);
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.tb_name);
@@ -225,7 +225,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(537, 424);
+            this.tabPage1.Size = new System.Drawing.Size(537, 400);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Général";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -272,14 +272,6 @@
             this.pb_icon.TabIndex = 15;
             this.pb_icon.TabStop = false;
             // 
-            // tb_cost
-            // 
-            this.tb_cost.Location = new System.Drawing.Point(75, 249);
-            this.tb_cost.Name = "tb_cost";
-            this.tb_cost.Size = new System.Drawing.Size(174, 20);
-            this.tb_cost.TabIndex = 14;
-            this.tb_cost.TextChanged += new System.EventHandler(this.FormatIntTextbox);
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -308,10 +300,17 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(537, 424);
+            this.tabPage2.Size = new System.Drawing.Size(537, 400);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Equipement";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tb_ModelName
+            // 
+            this.tb_ModelName.Location = new System.Drawing.Point(49, 384);
+            this.tb_ModelName.Name = "tb_ModelName";
+            this.tb_ModelName.Size = new System.Drawing.Size(100, 20);
+            this.tb_ModelName.TabIndex = 21;
             // 
             // gb_dstParams
             // 
@@ -482,12 +481,52 @@
             this.label7.TabIndex = 5;
             this.label7.Text = "Classe :";
             // 
-            // tb_ModelName
+            // menuStrip1
             // 
-            this.tb_ModelName.Location = new System.Drawing.Point(49, 384);
-            this.tb_ModelName.Name = "tb_ModelName";
-            this.tb_ModelName.Size = new System.Drawing.Size(100, 20);
-            this.tb_ModelName.TabIndex = 21;
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.TabIndex = 14;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiItemsAdd,
+            this.tsmiItemsSearch});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.fileToolStripMenuItem.Text = "Items";
+            // 
+            // tsmiItemsAdd
+            // 
+            this.tsmiItemsAdd.Name = "tsmiItemsAdd";
+            this.tsmiItemsAdd.Size = new System.Drawing.Size(149, 22);
+            this.tsmiItemsAdd.Text = "Add";
+            // 
+            // tsmiItemsSearch
+            // 
+            this.tsmiItemsSearch.Name = "tsmiItemsSearch";
+            this.tsmiItemsSearch.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.tsmiItemsSearch.Size = new System.Drawing.Size(149, 22);
+            this.tsmiItemsSearch.Text = "Search";
+            this.tsmiItemsSearch.Click += new System.EventHandler(this.TsmiItemsSearch_Click);
+            // 
+            // nudPackMax
+            // 
+            this.nudPackMax.Location = new System.Drawing.Point(75, 226);
+            this.nudPackMax.Name = "nudPackMax";
+            this.nudPackMax.Size = new System.Drawing.Size(174, 20);
+            this.nudPackMax.TabIndex = 20;
+            // 
+            // nudCost
+            // 
+            this.nudCost.Location = new System.Drawing.Point(75, 246);
+            this.nudCost.Name = "nudCost";
+            this.nudCost.Size = new System.Drawing.Size(174, 20);
+            this.nudCost.TabIndex = 21;
             // 
             // MainForm
             // 
@@ -496,10 +535,11 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.lb_items);
+            this.Controls.Add(this.menuStrip1);
             this.KeyPreview = true;
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Form1";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -508,7 +548,12 @@
             this.tabPage2.PerformLayout();
             this.gb_dstParams.ResumeLayout(false);
             this.gb_dstParams.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPackMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudCost)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -525,11 +570,9 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tb_id;
         private System.Windows.Forms.TextBox tb_name;
-        private System.Windows.Forms.TextBox tb_packmax;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TextBox tb_cost;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ComboBox cb_job;
@@ -556,6 +599,12 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox tb_ModelName;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiItemsAdd;
+        private System.Windows.Forms.ToolStripMenuItem tsmiItemsSearch;
+        private System.Windows.Forms.NumericUpDown nudCost;
+        private System.Windows.Forms.NumericUpDown nudPackMax;
     }
 }
 

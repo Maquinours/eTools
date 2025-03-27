@@ -27,7 +27,7 @@ namespace Common
         /// </summary>
         private readonly Dictionary<string, int> defines;
 #if __ITEMS
-        public Item[] Items { get; private set; }
+        private readonly List<Item> items;
 #endif // __ITEMS
 #if __MOVERS
         /// <summary>
@@ -60,7 +60,7 @@ namespace Common
             this.strings = new Dictionary<string, string>();
             this.defines = new Dictionary<string, int>();
 #if __ITEMS
-            this.Items = new Item[0];
+            this.items = new List<Item>();
 #endif // __ITEMS
 #if __MOVERS
             this.movers = new List<Mover>();
@@ -173,7 +173,7 @@ namespace Common
 #if __ITEMS
         public Item GetItemById(string dwId)
         {
-            foreach (Item it in this.Items)
+            foreach (Item it in this.items)
             {
                 if (it.Prop.DwID == dwId) return it;
             }
@@ -182,7 +182,7 @@ namespace Common
 
         private void LoadItems(string filePath)
         {
-            List<Item> itemsList = new List<Item>();
+            items.Clear();
             Scanner scanner = new Scanner();
 
             scanner.Load(filePath);
@@ -389,35 +389,23 @@ namespace Common
                     this.strings.Add(prop.SzName, "");          // If IDS is not defined, we add it to be defined.
                 if (!this.strings.ContainsKey(prop.SzCommand))
                     this.strings.Add(prop.SzCommand, "");
-                itemsList.Add(item);
+                items.Add(item);
             }
-            Items = itemsList.ToArray();
-        }
-        public string[] GetAllItemsName()
-        {
-            string[] result = new string[this.Items.Length];
-            for (int i = 0; i < result.Count(); i++)
-            {
-                string ids = this.Items[i].Prop.SzName;
-                string value = this.strings[ids];
-                if (string.IsNullOrWhiteSpace(value))
-                    result[i] = ids; // If ids has no valid string, we show the ids instead
-                else
-                    result[i] = value;
-            }
-            return result;
         }
 
-        public void RemoveItem(Item itemToRemove)
+        public Item[] GetItems()
         {
-            List<Item> list = new List<Item>(Items);
-            list.Remove(itemToRemove);
-            this.Items = list.ToArray();
+            return items.ToArray();
         }
 
-        public Item GetItemByIndex(int index)
+        public string[] GetItemsName()
         {
-            return Items[index];
+            return items.Select(x => x.Name).ToArray();
+        }
+
+        public void DeleteItem(Item item)
+        {
+            this.items.Remove(item);
         }
 
         public string[] GetAllItemKinds1()
@@ -1203,6 +1191,7 @@ namespace Common
 #endif // __ITEMS
                 }
             }
+#if __MOVERS
             foreach(Mover mover in this.movers.Where(x => x.Model == null)) // We add a default model for each mover who doesn't have any
             {
                 mover.Model = new ModelElem
@@ -1222,6 +1211,7 @@ namespace Common
                     BRenderFlag = 1
                 };
             }
+#endif
             scanner.Close();
         }
 
@@ -1336,6 +1326,6 @@ namespace Common
         {
             return Directory.GetFiles(Settings.GetInstance().ResourcePath + "Model\\", $"mvr_{model.SzName}*.ani").Select(x => Path.GetFileNameWithoutExtension(x).Remove(0, $"mvr_{model.SzName}_".Length)).ToArray();
         }
-        #endregion
+#endregion
     }
 }

@@ -15,18 +15,13 @@ namespace ItemsEditor
 {
     public partial class MainForm : Form
     {
-        private Item currentItem;
-        private SearchForm searchForm;
         public MainForm()
         {
             InitializeComponent();
             try
             {
                 Project prj = Project.GetInstance();
-                searchForm = new SearchForm();
                 prj.Load();
-                lb_items.DataSource = prj.Items;
-                lb_items.DisplayMember = "Name";
                 cb_ik1.DataSource = prj.GetAllItemKinds1();
                 cb_ik2.DataSource = prj.GetAllItemKinds2();
                 cb_ik3.DataSource = prj.GetAllItemKinds3();
@@ -34,12 +29,19 @@ namespace ItemsEditor
                 cb_sex.DataSource = new string[] { "=" }.Concat(prj.GetSexIdentifiers()).ToArray();
                 cb_DstParamIdentifier.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
                 cb_ElementType.DataSource = prj.GetElementsIdentifiers();
+                SetListBoxDataSource();
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
                 Environment.Exit(3);
             }
+        }
+
+        private void SetListBoxDataSource()
+        {
+            lb_items.DataSource = new BindingSource(Project.GetInstance().GetItems(), "");
+            lb_items.DisplayMember = "Name";
         }
 
         private void lb_items_SelectedIndexChanged(object sender, EventArgs e)
@@ -49,8 +51,8 @@ namespace ItemsEditor
             cb_ik3.DataBindings.Clear();
             tb_id.DataBindings.Clear();
             tb_name.DataBindings.Clear();
-            tb_packmax.DataBindings.Clear();
-            tb_cost.DataBindings.Clear();
+            nudPackMax.DataBindings.Clear();
+            nudCost.DataBindings.Clear();
             cb_job.DataBindings.Clear();
             cb_sex.DataBindings.Clear();
             pb_icon.DataBindings.Clear();
@@ -63,36 +65,34 @@ namespace ItemsEditor
             tb_Level.DataBindings.Clear();
             tb_ModelName.DataBindings.Clear();
 
-            if (lb_items.SelectedIndex == -1) return;
+            Item currentItem = ((Item)lb_items.SelectedItem);
+            if (currentItem == null) return;
 
-            currentItem = ((Item)lb_items.SelectedItem);
-            ItemProp prop = currentItem.Prop;
-
-            cb_ik1.DataBindings.Add(new Binding("SelectedItem", prop, "DwItemKind1", false, DataSourceUpdateMode.OnPropertyChanged));
-            cb_ik2.DataBindings.Add(new Binding("SelectedItem", prop, "DwItemKind2", false, DataSourceUpdateMode.OnPropertyChanged));
-            cb_ik3.DataBindings.Add(new Binding("SelectedItem", prop, "DwItemKind3", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_id.DataBindings.Add(new Binding("Text", prop, "DwID", false, DataSourceUpdateMode.OnPropertyChanged));
+            cb_ik1.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwItemKind1", false, DataSourceUpdateMode.OnPropertyChanged));
+            cb_ik2.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwItemKind2", false, DataSourceUpdateMode.OnPropertyChanged));
+            cb_ik3.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwItemKind3", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_id.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwID", false, DataSourceUpdateMode.OnPropertyChanged));
             tb_name.DataBindings.Add(new Binding("Text", currentItem, "Name", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_packmax.DataBindings.Add(new Binding("Text", prop, "DwPackMax", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_cost.DataBindings.Add(new Binding("Text", prop, "DwCost", false, DataSourceUpdateMode.OnPropertyChanged));
-            cb_job.DataBindings.Add(new Binding("Text", prop, "DwItemJob", false, DataSourceUpdateMode.OnPropertyChanged));
-            cb_sex.DataBindings.Add(new Binding("Text", prop, "DwItemSex", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_icon.DataBindings.Add(new Binding("Text", prop, "SzIcon", false, DataSourceUpdateMode.OnPropertyChanged));
+            nudPackMax.DataBindings.Add(new Binding("Value", currentItem.Prop, "DwPackMax", false, DataSourceUpdateMode.OnPropertyChanged));
+            nudCost.DataBindings.Add(new Binding("Value", currentItem.Prop, "DwCost", false, DataSourceUpdateMode.OnPropertyChanged));
+            cb_job.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemJob", false, DataSourceUpdateMode.OnPropertyChanged));
+            cb_sex.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemSex", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_icon.DataBindings.Add(new Binding("Text", currentItem.Prop, "SzIcon", false, DataSourceUpdateMode.OnPropertyChanged));
             tb_description.DataBindings.Add(new Binding("Text", currentItem, "Description", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_AtkMin.DataBindings.Add(new Binding("Text", prop, "DwAbilityMin", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_AtkMax.DataBindings.Add(new Binding("Text", prop, "DwAbilityMax", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_Level.DataBindings.Add(new Binding("Text", prop, "DwLimitLevel1", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_AtkMin.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMin", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_AtkMax.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMax", false, DataSourceUpdateMode.OnPropertyChanged));
+            tb_Level.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwLimitLevel1", false, DataSourceUpdateMode.OnPropertyChanged));
             tb_ModelName.DataBindings.Add(new Binding("Text", currentItem.Model, "SzName", false, DataSourceUpdateMode.OnPropertyChanged));
 
-            for (int i = 0; i < prop.DwDestParam.Length; i++)
+            for (int i = 0; i < currentItem.Prop.DwDestParam.Length; i++)
             {
-                if (prop.DwDestParam[i] != "=")
-                    lb_DstParams.Items.Add($"Stat {i} ({prop.DwDestParam[i]} + {prop.NAdjParamVal[i]})");
+                if (currentItem.Prop.DwDestParam[i] != "=")
+                    lb_DstParams.Items.Add($"Stat {i} ({currentItem.Prop.DwDestParam[i]} + {currentItem.Prop.NAdjParamVal[i]})");
                 else
                     lb_DstParams.Items.Add($"Stat {i}");
             }
 
-            string iconPath = $"{Settings.GetInstance().IconsFolderPath}{prop.SzIcon}";
+            string iconPath = $"{Settings.GetInstance().IconsFolderPath}{currentItem.Prop.SzIcon}";
             if (!File.Exists(iconPath))
             {
                 pb_icon.Image = pb_icon.ErrorImage;
@@ -132,43 +132,6 @@ namespace ItemsEditor
             {
                 tb.Text = finalStr;
                 tb.Select(tb.Text.Length, 0);
-            }
-        }
-
-        private void MainForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Control)
-            {
-                switch (e.KeyCode)
-                {
-                    case Keys.F: // Search
-                        e.SuppressKeyPress = true;
-                        if (searchForm.ShowDialog() == DialogResult.OK)
-                        {
-                            for (int i = lb_items.SelectedIndex + 1; i != lb_items.SelectedIndex; i++)
-                            {
-                                if (((Item)lb_items.Items[i]).Name.Contains(searchForm.SearchText))
-                                {
-                                    lb_items.SelectedIndex = i;
-                                    return;
-                                }
-                                if (i == lb_items.Items.Count - 1)
-                                    i = -1;
-                            }
-                        }
-                        break;
-                }
-            }
-            else if (e.KeyCode == Keys.Delete)
-            {
-                if (ActiveControl == lb_items && lb_items.SelectedItem != null)
-                {
-                    int newIndex = lb_items.SelectedIndex - 1;
-                    Project prj = Project.GetInstance();
-                    prj.RemoveItem((Item)lb_items.SelectedItem);
-                    lb_items.DataSource = prj.Items;
-                    lb_items.SelectedIndex = newIndex;
-                }
             }
         }
 
@@ -219,6 +182,35 @@ namespace ItemsEditor
             //    text += $"({cb_DstParamIdentifier.Text} {symbol}{tb_DstParamValue.Text})";
             //}
             //lb_DstParams.Items[lb_DstParams.SelectedIndex] = text;
+        }
+
+        private void TsmiItemsSearch_Click(object sender, EventArgs e)
+        {
+            SearchForm searchForm = new SearchForm();
+
+            if (searchForm.ShowDialog() == DialogResult.OK)
+            {
+                Item selectedItem = lb_items.Items.Cast<Item>().ToArray().FirstOrDefault(x => x.Name.ToLower().Contains(searchForm.Value.ToLower()));
+                if (selectedItem != null)
+                    lb_items.SelectedItem = selectedItem;
+            }
+        }
+
+        private void Lb_items_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                DeleteCurrentItem();
+            }
+        }
+
+        private void DeleteCurrentItem()
+        {
+            if (!(lb_items.SelectedItem is Item item)) return;
+            Project.GetInstance().DeleteItem(item);
+            int indexSave = lb_items.SelectedIndex;
+            SetListBoxDataSource();
+            lb_items.SelectedIndex = indexSave < lb_items.Items.Count ? indexSave : lb_items.Items.Count - 1;
         }
     }
 }
