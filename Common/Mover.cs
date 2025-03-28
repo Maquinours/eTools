@@ -83,8 +83,12 @@ namespace Common
         public int NBodyState { get; set; }
         public int DwAddAbility { get; set; }
         public int BKillable { get; set; }
-        public string[] DwVirtItem { get; set; }
-        public int[] BVirtType { get; set; }
+        public string DwVirtItem1 { get; set; }
+        public string DwVirtItem2 { get; set; }
+        public string DwVirtItem3 { get; set; }
+        public int BVirtType1 { get; set; }
+        public int BVirtType2 { get; set; }
+        public int BVirtType3 { get; set; }
         public string DwSndAtk1 { get; set; }
         public string DwSndAtk2 { get; set; }
         public string DwSndDie1 { get; set; }

@@ -546,14 +546,12 @@ namespace Common
                 mp.DwAddAbility = scanner.GetNumber(); // Useless
                 mp.BKillable = scanner.GetNumber(); // If monster, always true, otherwise, false
 
-                mp.DwVirtItem = new string[3]; // Useless
-                mp.BVirtType = new int[3]; // Useless
-                mp.DwVirtItem[0] = scanner.GetToken();
-                mp.DwVirtItem[1] = scanner.GetToken();
-                mp.DwVirtItem[2] = scanner.GetToken();
-                mp.BVirtType[0] = scanner.GetNumber();
-                mp.BVirtType[1] = scanner.GetNumber();
-                mp.BVirtType[2] = scanner.GetNumber();
+                mp.DwVirtItem1 = scanner.GetToken();
+                mp.DwVirtItem2 = scanner.GetToken();
+                mp.DwVirtItem3 = scanner.GetToken();
+                mp.BVirtType1 = scanner.GetNumber();
+                mp.BVirtType2 = scanner.GetNumber();
+                mp.BVirtType3 = scanner.GetNumber();
 
                 mp.DwSndAtk1 = scanner.GetToken(); // Useless
                 mp.DwSndAtk2 = scanner.GetToken(); // Useless
@@ -749,17 +747,17 @@ namespace Common
                     writer.Write(prop.BKillable == 1 ? "1" : "0");
                     writer.Write("\t");
 
-                    writer.Write(string.IsNullOrWhiteSpace(prop.DwVirtItem[0]) ? "=" : prop.DwVirtItem[0]);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwVirtItem1) ? "=" : prop.DwVirtItem1);
                     writer.Write("\t");
-                    writer.Write(string.IsNullOrWhiteSpace(prop.DwVirtItem[1]) ? "=" : prop.DwVirtItem[1]);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwVirtItem2) ? "=" : prop.DwVirtItem2);
                     writer.Write("\t");
-                    writer.Write(string.IsNullOrWhiteSpace(prop.DwVirtItem[2]) ? "=" : prop.DwVirtItem[2]);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwVirtItem3) ? "=" : prop.DwVirtItem3);
                     writer.Write("\t");
-                    writer.Write(prop.BVirtType[0] == -1 ? "=" : prop.BVirtType[0].ToString(new CultureInfo("en-US")));
+                    writer.Write(prop.BVirtType1 == -1 ? "=" : prop.BVirtType1.ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
-                    writer.Write(prop.BVirtType[1] == -1 ? "=" : prop.BVirtType[1].ToString(new CultureInfo("en-US")));
+                    writer.Write(prop.BVirtType2 == -1 ? "=" : prop.BVirtType2.ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
-                    writer.Write(prop.BVirtType[2] == -1 ? "=" : prop.BVirtType[2].ToString(new CultureInfo("en-US")));
+                    writer.Write(prop.BVirtType3 == -1 ? "=" : prop.BVirtType3.ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
 
                     writer.Write(string.IsNullOrWhiteSpace(prop.DwSndAtk1) ? "=" : prop.DwSndAtk1);
@@ -881,19 +879,12 @@ namespace Common
                     DwAddAbility = -1,
                     BKillable = 0,
 
-
-                    DwVirtItem = new string[3]
-                {
-                    "=",
-                    "=",
-                    "="
-                },
-                    BVirtType = new int[3]
-                {
-                    -1,
-                    -1,
-                    -1
-                },
+                    DwVirtItem1 = "=",
+                    DwVirtItem2 = "=",
+                    DwVirtItem3 = "=",
+                    BVirtType1 = -1,
+                    BVirtType2 = -1,
+                    BVirtType3 = -1,
                     DwSndAtk1 = "=",
                     DwSndAtk2 = "=",
 
@@ -1014,8 +1005,13 @@ namespace Common
                     BKillable = mover.Prop.BKillable,
 
 
-                    DwVirtItem = (string[])mover.Prop.DwVirtItem.Clone(),
-                    BVirtType = (int[])mover.Prop.BVirtType.Clone(),
+                    DwVirtItem1 = mover.Prop.DwVirtItem1,
+                    DwVirtItem2 = mover.Prop.DwVirtItem2,
+                    DwVirtItem3 = mover.Prop.DwVirtItem3,
+                    BVirtType1 = mover.Prop.BVirtType1,
+                    BVirtType2 = mover.Prop.BVirtType2,
+                    BVirtType3 = mover.Prop.BVirtType3,
+
                     DwSndAtk1 = mover.Prop.DwSndAtk1,
                     DwSndAtk2 = mover.Prop.DwSndAtk2,
 

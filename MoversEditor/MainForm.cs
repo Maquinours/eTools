@@ -380,5 +380,11 @@ namespace MoversEditor
             RefreshListBoxDataSource();
             lbMovers.SelectedIndex = lbMovers.Items.Count - 1;
         }
+
+        private void TsmiViewExpertEditor_Click(object sender, EventArgs e)
+        {
+            if (!(lbMovers.SelectedItem is Mover mover)) return;
+            new ExpertEditorForm(this, mover).ShowDialog();
+        }
     }
 }
