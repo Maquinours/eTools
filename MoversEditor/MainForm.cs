@@ -363,5 +363,13 @@ namespace MoversEditor
         {
             new AboutForm().ShowDialog();
         }
+
+        private void TsmiMoverDuplicate_Click(object sender, EventArgs e)
+        {
+            if (!(lbMovers.SelectedItem is Mover mover)) return;
+            Project.GetInstance().DuplicateMover(mover);
+            SetListBoxDataSource();
+            lbMovers.SelectedIndex = lbMovers.Items.Count - 1;
+        }
     }
 }

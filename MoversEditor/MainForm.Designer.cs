@@ -119,6 +119,7 @@
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsLbMovers = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiMoverDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMoverDuplicate = new System.Windows.Forms.ToolStripMenuItem();
             this.lbMovers = new System.Windows.Forms.ListBox();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.tcMover.SuspendLayout();
@@ -947,7 +948,8 @@
             resources.ApplyResources(this.cmsLbMovers, "cmsLbMovers");
             this.cmsLbMovers.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.cmsLbMovers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiMoverDelete});
+            this.tsmiMoverDelete,
+            this.tsmiMoverDuplicate});
             this.cmsLbMovers.Name = "cms_lbmovers";
             this.tooltip.SetToolTip(this.cmsLbMovers, resources.GetString("cmsLbMovers.ToolTip"));
             // 
@@ -956,6 +958,12 @@
             resources.ApplyResources(this.tsmiMoverDelete, "tsmiMoverDelete");
             this.tsmiMoverDelete.Name = "tsmiMoverDelete";
             this.tsmiMoverDelete.Click += new System.EventHandler(this.TsmiMoverDelete_Click);
+            // 
+            // tsmiMoverDuplicate
+            // 
+            resources.ApplyResources(this.tsmiMoverDuplicate, "tsmiMoverDuplicate");
+            this.tsmiMoverDuplicate.Name = "tsmiMoverDuplicate";
+            this.tsmiMoverDuplicate.Click += new System.EventHandler(this.TsmiMoverDuplicate_Click);
             // 
             // lbMovers
             // 
@@ -1120,6 +1128,7 @@
         private System.Windows.Forms.NumericUpDown nudExperience;
         private System.Windows.Forms.NumericUpDown nudLevel;
         private System.Windows.Forms.ToolStripMenuItem tsmiAbout;
+        private System.Windows.Forms.ToolStripMenuItem tsmiMoverDuplicate;
     }
 }
 

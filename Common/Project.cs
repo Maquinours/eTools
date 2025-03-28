@@ -934,6 +934,128 @@ namespace Common
             mover.Model.Brace = GetBracesByType(defines["OT_MOVER"]).First();
         }
 
+        public void DuplicateMover(Mover mover)
+        {
+            int[] stringIntKeys = strings.Select(x => int.Parse(x.Key.Substring(x.Key.Length - 6))).ToArray();
+            int txtIntKey = stringIntKeys.Length > 0 ? stringIntKeys.Max() + 1 : 0;
+
+            Mover duplicatedMover = new Mover()
+            {
+                Prop = new MoverProp
+                {
+                    DwId = "MI_",
+                    SzName = $"IDS_PROPMOVER_TXT_{txtIntKey:D6}",
+                    DwAi = mover.Prop.DwAi,
+                    DwStr = mover.Prop.DwStr,
+                    DwSta = mover.Prop.DwSta,
+                    DwDex = mover.Prop.DwDex,
+                    DwInt = mover.Prop.DwInt,
+                    DwHR = mover.Prop.DwHR,
+                    DwER = mover.Prop.DwER,
+                    DwRace = mover.Prop.DwRace,
+                    DwBelligerence = mover.Prop.DwBelligerence,
+                    DwGender = mover.Prop.DwGender,
+                    DwLevel = mover.Prop.DwLevel,
+                    DwFlightLevel = mover.Prop.DwFlightLevel,
+                    DwSize = mover.Prop.DwSize,
+                    DwClass = mover.Prop.DwClass,
+                    BIfParts = mover.Prop.BIfParts,
+                    NChaotic = mover.Prop.NChaotic,
+                    DwUseable = mover.Prop.DwUseable,
+                    DwActionRadius = mover.Prop.DwActionRadius,
+                    DwAtkMin = mover.Prop.DwAtkMin,
+                    DwAtkMax = mover.Prop.DwAtkMax,
+                    DwAtk1 = mover.Prop.DwAtk1,
+                    DwAtk2 = mover.Prop.DwAtk2,
+                    DwAtk3 = mover.Prop.DwAtk3,
+                    DwAtk4 = mover.Prop.DwAtk4,
+                    FFrame = mover.Prop.FFrame,
+                    DwOrthograde = mover.Prop.DwOrthograde,
+                    DwThrustRate = mover.Prop.DwThrustRate,
+                    DwChestRate = mover.Prop.DwChestRate,
+                    DwHeadRate = mover.Prop.DwHeadRate,
+                    DwArmRate = mover.Prop.DwArmRate,
+                    DwLegRate = mover.Prop.DwLegRate,
+                    DwAttackSpeed = mover.Prop.DwAttackSpeed,
+                    DwReAttackDelay = mover.Prop.DwReAttackDelay,
+                    DwAddHp = mover.Prop.DwAddHp,
+                    DwAddMp = mover.Prop.DwAddMp,
+                    DwNaturalArmor = mover.Prop.DwNaturalArmor,
+                    NAbrasion = mover.Prop.NAbrasion,
+                    NHardness = mover.Prop.NHardness,
+                    DwAdjAtkDelay = mover.Prop.DwAdjAtkDelay,
+                    EElementType = mover.Prop.EElementType,
+                    WElementAtk = mover.Prop.WElementAtk,
+                    DwHideLevel = mover.Prop.DwHideLevel,
+                    FSpeed = mover.Prop.FSpeed,
+                    DwShelter = mover.Prop.DwShelter,
+                    DwFlying = mover.Prop.DwFlying,
+                    DwJumpIng = mover.Prop.DwJumpIng,
+                    DwAirJump = mover.Prop.DwAirJump,
+                    BTaming = mover.Prop.BTaming,
+                    DwResisMgic = mover.Prop.DwResisMgic,
+
+                    NResistElecricity = mover.Prop.NResistElecricity,
+                    NResistFire = mover.Prop.NResistFire,
+                    NResistWind = mover.Prop.NResistWind,
+                    NResistWater = mover.Prop.NResistWater,
+                    NResistEarth = mover.Prop.NResistEarth,
+
+                    DwCash = mover.Prop.DwCash,
+                    DwSourceMaterial = mover.Prop.DwSourceMaterial,
+                    DwMaterialAmount = mover.Prop.DwMaterialAmount,
+                    DwCohesion = mover.Prop.DwCohesion,
+                    DwHoldingTime = mover.Prop.DwHoldingTime,
+                    DwCorrectionValue = mover.Prop.DwCorrectionValue,
+                    NExpValue = mover.Prop.NExpValue,
+                    NFxpValue = mover.Prop.NFxpValue,
+                    NBodyState = mover.Prop.NBodyState,
+                    DwAddAbility = mover.Prop.DwAddAbility,
+                    BKillable = mover.Prop.BKillable,
+
+
+                    DwVirtItem = (string[])mover.Prop.DwVirtItem.Clone(),
+                    BVirtType = (int[])mover.Prop.BVirtType.Clone(),
+                    DwSndAtk1 = mover.Prop.DwSndAtk1,
+                    DwSndAtk2 = mover.Prop.DwSndAtk2,
+
+                    DwSndDie1 = mover.Prop.DwSndDie1,
+                    DwSndDie2 = mover.Prop.DwSndDie2,
+
+                    DwSndDmg1 = mover.Prop.DwSndDmg1,
+                    DwSndDmg2 = mover.Prop.DwSndDmg2,
+                    DwSndDmg3 = mover.Prop.DwSndDmg3,
+
+                    DwSndIdle1 = mover.Prop.DwSndIdle1,
+                    DwSndIdle2 = mover.Prop.DwSndIdle2,
+
+                    SzComment = $"IDS_PROPMOVER_TXT_{txtIntKey + 1:D6}",
+                    SzNpcMark = mover.Prop.SzNpcMark,
+                    DwMadrigalGiftPoint = mover.Prop.DwMadrigalGiftPoint
+                },
+                Model = new ModelElem
+                {
+                    DwType = mover.Model.DwType,
+                    SzName = mover.Model.SzName,
+                    DwIndex = mover.Model.DwIndex,
+                    DwModelType = mover.Model.DwModelType,
+                    SzPart = mover.Model.SzPart,
+                    BFly = mover.Model.BFly,
+                    DwDistant = mover.Model.DwDistant,
+                    BPick = mover.Model.BPick,
+                    FScale = mover.Model.FScale,
+                    BTrans = mover.Model.BTrans,
+                    BShadow = mover.Model.BShadow,
+                    NTextureEx = mover.Model.NTextureEx,
+                    BRenderFlag = mover.Model.BRenderFlag,
+                    Brace = mover.Model.Brace,
+                }
+            };
+            strings.Add(duplicatedMover.Prop.SzName, mover.Name);
+            strings.Add(duplicatedMover.Prop.SzComment, this.GetString(mover.Prop.SzComment));
+            movers.Add(duplicatedMover);
+        }
+
         public string[] GetMoversName()
         {
             return movers.Select(x => x.Name).ToArray();
