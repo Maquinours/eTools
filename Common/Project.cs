@@ -440,6 +440,7 @@ namespace Common
 #if __MOVERS
         private void LoadMovers(string filePath)
         {
+
             movers.Clear();
 
             Scanner scanner = new Scanner();
@@ -1109,6 +1110,8 @@ namespace Common
 #if __ITEMS
             if (!defines.ContainsKey("OT_ITEM")) throw new MissingDefineException("OT_ITEM");
 #endif // __ITEMS
+            foreach (MainModelBrace brace in this.models) // Avoid memory leaks
+                ClearBraceRecursively(brace);
             this.models.Clear();
             Scanner scanner = new Scanner();
             scanner.Load(filePath);
@@ -1322,6 +1325,16 @@ namespace Common
             {
                 GetBracesRecursively(braces, subBrace);
             }
+        }
+
+        private void ClearBraceRecursively(ModelBrace brace)
+        {
+            foreach(ModelBrace child in brace.Braces)
+            {
+                ClearBraceRecursively(child);
+            }
+            brace.Braces.Clear();
+            brace.Models.Clear();
         }
 
         public void GenerateMotions(ModelElem model)
