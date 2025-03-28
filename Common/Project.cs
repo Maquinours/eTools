@@ -423,6 +423,16 @@ namespace Common
         {
             return defines.Where(x => x.Key.StartsWith("IK3_")).Select(x => x.Key).ToArray();
         }
+
+        public string[] GetPossibleItemKinds2ByItemKind1(string itemKind1)
+        {
+            return items.Where(x => x.Prop.DwItemKind1 == itemKind1).Select(x => x.Prop.DwItemKind2).Distinct().ToArray();
+        }
+
+        public string[] GetPossibleItemKinds3ByItemKind2(string itemKind2)
+        {
+            return items.Where(x => x.Prop.DwItemKind2 == itemKind2).Select(x => x.Prop.DwItemKind3).Distinct().ToArray();
+        }
 #endif // __ITEMS
         #endregion
 

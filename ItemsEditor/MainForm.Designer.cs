@@ -28,27 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.lb_items = new System.Windows.Forms.ListBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cb_ik1 = new System.Windows.Forms.ComboBox();
-            this.cb_ik2 = new System.Windows.Forms.ComboBox();
-            this.cb_ik3 = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tb_id = new System.Windows.Forms.TextBox();
-            this.tb_name = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tb_description = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tb_icon = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.pb_icon = new System.Windows.Forms.PictureBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lblTypeItemKind1 = new System.Windows.Forms.Label();
+            this.lblTypeItemKind2 = new System.Windows.Forms.Label();
+            this.lblTypeItemKind3 = new System.Windows.Forms.Label();
+            this.cbTypeItemKind1 = new System.Windows.Forms.ComboBox();
+            this.cbTypeItemKind2 = new System.Windows.Forms.ComboBox();
+            this.cbTypeItemKind3 = new System.Windows.Forms.ComboBox();
+            this.lblGeneralId = new System.Windows.Forms.Label();
+            this.lblGeneralName = new System.Windows.Forms.Label();
+            this.tbGeneralId = new System.Windows.Forms.TextBox();
+            this.tbGeneralName = new System.Windows.Forms.TextBox();
+            this.lblMiscPackMax = new System.Windows.Forms.Label();
+            this.tcMain = new System.Windows.Forms.TabControl();
+            this.tpMainGeneral = new System.Windows.Forms.TabPage();
+            this.nudMiscCost = new System.Windows.Forms.NumericUpDown();
+            this.nudMiscPackMax = new System.Windows.Forms.NumericUpDown();
+            this.tbGeneralDescription = new System.Windows.Forms.TextBox();
+            this.lblGeneralDescription = new System.Windows.Forms.Label();
+            this.tbMiscIcon = new System.Windows.Forms.TextBox();
+            this.lblMiscIcon = new System.Windows.Forms.Label();
+            this.pbMiscIcon = new System.Windows.Forms.PictureBox();
+            this.lblMiscCost = new System.Windows.Forms.Label();
+            this.tpMainEquipment = new System.Windows.Forms.TabPage();
             this.tb_ModelName = new System.Windows.Forms.TextBox();
             this.gb_dstParams = new System.Windows.Forms.GroupBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -72,16 +75,21 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiItemsAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiItemsSearch = new System.Windows.Forms.ToolStripMenuItem();
-            this.nudPackMax = new System.Windows.Forms.NumericUpDown();
-            this.nudCost = new System.Windows.Forms.NumericUpDown();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_icon)).BeginInit();
-            this.tabPage2.SuspendLayout();
+            this.gbGeneralType = new System.Windows.Forms.GroupBox();
+            this.gbGeneralGeneral = new System.Windows.Forms.GroupBox();
+            this.gbGeneralMisc = new System.Windows.Forms.GroupBox();
+            this.btnMiscSelectIcon = new System.Windows.Forms.Button();
+            this.tcMain.SuspendLayout();
+            this.tpMainGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMiscCost)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMiscPackMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMiscIcon)).BeginInit();
+            this.tpMainEquipment.SuspendLayout();
             this.gb_dstParams.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPackMax)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCost)).BeginInit();
+            this.gbGeneralType.SuspendLayout();
+            this.gbGeneralGeneral.SuspendLayout();
+            this.gbGeneralMisc.SuspendLayout();
             this.SuspendLayout();
             // 
             // lb_items
@@ -95,219 +103,237 @@
             this.lb_items.SelectedIndexChanged += new System.EventHandler(this.lb_items_SelectedIndexChanged);
             this.lb_items.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Lb_items_KeyDown);
             // 
-            // label1
+            // lblTypeItemKind1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 22);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "IK1 :";
+            this.lblTypeItemKind1.AutoSize = true;
+            this.lblTypeItemKind1.Location = new System.Drawing.Point(45, 33);
+            this.lblTypeItemKind1.Name = "lblTypeItemKind1";
+            this.lblTypeItemKind1.Size = new System.Drawing.Size(29, 13);
+            this.lblTypeItemKind1.TabIndex = 1;
+            this.lblTypeItemKind1.Text = "IK1 :";
             // 
-            // label2
+            // lblTypeItemKind2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(40, 67);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "IK2 :";
+            this.lblTypeItemKind2.AutoSize = true;
+            this.lblTypeItemKind2.Location = new System.Drawing.Point(45, 61);
+            this.lblTypeItemKind2.Name = "lblTypeItemKind2";
+            this.lblTypeItemKind2.Size = new System.Drawing.Size(29, 13);
+            this.lblTypeItemKind2.TabIndex = 2;
+            this.lblTypeItemKind2.Text = "IK2 :";
             // 
-            // label3
+            // lblTypeItemKind3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(40, 97);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(29, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "IK3 :";
+            this.lblTypeItemKind3.AutoSize = true;
+            this.lblTypeItemKind3.Location = new System.Drawing.Point(45, 86);
+            this.lblTypeItemKind3.Name = "lblTypeItemKind3";
+            this.lblTypeItemKind3.Size = new System.Drawing.Size(29, 13);
+            this.lblTypeItemKind3.TabIndex = 3;
+            this.lblTypeItemKind3.Text = "IK3 :";
             // 
-            // cb_ik1
+            // cbTypeItemKind1
             // 
-            this.cb_ik1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_ik1.FormattingEnabled = true;
-            this.cb_ik1.Location = new System.Drawing.Point(75, 22);
-            this.cb_ik1.Name = "cb_ik1";
-            this.cb_ik1.Size = new System.Drawing.Size(174, 21);
-            this.cb_ik1.TabIndex = 4;
+            this.cbTypeItemKind1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTypeItemKind1.FormattingEnabled = true;
+            this.cbTypeItemKind1.Location = new System.Drawing.Point(80, 30);
+            this.cbTypeItemKind1.Name = "cbTypeItemKind1";
+            this.cbTypeItemKind1.Size = new System.Drawing.Size(174, 21);
+            this.cbTypeItemKind1.TabIndex = 4;
+            this.cbTypeItemKind1.SelectedIndexChanged += new System.EventHandler(this.Cb_ik1_SelectedIndexChanged);
             // 
-            // cb_ik2
+            // cbTypeItemKind2
             // 
-            this.cb_ik2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_ik2.FormattingEnabled = true;
-            this.cb_ik2.Location = new System.Drawing.Point(75, 67);
-            this.cb_ik2.Name = "cb_ik2";
-            this.cb_ik2.Size = new System.Drawing.Size(174, 21);
-            this.cb_ik2.TabIndex = 5;
+            this.cbTypeItemKind2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTypeItemKind2.FormattingEnabled = true;
+            this.cbTypeItemKind2.Location = new System.Drawing.Point(80, 58);
+            this.cbTypeItemKind2.Name = "cbTypeItemKind2";
+            this.cbTypeItemKind2.Size = new System.Drawing.Size(174, 21);
+            this.cbTypeItemKind2.TabIndex = 5;
+            this.cbTypeItemKind2.SelectedIndexChanged += new System.EventHandler(this.Cb_ik2_SelectedIndexChanged);
             // 
-            // cb_ik3
+            // cbTypeItemKind3
             // 
-            this.cb_ik3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_ik3.FormattingEnabled = true;
-            this.cb_ik3.Location = new System.Drawing.Point(75, 94);
-            this.cb_ik3.Name = "cb_ik3";
-            this.cb_ik3.Size = new System.Drawing.Size(174, 21);
-            this.cb_ik3.TabIndex = 6;
+            this.cbTypeItemKind3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTypeItemKind3.FormattingEnabled = true;
+            this.cbTypeItemKind3.Location = new System.Drawing.Point(80, 84);
+            this.cbTypeItemKind3.Name = "cbTypeItemKind3";
+            this.cbTypeItemKind3.Size = new System.Drawing.Size(174, 21);
+            this.cbTypeItemKind3.TabIndex = 6;
             // 
-            // label4
+            // lblGeneralId
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(43, 168);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(24, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "ID :";
+            this.lblGeneralId.AutoSize = true;
+            this.lblGeneralId.Location = new System.Drawing.Point(50, 33);
+            this.lblGeneralId.Name = "lblGeneralId";
+            this.lblGeneralId.Size = new System.Drawing.Size(24, 13);
+            this.lblGeneralId.TabIndex = 7;
+            this.lblGeneralId.Text = "ID :";
             // 
-            // label5
+            // lblGeneralName
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(34, 197);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Nom :";
+            this.lblGeneralName.AutoSize = true;
+            this.lblGeneralName.Location = new System.Drawing.Point(33, 65);
+            this.lblGeneralName.Name = "lblGeneralName";
+            this.lblGeneralName.Size = new System.Drawing.Size(41, 13);
+            this.lblGeneralName.TabIndex = 8;
+            this.lblGeneralName.Text = "Name :";
             // 
-            // tb_id
+            // tbGeneralId
             // 
-            this.tb_id.Location = new System.Drawing.Point(75, 168);
-            this.tb_id.Name = "tb_id";
-            this.tb_id.Size = new System.Drawing.Size(174, 20);
-            this.tb_id.TabIndex = 9;
+            this.tbGeneralId.Location = new System.Drawing.Point(80, 33);
+            this.tbGeneralId.Name = "tbGeneralId";
+            this.tbGeneralId.Size = new System.Drawing.Size(174, 20);
+            this.tbGeneralId.TabIndex = 9;
             // 
-            // tb_name
+            // tbGeneralName
             // 
-            this.tb_name.Location = new System.Drawing.Point(75, 197);
-            this.tb_name.Name = "tb_name";
-            this.tb_name.Size = new System.Drawing.Size(174, 20);
-            this.tb_name.TabIndex = 10;
+            this.tbGeneralName.Location = new System.Drawing.Point(80, 62);
+            this.tbGeneralName.Name = "tbGeneralName";
+            this.tbGeneralName.Size = new System.Drawing.Size(174, 20);
+            this.tbGeneralName.TabIndex = 10;
             // 
-            // label6
+            // lblMiscPackMax
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 226);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(60, 13);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Pack max :";
+            this.lblMiscPackMax.AutoSize = true;
+            this.lblMiscPackMax.Location = new System.Drawing.Point(14, 37);
+            this.lblMiscPackMax.Name = "lblMiscPackMax";
+            this.lblMiscPackMax.Size = new System.Drawing.Size(60, 13);
+            this.lblMiscPackMax.TabIndex = 11;
+            this.lblMiscPackMax.Text = "Pack max :";
             // 
-            // tabControl1
+            // tcMain
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(255, 24);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(545, 426);
-            this.tabControl1.TabIndex = 13;
+            this.tcMain.Controls.Add(this.tpMainGeneral);
+            this.tcMain.Controls.Add(this.tpMainEquipment);
+            this.tcMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tcMain.Location = new System.Drawing.Point(255, 24);
+            this.tcMain.Name = "tcMain";
+            this.tcMain.SelectedIndex = 0;
+            this.tcMain.Size = new System.Drawing.Size(502, 426);
+            this.tcMain.TabIndex = 13;
             // 
-            // tabPage1
+            // tpMainGeneral
             // 
-            this.tabPage1.Controls.Add(this.nudCost);
-            this.tabPage1.Controls.Add(this.nudPackMax);
-            this.tabPage1.Controls.Add(this.tb_description);
-            this.tabPage1.Controls.Add(this.label11);
-            this.tabPage1.Controls.Add(this.tb_icon);
-            this.tabPage1.Controls.Add(this.label10);
-            this.tabPage1.Controls.Add(this.pb_icon);
-            this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.cb_ik1);
-            this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.tb_name);
-            this.tabPage1.Controls.Add(this.label2);
-            this.tabPage1.Controls.Add(this.tb_id);
-            this.tabPage1.Controls.Add(this.label3);
-            this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.cb_ik2);
-            this.tabPage1.Controls.Add(this.label4);
-            this.tabPage1.Controls.Add(this.cb_ik3);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(537, 400);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Général";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tpMainGeneral.Controls.Add(this.gbGeneralMisc);
+            this.tpMainGeneral.Controls.Add(this.gbGeneralGeneral);
+            this.tpMainGeneral.Controls.Add(this.gbGeneralType);
+            this.tpMainGeneral.Location = new System.Drawing.Point(4, 22);
+            this.tpMainGeneral.Name = "tpMainGeneral";
+            this.tpMainGeneral.Padding = new System.Windows.Forms.Padding(3);
+            this.tpMainGeneral.Size = new System.Drawing.Size(494, 400);
+            this.tpMainGeneral.TabIndex = 0;
+            this.tpMainGeneral.Text = "General";
+            this.tpMainGeneral.UseVisualStyleBackColor = true;
             // 
-            // tb_description
+            // nudMiscCost
             // 
-            this.tb_description.Location = new System.Drawing.Point(75, 296);
-            this.tb_description.Name = "tb_description";
-            this.tb_description.Size = new System.Drawing.Size(174, 20);
-            this.tb_description.TabIndex = 19;
+            this.nudMiscCost.Location = new System.Drawing.Point(80, 61);
+            this.nudMiscCost.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.nudMiscCost.Name = "nudMiscCost";
+            this.nudMiscCost.Size = new System.Drawing.Size(174, 20);
+            this.nudMiscCost.TabIndex = 21;
+            this.nudMiscCost.ThousandsSeparator = true;
             // 
-            // label11
+            // nudMiscPackMax
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(3, 296);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(66, 13);
-            this.label11.TabIndex = 18;
-            this.label11.Text = "Description :";
+            this.nudMiscPackMax.Location = new System.Drawing.Point(80, 35);
+            this.nudMiscPackMax.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.nudMiscPackMax.Name = "nudMiscPackMax";
+            this.nudMiscPackMax.Size = new System.Drawing.Size(174, 20);
+            this.nudMiscPackMax.TabIndex = 20;
+            this.nudMiscPackMax.ThousandsSeparator = true;
+            this.nudMiscPackMax.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // tb_icon
+            // tbGeneralDescription
             // 
-            this.tb_icon.Location = new System.Drawing.Point(75, 272);
-            this.tb_icon.Name = "tb_icon";
-            this.tb_icon.Size = new System.Drawing.Size(174, 20);
-            this.tb_icon.TabIndex = 17;
-            this.tb_icon.TextChanged += new System.EventHandler(this.tb_icon_TextChanged);
+            this.tbGeneralDescription.Location = new System.Drawing.Point(80, 88);
+            this.tbGeneralDescription.Name = "tbGeneralDescription";
+            this.tbGeneralDescription.Size = new System.Drawing.Size(174, 20);
+            this.tbGeneralDescription.TabIndex = 19;
             // 
-            // label10
+            // lblGeneralDescription
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(34, 272);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(40, 13);
-            this.label10.TabIndex = 16;
-            this.label10.Text = "Icône :";
+            this.lblGeneralDescription.AutoSize = true;
+            this.lblGeneralDescription.Location = new System.Drawing.Point(8, 91);
+            this.lblGeneralDescription.Name = "lblGeneralDescription";
+            this.lblGeneralDescription.Size = new System.Drawing.Size(66, 13);
+            this.lblGeneralDescription.TabIndex = 18;
+            this.lblGeneralDescription.Text = "Description :";
             // 
-            // pb_icon
+            // tbMiscIcon
             // 
-            this.pb_icon.Location = new System.Drawing.Point(271, 266);
-            this.pb_icon.Margin = new System.Windows.Forms.Padding(2);
-            this.pb_icon.Name = "pb_icon";
-            this.pb_icon.Size = new System.Drawing.Size(32, 31);
-            this.pb_icon.TabIndex = 15;
-            this.pb_icon.TabStop = false;
+            this.tbMiscIcon.Location = new System.Drawing.Point(80, 87);
+            this.tbMiscIcon.Name = "tbMiscIcon";
+            this.tbMiscIcon.Size = new System.Drawing.Size(153, 20);
+            this.tbMiscIcon.TabIndex = 17;
+            this.tbMiscIcon.TextChanged += new System.EventHandler(this.tb_icon_TextChanged);
             // 
-            // label8
+            // lblMiscIcon
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(32, 252);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(35, 13);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "Coût :";
+            this.lblMiscIcon.AutoSize = true;
+            this.lblMiscIcon.Location = new System.Drawing.Point(40, 90);
+            this.lblMiscIcon.Name = "lblMiscIcon";
+            this.lblMiscIcon.Size = new System.Drawing.Size(34, 13);
+            this.lblMiscIcon.TabIndex = 16;
+            this.lblMiscIcon.Text = "Icon :";
             // 
-            // tabPage2
+            // pbMiscIcon
             // 
-            this.tabPage2.Controls.Add(this.tb_ModelName);
-            this.tabPage2.Controls.Add(this.gb_dstParams);
-            this.tabPage2.Controls.Add(this.cb_ElementType);
-            this.tabPage2.Controls.Add(this.label15);
-            this.tabPage2.Controls.Add(this.label14);
-            this.tabPage2.Controls.Add(this.label13);
-            this.tabPage2.Controls.Add(this.label12);
-            this.tabPage2.Controls.Add(this.tb_Level);
-            this.tabPage2.Controls.Add(this.tb_AtkMax);
-            this.tabPage2.Controls.Add(this.tb_AtkMin);
-            this.tabPage2.Controls.Add(this.cb_sex);
-            this.tabPage2.Controls.Add(this.label9);
-            this.tabPage2.Controls.Add(this.cb_job);
-            this.tabPage2.Controls.Add(this.label7);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(537, 400);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Equipement";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.pbMiscIcon.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pbMiscIcon.ErrorImage")));
+            this.pbMiscIcon.Location = new System.Drawing.Point(259, 82);
+            this.pbMiscIcon.Margin = new System.Windows.Forms.Padding(2);
+            this.pbMiscIcon.Name = "pbMiscIcon";
+            this.pbMiscIcon.Size = new System.Drawing.Size(32, 32);
+            this.pbMiscIcon.TabIndex = 15;
+            this.pbMiscIcon.TabStop = false;
+            // 
+            // lblMiscCost
+            // 
+            this.lblMiscCost.AutoSize = true;
+            this.lblMiscCost.Location = new System.Drawing.Point(40, 63);
+            this.lblMiscCost.Name = "lblMiscCost";
+            this.lblMiscCost.Size = new System.Drawing.Size(34, 13);
+            this.lblMiscCost.TabIndex = 13;
+            this.lblMiscCost.Text = "Cost :";
+            // 
+            // tpMainEquipment
+            // 
+            this.tpMainEquipment.Controls.Add(this.tb_ModelName);
+            this.tpMainEquipment.Controls.Add(this.gb_dstParams);
+            this.tpMainEquipment.Controls.Add(this.cb_ElementType);
+            this.tpMainEquipment.Controls.Add(this.label15);
+            this.tpMainEquipment.Controls.Add(this.label14);
+            this.tpMainEquipment.Controls.Add(this.label13);
+            this.tpMainEquipment.Controls.Add(this.label12);
+            this.tpMainEquipment.Controls.Add(this.tb_Level);
+            this.tpMainEquipment.Controls.Add(this.tb_AtkMax);
+            this.tpMainEquipment.Controls.Add(this.tb_AtkMin);
+            this.tpMainEquipment.Controls.Add(this.cb_sex);
+            this.tpMainEquipment.Controls.Add(this.label9);
+            this.tpMainEquipment.Controls.Add(this.cb_job);
+            this.tpMainEquipment.Controls.Add(this.label7);
+            this.tpMainEquipment.Location = new System.Drawing.Point(4, 22);
+            this.tpMainEquipment.Name = "tpMainEquipment";
+            this.tpMainEquipment.Padding = new System.Windows.Forms.Padding(3);
+            this.tpMainEquipment.Size = new System.Drawing.Size(494, 400);
+            this.tpMainEquipment.TabIndex = 1;
+            this.tpMainEquipment.Text = "Equipment";
+            this.tpMainEquipment.UseVisualStyleBackColor = true;
             // 
             // tb_ModelName
             // 
-            this.tb_ModelName.Location = new System.Drawing.Point(49, 384);
+            this.tb_ModelName.Location = new System.Drawing.Point(239, 359);
             this.tb_ModelName.Name = "tb_ModelName";
             this.tb_ModelName.Size = new System.Drawing.Size(100, 20);
             this.tb_ModelName.TabIndex = 21;
@@ -487,7 +513,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(757, 24);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -503,55 +529,104 @@
             // tsmiItemsAdd
             // 
             this.tsmiItemsAdd.Name = "tsmiItemsAdd";
-            this.tsmiItemsAdd.Size = new System.Drawing.Size(149, 22);
+            this.tsmiItemsAdd.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.tsmiItemsAdd.Size = new System.Drawing.Size(180, 22);
             this.tsmiItemsAdd.Text = "Add";
             // 
             // tsmiItemsSearch
             // 
             this.tsmiItemsSearch.Name = "tsmiItemsSearch";
             this.tsmiItemsSearch.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.tsmiItemsSearch.Size = new System.Drawing.Size(149, 22);
+            this.tsmiItemsSearch.Size = new System.Drawing.Size(180, 22);
             this.tsmiItemsSearch.Text = "Search";
             this.tsmiItemsSearch.Click += new System.EventHandler(this.TsmiItemsSearch_Click);
             // 
-            // nudPackMax
+            // gbGeneralType
             // 
-            this.nudPackMax.Location = new System.Drawing.Point(75, 226);
-            this.nudPackMax.Name = "nudPackMax";
-            this.nudPackMax.Size = new System.Drawing.Size(174, 20);
-            this.nudPackMax.TabIndex = 20;
+            this.gbGeneralType.Controls.Add(this.cbTypeItemKind1);
+            this.gbGeneralType.Controls.Add(this.lblTypeItemKind1);
+            this.gbGeneralType.Controls.Add(this.lblTypeItemKind2);
+            this.gbGeneralType.Controls.Add(this.cbTypeItemKind2);
+            this.gbGeneralType.Controls.Add(this.lblTypeItemKind3);
+            this.gbGeneralType.Controls.Add(this.cbTypeItemKind3);
+            this.gbGeneralType.Location = new System.Drawing.Point(6, 134);
+            this.gbGeneralType.Name = "gbGeneralType";
+            this.gbGeneralType.Size = new System.Drawing.Size(310, 124);
+            this.gbGeneralType.TabIndex = 22;
+            this.gbGeneralType.TabStop = false;
+            this.gbGeneralType.Text = "Type";
             // 
-            // nudCost
+            // gbGeneralGeneral
             // 
-            this.nudCost.Location = new System.Drawing.Point(75, 246);
-            this.nudCost.Name = "nudCost";
-            this.nudCost.Size = new System.Drawing.Size(174, 20);
-            this.nudCost.TabIndex = 21;
+            this.gbGeneralGeneral.Controls.Add(this.tbGeneralName);
+            this.gbGeneralGeneral.Controls.Add(this.tbGeneralId);
+            this.gbGeneralGeneral.Controls.Add(this.lblGeneralName);
+            this.gbGeneralGeneral.Controls.Add(this.lblGeneralId);
+            this.gbGeneralGeneral.Controls.Add(this.tbGeneralDescription);
+            this.gbGeneralGeneral.Controls.Add(this.lblGeneralDescription);
+            this.gbGeneralGeneral.Location = new System.Drawing.Point(6, 6);
+            this.gbGeneralGeneral.Name = "gbGeneralGeneral";
+            this.gbGeneralGeneral.Size = new System.Drawing.Size(310, 122);
+            this.gbGeneralGeneral.TabIndex = 23;
+            this.gbGeneralGeneral.TabStop = false;
+            this.gbGeneralGeneral.Text = "General";
+            // 
+            // gbGeneralMisc
+            // 
+            this.gbGeneralMisc.Controls.Add(this.btnMiscSelectIcon);
+            this.gbGeneralMisc.Controls.Add(this.pbMiscIcon);
+            this.gbGeneralMisc.Controls.Add(this.lblMiscPackMax);
+            this.gbGeneralMisc.Controls.Add(this.nudMiscPackMax);
+            this.gbGeneralMisc.Controls.Add(this.nudMiscCost);
+            this.gbGeneralMisc.Controls.Add(this.lblMiscCost);
+            this.gbGeneralMisc.Controls.Add(this.lblMiscIcon);
+            this.gbGeneralMisc.Controls.Add(this.tbMiscIcon);
+            this.gbGeneralMisc.Location = new System.Drawing.Point(6, 268);
+            this.gbGeneralMisc.Name = "gbGeneralMisc";
+            this.gbGeneralMisc.Size = new System.Drawing.Size(310, 124);
+            this.gbGeneralMisc.TabIndex = 24;
+            this.gbGeneralMisc.TabStop = false;
+            this.gbGeneralMisc.Text = "Misc";
+            // 
+            // btnMiscSelectIcon
+            // 
+            this.btnMiscSelectIcon.Location = new System.Drawing.Point(230, 86);
+            this.btnMiscSelectIcon.Name = "btnMiscSelectIcon";
+            this.btnMiscSelectIcon.Size = new System.Drawing.Size(24, 22);
+            this.btnMiscSelectIcon.TabIndex = 22;
+            this.btnMiscSelectIcon.Text = "...";
+            this.btnMiscSelectIcon.UseVisualStyleBackColor = true;
+            this.btnMiscSelectIcon.Click += new System.EventHandler(this.BtnMiscSelectIcon_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.tabControl1);
+            this.ClientSize = new System.Drawing.Size(757, 450);
+            this.Controls.Add(this.tcMain);
             this.Controls.Add(this.lb_items);
             this.Controls.Add(this.menuStrip1);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = "Form1";
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_icon)).EndInit();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.Text = "Items Editor";
+            this.tcMain.ResumeLayout(false);
+            this.tpMainGeneral.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nudMiscCost)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudMiscPackMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbMiscIcon)).EndInit();
+            this.tpMainEquipment.ResumeLayout(false);
+            this.tpMainEquipment.PerformLayout();
             this.gb_dstParams.ResumeLayout(false);
             this.gb_dstParams.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPackMax)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudCost)).EndInit();
+            this.gbGeneralType.ResumeLayout(false);
+            this.gbGeneralType.PerformLayout();
+            this.gbGeneralGeneral.ResumeLayout(false);
+            this.gbGeneralGeneral.PerformLayout();
+            this.gbGeneralMisc.ResumeLayout(false);
+            this.gbGeneralMisc.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -560,30 +635,30 @@
         #endregion
 
         private System.Windows.Forms.ListBox lb_items;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cb_ik1;
-        private System.Windows.Forms.ComboBox cb_ik2;
-        private System.Windows.Forms.ComboBox cb_ik3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox tb_id;
-        private System.Windows.Forms.TextBox tb_name;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.Label lblTypeItemKind1;
+        private System.Windows.Forms.Label lblTypeItemKind2;
+        private System.Windows.Forms.Label lblTypeItemKind3;
+        private System.Windows.Forms.ComboBox cbTypeItemKind1;
+        private System.Windows.Forms.ComboBox cbTypeItemKind2;
+        private System.Windows.Forms.ComboBox cbTypeItemKind3;
+        private System.Windows.Forms.Label lblGeneralId;
+        private System.Windows.Forms.Label lblGeneralName;
+        private System.Windows.Forms.TextBox tbGeneralId;
+        private System.Windows.Forms.TextBox tbGeneralName;
+        private System.Windows.Forms.Label lblMiscPackMax;
+        private System.Windows.Forms.TabControl tcMain;
+        private System.Windows.Forms.TabPage tpMainGeneral;
+        private System.Windows.Forms.Label lblMiscCost;
+        private System.Windows.Forms.TabPage tpMainEquipment;
         private System.Windows.Forms.ComboBox cb_job;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cb_sex;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.PictureBox pb_icon;
-        private System.Windows.Forms.TextBox tb_icon;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox tb_description;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.PictureBox pbMiscIcon;
+        private System.Windows.Forms.TextBox tbMiscIcon;
+        private System.Windows.Forms.Label lblMiscIcon;
+        private System.Windows.Forms.TextBox tbGeneralDescription;
+        private System.Windows.Forms.Label lblGeneralDescription;
         private System.Windows.Forms.ListBox lb_DstParams;
         private System.Windows.Forms.TextBox tb_DstParamValue;
         private System.Windows.Forms.ComboBox cb_DstParamIdentifier;
@@ -603,8 +678,12 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmiItemsAdd;
         private System.Windows.Forms.ToolStripMenuItem tsmiItemsSearch;
-        private System.Windows.Forms.NumericUpDown nudCost;
-        private System.Windows.Forms.NumericUpDown nudPackMax;
+        private System.Windows.Forms.NumericUpDown nudMiscCost;
+        private System.Windows.Forms.NumericUpDown nudMiscPackMax;
+        private System.Windows.Forms.GroupBox gbGeneralType;
+        private System.Windows.Forms.GroupBox gbGeneralGeneral;
+        private System.Windows.Forms.GroupBox gbGeneralMisc;
+        private System.Windows.Forms.Button btnMiscSelectIcon;
     }
 }
 
