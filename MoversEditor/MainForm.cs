@@ -233,7 +233,7 @@ namespace MoversEditor
         private void AddMover()
         {
             Project.GetInstance().AddNewMover();
-            SetListBoxDataSource();
+            RefreshListBoxDataSource();
             lbMovers.SelectedIndex = lbMovers.Items.Count - 1;
         }
 
@@ -319,6 +319,15 @@ namespace MoversEditor
             lbMovers.DisplayMember = "Name";
         }
 
+        private void RefreshListBoxDataSource()
+        {
+            lbMovers.DisplayMember = null;
+            if (lbMovers.DataSource is BindingSource listboxBinding)
+                listboxBinding.Dispose();
+            lbMovers.DataSource = null;
+            SetListBoxDataSource();
+        }
+
         private void BtnSelectModelFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog()
@@ -355,7 +364,7 @@ namespace MoversEditor
             if (!(lbMovers.SelectedItem is Mover mover)) return;
             Project.GetInstance().DeleteMover(mover);
             int indexSave = lbMovers.SelectedIndex;
-            SetListBoxDataSource();
+            RefreshListBoxDataSource();
             lbMovers.SelectedIndex = indexSave < lbMovers.Items.Count ? indexSave : lbMovers.Items.Count - 1;
         }
 
@@ -368,7 +377,7 @@ namespace MoversEditor
         {
             if (!(lbMovers.SelectedItem is Mover mover)) return;
             Project.GetInstance().DuplicateMover(mover);
-            SetListBoxDataSource();
+            RefreshListBoxDataSource();
             lbMovers.SelectedIndex = lbMovers.Items.Count - 1;
         }
     }
