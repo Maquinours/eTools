@@ -71,6 +71,57 @@ namespace MoversEditor
             }
         }
 
+        private void ReloadFormData()
+        {
+
+            cbType.DataBindings.Clear();
+            tbName.DataBindings.Clear();
+            tbIdentifier.DataBindings.Clear();
+            nudMonsterStr.DataBindings.Clear();
+            nudMonsterSta.DataBindings.Clear();
+            nudMonsterDex.DataBindings.Clear();
+            nudMonsterInt.DataBindings.Clear();
+            nudMonsterHr.DataBindings.Clear();
+            nudMonsterEr.DataBindings.Clear();
+            cbBelligerence.DataBindings.Clear();
+            nudLevel.DataBindings.Clear();
+            cbClass.DataBindings.Clear();
+            nudMonsterAttackMin.DataBindings.Clear();
+            nudMonsterAttackMax.DataBindings.Clear();
+            nudMonsterAttackDelay.DataBindings.Clear();
+            nudMonsterHp.DataBindings.Clear();
+            nudMonsterMp.DataBindings.Clear();
+            nudMonsterArmor.DataBindings.Clear();
+            cbMonsterElementType.DataBindings.Clear();
+            nudMonsterElementValue.DataBindings.Clear();
+            nudMonsterSpeed.DataBindings.Clear();
+            nudMonsterMagicResist.DataBindings.Clear();
+            nudMonsterElectricityResistance.DataBindings.Clear();
+            nudMonsterFireResistance.DataBindings.Clear();
+            nudMonsterWaterResistance.DataBindings.Clear();
+            nudMonsterWindResistance.DataBindings.Clear();
+            nudMonsterEarthResistance.DataBindings.Clear();
+            nudExperience.DataBindings.Clear();
+            cbAi.DataBindings.Clear();
+            tbModelFile.DataBindings.Clear();
+            nudModelScale.DataBindings.Clear();
+            cbModelBrace.DataBindings.Clear();
+            tbIdentifier.AutoCompleteCustomSource = null;
+            cbAi.DataSource = null;
+            cbBelligerence.DataSource = null;
+            cbClass.DataSource = null;
+            cbMonsterElementType.DataSource = null;
+            cbModelBrace.DisplayMember = null;
+            cbModelBrace.DataSource = null;
+            cbType.DataSource = null;
+            lbMovers.DisplayMember = null;
+            if (lbMovers.DataSource is BindingSource listboxBinding)
+                listboxBinding.Dispose();
+            lbMovers.DataSource = null;
+
+            LoadFormData();
+        }
+
         private void MainForm_Shown(object sender, EventArgs e)
         {
             LoadFormData();
@@ -208,7 +259,7 @@ namespace MoversEditor
 
         private void TsmiFileReload_Click(object sender, EventArgs e)
         {
-            LoadFormData();
+            ReloadFormData();
         }
 
         private void TsmiFileSave_Click(object sender, EventArgs e)
