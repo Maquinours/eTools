@@ -50,7 +50,6 @@
             this.dgvMain.RowHeadersVisible = false;
             this.dgvMain.Size = new System.Drawing.Size(690, 62);
             this.dgvMain.TabIndex = 0;
-            this.dgvMain.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvMain_CellValueChanged);
             // 
             // ExpertEditorForm
             // 
