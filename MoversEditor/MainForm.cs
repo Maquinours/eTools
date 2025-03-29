@@ -384,7 +384,7 @@ namespace MoversEditor
         private void TsmiViewExpertEditor_Click(object sender, EventArgs e)
         {
             if (!(lbMovers.SelectedItem is Mover mover)) return;
-            new ExpertEditorForm(this, mover).ShowDialog();
+            new ExpertEditorForm(mover).ShowDialog();
         }
     }
 }
