@@ -2179,7 +2179,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tcMover.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <metadata name="msMain.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -2212,7 +2212,7 @@
     <value>Ctrl+R</value>
   </data>
   <data name="tsmiFileReload.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>151, 22</value>
   </data>
   <data name="tsmiFileReload.Text" xml:space="preserve">
     <value>Reload</value>
@@ -2221,7 +2221,7 @@
     <value>Ctrl+S</value>
   </data>
   <data name="tsmiFileSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>151, 22</value>
   </data>
   <data name="tsmiFileSave.Text" xml:space="preserve">
     <value>Save</value>
@@ -2233,7 +2233,7 @@
     <value>File</value>
   </data>
   <data name="tsmiViewExpertEditor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>141, 22</value>
   </data>
   <data name="tsmiViewExpertEditor.Text" xml:space="preserve">
     <value>Expert Editor</value>
@@ -2284,7 +2284,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;msMain.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <metadata name="cmsLbMovers.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>116, 17</value>
@@ -2332,7 +2332,28 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lbMovers.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
+  </data>
+  <data name="pbFileSaveReload.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 609</value>
+  </data>
+  <data name="pbFileSaveReload.Size" type="System.Drawing.Size, System.Drawing">
+    <value>690, 10</value>
+  </data>
+  <data name="pbFileSaveReload.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;pbFileSaveReload.Name" xml:space="preserve">
+    <value>pbFileSaveReload</value>
+  </data>
+  <data name="&gt;&gt;pbFileSaveReload.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ProgressBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pbFileSaveReload.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pbFileSaveReload.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -5733,6 +5754,18 @@
   <data name="&gt;&gt;tsmiFileSave.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;tsmiView.Name" xml:space="preserve">
+    <value>tsmiView</value>
+  </data>
+  <data name="&gt;&gt;tsmiView.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tsmiViewExpertEditor.Name" xml:space="preserve">
+    <value>tsmiViewExpertEditor</value>
+  </data>
+  <data name="&gt;&gt;tsmiViewExpertEditor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;tsmiSettings.Name" xml:space="preserve">
     <value>tsmiSettings</value>
   </data>
@@ -5762,18 +5795,6 @@
   </data>
   <data name="&gt;&gt;tooltip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiView.Name" xml:space="preserve">
-    <value>tsmiView</value>
-  </data>
-  <data name="&gt;&gt;tsmiView.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tsmiViewExpertEditor.Name" xml:space="preserve">
-    <value>tsmiViewExpertEditor</value>
-  </data>
-  <data name="&gt;&gt;tsmiViewExpertEditor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

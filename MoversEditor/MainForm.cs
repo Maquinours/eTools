@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Deployment.Application;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -12,6 +13,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace MoversEditor
@@ -23,13 +25,14 @@ namespace MoversEditor
             InitializeComponent();
         }
 
-        private void LoadFormData()
+        private async void LoadFormData()
         {
             //UseWaitCursor = true;
             try
             {
+                pbFileSaveReload.Visible = true;
                 Project prj = Project.GetInstance();
-                prj.Load();
+                await Task.Run(() => prj.Load((progress) => pbFileSaveReload.Invoke(new Action(() => pbFileSaveReload.Value = progress)))).ConfigureAwait(true);
                 AutoCompleteStringCollection identifiersSource = new AutoCompleteStringCollection();
                 identifiersSource.AddRange(prj.GetAllMoversDefines());
                 tbIdentifier.AutoCompleteCustomSource = identifiersSource;
@@ -68,6 +71,10 @@ namespace MoversEditor
                         Environment.Exit(3);
                         break;
                 }
+            }
+            finally
+            {
+                pbFileSaveReload.Visible = false;
             }
         }
 
@@ -274,11 +281,12 @@ namespace MoversEditor
             //UseWaitCursor = false;
         }
 
-        private void Save()
+        private async void Save()
         {
             try
             {
-                Project.GetInstance().Save();
+                pbFileSaveReload.Visible = true;
+                await Task.Run(() => Project.GetInstance().Save((progress) => pbFileSaveReload.Invoke(new Action(() => pbFileSaveReload.Value = progress)))).ConfigureAwait(true);
             }
             catch (Exception ex)
             {
@@ -291,6 +299,10 @@ namespace MoversEditor
                         Environment.Exit(3);
                         break;
                 }
+            }
+            finally
+            {
+                pbFileSaveReload.Visible = false;
             }
         }
 

@@ -72,35 +72,45 @@ namespace Common
         /// <summary>
         /// Load all data from files to project.
         /// </summary>
-        public void Load()
+        public void Load(Action<int> reportProgress)
         {
+            reportProgress?.Invoke(0);
             Settings config = Settings.GetInstance();
             config.LoadGeneral();
+            reportProgress?.Invoke(20);
 #if __ITEMS
             config.LoadSpecs();
 #endif // __ITEMS
 #if __MOVERS
             config.LoadSpecs();
 #endif // __MOVERS
+            reportProgress?.Invoke(40);
             this.LoadDefines(config.DefineFilesPaths.ToArray());
             this.LoadStrings(config.StringsFilePath);
+            reportProgress?.Invoke(60);
 #if __ITEMS
             this.LoadItems(config.PropFileName);
 #endif // __ITEMS
 #if __MOVERS
             LoadMovers(config.PropFileName);
+            reportProgress?.Invoke(80);
 #endif // __MOVERS
             LoadModels(config.ResourcePath + "mdlDyna.inc");
+            reportProgress?.Invoke(100);
         }
 
-        public void Save()
+        public void Save(Action<int> reportProgress)
         {
+            reportProgress?.Invoke(0);
             Settings config = Settings.GetInstance();
 #if __MOVERS
             SaveMoversprop(config.PropFileName);
+            reportProgress?.Invoke(33);
 #endif // __MOVERS
             SaveModels(config.ResourcePath + "mdlDyna.inc");
+            reportProgress?.Invoke(66);
             SaveStrings(config.StringsFilePath);
+            reportProgress?.Invoke(100);
         }
         #endregion
 

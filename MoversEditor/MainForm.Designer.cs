@@ -115,6 +115,8 @@
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFileReload = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFileSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiView = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiViewExpertEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.cmsLbMovers = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -122,8 +124,7 @@
             this.tsmiMoverDuplicate = new System.Windows.Forms.ToolStripMenuItem();
             this.lbMovers = new System.Windows.Forms.ListBox();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.tsmiView = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiViewExpertEditor = new System.Windows.Forms.ToolStripMenuItem();
+            this.pbFileSaveReload = new System.Windows.Forms.ProgressBar();
             this.tcMover.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.gbGeneralConfiguration.SuspendLayout();
@@ -857,6 +858,19 @@
             resources.ApplyResources(this.tsmiFileSave, "tsmiFileSave");
             this.tsmiFileSave.Click += new System.EventHandler(this.TsmiFileSave_Click);
             // 
+            // tsmiView
+            // 
+            this.tsmiView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiViewExpertEditor});
+            this.tsmiView.Name = "tsmiView";
+            resources.ApplyResources(this.tsmiView, "tsmiView");
+            // 
+            // tsmiViewExpertEditor
+            // 
+            this.tsmiViewExpertEditor.Name = "tsmiViewExpertEditor";
+            resources.ApplyResources(this.tsmiViewExpertEditor, "tsmiViewExpertEditor");
+            this.tsmiViewExpertEditor.Click += new System.EventHandler(this.TsmiViewExpertEditor_Click);
+            // 
             // tsmiSettings
             // 
             this.tsmiSettings.Name = "tsmiSettings";
@@ -899,23 +913,16 @@
             this.lbMovers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LbMovers_KeyDown);
             this.lbMovers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LbMovers_MouseDown);
             // 
-            // tsmiView
+            // pbFileSaveReload
             // 
-            this.tsmiView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiViewExpertEditor});
-            this.tsmiView.Name = "tsmiView";
-            resources.ApplyResources(this.tsmiView, "tsmiView");
-            // 
-            // tsmiViewExpertEditor
-            // 
-            this.tsmiViewExpertEditor.Name = "tsmiViewExpertEditor";
-            resources.ApplyResources(this.tsmiViewExpertEditor, "tsmiViewExpertEditor");
-            this.tsmiViewExpertEditor.Click += new System.EventHandler(this.TsmiViewExpertEditor_Click);
+            resources.ApplyResources(this.pbFileSaveReload, "pbFileSaveReload");
+            this.pbFileSaveReload.Name = "pbFileSaveReload";
             // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.pbFileSaveReload);
             this.Controls.Add(this.tcMover);
             this.Controls.Add(this.lbMovers);
             this.Controls.Add(this.msMain);
@@ -1067,6 +1074,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiMoverDuplicate;
         private System.Windows.Forms.ToolStripMenuItem tsmiView;
         private System.Windows.Forms.ToolStripMenuItem tsmiViewExpertEditor;
+        private System.Windows.Forms.ProgressBar pbFileSaveReload;
     }
 }
 
