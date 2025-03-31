@@ -7,13 +7,13 @@
     <ProjectGuid>{A711E0BB-321F-40A7-8ACE-08D908333EE6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>MoversEditor</RootNamespace>
-    <AssemblyName>MoversEditor</AssemblyName>
+    <AssemblyName>eTools Movers Editor</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>C:\xampp\htdocs\eTools\MoversEditor\</PublishUrl>
+    <PublishUrl>ftp://ftp.biza9490.odns.fr/MoversEditor/</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -23,14 +23,14 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://maquinours.com/eTools/</InstallUrl>
+    <InstallUrl>https://etools.maquinours.com/MoversEditor/</InstallUrl>
     <ProductName>MoversEditor</ProductName>
     <PublisherName>Maquinours</PublisherName>
     <SuiteName>eTools</SuiteName>
     <MinimumRequiredVersion>1.0.1.4</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
