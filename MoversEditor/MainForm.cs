@@ -127,7 +127,7 @@ namespace MoversEditor
             LoadFormData();
         }
 
-        private void LbMovers_SelectedIndexChanged(object sender, EventArgs e)
+        private void RefreshFieldsBindings()
         {
             cbType.DataBindings.Clear();
             tbName.DataBindings.Clear();
@@ -197,6 +197,11 @@ namespace MoversEditor
             tbModelFile.DataBindings.Add(new Binding("Text", currentItem.Model, "SzName", false, DataSourceUpdateMode.OnPropertyChanged));
             nudModelScale.DataBindings.Add(new Binding("Value", currentItem.Model, "FScale", true, DataSourceUpdateMode.OnPropertyChanged));
             cbModelBrace.DataBindings.Add(new Binding("SelectedItem", currentItem.Model, "Brace", false, DataSourceUpdateMode.OnPropertyChanged));
+        }
+
+        private void LbMovers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshFieldsBindings();
         }
 
         private void CbType_SelectedIndexChanged(object sender, EventArgs e)
@@ -385,6 +390,7 @@ namespace MoversEditor
         {
             if (!(lbMovers.SelectedItem is Mover mover)) return;
             new ExpertEditorForm(mover).ShowDialog();
+            this.RefreshFieldsBindings();
         }
     }
 }
