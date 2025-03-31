@@ -14,6 +14,8 @@ namespace MoversEditor
 {
     public partial class SettingsForm : Form
     {
+
+        public bool ContainsChanges { get; private set; }
         public SettingsForm()
         {
             InitializeComponent();
@@ -41,12 +43,24 @@ namespace MoversEditor
         private void BtnApply_Click(object sender, EventArgs e)
         {
             Settings settings = Settings.GetInstance();
-            settings.ResourcePath = tbResourcesPath.Text;
-            settings.PropFileName = settings.ResourcePath + tbPropFileName.Text;
-            settings.StringsFilePath = settings.ResourcePath + tbStringFileName.Text;
-            settings.ResourceVersion = Decimal.ToInt32(nudGameVersion.Value);
-            settings.SaveGeneral();
-            settings.SaveSpecs();
+            string resourcePath = tbResourcesPath.Text;
+            string propFileName = settings.ResourcePath + tbPropFileName.Text;
+            string stringsFilePath = settings.ResourcePath + tbStringFileName.Text;
+            int resourceVersion = Decimal.ToInt32(nudGameVersion.Value);
+            if (settings.ResourcePath == resourcePath && settings.PropFileName == propFileName && settings.StringsFilePath == stringsFilePath && settings.ResourceVersion == resourceVersion)
+            {
+                ContainsChanges = false;
+            }
+            else
+            {
+                ContainsChanges = true;
+                settings.ResourcePath = resourcePath;
+                settings.PropFileName = propFileName;
+                settings.StringsFilePath = stringsFilePath;
+                settings.ResourceVersion = resourceVersion;
+                settings.SaveGeneral();
+                settings.SaveSpecs();
+            }
             DialogResult = DialogResult.OK;
             Close();
         }

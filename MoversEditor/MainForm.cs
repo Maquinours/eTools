@@ -296,7 +296,10 @@ namespace MoversEditor
 
         private void TsmiSettings_Click(object sender, EventArgs e)
         {
-            new SettingsForm().ShowDialog();
+            SettingsForm settingsForm = new SettingsForm();
+            if(settingsForm.ShowDialog() == DialogResult.OK && settingsForm.ContainsChanges)
+                if (MessageBox.Show("Some settings have changed. Would you like to reload the data with the new settings?", "Settings changed", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    ReloadFormData();
         }
 
         private void TsmiMoversSearch_Click(object sender, EventArgs e)
