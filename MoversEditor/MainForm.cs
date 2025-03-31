@@ -406,6 +406,8 @@ namespace MoversEditor
             if (!(lbMovers.SelectedItem is Mover mover)) return;
             new ExpertEditorForm(mover).ShowDialog();
             this.RefreshFieldsBindings();
+            lbMovers.DisplayMember = null;
+            lbMovers.DisplayMember = "Name";
         }
     }
 }
