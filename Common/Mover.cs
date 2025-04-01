@@ -214,83 +214,16 @@ namespace Common
         private MoverProp _prop;
         private ModelElem _model;
 
-        public MoverProp Prop 
-        { 
-            get => this._prop; 
-            set 
-            {
-                if(value != this.Prop)
-                {
-                    this._prop = value;
-                    NotifyPropertyChanged();
-                }
-            } 
-        }
+        public MoverProp Prop { get => this._prop; set { if (value != this.Prop) { this._prop = value;NotifyPropertyChanged(); } } }
 
-        public ModelElem Model 
-        {
-            get => this._model;
-            set
-            {
-                if(value != this.Model)
-                {
-                    this._model = value;
-                    NotifyPropertyChanged();
-                }
-            } 
-        }
+        public ModelElem Model { get => this._model; set { if (value != this.Model) { this._model = value; NotifyPropertyChanged(); } } }
 
-        public string Id
-        {
-            get => this.Prop.DwId;
-            set 
-            {
-                if (value != this.Id)
-                {
-                    this.Prop.DwId = value;
-                    this.Model.DwIndex = value;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
+        public string Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; this.Model.DwIndex = value; NotifyPropertyChanged(); } } }
 
-        public string Name
-        {
-            get { return Project.GetInstance().GetString(Prop.SzName); }
-            set 
-            {
-                if (value != this.Name) 
-                {
-                    Project.GetInstance().ChangeStringValue(Prop.SzName, value);
-                    NotifyPropertyChanged();
-                }
-            }
-        }
+        public string Name { get => Project.GetInstance().GetString(Prop.SzName); set { if (value != this.Name) { Project.GetInstance().ChangeStringValue(Prop.SzName, value); NotifyPropertyChanged(); } } }
 
-        public string ElementType
-        {
-            get { return Project.GetInstance().GetElementNameById(Prop.EElementType); }
-            set 
-            { 
-                if(value != this.ElementType)
-                {
-                    Prop.EElementType = Project.GetInstance().GetElementIdByName(value);
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        public MoverTypes Type
-        {
-            get { return Project.GetInstance().GetMoverType(this); }
-            set 
-            {
-                if (value != this.Type)
-                {
-                    Project.GetInstance().SetMoverType(this, value);
-                    NotifyPropertyChanged();
-                }
-            }
-        }
+        public string ElementType { get => Project.GetInstance().GetElementNameById(Prop.EElementType); set {  if(value != this.ElementType) { Prop.EElementType = Project.GetInstance().GetElementIdByName(value); NotifyPropertyChanged(); } } }
+        public MoverTypes Type { get => Project.GetInstance().GetMoverType(this); set { if (value != this.Type) { Project.GetInstance().SetMoverType(this, value); NotifyPropertyChanged(); } } }
     }
 }
 #endif
