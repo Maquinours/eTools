@@ -1,4 +1,7 @@
 #if __MOVERS
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+
 namespace Common
 {
     public enum MoverTypes
@@ -104,31 +107,95 @@ namespace Common
         public int DwMadrigalGiftPoint { get; set; }
     }
 
-    public class Mover
+    public class Mover : INotifyPropertyChanged
     {
-        public MoverProp Prop { get; set; }
-        public ModelElem Model { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private MoverProp _prop;
+        private ModelElem _model;
+
+        public MoverProp Prop 
+        { 
+            get => this._prop; 
+            set 
+            {
+                if(value != this.Prop)
+                {
+                    this._prop = value;
+                    NotifyPropertyChanged();
+                }
+            } 
+        }
+
+        public ModelElem Model 
+        {
+            get => this._model;
+            set
+            {
+                if(value != this.Model)
+                {
+                    this._model = value;
+                    NotifyPropertyChanged();
+                }
+            } 
+        }
+
         public string Id
         {
-            get { return this.Prop.DwId; }
-            set { this.Prop.DwId = value; this.Model.DwIndex = value; }
+            get => this.Prop.DwId;
+            set 
+            {
+                if (value != this.Id)
+                {
+                    this.Prop.DwId = value;
+                    this.Model.DwIndex = value;
+                    NotifyPropertyChanged();
+                }
+            }
         }
 
         public string Name
         {
             get { return Project.GetInstance().GetString(Prop.SzName); }
-            set { Project.GetInstance().ChangeStringValue(Prop.SzName, value); }
+            set 
+            {
+                if (value != this.Name) 
+                {
+                    Project.GetInstance().ChangeStringValue(Prop.SzName, value);
+                    NotifyPropertyChanged();
+                }
+            }
         }
 
         public string ElementType
         {
             get { return Project.GetInstance().GetElementNameById(Prop.EElementType); }
-            set { Prop.EElementType = Project.GetInstance().GetElementIdByName(value); }
+            set 
+            { 
+                if(value != this.ElementType)
+                {
+                    Prop.EElementType = Project.GetInstance().GetElementIdByName(value);
+                    NotifyPropertyChanged();
+                }
+            }
         }
         public MoverTypes Type
         {
             get { return Project.GetInstance().GetMoverType(this); }
-            set { Project.GetInstance().SetMoverType(this, value); }
+            set 
+            {
+                if (value != this.Type)
+                {
+                    Project.GetInstance().SetMoverType(this, value);
+                    NotifyPropertyChanged();
+                }
+            }
         }
     }
 }
