@@ -76,16 +76,10 @@ namespace Common
         {
             reportProgress?.Invoke(0);
             Settings config = Settings.GetInstance();
-            config.LoadGeneral();
+            config.Load();
             reportProgress?.Invoke(20);
-#if __ITEMS
-            config.LoadSpecs();
-#endif // __ITEMS
-#if __MOVERS
-            config.LoadSpecs();
-#endif // __MOVERS
-            reportProgress?.Invoke(40);
             this.LoadDefines(config.DefineFilesPaths.ToArray());
+            reportProgress?.Invoke(40);
             this.LoadStrings(config.StringsFilePath);
             reportProgress?.Invoke(60);
 #if __ITEMS

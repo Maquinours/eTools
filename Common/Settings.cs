@@ -43,7 +43,26 @@ namespace Common
 #endif // __ITEMS
 #if __MOVERS
         public Dictionary<MoverTypes, MoverType> Types { get; set; }
-#endif // __MOBERS
+#endif // __MOVERS
+        private string SettingsFolderPath { get => $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\eTools\\"; }
+        private string GeneralSettingsFilePath { get => $"{SettingsFolderPath}eTools.ini"; }
+        private string SpecificSettingsFilePath { 
+            get {
+                return SettingsFolderPath +
+#if __MOVERS
+                "movers.ini"
+#endif
+#if __ITEMS
+                "items.ini"
+#endif
+                ;
+            }
+        }
+
+        public bool IsMissingSettingsFile
+        {
+            get => !File.Exists(GeneralSettingsFilePath) || !File.Exists(SpecificSettingsFilePath);
+        }
 
         private Settings()
         {
@@ -65,13 +84,18 @@ namespace Common
             return _instance;
         }
 
+        public void Load()
+        {
+            LoadGeneral();
+            LoadSpecs();
+        }
+
         /// <summary>
         /// Load the general config file
         /// </summary>
-        public void LoadGeneral()
+        private void LoadGeneral()
         {
-            string filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\eTools\\eTools.ini";
-            if (!File.Exists(filePath))
+            if (!File.Exists(GeneralSettingsFilePath))
             {
                 LoadDefaultData();
                 SaveGeneral();
@@ -81,7 +105,7 @@ namespace Common
             Elements.Clear();
             ResourceVersion = -1;
             Scanner scanner = new Scanner();
-            scanner.Load(filePath);
+            scanner.Load(GeneralSettingsFilePath);
             while (true)
             {
                 scanner.GetToken();
@@ -112,16 +136,9 @@ namespace Common
         /// <summary>
         /// Load the current editor config file
         /// </summary>
-        public void LoadSpecs()
+        private void LoadSpecs()
         {
-            string filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\eTools\\";
-#if __MOVERS
-            filePath += "movers.ini";
-#endif // __MOVERS
-#if __ITEMS
-            filePath += "items.ini";
-#endif // __ITEMS
-            if (!File.Exists(filePath))
+            if (!File.Exists(SpecificSettingsFilePath))
             {
                 LoadDefaultData();
                 LoadGeneral();
@@ -138,7 +155,7 @@ namespace Common
 #endif // __MOVERS
 
             Scanner scanner = new Scanner();
-            scanner.Load(filePath);
+            scanner.Load(SpecificSettingsFilePath);
             while (true)
             {
                 scanner.GetToken();
@@ -170,15 +187,15 @@ namespace Common
                         scanner.GetToken(); // {
                         while (scanner.GetToken() != "}")
                         {
-                            if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+                            if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(SpecificSettingsFilePath);
                             string type = scanner.Token;
                             List<string> identifiers = new List<string>();
                             scanner.GetToken(); // {
                             while (scanner.GetToken() != "}")
                             {
-                                if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+                                if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(SpecificSettingsFilePath);
                                 string identifier = scanner.Token;
-                                if (!identifier.StartsWith("AII_")) throw new IncorrectlyFormattedFileException(filePath);
+                                if (!identifier.StartsWith("AII_")) throw new IncorrectlyFormattedFileException(SpecificSettingsFilePath);
                                 identifiers.Add(identifier);
                             }
                             MoverType moverType = new MoverType() { Identifiers = identifiers.ToArray() };
@@ -193,13 +210,12 @@ namespace Common
 
         public void SaveGeneral()
         {
-            string filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\eTools\\eTools.ini";
-            FileInfo fi = new FileInfo(filePath);
+            FileInfo fi = new FileInfo(GeneralSettingsFilePath);
             if (!fi.Directory.Exists)
             {
                 System.IO.Directory.CreateDirectory(fi.DirectoryName);
             }
-            using (StreamWriter writer = new StreamWriter(filePath))
+            using (StreamWriter writer = new StreamWriter(GeneralSettingsFilePath))
             {
                 writer.WriteLine($"RESOURCEPATH\t\"{ResourcePath}\"");
                 writer.WriteLine($"VER\t{ResourceVersion}");
@@ -215,19 +231,12 @@ namespace Common
 
         public void SaveSpecs()
         {
-            string filePath = $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\eTools\\";
-#if __MOVERS
-            filePath += "movers.ini";
-#endif // __MOVERS
-#if __ITEMS
-            filePath += "items.ini";
-#endif // __ITEMS
-            FileInfo fi = new FileInfo(filePath);
+            FileInfo fi = new FileInfo(SpecificSettingsFilePath);
             if (!fi.Directory.Exists)
             {
                 System.IO.Directory.CreateDirectory(fi.DirectoryName);
             }
-            using (StreamWriter writer = new StreamWriter(filePath))
+            using (StreamWriter writer = new StreamWriter(SpecificSettingsFilePath))
             {
                 writer.WriteLine($"PROPFILE\t\"{Path.GetFileName(PropFileName)}\"");
 #if __ITEMS

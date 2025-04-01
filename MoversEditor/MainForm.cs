@@ -31,6 +31,17 @@ namespace MoversEditor
             try
             {
                 pbFileSaveReload.Visible = true;
+
+                Settings settings = Settings.GetInstance();
+                if(settings.IsMissingSettingsFile)
+                {
+                    settings.Load();
+                    if(MessageBox.Show("It seems like this is the first time you're launching the app. The settings have not been configured yet. Would you like to access the settings now ?", "Settings not found", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        new SettingsForm().ShowDialog();
+                    }
+                }
+
                 Project prj = Project.GetInstance();
                 await Task.Run(() => prj.Load((progress) => pbFileSaveReload.Invoke(new Action(() => pbFileSaveReload.Value = progress)))).ConfigureAwait(true);
                 AutoCompleteStringCollection identifiersSource = new AutoCompleteStringCollection();
