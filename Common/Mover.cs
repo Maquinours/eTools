@@ -211,10 +211,31 @@ namespace Common
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private void Prop_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == nameof(MoverProp.SzName))
+                NotifyPropertyChanged(e.PropertyName);
+        }
+
         private MoverProp _prop;
         private ModelElem _model;
 
-        public MoverProp Prop { get => this._prop; set { if (value != this.Prop) { this._prop = value;NotifyPropertyChanged(); } } }
+        public MoverProp Prop 
+        {
+            get => this._prop;
+            set 
+            {
+                if (value != this.Prop)
+                {
+                    if(this.Prop != null)
+                        this.Prop.PropertyChanged -= Prop_PropertyChanged;
+
+                    this._prop = value;
+                    this.Prop.PropertyChanged += Prop_PropertyChanged;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
 
         public ModelElem Model { get => this._model; set { if (value != this.Model) { this._model = value; NotifyPropertyChanged(); } } }
 
