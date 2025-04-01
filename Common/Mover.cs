@@ -214,7 +214,7 @@ namespace Common
         private void Prop_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             if(e.PropertyName == nameof(MoverProp.SzName))
-                NotifyPropertyChanged(e.PropertyName);
+                NotifyPropertyChanged(nameof(Mover.Name));
         }
 
         private MoverProp _prop;
