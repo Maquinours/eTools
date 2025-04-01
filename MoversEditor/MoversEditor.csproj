@@ -7,25 +7,27 @@
     <ProjectGuid>{A711E0BB-321F-40A7-8ACE-08D908333EE6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>MoversEditor</RootNamespace>
-    <AssemblyName>eTools Movers Editor</AssemblyName>
+    <AssemblyName>eTools_MoversEditor</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>ftp://ftp.biza9490.odns.fr/MoversEditor/</PublishUrl>
+    <PublishUrl>C:\xampp\htdocs\eTools\MoversEditor\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
-    <UpdateMode>Background</UpdateMode>
+    <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>true</UpdateRequired>
+    <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <InstallUrl>https://etools.maquinours.com/MoversEditor/</InstallUrl>
-    <ProductName>MoversEditor</ProductName>
-    <PublisherName>Maquinours</PublisherName>
+    <SupportUrl>https://github.com/Maquinours/eTools/issues</SupportUrl>
+    <ErrorReportUrl>https://github.com/Maquinours/eTools/issues</ErrorReportUrl>
+    <ProductName>Movers Editor</ProductName>
+    <PublisherName>Maqui</PublisherName>
     <SuiteName>eTools</SuiteName>
     <MinimumRequiredVersion>1.0.1.4</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
@@ -177,6 +179,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SearchForm.en.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
