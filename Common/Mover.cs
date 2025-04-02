@@ -1,5 +1,9 @@
 #if __MOVERS
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace Common
@@ -114,7 +118,21 @@ namespace Common
         private int _dwMadrigalGiftPoint;
 
         public string DwId { get => _dwId; set { if (_dwId != value) { _dwId = value; NotifyPropertyChanged(); } } }
-        public string SzName { get => _szName; set { if (_szName != value) { _szName = value; NotifyPropertyChanged(); } } }
+        public string SzName 
+        {
+            get => _szName;
+            set 
+            {
+                if (_szName != value)
+                {
+                    Project project = Project.GetInstance();
+                    if (!project.strings.ContainsKey(value))
+                        project.GenerateNewString(value);
+                    _szName = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
         public string DwAi { get => _dwAi; set { if (_dwAi != value) { _dwAi = value; NotifyPropertyChanged(); } } }
         public int DwStr { get => _dwStr; set { if (_dwStr != value) { _dwStr = value; NotifyPropertyChanged(); } } }
         public int DwSta { get => _dwSta; set { if (_dwSta != value) { _dwSta = value; NotifyPropertyChanged(); } } }
@@ -213,8 +231,27 @@ namespace Common
 
         private void Prop_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if(e.PropertyName == nameof(MoverProp.SzName))
-                NotifyPropertyChanged(nameof(Mover.Name));
+            switch(e.PropertyName)
+            {
+                case nameof(MoverProp.SzName):
+                    this.NotifyPropertyChanged(nameof(this.Name));
+                    break;
+                case nameof(MoverProp.DwId):
+                    this.NotifyPropertyChanged(nameof(this.Id));
+                    break;
+                case nameof(MoverProp.EElementType):
+                    this.NotifyPropertyChanged(nameof(this.ElementType));
+                    break;
+                case nameof(MoverProp.DwAi):
+                    this.NotifyPropertyChanged(nameof(this.Type));
+                    break;
+            }
+        }
+
+        private void ProjectStrings_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if(e.Action == NotifyCollectionChangedAction.Reset || (e.OldItems != null && e.OldItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)) || (e.NewItems != null && e.NewItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)))
+                NotifyPropertyChanged(nameof(this.Name));
         }
 
         private MoverProp _prop;
@@ -239,12 +276,23 @@ namespace Common
 
         public ModelElem Model { get => this._model; set { if (value != this.Model) { this._model = value; NotifyPropertyChanged(); } } }
 
-        public string Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; this.Model.DwIndex = value; NotifyPropertyChanged(); } } }
+        public string Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; this.Model.DwIndex = value; } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
 
-        public string Name { get => Project.GetInstance().GetString(Prop.SzName); set { if (value != this.Name) { Project.GetInstance().ChangeStringValue(Prop.SzName, value); NotifyPropertyChanged(); } } }
+        public string Name { get => Project.GetInstance().GetString(Prop.SzName); set { if (value != this.Name) { Project.GetInstance().ChangeStringValue(Prop.SzName, value); } } } // We don't notify changes cause ProjectStrings_CollectionChanged is already doing it
 
-        public string ElementType { get => Project.GetInstance().GetElementNameById(Prop.EElementType); set {  if(value != this.ElementType) { Prop.EElementType = Project.GetInstance().GetElementIdByName(value); NotifyPropertyChanged(); } } }
-        public MoverTypes Type { get => Project.GetInstance().GetMoverType(this); set { if (value != this.Type) { Project.GetInstance().SetMoverType(this, value); NotifyPropertyChanged(); } } }
+        public string ElementType { get => Project.GetInstance().GetElementNameById(Prop.EElementType); set {  if(value != this.ElementType) { Prop.EElementType = Project.GetInstance().GetElementIdByName(value); } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
+        public MoverTypes Type { get => Project.GetInstance().GetMoverType(this); set { if (value != this.Type) { Project.GetInstance().SetMoverType(this, value); } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
+
+        public Mover()
+        {
+            Project.GetInstance().strings.CollectionChanged += ProjectStrings_CollectionChanged;
+        }
+
+        public void Dispose()
+        {
+            Project.GetInstance().strings.CollectionChanged -= ProjectStrings_CollectionChanged;
+            this.Prop.PropertyChanged -= Prop_PropertyChanged;
+        }
     }
 }
 #endif

@@ -51,10 +51,11 @@ namespace MoversEditor
                 cbBelligerence.DataSource = prj.GetBelligerenceIdentifiers();
                 cbClass.DataSource = prj.GetClassIdentifiers();
                 cbMonsterElementType.DataSource = Settings.GetInstance().Elements.Values.ToArray();
-                cbModelBrace.DataSource = prj.GetMoverModelBraces();
                 cbModelBrace.DisplayMember = "SzName";
+                cbModelBrace.DataSource = prj.GetMoverModelBraces();
                 cbType.DataSource = Settings.GetInstance().Types.Keys.ToArray();
-                SetListBoxDataSource();
+                lbMovers.DisplayMember = "Name";
+                lbMovers.DataSource = Project.GetInstance().Movers;
                 //UseWaitCursor = false;
             }
             catch (Exception e) when (e is FileNotFoundException || e is DirectoryNotFoundException || e is MissingDefineException || e is IncorrectlyFormattedFileException)
@@ -86,6 +87,7 @@ namespace MoversEditor
             finally
             {
                 pbFileSaveReload.Visible = false;
+                pbFileSaveReload.Value = 0;
             }
         }
 
@@ -145,7 +147,7 @@ namespace MoversEditor
             LoadFormData();
         }
 
-        private void RefreshFieldsBindings()
+        private void LbMovers_SelectedIndexChanged(object sender, EventArgs e)
         {
             cbType.DataBindings.Clear();
             tbName.DataBindings.Clear();
@@ -185,7 +187,7 @@ namespace MoversEditor
 
             cbType.DataBindings.Add(new Binding("SelectedItem", currentItem, "Type", false, DataSourceUpdateMode.OnPropertyChanged));
             tbName.DataBindings.Add(new Binding("Text", currentItem, "Name", false, DataSourceUpdateMode.OnPropertyChanged));
-            tbIdentifier.DataBindings.Add(new Binding("Text", currentItem, "Id", false, DataSourceUpdateMode.OnValidation));
+            tbIdentifier.DataBindings.Add(new Binding("Text", currentItem, "Id", false, DataSourceUpdateMode.OnPropertyChanged));
             nudMonsterStr.DataBindings.Add(new Binding("Value", currentItem.Prop, "DwStr", true, DataSourceUpdateMode.OnPropertyChanged));
             nudMonsterSta.DataBindings.Add(new Binding("Value", currentItem.Prop, "DwSta", true, DataSourceUpdateMode.OnPropertyChanged));
             nudMonsterDex.DataBindings.Add(new Binding("Value", currentItem.Prop, "DwDex", true, DataSourceUpdateMode.OnPropertyChanged));
@@ -217,11 +219,6 @@ namespace MoversEditor
             cbModelBrace.DataBindings.Add(new Binding("SelectedItem", currentItem.Model, "Brace", false, DataSourceUpdateMode.OnPropertyChanged));
         }
 
-        private void LbMovers_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RefreshFieldsBindings();
-        }
-
         private void CbType_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!(lbMovers.SelectedItem is Mover mover) || !(cbType.SelectedItem is MoverTypes type)) return;
@@ -242,21 +239,9 @@ namespace MoversEditor
             nudExperience.Enabled = type == MoverTypes.MONSTER;
         }
 
-        private void Search()
-        {
-            SearchForm form = new SearchForm();
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                Mover selectedMover = lbMovers.Items.Cast<Mover>().ToArray().FirstOrDefault(x => x.Name.ToLower().Contains(form.Value.ToLower()));
-                if (selectedMover != null)
-                    lbMovers.SelectedItem = selectedMover;
-            }
-        }
-
         private void AddMover()
         {
             Project.GetInstance().AddNewMover();
-            RefreshListBoxDataSource();
             lbMovers.SelectedIndex = lbMovers.Items.Count - 1;
         }
 
@@ -314,6 +299,7 @@ namespace MoversEditor
             finally
             {
                 pbFileSaveReload.Visible = false;
+                pbFileSaveReload.Value = 0;
             }
         }
 
@@ -327,7 +313,13 @@ namespace MoversEditor
 
         private void TsmiMoversSearch_Click(object sender, EventArgs e)
         {
-            Search();
+            SearchForm form = new SearchForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                Mover selectedMover = lbMovers.Items.Cast<Mover>().ToArray().FirstOrDefault(x => x.Name.ToLower().Contains(form.Value.ToLower()));
+                if (selectedMover != null)
+                    lbMovers.SelectedItem = selectedMover;
+            }
         }
 
         private void BtnMotions_Click(object sender, EventArgs e)
@@ -342,21 +334,6 @@ namespace MoversEditor
             {
                 DeleteCurrentMover();
             }
-        }
-
-        private void SetListBoxDataSource()
-        {
-            lbMovers.DataSource = new BindingSource(Project.GetInstance().GetAllMovers(), "");
-            lbMovers.DisplayMember = "Name";
-        }
-
-        private void RefreshListBoxDataSource()
-        {
-            lbMovers.DisplayMember = null;
-            if (lbMovers.DataSource is BindingSource listboxBinding)
-                listboxBinding.Dispose();
-            lbMovers.DataSource = null;
-            SetListBoxDataSource();
         }
 
         private void BtnSelectModelFile_Click(object sender, EventArgs e)
@@ -380,7 +357,7 @@ namespace MoversEditor
         private void TbIdentifier_Validating(object sender, CancelEventArgs e)
         {
             if (!(lbMovers.SelectedItem is Mover mover)) return;
-            if (Project.GetInstance().GetAllMovers().FirstOrDefault(x => x != mover && x.Prop.DwId == tbIdentifier.Text) == null) return;
+            if (Project.GetInstance().Movers.FirstOrDefault(x => x != mover && x.Prop.DwId == tbIdentifier.Text) == null) return;
             e.Cancel = true;
             lblIdentifierAlreadyUsed.Visible = true;
         }
@@ -394,9 +371,6 @@ namespace MoversEditor
         {
             if (!(lbMovers.SelectedItem is Mover mover)) return;
             Project.GetInstance().DeleteMover(mover);
-            int indexSave = lbMovers.SelectedIndex;
-            RefreshListBoxDataSource();
-            lbMovers.SelectedIndex = indexSave < lbMovers.Items.Count ? indexSave : lbMovers.Items.Count - 1;
         }
 
         private void TsmiAbout_Click(object sender, EventArgs e)
@@ -408,17 +382,13 @@ namespace MoversEditor
         {
             if (!(lbMovers.SelectedItem is Mover mover)) return;
             Project.GetInstance().DuplicateMover(mover);
-            RefreshListBoxDataSource();
-            lbMovers.SelectedIndex = lbMovers.Items.Count - 1;
+            this.lbMovers.SelectedIndex = this.lbMovers.Items.Count - 1;
         }
 
         private void TsmiViewExpertEditor_Click(object sender, EventArgs e)
         {
             if (!(lbMovers.SelectedItem is Mover mover)) return;
             new ExpertEditorForm(mover).ShowDialog();
-            this.RefreshFieldsBindings();
-            lbMovers.DisplayMember = null;
-            lbMovers.DisplayMember = "Name";
         }
     }
 }

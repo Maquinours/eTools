@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Concurrent;
 
 using Scan;
 
@@ -21,7 +24,7 @@ namespace Common
         /// <summary>
         /// List of strings (IDS => value)
         /// </summary>
-        private readonly Dictionary<string, string> strings;
+        public readonly ObservableDictionary<string, string> strings;
         /// <summary>
         /// List of defines (identifier => ID)
         /// </summary>
@@ -33,7 +36,7 @@ namespace Common
         /// <summary>
         /// List of movers
         /// </summary>
-        private readonly List<Mover> movers;
+        public BindingList<Mover> Movers { get; private set; }
 #endif // __MOVERS
         /// <summary>
         /// List of models
@@ -57,13 +60,13 @@ namespace Common
         /// </summary>
         private Project()
         {
-            this.strings = new Dictionary<string, string>();
+            this.strings = new ObservableDictionary<string, string>();
             this.defines = new Dictionary<string, int>();
 #if __ITEMS
             this.items = new List<Item>();
 #endif // __ITEMS
 #if __MOVERS
-            this.movers = new List<Mover>();
+            this.Movers = new BindingList<Mover>();
 #endif // __MOVERS
             this.models = new List<MainModelBrace>();
         }
@@ -74,6 +77,13 @@ namespace Common
         /// </summary>
         public void Load(Action<int> reportProgress)
         {
+#if __MOVERS
+            this.ClearMovers();
+#endif
+            this.ClearMotions();
+            this.defines.Clear();
+            this.strings.Clear();
+
             reportProgress?.Invoke(0);
             Settings config = Settings.GetInstance();
             config.Load();
@@ -169,6 +179,31 @@ namespace Common
             {
                 foreach (KeyValuePair<string, string> str in strings)
                     writer.Write($"{str.Key}\t{str.Value}\r\n");
+            }
+        }
+
+        public void GenerateNewString(string stringIdentifier)
+        {
+            if(!this.strings.ContainsKey(stringIdentifier))
+                this.strings.Add(stringIdentifier, "");
+        }
+
+        /// <summary>
+        /// Get the next string identifier available.
+        /// </summary>
+        /// <returns>The next available string</returns>
+        public string GetNextStringIdentifier()
+        {
+            string stringStarter = "IDS_"
+#if __MOVERS
+                + "PROPMOVER_TXT_"
+#endif
+                ;
+            for(int i = 0; true; i++)
+            {
+                string identifier = stringStarter + i.ToString("D6");
+                if (!this.strings.ContainsKey(identifier))
+                    return identifier;
             }
         }
         #endregion
@@ -444,14 +479,12 @@ namespace Common
 #if __MOVERS
         private void LoadMovers(string filePath)
         {
-
-            movers.Clear();
+            this.ClearMovers();
 
             Scanner scanner = new Scanner();
             scanner.Load(filePath);
             while (true)
             {
-                Mover mover = new Mover();
                 MoverProp mp = new MoverProp
                 {
                     DwId = scanner.GetToken()
@@ -467,9 +500,7 @@ namespace Common
                     mp.SzName = scanner.GetToken();
                 if (!mp.SzName.StartsWith("IDS_"))
                 {
-                    int[] stringIntKeys = strings.Select(x => int.Parse(x.Key.Substring(x.Key.Length - 6))).ToArray();
-                    int txtIntKey = stringIntKeys.Length > 0 ? stringIntKeys.Max() + 1 : 0;
-                    string txtKey = $"IDS_PROPMOVER_TXT_{txtIntKey:D6}";
+                    string txtKey = this.GetNextStringIdentifier();
                     this.strings.Add(txtKey, mp.SzName);
                     mp.SzName = txtKey;
                 }
@@ -574,9 +605,7 @@ namespace Common
 
                 if (!mp.SzComment.StartsWith("IDS_"))
                 {
-                    int[] stringIntKeys = strings.Select(x => int.Parse(x.Key.Substring(x.Key.Length - 6))).ToArray();
-                    int txtIntKey = stringIntKeys.Length > 0 ? stringIntKeys.Max() + 1 : 0;
-                    string txtKey = $"IDS_PROPMOVER_TXT_{txtIntKey:D6}";
+                    string txtKey = this.GetNextStringIdentifier();
                     this.strings.Add(txtKey, mp.SzComment);
                     mp.SzComment = txtKey;
                 }
@@ -600,8 +629,12 @@ namespace Common
                     this.strings.Add(mp.SzName, "");          // If IDS is not defined, we add it to be defined.
                 if (!this.strings.ContainsKey(mp.SzComment))
                     this.strings.Add(mp.SzComment, "");          // If IDS is not defined, we add it to be defined.
-                mover.Prop = mp;
-                movers.Add(mover);
+                this.Movers.Add(
+                    new Mover()
+                    {
+                        Prop = mp
+                    }
+                );
             }
             scanner.Close();
         }
@@ -614,7 +647,7 @@ namespace Common
                 writer.WriteLine("// Generated by eTools - Movers Editor");
                 writer.WriteLine("// https://github.com/Maquinours/eTools");
                 writer.WriteLine("// ========================================");
-                foreach (Mover mover in movers)
+                foreach (Mover mover in this.Movers)
                 {
                     MoverProp prop = mover.Prop;
 
@@ -812,13 +845,19 @@ namespace Common
         {
             int[] stringIntKeys = strings.Select(x => int.Parse(x.Key.Substring(x.Key.Length - 6))).ToArray();
             int txtIntKey = stringIntKeys.Length > 0 ? stringIntKeys.Max() + 1 : 0;
+            string szName = this.GetNextStringIdentifier();
+            strings.Add(szName, "");
+            string szComment = this.GetNextStringIdentifier();
+            strings.Add(szComment, "");
+
+            int modelType = defines["OT_MOVER"];
 
             Mover mover = new Mover()
             {
                 Prop = new MoverProp
                 {
                     DwId = "MI_",
-                    SzName = $"IDS_PROPMOVER_TXT_{txtIntKey:D6}",
+                    SzName = szName,
                     DwAi = "AII_NONE",
                     DwStr = -1,
                     DwSta = -1,
@@ -906,13 +945,13 @@ namespace Common
                     DwSndIdle1 = "=",
                     DwSndIdle2 = "=",
 
-                    SzComment = $"IDS_PROPMOVER_TXT_{txtIntKey + 1:D6}",
+                    SzComment = szComment,
                     SzNpcMark = "=",
                     DwMadrigalGiftPoint = 0
                 },
                 Model = new ModelElem
                 {
-                    DwType = defines["OT_MOVER"],
+                    DwType = modelType,
                     SzName = "",
                     DwIndex = "MI_",
                     DwModelType = "MODELTYPE_ANIMATED_MESH",
@@ -924,13 +963,11 @@ namespace Common
                     BTrans = 0,
                     BShadow = 1,
                     NTextureEx = "ATEX_NONE",
-                    BRenderFlag = 1
+                    BRenderFlag = 1,
+                    Brace = GetBracesByType(modelType).First(),
                 }
             };
-            movers.Add(mover);
-            strings.Add($"IDS_PROPMOVER_TXT_{txtIntKey:D6}", "");
-            strings.Add($"IDS_PROPMOVER_TXT_{txtIntKey + 1:D6}", "");
-            mover.Model.Brace = GetBracesByType(defines["OT_MOVER"]).First();
+            this.Movers.Add(mover);
         }
 
         public void DuplicateMover(Mover mover)
@@ -938,12 +975,17 @@ namespace Common
             int[] stringIntKeys = strings.Select(x => int.Parse(x.Key.Substring(x.Key.Length - 6))).ToArray();
             int txtIntKey = stringIntKeys.Length > 0 ? stringIntKeys.Max() + 1 : 0;
 
+            string szName = this.GetNextStringIdentifier();
+            strings.Add(szName, mover.Name);
+            string szComment = this.GetNextStringIdentifier();
+            strings.Add(szComment, this.GetString(mover.Prop.SzComment));
+
             Mover duplicatedMover = new Mover()
             {
                 Prop = new MoverProp
                 {
                     DwId = "MI_",
-                    SzName = $"IDS_PROPMOVER_TXT_{txtIntKey:D6}",
+                    SzName = szName,
                     DwAi = mover.Prop.DwAi,
                     DwStr = mover.Prop.DwStr,
                     DwSta = mover.Prop.DwSta,
@@ -1033,7 +1075,7 @@ namespace Common
                     DwSndIdle1 = mover.Prop.DwSndIdle1,
                     DwSndIdle2 = mover.Prop.DwSndIdle2,
 
-                    SzComment = $"IDS_PROPMOVER_TXT_{txtIntKey + 1:D6}",
+                    SzComment = szComment,
                     SzNpcMark = mover.Prop.SzNpcMark,
                     DwMadrigalGiftPoint = mover.Prop.DwMadrigalGiftPoint
                 },
@@ -1055,14 +1097,12 @@ namespace Common
                     Brace = mover.Model.Brace,
                 }
             };
-            strings.Add(duplicatedMover.Prop.SzName, mover.Name);
-            strings.Add(duplicatedMover.Prop.SzComment, this.GetString(mover.Prop.SzComment));
-            movers.Add(duplicatedMover);
+            this.Movers.Add(duplicatedMover);
         }
 
         public string[] GetMoversName()
         {
-            return movers.Select(x => x.Name).ToArray();
+            return this.Movers.Select(x => x.Name).ToArray();
         }
 
         public void SetMoverType(Mover mover, MoverTypes type)
@@ -1128,16 +1168,11 @@ namespace Common
                 type == MoverTypes.NPC || type == MoverTypes.CHARACTER ? new string[] { GetClassIdentifiers().FirstOrDefault(x => x == "RANK_CITIZEN") ?? "=" } : new string[] { "RANK_LOW" };
         }
 
-        public Mover[] GetAllMovers()
-        {
-            return movers.ToArray();
-        }
-
         public Mover GetMoverById(string dwId)
         {
             try
             {
-                return movers.First(x => x.Prop.DwId == dwId);
+                return this.Movers.First(x => x.Prop.DwId == dwId);
             }
             catch (InvalidOperationException) // If no mover find
             {
@@ -1145,9 +1180,25 @@ namespace Common
             }
         }
 
+        public void ChangeMoverNameIdentifier(Mover mover, string nameIdentifier)
+        {
+            if (mover == null || nameIdentifier == null) throw new Exception("Project::ChangeMoverNameIdentifier : mover or nameIdentifier is null");
+            if (!this.strings.ContainsKey(nameIdentifier))
+                this.strings.Add(nameIdentifier, "");
+            mover.Prop.SzName = nameIdentifier;
+        }
+
         public void DeleteMover(Mover mover)
         {
-            movers.Remove(mover);
+            mover.Dispose();
+            this.Movers.Remove(mover);
+        }
+
+        public void ClearMovers()
+        {
+            foreach (Mover mover in this.Movers)
+                mover.Dispose();
+            this.Movers.Clear();
         }
 #endif // __MOVERS
         #endregion
@@ -1236,9 +1287,7 @@ namespace Common
 #if __ITEMS
             if (!defines.ContainsKey("OT_ITEM")) throw new MissingDefineException("OT_ITEM");
 #endif // __ITEMS
-            foreach (MainModelBrace brace in this.models) // Avoid memory leaks
-                ClearBraceRecursively(brace);
-            this.models.Clear();
+            this.ClearMotions();
             Scanner scanner = new Scanner();
             scanner.Load(filePath);
 
@@ -1340,7 +1389,7 @@ namespace Common
                 }
             }
 #if __MOVERS
-            foreach(Mover mover in this.movers.Where(x => x.Model == null)) // We add a default model for each mover who doesn't have any
+            foreach(Mover mover in this.Movers.Where(x => x.Model == null)) // We add a default model for each mover who doesn't have any
             {
                 mover.Model = new ModelElem
                 {
@@ -1483,6 +1532,13 @@ namespace Common
         public string[] GetAvalaibleMotionsFilesByModel(ModelElem model)
         {
             return Directory.GetFiles(Settings.GetInstance().ResourcePath + "Model\\", $"mvr_{model.SzName}*.ani").Select(x => Path.GetFileNameWithoutExtension(x).Remove(0, $"mvr_{model.SzName}_".Length)).ToArray();
+        }
+
+        public void ClearMotions()
+        {
+            foreach (MainModelBrace brace in this.models) // Avoid memory leaks
+                ClearBraceRecursively(brace);
+            this.models.Clear();
         }
 #endregion
     }
