@@ -843,8 +843,6 @@ namespace Common
 
         public void AddNewMover()
         {
-            int[] stringIntKeys = strings.Select(x => int.Parse(x.Key.Substring(x.Key.Length - 6))).ToArray();
-            int txtIntKey = stringIntKeys.Length > 0 ? stringIntKeys.Max() + 1 : 0;
             string szName = this.GetNextStringIdentifier();
             strings.Add(szName, "");
             string szComment = this.GetNextStringIdentifier();
@@ -972,9 +970,6 @@ namespace Common
 
         public void DuplicateMover(Mover mover)
         {
-            int[] stringIntKeys = strings.Select(x => int.Parse(x.Key.Substring(x.Key.Length - 6))).ToArray();
-            int txtIntKey = stringIntKeys.Length > 0 ? stringIntKeys.Max() + 1 : 0;
-
             string szName = this.GetNextStringIdentifier();
             strings.Add(szName, mover.Name);
             string szComment = this.GetNextStringIdentifier();
