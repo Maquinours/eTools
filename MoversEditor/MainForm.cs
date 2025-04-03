@@ -24,7 +24,6 @@ namespace MoversEditor
         public MainForm()
         {
             InitializeComponent();
-            SetSearchTextBoxPlaceHolder();
         }
 
         private async void LoadFormData()
@@ -397,34 +396,6 @@ namespace MoversEditor
             new ExpertEditorForm(mover).ShowDialog();
         }
 
-        private void SetSearchTextBoxPlaceHolder()
-        {
-            if (String.IsNullOrWhiteSpace(this.tbSearch.Text))
-            {
-                tbSearch.Text = "Search...";
-                tbSearch.ForeColor = Color.Gray;
-            } else
-            {
-                tbSearch.ForeColor = Color.Black;
-            }
-                tbSearch.GotFocus += (s, e) =>
-                {
-                    if (tbSearch.ForeColor == Color.Gray) // Placeholder
-                    {
-                        tbSearch.Text = "";
-                        tbSearch.ForeColor = Color.Black;
-                    }
-                };
-            tbSearch.LostFocus += (s, e) =>
-            {
-                if (String.IsNullOrWhiteSpace(tbSearch.Text))
-                {
-                    tbSearch.ForeColor = Color.Gray;
-                    tbSearch.Text = "Search...";
-                }
-            };
-        }
-
         private void SetSearchTextBoxAutoComplete() // TODO: remove this as we don't use autocomplete anymore on search text box
         {
             AutoCompleteStringCollection namesSource = new AutoCompleteStringCollection();
@@ -440,7 +411,7 @@ namespace MoversEditor
 
         private void TbSearch_TextChanged(object sender, EventArgs e)
         {
-            if (this.tbSearch.ForeColor == Color.Gray || String.IsNullOrWhiteSpace(this.tbSearch.Text)) // If placeholder or search text is blank
+            if (String.IsNullOrWhiteSpace(this.tbSearch.Text))
                 this.lbMovers.DataSource = Project.GetInstance().Movers;
             else
                 this.lbMovers.DataSource = new BindingList<Mover>(Project.GetInstance().Movers.Where(x => x.Name.ToLower().Contains(this.tbSearch.Text.Trim().ToLower())).ToList());
