@@ -23,6 +23,7 @@ namespace MoversEditor
         public MainForm()
         {
             InitializeComponent();
+            SetSearchTextBoxPlaceHolder();
         }
 
         private async void LoadFormData()
@@ -55,7 +56,10 @@ namespace MoversEditor
                 cbModelBrace.DataSource = prj.GetMoverModelBraces();
                 cbType.DataSource = Settings.GetInstance().Types.Keys.ToArray();
                 lbMovers.DisplayMember = "Name";
-                lbMovers.DataSource = Project.GetInstance().Movers;
+                lbMovers.DataSource = prj.Movers;
+                prj.Movers.ListChanged -= Movers_ListChanged;
+                prj.Movers.ListChanged += Movers_ListChanged;
+                SetSearchTextBoxAutoComplete();
                 //UseWaitCursor = false;
             }
             catch (Exception e) when (e is FileNotFoundException || e is DirectoryNotFoundException || e is MissingDefineException || e is IncorrectlyFormattedFileException)
@@ -182,8 +186,7 @@ namespace MoversEditor
             nudModelScale.DataBindings.Clear();
             cbModelBrace.DataBindings.Clear();
 
-            Mover currentItem = ((Mover)lbMovers.SelectedItem);
-            if (currentItem == null) return;
+            if (!(lbMovers.SelectedItem is Mover currentItem)) return;
 
             cbType.DataBindings.Add(new Binding("SelectedItem", currentItem, "Type", false, DataSourceUpdateMode.OnPropertyChanged));
             tbName.DataBindings.Add(new Binding("Text", currentItem, "Name", false, DataSourceUpdateMode.OnPropertyChanged));
@@ -313,13 +316,15 @@ namespace MoversEditor
 
         private void TsmiMoversSearch_Click(object sender, EventArgs e)
         {
-            SearchForm form = new SearchForm();
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                Mover selectedMover = lbMovers.Items.Cast<Mover>().ToArray().FirstOrDefault(x => x.Name.ToLower().Contains(form.Value.ToLower()));
-                if (selectedMover != null)
-                    lbMovers.SelectedItem = selectedMover;
-            }
+            this.tbSearch.Focus();
+            // TODO: remove this
+            //SearchForm form = new SearchForm(); 
+            //if (form.ShowDialog() == DialogResult.OK)
+            //{
+            //    Mover selectedMover = lbMovers.Items.Cast<Mover>().ToArray().FirstOrDefault(x => x.Name.ToLower().Contains(form.Value.ToLower()));
+            //    if (selectedMover != null)
+            //        lbMovers.SelectedItem = selectedMover;
+            //}
         }
 
         private void BtnMotions_Click(object sender, EventArgs e)
@@ -389,6 +394,55 @@ namespace MoversEditor
         {
             if (!(lbMovers.SelectedItem is Mover mover)) return;
             new ExpertEditorForm(mover).ShowDialog();
+        }
+
+        private void SetSearchTextBoxPlaceHolder()
+        {
+            if (String.IsNullOrWhiteSpace(this.tbSearch.Text))
+            {
+                tbSearch.Text = "Search...";
+                tbSearch.ForeColor = Color.Gray;
+            } else
+            {
+                tbSearch.ForeColor = Color.Black;
+            }
+                tbSearch.GotFocus += (s, e) =>
+                {
+                    if (tbSearch.ForeColor == Color.Gray) // Placeholder
+                    {
+                        tbSearch.Text = "";
+                        tbSearch.ForeColor = Color.Black;
+                    }
+                };
+            tbSearch.LostFocus += (s, e) =>
+            {
+                if (String.IsNullOrWhiteSpace(tbSearch.Text))
+                {
+                    tbSearch.ForeColor = Color.Gray;
+                    tbSearch.Text = "Search...";
+                }
+            };
+        }
+
+        private void SetSearchTextBoxAutoComplete() // TODO: remove this as we don't use autocomplete anymore on search text box
+        {
+            AutoCompleteStringCollection namesSource = new AutoCompleteStringCollection();
+            namesSource.AddRange(Project.GetInstance().Movers.Select(x => x.Name).ToArray());
+            tbSearch.AutoCompleteCustomSource = namesSource;
+
+        }
+
+        private void Movers_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            SetSearchTextBoxAutoComplete();
+        }
+
+        private void TbSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (this.tbSearch.ForeColor == Color.Gray || String.IsNullOrWhiteSpace(this.tbSearch.Text)) // If placeholder or search text is blank
+                this.lbMovers.DataSource = Project.GetInstance().Movers;
+            else
+                this.lbMovers.DataSource = new BindingList<Mover>(Project.GetInstance().Movers.Where(x => x.Name.ToLower().Contains(this.tbSearch.Text.Trim().ToLower())).ToList());
         }
     }
 }

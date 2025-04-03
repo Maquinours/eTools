@@ -125,6 +125,8 @@
             this.lbMovers = new System.Windows.Forms.ListBox();
             this.tooltip = new System.Windows.Forms.ToolTip(this.components);
             this.pbFileSaveReload = new System.Windows.Forms.ProgressBar();
+            this.pnlList = new System.Windows.Forms.Panel();
+            this.tbSearch = new System.Windows.Forms.TextBox();
             this.tcMover.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.gbGeneralConfiguration.SuspendLayout();
@@ -161,6 +163,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudMonsterArmor)).BeginInit();
             this.msMain.SuspendLayout();
             this.cmsLbMovers.SuspendLayout();
+            this.pnlList.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcMover
@@ -906,8 +909,8 @@
             // 
             // lbMovers
             // 
-            resources.ApplyResources(this.lbMovers, "lbMovers");
             this.lbMovers.FormattingEnabled = true;
+            resources.ApplyResources(this.lbMovers, "lbMovers");
             this.lbMovers.Name = "lbMovers";
             this.lbMovers.SelectedIndexChanged += new System.EventHandler(this.LbMovers_SelectedIndexChanged);
             this.lbMovers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LbMovers_KeyDown);
@@ -918,13 +921,27 @@
             resources.ApplyResources(this.pbFileSaveReload, "pbFileSaveReload");
             this.pbFileSaveReload.Name = "pbFileSaveReload";
             // 
+            // pnlList
+            // 
+            this.pnlList.Controls.Add(this.tbSearch);
+            this.pnlList.Controls.Add(this.lbMovers);
+            resources.ApplyResources(this.pnlList, "pnlList");
+            this.pnlList.Name = "pnlList";
+            // 
+            // tbSearch
+            // 
+            this.tbSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            resources.ApplyResources(this.tbSearch, "tbSearch");
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.TextChanged += new System.EventHandler(this.TbSearch_TextChanged);
+            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pbFileSaveReload);
+            this.Controls.Add(this.pnlList);
             this.Controls.Add(this.tcMover);
-            this.Controls.Add(this.lbMovers);
             this.Controls.Add(this.msMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.msMain;
@@ -974,6 +991,8 @@
             this.msMain.ResumeLayout(false);
             this.msMain.PerformLayout();
             this.cmsLbMovers.ResumeLayout(false);
+            this.pnlList.ResumeLayout(false);
+            this.pnlList.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1075,6 +1094,8 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiView;
         private System.Windows.Forms.ToolStripMenuItem tsmiViewExpertEditor;
         private System.Windows.Forms.ProgressBar pbFileSaveReload;
+        private System.Windows.Forms.Panel pnlList;
+        private System.Windows.Forms.TextBox tbSearch;
     }
 }
 
