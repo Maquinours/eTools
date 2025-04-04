@@ -42,6 +42,8 @@
             this.btnSelectStringFile = new System.Windows.Forms.Button();
             this.lblGameVersion = new System.Windows.Forms.Label();
             this.nudGameVersion = new System.Windows.Forms.NumericUpDown();
+            this.chckb64BitsHp = new System.Windows.Forms.CheckBox();
+            this.chckb64BitsAtk = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudGameVersion)).BeginInit();
             this.SuspendLayout();
             // 
@@ -135,12 +137,26 @@
             0,
             0});
             // 
+            // chckb64BitsHp
+            // 
+            resources.ApplyResources(this.chckb64BitsHp, "chckb64BitsHp");
+            this.chckb64BitsHp.Name = "chckb64BitsHp";
+            this.chckb64BitsHp.UseVisualStyleBackColor = true;
+            // 
+            // chckb64BitsAtk
+            // 
+            resources.ApplyResources(this.chckb64BitsAtk, "chckb64BitsAtk");
+            this.chckb64BitsAtk.Name = "chckb64BitsAtk";
+            this.chckb64BitsAtk.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             this.AcceptButton = this.btnApply;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
+            this.Controls.Add(this.chckb64BitsAtk);
+            this.Controls.Add(this.chckb64BitsHp);
             this.Controls.Add(this.nudGameVersion);
             this.Controls.Add(this.lblGameVersion);
             this.Controls.Add(this.btnSelectStringFile);
@@ -178,5 +194,7 @@
         private System.Windows.Forms.Button btnSelectStringFile;
         private System.Windows.Forms.Label lblGameVersion;
         private System.Windows.Forms.NumericUpDown nudGameVersion;
+        private System.Windows.Forms.CheckBox chckb64BitsHp;
+        private System.Windows.Forms.CheckBox chckb64BitsAtk;
     }
 }

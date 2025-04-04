@@ -50,8 +50,8 @@ namespace Common
         private int _nChaotic;
         private int _dwUseable;
         private int _dwActionRadius;
-        private int _dwAtkMin;
-        private int _dwAtkMax;
+        private long _dwAtkMin;
+        private long _dwAtkMax;
         private string _dwAtk1;
         private string _dwAtk2;
         private string _dwAtk3;
@@ -65,7 +65,7 @@ namespace Common
         private int _dwLegRate;
         private int _dwAttackSpeed;
         private int _dwReAttackDelay;
-        private int _dwAddHp;
+        private long _dwAddHp;
         private int _dwAddMp;
         private int _dwNaturalArmor;
         private int _nAbrasion;
@@ -151,8 +151,8 @@ namespace Common
         public int NChaotic { get => _nChaotic; set { if (_nChaotic != value) { _nChaotic = value; NotifyPropertyChanged(); } } }
         public int DwUseable { get => _dwUseable; set { if (_dwUseable != value) { _dwUseable = value; NotifyPropertyChanged(); } } }
         public int DwActionRadius { get => _dwActionRadius; set { if (_dwActionRadius != value) { _dwActionRadius = value; NotifyPropertyChanged(); } } }
-        public int DwAtkMin { get => _dwAtkMin; set { if (_dwAtkMin != value) { _dwAtkMin = value; NotifyPropertyChanged(); } } }
-        public int DwAtkMax { get => _dwAtkMax; set { if (_dwAtkMax != value) { _dwAtkMax = value; NotifyPropertyChanged(); } } }
+        public long DwAtkMin { get => _dwAtkMin; set { if (_dwAtkMin != value) { _dwAtkMin = value; NotifyPropertyChanged(); } } } // We set it to long to handle 64 bits attack configurations
+        public long DwAtkMax { get => _dwAtkMax; set { if (_dwAtkMax != value) { _dwAtkMax = value; NotifyPropertyChanged(); } } }
         public string DwAtk1 { get => _dwAtk1; set { if (_dwAtk1 != value) { _dwAtk1 = value; NotifyPropertyChanged(); } } }
         public string DwAtk2 { get => _dwAtk2; set { if (_dwAtk2 != value) { _dwAtk2 = value; NotifyPropertyChanged(); } } }
         public string DwAtk3 { get => _dwAtk3; set { if (_dwAtk3 != value) { _dwAtk3 = value; NotifyPropertyChanged(); } } }
@@ -166,7 +166,7 @@ namespace Common
         public int DwLegRate { get => _dwLegRate; set { if (_dwLegRate != value) { _dwLegRate = value; NotifyPropertyChanged(); } } }
         public int DwAttackSpeed { get => _dwAttackSpeed; set { if (_dwAttackSpeed != value) { _dwAttackSpeed = value; NotifyPropertyChanged(); } } }
         public int DwReAttackDelay { get => _dwReAttackDelay; set { if (_dwReAttackDelay != value) { _dwReAttackDelay = value; NotifyPropertyChanged(); } } }
-        public int DwAddHp { get => _dwAddHp; set { if (_dwAddHp != value) { _dwAddHp = value; NotifyPropertyChanged(); } } }
+        public long DwAddHp { get => _dwAddHp; set { if (_dwAddHp != value) { _dwAddHp = value; NotifyPropertyChanged(); } } }
         public int DwAddMp { get => _dwAddMp; set { if (_dwAddMp != value) { _dwAddMp = value; NotifyPropertyChanged(); } } }
         public int DwNaturalArmor { get => _dwNaturalArmor; set { if (_dwNaturalArmor != value) { _dwNaturalArmor = value; NotifyPropertyChanged(); } } }
         public int NAbrasion { get => _nAbrasion; set { if (_nAbrasion != value) { _nAbrasion = value; NotifyPropertyChanged(); } } }

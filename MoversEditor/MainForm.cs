@@ -57,6 +57,7 @@ namespace MoversEditor
                 cbType.DataSource = Settings.GetInstance().Types.Keys.ToArray();
                 lbMovers.DisplayMember = "Name";
                 lbMovers.DataSource = prj.Movers;
+                this.SetNumericUpDownLimits();
                 prj.Movers.ListChanged -= Movers_ListChanged;
                 prj.Movers.ListChanged += Movers_ListChanged;
                 SetSearchTextBoxAutoComplete();
@@ -309,9 +310,13 @@ namespace MoversEditor
         private void TsmiSettings_Click(object sender, EventArgs e)
         {
             SettingsForm settingsForm = new SettingsForm();
-            if(settingsForm.ShowDialog() == DialogResult.OK && settingsForm.ContainsChanges)
+            if (settingsForm.ShowDialog() == DialogResult.OK && settingsForm.ContainsChanges)
+            {
                 if (MessageBox.Show("Some settings have changed. Would you like to reload the data with the new settings?", "Settings changed", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     ReloadFormData();
+                else
+                    this.SetNumericUpDownLimits();
+            }
         }
 
         private void TsmiMoversSearch_Click(object sender, EventArgs e)
@@ -443,6 +448,25 @@ namespace MoversEditor
                 this.lbMovers.DataSource = Project.GetInstance().Movers;
             else
                 this.lbMovers.DataSource = new BindingList<Mover>(Project.GetInstance().Movers.Where(x => x.Name.ToLower().Contains(this.tbSearch.Text.Trim().ToLower())).ToList());
+        }
+
+        private void SetNumericUpDownLimits()
+        {
+            Settings settings = Settings.GetInstance();
+            if (settings.Use64BitsAttack)
+            {
+                nudMonsterAttackMin.Maximum = long.MaxValue;
+                nudMonsterAttackMax.Maximum = long.MaxValue;
+            }
+            else
+            {
+                nudMonsterAttackMin.Maximum = int.MaxValue;
+                nudMonsterAttackMax.Maximum = int.MaxValue;
+            }
+            if (settings.Use64BitsHp)
+                nudMonsterHp.Maximum = long.MaxValue;
+            else
+                nudMonsterHp.Maximum = int.MaxValue;
         }
     }
 }

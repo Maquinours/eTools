@@ -43,6 +43,8 @@ namespace Common
 #endif // __ITEMS
 #if __MOVERS
         public Dictionary<MoverTypes, MoverType> Types { get; set; }
+        public bool Use64BitsAttack { get; set; } = false;
+        public bool Use64BitsHp { get; set; } = false;
 #endif // __MOVERS
         private string SettingsFolderPath { get => $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\\eTools\\"; }
         private string GeneralSettingsFilePath { get => $"{SettingsFolderPath}eTools.ini"; }
@@ -152,6 +154,8 @@ namespace Common
 #endif // __ITEMS
 #if __MOVERS
             Types.Clear();
+            Use64BitsAttack = false;
+            Use64BitsHp = false;
 #endif // __MOVERS
 
             Scanner scanner = new Scanner();
@@ -201,6 +205,12 @@ namespace Common
                             MoverType moverType = new MoverType() { Identifiers = identifiers.ToArray() };
                             Types.Add((MoverTypes)Enum.Parse(typeof(MoverTypes), type), moverType);
                         }
+                        break;
+                    case "Use64BitsAttack":
+                        Use64BitsAttack = true;
+                        break;
+                    case "Use64BitsHp":
+                        Use64BitsHp = true;
                         break;
 #endif // __MOVERS
                 }
@@ -264,6 +274,10 @@ namespace Common
                     writer.WriteLine("\t}");
                 }
                 writer.WriteLine("}");
+                if(this.Use64BitsAttack)
+                    writer.WriteLine("Use64BitsAttack");
+                if (this.Use64BitsHp)
+                    writer.WriteLine("Use64BitsHp");
 #endif // __MOVERS
             }
         }

@@ -481,6 +481,8 @@ namespace Common
         {
             this.ClearMovers();
 
+            Settings settings = Settings.GetInstance();
+
             Scanner scanner = new Scanner();
             scanner.Load(filePath);
             while (true)
@@ -526,8 +528,16 @@ namespace Common
                 mp.NChaotic = scanner.GetNumber();
                 mp.DwUseable = scanner.GetNumber();
                 mp.DwActionRadius = scanner.GetNumber();
-                mp.DwAtkMin = scanner.GetNumber();
-                mp.DwAtkMax = scanner.GetNumber();
+                if (settings.Use64BitsAttack)
+                {
+                    mp.DwAtkMin = scanner.GetInt64();
+                    mp.DwAtkMax = scanner.GetInt64();
+                }
+                else
+                {
+                    mp.DwAtkMin = scanner.GetNumber();
+                    mp.DwAtkMax = scanner.GetNumber();
+                }
                 mp.DwAtk1 = scanner.GetToken();     // Need expert mode to change
                 mp.DwAtk2 = scanner.GetToken();     // Need expert mode to change
                 mp.DwAtk3 = scanner.GetToken();     // Need expert mode to change
@@ -543,7 +553,10 @@ namespace Common
 
                 mp.DwAttackSpeed = scanner.GetNumber(); // Useless
                 mp.DwReAttackDelay = scanner.GetNumber();
-                mp.DwAddHp = scanner.GetNumber();
+                if (settings.Use64BitsHp)
+                    mp.DwAddHp = scanner.GetInt64();
+                else
+                    mp.DwAddHp = scanner.GetNumber();
                 mp.DwAddMp = scanner.GetNumber();
                 mp.DwNaturalArmor = scanner.GetNumber();
                 mp.NAbrasion = scanner.GetNumber();
@@ -610,7 +623,7 @@ namespace Common
                     mp.SzComment = txtKey;
                 }
 
-                if (Settings.GetInstance().ResourceVersion >= 19)
+                if (settings.ResourceVersion >= 19)
                 {
                     mp.DwAreaColor = scanner.GetToken(); // Useless
                     mp.SzNpcMark = scanner.GetToken(); // Useless
