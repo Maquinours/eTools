@@ -22,7 +22,6 @@ namespace MoversEditor
     {
         public MainForm()
         {
-            System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("he-IL");
             InitializeComponent();
             SetSearchTextBoxPlaceHolder();
         }
