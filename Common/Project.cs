@@ -564,8 +564,9 @@ namespace Common
                 mp.DwAdjAtkDelay = scanner.GetNumber();
 
                 mp.EElementType = scanner.GetNumber();
-                mp.WElementAtk = scanner.GetNumber(); // The atk and def value from element
-                // if (mp.WElementAtk > short.MaxValue) return false; // ERROR
+                int elementAtk = scanner.GetNumber();
+                 if (elementAtk < short.MinValue || elementAtk > short.MaxValue) throw new Exception($"WElementAtk from mover {mp.DwId} value is below or above max short value : {elementAtk}"); // ERROR
+                mp.WElementAtk = (short)elementAtk; // The atk and def value from element
 
                 mp.DwHideLevel = scanner.GetNumber(); // Expert mode
                 mp.FSpeed = scanner.GetFloat(); // Speed

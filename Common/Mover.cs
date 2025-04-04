@@ -72,7 +72,7 @@ namespace Common
         private int _nHardness;
         private int _dwAdjAtkDelay;
         private int _eElementType;
-        private int _wElementAtk;
+        private short _wElementAtk;
         private int _dwHideLevel;
         private float _fSpeed;
         private int _dwShelter;
@@ -173,7 +173,7 @@ namespace Common
         public int NHardness { get => _nHardness; set { if (_nHardness != value) { _nHardness = value; NotifyPropertyChanged(); } } }
         public int DwAdjAtkDelay { get => _dwAdjAtkDelay; set { if (_dwAdjAtkDelay != value) { _dwAdjAtkDelay = value; NotifyPropertyChanged(); } } }
         public int EElementType { get => _eElementType; set { if (_eElementType != value) { _eElementType = value; NotifyPropertyChanged(); } } }
-        public int WElementAtk { get => _wElementAtk; set { if (_wElementAtk != value) { _wElementAtk = value; NotifyPropertyChanged(); } } }
+        public short WElementAtk { get => _wElementAtk; set { if (_wElementAtk != value) { _wElementAtk = value; NotifyPropertyChanged(); } } }
         public int DwHideLevel { get => _dwHideLevel; set { if (_dwHideLevel != value) { _dwHideLevel = value; NotifyPropertyChanged(); } } }
         public float FSpeed { get => _fSpeed; set { if (_fSpeed != value) { _fSpeed = value; NotifyPropertyChanged(); } } }
         public int DwShelter { get => _dwShelter; set { if (_dwShelter != value) { _dwShelter = value; NotifyPropertyChanged(); } } }

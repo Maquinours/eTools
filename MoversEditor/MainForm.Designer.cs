@@ -215,9 +215,14 @@
             resources.ApplyResources(this.nudModelScale, "nudModelScale");
             this.nudModelScale.Maximum = new decimal(new int[] {
             -1,
-            0,
-            0,
+            -1,
+            -1,
             0});
+            this.nudModelScale.Minimum = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            -2147483648});
             this.nudModelScale.Name = "nudModelScale";
             // 
             // btnSelectModelFile
@@ -285,16 +290,26 @@
             2147483647,
             0,
             0});
+            this.nudExperience.Minimum = new decimal(new int[] {
+            0,
+            -2147483648,
+            0,
+            -2147483648});
             this.nudExperience.Name = "nudExperience";
             // 
             // nudLevel
             // 
             resources.ApplyResources(this.nudLevel, "nudLevel");
             this.nudLevel.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudLevel.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudLevel.Name = "nudLevel";
             // 
             // cbAi
@@ -439,10 +454,15 @@
             // 
             resources.ApplyResources(this.nudMonsterElectricityResistance, "nudMonsterElectricityResistance");
             this.nudMonsterElectricityResistance.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterElectricityResistance.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterElectricityResistance.Name = "nudMonsterElectricityResistance";
             // 
             // nudMonsterFireResistance
@@ -513,6 +533,11 @@
             0,
             0,
             0});
+            this.nudMonsterElementValue.Minimum = new decimal(new int[] {
+            32768,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterElementValue.Name = "nudMonsterElementValue";
             // 
             // cbMonsterElementType
@@ -584,80 +609,120 @@
             // 
             resources.ApplyResources(this.nudMonsterMp, "nudMonsterMp");
             this.nudMonsterMp.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterMp.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterMp.Name = "nudMonsterMp";
             // 
             // nudMonsterHp
             // 
             resources.ApplyResources(this.nudMonsterHp, "nudMonsterHp");
             this.nudMonsterHp.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterHp.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterHp.Name = "nudMonsterHp";
             // 
             // nudMonsterHr
             // 
             resources.ApplyResources(this.nudMonsterHr, "nudMonsterHr");
             this.nudMonsterHr.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterHr.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterHr.Name = "nudMonsterHr";
             // 
             // nudMonsterEr
             // 
             resources.ApplyResources(this.nudMonsterEr, "nudMonsterEr");
             this.nudMonsterEr.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterEr.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterEr.Name = "nudMonsterEr";
             // 
             // nudMonsterInt
             // 
             resources.ApplyResources(this.nudMonsterInt, "nudMonsterInt");
             this.nudMonsterInt.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterInt.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterInt.Name = "nudMonsterInt";
             // 
             // nudMonsterDex
             // 
             resources.ApplyResources(this.nudMonsterDex, "nudMonsterDex");
             this.nudMonsterDex.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterDex.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterDex.Name = "nudMonsterDex";
             // 
             // nudMonsterSta
             // 
             resources.ApplyResources(this.nudMonsterSta, "nudMonsterSta");
             this.nudMonsterSta.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterSta.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterSta.Name = "nudMonsterSta";
             // 
             // nudMonsterStr
             // 
             resources.ApplyResources(this.nudMonsterStr, "nudMonsterStr");
             this.nudMonsterStr.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterStr.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterStr.Name = "nudMonsterStr";
             // 
             // lblMonsterEr
@@ -724,59 +789,89 @@
             resources.ApplyResources(this.nudMonsterSpeed, "nudMonsterSpeed");
             this.nudMonsterSpeed.Maximum = new decimal(new int[] {
             -1,
-            0,
-            0,
+            -1,
+            -1,
             0});
+            this.nudMonsterSpeed.Minimum = new decimal(new int[] {
+            -1,
+            -1,
+            -1,
+            -2147483648});
             this.nudMonsterSpeed.Name = "nudMonsterSpeed";
             // 
             // nudMonsterAttackDelay
             // 
             resources.ApplyResources(this.nudMonsterAttackDelay, "nudMonsterAttackDelay");
             this.nudMonsterAttackDelay.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterAttackDelay.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterAttackDelay.Name = "nudMonsterAttackDelay";
             // 
             // nudMonsterAttackMax
             // 
             resources.ApplyResources(this.nudMonsterAttackMax, "nudMonsterAttackMax");
             this.nudMonsterAttackMax.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterAttackMax.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterAttackMax.Name = "nudMonsterAttackMax";
             // 
             // nudMonsterMagicResist
             // 
             resources.ApplyResources(this.nudMonsterMagicResist, "nudMonsterMagicResist");
             this.nudMonsterMagicResist.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterMagicResist.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterMagicResist.Name = "nudMonsterMagicResist";
             // 
             // nudMonsterAttackMin
             // 
             resources.ApplyResources(this.nudMonsterAttackMin, "nudMonsterAttackMin");
             this.nudMonsterAttackMin.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterAttackMin.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterAttackMin.Name = "nudMonsterAttackMin";
             // 
             // nudMonsterArmor
             // 
             resources.ApplyResources(this.nudMonsterArmor, "nudMonsterArmor");
             this.nudMonsterArmor.Maximum = new decimal(new int[] {
-            -1,
+            2147483647,
             0,
             0,
             0});
+            this.nudMonsterArmor.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
             this.nudMonsterArmor.Name = "nudMonsterArmor";
             // 
             // lblMonsterMagicResist
