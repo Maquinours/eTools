@@ -14,6 +14,8 @@ namespace MoversEditor
 {
     public partial class SettingsForm : Form
     {
+
+        public bool ContainsChanges { get; private set; }
         public SettingsForm()
         {
             InitializeComponent();
@@ -27,6 +29,8 @@ namespace MoversEditor
             tbPropFileName.Text = Path.GetFileName(settings.PropFileName);
             tbStringFileName.Text = Path.GetFileName(settings.StringsFilePath);
             nudGameVersion.Value = settings.ResourceVersion;
+            chckb64BitsAtk.Checked = settings.Use64BitsAttack;
+            chckb64BitsHp.Checked = settings.Use64BitsHp;
         }
 
         private void BtnSelectFolder_Click(object sender, EventArgs e)
@@ -41,12 +45,29 @@ namespace MoversEditor
         private void BtnApply_Click(object sender, EventArgs e)
         {
             Settings settings = Settings.GetInstance();
-            settings.ResourcePath = tbResourcesPath.Text;
-            settings.PropFileName = settings.ResourcePath + tbPropFileName.Text;
-            settings.StringsFilePath = settings.ResourcePath + tbStringFileName.Text;
-            settings.ResourceVersion = Decimal.ToInt32(nudGameVersion.Value);
-            settings.SaveGeneral();
-            settings.SaveSpecs();
+            string resourcePath = tbResourcesPath.Text;
+            string propFileName = settings.ResourcePath + tbPropFileName.Text;
+            string stringsFilePath = settings.ResourcePath + tbStringFileName.Text;
+            int resourceVersion = Decimal.ToInt32(nudGameVersion.Value);
+            bool use64BitsAttack = chckb64BitsAtk.Checked;
+            bool use64BitsHp = chckb64BitsHp.Checked;
+
+            if (settings.ResourcePath == resourcePath && settings.PropFileName == propFileName && settings.StringsFilePath == stringsFilePath && settings.ResourceVersion == resourceVersion && settings.Use64BitsAttack == use64BitsAttack && settings.Use64BitsHp == use64BitsHp)
+            {
+                ContainsChanges = false;
+            }
+            else
+            {
+                ContainsChanges = true;
+                settings.ResourcePath = resourcePath;
+                settings.PropFileName = propFileName;
+                settings.StringsFilePath = stringsFilePath;
+                settings.ResourceVersion = resourceVersion;
+                settings.Use64BitsAttack = use64BitsAttack;
+                settings.Use64BitsHp = use64BitsHp;
+                settings.SaveGeneral();
+                settings.SaveSpecs();
+            }
             DialogResult = DialogResult.OK;
             Close();
         }

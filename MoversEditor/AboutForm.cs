@@ -16,6 +16,7 @@ namespace MoversEditor
         public AboutForm()
         {
             InitializeComponent();
+            lblTitle.Text = lblTitle.Text.Replace("{version}", Application.ProductVersion).Replace("{product}", Application.ProductName).Replace("{company}", Application.CompanyName);
         }
 
         private void LlblLicence_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

@@ -126,13 +126,13 @@
     <value>28, 9</value>
   </data>
   <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 13</value>
+    <value>177, 13</value>
   </data>
   <data name="lblTitle.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="lblTitle.Text" xml:space="preserve">
-    <value>eTools Movers Editor v1.0.1 - By Maqui</value>
+    <value>{product} v{version} - By {company}</value>
   </data>
   <data name="&gt;&gt;lblTitle.Name" xml:space="preserve">
     <value>lblTitle</value>

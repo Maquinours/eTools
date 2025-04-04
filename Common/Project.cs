@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Concurrent;
 
 using Scan;
 
@@ -21,19 +24,19 @@ namespace Common
         /// <summary>
         /// List of strings (IDS => value)
         /// </summary>
-        private readonly Dictionary<string, string> strings;
+        public readonly ObservableDictionary<string, string> strings;
         /// <summary>
         /// List of defines (identifier => ID)
         /// </summary>
         private readonly Dictionary<string, int> defines;
 #if __ITEMS
-        public Item[] Items { get; private set; }
+        private readonly List<Item> items;
 #endif // __ITEMS
 #if __MOVERS
         /// <summary>
         /// List of movers
         /// </summary>
-        private readonly List<Mover> movers;
+        public BindingList<Mover> Movers { get; private set; }
 #endif // __MOVERS
         /// <summary>
         /// List of models
@@ -57,13 +60,13 @@ namespace Common
         /// </summary>
         private Project()
         {
-            this.strings = new Dictionary<string, string>();
+            this.strings = new ObservableDictionary<string, string>();
             this.defines = new Dictionary<string, int>();
 #if __ITEMS
-            this.Items = new Item[0];
+            this.items = new List<Item>();
 #endif // __ITEMS
 #if __MOVERS
-            this.movers = new List<Mover>();
+            this.Movers = new BindingList<Mover>();
 #endif // __MOVERS
             this.models = new List<MainModelBrace>();
         }
@@ -72,35 +75,46 @@ namespace Common
         /// <summary>
         /// Load all data from files to project.
         /// </summary>
-        public void Load()
+        public void Load(Action<int> reportProgress)
         {
-            Settings config = Settings.GetInstance();
-            config.LoadGeneral();
-#if __ITEMS
-            config.LoadSpecs();
-#endif // __ITEMS
 #if __MOVERS
-            config.LoadSpecs();
-#endif // __MOVERS
+            this.ClearMovers();
+#endif
+            this.ClearMotions();
+            this.defines.Clear();
+            this.strings.Clear();
+
+            reportProgress?.Invoke(0);
+            Settings config = Settings.GetInstance();
+            config.Load();
+            reportProgress?.Invoke(20);
             this.LoadDefines(config.DefineFilesPaths.ToArray());
+            reportProgress?.Invoke(40);
             this.LoadStrings(config.StringsFilePath);
+            reportProgress?.Invoke(60);
 #if __ITEMS
             this.LoadItems(config.PropFileName);
 #endif // __ITEMS
 #if __MOVERS
             LoadMovers(config.PropFileName);
+            reportProgress?.Invoke(80);
 #endif // __MOVERS
             LoadModels(config.ResourcePath + "mdlDyna.inc");
+            reportProgress?.Invoke(100);
         }
 
-        public void Save()
+        public void Save(Action<int> reportProgress)
         {
+            reportProgress?.Invoke(0);
             Settings config = Settings.GetInstance();
 #if __MOVERS
             SaveMoversprop(config.PropFileName);
+            reportProgress?.Invoke(33);
 #endif // __MOVERS
             SaveModels(config.ResourcePath + "mdlDyna.inc");
+            reportProgress?.Invoke(66);
             SaveStrings(config.StringsFilePath);
+            reportProgress?.Invoke(100);
         }
         #endregion
 
@@ -167,13 +181,38 @@ namespace Common
                     writer.Write($"{str.Key}\t{str.Value}\r\n");
             }
         }
+
+        public void GenerateNewString(string stringIdentifier)
+        {
+            if(!this.strings.ContainsKey(stringIdentifier))
+                this.strings.Add(stringIdentifier, "");
+        }
+
+        /// <summary>
+        /// Get the next string identifier available.
+        /// </summary>
+        /// <returns>The next available string</returns>
+        public string GetNextStringIdentifier()
+        {
+            string stringStarter = "IDS_"
+#if __MOVERS
+                + "PROPMOVER_TXT_"
+#endif
+                ;
+            for(int i = 0; true; i++)
+            {
+                string identifier = stringStarter + i.ToString("D6");
+                if (!this.strings.ContainsKey(identifier))
+                    return identifier;
+            }
+        }
         #endregion
 
         #region Items specific Methods
 #if __ITEMS
         public Item GetItemById(string dwId)
         {
-            foreach (Item it in this.Items)
+            foreach (Item it in this.items)
             {
                 if (it.Prop.DwID == dwId) return it;
             }
@@ -182,7 +221,7 @@ namespace Common
 
         private void LoadItems(string filePath)
         {
-            List<Item> itemsList = new List<Item>();
+            items.Clear();
             Scanner scanner = new Scanner();
 
             scanner.Load(filePath);
@@ -389,35 +428,23 @@ namespace Common
                     this.strings.Add(prop.SzName, "");          // If IDS is not defined, we add it to be defined.
                 if (!this.strings.ContainsKey(prop.SzCommand))
                     this.strings.Add(prop.SzCommand, "");
-                itemsList.Add(item);
+                items.Add(item);
             }
-            Items = itemsList.ToArray();
-        }
-        public string[] GetAllItemsName()
-        {
-            string[] result = new string[this.Items.Length];
-            for (int i = 0; i < result.Count(); i++)
-            {
-                string ids = this.Items[i].Prop.SzName;
-                string value = this.strings[ids];
-                if (string.IsNullOrWhiteSpace(value))
-                    result[i] = ids; // If ids has no valid string, we show the ids instead
-                else
-                    result[i] = value;
-            }
-            return result;
         }
 
-        public void RemoveItem(Item itemToRemove)
+        public Item[] GetItems()
         {
-            List<Item> list = new List<Item>(Items);
-            list.Remove(itemToRemove);
-            this.Items = list.ToArray();
+            return items.ToArray();
         }
 
-        public Item GetItemByIndex(int index)
+        public string[] GetItemsName()
         {
-            return Items[index];
+            return items.Select(x => x.Name).ToArray();
+        }
+
+        public void DeleteItem(Item item)
+        {
+            this.items.Remove(item);
         }
 
         public string[] GetAllItemKinds1()
@@ -435,6 +462,16 @@ namespace Common
         {
             return defines.Where(x => x.Key.StartsWith("IK3_")).Select(x => x.Key).ToArray();
         }
+
+        public string[] GetPossibleItemKinds2ByItemKind1(string itemKind1)
+        {
+            return items.Where(x => x.Prop.DwItemKind1 == itemKind1).Select(x => x.Prop.DwItemKind2).Distinct().ToArray();
+        }
+
+        public string[] GetPossibleItemKinds3ByItemKind2(string itemKind2)
+        {
+            return items.Where(x => x.Prop.DwItemKind2 == itemKind2).Select(x => x.Prop.DwItemKind3).Distinct().ToArray();
+        }
 #endif // __ITEMS
         #endregion
 
@@ -442,13 +479,14 @@ namespace Common
 #if __MOVERS
         private void LoadMovers(string filePath)
         {
-            movers.Clear();
+            this.ClearMovers();
+
+            Settings settings = Settings.GetInstance();
 
             Scanner scanner = new Scanner();
             scanner.Load(filePath);
             while (true)
             {
-                Mover mover = new Mover();
                 MoverProp mp = new MoverProp
                 {
                     DwId = scanner.GetToken()
@@ -464,9 +502,7 @@ namespace Common
                     mp.SzName = scanner.GetToken();
                 if (!mp.SzName.StartsWith("IDS_"))
                 {
-                    int[] stringIntKeys = strings.Select(x => int.Parse(x.Key.Substring(x.Key.Length - 6))).ToArray();
-                    int txtIntKey = stringIntKeys.Length > 0 ? stringIntKeys.Max() + 1 : 0;
-                    string txtKey = $"IDS_PROPMOVER_TXT_{txtIntKey:D6}";
+                    string txtKey = this.GetNextStringIdentifier();
                     this.strings.Add(txtKey, mp.SzName);
                     mp.SzName = txtKey;
                 }
@@ -492,8 +528,16 @@ namespace Common
                 mp.NChaotic = scanner.GetNumber();
                 mp.DwUseable = scanner.GetNumber();
                 mp.DwActionRadius = scanner.GetNumber();
-                mp.DwAtkMin = scanner.GetNumber();
-                mp.DwAtkMax = scanner.GetNumber();
+                if (settings.Use64BitsAttack)
+                {
+                    mp.DwAtkMin = scanner.GetInt64();
+                    mp.DwAtkMax = scanner.GetInt64();
+                }
+                else
+                {
+                    mp.DwAtkMin = scanner.GetNumber();
+                    mp.DwAtkMax = scanner.GetNumber();
+                }
                 mp.DwAtk1 = scanner.GetToken();     // Need expert mode to change
                 mp.DwAtk2 = scanner.GetToken();     // Need expert mode to change
                 mp.DwAtk3 = scanner.GetToken();     // Need expert mode to change
@@ -509,7 +553,10 @@ namespace Common
 
                 mp.DwAttackSpeed = scanner.GetNumber(); // Useless
                 mp.DwReAttackDelay = scanner.GetNumber();
-                mp.DwAddHp = scanner.GetNumber();
+                if (settings.Use64BitsHp)
+                    mp.DwAddHp = scanner.GetInt64();
+                else
+                    mp.DwAddHp = scanner.GetNumber();
                 mp.DwAddMp = scanner.GetNumber();
                 mp.DwNaturalArmor = scanner.GetNumber();
                 mp.NAbrasion = scanner.GetNumber();
@@ -517,8 +564,9 @@ namespace Common
                 mp.DwAdjAtkDelay = scanner.GetNumber();
 
                 mp.EElementType = scanner.GetNumber();
-                mp.WElementAtk = scanner.GetNumber(); // The atk and def value from element
-                // if (mp.WElementAtk > short.MaxValue) return false; // ERROR
+                int elementAtk = scanner.GetNumber();
+                 if (elementAtk < short.MinValue || elementAtk > short.MaxValue) throw new Exception($"WElementAtk from mover {mp.DwId} value is below or above max short value : {elementAtk}"); // ERROR
+                mp.WElementAtk = (short)elementAtk; // The atk and def value from element
 
                 mp.DwHideLevel = scanner.GetNumber(); // Expert mode
                 mp.FSpeed = scanner.GetFloat(); // Speed
@@ -547,14 +595,12 @@ namespace Common
                 mp.DwAddAbility = scanner.GetNumber(); // Useless
                 mp.BKillable = scanner.GetNumber(); // If monster, always true, otherwise, false
 
-                mp.DwVirtItem = new string[3]; // Useless
-                mp.BVirtType = new int[3]; // Useless
-                mp.DwVirtItem[0] = scanner.GetToken();
-                mp.DwVirtItem[1] = scanner.GetToken();
-                mp.DwVirtItem[2] = scanner.GetToken();
-                mp.BVirtType[0] = scanner.GetNumber();
-                mp.BVirtType[1] = scanner.GetNumber();
-                mp.BVirtType[2] = scanner.GetNumber();
+                mp.DwVirtItem1 = scanner.GetToken();
+                mp.DwVirtItem2 = scanner.GetToken();
+                mp.DwVirtItem3 = scanner.GetToken();
+                mp.BVirtType1 = scanner.GetNumber();
+                mp.BVirtType2 = scanner.GetNumber();
+                mp.BVirtType3 = scanner.GetNumber();
 
                 mp.DwSndAtk1 = scanner.GetToken(); // Useless
                 mp.DwSndAtk2 = scanner.GetToken(); // Useless
@@ -571,7 +617,14 @@ namespace Common
 
                 mp.SzComment = scanner.GetToken(); // Comment (useless)
 
-                if (Settings.GetInstance().ResourceVersion >= 19)
+                if (!mp.SzComment.StartsWith("IDS_"))
+                {
+                    string txtKey = this.GetNextStringIdentifier();
+                    this.strings.Add(txtKey, mp.SzComment);
+                    mp.SzComment = txtKey;
+                }
+
+                if (settings.ResourceVersion >= 19)
                 {
                     mp.DwAreaColor = scanner.GetToken(); // Useless
                     mp.SzNpcMark = scanner.GetToken(); // Useless
@@ -590,8 +643,12 @@ namespace Common
                     this.strings.Add(mp.SzName, "");          // If IDS is not defined, we add it to be defined.
                 if (!this.strings.ContainsKey(mp.SzComment))
                     this.strings.Add(mp.SzComment, "");          // If IDS is not defined, we add it to be defined.
-                mover.Prop = mp;
-                movers.Add(mover);
+                this.Movers.Add(
+                    new Mover()
+                    {
+                        Prop = mp
+                    }
+                );
             }
             scanner.Close();
         }
@@ -600,7 +657,11 @@ namespace Common
         {
             using (StreamWriter writer = new StreamWriter(filePath, false, new UTF8Encoding(false)))
             {
-                foreach (Mover mover in movers)
+                writer.WriteLine("// ========================================");
+                writer.WriteLine("// Generated by eTools - Movers Editor");
+                writer.WriteLine("// https://github.com/Maquinours/eTools");
+                writer.WriteLine("// ========================================");
+                foreach (Mover mover in this.Movers)
                 {
                     MoverProp prop = mover.Prop;
 
@@ -741,17 +802,17 @@ namespace Common
                     writer.Write(prop.BKillable == 1 ? "1" : "0");
                     writer.Write("\t");
 
-                    writer.Write(string.IsNullOrWhiteSpace(prop.DwVirtItem[0]) ? "=" : prop.DwVirtItem[0]);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwVirtItem1) ? "=" : prop.DwVirtItem1);
                     writer.Write("\t");
-                    writer.Write(string.IsNullOrWhiteSpace(prop.DwVirtItem[1]) ? "=" : prop.DwVirtItem[1]);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwVirtItem2) ? "=" : prop.DwVirtItem2);
                     writer.Write("\t");
-                    writer.Write(string.IsNullOrWhiteSpace(prop.DwVirtItem[2]) ? "=" : prop.DwVirtItem[2]);
+                    writer.Write(string.IsNullOrWhiteSpace(prop.DwVirtItem3) ? "=" : prop.DwVirtItem3);
                     writer.Write("\t");
-                    writer.Write(prop.BVirtType[0] == -1 ? "=" : prop.BVirtType[0].ToString(new CultureInfo("en-US")));
+                    writer.Write(prop.BVirtType1 == -1 ? "=" : prop.BVirtType1.ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
-                    writer.Write(prop.BVirtType[1] == -1 ? "=" : prop.BVirtType[1].ToString(new CultureInfo("en-US")));
+                    writer.Write(prop.BVirtType2 == -1 ? "=" : prop.BVirtType2.ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
-                    writer.Write(prop.BVirtType[2] == -1 ? "=" : prop.BVirtType[2].ToString(new CultureInfo("en-US")));
+                    writer.Write(prop.BVirtType3 == -1 ? "=" : prop.BVirtType3.ToString(new CultureInfo("en-US")));
                     writer.Write("\t");
 
                     writer.Write(string.IsNullOrWhiteSpace(prop.DwSndAtk1) ? "=" : prop.DwSndAtk1);
@@ -796,15 +857,19 @@ namespace Common
 
         public void AddNewMover()
         {
-            int[] stringIntKeys = strings.Select(x => int.Parse(x.Key.Substring(x.Key.Length - 6))).ToArray();
-            int txtIntKey = stringIntKeys.Length > 0 ? stringIntKeys.Max() + 1 : 0;
+            string szName = this.GetNextStringIdentifier();
+            strings.Add(szName, "");
+            string szComment = this.GetNextStringIdentifier();
+            strings.Add(szComment, "");
+
+            int modelType = defines["OT_MOVER"];
 
             Mover mover = new Mover()
             {
                 Prop = new MoverProp
                 {
                     DwId = "MI_",
-                    SzName = $"IDS_PROPMOVER_TXT_{txtIntKey:D6}",
+                    SzName = szName,
                     DwAi = "AII_NONE",
                     DwStr = -1,
                     DwSta = -1,
@@ -873,19 +938,12 @@ namespace Common
                     DwAddAbility = -1,
                     BKillable = 0,
 
-
-                    DwVirtItem = new string[3]
-                {
-                    "=",
-                    "=",
-                    "="
-                },
-                    BVirtType = new int[3]
-                {
-                    -1,
-                    -1,
-                    -1
-                },
+                    DwVirtItem1 = "=",
+                    DwVirtItem2 = "=",
+                    DwVirtItem3 = "=",
+                    BVirtType1 = -1,
+                    BVirtType2 = -1,
+                    BVirtType3 = -1,
                     DwSndAtk1 = "=",
                     DwSndAtk2 = "=",
 
@@ -899,13 +957,13 @@ namespace Common
                     DwSndIdle1 = "=",
                     DwSndIdle2 = "=",
 
-                    SzComment = $"IDS_PROPMOVER_TXT_{txtIntKey + 1:D6}",
+                    SzComment = szComment,
                     SzNpcMark = "=",
                     DwMadrigalGiftPoint = 0
                 },
                 Model = new ModelElem
                 {
-                    DwType = defines["OT_MOVER"],
+                    DwType = modelType,
                     SzName = "",
                     DwIndex = "MI_",
                     DwModelType = "MODELTYPE_ANIMATED_MESH",
@@ -917,18 +975,143 @@ namespace Common
                     BTrans = 0,
                     BShadow = 1,
                     NTextureEx = "ATEX_NONE",
-                    BRenderFlag = 1
+                    BRenderFlag = 1,
+                    Brace = GetBracesByType(modelType).First(),
                 }
             };
-            movers.Add(mover);
-            strings.Add($"IDS_PROPMOVER_TXT_{txtIntKey:D6}", "");
-            strings.Add($"IDS_PROPMOVER_TXT_{txtIntKey + 1:D6}", "");
-            mover.Model.Brace = GetBracesByType(defines["OT_MOVER"]).First();
+            this.Movers.Add(mover);
+        }
+
+        public void DuplicateMover(Mover mover)
+        {
+            string szName = this.GetNextStringIdentifier();
+            strings.Add(szName, mover.Name);
+            string szComment = this.GetNextStringIdentifier();
+            strings.Add(szComment, this.GetString(mover.Prop.SzComment));
+
+            Mover duplicatedMover = new Mover()
+            {
+                Prop = new MoverProp
+                {
+                    DwId = "MI_",
+                    SzName = szName,
+                    DwAi = mover.Prop.DwAi,
+                    DwStr = mover.Prop.DwStr,
+                    DwSta = mover.Prop.DwSta,
+                    DwDex = mover.Prop.DwDex,
+                    DwInt = mover.Prop.DwInt,
+                    DwHR = mover.Prop.DwHR,
+                    DwER = mover.Prop.DwER,
+                    DwRace = mover.Prop.DwRace,
+                    DwBelligerence = mover.Prop.DwBelligerence,
+                    DwGender = mover.Prop.DwGender,
+                    DwLevel = mover.Prop.DwLevel,
+                    DwFlightLevel = mover.Prop.DwFlightLevel,
+                    DwSize = mover.Prop.DwSize,
+                    DwClass = mover.Prop.DwClass,
+                    BIfParts = mover.Prop.BIfParts,
+                    NChaotic = mover.Prop.NChaotic,
+                    DwUseable = mover.Prop.DwUseable,
+                    DwActionRadius = mover.Prop.DwActionRadius,
+                    DwAtkMin = mover.Prop.DwAtkMin,
+                    DwAtkMax = mover.Prop.DwAtkMax,
+                    DwAtk1 = mover.Prop.DwAtk1,
+                    DwAtk2 = mover.Prop.DwAtk2,
+                    DwAtk3 = mover.Prop.DwAtk3,
+                    DwAtk4 = mover.Prop.DwAtk4,
+                    FFrame = mover.Prop.FFrame,
+                    DwOrthograde = mover.Prop.DwOrthograde,
+                    DwThrustRate = mover.Prop.DwThrustRate,
+                    DwChestRate = mover.Prop.DwChestRate,
+                    DwHeadRate = mover.Prop.DwHeadRate,
+                    DwArmRate = mover.Prop.DwArmRate,
+                    DwLegRate = mover.Prop.DwLegRate,
+                    DwAttackSpeed = mover.Prop.DwAttackSpeed,
+                    DwReAttackDelay = mover.Prop.DwReAttackDelay,
+                    DwAddHp = mover.Prop.DwAddHp,
+                    DwAddMp = mover.Prop.DwAddMp,
+                    DwNaturalArmor = mover.Prop.DwNaturalArmor,
+                    NAbrasion = mover.Prop.NAbrasion,
+                    NHardness = mover.Prop.NHardness,
+                    DwAdjAtkDelay = mover.Prop.DwAdjAtkDelay,
+                    EElementType = mover.Prop.EElementType,
+                    WElementAtk = mover.Prop.WElementAtk,
+                    DwHideLevel = mover.Prop.DwHideLevel,
+                    FSpeed = mover.Prop.FSpeed,
+                    DwShelter = mover.Prop.DwShelter,
+                    DwFlying = mover.Prop.DwFlying,
+                    DwJumpIng = mover.Prop.DwJumpIng,
+                    DwAirJump = mover.Prop.DwAirJump,
+                    BTaming = mover.Prop.BTaming,
+                    DwResisMgic = mover.Prop.DwResisMgic,
+
+                    NResistElecricity = mover.Prop.NResistElecricity,
+                    NResistFire = mover.Prop.NResistFire,
+                    NResistWind = mover.Prop.NResistWind,
+                    NResistWater = mover.Prop.NResistWater,
+                    NResistEarth = mover.Prop.NResistEarth,
+
+                    DwCash = mover.Prop.DwCash,
+                    DwSourceMaterial = mover.Prop.DwSourceMaterial,
+                    DwMaterialAmount = mover.Prop.DwMaterialAmount,
+                    DwCohesion = mover.Prop.DwCohesion,
+                    DwHoldingTime = mover.Prop.DwHoldingTime,
+                    DwCorrectionValue = mover.Prop.DwCorrectionValue,
+                    NExpValue = mover.Prop.NExpValue,
+                    NFxpValue = mover.Prop.NFxpValue,
+                    NBodyState = mover.Prop.NBodyState,
+                    DwAddAbility = mover.Prop.DwAddAbility,
+                    BKillable = mover.Prop.BKillable,
+
+
+                    DwVirtItem1 = mover.Prop.DwVirtItem1,
+                    DwVirtItem2 = mover.Prop.DwVirtItem2,
+                    DwVirtItem3 = mover.Prop.DwVirtItem3,
+                    BVirtType1 = mover.Prop.BVirtType1,
+                    BVirtType2 = mover.Prop.BVirtType2,
+                    BVirtType3 = mover.Prop.BVirtType3,
+
+                    DwSndAtk1 = mover.Prop.DwSndAtk1,
+                    DwSndAtk2 = mover.Prop.DwSndAtk2,
+
+                    DwSndDie1 = mover.Prop.DwSndDie1,
+                    DwSndDie2 = mover.Prop.DwSndDie2,
+
+                    DwSndDmg1 = mover.Prop.DwSndDmg1,
+                    DwSndDmg2 = mover.Prop.DwSndDmg2,
+                    DwSndDmg3 = mover.Prop.DwSndDmg3,
+
+                    DwSndIdle1 = mover.Prop.DwSndIdle1,
+                    DwSndIdle2 = mover.Prop.DwSndIdle2,
+
+                    SzComment = szComment,
+                    SzNpcMark = mover.Prop.SzNpcMark,
+                    DwMadrigalGiftPoint = mover.Prop.DwMadrigalGiftPoint
+                },
+                Model = new ModelElem
+                {
+                    DwType = mover.Model.DwType,
+                    SzName = mover.Model.SzName,
+                    DwIndex = mover.Model.DwIndex,
+                    DwModelType = mover.Model.DwModelType,
+                    SzPart = mover.Model.SzPart,
+                    BFly = mover.Model.BFly,
+                    DwDistant = mover.Model.DwDistant,
+                    BPick = mover.Model.BPick,
+                    FScale = mover.Model.FScale,
+                    BTrans = mover.Model.BTrans,
+                    BShadow = mover.Model.BShadow,
+                    NTextureEx = mover.Model.NTextureEx,
+                    BRenderFlag = mover.Model.BRenderFlag,
+                    Brace = mover.Model.Brace,
+                }
+            };
+            this.Movers.Add(duplicatedMover);
         }
 
         public string[] GetMoversName()
         {
-            return movers.Select(x => x.Name).ToArray();
+            return this.Movers.Select(x => x.Name).ToArray();
         }
 
         public void SetMoverType(Mover mover, MoverTypes type)
@@ -994,16 +1177,11 @@ namespace Common
                 type == MoverTypes.NPC || type == MoverTypes.CHARACTER ? new string[] { GetClassIdentifiers().FirstOrDefault(x => x == "RANK_CITIZEN") ?? "=" } : new string[] { "RANK_LOW" };
         }
 
-        public Mover[] GetAllMovers()
-        {
-            return movers.ToArray();
-        }
-
         public Mover GetMoverById(string dwId)
         {
             try
             {
-                return movers.First(x => x.Prop.DwId == dwId);
+                return this.Movers.First(x => x.Prop.DwId == dwId);
             }
             catch (InvalidOperationException) // If no mover find
             {
@@ -1011,9 +1189,25 @@ namespace Common
             }
         }
 
+        public void ChangeMoverNameIdentifier(Mover mover, string nameIdentifier)
+        {
+            if (mover == null || nameIdentifier == null) throw new Exception("Project::ChangeMoverNameIdentifier : mover or nameIdentifier is null");
+            if (!this.strings.ContainsKey(nameIdentifier))
+                this.strings.Add(nameIdentifier, "");
+            mover.Prop.SzName = nameIdentifier;
+        }
+
         public void DeleteMover(Mover mover)
         {
-            movers.Remove(mover);
+            mover.Dispose();
+            this.Movers.Remove(mover);
+        }
+
+        public void ClearMovers()
+        {
+            foreach (Mover mover in this.Movers)
+                mover.Dispose();
+            this.Movers.Clear();
         }
 #endif // __MOVERS
         #endregion
@@ -1102,7 +1296,7 @@ namespace Common
 #if __ITEMS
             if (!defines.ContainsKey("OT_ITEM")) throw new MissingDefineException("OT_ITEM");
 #endif // __ITEMS
-            this.models.Clear();
+            this.ClearMotions();
             Scanner scanner = new Scanner();
             scanner.Load(filePath);
 
@@ -1203,7 +1397,8 @@ namespace Common
 #endif // __ITEMS
                 }
             }
-            foreach(Mover mover in this.movers.Where(x => x.Model == null)) // We add a default model for each mover who doesn't have any
+#if __MOVERS
+            foreach(Mover mover in this.Movers.Where(x => x.Model == null)) // We add a default model for each mover who doesn't have any
             {
                 mover.Model = new ModelElem
                 {
@@ -1222,6 +1417,7 @@ namespace Common
                     BRenderFlag = 1
                 };
             }
+#endif
             scanner.Close();
         }
 
@@ -1315,6 +1511,16 @@ namespace Common
             }
         }
 
+        private void ClearBraceRecursively(ModelBrace brace)
+        {
+            foreach(ModelBrace child in brace.Braces)
+            {
+                ClearBraceRecursively(child);
+            }
+            brace.Braces.Clear();
+            brace.Models.Clear();
+        }
+
         public void GenerateMotions(ModelElem model)
         {
             string[] aniFiles = GetAvalaibleMotionsFilesByModel(model);
@@ -1336,6 +1542,13 @@ namespace Common
         {
             return Directory.GetFiles(Settings.GetInstance().ResourcePath + "Model\\", $"mvr_{model.SzName}*.ani").Select(x => Path.GetFileNameWithoutExtension(x).Remove(0, $"mvr_{model.SzName}_".Length)).ToArray();
         }
-        #endregion
+
+        public void ClearMotions()
+        {
+            foreach (MainModelBrace brace in this.models) // Avoid memory leaks
+                ClearBraceRecursively(brace);
+            this.models.Clear();
+        }
+#endregion
     }
 }

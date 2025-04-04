@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Deployment.Application;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -12,6 +13,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace MoversEditor
@@ -21,15 +23,28 @@ namespace MoversEditor
         public MainForm()
         {
             InitializeComponent();
+            SetSearchTextBoxPlaceHolder();
         }
 
-        private void LoadFormData()
+        private async void LoadFormData()
         {
             //UseWaitCursor = true;
             try
             {
+                pbFileSaveReload.Visible = true;
+
+                Settings settings = Settings.GetInstance();
+                if(settings.IsMissingSettingsFile)
+                {
+                    settings.Load();
+                    if(MessageBox.Show("It seems like this is the first time you're launching the app. The settings have not been configured yet. Would you like to access the settings now ?", "Settings not found", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        new SettingsForm().ShowDialog();
+                    }
+                }
+
                 Project prj = Project.GetInstance();
-                prj.Load();
+                await Task.Run(() => prj.Load((progress) => pbFileSaveReload.Invoke(new Action(() => pbFileSaveReload.Value = progress)))).ConfigureAwait(true);
                 AutoCompleteStringCollection identifiersSource = new AutoCompleteStringCollection();
                 identifiersSource.AddRange(prj.GetAllMoversDefines());
                 tbIdentifier.AutoCompleteCustomSource = identifiersSource;
@@ -37,10 +52,15 @@ namespace MoversEditor
                 cbBelligerence.DataSource = prj.GetBelligerenceIdentifiers();
                 cbClass.DataSource = prj.GetClassIdentifiers();
                 cbMonsterElementType.DataSource = Settings.GetInstance().Elements.Values.ToArray();
-                cbModelBrace.DataSource = prj.GetMoverModelBraces();
                 cbModelBrace.DisplayMember = "SzName";
+                cbModelBrace.DataSource = prj.GetMoverModelBraces();
                 cbType.DataSource = Settings.GetInstance().Types.Keys.ToArray();
-                SetListBoxDataSource();
+                lbMovers.DisplayMember = "Name";
+                lbMovers.DataSource = prj.Movers;
+                this.SetNumericUpDownLimits();
+                prj.Movers.ListChanged -= Movers_ListChanged;
+                prj.Movers.ListChanged += Movers_ListChanged;
+                SetSearchTextBoxAutoComplete();
                 //UseWaitCursor = false;
             }
             catch (Exception e) when (e is FileNotFoundException || e is DirectoryNotFoundException || e is MissingDefineException || e is IncorrectlyFormattedFileException)
@@ -69,17 +89,15 @@ namespace MoversEditor
                         break;
                 }
             }
+            finally
+            {
+                pbFileSaveReload.Visible = false;
+                pbFileSaveReload.Value = 0;
+            }
         }
 
-        private void MainForm_Shown(object sender, EventArgs e)
+        private void ReloadFormData()
         {
-            LoadFormData();
-        }
-
-        private void LbMovers_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Mover currentItem = ((Mover)lbMovers.SelectedItem);
-            if (currentItem == null) return;
 
             cbType.DataBindings.Clear();
             tbName.DataBindings.Clear();
@@ -113,10 +131,67 @@ namespace MoversEditor
             tbModelFile.DataBindings.Clear();
             nudModelScale.DataBindings.Clear();
             cbModelBrace.DataBindings.Clear();
+            tbIdentifier.AutoCompleteCustomSource = null;
+            cbAi.DataSource = null;
+            cbBelligerence.DataSource = null;
+            cbClass.DataSource = null;
+            cbMonsterElementType.DataSource = null;
+            cbModelBrace.DisplayMember = null;
+            cbModelBrace.DataSource = null;
+            cbType.DataSource = null;
+            lbMovers.DisplayMember = null;
+            if (lbMovers.DataSource is BindingSource listboxBinding)
+                listboxBinding.Dispose();
+            lbMovers.DataSource = null;
+
+            LoadFormData();
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            LoadFormData();
+        }
+
+        private void LbMovers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbType.DataBindings.Clear();
+            tbName.DataBindings.Clear();
+            tbIdentifier.DataBindings.Clear();
+            nudMonsterStr.DataBindings.Clear();
+            nudMonsterSta.DataBindings.Clear();
+            nudMonsterDex.DataBindings.Clear();
+            nudMonsterInt.DataBindings.Clear();
+            nudMonsterHr.DataBindings.Clear();
+            nudMonsterEr.DataBindings.Clear();
+            cbBelligerence.DataBindings.Clear();
+            nudLevel.DataBindings.Clear();
+            cbClass.DataBindings.Clear();
+            nudMonsterAttackMin.DataBindings.Clear();
+            nudMonsterAttackMax.DataBindings.Clear();
+            nudMonsterAttackDelay.DataBindings.Clear();
+            nudMonsterHp.DataBindings.Clear();
+            nudMonsterMp.DataBindings.Clear();
+            nudMonsterArmor.DataBindings.Clear();
+            cbMonsterElementType.DataBindings.Clear();
+            nudMonsterElementValue.DataBindings.Clear();
+            nudMonsterSpeed.DataBindings.Clear();
+            nudMonsterMagicResist.DataBindings.Clear();
+            nudMonsterElectricityResistance.DataBindings.Clear();
+            nudMonsterFireResistance.DataBindings.Clear();
+            nudMonsterWaterResistance.DataBindings.Clear();
+            nudMonsterWindResistance.DataBindings.Clear();
+            nudMonsterEarthResistance.DataBindings.Clear();
+            nudExperience.DataBindings.Clear();
+            cbAi.DataBindings.Clear();
+            tbModelFile.DataBindings.Clear();
+            nudModelScale.DataBindings.Clear();
+            cbModelBrace.DataBindings.Clear();
+
+            if (!(lbMovers.SelectedItem is Mover currentItem)) return;
 
             cbType.DataBindings.Add(new Binding("SelectedItem", currentItem, "Type", false, DataSourceUpdateMode.OnPropertyChanged));
             tbName.DataBindings.Add(new Binding("Text", currentItem, "Name", false, DataSourceUpdateMode.OnPropertyChanged));
-            tbIdentifier.DataBindings.Add(new Binding("Text", currentItem, "Id", false, DataSourceUpdateMode.OnValidation));
+            tbIdentifier.DataBindings.Add(new Binding("Text", currentItem, "Id", false, DataSourceUpdateMode.OnPropertyChanged));
             nudMonsterStr.DataBindings.Add(new Binding("Value", currentItem.Prop, "DwStr", true, DataSourceUpdateMode.OnPropertyChanged));
             nudMonsterSta.DataBindings.Add(new Binding("Value", currentItem.Prop, "DwSta", true, DataSourceUpdateMode.OnPropertyChanged));
             nudMonsterDex.DataBindings.Add(new Binding("Value", currentItem.Prop, "DwDex", true, DataSourceUpdateMode.OnPropertyChanged));
@@ -168,21 +243,9 @@ namespace MoversEditor
             nudExperience.Enabled = type == MoverTypes.MONSTER;
         }
 
-        private void Search()
-        {
-            SearchForm form = new SearchForm();
-            if (form.ShowDialog() == DialogResult.OK)
-            {
-                Mover selectedMover = lbMovers.Items.Cast<Mover>().ToArray().FirstOrDefault(x => x.Name.ToLower().Contains(form.Value.ToLower()));
-                if (selectedMover != null)
-                    lbMovers.SelectedItem = selectedMover;
-            }
-        }
-
         private void AddMover()
         {
             Project.GetInstance().AddNewMover();
-            SetListBoxDataSource();
             lbMovers.SelectedIndex = lbMovers.Items.Count - 1;
         }
 
@@ -208,7 +271,7 @@ namespace MoversEditor
 
         private void TsmiFileReload_Click(object sender, EventArgs e)
         {
-            LoadFormData();
+            ReloadFormData();
         }
 
         private void TsmiFileSave_Click(object sender, EventArgs e)
@@ -218,11 +281,12 @@ namespace MoversEditor
             //UseWaitCursor = false;
         }
 
-        private void Save()
+        private async void Save()
         {
             try
             {
-                Project.GetInstance().Save();
+                pbFileSaveReload.Visible = true;
+                await Task.Run(() => Project.GetInstance().Save((progress) => pbFileSaveReload.Invoke(new Action(() => pbFileSaveReload.Value = progress)))).ConfigureAwait(true);
             }
             catch (Exception ex)
             {
@@ -236,16 +300,36 @@ namespace MoversEditor
                         break;
                 }
             }
+            finally
+            {
+                pbFileSaveReload.Visible = false;
+                pbFileSaveReload.Value = 0;
+            }
         }
 
         private void TsmiSettings_Click(object sender, EventArgs e)
         {
-            new SettingsForm().ShowDialog();
+            SettingsForm settingsForm = new SettingsForm();
+            if (settingsForm.ShowDialog() == DialogResult.OK && settingsForm.ContainsChanges)
+            {
+                if (MessageBox.Show("Some settings have changed. Would you like to reload the data with the new settings?", "Settings changed", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    ReloadFormData();
+                else
+                    this.SetNumericUpDownLimits();
+            }
         }
 
         private void TsmiMoversSearch_Click(object sender, EventArgs e)
         {
-            Search();
+            this.tbSearch.Focus();
+            // TODO: remove this
+            //SearchForm form = new SearchForm(); 
+            //if (form.ShowDialog() == DialogResult.OK)
+            //{
+            //    Mover selectedMover = lbMovers.Items.Cast<Mover>().ToArray().FirstOrDefault(x => x.Name.ToLower().Contains(form.Value.ToLower()));
+            //    if (selectedMover != null)
+            //        lbMovers.SelectedItem = selectedMover;
+            //}
         }
 
         private void BtnMotions_Click(object sender, EventArgs e)
@@ -260,12 +344,6 @@ namespace MoversEditor
             {
                 DeleteCurrentMover();
             }
-        }
-
-        private void SetListBoxDataSource()
-        {
-            lbMovers.DataSource = new BindingSource(Project.GetInstance().GetAllMovers(), "");
-            lbMovers.DisplayMember = "Name";
         }
 
         private void BtnSelectModelFile_Click(object sender, EventArgs e)
@@ -289,7 +367,7 @@ namespace MoversEditor
         private void TbIdentifier_Validating(object sender, CancelEventArgs e)
         {
             if (!(lbMovers.SelectedItem is Mover mover)) return;
-            if (Project.GetInstance().GetAllMovers().FirstOrDefault(x => x != mover && x.Prop.DwId == tbIdentifier.Text) == null) return;
+            if (Project.GetInstance().Movers.FirstOrDefault(x => x != mover && x.Prop.DwId == tbIdentifier.Text) == null) return;
             e.Cancel = true;
             lblIdentifierAlreadyUsed.Visible = true;
         }
@@ -303,14 +381,92 @@ namespace MoversEditor
         {
             if (!(lbMovers.SelectedItem is Mover mover)) return;
             Project.GetInstance().DeleteMover(mover);
-            int indexSave = lbMovers.SelectedIndex;
-            SetListBoxDataSource();
-            lbMovers.SelectedIndex = indexSave < lbMovers.Items.Count ? indexSave : lbMovers.Items.Count - 1;
         }
 
         private void TsmiAbout_Click(object sender, EventArgs e)
         {
             new AboutForm().ShowDialog();
+        }
+
+        private void TsmiMoverDuplicate_Click(object sender, EventArgs e)
+        {
+            if (!(lbMovers.SelectedItem is Mover mover)) return;
+            Project.GetInstance().DuplicateMover(mover);
+            this.lbMovers.SelectedIndex = this.lbMovers.Items.Count - 1;
+        }
+
+        private void TsmiViewExpertEditor_Click(object sender, EventArgs e)
+        {
+            if (!(lbMovers.SelectedItem is Mover mover)) return;
+            new ExpertEditorForm(mover).ShowDialog();
+        }
+
+        private void SetSearchTextBoxPlaceHolder()
+        {
+            if (String.IsNullOrWhiteSpace(this.tbSearch.Text))
+            {
+                tbSearch.Text = "Search...";
+                tbSearch.ForeColor = Color.Gray;
+            } else
+            {
+                tbSearch.ForeColor = Color.Black;
+            }
+                tbSearch.GotFocus += (s, e) =>
+                {
+                    if (tbSearch.ForeColor == Color.Gray) // Placeholder
+                    {
+                        tbSearch.Text = "";
+                        tbSearch.ForeColor = Color.Black;
+                    }
+                };
+            tbSearch.LostFocus += (s, e) =>
+            {
+                if (String.IsNullOrWhiteSpace(tbSearch.Text))
+                {
+                    tbSearch.ForeColor = Color.Gray;
+                    tbSearch.Text = "Search...";
+                }
+            };
+        }
+
+        private void SetSearchTextBoxAutoComplete() // TODO: remove this as we don't use autocomplete anymore on search text box
+        {
+            AutoCompleteStringCollection namesSource = new AutoCompleteStringCollection();
+            namesSource.AddRange(Project.GetInstance().Movers.Select(x => x.Name).ToArray());
+            tbSearch.AutoCompleteCustomSource = namesSource;
+
+        }
+
+        private void Movers_ListChanged(object sender, ListChangedEventArgs e)
+        {
+            SetSearchTextBoxAutoComplete();
+        }
+
+        private void TbSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (this.tbSearch.ForeColor == Color.Gray || String.IsNullOrWhiteSpace(this.tbSearch.Text)) // If placeholder or search text is blank
+                this.lbMovers.DataSource = Project.GetInstance().Movers;
+            else
+                this.lbMovers.DataSource = new BindingList<Mover>(Project.GetInstance().Movers.Where(x => x.Name.ToLower().Contains(this.tbSearch.Text.Trim().ToLower())).ToList());
+        }
+
+        private void SetNumericUpDownLimits()
+        {
+            Settings settings = Settings.GetInstance();
+            if (settings.Use64BitsAttack)
+            {
+                nudMonsterAttackMin.Maximum = long.MaxValue;
+                nudMonsterAttackMax.Maximum = long.MaxValue;
+            }
+            else
+            {
+                nudMonsterAttackMin.Maximum = int.MaxValue;
+                nudMonsterAttackMax.Maximum = int.MaxValue;
+            }
+            if (settings.Use64BitsHp)
+                nudMonsterHp.Maximum = long.MaxValue;
+            else
+                nudMonsterHp.Maximum = int.MaxValue;
         }
     }
 }
