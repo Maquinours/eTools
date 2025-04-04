@@ -22,6 +22,7 @@ namespace MoversEditor
     {
         public MainForm()
         {
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo("he-IL");
             InitializeComponent();
             SetSearchTextBoxPlaceHolder();
         }
@@ -444,10 +445,14 @@ namespace MoversEditor
 
         private void TbSearch_TextChanged(object sender, EventArgs e)
         {
+            Mover mover = this.lbMovers.SelectedItem as Mover;
             if (this.tbSearch.ForeColor == Color.Gray || String.IsNullOrWhiteSpace(this.tbSearch.Text)) // If placeholder or search text is blank
                 this.lbMovers.DataSource = Project.GetInstance().Movers;
-            else
+             else
                 this.lbMovers.DataSource = new BindingList<Mover>(Project.GetInstance().Movers.Where(x => x.Name.ToLower().Contains(this.tbSearch.Text.Trim().ToLower())).ToList());
+            if(mover is Mover && this.lbMovers.Items.Contains(mover)) // If the selected mover is still in the list, then we select it again
+                this.lbMovers.SelectedItem = mover;
+
         }
 
         private void SetNumericUpDownLimits()
