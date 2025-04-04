@@ -163,7 +163,7 @@ namespace Common
             while (true)
             {
                 scanner.GetToken();
-                if (scanner.EndOfStream) break;
+                if (String.IsNullOrEmpty(scanner.Token) && scanner.EndOfStream) break;
                 switch (scanner.Token)
                 {
                     case "DEFINES":
