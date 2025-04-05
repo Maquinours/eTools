@@ -18,6 +18,15 @@ namespace ItemsEditor
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            this.LoadFormData();
+        }
+
+        private void LoadFormData()
+        {
             try
             {
                 Project prj = Project.GetInstance();
@@ -243,5 +252,6 @@ namespace ItemsEditor
                 tbMiscIcon.Text = Path.GetFileName(ofd.FileName);
             }
         }
+
     }
 }
