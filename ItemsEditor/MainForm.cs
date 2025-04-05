@@ -21,7 +21,7 @@ namespace ItemsEditor
             try
             {
                 Project prj = Project.GetInstance();
-                prj.Load();
+                prj.Load(null);
                 cbTypeItemKind1.DataSource = prj.GetAllItemKinds1();
                 cbTypeItemKind2.DataSource = prj.GetAllItemKinds2();
                 cbTypeItemKind3.DataSource = prj.GetAllItemKinds3();
