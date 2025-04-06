@@ -30,6 +30,7 @@ namespace ItemsEditor
         {
             try
             {
+                this.Enabled = false;
                 pbFileSaveReload.Visible = true;
 
                 Project prj = Project.GetInstance();
@@ -53,6 +54,7 @@ namespace ItemsEditor
                 await System.Threading.Tasks.Task.Delay(300);
                 pbFileSaveReload.Visible = false;
                 pbFileSaveReload.Value = 0;
+                this.Enabled = true;
             }
         }
 
