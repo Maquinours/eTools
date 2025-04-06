@@ -58,6 +58,22 @@ namespace ItemsEditor
             }
         }
 
+        private void ReloadFormData()
+        {
+            cbTypeItemKind1.DataSource = null;
+            cbTypeItemKind2.DataSource = null;
+            cbTypeItemKind3.DataSource = null;
+            cbEquipmentJob.DataSource = null;
+            cbEquipmentSex.DataSource = null;
+            cbDstParamIdentifier.DataSource = null;
+            cbElementType.DataSource = null;
+            if (lbItems.DataSource is BindingSource listboxBinding)
+                listboxBinding.Dispose();
+            lbItems.DataSource = null;
+
+            LoadFormData();
+        }
+
         private void SetListBoxDataSource()
         {
             lbItems.DisplayMember = "Name";
@@ -307,6 +323,11 @@ namespace ItemsEditor
                 //else
                 //    this.SetNumericUpDownLimits();
             }
+        }
+
+        private void tsmiFileReload_Click(object sender, EventArgs e)
+        {
+            this.ReloadFormData();
         }
     }
 }

@@ -83,6 +83,8 @@
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.pbFileSaveReload = new System.Windows.Forms.ProgressBar();
             this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFileReload = new System.Windows.Forms.ToolStripMenuItem();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -573,6 +575,7 @@
             this.msMain.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiItems,
+            this.tsmiFile,
             this.tsmiSettings});
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
@@ -638,6 +641,22 @@
             this.tsmiSettings.Size = new System.Drawing.Size(61, 22);
             this.tsmiSettings.Text = "Settings";
             this.tsmiSettings.Click += new System.EventHandler(this.tsmiSettings_Click);
+            // 
+            // tsmiFile
+            // 
+            this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiFileReload});
+            this.tsmiFile.Name = "tsmiFile";
+            this.tsmiFile.Size = new System.Drawing.Size(37, 22);
+            this.tsmiFile.Text = "File";
+            // 
+            // tsmiFileReload
+            // 
+            this.tsmiFileReload.Name = "tsmiFileReload";
+            this.tsmiFileReload.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.tsmiFileReload.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFileReload.Text = "Reload";
+            this.tsmiFileReload.Click += new System.EventHandler(this.tsmiFileReload_Click);
             // 
             // MainForm
             // 
@@ -733,6 +752,8 @@
         private System.Windows.Forms.TextBox tbSearch;
         private System.Windows.Forms.ProgressBar pbFileSaveReload;
         private System.Windows.Forms.ToolStripMenuItem tsmiSettings;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFileReload;
     }
 }
 
