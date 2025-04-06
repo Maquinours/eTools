@@ -49,8 +49,8 @@ namespace ItemsEditor
 
         private void SetListBoxDataSource()
         {
-            lb_items.DataSource = new BindingSource(Project.GetInstance().GetItems(), "");
             lb_items.DisplayMember = "Name";
+            lb_items.DataSource = Project.GetInstance().Items;
         }
 
         private void lb_items_SelectedIndexChanged(object sender, EventArgs e)

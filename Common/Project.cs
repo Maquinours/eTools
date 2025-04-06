@@ -30,7 +30,7 @@ namespace Common
         /// </summary>
         private readonly Dictionary<string, int> defines;
 #if __ITEMS
-        private readonly List<Item> items;
+        public BindingList<Item> Items { get; private set; }
 #endif // __ITEMS
 #if __MOVERS
         /// <summary>
@@ -63,7 +63,7 @@ namespace Common
             this.strings = new ObservableDictionary<string, string>();
             this.defines = new Dictionary<string, int>();
 #if __ITEMS
-            this.items = new List<Item>();
+            this.Items = new BindingList<Item>();
 #endif // __ITEMS
 #if __MOVERS
             this.Movers = new BindingList<Mover>();
@@ -212,16 +212,12 @@ namespace Common
 #if __ITEMS
         public Item GetItemById(string dwId)
         {
-            foreach (Item it in this.items)
-            {
-                if (it.Prop.DwID == dwId) return it;
-            }
-            return null;
+            return this.Items.FirstOrDefault(x => x.Id == dwId);
         }
 
         private void LoadItems(string filePath)
         {
-            items.Clear();
+            Items.Clear();
             Scanner scanner = new Scanner();
 
             scanner.Load(filePath);
@@ -233,7 +229,7 @@ namespace Common
                 };
                 if (scanner.EndOfStream)
                     break;
-                prop.DwID = scanner.GetToken();
+                prop.DwId = scanner.GetToken();
                 prop.SzName = scanner.GetToken();
                 prop.DwNum = scanner.GetNumber();
                 prop.DwPackMax = scanner.GetNumber();
@@ -428,23 +424,18 @@ namespace Common
                     this.strings.Add(prop.SzName, "");          // If IDS is not defined, we add it to be defined.
                 if (!this.strings.ContainsKey(prop.SzCommand))
                     this.strings.Add(prop.SzCommand, "");
-                items.Add(item);
+                Items.Add(item);
             }
-        }
-
-        public Item[] GetItems()
-        {
-            return items.ToArray();
         }
 
         public string[] GetItemsName()
         {
-            return items.Select(x => x.Name).ToArray();
+            return Items.Select(x => x.Name).ToArray();
         }
 
         public void DeleteItem(Item item)
         {
-            this.items.Remove(item);
+            this.Items.Remove(item);
         }
 
         public string[] GetAllItemKinds1()
@@ -465,12 +456,12 @@ namespace Common
 
         public string[] GetPossibleItemKinds2ByItemKind1(string itemKind1)
         {
-            return items.Where(x => x.Prop.DwItemKind1 == itemKind1).Select(x => x.Prop.DwItemKind2).Distinct().ToArray();
+            return Items.Where(x => x.Prop.DwItemKind1 == itemKind1).Select(x => x.Prop.DwItemKind2).Distinct().ToArray();
         }
 
         public string[] GetPossibleItemKinds3ByItemKind2(string itemKind2)
         {
-            return items.Where(x => x.Prop.DwItemKind2 == itemKind2).Select(x => x.Prop.DwItemKind3).Distinct().ToArray();
+            return Items.Where(x => x.Prop.DwItemKind2 == itemKind2).Select(x => x.Prop.DwItemKind3).Distinct().ToArray();
         }
 #endif // __ITEMS
         #endregion
