@@ -250,7 +250,7 @@ namespace Common
 
         private void ProjectStrings_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            if(e.Action == NotifyCollectionChangedAction.Reset || (e.OldItems != null && e.OldItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)) || (e.NewItems != null && e.NewItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)))
+            if(this.Prop != null && e.Action == NotifyCollectionChangedAction.Reset || (e.OldItems != null && e.OldItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)) || (e.NewItems != null && e.NewItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)))
                 NotifyPropertyChanged(nameof(this.Name));
         }
 
@@ -291,7 +291,8 @@ namespace Common
         public void Dispose()
         {
             Project.GetInstance().strings.CollectionChanged -= ProjectStrings_CollectionChanged;
-            this.Prop.PropertyChanged -= Prop_PropertyChanged;
+            if(this.Prop != null)
+                this.Prop.PropertyChanged -= Prop_PropertyChanged;
         }
     }
 }
