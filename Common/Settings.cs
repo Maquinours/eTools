@@ -39,7 +39,7 @@ namespace Common
         /// </summary>
         public string PropFileName { get; set; }
 #if __ITEMS
-        public string IconsFolderPath { get; private set; }
+        public string IconsFolderPath { get; set; }
 #endif // __ITEMS
 #if __MOVERS
         public Dictionary<MoverTypes, MoverType> Types { get; set; }

@@ -82,6 +82,7 @@
             this.pnlList = new System.Windows.Forms.Panel();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.pbFileSaveReload = new System.Windows.Forms.ProgressBar();
+            this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -571,7 +572,8 @@
             // 
             this.msMain.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiItems});
+            this.tsmiItems,
+            this.tsmiSettings});
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
@@ -629,6 +631,13 @@
             this.pbFileSaveReload.Name = "pbFileSaveReload";
             this.pbFileSaveReload.Size = new System.Drawing.Size(757, 10);
             this.pbFileSaveReload.TabIndex = 2;
+            // 
+            // tsmiSettings
+            // 
+            this.tsmiSettings.Name = "tsmiSettings";
+            this.tsmiSettings.Size = new System.Drawing.Size(61, 22);
+            this.tsmiSettings.Text = "Settings";
+            this.tsmiSettings.Click += new System.EventHandler(this.tsmiSettings_Click);
             // 
             // MainForm
             // 
@@ -723,6 +732,7 @@
         private System.Windows.Forms.Panel pnlList;
         private System.Windows.Forms.TextBox tbSearch;
         private System.Windows.Forms.ProgressBar pbFileSaveReload;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSettings;
     }
 }
 

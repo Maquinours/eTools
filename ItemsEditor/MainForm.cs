@@ -294,5 +294,17 @@ namespace ItemsEditor
             if (item is Item && this.lbItems.Items.Contains(item)) // If the selected item is still in the list, then we select it again
                 this.lbItems.SelectedItem = item;
         }
+
+        private void tsmiSettings_Click(object sender, EventArgs e)
+        {
+            SettingsForm settingsForm = new SettingsForm();
+            if (settingsForm.ShowDialog() == DialogResult.OK && settingsForm.ContainsChanges)
+            {
+                //if (MessageBox.Show("Some settings have changed. Would you like to reload the data with the new settings?", "Settings changed", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                //    ReloadFormData();
+                //else
+                //    this.SetNumericUpDownLimits();
+            }
+        }
     }
 }
