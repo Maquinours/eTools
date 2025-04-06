@@ -26,12 +26,14 @@ namespace ItemsEditor
             this.LoadFormData();
         }
 
-        private void LoadFormData()
+        private async void LoadFormData()
         {
             try
             {
+                pbFileSaveReload.Visible = true;
+
                 Project prj = Project.GetInstance();
-                prj.Load(null);
+                await Task.Run(() => prj.Load((progress) => pbFileSaveReload.Invoke(new Action(() => pbFileSaveReload.Value = progress)))).ConfigureAwait(true);
                 cbTypeItemKind1.DataSource = prj.GetAllItemKinds1();
                 cbTypeItemKind2.DataSource = prj.GetAllItemKinds2();
                 cbTypeItemKind3.DataSource = prj.GetAllItemKinds3();
@@ -45,6 +47,12 @@ namespace ItemsEditor
             {
                 MessageBox.Show(e.Message);
                 Environment.Exit(3);
+            }
+            finally
+            {
+                await System.Threading.Tasks.Task.Delay(300);
+                pbFileSaveReload.Visible = false;
+                pbFileSaveReload.Value = 0;
             }
         }
 
