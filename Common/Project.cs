@@ -218,7 +218,7 @@ namespace Common
 
         private void LoadItems(string filePath)
         {
-            Items.Clear();
+            this.ClearItems();
             Scanner scanner = new Scanner();
 
             scanner.Load(filePath);
@@ -463,6 +463,13 @@ namespace Common
         public string[] GetPossibleItemKinds3ByItemKind2(string itemKind2)
         {
             return Items.Where(x => x.Prop.DwItemKind2 == itemKind2).Select(x => x.Prop.DwItemKind3).Distinct().ToArray();
+        }
+
+        private void ClearItems()
+        {
+            foreach (Item item in this.Items)
+                item.Dispose();
+            this.Items.Clear();
         }
 #endif // __ITEMS
         #endregion
