@@ -18,6 +18,7 @@ namespace ItemsEditor
         public MainForm()
         {
             InitializeComponent();
+            this.SetSearchTextBoxPlaceHolder();
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
@@ -195,14 +196,7 @@ namespace ItemsEditor
 
         private void TsmiItemsSearch_Click(object sender, EventArgs e)
         {
-            SearchForm searchForm = new SearchForm();
-
-            if (searchForm.ShowDialog() == DialogResult.OK)
-            {
-                Item selectedItem = lb_items.Items.Cast<Item>().ToArray().FirstOrDefault(x => x.Name.ToLower().Contains(searchForm.Value.ToLower()));
-                if (selectedItem != null)
-                    lb_items.SelectedItem = selectedItem;
-            }
+            tbSearch.Focus();
         }
 
         private void Lb_items_KeyDown(object sender, KeyEventArgs e)
@@ -253,5 +247,44 @@ namespace ItemsEditor
             }
         }
 
+        private void SetSearchTextBoxPlaceHolder()
+        {
+            if (String.IsNullOrWhiteSpace(this.tbSearch.Text))
+            {
+                tbSearch.Text = "Search...";
+                tbSearch.ForeColor = Color.Gray;
+            }
+            else
+            {
+                tbSearch.ForeColor = Color.Black;
+            }
+            tbSearch.GotFocus += (s, e) =>
+            {
+                if (tbSearch.ForeColor == Color.Gray) // Placeholder
+                {
+                    tbSearch.Text = "";
+                    tbSearch.ForeColor = Color.Black;
+                }
+            };
+            tbSearch.LostFocus += (s, e) =>
+            {
+                if (String.IsNullOrWhiteSpace(tbSearch.Text))
+                {
+                    tbSearch.ForeColor = Color.Gray;
+                    tbSearch.Text = "Search...";
+                }
+            };
+        }
+
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            Item item = this.lb_items.SelectedItem as Item;
+            if (this.tbSearch.ForeColor == Color.Gray || String.IsNullOrWhiteSpace(this.tbSearch.Text)) // If placeholder or search text is blank
+                this.lb_items.DataSource = Project.GetInstance().Items;
+            else
+                this.lb_items.DataSource = new BindingList<Item>(Project.GetInstance().Items.Where(x => x.Name.ToLower().Contains(this.tbSearch.Text.Trim().ToLower())).ToList());
+            if (item is Item && this.lb_items.Items.Contains(item)) // If the selected item is still in the list, then we select it again
+                this.lb_items.SelectedItem = item;
+        }
     }
 }

@@ -79,6 +79,8 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiItemsAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiItemsSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tbSearch = new System.Windows.Forms.TextBox();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -90,17 +92,17 @@
             this.tpMainEquipment.SuspendLayout();
             this.gb_dstParams.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lb_items
             // 
-            this.lb_items.Dock = System.Windows.Forms.DockStyle.Left;
             this.lb_items.FormattingEnabled = true;
             this.lb_items.ItemHeight = 20;
-            this.lb_items.Location = new System.Drawing.Point(0, 35);
+            this.lb_items.Location = new System.Drawing.Point(0, 29);
             this.lb_items.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.lb_items.Name = "lb_items";
-            this.lb_items.Size = new System.Drawing.Size(380, 657);
+            this.lb_items.Size = new System.Drawing.Size(383, 624);
             this.lb_items.TabIndex = 0;
             this.lb_items.SelectedIndexChanged += new System.EventHandler(this.lb_items_SelectedIndexChanged);
             this.lb_items.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Lb_items_KeyDown);
@@ -217,12 +219,12 @@
             // 
             this.tcMain.Controls.Add(this.tpMainGeneral);
             this.tcMain.Controls.Add(this.tpMainEquipment);
-            this.tcMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tcMain.Location = new System.Drawing.Point(380, 35);
+            this.tcMain.Dock = System.Windows.Forms.DockStyle.Right;
+            this.tcMain.Location = new System.Drawing.Point(380, 33);
             this.tcMain.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tcMain.Name = "tcMain";
             this.tcMain.SelectedIndex = 0;
-            this.tcMain.Size = new System.Drawing.Size(756, 657);
+            this.tcMain.Size = new System.Drawing.Size(756, 659);
             this.tcMain.TabIndex = 13;
             // 
             // tpMainGeneral
@@ -234,7 +236,7 @@
             this.tpMainGeneral.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tpMainGeneral.Name = "tpMainGeneral";
             this.tpMainGeneral.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tpMainGeneral.Size = new System.Drawing.Size(748, 624);
+            this.tpMainGeneral.Size = new System.Drawing.Size(748, 626);
             this.tpMainGeneral.TabIndex = 0;
             this.tpMainGeneral.Text = "General";
             this.tpMainGeneral.UseVisualStyleBackColor = true;
@@ -412,7 +414,7 @@
             this.tpMainEquipment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tpMainEquipment.Name = "tpMainEquipment";
             this.tpMainEquipment.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tpMainEquipment.Size = new System.Drawing.Size(745, 622);
+            this.tpMainEquipment.Size = new System.Drawing.Size(748, 624);
             this.tpMainEquipment.TabIndex = 1;
             this.tpMainEquipment.Text = "Equipment";
             this.tpMainEquipment.UseVisualStyleBackColor = true;
@@ -610,7 +612,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1136, 35);
+            this.menuStrip1.Size = new System.Drawing.Size(1136, 33);
             this.menuStrip1.TabIndex = 14;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -620,7 +622,7 @@
             this.tsmiItemsAdd,
             this.tsmiItemsSearch});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 29);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(72, 30);
             this.fileToolStripMenuItem.Text = "Items";
             // 
             // tsmiItemsAdd
@@ -638,13 +640,31 @@
             this.tsmiItemsSearch.Text = "Search";
             this.tsmiItemsSearch.Click += new System.EventHandler(this.TsmiItemsSearch_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.tbSearch);
+            this.panel1.Controls.Add(this.lb_items);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 33);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(386, 659);
+            this.panel1.TabIndex = 15;
+            // 
+            // tbSearch
+            // 
+            this.tbSearch.Location = new System.Drawing.Point(0, 0);
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.Size = new System.Drawing.Size(383, 26);
+            this.tbSearch.TabIndex = 1;
+            this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1136, 692);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.tcMain);
-            this.Controls.Add(this.lb_items);
             this.Controls.Add(this.menuStrip1);
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
@@ -669,6 +689,8 @@
             this.gb_dstParams.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -726,6 +748,8 @@
         private System.Windows.Forms.GroupBox gbGeneralGeneral;
         private System.Windows.Forms.GroupBox gbGeneralMisc;
         private System.Windows.Forms.Button btnMiscSelectIcon;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox tbSearch;
     }
 }
 
