@@ -37,10 +37,10 @@ namespace ItemsEditor
                 cbTypeItemKind1.DataSource = prj.GetAllItemKinds1();
                 cbTypeItemKind2.DataSource = prj.GetAllItemKinds2();
                 cbTypeItemKind3.DataSource = prj.GetAllItemKinds3();
-                cb_job.DataSource = new string[] { "=" }.Concat(prj.GetJobIdentifiers()).ToArray();
-                cb_sex.DataSource = new string[] { "=" }.Concat(prj.GetSexIdentifiers()).ToArray();
-                cb_DstParamIdentifier.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
-                cb_ElementType.DataSource = prj.GetElementsIdentifiers();
+                cbEquipmentJob.DataSource = new string[] { "=" }.Concat(prj.GetJobIdentifiers()).ToArray();
+                cbEquipmentSex.DataSource = new string[] { "=" }.Concat(prj.GetSexIdentifiers()).ToArray();
+                cbDstParamIdentifier.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
+                cbElementType.DataSource = prj.GetElementsIdentifiers();
                 SetListBoxDataSource();
             }
             catch (Exception e)
@@ -58,8 +58,8 @@ namespace ItemsEditor
 
         private void SetListBoxDataSource()
         {
-            lb_items.DisplayMember = "Name";
-            lb_items.DataSource = Project.GetInstance().Items;
+            lbItems.DisplayMember = "Name";
+            lbItems.DataSource = Project.GetInstance().Items;
         }
 
         private void lb_items_SelectedIndexChanged(object sender, EventArgs e)
@@ -71,19 +71,19 @@ namespace ItemsEditor
             tbGeneralName.DataBindings.Clear();
             nudMiscPackMax.DataBindings.Clear();
             nudMiscCost.DataBindings.Clear();
-            cb_job.DataBindings.Clear();
-            cb_sex.DataBindings.Clear();
+            cbEquipmentJob.DataBindings.Clear();
+            cbEquipmentSex.DataBindings.Clear();
             pbMiscIcon.DataBindings.Clear();
             tbMiscIcon.DataBindings.Clear();
             tbGeneralDescription.DataBindings.Clear();
-            lb_DstParams.SelectedIndex = -1;
-            lb_DstParams.Items.Clear();
-            tb_AtkMin.DataBindings.Clear();
-            tb_AtkMax.DataBindings.Clear();
-            tb_Level.DataBindings.Clear();
-            tb_ModelName.DataBindings.Clear();
+            lbDstParams.SelectedIndex = -1;
+            lbDstParams.Items.Clear();
+            tbAtkMin.DataBindings.Clear();
+            tbAtkMax.DataBindings.Clear();
+            tbEquipmentLevel.DataBindings.Clear();
+            tbModelName.DataBindings.Clear();
 
-            Item currentItem = ((Item)lb_items.SelectedItem);
+            Item currentItem = ((Item)lbItems.SelectedItem);
             if (currentItem == null) return;
 
             cbTypeItemKind1.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwItemKind1", false, DataSourceUpdateMode.OnPropertyChanged));
@@ -93,21 +93,21 @@ namespace ItemsEditor
             tbGeneralName.DataBindings.Add(new Binding("Text", currentItem, "Name", false, DataSourceUpdateMode.OnPropertyChanged));
             nudMiscPackMax.DataBindings.Add(new Binding("Value", currentItem.Prop, "DwPackMax", false, DataSourceUpdateMode.OnPropertyChanged));
             nudMiscCost.DataBindings.Add(new Binding("Value", currentItem.Prop, "DwCost", false, DataSourceUpdateMode.OnPropertyChanged));
-            cb_job.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemJob", false, DataSourceUpdateMode.OnPropertyChanged));
-            cb_sex.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemSex", false, DataSourceUpdateMode.OnPropertyChanged));
+            cbEquipmentJob.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemJob", false, DataSourceUpdateMode.OnPropertyChanged));
+            cbEquipmentSex.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemSex", false, DataSourceUpdateMode.OnPropertyChanged));
             tbMiscIcon.DataBindings.Add(new Binding("Text", currentItem.Prop, "SzIcon", false, DataSourceUpdateMode.OnPropertyChanged));
             tbGeneralDescription.DataBindings.Add(new Binding("Text", currentItem, "Description", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_AtkMin.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMin", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_AtkMax.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMax", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_Level.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwLimitLevel1", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_ModelName.DataBindings.Add(new Binding("Text", currentItem.Model, "SzName", false, DataSourceUpdateMode.OnPropertyChanged));
+            tbAtkMin.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMin", false, DataSourceUpdateMode.OnPropertyChanged));
+            tbAtkMax.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMax", false, DataSourceUpdateMode.OnPropertyChanged));
+            tbEquipmentLevel.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwLimitLevel1", false, DataSourceUpdateMode.OnPropertyChanged));
+            tbModelName.DataBindings.Add(new Binding("Text", currentItem.Model, "SzName", false, DataSourceUpdateMode.OnPropertyChanged));
 
             for (int i = 0; i < currentItem.Prop.DwDestParam.Length; i++)
             {
                 if (currentItem.Prop.DwDestParam[i] != "=")
-                    lb_DstParams.Items.Add($"Stat {i} ({currentItem.Prop.DwDestParam[i]} + {currentItem.Prop.NAdjParamVal[i]})");
+                    lbDstParams.Items.Add($"Stat {i} ({currentItem.Prop.DwDestParam[i]} + {currentItem.Prop.NAdjParamVal[i]})");
                 else
-                    lb_DstParams.Items.Add($"Stat {i}");
+                    lbDstParams.Items.Add($"Stat {i}");
             }
 
             string iconPath = $"{Settings.GetInstance().IconsFolderPath}{currentItem.Prop.SzIcon}";
@@ -166,24 +166,24 @@ namespace ItemsEditor
 
         private void lb_DstParams_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cb_DstParamIdentifier.DataBindings.Clear();
-            tb_DstParamValue.DataBindings.Clear();
-            if (lb_items.SelectedIndex == -1 || lb_DstParams.SelectedIndex == -1)
+            cbDstParamIdentifier.DataBindings.Clear();
+            tbDstParamValue.DataBindings.Clear();
+            if (lbItems.SelectedIndex == -1 || lbDstParams.SelectedIndex == -1)
             {
-                cb_DstParamIdentifier.ResetText();
-                cb_DstParamIdentifier.Enabled = false;
-                tb_DstParamValue.ResetText();
-                tb_DstParamValue.Enabled = false;
+                cbDstParamIdentifier.ResetText();
+                cbDstParamIdentifier.Enabled = false;
+                tbDstParamValue.ResetText();
+                tbDstParamValue.Enabled = false;
                 return;
             }
-            Item item = (Item)lb_items.SelectedItem;
+            Item item = (Item)lbItems.SelectedItem;
             //BindingSource bs = new BindingSource();
-            cb_DstParamIdentifier.DataBindings.Add(new Binding("SelectedItem", item.Prop.DwDestParam, "", false, DataSourceUpdateMode.OnPropertyChanged));
-            cb_DstParamIdentifier.BindingContext[item.Prop.DwDestParam].Position = lb_DstParams.SelectedIndex;
-            tb_DstParamValue.DataBindings.Add(new Binding("Text", item.Prop.NAdjParamVal, "", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_DstParamValue.BindingContext[item.Prop.NAdjParamVal].Position = lb_DstParams.SelectedIndex;
-            cb_DstParamIdentifier.Enabled = true;
-            tb_DstParamValue.Enabled = true;
+            cbDstParamIdentifier.DataBindings.Add(new Binding("SelectedItem", item.Prop.DwDestParam, "", false, DataSourceUpdateMode.OnPropertyChanged));
+            cbDstParamIdentifier.BindingContext[item.Prop.DwDestParam].Position = lbDstParams.SelectedIndex;
+            tbDstParamValue.DataBindings.Add(new Binding("Text", item.Prop.NAdjParamVal, "", false, DataSourceUpdateMode.OnPropertyChanged));
+            tbDstParamValue.BindingContext[item.Prop.NAdjParamVal].Position = lbDstParams.SelectedIndex;
+            cbDstParamIdentifier.Enabled = true;
+            tbDstParamValue.Enabled = true;
             //bs.DataSource = item.Prop.DwDestParam;
             //bs.Position = lb_DstParams.SelectedIndex;
             //cb_DstParamIdentifier.DataSource = bs;
@@ -217,11 +217,11 @@ namespace ItemsEditor
 
         private void DeleteCurrentItem()
         {
-            if (!(lb_items.SelectedItem is Item item)) return;
+            if (!(lbItems.SelectedItem is Item item)) return;
             Project.GetInstance().DeleteItem(item);
-            int indexSave = lb_items.SelectedIndex;
+            int indexSave = lbItems.SelectedIndex;
             SetListBoxDataSource();
-            lb_items.SelectedIndex = indexSave < lb_items.Items.Count ? indexSave : lb_items.Items.Count - 1;
+            lbItems.SelectedIndex = indexSave < lbItems.Items.Count ? indexSave : lbItems.Items.Count - 1;
         }
 
         private void Cb_ik1_SelectedIndexChanged(object sender, EventArgs e)
@@ -286,13 +286,13 @@ namespace ItemsEditor
 
         private void tbSearch_TextChanged(object sender, EventArgs e)
         {
-            Item item = this.lb_items.SelectedItem as Item;
+            Item item = this.lbItems.SelectedItem as Item;
             if (this.tbSearch.ForeColor == Color.Gray || String.IsNullOrWhiteSpace(this.tbSearch.Text)) // If placeholder or search text is blank
-                this.lb_items.DataSource = Project.GetInstance().Items;
+                this.lbItems.DataSource = Project.GetInstance().Items;
             else
-                this.lb_items.DataSource = new BindingList<Item>(Project.GetInstance().Items.Where(x => x.Name.ToLower().Contains(this.tbSearch.Text.Trim().ToLower())).ToList());
-            if (item is Item && this.lb_items.Items.Contains(item)) // If the selected item is still in the list, then we select it again
-                this.lb_items.SelectedItem = item;
+                this.lbItems.DataSource = new BindingList<Item>(Project.GetInstance().Items.Where(x => x.Name.ToLower().Contains(this.tbSearch.Text.Trim().ToLower())).ToList());
+            if (item is Item && this.lbItems.Items.Contains(item)) // If the selected item is still in the list, then we select it again
+                this.lbItems.SelectedItem = item;
         }
     }
 }

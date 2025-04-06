@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.lb_items = new System.Windows.Forms.ListBox();
+            this.lbItems = new System.Windows.Forms.ListBox();
             this.lblTypeItemKind1 = new System.Windows.Forms.Label();
             this.lblTypeItemKind2 = new System.Windows.Forms.Label();
             this.lblTypeItemKind3 = new System.Windows.Forms.Label();
@@ -56,27 +56,27 @@
             this.lblGeneralDescription = new System.Windows.Forms.Label();
             this.gbGeneralType = new System.Windows.Forms.GroupBox();
             this.tpMainEquipment = new System.Windows.Forms.TabPage();
-            this.tb_ModelName = new System.Windows.Forms.TextBox();
-            this.gb_dstParams = new System.Windows.Forms.GroupBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.cb_DstParamIdentifier = new System.Windows.Forms.ComboBox();
-            this.tb_DstParamValue = new System.Windows.Forms.TextBox();
-            this.lb_DstParams = new System.Windows.Forms.ListBox();
-            this.cb_ElementType = new System.Windows.Forms.ComboBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tb_Level = new System.Windows.Forms.TextBox();
-            this.tb_AtkMax = new System.Windows.Forms.TextBox();
-            this.tb_AtkMin = new System.Windows.Forms.TextBox();
-            this.cb_sex = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.cb_job = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tbModelName = new System.Windows.Forms.TextBox();
+            this.gbDstParams = new System.Windows.Forms.GroupBox();
+            this.lblDstParamValue = new System.Windows.Forms.Label();
+            this.lblDstParamIdentifier = new System.Windows.Forms.Label();
+            this.cbDstParamIdentifier = new System.Windows.Forms.ComboBox();
+            this.tbDstParamValue = new System.Windows.Forms.TextBox();
+            this.lbDstParams = new System.Windows.Forms.ListBox();
+            this.cbElementType = new System.Windows.Forms.ComboBox();
+            this.lblElementType = new System.Windows.Forms.Label();
+            this.lblAtkMax = new System.Windows.Forms.Label();
+            this.lblEquipmentAtkMin = new System.Windows.Forms.Label();
+            this.lblEquipmentLevel = new System.Windows.Forms.Label();
+            this.tbEquipmentLevel = new System.Windows.Forms.TextBox();
+            this.tbAtkMax = new System.Windows.Forms.TextBox();
+            this.tbAtkMin = new System.Windows.Forms.TextBox();
+            this.cbEquipmentSex = new System.Windows.Forms.ComboBox();
+            this.lblEquipmentSex = new System.Windows.Forms.Label();
+            this.cbEquipmentJob = new System.Windows.Forms.ComboBox();
+            this.lblEquipmentJob = new System.Windows.Forms.Label();
+            this.msMain = new System.Windows.Forms.MenuStrip();
+            this.tsmiItems = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiItemsAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiItemsSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlList = new System.Windows.Forms.Panel();
@@ -91,20 +91,20 @@
             this.gbGeneralGeneral.SuspendLayout();
             this.gbGeneralType.SuspendLayout();
             this.tpMainEquipment.SuspendLayout();
-            this.gb_dstParams.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.gbDstParams.SuspendLayout();
+            this.msMain.SuspendLayout();
             this.pnlList.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lb_items
+            // lbItems
             // 
-            this.lb_items.FormattingEnabled = true;
-            this.lb_items.Location = new System.Drawing.Point(0, 19);
-            this.lb_items.Name = "lb_items";
-            this.lb_items.Size = new System.Drawing.Size(253, 407);
-            this.lb_items.TabIndex = 0;
-            this.lb_items.SelectedIndexChanged += new System.EventHandler(this.lb_items_SelectedIndexChanged);
-            this.lb_items.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Lb_items_KeyDown);
+            this.lbItems.FormattingEnabled = true;
+            this.lbItems.Location = new System.Drawing.Point(0, 19);
+            this.lbItems.Name = "lbItems";
+            this.lbItems.Size = new System.Drawing.Size(253, 407);
+            this.lbItems.TabIndex = 0;
+            this.lbItems.SelectedIndexChanged += new System.EventHandler(this.lb_items_SelectedIndexChanged);
+            this.lbItems.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Lb_items_KeyDown);
             // 
             // lblTypeItemKind1
             // 
@@ -369,244 +369,244 @@
             // 
             // tpMainEquipment
             // 
-            this.tpMainEquipment.Controls.Add(this.tb_ModelName);
-            this.tpMainEquipment.Controls.Add(this.gb_dstParams);
-            this.tpMainEquipment.Controls.Add(this.cb_ElementType);
-            this.tpMainEquipment.Controls.Add(this.label15);
-            this.tpMainEquipment.Controls.Add(this.label14);
-            this.tpMainEquipment.Controls.Add(this.label13);
-            this.tpMainEquipment.Controls.Add(this.label12);
-            this.tpMainEquipment.Controls.Add(this.tb_Level);
-            this.tpMainEquipment.Controls.Add(this.tb_AtkMax);
-            this.tpMainEquipment.Controls.Add(this.tb_AtkMin);
-            this.tpMainEquipment.Controls.Add(this.cb_sex);
-            this.tpMainEquipment.Controls.Add(this.label9);
-            this.tpMainEquipment.Controls.Add(this.cb_job);
-            this.tpMainEquipment.Controls.Add(this.label7);
+            this.tpMainEquipment.Controls.Add(this.tbModelName);
+            this.tpMainEquipment.Controls.Add(this.gbDstParams);
+            this.tpMainEquipment.Controls.Add(this.cbElementType);
+            this.tpMainEquipment.Controls.Add(this.lblElementType);
+            this.tpMainEquipment.Controls.Add(this.lblAtkMax);
+            this.tpMainEquipment.Controls.Add(this.lblEquipmentAtkMin);
+            this.tpMainEquipment.Controls.Add(this.lblEquipmentLevel);
+            this.tpMainEquipment.Controls.Add(this.tbEquipmentLevel);
+            this.tpMainEquipment.Controls.Add(this.tbAtkMax);
+            this.tpMainEquipment.Controls.Add(this.tbAtkMin);
+            this.tpMainEquipment.Controls.Add(this.cbEquipmentSex);
+            this.tpMainEquipment.Controls.Add(this.lblEquipmentSex);
+            this.tpMainEquipment.Controls.Add(this.cbEquipmentJob);
+            this.tpMainEquipment.Controls.Add(this.lblEquipmentJob);
             this.tpMainEquipment.Location = new System.Drawing.Point(4, 22);
             this.tpMainEquipment.Name = "tpMainEquipment";
             this.tpMainEquipment.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
-            this.tpMainEquipment.Size = new System.Drawing.Size(496, 402);
+            this.tpMainEquipment.Size = new System.Drawing.Size(496, 400);
             this.tpMainEquipment.TabIndex = 1;
             this.tpMainEquipment.Text = "Equipment";
             this.tpMainEquipment.UseVisualStyleBackColor = true;
             // 
-            // tb_ModelName
+            // tbModelName
             // 
-            this.tb_ModelName.Location = new System.Drawing.Point(239, 359);
-            this.tb_ModelName.Name = "tb_ModelName";
-            this.tb_ModelName.Size = new System.Drawing.Size(100, 20);
-            this.tb_ModelName.TabIndex = 21;
+            this.tbModelName.Location = new System.Drawing.Point(239, 359);
+            this.tbModelName.Name = "tbModelName";
+            this.tbModelName.Size = new System.Drawing.Size(100, 20);
+            this.tbModelName.TabIndex = 21;
             // 
-            // gb_dstParams
+            // gbDstParams
             // 
-            this.gb_dstParams.Controls.Add(this.label17);
-            this.gb_dstParams.Controls.Add(this.label16);
-            this.gb_dstParams.Controls.Add(this.cb_DstParamIdentifier);
-            this.gb_dstParams.Controls.Add(this.tb_DstParamValue);
-            this.gb_dstParams.Controls.Add(this.lb_DstParams);
-            this.gb_dstParams.Location = new System.Drawing.Point(49, 135);
-            this.gb_dstParams.Name = "gb_dstParams";
-            this.gb_dstParams.Size = new System.Drawing.Size(356, 148);
-            this.gb_dstParams.TabIndex = 20;
-            this.gb_dstParams.TabStop = false;
-            this.gb_dstParams.Text = "Statistiques";
+            this.gbDstParams.Controls.Add(this.lblDstParamValue);
+            this.gbDstParams.Controls.Add(this.lblDstParamIdentifier);
+            this.gbDstParams.Controls.Add(this.cbDstParamIdentifier);
+            this.gbDstParams.Controls.Add(this.tbDstParamValue);
+            this.gbDstParams.Controls.Add(this.lbDstParams);
+            this.gbDstParams.Location = new System.Drawing.Point(49, 135);
+            this.gbDstParams.Name = "gbDstParams";
+            this.gbDstParams.Size = new System.Drawing.Size(356, 148);
+            this.gbDstParams.TabIndex = 20;
+            this.gbDstParams.TabStop = false;
+            this.gbDstParams.Text = "Statistiques";
             // 
-            // label17
+            // lblDstParamValue
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(187, 89);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(43, 13);
-            this.label17.TabIndex = 22;
-            this.label17.Text = "Valeur :";
+            this.lblDstParamValue.AutoSize = true;
+            this.lblDstParamValue.Location = new System.Drawing.Point(187, 89);
+            this.lblDstParamValue.Name = "lblDstParamValue";
+            this.lblDstParamValue.Size = new System.Drawing.Size(43, 13);
+            this.lblDstParamValue.TabIndex = 22;
+            this.lblDstParamValue.Text = "Valeur :";
             // 
-            // label16
+            // lblDstParamIdentifier
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(198, 52);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(32, 13);
-            this.label16.TabIndex = 21;
-            this.label16.Text = "Stat :";
+            this.lblDstParamIdentifier.AutoSize = true;
+            this.lblDstParamIdentifier.Location = new System.Drawing.Point(198, 52);
+            this.lblDstParamIdentifier.Name = "lblDstParamIdentifier";
+            this.lblDstParamIdentifier.Size = new System.Drawing.Size(32, 13);
+            this.lblDstParamIdentifier.TabIndex = 21;
+            this.lblDstParamIdentifier.Text = "Stat :";
             // 
-            // cb_DstParamIdentifier
+            // cbDstParamIdentifier
             // 
-            this.cb_DstParamIdentifier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_DstParamIdentifier.Enabled = false;
-            this.cb_DstParamIdentifier.FormattingEnabled = true;
-            this.cb_DstParamIdentifier.Location = new System.Drawing.Point(235, 49);
-            this.cb_DstParamIdentifier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.cb_DstParamIdentifier.Name = "cb_DstParamIdentifier";
-            this.cb_DstParamIdentifier.Size = new System.Drawing.Size(95, 21);
-            this.cb_DstParamIdentifier.TabIndex = 10;
-            this.cb_DstParamIdentifier.SelectedValueChanged += new System.EventHandler(this.cb_DstParamIdentifier_SelectedValueChanged);
+            this.cbDstParamIdentifier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbDstParamIdentifier.Enabled = false;
+            this.cbDstParamIdentifier.FormattingEnabled = true;
+            this.cbDstParamIdentifier.Location = new System.Drawing.Point(235, 49);
+            this.cbDstParamIdentifier.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbDstParamIdentifier.Name = "cbDstParamIdentifier";
+            this.cbDstParamIdentifier.Size = new System.Drawing.Size(95, 21);
+            this.cbDstParamIdentifier.TabIndex = 10;
+            this.cbDstParamIdentifier.SelectedValueChanged += new System.EventHandler(this.cb_DstParamIdentifier_SelectedValueChanged);
             // 
-            // tb_DstParamValue
+            // tbDstParamValue
             // 
-            this.tb_DstParamValue.Enabled = false;
-            this.tb_DstParamValue.Location = new System.Drawing.Point(235, 86);
-            this.tb_DstParamValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tb_DstParamValue.Name = "tb_DstParamValue";
-            this.tb_DstParamValue.Size = new System.Drawing.Size(95, 20);
-            this.tb_DstParamValue.TabIndex = 11;
-            this.tb_DstParamValue.TextChanged += new System.EventHandler(this.FormatIntTextbox);
+            this.tbDstParamValue.Enabled = false;
+            this.tbDstParamValue.Location = new System.Drawing.Point(235, 86);
+            this.tbDstParamValue.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbDstParamValue.Name = "tbDstParamValue";
+            this.tbDstParamValue.Size = new System.Drawing.Size(95, 20);
+            this.tbDstParamValue.TabIndex = 11;
+            this.tbDstParamValue.TextChanged += new System.EventHandler(this.FormatIntTextbox);
             // 
-            // lb_DstParams
+            // lbDstParams
             // 
-            this.lb_DstParams.FormattingEnabled = true;
-            this.lb_DstParams.Location = new System.Drawing.Point(5, 18);
-            this.lb_DstParams.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.lb_DstParams.Name = "lb_DstParams";
-            this.lb_DstParams.Size = new System.Drawing.Size(174, 121);
-            this.lb_DstParams.TabIndex = 9;
-            this.lb_DstParams.SelectedIndexChanged += new System.EventHandler(this.lb_DstParams_SelectedIndexChanged);
+            this.lbDstParams.FormattingEnabled = true;
+            this.lbDstParams.Location = new System.Drawing.Point(5, 18);
+            this.lbDstParams.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lbDstParams.Name = "lbDstParams";
+            this.lbDstParams.Size = new System.Drawing.Size(174, 121);
+            this.lbDstParams.TabIndex = 9;
+            this.lbDstParams.SelectedIndexChanged += new System.EventHandler(this.lb_DstParams_SelectedIndexChanged);
             // 
-            // cb_ElementType
+            // cbElementType
             // 
-            this.cb_ElementType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_ElementType.FormattingEnabled = true;
-            this.cb_ElementType.Location = new System.Drawing.Point(250, 289);
-            this.cb_ElementType.Name = "cb_ElementType";
-            this.cb_ElementType.Size = new System.Drawing.Size(174, 21);
-            this.cb_ElementType.TabIndex = 19;
+            this.cbElementType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbElementType.FormattingEnabled = true;
+            this.cbElementType.Location = new System.Drawing.Point(250, 289);
+            this.cbElementType.Name = "cbElementType";
+            this.cbElementType.Size = new System.Drawing.Size(174, 21);
+            this.cbElementType.TabIndex = 19;
             // 
-            // label15
+            // lblElementType
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(194, 292);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(51, 13);
-            this.label15.TabIndex = 18;
-            this.label15.Text = "Element :";
+            this.lblElementType.AutoSize = true;
+            this.lblElementType.Location = new System.Drawing.Point(194, 292);
+            this.lblElementType.Name = "lblElementType";
+            this.lblElementType.Size = new System.Drawing.Size(51, 13);
+            this.lblElementType.TabIndex = 18;
+            this.lblElementType.Text = "Element :";
             // 
-            // label14
+            // lblAtkMax
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(39, 324);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(54, 13);
-            this.label14.TabIndex = 17;
-            this.label14.Text = "Atk max. :";
+            this.lblAtkMax.AutoSize = true;
+            this.lblAtkMax.Location = new System.Drawing.Point(39, 324);
+            this.lblAtkMax.Name = "lblAtkMax";
+            this.lblAtkMax.Size = new System.Drawing.Size(54, 13);
+            this.lblAtkMax.TabIndex = 17;
+            this.lblAtkMax.Text = "Atk max. :";
             // 
-            // label13
+            // lblEquipmentAtkMin
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(42, 294);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(51, 13);
-            this.label13.TabIndex = 16;
-            this.label13.Text = "Atk min. :";
+            this.lblEquipmentAtkMin.AutoSize = true;
+            this.lblEquipmentAtkMin.Location = new System.Drawing.Point(42, 294);
+            this.lblEquipmentAtkMin.Name = "lblEquipmentAtkMin";
+            this.lblEquipmentAtkMin.Size = new System.Drawing.Size(51, 13);
+            this.lblEquipmentAtkMin.TabIndex = 16;
+            this.lblEquipmentAtkMin.Text = "Atk min. :";
             // 
-            // label12
+            // lblEquipmentLevel
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(46, 112);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(39, 13);
-            this.label12.TabIndex = 15;
-            this.label12.Text = "Level :";
+            this.lblEquipmentLevel.AutoSize = true;
+            this.lblEquipmentLevel.Location = new System.Drawing.Point(46, 112);
+            this.lblEquipmentLevel.Name = "lblEquipmentLevel";
+            this.lblEquipmentLevel.Size = new System.Drawing.Size(39, 13);
+            this.lblEquipmentLevel.TabIndex = 15;
+            this.lblEquipmentLevel.Text = "Level :";
             // 
-            // tb_Level
+            // tbEquipmentLevel
             // 
-            this.tb_Level.Location = new System.Drawing.Point(96, 110);
-            this.tb_Level.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tb_Level.Name = "tb_Level";
-            this.tb_Level.Size = new System.Drawing.Size(174, 20);
-            this.tb_Level.TabIndex = 14;
+            this.tbEquipmentLevel.Location = new System.Drawing.Point(96, 110);
+            this.tbEquipmentLevel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbEquipmentLevel.Name = "tbEquipmentLevel";
+            this.tbEquipmentLevel.Size = new System.Drawing.Size(174, 20);
+            this.tbEquipmentLevel.TabIndex = 14;
             // 
-            // tb_AtkMax
+            // tbAtkMax
             // 
-            this.tb_AtkMax.Location = new System.Drawing.Point(96, 322);
-            this.tb_AtkMax.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tb_AtkMax.Name = "tb_AtkMax";
-            this.tb_AtkMax.Size = new System.Drawing.Size(68, 20);
-            this.tb_AtkMax.TabIndex = 13;
+            this.tbAtkMax.Location = new System.Drawing.Point(96, 322);
+            this.tbAtkMax.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbAtkMax.Name = "tbAtkMax";
+            this.tbAtkMax.Size = new System.Drawing.Size(68, 20);
+            this.tbAtkMax.TabIndex = 13;
             // 
-            // tb_AtkMin
+            // tbAtkMin
             // 
-            this.tb_AtkMin.Location = new System.Drawing.Point(96, 292);
-            this.tb_AtkMin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.tb_AtkMin.Name = "tb_AtkMin";
-            this.tb_AtkMin.Size = new System.Drawing.Size(68, 20);
-            this.tb_AtkMin.TabIndex = 12;
+            this.tbAtkMin.Location = new System.Drawing.Point(96, 292);
+            this.tbAtkMin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbAtkMin.Name = "tbAtkMin";
+            this.tbAtkMin.Size = new System.Drawing.Size(68, 20);
+            this.tbAtkMin.TabIndex = 12;
             // 
-            // cb_sex
+            // cbEquipmentSex
             // 
-            this.cb_sex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_sex.FormattingEnabled = true;
-            this.cb_sex.Location = new System.Drawing.Point(96, 87);
-            this.cb_sex.Name = "cb_sex";
-            this.cb_sex.Size = new System.Drawing.Size(174, 21);
-            this.cb_sex.TabIndex = 8;
+            this.cbEquipmentSex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEquipmentSex.FormattingEnabled = true;
+            this.cbEquipmentSex.Location = new System.Drawing.Point(96, 87);
+            this.cbEquipmentSex.Name = "cbEquipmentSex";
+            this.cbEquipmentSex.Size = new System.Drawing.Size(174, 21);
+            this.cbEquipmentSex.TabIndex = 8;
             // 
-            // label9
+            // lblEquipmentSex
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(46, 90);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(37, 13);
-            this.label9.TabIndex = 7;
-            this.label9.Text = "Sexe :";
+            this.lblEquipmentSex.AutoSize = true;
+            this.lblEquipmentSex.Location = new System.Drawing.Point(46, 90);
+            this.lblEquipmentSex.Name = "lblEquipmentSex";
+            this.lblEquipmentSex.Size = new System.Drawing.Size(37, 13);
+            this.lblEquipmentSex.TabIndex = 7;
+            this.lblEquipmentSex.Text = "Sexe :";
             // 
-            // cb_job
+            // cbEquipmentJob
             // 
-            this.cb_job.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cb_job.FormattingEnabled = true;
-            this.cb_job.Location = new System.Drawing.Point(96, 60);
-            this.cb_job.Name = "cb_job";
-            this.cb_job.Size = new System.Drawing.Size(174, 21);
-            this.cb_job.TabIndex = 6;
+            this.cbEquipmentJob.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEquipmentJob.FormattingEnabled = true;
+            this.cbEquipmentJob.Location = new System.Drawing.Point(96, 60);
+            this.cbEquipmentJob.Name = "cbEquipmentJob";
+            this.cbEquipmentJob.Size = new System.Drawing.Size(174, 21);
+            this.cbEquipmentJob.TabIndex = 6;
             // 
-            // label7
+            // lblEquipmentJob
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(46, 63);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 13);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "Classe :";
+            this.lblEquipmentJob.AutoSize = true;
+            this.lblEquipmentJob.Location = new System.Drawing.Point(46, 63);
+            this.lblEquipmentJob.Name = "lblEquipmentJob";
+            this.lblEquipmentJob.Size = new System.Drawing.Size(44, 13);
+            this.lblEquipmentJob.TabIndex = 5;
+            this.lblEquipmentJob.Text = "Classe :";
             // 
-            // menuStrip1
+            // msMain
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
-            this.menuStrip1.Size = new System.Drawing.Size(757, 24);
-            this.menuStrip1.TabIndex = 14;
-            this.menuStrip1.Text = "menuStrip1";
+            this.msMain.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiItems});
+            this.msMain.Location = new System.Drawing.Point(0, 0);
+            this.msMain.Name = "msMain";
+            this.msMain.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
+            this.msMain.Size = new System.Drawing.Size(757, 24);
+            this.msMain.TabIndex = 14;
+            this.msMain.Text = "menuStrip1";
             // 
-            // fileToolStripMenuItem
+            // tsmiItems
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiItems.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiItemsAdd,
             this.tsmiItemsSearch});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(48, 22);
-            this.fileToolStripMenuItem.Text = "Items";
+            this.tsmiItems.Name = "tsmiItems";
+            this.tsmiItems.Size = new System.Drawing.Size(48, 22);
+            this.tsmiItems.Text = "Items";
             // 
             // tsmiItemsAdd
             // 
             this.tsmiItemsAdd.Name = "tsmiItemsAdd";
             this.tsmiItemsAdd.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.tsmiItemsAdd.Size = new System.Drawing.Size(149, 22);
+            this.tsmiItemsAdd.Size = new System.Drawing.Size(180, 22);
             this.tsmiItemsAdd.Text = "Add";
             // 
             // tsmiItemsSearch
             // 
             this.tsmiItemsSearch.Name = "tsmiItemsSearch";
             this.tsmiItemsSearch.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.tsmiItemsSearch.Size = new System.Drawing.Size(149, 22);
+            this.tsmiItemsSearch.Size = new System.Drawing.Size(180, 22);
             this.tsmiItemsSearch.Text = "Search";
             this.tsmiItemsSearch.Click += new System.EventHandler(this.TsmiItemsSearch_Click);
             // 
             // pnlList
             // 
             this.pnlList.Controls.Add(this.tbSearch);
-            this.pnlList.Controls.Add(this.lb_items);
+            this.pnlList.Controls.Add(this.lbItems);
             this.pnlList.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlList.Location = new System.Drawing.Point(0, 24);
             this.pnlList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
@@ -638,9 +638,9 @@
             this.Controls.Add(this.pbFileSaveReload);
             this.Controls.Add(this.tcMain);
             this.Controls.Add(this.pnlList);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.msMain);
             this.KeyPreview = true;
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.msMain;
             this.Name = "MainForm";
             this.Text = "Items Editor";
             this.Shown += new System.EventHandler(this.MainForm_Shown);
@@ -657,10 +657,10 @@
             this.gbGeneralType.PerformLayout();
             this.tpMainEquipment.ResumeLayout(false);
             this.tpMainEquipment.PerformLayout();
-            this.gb_dstParams.ResumeLayout(false);
-            this.gb_dstParams.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.gbDstParams.ResumeLayout(false);
+            this.gbDstParams.PerformLayout();
+            this.msMain.ResumeLayout(false);
+            this.msMain.PerformLayout();
             this.pnlList.ResumeLayout(false);
             this.pnlList.PerformLayout();
             this.ResumeLayout(false);
@@ -670,7 +670,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox lb_items;
+        private System.Windows.Forms.ListBox lbItems;
         private System.Windows.Forms.Label lblTypeItemKind1;
         private System.Windows.Forms.Label lblTypeItemKind2;
         private System.Windows.Forms.Label lblTypeItemKind3;
@@ -686,32 +686,32 @@
         private System.Windows.Forms.TabPage tpMainGeneral;
         private System.Windows.Forms.Label lblMiscCost;
         private System.Windows.Forms.TabPage tpMainEquipment;
-        private System.Windows.Forms.ComboBox cb_job;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cb_sex;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox cbEquipmentJob;
+        private System.Windows.Forms.Label lblEquipmentJob;
+        private System.Windows.Forms.ComboBox cbEquipmentSex;
+        private System.Windows.Forms.Label lblEquipmentSex;
         private System.Windows.Forms.PictureBox pbMiscIcon;
         private System.Windows.Forms.TextBox tbMiscIcon;
         private System.Windows.Forms.Label lblMiscIcon;
         private System.Windows.Forms.TextBox tbGeneralDescription;
         private System.Windows.Forms.Label lblGeneralDescription;
-        private System.Windows.Forms.ListBox lb_DstParams;
-        private System.Windows.Forms.TextBox tb_DstParamValue;
-        private System.Windows.Forms.ComboBox cb_DstParamIdentifier;
-        private System.Windows.Forms.TextBox tb_AtkMax;
-        private System.Windows.Forms.TextBox tb_AtkMin;
-        private System.Windows.Forms.TextBox tb_Level;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.ComboBox cb_ElementType;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.GroupBox gb_dstParams;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox tb_ModelName;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ListBox lbDstParams;
+        private System.Windows.Forms.TextBox tbDstParamValue;
+        private System.Windows.Forms.ComboBox cbDstParamIdentifier;
+        private System.Windows.Forms.TextBox tbAtkMax;
+        private System.Windows.Forms.TextBox tbAtkMin;
+        private System.Windows.Forms.TextBox tbEquipmentLevel;
+        private System.Windows.Forms.Label lblAtkMax;
+        private System.Windows.Forms.Label lblEquipmentAtkMin;
+        private System.Windows.Forms.Label lblEquipmentLevel;
+        private System.Windows.Forms.ComboBox cbElementType;
+        private System.Windows.Forms.Label lblElementType;
+        private System.Windows.Forms.GroupBox gbDstParams;
+        private System.Windows.Forms.Label lblDstParamValue;
+        private System.Windows.Forms.Label lblDstParamIdentifier;
+        private System.Windows.Forms.TextBox tbModelName;
+        private System.Windows.Forms.MenuStrip msMain;
+        private System.Windows.Forms.ToolStripMenuItem tsmiItems;
         private System.Windows.Forms.ToolStripMenuItem tsmiItemsAdd;
         private System.Windows.Forms.ToolStripMenuItem tsmiItemsSearch;
         private System.Windows.Forms.NumericUpDown nudMiscCost;
