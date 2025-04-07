@@ -8,17 +8,17 @@ using System.Runtime.CompilerServices;
 
 namespace Common
 {
-    public class DestParam
-    {
-        public string Param { get; set; }
-        public int Value { get; set; }
+    //public class DestParam
+    //{
+    //    public string Param { get; set; }
+    //    public int Value { get; set; }
 
-        public DestParam(string param, int value)
-        {
-            Param = param;
-            Value = value;
-        }
-    }
+    //    public DestParam(string param, int value)
+    //    {
+    //        Param = param;
+    //        Value = value;
+    //    }
+    //}
 
     public class ItemProp : INotifyPropertyChanged
     {
@@ -82,10 +82,30 @@ namespace Common
         private int _dwDmgShift;
         private string _dwAttackRange;
         private int _nProbability;
-        private string[] _dwDestParam;
-        private int[] _nAdjParamVal;
-        private int[] _dwChgParamVal;
-        private int[] _nDestData1;
+        private string _dwDestParam1;
+        private string _dwDestParam2;
+        private string _dwDestParam3;
+        private string _dwDestParam4;
+        private string _dwDestParam5;
+        private string _dwDestParam6;
+        private int _nAdjParamVal1;
+        private int _nAdjParamVal2;
+        private int _nAdjParamVal3;
+        private int _nAdjParamVal4;
+        private int _nAdjParamVal5;
+        private int _nAdjParamVal6;
+        private int _dwChgParamVal1;
+        private int _dwChgParamVal2;
+        private int _dwChgParamVal3;
+        private int _dwChgParamVal4;
+        private int _dwChgParamVal5;
+        private int _dwChgParamVal6;
+        private int _nDestData11;
+        private int _nDestData12;
+        private int _nDestData13;
+        private int _nDestData14;
+        private int _nDestData15;
+        private int _nDestData16;
 
         private string _dwActiveSkill;
         private int _dwActiveSkillLv;
@@ -235,10 +255,30 @@ namespace Common
         public int DwDmgShift { get => _dwDmgShift; set { if (value != DwDmgShift) { _dwDmgShift = value; NotifyPropertyChanged(); } } }
         public string DwAttackRange { get => _dwAttackRange; set { if (value != DwAttackRange) { _dwAttackRange = value; NotifyPropertyChanged(); } } }
         public int NProbability { get => _nProbability; set { if (value != NProbability) { _nProbability = value; NotifyPropertyChanged(); } } }
-        public string[] DwDestParam { get => _dwDestParam; set { if (value != DwDestParam) { _dwDestParam = value; NotifyPropertyChanged(); } } }
-        public int[] NAdjParamVal { get => _nAdjParamVal; set { if (value != NAdjParamVal) { _nAdjParamVal = value; NotifyPropertyChanged(); } } }
-        public int[] DwChgParamVal { get => _dwChgParamVal; set { if (value != DwChgParamVal) { _dwChgParamVal = value; NotifyPropertyChanged(); } } }
-        public int[] NDestData1 { get => _nDestData1; set { if (value != NDestData1) { _nDestData1 = value; NotifyPropertyChanged(); } } }
+        public string DwDestParam1 { get => _dwDestParam1; set { if (value != DwDestParam1) { _dwDestParam1 = value; NotifyPropertyChanged(); } } }
+        public string DwDestParam2 { get => _dwDestParam2; set { if (value != DwDestParam2) { _dwDestParam2 = value; NotifyPropertyChanged(); } } }
+        public string DwDestParam3 { get => _dwDestParam3; set { if (value != DwDestParam3) { _dwDestParam3 = value; NotifyPropertyChanged(); } } }
+        public string DwDestParam4 { get => _dwDestParam4; set { if (value != DwDestParam4) { _dwDestParam4 = value; NotifyPropertyChanged(); } } }
+        public string DwDestParam5 { get => _dwDestParam5; set { if (value != DwDestParam5) { _dwDestParam5 = value; NotifyPropertyChanged(); } } }
+        public string DwDestParam6 { get => _dwDestParam6; set { if (value != DwDestParam6) { _dwDestParam6 = value; NotifyPropertyChanged(); } } }
+        public int NAdjParamVal1 { get => _nAdjParamVal1; set { if (value != NAdjParamVal1) { _nAdjParamVal1 = value; NotifyPropertyChanged(); } } }
+        public int NAdjParamVal2 { get => _nAdjParamVal2; set { if (value != NAdjParamVal2) { _nAdjParamVal2 = value; NotifyPropertyChanged(); } } }
+        public int NAdjParamVal3 { get => _nAdjParamVal3; set { if (value != NAdjParamVal3) { _nAdjParamVal3 = value; NotifyPropertyChanged(); } } }
+        public int NAdjParamVal4 { get => _nAdjParamVal4; set { if (value != NAdjParamVal4) { _nAdjParamVal4 = value; NotifyPropertyChanged(); } } }
+        public int NAdjParamVal5 { get => _nAdjParamVal5; set { if (value != NAdjParamVal5) { _nAdjParamVal5 = value; NotifyPropertyChanged(); } } }
+        public int NAdjParamVal6 { get => _nAdjParamVal6; set { if (value != NAdjParamVal6) { _nAdjParamVal6 = value; NotifyPropertyChanged(); } } }
+        public int DwChgParamVal1 { get => _dwChgParamVal1; set { if (value != DwChgParamVal1) { _dwChgParamVal1 = value; NotifyPropertyChanged(); } } }
+        public int DwChgParamVal2 { get => _dwChgParamVal2; set { if (value != DwChgParamVal2) { _dwChgParamVal2 = value; NotifyPropertyChanged(); } } }
+        public int DwChgParamVal3 { get => _dwChgParamVal3; set { if (value != DwChgParamVal3) { _dwChgParamVal3 = value; NotifyPropertyChanged(); } } }
+        public int DwChgParamVal4 { get => _dwChgParamVal4; set { if (value != DwChgParamVal4) { _dwChgParamVal4 = value; NotifyPropertyChanged(); } } }
+        public int DwChgParamVal5 { get => _dwChgParamVal5; set { if (value != DwChgParamVal5) { _dwChgParamVal5 = value; NotifyPropertyChanged(); } } }
+        public int DwChgParamVal6 { get => _dwChgParamVal6; set { if (value != DwChgParamVal6) { _dwChgParamVal6 = value; NotifyPropertyChanged(); } } }
+        public int NDestData11 { get => _nDestData11; set { if (value != NDestData11) { _nDestData11 = value; NotifyPropertyChanged(); } } }
+        public int NDestData12 { get => _nDestData12; set { if (value != NDestData12) { _nDestData12 = value; NotifyPropertyChanged(); } } }
+        public int NDestData13 { get => _nDestData13; set { if (value != NDestData13) { _nDestData13 = value; NotifyPropertyChanged(); } } }
+        public int NDestData14 { get => _nDestData14; set { if (value != NDestData14) { _nDestData14 = value; NotifyPropertyChanged(); } } }
+        public int NDestData15 { get => _nDestData15; set { if (value != NDestData15) { _nDestData15 = value; NotifyPropertyChanged(); } } }
+        public int NDestData16 { get => _nDestData16; set { if (value != NDestData16) { _nDestData16 = value; NotifyPropertyChanged(); } } }
         public string DwActiveSkill { get => _dwActiveSkill; set { if (value != DwActiveSkill) { _dwActiveSkill = value; NotifyPropertyChanged(); } } }
         public int DwActiveSkillLv { get => _dwActiveSkillLv; set { if (value != DwActiveSkillLv) { _dwActiveSkillLv = value; NotifyPropertyChanged(); } } }
         public int DwActiveSkillRate { get => _dwActiveSkillRate; set { if (value != DwActiveSkillRate) { _dwActiveSkillRate = value; NotifyPropertyChanged(); } } }
@@ -333,18 +373,6 @@ namespace Common
         public int BCanSavePotion { get => _bCanSavePotion; set { if (value != BCanSavePotion) { _bCanSavePotion = value; NotifyPropertyChanged(); } } }
         public int BCanLooksChange { get => _bCanLooksChange; set { if (value != BCanLooksChange) { _bCanLooksChange = value; NotifyPropertyChanged(); } } }
         public int BIsLooksChangeMaterial { get => _bIsLooksChangeMaterial; set { if (value != BIsLooksChangeMaterial) { _bIsLooksChangeMaterial = value; NotifyPropertyChanged(); } } }
-
-        public DestParam[] DestParams
-        {
-            get
-            {
-                return new DestParam[] { new DestParam(DwDestParam[0], NAdjParamVal[0]), new DestParam(DwDestParam[1], NAdjParamVal[1]), new DestParam(DwDestParam[2], NAdjParamVal[2]), new DestParam(DwDestParam[3], NAdjParamVal[3]), new DestParam(DwDestParam[4], NAdjParamVal[4]), new DestParam(DwDestParam[5], NAdjParamVal[5]) };
-            }
-            set
-            {
-
-            }
-        }
     }
     public class Item : INotifyPropertyChanged
     {

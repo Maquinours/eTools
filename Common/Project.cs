@@ -285,45 +285,42 @@ namespace Common
                 prop.DwDmgShift = scanner.GetNumber(); // Unused
                 prop.DwAttackRange = scanner.GetToken(); // AR_
                 prop.NProbability = scanner.GetNumber();
-                prop.DwDestParam = new string[6];
-                prop.DwDestParam[0] = scanner.GetToken();
-                prop.DwDestParam[1] = scanner.GetToken();
-                prop.DwDestParam[2] = scanner.GetToken();
+                prop.DwDestParam1 = scanner.GetToken();
+                prop.DwDestParam2 = scanner.GetToken();
+                prop.DwDestParam3 = scanner.GetToken();
                 if (settings.ResourceVersion >= 19)
                 {
-                    prop.DwDestParam[3] = scanner.GetToken();
-                    prop.DwDestParam[4] = scanner.GetToken();
-                    prop.DwDestParam[5] = scanner.GetToken();
+                    prop.DwDestParam4 = scanner.GetToken();
+                    prop.DwDestParam5 = scanner.GetToken();
+                    prop.DwDestParam6 = scanner.GetToken();
                 }
-                prop.NAdjParamVal = new int[6];
-                prop.NAdjParamVal[0] = scanner.GetNumber();
-                prop.NAdjParamVal[1] = scanner.GetNumber();
-                prop.NAdjParamVal[2] = scanner.GetNumber();
+                prop.NAdjParamVal1 = scanner.GetNumber();
+                prop.NAdjParamVal2 = scanner.GetNumber();
+                prop.NAdjParamVal3 = scanner.GetNumber();
                 if(settings.ResourceVersion >= 19)
                 {
-                    prop.NAdjParamVal[3] = scanner.GetNumber();
-                    prop.NAdjParamVal[4] = scanner.GetNumber();
-                    prop.NAdjParamVal[5] = scanner.GetNumber();
+                    prop.NAdjParamVal4 = scanner.GetNumber();
+                    prop.NAdjParamVal5 = scanner.GetNumber();
+                    prop.NAdjParamVal6 = scanner.GetNumber();
                 }
-                prop.DwChgParamVal = new int[6]; // Unused
-                prop.DwChgParamVal[0] = scanner.GetNumber();
-                prop.DwChgParamVal[1] = scanner.GetNumber();
-                prop.DwChgParamVal[2] = scanner.GetNumber();
+                // DwChgParamVal is unused
+                prop.DwChgParamVal1 = scanner.GetNumber();
+                prop.DwChgParamVal2 = scanner.GetNumber();
+                prop.DwChgParamVal3 = scanner.GetNumber();
                 if(settings.ResourceVersion >= 19)
                 {
-                    prop.DwChgParamVal[3] = scanner.GetNumber();
-                    prop.DwChgParamVal[4] = scanner.GetNumber();
-                    prop.DwChgParamVal[5] = scanner.GetNumber();
+                    prop.DwChgParamVal4 = scanner.GetNumber();
+                    prop.DwChgParamVal5 = scanner.GetNumber();
+                    prop.DwChgParamVal6 = scanner.GetNumber();
                 }
-                prop.NDestData1 = new int[6];
-                prop.NDestData1[0] = scanner.GetNumber();
-                prop.NDestData1[1] = scanner.GetNumber();
-                prop.NDestData1[2] = scanner.GetNumber();
+                prop.NDestData11 = scanner.GetNumber();
+                prop.NDestData12 = scanner.GetNumber();
+                prop.NDestData13 = scanner.GetNumber();
                 if (settings.ResourceVersion >= 19)
                 {
-                    prop.NDestData1[3] = scanner.GetNumber();
-                    prop.NDestData1[4] = scanner.GetNumber();
-                    prop.NDestData1[5] = scanner.GetNumber();
+                    prop.NDestData14 = scanner.GetNumber();
+                    prop.NDestData15 = scanner.GetNumber();
+                    prop.NDestData16 = scanner.GetNumber();
                 }
                 prop.DwActiveSkill = scanner.GetToken(); // SI_ or II_
                 prop.DwActiveSkillLv = scanner.GetNumber();

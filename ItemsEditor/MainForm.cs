@@ -120,13 +120,14 @@ namespace ItemsEditor
             tbEquipmentLevel.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwLimitLevel1", false, DataSourceUpdateMode.OnPropertyChanged));
             tbModelName.DataBindings.Add(new Binding("Text", currentItem.Model, "SzName", false, DataSourceUpdateMode.OnPropertyChanged));
 
-            for (int i = 0; i < currentItem.Prop.DwDestParam.Length; i++)
-            {
-                if (currentItem.Prop.DwDestParam[i] != "=")
-                    lbDstParams.Items.Add($"Stat {i} ({currentItem.Prop.DwDestParam[i]} + {currentItem.Prop.NAdjParamVal[i]})");
-                else
-                    lbDstParams.Items.Add($"Stat {i}");
-            }
+            // TODO: reimplement something like this (rework params)
+            //for (int i = 0; i < currentItem.Prop.DwDestParam.Length; i++)
+            //{
+            //    if (currentItem.Prop.DwDestParam[i] != "=")
+            //        lbDstParams.Items.Add($"Stat {i} ({currentItem.Prop.DwDestParam[i]} + {currentItem.Prop.NAdjParamVal[i]})");
+            //    else
+            //        lbDstParams.Items.Add($"Stat {i}");
+            //}
 
             string iconPath = $"{Settings.GetInstance().IconsFolderPath}{currentItem.Prop.SzIcon}";
             if (!File.Exists(iconPath))
@@ -196,10 +197,12 @@ namespace ItemsEditor
             }
             Item item = (Item)lbItems.SelectedItem;
             //BindingSource bs = new BindingSource();
-            cbDstParamIdentifier.DataBindings.Add(new Binding("SelectedItem", item.Prop.DwDestParam, "", false, DataSourceUpdateMode.OnPropertyChanged));
-            cbDstParamIdentifier.BindingContext[item.Prop.DwDestParam].Position = lbDstParams.SelectedIndex;
-            tbDstParamValue.DataBindings.Add(new Binding("Text", item.Prop.NAdjParamVal, "", false, DataSourceUpdateMode.OnPropertyChanged));
-            tbDstParamValue.BindingContext[item.Prop.NAdjParamVal].Position = lbDstParams.SelectedIndex;
+
+            // TODO: rework on this
+            //cbDstParamIdentifier.DataBindings.Add(new Binding("SelectedItem", item.Prop.DwDestParam, "", false, DataSourceUpdateMode.OnPropertyChanged));
+            //cbDstParamIdentifier.BindingContext[item.Prop.DwDestParam].Position = lbDstParams.SelectedIndex;
+            //tbDstParamValue.DataBindings.Add(new Binding("Text", item.Prop.NAdjParamVal, "", false, DataSourceUpdateMode.OnPropertyChanged));
+            //tbDstParamValue.BindingContext[item.Prop.NAdjParamVal].Position = lbDstParams.SelectedIndex;
             cbDstParamIdentifier.Enabled = true;
             tbDstParamValue.Enabled = true;
             //bs.DataSource = item.Prop.DwDestParam;
@@ -328,6 +331,12 @@ namespace ItemsEditor
         private void tsmiFileReload_Click(object sender, EventArgs e)
         {
             this.ReloadFormData();
+        }
+
+        private void TsmiViewExpertEditor_Click(object sender, EventArgs e)
+        {
+            if (!(lbItems.SelectedItem is Item mover)) return;
+            new ExpertEditorForm(mover).ShowDialog();
         }
     }
 }
