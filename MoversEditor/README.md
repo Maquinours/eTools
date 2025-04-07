@@ -9,7 +9,7 @@
 - 🔧 Compatible with all game versions
 
 ## 📥 Download
-Download the latest version from [this link](https://tinyurl.com/eTools-Movers-Editor-v1-0-1)
+Download the latest version from [this link](https://tinyurl.com/eToolsMoversEditor)
 
 ## 🚀 Usage  
 1. Open **Movers Editor**  
@@ -19,6 +19,7 @@ Download the latest version from [this link](https://tinyurl.com/eTools-Movers-E
 5. Press **CTRL+S** to save
 
 ## 🖼 Screenshots  
-![Mover Editor - Editing an NPC](https://github.com/user-attachments/assets/d674501f-1102-4e36-bc43-7815f73a3d0a)
-![Mover Editor - Editing a Mover](https://github.com/user-attachments/assets/edca9a45-7067-41e6-947a-f5116f4ae0c7)
-![Mover Editor - Editing Motions](https://github.com/user-attachments/assets/4689a090-7aaf-4f46-9943-c654feff46b9)
+![Mover Editor - Editing an NPC](https://github.com/user-attachments/assets/35c48d89-2c7e-4d14-88eb-09b73a7cff99)
+![Mover Editor - Editing a Monster](https://github.com/user-attachments/assets/08382561-f4a9-4712-905f-0a34eee38338)
+![Mover Editor - Editing Motions](https://github.com/user-attachments/assets/9da3fe9e-8bd6-4c53-9c81-5182ea810568)
+
