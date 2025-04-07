@@ -51,7 +51,7 @@ namespace ItemsEditor
             }
             finally
             {
-                await System.Threading.Tasks.Task.Delay(300);
+                await Task.Delay(300).ConfigureAwait(true);
                 pbFileSaveReload.Visible = false;
                 pbFileSaveReload.Value = 0;
                 this.Enabled = true;
