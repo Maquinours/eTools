@@ -8,17 +8,152 @@ using System.Runtime.CompilerServices;
 
 namespace Common
 {
-    //public class DestParam
-    //{
-    //    public string Param { get; set; }
-    //    public int Value { get; set; }
+    public class Dest : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
 
-    //    public DestParam(string param, int value)
-    //    {
-    //        Param = param;
-    //        Value = value;
-    //    }
-    //}
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private Item _item;
+        private ItemProp _prop;
+        private int _index;
+        public string Param
+        {
+            get
+            {
+                switch (_index)
+                {
+                    case 1: return _item.Prop.DwDestParam1;
+                    case 2: return _item.Prop.DwDestParam2;
+                    case 3: return _item.Prop.DwDestParam3;
+                    case 4: return _item.Prop.DwDestParam4;
+                    case 5: return _item.Prop.DwDestParam5;
+                    case 6: return _item.Prop.DwDestParam6;
+                    default: throw new System.Exception("Invalid Dest Index");
+                }
+            }
+            set
+            {
+                switch (_index)
+                {
+                    case 1: _item.Prop.DwDestParam1 = value; break;
+                    case 2: _item.Prop.DwDestParam2 = value; break;
+                    case 3: _item.Prop.DwDestParam3 = value; break;
+                    case 4: _item.Prop.DwDestParam4 = value; break;
+                    case 5: _item.Prop.DwDestParam5 = value; break;
+                    case 6: _item.Prop.DwDestParam6 = value; break;
+                    default: throw new System.Exception("Invalid Dest Index");
+                }
+            }
+        }
+        public int Value
+        {
+            get 
+            {
+                switch (_index)
+                {
+                    case 1: return _item.Prop.NAdjParamVal1;
+                    case 2: return _item.Prop.NAdjParamVal2;
+                    case 3: return _item.Prop.NAdjParamVal3;
+                    case 4: return _item.Prop.NAdjParamVal4;
+                    case 5: return _item.Prop.NAdjParamVal5;
+                    case 6: return _item.Prop.NAdjParamVal6;
+                    default: throw new System.Exception("Invalid Dest Index");
+                }
+            }
+            set
+            {
+                switch (_index)
+                {
+                    case 1: _item.Prop.NAdjParamVal1 = value; break;
+                    case 2: _item.Prop.NAdjParamVal2 = value; break;
+                    case 3: _item.Prop.NAdjParamVal3 = value; break;
+                    case 4: _item.Prop.NAdjParamVal4 = value; break;
+                    case 5: _item.Prop.NAdjParamVal5 = value; break;
+                    case 6: _item.Prop.NAdjParamVal6 = value; break;
+                    default: throw new System.Exception("Invalid Dest Index");
+                }
+            }
+        }
+
+        public string Label { get => $"{this.Param} ({this.Value})"; }
+
+        public Dest(Item item, int index)
+        {
+            if (index < 0 || index > 6)
+                throw new System.Exception("Invalid Dest Index");
+
+            _item = item;
+            _prop = item.Prop;
+            _index = index;
+
+            item.PropertyChanged += Item_PropertyChanged;
+            if(this._prop != null)
+                _prop.PropertyChanged += ItemProp_PropertyChanged;
+        }
+
+        // TODO: connect events
+        private void Item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == nameof(Item.Prop))
+            {
+                if(this._prop != null)
+                    _prop.PropertyChanged -= ItemProp_PropertyChanged;
+                _prop = _item.Prop;
+                if(this._prop != null)
+                    _prop.PropertyChanged += ItemProp_PropertyChanged;
+                NotifyPropertyChanged(nameof(this.Param));
+                NotifyPropertyChanged(nameof(this.Value));
+            }
+        }
+
+        private void ItemProp_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (_index)
+            {
+                case 1:
+                    if (e.PropertyName == nameof(Item.Prop.DwDestParam1))
+                        NotifyPropertyChanged(nameof(Param));
+                    else if (e.PropertyName == nameof(Item.Prop.NAdjParamVal1))
+                        NotifyPropertyChanged(nameof(Value));
+                    break;
+                case 2:
+                    if (e.PropertyName == nameof(Item.Prop.DwDestParam2))
+                        NotifyPropertyChanged(nameof(Param));
+                    else if (e.PropertyName == nameof(Item.Prop.NAdjParamVal2))
+                        NotifyPropertyChanged(nameof(Value));
+                    break;
+                case 3:
+                    if (e.PropertyName == nameof(Item.Prop.DwDestParam3))
+                        NotifyPropertyChanged(nameof(Param));
+                    else if (e.PropertyName == nameof(Item.Prop.NAdjParamVal3))
+                        NotifyPropertyChanged(nameof(Value));
+                    break;
+                case 4:
+                    if (e.PropertyName == nameof(Item.Prop.DwDestParam4))
+                        NotifyPropertyChanged(nameof(Param));
+                    else if (e.PropertyName == nameof(Item.Prop.NAdjParamVal4))
+                        NotifyPropertyChanged(nameof(Value));
+                    break;
+                case 5:
+                    if (e.PropertyName == nameof(Item.Prop.DwDestParam5))
+                        NotifyPropertyChanged(nameof(Param));
+                    else if (e.PropertyName == nameof(Item.Prop.NAdjParamVal5))
+                        NotifyPropertyChanged(nameof(Value));
+                    break;
+                case 6:
+                    if (e.PropertyName == nameof(Item.Prop.DwDestParam6))
+                        NotifyPropertyChanged(nameof(Param));
+                    else if (e.PropertyName == nameof(Item.Prop.NAdjParamVal6))
+                        NotifyPropertyChanged(nameof(Value));
+                    break;
+                default: throw new System.Exception("Invalid Dest Index");
+            }
+        }
+    }
 
     public class ItemProp : INotifyPropertyChanged
     {
@@ -413,8 +548,9 @@ namespace Common
             }
         }
 
-        public ItemProp _prop;
-        public ModelElem _model;
+        private ItemProp _prop;
+        private ModelElem _model;
+        private BindingList<Dest> _dests;
 
         public ItemProp Prop
         { 
@@ -434,7 +570,6 @@ namespace Common
         }
         public ModelElem Model { get => _model; set { _model = value; NotifyPropertyChanged(); } }
 
-
         public string Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; this.Model.DwIndex = value; } } }
         public string Name
         {
@@ -447,8 +582,18 @@ namespace Common
             set { Project.GetInstance().ChangeStringValue(Prop.SzCommand, value); }
         }
 
+        public BindingList<Dest> Dests
+        {
+            get => this._dests;
+            private set { this._dests = value; }
+        }
+
         public Item()
         {
+            this.Dests = new BindingList<Dest>();
+            for (int i = 1; i <= 6; i++)
+                this.Dests.Add(new Dest(this, i));
+            
             Project.GetInstance().strings.CollectionChanged += ProjectStrings_CollectionChanged;
         }
 

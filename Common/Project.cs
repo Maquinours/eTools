@@ -487,6 +487,11 @@ namespace Common
             return Items.Where(x => x.Prop.DwItemKind2 == itemKind2).Select(x => x.Prop.DwItemKind3).Distinct().ToArray();
         }
 
+        public string[] GetPossiblePartsByItemKind3(string itemKind3)
+        {
+            return Items.Where(x => x.Prop.DwItemKind3 == itemKind3).Select(x => x.Prop.DwParts).Distinct().ToArray();
+        }
+
         private void ClearItems()
         {
             foreach (Item item in this.Items)
@@ -1277,6 +1282,11 @@ namespace Common
         public string[] GetMotionsIdentifiers()
         {
             return defines.Where(x => x.Key.StartsWith("MTI_")).Select(x => x.Key).ToArray();
+        }
+
+        public string[] GetPartsIdentifiers()
+        {
+            return defines.Where(x => x.Key.StartsWith("PARTS_")).Select(x => x.Key).ToArray();
         }
 
         public ModelBrace[] GetMoverModelBraces()

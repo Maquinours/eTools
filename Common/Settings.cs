@@ -320,6 +320,7 @@ namespace Common
                 ResourcePath + "defineItemKind.h",
                 ResourcePath + "defineJob.h",
                 ResourcePath + "defineAttribute.h",
+                ResourcePath + "defineNeuz.h"
             };
             IconsFolderPath = ResourcePath + "Item\\";
 #endif // __ITEMS

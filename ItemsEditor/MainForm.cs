@@ -40,8 +40,9 @@ namespace ItemsEditor
                 cbTypeItemKind3.DataSource = prj.GetAllItemKinds3();
                 cbEquipmentJob.DataSource = new string[] { "=" }.Concat(prj.GetJobIdentifiers()).ToArray();
                 cbEquipmentSex.DataSource = new string[] { "=" }.Concat(prj.GetSexIdentifiers()).ToArray();
-                cbDstParamIdentifier.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
-                cbElementType.DataSource = prj.GetElementsIdentifiers();
+                cbEquipmentDstParam.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
+                cbConsumableDstParam.DataSource = prj.GetDstIdentifiers();
+                cbEquipmentParts.DataSource = prj.GetPartsIdentifiers();
                 SetListBoxDataSource();
             }
             catch (Exception e)
@@ -65,11 +66,10 @@ namespace ItemsEditor
             cbTypeItemKind3.DataSource = null;
             cbEquipmentJob.DataSource = null;
             cbEquipmentSex.DataSource = null;
-            cbDstParamIdentifier.DataSource = null;
-            cbElementType.DataSource = null;
+            cbEquipmentDstParam.DataSource = null;
+            lbConsumableDst.DataSource = null;
             if (lbItems.DataSource is BindingSource listboxBinding)
                 listboxBinding.Dispose();
-            lbItems.DataSource = null;
 
             LoadFormData();
         }
@@ -94,12 +94,12 @@ namespace ItemsEditor
             pbMiscIcon.DataBindings.Clear();
             tbMiscIcon.DataBindings.Clear();
             tbGeneralDescription.DataBindings.Clear();
-            lbDstParams.SelectedIndex = -1;
-            lbDstParams.Items.Clear();
             tbAtkMin.DataBindings.Clear();
             tbAtkMax.DataBindings.Clear();
+            cbEquipmentParts.DataBindings.Clear();
             tbEquipmentLevel.DataBindings.Clear();
-            tbModelName.DataBindings.Clear();
+            lbEquipmentDstStats.DataSource = null;
+            lbConsumableDst.DataSource = null;
 
             Item currentItem = ((Item)lbItems.SelectedItem);
             if (currentItem == null) return;
@@ -118,18 +118,40 @@ namespace ItemsEditor
             tbAtkMin.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMin", false, DataSourceUpdateMode.OnPropertyChanged));
             tbAtkMax.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMax", false, DataSourceUpdateMode.OnPropertyChanged));
             tbEquipmentLevel.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwLimitLevel1", false, DataSourceUpdateMode.OnPropertyChanged));
-            tbModelName.DataBindings.Add(new Binding("Text", currentItem.Model, "SzName", false, DataSourceUpdateMode.OnPropertyChanged));
+            cbEquipmentParts.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwParts", false, DataSourceUpdateMode.OnPropertyChanged));
+            lbEquipmentDstStats.DisplayMember = nameof(Dest.Label);
+            lbEquipmentDstStats.DataSource = currentItem.Dests;
+            lbConsumableDst.DisplayMember = nameof(Dest.Label);
+            lbConsumableDst.DataSource = currentItem.Dests;
 
-            // TODO: reimplement something like this (rework params)
-            //for (int i = 0; i < currentItem.Prop.DwDestParam.Length; i++)
-            //{
-            //    if (currentItem.Prop.DwDestParam[i] != "=")
-            //        lbDstParams.Items.Add($"Stat {i} ({currentItem.Prop.DwDestParam[i]} + {currentItem.Prop.NAdjParamVal[i]})");
-            //    else
-            //        lbDstParams.Items.Add($"Stat {i}");
-            //}
+            if (currentItem.Prop.DwParts != "=")
+            {
+                tcMain.TabPages.Remove(tpMainConsumable);
+                if(!tcMain.TabPages.Contains(tpMainEquipment))
+                    tcMain.TabPages.Add(tpMainEquipment);
+            }
+            else if (currentItem.Prop.DwItemKind2 == "IK2_REFRESHER" || currentItem.Prop.DwItemKind2 == "IK2_FOOD")
+            {
+                tcMain.TabPages.Remove(tpMainEquipment);
+                if (!tcMain.TabPages.Contains(tpMainConsumable))
+                    tcMain.TabPages.Add(tpMainConsumable);
+            }
+            else
+            {
+                tcMain.TabPages.Remove(tpMainEquipment);
+                tcMain.TabPages.Remove(tpMainConsumable);
+            }
 
-            string iconPath = $"{Settings.GetInstance().IconsFolderPath}{currentItem.Prop.SzIcon}";
+                // TODO: reimplement something like this (rework params)
+                //for (int i = 0; i < currentItem.Prop.DwDestParam.Length; i++)
+                //{
+                //    if (currentItem.Prop.DwDestParam[i] != "=")
+                //        lbDstParams.Items.Add($"Stat {i} ({currentItem.Prop.DwDestParam[i]} + {currentItem.Prop.NAdjParamVal[i]})");
+                //    else
+                //        lbDstParams.Items.Add($"Stat {i}");
+                //}
+
+                string iconPath = $"{Settings.GetInstance().IconsFolderPath}{currentItem.Prop.SzIcon}";
             if (!File.Exists(iconPath))
             {
                 pbMiscIcon.Image = pbMiscIcon.ErrorImage;
@@ -185,30 +207,11 @@ namespace ItemsEditor
 
         private void lb_DstParams_SelectedIndexChanged(object sender, EventArgs e)
         {
-            cbDstParamIdentifier.DataBindings.Clear();
-            tbDstParamValue.DataBindings.Clear();
-            if (lbItems.SelectedIndex == -1 || lbDstParams.SelectedIndex == -1)
-            {
-                cbDstParamIdentifier.ResetText();
-                cbDstParamIdentifier.Enabled = false;
-                tbDstParamValue.ResetText();
-                tbDstParamValue.Enabled = false;
-                return;
-            }
-            Item item = (Item)lbItems.SelectedItem;
-            //BindingSource bs = new BindingSource();
-
-            // TODO: rework on this
-            //cbDstParamIdentifier.DataBindings.Add(new Binding("SelectedItem", item.Prop.DwDestParam, "", false, DataSourceUpdateMode.OnPropertyChanged));
-            //cbDstParamIdentifier.BindingContext[item.Prop.DwDestParam].Position = lbDstParams.SelectedIndex;
-            //tbDstParamValue.DataBindings.Add(new Binding("Text", item.Prop.NAdjParamVal, "", false, DataSourceUpdateMode.OnPropertyChanged));
-            //tbDstParamValue.BindingContext[item.Prop.NAdjParamVal].Position = lbDstParams.SelectedIndex;
-            cbDstParamIdentifier.Enabled = true;
-            tbDstParamValue.Enabled = true;
-            //bs.DataSource = item.Prop.DwDestParam;
-            //bs.Position = lb_DstParams.SelectedIndex;
-            //cb_DstParamIdentifier.DataSource = bs;
-            // TODO: ADD PARAM VALUE
+            cbEquipmentDstParam.DataBindings.Clear();
+            nudEquipmentDstValue.DataBindings.Clear();
+            if(!(lbEquipmentDstStats.SelectedItem is Dest dst)) return;   
+            cbEquipmentDstParam.DataBindings.Add(new Binding("SelectedItem", dst, nameof(Dest.Param), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudEquipmentDstValue.DataBindings.Add(new Binding("Value", dst, nameof(Dest.Value), false, DataSourceUpdateMode.OnPropertyChanged));
         }
 
         private void cb_DstParamIdentifier_SelectedValueChanged(object sender, EventArgs e)
@@ -255,6 +258,22 @@ namespace ItemsEditor
         {
             if (!(cbTypeItemKind2.SelectedItem is string itemKind2)) return;
             cbTypeItemKind3.DataSource = Project.GetInstance().GetPossibleItemKinds3ByItemKind2(itemKind2);
+            if(itemKind2 == "IK2_WEAPON_DIRECT" || itemKind2 == "IK2_WEAPON_MAGIC")
+            {
+                lblEquipmentAtkMin.Text = "Min Atk :";
+                lblEquipmentAtkMax.Text = "Max Atk :";
+            }
+            else
+            {
+                lblEquipmentAtkMin.Text = "Min Def :";
+                lblEquipmentAtkMax.Text = "Max Def :";
+            }
+        }
+
+        private void CbTypeItemKind3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(!(cbTypeItemKind3.SelectedItem is string itemKind3)) return;
+            cbEquipmentParts.DataSource = Project.GetInstance().GetPossiblePartsByItemKind3(itemKind3);
         }
 
         private void BtnMiscSelectIcon_Click(object sender, EventArgs e)
@@ -337,6 +356,33 @@ namespace ItemsEditor
         {
             if (!(lbItems.SelectedItem is Item mover)) return;
             new ExpertEditorForm(mover).ShowDialog();
+        }
+
+        private void LbConsumableDst_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.cbConsumableDstParam.DataBindings.Clear();
+            this.nudConsumableDstValue.DataBindings.Clear();
+            if (!(lbConsumableDst.SelectedItem is Dest dst)) return;
+            this.cbConsumableDstParam.DataBindings.Add(new Binding("SelectedItem", dst, nameof(Dest.Param), false, DataSourceUpdateMode.OnPropertyChanged));
+            this.nudConsumableDstValue.DataBindings.Add(new Binding("Value", dst, nameof(Dest.Value), false, DataSourceUpdateMode.OnPropertyChanged));
+        }
+
+        private void CbEquipmentDstParam_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!(this.cbEquipmentDstParam.SelectedItem is string selectedItem) || selectedItem == "=" || selectedItem == "DST_NONE")
+            {
+                nudEquipmentDstValue.Value = -1;
+                nudEquipmentDstValue.Enabled = false;
+            }
+            else
+                nudEquipmentDstValue.Enabled = true;
+        }
+
+        // TODO: Do the same for others item kinds
+        private void CbTypeItemKind1_DataSourceChanged(object sender, EventArgs e)
+        {
+            if (cbTypeItemKind1.Items.Count > 0) cbTypeItemKind1.Enabled = true;
+            else cbTypeItemKind1.Enabled = false;
         }
     }
 }
