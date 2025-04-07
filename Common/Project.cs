@@ -221,6 +221,7 @@ namespace Common
         private void LoadItems(string filePath)
         {
             this.ClearItems();
+            Settings settings = Settings.GetInstance();
             Scanner scanner = new Scanner();
 
             scanner.Load(filePath);
@@ -288,30 +289,42 @@ namespace Common
                 prop.DwDestParam[0] = scanner.GetToken();
                 prop.DwDestParam[1] = scanner.GetToken();
                 prop.DwDestParam[2] = scanner.GetToken();
-                prop.DwDestParam[3] = scanner.GetToken();
-                prop.DwDestParam[4] = scanner.GetToken();
-                prop.DwDestParam[5] = scanner.GetToken();
+                if (settings.ResourceVersion >= 19)
+                {
+                    prop.DwDestParam[3] = scanner.GetToken();
+                    prop.DwDestParam[4] = scanner.GetToken();
+                    prop.DwDestParam[5] = scanner.GetToken();
+                }
                 prop.NAdjParamVal = new int[6];
                 prop.NAdjParamVal[0] = scanner.GetNumber();
                 prop.NAdjParamVal[1] = scanner.GetNumber();
                 prop.NAdjParamVal[2] = scanner.GetNumber();
-                prop.NAdjParamVal[3] = scanner.GetNumber();
-                prop.NAdjParamVal[4] = scanner.GetNumber();
-                prop.NAdjParamVal[5] = scanner.GetNumber();
+                if(settings.ResourceVersion >= 19)
+                {
+                    prop.NAdjParamVal[3] = scanner.GetNumber();
+                    prop.NAdjParamVal[4] = scanner.GetNumber();
+                    prop.NAdjParamVal[5] = scanner.GetNumber();
+                }
                 prop.DwChgParamVal = new int[6]; // Unused
                 prop.DwChgParamVal[0] = scanner.GetNumber();
                 prop.DwChgParamVal[1] = scanner.GetNumber();
                 prop.DwChgParamVal[2] = scanner.GetNumber();
-                prop.DwChgParamVal[3] = scanner.GetNumber();
-                prop.DwChgParamVal[4] = scanner.GetNumber();
-                prop.DwChgParamVal[5] = scanner.GetNumber();
+                if(settings.ResourceVersion >= 19)
+                {
+                    prop.DwChgParamVal[3] = scanner.GetNumber();
+                    prop.DwChgParamVal[4] = scanner.GetNumber();
+                    prop.DwChgParamVal[5] = scanner.GetNumber();
+                }
                 prop.NDestData1 = new int[6];
                 prop.NDestData1[0] = scanner.GetNumber();
                 prop.NDestData1[1] = scanner.GetNumber();
                 prop.NDestData1[2] = scanner.GetNumber();
-                prop.NDestData1[3] = scanner.GetNumber();
-                prop.NDestData1[4] = scanner.GetNumber();
-                prop.NDestData1[5] = scanner.GetNumber();
+                if (settings.ResourceVersion >= 19)
+                {
+                    prop.NDestData1[3] = scanner.GetNumber();
+                    prop.NDestData1[4] = scanner.GetNumber();
+                    prop.NDestData1[5] = scanner.GetNumber();
+                }
                 prop.DwActiveSkill = scanner.GetToken(); // SI_ or II_
                 prop.DwActiveSkillLv = scanner.GetNumber();
                 prop.DwActiveSkillRate = scanner.GetNumber();
@@ -375,41 +388,50 @@ namespace Common
                 prop.SzTextFileName = scanner.GetToken();
                 scanner.GetToken(); // ""
                 prop.SzCommand = scanner.GetToken();
-                prop.NMinLimitLevel = scanner.GetNumber();
-                prop.NMaxLimitLevel = scanner.GetNumber();
-                prop.NItemGroup = scanner.GetNumber();
-                prop.NUseLimitGroup = scanner.GetNumber();
-                prop.NMaxDuplication = scanner.GetNumber();
-                prop.NEffectValue = scanner.GetNumber();
-                prop.NTargetMinEnchant = scanner.GetNumber();
-                prop.NTargetMaxEnchant = scanner.GetNumber();
-                prop.BResetBind = scanner.GetNumber();
-                prop.NBindCondition = scanner.GetNumber();
-                prop.NResetBindCondition = scanner.GetNumber();
-                prop.DwHitActiveSkillId = scanner.GetToken(); // SI_
-                prop.DwHitActiveSkillLv = scanner.GetNumber();
-                prop.DwHitActiveSkillProb = scanner.GetNumber();
-                prop.DwHitActiveSkillTarget = scanner.GetToken(); // IST_
-                prop.DwDamageActiveSkillId = scanner.GetToken(); // SI_
-                prop.DwDamageActiveSkillLv = scanner.GetNumber();
-                prop.DwDamageActiveSkillProb = scanner.GetNumber();
-                prop.DwDamageActiveSkillTarget = scanner.GetToken(); // IST_
-                prop.DwEquipActiveSkillId = scanner.GetNumber(); // Unused
-                prop.DwEquipActiveSkillLv = scanner.GetNumber(); // Unused
-                prop.DwSmelting = scanner.GetNumber();
-                prop.DwAttsmelting = scanner.GetNumber();
-                prop.DwGemsmelting = scanner.GetNumber();
-                prop.DwPierce = scanner.GetNumber();
-                prop.DwUprouse = scanner.GetNumber();
-                prop.BAbsoluteTime = scanner.GetNumber();
-                prop.DwItemGrade = scanner.GetToken(); // ITEM_GRADE_
-                prop.BCanTrade = scanner.GetNumber();
-                prop.DwMainCategory = scanner.GetToken(); // TYPE1_
-                prop.DwSubCategory = scanner.GetToken(); // TYPE2_
-                prop.BCanHaveServerTransform = scanner.GetNumber();
-                prop.BCanSavePotion = scanner.GetNumber();
-                prop.BCanLooksChange = scanner.GetNumber();
-                prop.BIsLooksChangeMaterial = scanner.GetNumber();
+                if (settings.ResourceVersion >= 16)
+                {
+                    prop.NMinLimitLevel = scanner.GetNumber();
+                    prop.NMaxLimitLevel = scanner.GetNumber();
+                    prop.NItemGroup = scanner.GetNumber();
+                    prop.NUseLimitGroup = scanner.GetNumber();
+                    prop.NMaxDuplication = scanner.GetNumber();
+                    prop.NEffectValue = scanner.GetNumber();
+                    prop.NTargetMinEnchant = scanner.GetNumber();
+                    prop.NTargetMaxEnchant = scanner.GetNumber();
+                    prop.BResetBind = scanner.GetNumber();
+                    prop.NBindCondition = scanner.GetNumber();
+                    prop.NResetBindCondition = scanner.GetNumber();
+                    prop.DwHitActiveSkillId = scanner.GetToken(); // SI_
+                    prop.DwHitActiveSkillLv = scanner.GetNumber();
+                    prop.DwHitActiveSkillProb = scanner.GetNumber();
+                    prop.DwHitActiveSkillTarget = scanner.GetToken(); // IST_
+                    prop.DwDamageActiveSkillId = scanner.GetToken(); // SI_
+                    prop.DwDamageActiveSkillLv = scanner.GetNumber();
+                    prop.DwDamageActiveSkillProb = scanner.GetNumber();
+                    prop.DwDamageActiveSkillTarget = scanner.GetToken(); // IST_
+                    prop.DwEquipActiveSkillId = scanner.GetNumber(); // Unused
+                    prop.DwEquipActiveSkillLv = scanner.GetNumber(); // Unused
+                    prop.DwSmelting = scanner.GetNumber();
+                    prop.DwAttsmelting = scanner.GetNumber();
+                    prop.DwGemsmelting = scanner.GetNumber();
+                    prop.DwPierce = scanner.GetNumber();
+                    prop.DwUprouse = scanner.GetNumber();
+                    prop.BAbsoluteTime = scanner.GetNumber();
+                    if (settings.ResourceVersion >= 18)
+                    {
+                        prop.DwItemGrade = scanner.GetToken(); // ITEM_GRADE_
+                        prop.BCanTrade = scanner.GetNumber();
+                        prop.DwMainCategory = scanner.GetToken(); // TYPE1_
+                        prop.DwSubCategory = scanner.GetToken(); // TYPE2_
+                        prop.BCanHaveServerTransform = scanner.GetNumber();
+                        prop.BCanSavePotion = scanner.GetNumber();
+                        if (settings.ResourceVersion >= 19)
+                        {
+                            prop.BCanLooksChange = scanner.GetNumber();
+                            prop.BIsLooksChangeMaterial = scanner.GetNumber();
+                        }
+                    }
+                }
 
                 /* It is possible to be at the end of stream there if there is no blank at the end of the
                  * line. So we check if the token is empty. If so, we can say that scanner was at the end
