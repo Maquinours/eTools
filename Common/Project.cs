@@ -77,14 +77,16 @@ namespace Common
         /// </summary>
         public void Load(Action<int> reportProgress)
         {
+            reportProgress?.Invoke(0);
 #if __MOVERS
             this.ClearMovers();
+#endif
+#if __ITEMS
+            this.ClearItems();
 #endif
             this.ClearMotions();
             this.defines.Clear();
             this.strings.Clear();
-
-            reportProgress?.Invoke(0);
             Settings config = Settings.GetInstance();
             config.Load();
             reportProgress?.Invoke(20);
@@ -427,6 +429,7 @@ namespace Common
                     this.strings.Add(prop.SzCommand, "");
                 Items.Add(item);
             }
+            scanner.Close();
         }
 
         public string[] GetItemsName()
