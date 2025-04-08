@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.nudGameVersion = new System.Windows.Forms.NumericUpDown();
             this.lblGameVersion = new System.Windows.Forms.Label();
             this.btnSelectStringFile = new System.Windows.Forms.Button();
@@ -233,6 +234,7 @@
             this.Controls.Add(this.tbPropFileName);
             this.Controls.Add(this.tbResourcesPath);
             this.Controls.Add(this.lblFolder);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingsForm";
             this.Text = "Settings";
             ((System.ComponentModel.ISupportInitialize)(this.nudGameVersion)).EndInit();

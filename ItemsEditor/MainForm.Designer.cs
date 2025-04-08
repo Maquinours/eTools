@@ -808,6 +808,7 @@
             this.Controls.Add(this.pnlList);
             this.Controls.Add(this.msMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.msMain;
             this.MaximizeBox = false;
