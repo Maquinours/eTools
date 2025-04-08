@@ -505,7 +505,7 @@ namespace Common
 
         public string[] GetPossiblePartsByItemKind3(string itemKind3)
         {
-            return Items.Where(x => x.Prop.DwItemKind3 == itemKind3).Select(x => x.Prop.DwParts).Distinct().ToArray();
+            return Items.Where(x => x.Prop.DwItemKind3 == itemKind3 && x.Prop.DwParts != "=").Select(x => x.Prop.DwParts).Distinct().ToArray();
         }
 
         private void ClearItems()
