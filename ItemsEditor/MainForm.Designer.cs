@@ -56,6 +56,13 @@
             this.lblGeneralDescription = new System.Windows.Forms.Label();
             this.gbGeneralType = new System.Windows.Forms.GroupBox();
             this.tpMainEquipment = new System.Windows.Forms.TabPage();
+            this.gbEquipmentMisc = new System.Windows.Forms.GroupBox();
+            this.tbAtkMin = new System.Windows.Forms.TextBox();
+            this.tbAtkMax = new System.Windows.Forms.TextBox();
+            this.lblEquipmentAtkMin = new System.Windows.Forms.Label();
+            this.cbEquipmentParts = new System.Windows.Forms.ComboBox();
+            this.lblEquipmentParts = new System.Windows.Forms.Label();
+            this.lblEquipmentAtkMax = new System.Windows.Forms.Label();
             this.gbEquipmentRequirements = new System.Windows.Forms.GroupBox();
             this.cbEquipmentSex = new System.Windows.Forms.ComboBox();
             this.lblEquipmentJob = new System.Windows.Forms.Label();
@@ -64,14 +71,11 @@
             this.tbEquipmentLevel = new System.Windows.Forms.TextBox();
             this.lblEquipmentLevel = new System.Windows.Forms.Label();
             this.gbDstParams = new System.Windows.Forms.GroupBox();
+            this.nudEquipmentDstValue = new System.Windows.Forms.NumericUpDown();
             this.lblDstParamValue = new System.Windows.Forms.Label();
             this.lblDstParamIdentifier = new System.Windows.Forms.Label();
             this.cbEquipmentDstParam = new System.Windows.Forms.ComboBox();
             this.lbEquipmentDstStats = new System.Windows.Forms.ListBox();
-            this.lblEquipmentAtkMax = new System.Windows.Forms.Label();
-            this.lblEquipmentAtkMin = new System.Windows.Forms.Label();
-            this.tbAtkMax = new System.Windows.Forms.TextBox();
-            this.tbAtkMin = new System.Windows.Forms.TextBox();
             this.tpMainConsumable = new System.Windows.Forms.TabPage();
             this.nudConsumableDstValue = new System.Windows.Forms.NumericUpDown();
             this.cbConsumableDstParam = new System.Windows.Forms.ComboBox();
@@ -92,10 +96,6 @@
             this.pnlList = new System.Windows.Forms.Panel();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.pbFileSaveReload = new System.Windows.Forms.ProgressBar();
-            this.gbEquipmentMisc = new System.Windows.Forms.GroupBox();
-            this.lblEquipmentParts = new System.Windows.Forms.Label();
-            this.cbEquipmentParts = new System.Windows.Forms.ComboBox();
-            this.nudEquipmentDstValue = new System.Windows.Forms.NumericUpDown();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -105,15 +105,15 @@
             this.gbGeneralGeneral.SuspendLayout();
             this.gbGeneralType.SuspendLayout();
             this.tpMainEquipment.SuspendLayout();
+            this.gbEquipmentMisc.SuspendLayout();
             this.gbEquipmentRequirements.SuspendLayout();
             this.gbDstParams.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEquipmentDstValue)).BeginInit();
             this.tpMainConsumable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudConsumableDstValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.msMain.SuspendLayout();
             this.pnlList.SuspendLayout();
-            this.gbEquipmentMisc.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudEquipmentDstValue)).BeginInit();
             this.SuspendLayout();
             // 
             // lbItems
@@ -173,6 +173,7 @@
             this.cbTypeItemKind2.Size = new System.Drawing.Size(174, 21);
             this.cbTypeItemKind2.TabIndex = 5;
             this.cbTypeItemKind2.SelectedIndexChanged += new System.EventHandler(this.Cb_ik2_SelectedIndexChanged);
+            this.cbTypeItemKind2.DataSourceChanged += new System.EventHandler(this.CbTypeItemKind2_DataSourceChanged);
             // 
             // cbTypeItemKind3
             // 
@@ -183,6 +184,7 @@
             this.cbTypeItemKind3.Size = new System.Drawing.Size(174, 21);
             this.cbTypeItemKind3.TabIndex = 6;
             this.cbTypeItemKind3.SelectedIndexChanged += new System.EventHandler(this.CbTypeItemKind3_SelectedIndexChanged);
+            this.cbTypeItemKind3.DataSourceChanged += new System.EventHandler(this.CbTypeItemKind3_DataSourceChanged);
             // 
             // lblGeneralId
             // 
@@ -403,6 +405,73 @@
             this.tpMainEquipment.Text = "Equipment";
             this.tpMainEquipment.UseVisualStyleBackColor = true;
             // 
+            // gbEquipmentMisc
+            // 
+            this.gbEquipmentMisc.Controls.Add(this.tbAtkMin);
+            this.gbEquipmentMisc.Controls.Add(this.tbAtkMax);
+            this.gbEquipmentMisc.Controls.Add(this.lblEquipmentAtkMin);
+            this.gbEquipmentMisc.Controls.Add(this.cbEquipmentParts);
+            this.gbEquipmentMisc.Controls.Add(this.lblEquipmentParts);
+            this.gbEquipmentMisc.Controls.Add(this.lblEquipmentAtkMax);
+            this.gbEquipmentMisc.Location = new System.Drawing.Point(6, 271);
+            this.gbEquipmentMisc.Name = "gbEquipmentMisc";
+            this.gbEquipmentMisc.Size = new System.Drawing.Size(356, 117);
+            this.gbEquipmentMisc.TabIndex = 23;
+            this.gbEquipmentMisc.TabStop = false;
+            this.gbEquipmentMisc.Text = "Misc";
+            // 
+            // tbAtkMin
+            // 
+            this.tbAtkMin.Location = new System.Drawing.Point(62, 29);
+            this.tbAtkMin.Margin = new System.Windows.Forms.Padding(2);
+            this.tbAtkMin.Name = "tbAtkMin";
+            this.tbAtkMin.Size = new System.Drawing.Size(68, 20);
+            this.tbAtkMin.TabIndex = 12;
+            // 
+            // tbAtkMax
+            // 
+            this.tbAtkMax.Location = new System.Drawing.Point(273, 28);
+            this.tbAtkMax.Margin = new System.Windows.Forms.Padding(2);
+            this.tbAtkMax.Name = "tbAtkMax";
+            this.tbAtkMax.Size = new System.Drawing.Size(77, 20);
+            this.tbAtkMax.TabIndex = 13;
+            // 
+            // lblEquipmentAtkMin
+            // 
+            this.lblEquipmentAtkMin.AutoSize = true;
+            this.lblEquipmentAtkMin.Location = new System.Drawing.Point(6, 32);
+            this.lblEquipmentAtkMin.Name = "lblEquipmentAtkMin";
+            this.lblEquipmentAtkMin.Size = new System.Drawing.Size(51, 13);
+            this.lblEquipmentAtkMin.TabIndex = 16;
+            this.lblEquipmentAtkMin.Text = "Atk min. :";
+            // 
+            // cbEquipmentParts
+            // 
+            this.cbEquipmentParts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEquipmentParts.FormattingEnabled = true;
+            this.cbEquipmentParts.Location = new System.Drawing.Point(108, 74);
+            this.cbEquipmentParts.Name = "cbEquipmentParts";
+            this.cbEquipmentParts.Size = new System.Drawing.Size(160, 21);
+            this.cbEquipmentParts.TabIndex = 19;
+            // 
+            // lblEquipmentParts
+            // 
+            this.lblEquipmentParts.AutoSize = true;
+            this.lblEquipmentParts.Location = new System.Drawing.Point(65, 77);
+            this.lblEquipmentParts.Name = "lblEquipmentParts";
+            this.lblEquipmentParts.Size = new System.Drawing.Size(37, 13);
+            this.lblEquipmentParts.TabIndex = 18;
+            this.lblEquipmentParts.Text = "Parts :";
+            // 
+            // lblEquipmentAtkMax
+            // 
+            this.lblEquipmentAtkMax.AutoSize = true;
+            this.lblEquipmentAtkMax.Location = new System.Drawing.Point(214, 32);
+            this.lblEquipmentAtkMax.Name = "lblEquipmentAtkMax";
+            this.lblEquipmentAtkMax.Size = new System.Drawing.Size(54, 13);
+            this.lblEquipmentAtkMax.TabIndex = 17;
+            this.lblEquipmentAtkMax.Text = "Atk max. :";
+            // 
             // gbEquipmentRequirements
             // 
             this.gbEquipmentRequirements.Controls.Add(this.cbEquipmentSex);
@@ -485,6 +554,24 @@
             this.gbDstParams.TabStop = false;
             this.gbDstParams.Text = "Statistiques";
             // 
+            // nudEquipmentDstValue
+            // 
+            this.nudEquipmentDstValue.Location = new System.Drawing.Point(235, 87);
+            this.nudEquipmentDstValue.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.nudEquipmentDstValue.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
+            this.nudEquipmentDstValue.Name = "nudEquipmentDstValue";
+            this.nudEquipmentDstValue.Size = new System.Drawing.Size(95, 20);
+            this.nudEquipmentDstValue.TabIndex = 23;
+            this.nudEquipmentDstValue.ThousandsSeparator = true;
+            // 
             // lblDstParamValue
             // 
             this.lblDstParamValue.AutoSize = true;
@@ -524,40 +611,6 @@
             this.lbEquipmentDstStats.Size = new System.Drawing.Size(174, 121);
             this.lbEquipmentDstStats.TabIndex = 9;
             this.lbEquipmentDstStats.SelectedIndexChanged += new System.EventHandler(this.lb_DstParams_SelectedIndexChanged);
-            // 
-            // lblEquipmentAtkMax
-            // 
-            this.lblEquipmentAtkMax.AutoSize = true;
-            this.lblEquipmentAtkMax.Location = new System.Drawing.Point(214, 32);
-            this.lblEquipmentAtkMax.Name = "lblEquipmentAtkMax";
-            this.lblEquipmentAtkMax.Size = new System.Drawing.Size(54, 13);
-            this.lblEquipmentAtkMax.TabIndex = 17;
-            this.lblEquipmentAtkMax.Text = "Atk max. :";
-            // 
-            // lblEquipmentAtkMin
-            // 
-            this.lblEquipmentAtkMin.AutoSize = true;
-            this.lblEquipmentAtkMin.Location = new System.Drawing.Point(6, 32);
-            this.lblEquipmentAtkMin.Name = "lblEquipmentAtkMin";
-            this.lblEquipmentAtkMin.Size = new System.Drawing.Size(51, 13);
-            this.lblEquipmentAtkMin.TabIndex = 16;
-            this.lblEquipmentAtkMin.Text = "Atk min. :";
-            // 
-            // tbAtkMax
-            // 
-            this.tbAtkMax.Location = new System.Drawing.Point(273, 28);
-            this.tbAtkMax.Margin = new System.Windows.Forms.Padding(2);
-            this.tbAtkMax.Name = "tbAtkMax";
-            this.tbAtkMax.Size = new System.Drawing.Size(77, 20);
-            this.tbAtkMax.TabIndex = 13;
-            // 
-            // tbAtkMin
-            // 
-            this.tbAtkMin.Location = new System.Drawing.Point(62, 29);
-            this.tbAtkMin.Margin = new System.Windows.Forms.Padding(2);
-            this.tbAtkMin.Name = "tbAtkMin";
-            this.tbAtkMin.Size = new System.Drawing.Size(68, 20);
-            this.tbAtkMin.TabIndex = 12;
             // 
             // tpMainConsumable
             // 
@@ -745,57 +798,6 @@
             this.pbFileSaveReload.Size = new System.Drawing.Size(635, 10);
             this.pbFileSaveReload.TabIndex = 2;
             // 
-            // gbEquipmentMisc
-            // 
-            this.gbEquipmentMisc.Controls.Add(this.tbAtkMin);
-            this.gbEquipmentMisc.Controls.Add(this.tbAtkMax);
-            this.gbEquipmentMisc.Controls.Add(this.lblEquipmentAtkMin);
-            this.gbEquipmentMisc.Controls.Add(this.cbEquipmentParts);
-            this.gbEquipmentMisc.Controls.Add(this.lblEquipmentParts);
-            this.gbEquipmentMisc.Controls.Add(this.lblEquipmentAtkMax);
-            this.gbEquipmentMisc.Location = new System.Drawing.Point(6, 271);
-            this.gbEquipmentMisc.Name = "gbEquipmentMisc";
-            this.gbEquipmentMisc.Size = new System.Drawing.Size(356, 117);
-            this.gbEquipmentMisc.TabIndex = 23;
-            this.gbEquipmentMisc.TabStop = false;
-            this.gbEquipmentMisc.Text = "Misc";
-            // 
-            // lblEquipmentParts
-            // 
-            this.lblEquipmentParts.AutoSize = true;
-            this.lblEquipmentParts.Location = new System.Drawing.Point(65, 77);
-            this.lblEquipmentParts.Name = "lblEquipmentParts";
-            this.lblEquipmentParts.Size = new System.Drawing.Size(37, 13);
-            this.lblEquipmentParts.TabIndex = 18;
-            this.lblEquipmentParts.Text = "Parts :";
-            // 
-            // cbEquipmentParts
-            // 
-            this.cbEquipmentParts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbEquipmentParts.FormattingEnabled = true;
-            this.cbEquipmentParts.Location = new System.Drawing.Point(108, 74);
-            this.cbEquipmentParts.Name = "cbEquipmentParts";
-            this.cbEquipmentParts.Size = new System.Drawing.Size(160, 21);
-            this.cbEquipmentParts.TabIndex = 19;
-            // 
-            // nudEquipmentDstValue
-            // 
-            this.nudEquipmentDstValue.Location = new System.Drawing.Point(235, 87);
-            this.nudEquipmentDstValue.Maximum = new decimal(new int[] {
-            2147483647,
-            0,
-            0,
-            0});
-            this.nudEquipmentDstValue.Minimum = new decimal(new int[] {
-            -2147483648,
-            0,
-            0,
-            -2147483648});
-            this.nudEquipmentDstValue.Name = "nudEquipmentDstValue";
-            this.nudEquipmentDstValue.Size = new System.Drawing.Size(95, 20);
-            this.nudEquipmentDstValue.TabIndex = 23;
-            this.nudEquipmentDstValue.ThousandsSeparator = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -824,10 +826,13 @@
             this.gbGeneralType.ResumeLayout(false);
             this.gbGeneralType.PerformLayout();
             this.tpMainEquipment.ResumeLayout(false);
+            this.gbEquipmentMisc.ResumeLayout(false);
+            this.gbEquipmentMisc.PerformLayout();
             this.gbEquipmentRequirements.ResumeLayout(false);
             this.gbEquipmentRequirements.PerformLayout();
             this.gbDstParams.ResumeLayout(false);
             this.gbDstParams.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudEquipmentDstValue)).EndInit();
             this.tpMainConsumable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudConsumableDstValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
@@ -835,9 +840,6 @@
             this.msMain.PerformLayout();
             this.pnlList.ResumeLayout(false);
             this.pnlList.PerformLayout();
-            this.gbEquipmentMisc.ResumeLayout(false);
-            this.gbEquipmentMisc.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudEquipmentDstValue)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

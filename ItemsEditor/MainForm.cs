@@ -381,8 +381,21 @@ namespace ItemsEditor
         // TODO: Do the same for others item kinds
         private void CbTypeItemKind1_DataSourceChanged(object sender, EventArgs e)
         {
-            if (cbTypeItemKind1.Items.Count > 0) cbTypeItemKind1.Enabled = true;
+            if(cbTypeItemKind1.DataSource is string[] dataSource && dataSource.Length > 1) cbTypeItemKind1.Enabled = true;
             else cbTypeItemKind1.Enabled = false;
+        }
+
+        private void CbTypeItemKind2_DataSourceChanged(object sender, EventArgs e)
+        {
+            int test = cbTypeItemKind1.Items.Count;
+            if (cbTypeItemKind2.DataSource is string[] dataSource && dataSource.Length > 1) cbTypeItemKind2.Enabled = true;
+            else cbTypeItemKind2.Enabled = false;
+        }
+
+        private void CbTypeItemKind3_DataSourceChanged(object sender, EventArgs e)
+        {
+            if (cbTypeItemKind3.DataSource is string[] dataSource && dataSource.Length > 1) cbTypeItemKind3.Enabled = true;
+            else cbTypeItemKind3.Enabled = false;
         }
     }
 }
