@@ -35,9 +35,9 @@ namespace ItemsEditor
 
                 Project prj = Project.GetInstance();
                 await Task.Run(() => prj.Load((progress) => pbFileSaveReload.Invoke(new Action(() => pbFileSaveReload.Value = progress)))).ConfigureAwait(true);
-                cbTypeItemKind1.DataSource = prj.GetAllItemKinds1();
-                cbTypeItemKind2.DataSource = prj.GetAllItemKinds2();
-                cbTypeItemKind3.DataSource = prj.GetAllItemKinds3();
+                cbTypeItemKind3.DataSource = prj.GetAllowedItemKinds3();
+                cbTypeItemKind2.DataSource = prj.GetAllowedItemKinds2();
+                cbTypeItemKind1.DataSource = prj.GetAllowedItemKinds1();
                 cbEquipmentJob.DataSource = new string[] { "=" }.Concat(prj.GetJobIdentifiers()).ToArray();
                 cbEquipmentSex.DataSource = new string[] { "=" }.Concat(prj.GetSexIdentifiers()).ToArray();
                 cbEquipmentDstParam.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
@@ -123,24 +123,7 @@ namespace ItemsEditor
             lbEquipmentDstStats.DataSource = currentItem.Dests;
             lbConsumableDst.DisplayMember = nameof(Dest.Label);
             lbConsumableDst.DataSource = currentItem.Dests;
-
-            if (currentItem.Prop.DwParts != "=")
-            {
-                tcMain.TabPages.Remove(tpMainConsumable);
-                if(!tcMain.TabPages.Contains(tpMainEquipment))
-                    tcMain.TabPages.Add(tpMainEquipment);
-            }
-            else if (currentItem.Prop.DwItemKind2 == "IK2_REFRESHER" || currentItem.Prop.DwItemKind2 == "IK2_FOOD")
-            {
-                tcMain.TabPages.Remove(tpMainEquipment);
-                if (!tcMain.TabPages.Contains(tpMainConsumable))
-                    tcMain.TabPages.Add(tpMainConsumable);
-            }
-            else
-            {
-                tcMain.TabPages.Remove(tpMainEquipment);
-                tcMain.TabPages.Remove(tpMainConsumable);
-            }
+            RefreshTabsState();
 
                 // TODO: reimplement something like this (rework params)
                 //for (int i = 0; i < currentItem.Prop.DwDestParam.Length; i++)
@@ -248,13 +231,13 @@ namespace ItemsEditor
             lbItems.SelectedIndex = indexSave < lbItems.Items.Count ? indexSave : lbItems.Items.Count - 1;
         }
 
-        private void Cb_ik1_SelectedIndexChanged(object sender, EventArgs e)
+        private void CbTypeItemKind1_SelectedValueChanged(object sender, EventArgs e)
         {
             if (!(cbTypeItemKind1.SelectedItem is string itemKind1)) return;
             cbTypeItemKind2.DataSource = Project.GetInstance().GetPossibleItemKinds2ByItemKind1(itemKind1);
         }
 
-        private void Cb_ik2_SelectedIndexChanged(object sender, EventArgs e)
+        private void CbTypeItemKind2_SelectedValueChanged(object sender, EventArgs e)
         {
             if (!(cbTypeItemKind2.SelectedItem is string itemKind2)) return;
             cbTypeItemKind3.DataSource = Project.GetInstance().GetPossibleItemKinds3ByItemKind2(itemKind2);
@@ -270,10 +253,19 @@ namespace ItemsEditor
             }
         }
 
-        private void CbTypeItemKind3_SelectedIndexChanged(object sender, EventArgs e)
+        private void CbTypeItemKind3_SelectedValueChanged(object sender, EventArgs e)
         {
             if(!(cbTypeItemKind3.SelectedItem is string itemKind3)) return;
-            cbEquipmentParts.DataSource = Project.GetInstance().GetPossiblePartsByItemKind3(itemKind3);
+            string[] possibleParts = Project.GetInstance().GetPossiblePartsByItemKind3(itemKind3);
+            cbEquipmentParts.DataSource = possibleParts;
+            if(lbItems.SelectedItem is Item item)
+            {
+                if(possibleParts.Length == 0)
+                    item.Prop.DwParts = "=";
+                else if (!possibleParts.Contains(item.Prop.DwParts))
+                    item.Prop.DwParts = possibleParts[0];
+                RefreshTabsState();
+            }
         }
 
         private void BtnMiscSelectIcon_Click(object sender, EventArgs e)
@@ -356,6 +348,7 @@ namespace ItemsEditor
         {
             if (!(lbItems.SelectedItem is Item mover)) return;
             new ExpertEditorForm(mover).ShowDialog();
+            RefreshTabsState();
         }
 
         private void LbConsumableDst_SelectedIndexChanged(object sender, EventArgs e)
@@ -387,7 +380,6 @@ namespace ItemsEditor
 
         private void CbTypeItemKind2_DataSourceChanged(object sender, EventArgs e)
         {
-            int test = cbTypeItemKind1.Items.Count;
             if (cbTypeItemKind2.DataSource is string[] dataSource && dataSource.Length > 1) cbTypeItemKind2.Enabled = true;
             else cbTypeItemKind2.Enabled = false;
         }
@@ -396,6 +388,28 @@ namespace ItemsEditor
         {
             if (cbTypeItemKind3.DataSource is string[] dataSource && dataSource.Length > 1) cbTypeItemKind3.Enabled = true;
             else cbTypeItemKind3.Enabled = false;
+        }
+
+        private void RefreshTabsState()
+        {
+            if(!(lbItems.SelectedItem is Item currentItem)) return;
+            if (currentItem.Prop.DwParts != "=")
+            {
+                tcMain.TabPages.Remove(tpMainConsumable);
+                if (!tcMain.TabPages.Contains(tpMainEquipment))
+                    tcMain.TabPages.Add(tpMainEquipment);
+            }
+            else if (currentItem.Prop.DwItemKind2 == "IK2_REFRESHER" || currentItem.Prop.DwItemKind2 == "IK2_FOOD")
+            {
+                tcMain.TabPages.Remove(tpMainEquipment);
+                if (!tcMain.TabPages.Contains(tpMainConsumable))
+                    tcMain.TabPages.Add(tpMainConsumable);
+            }
+            else
+            {
+                tcMain.TabPages.Remove(tpMainEquipment);
+                tcMain.TabPages.Remove(tpMainConsumable);
+            }
         }
     }
 }

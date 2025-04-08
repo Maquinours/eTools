@@ -477,6 +477,22 @@ namespace Common
             return defines.Where(x => x.Key.StartsWith("IK3_")).Select(x => x.Key).ToArray();
         }
 
+        public string[] GetAllowedItemKinds1()
+        {
+            return this.Items.Select(x => x.Prop.DwItemKind1).Distinct().Where(x => this.defines.ContainsKey(x)).ToArray();
+
+        }
+
+        public string[] GetAllowedItemKinds2()
+        {
+            return this.Items.Select(x => x.Prop.DwItemKind2).Distinct().Where(x => this.defines.ContainsKey(x)).ToArray();
+        }
+
+        public string[] GetAllowedItemKinds3()
+        {
+            return this.Items.Select(x => x.Prop.DwItemKind3).Distinct().Where(x => this.defines.ContainsKey(x)).ToArray();
+        }
+
         public string[] GetPossibleItemKinds2ByItemKind1(string itemKind1)
         {
             return Items.Where(x => x.Prop.DwItemKind1 == itemKind1).Select(x => x.Prop.DwItemKind2).Distinct().ToArray();

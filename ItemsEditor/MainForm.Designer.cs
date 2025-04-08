@@ -129,7 +129,7 @@
             // lblTypeItemKind1
             // 
             this.lblTypeItemKind1.AutoSize = true;
-            this.lblTypeItemKind1.Location = new System.Drawing.Point(45, 33);
+            this.lblTypeItemKind1.Location = new System.Drawing.Point(82, 34);
             this.lblTypeItemKind1.Name = "lblTypeItemKind1";
             this.lblTypeItemKind1.Size = new System.Drawing.Size(29, 13);
             this.lblTypeItemKind1.TabIndex = 1;
@@ -138,7 +138,7 @@
             // lblTypeItemKind2
             // 
             this.lblTypeItemKind2.AutoSize = true;
-            this.lblTypeItemKind2.Location = new System.Drawing.Point(45, 61);
+            this.lblTypeItemKind2.Location = new System.Drawing.Point(82, 62);
             this.lblTypeItemKind2.Name = "lblTypeItemKind2";
             this.lblTypeItemKind2.Size = new System.Drawing.Size(29, 13);
             this.lblTypeItemKind2.TabIndex = 2;
@@ -147,7 +147,7 @@
             // lblTypeItemKind3
             // 
             this.lblTypeItemKind3.AutoSize = true;
-            this.lblTypeItemKind3.Location = new System.Drawing.Point(45, 86);
+            this.lblTypeItemKind3.Location = new System.Drawing.Point(82, 87);
             this.lblTypeItemKind3.Name = "lblTypeItemKind3";
             this.lblTypeItemKind3.Size = new System.Drawing.Size(29, 13);
             this.lblTypeItemKind3.TabIndex = 3;
@@ -157,39 +157,39 @@
             // 
             this.cbTypeItemKind1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTypeItemKind1.FormattingEnabled = true;
-            this.cbTypeItemKind1.Location = new System.Drawing.Point(80, 30);
+            this.cbTypeItemKind1.Location = new System.Drawing.Point(117, 31);
             this.cbTypeItemKind1.Name = "cbTypeItemKind1";
             this.cbTypeItemKind1.Size = new System.Drawing.Size(174, 21);
             this.cbTypeItemKind1.TabIndex = 4;
-            this.cbTypeItemKind1.SelectedIndexChanged += new System.EventHandler(this.Cb_ik1_SelectedIndexChanged);
             this.cbTypeItemKind1.DataSourceChanged += new System.EventHandler(this.CbTypeItemKind1_DataSourceChanged);
+            this.cbTypeItemKind1.SelectedValueChanged += new System.EventHandler(this.CbTypeItemKind1_SelectedValueChanged);
             // 
             // cbTypeItemKind2
             // 
             this.cbTypeItemKind2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTypeItemKind2.FormattingEnabled = true;
-            this.cbTypeItemKind2.Location = new System.Drawing.Point(80, 58);
+            this.cbTypeItemKind2.Location = new System.Drawing.Point(117, 59);
             this.cbTypeItemKind2.Name = "cbTypeItemKind2";
             this.cbTypeItemKind2.Size = new System.Drawing.Size(174, 21);
             this.cbTypeItemKind2.TabIndex = 5;
-            this.cbTypeItemKind2.SelectedIndexChanged += new System.EventHandler(this.Cb_ik2_SelectedIndexChanged);
             this.cbTypeItemKind2.DataSourceChanged += new System.EventHandler(this.CbTypeItemKind2_DataSourceChanged);
+            this.cbTypeItemKind2.SelectedValueChanged += new System.EventHandler(this.CbTypeItemKind2_SelectedValueChanged);
             // 
             // cbTypeItemKind3
             // 
             this.cbTypeItemKind3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTypeItemKind3.FormattingEnabled = true;
-            this.cbTypeItemKind3.Location = new System.Drawing.Point(80, 84);
+            this.cbTypeItemKind3.Location = new System.Drawing.Point(117, 85);
             this.cbTypeItemKind3.Name = "cbTypeItemKind3";
             this.cbTypeItemKind3.Size = new System.Drawing.Size(174, 21);
             this.cbTypeItemKind3.TabIndex = 6;
-            this.cbTypeItemKind3.SelectedIndexChanged += new System.EventHandler(this.CbTypeItemKind3_SelectedIndexChanged);
             this.cbTypeItemKind3.DataSourceChanged += new System.EventHandler(this.CbTypeItemKind3_DataSourceChanged);
+            this.cbTypeItemKind3.SelectedValueChanged += new System.EventHandler(this.CbTypeItemKind3_SelectedValueChanged);
             // 
             // lblGeneralId
             // 
             this.lblGeneralId.AutoSize = true;
-            this.lblGeneralId.Location = new System.Drawing.Point(50, 33);
+            this.lblGeneralId.Location = new System.Drawing.Point(87, 28);
             this.lblGeneralId.Name = "lblGeneralId";
             this.lblGeneralId.Size = new System.Drawing.Size(24, 13);
             this.lblGeneralId.TabIndex = 7;
@@ -198,7 +198,7 @@
             // lblGeneralName
             // 
             this.lblGeneralName.AutoSize = true;
-            this.lblGeneralName.Location = new System.Drawing.Point(33, 65);
+            this.lblGeneralName.Location = new System.Drawing.Point(70, 60);
             this.lblGeneralName.Name = "lblGeneralName";
             this.lblGeneralName.Size = new System.Drawing.Size(41, 13);
             this.lblGeneralName.TabIndex = 8;
@@ -206,14 +206,14 @@
             // 
             // tbGeneralId
             // 
-            this.tbGeneralId.Location = new System.Drawing.Point(80, 33);
+            this.tbGeneralId.Location = new System.Drawing.Point(117, 28);
             this.tbGeneralId.Name = "tbGeneralId";
             this.tbGeneralId.Size = new System.Drawing.Size(174, 20);
             this.tbGeneralId.TabIndex = 9;
             // 
             // tbGeneralName
             // 
-            this.tbGeneralName.Location = new System.Drawing.Point(80, 62);
+            this.tbGeneralName.Location = new System.Drawing.Point(117, 57);
             this.tbGeneralName.Name = "tbGeneralName";
             this.tbGeneralName.Size = new System.Drawing.Size(174, 20);
             this.tbGeneralName.TabIndex = 10;
@@ -221,7 +221,7 @@
             // lblMiscPackMax
             // 
             this.lblMiscPackMax.AutoSize = true;
-            this.lblMiscPackMax.Location = new System.Drawing.Point(14, 37);
+            this.lblMiscPackMax.Location = new System.Drawing.Point(51, 35);
             this.lblMiscPackMax.Name = "lblMiscPackMax";
             this.lblMiscPackMax.Size = new System.Drawing.Size(60, 13);
             this.lblMiscPackMax.TabIndex = 11;
@@ -264,14 +264,14 @@
             this.gbGeneralMisc.Controls.Add(this.tbMiscIcon);
             this.gbGeneralMisc.Location = new System.Drawing.Point(6, 268);
             this.gbGeneralMisc.Name = "gbGeneralMisc";
-            this.gbGeneralMisc.Size = new System.Drawing.Size(310, 124);
+            this.gbGeneralMisc.Size = new System.Drawing.Size(360, 124);
             this.gbGeneralMisc.TabIndex = 24;
             this.gbGeneralMisc.TabStop = false;
             this.gbGeneralMisc.Text = "Misc";
             // 
             // btnMiscSelectIcon
             // 
-            this.btnMiscSelectIcon.Location = new System.Drawing.Point(230, 86);
+            this.btnMiscSelectIcon.Location = new System.Drawing.Point(267, 84);
             this.btnMiscSelectIcon.Name = "btnMiscSelectIcon";
             this.btnMiscSelectIcon.Size = new System.Drawing.Size(24, 22);
             this.btnMiscSelectIcon.TabIndex = 22;
@@ -282,7 +282,7 @@
             // pbMiscIcon
             // 
             this.pbMiscIcon.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pbMiscIcon.ErrorImage")));
-            this.pbMiscIcon.Location = new System.Drawing.Point(259, 82);
+            this.pbMiscIcon.Location = new System.Drawing.Point(296, 80);
             this.pbMiscIcon.Margin = new System.Windows.Forms.Padding(2);
             this.pbMiscIcon.Name = "pbMiscIcon";
             this.pbMiscIcon.Size = new System.Drawing.Size(32, 32);
@@ -291,7 +291,7 @@
             // 
             // nudMiscPackMax
             // 
-            this.nudMiscPackMax.Location = new System.Drawing.Point(80, 35);
+            this.nudMiscPackMax.Location = new System.Drawing.Point(117, 33);
             this.nudMiscPackMax.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -309,7 +309,7 @@
             // 
             // nudMiscCost
             // 
-            this.nudMiscCost.Location = new System.Drawing.Point(80, 61);
+            this.nudMiscCost.Location = new System.Drawing.Point(117, 59);
             this.nudMiscCost.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -323,7 +323,7 @@
             // lblMiscCost
             // 
             this.lblMiscCost.AutoSize = true;
-            this.lblMiscCost.Location = new System.Drawing.Point(40, 63);
+            this.lblMiscCost.Location = new System.Drawing.Point(77, 61);
             this.lblMiscCost.Name = "lblMiscCost";
             this.lblMiscCost.Size = new System.Drawing.Size(34, 13);
             this.lblMiscCost.TabIndex = 13;
@@ -332,7 +332,7 @@
             // lblMiscIcon
             // 
             this.lblMiscIcon.AutoSize = true;
-            this.lblMiscIcon.Location = new System.Drawing.Point(40, 90);
+            this.lblMiscIcon.Location = new System.Drawing.Point(77, 88);
             this.lblMiscIcon.Name = "lblMiscIcon";
             this.lblMiscIcon.Size = new System.Drawing.Size(34, 13);
             this.lblMiscIcon.TabIndex = 16;
@@ -340,7 +340,7 @@
             // 
             // tbMiscIcon
             // 
-            this.tbMiscIcon.Location = new System.Drawing.Point(80, 87);
+            this.tbMiscIcon.Location = new System.Drawing.Point(117, 85);
             this.tbMiscIcon.Name = "tbMiscIcon";
             this.tbMiscIcon.Size = new System.Drawing.Size(153, 20);
             this.tbMiscIcon.TabIndex = 17;
@@ -356,14 +356,14 @@
             this.gbGeneralGeneral.Controls.Add(this.lblGeneralDescription);
             this.gbGeneralGeneral.Location = new System.Drawing.Point(6, 6);
             this.gbGeneralGeneral.Name = "gbGeneralGeneral";
-            this.gbGeneralGeneral.Size = new System.Drawing.Size(310, 122);
+            this.gbGeneralGeneral.Size = new System.Drawing.Size(360, 122);
             this.gbGeneralGeneral.TabIndex = 23;
             this.gbGeneralGeneral.TabStop = false;
             this.gbGeneralGeneral.Text = "General";
             // 
             // tbGeneralDescription
             // 
-            this.tbGeneralDescription.Location = new System.Drawing.Point(80, 88);
+            this.tbGeneralDescription.Location = new System.Drawing.Point(117, 83);
             this.tbGeneralDescription.Name = "tbGeneralDescription";
             this.tbGeneralDescription.Size = new System.Drawing.Size(174, 20);
             this.tbGeneralDescription.TabIndex = 19;
@@ -371,7 +371,7 @@
             // lblGeneralDescription
             // 
             this.lblGeneralDescription.AutoSize = true;
-            this.lblGeneralDescription.Location = new System.Drawing.Point(8, 91);
+            this.lblGeneralDescription.Location = new System.Drawing.Point(45, 86);
             this.lblGeneralDescription.Name = "lblGeneralDescription";
             this.lblGeneralDescription.Size = new System.Drawing.Size(66, 13);
             this.lblGeneralDescription.TabIndex = 18;
@@ -387,7 +387,7 @@
             this.gbGeneralType.Controls.Add(this.cbTypeItemKind3);
             this.gbGeneralType.Location = new System.Drawing.Point(6, 134);
             this.gbGeneralType.Name = "gbGeneralType";
-            this.gbGeneralType.Size = new System.Drawing.Size(310, 124);
+            this.gbGeneralType.Size = new System.Drawing.Size(360, 124);
             this.gbGeneralType.TabIndex = 22;
             this.gbGeneralType.TabStop = false;
             this.gbGeneralType.Text = "Type";
@@ -499,11 +499,11 @@
             // lblEquipmentJob
             // 
             this.lblEquipmentJob.AutoSize = true;
-            this.lblEquipmentJob.Location = new System.Drawing.Point(58, 25);
+            this.lblEquipmentJob.Location = new System.Drawing.Point(72, 25);
             this.lblEquipmentJob.Name = "lblEquipmentJob";
-            this.lblEquipmentJob.Size = new System.Drawing.Size(44, 13);
+            this.lblEquipmentJob.Size = new System.Drawing.Size(30, 13);
             this.lblEquipmentJob.TabIndex = 5;
-            this.lblEquipmentJob.Text = "Classe :";
+            this.lblEquipmentJob.Text = "Job :";
             // 
             // cbEquipmentJob
             // 
@@ -517,11 +517,11 @@
             // lblEquipmentSex
             // 
             this.lblEquipmentSex.AutoSize = true;
-            this.lblEquipmentSex.Location = new System.Drawing.Point(58, 52);
+            this.lblEquipmentSex.Location = new System.Drawing.Point(71, 52);
             this.lblEquipmentSex.Name = "lblEquipmentSex";
-            this.lblEquipmentSex.Size = new System.Drawing.Size(37, 13);
+            this.lblEquipmentSex.Size = new System.Drawing.Size(31, 13);
             this.lblEquipmentSex.TabIndex = 7;
-            this.lblEquipmentSex.Text = "Sexe :";
+            this.lblEquipmentSex.Text = "Sex :";
             // 
             // tbEquipmentLevel
             // 
@@ -534,7 +534,7 @@
             // lblEquipmentLevel
             // 
             this.lblEquipmentLevel.AutoSize = true;
-            this.lblEquipmentLevel.Location = new System.Drawing.Point(58, 77);
+            this.lblEquipmentLevel.Location = new System.Drawing.Point(64, 75);
             this.lblEquipmentLevel.Name = "lblEquipmentLevel";
             this.lblEquipmentLevel.Size = new System.Drawing.Size(39, 13);
             this.lblEquipmentLevel.TabIndex = 15;
