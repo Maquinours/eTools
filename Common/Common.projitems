@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Exceptions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Item.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Model.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ModelProject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Mover.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ObservableDictionary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Project.cs" />
