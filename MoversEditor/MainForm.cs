@@ -27,7 +27,6 @@ namespace MoversEditor
         {
             //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en"); // Used to test localizations
             InitializeComponent();
-            SetSearchTextBoxPlaceHolder();
             this._dm = new DarkModeCS(this)
             {
                 //[Optional] Choose your preferred color mode here:
@@ -46,7 +45,7 @@ namespace MoversEditor
                 if(settings.IsMissingSettingsFile)
                 {
                     settings.Load();
-                    if(MessageBox.Show("It seems like this is the first time you're launching the app. The settings have not been configured yet. Would you like to access the settings now ?", "Settings not found", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if(Messenger.MessageBox("It seems like this is the first time you're launching the app. The settings have not been configured yet. Would you like to access the settings now ?", "Settings not found", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         new SettingsForm().ShowDialog();
                     }
@@ -88,7 +87,7 @@ namespace MoversEditor
             catch (Exception e)
             {
                 //UseWaitCursor = false;
-                switch (MessageBox.Show(e.Message, ErrorMessages.GetMessage("LoadingError"), MessageBoxButtons.RetryCancel, MessageBoxIcon.Error))
+                switch (Messenger.MessageBox(e.Message, ErrorMessages.GetMessage("LoadingError"), MessageBoxButtons.RetryCancel, MessageBoxIcon.Error))
                 {
                     case DialogResult.Retry:
                         LoadFormData();
@@ -158,6 +157,7 @@ namespace MoversEditor
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
+            SetSearchTextBoxPlaceHolder();
             LoadFormData();
         }
 
@@ -299,7 +299,7 @@ namespace MoversEditor
             }
             catch (Exception ex)
             {
-                switch (MessageBox.Show(ex.Message, "Save error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error))
+                switch (Messenger.MessageBox(ex.Message, "Save error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error))
                 {
                     case DialogResult.Retry:
                         Save();
@@ -321,7 +321,7 @@ namespace MoversEditor
             SettingsForm settingsForm = new SettingsForm();
             if (settingsForm.ShowDialog() == DialogResult.OK && settingsForm.ContainsChanges)
             {
-                if (MessageBox.Show("Some settings have changed. Would you like to reload the data with the new settings?", "Settings changed", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (Messenger.MessageBox("Some settings have changed. Would you like to reload the data with the new settings?", "Settings changed", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     ReloadFormData();
                 else
                     this.SetNumericUpDownLimits();
@@ -418,14 +418,14 @@ namespace MoversEditor
                 tbSearch.ForeColor = Color.Gray;
             } else
             {
-                tbSearch.ForeColor = Color.Black;
+                tbSearch.GetType().GetProperty("ForeColor")?.SetValue(tbSearch, _dm.OScolors.TextActive);
             }
                 tbSearch.GotFocus += (s, e) =>
                 {
                     if (tbSearch.ForeColor == Color.Gray) // Placeholder
                     {
                         tbSearch.Text = "";
-                        tbSearch.ForeColor = Color.Black;
+                        tbSearch.GetType().GetProperty("ForeColor")?.SetValue(tbSearch, _dm.OScolors.TextActive);
                     }
                 };
             tbSearch.LostFocus += (s, e) =>
