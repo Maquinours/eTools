@@ -9,11 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Common;
+using DarkModeForms;
 
 namespace MoversEditor
 {
     public partial class ExpertEditorForm : Form
     {
+        private readonly DarkModeCS _dm;
+
         private Mover CurrentMover { get; set; }
 
         public ExpertEditorForm(Mover currentMover)
@@ -26,6 +29,11 @@ namespace MoversEditor
             }
             this.CurrentMover = currentMover;
             this.Text = $"{this.Text} ({currentMover.Name})";
+            this._dm = new DarkModeCS(this)
+            {
+                //[Optional] Choose your preferred color mode here:
+                ColorMode = DarkModeCS.DisplayMode.SystemDefault
+            };
             FillDataGridView();
         }
 

@@ -9,16 +9,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Common;
+using DarkModeForms;
 
 namespace MoversEditor
 {
     public partial class SettingsForm : Form
     {
+        private readonly DarkModeCS _dm;
 
         public bool ContainsChanges { get; private set; }
         public SettingsForm()
         {
             InitializeComponent();
+            this._dm = new DarkModeCS(this)
+            {
+                //[Optional] Choose your preferred color mode here:
+                ColorMode = DarkModeCS.DisplayMode.SystemDefault
+            };
             LoadFormData();
         }
 

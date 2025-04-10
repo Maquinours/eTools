@@ -1,4 +1,5 @@
 ﻿using Common;
+using DarkModeForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,8 @@ namespace MoversEditor
 {
     public partial class MotionsForm : Form
     {
+        private DarkModeCS _dm;
+
         private Mover CurrentMover { get; set; }
         public MotionsForm(Mover currentMover)
         {
@@ -24,6 +27,11 @@ namespace MoversEditor
                 return;
             }
             CurrentMover = currentMover;
+            this._dm = new DarkModeCS(this)
+            {
+                //[Optional] Choose your preferred color mode here:
+                ColorMode = DarkModeCS.DisplayMode.SystemDefault
+            };
             Project prj = Project.GetInstance();
             AutoCompleteStringCollection filesSource = new AutoCompleteStringCollection();
             filesSource.AddRange(prj.GetAvalaibleMotionsFilesByModel(CurrentMover.Model));

@@ -8,15 +8,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using DarkModeForms;
 
 namespace MoversEditor
 {
     public partial class AboutForm : Form
     {
+        private readonly DarkModeCS _dm;
         public AboutForm()
         {
             InitializeComponent();
             lblTitle.Text = lblTitle.Text.Replace("{version}", Application.ProductVersion).Replace("{product}", Application.ProductName).Replace("{company}", Application.CompanyName);
+            this._dm = new DarkModeCS(this)
+            {
+                //[Optional] Choose your preferred color mode here:
+                ColorMode = DarkModeCS.DisplayMode.SystemDefault
+            };
         }
 
         private void LlblLicence_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
