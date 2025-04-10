@@ -14,16 +14,25 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using DarkModeForms;
 
 
 namespace MoversEditor
 {
     public partial class MainForm : Form
     {
+        private readonly DarkModeCS _dm;
+
         public MainForm()
         {
+            //Thread.CurrentThread.CurrentUICulture = new CultureInfo("en"); // Used to test localizations
             InitializeComponent();
             SetSearchTextBoxPlaceHolder();
+            this._dm = new DarkModeCS(this)
+            {
+                //[Optional] Choose your preferred color mode here:
+                ColorMode = DarkModeCS.DisplayMode.SystemDefault
+            };
         }
 
         private async void LoadFormData()

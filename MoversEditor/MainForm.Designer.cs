@@ -30,7 +30,26 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.tcMover = new System.Windows.Forms.TabControl();
+            this.msMain = new System.Windows.Forms.MenuStrip();
+            this.tsmiMovers = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMoversAdd = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMoversSearch = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFileReload = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFileSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiView = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiViewExpertEditor = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.cmsLbMovers = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiMoverDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiMoverDuplicate = new System.Windows.Forms.ToolStripMenuItem();
+            this.lbMovers = new System.Windows.Forms.ListBox();
+            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.pnlList = new System.Windows.Forms.Panel();
+            this.tbSearch = new System.Windows.Forms.TextBox();
+            this.pbFileSaveReload = new System.Windows.Forms.ProgressBar();
+            this.tcMover = new DarkModeForms.FlatTabControl();
             this.tpGeneral = new System.Windows.Forms.TabPage();
             this.gbGeneralConfiguration = new System.Windows.Forms.GroupBox();
             this.gbGeneralConfigurationModel = new System.Windows.Forms.GroupBox();
@@ -108,25 +127,9 @@
             this.lblMonsterAttackDelay = new System.Windows.Forms.Label();
             this.lblMonsterArmor = new System.Windows.Forms.Label();
             this.lblMonsterSpeed = new System.Windows.Forms.Label();
-            this.msMain = new System.Windows.Forms.MenuStrip();
-            this.tsmiMovers = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiMoversAdd = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiMoversSearch = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiFileReload = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiFileSave = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiView = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiViewExpertEditor = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.cmsLbMovers = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tsmiMoverDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmiMoverDuplicate = new System.Windows.Forms.ToolStripMenuItem();
-            this.lbMovers = new System.Windows.Forms.ListBox();
-            this.tooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.pbFileSaveReload = new System.Windows.Forms.ProgressBar();
-            this.pnlList = new System.Windows.Forms.Panel();
-            this.tbSearch = new System.Windows.Forms.TextBox();
+            this.msMain.SuspendLayout();
+            this.cmsLbMovers.SuspendLayout();
+            this.pnlList.SuspendLayout();
             this.tcMover.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.gbGeneralConfiguration.SuspendLayout();
@@ -161,25 +164,157 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudMonsterMagicResist)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMonsterAttackMin)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMonsterArmor)).BeginInit();
-            this.msMain.SuspendLayout();
-            this.cmsLbMovers.SuspendLayout();
-            this.pnlList.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // msMain
+            // 
+            this.msMain.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiMovers,
+            this.tsmiFile,
+            this.tsmiView,
+            this.tsmiSettings,
+            this.tsmiAbout});
+            resources.ApplyResources(this.msMain, "msMain");
+            this.msMain.Name = "msMain";
+            // 
+            // tsmiMovers
+            // 
+            this.tsmiMovers.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiMoversAdd,
+            this.tsmiMoversSearch});
+            this.tsmiMovers.Name = "tsmiMovers";
+            resources.ApplyResources(this.tsmiMovers, "tsmiMovers");
+            // 
+            // tsmiMoversAdd
+            // 
+            this.tsmiMoversAdd.Name = "tsmiMoversAdd";
+            resources.ApplyResources(this.tsmiMoversAdd, "tsmiMoversAdd");
+            this.tsmiMoversAdd.Click += new System.EventHandler(this.TsmiMoversAdd_Click);
+            // 
+            // tsmiMoversSearch
+            // 
+            this.tsmiMoversSearch.Name = "tsmiMoversSearch";
+            resources.ApplyResources(this.tsmiMoversSearch, "tsmiMoversSearch");
+            this.tsmiMoversSearch.Click += new System.EventHandler(this.TsmiMoversSearch_Click);
+            // 
+            // tsmiFile
+            // 
+            this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiFileReload,
+            this.tsmiFileSave});
+            this.tsmiFile.Name = "tsmiFile";
+            resources.ApplyResources(this.tsmiFile, "tsmiFile");
+            // 
+            // tsmiFileReload
+            // 
+            this.tsmiFileReload.Name = "tsmiFileReload";
+            resources.ApplyResources(this.tsmiFileReload, "tsmiFileReload");
+            this.tsmiFileReload.Click += new System.EventHandler(this.TsmiFileReload_Click);
+            // 
+            // tsmiFileSave
+            // 
+            this.tsmiFileSave.Name = "tsmiFileSave";
+            resources.ApplyResources(this.tsmiFileSave, "tsmiFileSave");
+            this.tsmiFileSave.Click += new System.EventHandler(this.TsmiFileSave_Click);
+            // 
+            // tsmiView
+            // 
+            this.tsmiView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiViewExpertEditor});
+            this.tsmiView.Name = "tsmiView";
+            resources.ApplyResources(this.tsmiView, "tsmiView");
+            // 
+            // tsmiViewExpertEditor
+            // 
+            this.tsmiViewExpertEditor.Name = "tsmiViewExpertEditor";
+            resources.ApplyResources(this.tsmiViewExpertEditor, "tsmiViewExpertEditor");
+            this.tsmiViewExpertEditor.Click += new System.EventHandler(this.TsmiViewExpertEditor_Click);
+            // 
+            // tsmiSettings
+            // 
+            this.tsmiSettings.Name = "tsmiSettings";
+            resources.ApplyResources(this.tsmiSettings, "tsmiSettings");
+            this.tsmiSettings.Click += new System.EventHandler(this.TsmiSettings_Click);
+            // 
+            // tsmiAbout
+            // 
+            this.tsmiAbout.Name = "tsmiAbout";
+            resources.ApplyResources(this.tsmiAbout, "tsmiAbout");
+            this.tsmiAbout.Click += new System.EventHandler(this.TsmiAbout_Click);
+            // 
+            // cmsLbMovers
+            // 
+            this.cmsLbMovers.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.cmsLbMovers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiMoverDelete,
+            this.tsmiMoverDuplicate});
+            this.cmsLbMovers.Name = "cms_lbmovers";
+            resources.ApplyResources(this.cmsLbMovers, "cmsLbMovers");
+            // 
+            // tsmiMoverDelete
+            // 
+            this.tsmiMoverDelete.Name = "tsmiMoverDelete";
+            resources.ApplyResources(this.tsmiMoverDelete, "tsmiMoverDelete");
+            this.tsmiMoverDelete.Click += new System.EventHandler(this.TsmiMoverDelete_Click);
+            // 
+            // tsmiMoverDuplicate
+            // 
+            this.tsmiMoverDuplicate.Name = "tsmiMoverDuplicate";
+            resources.ApplyResources(this.tsmiMoverDuplicate, "tsmiMoverDuplicate");
+            this.tsmiMoverDuplicate.Click += new System.EventHandler(this.TsmiMoverDuplicate_Click);
+            // 
+            // lbMovers
+            // 
+            this.lbMovers.FormattingEnabled = true;
+            resources.ApplyResources(this.lbMovers, "lbMovers");
+            this.lbMovers.Name = "lbMovers";
+            this.lbMovers.SelectedIndexChanged += new System.EventHandler(this.LbMovers_SelectedIndexChanged);
+            this.lbMovers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LbMovers_KeyDown);
+            this.lbMovers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LbMovers_MouseDown);
+            // 
+            // pnlList
+            // 
+            this.pnlList.Controls.Add(this.tbSearch);
+            this.pnlList.Controls.Add(this.lbMovers);
+            resources.ApplyResources(this.pnlList, "pnlList");
+            this.pnlList.Name = "pnlList";
+            // 
+            // tbSearch
+            // 
+            this.tbSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            resources.ApplyResources(this.tbSearch, "tbSearch");
+            this.tbSearch.Name = "tbSearch";
+            this.tbSearch.TextChanged += new System.EventHandler(this.TbSearch_TextChanged);
+            // 
+            // pbFileSaveReload
+            // 
+            resources.ApplyResources(this.pbFileSaveReload, "pbFileSaveReload");
+            this.pbFileSaveReload.Name = "pbFileSaveReload";
             // 
             // tcMover
             // 
+            resources.ApplyResources(this.tcMover, "tcMover");
+            this.tcMover.BorderColor = System.Drawing.SystemColors.ControlDark;
             this.tcMover.Controls.Add(this.tpGeneral);
             this.tcMover.Controls.Add(this.tpMonster);
-            resources.ApplyResources(this.tcMover, "tcMover");
+            this.tcMover.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.tcMover.LineColor = System.Drawing.SystemColors.Highlight;
             this.tcMover.Name = "tcMover";
+            this.tcMover.SelectedForeColor = System.Drawing.SystemColors.HighlightText;
             this.tcMover.SelectedIndex = 0;
+            this.tcMover.SelectTabColor = System.Drawing.SystemColors.ControlLight;
+            this.tcMover.ShowTabCloseButton = false;
+            this.tcMover.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.tcMover.TabCloseColor = System.Drawing.SystemColors.ControlText;
+            this.tcMover.TabColor = System.Drawing.SystemColors.ControlLight;
             // 
             // tpGeneral
             // 
+            this.tpGeneral.BackColor = System.Drawing.SystemColors.ControlLight;
             this.tpGeneral.Controls.Add(this.gbGeneralConfiguration);
             resources.ApplyResources(this.tpGeneral, "tpGeneral");
             this.tpGeneral.Name = "tpGeneral";
-            this.tpGeneral.UseVisualStyleBackColor = true;
             // 
             // gbGeneralConfiguration
             // 
@@ -416,10 +551,10 @@
             // 
             // tpMonster
             // 
+            this.tpMonster.BackColor = System.Drawing.SystemColors.ControlLight;
             this.tpMonster.Controls.Add(this.gbMonsterStats);
             resources.ApplyResources(this.tpMonster, "tpMonster");
             this.tpMonster.Name = "tpMonster";
-            this.tpMonster.UseVisualStyleBackColor = true;
             // 
             // gbMonsterStats
             // 
@@ -904,132 +1039,6 @@
             resources.ApplyResources(this.lblMonsterSpeed, "lblMonsterSpeed");
             this.lblMonsterSpeed.Name = "lblMonsterSpeed";
             // 
-            // msMain
-            // 
-            this.msMain.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiMovers,
-            this.tsmiFile,
-            this.tsmiView,
-            this.tsmiSettings,
-            this.tsmiAbout});
-            resources.ApplyResources(this.msMain, "msMain");
-            this.msMain.Name = "msMain";
-            // 
-            // tsmiMovers
-            // 
-            this.tsmiMovers.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiMoversAdd,
-            this.tsmiMoversSearch});
-            this.tsmiMovers.Name = "tsmiMovers";
-            resources.ApplyResources(this.tsmiMovers, "tsmiMovers");
-            // 
-            // tsmiMoversAdd
-            // 
-            this.tsmiMoversAdd.Name = "tsmiMoversAdd";
-            resources.ApplyResources(this.tsmiMoversAdd, "tsmiMoversAdd");
-            this.tsmiMoversAdd.Click += new System.EventHandler(this.TsmiMoversAdd_Click);
-            // 
-            // tsmiMoversSearch
-            // 
-            this.tsmiMoversSearch.Name = "tsmiMoversSearch";
-            resources.ApplyResources(this.tsmiMoversSearch, "tsmiMoversSearch");
-            this.tsmiMoversSearch.Click += new System.EventHandler(this.TsmiMoversSearch_Click);
-            // 
-            // tsmiFile
-            // 
-            this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiFileReload,
-            this.tsmiFileSave});
-            this.tsmiFile.Name = "tsmiFile";
-            resources.ApplyResources(this.tsmiFile, "tsmiFile");
-            // 
-            // tsmiFileReload
-            // 
-            this.tsmiFileReload.Name = "tsmiFileReload";
-            resources.ApplyResources(this.tsmiFileReload, "tsmiFileReload");
-            this.tsmiFileReload.Click += new System.EventHandler(this.TsmiFileReload_Click);
-            // 
-            // tsmiFileSave
-            // 
-            this.tsmiFileSave.Name = "tsmiFileSave";
-            resources.ApplyResources(this.tsmiFileSave, "tsmiFileSave");
-            this.tsmiFileSave.Click += new System.EventHandler(this.TsmiFileSave_Click);
-            // 
-            // tsmiView
-            // 
-            this.tsmiView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiViewExpertEditor});
-            this.tsmiView.Name = "tsmiView";
-            resources.ApplyResources(this.tsmiView, "tsmiView");
-            // 
-            // tsmiViewExpertEditor
-            // 
-            this.tsmiViewExpertEditor.Name = "tsmiViewExpertEditor";
-            resources.ApplyResources(this.tsmiViewExpertEditor, "tsmiViewExpertEditor");
-            this.tsmiViewExpertEditor.Click += new System.EventHandler(this.TsmiViewExpertEditor_Click);
-            // 
-            // tsmiSettings
-            // 
-            this.tsmiSettings.Name = "tsmiSettings";
-            resources.ApplyResources(this.tsmiSettings, "tsmiSettings");
-            this.tsmiSettings.Click += new System.EventHandler(this.TsmiSettings_Click);
-            // 
-            // tsmiAbout
-            // 
-            this.tsmiAbout.Name = "tsmiAbout";
-            resources.ApplyResources(this.tsmiAbout, "tsmiAbout");
-            this.tsmiAbout.Click += new System.EventHandler(this.TsmiAbout_Click);
-            // 
-            // cmsLbMovers
-            // 
-            this.cmsLbMovers.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.cmsLbMovers.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiMoverDelete,
-            this.tsmiMoverDuplicate});
-            this.cmsLbMovers.Name = "cms_lbmovers";
-            resources.ApplyResources(this.cmsLbMovers, "cmsLbMovers");
-            // 
-            // tsmiMoverDelete
-            // 
-            this.tsmiMoverDelete.Name = "tsmiMoverDelete";
-            resources.ApplyResources(this.tsmiMoverDelete, "tsmiMoverDelete");
-            this.tsmiMoverDelete.Click += new System.EventHandler(this.TsmiMoverDelete_Click);
-            // 
-            // tsmiMoverDuplicate
-            // 
-            this.tsmiMoverDuplicate.Name = "tsmiMoverDuplicate";
-            resources.ApplyResources(this.tsmiMoverDuplicate, "tsmiMoverDuplicate");
-            this.tsmiMoverDuplicate.Click += new System.EventHandler(this.TsmiMoverDuplicate_Click);
-            // 
-            // lbMovers
-            // 
-            this.lbMovers.FormattingEnabled = true;
-            resources.ApplyResources(this.lbMovers, "lbMovers");
-            this.lbMovers.Name = "lbMovers";
-            this.lbMovers.SelectedIndexChanged += new System.EventHandler(this.LbMovers_SelectedIndexChanged);
-            this.lbMovers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LbMovers_KeyDown);
-            this.lbMovers.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LbMovers_MouseDown);
-            // 
-            // pbFileSaveReload
-            // 
-            resources.ApplyResources(this.pbFileSaveReload, "pbFileSaveReload");
-            this.pbFileSaveReload.Name = "pbFileSaveReload";
-            // 
-            // pnlList
-            // 
-            this.pnlList.Controls.Add(this.tbSearch);
-            this.pnlList.Controls.Add(this.lbMovers);
-            resources.ApplyResources(this.pnlList, "pnlList");
-            this.pnlList.Name = "pnlList";
-            // 
-            // tbSearch
-            // 
-            this.tbSearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            resources.ApplyResources(this.tbSearch, "tbSearch");
-            this.tbSearch.Name = "tbSearch";
-            this.tbSearch.TextChanged += new System.EventHandler(this.TbSearch_TextChanged);
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -1043,6 +1052,11 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Shown += new System.EventHandler(this.MainForm_Shown);
+            this.msMain.ResumeLayout(false);
+            this.msMain.PerformLayout();
+            this.cmsLbMovers.ResumeLayout(false);
+            this.pnlList.ResumeLayout(false);
+            this.pnlList.PerformLayout();
             this.tcMover.ResumeLayout(false);
             this.tpGeneral.ResumeLayout(false);
             this.gbGeneralConfiguration.ResumeLayout(false);
@@ -1083,18 +1097,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudMonsterMagicResist)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMonsterAttackMin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudMonsterArmor)).EndInit();
-            this.msMain.ResumeLayout(false);
-            this.msMain.PerformLayout();
-            this.cmsLbMovers.ResumeLayout(false);
-            this.pnlList.ResumeLayout(false);
-            this.pnlList.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.TabControl tcMover;
         private System.Windows.Forms.MenuStrip msMain;
         private System.Windows.Forms.ToolStripMenuItem tsmiMovers;
         private System.Windows.Forms.ToolStripMenuItem tsmiMoversAdd;
@@ -1188,9 +1196,10 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiMoverDuplicate;
         private System.Windows.Forms.ToolStripMenuItem tsmiView;
         private System.Windows.Forms.ToolStripMenuItem tsmiViewExpertEditor;
-        private System.Windows.Forms.ProgressBar pbFileSaveReload;
         private System.Windows.Forms.Panel pnlList;
         private System.Windows.Forms.TextBox tbSearch;
+        private DarkModeForms.FlatTabControl tcMover;
+        private System.Windows.Forms.ProgressBar pbFileSaveReload;
     }
 }
 
