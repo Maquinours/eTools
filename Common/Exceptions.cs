@@ -7,7 +7,12 @@ namespace Common
 {
     public static class ErrorMessages
     {
-        private static readonly ResourceManager ResourceManager = new ResourceManager($"{typeof(ErrorMessages).Assembly.GetName().Name}.Resources.ExceptionMessages", typeof(ErrorMessages).Assembly);
+#if __MOVERS
+        private static readonly ResourceManager ResourceManager = new ResourceManager("MoversEditor.Resources.ExceptionMessages", typeof(ErrorMessages).Assembly);
+#endif
+#if __ITEMS
+        private static readonly ResourceManager ResourceManager = new ResourceManager("ItemsEditor.Resources.ExceptionMessages", typeof(ErrorMessages).Assembly);
+#endif
 
         public static string GetMessage(string key, params object[] args)
         {
