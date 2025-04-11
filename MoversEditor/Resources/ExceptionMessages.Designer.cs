@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Common.Resources {
+namespace MoversEditor.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Common.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MoversEditor.ExceptionMessages", typeof(ExceptionMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MoversEditor.Resources.ExceptionMessages", typeof(ExceptionMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,33 @@ namespace Common.Resources {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The file &quot;{0}&quot; is incorrectly formatted..
+        /// </summary>
+        internal static string IncorrectlyFormattedFile {
+            get {
+                return ResourceManager.GetString("IncorrectlyFormattedFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Loading error.
+        /// </summary>
+        internal static string LoadingError {
+            get {
+                return ResourceManager.GetString("LoadingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à The definition with ID &quot;{0}&quot; is missing..
+        /// </summary>
+        internal static string MissingDefine {
+            get {
+                return ResourceManager.GetString("MissingDefine", resourceCulture);
             }
         }
     }

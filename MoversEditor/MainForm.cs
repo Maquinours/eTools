@@ -79,7 +79,7 @@ namespace MoversEditor
             catch (Exception e)
             {
                 //UseWaitCursor = false;
-                switch (MessageBox.Show(e.Message, ErrorMessages.GetMessage("LoadingError"), MessageBoxButtons.RetryCancel, MessageBoxIcon.Error))
+                switch (MessageBox.Show(e.Message, Resources.ExceptionMessages.LoadingError, MessageBoxButtons.RetryCancel, MessageBoxIcon.Error))
                 {
                     case DialogResult.Retry:
                         LoadFormData();
