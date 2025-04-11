@@ -1,4 +1,4 @@
-#if __MOVERS
+#if __MOVERS || __ITEMS
 using System;
 using System.Globalization;
 using System.Reflection;
@@ -11,7 +11,9 @@ namespace Common
         public IncorrectlyFormattedFileException(string filePath)
             :
 #if __MOVERS
-            base(string.Format(MoversEditor.Resources.ExceptionMessages.IncorrectlyFormattedFile, filePath)) 
+            base(string.Format(MoversEditor.Resources.ExceptionMessages.IncorrectlyFormattedFile, filePath))
+#elif __ITEMS
+            base(string.Format(ItemsEditor.Resources.ExceptionMessages.IncorrectlyFormattedFile, filePath))
 #endif
         { }
     }
@@ -22,8 +24,10 @@ namespace Common
             :
 #if __MOVERS
             base(string.Format(MoversEditor.Resources.ExceptionMessages.MissingDefine, defineIdentifier))
+#elif __ITEMS
+            base(string.Format(ItemsEditor.Resources.ExceptionMessages.MissingDefine, defineIdentifier))
 #endif
-            { }
+        { }
     }
 }
 #endif
