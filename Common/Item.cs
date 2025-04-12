@@ -528,6 +528,22 @@ namespace Common
                 case nameof(ItemProp.SzCommand):
                     this.NotifyPropertyChanged(nameof(this.Description));
                     break;
+                case nameof(ItemProp.DwItemKind3):
+                    this.NotifyPropertyChanged(nameof(this.IsTownBlinkwing));
+                    this.NotifyPropertyChanged(nameof(this.IsNormalBlinkwing));
+                    break;
+                case nameof(ItemProp.DwItemAtkOrder1):
+                    this.NotifyPropertyChanged(nameof(this.BlinkwingPositionX));
+                    break;
+                case nameof(ItemProp.DwItemAtkOrder2):
+                    this.NotifyPropertyChanged(nameof(this.BlinkwingPositionY));
+                    break;
+                case nameof(ItemProp.DwItemAtkOrder3):
+                    this.NotifyPropertyChanged(nameof(this.BlinkwingPositionZ));
+                    break;
+                case nameof(ItemProp.DwItemAtkOrder4):
+                    this.NotifyPropertyChanged(nameof(this.BlinkwingAngle));
+                    break;
             }
         }
 
@@ -586,6 +602,99 @@ namespace Common
         {
             get => this._dests;
             private set { this._dests = value; }
+        }
+
+        public bool IsTownBlinkwing
+        {
+            get => this.Prop.DwItemKind3 == "IK3_TOWNBLINKWING";
+            set
+            {
+                if (this.IsTownBlinkwing != value)
+                {
+                    if (this.Prop.DwItemKind2 != "IK2_BLINKWING") throw new System.Exception("Item is not a Blinkwing");
+                    if (value)
+                    {
+                        this.Prop.DwItemKind3 = "IK3_TOWNBLINKWING";
+                        this.Prop.DwWeaponType = "=";
+                        this.Prop.DwItemAtkOrder1 = "=";
+                        this.Prop.DwItemAtkOrder2 = "=";
+                        this.Prop.DwItemAtkOrder3 = "=";
+                        this.Prop.DwItemAtkOrder4 = "=";
+                    }
+                    else
+                        this.Prop.DwItemKind3 = "IK3_BLINKWING";
+                }
+            }
+        }
+
+        public bool IsNormalBlinkwing
+        {
+            get => this.Prop.DwItemKind3 == "IK3_BLINKWING";
+        }
+
+        public int BlinkwingPositionX
+        {
+            get 
+            {
+                if (int.TryParse(this.Prop.DwItemAtkOrder1, out int result)) return result;
+                return -1;
+            }
+            set
+            {
+                if (value != this.BlinkwingPositionX)
+                {
+                    if (this.Prop.DwItemKind2 != "IK2_BLINKWING") throw new System.Exception("Item is not a Blinkwing");
+                    this.Prop.DwItemAtkOrder1 = value == -1 ? "=" : value.ToString();
+                }
+            }
+        }
+        public int BlinkwingPositionY
+        {
+            get
+            {
+                if (int.TryParse(this.Prop.DwItemAtkOrder2, out int result)) return result;
+                return -1;
+            }
+            set
+            {
+                if (value != this.BlinkwingPositionY)
+                {
+                    if (this.Prop.DwItemKind2 != "IK2_BLINKWING") throw new System.Exception("Item is not a Blinkwing");
+                    this.Prop.DwItemAtkOrder2 = value == -1 ? "=" : value.ToString();
+                }
+            }
+        }
+        public int BlinkwingPositionZ
+        {
+            get
+            {
+                if (int.TryParse(this.Prop.DwItemAtkOrder3, out int result)) return result;
+                return -1;
+            }
+            set
+            {
+                if (value != this.BlinkwingPositionZ)
+                {
+                    if (this.Prop.DwItemKind2 != "IK2_BLINKWING") throw new System.Exception("Item is not a Blinkwing");
+                    this.Prop.DwItemAtkOrder3 = value == -1 ? "=" : value.ToString();
+                }
+            }
+        }
+        public int BlinkwingAngle
+        {
+            get
+            {
+                if (int.TryParse(this.Prop.DwItemAtkOrder4, out int result)) return result;
+                return -1;
+            }
+            set
+            {
+                if (value != this.BlinkwingAngle)
+                {
+                    if (this.Prop.DwItemKind2 != "IK2_BLINKWING") throw new System.Exception("Item is not a Blinkwing");
+                    this.Prop.DwItemAtkOrder4 = value == -1 ? "=" : value.ToString();
+                }
+            }
         }
 
         public Item()

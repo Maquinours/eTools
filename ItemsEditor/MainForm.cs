@@ -43,6 +43,7 @@ namespace ItemsEditor
                 cbEquipmentDstParam.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
                 cbConsumableDstParam.DataSource = prj.GetDstIdentifiers();
                 cbEquipmentParts.DataSource = prj.GetPartsIdentifiers();
+                cbBlinkwingWorld.DataSource = prj.GetWorldIdentifiers();
                 SetListBoxDataSource();
             }
             catch (Exception e)
@@ -98,6 +99,12 @@ namespace ItemsEditor
             tbAtkMax.DataBindings.Clear();
             cbEquipmentParts.DataBindings.Clear();
             tbEquipmentLevel.DataBindings.Clear();
+            chckbBlinkwingNearestTown.DataBindings.Clear();
+            cbBlinkwingWorld.DataBindings.Clear();
+            nudBlinkwingPositionX.DataBindings.Clear();
+            nudBlinkwingPositionY.DataBindings.Clear();
+            nudBlinkwingPositionZ.DataBindings.Clear();
+            nudBlinkwingAngle.DataBindings.Clear();
             lbEquipmentDstStats.DataSource = null;
             lbConsumableDst.DataSource = null;
 
@@ -119,6 +126,18 @@ namespace ItemsEditor
             tbAtkMax.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMax", false, DataSourceUpdateMode.OnPropertyChanged));
             tbEquipmentLevel.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwLimitLevel1", false, DataSourceUpdateMode.OnPropertyChanged));
             cbEquipmentParts.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwParts", false, DataSourceUpdateMode.OnPropertyChanged));
+            chckbBlinkwingNearestTown.DataBindings.Add(new Binding("Checked", currentItem, nameof(Item.IsTownBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbBlinkwingWorld.SelectedItem = null; // Reset the selected item to reset what's shown in case of a "=" value.
+            cbBlinkwingWorld.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwWeaponType), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingPositionX.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingPositionX), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingPositionY.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingPositionY), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingPositionZ.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingPositionZ), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingAngle.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingAngle), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbBlinkwingWorld.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingPositionX.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingPositionY.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingPositionZ.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingAngle.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
             lbEquipmentDstStats.DisplayMember = nameof(Dest.Label);
             lbEquipmentDstStats.DataSource = currentItem.Dests;
             lbConsumableDst.DisplayMember = nameof(Dest.Label);
@@ -393,23 +412,30 @@ namespace ItemsEditor
         private void RefreshTabsState()
         {
             if(!(lbItems.SelectedItem is Item currentItem)) return;
+            List<TabPage> tabs = new List<TabPage> { tpMainGeneral };
             if (currentItem.Prop.DwParts != "=")
-            {
-                tcMain.TabPages.Remove(tpMainConsumable);
-                if (!tcMain.TabPages.Contains(tpMainEquipment))
-                    tcMain.TabPages.Add(tpMainEquipment);
-            }
-            else if (currentItem.Prop.DwItemKind2 == "IK2_REFRESHER" || currentItem.Prop.DwItemKind2 == "IK2_POTION" || currentItem.Prop.DwItemKind2 == "IK2_FOOD")
-            {
-                tcMain.TabPages.Remove(tpMainEquipment);
-                if (!tcMain.TabPages.Contains(tpMainConsumable))
-                    tcMain.TabPages.Add(tpMainConsumable);
-            }
+                tabs.Add(tpMainEquipment);
             else
             {
-                tcMain.TabPages.Remove(tpMainEquipment);
-                tcMain.TabPages.Remove(tpMainConsumable);
+                switch(currentItem.Prop.DwItemKind2)
+                {
+                    case "IK2_REFRESHER":
+                    case "IK2_POTION":
+                    case "IK2_FOOD":
+                        tabs.Add(tpMainConsumable);
+                        break;
+                    case "IK2_BLINKWING":
+                        tabs.Add(tpMainBlinkwing);
+                        break;
+                }
             }
+
+            foreach(TabPage tab in tcMain.TabPages)
+                if(!tabs.Contains(tab))
+                    tcMain.TabPages.Remove(tab);
+            foreach(TabPage tab in tabs)
+                if(!tcMain.TabPages.Contains(tab))
+                    tcMain.TabPages.Add(tab);
         }
     }
 }

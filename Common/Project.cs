@@ -187,6 +187,11 @@ namespace Common
             return defines.Where(x => x.Key.StartsWith("PARTS_")).Select(x => x.Key).ToArray();
         }
 
+        public string[] GetWorldIdentifiers()
+        {
+            return defines.Where(x => x.Key.StartsWith("WI_WORLD")).Select(x => x.Key).ToArray();
+        }
+
         public ModelBrace[] GetMoverModelBraces()
         {
             if (!defines.ContainsKey("OT_MOVER")) throw new MissingDefineException("OT_MOVER");
