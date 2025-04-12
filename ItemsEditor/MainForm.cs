@@ -399,7 +399,7 @@ namespace ItemsEditor
                 if (!tcMain.TabPages.Contains(tpMainEquipment))
                     tcMain.TabPages.Add(tpMainEquipment);
             }
-            else if (currentItem.Prop.DwItemKind2 == "IK2_REFRESHER" || currentItem.Prop.DwItemKind2 == "IK2_FOOD")
+            else if (currentItem.Prop.DwItemKind2 == "IK2_REFRESHER" || currentItem.Prop.DwItemKind2 == "IK2_POTION" || currentItem.Prop.DwItemKind2 == "IK2_FOOD")
             {
                 tcMain.TabPages.Remove(tpMainEquipment);
                 if (!tcMain.TabPages.Contains(tpMainConsumable))
