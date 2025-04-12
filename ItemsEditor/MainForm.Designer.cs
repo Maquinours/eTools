@@ -286,11 +286,11 @@
             this.tcMain.Controls.Add(this.tpMainBlinkwing);
             this.tcMain.Controls.Add(this.tpMainSpecialBuff);
             this.tcMain.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tcMain.Location = new System.Drawing.Point(379, 33);
+            this.tcMain.Location = new System.Drawing.Point(379, 36);
             this.tcMain.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tcMain.Name = "tcMain";
             this.tcMain.SelectedIndex = 0;
-            this.tcMain.Size = new System.Drawing.Size(573, 659);
+            this.tcMain.Size = new System.Drawing.Size(573, 656);
             this.tcMain.TabIndex = 13;
             // 
             // tpMainGeneral
@@ -891,7 +891,7 @@
             this.tsmiSettings});
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
-            this.msMain.Size = new System.Drawing.Size(952, 33);
+            this.msMain.Size = new System.Drawing.Size(952, 36);
             this.msMain.TabIndex = 14;
             this.msMain.Text = "menuStrip1";
             // 
@@ -963,9 +963,9 @@
             this.pnlList.Controls.Add(this.tbSearch);
             this.pnlList.Controls.Add(this.lbItems);
             this.pnlList.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlList.Location = new System.Drawing.Point(0, 33);
+            this.pnlList.Location = new System.Drawing.Point(0, 36);
             this.pnlList.Name = "pnlList";
-            this.pnlList.Size = new System.Drawing.Size(386, 659);
+            this.pnlList.Size = new System.Drawing.Size(386, 656);
             this.pnlList.TabIndex = 15;
             // 
             // tbSearch
@@ -1084,7 +1084,7 @@
             this.tpMainSpecialBuff.Controls.Add(this.gbSpecialBuffSettings);
             this.tpMainSpecialBuff.Location = new System.Drawing.Point(4, 29);
             this.tpMainSpecialBuff.Name = "tpMainSpecialBuff";
-            this.tpMainSpecialBuff.Size = new System.Drawing.Size(565, 626);
+            this.tpMainSpecialBuff.Size = new System.Drawing.Size(565, 623);
             this.tpMainSpecialBuff.TabIndex = 4;
             this.tpMainSpecialBuff.Text = "Special buff";
             this.tpMainSpecialBuff.UseVisualStyleBackColor = true;
