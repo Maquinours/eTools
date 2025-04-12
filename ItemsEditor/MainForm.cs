@@ -18,6 +18,12 @@ namespace ItemsEditor
         public MainForm()
         {
             InitializeComponent();
+
+            // We remove all pages except the general page
+            foreach(TabPage tab in this.tcMain.TabPages)
+                if(tab != tpMainGeneral)
+                    this.tcMain.TabPages.Remove(tab);
+
             this.SetSearchTextBoxPlaceHolder();
         }
 
