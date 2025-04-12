@@ -1,5 +1,6 @@
 #if __ITEMS
 
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
@@ -695,6 +696,22 @@ namespace Common
                     this.Prop.DwItemAtkOrder4 = value == -1 ? "=" : value.ToString();
                 }
             }
+        }
+
+        public int AbilityMinDurationDays
+        {
+            get => this.Prop.DwAbilityMin / 60 / 24;
+            set => this.Prop.DwAbilityMin = value * 60 * 24 + AbilityMinDurationHours * 60 + AbilityMinDurationMinutes;
+        }
+        public int AbilityMinDurationHours
+        {
+            get => (this.Prop.DwAbilityMin % (60 * 24)) / 60;
+            set => this.Prop.DwAbilityMin = AbilityMinDurationDays * 60 * 24 + value * 60 + AbilityMinDurationMinutes;
+        }
+        public int AbilityMinDurationMinutes
+        {
+            get => this.Prop.DwAbilityMin % 60;
+            set => this.Prop.DwAbilityMin = AbilityMinDurationDays * 60 * 24 + AbilityMinDurationHours * 60 + value;
         }
 
         public Item()

@@ -112,6 +112,15 @@
             this.nudBlinkwingPositionZ = new System.Windows.Forms.NumericUpDown();
             this.lblBlinkwingAngle = new System.Windows.Forms.Label();
             this.nudBlinkwingAngle = new System.Windows.Forms.NumericUpDown();
+            this.tpMainSpecialBuff = new System.Windows.Forms.TabPage();
+            this.gbSpecialBuffSettings = new System.Windows.Forms.GroupBox();
+            this.lbSpecialBuffDuration = new System.Windows.Forms.Label();
+            this.nudSpecialBuffDurationDays = new System.Windows.Forms.NumericUpDown();
+            this.nudSpecialBuffDurationHours = new System.Windows.Forms.NumericUpDown();
+            this.nudSpecialBuffDurationMinutes = new System.Windows.Forms.NumericUpDown();
+            this.lblSpecialBuffDurationDays = new System.Windows.Forms.Label();
+            this.lblSpecialBuffDurationHours = new System.Windows.Forms.Label();
+            this.lblSpecialBuffDurationMinutes = new System.Windows.Forms.Label();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -138,6 +147,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingAngle)).BeginInit();
+            this.tpMainSpecialBuff.SuspendLayout();
+            this.gbSpecialBuffSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationDays)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationHours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationMinutes)).BeginInit();
             this.SuspendLayout();
             // 
             // lbItems
@@ -270,6 +284,7 @@
             this.tcMain.Controls.Add(this.tpMainEquipment);
             this.tcMain.Controls.Add(this.tpMainConsumable);
             this.tcMain.Controls.Add(this.tpMainBlinkwing);
+            this.tcMain.Controls.Add(this.tpMainSpecialBuff);
             this.tcMain.Dock = System.Windows.Forms.DockStyle.Right;
             this.tcMain.Location = new System.Drawing.Point(379, 33);
             this.tcMain.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -1064,6 +1079,109 @@
             this.nudBlinkwingAngle.Size = new System.Drawing.Size(120, 26);
             this.nudBlinkwingAngle.TabIndex = 1;
             // 
+            // tpMainSpecialBuff
+            // 
+            this.tpMainSpecialBuff.Controls.Add(this.gbSpecialBuffSettings);
+            this.tpMainSpecialBuff.Location = new System.Drawing.Point(4, 29);
+            this.tpMainSpecialBuff.Name = "tpMainSpecialBuff";
+            this.tpMainSpecialBuff.Size = new System.Drawing.Size(565, 626);
+            this.tpMainSpecialBuff.TabIndex = 4;
+            this.tpMainSpecialBuff.Text = "Special buff";
+            this.tpMainSpecialBuff.UseVisualStyleBackColor = true;
+            // 
+            // gbSpecialBuffSettings
+            // 
+            this.gbSpecialBuffSettings.Controls.Add(this.nudSpecialBuffDurationMinutes);
+            this.gbSpecialBuffSettings.Controls.Add(this.nudSpecialBuffDurationHours);
+            this.gbSpecialBuffSettings.Controls.Add(this.nudSpecialBuffDurationDays);
+            this.gbSpecialBuffSettings.Controls.Add(this.lblSpecialBuffDurationHours);
+            this.gbSpecialBuffSettings.Controls.Add(this.lblSpecialBuffDurationMinutes);
+            this.gbSpecialBuffSettings.Controls.Add(this.lblSpecialBuffDurationDays);
+            this.gbSpecialBuffSettings.Controls.Add(this.lbSpecialBuffDuration);
+            this.gbSpecialBuffSettings.Location = new System.Drawing.Point(9, 9);
+            this.gbSpecialBuffSettings.Name = "gbSpecialBuffSettings";
+            this.gbSpecialBuffSettings.Size = new System.Drawing.Size(548, 100);
+            this.gbSpecialBuffSettings.TabIndex = 0;
+            this.gbSpecialBuffSettings.TabStop = false;
+            this.gbSpecialBuffSettings.Text = "Settings";
+            // 
+            // lbSpecialBuffDuration
+            // 
+            this.lbSpecialBuffDuration.AutoSize = true;
+            this.lbSpecialBuffDuration.Location = new System.Drawing.Point(6, 44);
+            this.lbSpecialBuffDuration.Name = "lbSpecialBuffDuration";
+            this.lbSpecialBuffDuration.Size = new System.Drawing.Size(78, 20);
+            this.lbSpecialBuffDuration.TabIndex = 0;
+            this.lbSpecialBuffDuration.Text = "Duration :";
+            // 
+            // nudSpecialBuffDurationDays
+            // 
+            this.nudSpecialBuffDurationDays.Location = new System.Drawing.Point(90, 42);
+            this.nudSpecialBuffDurationDays.Maximum = new decimal(new int[] {
+            1491308,
+            0,
+            0,
+            0});
+            this.nudSpecialBuffDurationDays.Name = "nudSpecialBuffDurationDays";
+            this.nudSpecialBuffDurationDays.Size = new System.Drawing.Size(84, 26);
+            this.nudSpecialBuffDurationDays.TabIndex = 1;
+            // 
+            // nudSpecialBuffDurationHours
+            // 
+            this.nudSpecialBuffDurationHours.Location = new System.Drawing.Point(228, 42);
+            this.nudSpecialBuffDurationHours.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.nudSpecialBuffDurationHours.Name = "nudSpecialBuffDurationHours";
+            this.nudSpecialBuffDurationHours.Size = new System.Drawing.Size(84, 26);
+            this.nudSpecialBuffDurationHours.TabIndex = 1;
+            // 
+            // nudSpecialBuffDurationMinutes
+            // 
+            this.nudSpecialBuffDurationMinutes.Location = new System.Drawing.Point(373, 42);
+            this.nudSpecialBuffDurationMinutes.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.nudSpecialBuffDurationMinutes.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.nudSpecialBuffDurationMinutes.Name = "nudSpecialBuffDurationMinutes";
+            this.nudSpecialBuffDurationMinutes.Size = new System.Drawing.Size(84, 26);
+            this.nudSpecialBuffDurationMinutes.TabIndex = 1;
+            // 
+            // lblSpecialBuffDurationDays
+            // 
+            this.lblSpecialBuffDurationDays.AutoSize = true;
+            this.lblSpecialBuffDurationDays.Location = new System.Drawing.Point(180, 44);
+            this.lblSpecialBuffDurationDays.Name = "lblSpecialBuffDurationDays";
+            this.lblSpecialBuffDurationDays.Size = new System.Drawing.Size(42, 20);
+            this.lblSpecialBuffDurationDays.TabIndex = 0;
+            this.lblSpecialBuffDurationDays.Text = "days";
+            // 
+            // lblSpecialBuffDurationHours
+            // 
+            this.lblSpecialBuffDurationHours.AutoSize = true;
+            this.lblSpecialBuffDurationHours.Location = new System.Drawing.Point(318, 44);
+            this.lblSpecialBuffDurationHours.Name = "lblSpecialBuffDurationHours";
+            this.lblSpecialBuffDurationHours.Size = new System.Drawing.Size(49, 20);
+            this.lblSpecialBuffDurationHours.TabIndex = 0;
+            this.lblSpecialBuffDurationHours.Text = "hours";
+            // 
+            // lblSpecialBuffDurationMinutes
+            // 
+            this.lblSpecialBuffDurationMinutes.AutoSize = true;
+            this.lblSpecialBuffDurationMinutes.Location = new System.Drawing.Point(463, 44);
+            this.lblSpecialBuffDurationMinutes.Name = "lblSpecialBuffDurationMinutes";
+            this.lblSpecialBuffDurationMinutes.Size = new System.Drawing.Size(65, 20);
+            this.lblSpecialBuffDurationMinutes.TabIndex = 0;
+            this.lblSpecialBuffDurationMinutes.Text = "minutes";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -1118,6 +1236,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionZ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingAngle)).EndInit();
+            this.tpMainSpecialBuff.ResumeLayout(false);
+            this.gbSpecialBuffSettings.ResumeLayout(false);
+            this.gbSpecialBuffSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationDays)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationHours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationMinutes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1208,6 +1332,15 @@
         private System.Windows.Forms.Label lblBlinkwingPositionY;
         private System.Windows.Forms.NumericUpDown nudBlinkwingAngle;
         private System.Windows.Forms.Label lblBlinkwingAngle;
+        private System.Windows.Forms.TabPage tpMainSpecialBuff;
+        private System.Windows.Forms.GroupBox gbSpecialBuffSettings;
+        private System.Windows.Forms.Label lbSpecialBuffDuration;
+        private System.Windows.Forms.NumericUpDown nudSpecialBuffDurationMinutes;
+        private System.Windows.Forms.NumericUpDown nudSpecialBuffDurationHours;
+        private System.Windows.Forms.NumericUpDown nudSpecialBuffDurationDays;
+        private System.Windows.Forms.Label lblSpecialBuffDurationHours;
+        private System.Windows.Forms.Label lblSpecialBuffDurationDays;
+        private System.Windows.Forms.Label lblSpecialBuffDurationMinutes;
     }
 }
 

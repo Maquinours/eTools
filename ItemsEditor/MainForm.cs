@@ -111,6 +111,9 @@ namespace ItemsEditor
             nudBlinkwingPositionY.DataBindings.Clear();
             nudBlinkwingPositionZ.DataBindings.Clear();
             nudBlinkwingAngle.DataBindings.Clear();
+            nudSpecialBuffDurationDays.DataBindings.Clear(); 
+            nudSpecialBuffDurationHours.DataBindings.Clear(); 
+            nudSpecialBuffDurationMinutes.DataBindings.Clear(); 
             lbEquipmentDstStats.DataSource = null;
             lbConsumableDst.DataSource = null;
 
@@ -144,6 +147,9 @@ namespace ItemsEditor
             nudBlinkwingPositionY.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBlinkwingPositionZ.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBlinkwingAngle.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudSpecialBuffDurationDays.DataBindings.Add(new Binding(nameof(DateTimePicker.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudSpecialBuffDurationHours.DataBindings.Add(new Binding(nameof(DateTimePicker.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudSpecialBuffDurationMinutes.DataBindings.Add(new Binding(nameof(DateTimePicker.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
             lbEquipmentDstStats.DisplayMember = nameof(Dest.Label);
             lbEquipmentDstStats.DataSource = currentItem.Dests;
             lbConsumableDst.DisplayMember = nameof(Dest.Label);
@@ -432,6 +438,9 @@ namespace ItemsEditor
                         break;
                     case "IK2_BLINKWING":
                         tabs.Add(tpMainBlinkwing);
+                        break;
+                    case "IK2_BUFF2":
+                        tabs.Add(tpMainSpecialBuff);
                         break;
                 }
             }
