@@ -19,7 +19,7 @@ namespace ItemsEditor
         {
             InitializeComponent();
 
-            // We remove all pages except the general page
+            // We remove all tab pages except the general page
             foreach(TabPage tab in this.tcMain.TabPages)
                 if(tab != tpMainGeneral)
                     this.tcMain.TabPages.Remove(tab);
