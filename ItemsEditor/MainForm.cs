@@ -50,6 +50,7 @@ namespace ItemsEditor
                 cbConsumableDstParam.DataSource = prj.GetDstIdentifiers();
                 cbEquipmentParts.DataSource = prj.GetPartsIdentifiers();
                 cbBlinkwingWorld.DataSource = prj.GetWorldIdentifiers();
+                cbBlinkwingSfx.DataSource = prj.GetSfxIdentifiers();
                 SetListBoxDataSource();
             }
             catch (Exception e)
@@ -111,6 +112,11 @@ namespace ItemsEditor
             nudBlinkwingPositionY.DataBindings.Clear();
             nudBlinkwingPositionZ.DataBindings.Clear();
             nudBlinkwingAngle.DataBindings.Clear();
+            nudBlinkwingCastingTimeMinutes.DataBindings.Clear();
+            nudBlinkwingCastingTimeSeconds.DataBindings.Clear();
+            nudBlinkwingCastingTimeMs.DataBindings.Clear();
+            cbBlinkwingSfx.DataBindings.Clear();
+            tbBlinkwingChaoticSpawnKey.DataBindings.Clear();
             nudSpecialBuffDurationDays.DataBindings.Clear(); 
             nudSpecialBuffDurationHours.DataBindings.Clear(); 
             nudSpecialBuffDurationMinutes.DataBindings.Clear(); 
@@ -142,11 +148,17 @@ namespace ItemsEditor
             nudBlinkwingPositionY.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingPositionY), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBlinkwingPositionZ.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingPositionZ), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBlinkwingAngle.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingAngle), false, DataSourceUpdateMode.OnPropertyChanged));
+            tbBlinkwingChaoticSpawnKey.DataBindings.Add(new Binding(nameof(TextBox.Text), currentItem.Prop, nameof(ItemProp.SzTextFileName), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingCastingTimeMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.SkillReadyMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingCastingTimeSeconds.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.SkillReadySeconds), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingCastingTimeMs.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.SkillReadyMilliseconds), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbBlinkwingSfx.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwSfxObj), false, DataSourceUpdateMode.OnPropertyChanged));
             cbBlinkwingWorld.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBlinkwingPositionX.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBlinkwingPositionY.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBlinkwingPositionZ.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBlinkwingAngle.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
+            tbBlinkwingChaoticSpawnKey.DataBindings.Add(new Binding(nameof(TextBox.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
             nudSpecialBuffDurationDays.DataBindings.Add(new Binding(nameof(DateTimePicker.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
             nudSpecialBuffDurationHours.DataBindings.Add(new Binding(nameof(DateTimePicker.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
             nudSpecialBuffDurationMinutes.DataBindings.Add(new Binding(nameof(DateTimePicker.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));

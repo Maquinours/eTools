@@ -621,6 +621,7 @@ namespace Common
                         this.Prop.DwItemAtkOrder2 = "=";
                         this.Prop.DwItemAtkOrder3 = "=";
                         this.Prop.DwItemAtkOrder4 = "=";
+                        this.Prop.SzTextFileName = "";
                     }
                     else
                         this.Prop.DwItemKind3 = "IK3_BLINKWING";
@@ -712,6 +713,24 @@ namespace Common
         {
             get => this.Prop.DwAbilityMin % 60;
             set => this.Prop.DwAbilityMin = AbilityMinDurationDays * 60 * 24 + AbilityMinDurationHours * 60 + value;
+        }
+
+        public int SkillReadyMinutes
+        {
+            get => this.Prop.DwSkillReadyType / (1000 * 60);
+            set => this.Prop.DwSkillReadyType = value * 60 * 1000 + SkillReadySeconds * 1000 + SkillReadyMilliseconds;
+        }
+
+        public int SkillReadySeconds
+        {
+            get => (this.Prop.DwSkillReadyType % (1000 * 60)) / 1000;
+            set => this.Prop.DwSkillReadyType = SkillReadyMinutes * 60 * 1000 + value * 1000 + SkillReadyMilliseconds;
+        }
+
+        public int SkillReadyMilliseconds
+        {
+            get => this.Prop.DwSkillReadyType % 1000;
+            set => this.Prop.DwSkillReadyType = SkillReadyMinutes * 60 * 1000 + SkillReadySeconds * 1000 + value;
         }
 
         public Item()

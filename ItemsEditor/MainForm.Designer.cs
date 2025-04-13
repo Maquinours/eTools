@@ -86,6 +86,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tpMainBlinkwing = new System.Windows.Forms.TabPage();
             this.gbBlinkwingSettings = new System.Windows.Forms.GroupBox();
+            this.nudBlinkwingPositionZ = new System.Windows.Forms.NumericUpDown();
+            this.lblBlinkwingPositionZ = new System.Windows.Forms.Label();
+            this.nudBlinkwingPositionY = new System.Windows.Forms.NumericUpDown();
+            this.lblBlinkwingPositionY = new System.Windows.Forms.Label();
+            this.nudBlinkwingAngle = new System.Windows.Forms.NumericUpDown();
+            this.lblBlinkwingAngle = new System.Windows.Forms.Label();
+            this.nudBlinkwingPositionX = new System.Windows.Forms.NumericUpDown();
             this.lblBlinkwingPositionX = new System.Windows.Forms.Label();
             this.cbBlinkwingWorld = new System.Windows.Forms.ComboBox();
             this.chckbBlinkwingNearestTown = new System.Windows.Forms.CheckBox();
@@ -93,6 +100,15 @@
             this.gbBlinkwingRequirements = new System.Windows.Forms.GroupBox();
             this.nudBlinkwingMinLevel = new System.Windows.Forms.NumericUpDown();
             this.lblBlinkwingMinLevel = new System.Windows.Forms.Label();
+            this.tpMainSpecialBuff = new System.Windows.Forms.TabPage();
+            this.gbSpecialBuffSettings = new System.Windows.Forms.GroupBox();
+            this.nudSpecialBuffDurationMinutes = new System.Windows.Forms.NumericUpDown();
+            this.nudSpecialBuffDurationHours = new System.Windows.Forms.NumericUpDown();
+            this.nudSpecialBuffDurationDays = new System.Windows.Forms.NumericUpDown();
+            this.lblSpecialBuffDurationHours = new System.Windows.Forms.Label();
+            this.lblSpecialBuffDurationMinutes = new System.Windows.Forms.Label();
+            this.lblSpecialBuffDurationDays = new System.Windows.Forms.Label();
+            this.lbSpecialBuffDuration = new System.Windows.Forms.Label();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.tsmiItems = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiItemsAdd = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,22 +121,18 @@
             this.pnlList = new System.Windows.Forms.Panel();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.pbFileSaveReload = new System.Windows.Forms.ProgressBar();
-            this.nudBlinkwingPositionX = new System.Windows.Forms.NumericUpDown();
-            this.lblBlinkwingPositionY = new System.Windows.Forms.Label();
-            this.nudBlinkwingPositionY = new System.Windows.Forms.NumericUpDown();
-            this.lblBlinkwingPositionZ = new System.Windows.Forms.Label();
-            this.nudBlinkwingPositionZ = new System.Windows.Forms.NumericUpDown();
-            this.lblBlinkwingAngle = new System.Windows.Forms.Label();
-            this.nudBlinkwingAngle = new System.Windows.Forms.NumericUpDown();
-            this.tpMainSpecialBuff = new System.Windows.Forms.TabPage();
-            this.gbSpecialBuffSettings = new System.Windows.Forms.GroupBox();
-            this.lbSpecialBuffDuration = new System.Windows.Forms.Label();
-            this.nudSpecialBuffDurationDays = new System.Windows.Forms.NumericUpDown();
-            this.nudSpecialBuffDurationHours = new System.Windows.Forms.NumericUpDown();
-            this.nudSpecialBuffDurationMinutes = new System.Windows.Forms.NumericUpDown();
-            this.lblSpecialBuffDurationDays = new System.Windows.Forms.Label();
-            this.lblSpecialBuffDurationHours = new System.Windows.Forms.Label();
-            this.lblSpecialBuffDurationMinutes = new System.Windows.Forms.Label();
+            this.lblBlinkwingChaoticSpawnKey = new System.Windows.Forms.Label();
+            this.tbBlinkwingChaoticSpawnKey = new System.Windows.Forms.TextBox();
+            this.gbBlinkwingMisc = new System.Windows.Forms.GroupBox();
+            this.lblBlinkwingCastingTime = new System.Windows.Forms.Label();
+            this.nudBlinkwingCastingTimeMinutes = new System.Windows.Forms.NumericUpDown();
+            this.nudBlinkwingCastingTimeSeconds = new System.Windows.Forms.NumericUpDown();
+            this.lblBlinkwingCastingTimeMinutes = new System.Windows.Forms.Label();
+            this.lblBlinkwingCastingTimeSeconds = new System.Windows.Forms.Label();
+            this.nudBlinkwingCastingTimeMs = new System.Windows.Forms.NumericUpDown();
+            this.lblBlinkwingCastingTimeMs = new System.Windows.Forms.Label();
+            this.lblBlinkwingSfx = new System.Windows.Forms.Label();
+            this.cbBlinkwingSfx = new System.Windows.Forms.ComboBox();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -139,19 +151,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tpMainBlinkwing.SuspendLayout();
             this.gbBlinkwingSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionY)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingAngle)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionX)).BeginInit();
             this.gbBlinkwingRequirements.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingMinLevel)).BeginInit();
-            this.msMain.SuspendLayout();
-            this.pnlList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionX)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionY)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionZ)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingAngle)).BeginInit();
             this.tpMainSpecialBuff.SuspendLayout();
             this.gbSpecialBuffSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationDays)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationHours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationMinutes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationHours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationDays)).BeginInit();
+            this.msMain.SuspendLayout();
+            this.pnlList.SuspendLayout();
+            this.gbBlinkwingMisc.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeMinutes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeSeconds)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeMs)).BeginInit();
             this.SuspendLayout();
             // 
             // lbItems
@@ -469,7 +485,7 @@
             this.tpMainEquipment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tpMainEquipment.Name = "tpMainEquipment";
             this.tpMainEquipment.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tpMainEquipment.Size = new System.Drawing.Size(565, 626);
+            this.tpMainEquipment.Size = new System.Drawing.Size(565, 623);
             this.tpMainEquipment.TabIndex = 1;
             this.tpMainEquipment.Text = "Equipment";
             this.tpMainEquipment.UseVisualStyleBackColor = true;
@@ -707,7 +723,7 @@
             this.tpMainConsumable.Location = new System.Drawing.Point(4, 29);
             this.tpMainConsumable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tpMainConsumable.Name = "tpMainConsumable";
-            this.tpMainConsumable.Size = new System.Drawing.Size(565, 626);
+            this.tpMainConsumable.Size = new System.Drawing.Size(565, 623);
             this.tpMainConsumable.TabIndex = 2;
             this.tpMainConsumable.Text = "Consumable";
             this.tpMainConsumable.UseVisualStyleBackColor = true;
@@ -787,17 +803,19 @@
             // 
             // tpMainBlinkwing
             // 
+            this.tpMainBlinkwing.Controls.Add(this.gbBlinkwingMisc);
             this.tpMainBlinkwing.Controls.Add(this.gbBlinkwingSettings);
             this.tpMainBlinkwing.Controls.Add(this.gbBlinkwingRequirements);
             this.tpMainBlinkwing.Location = new System.Drawing.Point(4, 29);
             this.tpMainBlinkwing.Name = "tpMainBlinkwing";
-            this.tpMainBlinkwing.Size = new System.Drawing.Size(565, 626);
+            this.tpMainBlinkwing.Size = new System.Drawing.Size(565, 623);
             this.tpMainBlinkwing.TabIndex = 3;
             this.tpMainBlinkwing.Text = "Blinkwing";
             this.tpMainBlinkwing.UseVisualStyleBackColor = true;
             // 
             // gbBlinkwingSettings
             // 
+            this.gbBlinkwingSettings.Controls.Add(this.tbBlinkwingChaoticSpawnKey);
             this.gbBlinkwingSettings.Controls.Add(this.nudBlinkwingPositionZ);
             this.gbBlinkwingSettings.Controls.Add(this.lblBlinkwingPositionZ);
             this.gbBlinkwingSettings.Controls.Add(this.nudBlinkwingPositionY);
@@ -808,13 +826,109 @@
             this.gbBlinkwingSettings.Controls.Add(this.lblBlinkwingPositionX);
             this.gbBlinkwingSettings.Controls.Add(this.cbBlinkwingWorld);
             this.gbBlinkwingSettings.Controls.Add(this.chckbBlinkwingNearestTown);
+            this.gbBlinkwingSettings.Controls.Add(this.lblBlinkwingChaoticSpawnKey);
             this.gbBlinkwingSettings.Controls.Add(this.lblBlinkwingWorld);
             this.gbBlinkwingSettings.Location = new System.Drawing.Point(10, 88);
             this.gbBlinkwingSettings.Name = "gbBlinkwingSettings";
-            this.gbBlinkwingSettings.Size = new System.Drawing.Size(547, 218);
+            this.gbBlinkwingSettings.Size = new System.Drawing.Size(547, 256);
             this.gbBlinkwingSettings.TabIndex = 1;
             this.gbBlinkwingSettings.TabStop = false;
             this.gbBlinkwingSettings.Text = "Settings";
+            // 
+            // nudBlinkwingPositionZ
+            // 
+            this.nudBlinkwingPositionZ.Location = new System.Drawing.Point(421, 119);
+            this.nudBlinkwingPositionZ.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.nudBlinkwingPositionZ.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
+            this.nudBlinkwingPositionZ.Name = "nudBlinkwingPositionZ";
+            this.nudBlinkwingPositionZ.Size = new System.Drawing.Size(120, 26);
+            this.nudBlinkwingPositionZ.TabIndex = 1;
+            // 
+            // lblBlinkwingPositionZ
+            // 
+            this.lblBlinkwingPositionZ.AutoSize = true;
+            this.lblBlinkwingPositionZ.Location = new System.Drawing.Point(387, 121);
+            this.lblBlinkwingPositionZ.Name = "lblBlinkwingPositionZ";
+            this.lblBlinkwingPositionZ.Size = new System.Drawing.Size(27, 20);
+            this.lblBlinkwingPositionZ.TabIndex = 2;
+            this.lblBlinkwingPositionZ.Text = "Z :";
+            // 
+            // nudBlinkwingPositionY
+            // 
+            this.nudBlinkwingPositionY.Location = new System.Drawing.Point(237, 119);
+            this.nudBlinkwingPositionY.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.nudBlinkwingPositionY.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
+            this.nudBlinkwingPositionY.Name = "nudBlinkwingPositionY";
+            this.nudBlinkwingPositionY.Size = new System.Drawing.Size(120, 26);
+            this.nudBlinkwingPositionY.TabIndex = 1;
+            // 
+            // lblBlinkwingPositionY
+            // 
+            this.lblBlinkwingPositionY.AutoSize = true;
+            this.lblBlinkwingPositionY.Location = new System.Drawing.Point(203, 121);
+            this.lblBlinkwingPositionY.Name = "lblBlinkwingPositionY";
+            this.lblBlinkwingPositionY.Size = new System.Drawing.Size(28, 20);
+            this.lblBlinkwingPositionY.TabIndex = 2;
+            this.lblBlinkwingPositionY.Text = "Y :";
+            // 
+            // nudBlinkwingAngle
+            // 
+            this.nudBlinkwingAngle.Location = new System.Drawing.Point(237, 162);
+            this.nudBlinkwingAngle.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.nudBlinkwingAngle.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
+            this.nudBlinkwingAngle.Name = "nudBlinkwingAngle";
+            this.nudBlinkwingAngle.Size = new System.Drawing.Size(120, 26);
+            this.nudBlinkwingAngle.TabIndex = 1;
+            // 
+            // lblBlinkwingAngle
+            // 
+            this.lblBlinkwingAngle.AutoSize = true;
+            this.lblBlinkwingAngle.Location = new System.Drawing.Point(173, 164);
+            this.lblBlinkwingAngle.Name = "lblBlinkwingAngle";
+            this.lblBlinkwingAngle.Size = new System.Drawing.Size(58, 20);
+            this.lblBlinkwingAngle.TabIndex = 2;
+            this.lblBlinkwingAngle.Text = "Angle :";
+            // 
+            // nudBlinkwingPositionX
+            // 
+            this.nudBlinkwingPositionX.Location = new System.Drawing.Point(40, 119);
+            this.nudBlinkwingPositionX.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.nudBlinkwingPositionX.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
+            this.nudBlinkwingPositionX.Name = "nudBlinkwingPositionX";
+            this.nudBlinkwingPositionX.Size = new System.Drawing.Size(120, 26);
+            this.nudBlinkwingPositionX.TabIndex = 1;
             // 
             // lblBlinkwingPositionX
             // 
@@ -880,6 +994,109 @@
             this.lblBlinkwingMinLevel.TabIndex = 0;
             this.lblBlinkwingMinLevel.Text = "Level :";
             // 
+            // tpMainSpecialBuff
+            // 
+            this.tpMainSpecialBuff.Controls.Add(this.gbSpecialBuffSettings);
+            this.tpMainSpecialBuff.Location = new System.Drawing.Point(4, 29);
+            this.tpMainSpecialBuff.Name = "tpMainSpecialBuff";
+            this.tpMainSpecialBuff.Size = new System.Drawing.Size(565, 623);
+            this.tpMainSpecialBuff.TabIndex = 4;
+            this.tpMainSpecialBuff.Text = "Special buff";
+            this.tpMainSpecialBuff.UseVisualStyleBackColor = true;
+            // 
+            // gbSpecialBuffSettings
+            // 
+            this.gbSpecialBuffSettings.Controls.Add(this.nudSpecialBuffDurationMinutes);
+            this.gbSpecialBuffSettings.Controls.Add(this.nudSpecialBuffDurationHours);
+            this.gbSpecialBuffSettings.Controls.Add(this.nudSpecialBuffDurationDays);
+            this.gbSpecialBuffSettings.Controls.Add(this.lblSpecialBuffDurationHours);
+            this.gbSpecialBuffSettings.Controls.Add(this.lblSpecialBuffDurationMinutes);
+            this.gbSpecialBuffSettings.Controls.Add(this.lblSpecialBuffDurationDays);
+            this.gbSpecialBuffSettings.Controls.Add(this.lbSpecialBuffDuration);
+            this.gbSpecialBuffSettings.Location = new System.Drawing.Point(9, 9);
+            this.gbSpecialBuffSettings.Name = "gbSpecialBuffSettings";
+            this.gbSpecialBuffSettings.Size = new System.Drawing.Size(548, 100);
+            this.gbSpecialBuffSettings.TabIndex = 0;
+            this.gbSpecialBuffSettings.TabStop = false;
+            this.gbSpecialBuffSettings.Text = "Settings";
+            // 
+            // nudSpecialBuffDurationMinutes
+            // 
+            this.nudSpecialBuffDurationMinutes.Location = new System.Drawing.Point(373, 42);
+            this.nudSpecialBuffDurationMinutes.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.nudSpecialBuffDurationMinutes.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.nudSpecialBuffDurationMinutes.Name = "nudSpecialBuffDurationMinutes";
+            this.nudSpecialBuffDurationMinutes.Size = new System.Drawing.Size(84, 26);
+            this.nudSpecialBuffDurationMinutes.TabIndex = 1;
+            // 
+            // nudSpecialBuffDurationHours
+            // 
+            this.nudSpecialBuffDurationHours.Location = new System.Drawing.Point(228, 42);
+            this.nudSpecialBuffDurationHours.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.nudSpecialBuffDurationHours.Name = "nudSpecialBuffDurationHours";
+            this.nudSpecialBuffDurationHours.Size = new System.Drawing.Size(84, 26);
+            this.nudSpecialBuffDurationHours.TabIndex = 1;
+            // 
+            // nudSpecialBuffDurationDays
+            // 
+            this.nudSpecialBuffDurationDays.Location = new System.Drawing.Point(90, 42);
+            this.nudSpecialBuffDurationDays.Maximum = new decimal(new int[] {
+            1491308,
+            0,
+            0,
+            0});
+            this.nudSpecialBuffDurationDays.Name = "nudSpecialBuffDurationDays";
+            this.nudSpecialBuffDurationDays.Size = new System.Drawing.Size(84, 26);
+            this.nudSpecialBuffDurationDays.TabIndex = 1;
+            // 
+            // lblSpecialBuffDurationHours
+            // 
+            this.lblSpecialBuffDurationHours.AutoSize = true;
+            this.lblSpecialBuffDurationHours.Location = new System.Drawing.Point(318, 44);
+            this.lblSpecialBuffDurationHours.Name = "lblSpecialBuffDurationHours";
+            this.lblSpecialBuffDurationHours.Size = new System.Drawing.Size(49, 20);
+            this.lblSpecialBuffDurationHours.TabIndex = 0;
+            this.lblSpecialBuffDurationHours.Text = "hours";
+            // 
+            // lblSpecialBuffDurationMinutes
+            // 
+            this.lblSpecialBuffDurationMinutes.AutoSize = true;
+            this.lblSpecialBuffDurationMinutes.Location = new System.Drawing.Point(463, 44);
+            this.lblSpecialBuffDurationMinutes.Name = "lblSpecialBuffDurationMinutes";
+            this.lblSpecialBuffDurationMinutes.Size = new System.Drawing.Size(65, 20);
+            this.lblSpecialBuffDurationMinutes.TabIndex = 0;
+            this.lblSpecialBuffDurationMinutes.Text = "minutes";
+            // 
+            // lblSpecialBuffDurationDays
+            // 
+            this.lblSpecialBuffDurationDays.AutoSize = true;
+            this.lblSpecialBuffDurationDays.Location = new System.Drawing.Point(180, 44);
+            this.lblSpecialBuffDurationDays.Name = "lblSpecialBuffDurationDays";
+            this.lblSpecialBuffDurationDays.Size = new System.Drawing.Size(42, 20);
+            this.lblSpecialBuffDurationDays.TabIndex = 0;
+            this.lblSpecialBuffDurationDays.Text = "days";
+            // 
+            // lbSpecialBuffDuration
+            // 
+            this.lbSpecialBuffDuration.AutoSize = true;
+            this.lbSpecialBuffDuration.Location = new System.Drawing.Point(6, 44);
+            this.lbSpecialBuffDuration.Name = "lbSpecialBuffDuration";
+            this.lbSpecialBuffDuration.Size = new System.Drawing.Size(78, 20);
+            this.lbSpecialBuffDuration.TabIndex = 0;
+            this.lbSpecialBuffDuration.Text = "Duration :";
+            // 
             // msMain
             // 
             this.msMain.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
@@ -901,7 +1118,7 @@
             this.tsmiItemsAdd,
             this.tsmiItemsSearch});
             this.tsmiItems.Name = "tsmiItems";
-            this.tsmiItems.Size = new System.Drawing.Size(72, 29);
+            this.tsmiItems.Size = new System.Drawing.Size(72, 30);
             this.tsmiItems.Text = "Items";
             // 
             // tsmiItemsAdd
@@ -924,7 +1141,7 @@
             this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFileReload});
             this.tsmiFile.Name = "tsmiFile";
-            this.tsmiFile.Size = new System.Drawing.Size(54, 29);
+            this.tsmiFile.Size = new System.Drawing.Size(54, 30);
             this.tsmiFile.Text = "File";
             // 
             // tsmiFileReload
@@ -940,7 +1157,7 @@
             this.tsmiView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiViewExpertEditor});
             this.tsmiView.Name = "tsmiView";
-            this.tsmiView.Size = new System.Drawing.Size(65, 29);
+            this.tsmiView.Size = new System.Drawing.Size(65, 30);
             this.tsmiView.Text = "View";
             // 
             // tsmiViewExpertEditor
@@ -954,7 +1171,7 @@
             // tsmiSettings
             // 
             this.tsmiSettings.Name = "tsmiSettings";
-            this.tsmiSettings.Size = new System.Drawing.Size(92, 29);
+            this.tsmiSettings.Size = new System.Drawing.Size(92, 30);
             this.tsmiSettings.Text = "Settings";
             this.tsmiSettings.Click += new System.EventHandler(this.tsmiSettings_Click);
             // 
@@ -984,203 +1201,144 @@
             this.pbFileSaveReload.Size = new System.Drawing.Size(952, 15);
             this.pbFileSaveReload.TabIndex = 2;
             // 
-            // nudBlinkwingPositionX
+            // lblBlinkwingChaoticSpawnKey
             // 
-            this.nudBlinkwingPositionX.Location = new System.Drawing.Point(40, 119);
-            this.nudBlinkwingPositionX.Maximum = new decimal(new int[] {
+            this.lblBlinkwingChaoticSpawnKey.AutoSize = true;
+            this.lblBlinkwingChaoticSpawnKey.Location = new System.Drawing.Point(114, 208);
+            this.lblBlinkwingChaoticSpawnKey.Name = "lblBlinkwingChaoticSpawnKey";
+            this.lblBlinkwingChaoticSpawnKey.Size = new System.Drawing.Size(149, 20);
+            this.lblBlinkwingChaoticSpawnKey.TabIndex = 0;
+            this.lblBlinkwingChaoticSpawnKey.Text = "Chaotic spawn key :";
+            // 
+            // tbBlinkwingChaoticSpawnKey
+            // 
+            this.tbBlinkwingChaoticSpawnKey.Location = new System.Drawing.Point(269, 205);
+            this.tbBlinkwingChaoticSpawnKey.Name = "tbBlinkwingChaoticSpawnKey";
+            this.tbBlinkwingChaoticSpawnKey.Size = new System.Drawing.Size(109, 26);
+            this.tbBlinkwingChaoticSpawnKey.TabIndex = 3;
+            // 
+            // gbBlinkwingMisc
+            // 
+            this.gbBlinkwingMisc.Controls.Add(this.lblBlinkwingCastingTimeMs);
+            this.gbBlinkwingMisc.Controls.Add(this.lblBlinkwingCastingTimeSeconds);
+            this.gbBlinkwingMisc.Controls.Add(this.lblBlinkwingCastingTimeMinutes);
+            this.gbBlinkwingMisc.Controls.Add(this.nudBlinkwingCastingTimeMs);
+            this.gbBlinkwingMisc.Controls.Add(this.lblBlinkwingCastingTime);
+            this.gbBlinkwingMisc.Controls.Add(this.nudBlinkwingCastingTimeSeconds);
+            this.gbBlinkwingMisc.Controls.Add(this.nudBlinkwingCastingTimeMinutes);
+            this.gbBlinkwingMisc.Controls.Add(this.cbBlinkwingSfx);
+            this.gbBlinkwingMisc.Controls.Add(this.lblBlinkwingSfx);
+            this.gbBlinkwingMisc.Location = new System.Drawing.Point(9, 350);
+            this.gbBlinkwingMisc.Name = "gbBlinkwingMisc";
+            this.gbBlinkwingMisc.Size = new System.Drawing.Size(548, 124);
+            this.gbBlinkwingMisc.TabIndex = 2;
+            this.gbBlinkwingMisc.TabStop = false;
+            this.gbBlinkwingMisc.Text = "Misc";
+            // 
+            // lblBlinkwingCastingTime
+            // 
+            this.lblBlinkwingCastingTime.AutoSize = true;
+            this.lblBlinkwingCastingTime.Location = new System.Drawing.Point(20, 37);
+            this.lblBlinkwingCastingTime.Name = "lblBlinkwingCastingTime";
+            this.lblBlinkwingCastingTime.Size = new System.Drawing.Size(105, 20);
+            this.lblBlinkwingCastingTime.TabIndex = 0;
+            this.lblBlinkwingCastingTime.Text = "Casting time :";
+            // 
+            // nudBlinkwingCastingTimeMinutes
+            // 
+            this.nudBlinkwingCastingTimeMinutes.Location = new System.Drawing.Point(131, 35);
+            this.nudBlinkwingCastingTimeMinutes.Maximum = new decimal(new int[] {
             2147483647,
             0,
             0,
             0});
-            this.nudBlinkwingPositionX.Minimum = new decimal(new int[] {
+            this.nudBlinkwingCastingTimeMinutes.Minimum = new decimal(new int[] {
             -2147483648,
             0,
             0,
             -2147483648});
-            this.nudBlinkwingPositionX.Name = "nudBlinkwingPositionX";
-            this.nudBlinkwingPositionX.Size = new System.Drawing.Size(120, 26);
-            this.nudBlinkwingPositionX.TabIndex = 1;
+            this.nudBlinkwingCastingTimeMinutes.Name = "nudBlinkwingCastingTimeMinutes";
+            this.nudBlinkwingCastingTimeMinutes.Size = new System.Drawing.Size(64, 26);
+            this.nudBlinkwingCastingTimeMinutes.TabIndex = 1;
             // 
-            // lblBlinkwingPositionY
+            // nudBlinkwingCastingTimeSeconds
             // 
-            this.lblBlinkwingPositionY.AutoSize = true;
-            this.lblBlinkwingPositionY.Location = new System.Drawing.Point(203, 121);
-            this.lblBlinkwingPositionY.Name = "lblBlinkwingPositionY";
-            this.lblBlinkwingPositionY.Size = new System.Drawing.Size(28, 20);
-            this.lblBlinkwingPositionY.TabIndex = 2;
-            this.lblBlinkwingPositionY.Text = "Y :";
-            // 
-            // nudBlinkwingPositionY
-            // 
-            this.nudBlinkwingPositionY.Location = new System.Drawing.Point(237, 119);
-            this.nudBlinkwingPositionY.Maximum = new decimal(new int[] {
+            this.nudBlinkwingCastingTimeSeconds.Location = new System.Drawing.Point(272, 35);
+            this.nudBlinkwingCastingTimeSeconds.Maximum = new decimal(new int[] {
             2147483647,
             0,
             0,
             0});
-            this.nudBlinkwingPositionY.Minimum = new decimal(new int[] {
+            this.nudBlinkwingCastingTimeSeconds.Minimum = new decimal(new int[] {
             -2147483648,
             0,
             0,
             -2147483648});
-            this.nudBlinkwingPositionY.Name = "nudBlinkwingPositionY";
-            this.nudBlinkwingPositionY.Size = new System.Drawing.Size(120, 26);
-            this.nudBlinkwingPositionY.TabIndex = 1;
+            this.nudBlinkwingCastingTimeSeconds.Name = "nudBlinkwingCastingTimeSeconds";
+            this.nudBlinkwingCastingTimeSeconds.Size = new System.Drawing.Size(64, 26);
+            this.nudBlinkwingCastingTimeSeconds.TabIndex = 1;
             // 
-            // lblBlinkwingPositionZ
+            // lblBlinkwingCastingTimeMinutes
             // 
-            this.lblBlinkwingPositionZ.AutoSize = true;
-            this.lblBlinkwingPositionZ.Location = new System.Drawing.Point(387, 121);
-            this.lblBlinkwingPositionZ.Name = "lblBlinkwingPositionZ";
-            this.lblBlinkwingPositionZ.Size = new System.Drawing.Size(27, 20);
-            this.lblBlinkwingPositionZ.TabIndex = 2;
-            this.lblBlinkwingPositionZ.Text = "Z :";
+            this.lblBlinkwingCastingTimeMinutes.AutoSize = true;
+            this.lblBlinkwingCastingTimeMinutes.Location = new System.Drawing.Point(201, 37);
+            this.lblBlinkwingCastingTimeMinutes.Name = "lblBlinkwingCastingTimeMinutes";
+            this.lblBlinkwingCastingTimeMinutes.Size = new System.Drawing.Size(65, 20);
+            this.lblBlinkwingCastingTimeMinutes.TabIndex = 0;
+            this.lblBlinkwingCastingTimeMinutes.Text = "minutes";
             // 
-            // nudBlinkwingPositionZ
+            // lblBlinkwingCastingTimeSeconds
             // 
-            this.nudBlinkwingPositionZ.Location = new System.Drawing.Point(421, 119);
-            this.nudBlinkwingPositionZ.Maximum = new decimal(new int[] {
+            this.lblBlinkwingCastingTimeSeconds.AutoSize = true;
+            this.lblBlinkwingCastingTimeSeconds.Location = new System.Drawing.Point(342, 37);
+            this.lblBlinkwingCastingTimeSeconds.Name = "lblBlinkwingCastingTimeSeconds";
+            this.lblBlinkwingCastingTimeSeconds.Size = new System.Drawing.Size(69, 20);
+            this.lblBlinkwingCastingTimeSeconds.TabIndex = 0;
+            this.lblBlinkwingCastingTimeSeconds.Text = "seconds";
+            // 
+            // nudBlinkwingCastingTimeMs
+            // 
+            this.nudBlinkwingCastingTimeMs.Location = new System.Drawing.Point(417, 35);
+            this.nudBlinkwingCastingTimeMs.Maximum = new decimal(new int[] {
             2147483647,
             0,
             0,
             0});
-            this.nudBlinkwingPositionZ.Minimum = new decimal(new int[] {
+            this.nudBlinkwingCastingTimeMs.Minimum = new decimal(new int[] {
             -2147483648,
             0,
             0,
             -2147483648});
-            this.nudBlinkwingPositionZ.Name = "nudBlinkwingPositionZ";
-            this.nudBlinkwingPositionZ.Size = new System.Drawing.Size(120, 26);
-            this.nudBlinkwingPositionZ.TabIndex = 1;
+            this.nudBlinkwingCastingTimeMs.Name = "nudBlinkwingCastingTimeMs";
+            this.nudBlinkwingCastingTimeMs.Size = new System.Drawing.Size(64, 26);
+            this.nudBlinkwingCastingTimeMs.TabIndex = 1;
             // 
-            // lblBlinkwingAngle
+            // lblBlinkwingCastingTimeMs
             // 
-            this.lblBlinkwingAngle.AutoSize = true;
-            this.lblBlinkwingAngle.Location = new System.Drawing.Point(173, 164);
-            this.lblBlinkwingAngle.Name = "lblBlinkwingAngle";
-            this.lblBlinkwingAngle.Size = new System.Drawing.Size(58, 20);
-            this.lblBlinkwingAngle.TabIndex = 2;
-            this.lblBlinkwingAngle.Text = "Angle :";
+            this.lblBlinkwingCastingTimeMs.AutoSize = true;
+            this.lblBlinkwingCastingTimeMs.Location = new System.Drawing.Point(487, 37);
+            this.lblBlinkwingCastingTimeMs.Name = "lblBlinkwingCastingTimeMs";
+            this.lblBlinkwingCastingTimeMs.Size = new System.Drawing.Size(30, 20);
+            this.lblBlinkwingCastingTimeMs.TabIndex = 0;
+            this.lblBlinkwingCastingTimeMs.Text = "ms";
             // 
-            // nudBlinkwingAngle
+            // lblBlinkwingSfx
             // 
-            this.nudBlinkwingAngle.Location = new System.Drawing.Point(237, 162);
-            this.nudBlinkwingAngle.Maximum = new decimal(new int[] {
-            2147483647,
-            0,
-            0,
-            0});
-            this.nudBlinkwingAngle.Minimum = new decimal(new int[] {
-            -2147483648,
-            0,
-            0,
-            -2147483648});
-            this.nudBlinkwingAngle.Name = "nudBlinkwingAngle";
-            this.nudBlinkwingAngle.Size = new System.Drawing.Size(120, 26);
-            this.nudBlinkwingAngle.TabIndex = 1;
+            this.lblBlinkwingSfx.AutoSize = true;
+            this.lblBlinkwingSfx.Location = new System.Drawing.Point(133, 82);
+            this.lblBlinkwingSfx.Name = "lblBlinkwingSfx";
+            this.lblBlinkwingSfx.Size = new System.Drawing.Size(40, 20);
+            this.lblBlinkwingSfx.TabIndex = 0;
+            this.lblBlinkwingSfx.Text = "Sfx :";
             // 
-            // tpMainSpecialBuff
+            // cbBlinkwingSfx
             // 
-            this.tpMainSpecialBuff.Controls.Add(this.gbSpecialBuffSettings);
-            this.tpMainSpecialBuff.Location = new System.Drawing.Point(4, 29);
-            this.tpMainSpecialBuff.Name = "tpMainSpecialBuff";
-            this.tpMainSpecialBuff.Size = new System.Drawing.Size(565, 623);
-            this.tpMainSpecialBuff.TabIndex = 4;
-            this.tpMainSpecialBuff.Text = "Special buff";
-            this.tpMainSpecialBuff.UseVisualStyleBackColor = true;
-            // 
-            // gbSpecialBuffSettings
-            // 
-            this.gbSpecialBuffSettings.Controls.Add(this.nudSpecialBuffDurationMinutes);
-            this.gbSpecialBuffSettings.Controls.Add(this.nudSpecialBuffDurationHours);
-            this.gbSpecialBuffSettings.Controls.Add(this.nudSpecialBuffDurationDays);
-            this.gbSpecialBuffSettings.Controls.Add(this.lblSpecialBuffDurationHours);
-            this.gbSpecialBuffSettings.Controls.Add(this.lblSpecialBuffDurationMinutes);
-            this.gbSpecialBuffSettings.Controls.Add(this.lblSpecialBuffDurationDays);
-            this.gbSpecialBuffSettings.Controls.Add(this.lbSpecialBuffDuration);
-            this.gbSpecialBuffSettings.Location = new System.Drawing.Point(9, 9);
-            this.gbSpecialBuffSettings.Name = "gbSpecialBuffSettings";
-            this.gbSpecialBuffSettings.Size = new System.Drawing.Size(548, 100);
-            this.gbSpecialBuffSettings.TabIndex = 0;
-            this.gbSpecialBuffSettings.TabStop = false;
-            this.gbSpecialBuffSettings.Text = "Settings";
-            // 
-            // lbSpecialBuffDuration
-            // 
-            this.lbSpecialBuffDuration.AutoSize = true;
-            this.lbSpecialBuffDuration.Location = new System.Drawing.Point(6, 44);
-            this.lbSpecialBuffDuration.Name = "lbSpecialBuffDuration";
-            this.lbSpecialBuffDuration.Size = new System.Drawing.Size(78, 20);
-            this.lbSpecialBuffDuration.TabIndex = 0;
-            this.lbSpecialBuffDuration.Text = "Duration :";
-            // 
-            // nudSpecialBuffDurationDays
-            // 
-            this.nudSpecialBuffDurationDays.Location = new System.Drawing.Point(90, 42);
-            this.nudSpecialBuffDurationDays.Maximum = new decimal(new int[] {
-            1491308,
-            0,
-            0,
-            0});
-            this.nudSpecialBuffDurationDays.Name = "nudSpecialBuffDurationDays";
-            this.nudSpecialBuffDurationDays.Size = new System.Drawing.Size(84, 26);
-            this.nudSpecialBuffDurationDays.TabIndex = 1;
-            // 
-            // nudSpecialBuffDurationHours
-            // 
-            this.nudSpecialBuffDurationHours.Location = new System.Drawing.Point(228, 42);
-            this.nudSpecialBuffDurationHours.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.nudSpecialBuffDurationHours.Name = "nudSpecialBuffDurationHours";
-            this.nudSpecialBuffDurationHours.Size = new System.Drawing.Size(84, 26);
-            this.nudSpecialBuffDurationHours.TabIndex = 1;
-            // 
-            // nudSpecialBuffDurationMinutes
-            // 
-            this.nudSpecialBuffDurationMinutes.Location = new System.Drawing.Point(373, 42);
-            this.nudSpecialBuffDurationMinutes.Maximum = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.nudSpecialBuffDurationMinutes.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.nudSpecialBuffDurationMinutes.Name = "nudSpecialBuffDurationMinutes";
-            this.nudSpecialBuffDurationMinutes.Size = new System.Drawing.Size(84, 26);
-            this.nudSpecialBuffDurationMinutes.TabIndex = 1;
-            // 
-            // lblSpecialBuffDurationDays
-            // 
-            this.lblSpecialBuffDurationDays.AutoSize = true;
-            this.lblSpecialBuffDurationDays.Location = new System.Drawing.Point(180, 44);
-            this.lblSpecialBuffDurationDays.Name = "lblSpecialBuffDurationDays";
-            this.lblSpecialBuffDurationDays.Size = new System.Drawing.Size(42, 20);
-            this.lblSpecialBuffDurationDays.TabIndex = 0;
-            this.lblSpecialBuffDurationDays.Text = "days";
-            // 
-            // lblSpecialBuffDurationHours
-            // 
-            this.lblSpecialBuffDurationHours.AutoSize = true;
-            this.lblSpecialBuffDurationHours.Location = new System.Drawing.Point(318, 44);
-            this.lblSpecialBuffDurationHours.Name = "lblSpecialBuffDurationHours";
-            this.lblSpecialBuffDurationHours.Size = new System.Drawing.Size(49, 20);
-            this.lblSpecialBuffDurationHours.TabIndex = 0;
-            this.lblSpecialBuffDurationHours.Text = "hours";
-            // 
-            // lblSpecialBuffDurationMinutes
-            // 
-            this.lblSpecialBuffDurationMinutes.AutoSize = true;
-            this.lblSpecialBuffDurationMinutes.Location = new System.Drawing.Point(463, 44);
-            this.lblSpecialBuffDurationMinutes.Name = "lblSpecialBuffDurationMinutes";
-            this.lblSpecialBuffDurationMinutes.Size = new System.Drawing.Size(65, 20);
-            this.lblSpecialBuffDurationMinutes.TabIndex = 0;
-            this.lblSpecialBuffDurationMinutes.Text = "minutes";
+            this.cbBlinkwingSfx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBlinkwingSfx.FormattingEnabled = true;
+            this.cbBlinkwingSfx.Location = new System.Drawing.Point(179, 79);
+            this.cbBlinkwingSfx.Name = "cbBlinkwingSfx";
+            this.cbBlinkwingSfx.Size = new System.Drawing.Size(236, 28);
+            this.cbBlinkwingSfx.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -1225,23 +1383,28 @@
             this.tpMainBlinkwing.ResumeLayout(false);
             this.gbBlinkwingSettings.ResumeLayout(false);
             this.gbBlinkwingSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionY)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingAngle)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionX)).EndInit();
             this.gbBlinkwingRequirements.ResumeLayout(false);
             this.gbBlinkwingRequirements.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingMinLevel)).EndInit();
+            this.tpMainSpecialBuff.ResumeLayout(false);
+            this.gbSpecialBuffSettings.ResumeLayout(false);
+            this.gbSpecialBuffSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationMinutes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationHours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationDays)).EndInit();
             this.msMain.ResumeLayout(false);
             this.msMain.PerformLayout();
             this.pnlList.ResumeLayout(false);
             this.pnlList.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionX)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionY)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionZ)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingAngle)).EndInit();
-            this.tpMainSpecialBuff.ResumeLayout(false);
-            this.gbSpecialBuffSettings.ResumeLayout(false);
-            this.gbSpecialBuffSettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationDays)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationHours)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationMinutes)).EndInit();
+            this.gbBlinkwingMisc.ResumeLayout(false);
+            this.gbBlinkwingMisc.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeMinutes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeSeconds)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeMs)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1341,6 +1504,18 @@
         private System.Windows.Forms.Label lblSpecialBuffDurationHours;
         private System.Windows.Forms.Label lblSpecialBuffDurationDays;
         private System.Windows.Forms.Label lblSpecialBuffDurationMinutes;
+        private System.Windows.Forms.TextBox tbBlinkwingChaoticSpawnKey;
+        private System.Windows.Forms.Label lblBlinkwingChaoticSpawnKey;
+        private System.Windows.Forms.GroupBox gbBlinkwingMisc;
+        private System.Windows.Forms.Label lblBlinkwingCastingTimeMinutes;
+        private System.Windows.Forms.Label lblBlinkwingCastingTime;
+        private System.Windows.Forms.NumericUpDown nudBlinkwingCastingTimeSeconds;
+        private System.Windows.Forms.NumericUpDown nudBlinkwingCastingTimeMinutes;
+        private System.Windows.Forms.Label lblBlinkwingCastingTimeMs;
+        private System.Windows.Forms.Label lblBlinkwingCastingTimeSeconds;
+        private System.Windows.Forms.NumericUpDown nudBlinkwingCastingTimeMs;
+        private System.Windows.Forms.ComboBox cbBlinkwingSfx;
+        private System.Windows.Forms.Label lblBlinkwingSfx;
     }
 }
 
