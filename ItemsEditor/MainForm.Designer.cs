@@ -172,6 +172,19 @@
             this.pnlList = new System.Windows.Forms.Panel();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.pbFileSaveReload = new System.Windows.Forms.ProgressBar();
+            this.tpMainGuildHouseFurniture = new System.Windows.Forms.TabPage();
+            this.gbGuildHouseFurnitureSettings = new System.Windows.Forms.GroupBox();
+            this.cbGuildHouseFurnitureControl = new System.Windows.Forms.ComboBox();
+            this.nudGuildHouseFurnitureDurationMinutes = new System.Windows.Forms.NumericUpDown();
+            this.nudGuildHouseFurnitureDurationHours = new System.Windows.Forms.NumericUpDown();
+            this.nudGuildHouseFurnitureDurationDays = new System.Windows.Forms.NumericUpDown();
+            this.lblGuildHouseFurnitureDurationHours = new System.Windows.Forms.Label();
+            this.lblGuildHouseFurnitureDurationMinutes = new System.Windows.Forms.Label();
+            this.lblGuildHouseFurnitureDurationDays = new System.Windows.Forms.Label();
+            this.lblGuildHouseFurnitureControl = new System.Windows.Forms.Label();
+            this.lblGuildHouseFurnitureDuration = new System.Windows.Forms.Label();
+            this.lblGuildHouseFurnitureRank = new System.Windows.Forms.Label();
+            this.nudGuildHouseFurnitureRank = new System.Windows.Forms.NumericUpDown();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -226,6 +239,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadDurationDays)).BeginInit();
             this.msMain.SuspendLayout();
             this.pnlList.SuspendLayout();
+            this.tpMainGuildHouseFurniture.SuspendLayout();
+            this.gbGuildHouseFurnitureSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseFurnitureDurationMinutes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseFurnitureDurationHours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseFurnitureDurationDays)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseFurnitureRank)).BeginInit();
             this.SuspendLayout();
             // 
             // lbItems
@@ -301,7 +320,7 @@
             // lblGeneralId
             // 
             this.lblGeneralId.AutoSize = true;
-            this.lblGeneralId.Location = new System.Drawing.Point(87, 28);
+            this.lblGeneralId.Location = new System.Drawing.Point(87, 31);
             this.lblGeneralId.Name = "lblGeneralId";
             this.lblGeneralId.Size = new System.Drawing.Size(24, 13);
             this.lblGeneralId.TabIndex = 7;
@@ -348,6 +367,7 @@
             this.tcMain.Controls.Add(this.tpMainSpecialBuff);
             this.tcMain.Controls.Add(this.tpMainFurniture);
             this.tcMain.Controls.Add(this.tpMainPapering);
+            this.tcMain.Controls.Add(this.tpMainGuildHouseFurniture);
             this.tcMain.Controls.Add(this.tpMainPet);
             this.tcMain.Controls.Add(this.tpMainBuffBead);
             this.tcMain.Dock = System.Windows.Forms.DockStyle.Right;
@@ -1857,6 +1877,164 @@
             this.pbFileSaveReload.Size = new System.Drawing.Size(635, 10);
             this.pbFileSaveReload.TabIndex = 2;
             // 
+            // tpMainGuildHouseFurniture
+            // 
+            this.tpMainGuildHouseFurniture.Controls.Add(this.gbGuildHouseFurnitureSettings);
+            this.tpMainGuildHouseFurniture.Location = new System.Drawing.Point(4, 22);
+            this.tpMainGuildHouseFurniture.Name = "tpMainGuildHouseFurniture";
+            this.tpMainGuildHouseFurniture.Size = new System.Drawing.Size(374, 400);
+            this.tpMainGuildHouseFurniture.TabIndex = 9;
+            this.tpMainGuildHouseFurniture.Text = "Guild house furniture";
+            this.tpMainGuildHouseFurniture.UseVisualStyleBackColor = true;
+            // 
+            // gbGuildHouseFurnitureSettings
+            // 
+            this.gbGuildHouseFurnitureSettings.Controls.Add(this.cbGuildHouseFurnitureControl);
+            this.gbGuildHouseFurnitureSettings.Controls.Add(this.nudGuildHouseFurnitureDurationMinutes);
+            this.gbGuildHouseFurnitureSettings.Controls.Add(this.nudGuildHouseFurnitureDurationHours);
+            this.gbGuildHouseFurnitureSettings.Controls.Add(this.nudGuildHouseFurnitureRank);
+            this.gbGuildHouseFurnitureSettings.Controls.Add(this.nudGuildHouseFurnitureDurationDays);
+            this.gbGuildHouseFurnitureSettings.Controls.Add(this.lblGuildHouseFurnitureDurationHours);
+            this.gbGuildHouseFurnitureSettings.Controls.Add(this.lblGuildHouseFurnitureDurationMinutes);
+            this.gbGuildHouseFurnitureSettings.Controls.Add(this.lblGuildHouseFurnitureDurationDays);
+            this.gbGuildHouseFurnitureSettings.Controls.Add(this.lblGuildHouseFurnitureRank);
+            this.gbGuildHouseFurnitureSettings.Controls.Add(this.lblGuildHouseFurnitureControl);
+            this.gbGuildHouseFurnitureSettings.Controls.Add(this.lblGuildHouseFurnitureDuration);
+            this.gbGuildHouseFurnitureSettings.Location = new System.Drawing.Point(9, 9);
+            this.gbGuildHouseFurnitureSettings.Margin = new System.Windows.Forms.Padding(2);
+            this.gbGuildHouseFurnitureSettings.Name = "gbGuildHouseFurnitureSettings";
+            this.gbGuildHouseFurnitureSettings.Padding = new System.Windows.Forms.Padding(2);
+            this.gbGuildHouseFurnitureSettings.Size = new System.Drawing.Size(358, 132);
+            this.gbGuildHouseFurnitureSettings.TabIndex = 2;
+            this.gbGuildHouseFurnitureSettings.TabStop = false;
+            this.gbGuildHouseFurnitureSettings.Text = "Settings";
+            // 
+            // cbGuildHouseFurnitureControl
+            // 
+            this.cbGuildHouseFurnitureControl.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbGuildHouseFurnitureControl.FormattingEnabled = true;
+            this.cbGuildHouseFurnitureControl.Location = new System.Drawing.Point(117, 67);
+            this.cbGuildHouseFurnitureControl.Name = "cbGuildHouseFurnitureControl";
+            this.cbGuildHouseFurnitureControl.Size = new System.Drawing.Size(180, 21);
+            this.cbGuildHouseFurnitureControl.TabIndex = 2;
+            // 
+            // nudGuildHouseFurnitureDurationMinutes
+            // 
+            this.nudGuildHouseFurnitureDurationMinutes.Location = new System.Drawing.Point(249, 27);
+            this.nudGuildHouseFurnitureDurationMinutes.Margin = new System.Windows.Forms.Padding(2);
+            this.nudGuildHouseFurnitureDurationMinutes.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.nudGuildHouseFurnitureDurationMinutes.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.nudGuildHouseFurnitureDurationMinutes.Name = "nudGuildHouseFurnitureDurationMinutes";
+            this.nudGuildHouseFurnitureDurationMinutes.Size = new System.Drawing.Size(56, 20);
+            this.nudGuildHouseFurnitureDurationMinutes.TabIndex = 1;
+            // 
+            // nudGuildHouseFurnitureDurationHours
+            // 
+            this.nudGuildHouseFurnitureDurationHours.Location = new System.Drawing.Point(152, 27);
+            this.nudGuildHouseFurnitureDurationHours.Margin = new System.Windows.Forms.Padding(2);
+            this.nudGuildHouseFurnitureDurationHours.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.nudGuildHouseFurnitureDurationHours.Name = "nudGuildHouseFurnitureDurationHours";
+            this.nudGuildHouseFurnitureDurationHours.Size = new System.Drawing.Size(56, 20);
+            this.nudGuildHouseFurnitureDurationHours.TabIndex = 1;
+            // 
+            // nudGuildHouseFurnitureDurationDays
+            // 
+            this.nudGuildHouseFurnitureDurationDays.Location = new System.Drawing.Point(60, 27);
+            this.nudGuildHouseFurnitureDurationDays.Margin = new System.Windows.Forms.Padding(2);
+            this.nudGuildHouseFurnitureDurationDays.Maximum = new decimal(new int[] {
+            1491308,
+            0,
+            0,
+            0});
+            this.nudGuildHouseFurnitureDurationDays.Name = "nudGuildHouseFurnitureDurationDays";
+            this.nudGuildHouseFurnitureDurationDays.Size = new System.Drawing.Size(56, 20);
+            this.nudGuildHouseFurnitureDurationDays.TabIndex = 1;
+            // 
+            // lblGuildHouseFurnitureDurationHours
+            // 
+            this.lblGuildHouseFurnitureDurationHours.AutoSize = true;
+            this.lblGuildHouseFurnitureDurationHours.Location = new System.Drawing.Point(212, 29);
+            this.lblGuildHouseFurnitureDurationHours.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblGuildHouseFurnitureDurationHours.Name = "lblGuildHouseFurnitureDurationHours";
+            this.lblGuildHouseFurnitureDurationHours.Size = new System.Drawing.Size(33, 13);
+            this.lblGuildHouseFurnitureDurationHours.TabIndex = 0;
+            this.lblGuildHouseFurnitureDurationHours.Text = "hours";
+            // 
+            // lblGuildHouseFurnitureDurationMinutes
+            // 
+            this.lblGuildHouseFurnitureDurationMinutes.AutoSize = true;
+            this.lblGuildHouseFurnitureDurationMinutes.Location = new System.Drawing.Point(309, 29);
+            this.lblGuildHouseFurnitureDurationMinutes.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblGuildHouseFurnitureDurationMinutes.Name = "lblGuildHouseFurnitureDurationMinutes";
+            this.lblGuildHouseFurnitureDurationMinutes.Size = new System.Drawing.Size(43, 13);
+            this.lblGuildHouseFurnitureDurationMinutes.TabIndex = 0;
+            this.lblGuildHouseFurnitureDurationMinutes.Text = "minutes";
+            // 
+            // lblGuildHouseFurnitureDurationDays
+            // 
+            this.lblGuildHouseFurnitureDurationDays.AutoSize = true;
+            this.lblGuildHouseFurnitureDurationDays.Location = new System.Drawing.Point(120, 29);
+            this.lblGuildHouseFurnitureDurationDays.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblGuildHouseFurnitureDurationDays.Name = "lblGuildHouseFurnitureDurationDays";
+            this.lblGuildHouseFurnitureDurationDays.Size = new System.Drawing.Size(29, 13);
+            this.lblGuildHouseFurnitureDurationDays.TabIndex = 0;
+            this.lblGuildHouseFurnitureDurationDays.Text = "days";
+            // 
+            // lblGuildHouseFurnitureControl
+            // 
+            this.lblGuildHouseFurnitureControl.AutoSize = true;
+            this.lblGuildHouseFurnitureControl.Location = new System.Drawing.Point(66, 70);
+            this.lblGuildHouseFurnitureControl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblGuildHouseFurnitureControl.Name = "lblGuildHouseFurnitureControl";
+            this.lblGuildHouseFurnitureControl.Size = new System.Drawing.Size(46, 13);
+            this.lblGuildHouseFurnitureControl.TabIndex = 0;
+            this.lblGuildHouseFurnitureControl.Text = "Control :";
+            // 
+            // lblGuildHouseFurnitureDuration
+            // 
+            this.lblGuildHouseFurnitureDuration.AutoSize = true;
+            this.lblGuildHouseFurnitureDuration.Location = new System.Drawing.Point(4, 29);
+            this.lblGuildHouseFurnitureDuration.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblGuildHouseFurnitureDuration.Name = "lblGuildHouseFurnitureDuration";
+            this.lblGuildHouseFurnitureDuration.Size = new System.Drawing.Size(53, 13);
+            this.lblGuildHouseFurnitureDuration.TabIndex = 0;
+            this.lblGuildHouseFurnitureDuration.Text = "Duration :";
+            // 
+            // lblGuildHouseFurnitureRank
+            // 
+            this.lblGuildHouseFurnitureRank.AutoSize = true;
+            this.lblGuildHouseFurnitureRank.Location = new System.Drawing.Point(109, 103);
+            this.lblGuildHouseFurnitureRank.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblGuildHouseFurnitureRank.Name = "lblGuildHouseFurnitureRank";
+            this.lblGuildHouseFurnitureRank.Size = new System.Drawing.Size(39, 13);
+            this.lblGuildHouseFurnitureRank.TabIndex = 0;
+            this.lblGuildHouseFurnitureRank.Text = "Rank :";
+            // 
+            // nudGuildHouseFurnitureRank
+            // 
+            this.nudGuildHouseFurnitureRank.Location = new System.Drawing.Point(152, 101);
+            this.nudGuildHouseFurnitureRank.Margin = new System.Windows.Forms.Padding(2);
+            this.nudGuildHouseFurnitureRank.Maximum = new decimal(new int[] {
+            1491308,
+            0,
+            0,
+            0});
+            this.nudGuildHouseFurnitureRank.Name = "nudGuildHouseFurnitureRank";
+            this.nudGuildHouseFurnitureRank.Size = new System.Drawing.Size(56, 20);
+            this.nudGuildHouseFurnitureRank.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1944,6 +2122,13 @@
             this.msMain.PerformLayout();
             this.pnlList.ResumeLayout(false);
             this.pnlList.PerformLayout();
+            this.tpMainGuildHouseFurniture.ResumeLayout(false);
+            this.gbGuildHouseFurnitureSettings.ResumeLayout(false);
+            this.gbGuildHouseFurnitureSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseFurnitureDurationMinutes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseFurnitureDurationHours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseFurnitureDurationDays)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseFurnitureRank)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2094,6 +2279,19 @@
         private System.Windows.Forms.Label lblBuffBeadGrade;
         private System.Windows.Forms.Label lblBuffBeadDuration;
         private System.Windows.Forms.NumericUpDown nudBuffBeadGrade;
+        private System.Windows.Forms.TabPage tpMainGuildHouseFurniture;
+        private System.Windows.Forms.GroupBox gbGuildHouseFurnitureSettings;
+        private System.Windows.Forms.ComboBox cbGuildHouseFurnitureControl;
+        private System.Windows.Forms.NumericUpDown nudGuildHouseFurnitureDurationMinutes;
+        private System.Windows.Forms.NumericUpDown nudGuildHouseFurnitureDurationHours;
+        private System.Windows.Forms.NumericUpDown nudGuildHouseFurnitureDurationDays;
+        private System.Windows.Forms.Label lblGuildHouseFurnitureDurationHours;
+        private System.Windows.Forms.Label lblGuildHouseFurnitureDurationMinutes;
+        private System.Windows.Forms.Label lblGuildHouseFurnitureDurationDays;
+        private System.Windows.Forms.Label lblGuildHouseFurnitureControl;
+        private System.Windows.Forms.Label lblGuildHouseFurnitureDuration;
+        private System.Windows.Forms.NumericUpDown nudGuildHouseFurnitureRank;
+        private System.Windows.Forms.Label lblGuildHouseFurnitureRank;
     }
 }
 

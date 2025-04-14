@@ -52,6 +52,7 @@ namespace ItemsEditor
                 cbBlinkwingWorld.DataSource = prj.GetWorldIdentifiers();
                 cbBlinkwingSfx.DataSource = prj.GetSfxIdentifiers();
                 cbFurnitureControl.DataSource = prj.GetControlIdentifiers();
+                cbGuildHouseFurnitureControl.DataSource = prj.GetControlIdentifiers();
                 cbPetMoverIdentifier.DataSource = prj.GetPetMoverIdentifiers();
                 SetListBoxDataSource();
             }
@@ -133,6 +134,12 @@ namespace ItemsEditor
             nudPaperingDurationMinutes.DataBindings.Clear();
             tbPaperingTexture.DataBindings.Clear();
             picboxPaperingTexture.DataBindings.Clear();
+            nudGuildHouseFurnitureDurationDays.DataBindings.Clear();
+            nudGuildHouseFurnitureDurationHours.DataBindings.Clear();
+            nudGuildHouseFurnitureDurationMinutes.DataBindings.Clear();
+            nudGuildHouseFurnitureRank.DataBindings.Clear();
+            cbGuildHouseFurnitureControl.DataBindings.Clear();
+            cbGuildHouseFurnitureControl.SelectedItem = null;
             cbPetMoverIdentifier.DataBindings.Clear();
             cbPetMoverIdentifier.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
             nudBuffBeadDurationDays.DataBindings.Clear();
@@ -189,6 +196,11 @@ namespace ItemsEditor
             nudPaperingDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
             tbPaperingTexture.DataBindings.Add(new Binding(nameof(TextBox.Text), currentItem.Prop, nameof(ItemProp.SzTextFileName), false, DataSourceUpdateMode.OnPropertyChanged));
             picboxPaperingTexture.DataBindings.Add(new Binding(nameof(PictureBox.Image), currentItem, nameof(Item.PaperingTexture), true, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHouseFurnitureDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHouseFurnitureDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHouseFurnitureDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbGuildHouseFurnitureControl.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwLinkKind), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHouseFurnitureRank.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMax), false, DataSourceUpdateMode.OnPropertyChanged));
             cbPetMoverIdentifier.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwLinkKind), true, DataSourceUpdateMode.OnPropertyChanged));
             nudBuffBeadDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBuffBeadDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
@@ -198,19 +210,19 @@ namespace ItemsEditor
             lbEquipmentDstStats.DataSource = currentItem.Dests;
             lbConsumableDst.DisplayMember = nameof(Dest.Label);
             lbConsumableDst.DataSource = currentItem.Dests;
-            //Item[] items = Project.GetInstance().Items.Where(x => x.Prop.DwItemKind3 == "IK3_VIS").ToArray();
+            Item[] items = Project.GetInstance().Items.Where(x => x.Prop.DwItemKind2 == "IK2_GUILDHOUSE_NPC").ToArray();
             RefreshTabsState();
 
-                // TODO: reimplement something like this (rework params)
-                //for (int i = 0; i < currentItem.Prop.DwDestParam.Length; i++)
-                //{
-                //    if (currentItem.Prop.DwDestParam[i] != "=")
-                //        lbDstParams.Items.Add($"Stat {i} ({currentItem.Prop.DwDestParam[i]} + {currentItem.Prop.NAdjParamVal[i]})");
-                //    else
-                //        lbDstParams.Items.Add($"Stat {i}");
-                //}
+            // TODO: reimplement something like this (rework params)
+            //for (int i = 0; i < currentItem.Prop.DwDestParam.Length; i++)
+            //{
+            //    if (currentItem.Prop.DwDestParam[i] != "=")
+            //        lbDstParams.Items.Add($"Stat {i} ({currentItem.Prop.DwDestParam[i]} + {currentItem.Prop.NAdjParamVal[i]})");
+            //    else
+            //        lbDstParams.Items.Add($"Stat {i}");
+            //}
 
-                string iconPath = $"{Settings.GetInstance().IconsFolderPath}{currentItem.Prop.SzIcon}";
+            string iconPath = $"{Settings.GetInstance().IconsFolderPath}{currentItem.Prop.SzIcon}";
             if (!File.Exists(iconPath))
             {
                 pbMiscIcon.Image = pbMiscIcon.ErrorImage;
@@ -460,6 +472,9 @@ namespace ItemsEditor
                         break;
                     case "IK2_PAPERING":
                         tabs.Add(tpMainPapering);
+                        break;
+                    case "IK2_GUILDHOUSE_FURNITURE":
+                        tabs.Add(tpMainGuildHouseFurniture);
                         break;
                     case "IK2_REFRESHER":
                     case "IK2_POTION":
