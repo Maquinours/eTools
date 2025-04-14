@@ -45,12 +45,15 @@
             this.tbIconsFolder = new System.Windows.Forms.TextBox();
             this.lblIconsFolder = new System.Windows.Forms.Label();
             this.btnSelectIconsFolder = new System.Windows.Forms.Button();
+            this.tbTexturesFolder = new System.Windows.Forms.TextBox();
+            this.lblTexturesFolder = new System.Windows.Forms.Label();
+            this.btnSelectTexturesFolder = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudGameVersion)).BeginInit();
             this.SuspendLayout();
             // 
             // nudGameVersion
             // 
-            this.nudGameVersion.Location = new System.Drawing.Point(115, 120);
+            this.nudGameVersion.Location = new System.Drawing.Point(115, 146);
             this.nudGameVersion.Maximum = new decimal(new int[] {
             22,
             0,
@@ -74,7 +77,7 @@
             // 
             this.lblGameVersion.AutoSize = true;
             this.lblGameVersion.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblGameVersion.Location = new System.Drawing.Point(61, 123);
+            this.lblGameVersion.Location = new System.Drawing.Point(61, 148);
             this.lblGameVersion.Name = "lblGameVersion";
             this.lblGameVersion.Size = new System.Drawing.Size(48, 13);
             this.lblGameVersion.TabIndex = 24;
@@ -116,18 +119,19 @@
             // btnApply
             // 
             this.btnApply.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnApply.Location = new System.Drawing.Point(7, 163);
+            this.btnApply.Location = new System.Drawing.Point(12, 187);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
             this.btnApply.TabIndex = 26;
             this.btnApply.Text = "Apply";
             this.btnApply.UseVisualStyleBackColor = true;
+            this.btnApply.Click += new System.EventHandler(this.BtnApply_Click);
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(220, 163);
+            this.btnCancel.Location = new System.Drawing.Point(225, 187);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 27;
@@ -213,21 +217,52 @@
             this.btnSelectIconsFolder.UseVisualStyleBackColor = true;
             this.btnSelectIconsFolder.Click += new System.EventHandler(this.btnSelectIconsFolder_Click);
             // 
+            // tbTexturesFolder
+            // 
+            this.tbTexturesFolder.Location = new System.Drawing.Point(115, 120);
+            this.tbTexturesFolder.Name = "tbTexturesFolder";
+            this.tbTexturesFolder.Size = new System.Drawing.Size(167, 20);
+            this.tbTexturesFolder.TabIndex = 22;
+            // 
+            // lblTexturesFolder
+            // 
+            this.lblTexturesFolder.AutoSize = true;
+            this.lblTexturesFolder.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblTexturesFolder.Location = new System.Drawing.Point(31, 123);
+            this.lblTexturesFolder.Name = "lblTexturesFolder";
+            this.lblTexturesFolder.Size = new System.Drawing.Size(78, 13);
+            this.lblTexturesFolder.TabIndex = 21;
+            this.lblTexturesFolder.Text = "Texture folder :";
+            // 
+            // btnSelectTexturesFolder
+            // 
+            this.btnSelectTexturesFolder.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnSelectTexturesFolder.Location = new System.Drawing.Point(279, 120);
+            this.btnSelectTexturesFolder.Name = "btnSelectTexturesFolder";
+            this.btnSelectTexturesFolder.Size = new System.Drawing.Size(26, 20);
+            this.btnSelectTexturesFolder.TabIndex = 23;
+            this.btnSelectTexturesFolder.Text = "...";
+            this.btnSelectTexturesFolder.UseVisualStyleBackColor = true;
+            this.btnSelectTexturesFolder.Click += new System.EventHandler(this.btnSelectIconsFolder_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(312, 203);
+            this.ClientSize = new System.Drawing.Size(312, 222);
             this.Controls.Add(this.nudGameVersion);
             this.Controls.Add(this.lblGameVersion);
+            this.Controls.Add(this.btnSelectTexturesFolder);
             this.Controls.Add(this.btnSelectIconsFolder);
             this.Controls.Add(this.btnSelectStringFile);
             this.Controls.Add(this.btnSelectPropFile);
             this.Controls.Add(this.btnSelectFolder);
             this.Controls.Add(this.btnApply);
+            this.Controls.Add(this.lblTexturesFolder);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.lblIconsFolder);
             this.Controls.Add(this.lblStringFile);
+            this.Controls.Add(this.tbTexturesFolder);
             this.Controls.Add(this.lblPropFile);
             this.Controls.Add(this.tbIconsFolder);
             this.Controls.Add(this.tbStringFileName);
@@ -261,5 +296,8 @@
         private System.Windows.Forms.TextBox tbIconsFolder;
         private System.Windows.Forms.Label lblIconsFolder;
         private System.Windows.Forms.Button btnSelectIconsFolder;
+        private System.Windows.Forms.TextBox tbTexturesFolder;
+        private System.Windows.Forms.Label lblTexturesFolder;
+        private System.Windows.Forms.Button btnSelectTexturesFolder;
     }
 }

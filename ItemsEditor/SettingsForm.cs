@@ -29,6 +29,7 @@ namespace ItemsEditor
             tbPropFileName.Text = Path.GetFileName(settings.PropFileName);
             tbStringFileName.Text = Path.GetFileName(settings.StringsFilePath);
             tbIconsFolder.Text = settings.IconsFolderPath;
+            tbTexturesFolder.Text = settings.TexturesFolderPath;
             nudGameVersion.Value = settings.ResourceVersion;
         }
 
@@ -78,9 +79,10 @@ namespace ItemsEditor
             string propFileName = settings.ResourcePath + tbPropFileName.Text;
             string stringsFilePath = settings.ResourcePath + tbStringFileName.Text;
             string iconsFolderPath = settings.ResourcePath + tbIconsFolder.Text;
+            string texturesFolderPath = tbTexturesFolder.Text;
             int resourceVersion = Decimal.ToInt32(nudGameVersion.Value);
 
-            if (settings.ResourcePath == resourcePath && settings.PropFileName == propFileName && settings.StringsFilePath == stringsFilePath && settings.IconsFolderPath == iconsFolderPath && settings.ResourceVersion == resourceVersion)
+            if (settings.ResourcePath == resourcePath && settings.PropFileName == propFileName && settings.StringsFilePath == stringsFilePath && settings.IconsFolderPath == iconsFolderPath && settings.TexturesFolderPath == texturesFolderPath && settings.ResourceVersion == resourceVersion)
             {
                 ContainsChanges = false;
             }
@@ -91,6 +93,7 @@ namespace ItemsEditor
                 settings.PropFileName = propFileName;
                 settings.StringsFilePath = stringsFilePath;
                 settings.IconsFolderPath = iconsFolderPath;
+                settings.TexturesFolderPath = texturesFolderPath;
                 settings.ResourceVersion = resourceVersion;
                 settings.SaveGeneral();
                 settings.SaveSpecs();

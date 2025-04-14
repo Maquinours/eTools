@@ -10,7 +10,7 @@ using Scan;
 
 namespace Common
 {
-    public class Settings
+    public class Settings // TODO: Make it observable to observe it on Item images getters (icons & textures)
     {
         private static Settings _instance;
 
@@ -40,6 +40,7 @@ namespace Common
         public string PropFileName { get; set; }
 #if __ITEMS
         public string IconsFolderPath { get; set; }
+        public string TexturesFolderPath { get; set; }
 #endif // __ITEMS
 #if __MOVERS
         public Dictionary<MoverTypes, MoverType> Types { get; set; }
@@ -185,6 +186,9 @@ namespace Common
                     case "ICONSPATH":
                         IconsFolderPath = scanner.GetToken();
                         break;
+                    case "TEXTURESPATH":
+                        TexturesFolderPath = scanner.GetToken();
+                        break;
 #endif // __ITEMS
 #if __MOVERS
                     case "TYPES":
@@ -251,6 +255,7 @@ namespace Common
                 writer.WriteLine($"PROPFILE\t\"{Path.GetFileName(PropFileName)}\"");
 #if __ITEMS
                 writer.WriteLine($"ICONSPATH\t\"{IconsFolderPath}\"");
+                writer.WriteLine($"TEXTURESPATH\t\"{TexturesFolderPath}\"");
 #endif // __ITEMS
                 writer.WriteLine($"STRINGS\t\"{Path.GetFileName(StringsFilePath)}\"");
                 writer.WriteLine("DEFINES");
@@ -324,6 +329,7 @@ namespace Common
                 ResourcePath + "defineWorld.h"
             };
             IconsFolderPath = ResourcePath + "Item\\";
+            TexturesFolderPath = ResourcePath + "Model\\Texture\\";
 #endif // __ITEMS
         }
     }

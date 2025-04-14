@@ -51,6 +51,7 @@ namespace ItemsEditor
                 cbEquipmentParts.DataSource = prj.GetPartsIdentifiers();
                 cbBlinkwingWorld.DataSource = prj.GetWorldIdentifiers();
                 cbBlinkwingSfx.DataSource = prj.GetSfxIdentifiers();
+                cbFurnitureControl.DataSource = prj.GetControlIdentifiers();
                 SetListBoxDataSource();
             }
             catch (Exception e)
@@ -108,6 +109,7 @@ namespace ItemsEditor
             tbEquipmentLevel.DataBindings.Clear();
             chckbBlinkwingNearestTown.DataBindings.Clear();
             cbBlinkwingWorld.DataBindings.Clear();
+            cbBlinkwingWorld.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
             nudBlinkwingPositionX.DataBindings.Clear();
             nudBlinkwingPositionY.DataBindings.Clear();
             nudBlinkwingPositionZ.DataBindings.Clear();
@@ -119,7 +121,17 @@ namespace ItemsEditor
             tbBlinkwingChaoticSpawnKey.DataBindings.Clear();
             nudSpecialBuffDurationDays.DataBindings.Clear(); 
             nudSpecialBuffDurationHours.DataBindings.Clear(); 
-            nudSpecialBuffDurationMinutes.DataBindings.Clear(); 
+            nudSpecialBuffDurationMinutes.DataBindings.Clear();
+            nudFurnitureDurationDays.DataBindings.Clear();
+            nudFurnitureDurationHours.DataBindings.Clear();
+            nudFurnitureDurationMinutes.DataBindings.Clear();
+            cbFurnitureControl.DataBindings.Clear();
+            cbFurnitureControl.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+            nudPaperingDurationDays.DataBindings.Clear();
+            nudPaperingDurationHours.DataBindings.Clear();
+            nudPaperingDurationMinutes.DataBindings.Clear();
+            tbPaperingTexture.DataBindings.Clear();
+            picboxFurnitureTexture.DataBindings.Clear();
             lbEquipmentDstStats.DataSource = null;
             lbConsumableDst.DataSource = null;
 
@@ -142,7 +154,6 @@ namespace ItemsEditor
             tbEquipmentLevel.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwLimitLevel1", false, DataSourceUpdateMode.OnPropertyChanged));
             cbEquipmentParts.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwParts", false, DataSourceUpdateMode.OnPropertyChanged));
             chckbBlinkwingNearestTown.DataBindings.Add(new Binding("Checked", currentItem, nameof(Item.IsTownBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
-            cbBlinkwingWorld.SelectedItem = null; // Reset the selected item to reset what's shown in case of a "=" value.
             cbBlinkwingWorld.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwWeaponType), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBlinkwingPositionX.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingPositionX), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBlinkwingPositionY.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingPositionY), false, DataSourceUpdateMode.OnPropertyChanged));
@@ -162,10 +173,20 @@ namespace ItemsEditor
             nudSpecialBuffDurationDays.DataBindings.Add(new Binding(nameof(DateTimePicker.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
             nudSpecialBuffDurationHours.DataBindings.Add(new Binding(nameof(DateTimePicker.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
             nudSpecialBuffDurationMinutes.DataBindings.Add(new Binding(nameof(DateTimePicker.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudFurnitureDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudFurnitureDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudFurnitureDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbFurnitureControl.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwLinkKind), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudPaperingDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudPaperingDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudPaperingDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
+            tbPaperingTexture.DataBindings.Add(new Binding(nameof(TextBox.Text), currentItem.Prop, nameof(ItemProp.SzTextFileName), false, DataSourceUpdateMode.OnPropertyChanged));
+            picboxFurnitureTexture.DataBindings.Add(new Binding(nameof(PictureBox.Image), currentItem, nameof(Item.PaperingTexture), true, DataSourceUpdateMode.OnPropertyChanged));
             lbEquipmentDstStats.DisplayMember = nameof(Dest.Label);
             lbEquipmentDstStats.DataSource = currentItem.Dests;
             lbConsumableDst.DisplayMember = nameof(Dest.Label);
             lbConsumableDst.DataSource = currentItem.Dests;
+            Item[] items = Project.GetInstance().Items.Where(x => x.Prop.DwItemKind2 == "IK2_PAPERING").ToArray();
             RefreshTabsState();
 
                 // TODO: reimplement something like this (rework params)
@@ -443,6 +464,12 @@ namespace ItemsEditor
             {
                 switch(currentItem.Prop.DwItemKind2)
                 {
+                    case "IK2_FURNITURE":
+                        tabs.Add(tpMainFurniture);
+                        break;
+                    case "IK2_PAPERING":
+                        tabs.Add(tpMainPapering);
+                        break;
                     case "IK2_REFRESHER":
                     case "IK2_POTION":
                     case "IK2_FOOD":

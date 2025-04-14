@@ -1,9 +1,12 @@
 #if __ITEMS
 
+using DDSImageParser;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 
@@ -545,6 +548,9 @@ namespace Common
                 case nameof(ItemProp.DwItemAtkOrder4):
                     this.NotifyPropertyChanged(nameof(this.BlinkwingAngle));
                     break;
+                case nameof(ItemProp.SzTextFileName):
+                    this.NotifyPropertyChanged(nameof(this.PaperingTexture));
+                    break;
             }
         }
 
@@ -731,6 +737,22 @@ namespace Common
         {
             get => this.Prop.DwSkillReadyType % 1000;
             set => this.Prop.DwSkillReadyType = SkillReadyMinutes * 60 * 1000 + SkillReadySeconds * 1000 + value;
+        }
+
+        public Image PaperingTexture
+        {
+            get 
+            {
+                string filePath = $"{Settings.GetInstance().TexturesFolderPath}{this.Prop.SzTextFileName}";
+                if (!File.Exists(filePath))
+                {
+                    using (var ms = new MemoryStream(ItemsEditor.Resources.Images.NotFoundImage))
+                    {
+                        return Image.FromStream(ms);
+                    }
+                }
+                return new DDSImage(File.OpenRead(filePath)).BitmapImage;
+            }
         }
 
         public Item()

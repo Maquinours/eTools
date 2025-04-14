@@ -85,7 +85,18 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tpMainBlinkwing = new System.Windows.Forms.TabPage();
+            this.gbBlinkwingMisc = new System.Windows.Forms.GroupBox();
+            this.lblBlinkwingCastingTimeMs = new System.Windows.Forms.Label();
+            this.lblBlinkwingCastingTimeSeconds = new System.Windows.Forms.Label();
+            this.lblBlinkwingCastingTimeMinutes = new System.Windows.Forms.Label();
+            this.nudBlinkwingCastingTimeMs = new System.Windows.Forms.NumericUpDown();
+            this.lblBlinkwingCastingTime = new System.Windows.Forms.Label();
+            this.nudBlinkwingCastingTimeSeconds = new System.Windows.Forms.NumericUpDown();
+            this.nudBlinkwingCastingTimeMinutes = new System.Windows.Forms.NumericUpDown();
+            this.cbBlinkwingSfx = new System.Windows.Forms.ComboBox();
+            this.lblBlinkwingSfx = new System.Windows.Forms.Label();
             this.gbBlinkwingSettings = new System.Windows.Forms.GroupBox();
+            this.tbBlinkwingChaoticSpawnKey = new System.Windows.Forms.TextBox();
             this.nudBlinkwingPositionZ = new System.Windows.Forms.NumericUpDown();
             this.lblBlinkwingPositionZ = new System.Windows.Forms.Label();
             this.nudBlinkwingPositionY = new System.Windows.Forms.NumericUpDown();
@@ -96,6 +107,7 @@
             this.lblBlinkwingPositionX = new System.Windows.Forms.Label();
             this.cbBlinkwingWorld = new System.Windows.Forms.ComboBox();
             this.chckbBlinkwingNearestTown = new System.Windows.Forms.CheckBox();
+            this.lblBlinkwingChaoticSpawnKey = new System.Windows.Forms.Label();
             this.lblBlinkwingWorld = new System.Windows.Forms.Label();
             this.gbBlinkwingRequirements = new System.Windows.Forms.GroupBox();
             this.nudBlinkwingMinLevel = new System.Windows.Forms.NumericUpDown();
@@ -121,18 +133,30 @@
             this.pnlList = new System.Windows.Forms.Panel();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.pbFileSaveReload = new System.Windows.Forms.ProgressBar();
-            this.lblBlinkwingChaoticSpawnKey = new System.Windows.Forms.Label();
-            this.tbBlinkwingChaoticSpawnKey = new System.Windows.Forms.TextBox();
-            this.gbBlinkwingMisc = new System.Windows.Forms.GroupBox();
-            this.lblBlinkwingCastingTime = new System.Windows.Forms.Label();
-            this.nudBlinkwingCastingTimeMinutes = new System.Windows.Forms.NumericUpDown();
-            this.nudBlinkwingCastingTimeSeconds = new System.Windows.Forms.NumericUpDown();
-            this.lblBlinkwingCastingTimeMinutes = new System.Windows.Forms.Label();
-            this.lblBlinkwingCastingTimeSeconds = new System.Windows.Forms.Label();
-            this.nudBlinkwingCastingTimeMs = new System.Windows.Forms.NumericUpDown();
-            this.lblBlinkwingCastingTimeMs = new System.Windows.Forms.Label();
-            this.lblBlinkwingSfx = new System.Windows.Forms.Label();
-            this.cbBlinkwingSfx = new System.Windows.Forms.ComboBox();
+            this.tpMainFurniture = new System.Windows.Forms.TabPage();
+            this.gbFurnitureSettings = new System.Windows.Forms.GroupBox();
+            this.nudFurnitureDurationMinutes = new System.Windows.Forms.NumericUpDown();
+            this.nudFurnitureDurationHours = new System.Windows.Forms.NumericUpDown();
+            this.nudFurnitureDurationDays = new System.Windows.Forms.NumericUpDown();
+            this.lblFurnitureDurationHours = new System.Windows.Forms.Label();
+            this.lblFurnitureDurationMinutes = new System.Windows.Forms.Label();
+            this.lblFurnitureDurationDays = new System.Windows.Forms.Label();
+            this.lblFurnitureDuration = new System.Windows.Forms.Label();
+            this.lblFurnitureControl = new System.Windows.Forms.Label();
+            this.cbFurnitureControl = new System.Windows.Forms.ComboBox();
+            this.tpMainPapering = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.nudPaperingDurationMinutes = new System.Windows.Forms.NumericUpDown();
+            this.nudPaperingDurationHours = new System.Windows.Forms.NumericUpDown();
+            this.nudPaperingDurationDays = new System.Windows.Forms.NumericUpDown();
+            this.lblPaperingDurationHours = new System.Windows.Forms.Label();
+            this.lblPaperingDurationMinutes = new System.Windows.Forms.Label();
+            this.lblPaperingDurationDays = new System.Windows.Forms.Label();
+            this.lblPaperingTexture = new System.Windows.Forms.Label();
+            this.lblPaperingDuration = new System.Windows.Forms.Label();
+            this.tbPaperingTexture = new System.Windows.Forms.TextBox();
+            this.btnFurnitureSelectTexture = new System.Windows.Forms.Button();
+            this.picboxFurnitureTexture = new System.Windows.Forms.PictureBox();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -150,6 +174,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudConsumableDstValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.tpMainBlinkwing.SuspendLayout();
+            this.gbBlinkwingMisc.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeMs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeSeconds)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeMinutes)).BeginInit();
             this.gbBlinkwingSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionY)).BeginInit();
@@ -164,20 +192,25 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudSpecialBuffDurationDays)).BeginInit();
             this.msMain.SuspendLayout();
             this.pnlList.SuspendLayout();
-            this.gbBlinkwingMisc.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeMinutes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeSeconds)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeMs)).BeginInit();
+            this.tpMainFurniture.SuspendLayout();
+            this.gbFurnitureSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFurnitureDurationMinutes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFurnitureDurationHours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFurnitureDurationDays)).BeginInit();
+            this.tpMainPapering.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPaperingDurationMinutes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPaperingDurationHours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPaperingDurationDays)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picboxFurnitureTexture)).BeginInit();
             this.SuspendLayout();
             // 
             // lbItems
             // 
             this.lbItems.FormattingEnabled = true;
-            this.lbItems.ItemHeight = 20;
-            this.lbItems.Location = new System.Drawing.Point(0, 29);
-            this.lbItems.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lbItems.Location = new System.Drawing.Point(0, 19);
             this.lbItems.Name = "lbItems";
-            this.lbItems.Size = new System.Drawing.Size(378, 624);
+            this.lbItems.Size = new System.Drawing.Size(253, 407);
             this.lbItems.TabIndex = 0;
             this.lbItems.SelectedIndexChanged += new System.EventHandler(this.lb_items_SelectedIndexChanged);
             this.lbItems.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Lb_items_KeyDown);
@@ -185,30 +218,27 @@
             // lblTypeItemKind1
             // 
             this.lblTypeItemKind1.AutoSize = true;
-            this.lblTypeItemKind1.Location = new System.Drawing.Point(123, 52);
-            this.lblTypeItemKind1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTypeItemKind1.Location = new System.Drawing.Point(82, 34);
             this.lblTypeItemKind1.Name = "lblTypeItemKind1";
-            this.lblTypeItemKind1.Size = new System.Drawing.Size(41, 20);
+            this.lblTypeItemKind1.Size = new System.Drawing.Size(29, 13);
             this.lblTypeItemKind1.TabIndex = 1;
             this.lblTypeItemKind1.Text = "IK1 :";
             // 
             // lblTypeItemKind2
             // 
             this.lblTypeItemKind2.AutoSize = true;
-            this.lblTypeItemKind2.Location = new System.Drawing.Point(123, 95);
-            this.lblTypeItemKind2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTypeItemKind2.Location = new System.Drawing.Point(82, 62);
             this.lblTypeItemKind2.Name = "lblTypeItemKind2";
-            this.lblTypeItemKind2.Size = new System.Drawing.Size(41, 20);
+            this.lblTypeItemKind2.Size = new System.Drawing.Size(29, 13);
             this.lblTypeItemKind2.TabIndex = 2;
             this.lblTypeItemKind2.Text = "IK2 :";
             // 
             // lblTypeItemKind3
             // 
             this.lblTypeItemKind3.AutoSize = true;
-            this.lblTypeItemKind3.Location = new System.Drawing.Point(123, 134);
-            this.lblTypeItemKind3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTypeItemKind3.Location = new System.Drawing.Point(82, 87);
             this.lblTypeItemKind3.Name = "lblTypeItemKind3";
-            this.lblTypeItemKind3.Size = new System.Drawing.Size(41, 20);
+            this.lblTypeItemKind3.Size = new System.Drawing.Size(29, 13);
             this.lblTypeItemKind3.TabIndex = 3;
             this.lblTypeItemKind3.Text = "IK3 :";
             // 
@@ -216,10 +246,9 @@
             // 
             this.cbTypeItemKind1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTypeItemKind1.FormattingEnabled = true;
-            this.cbTypeItemKind1.Location = new System.Drawing.Point(176, 48);
-            this.cbTypeItemKind1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbTypeItemKind1.Location = new System.Drawing.Point(117, 31);
             this.cbTypeItemKind1.Name = "cbTypeItemKind1";
-            this.cbTypeItemKind1.Size = new System.Drawing.Size(259, 28);
+            this.cbTypeItemKind1.Size = new System.Drawing.Size(174, 21);
             this.cbTypeItemKind1.TabIndex = 4;
             this.cbTypeItemKind1.DataSourceChanged += new System.EventHandler(this.CbTypeItemKind1_DataSourceChanged);
             this.cbTypeItemKind1.SelectedValueChanged += new System.EventHandler(this.CbTypeItemKind1_SelectedValueChanged);
@@ -228,10 +257,9 @@
             // 
             this.cbTypeItemKind2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTypeItemKind2.FormattingEnabled = true;
-            this.cbTypeItemKind2.Location = new System.Drawing.Point(176, 91);
-            this.cbTypeItemKind2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbTypeItemKind2.Location = new System.Drawing.Point(117, 59);
             this.cbTypeItemKind2.Name = "cbTypeItemKind2";
-            this.cbTypeItemKind2.Size = new System.Drawing.Size(259, 28);
+            this.cbTypeItemKind2.Size = new System.Drawing.Size(174, 21);
             this.cbTypeItemKind2.TabIndex = 5;
             this.cbTypeItemKind2.DataSourceChanged += new System.EventHandler(this.CbTypeItemKind2_DataSourceChanged);
             this.cbTypeItemKind2.SelectedValueChanged += new System.EventHandler(this.CbTypeItemKind2_SelectedValueChanged);
@@ -240,10 +268,9 @@
             // 
             this.cbTypeItemKind3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTypeItemKind3.FormattingEnabled = true;
-            this.cbTypeItemKind3.Location = new System.Drawing.Point(176, 131);
-            this.cbTypeItemKind3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbTypeItemKind3.Location = new System.Drawing.Point(117, 85);
             this.cbTypeItemKind3.Name = "cbTypeItemKind3";
-            this.cbTypeItemKind3.Size = new System.Drawing.Size(259, 28);
+            this.cbTypeItemKind3.Size = new System.Drawing.Size(174, 21);
             this.cbTypeItemKind3.TabIndex = 6;
             this.cbTypeItemKind3.DataSourceChanged += new System.EventHandler(this.CbTypeItemKind3_DataSourceChanged);
             this.cbTypeItemKind3.SelectedValueChanged += new System.EventHandler(this.CbTypeItemKind3_SelectedValueChanged);
@@ -251,46 +278,41 @@
             // lblGeneralId
             // 
             this.lblGeneralId.AutoSize = true;
-            this.lblGeneralId.Location = new System.Drawing.Point(130, 43);
-            this.lblGeneralId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblGeneralId.Location = new System.Drawing.Point(87, 28);
             this.lblGeneralId.Name = "lblGeneralId";
-            this.lblGeneralId.Size = new System.Drawing.Size(34, 20);
+            this.lblGeneralId.Size = new System.Drawing.Size(24, 13);
             this.lblGeneralId.TabIndex = 7;
             this.lblGeneralId.Text = "ID :";
             // 
             // lblGeneralName
             // 
             this.lblGeneralName.AutoSize = true;
-            this.lblGeneralName.Location = new System.Drawing.Point(105, 92);
-            this.lblGeneralName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblGeneralName.Location = new System.Drawing.Point(70, 60);
             this.lblGeneralName.Name = "lblGeneralName";
-            this.lblGeneralName.Size = new System.Drawing.Size(59, 20);
+            this.lblGeneralName.Size = new System.Drawing.Size(41, 13);
             this.lblGeneralName.TabIndex = 8;
             this.lblGeneralName.Text = "Name :";
             // 
             // tbGeneralId
             // 
-            this.tbGeneralId.Location = new System.Drawing.Point(176, 43);
-            this.tbGeneralId.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbGeneralId.Location = new System.Drawing.Point(117, 28);
             this.tbGeneralId.Name = "tbGeneralId";
-            this.tbGeneralId.Size = new System.Drawing.Size(259, 26);
+            this.tbGeneralId.Size = new System.Drawing.Size(174, 20);
             this.tbGeneralId.TabIndex = 9;
             // 
             // tbGeneralName
             // 
-            this.tbGeneralName.Location = new System.Drawing.Point(176, 88);
-            this.tbGeneralName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbGeneralName.Location = new System.Drawing.Point(117, 57);
             this.tbGeneralName.Name = "tbGeneralName";
-            this.tbGeneralName.Size = new System.Drawing.Size(259, 26);
+            this.tbGeneralName.Size = new System.Drawing.Size(174, 20);
             this.tbGeneralName.TabIndex = 10;
             // 
             // lblMiscPackMax
             // 
             this.lblMiscPackMax.AutoSize = true;
-            this.lblMiscPackMax.Location = new System.Drawing.Point(76, 54);
-            this.lblMiscPackMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMiscPackMax.Location = new System.Drawing.Point(51, 35);
             this.lblMiscPackMax.Name = "lblMiscPackMax";
-            this.lblMiscPackMax.Size = new System.Drawing.Size(85, 20);
+            this.lblMiscPackMax.Size = new System.Drawing.Size(60, 13);
             this.lblMiscPackMax.TabIndex = 11;
             this.lblMiscPackMax.Text = "Pack max :";
             // 
@@ -301,12 +323,13 @@
             this.tcMain.Controls.Add(this.tpMainConsumable);
             this.tcMain.Controls.Add(this.tpMainBlinkwing);
             this.tcMain.Controls.Add(this.tpMainSpecialBuff);
+            this.tcMain.Controls.Add(this.tpMainFurniture);
+            this.tcMain.Controls.Add(this.tpMainPapering);
             this.tcMain.Dock = System.Windows.Forms.DockStyle.Right;
-            this.tcMain.Location = new System.Drawing.Point(379, 36);
-            this.tcMain.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tcMain.Location = new System.Drawing.Point(253, 24);
             this.tcMain.Name = "tcMain";
             this.tcMain.SelectedIndex = 0;
-            this.tcMain.Size = new System.Drawing.Size(573, 656);
+            this.tcMain.Size = new System.Drawing.Size(382, 426);
             this.tcMain.TabIndex = 13;
             // 
             // tpMainGeneral
@@ -314,11 +337,10 @@
             this.tpMainGeneral.Controls.Add(this.gbGeneralMisc);
             this.tpMainGeneral.Controls.Add(this.gbGeneralGeneral);
             this.tpMainGeneral.Controls.Add(this.gbGeneralType);
-            this.tpMainGeneral.Location = new System.Drawing.Point(4, 29);
-            this.tpMainGeneral.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tpMainGeneral.Location = new System.Drawing.Point(4, 22);
             this.tpMainGeneral.Name = "tpMainGeneral";
-            this.tpMainGeneral.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tpMainGeneral.Size = new System.Drawing.Size(565, 626);
+            this.tpMainGeneral.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tpMainGeneral.Size = new System.Drawing.Size(374, 400);
             this.tpMainGeneral.TabIndex = 0;
             this.tpMainGeneral.Text = "General";
             this.tpMainGeneral.UseVisualStyleBackColor = true;
@@ -333,21 +355,18 @@
             this.gbGeneralMisc.Controls.Add(this.lblMiscCost);
             this.gbGeneralMisc.Controls.Add(this.lblMiscIcon);
             this.gbGeneralMisc.Controls.Add(this.tbMiscIcon);
-            this.gbGeneralMisc.Location = new System.Drawing.Point(9, 412);
-            this.gbGeneralMisc.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbGeneralMisc.Location = new System.Drawing.Point(6, 268);
             this.gbGeneralMisc.Name = "gbGeneralMisc";
-            this.gbGeneralMisc.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbGeneralMisc.Size = new System.Drawing.Size(540, 191);
+            this.gbGeneralMisc.Size = new System.Drawing.Size(360, 124);
             this.gbGeneralMisc.TabIndex = 24;
             this.gbGeneralMisc.TabStop = false;
             this.gbGeneralMisc.Text = "Misc";
             // 
             // btnMiscSelectIcon
             // 
-            this.btnMiscSelectIcon.Location = new System.Drawing.Point(400, 129);
-            this.btnMiscSelectIcon.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnMiscSelectIcon.Location = new System.Drawing.Point(267, 84);
             this.btnMiscSelectIcon.Name = "btnMiscSelectIcon";
-            this.btnMiscSelectIcon.Size = new System.Drawing.Size(36, 34);
+            this.btnMiscSelectIcon.Size = new System.Drawing.Size(24, 22);
             this.btnMiscSelectIcon.TabIndex = 22;
             this.btnMiscSelectIcon.Text = "...";
             this.btnMiscSelectIcon.UseVisualStyleBackColor = true;
@@ -356,30 +375,29 @@
             // pbMiscIcon
             // 
             this.pbMiscIcon.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pbMiscIcon.ErrorImage")));
-            this.pbMiscIcon.Location = new System.Drawing.Point(444, 123);
+            this.pbMiscIcon.Location = new System.Drawing.Point(296, 80);
+            this.pbMiscIcon.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pbMiscIcon.Name = "pbMiscIcon";
-            this.pbMiscIcon.Size = new System.Drawing.Size(48, 49);
+            this.pbMiscIcon.Size = new System.Drawing.Size(32, 32);
             this.pbMiscIcon.TabIndex = 15;
             this.pbMiscIcon.TabStop = false;
             // 
             // nudMiscPackMax
             // 
-            this.nudMiscPackMax.Location = new System.Drawing.Point(176, 51);
-            this.nudMiscPackMax.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nudMiscPackMax.Location = new System.Drawing.Point(117, 33);
             this.nudMiscPackMax.Maximum = new decimal(new int[] {
             2147483647,
             0,
             0,
             0});
             this.nudMiscPackMax.Name = "nudMiscPackMax";
-            this.nudMiscPackMax.Size = new System.Drawing.Size(261, 26);
+            this.nudMiscPackMax.Size = new System.Drawing.Size(174, 20);
             this.nudMiscPackMax.TabIndex = 20;
             this.nudMiscPackMax.ThousandsSeparator = true;
             // 
             // nudMiscCost
             // 
-            this.nudMiscCost.Location = new System.Drawing.Point(176, 91);
-            this.nudMiscCost.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nudMiscCost.Location = new System.Drawing.Point(117, 59);
             this.nudMiscCost.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -391,36 +409,33 @@
             0,
             -2147483648});
             this.nudMiscCost.Name = "nudMiscCost";
-            this.nudMiscCost.Size = new System.Drawing.Size(261, 26);
+            this.nudMiscCost.Size = new System.Drawing.Size(174, 20);
             this.nudMiscCost.TabIndex = 21;
             this.nudMiscCost.ThousandsSeparator = true;
             // 
             // lblMiscCost
             // 
             this.lblMiscCost.AutoSize = true;
-            this.lblMiscCost.Location = new System.Drawing.Point(116, 94);
-            this.lblMiscCost.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMiscCost.Location = new System.Drawing.Point(77, 61);
             this.lblMiscCost.Name = "lblMiscCost";
-            this.lblMiscCost.Size = new System.Drawing.Size(50, 20);
+            this.lblMiscCost.Size = new System.Drawing.Size(34, 13);
             this.lblMiscCost.TabIndex = 13;
             this.lblMiscCost.Text = "Cost :";
             // 
             // lblMiscIcon
             // 
             this.lblMiscIcon.AutoSize = true;
-            this.lblMiscIcon.Location = new System.Drawing.Point(116, 135);
-            this.lblMiscIcon.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblMiscIcon.Location = new System.Drawing.Point(77, 88);
             this.lblMiscIcon.Name = "lblMiscIcon";
-            this.lblMiscIcon.Size = new System.Drawing.Size(48, 20);
+            this.lblMiscIcon.Size = new System.Drawing.Size(34, 13);
             this.lblMiscIcon.TabIndex = 16;
             this.lblMiscIcon.Text = "Icon :";
             // 
             // tbMiscIcon
             // 
-            this.tbMiscIcon.Location = new System.Drawing.Point(176, 131);
-            this.tbMiscIcon.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbMiscIcon.Location = new System.Drawing.Point(117, 85);
             this.tbMiscIcon.Name = "tbMiscIcon";
-            this.tbMiscIcon.Size = new System.Drawing.Size(228, 26);
+            this.tbMiscIcon.Size = new System.Drawing.Size(153, 20);
             this.tbMiscIcon.TabIndex = 17;
             this.tbMiscIcon.TextChanged += new System.EventHandler(this.tb_icon_TextChanged);
             // 
@@ -432,30 +447,26 @@
             this.gbGeneralGeneral.Controls.Add(this.lblGeneralId);
             this.gbGeneralGeneral.Controls.Add(this.tbGeneralDescription);
             this.gbGeneralGeneral.Controls.Add(this.lblGeneralDescription);
-            this.gbGeneralGeneral.Location = new System.Drawing.Point(9, 9);
-            this.gbGeneralGeneral.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbGeneralGeneral.Location = new System.Drawing.Point(6, 6);
             this.gbGeneralGeneral.Name = "gbGeneralGeneral";
-            this.gbGeneralGeneral.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbGeneralGeneral.Size = new System.Drawing.Size(540, 188);
+            this.gbGeneralGeneral.Size = new System.Drawing.Size(360, 122);
             this.gbGeneralGeneral.TabIndex = 23;
             this.gbGeneralGeneral.TabStop = false;
             this.gbGeneralGeneral.Text = "General";
             // 
             // tbGeneralDescription
             // 
-            this.tbGeneralDescription.Location = new System.Drawing.Point(176, 128);
-            this.tbGeneralDescription.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tbGeneralDescription.Location = new System.Drawing.Point(117, 83);
             this.tbGeneralDescription.Name = "tbGeneralDescription";
-            this.tbGeneralDescription.Size = new System.Drawing.Size(259, 26);
+            this.tbGeneralDescription.Size = new System.Drawing.Size(174, 20);
             this.tbGeneralDescription.TabIndex = 19;
             // 
             // lblGeneralDescription
             // 
             this.lblGeneralDescription.AutoSize = true;
-            this.lblGeneralDescription.Location = new System.Drawing.Point(68, 132);
-            this.lblGeneralDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblGeneralDescription.Location = new System.Drawing.Point(45, 86);
             this.lblGeneralDescription.Name = "lblGeneralDescription";
-            this.lblGeneralDescription.Size = new System.Drawing.Size(97, 20);
+            this.lblGeneralDescription.Size = new System.Drawing.Size(66, 13);
             this.lblGeneralDescription.TabIndex = 18;
             this.lblGeneralDescription.Text = "Description :";
             // 
@@ -467,11 +478,9 @@
             this.gbGeneralType.Controls.Add(this.cbTypeItemKind2);
             this.gbGeneralType.Controls.Add(this.lblTypeItemKind3);
             this.gbGeneralType.Controls.Add(this.cbTypeItemKind3);
-            this.gbGeneralType.Location = new System.Drawing.Point(9, 206);
-            this.gbGeneralType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbGeneralType.Location = new System.Drawing.Point(6, 134);
             this.gbGeneralType.Name = "gbGeneralType";
-            this.gbGeneralType.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbGeneralType.Size = new System.Drawing.Size(540, 191);
+            this.gbGeneralType.Size = new System.Drawing.Size(360, 124);
             this.gbGeneralType.TabIndex = 22;
             this.gbGeneralType.TabStop = false;
             this.gbGeneralType.Text = "Type";
@@ -481,11 +490,10 @@
             this.tpMainEquipment.Controls.Add(this.gbEquipmentMisc);
             this.tpMainEquipment.Controls.Add(this.gbEquipmentRequirements);
             this.tpMainEquipment.Controls.Add(this.gbDstParams);
-            this.tpMainEquipment.Location = new System.Drawing.Point(4, 29);
-            this.tpMainEquipment.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tpMainEquipment.Location = new System.Drawing.Point(4, 22);
             this.tpMainEquipment.Name = "tpMainEquipment";
-            this.tpMainEquipment.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.tpMainEquipment.Size = new System.Drawing.Size(565, 623);
+            this.tpMainEquipment.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tpMainEquipment.Size = new System.Drawing.Size(374, 400);
             this.tpMainEquipment.TabIndex = 1;
             this.tpMainEquipment.Text = "Equipment";
             this.tpMainEquipment.UseVisualStyleBackColor = true;
@@ -498,36 +506,35 @@
             this.gbEquipmentMisc.Controls.Add(this.cbEquipmentParts);
             this.gbEquipmentMisc.Controls.Add(this.lblEquipmentParts);
             this.gbEquipmentMisc.Controls.Add(this.lblEquipmentAtkMax);
-            this.gbEquipmentMisc.Location = new System.Drawing.Point(9, 417);
-            this.gbEquipmentMisc.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbEquipmentMisc.Location = new System.Drawing.Point(6, 271);
             this.gbEquipmentMisc.Name = "gbEquipmentMisc";
-            this.gbEquipmentMisc.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbEquipmentMisc.Size = new System.Drawing.Size(534, 180);
+            this.gbEquipmentMisc.Size = new System.Drawing.Size(356, 117);
             this.gbEquipmentMisc.TabIndex = 23;
             this.gbEquipmentMisc.TabStop = false;
             this.gbEquipmentMisc.Text = "Misc";
             // 
             // tbAtkMin
             // 
-            this.tbAtkMin.Location = new System.Drawing.Point(93, 45);
+            this.tbAtkMin.Location = new System.Drawing.Point(62, 29);
+            this.tbAtkMin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbAtkMin.Name = "tbAtkMin";
-            this.tbAtkMin.Size = new System.Drawing.Size(100, 26);
+            this.tbAtkMin.Size = new System.Drawing.Size(68, 20);
             this.tbAtkMin.TabIndex = 12;
             // 
             // tbAtkMax
             // 
-            this.tbAtkMax.Location = new System.Drawing.Point(410, 43);
+            this.tbAtkMax.Location = new System.Drawing.Point(273, 28);
+            this.tbAtkMax.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbAtkMax.Name = "tbAtkMax";
-            this.tbAtkMax.Size = new System.Drawing.Size(114, 26);
+            this.tbAtkMax.Size = new System.Drawing.Size(77, 20);
             this.tbAtkMax.TabIndex = 13;
             // 
             // lblEquipmentAtkMin
             // 
             this.lblEquipmentAtkMin.AutoSize = true;
-            this.lblEquipmentAtkMin.Location = new System.Drawing.Point(9, 49);
-            this.lblEquipmentAtkMin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEquipmentAtkMin.Location = new System.Drawing.Point(6, 32);
             this.lblEquipmentAtkMin.Name = "lblEquipmentAtkMin";
-            this.lblEquipmentAtkMin.Size = new System.Drawing.Size(74, 20);
+            this.lblEquipmentAtkMin.Size = new System.Drawing.Size(51, 13);
             this.lblEquipmentAtkMin.TabIndex = 16;
             this.lblEquipmentAtkMin.Text = "Atk min. :";
             // 
@@ -535,29 +542,26 @@
             // 
             this.cbEquipmentParts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEquipmentParts.FormattingEnabled = true;
-            this.cbEquipmentParts.Location = new System.Drawing.Point(162, 114);
-            this.cbEquipmentParts.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbEquipmentParts.Location = new System.Drawing.Point(108, 74);
             this.cbEquipmentParts.Name = "cbEquipmentParts";
-            this.cbEquipmentParts.Size = new System.Drawing.Size(238, 28);
+            this.cbEquipmentParts.Size = new System.Drawing.Size(160, 21);
             this.cbEquipmentParts.TabIndex = 19;
             // 
             // lblEquipmentParts
             // 
             this.lblEquipmentParts.AutoSize = true;
-            this.lblEquipmentParts.Location = new System.Drawing.Point(98, 118);
-            this.lblEquipmentParts.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEquipmentParts.Location = new System.Drawing.Point(65, 77);
             this.lblEquipmentParts.Name = "lblEquipmentParts";
-            this.lblEquipmentParts.Size = new System.Drawing.Size(54, 20);
+            this.lblEquipmentParts.Size = new System.Drawing.Size(37, 13);
             this.lblEquipmentParts.TabIndex = 18;
             this.lblEquipmentParts.Text = "Parts :";
             // 
             // lblEquipmentAtkMax
             // 
             this.lblEquipmentAtkMax.AutoSize = true;
-            this.lblEquipmentAtkMax.Location = new System.Drawing.Point(321, 49);
-            this.lblEquipmentAtkMax.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEquipmentAtkMax.Location = new System.Drawing.Point(214, 32);
             this.lblEquipmentAtkMax.Name = "lblEquipmentAtkMax";
-            this.lblEquipmentAtkMax.Size = new System.Drawing.Size(78, 20);
+            this.lblEquipmentAtkMax.Size = new System.Drawing.Size(54, 13);
             this.lblEquipmentAtkMax.TabIndex = 17;
             this.lblEquipmentAtkMax.Text = "Atk max. :";
             // 
@@ -569,11 +573,9 @@
             this.gbEquipmentRequirements.Controls.Add(this.lblEquipmentSex);
             this.gbEquipmentRequirements.Controls.Add(this.tbEquipmentLevel);
             this.gbEquipmentRequirements.Controls.Add(this.lblEquipmentLevel);
-            this.gbEquipmentRequirements.Location = new System.Drawing.Point(9, 9);
-            this.gbEquipmentRequirements.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbEquipmentRequirements.Location = new System.Drawing.Point(6, 6);
             this.gbEquipmentRequirements.Name = "gbEquipmentRequirements";
-            this.gbEquipmentRequirements.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbEquipmentRequirements.Size = new System.Drawing.Size(534, 162);
+            this.gbEquipmentRequirements.Size = new System.Drawing.Size(356, 105);
             this.gbEquipmentRequirements.TabIndex = 22;
             this.gbEquipmentRequirements.TabStop = false;
             this.gbEquipmentRequirements.Text = "Requirements";
@@ -582,19 +584,17 @@
             // 
             this.cbEquipmentSex.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEquipmentSex.FormattingEnabled = true;
-            this.cbEquipmentSex.Location = new System.Drawing.Point(162, 75);
-            this.cbEquipmentSex.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbEquipmentSex.Location = new System.Drawing.Point(108, 49);
             this.cbEquipmentSex.Name = "cbEquipmentSex";
-            this.cbEquipmentSex.Size = new System.Drawing.Size(259, 28);
+            this.cbEquipmentSex.Size = new System.Drawing.Size(174, 21);
             this.cbEquipmentSex.TabIndex = 8;
             // 
             // lblEquipmentJob
             // 
             this.lblEquipmentJob.AutoSize = true;
-            this.lblEquipmentJob.Location = new System.Drawing.Point(108, 38);
-            this.lblEquipmentJob.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEquipmentJob.Location = new System.Drawing.Point(72, 25);
             this.lblEquipmentJob.Name = "lblEquipmentJob";
-            this.lblEquipmentJob.Size = new System.Drawing.Size(43, 20);
+            this.lblEquipmentJob.Size = new System.Drawing.Size(30, 13);
             this.lblEquipmentJob.TabIndex = 5;
             this.lblEquipmentJob.Text = "Job :";
             // 
@@ -602,36 +602,34 @@
             // 
             this.cbEquipmentJob.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEquipmentJob.FormattingEnabled = true;
-            this.cbEquipmentJob.Location = new System.Drawing.Point(162, 34);
-            this.cbEquipmentJob.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbEquipmentJob.Location = new System.Drawing.Point(108, 22);
             this.cbEquipmentJob.Name = "cbEquipmentJob";
-            this.cbEquipmentJob.Size = new System.Drawing.Size(259, 28);
+            this.cbEquipmentJob.Size = new System.Drawing.Size(174, 21);
             this.cbEquipmentJob.TabIndex = 6;
             // 
             // lblEquipmentSex
             // 
             this.lblEquipmentSex.AutoSize = true;
-            this.lblEquipmentSex.Location = new System.Drawing.Point(106, 80);
-            this.lblEquipmentSex.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEquipmentSex.Location = new System.Drawing.Point(71, 52);
             this.lblEquipmentSex.Name = "lblEquipmentSex";
-            this.lblEquipmentSex.Size = new System.Drawing.Size(44, 20);
+            this.lblEquipmentSex.Size = new System.Drawing.Size(31, 13);
             this.lblEquipmentSex.TabIndex = 7;
             this.lblEquipmentSex.Text = "Sex :";
             // 
             // tbEquipmentLevel
             // 
-            this.tbEquipmentLevel.Location = new System.Drawing.Point(162, 115);
+            this.tbEquipmentLevel.Location = new System.Drawing.Point(108, 75);
+            this.tbEquipmentLevel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbEquipmentLevel.Name = "tbEquipmentLevel";
-            this.tbEquipmentLevel.Size = new System.Drawing.Size(259, 26);
+            this.tbEquipmentLevel.Size = new System.Drawing.Size(174, 20);
             this.tbEquipmentLevel.TabIndex = 14;
             // 
             // lblEquipmentLevel
             // 
             this.lblEquipmentLevel.AutoSize = true;
-            this.lblEquipmentLevel.Location = new System.Drawing.Point(96, 115);
-            this.lblEquipmentLevel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblEquipmentLevel.Location = new System.Drawing.Point(64, 75);
             this.lblEquipmentLevel.Name = "lblEquipmentLevel";
-            this.lblEquipmentLevel.Size = new System.Drawing.Size(54, 20);
+            this.lblEquipmentLevel.Size = new System.Drawing.Size(39, 13);
             this.lblEquipmentLevel.TabIndex = 15;
             this.lblEquipmentLevel.Text = "Level :";
             // 
@@ -642,19 +640,16 @@
             this.gbDstParams.Controls.Add(this.lblDstParamIdentifier);
             this.gbDstParams.Controls.Add(this.cbEquipmentDstParam);
             this.gbDstParams.Controls.Add(this.lbEquipmentDstStats);
-            this.gbDstParams.Location = new System.Drawing.Point(9, 180);
-            this.gbDstParams.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.gbDstParams.Location = new System.Drawing.Point(6, 117);
             this.gbDstParams.Name = "gbDstParams";
-            this.gbDstParams.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.gbDstParams.Size = new System.Drawing.Size(534, 228);
+            this.gbDstParams.Size = new System.Drawing.Size(356, 148);
             this.gbDstParams.TabIndex = 20;
             this.gbDstParams.TabStop = false;
             this.gbDstParams.Text = "Statistiques";
             // 
             // nudEquipmentDstValue
             // 
-            this.nudEquipmentDstValue.Location = new System.Drawing.Point(352, 134);
-            this.nudEquipmentDstValue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nudEquipmentDstValue.Location = new System.Drawing.Point(235, 87);
             this.nudEquipmentDstValue.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -666,27 +661,25 @@
             0,
             -2147483648});
             this.nudEquipmentDstValue.Name = "nudEquipmentDstValue";
-            this.nudEquipmentDstValue.Size = new System.Drawing.Size(142, 26);
+            this.nudEquipmentDstValue.Size = new System.Drawing.Size(95, 20);
             this.nudEquipmentDstValue.TabIndex = 23;
             this.nudEquipmentDstValue.ThousandsSeparator = true;
             // 
             // lblDstParamValue
             // 
             this.lblDstParamValue.AutoSize = true;
-            this.lblDstParamValue.Location = new System.Drawing.Point(280, 137);
-            this.lblDstParamValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDstParamValue.Location = new System.Drawing.Point(187, 89);
             this.lblDstParamValue.Name = "lblDstParamValue";
-            this.lblDstParamValue.Size = new System.Drawing.Size(63, 20);
+            this.lblDstParamValue.Size = new System.Drawing.Size(43, 13);
             this.lblDstParamValue.TabIndex = 22;
             this.lblDstParamValue.Text = "Valeur :";
             // 
             // lblDstParamIdentifier
             // 
             this.lblDstParamIdentifier.AutoSize = true;
-            this.lblDstParamIdentifier.Location = new System.Drawing.Point(297, 80);
-            this.lblDstParamIdentifier.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblDstParamIdentifier.Location = new System.Drawing.Point(198, 52);
             this.lblDstParamIdentifier.Name = "lblDstParamIdentifier";
-            this.lblDstParamIdentifier.Size = new System.Drawing.Size(47, 20);
+            this.lblDstParamIdentifier.Size = new System.Drawing.Size(32, 13);
             this.lblDstParamIdentifier.TabIndex = 21;
             this.lblDstParamIdentifier.Text = "Stat :";
             // 
@@ -694,9 +687,10 @@
             // 
             this.cbEquipmentDstParam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEquipmentDstParam.FormattingEnabled = true;
-            this.cbEquipmentDstParam.Location = new System.Drawing.Point(352, 75);
+            this.cbEquipmentDstParam.Location = new System.Drawing.Point(235, 49);
+            this.cbEquipmentDstParam.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbEquipmentDstParam.Name = "cbEquipmentDstParam";
-            this.cbEquipmentDstParam.Size = new System.Drawing.Size(140, 28);
+            this.cbEquipmentDstParam.Size = new System.Drawing.Size(95, 21);
             this.cbEquipmentDstParam.TabIndex = 10;
             this.cbEquipmentDstParam.SelectedIndexChanged += new System.EventHandler(this.CbEquipmentDstParam_SelectedIndexChanged);
             this.cbEquipmentDstParam.SelectedValueChanged += new System.EventHandler(this.cb_DstParamIdentifier_SelectedValueChanged);
@@ -704,10 +698,10 @@
             // lbEquipmentDstStats
             // 
             this.lbEquipmentDstStats.FormattingEnabled = true;
-            this.lbEquipmentDstStats.ItemHeight = 20;
-            this.lbEquipmentDstStats.Location = new System.Drawing.Point(8, 28);
+            this.lbEquipmentDstStats.Location = new System.Drawing.Point(5, 18);
+            this.lbEquipmentDstStats.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lbEquipmentDstStats.Name = "lbEquipmentDstStats";
-            this.lbEquipmentDstStats.Size = new System.Drawing.Size(259, 184);
+            this.lbEquipmentDstStats.Size = new System.Drawing.Size(174, 121);
             this.lbEquipmentDstStats.TabIndex = 9;
             this.lbEquipmentDstStats.SelectedIndexChanged += new System.EventHandler(this.lb_DstParams_SelectedIndexChanged);
             // 
@@ -720,18 +714,16 @@
             this.tpMainConsumable.Controls.Add(this.label2);
             this.tpMainConsumable.Controls.Add(this.label3);
             this.tpMainConsumable.Controls.Add(this.label1);
-            this.tpMainConsumable.Location = new System.Drawing.Point(4, 29);
-            this.tpMainConsumable.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tpMainConsumable.Location = new System.Drawing.Point(4, 22);
             this.tpMainConsumable.Name = "tpMainConsumable";
-            this.tpMainConsumable.Size = new System.Drawing.Size(565, 623);
+            this.tpMainConsumable.Size = new System.Drawing.Size(374, 400);
             this.tpMainConsumable.TabIndex = 2;
             this.tpMainConsumable.Text = "Consumable";
             this.tpMainConsumable.UseVisualStyleBackColor = true;
             // 
             // nudConsumableDstValue
             // 
-            this.nudConsumableDstValue.Location = new System.Drawing.Point(330, 186);
-            this.nudConsumableDstValue.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nudConsumableDstValue.Location = new System.Drawing.Point(220, 121);
             this.nudConsumableDstValue.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -743,61 +735,54 @@
             0,
             -2147483648});
             this.nudConsumableDstValue.Name = "nudConsumableDstValue";
-            this.nudConsumableDstValue.Size = new System.Drawing.Size(180, 26);
+            this.nudConsumableDstValue.Size = new System.Drawing.Size(120, 20);
             this.nudConsumableDstValue.TabIndex = 4;
             // 
             // cbConsumableDstParam
             // 
             this.cbConsumableDstParam.FormattingEnabled = true;
-            this.cbConsumableDstParam.Location = new System.Drawing.Point(328, 111);
-            this.cbConsumableDstParam.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cbConsumableDstParam.Location = new System.Drawing.Point(219, 72);
             this.cbConsumableDstParam.Name = "cbConsumableDstParam";
-            this.cbConsumableDstParam.Size = new System.Drawing.Size(180, 28);
+            this.cbConsumableDstParam.Size = new System.Drawing.Size(121, 21);
             this.cbConsumableDstParam.TabIndex = 3;
             // 
             // lbConsumableDst
             // 
             this.lbConsumableDst.FormattingEnabled = true;
-            this.lbConsumableDst.ItemHeight = 20;
-            this.lbConsumableDst.Location = new System.Drawing.Point(21, 115);
-            this.lbConsumableDst.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lbConsumableDst.Location = new System.Drawing.Point(14, 75);
             this.lbConsumableDst.Name = "lbConsumableDst";
-            this.lbConsumableDst.Size = new System.Drawing.Size(235, 144);
+            this.lbConsumableDst.Size = new System.Drawing.Size(158, 95);
             this.lbConsumableDst.TabIndex = 2;
             this.lbConsumableDst.SelectedIndexChanged += new System.EventHandler(this.LbConsumableDst_SelectedIndexChanged);
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(78, 60);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.numericUpDown1.Location = new System.Drawing.Point(52, 39);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(180, 26);
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
             this.numericUpDown1.TabIndex = 1;
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(267, 115);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(178, 75);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 20);
+            this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "label1";
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(268, 189);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(179, 123);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 20);
+            this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 0;
             this.label3.Text = "label1";
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(16, 63);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(11, 41);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 20);
+            this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             // 
@@ -806,12 +791,147 @@
             this.tpMainBlinkwing.Controls.Add(this.gbBlinkwingMisc);
             this.tpMainBlinkwing.Controls.Add(this.gbBlinkwingSettings);
             this.tpMainBlinkwing.Controls.Add(this.gbBlinkwingRequirements);
-            this.tpMainBlinkwing.Location = new System.Drawing.Point(4, 29);
+            this.tpMainBlinkwing.Location = new System.Drawing.Point(4, 22);
+            this.tpMainBlinkwing.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tpMainBlinkwing.Name = "tpMainBlinkwing";
-            this.tpMainBlinkwing.Size = new System.Drawing.Size(565, 623);
+            this.tpMainBlinkwing.Size = new System.Drawing.Size(374, 400);
             this.tpMainBlinkwing.TabIndex = 3;
             this.tpMainBlinkwing.Text = "Blinkwing";
             this.tpMainBlinkwing.UseVisualStyleBackColor = true;
+            // 
+            // gbBlinkwingMisc
+            // 
+            this.gbBlinkwingMisc.Controls.Add(this.lblBlinkwingCastingTimeMs);
+            this.gbBlinkwingMisc.Controls.Add(this.lblBlinkwingCastingTimeSeconds);
+            this.gbBlinkwingMisc.Controls.Add(this.lblBlinkwingCastingTimeMinutes);
+            this.gbBlinkwingMisc.Controls.Add(this.nudBlinkwingCastingTimeMs);
+            this.gbBlinkwingMisc.Controls.Add(this.lblBlinkwingCastingTime);
+            this.gbBlinkwingMisc.Controls.Add(this.nudBlinkwingCastingTimeSeconds);
+            this.gbBlinkwingMisc.Controls.Add(this.nudBlinkwingCastingTimeMinutes);
+            this.gbBlinkwingMisc.Controls.Add(this.cbBlinkwingSfx);
+            this.gbBlinkwingMisc.Controls.Add(this.lblBlinkwingSfx);
+            this.gbBlinkwingMisc.Location = new System.Drawing.Point(6, 227);
+            this.gbBlinkwingMisc.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbBlinkwingMisc.Name = "gbBlinkwingMisc";
+            this.gbBlinkwingMisc.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbBlinkwingMisc.Size = new System.Drawing.Size(365, 81);
+            this.gbBlinkwingMisc.TabIndex = 2;
+            this.gbBlinkwingMisc.TabStop = false;
+            this.gbBlinkwingMisc.Text = "Misc";
+            // 
+            // lblBlinkwingCastingTimeMs
+            // 
+            this.lblBlinkwingCastingTimeMs.AutoSize = true;
+            this.lblBlinkwingCastingTimeMs.Location = new System.Drawing.Point(325, 24);
+            this.lblBlinkwingCastingTimeMs.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBlinkwingCastingTimeMs.Name = "lblBlinkwingCastingTimeMs";
+            this.lblBlinkwingCastingTimeMs.Size = new System.Drawing.Size(20, 13);
+            this.lblBlinkwingCastingTimeMs.TabIndex = 0;
+            this.lblBlinkwingCastingTimeMs.Text = "ms";
+            // 
+            // lblBlinkwingCastingTimeSeconds
+            // 
+            this.lblBlinkwingCastingTimeSeconds.AutoSize = true;
+            this.lblBlinkwingCastingTimeSeconds.Location = new System.Drawing.Point(228, 24);
+            this.lblBlinkwingCastingTimeSeconds.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBlinkwingCastingTimeSeconds.Name = "lblBlinkwingCastingTimeSeconds";
+            this.lblBlinkwingCastingTimeSeconds.Size = new System.Drawing.Size(47, 13);
+            this.lblBlinkwingCastingTimeSeconds.TabIndex = 0;
+            this.lblBlinkwingCastingTimeSeconds.Text = "seconds";
+            // 
+            // lblBlinkwingCastingTimeMinutes
+            // 
+            this.lblBlinkwingCastingTimeMinutes.AutoSize = true;
+            this.lblBlinkwingCastingTimeMinutes.Location = new System.Drawing.Point(134, 24);
+            this.lblBlinkwingCastingTimeMinutes.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBlinkwingCastingTimeMinutes.Name = "lblBlinkwingCastingTimeMinutes";
+            this.lblBlinkwingCastingTimeMinutes.Size = new System.Drawing.Size(43, 13);
+            this.lblBlinkwingCastingTimeMinutes.TabIndex = 0;
+            this.lblBlinkwingCastingTimeMinutes.Text = "minutes";
+            // 
+            // nudBlinkwingCastingTimeMs
+            // 
+            this.nudBlinkwingCastingTimeMs.Location = new System.Drawing.Point(278, 23);
+            this.nudBlinkwingCastingTimeMs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nudBlinkwingCastingTimeMs.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.nudBlinkwingCastingTimeMs.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
+            this.nudBlinkwingCastingTimeMs.Name = "nudBlinkwingCastingTimeMs";
+            this.nudBlinkwingCastingTimeMs.Size = new System.Drawing.Size(43, 20);
+            this.nudBlinkwingCastingTimeMs.TabIndex = 1;
+            // 
+            // lblBlinkwingCastingTime
+            // 
+            this.lblBlinkwingCastingTime.AutoSize = true;
+            this.lblBlinkwingCastingTime.Location = new System.Drawing.Point(13, 24);
+            this.lblBlinkwingCastingTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBlinkwingCastingTime.Name = "lblBlinkwingCastingTime";
+            this.lblBlinkwingCastingTime.Size = new System.Drawing.Size(70, 13);
+            this.lblBlinkwingCastingTime.TabIndex = 0;
+            this.lblBlinkwingCastingTime.Text = "Casting time :";
+            // 
+            // nudBlinkwingCastingTimeSeconds
+            // 
+            this.nudBlinkwingCastingTimeSeconds.Location = new System.Drawing.Point(181, 23);
+            this.nudBlinkwingCastingTimeSeconds.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nudBlinkwingCastingTimeSeconds.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.nudBlinkwingCastingTimeSeconds.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
+            this.nudBlinkwingCastingTimeSeconds.Name = "nudBlinkwingCastingTimeSeconds";
+            this.nudBlinkwingCastingTimeSeconds.Size = new System.Drawing.Size(43, 20);
+            this.nudBlinkwingCastingTimeSeconds.TabIndex = 1;
+            // 
+            // nudBlinkwingCastingTimeMinutes
+            // 
+            this.nudBlinkwingCastingTimeMinutes.Location = new System.Drawing.Point(87, 23);
+            this.nudBlinkwingCastingTimeMinutes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nudBlinkwingCastingTimeMinutes.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.nudBlinkwingCastingTimeMinutes.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
+            this.nudBlinkwingCastingTimeMinutes.Name = "nudBlinkwingCastingTimeMinutes";
+            this.nudBlinkwingCastingTimeMinutes.Size = new System.Drawing.Size(43, 20);
+            this.nudBlinkwingCastingTimeMinutes.TabIndex = 1;
+            // 
+            // cbBlinkwingSfx
+            // 
+            this.cbBlinkwingSfx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBlinkwingSfx.FormattingEnabled = true;
+            this.cbBlinkwingSfx.Location = new System.Drawing.Point(119, 51);
+            this.cbBlinkwingSfx.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbBlinkwingSfx.Name = "cbBlinkwingSfx";
+            this.cbBlinkwingSfx.Size = new System.Drawing.Size(159, 21);
+            this.cbBlinkwingSfx.TabIndex = 1;
+            // 
+            // lblBlinkwingSfx
+            // 
+            this.lblBlinkwingSfx.AutoSize = true;
+            this.lblBlinkwingSfx.Location = new System.Drawing.Point(89, 53);
+            this.lblBlinkwingSfx.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBlinkwingSfx.Name = "lblBlinkwingSfx";
+            this.lblBlinkwingSfx.Size = new System.Drawing.Size(28, 13);
+            this.lblBlinkwingSfx.TabIndex = 0;
+            this.lblBlinkwingSfx.Text = "Sfx :";
             // 
             // gbBlinkwingSettings
             // 
@@ -828,16 +948,27 @@
             this.gbBlinkwingSettings.Controls.Add(this.chckbBlinkwingNearestTown);
             this.gbBlinkwingSettings.Controls.Add(this.lblBlinkwingChaoticSpawnKey);
             this.gbBlinkwingSettings.Controls.Add(this.lblBlinkwingWorld);
-            this.gbBlinkwingSettings.Location = new System.Drawing.Point(10, 88);
+            this.gbBlinkwingSettings.Location = new System.Drawing.Point(7, 57);
+            this.gbBlinkwingSettings.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbBlinkwingSettings.Name = "gbBlinkwingSettings";
-            this.gbBlinkwingSettings.Size = new System.Drawing.Size(547, 256);
+            this.gbBlinkwingSettings.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbBlinkwingSettings.Size = new System.Drawing.Size(365, 166);
             this.gbBlinkwingSettings.TabIndex = 1;
             this.gbBlinkwingSettings.TabStop = false;
             this.gbBlinkwingSettings.Text = "Settings";
             // 
+            // tbBlinkwingChaoticSpawnKey
+            // 
+            this.tbBlinkwingChaoticSpawnKey.Location = new System.Drawing.Point(179, 133);
+            this.tbBlinkwingChaoticSpawnKey.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbBlinkwingChaoticSpawnKey.Name = "tbBlinkwingChaoticSpawnKey";
+            this.tbBlinkwingChaoticSpawnKey.Size = new System.Drawing.Size(74, 20);
+            this.tbBlinkwingChaoticSpawnKey.TabIndex = 3;
+            // 
             // nudBlinkwingPositionZ
             // 
-            this.nudBlinkwingPositionZ.Location = new System.Drawing.Point(421, 119);
+            this.nudBlinkwingPositionZ.Location = new System.Drawing.Point(281, 77);
+            this.nudBlinkwingPositionZ.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nudBlinkwingPositionZ.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -849,21 +980,23 @@
             0,
             -2147483648});
             this.nudBlinkwingPositionZ.Name = "nudBlinkwingPositionZ";
-            this.nudBlinkwingPositionZ.Size = new System.Drawing.Size(120, 26);
+            this.nudBlinkwingPositionZ.Size = new System.Drawing.Size(80, 20);
             this.nudBlinkwingPositionZ.TabIndex = 1;
             // 
             // lblBlinkwingPositionZ
             // 
             this.lblBlinkwingPositionZ.AutoSize = true;
-            this.lblBlinkwingPositionZ.Location = new System.Drawing.Point(387, 121);
+            this.lblBlinkwingPositionZ.Location = new System.Drawing.Point(258, 79);
+            this.lblBlinkwingPositionZ.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBlinkwingPositionZ.Name = "lblBlinkwingPositionZ";
-            this.lblBlinkwingPositionZ.Size = new System.Drawing.Size(27, 20);
+            this.lblBlinkwingPositionZ.Size = new System.Drawing.Size(20, 13);
             this.lblBlinkwingPositionZ.TabIndex = 2;
             this.lblBlinkwingPositionZ.Text = "Z :";
             // 
             // nudBlinkwingPositionY
             // 
-            this.nudBlinkwingPositionY.Location = new System.Drawing.Point(237, 119);
+            this.nudBlinkwingPositionY.Location = new System.Drawing.Point(158, 77);
+            this.nudBlinkwingPositionY.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nudBlinkwingPositionY.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -875,21 +1008,23 @@
             0,
             -2147483648});
             this.nudBlinkwingPositionY.Name = "nudBlinkwingPositionY";
-            this.nudBlinkwingPositionY.Size = new System.Drawing.Size(120, 26);
+            this.nudBlinkwingPositionY.Size = new System.Drawing.Size(80, 20);
             this.nudBlinkwingPositionY.TabIndex = 1;
             // 
             // lblBlinkwingPositionY
             // 
             this.lblBlinkwingPositionY.AutoSize = true;
-            this.lblBlinkwingPositionY.Location = new System.Drawing.Point(203, 121);
+            this.lblBlinkwingPositionY.Location = new System.Drawing.Point(135, 79);
+            this.lblBlinkwingPositionY.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBlinkwingPositionY.Name = "lblBlinkwingPositionY";
-            this.lblBlinkwingPositionY.Size = new System.Drawing.Size(28, 20);
+            this.lblBlinkwingPositionY.Size = new System.Drawing.Size(20, 13);
             this.lblBlinkwingPositionY.TabIndex = 2;
             this.lblBlinkwingPositionY.Text = "Y :";
             // 
             // nudBlinkwingAngle
             // 
-            this.nudBlinkwingAngle.Location = new System.Drawing.Point(237, 162);
+            this.nudBlinkwingAngle.Location = new System.Drawing.Point(158, 105);
+            this.nudBlinkwingAngle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nudBlinkwingAngle.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -901,21 +1036,23 @@
             0,
             -2147483648});
             this.nudBlinkwingAngle.Name = "nudBlinkwingAngle";
-            this.nudBlinkwingAngle.Size = new System.Drawing.Size(120, 26);
+            this.nudBlinkwingAngle.Size = new System.Drawing.Size(80, 20);
             this.nudBlinkwingAngle.TabIndex = 1;
             // 
             // lblBlinkwingAngle
             // 
             this.lblBlinkwingAngle.AutoSize = true;
-            this.lblBlinkwingAngle.Location = new System.Drawing.Point(173, 164);
+            this.lblBlinkwingAngle.Location = new System.Drawing.Point(115, 107);
+            this.lblBlinkwingAngle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBlinkwingAngle.Name = "lblBlinkwingAngle";
-            this.lblBlinkwingAngle.Size = new System.Drawing.Size(58, 20);
+            this.lblBlinkwingAngle.Size = new System.Drawing.Size(40, 13);
             this.lblBlinkwingAngle.TabIndex = 2;
             this.lblBlinkwingAngle.Text = "Angle :";
             // 
             // nudBlinkwingPositionX
             // 
-            this.nudBlinkwingPositionX.Location = new System.Drawing.Point(40, 119);
+            this.nudBlinkwingPositionX.Location = new System.Drawing.Point(27, 77);
+            this.nudBlinkwingPositionX.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nudBlinkwingPositionX.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -927,15 +1064,16 @@
             0,
             -2147483648});
             this.nudBlinkwingPositionX.Name = "nudBlinkwingPositionX";
-            this.nudBlinkwingPositionX.Size = new System.Drawing.Size(120, 26);
+            this.nudBlinkwingPositionX.Size = new System.Drawing.Size(80, 20);
             this.nudBlinkwingPositionX.TabIndex = 1;
             // 
             // lblBlinkwingPositionX
             // 
             this.lblBlinkwingPositionX.AutoSize = true;
-            this.lblBlinkwingPositionX.Location = new System.Drawing.Point(6, 121);
+            this.lblBlinkwingPositionX.Location = new System.Drawing.Point(4, 79);
+            this.lblBlinkwingPositionX.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBlinkwingPositionX.Name = "lblBlinkwingPositionX";
-            this.lblBlinkwingPositionX.Size = new System.Drawing.Size(28, 20);
+            this.lblBlinkwingPositionX.Size = new System.Drawing.Size(20, 13);
             this.lblBlinkwingPositionX.TabIndex = 2;
             this.lblBlinkwingPositionX.Text = "X :";
             // 
@@ -943,27 +1081,40 @@
             // 
             this.cbBlinkwingWorld.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbBlinkwingWorld.FormattingEnabled = true;
-            this.cbBlinkwingWorld.Location = new System.Drawing.Point(178, 69);
+            this.cbBlinkwingWorld.Location = new System.Drawing.Point(119, 45);
+            this.cbBlinkwingWorld.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbBlinkwingWorld.Name = "cbBlinkwingWorld";
-            this.cbBlinkwingWorld.Size = new System.Drawing.Size(236, 28);
+            this.cbBlinkwingWorld.Size = new System.Drawing.Size(159, 21);
             this.cbBlinkwingWorld.TabIndex = 1;
             // 
             // chckbBlinkwingNearestTown
             // 
             this.chckbBlinkwingNearestTown.AutoSize = true;
-            this.chckbBlinkwingNearestTown.Location = new System.Drawing.Point(157, 25);
+            this.chckbBlinkwingNearestTown.Location = new System.Drawing.Point(105, 16);
+            this.chckbBlinkwingNearestTown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.chckbBlinkwingNearestTown.Name = "chckbBlinkwingNearestTown";
-            this.chckbBlinkwingNearestTown.Size = new System.Drawing.Size(234, 24);
+            this.chckbBlinkwingNearestTown.Size = new System.Drawing.Size(159, 17);
             this.chckbBlinkwingNearestTown.TabIndex = 0;
             this.chckbBlinkwingNearestTown.Text = "Teleport to the nearest town";
             this.chckbBlinkwingNearestTown.UseVisualStyleBackColor = true;
             // 
+            // lblBlinkwingChaoticSpawnKey
+            // 
+            this.lblBlinkwingChaoticSpawnKey.AutoSize = true;
+            this.lblBlinkwingChaoticSpawnKey.Location = new System.Drawing.Point(76, 135);
+            this.lblBlinkwingChaoticSpawnKey.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBlinkwingChaoticSpawnKey.Name = "lblBlinkwingChaoticSpawnKey";
+            this.lblBlinkwingChaoticSpawnKey.Size = new System.Drawing.Size(103, 13);
+            this.lblBlinkwingChaoticSpawnKey.TabIndex = 0;
+            this.lblBlinkwingChaoticSpawnKey.Text = "Chaotic spawn key :";
+            // 
             // lblBlinkwingWorld
             // 
             this.lblBlinkwingWorld.AutoSize = true;
-            this.lblBlinkwingWorld.Location = new System.Drawing.Point(114, 72);
+            this.lblBlinkwingWorld.Location = new System.Drawing.Point(76, 47);
+            this.lblBlinkwingWorld.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBlinkwingWorld.Name = "lblBlinkwingWorld";
-            this.lblBlinkwingWorld.Size = new System.Drawing.Size(58, 20);
+            this.lblBlinkwingWorld.Size = new System.Drawing.Size(41, 13);
             this.lblBlinkwingWorld.TabIndex = 0;
             this.lblBlinkwingWorld.Text = "World :";
             // 
@@ -971,35 +1122,40 @@
             // 
             this.gbBlinkwingRequirements.Controls.Add(this.nudBlinkwingMinLevel);
             this.gbBlinkwingRequirements.Controls.Add(this.lblBlinkwingMinLevel);
-            this.gbBlinkwingRequirements.Location = new System.Drawing.Point(9, 9);
+            this.gbBlinkwingRequirements.Location = new System.Drawing.Point(6, 6);
+            this.gbBlinkwingRequirements.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbBlinkwingRequirements.Name = "gbBlinkwingRequirements";
-            this.gbBlinkwingRequirements.Size = new System.Drawing.Size(548, 72);
+            this.gbBlinkwingRequirements.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbBlinkwingRequirements.Size = new System.Drawing.Size(365, 47);
             this.gbBlinkwingRequirements.TabIndex = 0;
             this.gbBlinkwingRequirements.TabStop = false;
             this.gbBlinkwingRequirements.Text = "Requirements";
             // 
             // nudBlinkwingMinLevel
             // 
-            this.nudBlinkwingMinLevel.Location = new System.Drawing.Point(214, 26);
+            this.nudBlinkwingMinLevel.Location = new System.Drawing.Point(143, 17);
+            this.nudBlinkwingMinLevel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nudBlinkwingMinLevel.Name = "nudBlinkwingMinLevel";
-            this.nudBlinkwingMinLevel.Size = new System.Drawing.Size(120, 26);
+            this.nudBlinkwingMinLevel.Size = new System.Drawing.Size(80, 20);
             this.nudBlinkwingMinLevel.TabIndex = 1;
             // 
             // lblBlinkwingMinLevel
             // 
             this.lblBlinkwingMinLevel.AutoSize = true;
-            this.lblBlinkwingMinLevel.Location = new System.Drawing.Point(154, 28);
+            this.lblBlinkwingMinLevel.Location = new System.Drawing.Point(103, 18);
+            this.lblBlinkwingMinLevel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblBlinkwingMinLevel.Name = "lblBlinkwingMinLevel";
-            this.lblBlinkwingMinLevel.Size = new System.Drawing.Size(54, 20);
+            this.lblBlinkwingMinLevel.Size = new System.Drawing.Size(39, 13);
             this.lblBlinkwingMinLevel.TabIndex = 0;
             this.lblBlinkwingMinLevel.Text = "Level :";
             // 
             // tpMainSpecialBuff
             // 
             this.tpMainSpecialBuff.Controls.Add(this.gbSpecialBuffSettings);
-            this.tpMainSpecialBuff.Location = new System.Drawing.Point(4, 29);
+            this.tpMainSpecialBuff.Location = new System.Drawing.Point(4, 22);
+            this.tpMainSpecialBuff.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tpMainSpecialBuff.Name = "tpMainSpecialBuff";
-            this.tpMainSpecialBuff.Size = new System.Drawing.Size(565, 623);
+            this.tpMainSpecialBuff.Size = new System.Drawing.Size(374, 400);
             this.tpMainSpecialBuff.TabIndex = 4;
             this.tpMainSpecialBuff.Text = "Special buff";
             this.tpMainSpecialBuff.UseVisualStyleBackColor = true;
@@ -1013,16 +1169,19 @@
             this.gbSpecialBuffSettings.Controls.Add(this.lblSpecialBuffDurationMinutes);
             this.gbSpecialBuffSettings.Controls.Add(this.lblSpecialBuffDurationDays);
             this.gbSpecialBuffSettings.Controls.Add(this.lbSpecialBuffDuration);
-            this.gbSpecialBuffSettings.Location = new System.Drawing.Point(9, 9);
+            this.gbSpecialBuffSettings.Location = new System.Drawing.Point(6, 6);
+            this.gbSpecialBuffSettings.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbSpecialBuffSettings.Name = "gbSpecialBuffSettings";
-            this.gbSpecialBuffSettings.Size = new System.Drawing.Size(548, 100);
+            this.gbSpecialBuffSettings.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbSpecialBuffSettings.Size = new System.Drawing.Size(365, 65);
             this.gbSpecialBuffSettings.TabIndex = 0;
             this.gbSpecialBuffSettings.TabStop = false;
             this.gbSpecialBuffSettings.Text = "Settings";
             // 
             // nudSpecialBuffDurationMinutes
             // 
-            this.nudSpecialBuffDurationMinutes.Location = new System.Drawing.Point(373, 42);
+            this.nudSpecialBuffDurationMinutes.Location = new System.Drawing.Point(249, 27);
+            this.nudSpecialBuffDurationMinutes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nudSpecialBuffDurationMinutes.Maximum = new decimal(new int[] {
             60,
             0,
@@ -1034,72 +1193,77 @@
             0,
             -2147483648});
             this.nudSpecialBuffDurationMinutes.Name = "nudSpecialBuffDurationMinutes";
-            this.nudSpecialBuffDurationMinutes.Size = new System.Drawing.Size(84, 26);
+            this.nudSpecialBuffDurationMinutes.Size = new System.Drawing.Size(56, 20);
             this.nudSpecialBuffDurationMinutes.TabIndex = 1;
             // 
             // nudSpecialBuffDurationHours
             // 
-            this.nudSpecialBuffDurationHours.Location = new System.Drawing.Point(228, 42);
+            this.nudSpecialBuffDurationHours.Location = new System.Drawing.Point(152, 27);
+            this.nudSpecialBuffDurationHours.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nudSpecialBuffDurationHours.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             -2147483648});
             this.nudSpecialBuffDurationHours.Name = "nudSpecialBuffDurationHours";
-            this.nudSpecialBuffDurationHours.Size = new System.Drawing.Size(84, 26);
+            this.nudSpecialBuffDurationHours.Size = new System.Drawing.Size(56, 20);
             this.nudSpecialBuffDurationHours.TabIndex = 1;
             // 
             // nudSpecialBuffDurationDays
             // 
-            this.nudSpecialBuffDurationDays.Location = new System.Drawing.Point(90, 42);
+            this.nudSpecialBuffDurationDays.Location = new System.Drawing.Point(60, 27);
+            this.nudSpecialBuffDurationDays.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nudSpecialBuffDurationDays.Maximum = new decimal(new int[] {
             1491308,
             0,
             0,
             0});
             this.nudSpecialBuffDurationDays.Name = "nudSpecialBuffDurationDays";
-            this.nudSpecialBuffDurationDays.Size = new System.Drawing.Size(84, 26);
+            this.nudSpecialBuffDurationDays.Size = new System.Drawing.Size(56, 20);
             this.nudSpecialBuffDurationDays.TabIndex = 1;
             // 
             // lblSpecialBuffDurationHours
             // 
             this.lblSpecialBuffDurationHours.AutoSize = true;
-            this.lblSpecialBuffDurationHours.Location = new System.Drawing.Point(318, 44);
+            this.lblSpecialBuffDurationHours.Location = new System.Drawing.Point(212, 29);
+            this.lblSpecialBuffDurationHours.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSpecialBuffDurationHours.Name = "lblSpecialBuffDurationHours";
-            this.lblSpecialBuffDurationHours.Size = new System.Drawing.Size(49, 20);
+            this.lblSpecialBuffDurationHours.Size = new System.Drawing.Size(33, 13);
             this.lblSpecialBuffDurationHours.TabIndex = 0;
             this.lblSpecialBuffDurationHours.Text = "hours";
             // 
             // lblSpecialBuffDurationMinutes
             // 
             this.lblSpecialBuffDurationMinutes.AutoSize = true;
-            this.lblSpecialBuffDurationMinutes.Location = new System.Drawing.Point(463, 44);
+            this.lblSpecialBuffDurationMinutes.Location = new System.Drawing.Point(309, 29);
+            this.lblSpecialBuffDurationMinutes.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSpecialBuffDurationMinutes.Name = "lblSpecialBuffDurationMinutes";
-            this.lblSpecialBuffDurationMinutes.Size = new System.Drawing.Size(65, 20);
+            this.lblSpecialBuffDurationMinutes.Size = new System.Drawing.Size(43, 13);
             this.lblSpecialBuffDurationMinutes.TabIndex = 0;
             this.lblSpecialBuffDurationMinutes.Text = "minutes";
             // 
             // lblSpecialBuffDurationDays
             // 
             this.lblSpecialBuffDurationDays.AutoSize = true;
-            this.lblSpecialBuffDurationDays.Location = new System.Drawing.Point(180, 44);
+            this.lblSpecialBuffDurationDays.Location = new System.Drawing.Point(120, 29);
+            this.lblSpecialBuffDurationDays.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSpecialBuffDurationDays.Name = "lblSpecialBuffDurationDays";
-            this.lblSpecialBuffDurationDays.Size = new System.Drawing.Size(42, 20);
+            this.lblSpecialBuffDurationDays.Size = new System.Drawing.Size(29, 13);
             this.lblSpecialBuffDurationDays.TabIndex = 0;
             this.lblSpecialBuffDurationDays.Text = "days";
             // 
             // lbSpecialBuffDuration
             // 
             this.lbSpecialBuffDuration.AutoSize = true;
-            this.lbSpecialBuffDuration.Location = new System.Drawing.Point(6, 44);
+            this.lbSpecialBuffDuration.Location = new System.Drawing.Point(4, 29);
+            this.lbSpecialBuffDuration.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbSpecialBuffDuration.Name = "lbSpecialBuffDuration";
-            this.lbSpecialBuffDuration.Size = new System.Drawing.Size(78, 20);
+            this.lbSpecialBuffDuration.Size = new System.Drawing.Size(53, 13);
             this.lbSpecialBuffDuration.TabIndex = 0;
             this.lbSpecialBuffDuration.Text = "Duration :";
             // 
             // msMain
             // 
-            this.msMain.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.msMain.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiItems,
@@ -1108,7 +1272,8 @@
             this.tsmiSettings});
             this.msMain.Location = new System.Drawing.Point(0, 0);
             this.msMain.Name = "msMain";
-            this.msMain.Size = new System.Drawing.Size(952, 36);
+            this.msMain.Padding = new System.Windows.Forms.Padding(4, 1, 0, 1);
+            this.msMain.Size = new System.Drawing.Size(635, 24);
             this.msMain.TabIndex = 14;
             this.msMain.Text = "menuStrip1";
             // 
@@ -1118,21 +1283,21 @@
             this.tsmiItemsAdd,
             this.tsmiItemsSearch});
             this.tsmiItems.Name = "tsmiItems";
-            this.tsmiItems.Size = new System.Drawing.Size(72, 30);
+            this.tsmiItems.Size = new System.Drawing.Size(48, 22);
             this.tsmiItems.Text = "Items";
             // 
             // tsmiItemsAdd
             // 
             this.tsmiItemsAdd.Name = "tsmiItemsAdd";
             this.tsmiItemsAdd.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.tsmiItemsAdd.Size = new System.Drawing.Size(226, 34);
+            this.tsmiItemsAdd.Size = new System.Drawing.Size(149, 22);
             this.tsmiItemsAdd.Text = "Add";
             // 
             // tsmiItemsSearch
             // 
             this.tsmiItemsSearch.Name = "tsmiItemsSearch";
             this.tsmiItemsSearch.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.tsmiItemsSearch.Size = new System.Drawing.Size(226, 34);
+            this.tsmiItemsSearch.Size = new System.Drawing.Size(149, 22);
             this.tsmiItemsSearch.Text = "Search";
             this.tsmiItemsSearch.Click += new System.EventHandler(this.TsmiItemsSearch_Click);
             // 
@@ -1141,14 +1306,14 @@
             this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFileReload});
             this.tsmiFile.Name = "tsmiFile";
-            this.tsmiFile.Size = new System.Drawing.Size(54, 30);
+            this.tsmiFile.Size = new System.Drawing.Size(37, 22);
             this.tsmiFile.Text = "File";
             // 
             // tsmiFileReload
             // 
             this.tsmiFileReload.Name = "tsmiFileReload";
             this.tsmiFileReload.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.tsmiFileReload.Size = new System.Drawing.Size(230, 34);
+            this.tsmiFileReload.Size = new System.Drawing.Size(151, 22);
             this.tsmiFileReload.Text = "Reload";
             this.tsmiFileReload.Click += new System.EventHandler(this.tsmiFileReload_Click);
             // 
@@ -1157,21 +1322,21 @@
             this.tsmiView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiViewExpertEditor});
             this.tsmiView.Name = "tsmiView";
-            this.tsmiView.Size = new System.Drawing.Size(65, 30);
+            this.tsmiView.Size = new System.Drawing.Size(44, 22);
             this.tsmiView.Text = "View";
             // 
             // tsmiViewExpertEditor
             // 
             this.tsmiViewExpertEditor.Name = "tsmiViewExpertEditor";
             this.tsmiViewExpertEditor.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.tsmiViewExpertEditor.Size = new System.Drawing.Size(275, 34);
+            this.tsmiViewExpertEditor.Size = new System.Drawing.Size(181, 22);
             this.tsmiViewExpertEditor.Text = "Expert Editor";
             this.tsmiViewExpertEditor.Click += new System.EventHandler(this.TsmiViewExpertEditor_Click);
             // 
             // tsmiSettings
             // 
             this.tsmiSettings.Name = "tsmiSettings";
-            this.tsmiSettings.Size = new System.Drawing.Size(92, 30);
+            this.tsmiSettings.Size = new System.Drawing.Size(61, 22);
             this.tsmiSettings.Text = "Settings";
             this.tsmiSettings.Click += new System.EventHandler(this.tsmiSettings_Click);
             // 
@@ -1180,171 +1345,318 @@
             this.pnlList.Controls.Add(this.tbSearch);
             this.pnlList.Controls.Add(this.lbItems);
             this.pnlList.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlList.Location = new System.Drawing.Point(0, 36);
+            this.pnlList.Location = new System.Drawing.Point(0, 24);
+            this.pnlList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlList.Name = "pnlList";
-            this.pnlList.Size = new System.Drawing.Size(386, 656);
+            this.pnlList.Size = new System.Drawing.Size(257, 426);
             this.pnlList.TabIndex = 15;
             // 
             // tbSearch
             // 
             this.tbSearch.Location = new System.Drawing.Point(0, 0);
+            this.tbSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(378, 26);
+            this.tbSearch.Size = new System.Drawing.Size(253, 20);
             this.tbSearch.TabIndex = 1;
             this.tbSearch.TextChanged += new System.EventHandler(this.tbSearch_TextChanged);
             // 
             // pbFileSaveReload
             // 
-            this.pbFileSaveReload.Location = new System.Drawing.Point(0, 677);
-            this.pbFileSaveReload.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pbFileSaveReload.Location = new System.Drawing.Point(0, 440);
             this.pbFileSaveReload.Name = "pbFileSaveReload";
-            this.pbFileSaveReload.Size = new System.Drawing.Size(952, 15);
+            this.pbFileSaveReload.Size = new System.Drawing.Size(635, 10);
             this.pbFileSaveReload.TabIndex = 2;
             // 
-            // lblBlinkwingChaoticSpawnKey
+            // tpMainFurniture
             // 
-            this.lblBlinkwingChaoticSpawnKey.AutoSize = true;
-            this.lblBlinkwingChaoticSpawnKey.Location = new System.Drawing.Point(114, 208);
-            this.lblBlinkwingChaoticSpawnKey.Name = "lblBlinkwingChaoticSpawnKey";
-            this.lblBlinkwingChaoticSpawnKey.Size = new System.Drawing.Size(149, 20);
-            this.lblBlinkwingChaoticSpawnKey.TabIndex = 0;
-            this.lblBlinkwingChaoticSpawnKey.Text = "Chaotic spawn key :";
+            this.tpMainFurniture.Controls.Add(this.gbFurnitureSettings);
+            this.tpMainFurniture.Location = new System.Drawing.Point(4, 22);
+            this.tpMainFurniture.Name = "tpMainFurniture";
+            this.tpMainFurniture.Size = new System.Drawing.Size(374, 400);
+            this.tpMainFurniture.TabIndex = 5;
+            this.tpMainFurniture.Text = "Furniture";
+            this.tpMainFurniture.UseVisualStyleBackColor = true;
             // 
-            // tbBlinkwingChaoticSpawnKey
+            // gbFurnitureSettings
             // 
-            this.tbBlinkwingChaoticSpawnKey.Location = new System.Drawing.Point(269, 205);
-            this.tbBlinkwingChaoticSpawnKey.Name = "tbBlinkwingChaoticSpawnKey";
-            this.tbBlinkwingChaoticSpawnKey.Size = new System.Drawing.Size(109, 26);
-            this.tbBlinkwingChaoticSpawnKey.TabIndex = 3;
+            this.gbFurnitureSettings.Controls.Add(this.cbFurnitureControl);
+            this.gbFurnitureSettings.Controls.Add(this.nudFurnitureDurationMinutes);
+            this.gbFurnitureSettings.Controls.Add(this.nudFurnitureDurationHours);
+            this.gbFurnitureSettings.Controls.Add(this.nudFurnitureDurationDays);
+            this.gbFurnitureSettings.Controls.Add(this.lblFurnitureDurationHours);
+            this.gbFurnitureSettings.Controls.Add(this.lblFurnitureDurationMinutes);
+            this.gbFurnitureSettings.Controls.Add(this.lblFurnitureDurationDays);
+            this.gbFurnitureSettings.Controls.Add(this.lblFurnitureControl);
+            this.gbFurnitureSettings.Controls.Add(this.lblFurnitureDuration);
+            this.gbFurnitureSettings.Location = new System.Drawing.Point(6, 6);
+            this.gbFurnitureSettings.Margin = new System.Windows.Forms.Padding(2);
+            this.gbFurnitureSettings.Name = "gbFurnitureSettings";
+            this.gbFurnitureSettings.Padding = new System.Windows.Forms.Padding(2);
+            this.gbFurnitureSettings.Size = new System.Drawing.Size(365, 103);
+            this.gbFurnitureSettings.TabIndex = 1;
+            this.gbFurnitureSettings.TabStop = false;
+            this.gbFurnitureSettings.Text = "Settings";
             // 
-            // gbBlinkwingMisc
+            // nudFurnitureDurationMinutes
             // 
-            this.gbBlinkwingMisc.Controls.Add(this.lblBlinkwingCastingTimeMs);
-            this.gbBlinkwingMisc.Controls.Add(this.lblBlinkwingCastingTimeSeconds);
-            this.gbBlinkwingMisc.Controls.Add(this.lblBlinkwingCastingTimeMinutes);
-            this.gbBlinkwingMisc.Controls.Add(this.nudBlinkwingCastingTimeMs);
-            this.gbBlinkwingMisc.Controls.Add(this.lblBlinkwingCastingTime);
-            this.gbBlinkwingMisc.Controls.Add(this.nudBlinkwingCastingTimeSeconds);
-            this.gbBlinkwingMisc.Controls.Add(this.nudBlinkwingCastingTimeMinutes);
-            this.gbBlinkwingMisc.Controls.Add(this.cbBlinkwingSfx);
-            this.gbBlinkwingMisc.Controls.Add(this.lblBlinkwingSfx);
-            this.gbBlinkwingMisc.Location = new System.Drawing.Point(9, 350);
-            this.gbBlinkwingMisc.Name = "gbBlinkwingMisc";
-            this.gbBlinkwingMisc.Size = new System.Drawing.Size(548, 124);
-            this.gbBlinkwingMisc.TabIndex = 2;
-            this.gbBlinkwingMisc.TabStop = false;
-            this.gbBlinkwingMisc.Text = "Misc";
-            // 
-            // lblBlinkwingCastingTime
-            // 
-            this.lblBlinkwingCastingTime.AutoSize = true;
-            this.lblBlinkwingCastingTime.Location = new System.Drawing.Point(20, 37);
-            this.lblBlinkwingCastingTime.Name = "lblBlinkwingCastingTime";
-            this.lblBlinkwingCastingTime.Size = new System.Drawing.Size(105, 20);
-            this.lblBlinkwingCastingTime.TabIndex = 0;
-            this.lblBlinkwingCastingTime.Text = "Casting time :";
-            // 
-            // nudBlinkwingCastingTimeMinutes
-            // 
-            this.nudBlinkwingCastingTimeMinutes.Location = new System.Drawing.Point(131, 35);
-            this.nudBlinkwingCastingTimeMinutes.Maximum = new decimal(new int[] {
-            2147483647,
+            this.nudFurnitureDurationMinutes.Location = new System.Drawing.Point(249, 27);
+            this.nudFurnitureDurationMinutes.Margin = new System.Windows.Forms.Padding(2);
+            this.nudFurnitureDurationMinutes.Maximum = new decimal(new int[] {
+            60,
             0,
             0,
             0});
-            this.nudBlinkwingCastingTimeMinutes.Minimum = new decimal(new int[] {
-            -2147483648,
+            this.nudFurnitureDurationMinutes.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             -2147483648});
-            this.nudBlinkwingCastingTimeMinutes.Name = "nudBlinkwingCastingTimeMinutes";
-            this.nudBlinkwingCastingTimeMinutes.Size = new System.Drawing.Size(64, 26);
-            this.nudBlinkwingCastingTimeMinutes.TabIndex = 1;
+            this.nudFurnitureDurationMinutes.Name = "nudFurnitureDurationMinutes";
+            this.nudFurnitureDurationMinutes.Size = new System.Drawing.Size(56, 20);
+            this.nudFurnitureDurationMinutes.TabIndex = 1;
             // 
-            // nudBlinkwingCastingTimeSeconds
+            // nudFurnitureDurationHours
             // 
-            this.nudBlinkwingCastingTimeSeconds.Location = new System.Drawing.Point(272, 35);
-            this.nudBlinkwingCastingTimeSeconds.Maximum = new decimal(new int[] {
-            2147483647,
+            this.nudFurnitureDurationHours.Location = new System.Drawing.Point(152, 27);
+            this.nudFurnitureDurationHours.Margin = new System.Windows.Forms.Padding(2);
+            this.nudFurnitureDurationHours.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.nudFurnitureDurationHours.Name = "nudFurnitureDurationHours";
+            this.nudFurnitureDurationHours.Size = new System.Drawing.Size(56, 20);
+            this.nudFurnitureDurationHours.TabIndex = 1;
+            // 
+            // nudFurnitureDurationDays
+            // 
+            this.nudFurnitureDurationDays.Location = new System.Drawing.Point(60, 27);
+            this.nudFurnitureDurationDays.Margin = new System.Windows.Forms.Padding(2);
+            this.nudFurnitureDurationDays.Maximum = new decimal(new int[] {
+            1491308,
             0,
             0,
             0});
-            this.nudBlinkwingCastingTimeSeconds.Minimum = new decimal(new int[] {
-            -2147483648,
-            0,
-            0,
-            -2147483648});
-            this.nudBlinkwingCastingTimeSeconds.Name = "nudBlinkwingCastingTimeSeconds";
-            this.nudBlinkwingCastingTimeSeconds.Size = new System.Drawing.Size(64, 26);
-            this.nudBlinkwingCastingTimeSeconds.TabIndex = 1;
+            this.nudFurnitureDurationDays.Name = "nudFurnitureDurationDays";
+            this.nudFurnitureDurationDays.Size = new System.Drawing.Size(56, 20);
+            this.nudFurnitureDurationDays.TabIndex = 1;
             // 
-            // lblBlinkwingCastingTimeMinutes
+            // lblFurnitureDurationHours
             // 
-            this.lblBlinkwingCastingTimeMinutes.AutoSize = true;
-            this.lblBlinkwingCastingTimeMinutes.Location = new System.Drawing.Point(201, 37);
-            this.lblBlinkwingCastingTimeMinutes.Name = "lblBlinkwingCastingTimeMinutes";
-            this.lblBlinkwingCastingTimeMinutes.Size = new System.Drawing.Size(65, 20);
-            this.lblBlinkwingCastingTimeMinutes.TabIndex = 0;
-            this.lblBlinkwingCastingTimeMinutes.Text = "minutes";
+            this.lblFurnitureDurationHours.AutoSize = true;
+            this.lblFurnitureDurationHours.Location = new System.Drawing.Point(212, 29);
+            this.lblFurnitureDurationHours.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblFurnitureDurationHours.Name = "lblFurnitureDurationHours";
+            this.lblFurnitureDurationHours.Size = new System.Drawing.Size(33, 13);
+            this.lblFurnitureDurationHours.TabIndex = 0;
+            this.lblFurnitureDurationHours.Text = "hours";
             // 
-            // lblBlinkwingCastingTimeSeconds
+            // lblFurnitureDurationMinutes
             // 
-            this.lblBlinkwingCastingTimeSeconds.AutoSize = true;
-            this.lblBlinkwingCastingTimeSeconds.Location = new System.Drawing.Point(342, 37);
-            this.lblBlinkwingCastingTimeSeconds.Name = "lblBlinkwingCastingTimeSeconds";
-            this.lblBlinkwingCastingTimeSeconds.Size = new System.Drawing.Size(69, 20);
-            this.lblBlinkwingCastingTimeSeconds.TabIndex = 0;
-            this.lblBlinkwingCastingTimeSeconds.Text = "seconds";
+            this.lblFurnitureDurationMinutes.AutoSize = true;
+            this.lblFurnitureDurationMinutes.Location = new System.Drawing.Point(309, 29);
+            this.lblFurnitureDurationMinutes.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblFurnitureDurationMinutes.Name = "lblFurnitureDurationMinutes";
+            this.lblFurnitureDurationMinutes.Size = new System.Drawing.Size(43, 13);
+            this.lblFurnitureDurationMinutes.TabIndex = 0;
+            this.lblFurnitureDurationMinutes.Text = "minutes";
             // 
-            // nudBlinkwingCastingTimeMs
+            // lblFurnitureDurationDays
             // 
-            this.nudBlinkwingCastingTimeMs.Location = new System.Drawing.Point(417, 35);
-            this.nudBlinkwingCastingTimeMs.Maximum = new decimal(new int[] {
-            2147483647,
+            this.lblFurnitureDurationDays.AutoSize = true;
+            this.lblFurnitureDurationDays.Location = new System.Drawing.Point(120, 29);
+            this.lblFurnitureDurationDays.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblFurnitureDurationDays.Name = "lblFurnitureDurationDays";
+            this.lblFurnitureDurationDays.Size = new System.Drawing.Size(29, 13);
+            this.lblFurnitureDurationDays.TabIndex = 0;
+            this.lblFurnitureDurationDays.Text = "days";
+            // 
+            // lblFurnitureDuration
+            // 
+            this.lblFurnitureDuration.AutoSize = true;
+            this.lblFurnitureDuration.Location = new System.Drawing.Point(4, 29);
+            this.lblFurnitureDuration.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblFurnitureDuration.Name = "lblFurnitureDuration";
+            this.lblFurnitureDuration.Size = new System.Drawing.Size(53, 13);
+            this.lblFurnitureDuration.TabIndex = 0;
+            this.lblFurnitureDuration.Text = "Duration :";
+            // 
+            // lblFurnitureControl
+            // 
+            this.lblFurnitureControl.AutoSize = true;
+            this.lblFurnitureControl.Location = new System.Drawing.Point(66, 70);
+            this.lblFurnitureControl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblFurnitureControl.Name = "lblFurnitureControl";
+            this.lblFurnitureControl.Size = new System.Drawing.Size(46, 13);
+            this.lblFurnitureControl.TabIndex = 0;
+            this.lblFurnitureControl.Text = "Control :";
+            // 
+            // cbFurnitureControl
+            // 
+            this.cbFurnitureControl.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbFurnitureControl.FormattingEnabled = true;
+            this.cbFurnitureControl.Location = new System.Drawing.Point(117, 67);
+            this.cbFurnitureControl.Name = "cbFurnitureControl";
+            this.cbFurnitureControl.Size = new System.Drawing.Size(180, 21);
+            this.cbFurnitureControl.TabIndex = 2;
+            // 
+            // tpMainPapering
+            // 
+            this.tpMainPapering.Controls.Add(this.groupBox1);
+            this.tpMainPapering.Location = new System.Drawing.Point(4, 22);
+            this.tpMainPapering.Name = "tpMainPapering";
+            this.tpMainPapering.Size = new System.Drawing.Size(374, 400);
+            this.tpMainPapering.TabIndex = 6;
+            this.tpMainPapering.Text = "Papering";
+            this.tpMainPapering.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnFurnitureSelectTexture);
+            this.groupBox1.Controls.Add(this.picboxFurnitureTexture);
+            this.groupBox1.Controls.Add(this.tbPaperingTexture);
+            this.groupBox1.Controls.Add(this.nudPaperingDurationMinutes);
+            this.groupBox1.Controls.Add(this.nudPaperingDurationHours);
+            this.groupBox1.Controls.Add(this.nudPaperingDurationDays);
+            this.groupBox1.Controls.Add(this.lblPaperingDurationHours);
+            this.groupBox1.Controls.Add(this.lblPaperingDurationMinutes);
+            this.groupBox1.Controls.Add(this.lblPaperingDurationDays);
+            this.groupBox1.Controls.Add(this.lblPaperingTexture);
+            this.groupBox1.Controls.Add(this.lblPaperingDuration);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(365, 103);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Settings";
+            // 
+            // nudPaperingDurationMinutes
+            // 
+            this.nudPaperingDurationMinutes.Location = new System.Drawing.Point(249, 27);
+            this.nudPaperingDurationMinutes.Margin = new System.Windows.Forms.Padding(2);
+            this.nudPaperingDurationMinutes.Maximum = new decimal(new int[] {
+            60,
             0,
             0,
             0});
-            this.nudBlinkwingCastingTimeMs.Minimum = new decimal(new int[] {
-            -2147483648,
+            this.nudPaperingDurationMinutes.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             -2147483648});
-            this.nudBlinkwingCastingTimeMs.Name = "nudBlinkwingCastingTimeMs";
-            this.nudBlinkwingCastingTimeMs.Size = new System.Drawing.Size(64, 26);
-            this.nudBlinkwingCastingTimeMs.TabIndex = 1;
+            this.nudPaperingDurationMinutes.Name = "nudPaperingDurationMinutes";
+            this.nudPaperingDurationMinutes.Size = new System.Drawing.Size(56, 20);
+            this.nudPaperingDurationMinutes.TabIndex = 1;
             // 
-            // lblBlinkwingCastingTimeMs
+            // nudPaperingDurationHours
             // 
-            this.lblBlinkwingCastingTimeMs.AutoSize = true;
-            this.lblBlinkwingCastingTimeMs.Location = new System.Drawing.Point(487, 37);
-            this.lblBlinkwingCastingTimeMs.Name = "lblBlinkwingCastingTimeMs";
-            this.lblBlinkwingCastingTimeMs.Size = new System.Drawing.Size(30, 20);
-            this.lblBlinkwingCastingTimeMs.TabIndex = 0;
-            this.lblBlinkwingCastingTimeMs.Text = "ms";
+            this.nudPaperingDurationHours.Location = new System.Drawing.Point(152, 27);
+            this.nudPaperingDurationHours.Margin = new System.Windows.Forms.Padding(2);
+            this.nudPaperingDurationHours.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.nudPaperingDurationHours.Name = "nudPaperingDurationHours";
+            this.nudPaperingDurationHours.Size = new System.Drawing.Size(56, 20);
+            this.nudPaperingDurationHours.TabIndex = 1;
             // 
-            // lblBlinkwingSfx
+            // nudPaperingDurationDays
             // 
-            this.lblBlinkwingSfx.AutoSize = true;
-            this.lblBlinkwingSfx.Location = new System.Drawing.Point(133, 82);
-            this.lblBlinkwingSfx.Name = "lblBlinkwingSfx";
-            this.lblBlinkwingSfx.Size = new System.Drawing.Size(40, 20);
-            this.lblBlinkwingSfx.TabIndex = 0;
-            this.lblBlinkwingSfx.Text = "Sfx :";
+            this.nudPaperingDurationDays.Location = new System.Drawing.Point(60, 27);
+            this.nudPaperingDurationDays.Margin = new System.Windows.Forms.Padding(2);
+            this.nudPaperingDurationDays.Maximum = new decimal(new int[] {
+            1491308,
+            0,
+            0,
+            0});
+            this.nudPaperingDurationDays.Name = "nudPaperingDurationDays";
+            this.nudPaperingDurationDays.Size = new System.Drawing.Size(56, 20);
+            this.nudPaperingDurationDays.TabIndex = 1;
             // 
-            // cbBlinkwingSfx
+            // lblPaperingDurationHours
             // 
-            this.cbBlinkwingSfx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbBlinkwingSfx.FormattingEnabled = true;
-            this.cbBlinkwingSfx.Location = new System.Drawing.Point(179, 79);
-            this.cbBlinkwingSfx.Name = "cbBlinkwingSfx";
-            this.cbBlinkwingSfx.Size = new System.Drawing.Size(236, 28);
-            this.cbBlinkwingSfx.TabIndex = 1;
+            this.lblPaperingDurationHours.AutoSize = true;
+            this.lblPaperingDurationHours.Location = new System.Drawing.Point(212, 29);
+            this.lblPaperingDurationHours.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPaperingDurationHours.Name = "lblPaperingDurationHours";
+            this.lblPaperingDurationHours.Size = new System.Drawing.Size(33, 13);
+            this.lblPaperingDurationHours.TabIndex = 0;
+            this.lblPaperingDurationHours.Text = "hours";
+            // 
+            // lblPaperingDurationMinutes
+            // 
+            this.lblPaperingDurationMinutes.AutoSize = true;
+            this.lblPaperingDurationMinutes.Location = new System.Drawing.Point(309, 29);
+            this.lblPaperingDurationMinutes.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPaperingDurationMinutes.Name = "lblPaperingDurationMinutes";
+            this.lblPaperingDurationMinutes.Size = new System.Drawing.Size(43, 13);
+            this.lblPaperingDurationMinutes.TabIndex = 0;
+            this.lblPaperingDurationMinutes.Text = "minutes";
+            // 
+            // lblPaperingDurationDays
+            // 
+            this.lblPaperingDurationDays.AutoSize = true;
+            this.lblPaperingDurationDays.Location = new System.Drawing.Point(120, 29);
+            this.lblPaperingDurationDays.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPaperingDurationDays.Name = "lblPaperingDurationDays";
+            this.lblPaperingDurationDays.Size = new System.Drawing.Size(29, 13);
+            this.lblPaperingDurationDays.TabIndex = 0;
+            this.lblPaperingDurationDays.Text = "days";
+            // 
+            // lblPaperingTexture
+            // 
+            this.lblPaperingTexture.AutoSize = true;
+            this.lblPaperingTexture.Location = new System.Drawing.Point(57, 69);
+            this.lblPaperingTexture.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPaperingTexture.Name = "lblPaperingTexture";
+            this.lblPaperingTexture.Size = new System.Drawing.Size(49, 13);
+            this.lblPaperingTexture.TabIndex = 0;
+            this.lblPaperingTexture.Text = "Texture :";
+            // 
+            // lblPaperingDuration
+            // 
+            this.lblPaperingDuration.AutoSize = true;
+            this.lblPaperingDuration.Location = new System.Drawing.Point(4, 29);
+            this.lblPaperingDuration.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPaperingDuration.Name = "lblPaperingDuration";
+            this.lblPaperingDuration.Size = new System.Drawing.Size(53, 13);
+            this.lblPaperingDuration.TabIndex = 0;
+            this.lblPaperingDuration.Text = "Duration :";
+            // 
+            // tbPaperingTexture
+            // 
+            this.tbPaperingTexture.Location = new System.Drawing.Point(111, 66);
+            this.tbPaperingTexture.Name = "tbPaperingTexture";
+            this.tbPaperingTexture.Size = new System.Drawing.Size(143, 20);
+            this.tbPaperingTexture.TabIndex = 2;
+            // 
+            // btnFurnitureSelectTexture
+            // 
+            this.btnFurnitureSelectTexture.Location = new System.Drawing.Point(253, 65);
+            this.btnFurnitureSelectTexture.Name = "btnFurnitureSelectTexture";
+            this.btnFurnitureSelectTexture.Size = new System.Drawing.Size(24, 22);
+            this.btnFurnitureSelectTexture.TabIndex = 24;
+            this.btnFurnitureSelectTexture.Text = "...";
+            this.btnFurnitureSelectTexture.UseVisualStyleBackColor = true;
+            // 
+            // picboxFurnitureTexture
+            // 
+            this.picboxFurnitureTexture.ErrorImage = ((System.Drawing.Image)(resources.GetObject("picboxFurnitureTexture.ErrorImage")));
+            this.picboxFurnitureTexture.Location = new System.Drawing.Point(283, 62);
+            this.picboxFurnitureTexture.Margin = new System.Windows.Forms.Padding(2);
+            this.picboxFurnitureTexture.Name = "picboxFurnitureTexture";
+            this.picboxFurnitureTexture.Size = new System.Drawing.Size(32, 32);
+            this.picboxFurnitureTexture.TabIndex = 23;
+            this.picboxFurnitureTexture.TabStop = false;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(952, 692);
+            this.ClientSize = new System.Drawing.Size(635, 450);
             this.Controls.Add(this.pbFileSaveReload);
             this.Controls.Add(this.tcMain);
             this.Controls.Add(this.pnlList);
@@ -1353,7 +1665,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.msMain;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Items Editor";
@@ -1381,6 +1692,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudConsumableDstValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.tpMainBlinkwing.ResumeLayout(false);
+            this.gbBlinkwingMisc.ResumeLayout(false);
+            this.gbBlinkwingMisc.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeMs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeSeconds)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeMinutes)).EndInit();
             this.gbBlinkwingSettings.ResumeLayout(false);
             this.gbBlinkwingSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingPositionZ)).EndInit();
@@ -1400,11 +1716,19 @@
             this.msMain.PerformLayout();
             this.pnlList.ResumeLayout(false);
             this.pnlList.PerformLayout();
-            this.gbBlinkwingMisc.ResumeLayout(false);
-            this.gbBlinkwingMisc.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeMinutes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeSeconds)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeMs)).EndInit();
+            this.tpMainFurniture.ResumeLayout(false);
+            this.gbFurnitureSettings.ResumeLayout(false);
+            this.gbFurnitureSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFurnitureDurationMinutes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFurnitureDurationHours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudFurnitureDurationDays)).EndInit();
+            this.tpMainPapering.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPaperingDurationMinutes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPaperingDurationHours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudPaperingDurationDays)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picboxFurnitureTexture)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1516,6 +1840,30 @@
         private System.Windows.Forms.NumericUpDown nudBlinkwingCastingTimeMs;
         private System.Windows.Forms.ComboBox cbBlinkwingSfx;
         private System.Windows.Forms.Label lblBlinkwingSfx;
+        private System.Windows.Forms.TabPage tpMainFurniture;
+        private System.Windows.Forms.GroupBox gbFurnitureSettings;
+        private System.Windows.Forms.NumericUpDown nudFurnitureDurationMinutes;
+        private System.Windows.Forms.NumericUpDown nudFurnitureDurationHours;
+        private System.Windows.Forms.NumericUpDown nudFurnitureDurationDays;
+        private System.Windows.Forms.Label lblFurnitureDurationHours;
+        private System.Windows.Forms.Label lblFurnitureDurationMinutes;
+        private System.Windows.Forms.Label lblFurnitureDurationDays;
+        private System.Windows.Forms.Label lblFurnitureDuration;
+        private System.Windows.Forms.Label lblFurnitureControl;
+        private System.Windows.Forms.ComboBox cbFurnitureControl;
+        private System.Windows.Forms.TabPage tpMainPapering;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.NumericUpDown nudPaperingDurationMinutes;
+        private System.Windows.Forms.NumericUpDown nudPaperingDurationHours;
+        private System.Windows.Forms.NumericUpDown nudPaperingDurationDays;
+        private System.Windows.Forms.Label lblPaperingDurationHours;
+        private System.Windows.Forms.Label lblPaperingDurationMinutes;
+        private System.Windows.Forms.Label lblPaperingDurationDays;
+        private System.Windows.Forms.Label lblPaperingTexture;
+        private System.Windows.Forms.Label lblPaperingDuration;
+        private System.Windows.Forms.TextBox tbPaperingTexture;
+        private System.Windows.Forms.Button btnFurnitureSelectTexture;
+        private System.Windows.Forms.PictureBox picboxFurnitureTexture;
     }
 }
 
