@@ -78,7 +78,7 @@ namespace ItemsEditor
             string resourcePath = tbResourcesPath.Text;
             string propFileName = settings.ResourcePath + tbPropFileName.Text;
             string stringsFilePath = settings.ResourcePath + tbStringFileName.Text;
-            string iconsFolderPath = settings.ResourcePath + tbIconsFolder.Text;
+            string iconsFolderPath = tbIconsFolder.Text;
             string texturesFolderPath = tbTexturesFolder.Text;
             int resourceVersion = Decimal.ToInt32(nudGameVersion.Value);
 
