@@ -264,27 +264,6 @@ namespace ItemsEditor
             pbMiscIcon.Image = new DDSImage(File.OpenRead(filePath)).BitmapImage;
         }
 
-        private void lb_DstParams_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cbEquipmentDstParam.DataBindings.Clear();
-            nudEquipmentDstValue.DataBindings.Clear();
-            if(!(lbEquipmentDstStats.SelectedItem is Dest dst)) return;   
-            cbEquipmentDstParam.DataBindings.Add(new Binding("SelectedItem", dst, nameof(Dest.Param), false, DataSourceUpdateMode.OnPropertyChanged));
-            nudEquipmentDstValue.DataBindings.Add(new Binding("Value", dst, nameof(Dest.Value), false, DataSourceUpdateMode.OnPropertyChanged));
-        }
-
-        private void cb_DstParamIdentifier_SelectedValueChanged(object sender, EventArgs e)
-        {
-            //if (lb_DstParams.SelectedIndex == -1) return;
-            //string text = $"Stat {lb_DstParams.SelectedIndex}";
-            //if (cb_DstParamIdentifier.SelectedText != "=" && int.TryParse(tb_DstParamValue.Text, out int intParamValue))
-            //{
-            //    string symbol = intParamValue >= 0 ? "+" : "";
-            //    text += $"({cb_DstParamIdentifier.Text} {symbol}{tb_DstParamValue.Text})";
-            //}
-            //lb_DstParams.Items[lb_DstParams.SelectedIndex] = text;
-        }
-
         private void TsmiItemsSearch_Click(object sender, EventArgs e)
         {
             tbSearch.Focus();
@@ -530,6 +509,15 @@ namespace ItemsEditor
                     return;
                 tbPaperingTexture.Text = Path.GetFileName(ofd.FileName);
             }
+        }
+
+        private void LbEquipmentDstStats_SelectedValueChanged(object sender, EventArgs e)
+        {
+            cbEquipmentDstParam.DataBindings.Clear();
+            nudEquipmentDstValue.DataBindings.Clear();
+            if (!(lbEquipmentDstStats.SelectedItem is Dest dst)) return;
+            cbEquipmentDstParam.DataBindings.Add(new Binding("SelectedItem", dst, nameof(Dest.Param), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudEquipmentDstValue.DataBindings.Add(new Binding("Value", dst, nameof(Dest.Value), false, DataSourceUpdateMode.OnPropertyChanged));
         }
     }
 }

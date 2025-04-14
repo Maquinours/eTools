@@ -83,7 +83,7 @@ namespace Common
             }
         }
 
-        public string Label { get => $"{this.Param} ({this.Value})"; }
+        public string Label { get => this.Param != "=" ? $"{this.Param} ({this.Value})" : $"Stat {this._index}"; }
 
         public Dest(Item item, int index)
         {
@@ -116,6 +116,7 @@ namespace Common
 
         private void ItemProp_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            bool hasChange = true;
             switch (_index)
             {
                 case 1:
@@ -123,39 +124,47 @@ namespace Common
                         NotifyPropertyChanged(nameof(Param));
                     else if (e.PropertyName == nameof(Item.Prop.NAdjParamVal1))
                         NotifyPropertyChanged(nameof(Value));
+                    else hasChange = false;
                     break;
                 case 2:
                     if (e.PropertyName == nameof(Item.Prop.DwDestParam2))
                         NotifyPropertyChanged(nameof(Param));
                     else if (e.PropertyName == nameof(Item.Prop.NAdjParamVal2))
                         NotifyPropertyChanged(nameof(Value));
+                    else hasChange = false;
                     break;
                 case 3:
                     if (e.PropertyName == nameof(Item.Prop.DwDestParam3))
                         NotifyPropertyChanged(nameof(Param));
                     else if (e.PropertyName == nameof(Item.Prop.NAdjParamVal3))
                         NotifyPropertyChanged(nameof(Value));
+                    else hasChange = false;
                     break;
                 case 4:
                     if (e.PropertyName == nameof(Item.Prop.DwDestParam4))
                         NotifyPropertyChanged(nameof(Param));
                     else if (e.PropertyName == nameof(Item.Prop.NAdjParamVal4))
                         NotifyPropertyChanged(nameof(Value));
+                    else hasChange = false;
                     break;
                 case 5:
                     if (e.PropertyName == nameof(Item.Prop.DwDestParam5))
                         NotifyPropertyChanged(nameof(Param));
                     else if (e.PropertyName == nameof(Item.Prop.NAdjParamVal5))
                         NotifyPropertyChanged(nameof(Value));
+                    else hasChange = false;
                     break;
                 case 6:
                     if (e.PropertyName == nameof(Item.Prop.DwDestParam6))
                         NotifyPropertyChanged(nameof(Param));
                     else if (e.PropertyName == nameof(Item.Prop.NAdjParamVal6))
                         NotifyPropertyChanged(nameof(Value));
+                    else hasChange = false;
                     break;
                 default: throw new System.Exception("Invalid Dest Index");
             }
+            if (hasChange)
+                this.NotifyPropertyChanged(nameof(this.Label));
         }
     }
 
@@ -577,6 +586,9 @@ namespace Common
                 case nameof(Settings.TexturesFolderPath):
                     NotifyPropertyChanged(nameof(this.PaperingTexture));
                     break;
+                case nameof(Settings.ResourceVersion):
+                    this.CreateDests();
+                    break;
             }
         }
 
@@ -617,7 +629,7 @@ namespace Common
         public BindingList<Dest> Dests
         {
             get => this._dests;
-            private set { this._dests = value; }
+            private set { if (value != this.Dests) { this._dests = value; this.NotifyPropertyChanged(); } }
         }
 
         public bool IsTownBlinkwing
@@ -766,10 +778,7 @@ namespace Common
 
         public Item()
         {
-            this.Dests = new BindingList<Dest>();
-            for (int i = 1; i <= 6; i++)
-                this.Dests.Add(new Dest(this, i));
-            
+            this.CreateDests();
             Project.GetInstance().strings.CollectionChanged += ProjectStrings_CollectionChanged;
             Settings.GetInstance().PropertyChanged += Settings_PropertyChanged;
         }
@@ -780,6 +789,15 @@ namespace Common
             Settings.GetInstance().PropertyChanged -= Settings_PropertyChanged;
             if (this.Prop != null)
                 this.Prop.PropertyChanged -= Prop_PropertyChanged;
+        }
+
+        private void CreateDests()
+        {
+            Settings settings = Settings.GetInstance();
+            int maxDest = settings.ResourceVersion >= 19 ? 6 : 3;
+            this.Dests = new BindingList<Dest>();
+            for (int i = 1; i <= maxDest; i++)
+                this.Dests.Add(new Dest(this, i));
         }
     }
 }
