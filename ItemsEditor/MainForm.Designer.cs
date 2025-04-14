@@ -161,6 +161,17 @@
             this.gbPetSettings = new System.Windows.Forms.GroupBox();
             this.cbPetMoverIdentifier = new System.Windows.Forms.ComboBox();
             this.lblPetMoverIdentifier = new System.Windows.Forms.Label();
+            this.tpMainBuffBead = new System.Windows.Forms.TabPage();
+            this.gbBuffBeadSettings = new System.Windows.Forms.GroupBox();
+            this.nudBuffBeadDurationMinutes = new System.Windows.Forms.NumericUpDown();
+            this.nudBuffBeadDurationHours = new System.Windows.Forms.NumericUpDown();
+            this.nudBuffBeadDurationDays = new System.Windows.Forms.NumericUpDown();
+            this.lblBuffBeadDurationHours = new System.Windows.Forms.Label();
+            this.lblBuffBeadDurationMinutes = new System.Windows.Forms.Label();
+            this.lblBuffBeadDurationDays = new System.Windows.Forms.Label();
+            this.lblBuffBeadGrade = new System.Windows.Forms.Label();
+            this.lblBuffBeadDuration = new System.Windows.Forms.Label();
+            this.nudBuffBeadGrade = new System.Windows.Forms.NumericUpDown();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -209,6 +220,12 @@
             this.pnlList.SuspendLayout();
             this.tpMainPet.SuspendLayout();
             this.gbPetSettings.SuspendLayout();
+            this.tpMainBuffBead.SuspendLayout();
+            this.gbBuffBeadSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadDurationMinutes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadDurationHours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadDurationDays)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadGrade)).BeginInit();
             this.SuspendLayout();
             // 
             // lbItems
@@ -332,6 +349,7 @@
             this.tcMain.Controls.Add(this.tpMainFurniture);
             this.tcMain.Controls.Add(this.tpMainPapering);
             this.tcMain.Controls.Add(this.tpMainPet);
+            this.tcMain.Controls.Add(this.tpMainBuffBead);
             this.tcMain.Dock = System.Windows.Forms.DockStyle.Right;
             this.tcMain.Location = new System.Drawing.Point(253, 24);
             this.tcMain.Name = "tcMain";
@@ -1703,6 +1721,143 @@
             this.lblPetMoverIdentifier.TabIndex = 3;
             this.lblPetMoverIdentifier.Text = "Mover :";
             // 
+            // tpMainBuffBead
+            // 
+            this.tpMainBuffBead.Controls.Add(this.gbBuffBeadSettings);
+            this.tpMainBuffBead.Location = new System.Drawing.Point(4, 22);
+            this.tpMainBuffBead.Name = "tpMainBuffBead";
+            this.tpMainBuffBead.Size = new System.Drawing.Size(374, 400);
+            this.tpMainBuffBead.TabIndex = 8;
+            this.tpMainBuffBead.Text = "Buff bead";
+            this.tpMainBuffBead.UseVisualStyleBackColor = true;
+            // 
+            // gbBuffBeadSettings
+            // 
+            this.gbBuffBeadSettings.Controls.Add(this.nudBuffBeadDurationMinutes);
+            this.gbBuffBeadSettings.Controls.Add(this.nudBuffBeadDurationHours);
+            this.gbBuffBeadSettings.Controls.Add(this.nudBuffBeadGrade);
+            this.gbBuffBeadSettings.Controls.Add(this.nudBuffBeadDurationDays);
+            this.gbBuffBeadSettings.Controls.Add(this.lblBuffBeadDurationHours);
+            this.gbBuffBeadSettings.Controls.Add(this.lblBuffBeadDurationMinutes);
+            this.gbBuffBeadSettings.Controls.Add(this.lblBuffBeadDurationDays);
+            this.gbBuffBeadSettings.Controls.Add(this.lblBuffBeadGrade);
+            this.gbBuffBeadSettings.Controls.Add(this.lblBuffBeadDuration);
+            this.gbBuffBeadSettings.Location = new System.Drawing.Point(9, 9);
+            this.gbBuffBeadSettings.Margin = new System.Windows.Forms.Padding(2);
+            this.gbBuffBeadSettings.Name = "gbBuffBeadSettings";
+            this.gbBuffBeadSettings.Padding = new System.Windows.Forms.Padding(2);
+            this.gbBuffBeadSettings.Size = new System.Drawing.Size(358, 103);
+            this.gbBuffBeadSettings.TabIndex = 3;
+            this.gbBuffBeadSettings.TabStop = false;
+            this.gbBuffBeadSettings.Text = "Settings";
+            // 
+            // nudBuffBeadDurationMinutes
+            // 
+            this.nudBuffBeadDurationMinutes.Location = new System.Drawing.Point(249, 27);
+            this.nudBuffBeadDurationMinutes.Margin = new System.Windows.Forms.Padding(2);
+            this.nudBuffBeadDurationMinutes.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.nudBuffBeadDurationMinutes.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.nudBuffBeadDurationMinutes.Name = "nudBuffBeadDurationMinutes";
+            this.nudBuffBeadDurationMinutes.Size = new System.Drawing.Size(56, 20);
+            this.nudBuffBeadDurationMinutes.TabIndex = 1;
+            // 
+            // nudBuffBeadDurationHours
+            // 
+            this.nudBuffBeadDurationHours.Location = new System.Drawing.Point(152, 27);
+            this.nudBuffBeadDurationHours.Margin = new System.Windows.Forms.Padding(2);
+            this.nudBuffBeadDurationHours.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.nudBuffBeadDurationHours.Name = "nudBuffBeadDurationHours";
+            this.nudBuffBeadDurationHours.Size = new System.Drawing.Size(56, 20);
+            this.nudBuffBeadDurationHours.TabIndex = 1;
+            // 
+            // nudBuffBeadDurationDays
+            // 
+            this.nudBuffBeadDurationDays.Location = new System.Drawing.Point(60, 27);
+            this.nudBuffBeadDurationDays.Margin = new System.Windows.Forms.Padding(2);
+            this.nudBuffBeadDurationDays.Maximum = new decimal(new int[] {
+            1491308,
+            0,
+            0,
+            0});
+            this.nudBuffBeadDurationDays.Name = "nudBuffBeadDurationDays";
+            this.nudBuffBeadDurationDays.Size = new System.Drawing.Size(56, 20);
+            this.nudBuffBeadDurationDays.TabIndex = 1;
+            // 
+            // lblBuffBeadDurationHours
+            // 
+            this.lblBuffBeadDurationHours.AutoSize = true;
+            this.lblBuffBeadDurationHours.Location = new System.Drawing.Point(212, 29);
+            this.lblBuffBeadDurationHours.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBuffBeadDurationHours.Name = "lblBuffBeadDurationHours";
+            this.lblBuffBeadDurationHours.Size = new System.Drawing.Size(33, 13);
+            this.lblBuffBeadDurationHours.TabIndex = 0;
+            this.lblBuffBeadDurationHours.Text = "hours";
+            // 
+            // lblBuffBeadDurationMinutes
+            // 
+            this.lblBuffBeadDurationMinutes.AutoSize = true;
+            this.lblBuffBeadDurationMinutes.Location = new System.Drawing.Point(309, 29);
+            this.lblBuffBeadDurationMinutes.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBuffBeadDurationMinutes.Name = "lblBuffBeadDurationMinutes";
+            this.lblBuffBeadDurationMinutes.Size = new System.Drawing.Size(43, 13);
+            this.lblBuffBeadDurationMinutes.TabIndex = 0;
+            this.lblBuffBeadDurationMinutes.Text = "minutes";
+            // 
+            // lblBuffBeadDurationDays
+            // 
+            this.lblBuffBeadDurationDays.AutoSize = true;
+            this.lblBuffBeadDurationDays.Location = new System.Drawing.Point(120, 29);
+            this.lblBuffBeadDurationDays.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBuffBeadDurationDays.Name = "lblBuffBeadDurationDays";
+            this.lblBuffBeadDurationDays.Size = new System.Drawing.Size(29, 13);
+            this.lblBuffBeadDurationDays.TabIndex = 0;
+            this.lblBuffBeadDurationDays.Text = "days";
+            // 
+            // lblBuffBeadGrade
+            // 
+            this.lblBuffBeadGrade.AutoSize = true;
+            this.lblBuffBeadGrade.Location = new System.Drawing.Point(106, 69);
+            this.lblBuffBeadGrade.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBuffBeadGrade.Name = "lblBuffBeadGrade";
+            this.lblBuffBeadGrade.Size = new System.Drawing.Size(42, 13);
+            this.lblBuffBeadGrade.TabIndex = 0;
+            this.lblBuffBeadGrade.Text = "Grade :";
+            // 
+            // lblBuffBeadDuration
+            // 
+            this.lblBuffBeadDuration.AutoSize = true;
+            this.lblBuffBeadDuration.Location = new System.Drawing.Point(4, 29);
+            this.lblBuffBeadDuration.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBuffBeadDuration.Name = "lblBuffBeadDuration";
+            this.lblBuffBeadDuration.Size = new System.Drawing.Size(53, 13);
+            this.lblBuffBeadDuration.TabIndex = 0;
+            this.lblBuffBeadDuration.Text = "Duration :";
+            // 
+            // nudBuffBeadGrade
+            // 
+            this.nudBuffBeadGrade.Location = new System.Drawing.Point(152, 67);
+            this.nudBuffBeadGrade.Margin = new System.Windows.Forms.Padding(2);
+            this.nudBuffBeadGrade.Maximum = new decimal(new int[] {
+            1491308,
+            0,
+            0,
+            0});
+            this.nudBuffBeadGrade.Name = "nudBuffBeadGrade";
+            this.nudBuffBeadGrade.Size = new System.Drawing.Size(56, 20);
+            this.nudBuffBeadGrade.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1783,6 +1938,13 @@
             this.tpMainPet.ResumeLayout(false);
             this.gbPetSettings.ResumeLayout(false);
             this.gbPetSettings.PerformLayout();
+            this.tpMainBuffBead.ResumeLayout(false);
+            this.gbBuffBeadSettings.ResumeLayout(false);
+            this.gbBuffBeadSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadDurationMinutes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadDurationHours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadDurationDays)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadGrade)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1922,6 +2084,17 @@
         private System.Windows.Forms.GroupBox gbPetSettings;
         private System.Windows.Forms.ComboBox cbPetMoverIdentifier;
         private System.Windows.Forms.Label lblPetMoverIdentifier;
+        private System.Windows.Forms.TabPage tpMainBuffBead;
+        private System.Windows.Forms.GroupBox gbBuffBeadSettings;
+        private System.Windows.Forms.NumericUpDown nudBuffBeadDurationMinutes;
+        private System.Windows.Forms.NumericUpDown nudBuffBeadDurationHours;
+        private System.Windows.Forms.NumericUpDown nudBuffBeadDurationDays;
+        private System.Windows.Forms.Label lblBuffBeadDurationHours;
+        private System.Windows.Forms.Label lblBuffBeadDurationMinutes;
+        private System.Windows.Forms.Label lblBuffBeadDurationDays;
+        private System.Windows.Forms.Label lblBuffBeadGrade;
+        private System.Windows.Forms.Label lblBuffBeadDuration;
+        private System.Windows.Forms.NumericUpDown nudBuffBeadGrade;
     }
 }
 

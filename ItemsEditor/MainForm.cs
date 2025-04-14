@@ -135,6 +135,10 @@ namespace ItemsEditor
             picboxPaperingTexture.DataBindings.Clear();
             cbPetMoverIdentifier.DataBindings.Clear();
             cbPetMoverIdentifier.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+            nudBuffBeadDurationDays.DataBindings.Clear();
+            nudBuffBeadDurationHours.DataBindings.Clear();
+            nudBuffBeadDurationMinutes.DataBindings.Clear();
+            nudBuffBeadGrade.DataBindings.Clear();
             lbEquipmentDstStats.DataSource = null;
             lbConsumableDst.DataSource = null;
 
@@ -186,6 +190,10 @@ namespace ItemsEditor
             tbPaperingTexture.DataBindings.Add(new Binding(nameof(TextBox.Text), currentItem.Prop, nameof(ItemProp.SzTextFileName), false, DataSourceUpdateMode.OnPropertyChanged));
             picboxPaperingTexture.DataBindings.Add(new Binding(nameof(PictureBox.Image), currentItem, nameof(Item.PaperingTexture), true, DataSourceUpdateMode.OnPropertyChanged));
             cbPetMoverIdentifier.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwLinkKind), true, DataSourceUpdateMode.OnPropertyChanged));
+            nudBuffBeadDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBuffBeadDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBuffBeadDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBuffBeadGrade.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMax), false, DataSourceUpdateMode.OnPropertyChanged));
             lbEquipmentDstStats.DisplayMember = nameof(Dest.Label);
             lbEquipmentDstStats.DataSource = currentItem.Dests;
             lbConsumableDst.DisplayMember = nameof(Dest.Label);
@@ -488,10 +496,12 @@ namespace ItemsEditor
                 }
                 switch(currentItem.Prop.DwItemKind3)
                 {
-
                     case "IK3_PET":
                     case "IK3_SUMMON_NPC":
                         tabs.Add(tpMainPet);
+                        break;
+                    case "IK3_VIS":
+                        tabs.Add(tpMainBuffBead);
                         break;
                 }
             }
