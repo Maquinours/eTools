@@ -131,7 +131,7 @@ namespace ItemsEditor
             nudPaperingDurationHours.DataBindings.Clear();
             nudPaperingDurationMinutes.DataBindings.Clear();
             tbPaperingTexture.DataBindings.Clear();
-            picboxFurnitureTexture.DataBindings.Clear();
+            picboxPaperingTexture.DataBindings.Clear();
             lbEquipmentDstStats.DataSource = null;
             lbConsumableDst.DataSource = null;
 
@@ -181,7 +181,7 @@ namespace ItemsEditor
             nudPaperingDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
             nudPaperingDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
             tbPaperingTexture.DataBindings.Add(new Binding(nameof(TextBox.Text), currentItem.Prop, nameof(ItemProp.SzTextFileName), false, DataSourceUpdateMode.OnPropertyChanged));
-            picboxFurnitureTexture.DataBindings.Add(new Binding(nameof(PictureBox.Image), currentItem, nameof(Item.PaperingTexture), true, DataSourceUpdateMode.OnPropertyChanged));
+            picboxPaperingTexture.DataBindings.Add(new Binding(nameof(PictureBox.Image), currentItem, nameof(Item.PaperingTexture), true, DataSourceUpdateMode.OnPropertyChanged));
             lbEquipmentDstStats.DisplayMember = nameof(Dest.Label);
             lbEquipmentDstStats.DataSource = currentItem.Dests;
             lbConsumableDst.DisplayMember = nameof(Dest.Label);
@@ -490,6 +490,24 @@ namespace ItemsEditor
             foreach(TabPage tab in tabs)
                 if(!tcMain.TabPages.Contains(tab))
                     tcMain.TabPages.Add(tab);
+        }
+
+        private void BtnPaperingSelectTexture_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog()
+            {
+                InitialDirectory = Settings.GetInstance().TexturesFolderPath,
+                Filter = ".dds files | *.dds",
+                CheckFileExists = true,
+                FileName = tbPaperingTexture.Text,
+            };
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                if (!ofd.SafeFileName.ToLower().EndsWith(".dds")
+                    || !File.Exists(ofd.FileName))
+                    return;
+                tbPaperingTexture.Text = Path.GetFileName(ofd.FileName);
+            }
         }
     }
 }
