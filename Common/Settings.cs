@@ -53,7 +53,7 @@ namespace Common
         /// <summary>
         /// .txt file path that process will read and save (file containing names & descriptions) (E.G propMover.txt.txt)
         /// </summary>
-        public string StringsFilePath { get => this._stringsFilePath; private set { if (value != this.StringsFilePath) { this._stringsFilePath = value; this.NotifyPropertyChanged(); } } }
+        public string StringsFilePath { get => this._stringsFilePath; set { if (value != this.StringsFilePath) { this._stringsFilePath = value; this.NotifyPropertyChanged(); } } }
         /// <summary>
         /// Main data file that process will read and save (E.G propMover.txt)
         /// </summary>
