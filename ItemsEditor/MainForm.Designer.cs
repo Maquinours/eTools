@@ -157,6 +157,10 @@
             this.pnlList = new System.Windows.Forms.Panel();
             this.tbSearch = new System.Windows.Forms.TextBox();
             this.pbFileSaveReload = new System.Windows.Forms.ProgressBar();
+            this.tpMainPet = new System.Windows.Forms.TabPage();
+            this.gbPetSettings = new System.Windows.Forms.GroupBox();
+            this.cbPetMoverIdentifier = new System.Windows.Forms.ComboBox();
+            this.lblPetMoverIdentifier = new System.Windows.Forms.Label();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -203,6 +207,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudPaperingDurationDays)).BeginInit();
             this.msMain.SuspendLayout();
             this.pnlList.SuspendLayout();
+            this.tpMainPet.SuspendLayout();
+            this.gbPetSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbItems
@@ -325,6 +331,7 @@
             this.tcMain.Controls.Add(this.tpMainSpecialBuff);
             this.tcMain.Controls.Add(this.tpMainFurniture);
             this.tcMain.Controls.Add(this.tpMainPapering);
+            this.tcMain.Controls.Add(this.tpMainPet);
             this.tcMain.Dock = System.Windows.Forms.DockStyle.Right;
             this.tcMain.Location = new System.Drawing.Point(253, 24);
             this.tcMain.Name = "tcMain";
@@ -1654,6 +1661,48 @@
             this.pbFileSaveReload.Size = new System.Drawing.Size(635, 10);
             this.pbFileSaveReload.TabIndex = 2;
             // 
+            // tpMainPet
+            // 
+            this.tpMainPet.Controls.Add(this.gbPetSettings);
+            this.tpMainPet.Location = new System.Drawing.Point(4, 22);
+            this.tpMainPet.Name = "tpMainPet";
+            this.tpMainPet.Size = new System.Drawing.Size(374, 400);
+            this.tpMainPet.TabIndex = 7;
+            this.tpMainPet.Text = "Pet";
+            this.tpMainPet.UseVisualStyleBackColor = true;
+            // 
+            // gbPetSettings
+            // 
+            this.gbPetSettings.Controls.Add(this.cbPetMoverIdentifier);
+            this.gbPetSettings.Controls.Add(this.lblPetMoverIdentifier);
+            this.gbPetSettings.Location = new System.Drawing.Point(9, 9);
+            this.gbPetSettings.Margin = new System.Windows.Forms.Padding(2);
+            this.gbPetSettings.Name = "gbPetSettings";
+            this.gbPetSettings.Padding = new System.Windows.Forms.Padding(2);
+            this.gbPetSettings.Size = new System.Drawing.Size(358, 68);
+            this.gbPetSettings.TabIndex = 3;
+            this.gbPetSettings.TabStop = false;
+            this.gbPetSettings.Text = "Settings";
+            // 
+            // cbPetMoverIdentifier
+            // 
+            this.cbPetMoverIdentifier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbPetMoverIdentifier.FormattingEnabled = true;
+            this.cbPetMoverIdentifier.Location = new System.Drawing.Point(115, 29);
+            this.cbPetMoverIdentifier.Name = "cbPetMoverIdentifier";
+            this.cbPetMoverIdentifier.Size = new System.Drawing.Size(180, 21);
+            this.cbPetMoverIdentifier.TabIndex = 4;
+            // 
+            // lblPetMoverIdentifier
+            // 
+            this.lblPetMoverIdentifier.AutoSize = true;
+            this.lblPetMoverIdentifier.Location = new System.Drawing.Point(67, 32);
+            this.lblPetMoverIdentifier.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPetMoverIdentifier.Name = "lblPetMoverIdentifier";
+            this.lblPetMoverIdentifier.Size = new System.Drawing.Size(43, 13);
+            this.lblPetMoverIdentifier.TabIndex = 3;
+            this.lblPetMoverIdentifier.Text = "Mover :";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1731,6 +1780,9 @@
             this.msMain.PerformLayout();
             this.pnlList.ResumeLayout(false);
             this.pnlList.PerformLayout();
+            this.tpMainPet.ResumeLayout(false);
+            this.gbPetSettings.ResumeLayout(false);
+            this.gbPetSettings.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1866,6 +1918,10 @@
         private System.Windows.Forms.TextBox tbPaperingTexture;
         private System.Windows.Forms.Button btnPaperingSelectTexture;
         private System.Windows.Forms.PictureBox picboxPaperingTexture;
+        private System.Windows.Forms.TabPage tpMainPet;
+        private System.Windows.Forms.GroupBox gbPetSettings;
+        private System.Windows.Forms.ComboBox cbPetMoverIdentifier;
+        private System.Windows.Forms.Label lblPetMoverIdentifier;
     }
 }
 

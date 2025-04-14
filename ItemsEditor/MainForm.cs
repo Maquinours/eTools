@@ -52,6 +52,7 @@ namespace ItemsEditor
                 cbBlinkwingWorld.DataSource = prj.GetWorldIdentifiers();
                 cbBlinkwingSfx.DataSource = prj.GetSfxIdentifiers();
                 cbFurnitureControl.DataSource = prj.GetControlIdentifiers();
+                cbPetMoverIdentifier.DataSource = prj.GetPetMoverIdentifiers();
                 SetListBoxDataSource();
             }
             catch (Exception e)
@@ -132,6 +133,8 @@ namespace ItemsEditor
             nudPaperingDurationMinutes.DataBindings.Clear();
             tbPaperingTexture.DataBindings.Clear();
             picboxPaperingTexture.DataBindings.Clear();
+            cbPetMoverIdentifier.DataBindings.Clear();
+            cbPetMoverIdentifier.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
             lbEquipmentDstStats.DataSource = null;
             lbConsumableDst.DataSource = null;
 
@@ -182,11 +185,12 @@ namespace ItemsEditor
             nudPaperingDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
             tbPaperingTexture.DataBindings.Add(new Binding(nameof(TextBox.Text), currentItem.Prop, nameof(ItemProp.SzTextFileName), false, DataSourceUpdateMode.OnPropertyChanged));
             picboxPaperingTexture.DataBindings.Add(new Binding(nameof(PictureBox.Image), currentItem, nameof(Item.PaperingTexture), true, DataSourceUpdateMode.OnPropertyChanged));
+            cbPetMoverIdentifier.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwLinkKind), true, DataSourceUpdateMode.OnPropertyChanged));
             lbEquipmentDstStats.DisplayMember = nameof(Dest.Label);
             lbEquipmentDstStats.DataSource = currentItem.Dests;
             lbConsumableDst.DisplayMember = nameof(Dest.Label);
             lbConsumableDst.DataSource = currentItem.Dests;
-            Item[] items = Project.GetInstance().Items.Where(x => x.Prop.DwItemKind2 == "IK2_PAPERING").ToArray();
+            //Item[] items = Project.GetInstance().Items.Where(x => x.Prop.DwItemKind3 == "IK3_VIS").ToArray();
             RefreshTabsState();
 
                 // TODO: reimplement something like this (rework params)
@@ -480,6 +484,14 @@ namespace ItemsEditor
                         break;
                     case "IK2_BUFF2":
                         tabs.Add(tpMainSpecialBuff);
+                        break;
+                }
+                switch(currentItem.Prop.DwItemKind3)
+                {
+
+                    case "IK3_PET":
+                    case "IK3_SUMMON_NPC":
+                        tabs.Add(tpMainPet);
                         break;
                 }
             }
