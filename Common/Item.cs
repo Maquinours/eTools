@@ -570,6 +570,15 @@ namespace Common
                     NotifyPropertyChanged(nameof(this.Description));
             }
         }
+        private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case nameof(Settings.TexturesFolderPath):
+                    NotifyPropertyChanged(nameof(this.PaperingTexture));
+                    break;
+            }
+        }
 
         private ItemProp _prop;
         private ModelElem _model;
@@ -762,11 +771,13 @@ namespace Common
                 this.Dests.Add(new Dest(this, i));
             
             Project.GetInstance().strings.CollectionChanged += ProjectStrings_CollectionChanged;
+            Settings.GetInstance().PropertyChanged += Settings_PropertyChanged;
         }
 
         public void Dispose()
         {
             Project.GetInstance().strings.CollectionChanged -= ProjectStrings_CollectionChanged;
+            Settings.GetInstance().PropertyChanged -= Settings_PropertyChanged;
             if (this.Prop != null)
                 this.Prop.PropertyChanged -= Prop_PropertyChanged;
         }
