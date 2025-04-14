@@ -185,6 +185,19 @@
             this.lblGuildHouseFurnitureDuration = new System.Windows.Forms.Label();
             this.lblGuildHouseFurnitureRank = new System.Windows.Forms.Label();
             this.nudGuildHouseFurnitureRank = new System.Windows.Forms.NumericUpDown();
+            this.tpMainGuildHouseNPC = new System.Windows.Forms.TabPage();
+            this.gbGuildHouseNpcSettings = new System.Windows.Forms.GroupBox();
+            this.cbGuildHouseNpcMover = new System.Windows.Forms.ComboBox();
+            this.nudGuildHouseNpcDurationMinutes = new System.Windows.Forms.NumericUpDown();
+            this.nudGuildHouseNpcDurationHours = new System.Windows.Forms.NumericUpDown();
+            this.nudGuildHouseNpcRank = new System.Windows.Forms.NumericUpDown();
+            this.nudGuildHouseNpcDurationDays = new System.Windows.Forms.NumericUpDown();
+            this.lblGuildHouseNpcDurationHours = new System.Windows.Forms.Label();
+            this.lblGuildHouseNpcDurationMinutes = new System.Windows.Forms.Label();
+            this.lblGuildHouseNpcDurationDays = new System.Windows.Forms.Label();
+            this.lblGuildHouseNpcRank = new System.Windows.Forms.Label();
+            this.lblGuildHouseNpcMover = new System.Windows.Forms.Label();
+            this.lblGuildHouseNpcDuration = new System.Windows.Forms.Label();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -245,6 +258,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseFurnitureDurationHours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseFurnitureDurationDays)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseFurnitureRank)).BeginInit();
+            this.tpMainGuildHouseNPC.SuspendLayout();
+            this.gbGuildHouseNpcSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseNpcDurationMinutes)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseNpcDurationHours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseNpcRank)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseNpcDurationDays)).BeginInit();
             this.SuspendLayout();
             // 
             // lbItems
@@ -368,6 +387,7 @@
             this.tcMain.Controls.Add(this.tpMainFurniture);
             this.tcMain.Controls.Add(this.tpMainPapering);
             this.tcMain.Controls.Add(this.tpMainGuildHouseFurniture);
+            this.tcMain.Controls.Add(this.tpMainGuildHouseNPC);
             this.tcMain.Controls.Add(this.tpMainPet);
             this.tcMain.Controls.Add(this.tpMainBuffBead);
             this.tcMain.Dock = System.Windows.Forms.DockStyle.Right;
@@ -2035,6 +2055,164 @@
             this.nudGuildHouseFurnitureRank.Size = new System.Drawing.Size(56, 20);
             this.nudGuildHouseFurnitureRank.TabIndex = 1;
             // 
+            // tpMainGuildHouseNPC
+            // 
+            this.tpMainGuildHouseNPC.Controls.Add(this.gbGuildHouseNpcSettings);
+            this.tpMainGuildHouseNPC.Location = new System.Drawing.Point(4, 22);
+            this.tpMainGuildHouseNPC.Name = "tpMainGuildHouseNPC";
+            this.tpMainGuildHouseNPC.Size = new System.Drawing.Size(374, 400);
+            this.tpMainGuildHouseNPC.TabIndex = 10;
+            this.tpMainGuildHouseNPC.Text = "Guild house NPC";
+            this.tpMainGuildHouseNPC.UseVisualStyleBackColor = true;
+            // 
+            // gbGuildHouseNpcSettings
+            // 
+            this.gbGuildHouseNpcSettings.Controls.Add(this.cbGuildHouseNpcMover);
+            this.gbGuildHouseNpcSettings.Controls.Add(this.nudGuildHouseNpcDurationMinutes);
+            this.gbGuildHouseNpcSettings.Controls.Add(this.nudGuildHouseNpcDurationHours);
+            this.gbGuildHouseNpcSettings.Controls.Add(this.nudGuildHouseNpcRank);
+            this.gbGuildHouseNpcSettings.Controls.Add(this.nudGuildHouseNpcDurationDays);
+            this.gbGuildHouseNpcSettings.Controls.Add(this.lblGuildHouseNpcDurationHours);
+            this.gbGuildHouseNpcSettings.Controls.Add(this.lblGuildHouseNpcDurationMinutes);
+            this.gbGuildHouseNpcSettings.Controls.Add(this.lblGuildHouseNpcDurationDays);
+            this.gbGuildHouseNpcSettings.Controls.Add(this.lblGuildHouseNpcRank);
+            this.gbGuildHouseNpcSettings.Controls.Add(this.lblGuildHouseNpcMover);
+            this.gbGuildHouseNpcSettings.Controls.Add(this.lblGuildHouseNpcDuration);
+            this.gbGuildHouseNpcSettings.Location = new System.Drawing.Point(9, 9);
+            this.gbGuildHouseNpcSettings.Margin = new System.Windows.Forms.Padding(2);
+            this.gbGuildHouseNpcSettings.Name = "gbGuildHouseNpcSettings";
+            this.gbGuildHouseNpcSettings.Padding = new System.Windows.Forms.Padding(2);
+            this.gbGuildHouseNpcSettings.Size = new System.Drawing.Size(358, 132);
+            this.gbGuildHouseNpcSettings.TabIndex = 3;
+            this.gbGuildHouseNpcSettings.TabStop = false;
+            this.gbGuildHouseNpcSettings.Text = "Settings";
+            // 
+            // cbGuildHouseNpcMover
+            // 
+            this.cbGuildHouseNpcMover.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbGuildHouseNpcMover.FormattingEnabled = true;
+            this.cbGuildHouseNpcMover.Location = new System.Drawing.Point(117, 67);
+            this.cbGuildHouseNpcMover.Name = "cbGuildHouseNpcMover";
+            this.cbGuildHouseNpcMover.Size = new System.Drawing.Size(180, 21);
+            this.cbGuildHouseNpcMover.TabIndex = 2;
+            // 
+            // nudGuildHouseNpcDurationMinutes
+            // 
+            this.nudGuildHouseNpcDurationMinutes.Location = new System.Drawing.Point(249, 27);
+            this.nudGuildHouseNpcDurationMinutes.Margin = new System.Windows.Forms.Padding(2);
+            this.nudGuildHouseNpcDurationMinutes.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.nudGuildHouseNpcDurationMinutes.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.nudGuildHouseNpcDurationMinutes.Name = "nudGuildHouseNpcDurationMinutes";
+            this.nudGuildHouseNpcDurationMinutes.Size = new System.Drawing.Size(56, 20);
+            this.nudGuildHouseNpcDurationMinutes.TabIndex = 1;
+            // 
+            // nudGuildHouseNpcDurationHours
+            // 
+            this.nudGuildHouseNpcDurationHours.Location = new System.Drawing.Point(152, 27);
+            this.nudGuildHouseNpcDurationHours.Margin = new System.Windows.Forms.Padding(2);
+            this.nudGuildHouseNpcDurationHours.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.nudGuildHouseNpcDurationHours.Name = "nudGuildHouseNpcDurationHours";
+            this.nudGuildHouseNpcDurationHours.Size = new System.Drawing.Size(56, 20);
+            this.nudGuildHouseNpcDurationHours.TabIndex = 1;
+            // 
+            // nudGuildHouseNpcRank
+            // 
+            this.nudGuildHouseNpcRank.Location = new System.Drawing.Point(152, 101);
+            this.nudGuildHouseNpcRank.Margin = new System.Windows.Forms.Padding(2);
+            this.nudGuildHouseNpcRank.Maximum = new decimal(new int[] {
+            1491308,
+            0,
+            0,
+            0});
+            this.nudGuildHouseNpcRank.Name = "nudGuildHouseNpcRank";
+            this.nudGuildHouseNpcRank.Size = new System.Drawing.Size(56, 20);
+            this.nudGuildHouseNpcRank.TabIndex = 1;
+            // 
+            // nudGuildHouseNpcDurationDays
+            // 
+            this.nudGuildHouseNpcDurationDays.Location = new System.Drawing.Point(60, 27);
+            this.nudGuildHouseNpcDurationDays.Margin = new System.Windows.Forms.Padding(2);
+            this.nudGuildHouseNpcDurationDays.Maximum = new decimal(new int[] {
+            1491308,
+            0,
+            0,
+            0});
+            this.nudGuildHouseNpcDurationDays.Name = "nudGuildHouseNpcDurationDays";
+            this.nudGuildHouseNpcDurationDays.Size = new System.Drawing.Size(56, 20);
+            this.nudGuildHouseNpcDurationDays.TabIndex = 1;
+            // 
+            // lblGuildHouseNpcDurationHours
+            // 
+            this.lblGuildHouseNpcDurationHours.AutoSize = true;
+            this.lblGuildHouseNpcDurationHours.Location = new System.Drawing.Point(212, 29);
+            this.lblGuildHouseNpcDurationHours.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblGuildHouseNpcDurationHours.Name = "lblGuildHouseNpcDurationHours";
+            this.lblGuildHouseNpcDurationHours.Size = new System.Drawing.Size(33, 13);
+            this.lblGuildHouseNpcDurationHours.TabIndex = 0;
+            this.lblGuildHouseNpcDurationHours.Text = "hours";
+            // 
+            // lblGuildHouseNpcDurationMinutes
+            // 
+            this.lblGuildHouseNpcDurationMinutes.AutoSize = true;
+            this.lblGuildHouseNpcDurationMinutes.Location = new System.Drawing.Point(309, 29);
+            this.lblGuildHouseNpcDurationMinutes.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblGuildHouseNpcDurationMinutes.Name = "lblGuildHouseNpcDurationMinutes";
+            this.lblGuildHouseNpcDurationMinutes.Size = new System.Drawing.Size(43, 13);
+            this.lblGuildHouseNpcDurationMinutes.TabIndex = 0;
+            this.lblGuildHouseNpcDurationMinutes.Text = "minutes";
+            // 
+            // lblGuildHouseNpcDurationDays
+            // 
+            this.lblGuildHouseNpcDurationDays.AutoSize = true;
+            this.lblGuildHouseNpcDurationDays.Location = new System.Drawing.Point(120, 29);
+            this.lblGuildHouseNpcDurationDays.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblGuildHouseNpcDurationDays.Name = "lblGuildHouseNpcDurationDays";
+            this.lblGuildHouseNpcDurationDays.Size = new System.Drawing.Size(29, 13);
+            this.lblGuildHouseNpcDurationDays.TabIndex = 0;
+            this.lblGuildHouseNpcDurationDays.Text = "days";
+            // 
+            // lblGuildHouseNpcRank
+            // 
+            this.lblGuildHouseNpcRank.AutoSize = true;
+            this.lblGuildHouseNpcRank.Location = new System.Drawing.Point(109, 103);
+            this.lblGuildHouseNpcRank.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblGuildHouseNpcRank.Name = "lblGuildHouseNpcRank";
+            this.lblGuildHouseNpcRank.Size = new System.Drawing.Size(39, 13);
+            this.lblGuildHouseNpcRank.TabIndex = 0;
+            this.lblGuildHouseNpcRank.Text = "Rank :";
+            // 
+            // lblGuildHouseNpcMover
+            // 
+            this.lblGuildHouseNpcMover.AutoSize = true;
+            this.lblGuildHouseNpcMover.Location = new System.Drawing.Point(69, 70);
+            this.lblGuildHouseNpcMover.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblGuildHouseNpcMover.Name = "lblGuildHouseNpcMover";
+            this.lblGuildHouseNpcMover.Size = new System.Drawing.Size(43, 13);
+            this.lblGuildHouseNpcMover.TabIndex = 0;
+            this.lblGuildHouseNpcMover.Text = "Mover :";
+            // 
+            // lblGuildHouseNpcDuration
+            // 
+            this.lblGuildHouseNpcDuration.AutoSize = true;
+            this.lblGuildHouseNpcDuration.Location = new System.Drawing.Point(4, 29);
+            this.lblGuildHouseNpcDuration.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblGuildHouseNpcDuration.Name = "lblGuildHouseNpcDuration";
+            this.lblGuildHouseNpcDuration.Size = new System.Drawing.Size(53, 13);
+            this.lblGuildHouseNpcDuration.TabIndex = 0;
+            this.lblGuildHouseNpcDuration.Text = "Duration :";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2129,6 +2307,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseFurnitureDurationHours)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseFurnitureDurationDays)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseFurnitureRank)).EndInit();
+            this.tpMainGuildHouseNPC.ResumeLayout(false);
+            this.gbGuildHouseNpcSettings.ResumeLayout(false);
+            this.gbGuildHouseNpcSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseNpcDurationMinutes)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseNpcDurationHours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseNpcRank)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudGuildHouseNpcDurationDays)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2292,6 +2477,19 @@
         private System.Windows.Forms.Label lblGuildHouseFurnitureDuration;
         private System.Windows.Forms.NumericUpDown nudGuildHouseFurnitureRank;
         private System.Windows.Forms.Label lblGuildHouseFurnitureRank;
+        private System.Windows.Forms.TabPage tpMainGuildHouseNPC;
+        private System.Windows.Forms.GroupBox gbGuildHouseNpcSettings;
+        private System.Windows.Forms.ComboBox cbGuildHouseNpcMover;
+        private System.Windows.Forms.NumericUpDown nudGuildHouseNpcDurationMinutes;
+        private System.Windows.Forms.NumericUpDown nudGuildHouseNpcDurationHours;
+        private System.Windows.Forms.NumericUpDown nudGuildHouseNpcRank;
+        private System.Windows.Forms.NumericUpDown nudGuildHouseNpcDurationDays;
+        private System.Windows.Forms.Label lblGuildHouseNpcDurationHours;
+        private System.Windows.Forms.Label lblGuildHouseNpcDurationMinutes;
+        private System.Windows.Forms.Label lblGuildHouseNpcDurationDays;
+        private System.Windows.Forms.Label lblGuildHouseNpcRank;
+        private System.Windows.Forms.Label lblGuildHouseNpcMover;
+        private System.Windows.Forms.Label lblGuildHouseNpcDuration;
     }
 }
 

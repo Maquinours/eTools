@@ -145,6 +145,10 @@ namespace Common
         {
             return defines.Where(x => x.Key.StartsWith("MI_PET_")).Select(x => x.Key).ToArray();
         }
+        public string[] GetNpcMoverIdentifiers()
+        {
+            return defines.Where(x => x.Key.StartsWith("MI_NPC_")).Select(x => x.Key).ToArray();
+        }
         public string[] GetAiIdentifiers()
         {
             return defines.Where(x => x.Key.StartsWith("AII_")).Select(x => x.Key).ToArray();
