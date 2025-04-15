@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.lbItems = new System.Windows.Forms.ListBox();
             this.lblTypeItemKind1 = new System.Windows.Forms.Label();
@@ -215,6 +216,9 @@
             this.lblGuildHousePaperingRank = new System.Windows.Forms.Label();
             this.tbGuildHouseNpcCharacterKey = new System.Windows.Forms.TextBox();
             this.lblGuildHouseNpcCharacterKey = new System.Windows.Forms.Label();
+            this.cmsLbItems = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmiItemDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiItemDuplicate = new System.Windows.Forms.ToolStripMenuItem();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -288,6 +292,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudGuildHousePaperingDurationHours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudGuildHousePaperingDurationDays)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudGuildHousePaperingRank)).BeginInit();
+            this.cmsLbItems.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbItems
@@ -299,6 +304,7 @@
             this.lbItems.TabIndex = 0;
             this.lbItems.SelectedIndexChanged += new System.EventHandler(this.lb_items_SelectedIndexChanged);
             this.lbItems.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Lb_items_KeyDown);
+            this.lbItems.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LbItems_MouseDown);
             // 
             // lblTypeItemKind1
             // 
@@ -2436,6 +2442,28 @@
             this.lblGuildHouseNpcCharacterKey.TabIndex = 3;
             this.lblGuildHouseNpcCharacterKey.Text = "Character key :";
             // 
+            // cmsLbItems
+            // 
+            this.cmsLbItems.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.cmsLbItems.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiItemDelete,
+            this.tsmiItemDuplicate});
+            this.cmsLbItems.Name = "cms_lbmovers";
+            this.cmsLbItems.Size = new System.Drawing.Size(181, 70);
+            // 
+            // tsmiItemDelete
+            // 
+            this.tsmiItemDelete.Name = "tsmiItemDelete";
+            this.tsmiItemDelete.Size = new System.Drawing.Size(180, 22);
+            this.tsmiItemDelete.Text = "Delete";
+            // 
+            // tsmiItemDuplicate
+            // 
+            this.tsmiItemDuplicate.Name = "tsmiItemDuplicate";
+            this.tsmiItemDuplicate.Size = new System.Drawing.Size(180, 22);
+            this.tsmiItemDuplicate.Text = "Duplicate";
+            this.tsmiItemDuplicate.Click += new System.EventHandler(this.TsmiItemDuplicate_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2545,6 +2573,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudGuildHousePaperingDurationHours)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudGuildHousePaperingDurationDays)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudGuildHousePaperingRank)).EndInit();
+            this.cmsLbItems.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2738,6 +2767,9 @@
         private System.Windows.Forms.Label lblGuildHousePaperingDuration;
         private System.Windows.Forms.TextBox tbGuildHouseNpcCharacterKey;
         private System.Windows.Forms.Label lblGuildHouseNpcCharacterKey;
+        private System.Windows.Forms.ContextMenuStrip cmsLbItems;
+        private System.Windows.Forms.ToolStripMenuItem tsmiItemDelete;
+        private System.Windows.Forms.ToolStripMenuItem tsmiItemDuplicate;
     }
 }
 

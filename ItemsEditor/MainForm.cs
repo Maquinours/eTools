@@ -568,5 +568,22 @@ namespace ItemsEditor
             cbEquipmentDstParam.DataBindings.Add(new Binding("SelectedItem", dst, nameof(Dest.Param), false, DataSourceUpdateMode.OnPropertyChanged));
             nudEquipmentDstValue.DataBindings.Add(new Binding("Value", dst, nameof(Dest.Value), false, DataSourceUpdateMode.OnPropertyChanged));
         }
+
+        private void LbItems_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                lbItems.SelectedIndex = lbItems.IndexFromPoint(e.Location);
+                if (lbItems.SelectedIndex != -1)
+                    cmsLbItems.Show(Cursor.Position);
+            }
+        }
+
+        private void TsmiItemDuplicate_Click(object sender, EventArgs e)
+        {
+            if (!(lbItems.SelectedItem is Item item)) return;
+            Project.GetInstance().DuplicateItem(item);
+            this.lbItems.SelectedIndex = this.lbItems.Items.Count - 1;
+        }
     }
 }
