@@ -154,6 +154,7 @@ namespace ItemsEditor
             nudGuildHouseNpcRank.DataBindings.Clear();
             cbGuildHouseNpcMover.DataBindings.Clear();
             cbGuildHouseNpcMover.SelectedItem = null;
+            tbGuildHouseNpcCharacterKey.DataBindings.Clear();
             nudGuildHouseNpcRank.DataBindings.Clear();
             cbPetMoverIdentifier.DataBindings.Clear();
             cbPetMoverIdentifier.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
@@ -226,6 +227,7 @@ namespace ItemsEditor
             nudGuildHouseNpcDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
             nudGuildHouseNpcDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
             cbGuildHouseNpcMover.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwLinkKind), false, DataSourceUpdateMode.OnPropertyChanged));
+            tbGuildHouseNpcCharacterKey.DataBindings.Add(new Binding(nameof(tbGuildHouseNpcCharacterKey.Text), currentItem.Prop, nameof(ItemProp.SzTextFileName), false, DataSourceUpdateMode.OnPropertyChanged));
             nudGuildHouseNpcRank.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMax), false, DataSourceUpdateMode.OnPropertyChanged));
             cbPetMoverIdentifier.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwLinkKind), true, DataSourceUpdateMode.OnPropertyChanged));
             nudBuffBeadDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));

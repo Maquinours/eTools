@@ -213,6 +213,8 @@
             this.lblGuildHousePaperingDuration = new System.Windows.Forms.Label();
             this.nudGuildHousePaperingRank = new System.Windows.Forms.NumericUpDown();
             this.lblGuildHousePaperingRank = new System.Windows.Forms.Label();
+            this.tbGuildHouseNpcCharacterKey = new System.Windows.Forms.TextBox();
+            this.lblGuildHouseNpcCharacterKey = new System.Windows.Forms.Label();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -1806,6 +1808,8 @@
             // 
             // gbGuildHouseNpcSettings
             // 
+            this.gbGuildHouseNpcSettings.Controls.Add(this.tbGuildHouseNpcCharacterKey);
+            this.gbGuildHouseNpcSettings.Controls.Add(this.lblGuildHouseNpcCharacterKey);
             this.gbGuildHouseNpcSettings.Controls.Add(this.cbGuildHouseNpcMover);
             this.gbGuildHouseNpcSettings.Controls.Add(this.nudGuildHouseNpcDurationMinutes);
             this.gbGuildHouseNpcSettings.Controls.Add(this.nudGuildHouseNpcDurationHours);
@@ -1821,7 +1825,7 @@
             this.gbGuildHouseNpcSettings.Margin = new System.Windows.Forms.Padding(2);
             this.gbGuildHouseNpcSettings.Name = "gbGuildHouseNpcSettings";
             this.gbGuildHouseNpcSettings.Padding = new System.Windows.Forms.Padding(2);
-            this.gbGuildHouseNpcSettings.Size = new System.Drawing.Size(358, 132);
+            this.gbGuildHouseNpcSettings.Size = new System.Drawing.Size(358, 175);
             this.gbGuildHouseNpcSettings.TabIndex = 3;
             this.gbGuildHouseNpcSettings.TabStop = false;
             this.gbGuildHouseNpcSettings.Text = "Settings";
@@ -1868,7 +1872,7 @@
             // 
             // nudGuildHouseNpcRank
             // 
-            this.nudGuildHouseNpcRank.Location = new System.Drawing.Point(152, 101);
+            this.nudGuildHouseNpcRank.Location = new System.Drawing.Point(154, 139);
             this.nudGuildHouseNpcRank.Margin = new System.Windows.Forms.Padding(2);
             this.nudGuildHouseNpcRank.Maximum = new decimal(new int[] {
             1491308,
@@ -1925,7 +1929,7 @@
             // lblGuildHouseNpcRank
             // 
             this.lblGuildHouseNpcRank.AutoSize = true;
-            this.lblGuildHouseNpcRank.Location = new System.Drawing.Point(109, 103);
+            this.lblGuildHouseNpcRank.Location = new System.Drawing.Point(111, 141);
             this.lblGuildHouseNpcRank.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblGuildHouseNpcRank.Name = "lblGuildHouseNpcRank";
             this.lblGuildHouseNpcRank.Size = new System.Drawing.Size(39, 13);
@@ -2415,6 +2419,23 @@
             this.lblGuildHousePaperingRank.TabIndex = 25;
             this.lblGuildHousePaperingRank.Text = "Rank :";
             // 
+            // tbGuildHouseNpcCharacterKey
+            // 
+            this.tbGuildHouseNpcCharacterKey.Location = new System.Drawing.Point(154, 104);
+            this.tbGuildHouseNpcCharacterKey.Name = "tbGuildHouseNpcCharacterKey";
+            this.tbGuildHouseNpcCharacterKey.Size = new System.Drawing.Size(143, 20);
+            this.tbGuildHouseNpcCharacterKey.TabIndex = 4;
+            // 
+            // lblGuildHouseNpcCharacterKey
+            // 
+            this.lblGuildHouseNpcCharacterKey.AutoSize = true;
+            this.lblGuildHouseNpcCharacterKey.Location = new System.Drawing.Point(70, 107);
+            this.lblGuildHouseNpcCharacterKey.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblGuildHouseNpcCharacterKey.Name = "lblGuildHouseNpcCharacterKey";
+            this.lblGuildHouseNpcCharacterKey.Size = new System.Drawing.Size(79, 13);
+            this.lblGuildHouseNpcCharacterKey.TabIndex = 3;
+            this.lblGuildHouseNpcCharacterKey.Text = "Character key :";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2715,6 +2736,8 @@
         private System.Windows.Forms.Label lblGuildHousePaperingDurationDays;
         private System.Windows.Forms.Label lblGuildHousePaperingTexture;
         private System.Windows.Forms.Label lblGuildHousePaperingDuration;
+        private System.Windows.Forms.TextBox tbGuildHouseNpcCharacterKey;
+        private System.Windows.Forms.Label lblGuildHouseNpcCharacterKey;
     }
 }
 
