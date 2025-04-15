@@ -2456,6 +2456,7 @@
             this.tsmiItemDelete.Name = "tsmiItemDelete";
             this.tsmiItemDelete.Size = new System.Drawing.Size(180, 22);
             this.tsmiItemDelete.Text = "Delete";
+            this.tsmiItemDelete.Click += new System.EventHandler(this.TsmiItemDelete_Click);
             // 
             // tsmiItemDuplicate
             // 

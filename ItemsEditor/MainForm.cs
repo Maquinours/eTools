@@ -585,5 +585,10 @@ namespace ItemsEditor
             Project.GetInstance().DuplicateItem(item);
             this.lbItems.SelectedIndex = this.lbItems.Items.Count - 1;
         }
+
+        private void TsmiItemDelete_Click(object sender, EventArgs e)
+        {
+            this.DeleteCurrentItem();
+        }
     }
 }
