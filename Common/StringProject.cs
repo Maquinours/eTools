@@ -65,6 +65,8 @@ namespace Common
             string stringStarter = "IDS_"
 #if __MOVERS
                 + "PROPMOVER_TXT_"
+#elif __ITEMS
+                + "PROPITEM_TXT_"
 #endif
                 ;
             for (int i = 0; true; i++)
