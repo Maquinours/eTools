@@ -141,6 +141,13 @@ namespace ItemsEditor
             nudGuildHouseFurnitureRank.DataBindings.Clear();
             cbGuildHouseFurnitureControl.DataBindings.Clear();
             cbGuildHouseFurnitureControl.SelectedItem = null;
+            nudGuildHousePaperingDurationDays.DataBindings.Clear();
+            nudGuildHousePaperingDurationHours.DataBindings.Clear();
+            nudGuildHousePaperingDurationMinutes.DataBindings.Clear();
+            nudGuildHousePaperingRank.DataBindings.Clear();
+            tbGuildHousePaperingTexture.DataBindings.Clear();
+            picboxGuildHousePaperingTexture.DataBindings.Clear();
+            nudGuildHousePaperingRank.DataBindings.Clear();
             nudGuildHouseNpcDurationDays.DataBindings.Clear();
             nudGuildHouseNpcDurationHours.DataBindings.Clear();
             nudGuildHouseNpcDurationMinutes.DataBindings.Clear();
@@ -209,6 +216,12 @@ namespace ItemsEditor
             nudGuildHouseFurnitureDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
             cbGuildHouseFurnitureControl.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwLinkKind), false, DataSourceUpdateMode.OnPropertyChanged));
             nudGuildHouseFurnitureRank.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMax), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHousePaperingDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHousePaperingDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHousePaperingDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
+            tbGuildHousePaperingTexture.DataBindings.Add(new Binding(nameof(TextBox.Text), currentItem.Prop, nameof(ItemProp.SzTextFileName), false, DataSourceUpdateMode.OnPropertyChanged));
+            picboxGuildHousePaperingTexture.DataBindings.Add(new Binding(nameof(PictureBox.Image), currentItem, nameof(Item.PaperingTexture), true, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHousePaperingRank.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMax), false, DataSourceUpdateMode.OnPropertyChanged));
             nudGuildHouseNpcDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
             nudGuildHouseNpcDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
             nudGuildHouseNpcDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
@@ -488,6 +501,9 @@ namespace ItemsEditor
                         break;
                     case "IK2_GUILDHOUSE_FURNITURE":
                         tabs.Add(tpMainGuildHouseFurniture);
+                        break;
+                    case "IK2_GUILDHOUSE_PAPERING":
+                        tabs.Add(tpMainGuildHousePapering);
                         break;
                     case "IK2_GUILDHOUSE_NPC":
                         tabs.Add(tpMainGuildHouseNPC);
