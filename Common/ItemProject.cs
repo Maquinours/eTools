@@ -860,6 +860,7 @@ namespace Common
 
         public void DeleteItem(Item item)
         {
+            item.Dispose();
             this.Items.Remove(item);
         }
 
