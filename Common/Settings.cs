@@ -346,7 +346,8 @@ namespace Common
                 ResourcePath + "defineJob.h",
                 ResourcePath + "defineAttribute.h",
                 ResourcePath + "defineNeuz.h",
-                ResourcePath + "defineWorld.h"
+                ResourcePath + "defineWorld.h",
+                ResourcePath + "defineItem.h"
             };
             IconsFolderPath = ResourcePath + "Item\\";
             TexturesFolderPath = ResourcePath + "Model\\Texture\\";

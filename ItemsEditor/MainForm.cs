@@ -41,6 +41,9 @@ namespace ItemsEditor
 
                 Project prj = Project.GetInstance();
                 await Task.Run(() => prj.Load((progress) => pbFileSaveReload.Invoke(new Action(() => pbFileSaveReload.Value = progress)))).ConfigureAwait(true);
+                AutoCompleteStringCollection identifiersSource = new AutoCompleteStringCollection();
+                identifiersSource.AddRange(prj.GetItemIdentifiers());
+                tbGeneralId.AutoCompleteCustomSource = identifiersSource;
                 cbTypeItemKind3.DataSource = prj.GetAllowedItemKinds3();
                 cbTypeItemKind2.DataSource = prj.GetAllowedItemKinds2();
                 cbTypeItemKind1.DataSource = prj.GetAllowedItemKinds1();

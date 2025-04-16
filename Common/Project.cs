@@ -141,6 +141,11 @@ namespace Common
         {
             return defines.Where(x => x.Key.StartsWith("MI_")).Select(x => x.Key).ToArray();
         }
+
+        public string[] GetItemIdentifiers()
+        {
+            return defines.Where(x => x.Key.StartsWith("II_")).Select(x => x.Key).ToArray();
+        }
         public string[] GetPetMoverIdentifiers()
         {
             return defines.Where(x => x.Key.StartsWith("MI_PET_")).Select(x => x.Key).ToArray();
