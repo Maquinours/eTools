@@ -784,6 +784,7 @@
             // cbEquipmentDstParam
             // 
             this.cbEquipmentDstParam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbEquipmentDstParam.DropDownWidth = 300;
             this.cbEquipmentDstParam.FormattingEnabled = true;
             this.cbEquipmentDstParam.Location = new System.Drawing.Point(235, 49);
             this.cbEquipmentDstParam.Margin = new System.Windows.Forms.Padding(2);
