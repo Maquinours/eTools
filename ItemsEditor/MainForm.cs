@@ -635,14 +635,12 @@ namespace ItemsEditor
 
         private void BtnWeaponPlayAttackSound_Click(object sender, EventArgs e)
         {
-            if(!(cbWeaponAttackSound.SelectedItem is string soundName)) return;
-            this.PlaySound(soundName);
+            this.PlaySound(cbWeaponAttackSound.Text);
         }
 
         private void BtnWeaponPlayCriticalAttackSound_Click(object sender, EventArgs e)
         {
-            if (!(cbWeaponCriticalAttackSound.SelectedItem is string soundName)) return;
-            this.PlaySound(soundName);
+            this.PlaySound(cbWeaponCriticalAttackSound.Text);
         }
 
         private async void Save()
