@@ -107,5 +107,23 @@ namespace ItemsEditor
             DialogResult = DialogResult.OK;
             Close();
         }
+
+        private void btnSelectSoundsConfigurationsFilePath_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                tbSoundsConfigurationsFilePath.Text = Path.GetFullPath(ofd.FileName);
+            }
+        }
+
+        private void btnSelectSoundsFolderPath_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                tbSoundsFolderPath.Text = fbd.SelectedPath + "\\";
+            }
+        }
     }
 }

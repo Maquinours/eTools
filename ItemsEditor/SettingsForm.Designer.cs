@@ -59,7 +59,8 @@
             // 
             // nudGameVersion
             // 
-            this.nudGameVersion.Location = new System.Drawing.Point(115, 198);
+            this.nudGameVersion.Location = new System.Drawing.Point(172, 305);
+            this.nudGameVersion.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.nudGameVersion.Maximum = new decimal(new int[] {
             22,
             0,
@@ -71,7 +72,7 @@
             0,
             0});
             this.nudGameVersion.Name = "nudGameVersion";
-            this.nudGameVersion.Size = new System.Drawing.Size(167, 20);
+            this.nudGameVersion.Size = new System.Drawing.Size(250, 26);
             this.nudGameVersion.TabIndex = 25;
             this.nudGameVersion.Value = new decimal(new int[] {
             1,
@@ -83,18 +84,20 @@
             // 
             this.lblGameVersion.AutoSize = true;
             this.lblGameVersion.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblGameVersion.Location = new System.Drawing.Point(61, 200);
+            this.lblGameVersion.Location = new System.Drawing.Point(92, 308);
+            this.lblGameVersion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblGameVersion.Name = "lblGameVersion";
-            this.lblGameVersion.Size = new System.Drawing.Size(48, 13);
+            this.lblGameVersion.Size = new System.Drawing.Size(71, 20);
             this.lblGameVersion.TabIndex = 24;
             this.lblGameVersion.Text = "Version :";
             // 
             // btnSelectStringFile
             // 
             this.btnSelectStringFile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSelectStringFile.Location = new System.Drawing.Point(279, 68);
+            this.btnSelectStringFile.Location = new System.Drawing.Point(418, 105);
+            this.btnSelectStringFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSelectStringFile.Name = "btnSelectStringFile";
-            this.btnSelectStringFile.Size = new System.Drawing.Size(26, 20);
+            this.btnSelectStringFile.Size = new System.Drawing.Size(39, 31);
             this.btnSelectStringFile.TabIndex = 23;
             this.btnSelectStringFile.Text = "...";
             this.btnSelectStringFile.UseVisualStyleBackColor = true;
@@ -103,9 +106,10 @@
             // btnSelectPropFile
             // 
             this.btnSelectPropFile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSelectPropFile.Location = new System.Drawing.Point(279, 41);
+            this.btnSelectPropFile.Location = new System.Drawing.Point(418, 63);
+            this.btnSelectPropFile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSelectPropFile.Name = "btnSelectPropFile";
-            this.btnSelectPropFile.Size = new System.Drawing.Size(26, 20);
+            this.btnSelectPropFile.Size = new System.Drawing.Size(39, 31);
             this.btnSelectPropFile.TabIndex = 20;
             this.btnSelectPropFile.Text = "...";
             this.btnSelectPropFile.UseVisualStyleBackColor = true;
@@ -114,9 +118,10 @@
             // btnSelectFolder
             // 
             this.btnSelectFolder.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSelectFolder.Location = new System.Drawing.Point(279, 16);
+            this.btnSelectFolder.Location = new System.Drawing.Point(418, 25);
+            this.btnSelectFolder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSelectFolder.Name = "btnSelectFolder";
-            this.btnSelectFolder.Size = new System.Drawing.Size(26, 20);
+            this.btnSelectFolder.Size = new System.Drawing.Size(39, 31);
             this.btnSelectFolder.TabIndex = 17;
             this.btnSelectFolder.Text = "...";
             this.btnSelectFolder.UseVisualStyleBackColor = true;
@@ -125,9 +130,10 @@
             // btnApply
             // 
             this.btnApply.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnApply.Location = new System.Drawing.Point(12, 247);
+            this.btnApply.Location = new System.Drawing.Point(18, 380);
+            this.btnApply.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnApply.Name = "btnApply";
-            this.btnApply.Size = new System.Drawing.Size(75, 23);
+            this.btnApply.Size = new System.Drawing.Size(112, 35);
             this.btnApply.TabIndex = 26;
             this.btnApply.Text = "Apply";
             this.btnApply.UseVisualStyleBackColor = true;
@@ -137,9 +143,10 @@
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(225, 247);
+            this.btnCancel.Location = new System.Drawing.Point(338, 380);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(112, 35);
             this.btnCancel.TabIndex = 27;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -148,9 +155,10 @@
             // 
             this.lblStringFile.AutoSize = true;
             this.lblStringFile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblStringFile.Location = new System.Drawing.Point(59, 71);
+            this.lblStringFile.Location = new System.Drawing.Point(88, 109);
+            this.lblStringFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStringFile.Name = "lblStringFile";
-            this.lblStringFile.Size = new System.Drawing.Size(50, 13);
+            this.lblStringFile.Size = new System.Drawing.Size(71, 20);
             this.lblStringFile.TabIndex = 21;
             this.lblStringFile.Text = "Text file :";
             // 
@@ -158,66 +166,74 @@
             // 
             this.lblPropFile.AutoSize = true;
             this.lblPropFile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblPropFile.Location = new System.Drawing.Point(58, 45);
+            this.lblPropFile.Location = new System.Drawing.Point(87, 69);
+            this.lblPropFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPropFile.Name = "lblPropFile";
-            this.lblPropFile.Size = new System.Drawing.Size(51, 13);
+            this.lblPropFile.Size = new System.Drawing.Size(74, 20);
             this.lblPropFile.TabIndex = 18;
             this.lblPropFile.Text = "Prop file :";
             // 
             // tbStringFileName
             // 
-            this.tbStringFileName.Location = new System.Drawing.Point(115, 68);
+            this.tbStringFileName.Location = new System.Drawing.Point(172, 105);
+            this.tbStringFileName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbStringFileName.Name = "tbStringFileName";
-            this.tbStringFileName.Size = new System.Drawing.Size(167, 20);
+            this.tbStringFileName.Size = new System.Drawing.Size(248, 26);
             this.tbStringFileName.TabIndex = 22;
             // 
             // tbPropFileName
             // 
-            this.tbPropFileName.Location = new System.Drawing.Point(115, 42);
+            this.tbPropFileName.Location = new System.Drawing.Point(172, 65);
+            this.tbPropFileName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbPropFileName.Name = "tbPropFileName";
-            this.tbPropFileName.Size = new System.Drawing.Size(167, 20);
+            this.tbPropFileName.Size = new System.Drawing.Size(248, 26);
             this.tbPropFileName.TabIndex = 19;
             // 
             // tbResourcesPath
             // 
-            this.tbResourcesPath.Location = new System.Drawing.Point(115, 16);
+            this.tbResourcesPath.Location = new System.Drawing.Point(172, 25);
+            this.tbResourcesPath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbResourcesPath.Name = "tbResourcesPath";
-            this.tbResourcesPath.Size = new System.Drawing.Size(167, 20);
+            this.tbResourcesPath.Size = new System.Drawing.Size(248, 26);
             this.tbResourcesPath.TabIndex = 16;
             // 
             // lblFolder
             // 
             this.lblFolder.AutoSize = true;
             this.lblFolder.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblFolder.Location = new System.Drawing.Point(16, 19);
+            this.lblFolder.Location = new System.Drawing.Point(24, 29);
+            this.lblFolder.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFolder.Name = "lblFolder";
-            this.lblFolder.Size = new System.Drawing.Size(93, 13);
+            this.lblFolder.Size = new System.Drawing.Size(138, 20);
             this.lblFolder.TabIndex = 15;
             this.lblFolder.Text = "Resources folder :";
             // 
             // tbIconsFolder
             // 
-            this.tbIconsFolder.Location = new System.Drawing.Point(115, 94);
+            this.tbIconsFolder.Location = new System.Drawing.Point(172, 145);
+            this.tbIconsFolder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbIconsFolder.Name = "tbIconsFolder";
-            this.tbIconsFolder.Size = new System.Drawing.Size(167, 20);
+            this.tbIconsFolder.Size = new System.Drawing.Size(248, 26);
             this.tbIconsFolder.TabIndex = 22;
             // 
             // lblIconsFolder
             // 
             this.lblIconsFolder.AutoSize = true;
             this.lblIconsFolder.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblIconsFolder.Location = new System.Drawing.Point(41, 97);
+            this.lblIconsFolder.Location = new System.Drawing.Point(62, 149);
+            this.lblIconsFolder.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIconsFolder.Name = "lblIconsFolder";
-            this.lblIconsFolder.Size = new System.Drawing.Size(68, 13);
+            this.lblIconsFolder.Size = new System.Drawing.Size(100, 20);
             this.lblIconsFolder.TabIndex = 21;
             this.lblIconsFolder.Text = "Icons folder :";
             // 
             // btnSelectIconsFolder
             // 
             this.btnSelectIconsFolder.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSelectIconsFolder.Location = new System.Drawing.Point(279, 94);
+            this.btnSelectIconsFolder.Location = new System.Drawing.Point(418, 145);
+            this.btnSelectIconsFolder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSelectIconsFolder.Name = "btnSelectIconsFolder";
-            this.btnSelectIconsFolder.Size = new System.Drawing.Size(26, 20);
+            this.btnSelectIconsFolder.Size = new System.Drawing.Size(39, 31);
             this.btnSelectIconsFolder.TabIndex = 23;
             this.btnSelectIconsFolder.Text = "...";
             this.btnSelectIconsFolder.UseVisualStyleBackColor = true;
@@ -225,27 +241,30 @@
             // 
             // tbTexturesFolder
             // 
-            this.tbTexturesFolder.Location = new System.Drawing.Point(115, 120);
+            this.tbTexturesFolder.Location = new System.Drawing.Point(172, 185);
+            this.tbTexturesFolder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbTexturesFolder.Name = "tbTexturesFolder";
-            this.tbTexturesFolder.Size = new System.Drawing.Size(167, 20);
+            this.tbTexturesFolder.Size = new System.Drawing.Size(248, 26);
             this.tbTexturesFolder.TabIndex = 22;
             // 
             // lblTexturesFolder
             // 
             this.lblTexturesFolder.AutoSize = true;
             this.lblTexturesFolder.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblTexturesFolder.Location = new System.Drawing.Point(31, 123);
+            this.lblTexturesFolder.Location = new System.Drawing.Point(46, 189);
+            this.lblTexturesFolder.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTexturesFolder.Name = "lblTexturesFolder";
-            this.lblTexturesFolder.Size = new System.Drawing.Size(78, 13);
+            this.lblTexturesFolder.Size = new System.Drawing.Size(114, 20);
             this.lblTexturesFolder.TabIndex = 21;
             this.lblTexturesFolder.Text = "Texture folder :";
             // 
             // btnSelectTexturesFolder
             // 
             this.btnSelectTexturesFolder.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSelectTexturesFolder.Location = new System.Drawing.Point(279, 120);
+            this.btnSelectTexturesFolder.Location = new System.Drawing.Point(418, 185);
+            this.btnSelectTexturesFolder.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSelectTexturesFolder.Name = "btnSelectTexturesFolder";
-            this.btnSelectTexturesFolder.Size = new System.Drawing.Size(26, 20);
+            this.btnSelectTexturesFolder.Size = new System.Drawing.Size(39, 31);
             this.btnSelectTexturesFolder.TabIndex = 23;
             this.btnSelectTexturesFolder.Text = "...";
             this.btnSelectTexturesFolder.UseVisualStyleBackColor = true;
@@ -253,25 +272,28 @@
             // 
             // tbSoundsConfigurationsFilePath
             // 
-            this.tbSoundsConfigurationsFilePath.Location = new System.Drawing.Point(115, 146);
+            this.tbSoundsConfigurationsFilePath.Location = new System.Drawing.Point(172, 225);
+            this.tbSoundsConfigurationsFilePath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbSoundsConfigurationsFilePath.Name = "tbSoundsConfigurationsFilePath";
-            this.tbSoundsConfigurationsFilePath.Size = new System.Drawing.Size(167, 20);
+            this.tbSoundsConfigurationsFilePath.Size = new System.Drawing.Size(248, 26);
             this.tbSoundsConfigurationsFilePath.TabIndex = 22;
             // 
             // tbSoundsFolderPath
             // 
-            this.tbSoundsFolderPath.Location = new System.Drawing.Point(115, 172);
+            this.tbSoundsFolderPath.Location = new System.Drawing.Point(172, 265);
+            this.tbSoundsFolderPath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tbSoundsFolderPath.Name = "tbSoundsFolderPath";
-            this.tbSoundsFolderPath.Size = new System.Drawing.Size(167, 20);
+            this.tbSoundsFolderPath.Size = new System.Drawing.Size(248, 26);
             this.tbSoundsFolderPath.TabIndex = 22;
             // 
             // lblSoundsConfigurationsFilePath
             // 
             this.lblSoundsConfigurationsFilePath.AutoSize = true;
             this.lblSoundsConfigurationsFilePath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblSoundsConfigurationsFilePath.Location = new System.Drawing.Point(12, 150);
+            this.lblSoundsConfigurationsFilePath.Location = new System.Drawing.Point(18, 231);
+            this.lblSoundsConfigurationsFilePath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSoundsConfigurationsFilePath.Name = "lblSoundsConfigurationsFilePath";
-            this.lblSoundsConfigurationsFilePath.Size = new System.Drawing.Size(97, 13);
+            this.lblSoundsConfigurationsFilePath.Size = new System.Drawing.Size(143, 20);
             this.lblSoundsConfigurationsFilePath.TabIndex = 21;
             this.lblSoundsConfigurationsFilePath.Text = "Sounds config file :";
             // 
@@ -279,39 +301,42 @@
             // 
             this.lblSoundsFolderPath.AutoSize = true;
             this.lblSoundsFolderPath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblSoundsFolderPath.Location = new System.Drawing.Point(36, 175);
+            this.lblSoundsFolderPath.Location = new System.Drawing.Point(54, 269);
+            this.lblSoundsFolderPath.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSoundsFolderPath.Name = "lblSoundsFolderPath";
-            this.lblSoundsFolderPath.Size = new System.Drawing.Size(78, 13);
+            this.lblSoundsFolderPath.Size = new System.Drawing.Size(116, 20);
             this.lblSoundsFolderPath.TabIndex = 21;
             this.lblSoundsFolderPath.Text = "Sounds folder :";
             // 
             // btnSelectSoundsConfigurationsFilePath
             // 
             this.btnSelectSoundsConfigurationsFilePath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSelectSoundsConfigurationsFilePath.Location = new System.Drawing.Point(279, 146);
+            this.btnSelectSoundsConfigurationsFilePath.Location = new System.Drawing.Point(418, 225);
+            this.btnSelectSoundsConfigurationsFilePath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSelectSoundsConfigurationsFilePath.Name = "btnSelectSoundsConfigurationsFilePath";
-            this.btnSelectSoundsConfigurationsFilePath.Size = new System.Drawing.Size(26, 20);
+            this.btnSelectSoundsConfigurationsFilePath.Size = new System.Drawing.Size(39, 31);
             this.btnSelectSoundsConfigurationsFilePath.TabIndex = 23;
             this.btnSelectSoundsConfigurationsFilePath.Text = "...";
             this.btnSelectSoundsConfigurationsFilePath.UseVisualStyleBackColor = true;
-            this.btnSelectSoundsConfigurationsFilePath.Click += new System.EventHandler(this.btnSelectIconsFolder_Click);
+            this.btnSelectSoundsConfigurationsFilePath.Click += new System.EventHandler(this.btnSelectSoundsConfigurationsFilePath_Click);
             // 
             // btnSelectSoundsFolderPath
             // 
             this.btnSelectSoundsFolderPath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnSelectSoundsFolderPath.Location = new System.Drawing.Point(279, 172);
+            this.btnSelectSoundsFolderPath.Location = new System.Drawing.Point(418, 265);
+            this.btnSelectSoundsFolderPath.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSelectSoundsFolderPath.Name = "btnSelectSoundsFolderPath";
-            this.btnSelectSoundsFolderPath.Size = new System.Drawing.Size(26, 20);
+            this.btnSelectSoundsFolderPath.Size = new System.Drawing.Size(39, 31);
             this.btnSelectSoundsFolderPath.TabIndex = 23;
             this.btnSelectSoundsFolderPath.Text = "...";
             this.btnSelectSoundsFolderPath.UseVisualStyleBackColor = true;
-            this.btnSelectSoundsFolderPath.Click += new System.EventHandler(this.btnSelectIconsFolder_Click);
+            this.btnSelectSoundsFolderPath.Click += new System.EventHandler(this.btnSelectSoundsFolderPath_Click);
             // 
             // SettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(312, 282);
+            this.ClientSize = new System.Drawing.Size(468, 434);
             this.Controls.Add(this.nudGameVersion);
             this.Controls.Add(this.lblGameVersion);
             this.Controls.Add(this.btnSelectSoundsFolderPath);
@@ -338,6 +363,7 @@
             this.Controls.Add(this.tbResourcesPath);
             this.Controls.Add(this.lblFolder);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "SettingsForm";
             this.Text = "Settings";
             ((System.ComponentModel.ISupportInitialize)(this.nudGameVersion)).EndInit();
