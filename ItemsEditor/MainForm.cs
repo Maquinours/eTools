@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DDSImageParser;
 using System.IO;
+using System.Media;
 
 namespace ItemsEditor
 {
@@ -53,7 +54,7 @@ namespace ItemsEditor
                 cbWeaponType.DataSource = prj.GetWeaponTypeIdentifiers();
                 cbWeaponAttackRange.DataSource = prj.GetAttackRangeIdentifiers();
                 cbWeaponAttackSound.DataSource = prj.GetSoundIdentifiers();
-                cbWeaponDamageSound.DataSource = prj.GetSoundIdentifiers();
+                cbWeaponCriticalAttackSound.DataSource = prj.GetSoundIdentifiers();
                 cbConsumableDstParam.DataSource = prj.GetDstIdentifiers();
                 cbEquipmentParts.DataSource = prj.GetPartsIdentifiers();
                 cbBlinkwingWorld.DataSource = prj.GetWorldIdentifiers();
@@ -123,8 +124,8 @@ namespace ItemsEditor
             cbWeaponAttackRange.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
             cbWeaponAttackSound.DataBindings.Clear();
             cbWeaponAttackSound.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
-            cbWeaponDamageSound.DataBindings.Clear();
-            cbWeaponDamageSound.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+            cbWeaponCriticalAttackSound.DataBindings.Clear();
+            cbWeaponCriticalAttackSound.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
             chckbBlinkwingNearestTown.DataBindings.Clear();
             cbBlinkwingWorld.DataBindings.Clear();
             cbBlinkwingWorld.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
@@ -201,7 +202,7 @@ namespace ItemsEditor
             cbWeaponType.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwWeaponType), false, DataSourceUpdateMode.OnPropertyChanged));
             cbWeaponAttackRange.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwAttackRange), false, DataSourceUpdateMode.OnPropertyChanged));
             cbWeaponAttackSound.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwSndAttack1), false, DataSourceUpdateMode.OnPropertyChanged));
-            cbWeaponDamageSound.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwSndAttack2), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbWeaponCriticalAttackSound.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwSndAttack2), false, DataSourceUpdateMode.OnPropertyChanged));
             chckbBlinkwingNearestTown.DataBindings.Add(new Binding("Checked", currentItem, nameof(Item.IsTownBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
             cbBlinkwingWorld.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwWeaponType), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBlinkwingPositionX.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingPositionX), false, DataSourceUpdateMode.OnPropertyChanged));
@@ -614,6 +615,18 @@ namespace ItemsEditor
         private void TsmiItemDelete_Click(object sender, EventArgs e)
         {
             this.DeleteCurrentItem();
+        }
+
+        private void BtnWeaponPlayAttackSound_Click(object sender, EventArgs e)
+        {
+            if(!(cbWeaponAttackSound.SelectedItem is string soundName)) return;
+            Project.GetInstance().PlaySound(soundName);
+        }
+
+        private void BtnWeaponPlayCriticalAttackSound_Click(object sender, EventArgs e)
+        {
+            if (!(cbWeaponCriticalAttackSound.SelectedItem is string soundName)) return;
+            Project.GetInstance().PlaySound(soundName);
         }
     }
 }

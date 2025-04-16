@@ -48,12 +48,18 @@
             this.tbTexturesFolder = new System.Windows.Forms.TextBox();
             this.lblTexturesFolder = new System.Windows.Forms.Label();
             this.btnSelectTexturesFolder = new System.Windows.Forms.Button();
+            this.tbSoundsConfigurationsFilePath = new System.Windows.Forms.TextBox();
+            this.tbSoundsFolderPath = new System.Windows.Forms.TextBox();
+            this.lblSoundsConfigurationsFilePath = new System.Windows.Forms.Label();
+            this.lblSoundsFolderPath = new System.Windows.Forms.Label();
+            this.btnSelectSoundsConfigurationsFilePath = new System.Windows.Forms.Button();
+            this.btnSelectSoundsFolderPath = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudGameVersion)).BeginInit();
             this.SuspendLayout();
             // 
             // nudGameVersion
             // 
-            this.nudGameVersion.Location = new System.Drawing.Point(115, 146);
+            this.nudGameVersion.Location = new System.Drawing.Point(115, 198);
             this.nudGameVersion.Maximum = new decimal(new int[] {
             22,
             0,
@@ -77,7 +83,7 @@
             // 
             this.lblGameVersion.AutoSize = true;
             this.lblGameVersion.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.lblGameVersion.Location = new System.Drawing.Point(61, 148);
+            this.lblGameVersion.Location = new System.Drawing.Point(61, 200);
             this.lblGameVersion.Name = "lblGameVersion";
             this.lblGameVersion.Size = new System.Drawing.Size(48, 13);
             this.lblGameVersion.TabIndex = 24;
@@ -119,7 +125,7 @@
             // btnApply
             // 
             this.btnApply.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnApply.Location = new System.Drawing.Point(12, 187);
+            this.btnApply.Location = new System.Drawing.Point(12, 247);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
             this.btnApply.TabIndex = 26;
@@ -131,7 +137,7 @@
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnCancel.Location = new System.Drawing.Point(225, 187);
+            this.btnCancel.Location = new System.Drawing.Point(225, 247);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 27;
@@ -245,25 +251,87 @@
             this.btnSelectTexturesFolder.UseVisualStyleBackColor = true;
             this.btnSelectTexturesFolder.Click += new System.EventHandler(this.btnSelectIconsFolder_Click);
             // 
+            // tbSoundsConfigurationsFilePath
+            // 
+            this.tbSoundsConfigurationsFilePath.Location = new System.Drawing.Point(115, 146);
+            this.tbSoundsConfigurationsFilePath.Name = "tbSoundsConfigurationsFilePath";
+            this.tbSoundsConfigurationsFilePath.Size = new System.Drawing.Size(167, 20);
+            this.tbSoundsConfigurationsFilePath.TabIndex = 22;
+            // 
+            // tbSoundsFolderPath
+            // 
+            this.tbSoundsFolderPath.Location = new System.Drawing.Point(115, 172);
+            this.tbSoundsFolderPath.Name = "tbSoundsFolderPath";
+            this.tbSoundsFolderPath.Size = new System.Drawing.Size(167, 20);
+            this.tbSoundsFolderPath.TabIndex = 22;
+            // 
+            // lblSoundsConfigurationsFilePath
+            // 
+            this.lblSoundsConfigurationsFilePath.AutoSize = true;
+            this.lblSoundsConfigurationsFilePath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblSoundsConfigurationsFilePath.Location = new System.Drawing.Point(12, 150);
+            this.lblSoundsConfigurationsFilePath.Name = "lblSoundsConfigurationsFilePath";
+            this.lblSoundsConfigurationsFilePath.Size = new System.Drawing.Size(97, 13);
+            this.lblSoundsConfigurationsFilePath.TabIndex = 21;
+            this.lblSoundsConfigurationsFilePath.Text = "Sounds config file :";
+            // 
+            // lblSoundsFolderPath
+            // 
+            this.lblSoundsFolderPath.AutoSize = true;
+            this.lblSoundsFolderPath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.lblSoundsFolderPath.Location = new System.Drawing.Point(36, 175);
+            this.lblSoundsFolderPath.Name = "lblSoundsFolderPath";
+            this.lblSoundsFolderPath.Size = new System.Drawing.Size(78, 13);
+            this.lblSoundsFolderPath.TabIndex = 21;
+            this.lblSoundsFolderPath.Text = "Sounds folder :";
+            // 
+            // btnSelectSoundsConfigurationsFilePath
+            // 
+            this.btnSelectSoundsConfigurationsFilePath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnSelectSoundsConfigurationsFilePath.Location = new System.Drawing.Point(279, 146);
+            this.btnSelectSoundsConfigurationsFilePath.Name = "btnSelectSoundsConfigurationsFilePath";
+            this.btnSelectSoundsConfigurationsFilePath.Size = new System.Drawing.Size(26, 20);
+            this.btnSelectSoundsConfigurationsFilePath.TabIndex = 23;
+            this.btnSelectSoundsConfigurationsFilePath.Text = "...";
+            this.btnSelectSoundsConfigurationsFilePath.UseVisualStyleBackColor = true;
+            this.btnSelectSoundsConfigurationsFilePath.Click += new System.EventHandler(this.btnSelectIconsFolder_Click);
+            // 
+            // btnSelectSoundsFolderPath
+            // 
+            this.btnSelectSoundsFolderPath.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnSelectSoundsFolderPath.Location = new System.Drawing.Point(279, 172);
+            this.btnSelectSoundsFolderPath.Name = "btnSelectSoundsFolderPath";
+            this.btnSelectSoundsFolderPath.Size = new System.Drawing.Size(26, 20);
+            this.btnSelectSoundsFolderPath.TabIndex = 23;
+            this.btnSelectSoundsFolderPath.Text = "...";
+            this.btnSelectSoundsFolderPath.UseVisualStyleBackColor = true;
+            this.btnSelectSoundsFolderPath.Click += new System.EventHandler(this.btnSelectIconsFolder_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(312, 222);
+            this.ClientSize = new System.Drawing.Size(312, 282);
             this.Controls.Add(this.nudGameVersion);
             this.Controls.Add(this.lblGameVersion);
+            this.Controls.Add(this.btnSelectSoundsFolderPath);
             this.Controls.Add(this.btnSelectTexturesFolder);
+            this.Controls.Add(this.btnSelectSoundsConfigurationsFilePath);
             this.Controls.Add(this.btnSelectIconsFolder);
             this.Controls.Add(this.btnSelectStringFile);
             this.Controls.Add(this.btnSelectPropFile);
             this.Controls.Add(this.btnSelectFolder);
             this.Controls.Add(this.btnApply);
+            this.Controls.Add(this.lblSoundsFolderPath);
             this.Controls.Add(this.lblTexturesFolder);
             this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.lblSoundsConfigurationsFilePath);
             this.Controls.Add(this.lblIconsFolder);
             this.Controls.Add(this.lblStringFile);
+            this.Controls.Add(this.tbSoundsFolderPath);
             this.Controls.Add(this.tbTexturesFolder);
             this.Controls.Add(this.lblPropFile);
+            this.Controls.Add(this.tbSoundsConfigurationsFilePath);
             this.Controls.Add(this.tbIconsFolder);
             this.Controls.Add(this.tbStringFileName);
             this.Controls.Add(this.tbPropFileName);
@@ -299,5 +367,11 @@
         private System.Windows.Forms.TextBox tbTexturesFolder;
         private System.Windows.Forms.Label lblTexturesFolder;
         private System.Windows.Forms.Button btnSelectTexturesFolder;
+        private System.Windows.Forms.TextBox tbSoundsConfigurationsFilePath;
+        private System.Windows.Forms.TextBox tbSoundsFolderPath;
+        private System.Windows.Forms.Label lblSoundsConfigurationsFilePath;
+        private System.Windows.Forms.Label lblSoundsFolderPath;
+        private System.Windows.Forms.Button btnSelectSoundsConfigurationsFilePath;
+        private System.Windows.Forms.Button btnSelectSoundsFolderPath;
     }
 }

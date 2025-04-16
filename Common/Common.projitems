@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ObservableDictionary.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Project.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SoundProject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StringProject.cs" />
   </ItemGroup>
 </Project>

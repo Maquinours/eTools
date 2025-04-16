@@ -77,6 +77,18 @@
             this.lblDstParamIdentifier = new System.Windows.Forms.Label();
             this.cbEquipmentDstParam = new System.Windows.Forms.ComboBox();
             this.lbEquipmentDstStats = new System.Windows.Forms.ListBox();
+            this.tpMainWeapon = new System.Windows.Forms.TabPage();
+            this.gbWeaponSettings = new System.Windows.Forms.GroupBox();
+            this.btnWeaponPlayCriticalAttackSound = new System.Windows.Forms.Button();
+            this.btnWeaponPlayAttackSound = new System.Windows.Forms.Button();
+            this.cbWeaponCriticalAttackSound = new System.Windows.Forms.ComboBox();
+            this.lblWeaponCriticalAttackSound = new System.Windows.Forms.Label();
+            this.cbWeaponAttackSound = new System.Windows.Forms.ComboBox();
+            this.lblWeaponAttackSound = new System.Windows.Forms.Label();
+            this.cbWeaponAttackRange = new System.Windows.Forms.ComboBox();
+            this.lblWeaponAttackRange = new System.Windows.Forms.Label();
+            this.cbWeaponType = new System.Windows.Forms.ComboBox();
+            this.lblWeaponType = new System.Windows.Forms.Label();
             this.tpMainConsumable = new System.Windows.Forms.TabPage();
             this.nudConsumableDstValue = new System.Windows.Forms.NumericUpDown();
             this.cbConsumableDstParam = new System.Windows.Forms.ComboBox();
@@ -219,16 +231,6 @@
             this.cmsLbItems = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiItemDuplicate = new System.Windows.Forms.ToolStripMenuItem();
-            this.tpMainWeapon = new System.Windows.Forms.TabPage();
-            this.gbWeaponSettings = new System.Windows.Forms.GroupBox();
-            this.cbWeaponType = new System.Windows.Forms.ComboBox();
-            this.lblWeaponType = new System.Windows.Forms.Label();
-            this.lblWeaponAttackRange = new System.Windows.Forms.Label();
-            this.cbWeaponAttackRange = new System.Windows.Forms.ComboBox();
-            this.lblWeaponAttackSound = new System.Windows.Forms.Label();
-            this.cbWeaponAttackSound = new System.Windows.Forms.ComboBox();
-            this.lblWeaponDamageSound = new System.Windows.Forms.Label();
-            this.cbWeaponDamageSound = new System.Windows.Forms.ComboBox();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -242,6 +244,8 @@
             this.gbEquipmentRequirements.SuspendLayout();
             this.gbDstParams.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudEquipmentDstValue)).BeginInit();
+            this.tpMainWeapon.SuspendLayout();
+            this.gbWeaponSettings.SuspendLayout();
             this.tpMainConsumable.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudConsumableDstValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -303,8 +307,6 @@
             this.msMain.SuspendLayout();
             this.pnlList.SuspendLayout();
             this.cmsLbItems.SuspendLayout();
-            this.tpMainWeapon.SuspendLayout();
-            this.gbWeaponSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbItems
@@ -815,6 +817,139 @@
             this.lbEquipmentDstStats.Size = new System.Drawing.Size(174, 121);
             this.lbEquipmentDstStats.TabIndex = 9;
             this.lbEquipmentDstStats.SelectedValueChanged += new System.EventHandler(this.LbEquipmentDstStats_SelectedValueChanged);
+            // 
+            // tpMainWeapon
+            // 
+            this.tpMainWeapon.Controls.Add(this.gbWeaponSettings);
+            this.tpMainWeapon.Location = new System.Drawing.Point(4, 22);
+            this.tpMainWeapon.Name = "tpMainWeapon";
+            this.tpMainWeapon.Size = new System.Drawing.Size(374, 400);
+            this.tpMainWeapon.TabIndex = 12;
+            this.tpMainWeapon.Text = "Weapon";
+            this.tpMainWeapon.UseVisualStyleBackColor = true;
+            // 
+            // gbWeaponSettings
+            // 
+            this.gbWeaponSettings.Controls.Add(this.btnWeaponPlayCriticalAttackSound);
+            this.gbWeaponSettings.Controls.Add(this.btnWeaponPlayAttackSound);
+            this.gbWeaponSettings.Controls.Add(this.cbWeaponCriticalAttackSound);
+            this.gbWeaponSettings.Controls.Add(this.lblWeaponCriticalAttackSound);
+            this.gbWeaponSettings.Controls.Add(this.cbWeaponAttackSound);
+            this.gbWeaponSettings.Controls.Add(this.lblWeaponAttackSound);
+            this.gbWeaponSettings.Controls.Add(this.cbWeaponAttackRange);
+            this.gbWeaponSettings.Controls.Add(this.lblWeaponAttackRange);
+            this.gbWeaponSettings.Controls.Add(this.cbWeaponType);
+            this.gbWeaponSettings.Controls.Add(this.lblWeaponType);
+            this.gbWeaponSettings.Location = new System.Drawing.Point(9, 9);
+            this.gbWeaponSettings.Margin = new System.Windows.Forms.Padding(2);
+            this.gbWeaponSettings.Name = "gbWeaponSettings";
+            this.gbWeaponSettings.Padding = new System.Windows.Forms.Padding(2);
+            this.gbWeaponSettings.Size = new System.Drawing.Size(358, 166);
+            this.gbWeaponSettings.TabIndex = 2;
+            this.gbWeaponSettings.TabStop = false;
+            this.gbWeaponSettings.Text = "Settings";
+            // 
+            // btnWeaponPlayCriticalAttackSound
+            // 
+            this.btnWeaponPlayCriticalAttackSound.BackColor = System.Drawing.Color.Transparent;
+            this.btnWeaponPlayCriticalAttackSound.Image = ((System.Drawing.Image)(resources.GetObject("btnWeaponPlayCriticalAttackSound.Image")));
+            this.btnWeaponPlayCriticalAttackSound.Location = new System.Drawing.Point(283, 130);
+            this.btnWeaponPlayCriticalAttackSound.Name = "btnWeaponPlayCriticalAttackSound";
+            this.btnWeaponPlayCriticalAttackSound.Size = new System.Drawing.Size(24, 24);
+            this.btnWeaponPlayCriticalAttackSound.TabIndex = 2;
+            this.btnWeaponPlayCriticalAttackSound.UseVisualStyleBackColor = false;
+            this.btnWeaponPlayCriticalAttackSound.Click += new System.EventHandler(this.BtnWeaponPlayCriticalAttackSound_Click);
+            // 
+            // btnWeaponPlayAttackSound
+            // 
+            this.btnWeaponPlayAttackSound.BackColor = System.Drawing.Color.Transparent;
+            this.btnWeaponPlayAttackSound.Image = ((System.Drawing.Image)(resources.GetObject("btnWeaponPlayAttackSound.Image")));
+            this.btnWeaponPlayAttackSound.Location = new System.Drawing.Point(283, 105);
+            this.btnWeaponPlayAttackSound.Name = "btnWeaponPlayAttackSound";
+            this.btnWeaponPlayAttackSound.Size = new System.Drawing.Size(24, 24);
+            this.btnWeaponPlayAttackSound.TabIndex = 2;
+            this.btnWeaponPlayAttackSound.UseVisualStyleBackColor = false;
+            this.btnWeaponPlayAttackSound.Click += new System.EventHandler(this.BtnWeaponPlayAttackSound_Click);
+            // 
+            // cbWeaponCriticalAttackSound
+            // 
+            this.cbWeaponCriticalAttackSound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbWeaponCriticalAttackSound.FormattingEnabled = true;
+            this.cbWeaponCriticalAttackSound.Location = new System.Drawing.Point(119, 131);
+            this.cbWeaponCriticalAttackSound.Margin = new System.Windows.Forms.Padding(2);
+            this.cbWeaponCriticalAttackSound.Name = "cbWeaponCriticalAttackSound";
+            this.cbWeaponCriticalAttackSound.Size = new System.Drawing.Size(159, 21);
+            this.cbWeaponCriticalAttackSound.TabIndex = 1;
+            // 
+            // lblWeaponCriticalAttackSound
+            // 
+            this.lblWeaponCriticalAttackSound.AutoSize = true;
+            this.lblWeaponCriticalAttackSound.Location = new System.Drawing.Point(6, 134);
+            this.lblWeaponCriticalAttackSound.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblWeaponCriticalAttackSound.Name = "lblWeaponCriticalAttackSound";
+            this.lblWeaponCriticalAttackSound.Size = new System.Drawing.Size(109, 13);
+            this.lblWeaponCriticalAttackSound.TabIndex = 0;
+            this.lblWeaponCriticalAttackSound.Text = "Critical attack sound :";
+            // 
+            // cbWeaponAttackSound
+            // 
+            this.cbWeaponAttackSound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbWeaponAttackSound.FormattingEnabled = true;
+            this.cbWeaponAttackSound.Location = new System.Drawing.Point(119, 106);
+            this.cbWeaponAttackSound.Margin = new System.Windows.Forms.Padding(2);
+            this.cbWeaponAttackSound.Name = "cbWeaponAttackSound";
+            this.cbWeaponAttackSound.Size = new System.Drawing.Size(159, 21);
+            this.cbWeaponAttackSound.TabIndex = 1;
+            // 
+            // lblWeaponAttackSound
+            // 
+            this.lblWeaponAttackSound.AutoSize = true;
+            this.lblWeaponAttackSound.Location = new System.Drawing.Point(39, 109);
+            this.lblWeaponAttackSound.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblWeaponAttackSound.Name = "lblWeaponAttackSound";
+            this.lblWeaponAttackSound.Size = new System.Drawing.Size(76, 13);
+            this.lblWeaponAttackSound.TabIndex = 0;
+            this.lblWeaponAttackSound.Text = "Attack sound :";
+            // 
+            // cbWeaponAttackRange
+            // 
+            this.cbWeaponAttackRange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbWeaponAttackRange.FormattingEnabled = true;
+            this.cbWeaponAttackRange.Location = new System.Drawing.Point(119, 65);
+            this.cbWeaponAttackRange.Margin = new System.Windows.Forms.Padding(2);
+            this.cbWeaponAttackRange.Name = "cbWeaponAttackRange";
+            this.cbWeaponAttackRange.Size = new System.Drawing.Size(159, 21);
+            this.cbWeaponAttackRange.TabIndex = 1;
+            // 
+            // lblWeaponAttackRange
+            // 
+            this.lblWeaponAttackRange.AutoSize = true;
+            this.lblWeaponAttackRange.Location = new System.Drawing.Point(36, 68);
+            this.lblWeaponAttackRange.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblWeaponAttackRange.Name = "lblWeaponAttackRange";
+            this.lblWeaponAttackRange.Size = new System.Drawing.Size(79, 13);
+            this.lblWeaponAttackRange.TabIndex = 0;
+            this.lblWeaponAttackRange.Text = "Attack Range :";
+            // 
+            // cbWeaponType
+            // 
+            this.cbWeaponType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbWeaponType.FormattingEnabled = true;
+            this.cbWeaponType.Location = new System.Drawing.Point(119, 29);
+            this.cbWeaponType.Margin = new System.Windows.Forms.Padding(2);
+            this.cbWeaponType.Name = "cbWeaponType";
+            this.cbWeaponType.Size = new System.Drawing.Size(159, 21);
+            this.cbWeaponType.TabIndex = 1;
+            // 
+            // lblWeaponType
+            // 
+            this.lblWeaponType.AutoSize = true;
+            this.lblWeaponType.Location = new System.Drawing.Point(76, 31);
+            this.lblWeaponType.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblWeaponType.Name = "lblWeaponType";
+            this.lblWeaponType.Size = new System.Drawing.Size(37, 13);
+            this.lblWeaponType.TabIndex = 0;
+            this.lblWeaponType.Text = "Type :";
             // 
             // tpMainConsumable
             // 
@@ -2481,115 +2616,6 @@
             this.tsmiItemDuplicate.Text = "Duplicate";
             this.tsmiItemDuplicate.Click += new System.EventHandler(this.TsmiItemDuplicate_Click);
             // 
-            // tpMainWeapon
-            // 
-            this.tpMainWeapon.Controls.Add(this.gbWeaponSettings);
-            this.tpMainWeapon.Location = new System.Drawing.Point(4, 22);
-            this.tpMainWeapon.Name = "tpMainWeapon";
-            this.tpMainWeapon.Size = new System.Drawing.Size(374, 400);
-            this.tpMainWeapon.TabIndex = 12;
-            this.tpMainWeapon.Text = "Weapon";
-            this.tpMainWeapon.UseVisualStyleBackColor = true;
-            // 
-            // gbWeaponSettings
-            // 
-            this.gbWeaponSettings.Controls.Add(this.cbWeaponDamageSound);
-            this.gbWeaponSettings.Controls.Add(this.lblWeaponDamageSound);
-            this.gbWeaponSettings.Controls.Add(this.cbWeaponAttackSound);
-            this.gbWeaponSettings.Controls.Add(this.lblWeaponAttackSound);
-            this.gbWeaponSettings.Controls.Add(this.cbWeaponAttackRange);
-            this.gbWeaponSettings.Controls.Add(this.lblWeaponAttackRange);
-            this.gbWeaponSettings.Controls.Add(this.cbWeaponType);
-            this.gbWeaponSettings.Controls.Add(this.lblWeaponType);
-            this.gbWeaponSettings.Location = new System.Drawing.Point(9, 9);
-            this.gbWeaponSettings.Margin = new System.Windows.Forms.Padding(2);
-            this.gbWeaponSettings.Name = "gbWeaponSettings";
-            this.gbWeaponSettings.Padding = new System.Windows.Forms.Padding(2);
-            this.gbWeaponSettings.Size = new System.Drawing.Size(358, 166);
-            this.gbWeaponSettings.TabIndex = 2;
-            this.gbWeaponSettings.TabStop = false;
-            this.gbWeaponSettings.Text = "Settings";
-            // 
-            // cbWeaponType
-            // 
-            this.cbWeaponType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbWeaponType.FormattingEnabled = true;
-            this.cbWeaponType.Location = new System.Drawing.Point(119, 29);
-            this.cbWeaponType.Margin = new System.Windows.Forms.Padding(2);
-            this.cbWeaponType.Name = "cbWeaponType";
-            this.cbWeaponType.Size = new System.Drawing.Size(159, 21);
-            this.cbWeaponType.TabIndex = 1;
-            // 
-            // lblWeaponType
-            // 
-            this.lblWeaponType.AutoSize = true;
-            this.lblWeaponType.Location = new System.Drawing.Point(76, 31);
-            this.lblWeaponType.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblWeaponType.Name = "lblWeaponType";
-            this.lblWeaponType.Size = new System.Drawing.Size(37, 13);
-            this.lblWeaponType.TabIndex = 0;
-            this.lblWeaponType.Text = "Type :";
-            // 
-            // lblWeaponAttackRange
-            // 
-            this.lblWeaponAttackRange.AutoSize = true;
-            this.lblWeaponAttackRange.Location = new System.Drawing.Point(36, 68);
-            this.lblWeaponAttackRange.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblWeaponAttackRange.Name = "lblWeaponAttackRange";
-            this.lblWeaponAttackRange.Size = new System.Drawing.Size(79, 13);
-            this.lblWeaponAttackRange.TabIndex = 0;
-            this.lblWeaponAttackRange.Text = "Attack Range :";
-            // 
-            // cbWeaponAttackRange
-            // 
-            this.cbWeaponAttackRange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbWeaponAttackRange.FormattingEnabled = true;
-            this.cbWeaponAttackRange.Location = new System.Drawing.Point(119, 65);
-            this.cbWeaponAttackRange.Margin = new System.Windows.Forms.Padding(2);
-            this.cbWeaponAttackRange.Name = "cbWeaponAttackRange";
-            this.cbWeaponAttackRange.Size = new System.Drawing.Size(159, 21);
-            this.cbWeaponAttackRange.TabIndex = 1;
-            // 
-            // lblWeaponAttackSound
-            // 
-            this.lblWeaponAttackSound.AutoSize = true;
-            this.lblWeaponAttackSound.Location = new System.Drawing.Point(39, 109);
-            this.lblWeaponAttackSound.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblWeaponAttackSound.Name = "lblWeaponAttackSound";
-            this.lblWeaponAttackSound.Size = new System.Drawing.Size(76, 13);
-            this.lblWeaponAttackSound.TabIndex = 0;
-            this.lblWeaponAttackSound.Text = "Attack sound :";
-            // 
-            // cbWeaponAttackSound
-            // 
-            this.cbWeaponAttackSound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbWeaponAttackSound.FormattingEnabled = true;
-            this.cbWeaponAttackSound.Location = new System.Drawing.Point(119, 106);
-            this.cbWeaponAttackSound.Margin = new System.Windows.Forms.Padding(2);
-            this.cbWeaponAttackSound.Name = "cbWeaponAttackSound";
-            this.cbWeaponAttackSound.Size = new System.Drawing.Size(159, 21);
-            this.cbWeaponAttackSound.TabIndex = 1;
-            // 
-            // lblWeaponDamageSound
-            // 
-            this.lblWeaponDamageSound.AutoSize = true;
-            this.lblWeaponDamageSound.Location = new System.Drawing.Point(30, 134);
-            this.lblWeaponDamageSound.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblWeaponDamageSound.Name = "lblWeaponDamageSound";
-            this.lblWeaponDamageSound.Size = new System.Drawing.Size(85, 13);
-            this.lblWeaponDamageSound.TabIndex = 0;
-            this.lblWeaponDamageSound.Text = "Damage sound :";
-            // 
-            // cbWeaponDamageSound
-            // 
-            this.cbWeaponDamageSound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbWeaponDamageSound.FormattingEnabled = true;
-            this.cbWeaponDamageSound.Location = new System.Drawing.Point(119, 131);
-            this.cbWeaponDamageSound.Margin = new System.Windows.Forms.Padding(2);
-            this.cbWeaponDamageSound.Name = "cbWeaponDamageSound";
-            this.cbWeaponDamageSound.Size = new System.Drawing.Size(159, 21);
-            this.cbWeaponDamageSound.TabIndex = 1;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2626,6 +2652,9 @@
             this.gbDstParams.ResumeLayout(false);
             this.gbDstParams.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudEquipmentDstValue)).EndInit();
+            this.tpMainWeapon.ResumeLayout(false);
+            this.gbWeaponSettings.ResumeLayout(false);
+            this.gbWeaponSettings.PerformLayout();
             this.tpMainConsumable.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nudConsumableDstValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
@@ -2700,9 +2729,6 @@
             this.pnlList.ResumeLayout(false);
             this.pnlList.PerformLayout();
             this.cmsLbItems.ResumeLayout(false);
-            this.tpMainWeapon.ResumeLayout(false);
-            this.gbWeaponSettings.ResumeLayout(false);
-            this.gbWeaponSettings.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2905,10 +2931,12 @@
         private System.Windows.Forms.Label lblWeaponType;
         private System.Windows.Forms.ComboBox cbWeaponAttackRange;
         private System.Windows.Forms.Label lblWeaponAttackRange;
-        private System.Windows.Forms.ComboBox cbWeaponDamageSound;
-        private System.Windows.Forms.Label lblWeaponDamageSound;
+        private System.Windows.Forms.ComboBox cbWeaponCriticalAttackSound;
+        private System.Windows.Forms.Label lblWeaponCriticalAttackSound;
         private System.Windows.Forms.ComboBox cbWeaponAttackSound;
         private System.Windows.Forms.Label lblWeaponAttackSound;
+        private System.Windows.Forms.Button btnWeaponPlayAttackSound;
+        private System.Windows.Forms.Button btnWeaponPlayCriticalAttackSound;
     }
 }
 

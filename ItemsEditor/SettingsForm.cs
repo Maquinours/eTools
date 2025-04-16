@@ -30,6 +30,8 @@ namespace ItemsEditor
             tbStringFileName.Text = Path.GetFileName(settings.StringsFilePath);
             tbIconsFolder.Text = settings.IconsFolderPath;
             tbTexturesFolder.Text = settings.TexturesFolderPath;
+            tbSoundsConfigurationsFilePath.Text = settings.SoundsConfigurationsFilePath;
+            tbSoundsFolderPath.Text = settings.SoundsFolderPath;
             nudGameVersion.Value = settings.ResourceVersion;
         }
 
@@ -80,9 +82,11 @@ namespace ItemsEditor
             string stringsFilePath = settings.ResourcePath + tbStringFileName.Text;
             string iconsFolderPath = tbIconsFolder.Text;
             string texturesFolderPath = tbTexturesFolder.Text;
+            string soundsConfigurationsFilePath = tbSoundsConfigurationsFilePath.Text;
+            string soundsFolderPath = tbSoundsFolderPath.Text;
             int resourceVersion = Decimal.ToInt32(nudGameVersion.Value);
 
-            if (settings.ResourcePath == resourcePath && settings.PropFileName == propFileName && settings.StringsFilePath == stringsFilePath && settings.IconsFolderPath == iconsFolderPath && settings.TexturesFolderPath == texturesFolderPath && settings.ResourceVersion == resourceVersion)
+            if (settings.ResourcePath == resourcePath && settings.PropFileName == propFileName && settings.StringsFilePath == stringsFilePath && settings.IconsFolderPath == iconsFolderPath && settings.TexturesFolderPath == texturesFolderPath && settings.SoundsConfigurationsFilePath != soundsConfigurationsFilePath && settings.SoundsFolderPath != soundsFolderPath && settings.ResourceVersion == resourceVersion)
             {
                 ContainsChanges = false;
             }
@@ -94,6 +98,8 @@ namespace ItemsEditor
                 settings.StringsFilePath = stringsFilePath;
                 settings.IconsFolderPath = iconsFolderPath;
                 settings.TexturesFolderPath = texturesFolderPath;
+                settings.SoundsConfigurationsFilePath = soundsConfigurationsFilePath;
+                settings.SoundsFolderPath = soundsFolderPath;
                 settings.ResourceVersion = resourceVersion;
                 settings.SaveGeneral();
                 settings.SaveSpecs();

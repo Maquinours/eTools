@@ -32,6 +32,8 @@ namespace Common
 #if __ITEMS
         private string _iconsFolderPath;
         private string _texturesFolderPath;
+        private string _soundsConfigurationsFilePath;
+        public string _soundsFolderPath;
 #endif // __ITEMS
 
         /// <summary>
@@ -61,6 +63,8 @@ namespace Common
 #if __ITEMS
         public string IconsFolderPath { get => this._iconsFolderPath; set { if (value != this.IconsFolderPath) { this._iconsFolderPath = value; this.NotifyPropertyChanged(); } } }
         public string TexturesFolderPath { get => this._texturesFolderPath; set { if (value != this.TexturesFolderPath) { this._texturesFolderPath = value; this.NotifyPropertyChanged(); } } }
+        public string SoundsConfigurationsFilePath { get => this._soundsConfigurationsFilePath; set { if (value != this.SoundsConfigurationsFilePath) { this._soundsConfigurationsFilePath = value; this.NotifyPropertyChanged(); } } }
+        public string SoundsFolderPath { get => this._soundsFolderPath; set { if (value != this.SoundsFolderPath) { this._soundsFolderPath = value; this.NotifyPropertyChanged(); } } }
 #endif // __ITEMS
 #if __MOVERS
         public Dictionary<MoverTypes, MoverType> Types { get; set; }
@@ -209,6 +213,12 @@ namespace Common
                     case "TEXTURESPATH":
                         TexturesFolderPath = scanner.GetToken();
                         break;
+                    case "SOUNDSCONFIG":
+                        SoundsConfigurationsFilePath = scanner.GetToken();
+                        break;
+                    case "SOUNDSPATH":
+                        SoundsFolderPath = scanner.GetToken();
+                        break;
 #endif // __ITEMS
 #if __MOVERS
                     case "TYPES":
@@ -276,6 +286,8 @@ namespace Common
 #if __ITEMS
                 writer.WriteLine($"ICONSPATH\t\"{IconsFolderPath}\"");
                 writer.WriteLine($"TEXTURESPATH\t\"{TexturesFolderPath}\"");
+                writer.WriteLine($"SOUNDSCONFIG\t\"{SoundsConfigurationsFilePath}\"");
+                writer.WriteLine($"SOUNDSPATH\t\"{SoundsFolderPath}\"");
 #endif // __ITEMS
                 writer.WriteLine($"STRINGS\t\"{Path.GetFileName(StringsFilePath)}\"");
                 writer.WriteLine("DEFINES");
@@ -352,6 +364,8 @@ namespace Common
             };
             IconsFolderPath = ResourcePath + "Item\\";
             TexturesFolderPath = ResourcePath + "Model\\Texture\\";
+            SoundsConfigurationsFilePath = ResourcePath + "Client\\sound.inc";
+            SoundsFolderPath = ResourcePath + "Sound\\";
 #endif // __ITEMS
         }
     }

@@ -78,6 +78,7 @@ namespace Common
             this.LoadStrings(config.StringsFilePath);
             reportProgress?.Invoke(60);
 #if __ITEMS
+            this.LoadSounds(config.SoundsConfigurationsFilePath);
             this.LoadItems(config.PropFileName);
             reportProgress?.Invoke(80);
 #endif // __ITEMS

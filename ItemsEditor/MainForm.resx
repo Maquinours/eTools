@@ -136,6 +136,22 @@
         AABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btnWeaponPlayCriticalAttackSound.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAJlJREFUSEvt
+        ldsJgDAMRYsrOIsj6Zc7uIaO5CyuINobIRBK1T6Sv144aPww5qitaynJDCbQPZVBFnCBHQx0QTvc4AYn
+        2EAP1MINJAcYgYo2OQEhz1W0fTUgqrXFFMUo1vY3Add8zNaWOoGEtK0gSVvuBIRpg2JF4Q3Duvolv6H2
+        mYZPTJj9aKRDbYWVikwXO7Pl2nzDaRFxzgN0qoYgfBPzGgAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnWeaponPlayAttackSound.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAJlJREFUSEvt
+        ldsJgDAMRYsrOIsj6Zc7uIaO5CyuINobIRBK1T6Sv144aPww5qitaynJDCbQPZVBFnCBHQx0QTvc4AYn
+        2EAP1MINJAcYgYo2OQEhz1W0fTUgqrXFFMUo1vY3Add8zNaWOoGEtK0gSVvuBIRpg2JF4Q3Duvolv6H2
+        mYZPTJj9aKRDbYWVikwXO7Pl2nzDaRFxzgN0qoYgfBPzGgAAAABJRU5ErkJggg==
+</value>
+  </data>
   <data name="picboxPaperingTexture.ErrorImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAgCAYAAAAFQMh/AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
