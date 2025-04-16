@@ -621,16 +621,28 @@ namespace ItemsEditor
             this.DeleteCurrentItem();
         }
 
+        private void PlaySound(string soundName)
+        {
+            try
+            {
+                Project.GetInstance().PlaySound(soundName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Resources.ExceptionMessages.LoadingError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void BtnWeaponPlayAttackSound_Click(object sender, EventArgs e)
         {
             if(!(cbWeaponAttackSound.SelectedItem is string soundName)) return;
-            Project.GetInstance().PlaySound(soundName);
+            this.PlaySound(soundName);
         }
 
         private void BtnWeaponPlayCriticalAttackSound_Click(object sender, EventArgs e)
         {
             if (!(cbWeaponCriticalAttackSound.SelectedItem is string soundName)) return;
-            Project.GetInstance().PlaySound(soundName);
+            this.PlaySound(soundName);
         }
 
         private async void Save()
