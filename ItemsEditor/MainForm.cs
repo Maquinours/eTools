@@ -632,5 +632,21 @@ namespace ItemsEditor
             if (!(cbWeaponCriticalAttackSound.SelectedItem is string soundName)) return;
             Project.GetInstance().PlaySound(soundName);
         }
+
+        private async void Save()
+        {
+            try
+            {
+                await Task.Run(() => Project.GetInstance().Save((progress) => pbFileSaveReload.Invoke(new Action(() => pbFileSaveReload.Value = progress)))).ConfigureAwait(true);
+            } catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
+        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Save();
+        }
     }
 }
