@@ -637,14 +637,23 @@ namespace ItemsEditor
         {
             try
             {
+                this.Enabled = false;
+                pbFileSaveReload.Visible = true;
                 await Task.Run(() => Project.GetInstance().Save((progress) => pbFileSaveReload.Invoke(new Action(() => pbFileSaveReload.Value = progress)))).ConfigureAwait(true);
             } catch(Exception e)
             {
                 MessageBox.Show(e.Message);
             }
+            finally
+            {
+                await Task.Delay(300).ConfigureAwait(true);
+                pbFileSaveReload.Visible = false;
+                pbFileSaveReload.Value = 0;
+                this.Enabled = true;
+            }
         }
 
-        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TsmiFileSave_Click(object sender, EventArgs e)
         {
             this.Save();
         }

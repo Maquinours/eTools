@@ -97,7 +97,10 @@ namespace Common
 #if __MOVERS
             SaveMoversprop(config.PropFileName);
             reportProgress?.Invoke(33);
-#endif // __MOVERS
+#elif __ITEMS
+            SaveItemsprop(config.PropFileName);
+            reportProgress?.Invoke(33);
+#endif // __ITEMS
             SaveModels(config.ResourcePath + "mdlDyna.inc");
             reportProgress?.Invoke(66);
             SaveStrings(config.StringsFilePath);

@@ -226,6 +226,7 @@
             this.tsmiItemsSearch = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiFileReload = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFileSave = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiView = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiViewExpertEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
@@ -235,7 +236,6 @@
             this.cmsLbItems = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiItemDuplicate = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -2584,7 +2584,7 @@
             // 
             this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiFileReload,
-            this.saveToolStripMenuItem});
+            this.tsmiFileSave});
             this.tsmiFile.Name = "tsmiFile";
             this.tsmiFile.Size = new System.Drawing.Size(37, 22);
             this.tsmiFile.Text = "File";
@@ -2596,6 +2596,14 @@
             this.tsmiFileReload.Size = new System.Drawing.Size(180, 22);
             this.tsmiFileReload.Text = "Reload";
             this.tsmiFileReload.Click += new System.EventHandler(this.tsmiFileReload_Click);
+            // 
+            // tsmiFileSave
+            // 
+            this.tsmiFileSave.Name = "tsmiFileSave";
+            this.tsmiFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.tsmiFileSave.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFileSave.Text = "Save";
+            this.tsmiFileSave.Click += new System.EventHandler(this.TsmiFileSave_Click);
             // 
             // tsmiView
             // 
@@ -2669,14 +2677,6 @@
             this.tsmiItemDuplicate.Size = new System.Drawing.Size(124, 22);
             this.tsmiItemDuplicate.Text = "Duplicate";
             this.tsmiItemDuplicate.Click += new System.EventHandler(this.TsmiItemDuplicate_Click);
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveToolStripMenuItem.Text = "Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -3007,7 +3007,7 @@
         private System.Windows.Forms.ComboBox cbWeaponAttackSfx;
         private System.Windows.Forms.Label lblWeaponAttackSfx;
         private System.Windows.Forms.GroupBox gbWeaponSounds;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFileSave;
     }
 }
 
