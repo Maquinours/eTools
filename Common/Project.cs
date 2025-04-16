@@ -146,6 +146,18 @@ namespace Common
         {
             return defines.Where(x => x.Key.StartsWith("II_")).Select(x => x.Key).ToArray();
         }
+        public string[] GetWeaponTypeIdentifiers()
+        {
+            return defines.Where(x => x.Key.StartsWith("WT_")).Select(x => x.Key).ToArray();
+        }
+        public string[] GetAttackRangeIdentifiers()
+        {
+            return defines.Where(x => x.Key.StartsWith("AR_")).Select(x => x.Key).ToArray();
+        }
+        public string[] GetSoundIdentifiers()
+        {
+            return defines.Where(x => x.Key.StartsWith("SND_")).Select(x => x.Key).ToArray();
+        }
         public string[] GetPetMoverIdentifiers()
         {
             return defines.Where(x => x.Key.StartsWith("MI_PET_")).Select(x => x.Key).ToArray();

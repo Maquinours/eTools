@@ -50,6 +50,10 @@ namespace ItemsEditor
                 cbEquipmentJob.DataSource = new string[] { "=" }.Concat(prj.GetJobIdentifiers()).ToArray();
                 cbEquipmentSex.DataSource = new string[] { "=" }.Concat(prj.GetSexIdentifiers()).ToArray();
                 cbEquipmentDstParam.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
+                cbWeaponType.DataSource = prj.GetWeaponTypeIdentifiers();
+                cbWeaponAttackRange.DataSource = prj.GetAttackRangeIdentifiers();
+                cbWeaponAttackSound.DataSource = prj.GetSoundIdentifiers();
+                cbWeaponDamageSound.DataSource = prj.GetSoundIdentifiers();
                 cbConsumableDstParam.DataSource = prj.GetDstIdentifiers();
                 cbEquipmentParts.DataSource = prj.GetPartsIdentifiers();
                 cbBlinkwingWorld.DataSource = prj.GetWorldIdentifiers();
@@ -113,6 +117,14 @@ namespace ItemsEditor
             tbAtkMax.DataBindings.Clear();
             cbEquipmentParts.DataBindings.Clear();
             tbEquipmentLevel.DataBindings.Clear();
+            cbWeaponType.DataBindings.Clear();
+            cbWeaponType.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+            cbWeaponAttackRange.DataBindings.Clear();
+            cbWeaponAttackRange.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+            cbWeaponAttackSound.DataBindings.Clear();
+            cbWeaponAttackSound.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+            cbWeaponDamageSound.DataBindings.Clear();
+            cbWeaponDamageSound.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
             chckbBlinkwingNearestTown.DataBindings.Clear();
             cbBlinkwingWorld.DataBindings.Clear();
             cbBlinkwingWorld.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
@@ -186,6 +198,10 @@ namespace ItemsEditor
             tbAtkMax.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMax", false, DataSourceUpdateMode.OnPropertyChanged));
             tbEquipmentLevel.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwLimitLevel1", false, DataSourceUpdateMode.OnPropertyChanged));
             cbEquipmentParts.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwParts", false, DataSourceUpdateMode.OnPropertyChanged));
+            cbWeaponType.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwWeaponType), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbWeaponAttackRange.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwAttackRange), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbWeaponAttackSound.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwSndAttack1), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbWeaponDamageSound.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwSndAttack2), false, DataSourceUpdateMode.OnPropertyChanged));
             chckbBlinkwingNearestTown.DataBindings.Add(new Binding("Checked", currentItem, nameof(Item.IsTownBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
             cbBlinkwingWorld.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwWeaponType), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBlinkwingPositionX.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingPositionX), false, DataSourceUpdateMode.OnPropertyChanged));
@@ -536,8 +552,14 @@ namespace ItemsEditor
                         break;
                 }
             }
+            switch(currentItem.Prop.DwItemKind1)
+            {
+                case "IK1_WEAPON":
+                    tabs.Add(tpMainWeapon);
+                    break;
+            }
 
-            foreach(TabPage tab in tcMain.TabPages)
+            foreach (TabPage tab in tcMain.TabPages)
                 if(!tabs.Contains(tab))
                     tcMain.TabPages.Remove(tab);
             foreach(TabPage tab in tabs)
