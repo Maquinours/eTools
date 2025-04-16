@@ -55,6 +55,7 @@ namespace ItemsEditor
                 cbWeaponAttackRange.DataSource = prj.GetAttackRangeIdentifiers();
                 cbWeaponAttackSound.DataSource = prj.GetSoundIdentifiers();
                 cbWeaponCriticalAttackSound.DataSource = prj.GetSoundIdentifiers();
+                cbWeaponAttackSfx.DataSource = new string[] {"="}.Concat(prj.GetSfxIdentifiers()).ToArray();
                 cbConsumableDstParam.DataSource = prj.GetDstIdentifiers();
                 cbEquipmentParts.DataSource = prj.GetPartsIdentifiers();
                 cbBlinkwingWorld.DataSource = prj.GetWorldIdentifiers();
@@ -126,6 +127,8 @@ namespace ItemsEditor
             cbWeaponAttackSound.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
             cbWeaponCriticalAttackSound.DataBindings.Clear();
             cbWeaponCriticalAttackSound.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+            cbWeaponAttackSfx.DataBindings.Clear();
+            cbWeaponAttackSfx.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
             chckbBlinkwingNearestTown.DataBindings.Clear();
             cbBlinkwingWorld.DataBindings.Clear();
             cbBlinkwingWorld.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
@@ -203,6 +206,7 @@ namespace ItemsEditor
             cbWeaponAttackRange.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwAttackRange), false, DataSourceUpdateMode.OnPropertyChanged));
             cbWeaponAttackSound.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwSndAttack1), false, DataSourceUpdateMode.OnPropertyChanged));
             cbWeaponCriticalAttackSound.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwSndAttack2), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbWeaponAttackSfx.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwSfxObj3), false, DataSourceUpdateMode.OnPropertyChanged));
             chckbBlinkwingNearestTown.DataBindings.Add(new Binding("Checked", currentItem, nameof(Item.IsTownBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
             cbBlinkwingWorld.DataBindings.Add(new Binding(nameof(ComboBox.SelectedItem), currentItem.Prop, nameof(ItemProp.DwWeaponType), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBlinkwingPositionX.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingPositionX), false, DataSourceUpdateMode.OnPropertyChanged));
@@ -258,7 +262,7 @@ namespace ItemsEditor
             lbEquipmentDstStats.DataSource = currentItem.Dests;
             lbConsumableDst.DisplayMember = nameof(Dest.Label);
             lbConsumableDst.DataSource = currentItem.Dests;
-            Item[] items = Project.GetInstance().Items.Where(x => x.Prop.DwItemKind2 == "IK2_GUILDHOUSE_NPC").ToArray();
+            Item[] items = Project.GetInstance().Items.Where(x => x.Prop.DwSfxObj5 != "=").ToArray();
             RefreshTabsState();
 
             // TODO: reimplement something like this (rework params)
