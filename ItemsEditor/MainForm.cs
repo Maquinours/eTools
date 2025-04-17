@@ -267,51 +267,6 @@ namespace ItemsEditor
             RefreshTabsState();
         }
 
-        private void FormatIntTextbox(object sender, EventArgs e)
-        {
-            TextBox tb = (TextBox)sender;
-            string tempStr = "";
-            string finalStr = "";
-            for (int i = 0; i < tb.Text.Length; i++)
-            {
-                if (char.IsDigit(tb.Text[i]) || (i == 0 && tb.Text[i] == '-'))
-                {
-                    tempStr += tb.Text[i];
-                }
-            }
-
-            // Remove last character while value is greater than int32
-            while (tempStr.Length > 0 && Int64.Parse(tempStr) > int.MaxValue)
-            {
-                tempStr = tempStr.Remove(tempStr.Length - 1);
-            }
-
-            int value = tempStr.Length > 0 ? int.Parse(tempStr) : 0;
-            tempStr = value.ToString();
-            for (int i = 0; i < tempStr.Length; i++)
-            {
-                finalStr += tempStr[i];
-                if ((tempStr.Length - i) % 3 == 1 && i != tempStr.Length - 1)
-                    finalStr += " ";
-            }
-            if (finalStr != tb.Text)
-            {
-                tb.Text = finalStr;
-                tb.Select(tb.Text.Length, 0);
-            }
-        }
-
-        private void tb_icon_TextChanged(object sender, EventArgs e)
-        {
-            string filePath = $"{Settings.GetInstance().IconsFolderPath}{((TextBox)sender).Text}";
-            if (!File.Exists(filePath))
-            {
-                pbMiscIcon.Image = pbMiscIcon.ErrorImage;
-                return;
-            }
-            pbMiscIcon.Image = new DDSImage(File.OpenRead(filePath)).BitmapImage;
-        }
-
         private void TsmiItemsSearch_Click(object sender, EventArgs e)
         {
             tbSearch.Focus();

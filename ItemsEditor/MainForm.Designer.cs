@@ -558,7 +558,6 @@
             this.tbMiscIcon.Name = "tbMiscIcon";
             this.tbMiscIcon.Size = new System.Drawing.Size(153, 20);
             this.tbMiscIcon.TabIndex = 17;
-            this.tbMiscIcon.TextChanged += new System.EventHandler(this.tb_icon_TextChanged);
             // 
             // gbGeneralGeneral
             // 
