@@ -527,7 +527,7 @@ namespace ItemsEditor
             cbEquipmentDstParam.DataBindings.Clear();
             nudEquipmentDstValue.DataBindings.Clear();
             if (!(lbEquipmentDstStats.SelectedItem is Dest dst)) return;
-            cbEquipmentDstParam.DataBindings.Add(new Binding("SelectedItem", dst, nameof(Dest.Param), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbEquipmentDstParam.DataBindings.Add(new Binding(nameof(ComboBox.Text), dst, nameof(Dest.Param), false, DataSourceUpdateMode.OnPropertyChanged));
             nudEquipmentDstValue.DataBindings.Add(new Binding("Value", dst, nameof(Dest.Value), false, DataSourceUpdateMode.OnPropertyChanged));
         }
 
