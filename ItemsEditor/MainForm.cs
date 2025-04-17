@@ -67,6 +67,9 @@ namespace ItemsEditor
                 cbPetMoverIdentifier.DataSource = prj.GetPetMoverIdentifiers();
                 cbGuildHouseNpcMover.DataSource = prj.GetNpcMoverIdentifiers();
 
+                // Buff beads
+                cbBuffBeadStatType.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
+
                 // Buffs
                 cbBuffStatType.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
                 cbBuffSound.DataSource = new string[] { "=" }.Concat(prj.GetSoundIdentifiers()).ToArray();
@@ -185,10 +188,16 @@ namespace ItemsEditor
             nudGuildHouseNpcRank.DataBindings.Clear();
             cbPetMoverIdentifier.DataBindings.Clear();
             cbPetMoverIdentifier.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+
             nudBuffBeadDurationDays.DataBindings.Clear();
             nudBuffBeadDurationHours.DataBindings.Clear();
             nudBuffBeadDurationMinutes.DataBindings.Clear();
             nudBuffBeadGrade.DataBindings.Clear();
+            cbBuffBeadStatType.DataBindings.Clear();
+            cbBuffBeadStatType.SelectedItem = null;
+            nudBuffBeadStatValue.DataBindings.Clear();
+            lbBuffBeadStats.DataSource = null;
+
             nudConsumableStatMax.DataBindings.Clear();
             cbConsumableSfx.DataBindings.Clear();
             cbConsumableSfx.SelectedItem = null;
@@ -281,10 +290,15 @@ namespace ItemsEditor
             tbGuildHouseNpcCharacterKey.DataBindings.Add(new Binding(nameof(tbGuildHouseNpcCharacterKey.Text), currentItem.Prop, nameof(ItemProp.SzTextFileName), false, DataSourceUpdateMode.OnPropertyChanged));
             nudGuildHouseNpcRank.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMax), false, DataSourceUpdateMode.OnPropertyChanged));
             cbPetMoverIdentifier.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwLinkKind), true, DataSourceUpdateMode.OnPropertyChanged));
+
+            // Buff beads
             nudBuffBeadDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBuffBeadDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBuffBeadDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBuffBeadGrade.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMax), false, DataSourceUpdateMode.OnPropertyChanged));
+            lbBuffBeadStats.DisplayMember = nameof(Dest.Label);
+            lbBuffBeadStats.DataSource = currentItem.Dests;
+
             nudConsumableStatMax.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMin), false, DataSourceUpdateMode.OnPropertyChanged));
             nudConsumableStatMax.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.HasRegenerableDestParam), false, DataSourceUpdateMode.OnPropertyChanged));
             cbConsumableSfx.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwSfxObj3), false, DataSourceUpdateMode.OnPropertyChanged));
@@ -303,7 +317,7 @@ namespace ItemsEditor
             lbEquipmentDstStats.DataSource = currentItem.Dests;
             lbConsumableStats.DisplayMember = nameof(Dest.Label);
             lbConsumableStats.DataSource = currentItem.Dests;
-            string[] items = Project.GetInstance().Items.Where(x => x.Prop.DwItemKind2 == "IK2_BUFF" && (x.Prop.DwSndAttack1 != "=" || x.Prop.DwSndAttack2 != "=")).Select(x => x.Name).ToArray();
+            string[] items = Project.GetInstance().Items.Where(x => x.Prop.DwItemKind2 == "IK2_ONCE").Select(x => x.Name).ToArray();
             RefreshTabsState();
         }
 
@@ -692,6 +706,16 @@ namespace ItemsEditor
             if (!(lbBuffStats.SelectedItem is Dest dst)) return;
             cbBuffStatType.DataBindings.Add(new Binding(nameof(ComboBox.Text), dst, nameof(Dest.Param), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBuffStatValue.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), dst, nameof(Dest.Value), false, DataSourceUpdateMode.OnPropertyChanged));
+        }
+
+        private void LbBuffBeadStats_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbBuffBeadStatType.DataBindings.Clear();
+            cbBuffBeadStatType.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+            nudBuffBeadStatValue.DataBindings.Clear();
+            if (!(lbBuffBeadStats.SelectedItem is Dest dst)) return;
+            cbBuffBeadStatType.DataBindings.Add(new Binding(nameof(ComboBox.Text), dst, nameof(Dest.Param), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBuffBeadStatValue.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), dst, nameof(Dest.Value), false, DataSourceUpdateMode.OnPropertyChanged));
         }
     }
 }

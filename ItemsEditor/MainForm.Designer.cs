@@ -267,6 +267,12 @@
             this.cmsLbItems = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiItemDuplicate = new System.Windows.Forms.ToolStripMenuItem();
+            this.gbBuffBeauStats = new System.Windows.Forms.GroupBox();
+            this.nudBuffBeadStatValue = new System.Windows.Forms.NumericUpDown();
+            this.lblBuffBeadStatValue = new System.Windows.Forms.Label();
+            this.lblBuffBeadStatType = new System.Windows.Forms.Label();
+            this.cbBuffBeadStatType = new System.Windows.Forms.ComboBox();
+            this.lbBuffBeadStats = new System.Windows.Forms.ListBox();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -355,6 +361,8 @@
             this.msMain.SuspendLayout();
             this.pnlList.SuspendLayout();
             this.cmsLbItems.SuspendLayout();
+            this.gbBuffBeauStats.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadStatValue)).BeginInit();
             this.SuspendLayout();
             // 
             // lbItems
@@ -2564,6 +2572,7 @@
             // 
             // tpMainBuffBead
             // 
+            this.tpMainBuffBead.Controls.Add(this.gbBuffBeauStats);
             this.tpMainBuffBead.Controls.Add(this.gbBuffBeadSettings);
             this.tpMainBuffBead.Location = new System.Drawing.Point(4, 22);
             this.tpMainBuffBead.Name = "tpMainBuffBead";
@@ -3098,6 +3107,77 @@
             this.tsmiItemDuplicate.Text = "Duplicate";
             this.tsmiItemDuplicate.Click += new System.EventHandler(this.TsmiItemDuplicate_Click);
             // 
+            // gbBuffBeauStats
+            // 
+            this.gbBuffBeauStats.Controls.Add(this.nudBuffBeadStatValue);
+            this.gbBuffBeauStats.Controls.Add(this.lblBuffBeadStatValue);
+            this.gbBuffBeauStats.Controls.Add(this.lblBuffBeadStatType);
+            this.gbBuffBeauStats.Controls.Add(this.cbBuffBeadStatType);
+            this.gbBuffBeauStats.Controls.Add(this.lbBuffBeadStats);
+            this.gbBuffBeauStats.Location = new System.Drawing.Point(9, 117);
+            this.gbBuffBeauStats.Name = "gbBuffBeauStats";
+            this.gbBuffBeauStats.Size = new System.Drawing.Size(356, 148);
+            this.gbBuffBeauStats.TabIndex = 21;
+            this.gbBuffBeauStats.TabStop = false;
+            this.gbBuffBeauStats.Text = "Stats";
+            // 
+            // nudBuffBeadStatValue
+            // 
+            this.nudBuffBeadStatValue.Location = new System.Drawing.Point(230, 87);
+            this.nudBuffBeadStatValue.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.nudBuffBeadStatValue.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
+            this.nudBuffBeadStatValue.Name = "nudBuffBeadStatValue";
+            this.nudBuffBeadStatValue.Size = new System.Drawing.Size(120, 20);
+            this.nudBuffBeadStatValue.TabIndex = 23;
+            this.nudBuffBeadStatValue.ThousandsSeparator = true;
+            // 
+            // lblBuffBeadStatValue
+            // 
+            this.lblBuffBeadStatValue.AutoSize = true;
+            this.lblBuffBeadStatValue.Location = new System.Drawing.Point(184, 89);
+            this.lblBuffBeadStatValue.Name = "lblBuffBeadStatValue";
+            this.lblBuffBeadStatValue.Size = new System.Drawing.Size(40, 13);
+            this.lblBuffBeadStatValue.TabIndex = 22;
+            this.lblBuffBeadStatValue.Text = "Value :";
+            // 
+            // lblBuffBeadStatType
+            // 
+            this.lblBuffBeadStatType.AutoSize = true;
+            this.lblBuffBeadStatType.Location = new System.Drawing.Point(192, 52);
+            this.lblBuffBeadStatType.Name = "lblBuffBeadStatType";
+            this.lblBuffBeadStatType.Size = new System.Drawing.Size(32, 13);
+            this.lblBuffBeadStatType.TabIndex = 21;
+            this.lblBuffBeadStatType.Text = "Stat :";
+            // 
+            // cbBuffBeadStatType
+            // 
+            this.cbBuffBeadStatType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBuffBeadStatType.DropDownWidth = 300;
+            this.cbBuffBeadStatType.FormattingEnabled = true;
+            this.cbBuffBeadStatType.Location = new System.Drawing.Point(230, 49);
+            this.cbBuffBeadStatType.Margin = new System.Windows.Forms.Padding(2);
+            this.cbBuffBeadStatType.Name = "cbBuffBeadStatType";
+            this.cbBuffBeadStatType.Size = new System.Drawing.Size(120, 21);
+            this.cbBuffBeadStatType.TabIndex = 10;
+            // 
+            // lbBuffBeadStats
+            // 
+            this.lbBuffBeadStats.FormattingEnabled = true;
+            this.lbBuffBeadStats.Location = new System.Drawing.Point(5, 18);
+            this.lbBuffBeadStats.Margin = new System.Windows.Forms.Padding(2);
+            this.lbBuffBeadStats.Name = "lbBuffBeadStats";
+            this.lbBuffBeadStats.Size = new System.Drawing.Size(174, 121);
+            this.lbBuffBeadStats.TabIndex = 9;
+            this.lbBuffBeadStats.SelectedIndexChanged += new System.EventHandler(this.LbBuffBeadStats_SelectedIndexChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3230,6 +3310,9 @@
             this.pnlList.ResumeLayout(false);
             this.pnlList.PerformLayout();
             this.cmsLbItems.ResumeLayout(false);
+            this.gbBuffBeauStats.ResumeLayout(false);
+            this.gbBuffBeauStats.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadStatValue)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3474,6 +3557,12 @@
         private System.Windows.Forms.ComboBox cbBuffSfx;
         private System.Windows.Forms.Label lblBuffSound;
         private System.Windows.Forms.ComboBox cbBuffSound;
+        private System.Windows.Forms.GroupBox gbBuffBeauStats;
+        private System.Windows.Forms.NumericUpDown nudBuffBeadStatValue;
+        private System.Windows.Forms.Label lblBuffBeadStatValue;
+        private System.Windows.Forms.Label lblBuffBeadStatType;
+        private System.Windows.Forms.ComboBox cbBuffBeadStatType;
+        private System.Windows.Forms.ListBox lbBuffBeadStats;
     }
 }
 
