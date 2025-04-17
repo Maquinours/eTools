@@ -236,6 +236,7 @@
             this.cmsLbItems = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiItemDuplicate = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnWeaponOpenAttackSfx = new System.Windows.Forms.Button();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -839,6 +840,7 @@
             // 
             // gbWeaponSfx
             // 
+            this.gbWeaponSfx.Controls.Add(this.btnWeaponOpenAttackSfx);
             this.gbWeaponSfx.Controls.Add(this.cbWeaponAttackSfx);
             this.gbWeaponSfx.Controls.Add(this.lblWeaponAttackSfx);
             this.gbWeaponSfx.Location = new System.Drawing.Point(9, 198);
@@ -2593,7 +2595,7 @@
             // 
             this.tsmiFileReload.Name = "tsmiFileReload";
             this.tsmiFileReload.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.tsmiFileReload.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFileReload.Size = new System.Drawing.Size(151, 22);
             this.tsmiFileReload.Text = "Reload";
             this.tsmiFileReload.Click += new System.EventHandler(this.tsmiFileReload_Click);
             // 
@@ -2601,7 +2603,7 @@
             // 
             this.tsmiFileSave.Name = "tsmiFileSave";
             this.tsmiFileSave.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.tsmiFileSave.Size = new System.Drawing.Size(180, 22);
+            this.tsmiFileSave.Size = new System.Drawing.Size(151, 22);
             this.tsmiFileSave.Text = "Save";
             this.tsmiFileSave.Click += new System.EventHandler(this.TsmiFileSave_Click);
             // 
@@ -2677,6 +2679,17 @@
             this.tsmiItemDuplicate.Size = new System.Drawing.Size(124, 22);
             this.tsmiItemDuplicate.Text = "Duplicate";
             this.tsmiItemDuplicate.Click += new System.EventHandler(this.TsmiItemDuplicate_Click);
+            // 
+            // btnWeaponOpenAttackSfx
+            // 
+            this.btnWeaponOpenAttackSfx.BackColor = System.Drawing.Color.Transparent;
+            this.btnWeaponOpenAttackSfx.Image = ((System.Drawing.Image)(resources.GetObject("btnWeaponOpenAttackSfx.Image")));
+            this.btnWeaponOpenAttackSfx.Location = new System.Drawing.Point(283, 28);
+            this.btnWeaponOpenAttackSfx.Name = "btnWeaponOpenAttackSfx";
+            this.btnWeaponOpenAttackSfx.Size = new System.Drawing.Size(24, 24);
+            this.btnWeaponOpenAttackSfx.TabIndex = 2;
+            this.btnWeaponOpenAttackSfx.UseVisualStyleBackColor = false;
+            this.btnWeaponOpenAttackSfx.Click += new System.EventHandler(this.BtnWeaponOpenAttackSfx_Click);
             // 
             // MainForm
             // 
@@ -3008,6 +3021,7 @@
         private System.Windows.Forms.Label lblWeaponAttackSfx;
         private System.Windows.Forms.GroupBox gbWeaponSounds;
         private System.Windows.Forms.ToolStripMenuItem tsmiFileSave;
+        private System.Windows.Forms.Button btnWeaponOpenAttackSfx;
     }
 }
 

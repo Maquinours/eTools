@@ -651,5 +651,17 @@ namespace ItemsEditor
         {
             this.Save();
         }
+
+        private void BtnWeaponOpenAttackSfx_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Project project = Project.GetInstance();
+                project.OpenModelById(this.cbWeaponAttackSfx.Text);
+            } catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, Resources.ExceptionMessages.LoadingError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

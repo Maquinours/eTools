@@ -5,6 +5,7 @@ using System.Text;
 using System.Linq;
 using System.IO;
 using System.Globalization;
+using System.Diagnostics;
 
 namespace Common
 {
@@ -277,6 +278,37 @@ namespace Common
             foreach (MainModelBrace brace in this.models) // Avoid memory leaks
                 ClearBraceRecursively(brace);
             this.models.Clear();
+        }
+
+        public ModelElem GetModelById(string id, List<ModelBrace> braces = null)
+        {
+            if (braces == null) braces = this.models.Cast<ModelBrace>().ToList(); // Explicitly cast MainModelBrace to ModelBrace
+            foreach (ModelBrace brace in braces)
+            {
+                foreach (ModelElem model in brace.Models)
+                {
+                    if (model.DwIndex == id) return model;
+                }
+                ModelElem resultModel = GetModelById(id, brace.Braces);
+                if (resultModel != null)
+                    return resultModel;
+            }
+            return null; // Ensure a return statement is present
+        }
+
+        public void OpenModelById(string id)
+        {
+            ModelElem model = this.GetModelById(id);
+            if(model == null) throw new Exception("Model not found");
+            Settings settings = Settings.GetInstance();
+            if (model.DwModelType != "MODELTYPE_SFX") throw new Exception("Model is not an SFX"); // We accept only SFX for now
+            string path = $@"{settings.ResourcePath}SFX\{model.SzName}.sfx";
+            using (Process fileOpener = new Process())
+            {
+                fileOpener.StartInfo.FileName = "explorer";
+                fileOpener.StartInfo.Arguments = $"\"{path}\"";
+                fileOpener.Start();
+            }
         }
     }
 }
