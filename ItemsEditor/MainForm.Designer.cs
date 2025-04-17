@@ -804,7 +804,7 @@
             this.gbDstParams.Size = new System.Drawing.Size(356, 148);
             this.gbDstParams.TabIndex = 20;
             this.gbDstParams.TabStop = false;
-            this.gbDstParams.Text = "Statistiques";
+            this.gbDstParams.Text = "Stats";
             // 
             // nudEquipmentDstValue
             // 
