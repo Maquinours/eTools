@@ -363,8 +363,6 @@
             this.cbTypeItemKind1.Name = "cbTypeItemKind1";
             this.cbTypeItemKind1.Size = new System.Drawing.Size(174, 21);
             this.cbTypeItemKind1.TabIndex = 4;
-            this.cbTypeItemKind1.DataSourceChanged += new System.EventHandler(this.CbTypeItemKind1_DataSourceChanged);
-            this.cbTypeItemKind1.SelectedValueChanged += new System.EventHandler(this.CbTypeItemKind1_SelectedValueChanged);
             // 
             // cbTypeItemKind2
             // 

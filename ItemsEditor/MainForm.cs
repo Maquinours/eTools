@@ -289,16 +289,9 @@ namespace ItemsEditor
             lbItems.SelectedIndex = indexSave < lbItems.Items.Count ? indexSave : lbItems.Items.Count - 1;
         }
 
-        private void CbTypeItemKind1_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (!(cbTypeItemKind1.SelectedItem is string itemKind1)) return;
-            cbTypeItemKind2.DataSource = Project.GetInstance().GetPossibleItemKinds2ByItemKind1(itemKind1);
-        }
-
         private void CbTypeItemKind2_SelectedValueChanged(object sender, EventArgs e)
         {
             if (!(cbTypeItemKind2.SelectedItem is string itemKind2)) return;
-            cbTypeItemKind3.DataSource = Project.GetInstance().GetPossibleItemKinds3ByItemKind2(itemKind2);
             if(itemKind2 == "IK2_WEAPON_DIRECT" || itemKind2 == "IK2_WEAPON_MAGIC")
             {
                 lblEquipmentAtkMin.Text = "Min Atk :";
