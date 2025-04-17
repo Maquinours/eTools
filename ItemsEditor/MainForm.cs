@@ -504,6 +504,7 @@ namespace ItemsEditor
             SettingsForm settingsForm = new SettingsForm();
             if (settingsForm.ShowDialog() == DialogResult.OK && settingsForm.ContainsChanges)
             {
+                // TODO: re implement this
                 //if (MessageBox.Show("Some settings have changed. Would you like to reload the data with the new settings?", "Settings changed", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 //    ReloadFormData();
                 //else
@@ -532,25 +533,6 @@ namespace ItemsEditor
             }
             else
                 nudEquipmentDstValue.Enabled = true;
-        }
-
-        // TODO: Do the same for others item kinds
-        private void CbTypeItemKind1_DataSourceChanged(object sender, EventArgs e)
-        {
-            if(cbTypeItemKind1.DataSource is string[] dataSource && dataSource.Length > 1) cbTypeItemKind1.Enabled = true;
-            else cbTypeItemKind1.Enabled = false;
-        }
-
-        private void CbTypeItemKind2_DataSourceChanged(object sender, EventArgs e)
-        {
-            if (cbTypeItemKind2.DataSource is string[] dataSource && dataSource.Length > 1) cbTypeItemKind2.Enabled = true;
-            else cbTypeItemKind2.Enabled = false;
-        }
-
-        private void CbTypeItemKind3_DataSourceChanged(object sender, EventArgs e)
-        {
-            if (cbTypeItemKind3.DataSource is string[] dataSource && dataSource.Length > 1) cbTypeItemKind3.Enabled = true;
-            else cbTypeItemKind3.Enabled = false;
         }
 
         private void RefreshTabsState()

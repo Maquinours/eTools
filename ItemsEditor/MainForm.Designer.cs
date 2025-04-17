@@ -420,7 +420,6 @@
             this.cbTypeItemKind2.Name = "cbTypeItemKind2";
             this.cbTypeItemKind2.Size = new System.Drawing.Size(174, 21);
             this.cbTypeItemKind2.TabIndex = 5;
-            this.cbTypeItemKind2.DataSourceChanged += new System.EventHandler(this.CbTypeItemKind2_DataSourceChanged);
             this.cbTypeItemKind2.SelectedValueChanged += new System.EventHandler(this.CbTypeItemKind2_SelectedValueChanged);
             // 
             // cbTypeItemKind3
@@ -431,7 +430,6 @@
             this.cbTypeItemKind3.Name = "cbTypeItemKind3";
             this.cbTypeItemKind3.Size = new System.Drawing.Size(174, 21);
             this.cbTypeItemKind3.TabIndex = 6;
-            this.cbTypeItemKind3.DataSourceChanged += new System.EventHandler(this.CbTypeItemKind3_DataSourceChanged);
             this.cbTypeItemKind3.SelectedValueChanged += new System.EventHandler(this.CbTypeItemKind3_SelectedValueChanged);
             // 
             // lblGeneralId
