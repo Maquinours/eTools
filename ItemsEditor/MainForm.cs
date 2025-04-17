@@ -114,6 +114,7 @@ namespace ItemsEditor
 
         private void lb_items_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // General
             cbTypeItemKind1.DataBindings.Clear();
             cbTypeItemKind2.DataBindings.Clear();
             cbTypeItemKind3.DataBindings.Clear();
@@ -121,15 +122,19 @@ namespace ItemsEditor
             tbGeneralName.DataBindings.Clear();
             nudMiscPackMax.DataBindings.Clear();
             nudMiscCost.DataBindings.Clear();
-            cbEquipmentJob.DataBindings.Clear();
-            cbEquipmentSex.DataBindings.Clear();
             pbMiscIcon.DataBindings.Clear();
             tbMiscIcon.DataBindings.Clear();
             tbGeneralDescription.DataBindings.Clear();
+
+            // Equipment
+            cbEquipmentJob.DataBindings.Clear();
+            cbEquipmentSex.DataBindings.Clear();
             tbAtkMin.DataBindings.Clear();
             tbAtkMax.DataBindings.Clear();
             cbEquipmentParts.DataBindings.Clear();
             tbEquipmentLevel.DataBindings.Clear();
+
+            // Weapon
             cbWeaponType.DataBindings.Clear();
             cbWeaponType.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
             cbWeaponAttackRange.DataBindings.Clear();
@@ -140,6 +145,8 @@ namespace ItemsEditor
             cbWeaponCriticalAttackSound.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
             cbWeaponAttackSfx.DataBindings.Clear();
             cbWeaponAttackSfx.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+
+            // Blinkwing
             chckbBlinkwingNearestTown.DataBindings.Clear();
             cbBlinkwingWorld.DataBindings.Clear();
             cbBlinkwingWorld.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
@@ -152,25 +159,35 @@ namespace ItemsEditor
             nudBlinkwingCastingTimeMs.DataBindings.Clear();
             cbBlinkwingSfx.DataBindings.Clear();
             tbBlinkwingChaoticSpawnKey.DataBindings.Clear();
+
+            // Special buff
             nudSpecialBuffDurationDays.DataBindings.Clear(); 
             nudSpecialBuffDurationHours.DataBindings.Clear(); 
             nudSpecialBuffDurationMinutes.DataBindings.Clear();
+
+            // Furniture
             nudFurnitureDurationDays.DataBindings.Clear();
             nudFurnitureDurationHours.DataBindings.Clear();
             nudFurnitureDurationMinutes.DataBindings.Clear();
             cbFurnitureControl.DataBindings.Clear();
             cbFurnitureControl.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+
+            // Papering
             nudPaperingDurationDays.DataBindings.Clear();
             nudPaperingDurationHours.DataBindings.Clear();
             nudPaperingDurationMinutes.DataBindings.Clear();
             tbPaperingTexture.DataBindings.Clear();
             picboxPaperingTexture.DataBindings.Clear();
+
+            // Guild house furniture
             nudGuildHouseFurnitureDurationDays.DataBindings.Clear();
             nudGuildHouseFurnitureDurationHours.DataBindings.Clear();
             nudGuildHouseFurnitureDurationMinutes.DataBindings.Clear();
             nudGuildHouseFurnitureRank.DataBindings.Clear();
             cbGuildHouseFurnitureControl.DataBindings.Clear();
             cbGuildHouseFurnitureControl.SelectedItem = null;
+
+            // Guild house papering
             nudGuildHousePaperingDurationDays.DataBindings.Clear();
             nudGuildHousePaperingDurationHours.DataBindings.Clear();
             nudGuildHousePaperingDurationMinutes.DataBindings.Clear();
@@ -178,6 +195,8 @@ namespace ItemsEditor
             tbGuildHousePaperingTexture.DataBindings.Clear();
             picboxGuildHousePaperingTexture.DataBindings.Clear();
             nudGuildHousePaperingRank.DataBindings.Clear();
+
+            // Guild house NPC
             nudGuildHouseNpcDurationDays.DataBindings.Clear();
             nudGuildHouseNpcDurationHours.DataBindings.Clear();
             nudGuildHouseNpcDurationMinutes.DataBindings.Clear();
@@ -186,9 +205,12 @@ namespace ItemsEditor
             cbGuildHouseNpcMover.SelectedItem = null;
             tbGuildHouseNpcCharacterKey.DataBindings.Clear();
             nudGuildHouseNpcRank.DataBindings.Clear();
+
+            // Pet
             cbPetMoverIdentifier.DataBindings.Clear();
             cbPetMoverIdentifier.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
 
+            // Buff bead
             nudBuffBeadDurationDays.DataBindings.Clear();
             nudBuffBeadDurationHours.DataBindings.Clear();
             nudBuffBeadDurationMinutes.DataBindings.Clear();
@@ -198,12 +220,14 @@ namespace ItemsEditor
             nudBuffBeadStatValue.DataBindings.Clear();
             lbBuffBeadStats.DataSource = null;
 
+            // Consumable
             nudConsumableStatMax.DataBindings.Clear();
             cbConsumableSfx.DataBindings.Clear();
             cbConsumableSfx.SelectedItem = null;
             cbConsumableSound.DataBindings.Clear();
             cbConsumableSound.SelectedItem = null;
 
+            // Buff
             nudBuffDurationMinutes.DataBindings.Clear();
             nudBuffDurationSeconds.DataBindings.Clear();
             nudBuffDurationMs.DataBindings.Clear();
@@ -222,6 +246,7 @@ namespace ItemsEditor
             Item currentItem = ((Item)lbItems.SelectedItem);
             if (currentItem == null) return;
 
+            // General
             cbTypeItemKind1.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemKind1", false, DataSourceUpdateMode.OnPropertyChanged));
             cbTypeItemKind2.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemKind2", false, DataSourceUpdateMode.OnPropertyChanged));
             cbTypeItemKind3.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemKind3", false, DataSourceUpdateMode.OnPropertyChanged));
@@ -229,20 +254,26 @@ namespace ItemsEditor
             tbGeneralName.DataBindings.Add(new Binding("Text", currentItem, "Name", false, DataSourceUpdateMode.OnPropertyChanged));
             nudMiscPackMax.DataBindings.Add(new Binding("Value", currentItem.Prop, "DwPackMax", false, DataSourceUpdateMode.OnPropertyChanged));
             nudMiscCost.DataBindings.Add(new Binding("Value", currentItem.Prop, "DwCost", false, DataSourceUpdateMode.OnPropertyChanged));
-            cbEquipmentJob.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemJob", false, DataSourceUpdateMode.OnPropertyChanged));
-            cbEquipmentSex.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemSex", false, DataSourceUpdateMode.OnPropertyChanged));
             tbMiscIcon.DataBindings.Add(new Binding("Text", currentItem.Prop, "SzIcon", false, DataSourceUpdateMode.OnPropertyChanged));
             pbMiscIcon.DataBindings.Add(new Binding(nameof(PictureBox.Image), currentItem, nameof(Item.Icon), false, DataSourceUpdateMode.OnPropertyChanged));
             tbGeneralDescription.DataBindings.Add(new Binding("Text", currentItem, "Description", false, DataSourceUpdateMode.OnPropertyChanged));
+
+            // Equipment
+            cbEquipmentJob.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemJob", false, DataSourceUpdateMode.OnPropertyChanged));
+            cbEquipmentSex.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemSex", false, DataSourceUpdateMode.OnPropertyChanged));
             tbAtkMin.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMin", false, DataSourceUpdateMode.OnPropertyChanged));
             tbAtkMax.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMax", false, DataSourceUpdateMode.OnPropertyChanged));
             tbEquipmentLevel.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwLimitLevel1", false, DataSourceUpdateMode.OnPropertyChanged));
             cbEquipmentParts.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwParts", false, DataSourceUpdateMode.OnPropertyChanged));
+
+            // Weapon
             cbWeaponType.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwWeaponType), false, DataSourceUpdateMode.OnPropertyChanged));
             cbWeaponAttackRange.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwAttackRange), false, DataSourceUpdateMode.OnPropertyChanged));
             cbWeaponAttackSound.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwSndAttack1), false, DataSourceUpdateMode.OnPropertyChanged));
             cbWeaponCriticalAttackSound.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwSndAttack2), false, DataSourceUpdateMode.OnPropertyChanged));
             cbWeaponAttackSfx.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwSfxObj3), false, DataSourceUpdateMode.OnPropertyChanged));
+
+            // Blinkwing
             chckbBlinkwingNearestTown.DataBindings.Add(new Binding("Checked", currentItem, nameof(Item.IsTownBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
             cbBlinkwingWorld.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwWeaponType), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBlinkwingPositionX.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingPositionX), false, DataSourceUpdateMode.OnPropertyChanged));
@@ -260,35 +291,49 @@ namespace ItemsEditor
             nudBlinkwingPositionZ.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBlinkwingAngle.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
             tbBlinkwingChaoticSpawnKey.DataBindings.Add(new Binding(nameof(TextBox.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
+
+            // Special buff
             nudSpecialBuffDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
             nudSpecialBuffDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
             nudSpecialBuffDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
+
+            // Furniture
             nudFurnitureDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
             nudFurnitureDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
             nudFurnitureDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
             cbFurnitureControl.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwLinkKind), false, DataSourceUpdateMode.OnPropertyChanged));
+
+            // Papering
             nudPaperingDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
             nudPaperingDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
             nudPaperingDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
             tbPaperingTexture.DataBindings.Add(new Binding(nameof(TextBox.Text), currentItem.Prop, nameof(ItemProp.SzTextFileName), false, DataSourceUpdateMode.OnPropertyChanged));
             picboxPaperingTexture.DataBindings.Add(new Binding(nameof(PictureBox.Image), currentItem, nameof(Item.PaperingTexture), true, DataSourceUpdateMode.OnPropertyChanged));
+
+            // Guild house furniture
             nudGuildHouseFurnitureDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
             nudGuildHouseFurnitureDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
             nudGuildHouseFurnitureDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
             cbGuildHouseFurnitureControl.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwLinkKind), false, DataSourceUpdateMode.OnPropertyChanged));
             nudGuildHouseFurnitureRank.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMax), false, DataSourceUpdateMode.OnPropertyChanged));
+
+            // Guild house papering
             nudGuildHousePaperingDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
             nudGuildHousePaperingDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
             nudGuildHousePaperingDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
             tbGuildHousePaperingTexture.DataBindings.Add(new Binding(nameof(TextBox.Text), currentItem.Prop, nameof(ItemProp.SzTextFileName), false, DataSourceUpdateMode.OnPropertyChanged));
             picboxGuildHousePaperingTexture.DataBindings.Add(new Binding(nameof(PictureBox.Image), currentItem, nameof(Item.PaperingTexture), true, DataSourceUpdateMode.OnPropertyChanged));
             nudGuildHousePaperingRank.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMax), false, DataSourceUpdateMode.OnPropertyChanged));
+
+            // Guild house NPC
             nudGuildHouseNpcDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
             nudGuildHouseNpcDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
             nudGuildHouseNpcDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
             cbGuildHouseNpcMover.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwLinkKind), false, DataSourceUpdateMode.OnPropertyChanged));
             tbGuildHouseNpcCharacterKey.DataBindings.Add(new Binding(nameof(tbGuildHouseNpcCharacterKey.Text), currentItem.Prop, nameof(ItemProp.SzTextFileName), false, DataSourceUpdateMode.OnPropertyChanged));
             nudGuildHouseNpcRank.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMax), false, DataSourceUpdateMode.OnPropertyChanged));
+
+            // Pet
             cbPetMoverIdentifier.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwLinkKind), true, DataSourceUpdateMode.OnPropertyChanged));
 
             // Buff beads
