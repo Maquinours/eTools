@@ -139,6 +139,7 @@ namespace ItemsEditor
             cbEquipmentParts.DataBindings.Clear();
             cbEquipmentParts.SelectedItem = null;
             tbEquipmentLevel.DataBindings.Clear();
+            lbEquipmentDstStats.DataSource = null;
 
             // Weapon
             cbWeaponType.DataBindings.Clear();
@@ -233,6 +234,7 @@ namespace ItemsEditor
             cbConsumableSfx.SelectedItem = null;
             cbConsumableSound.DataBindings.Clear();
             cbConsumableSound.SelectedItem = null;
+            lbConsumableStats.DataSource = null;
 
             // Buff
             nudBuffDurationMinutes.DataBindings.Clear();
@@ -246,9 +248,6 @@ namespace ItemsEditor
             cbBuffSound.SelectedItem = null;
             cbBuffSfx.DataBindings.Clear();
             cbBuffSound.SelectedItem = null;
-
-            lbEquipmentDstStats.DataSource = null;
-            lbConsumableStats.DataSource = null;
 
             Item currentItem = ((Item)lbItems.SelectedItem);
             if (currentItem == null) return;
@@ -272,6 +271,8 @@ namespace ItemsEditor
             tbAtkMax.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMax", false, DataSourceUpdateMode.OnPropertyChanged));
             tbEquipmentLevel.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwLimitLevel1", false, DataSourceUpdateMode.OnPropertyChanged));
             cbEquipmentParts.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwParts", false, DataSourceUpdateMode.OnPropertyChanged));
+            lbEquipmentDstStats.DisplayMember = nameof(Dest.Label);
+            lbEquipmentDstStats.DataSource = currentItem.Dests;
 
             // Weapon
             cbWeaponType.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwWeaponType), false, DataSourceUpdateMode.OnPropertyChanged));
@@ -351,10 +352,13 @@ namespace ItemsEditor
             lbBuffBeadStats.DisplayMember = nameof(Dest.Label);
             lbBuffBeadStats.DataSource = currentItem.Dests;
 
+            // Consumable
             nudConsumableStatMax.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMin), false, DataSourceUpdateMode.OnPropertyChanged));
             nudConsumableStatMax.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.HasRegenerableDestParam), false, DataSourceUpdateMode.OnPropertyChanged));
             cbConsumableSfx.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwSfxObj3), false, DataSourceUpdateMode.OnPropertyChanged));
             cbConsumableSound.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwSndAttack1), false, DataSourceUpdateMode.OnPropertyChanged));
+            lbConsumableStats.DisplayMember = nameof(Dest.Label);
+            lbConsumableStats.DataSource = currentItem.Dests;
 
             // Buffs
             nudBuffDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.SkillTimeMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
@@ -365,10 +369,6 @@ namespace ItemsEditor
             cbBuffSound.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwSndAttack1), false, DataSourceUpdateMode.OnPropertyChanged));
             cbBuffSfx.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwSfxObj3), false, DataSourceUpdateMode.OnPropertyChanged));
 
-            lbEquipmentDstStats.DisplayMember = nameof(Dest.Label);
-            lbEquipmentDstStats.DataSource = currentItem.Dests;
-            lbConsumableStats.DisplayMember = nameof(Dest.Label);
-            lbConsumableStats.DataSource = currentItem.Dests;
             string[] items = Project.GetInstance().Items.Where(x => x.Prop.DwItemKind2 == "IK2_ONCE").Select(x => x.Name).ToArray();
             RefreshTabsState();
         }
