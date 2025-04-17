@@ -42,29 +42,47 @@ namespace ItemsEditor
 
                 Project prj = Project.GetInstance();
                 await Task.Run(() => prj.Load((progress) => pbFileSaveReload.Invoke(new Action(() => pbFileSaveReload.Value = progress)))).ConfigureAwait(true);
+
+                // General
                 AutoCompleteStringCollection identifiersSource = new AutoCompleteStringCollection();
                 identifiersSource.AddRange(prj.GetItemIdentifiers());
                 tbGeneralId.AutoCompleteCustomSource = identifiersSource;
                 cbTypeItemKind3.DataSource = prj.GetAllowedItemKinds3();
                 cbTypeItemKind2.DataSource = prj.GetAllowedItemKinds2();
                 cbTypeItemKind1.DataSource = prj.GetAllowedItemKinds1();
+
+                // Equipment
                 cbEquipmentJob.DataSource = new string[] { "=" }.Concat(prj.GetJobIdentifiers()).ToArray();
                 cbEquipmentSex.DataSource = new string[] { "=" }.Concat(prj.GetSexIdentifiers()).ToArray();
                 cbEquipmentDstParam.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
+                cbEquipmentParts.DataSource = prj.GetPartsIdentifiers();
+
+                // Weapon
                 cbWeaponType.DataSource = prj.GetWeaponTypeIdentifiers();
                 cbWeaponAttackRange.DataSource = prj.GetAttackRangeIdentifiers();
                 cbWeaponAttackSound.DataSource = prj.GetSoundIdentifiers();
                 cbWeaponCriticalAttackSound.DataSource = prj.GetSoundIdentifiers();
                 cbWeaponAttackSfx.DataSource = new string[] {"="}.Concat(prj.GetSfxIdentifiers()).ToArray();
+
+                // Consumable
                 cbConsumableStatType.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
                 cbConsumableSfx.DataSource = new string[] {"="}.Concat(prj.GetSfxIdentifiers()).ToArray();
                 cbConsumableSound.DataSource = new string[] { "=" }.Concat(prj.GetSoundIdentifiers()).ToArray();
-                cbEquipmentParts.DataSource = prj.GetPartsIdentifiers();
+
+                // Blinkwings
                 cbBlinkwingWorld.DataSource = prj.GetWorldIdentifiers();
                 cbBlinkwingSfx.DataSource = prj.GetSfxIdentifiers();
+
+                // Furniture
                 cbFurnitureControl.DataSource = prj.GetControlIdentifiers();
+
+                // Guild house furniture
                 cbGuildHouseFurnitureControl.DataSource = prj.GetControlIdentifiers();
+
+                // Pet
                 cbPetMoverIdentifier.DataSource = prj.GetPetMoverIdentifiers();
+
+                // Guild house NPC
                 cbGuildHouseNpcMover.DataSource = prj.GetNpcMoverIdentifiers();
 
                 // Buff beads
@@ -75,7 +93,9 @@ namespace ItemsEditor
                 cbBuffSound.DataSource = new string[] { "=" }.Concat(prj.GetSoundIdentifiers()).ToArray();
                 cbBuffSfx.DataSource = new string[] { "=" }.Concat(prj.GetSfxIdentifiers()).ToArray();
 
-                SetListBoxDataSource();
+                // Items listbox
+                lbItems.DisplayMember = nameof(Item.Name);
+                lbItems.DataSource = Project.GetInstance().Items;
             }
             catch (Exception e)
             {
@@ -104,12 +124,6 @@ namespace ItemsEditor
                 listboxBinding.Dispose();
 
             LoadFormData();
-        }
-
-        private void SetListBoxDataSource()
-        {
-            lbItems.DisplayMember = "Name";
-            lbItems.DataSource = Project.GetInstance().Items;
         }
 
         private void lb_items_SelectedIndexChanged(object sender, EventArgs e)
