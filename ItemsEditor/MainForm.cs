@@ -116,8 +116,11 @@ namespace ItemsEditor
         {
             // General
             cbTypeItemKind1.DataBindings.Clear();
+            cbTypeItemKind1.SelectedItem = null;
             cbTypeItemKind2.DataBindings.Clear();
+            cbTypeItemKind2.SelectedItem = null;
             cbTypeItemKind3.DataBindings.Clear();
+            cbTypeItemKind3.SelectedItem = null;
             tbGeneralId.DataBindings.Clear();
             tbGeneralName.DataBindings.Clear();
             nudMiscPackMax.DataBindings.Clear();
@@ -128,10 +131,13 @@ namespace ItemsEditor
 
             // Equipment
             cbEquipmentJob.DataBindings.Clear();
+            cbEquipmentJob.SelectedItem = null;
             cbEquipmentSex.DataBindings.Clear();
+            cbEquipmentSex.SelectedItem = null;
             tbAtkMin.DataBindings.Clear();
             tbAtkMax.DataBindings.Clear();
             cbEquipmentParts.DataBindings.Clear();
+            cbEquipmentParts.SelectedItem = null;
             tbEquipmentLevel.DataBindings.Clear();
 
             // Weapon
@@ -158,6 +164,7 @@ namespace ItemsEditor
             nudBlinkwingCastingTimeSeconds.DataBindings.Clear();
             nudBlinkwingCastingTimeMs.DataBindings.Clear();
             cbBlinkwingSfx.DataBindings.Clear();
+            cbBlinkwingSfx.SelectedItem = null;
             tbBlinkwingChaoticSpawnKey.DataBindings.Clear();
 
             // Special buff
