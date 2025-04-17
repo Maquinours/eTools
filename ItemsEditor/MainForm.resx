@@ -118,17 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnWeaponOpenAttackSfx.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAAAHUAAAB1AePCB2UAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwa
-        AAAA8UlEQVQ4T63Tu2pCQRDG8fUCsZCACFaxVkuTt5H04vNFI+Q11EJsrNRKiIqx0vy/dRc2yx5zBAd+
-        7sWZcT0XkyMqmOKS8AXTxBhHhF/OoOJn7Nxe7AzzGWyEtqhC0cAbeviBz7ENDm7Rh5K8GsJoYQXlntxo
-        G+hDi1ctMqINX6zx3c1zNehgDeVoVDOdMFeDuFhrha7JNyZaZDVQ8gZxsQ/dnSdNUg3KWOJWsW6xjVSD
-        IhaYIy6uQ8fXw2Uj6y/oFKXr9E90oXzRD928iKl4fIO9WwwQPolZlKd8vTsFmKHbuNcINl6gJv6d+I/y
-        PkCdMb8kTnudYH0VbwAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="pbMiscIcon.ErrorImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAB4AAAAgCAYAAAAFQMh/AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -145,6 +134,17 @@
         rjabzZTjvL29vTkwNlfs6oqa5+Ligj4EnH0+H+W5bpcUjOsYCoUoTjBrzX/CGrOTYd7tdksPXrSBiFlS
         8IfjY/AwHY2l/XRyQuaXm+8tZieTDLyu3wzGv0D4qVvX3W6XvcK8VgJvQv/Bf0kAvwBCr/GrmkjejQAA
         AABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="btnWeaponOpenAttackSfx.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAA
+        dAAAAHQBMYXlgQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAADxSURBVDhPrdO7
+        akJBEMbx9QKxkIAIVrFWS5O3kfTi80Uj5DXUQmys1EqIirHS/L91FzbLHnMEB37uxZlxPReTIyqY4pLw
+        BdPEGEeEX86g4mfs3F7sDPMZbIS2qELRwBt6+IHPsQ0ObtGHkrwawmhhBeWe3Ggb6EOLVy0yog1frPHd
+        zXM16GAN5WhUM50wV4O4WGuFrsk3JlpkNVDyBnGxD92dJ01SDcpY4laxbrGNVIMiFpgjLq5Dx9fDZSPr
+        L+gUpev0T3ShfNEP3byIqXh8g71bDBA+iVmUp3y9OwWYodu41wg2XqAm/p34j/I+QJ0xvyROe51gfRVv
+        AAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="btnWeaponPlayCriticalAttackSound.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

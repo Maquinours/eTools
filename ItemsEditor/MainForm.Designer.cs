@@ -79,6 +79,7 @@
             this.lbEquipmentDstStats = new System.Windows.Forms.ListBox();
             this.tpMainWeapon = new System.Windows.Forms.TabPage();
             this.gbWeaponSfx = new System.Windows.Forms.GroupBox();
+            this.btnWeaponOpenAttackSfx = new System.Windows.Forms.Button();
             this.cbWeaponAttackSfx = new System.Windows.Forms.ComboBox();
             this.lblWeaponAttackSfx = new System.Windows.Forms.Label();
             this.gbWeaponSounds = new System.Windows.Forms.GroupBox();
@@ -236,7 +237,6 @@
             this.cmsLbItems = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiItemDuplicate = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnWeaponOpenAttackSfx = new System.Windows.Forms.Button();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -770,7 +770,7 @@
             // 
             // nudEquipmentDstValue
             // 
-            this.nudEquipmentDstValue.Location = new System.Drawing.Point(235, 87);
+            this.nudEquipmentDstValue.Location = new System.Drawing.Point(230, 87);
             this.nudEquipmentDstValue.Maximum = new decimal(new int[] {
             2147483647,
             0,
@@ -782,23 +782,23 @@
             0,
             -2147483648});
             this.nudEquipmentDstValue.Name = "nudEquipmentDstValue";
-            this.nudEquipmentDstValue.Size = new System.Drawing.Size(95, 20);
+            this.nudEquipmentDstValue.Size = new System.Drawing.Size(120, 20);
             this.nudEquipmentDstValue.TabIndex = 23;
             this.nudEquipmentDstValue.ThousandsSeparator = true;
             // 
             // lblDstParamValue
             // 
             this.lblDstParamValue.AutoSize = true;
-            this.lblDstParamValue.Location = new System.Drawing.Point(187, 89);
+            this.lblDstParamValue.Location = new System.Drawing.Point(184, 89);
             this.lblDstParamValue.Name = "lblDstParamValue";
-            this.lblDstParamValue.Size = new System.Drawing.Size(43, 13);
+            this.lblDstParamValue.Size = new System.Drawing.Size(40, 13);
             this.lblDstParamValue.TabIndex = 22;
-            this.lblDstParamValue.Text = "Valeur :";
+            this.lblDstParamValue.Text = "Value :";
             // 
             // lblDstParamIdentifier
             // 
             this.lblDstParamIdentifier.AutoSize = true;
-            this.lblDstParamIdentifier.Location = new System.Drawing.Point(198, 52);
+            this.lblDstParamIdentifier.Location = new System.Drawing.Point(192, 52);
             this.lblDstParamIdentifier.Name = "lblDstParamIdentifier";
             this.lblDstParamIdentifier.Size = new System.Drawing.Size(32, 13);
             this.lblDstParamIdentifier.TabIndex = 21;
@@ -809,10 +809,10 @@
             this.cbEquipmentDstParam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbEquipmentDstParam.DropDownWidth = 300;
             this.cbEquipmentDstParam.FormattingEnabled = true;
-            this.cbEquipmentDstParam.Location = new System.Drawing.Point(235, 49);
+            this.cbEquipmentDstParam.Location = new System.Drawing.Point(230, 49);
             this.cbEquipmentDstParam.Margin = new System.Windows.Forms.Padding(2);
             this.cbEquipmentDstParam.Name = "cbEquipmentDstParam";
-            this.cbEquipmentDstParam.Size = new System.Drawing.Size(95, 21);
+            this.cbEquipmentDstParam.Size = new System.Drawing.Size(120, 21);
             this.cbEquipmentDstParam.TabIndex = 10;
             this.cbEquipmentDstParam.SelectedIndexChanged += new System.EventHandler(this.CbEquipmentDstParam_SelectedIndexChanged);
             // 
@@ -851,6 +851,17 @@
             this.gbWeaponSfx.TabIndex = 3;
             this.gbWeaponSfx.TabStop = false;
             this.gbWeaponSfx.Text = "SFX";
+            // 
+            // btnWeaponOpenAttackSfx
+            // 
+            this.btnWeaponOpenAttackSfx.BackColor = System.Drawing.Color.Transparent;
+            this.btnWeaponOpenAttackSfx.Image = ((System.Drawing.Image)(resources.GetObject("btnWeaponOpenAttackSfx.Image")));
+            this.btnWeaponOpenAttackSfx.Location = new System.Drawing.Point(283, 28);
+            this.btnWeaponOpenAttackSfx.Name = "btnWeaponOpenAttackSfx";
+            this.btnWeaponOpenAttackSfx.Size = new System.Drawing.Size(24, 24);
+            this.btnWeaponOpenAttackSfx.TabIndex = 2;
+            this.btnWeaponOpenAttackSfx.UseVisualStyleBackColor = false;
+            this.btnWeaponOpenAttackSfx.Click += new System.EventHandler(this.BtnWeaponOpenAttackSfx_Click);
             // 
             // cbWeaponAttackSfx
             // 
@@ -2679,17 +2690,6 @@
             this.tsmiItemDuplicate.Size = new System.Drawing.Size(124, 22);
             this.tsmiItemDuplicate.Text = "Duplicate";
             this.tsmiItemDuplicate.Click += new System.EventHandler(this.TsmiItemDuplicate_Click);
-            // 
-            // btnWeaponOpenAttackSfx
-            // 
-            this.btnWeaponOpenAttackSfx.BackColor = System.Drawing.Color.Transparent;
-            this.btnWeaponOpenAttackSfx.Image = ((System.Drawing.Image)(resources.GetObject("btnWeaponOpenAttackSfx.Image")));
-            this.btnWeaponOpenAttackSfx.Location = new System.Drawing.Point(283, 28);
-            this.btnWeaponOpenAttackSfx.Name = "btnWeaponOpenAttackSfx";
-            this.btnWeaponOpenAttackSfx.Size = new System.Drawing.Size(24, 24);
-            this.btnWeaponOpenAttackSfx.TabIndex = 2;
-            this.btnWeaponOpenAttackSfx.UseVisualStyleBackColor = false;
-            this.btnWeaponOpenAttackSfx.Click += new System.EventHandler(this.BtnWeaponOpenAttackSfx_Click);
             // 
             // MainForm
             // 
