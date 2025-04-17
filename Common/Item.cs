@@ -560,6 +560,9 @@ namespace Common
                 case nameof(ItemProp.SzTextFileName):
                     this.NotifyPropertyChanged(nameof(this.PaperingTexture));
                     break;
+                case nameof(ItemProp.SzIcon):
+                    this.NotifyPropertyChanged(nameof(this.Icon));
+                    break;
             }
         }
 
@@ -624,6 +627,22 @@ namespace Common
         {
             get => Project.GetInstance().GetString(Prop.SzCommand);
             set { Project.GetInstance().ChangeStringValue(Prop.SzCommand, value); }
+        }
+
+        public Image Icon
+        {
+            get
+            {
+                string filePath = $"{Settings.GetInstance().IconsFolderPath}{this.Prop.SzIcon}";
+                if (!File.Exists(filePath))
+                {
+                    using (var ms = new MemoryStream(ItemsEditor.Resources.Images.NotFoundImage))
+                    {
+                        return Image.FromStream(ms);
+                    }
+                }
+                return new DDSImage(File.OpenRead(filePath)).BitmapImage;
+            }
         }
 
         public BindingList<Dest> Dests

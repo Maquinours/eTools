@@ -197,6 +197,7 @@ namespace ItemsEditor
             cbEquipmentJob.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemJob", false, DataSourceUpdateMode.OnPropertyChanged));
             cbEquipmentSex.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemSex", false, DataSourceUpdateMode.OnPropertyChanged));
             tbMiscIcon.DataBindings.Add(new Binding("Text", currentItem.Prop, "SzIcon", false, DataSourceUpdateMode.OnPropertyChanged));
+            pbMiscIcon.DataBindings.Add(new Binding(nameof(PictureBox.Image), currentItem, nameof(Item.Icon), false, DataSourceUpdateMode.OnPropertyChanged));
             tbGeneralDescription.DataBindings.Add(new Binding("Text", currentItem, "Description", false, DataSourceUpdateMode.OnPropertyChanged));
             tbAtkMin.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMin", false, DataSourceUpdateMode.OnPropertyChanged));
             tbAtkMax.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMax", false, DataSourceUpdateMode.OnPropertyChanged));
@@ -264,23 +265,6 @@ namespace ItemsEditor
             lbConsumableDst.DataSource = currentItem.Dests;
             Item[] items = Project.GetInstance().Items.Where(x => x.Prop.DwSfxObj5 != "=").ToArray();
             RefreshTabsState();
-
-            // TODO: reimplement something like this (rework params)
-            //for (int i = 0; i < currentItem.Prop.DwDestParam.Length; i++)
-            //{
-            //    if (currentItem.Prop.DwDestParam[i] != "=")
-            //        lbDstParams.Items.Add($"Stat {i} ({currentItem.Prop.DwDestParam[i]} + {currentItem.Prop.NAdjParamVal[i]})");
-            //    else
-            //        lbDstParams.Items.Add($"Stat {i}");
-            //}
-
-            string iconPath = $"{Settings.GetInstance().IconsFolderPath}{currentItem.Prop.SzIcon}";
-            if (!File.Exists(iconPath))
-            {
-                pbMiscIcon.Image = pbMiscIcon.ErrorImage;
-            }
-            else
-                pbMiscIcon.Image = new DDSImage(File.OpenRead(iconPath)).BitmapImage;
         }
 
         private void FormatIntTextbox(object sender, EventArgs e)
