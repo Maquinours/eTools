@@ -284,9 +284,10 @@ namespace ItemsEditor
         {
             if (!(lbItems.SelectedItem is Item item)) return;
             Project.GetInstance().DeleteItem(item);
+            // Trigger SelectedIndexChanged to bind data to the new selected item
             int indexSave = lbItems.SelectedIndex;
-            SetListBoxDataSource();
-            lbItems.SelectedIndex = indexSave < lbItems.Items.Count ? indexSave : lbItems.Items.Count - 1;
+            lbItems.SelectedIndex = -1;
+            lbItems.SelectedIndex = indexSave;
         }
 
         private void CbTypeItemKind2_SelectedValueChanged(object sender, EventArgs e)
