@@ -95,6 +95,13 @@
             this.cbWeaponType = new System.Windows.Forms.ComboBox();
             this.lblWeaponType = new System.Windows.Forms.Label();
             this.tpMainConsumable = new System.Windows.Forms.TabPage();
+            this.gbConsumableMisc = new System.Windows.Forms.GroupBox();
+            this.btnConsumableOpenSfx = new System.Windows.Forms.Button();
+            this.btnConsumablePlaySound = new System.Windows.Forms.Button();
+            this.lblConsumableSfx = new System.Windows.Forms.Label();
+            this.cbConsumableSfx = new System.Windows.Forms.ComboBox();
+            this.lblConsumableSound = new System.Windows.Forms.Label();
+            this.cbConsumableSound = new System.Windows.Forms.ComboBox();
             this.gbConsumableStats = new System.Windows.Forms.GroupBox();
             this.nudConsumableStatMax = new System.Windows.Forms.NumericUpDown();
             this.lblConsumableStatMax = new System.Windows.Forms.Label();
@@ -222,6 +229,28 @@
             this.lblBuffBeadDurationDays = new System.Windows.Forms.Label();
             this.lblBuffBeadGrade = new System.Windows.Forms.Label();
             this.lblBuffBeadDuration = new System.Windows.Forms.Label();
+            this.tpMainBuff = new System.Windows.Forms.TabPage();
+            this.gbBuffMisc = new System.Windows.Forms.GroupBox();
+            this.btnBuffOpenSfx = new System.Windows.Forms.Button();
+            this.btnBuffPlaySound = new System.Windows.Forms.Button();
+            this.lblBuffSfx = new System.Windows.Forms.Label();
+            this.cbBuffSfx = new System.Windows.Forms.ComboBox();
+            this.lblBuffSound = new System.Windows.Forms.Label();
+            this.cbBuffSound = new System.Windows.Forms.ComboBox();
+            this.gbBuffStats = new System.Windows.Forms.GroupBox();
+            this.nudBuffStatValue = new System.Windows.Forms.NumericUpDown();
+            this.lblBuffStatValue = new System.Windows.Forms.Label();
+            this.lblBuffStatType = new System.Windows.Forms.Label();
+            this.cbBuffStatType = new System.Windows.Forms.ComboBox();
+            this.lbBuffStats = new System.Windows.Forms.ListBox();
+            this.gbBuffSettings = new System.Windows.Forms.GroupBox();
+            this.nudBuffDurationMs = new System.Windows.Forms.NumericUpDown();
+            this.nudBuffDurationSeconds = new System.Windows.Forms.NumericUpDown();
+            this.nudBuffDurationMinutes = new System.Windows.Forms.NumericUpDown();
+            this.lblBuffDurationSeconds = new System.Windows.Forms.Label();
+            this.lblBuffDurationMs = new System.Windows.Forms.Label();
+            this.lblBuffDurationMinutes = new System.Windows.Forms.Label();
+            this.lblBuffDuration = new System.Windows.Forms.Label();
             this.msMain = new System.Windows.Forms.MenuStrip();
             this.tsmiItems = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiItemsAdd = new System.Windows.Forms.ToolStripMenuItem();
@@ -238,13 +267,6 @@
             this.cmsLbItems = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiItemDuplicate = new System.Windows.Forms.ToolStripMenuItem();
-            this.gbConsumableMisc = new System.Windows.Forms.GroupBox();
-            this.lblConsumableSound = new System.Windows.Forms.Label();
-            this.cbConsumableSound = new System.Windows.Forms.ComboBox();
-            this.lblConsumableSfx = new System.Windows.Forms.Label();
-            this.cbConsumableSfx = new System.Windows.Forms.ComboBox();
-            this.btnConsumablePlaySound = new System.Windows.Forms.Button();
-            this.btnConsumableOpenSfx = new System.Windows.Forms.Button();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -263,6 +285,7 @@
             this.gbWeaponSounds.SuspendLayout();
             this.gbWeaponSettings.SuspendLayout();
             this.tpMainConsumable.SuspendLayout();
+            this.gbConsumableMisc.SuspendLayout();
             this.gbConsumableStats.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudConsumableStatMax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudConsumableStatValue)).BeginInit();
@@ -321,10 +344,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadDurationHours)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadGrade)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadDurationDays)).BeginInit();
+            this.tpMainBuff.SuspendLayout();
+            this.gbBuffMisc.SuspendLayout();
+            this.gbBuffStats.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffStatValue)).BeginInit();
+            this.gbBuffSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffDurationMs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffDurationSeconds)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffDurationMinutes)).BeginInit();
             this.msMain.SuspendLayout();
             this.pnlList.SuspendLayout();
             this.cmsLbItems.SuspendLayout();
-            this.gbConsumableMisc.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbItems
@@ -454,6 +484,7 @@
             this.tcMain.Controls.Add(this.tpMainGuildHouseNPC);
             this.tcMain.Controls.Add(this.tpMainPet);
             this.tcMain.Controls.Add(this.tpMainBuffBead);
+            this.tcMain.Controls.Add(this.tpMainBuff);
             this.tcMain.Dock = System.Windows.Forms.DockStyle.Right;
             this.tcMain.Location = new System.Drawing.Point(253, 24);
             this.tcMain.Name = "tcMain";
@@ -1034,6 +1065,83 @@
             this.tpMainConsumable.TabIndex = 2;
             this.tpMainConsumable.Text = "Consumable";
             this.tpMainConsumable.UseVisualStyleBackColor = true;
+            // 
+            // gbConsumableMisc
+            // 
+            this.gbConsumableMisc.Controls.Add(this.btnConsumableOpenSfx);
+            this.gbConsumableMisc.Controls.Add(this.btnConsumablePlaySound);
+            this.gbConsumableMisc.Controls.Add(this.lblConsumableSfx);
+            this.gbConsumableMisc.Controls.Add(this.cbConsumableSfx);
+            this.gbConsumableMisc.Controls.Add(this.lblConsumableSound);
+            this.gbConsumableMisc.Controls.Add(this.cbConsumableSound);
+            this.gbConsumableMisc.Location = new System.Drawing.Point(9, 164);
+            this.gbConsumableMisc.Name = "gbConsumableMisc";
+            this.gbConsumableMisc.Size = new System.Drawing.Size(357, 100);
+            this.gbConsumableMisc.TabIndex = 22;
+            this.gbConsumableMisc.TabStop = false;
+            this.gbConsumableMisc.Text = "Misc";
+            // 
+            // btnConsumableOpenSfx
+            // 
+            this.btnConsumableOpenSfx.BackColor = System.Drawing.Color.Transparent;
+            this.btnConsumableOpenSfx.Image = ((System.Drawing.Image)(resources.GetObject("btnConsumableOpenSfx.Image")));
+            this.btnConsumableOpenSfx.Location = new System.Drawing.Point(267, 57);
+            this.btnConsumableOpenSfx.Name = "btnConsumableOpenSfx";
+            this.btnConsumableOpenSfx.Size = new System.Drawing.Size(24, 24);
+            this.btnConsumableOpenSfx.TabIndex = 14;
+            this.btnConsumableOpenSfx.UseVisualStyleBackColor = false;
+            this.btnConsumableOpenSfx.Click += new System.EventHandler(this.BtnConsumableOpenSfx_Click);
+            // 
+            // btnConsumablePlaySound
+            // 
+            this.btnConsumablePlaySound.BackColor = System.Drawing.Color.Transparent;
+            this.btnConsumablePlaySound.Image = ((System.Drawing.Image)(resources.GetObject("btnConsumablePlaySound.Image")));
+            this.btnConsumablePlaySound.Location = new System.Drawing.Point(267, 31);
+            this.btnConsumablePlaySound.Name = "btnConsumablePlaySound";
+            this.btnConsumablePlaySound.Size = new System.Drawing.Size(24, 24);
+            this.btnConsumablePlaySound.TabIndex = 13;
+            this.btnConsumablePlaySound.UseVisualStyleBackColor = false;
+            this.btnConsumablePlaySound.Click += new System.EventHandler(this.BtnConsumablePlaySound_Click);
+            // 
+            // lblConsumableSfx
+            // 
+            this.lblConsumableSfx.AutoSize = true;
+            this.lblConsumableSfx.Location = new System.Drawing.Point(61, 61);
+            this.lblConsumableSfx.Name = "lblConsumableSfx";
+            this.lblConsumableSfx.Size = new System.Drawing.Size(33, 13);
+            this.lblConsumableSfx.TabIndex = 11;
+            this.lblConsumableSfx.Text = "SFX :";
+            // 
+            // cbConsumableSfx
+            // 
+            this.cbConsumableSfx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbConsumableSfx.DropDownWidth = 300;
+            this.cbConsumableSfx.FormattingEnabled = true;
+            this.cbConsumableSfx.Location = new System.Drawing.Point(99, 58);
+            this.cbConsumableSfx.Margin = new System.Windows.Forms.Padding(2);
+            this.cbConsumableSfx.Name = "cbConsumableSfx";
+            this.cbConsumableSfx.Size = new System.Drawing.Size(163, 21);
+            this.cbConsumableSfx.TabIndex = 12;
+            // 
+            // lblConsumableSound
+            // 
+            this.lblConsumableSound.AutoSize = true;
+            this.lblConsumableSound.Location = new System.Drawing.Point(50, 36);
+            this.lblConsumableSound.Name = "lblConsumableSound";
+            this.lblConsumableSound.Size = new System.Drawing.Size(44, 13);
+            this.lblConsumableSound.TabIndex = 0;
+            this.lblConsumableSound.Text = "Sound :";
+            // 
+            // cbConsumableSound
+            // 
+            this.cbConsumableSound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbConsumableSound.DropDownWidth = 300;
+            this.cbConsumableSound.FormattingEnabled = true;
+            this.cbConsumableSound.Location = new System.Drawing.Point(99, 33);
+            this.cbConsumableSound.Margin = new System.Windows.Forms.Padding(2);
+            this.cbConsumableSound.Name = "cbConsumableSound";
+            this.cbConsumableSound.Size = new System.Drawing.Size(163, 21);
+            this.cbConsumableSound.TabIndex = 10;
             // 
             // gbConsumableStats
             // 
@@ -2591,6 +2699,268 @@
             this.lblBuffBeadDuration.TabIndex = 0;
             this.lblBuffBeadDuration.Text = "Duration :";
             // 
+            // tpMainBuff
+            // 
+            this.tpMainBuff.Controls.Add(this.gbBuffMisc);
+            this.tpMainBuff.Controls.Add(this.gbBuffStats);
+            this.tpMainBuff.Controls.Add(this.gbBuffSettings);
+            this.tpMainBuff.Location = new System.Drawing.Point(4, 22);
+            this.tpMainBuff.Name = "tpMainBuff";
+            this.tpMainBuff.Size = new System.Drawing.Size(374, 400);
+            this.tpMainBuff.TabIndex = 13;
+            this.tpMainBuff.Text = "Buff";
+            this.tpMainBuff.UseVisualStyleBackColor = true;
+            // 
+            // gbBuffMisc
+            // 
+            this.gbBuffMisc.Controls.Add(this.btnBuffOpenSfx);
+            this.gbBuffMisc.Controls.Add(this.btnBuffPlaySound);
+            this.gbBuffMisc.Controls.Add(this.lblBuffSfx);
+            this.gbBuffMisc.Controls.Add(this.cbBuffSfx);
+            this.gbBuffMisc.Controls.Add(this.lblBuffSound);
+            this.gbBuffMisc.Controls.Add(this.cbBuffSound);
+            this.gbBuffMisc.Location = new System.Drawing.Point(9, 237);
+            this.gbBuffMisc.Name = "gbBuffMisc";
+            this.gbBuffMisc.Size = new System.Drawing.Size(358, 100);
+            this.gbBuffMisc.TabIndex = 23;
+            this.gbBuffMisc.TabStop = false;
+            this.gbBuffMisc.Text = "Misc";
+            // 
+            // btnBuffOpenSfx
+            // 
+            this.btnBuffOpenSfx.BackColor = System.Drawing.Color.Transparent;
+            this.btnBuffOpenSfx.Image = ((System.Drawing.Image)(resources.GetObject("btnBuffOpenSfx.Image")));
+            this.btnBuffOpenSfx.Location = new System.Drawing.Point(267, 57);
+            this.btnBuffOpenSfx.Name = "btnBuffOpenSfx";
+            this.btnBuffOpenSfx.Size = new System.Drawing.Size(24, 24);
+            this.btnBuffOpenSfx.TabIndex = 14;
+            this.btnBuffOpenSfx.UseVisualStyleBackColor = false;
+            this.btnBuffOpenSfx.Click += new System.EventHandler(this.BtnBuffOpenSfx_Click);
+            // 
+            // btnBuffPlaySound
+            // 
+            this.btnBuffPlaySound.BackColor = System.Drawing.Color.Transparent;
+            this.btnBuffPlaySound.Image = ((System.Drawing.Image)(resources.GetObject("btnBuffPlaySound.Image")));
+            this.btnBuffPlaySound.Location = new System.Drawing.Point(267, 31);
+            this.btnBuffPlaySound.Name = "btnBuffPlaySound";
+            this.btnBuffPlaySound.Size = new System.Drawing.Size(24, 24);
+            this.btnBuffPlaySound.TabIndex = 13;
+            this.btnBuffPlaySound.UseVisualStyleBackColor = false;
+            this.btnBuffPlaySound.Click += new System.EventHandler(this.BtnBuffPlaySound_Click);
+            // 
+            // lblBuffSfx
+            // 
+            this.lblBuffSfx.AutoSize = true;
+            this.lblBuffSfx.Location = new System.Drawing.Point(61, 61);
+            this.lblBuffSfx.Name = "lblBuffSfx";
+            this.lblBuffSfx.Size = new System.Drawing.Size(33, 13);
+            this.lblBuffSfx.TabIndex = 11;
+            this.lblBuffSfx.Text = "SFX :";
+            // 
+            // cbBuffSfx
+            // 
+            this.cbBuffSfx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBuffSfx.DropDownWidth = 300;
+            this.cbBuffSfx.FormattingEnabled = true;
+            this.cbBuffSfx.Location = new System.Drawing.Point(99, 58);
+            this.cbBuffSfx.Margin = new System.Windows.Forms.Padding(2);
+            this.cbBuffSfx.Name = "cbBuffSfx";
+            this.cbBuffSfx.Size = new System.Drawing.Size(163, 21);
+            this.cbBuffSfx.TabIndex = 12;
+            // 
+            // lblBuffSound
+            // 
+            this.lblBuffSound.AutoSize = true;
+            this.lblBuffSound.Location = new System.Drawing.Point(50, 36);
+            this.lblBuffSound.Name = "lblBuffSound";
+            this.lblBuffSound.Size = new System.Drawing.Size(44, 13);
+            this.lblBuffSound.TabIndex = 0;
+            this.lblBuffSound.Text = "Sound :";
+            // 
+            // cbBuffSound
+            // 
+            this.cbBuffSound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBuffSound.DropDownWidth = 300;
+            this.cbBuffSound.FormattingEnabled = true;
+            this.cbBuffSound.Location = new System.Drawing.Point(99, 33);
+            this.cbBuffSound.Margin = new System.Windows.Forms.Padding(2);
+            this.cbBuffSound.Name = "cbBuffSound";
+            this.cbBuffSound.Size = new System.Drawing.Size(163, 21);
+            this.cbBuffSound.TabIndex = 10;
+            // 
+            // gbBuffStats
+            // 
+            this.gbBuffStats.Controls.Add(this.nudBuffStatValue);
+            this.gbBuffStats.Controls.Add(this.lblBuffStatValue);
+            this.gbBuffStats.Controls.Add(this.lblBuffStatType);
+            this.gbBuffStats.Controls.Add(this.cbBuffStatType);
+            this.gbBuffStats.Controls.Add(this.lbBuffStats);
+            this.gbBuffStats.Location = new System.Drawing.Point(9, 83);
+            this.gbBuffStats.Name = "gbBuffStats";
+            this.gbBuffStats.Size = new System.Drawing.Size(358, 148);
+            this.gbBuffStats.TabIndex = 22;
+            this.gbBuffStats.TabStop = false;
+            this.gbBuffStats.Text = "Stats";
+            // 
+            // nudBuffStatValue
+            // 
+            this.nudBuffStatValue.Location = new System.Drawing.Point(230, 88);
+            this.nudBuffStatValue.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.nudBuffStatValue.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
+            this.nudBuffStatValue.Name = "nudBuffStatValue";
+            this.nudBuffStatValue.Size = new System.Drawing.Size(120, 20);
+            this.nudBuffStatValue.TabIndex = 23;
+            this.nudBuffStatValue.ThousandsSeparator = true;
+            // 
+            // lblBuffStatValue
+            // 
+            this.lblBuffStatValue.AutoSize = true;
+            this.lblBuffStatValue.Location = new System.Drawing.Point(184, 90);
+            this.lblBuffStatValue.Name = "lblBuffStatValue";
+            this.lblBuffStatValue.Size = new System.Drawing.Size(40, 13);
+            this.lblBuffStatValue.TabIndex = 22;
+            this.lblBuffStatValue.Text = "Value :";
+            // 
+            // lblBuffStatType
+            // 
+            this.lblBuffStatType.AutoSize = true;
+            this.lblBuffStatType.Location = new System.Drawing.Point(192, 57);
+            this.lblBuffStatType.Name = "lblBuffStatType";
+            this.lblBuffStatType.Size = new System.Drawing.Size(32, 13);
+            this.lblBuffStatType.TabIndex = 21;
+            this.lblBuffStatType.Text = "Stat :";
+            // 
+            // cbBuffStatType
+            // 
+            this.cbBuffStatType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbBuffStatType.DropDownWidth = 300;
+            this.cbBuffStatType.FormattingEnabled = true;
+            this.cbBuffStatType.Location = new System.Drawing.Point(229, 49);
+            this.cbBuffStatType.Margin = new System.Windows.Forms.Padding(2);
+            this.cbBuffStatType.Name = "cbBuffStatType";
+            this.cbBuffStatType.Size = new System.Drawing.Size(121, 21);
+            this.cbBuffStatType.TabIndex = 10;
+            // 
+            // lbBuffStats
+            // 
+            this.lbBuffStats.FormattingEnabled = true;
+            this.lbBuffStats.Location = new System.Drawing.Point(5, 18);
+            this.lbBuffStats.Margin = new System.Windows.Forms.Padding(2);
+            this.lbBuffStats.Name = "lbBuffStats";
+            this.lbBuffStats.Size = new System.Drawing.Size(174, 121);
+            this.lbBuffStats.TabIndex = 9;
+            this.lbBuffStats.SelectedIndexChanged += new System.EventHandler(this.LbBuffStats_SelectedIndexChanged);
+            // 
+            // gbBuffSettings
+            // 
+            this.gbBuffSettings.Controls.Add(this.nudBuffDurationMs);
+            this.gbBuffSettings.Controls.Add(this.nudBuffDurationSeconds);
+            this.gbBuffSettings.Controls.Add(this.nudBuffDurationMinutes);
+            this.gbBuffSettings.Controls.Add(this.lblBuffDurationSeconds);
+            this.gbBuffSettings.Controls.Add(this.lblBuffDurationMs);
+            this.gbBuffSettings.Controls.Add(this.lblBuffDurationMinutes);
+            this.gbBuffSettings.Controls.Add(this.lblBuffDuration);
+            this.gbBuffSettings.Location = new System.Drawing.Point(9, 9);
+            this.gbBuffSettings.Margin = new System.Windows.Forms.Padding(2);
+            this.gbBuffSettings.Name = "gbBuffSettings";
+            this.gbBuffSettings.Padding = new System.Windows.Forms.Padding(2);
+            this.gbBuffSettings.Size = new System.Drawing.Size(358, 69);
+            this.gbBuffSettings.TabIndex = 4;
+            this.gbBuffSettings.TabStop = false;
+            this.gbBuffSettings.Text = "Settings";
+            // 
+            // nudBuffDurationMs
+            // 
+            this.nudBuffDurationMs.Location = new System.Drawing.Point(278, 27);
+            this.nudBuffDurationMs.Margin = new System.Windows.Forms.Padding(2);
+            this.nudBuffDurationMs.Maximum = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.nudBuffDurationMs.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.nudBuffDurationMs.Name = "nudBuffDurationMs";
+            this.nudBuffDurationMs.Size = new System.Drawing.Size(56, 20);
+            this.nudBuffDurationMs.TabIndex = 1;
+            // 
+            // nudBuffDurationSeconds
+            // 
+            this.nudBuffDurationSeconds.Location = new System.Drawing.Point(167, 27);
+            this.nudBuffDurationSeconds.Margin = new System.Windows.Forms.Padding(2);
+            this.nudBuffDurationSeconds.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.nudBuffDurationSeconds.Name = "nudBuffDurationSeconds";
+            this.nudBuffDurationSeconds.Size = new System.Drawing.Size(56, 20);
+            this.nudBuffDurationSeconds.TabIndex = 1;
+            // 
+            // nudBuffDurationMinutes
+            // 
+            this.nudBuffDurationMinutes.Location = new System.Drawing.Point(60, 27);
+            this.nudBuffDurationMinutes.Margin = new System.Windows.Forms.Padding(2);
+            this.nudBuffDurationMinutes.Maximum = new decimal(new int[] {
+            1491308,
+            0,
+            0,
+            0});
+            this.nudBuffDurationMinutes.Name = "nudBuffDurationMinutes";
+            this.nudBuffDurationMinutes.Size = new System.Drawing.Size(56, 20);
+            this.nudBuffDurationMinutes.TabIndex = 1;
+            // 
+            // lblBuffDurationSeconds
+            // 
+            this.lblBuffDurationSeconds.AutoSize = true;
+            this.lblBuffDurationSeconds.Location = new System.Drawing.Point(227, 29);
+            this.lblBuffDurationSeconds.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBuffDurationSeconds.Name = "lblBuffDurationSeconds";
+            this.lblBuffDurationSeconds.Size = new System.Drawing.Size(47, 13);
+            this.lblBuffDurationSeconds.TabIndex = 0;
+            this.lblBuffDurationSeconds.Text = "seconds";
+            // 
+            // lblBuffDurationMs
+            // 
+            this.lblBuffDurationMs.AutoSize = true;
+            this.lblBuffDurationMs.Location = new System.Drawing.Point(338, 29);
+            this.lblBuffDurationMs.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBuffDurationMs.Name = "lblBuffDurationMs";
+            this.lblBuffDurationMs.Size = new System.Drawing.Size(20, 13);
+            this.lblBuffDurationMs.TabIndex = 0;
+            this.lblBuffDurationMs.Text = "ms";
+            // 
+            // lblBuffDurationMinutes
+            // 
+            this.lblBuffDurationMinutes.AutoSize = true;
+            this.lblBuffDurationMinutes.Location = new System.Drawing.Point(120, 29);
+            this.lblBuffDurationMinutes.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBuffDurationMinutes.Name = "lblBuffDurationMinutes";
+            this.lblBuffDurationMinutes.Size = new System.Drawing.Size(43, 13);
+            this.lblBuffDurationMinutes.TabIndex = 0;
+            this.lblBuffDurationMinutes.Text = "minutes";
+            // 
+            // lblBuffDuration
+            // 
+            this.lblBuffDuration.AutoSize = true;
+            this.lblBuffDuration.Location = new System.Drawing.Point(4, 29);
+            this.lblBuffDuration.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBuffDuration.Name = "lblBuffDuration";
+            this.lblBuffDuration.Size = new System.Drawing.Size(53, 13);
+            this.lblBuffDuration.TabIndex = 0;
+            this.lblBuffDuration.Text = "Duration :";
+            // 
             // msMain
             // 
             this.msMain.ImageScalingSize = new System.Drawing.Size(24, 24);
@@ -2728,83 +3098,6 @@
             this.tsmiItemDuplicate.Text = "Duplicate";
             this.tsmiItemDuplicate.Click += new System.EventHandler(this.TsmiItemDuplicate_Click);
             // 
-            // gbConsumableMisc
-            // 
-            this.gbConsumableMisc.Controls.Add(this.btnConsumableOpenSfx);
-            this.gbConsumableMisc.Controls.Add(this.btnConsumablePlaySound);
-            this.gbConsumableMisc.Controls.Add(this.lblConsumableSfx);
-            this.gbConsumableMisc.Controls.Add(this.cbConsumableSfx);
-            this.gbConsumableMisc.Controls.Add(this.lblConsumableSound);
-            this.gbConsumableMisc.Controls.Add(this.cbConsumableSound);
-            this.gbConsumableMisc.Location = new System.Drawing.Point(9, 164);
-            this.gbConsumableMisc.Name = "gbConsumableMisc";
-            this.gbConsumableMisc.Size = new System.Drawing.Size(357, 100);
-            this.gbConsumableMisc.TabIndex = 22;
-            this.gbConsumableMisc.TabStop = false;
-            this.gbConsumableMisc.Text = "Misc";
-            // 
-            // lblConsumableSound
-            // 
-            this.lblConsumableSound.AutoSize = true;
-            this.lblConsumableSound.Location = new System.Drawing.Point(50, 36);
-            this.lblConsumableSound.Name = "lblConsumableSound";
-            this.lblConsumableSound.Size = new System.Drawing.Size(44, 13);
-            this.lblConsumableSound.TabIndex = 0;
-            this.lblConsumableSound.Text = "Sound :";
-            // 
-            // cbConsumableSound
-            // 
-            this.cbConsumableSound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbConsumableSound.DropDownWidth = 300;
-            this.cbConsumableSound.FormattingEnabled = true;
-            this.cbConsumableSound.Location = new System.Drawing.Point(99, 33);
-            this.cbConsumableSound.Margin = new System.Windows.Forms.Padding(2);
-            this.cbConsumableSound.Name = "cbConsumableSound";
-            this.cbConsumableSound.Size = new System.Drawing.Size(163, 21);
-            this.cbConsumableSound.TabIndex = 10;
-            // 
-            // lblConsumableSfx
-            // 
-            this.lblConsumableSfx.AutoSize = true;
-            this.lblConsumableSfx.Location = new System.Drawing.Point(61, 61);
-            this.lblConsumableSfx.Name = "lblConsumableSfx";
-            this.lblConsumableSfx.Size = new System.Drawing.Size(33, 13);
-            this.lblConsumableSfx.TabIndex = 11;
-            this.lblConsumableSfx.Text = "SFX :";
-            // 
-            // cbConsumableSfx
-            // 
-            this.cbConsumableSfx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbConsumableSfx.DropDownWidth = 300;
-            this.cbConsumableSfx.FormattingEnabled = true;
-            this.cbConsumableSfx.Location = new System.Drawing.Point(99, 58);
-            this.cbConsumableSfx.Margin = new System.Windows.Forms.Padding(2);
-            this.cbConsumableSfx.Name = "cbConsumableSfx";
-            this.cbConsumableSfx.Size = new System.Drawing.Size(163, 21);
-            this.cbConsumableSfx.TabIndex = 12;
-            // 
-            // btnConsumablePlaySound
-            // 
-            this.btnConsumablePlaySound.BackColor = System.Drawing.Color.Transparent;
-            this.btnConsumablePlaySound.Image = ((System.Drawing.Image)(resources.GetObject("btnConsumablePlaySound.Image")));
-            this.btnConsumablePlaySound.Location = new System.Drawing.Point(267, 31);
-            this.btnConsumablePlaySound.Name = "btnConsumablePlaySound";
-            this.btnConsumablePlaySound.Size = new System.Drawing.Size(24, 24);
-            this.btnConsumablePlaySound.TabIndex = 13;
-            this.btnConsumablePlaySound.UseVisualStyleBackColor = false;
-            this.btnConsumablePlaySound.Click += new System.EventHandler(this.BtnConsumablePlaySound_Click);
-            // 
-            // btnConsumableOpenSfx
-            // 
-            this.btnConsumableOpenSfx.BackColor = System.Drawing.Color.Transparent;
-            this.btnConsumableOpenSfx.Image = ((System.Drawing.Image)(resources.GetObject("btnConsumableOpenSfx.Image")));
-            this.btnConsumableOpenSfx.Location = new System.Drawing.Point(267, 57);
-            this.btnConsumableOpenSfx.Name = "btnConsumableOpenSfx";
-            this.btnConsumableOpenSfx.Size = new System.Drawing.Size(24, 24);
-            this.btnConsumableOpenSfx.TabIndex = 14;
-            this.btnConsumableOpenSfx.UseVisualStyleBackColor = false;
-            this.btnConsumableOpenSfx.Click += new System.EventHandler(this.BtnConsumableOpenSfx_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2849,6 +3142,8 @@
             this.gbWeaponSettings.ResumeLayout(false);
             this.gbWeaponSettings.PerformLayout();
             this.tpMainConsumable.ResumeLayout(false);
+            this.gbConsumableMisc.ResumeLayout(false);
+            this.gbConsumableMisc.PerformLayout();
             this.gbConsumableStats.ResumeLayout(false);
             this.gbConsumableStats.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudConsumableStatMax)).EndInit();
@@ -2919,13 +3214,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadDurationHours)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadGrade)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudBuffBeadDurationDays)).EndInit();
+            this.tpMainBuff.ResumeLayout(false);
+            this.gbBuffMisc.ResumeLayout(false);
+            this.gbBuffMisc.PerformLayout();
+            this.gbBuffStats.ResumeLayout(false);
+            this.gbBuffStats.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffStatValue)).EndInit();
+            this.gbBuffSettings.ResumeLayout(false);
+            this.gbBuffSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffDurationMs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffDurationSeconds)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudBuffDurationMinutes)).EndInit();
             this.msMain.ResumeLayout(false);
             this.msMain.PerformLayout();
             this.pnlList.ResumeLayout(false);
             this.pnlList.PerformLayout();
             this.cmsLbItems.ResumeLayout(false);
-            this.gbConsumableMisc.ResumeLayout(false);
-            this.gbConsumableMisc.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3148,6 +3452,28 @@
         private System.Windows.Forms.Button btnConsumablePlaySound;
         private System.Windows.Forms.Label lblConsumableSfx;
         private System.Windows.Forms.ComboBox cbConsumableSfx;
+        private System.Windows.Forms.TabPage tpMainBuff;
+        private System.Windows.Forms.GroupBox gbBuffStats;
+        private System.Windows.Forms.NumericUpDown nudBuffStatValue;
+        private System.Windows.Forms.Label lblBuffStatValue;
+        private System.Windows.Forms.Label lblBuffStatType;
+        private System.Windows.Forms.ComboBox cbBuffStatType;
+        private System.Windows.Forms.ListBox lbBuffStats;
+        private System.Windows.Forms.GroupBox gbBuffSettings;
+        private System.Windows.Forms.NumericUpDown nudBuffDurationMs;
+        private System.Windows.Forms.NumericUpDown nudBuffDurationSeconds;
+        private System.Windows.Forms.NumericUpDown nudBuffDurationMinutes;
+        private System.Windows.Forms.Label lblBuffDurationSeconds;
+        private System.Windows.Forms.Label lblBuffDurationMs;
+        private System.Windows.Forms.Label lblBuffDurationMinutes;
+        private System.Windows.Forms.Label lblBuffDuration;
+        private System.Windows.Forms.GroupBox gbBuffMisc;
+        private System.Windows.Forms.Button btnBuffOpenSfx;
+        private System.Windows.Forms.Button btnBuffPlaySound;
+        private System.Windows.Forms.Label lblBuffSfx;
+        private System.Windows.Forms.ComboBox cbBuffSfx;
+        private System.Windows.Forms.Label lblBuffSound;
+        private System.Windows.Forms.ComboBox cbBuffSound;
     }
 }
 

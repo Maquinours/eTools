@@ -787,6 +787,24 @@ namespace Common
             set => this.Prop.DwSkillReadyType = SkillReadyMinutes * 60 * 1000 + SkillReadySeconds * 1000 + value;
         }
 
+        public int SkillTimeMinutes
+        {
+            get => this.Prop.DwSkillTime / (1000 * 60);
+            set => this.Prop.DwSkillTime = value * 60 * 1000 + SkillTimeSeconds * 1000 + SkillTimeMilliseconds;
+        }
+
+        public int SkillTimeSeconds
+        {
+            get => (this.Prop.DwSkillTime % (1000 * 60)) / 1000;
+            set => this.Prop.DwSkillTime = SkillTimeMinutes * 60 * 1000 + value * 1000 + SkillTimeMilliseconds;
+        }
+
+        public int SkillTimeMilliseconds
+        {
+            get => this.Prop.DwSkillTime % 1000;
+            set => this.Prop.DwSkillTime = SkillTimeMinutes * 60 * 1000 + SkillTimeSeconds * 1000 + value;
+        }
+
         public Image PaperingTexture
         {
             get 
