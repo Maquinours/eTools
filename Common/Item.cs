@@ -563,6 +563,14 @@ namespace Common
                 case nameof(ItemProp.SzIcon):
                     this.NotifyPropertyChanged(nameof(this.Icon));
                     break;
+                case nameof(ItemProp.DwDestParam1):
+                case nameof(ItemProp.DwDestParam2):
+                case nameof(ItemProp.DwDestParam3):
+                case nameof(ItemProp.DwDestParam4):
+                case nameof(ItemProp.DwDestParam5):
+                case nameof(ItemProp.DwDestParam6):
+                    this.NotifyPropertyChanged(nameof(this.HasRegenerableDestParam));
+                    break;
             }
         }
 
@@ -793,6 +801,11 @@ namespace Common
                 }
                 return new DDSImage(File.OpenRead(filePath)).BitmapImage;
             }
+        }
+
+        public bool HasRegenerableDestParam
+        {
+            get => this.Dests.Where(x => x.Param == "DST_HP" || x.Param == "DST_FP" || x.Param == "DST_MP").Any();
         }
 
         public Item()

@@ -95,13 +95,14 @@
             this.cbWeaponType = new System.Windows.Forms.ComboBox();
             this.lblWeaponType = new System.Windows.Forms.Label();
             this.tpMainConsumable = new System.Windows.Forms.TabPage();
-            this.nudConsumableDstValue = new System.Windows.Forms.NumericUpDown();
-            this.cbConsumableDstParam = new System.Windows.Forms.ComboBox();
-            this.lbConsumableDst = new System.Windows.Forms.ListBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.gbConsumableStats = new System.Windows.Forms.GroupBox();
+            this.nudConsumableStatMax = new System.Windows.Forms.NumericUpDown();
+            this.lblConsumableStatMax = new System.Windows.Forms.Label();
+            this.nudConsumableStatValue = new System.Windows.Forms.NumericUpDown();
+            this.lblConsumableStatValue = new System.Windows.Forms.Label();
+            this.lblConsumableStatType = new System.Windows.Forms.Label();
+            this.cbConsumableStatType = new System.Windows.Forms.ComboBox();
+            this.lbConsumableStats = new System.Windows.Forms.ListBox();
             this.tpMainBlinkwing = new System.Windows.Forms.TabPage();
             this.gbBlinkwingMisc = new System.Windows.Forms.GroupBox();
             this.lblBlinkwingCastingTimeMs = new System.Windows.Forms.Label();
@@ -237,6 +238,13 @@
             this.cmsLbItems = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiItemDelete = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiItemDuplicate = new System.Windows.Forms.ToolStripMenuItem();
+            this.gbConsumableMisc = new System.Windows.Forms.GroupBox();
+            this.lblConsumableSound = new System.Windows.Forms.Label();
+            this.cbConsumableSound = new System.Windows.Forms.ComboBox();
+            this.lblConsumableSfx = new System.Windows.Forms.Label();
+            this.cbConsumableSfx = new System.Windows.Forms.ComboBox();
+            this.btnConsumablePlaySound = new System.Windows.Forms.Button();
+            this.btnConsumableOpenSfx = new System.Windows.Forms.Button();
             this.tcMain.SuspendLayout();
             this.tpMainGeneral.SuspendLayout();
             this.gbGeneralMisc.SuspendLayout();
@@ -255,8 +263,9 @@
             this.gbWeaponSounds.SuspendLayout();
             this.gbWeaponSettings.SuspendLayout();
             this.tpMainConsumable.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudConsumableDstValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.gbConsumableStats.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudConsumableStatMax)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudConsumableStatValue)).BeginInit();
             this.tpMainBlinkwing.SuspendLayout();
             this.gbBlinkwingMisc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudBlinkwingCastingTimeMs)).BeginInit();
@@ -315,6 +324,7 @@
             this.msMain.SuspendLayout();
             this.pnlList.SuspendLayout();
             this.cmsLbItems.SuspendLayout();
+            this.gbConsumableMisc.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbItems
@@ -1016,13 +1026,8 @@
             // 
             // tpMainConsumable
             // 
-            this.tpMainConsumable.Controls.Add(this.nudConsumableDstValue);
-            this.tpMainConsumable.Controls.Add(this.cbConsumableDstParam);
-            this.tpMainConsumable.Controls.Add(this.lbConsumableDst);
-            this.tpMainConsumable.Controls.Add(this.numericUpDown1);
-            this.tpMainConsumable.Controls.Add(this.label2);
-            this.tpMainConsumable.Controls.Add(this.label3);
-            this.tpMainConsumable.Controls.Add(this.label1);
+            this.tpMainConsumable.Controls.Add(this.gbConsumableMisc);
+            this.tpMainConsumable.Controls.Add(this.gbConsumableStats);
             this.tpMainConsumable.Location = new System.Drawing.Point(4, 22);
             this.tpMainConsumable.Name = "tpMainConsumable";
             this.tpMainConsumable.Size = new System.Drawing.Size(374, 400);
@@ -1030,70 +1035,105 @@
             this.tpMainConsumable.Text = "Consumable";
             this.tpMainConsumable.UseVisualStyleBackColor = true;
             // 
-            // nudConsumableDstValue
+            // gbConsumableStats
             // 
-            this.nudConsumableDstValue.Location = new System.Drawing.Point(220, 121);
-            this.nudConsumableDstValue.Maximum = new decimal(new int[] {
+            this.gbConsumableStats.Controls.Add(this.nudConsumableStatMax);
+            this.gbConsumableStats.Controls.Add(this.lblConsumableStatMax);
+            this.gbConsumableStats.Controls.Add(this.nudConsumableStatValue);
+            this.gbConsumableStats.Controls.Add(this.lblConsumableStatValue);
+            this.gbConsumableStats.Controls.Add(this.lblConsumableStatType);
+            this.gbConsumableStats.Controls.Add(this.cbConsumableStatType);
+            this.gbConsumableStats.Controls.Add(this.lbConsumableStats);
+            this.gbConsumableStats.Location = new System.Drawing.Point(9, 9);
+            this.gbConsumableStats.Name = "gbConsumableStats";
+            this.gbConsumableStats.Size = new System.Drawing.Size(357, 148);
+            this.gbConsumableStats.TabIndex = 21;
+            this.gbConsumableStats.TabStop = false;
+            this.gbConsumableStats.Text = "Stats";
+            // 
+            // nudConsumableStatMax
+            // 
+            this.nudConsumableStatMax.Location = new System.Drawing.Point(231, 108);
+            this.nudConsumableStatMax.Maximum = new decimal(new int[] {
             2147483647,
             0,
             0,
             0});
-            this.nudConsumableDstValue.Minimum = new decimal(new int[] {
+            this.nudConsumableStatMax.Minimum = new decimal(new int[] {
             -2147483648,
             0,
             0,
             -2147483648});
-            this.nudConsumableDstValue.Name = "nudConsumableDstValue";
-            this.nudConsumableDstValue.Size = new System.Drawing.Size(120, 20);
-            this.nudConsumableDstValue.TabIndex = 4;
+            this.nudConsumableStatMax.Name = "nudConsumableStatMax";
+            this.nudConsumableStatMax.Size = new System.Drawing.Size(120, 20);
+            this.nudConsumableStatMax.TabIndex = 23;
+            this.nudConsumableStatMax.ThousandsSeparator = true;
             // 
-            // cbConsumableDstParam
+            // lblConsumableStatMax
             // 
-            this.cbConsumableDstParam.FormattingEnabled = true;
-            this.cbConsumableDstParam.Location = new System.Drawing.Point(219, 72);
-            this.cbConsumableDstParam.Name = "cbConsumableDstParam";
-            this.cbConsumableDstParam.Size = new System.Drawing.Size(121, 21);
-            this.cbConsumableDstParam.TabIndex = 3;
+            this.lblConsumableStatMax.AutoSize = true;
+            this.lblConsumableStatMax.Location = new System.Drawing.Point(192, 110);
+            this.lblConsumableStatMax.Name = "lblConsumableStatMax";
+            this.lblConsumableStatMax.Size = new System.Drawing.Size(33, 13);
+            this.lblConsumableStatMax.TabIndex = 22;
+            this.lblConsumableStatMax.Text = "Max :";
             // 
-            // lbConsumableDst
+            // nudConsumableStatValue
             // 
-            this.lbConsumableDst.FormattingEnabled = true;
-            this.lbConsumableDst.Location = new System.Drawing.Point(14, 75);
-            this.lbConsumableDst.Name = "lbConsumableDst";
-            this.lbConsumableDst.Size = new System.Drawing.Size(158, 95);
-            this.lbConsumableDst.TabIndex = 2;
-            this.lbConsumableDst.SelectedIndexChanged += new System.EventHandler(this.LbConsumableDst_SelectedIndexChanged);
+            this.nudConsumableStatValue.Location = new System.Drawing.Point(231, 70);
+            this.nudConsumableStatValue.Maximum = new decimal(new int[] {
+            2147483647,
+            0,
+            0,
+            0});
+            this.nudConsumableStatValue.Minimum = new decimal(new int[] {
+            -2147483648,
+            0,
+            0,
+            -2147483648});
+            this.nudConsumableStatValue.Name = "nudConsumableStatValue";
+            this.nudConsumableStatValue.Size = new System.Drawing.Size(120, 20);
+            this.nudConsumableStatValue.TabIndex = 23;
+            this.nudConsumableStatValue.ThousandsSeparator = true;
             // 
-            // numericUpDown1
+            // lblConsumableStatValue
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(52, 39);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDown1.TabIndex = 1;
+            this.lblConsumableStatValue.AutoSize = true;
+            this.lblConsumableStatValue.Location = new System.Drawing.Point(185, 72);
+            this.lblConsumableStatValue.Name = "lblConsumableStatValue";
+            this.lblConsumableStatValue.Size = new System.Drawing.Size(40, 13);
+            this.lblConsumableStatValue.TabIndex = 22;
+            this.lblConsumableStatValue.Text = "Value :";
             // 
-            // label2
+            // lblConsumableStatType
             // 
-            this.label2.Location = new System.Drawing.Point(178, 75);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "label1";
+            this.lblConsumableStatType.AutoSize = true;
+            this.lblConsumableStatType.Location = new System.Drawing.Point(193, 35);
+            this.lblConsumableStatType.Name = "lblConsumableStatType";
+            this.lblConsumableStatType.Size = new System.Drawing.Size(32, 13);
+            this.lblConsumableStatType.TabIndex = 21;
+            this.lblConsumableStatType.Text = "Stat :";
             // 
-            // label3
+            // cbConsumableStatType
             // 
-            this.label3.Location = new System.Drawing.Point(179, 123);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "label1";
+            this.cbConsumableStatType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbConsumableStatType.DropDownWidth = 300;
+            this.cbConsumableStatType.FormattingEnabled = true;
+            this.cbConsumableStatType.Location = new System.Drawing.Point(231, 32);
+            this.cbConsumableStatType.Margin = new System.Windows.Forms.Padding(2);
+            this.cbConsumableStatType.Name = "cbConsumableStatType";
+            this.cbConsumableStatType.Size = new System.Drawing.Size(120, 21);
+            this.cbConsumableStatType.TabIndex = 10;
             // 
-            // label1
+            // lbConsumableStats
             // 
-            this.label1.Location = new System.Drawing.Point(11, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.lbConsumableStats.FormattingEnabled = true;
+            this.lbConsumableStats.Location = new System.Drawing.Point(5, 18);
+            this.lbConsumableStats.Margin = new System.Windows.Forms.Padding(2);
+            this.lbConsumableStats.Name = "lbConsumableStats";
+            this.lbConsumableStats.Size = new System.Drawing.Size(174, 121);
+            this.lbConsumableStats.TabIndex = 9;
+            this.lbConsumableStats.SelectedIndexChanged += new System.EventHandler(this.LbConsumableStats_SelectedIndexChanged);
             // 
             // tpMainBlinkwing
             // 
@@ -2688,6 +2728,83 @@
             this.tsmiItemDuplicate.Text = "Duplicate";
             this.tsmiItemDuplicate.Click += new System.EventHandler(this.TsmiItemDuplicate_Click);
             // 
+            // gbConsumableMisc
+            // 
+            this.gbConsumableMisc.Controls.Add(this.btnConsumableOpenSfx);
+            this.gbConsumableMisc.Controls.Add(this.btnConsumablePlaySound);
+            this.gbConsumableMisc.Controls.Add(this.lblConsumableSfx);
+            this.gbConsumableMisc.Controls.Add(this.cbConsumableSfx);
+            this.gbConsumableMisc.Controls.Add(this.lblConsumableSound);
+            this.gbConsumableMisc.Controls.Add(this.cbConsumableSound);
+            this.gbConsumableMisc.Location = new System.Drawing.Point(9, 164);
+            this.gbConsumableMisc.Name = "gbConsumableMisc";
+            this.gbConsumableMisc.Size = new System.Drawing.Size(357, 100);
+            this.gbConsumableMisc.TabIndex = 22;
+            this.gbConsumableMisc.TabStop = false;
+            this.gbConsumableMisc.Text = "Misc";
+            // 
+            // lblConsumableSound
+            // 
+            this.lblConsumableSound.AutoSize = true;
+            this.lblConsumableSound.Location = new System.Drawing.Point(50, 36);
+            this.lblConsumableSound.Name = "lblConsumableSound";
+            this.lblConsumableSound.Size = new System.Drawing.Size(44, 13);
+            this.lblConsumableSound.TabIndex = 0;
+            this.lblConsumableSound.Text = "Sound :";
+            // 
+            // cbConsumableSound
+            // 
+            this.cbConsumableSound.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbConsumableSound.DropDownWidth = 300;
+            this.cbConsumableSound.FormattingEnabled = true;
+            this.cbConsumableSound.Location = new System.Drawing.Point(99, 33);
+            this.cbConsumableSound.Margin = new System.Windows.Forms.Padding(2);
+            this.cbConsumableSound.Name = "cbConsumableSound";
+            this.cbConsumableSound.Size = new System.Drawing.Size(163, 21);
+            this.cbConsumableSound.TabIndex = 10;
+            // 
+            // lblConsumableSfx
+            // 
+            this.lblConsumableSfx.AutoSize = true;
+            this.lblConsumableSfx.Location = new System.Drawing.Point(61, 61);
+            this.lblConsumableSfx.Name = "lblConsumableSfx";
+            this.lblConsumableSfx.Size = new System.Drawing.Size(33, 13);
+            this.lblConsumableSfx.TabIndex = 11;
+            this.lblConsumableSfx.Text = "SFX :";
+            // 
+            // cbConsumableSfx
+            // 
+            this.cbConsumableSfx.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbConsumableSfx.DropDownWidth = 300;
+            this.cbConsumableSfx.FormattingEnabled = true;
+            this.cbConsumableSfx.Location = new System.Drawing.Point(99, 58);
+            this.cbConsumableSfx.Margin = new System.Windows.Forms.Padding(2);
+            this.cbConsumableSfx.Name = "cbConsumableSfx";
+            this.cbConsumableSfx.Size = new System.Drawing.Size(163, 21);
+            this.cbConsumableSfx.TabIndex = 12;
+            // 
+            // btnConsumablePlaySound
+            // 
+            this.btnConsumablePlaySound.BackColor = System.Drawing.Color.Transparent;
+            this.btnConsumablePlaySound.Image = ((System.Drawing.Image)(resources.GetObject("btnConsumablePlaySound.Image")));
+            this.btnConsumablePlaySound.Location = new System.Drawing.Point(267, 31);
+            this.btnConsumablePlaySound.Name = "btnConsumablePlaySound";
+            this.btnConsumablePlaySound.Size = new System.Drawing.Size(24, 24);
+            this.btnConsumablePlaySound.TabIndex = 13;
+            this.btnConsumablePlaySound.UseVisualStyleBackColor = false;
+            this.btnConsumablePlaySound.Click += new System.EventHandler(this.BtnConsumablePlaySound_Click);
+            // 
+            // btnConsumableOpenSfx
+            // 
+            this.btnConsumableOpenSfx.BackColor = System.Drawing.Color.Transparent;
+            this.btnConsumableOpenSfx.Image = ((System.Drawing.Image)(resources.GetObject("btnConsumableOpenSfx.Image")));
+            this.btnConsumableOpenSfx.Location = new System.Drawing.Point(267, 57);
+            this.btnConsumableOpenSfx.Name = "btnConsumableOpenSfx";
+            this.btnConsumableOpenSfx.Size = new System.Drawing.Size(24, 24);
+            this.btnConsumableOpenSfx.TabIndex = 14;
+            this.btnConsumableOpenSfx.UseVisualStyleBackColor = false;
+            this.btnConsumableOpenSfx.Click += new System.EventHandler(this.BtnConsumableOpenSfx_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2732,8 +2849,10 @@
             this.gbWeaponSettings.ResumeLayout(false);
             this.gbWeaponSettings.PerformLayout();
             this.tpMainConsumable.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nudConsumableDstValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            this.gbConsumableStats.ResumeLayout(false);
+            this.gbConsumableStats.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nudConsumableStatMax)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudConsumableStatValue)).EndInit();
             this.tpMainBlinkwing.ResumeLayout(false);
             this.gbBlinkwingMisc.ResumeLayout(false);
             this.gbBlinkwingMisc.PerformLayout();
@@ -2805,6 +2924,8 @@
             this.pnlList.ResumeLayout(false);
             this.pnlList.PerformLayout();
             this.cmsLbItems.ResumeLayout(false);
+            this.gbConsumableMisc.ResumeLayout(false);
+            this.gbConsumableMisc.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2867,13 +2988,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiView;
         private System.Windows.Forms.ToolStripMenuItem tsmiViewExpertEditor;
         private System.Windows.Forms.TabPage tpMainConsumable;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox lbConsumableDst;
-        private System.Windows.Forms.NumericUpDown nudConsumableDstValue;
-        private System.Windows.Forms.ComboBox cbConsumableDstParam;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox gbEquipmentRequirements;
         private System.Windows.Forms.GroupBox gbEquipmentMisc;
         private System.Windows.Forms.ComboBox cbEquipmentParts;
@@ -3019,6 +3133,21 @@
         private System.Windows.Forms.GroupBox gbWeaponSounds;
         private System.Windows.Forms.ToolStripMenuItem tsmiFileSave;
         private System.Windows.Forms.Button btnWeaponOpenAttackSfx;
+        private System.Windows.Forms.GroupBox gbConsumableStats;
+        private System.Windows.Forms.NumericUpDown nudConsumableStatValue;
+        private System.Windows.Forms.Label lblConsumableStatValue;
+        private System.Windows.Forms.Label lblConsumableStatType;
+        private System.Windows.Forms.ComboBox cbConsumableStatType;
+        private System.Windows.Forms.ListBox lbConsumableStats;
+        private System.Windows.Forms.NumericUpDown nudConsumableStatMax;
+        private System.Windows.Forms.Label lblConsumableStatMax;
+        private System.Windows.Forms.GroupBox gbConsumableMisc;
+        private System.Windows.Forms.Label lblConsumableSound;
+        private System.Windows.Forms.ComboBox cbConsumableSound;
+        private System.Windows.Forms.Button btnConsumableOpenSfx;
+        private System.Windows.Forms.Button btnConsumablePlaySound;
+        private System.Windows.Forms.Label lblConsumableSfx;
+        private System.Windows.Forms.ComboBox cbConsumableSfx;
     }
 }
 
