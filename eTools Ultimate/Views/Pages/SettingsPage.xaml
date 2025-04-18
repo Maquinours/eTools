@@ -50,7 +50,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Resources folder" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Text="{Binding ResourcesFolder, Mode=TwoWay}" Margin="0,0,8,0"/>
+                                <TextBox Grid.Column="1" Text="{Binding Settings.ResourcesFolderPath, Mode=OneTime}" Margin="0,0,8,0"/>
                                 <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectResourcesFolderCommand}"/>
                             </Grid>
 
