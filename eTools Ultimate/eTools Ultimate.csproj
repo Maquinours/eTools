@@ -27,6 +27,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="Scanner">
+      <HintPath>..\libs\net9.0\Scanner.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Assets\wpfui-icon-256.png" />
     <Resource Include="Assets\wpfui-icon-1024.png" />
   </ItemGroup>
