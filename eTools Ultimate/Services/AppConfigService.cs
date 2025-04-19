@@ -8,6 +8,5 @@ namespace eTools_Ultimate.Services
 {
     internal class AppConfigService
     {
-        private string _resourcePath = "test";
     }
 }
