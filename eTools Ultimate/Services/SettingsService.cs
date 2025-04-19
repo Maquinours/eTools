@@ -57,7 +57,7 @@ namespace eTools_Ultimate.Services
                             Settings.Instance.TexturesFolderPath = scanner.GetToken();
                             break;
                         case SettingsKeywords.SoundsConfigPath:
-                            Settings.Instance.SoundsConfigFileNamePath = scanner.GetToken();
+                            Settings.Instance.SoundsConfigFilePath = scanner.GetToken();
                             break;
                         case SettingsKeywords.SoundsPath:
                             Settings.Instance.SoundsFolderPath = scanner.GetToken();
@@ -93,7 +93,7 @@ namespace eTools_Ultimate.Services
                 writer.WriteLine($"{SettingsKeywords.ResourcesPath}\t{Settings.Instance.ResourcesFolderPath}");
                 writer.WriteLine($"{SettingsKeywords.IconsPath}\t{Settings.Instance.IconsFolderPath}");
                 writer.WriteLine($"{SettingsKeywords.TexturesPath}\t{Settings.Instance.TexturesFolderPath}");
-                writer.WriteLine($"{SettingsKeywords.SoundsConfigPath}\t{Settings.Instance.SoundsConfigFileNamePath}");
+                writer.WriteLine($"{SettingsKeywords.SoundsConfigPath}\t{Settings.Instance.SoundsConfigFilePath}");
                 writer.WriteLine($"{SettingsKeywords.SoundsPath}\t{Settings.Instance.SoundsFolderPath}");
 
                 // Movers settings

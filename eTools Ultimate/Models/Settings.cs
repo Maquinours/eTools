@@ -16,7 +16,7 @@ namespace eTools_Ultimate.Models
         private string _resourcesFolderPath = System.AppDomain.CurrentDomain.BaseDirectory;
         private string _iconsFolderPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Item\";
         private string _texturesFolderPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Model\Texture\";
-        private string _soundsConfigFileNamePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Client\sound.inc";
+        private string _soundsConfigFilePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Client\sound.inc";
         private string _soundsFolderPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Sound\";
 
         // Movers settings
@@ -53,10 +53,10 @@ namespace eTools_Ultimate.Models
             set => this._texturesFolderPath = value;
         }
 
-        public string SoundsConfigFileNamePath
+        public string SoundsConfigFilePath
         {
-            get => this._soundsConfigFileNamePath;
-            set => this._soundsConfigFileNamePath = value;
+            get => this._soundsConfigFilePath;
+            set => this._soundsConfigFilePath = value;
         }
         public string SoundsFolderPath
         {
