@@ -11,6 +11,7 @@ namespace eTools_Ultimate.Models
     {
         private static Settings _instance = new Settings();
 
+        // General settings
         private int _resourcesVersion = 19;
         private string _resourcesFolderPath = System.AppDomain.CurrentDomain.BaseDirectory;
         private string _iconsFolderPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Item\";
@@ -18,11 +19,19 @@ namespace eTools_Ultimate.Models
         private string _soundsConfigFileNamePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Client\sound.inc";
         private string _soundsFolderPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Sound\";
 
+        // Movers settings
+        private string _propMoverFilePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}propMover.txt";
+        private string _propMoverTxtFilePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}propMover.txt.txt";
+        private string _propMoverExFilePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}propMoverEx.inc";
+        private bool _mover64BitHp = false;
+        private bool _mover64BitAtk = false;
+
         public static Settings Instance
         {
             get => _instance;
         }
 
+        // General settings
         public int ResourcesVersion
         {
             get => this._resourcesVersion;
@@ -53,6 +62,33 @@ namespace eTools_Ultimate.Models
         {
             get => this._soundsFolderPath;
             set => this._soundsFolderPath = value;
+        }
+
+        // Movers settings
+        public string PropMoverFilePath
+        {
+            get => this._propMoverFilePath;
+            set => this._propMoverFilePath = value;
+        }
+        public string PropMoverTxtFilePath
+        {
+            get => this._propMoverTxtFilePath;
+            set => this._propMoverTxtFilePath = value;
+        }
+        public string PropMoverExFilePath
+        {
+            get => this._propMoverExFilePath;
+            set => this._propMoverExFilePath = value;
+        }
+        public bool Mover64BitHp
+        {
+            get => this._mover64BitHp;
+            set => this._mover64BitHp = value;
+        }
+        public bool Mover64BitAtk
+        {
+            get => this._mover64BitAtk;
+            set => this._mover64BitAtk = value;
         }
     }
 }
