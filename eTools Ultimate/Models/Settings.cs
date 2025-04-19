@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,12 +11,12 @@ namespace eTools_Ultimate.Models
     {
         private static Settings _instance = new Settings();
 
-        private int _resourcesVersion;
-        private string _resourcesFolderPath;
-        private string _iconsFolderPath;
-        private string _texturesFolderPath;
-        private string _soundsConfigFileNamePath;
-        private string _soundsFolderPath;
+        private int _resourcesVersion = 19;
+        private string _resourcesFolderPath = System.AppDomain.CurrentDomain.BaseDirectory;
+        private string _iconsFolderPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Item\";
+        private string _texturesFolderPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Model\Texture\";
+        private string _soundsConfigFileNamePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Client\sound.inc";
+        private string _soundsFolderPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Sound\";
 
         public static Settings Instance
         {
