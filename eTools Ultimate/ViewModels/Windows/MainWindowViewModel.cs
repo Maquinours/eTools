@@ -6,7 +6,7 @@ namespace eTools_Ultimate.ViewModels.Windows
     public partial class MainWindowViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string _applicationTitle = "eTool Ultimate";
+        private string _applicationTitle = "WPF UI - eTools_Ultimate";
 
         [ObservableProperty]
         private ObservableCollection<object> _menuItems = new()

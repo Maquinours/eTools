@@ -2902,7 +2902,7 @@
     <value>Movers</value>
   </data>
   <data name="tsmiMoversAdd.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Control+P</value>
+    <value>Ctrl+P</value>
   </data>
   <data name="tsmiMoversAdd.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 22</value>
@@ -2911,7 +2911,7 @@
     <value>Add</value>
   </data>
   <data name="tsmiMoversSearch.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Control+F</value>
+    <value>Ctrl+F</value>
   </data>
   <data name="tsmiMoversSearch.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 22</value>
@@ -2926,7 +2926,7 @@
     <value>File</value>
   </data>
   <data name="tsmiFileReload.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Control+R</value>
+    <value>Ctrl+R</value>
   </data>
   <data name="tsmiFileReload.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 22</value>
@@ -2935,7 +2935,7 @@
     <value>Reload</value>
   </data>
   <data name="tsmiFileSave.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Control+S</value>
+    <value>Ctrl+S</value>
   </data>
   <data name="tsmiFileSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 22</value>
@@ -2950,7 +2950,7 @@
     <value>View</value>
   </data>
   <data name="tsmiViewExpertEditor.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Control+E</value>
+    <value>Ctrl+E</value>
   </data>
   <data name="tsmiViewExpertEditor.Size" type="System.Drawing.Size, System.Drawing">
     <value>181, 22</value>
@@ -2959,7 +2959,7 @@
     <value>Expert Editor</value>
   </data>
   <data name="tsmiSettings.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
-    <value>Control+O</value>
+    <value>Ctrl+O</value>
   </data>
   <data name="tsmiSettings.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 22</value>

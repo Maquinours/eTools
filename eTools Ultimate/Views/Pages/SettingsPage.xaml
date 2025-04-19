@@ -28,12 +28,9 @@
             <TabControl>
                 <!-- Resources Tab -->
                 <TabItem Header="Resource Path" HorizontalAlignment="Center">
-
-                    <StackPanel RenderTransformOrigin="0.5,0.5">
+                    <StackPanel>
                         <!-- Grid mit 2x4 Layout für die Einstellungen -->
-                        <ui:TextBlock TextWrapping="Wrap" Text="General" FontWeight="Bold" Margin="0,20,0,0" FontSize="16"/>
-                        <!-- Grid mit 2x4 Layout für die Einstellungen -->
-                        <Grid Margin="0,10,0,12">
+                        <Grid Margin="0,30,0,12">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -53,7 +50,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Resources folder" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Margin="0,0,8,0" Text="./"/>
+                                <TextBox Grid.Column="1" Text="{Binding ResourcesFolder, Mode=TwoWay}" Margin="0,0,8,0"/>
                                 <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectResourcesFolderCommand}"/>
                             </Grid>
 
@@ -64,8 +61,8 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Spec_Item file" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Margin="0,0,8,0" TextChanged="TextBox_TextChanged_1" Text="spec_Item.txt"/>
+                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Prop file" Margin="0,0,8,0"/>
+                                <TextBox Grid.Column="1" Text="{Binding PropFileName, Mode=TwoWay}" Margin="0,0,8,0"/>
                                 <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectPropFileCommand}"/>
                             </Grid>
 
@@ -76,9 +73,9 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Icon folder" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Margin="0,0,8,0" Text="./Item\"/>
-                                <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectIconsFolderCommand}"/>
+                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Text file" Margin="0,0,8,0"/>
+                                <TextBox Grid.Column="1" Text="{Binding TextFileName, Mode=TwoWay}" Margin="0,0,8,0"/>
+                                <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectTextFileCommand}"/>
                             </Grid>
 
                             <!-- Zeile 1, Spalte 1: Icons folder -->
@@ -88,9 +85,10 @@
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropItem file" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Margin="0,0,8,0" Text="propItem.txt.txt"/>
-                                <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectTextFileCommand}"/>
+                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Icons folder" Margin="0,0,8,0"/>
+                                <TextBox Grid.Column="1" Text="{Binding IconsFolder, Mode=TwoWay}" Margin="0,0,8,0"/>
+                                <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectIconsFolderCommand}"/>
+
                             </Grid>
 
                             <!-- Zeile 2, Spalte 0: Texture folder -->
@@ -101,7 +99,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Texture folder" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Margin="0,0,8,0" Text="./Model\Texture\"/>
+                                <TextBox Grid.Column="1" Text="{Binding TexturesFolder, Mode=TwoWay}" Margin="0,0,8,0"/>
                                 <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectTexturesFolderCommand}"/>
                             </Grid>
 
@@ -113,7 +111,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Sounds config file" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Margin="0,0,8,0" Text="./Client\sound.inc"/>
+                                <TextBox Grid.Column="1" Text="{Binding SoundsConfigFile, Mode=TwoWay}" Margin="0,0,8,0"/>
                                 <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectSoundsConfigCommand}"/>
                             </Grid>
 
@@ -125,7 +123,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Sounds folder" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Margin="0,0,8,0" Text="./Sound\"/>
+                                <TextBox Grid.Column="1" Text="{Binding SoundsFolder, Mode=TwoWay}" Margin="0,0,8,0"/>
                                 <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectSoundsFolderCommand}"/>
                             </Grid>
 
@@ -139,7 +137,7 @@
                                 <ComboBox Grid.Column="1" 
                                          SelectedItem="{Binding Version, Mode=TwoWay}" 
                                          HorizontalAlignment="Left" 
-                                         Width="100" SelectedIndex="8">
+                                         Width="100">
                                     <ComboBoxItem Content="11"/>
                                     <ComboBoxItem Content="12"/>
                                     <ComboBoxItem Content="13"/>
@@ -153,70 +151,6 @@
                                     <ComboBoxItem Content="21"/>
                                     <ComboBoxItem Content="22"/>
                                 </ComboBox>
-                            </Grid>
-                        </Grid>
-                        <!-- Separator before Mover -->
-                        <Separator Margin="0,10,0,5"/>
-
-                        <!-- Mover Section -->
-                        <ui:TextBlock Text="Mover" FontWeight="Bold" FontSize="16" Margin="0,10,0,0"/>
-
-                        <Grid Margin="0,10,0,12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-
-                            <!-- PropMover file -->
-                            <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,10,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMover file" Margin="0,0,8,0"/>
-                                <TextBox    Grid.Column="1" Margin="0,0,8,0" TextChanged="TextBox_TextChanged" Text="propMover.txt"/>
-                                <Button     Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectPropMoverFileCommand}"/>
-                            </Grid>
-
-                            <!-- PropMover Text file -->
-                            <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,0,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMover.txt file" Margin="0,0,8,0"/>
-                                <TextBox    Grid.Column="1" Margin="0,0,8,0" Text="propMover.txt.txt"/>
-                                <Button     Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectPropMoverTextFileCommand}"/>
-                            </Grid>
-
-                            <!-- PropMoverEx file -->
-                            <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,10,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMoverEx file" Margin="0,0,8,0"/>
-                                <TextBox    Grid.Column="1" Margin="0,0,8,0" IsHitTestVisible="False" Text="propMoverEx"/>
-                                <Button     Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectPropMoverExFileCommand}"/>
-                            </Grid>
-
-                            <!-- Checkboxes für PropMoverEx -->
-                            <Grid Grid.Row="1" Grid.Column="1" Margin="10,0,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="64 Bit" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                <CheckBox Grid.Column="1" Content="HP" VerticalAlignment="Center" Margin="64,0,10,0"/>
-                                <CheckBox Grid.Column="2" Content="ATK" VerticalAlignment="Center" Margin="0,0,0,0"/>
                             </Grid>
                         </Grid>
                     </StackPanel>
