@@ -50,7 +50,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Resources folder" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Text="{Binding ResourcesFolder, Mode=TwoWay}" Margin="0,0,8,0"/>
+                                <TextBox Grid.Column="1" Text="{Binding Settings.ResourcesFolderPath, Mode=OneTime}" Margin="0,0,8,0"/>
                                 <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectResourcesFolderCommand}"/>
                             </Grid>
 
@@ -86,7 +86,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Icons folder" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Text="{Binding IconsFolder, Mode=TwoWay}" Margin="0,0,8,0"/>
+                                <TextBox Grid.Column="1" Text="{Binding Settings.IconsFolderPath, Mode=OneTime}" Margin="0,0,8,0"/>
                                 <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectIconsFolderCommand}"/>
 
                             </Grid>
@@ -99,7 +99,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Texture folder" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Text="{Binding TexturesFolder, Mode=TwoWay}" Margin="0,0,8,0"/>
+                                <TextBox Grid.Column="1" Text="{Binding Settings.TexturesFolderPath, Mode=OneTime}" Margin="0,0,8,0"/>
                                 <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectTexturesFolderCommand}"/>
                             </Grid>
 
@@ -111,7 +111,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Sounds config file" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Text="{Binding SoundsConfigFile, Mode=TwoWay}" Margin="0,0,8,0"/>
+                                <TextBox Grid.Column="1" Text="{Binding Settings.SoundsConfigFilePath, Mode=OneTime}" Margin="0,0,8,0"/>
                                 <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectSoundsConfigCommand}"/>
                             </Grid>
 
@@ -123,7 +123,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Sounds folder" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Text="{Binding SoundsFolder, Mode=TwoWay}" Margin="0,0,8,0"/>
+                                <TextBox Grid.Column="1" Text="{Binding Settings.SoundsFolderPath, Mode=OneTime}" Margin="0,0,8,0"/>
                                 <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectSoundsFolderCommand}"/>
                             </Grid>
 
@@ -135,7 +135,7 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Version" Margin="0,0,8,0"/>
                                 <ComboBox Grid.Column="1" 
-                                         SelectedItem="{Binding Version, Mode=TwoWay}" 
+                                         SelectedItem="{Binding Settings.ResourcesVersion, Mode=OneTime}" 
                                          HorizontalAlignment="Left" 
                                          Width="100">
                                     <ComboBoxItem Content="11"/>
@@ -151,6 +151,70 @@
                                     <ComboBoxItem Content="21"/>
                                     <ComboBoxItem Content="22"/>
                                 </ComboBox>
+                            </Grid>
+                        </Grid>
+                        <!-- Separator before Mover -->
+                        <Separator Margin="0,10,0,5"/>
+
+                        <!-- Mover Section -->
+                        <ui:TextBlock Text="Mover" FontWeight="Bold" FontSize="16" Margin="0,10,0,0"/>
+
+                        <Grid Margin="0,10,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- PropMover file -->
+                            <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,10,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMover file" Margin="0,0,8,0"/>
+                                <TextBox    Grid.Column="1" Margin="0,0,8,0" Text="{Binding Settings.PropMoverFilePath, Mode=OneTime}"/>
+                                <Button     Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectPropMoverFileCommand}"/>
+                            </Grid>
+
+                            <!-- PropMover Text file -->
+                            <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMover.txt file" Margin="0,0,8,0"/>
+                                <TextBox    Grid.Column="1" Margin="0,0,8,0" Text="{Binding Settings.PropMoverTxtFilePath, Mode=OneTime}"/>
+                                <Button     Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectPropMoverTextFileCommand}"/>
+                            </Grid>
+
+                            <!-- PropMoverEx file -->
+                            <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,10,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMoverEx file" Margin="0,0,8,0"/>
+                                <TextBox    Grid.Column="1" Margin="0,0,8,0" IsHitTestVisible="False" Text="{Binding Settings.PropMoverExFilePath, Mode=OneTime}"/>
+                                <Button     Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectPropMoverExFileCommand}"/>
+                            </Grid>
+
+                            <!-- Checkboxes für PropMoverEx -->
+                            <Grid Grid.Row="1" Grid.Column="1" Margin="10,0,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="64 Bit" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                                <CheckBox Grid.Column="1" Content="HP" IsChecked="{Binding Settings.Mover64BitHp, Mode=OneTime}" VerticalAlignment="Center" Margin="64,0,10,0"/>
+                                <CheckBox Grid.Column="2" Content="ATK" IsChecked="{Binding Settings.Mover64BitHp, Mode=OneTime}" VerticalAlignment="Center" Margin="0,0,0,0"/>
                             </Grid>
                         </Grid>
                     </StackPanel>
