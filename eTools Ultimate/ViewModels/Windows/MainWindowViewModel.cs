@@ -6,7 +6,7 @@ namespace eTools_Ultimate.ViewModels.Windows
     public partial class MainWindowViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string _applicationTitle = "WPF UI - eTools_Ultimate";
+        private string _applicationTitle = "eTools Ultimate";
 
         [ObservableProperty]
         private ObservableCollection<object> _menuItems = new()
@@ -17,11 +17,12 @@ namespace eTools_Ultimate.ViewModels.Windows
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
                 TargetPageType = typeof(Views.Pages.DashboardPage)
             },
+            new NavigationViewItemSeparator(),
             new NavigationViewItem()
             {
-                Content = "Data",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
-                TargetPageType = typeof(Views.Pages.DataPage)
+                Content = "Item",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Cube20 },
+                TargetPageType = typeof(Views.Pages.ItemPage)
             }
         };
 
