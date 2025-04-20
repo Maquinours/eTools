@@ -12,7 +12,7 @@
     d:DataContext="{d:DesignInstance local:ItemPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="800"
-    d:DesignWidth="1200"
+    d:DesignWidth="1600"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -504,14 +504,82 @@
         <selectors:ItemTemplateSelector x:Key="ItemTemplateSelector"
                                         CommonTemplate="{StaticResource CommonTemplate}"
                                         EquipmentTemplate="{StaticResource EquipmentTemplate}"/>
+
+        <!-- DataTemplate für die ListView-Items -->
+        <DataTemplate x:Key="ItemListTemplate">
+            <Grid Margin="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Width="32" 
+                       Height="32" 
+                       Background="{DynamicResource ControlFillColorDefaultBrush}"
+                       BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                       BorderThickness="1"
+                       Margin="0,0,8,0">
+                    <Image Stretch="Uniform" Margin="2"/>
+                </Border>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding Id}" Foreground="{DynamicResource TextFillColorSecondaryBrush}" FontSize="12"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
 
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
-            <ContentControl Grid.Column="1"
-                            Content="{Binding IsEnabled}"
-                            ContentTemplateSelector="{StaticResource ItemTemplateSelector}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Linke Seite - ListView -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Suchleiste -->
+            <Grid Grid.Row="0" Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ui:TextBox Grid.Column="0" 
+                           PlaceholderText="Item suchen..." 
+                           Icon="Search24"/>
+            </Grid>
+            
+            <!-- Item-Liste -->
+            <Border Grid.Row="1"
+                    CornerRadius="8"
+                    BorderThickness="1"
+                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                    Background="{DynamicResource ApplicationBackgroundBrush}"
+                    Margin="5,5,15,5">
+                <ListView x:Name="ItemsListView"
+                         BorderThickness="0"
+                         Background="Transparent"
+                         ItemTemplate="{StaticResource ItemListTemplate}"
+                         SelectionChanged="VirtualizingGridView_SelectionChanged">
+                </ListView>
+            </Border>
+        </Grid>
+        
+        <!-- Separator -->
+        <GridSplitter Grid.Column="1" 
+                     Width="5" 
+                     HorizontalAlignment="Center" 
+                     VerticalAlignment="Stretch"
+                     Background="{DynamicResource ControlElevationBorderBrush}"/>
+        
+        <!-- Rechte Seite - Formular -->
+        <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
+            <ContentControl Content="{Binding IsEnabled}"
+                          ContentTemplateSelector="{StaticResource ItemTemplateSelector}"/>
         </ScrollViewer>
     </Grid>
 
