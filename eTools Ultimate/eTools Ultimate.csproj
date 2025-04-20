@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -24,6 +24,10 @@
   <ItemGroup>
     <None Remove="Assets\wpfui-icon-256.png" />
     <None Remove="Assets\wpfui-icon-1024.png" />
+    <None Remove="Views\Pages\AboutIcon.png" />
+    <None Remove="Views\Pages\FolderPathIcon.png" />
+    <None Remove="Views\Pages\PaintPaletteIcon.png" />
+    <None Remove="Views\Pages\SettingPageBanner.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +39,14 @@
   <ItemGroup>
     <Resource Include="Assets\wpfui-icon-256.png" />
     <Resource Include="Assets\wpfui-icon-1024.png" />
+    <Resource Include="Views\Pages\AboutIcon.png" />
+    <Resource Include="Views\Pages\FolderPathIcon.png" />
+    <Resource Include="Views\Pages\PaintPaletteIcon.png" />
+    <Resource Include="Views\Pages\SettingPageBanner.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\Icons\" />
   </ItemGroup>
 
 </Project>

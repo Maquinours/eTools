@@ -7,276 +7,191 @@
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:vm="clr-namespace:eTools_Ultimate.ViewModels.Pages"
     Title="SettingsPage"
-    d:DataContext="{d:DesignInstance local:SettingsPage,
+    d:DataContext="{d:DesignInstance vm:SettingsViewModel,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource ApplicationForegroundBrush}"
     mc:Ignorable="d">
-    <!-- Scroll-Funktion -->
-    <ScrollViewer
-      Margin="0,1,0,-1"
-      VerticalScrollBarVisibility="Auto"
-      HorizontalScrollBarVisibility="Disabled">
 
-        <StackPanel Margin="20" HorizontalAlignment="Stretch">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
-            <!-- TabControl mit den drei Hauptkategorien -->
-            <TabControl>
-                <!-- Resources Tab -->
-                <TabItem Header="Resource Path" HorizontalAlignment="Center">
-                    <StackPanel>
-
-                         <!-- General Section -->
-                        <ui:TextBlock Text="General" FontWeight="Bold" FontSize="16" Margin="0,10,0,0"/>
-                        
-                        <!-- Grid mit 2x4 Layout für die Einstellungen -->
-                        <Grid Margin="0,20,0,12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-
-                            <!-- Zeile 0, Spalte 0: Resources folder -->
-                            <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,10,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Resources folder" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Text="{Binding Settings.ResourcesFolderPath, Mode=OneTime}" Margin="0,0,8,0"/>
-                                <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectResourcesFolderCommand}"/>
-                            </Grid>
-
-                            <!-- Zeile 0, Spalte 1: Prop file -->
-                            <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,0,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Prop file" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Text="{Binding PropFileName, Mode=TwoWay}" Margin="0,0,8,0"/>
-                                <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectPropFileCommand}"/>
-                            </Grid>
-
-                            <!-- Zeile 1, Spalte 0: Icons folder -->
-                            <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,10,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Icons folder" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Text="{Binding Settings.IconsFolderPath, Mode=OneTime}" Margin="0,0,8,0"/>
-                                <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectIconsFolderCommand}"/>
-                            </Grid>
-
-                            <!-- Zeile 1, Spalte 1: Text file -->
-                            <Grid Grid.Row="1" Grid.Column="1" Margin="10,0,0,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Text file" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Text="{Binding TextFileName, Mode=TwoWay}" Margin="0,0,8,0"/>
-                                <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectTextFileCommand}"/>
-                            </Grid>
-
-                            <!-- Zeile 2, Spalte 0: Texture folder -->
-                            <Grid Grid.Row="2" Grid.Column="0" Margin="0,0,10,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Texture folder" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Text="{Binding Settings.TexturesFolderPath, Mode=OneTime}" Margin="0,0,8,0"/>
-                                <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectTexturesFolderCommand}"/>
-                            </Grid>
-
-                            <!-- Zeile 2, Spalte 1: Sounds config file -->
-                            <Grid Grid.Row="2" Grid.Column="1" Margin="10,0,0,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Sounds config file" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Text="{Binding Settings.SoundsConfigFilePath, Mode=OneTime}" Margin="0,0,8,0"/>
-                                <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectSoundsConfigCommand}"/>
-                            </Grid>
-
-                            <!-- Zeile 3, Spalte 0: Sounds folder -->
-                            <Grid Grid.Row="3" Grid.Column="0" Margin="0,0,10,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Sounds folder" Margin="0,0,8,0"/>
-                                <TextBox Grid.Column="1" Text="{Binding Settings.SoundsFolderPath, Mode=OneTime}" Margin="0,0,8,0"/>
-                                <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectSoundsFolderCommand}"/>
-                            </Grid>
-
-                            <!-- Zeile 3, Spalte 1: Version -->
-                            <Grid Grid.Row="3" Grid.Column="1" Margin="10,0,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Version" Margin="0,0,8,0"/>
-                                <ComboBox Grid.Column="1" 
-                                         SelectedItem="{Binding Settings.ResourcesVersion, Mode=OneTime}" 
-                                         HorizontalAlignment="Left" 
-                                         Width="100">
-                                    <ComboBoxItem Content="11"/>
-                                    <ComboBoxItem Content="12"/>
-                                    <ComboBoxItem Content="13"/>
-                                    <ComboBoxItem Content="14"/>
-                                    <ComboBoxItem Content="15"/>
-                                    <ComboBoxItem Content="16"/>
-                                    <ComboBoxItem Content="17"/>
-                                    <ComboBoxItem Content="18"/>
-                                    <ComboBoxItem Content="19"/>
-                                    <ComboBoxItem Content="20"/>
-                                    <ComboBoxItem Content="21"/>
-                                    <ComboBoxItem Content="22"/>
-                                </ComboBox>
-                            </Grid>
-                        </Grid>
-                        <!-- Separator before Mover -->
-                        <Separator Margin="0,10,0,5"/>
-
-                        <!-- Mover Section -->
-                        <ui:TextBlock Text="Mover" FontWeight="Bold" FontSize="16" Margin="0,10,0,0"/>
-
-                        <Grid Margin="0,10,0,12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-
-                            <!-- PropMover file -->
-                            <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,10,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMover file" Margin="0,0,8,0"/>
-                                <TextBox    Grid.Column="1" Margin="0,0,8,0" Text="{Binding Settings.PropMoverFilePath, Mode=OneTime}"/>
-                                <Button     Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectPropMoverFileCommand}"/>
-                            </Grid>
-
-                            <!-- PropMover Text file -->
-                            <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,0,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMover.txt file" Margin="0,0,8,0"/>
-                                <TextBox    Grid.Column="1" Margin="0,0,8,0" Text="{Binding Settings.PropMoverTxtFilePath, Mode=OneTime}"/>
-                                <Button     Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectPropMoverTextFileCommand}"/>
-                            </Grid>
-
-                            <!-- PropMoverEx file -->
-                            <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,10,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMoverEx file" Margin="0,0,8,0"/>
-                                <TextBox    Grid.Column="1" Margin="0,0,8,0" IsHitTestVisible="False" Text="{Binding Settings.PropMoverExFilePath, Mode=OneTime}"/>
-                                <Button     Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectPropMoverExFileCommand}"/>
-                            </Grid>
-
-                            <!-- Checkboxes für PropMoverEx -->
-                            <Grid Grid.Row="1" Grid.Column="1" Margin="10,0,0,0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
-                                <TextBlock Grid.Column="0" Text="64 Bit" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                                <CheckBox Grid.Column="1" Content="HP" IsChecked="{Binding Settings.Mover64BitHp, Mode=OneTime}" VerticalAlignment="Center" Margin="64,0,10,0"/>
-                                <CheckBox Grid.Column="2" Content="ATK" IsChecked="{Binding Settings.Mover64BitHp, Mode=OneTime}" VerticalAlignment="Center" Margin="0,0,0,0"/>
-                            </Grid>
-                        </Grid>
+        <Border
+            Grid.Row="0"
+            Height="200"
+            CornerRadius="8">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Offset="0" Color="#2B5797" />
+                    <GradientStop Offset="1" Color="#0078D7" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Border CornerRadius="8">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Views/Pages/SettingPageBanner.jpg"
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                    Stretch="UniformToFill"  />
+                </Border.Background>
+                <Grid>
+                    <StackPanel
+                        Margin="48,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Background="Transparent">
+                        <ui:TextBlock
+                            FontTypography="Title"
+                            Foreground="#FFFFFF"
+                            Text="Settings" />
                     </StackPanel>
-                </TabItem>
+                    <ui:TextBlock
+                        Margin="12"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        FontTypography="Caption"
+                        Foreground="#57FFFFFF"
+                        Text="eTools Ultimate" />
+                </Grid>
+            </Border>
+        </Border>
 
-                <!-- Personalization Tab -->
-                <TabItem Header="Personalization">
-                    <StackPanel Margin="0,12,0,0">
-                        <TextBlock Margin="0,30,0,12" Text="Theme" />
-                        <RadioButton Margin="0,12,0,0" Content="Light" GroupName="themeSelect" />
-                        <RadioButton Margin="0,8,0,0" Content="Dark"  GroupName="themeSelect" />
+        <!--<controls:GalleryNavigationPresenter
+            Grid.Row="1"
+            Margin="0,24,0,0"
+            Padding="0"
+            ItemsSource="{Binding ViewModel.NavigationCards, Mode=OneWay}" />-->
+
+        <Grid Grid.Row="1" Margin="0,24,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <ui:CardAction
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0,0,4,0"
+                Padding="0"
+                VerticalAlignment="Stretch"
+                Command="{Binding ViewModel.NavigateToResourcePathCommand, Mode=OneWay}"
+                IsChevronVisible="False">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Image
+                        Width="60"
+                        Height="auto"
+                        Margin="24,0,0,0"
+                        Source="/Views/Pages/FolderPathIcon.png" />
+
+                    <StackPanel
+                        Grid.Column="1"
+                        Margin="24"
+                        VerticalAlignment="Center">
+                        <ui:TextBlock
+                            Margin="0"
+                            FontTypography="BodyStrong"
+                            Text="Resurce Path"
+                            TextWrapping="WrapWithOverflow" />
+                        <ui:TextBlock
+                            Appearance="Secondary"
+                            Foreground="Gray"
+                            Text="Loading all Paths."
+                            TextWrapping="WrapWithOverflow" />
                     </StackPanel>
-                </TabItem>
+                </Grid>
+            </ui:CardAction>
 
-                <!-- About Tab -->
-                <TabItem Header="About">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <StackPanel Margin="0,12,0,0">
-                            <TextBlock Margin="0,0,0,12" TextWrapping="Wrap">
-                                eTool Ultimate is a powerful editor designed for editing Flyff resource files. 
-                                Our tool simplifies the editing process for developers.
-                            </TextBlock>
-                            <TextBlock Margin="0,0,0,6" FontWeight="Bold">Key Features</TextBlock>
-                            <TextBlock Margin="12,0,0,6" TextWrapping="Wrap">
-                                <Run Text="• Edit .txt, .h, and .inc files with structured interfaces" />
-                                <LineBreak />
-                                <Run Text="• Advanced categorization by item types" />
-                                <LineBreak />
-                                <Run Text="• Light and Dark Theme" />
-                            </TextBlock>
+            <ui:CardAction
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="4,0,4,0"
+                Padding="0"
+                VerticalAlignment="Stretch"
+                Command="{Binding ViewModel.NavigateToPersonalizationCommand, Mode=OneWay}"
+                IsChevronVisible="False">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                            <TextBlock Margin="0,12,0,6" FontWeight="Bold">System Requirements</TextBlock>
-                            <TextBlock Margin="12,0,0,6" TextWrapping="Wrap">
-                                <Run Text="• Operating System: Windows 10/11" />
-                                <LineBreak />
-                                <Run Text="• Memory: 4GB RAM minimum, 8GB recommended" />
-                                <LineBreak />
-                                <Run Text="• Disk Space: 200MB available space" />
-                                <LineBreak />
-                                <Run Text="• Internet Connection: Required for updates and cloud features" />
-                            </TextBlock>
+                    <Image
+                        Width="60"
+                        Height="Auto"
+                        Margin="24,0,0,0"
+                        Source="/Views/Pages/PaintPaletteIcon.png" />
 
-                            <TextBlock Margin="0,20,0,0" TextWrapping="Wrap">© 2025 eTool Ultimate. All rights reserved.</TextBlock>
-                            <TextBlock Margin="0,2,0,0" Text="{Binding ViewModel.AppVersion, Mode=OneWay}" />
-                        </StackPanel>
-                    </ScrollViewer>
-                </TabItem>
+                    <StackPanel
+                        Grid.Column="1"
+                        Margin="24"
+                        VerticalAlignment="Center">
+                        <ui:TextBlock
+                            Margin="0"
+                            FontTypography="BodyStrong"
+                            Text="Personalization"
+                            TextWrapping="WrapWithOverflow" />
+                        <ui:TextBlock
+                            Appearance="Secondary"
+                            Foreground="Gray"
+                            Text="Change Design and other parts"
+                            TextWrapping="WrapWithOverflow" />
+                    </StackPanel>
+                </Grid>
+            </ui:CardAction>
 
+            <ui:CardAction
+                Grid.Row="0"
+                Grid.Column="2"
+                Margin="4,0,4,0"
+                Padding="0"
+                VerticalAlignment="Stretch"
+                Command="{Binding ViewModel.NavigateToAboutCommand, Mode=OneWay}"
+                IsChevronVisible="False">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-            </TabControl>
+                    <Image
+                        Width="60"
+                        Height="Auto"
+                        Margin="24,0,0,0"
+                        Source="/Views/Pages/AboutIcon.png" />
 
-            <!-- Buttons -->
-            <StackPanel
-          Orientation="Horizontal"
-          HorizontalAlignment="center"
-          Margin="0,24,0,0">
-                <Button Content="Apply"  Width="80" Command="{Binding ApplySettingsCommand}" Margin="0,0,8,0" />
-                <Button Content="Cancel" Width="80" Command="{Binding CancelSettingsCommand}" />
-            </StackPanel>
-        </StackPanel>
-    </ScrollViewer>
+                    <StackPanel
+                        Grid.Column="1"
+                        Margin="24"
+                        VerticalAlignment="Center">
+                        <ui:TextBlock
+                            Margin="0"
+                            FontTypography="BodyStrong"
+                            Text="About"
+                            TextWrapping="WrapWithOverflow" />
+                        <ui:TextBlock
+                            Appearance="Secondary"
+                            Foreground="Gray"
+                            Text="eTools Ultimate"
+                            TextWrapping="WrapWithOverflow" />
+                    </StackPanel>
+                </Grid>
+            </ui:CardAction>
+        </Grid>
+    </Grid>
 </Page>

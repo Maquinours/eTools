@@ -1,26 +1,17 @@
-﻿using Wpf.Ui.Abstractions.Controls;
-using Wpf.Ui.Appearance;
-using eTools_Ultimate.Models;
+using System;
 using System.IO;
+using System.Windows;
 using Microsoft.Win32;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using eTools_Ultimate.Views.Pages;
-using Wpf.Ui.Controls;
-using eTools_Ultimate.ViewModels.Windows;
-using eTools_Ultimate.Views.Windows;
-using Wpf.Ui;
+using eTools_Ultimate.Models;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class SettingsViewModel : ObservableObject, INavigationAware
+    public partial class ResourcePathViewModel : ObservableObject
     {
-        private bool _isInitialized = false;
-
         [ObservableProperty]
-        private string _appVersion = String.Empty;
-
-        [ObservableProperty]
-        private ApplicationTheme _currentTheme = ApplicationTheme.Unknown;
+        private string _resourcePath = string.Empty;
 
         [ObservableProperty]
         private string _propFileName = string.Empty;
@@ -30,65 +21,58 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         public Settings Settings => Settings.Instance;
 
-        public Task OnNavigatedToAsync()
+        public ResourcePathViewModel()
         {
-            if (!_isInitialized)
-                InitializeViewModel();
-
-            return Task.CompletedTask;
-        }
-
-        public Task OnNavigatedFromAsync() => Task.CompletedTask;
-
-        private void InitializeViewModel()
-        {
-            CurrentTheme = ApplicationThemeManager.GetAppTheme();
-            AppVersion = $"UiDesktopApp1 - {GetAssemblyVersion()}";
-            PropFileName = "prop.inc";
-            TextFileName = "text.txt";
-
-            _isInitialized = true;
-        }
-
-        private string GetAssemblyVersion()
-        {
-            return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
-                ?? String.Empty;
+            // Initialisieren der Pfade bei Bedarf
+            _resourcePath = Settings.ResourcesFolderPath;
+            _propFileName = "prop.inc";
+            _textFileName = "text.txt";
         }
 
         [RelayCommand]
-        private void OnChangeTheme(string parameter)
+        private void Browse()
         {
-            switch (parameter)
+            var dialog = new OpenFileDialog
             {
-                case "theme_light":
-                    if (CurrentTheme == ApplicationTheme.Light)
-                        break;
+                Title = "Ressourcenpfad auswählen",
+                CheckFileExists = false,
+                CheckPathExists = true,
+                FileName = "Ordner auswählen",
+                ValidateNames = false
+            };
 
-                    ApplicationThemeManager.Apply(ApplicationTheme.Light);
-                    CurrentTheme = ApplicationTheme.Light;
-
-                    break;
-
-                default:
-                    if (CurrentTheme == ApplicationTheme.Dark)
-                        break;
-
-                    ApplicationThemeManager.Apply(ApplicationTheme.Dark);
-                    CurrentTheme = ApplicationTheme.Dark;
-
-                    break;
+            if (!string.IsNullOrEmpty(ResourcePath) && Directory.Exists(ResourcePath))
+            {
+                dialog.InitialDirectory = ResourcePath;
             }
+
+            if (dialog.ShowDialog() == true)
+            {
+                // Wir verwenden den Verzeichnispfad statt der ausgewählten Datei
+                string selectedPath = Path.GetDirectoryName(dialog.FileName);
+                if (!string.IsNullOrEmpty(selectedPath))
+                {
+                    ResourcePath = selectedPath;
+                    // Aktualisiere auch den Ressourcenpfad in den Einstellungen
+                    Settings.ResourcesFolderPath = ResourcePath;
+                }
+            }
+        }
+
+        [RelayCommand]
+        private void Save()
+        {
+            // Speichern der Einstellungen
+            MessageBox.Show("Ressourcenpfad erfolgreich gespeichert.", "Gespeichert", 
+                MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         #region Folder and File Selection Commands
         [RelayCommand]
         private void SelectResourcesFolder()
         {
-            string path = Settings.ResourcesFolderPath;
-            SelectFolder("Ressourcen-Ordner auswählen", ref path);
-            Settings.ResourcesFolderPath = path;
-            OnPropertyChanged(nameof(Settings));
+            SelectFolder("Ressourcen-Ordner auswählen", ref _resourcePath);
+            Settings.ResourcesFolderPath = ResourcePath;
         }
 
         [RelayCommand]
@@ -122,14 +106,12 @@ namespace eTools_Ultimate.ViewModels.Pages
         private void SelectPropFile()
         {
             SelectFile("Prop-Datei auswählen", "Inc-Dateien (*.inc)|*.inc|Alle Dateien (*.*)|*.*", ref _propFileName);
-            OnPropertyChanged(nameof(PropFileName));
         }
 
         [RelayCommand]
         private void SelectTextFile()
         {
             SelectFile("Text-Datei auswählen", "Textdateien (*.txt)|*.txt|Alle Dateien (*.*)|*.*", ref _textFileName);
-            OnPropertyChanged(nameof(TextFileName));
         }
 
         [RelayCommand]
@@ -190,6 +172,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (!string.IsNullOrEmpty(selectedPath))
                 {
                     path = selectedPath;
+                    OnPropertyChanged(nameof(ResourcePath));
                 }
             }
         }
@@ -216,29 +199,10 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (dialog.ShowDialog() == true)
             {
                 filePath = dialog.FileName;
+                OnPropertyChanged(nameof(PropFileName));
+                OnPropertyChanged(nameof(TextFileName));
             }
         }
         #endregion
-
-        [RelayCommand]
-        private void NavigateToResourcePath()
-        {
-            var navigationService = App.Services.GetService(typeof(INavigationService)) as INavigationService;
-            navigationService?.Navigate(typeof(ResourcePathPage));
-        }
-
-        [RelayCommand]
-        private void NavigateToPersonalization()
-        {
-            var navigationService = App.Services.GetService(typeof(INavigationService)) as INavigationService;
-            navigationService?.Navigate(typeof(PersonalizationPage));
-        }
-
-        [RelayCommand]
-        private void NavigateToAbout()
-        {
-            var navigationService = App.Services.GetService(typeof(INavigationService)) as INavigationService;
-            navigationService?.Navigate(typeof(AboutPage));
-        }
     }
-}
+} 
