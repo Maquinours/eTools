@@ -26,6 +26,10 @@ namespace eTools_Ultimate.Models
         private bool _mover64BitHp = false;
         private bool _mover64BitAtk = false;
 
+        // Items settings
+        private string _propItemFilePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}spec_Item.txt";
+        private string _propItemTxtFilePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}propItem.txt";
+
         public static Settings Instance
         {
             get => _instance;
@@ -89,6 +93,18 @@ namespace eTools_Ultimate.Models
         {
             get => this._mover64BitAtk;
             set => this._mover64BitAtk = value;
+        }
+
+        // Items settings
+        public string PropItemFilePath
+        {
+            get => this._propItemFilePath;
+            set => this._propItemFilePath = value;
+        }
+        public string PropItemTxtFilePath
+        {
+            get => this._propItemTxtFilePath;
+            set => this._propItemTxtFilePath = value;
         }
     }
 }

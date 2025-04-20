@@ -25,6 +25,10 @@ namespace eTools_Ultimate.Services
         internal const string PropMoverExPath = "PropMoverExPath";
         internal const string Mover64BitHp = "Mover64BitHp";
         internal const string Mover64BitAtk = "Mover64BitAtk";
+
+        // Items settings
+        internal const string PropItemPath = "PropItemPath";
+        internal const string PropItemTxtPath = "PropItemTxtPath";
     }
 
     internal class SettingsService
@@ -79,6 +83,14 @@ namespace eTools_Ultimate.Services
                         case SettingsKeywords.Mover64BitAtk:
                             Settings.Instance.Mover64BitAtk = true;
                             break;
+
+                        // Items settings
+                        case SettingsKeywords.PropItemPath:
+                            Settings.Instance.PropItemFilePath = scanner.GetToken();
+                            break;
+                        case SettingsKeywords.PropItemTxtPath:
+                            Settings.Instance.PropItemTxtFilePath = scanner.GetToken();
+                            break;
                     }
                 }
             }
@@ -104,6 +116,10 @@ namespace eTools_Ultimate.Services
                     writer.WriteLine(SettingsKeywords.Mover64BitAtk);
                 if (Settings.Instance.Mover64BitHp)
                     writer.WriteLine(SettingsKeywords.Mover64BitHp);
+
+                // Items settings
+                writer.WriteLine($"{SettingsKeywords.PropItemPath}\t{Settings.Instance.PropItemFilePath}");
+                writer.WriteLine($"{SettingsKeywords.PropItemTxtPath}\t{Settings.Instance.PropItemTxtFilePath}");
             }
         }
     }
