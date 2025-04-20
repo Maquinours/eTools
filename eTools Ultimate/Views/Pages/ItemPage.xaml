@@ -284,11 +284,12 @@
                 <ContentPresenter Content="{Binding}"
                                   ContentTemplate="{StaticResource CommonTemplate}"/>
                 <!-- Separator -->
-                <Separator Margin="0,10,0,5"/>
+                <Separator Margin="20,10,0,5"/>
                 <!-- Inventory & Stack -->
                 <TextBlock Text="Inventory &amp; Stack"
-                           Style="{StaticResource SectionHeaderStyle}"/>
-                <UniformGrid Columns="2">
+                           Style="{StaticResource SectionHeaderStyle}"
+                           Margin="20,0,0,15"/>
+                <UniformGrid Columns="2" Margin="20,0,0,0">
                     <!-- Maximum stack size -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -333,12 +334,13 @@
                 </UniformGrid>
 
                 <!-- Separator -->
-                <Separator Margin="0,10,0,5"/>
+                <Separator Margin="20,10,0,5"/>
 
                 <!-- Character Requirements -->
                 <TextBlock Text="Character Requirements"
-                           Style="{StaticResource SectionHeaderStyle}"/>
-                <UniformGrid Columns="2">
+                           Style="{StaticResource SectionHeaderStyle}"
+                           Margin="20,0,0,15"/>
+                <UniformGrid Columns="2" Margin="20,0,0,0">
                     <!-- Gender restriction -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -505,7 +507,7 @@
                                         CommonTemplate="{StaticResource CommonTemplate}"
                                         EquipmentTemplate="{StaticResource EquipmentTemplate}"/>
 
-        <!-- DataTemplate für die ListView-Items -->
+        <!-- DataTemplate for ListView Items -->
         <DataTemplate x:Key="ItemListTemplate">
             <Grid Margin="4">
                 <Grid.ColumnDefinitions>
@@ -536,24 +538,24 @@
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         
-        <!-- Linke Seite - ListView -->
+        <!-- Left Side - ListView -->
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
-            <!-- Suchleiste -->
+            <!-- Search Bar -->
             <Grid Grid.Row="0" Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <ui:TextBox Grid.Column="0" 
-                           PlaceholderText="Item suchen..." 
+                           PlaceholderText="Search items..." 
                            Icon="Search24"/>
             </Grid>
             
-            <!-- Item-Liste -->
+            <!-- Item List -->
             <Border Grid.Row="1"
                     CornerRadius="8"
                     BorderThickness="1"
@@ -576,7 +578,7 @@
                      VerticalAlignment="Stretch"
                      Background="{DynamicResource ControlElevationBorderBrush}"/>
         
-        <!-- Rechte Seite - Formular -->
+        <!-- Right Side - Form -->
         <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
             <ContentControl Content="{Binding IsEnabled}"
                           ContentTemplateSelector="{StaticResource ItemTemplateSelector}"/>
