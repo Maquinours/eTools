@@ -1,4 +1,8 @@
 ﻿using eTools_Ultimate.Models;
+using eTools_Ultimate.Services;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Data;
 using System.Windows.Media;
 using Wpf.Ui.Abstractions.Controls;
 
@@ -10,6 +14,25 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         [ObservableProperty]
         private IEnumerable<DataColor> _colors;
+
+        private string _searchText = string.Empty;
+
+        [ObservableProperty]
+        public ICollectionView _itemsView = CollectionViewSource.GetDefaultView(ItemsService.Instance.Items);
+
+        public string SearchText
+        {
+            get => _searchText;
+            set
+            {
+                if (_searchText != value)
+                {
+                    _searchText = value;
+                    OnPropertyChanged(nameof(this.SearchText));
+                    ItemsView.Refresh();
+                }
+            }
+        }
 
         public Task OnNavigatedToAsync()
         {
@@ -43,7 +66,16 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             Colors = colorCollection;
 
+            ItemsView.Filter = new Predicate<object>(FilterItem);
+
             _isInitialized = true;
+        }
+
+        private bool FilterItem(object obj)
+        {
+            if (obj is not Item item) return false;
+            if (string.IsNullOrEmpty(this.SearchText)) return true;
+            return item.Name.ToLower().Contains(this.SearchText.ToLower());
         }
     }
 }

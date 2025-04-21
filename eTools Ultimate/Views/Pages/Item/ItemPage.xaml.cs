@@ -3,14 +3,14 @@ using eTools_Ultimate.ViewModels.Pages;
 using System.Collections.ObjectModel;
 using Wpf.Ui.Abstractions.Controls;
 using eTools_Ultimate.Models;
+using System.ComponentModel;
+using System.Windows.Data;
 
 namespace eTools_Ultimate.Views.Pages
 {
     public partial class ItemPage : INavigableView<DataViewModel>
     {
         public DataViewModel ViewModel { get; }
-
-        public ObservableCollection<Item> Items => ItemsService.Instance.Items;
 
         public ItemPage(DataViewModel viewModel)
         {

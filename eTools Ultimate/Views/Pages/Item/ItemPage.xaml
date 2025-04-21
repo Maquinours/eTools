@@ -1679,7 +1679,8 @@
                 </Grid.ColumnDefinitions>
                 <ui:TextBox Grid.Column="0"
                             PlaceholderText="Search items..."
-                            Icon="Search24"/>
+                            Icon="Search24"
+                            Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
 
             <!-- Item List -->
@@ -1694,8 +1695,8 @@
                           Background="Transparent"
                           ItemTemplate="{StaticResource ItemListTemplate}"
                           SelectionChanged="VirtualizingGridView_SelectionChanged"
-                          ItemsSource="{Binding Items}"
-                          IsSynchronizedWithCurrentItem="True">
+                          ItemsSource="{Binding ViewModel.ItemsView}"
+                          IsSynchronizedWithCurrentItem="True" Cursor="">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Background"
@@ -1733,7 +1734,7 @@
         <ScrollViewer Grid.Column="2"
                 VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="20">
-                <ContentControl Content="{Binding Items}" ContentTemplate="{StaticResource GeneralSectionTemplate}"/>
+                <ContentControl Content="{Binding ViewModel.ItemsView}" ContentTemplate="{StaticResource GeneralSectionTemplate}"/>
                 <Separator Margin="0,10,0,5"/>
                 <ContentControl ContentTemplate="{StaticResource InventoryStackSectionTemplate}"/>
                 <Separator Margin="0,10,0,5"/>
