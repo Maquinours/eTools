@@ -536,13 +536,12 @@ namespace eTools_Ultimate.Models
         {
             switch (e.PropertyName)
             {
-                // TODO: readd this
-                //case nameof(ItemProp.SzName):
-                //    this.NotifyPropertyChanged(nameof(this.Name));
-                //    break;
-                //case nameof(ItemProp.SzCommand):
-                //    this.NotifyPropertyChanged(nameof(this.Description));
-                //    break;
+                case nameof(ItemProp.SzName):
+                    this.NotifyPropertyChanged(nameof(this.Name));
+                    break;
+                case nameof(ItemProp.SzCommand):
+                    this.NotifyPropertyChanged(nameof(this.Description));
+                    break;
                 case nameof(ItemProp.DwItemKind3):
                     this.NotifyPropertyChanged(nameof(this.IsTownBlinkwing));
                     this.NotifyPropertyChanged(nameof(this.IsNormalBlinkwing));
@@ -562,7 +561,7 @@ namespace eTools_Ultimate.Models
                     // TODO: readd this
                 //case nameof(ItemProp.SzTextFileName):
                 //    this.NotifyPropertyChanged(nameof(this.PaperingTexture));
-                    break;
+                    //break;
                 // TODO: readd this
                 //case nameof(ItemProp.SzIcon):
                 //    this.NotifyPropertyChanged(nameof(this.Icon));
@@ -575,25 +574,27 @@ namespace eTools_Ultimate.Models
                 case nameof(ItemProp.DwDestParam6):
                     this.NotifyPropertyChanged(nameof(this.HasRegenerableDestParam));
                     break;
+                case nameof(ItemProp.DwId):
+                    this.NotifyPropertyChanged(nameof(this.Id));
+                    break;
             }
         }
 
         private void ProjectStrings_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (this.Prop == null) return;
-            // TODO : readd this
-            //if (e.Action == NotifyCollectionChangedAction.Reset)
-            //{
-            //    NotifyPropertyChanged(nameof(this.Name));
-            //    NotifyPropertyChanged(nameof(this.Description));
-            //}
-            //else
-            //{
-            //    if ((e.OldItems != null && e.OldItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)) || (e.NewItems != null && e.NewItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)))
-            //        NotifyPropertyChanged(nameof(this.Name));
-            //    if ((e.OldItems != null && e.OldItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzCommand)) || (e.NewItems != null && e.NewItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzCommand)))
-            //        NotifyPropertyChanged(nameof(this.Description));
-            //}
+            if (e.Action == NotifyCollectionChangedAction.Reset)
+            {
+                NotifyPropertyChanged(nameof(this.Name));
+                NotifyPropertyChanged(nameof(this.Description));
+            }
+            else
+            {
+                if ((e.OldItems != null && e.OldItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)) || (e.NewItems != null && e.NewItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)))
+                    NotifyPropertyChanged(nameof(this.Name));
+                if ((e.OldItems != null && e.OldItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzCommand)) || (e.NewItems != null && e.NewItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzCommand)))
+                    NotifyPropertyChanged(nameof(this.Description));
+            }
         }
         private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -853,15 +854,15 @@ namespace eTools_Ultimate.Models
         public Item()
         {
             this.CreateDests();
+            StringsService.Instance.Strings.CollectionChanged += ProjectStrings_CollectionChanged;
             // TODO: readd this
-            //Project.GetInstance().strings.CollectionChanged += ProjectStrings_CollectionChanged;
             //Settings.GetInstance().PropertyChanged += Settings_PropertyChanged;
         }
 
         public void Dispose()
         {
+            StringsService.Instance.Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
             // TODO: readd this
-            //Project.GetInstance().strings.CollectionChanged -= ProjectStrings_CollectionChanged;
             //Settings.GetInstance().PropertyChanged -= Settings_PropertyChanged;
             if (this.Prop != null)
                 this.Prop.PropertyChanged -= Prop_PropertyChanged;
