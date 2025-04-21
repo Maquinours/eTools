@@ -562,10 +562,9 @@ namespace eTools_Ultimate.Models
                 //case nameof(ItemProp.SzTextFileName):
                 //    this.NotifyPropertyChanged(nameof(this.PaperingTexture));
                     //break;
-                // TODO: readd this
-                //case nameof(ItemProp.SzIcon):
-                //    this.NotifyPropertyChanged(nameof(this.Icon));
-                //    break;
+                case nameof(ItemProp.SzIcon):
+                    this.NotifyPropertyChanged(nameof(this.Icon));
+                    break;
                 case nameof(ItemProp.DwDestParam1):
                 case nameof(ItemProp.DwDestParam2):
                 case nameof(ItemProp.DwDestParam3):
