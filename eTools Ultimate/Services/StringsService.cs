@@ -64,5 +64,11 @@ namespace eTools_Ultimate.Services
         {
             this.Strings[ids] = newValue;
         }
+
+        public void GenerateNewString(string stringIdentifier)
+        {
+            if (!this.Strings.ContainsKey(stringIdentifier))
+                this.Strings.Add(stringIdentifier, "");
+        }
     }
 }

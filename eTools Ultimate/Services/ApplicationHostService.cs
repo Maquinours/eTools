@@ -59,6 +59,7 @@ namespace eTools_Ultimate.Services
                     {
                         SettingsService.Load();
                         StringsService.Instance.Load();
+                        MoversService.Instance.Load();
                         ItemsService.Instance.Load();
                     });
                 }
