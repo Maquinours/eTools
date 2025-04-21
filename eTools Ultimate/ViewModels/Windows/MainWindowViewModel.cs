@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using eTools_Ultimate.Views.Pages;
 using Wpf.Ui.Controls;
 
 namespace eTools_Ultimate.ViewModels.Windows
@@ -29,11 +30,17 @@ namespace eTools_Ultimate.ViewModels.Windows
         [ObservableProperty]
         private ObservableCollection<object> _footerMenuItems = new()
         {
-            new NavigationViewItem()
+            new NavigationViewItem
             {
                 Content = "Settings",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
-                TargetPageType = typeof(Views.Pages.SettingsPage)
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Settings20 },
+                TargetPageType = typeof(SettingsPage),
+                MenuItemsSource = new object[]
+                {
+                    new NavigationViewItem("Resource Path", typeof(ResourcePathPage)),
+                    new NavigationViewItem("Personalization", typeof(PersonalizationPage)),
+                    new NavigationViewItem("About", typeof(AboutPage))
+                }
             }
         };
 

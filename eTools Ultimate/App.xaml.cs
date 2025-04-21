@@ -50,8 +50,17 @@ namespace eTools_Ultimate
                 services.AddSingleton<DashboardViewModel>();
                 services.AddSingleton<ItemPage>();
                 services.AddSingleton<DataViewModel>();
+
+                // Settings pages
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
+
+                services.AddSingleton<ResourcePathPage>();
+                services.AddSingleton<ResourcePathViewModel>();
+                services.AddSingleton<PersonalizationPage>();
+                services.AddSingleton<PersonalizationViewModel>();
+                services.AddSingleton<AboutPage>();
+                services.AddSingleton<AboutViewModel>();
             }).Build();
 
         /// <summary>
