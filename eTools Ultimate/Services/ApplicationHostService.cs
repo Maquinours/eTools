@@ -55,13 +55,7 @@ namespace eTools_Ultimate.Services
                 splashScreen.Show();
                 try
                 {
-                    await Task.Run(() =>
-                    {
-                        SettingsService.Load();
-                        StringsService.Instance.Load();
-                        MoversService.Instance.Load();
-                        ItemsService.Instance.Load();
-                    });
+                    await splashScreen.Load();
                 }
                 catch (Exception ex)
                 {
