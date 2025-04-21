@@ -11,7 +11,7 @@
     Title="ItemPage"
     d:DataContext="{d:DesignInstance local:ItemPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="800"
+    d:DesignHeight="4101"
     d:DesignWidth="1600"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -1462,6 +1462,86 @@
             </StackPanel>
         </DataTemplate>
 
+        <!-- DataTemplate: Sound Section -->
+        <DataTemplate x:Key="SoundSectionTemplate">
+            <StackPanel>
+                <TextBlock Text="Sound"
+                        Style="{StaticResource SectionHeaderStyle}"/>
+                <UniformGrid Columns="2">
+                    <!-- Attack Sound -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Attack Sound"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Sound played when attacking"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Grid.Column="0"
+                                    x:Name="AttackSoundComboBox"
+                                    ItemsSource="{Binding ViewModel.AttackSounds}"
+                                    DisplayMemberPath="Name"
+                                    SelectedValuePath="Id"
+                                    SelectedValue="{Binding ViewModel.SelectedAttackSound, Mode=TwoWay}"/>
+                            <ui:Button Grid.Column="1"
+                                    Content="Play"
+                                    Icon="Play24"
+                                    Margin="5,0,0,0"
+                                    Command="{Binding ViewModel.PlayAttackSoundCommand}"/>
+                        </Grid>
+                    </Grid>
+                    <!-- Critical Attack Sound -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Critical Attack Sound"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Sound played when landing a critical hit"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Grid.Column="0"
+                                    x:Name="CriticalAttackSoundComboBox"
+                                    ItemsSource="{Binding ViewModel.CriticalAttackSounds}"
+                                    DisplayMemberPath="Name"
+                                    SelectedValuePath="Id"
+                                    SelectedValue="{Binding ViewModel.SelectedCriticalAttackSound, Mode=TwoWay}"/>
+                            <ui:Button Grid.Column="1"
+                                    Content="Play"
+                                    Icon="Play24"
+                                    Margin="5,0,0,0"
+                                    Command="{Binding ViewModel.PlayCriticalAttackSoundCommand}"/>
+                        </Grid>
+                    </Grid>
+                </UniformGrid>
+            </StackPanel>
+        </DataTemplate>        
+         
         <!-- DataTemplate: Flags & Conditions Section -->
         <DataTemplate x:Key="FlagsConditionsSectionTemplate">
             <StackPanel>
@@ -1749,6 +1829,8 @@
                 <ContentControl ContentTemplate="{StaticResource ResistanceAlignmentSectionTemplate}"/>
                 <Separator Margin="0,10,0,5"/>
                 <ContentControl ContentTemplate="{StaticResource CraftingEnhancementSectionTemplate}"/>
+                <Separator Margin="0,10,0,5"/>
+                <ContentControl ContentTemplate="{StaticResource SoundSectionTemplate}"/>
                 <Separator Margin="0,10,0,5"/>
                 <ContentControl ContentTemplate="{StaticResource FlagsConditionsSectionTemplate}"/>
             </StackPanel>
