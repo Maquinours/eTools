@@ -37,6 +37,8 @@ namespace eTools_Ultimate.Services
         private static string SettingsFilePath { get => $"{SettingsFolderPath}eTools.ini"; }
         public static void Load()
         {
+            Settings.Instance.PropertyChanged -= SettingsChanged;
+
             using (Scanner scanner = new Scanner())
             {
                 scanner.Load(SettingsService.SettingsFilePath);
@@ -94,6 +96,8 @@ namespace eTools_Ultimate.Services
                     }
                 }
             }
+
+            Settings.Instance.PropertyChanged += SettingsChanged;
         }
 
         public static void Save()
@@ -101,26 +105,31 @@ namespace eTools_Ultimate.Services
             using (StreamWriter writer = new StreamWriter(SettingsFilePath))
             {
                 // General settings
-                writer.WriteLine($"{SettingsKeywords.ResourcesVersion}\t{Settings.Instance.ResourcesVersion}");
-                writer.WriteLine($"{SettingsKeywords.ResourcesPath}\t{Settings.Instance.ResourcesFolderPath}");
-                writer.WriteLine($"{SettingsKeywords.IconsPath}\t{Settings.Instance.IconsFolderPath}");
-                writer.WriteLine($"{SettingsKeywords.TexturesPath}\t{Settings.Instance.TexturesFolderPath}");
-                writer.WriteLine($"{SettingsKeywords.SoundsConfigPath}\t{Settings.Instance.SoundsConfigFilePath}");
-                writer.WriteLine($"{SettingsKeywords.SoundsPath}\t{Settings.Instance.SoundsFolderPath}");
+                writer.WriteLine($"{SettingsKeywords.ResourcesVersion}\t\"{Settings.Instance.ResourcesVersion}\"");
+                writer.WriteLine($"{SettingsKeywords.ResourcesPath}\t\"{Settings.Instance.ResourcesFolderPath}\"");
+                writer.WriteLine($"{SettingsKeywords.IconsPath}\t\"{Settings.Instance.IconsFolderPath}\"");
+                writer.WriteLine($"{SettingsKeywords.TexturesPath}\t\"{Settings.Instance.TexturesFolderPath}\"");
+                writer.WriteLine($"{SettingsKeywords.SoundsConfigPath}\t\"{Settings.Instance.SoundsConfigFilePath}\"");
+                writer.WriteLine($"{SettingsKeywords.SoundsPath}\t\"{Settings.Instance.SoundsFolderPath}\"");
 
                 // Movers settings
-                writer.WriteLine($"{SettingsKeywords.PropMoverPath}\t{Settings.Instance.PropMoverFilePath}");
-                writer.WriteLine($"{SettingsKeywords.PropMoverTxtPath}\t{Settings.Instance.PropMoverTxtFilePath}");
-                writer.WriteLine($"{SettingsKeywords.PropMoverExPath}\t{Settings.Instance.PropMoverExFilePath}");
+                writer.WriteLine($"{SettingsKeywords.PropMoverPath}\t\"{Settings.Instance.PropMoverFilePath}\"");
+                writer.WriteLine($"{SettingsKeywords.PropMoverTxtPath}\t\"{Settings.Instance.PropMoverTxtFilePath}\"");
+                writer.WriteLine($"{SettingsKeywords.PropMoverExPath}\t\"{Settings.Instance.PropMoverExFilePath}\"");
                 if(Settings.Instance.Mover64BitAtk)
                     writer.WriteLine(SettingsKeywords.Mover64BitAtk);
                 if (Settings.Instance.Mover64BitHp)
                     writer.WriteLine(SettingsKeywords.Mover64BitHp);
 
                 // Items settings
-                writer.WriteLine($"{SettingsKeywords.PropItemPath}\t{Settings.Instance.PropItemFilePath}");
-                writer.WriteLine($"{SettingsKeywords.PropItemTxtPath}\t{Settings.Instance.PropItemTxtFilePath}");
+                writer.WriteLine($"{SettingsKeywords.PropItemPath}\t\"{Settings.Instance.PropItemFilePath}\"");
+                writer.WriteLine($"{SettingsKeywords.PropItemTxtPath}\t\"{Settings.Instance.PropItemTxtFilePath}\"");
             }
+        }
+
+        private static void SettingsChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+                Save();
         }
     }
 }

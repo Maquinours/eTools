@@ -23,6 +23,7 @@ namespace eTools_Ultimate.Views.Windows
 
             SystemThemeWatcher.Watch(this);
 
+            this.Visibility = Visibility.Hidden;
             InitializeComponent();
             SetPageService(navigationViewPageProvider);
 
@@ -62,31 +63,6 @@ namespace eTools_Ultimate.Views.Windows
         public void SetServiceProvider(IServiceProvider serviceProvider)
         {
             throw new NotImplementedException();
-        }
-
-        private void FluentWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            bool loadingError = false;
-            SplashScreen splashScreen = new SplashScreen();
-            splashScreen.Show();
-            try
-            {
-                StringsService.Instance.Load();
-            }
-            catch (Exception ex)
-            {
-                loadingError = true;
-                splashScreen.Close();
-                System.Windows.MessageBox.Show(ex.Message, "Error", System.Windows.MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                splashScreen.Close();
-                if (loadingError)
-                    Navigate(typeof(SettingsPage));
-                else
-                    Navigate(typeof(DashboardPage));
-            }
         }
     }
 }

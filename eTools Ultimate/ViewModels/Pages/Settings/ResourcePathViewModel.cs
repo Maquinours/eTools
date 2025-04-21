@@ -10,24 +10,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 {
     public partial class ResourcePathViewModel : ObservableObject
     {
-        [ObservableProperty]
-        private string _resourcePath = string.Empty;
-
-        [ObservableProperty]
-        private string _propFileName = string.Empty;
-
-        [ObservableProperty]
-        private string _textFileName = string.Empty;
-
         public Settings Settings => Settings.Instance;
-
-        public ResourcePathViewModel()
-        {
-            // Initialisieren der Pfade bei Bedarf
-            _resourcePath = Settings.ResourcesFolderPath;
-            _propFileName = "prop.inc";
-            _textFileName = "text.txt";
-        }
 
         [RelayCommand]
         private void Browse()
@@ -41,9 +24,9 @@ namespace eTools_Ultimate.ViewModels.Pages
                 ValidateNames = false
             };
 
-            if (!string.IsNullOrEmpty(ResourcePath) && Directory.Exists(ResourcePath))
+            if (!string.IsNullOrEmpty(Settings.ResourcesFolderPath) && Directory.Exists(Settings.ResourcesFolderPath))
             {
-                dialog.InitialDirectory = ResourcePath;
+                dialog.InitialDirectory = Settings.ResourcesFolderPath;
             }
 
             if (dialog.ShowDialog() == true)
@@ -52,9 +35,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 string selectedPath = Path.GetDirectoryName(dialog.FileName);
                 if (!string.IsNullOrEmpty(selectedPath))
                 {
-                    ResourcePath = selectedPath;
-                    // Aktualisiere auch den Ressourcenpfad in den Einstellungen
-                    Settings.ResourcesFolderPath = ResourcePath;
+                    Settings.ResourcesFolderPath = Settings.ResourcesFolderPath;
                 }
             }
         }
@@ -71,8 +52,9 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private void SelectResourcesFolder()
         {
-            SelectFolder("Ressourcen-Ordner auswählen", ref _resourcePath);
-            Settings.ResourcesFolderPath = ResourcePath;
+            string path = Settings.ResourcesFolderPath;
+            SelectFolder("Ressourcen-Ordner auswählen", ref path);
+            Settings.ResourcesFolderPath = path;
         }
 
         [RelayCommand]
@@ -81,7 +63,6 @@ namespace eTools_Ultimate.ViewModels.Pages
             string path = Settings.IconsFolderPath;
             SelectFolder("Icons-Ordner auswählen", ref path);
             Settings.IconsFolderPath = path;
-            OnPropertyChanged(nameof(Settings));
         }
 
         [RelayCommand]
@@ -90,7 +71,6 @@ namespace eTools_Ultimate.ViewModels.Pages
             string path = Settings.TexturesFolderPath;
             SelectFolder("Texturen-Ordner auswählen", ref path);
             Settings.TexturesFolderPath = path;
-            OnPropertyChanged(nameof(Settings));
         }
 
         [RelayCommand]
@@ -99,19 +79,22 @@ namespace eTools_Ultimate.ViewModels.Pages
             string path = Settings.SoundsFolderPath;
             SelectFolder("Sound-Ordner auswählen", ref path);
             Settings.SoundsFolderPath = path;
-            OnPropertyChanged(nameof(Settings));
         }
 
         [RelayCommand]
-        private void SelectPropFile()
+        private void SelectPropItemFile()
         {
-            SelectFile("Prop-Datei auswählen", "Inc-Dateien (*.inc)|*.inc|Alle Dateien (*.*)|*.*", ref _propFileName);
+            string path = Settings.PropItemFilePath;
+            SelectFile("Prop-Datei auswählen", "Inc-Dateien (*.inc)|*.inc|Alle Dateien (*.*)|*.*", ref path);
+            Settings.PropItemFilePath = path;
         }
 
         [RelayCommand]
-        private void SelectTextFile()
+        private void SelectPropItemTxtFile()
         {
-            SelectFile("Text-Datei auswählen", "Textdateien (*.txt)|*.txt|Alle Dateien (*.*)|*.*", ref _textFileName);
+            string path = Settings.PropItemTxtFilePath;
+            SelectFile("Text-Datei auswählen", "Textdateien (*.txt)|*.txt|Alle Dateien (*.*)|*.*", ref path);
+            Settings.PropItemTxtFilePath = path;
         }
 
         [RelayCommand]
@@ -120,7 +103,6 @@ namespace eTools_Ultimate.ViewModels.Pages
             string path = Settings.SoundsConfigFilePath;
             SelectFile("Sound-Konfigurationsdatei auswählen", "Inc-Dateien (*.inc)|*.inc|Alle Dateien (*.*)|*.*", ref path);
             Settings.SoundsConfigFilePath = path;
-            OnPropertyChanged(nameof(Settings));
         }
 
         [RelayCommand]
@@ -172,7 +154,6 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (!string.IsNullOrEmpty(selectedPath))
                 {
                     path = selectedPath;
-                    OnPropertyChanged(nameof(ResourcePath));
                 }
             }
         }
@@ -197,11 +178,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
 
             if (dialog.ShowDialog() == true)
-            {
                 filePath = dialog.FileName;
-                OnPropertyChanged(nameof(PropFileName));
-                OnPropertyChanged(nameof(TextFileName));
-            }
         }
         #endregion
     }

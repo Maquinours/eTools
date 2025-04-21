@@ -40,7 +40,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Resources folder" Margin="0,0,8,0"/>
-                    <TextBox Grid.Column="1" Text="{Binding Settings.ResourcesFolderPath, Mode=OneWay}" Margin="0,0,8,0"/>
+                    <TextBox Grid.Column="1" Text="{Binding Settings.ResourcesFolderPath, Mode=TwoWay}" Margin="0,0,8,0"/>
                     <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectResourcesFolderCommand}"/> 
                 </Grid>
 
@@ -52,7 +52,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Icons folder" Margin="0,0,8,0"/>
-                    <TextBox Grid.Column="1" Text="{Binding Settings.IconsFolderPath, Mode=OneWay}" Margin="0,0,8,0"/>
+                    <TextBox Grid.Column="1" Text="{Binding Settings.IconsFolderPath, Mode=TwoWay}" Margin="0,0,8,0"/>
                     <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectIconsFolderCommand}"/>
                 </Grid>
 
@@ -64,7 +64,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Texture folder" Margin="0,0,8,0"/>
-                    <TextBox Grid.Column="1" Text="{Binding Settings.TexturesFolderPath, Mode=OneWay}" Margin="0,0,8,0"/>
+                    <TextBox Grid.Column="1" Text="{Binding Settings.TexturesFolderPath, Mode=TwoWay}" Margin="0,0,8,0"/>
                     <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectTexturesFolderCommand}"/>
                 </Grid>
 
@@ -76,7 +76,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Sounds config file" Margin="0,0,8,0"/>
-                    <TextBox Grid.Column="1" Text="{Binding Settings.SoundsConfigFilePath, Mode=OneWay}" Margin="0,0,8,0"/>
+                    <TextBox Grid.Column="1" Text="{Binding Settings.SoundsConfigFilePath, Mode=TwoWay}" Margin="0,0,8,0"/>
                     <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectSoundsConfigCommand}"/>
                 </Grid>
 
@@ -88,7 +88,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Sounds folder" Margin="0,0,8,0"/>
-                    <TextBox Grid.Column="1" Text="{Binding Settings.SoundsFolderPath, Mode=OneWay}" Margin="0,0,8,0"/>
+                    <TextBox Grid.Column="1" Text="{Binding Settings.SoundsFolderPath, Mode=TwoWay}" Margin="0,0,8,0"/>
                     <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectSoundsFolderCommand}"/>
                 </Grid>
 
@@ -144,7 +144,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Spec_Item file" Margin="0,0,8,0"/>
-                    <TextBox Grid.Column="1" Text="{Binding PropFileName, Mode=TwoWay}" Margin="0,0,8,0"/>
+                    <TextBox Grid.Column="1" Text="{Binding Settings.PropItemFilePath, Mode=TwoWay}" Margin="0,0,8,0"/>
                     <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectPropFileCommand}"/>
                 </Grid>
 
@@ -156,7 +156,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropItem.txt file" Margin="0,0,8,0"/>
-                    <TextBox Grid.Column="1" Text="{Binding TextFileName, Mode=TwoWay}" Margin="0,0,8,0"/>
+                    <TextBox Grid.Column="1" Text="{Binding Settings.PropItemTxtFilePath, Mode=TwoWay}" Margin="0,0,8,0" Cursor="IBeam"/>
                     <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectTextFileCommand}"/>
                 </Grid>
             </Grid>
@@ -185,7 +185,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMover file" Margin="0,0,8,0"/>
-                    <TextBox Grid.Column="1" Margin="0,0,8,0" Text="{Binding Settings.PropMoverFilePath, Mode=OneWay}"/>
+                    <TextBox Grid.Column="1" Margin="0,0,8,0" Text="{Binding Settings.PropMoverFilePath, Mode=TwoWay}"/>
                     <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectPropMoverFileCommand}"/>
                 </Grid>
 
@@ -197,7 +197,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMover.txt file" Margin="0,0,8,0"/>
-                    <TextBox Grid.Column="1" Margin="0,0,8,0" Text="{Binding Settings.PropMoverTxtFilePath, Mode=OneWay}"/>
+                    <TextBox Grid.Column="1" Margin="0,0,8,0" Text="{Binding Settings.PropMoverTxtFilePath, Mode=TwoWay}"/>
                     <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectPropMoverTextFileCommand}"/>
                 </Grid>
 
@@ -209,7 +209,7 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMoverEx file" Margin="0,0,8,0"/>
-                    <TextBox Grid.Column="1" Margin="0,0,8,0" IsHitTestVisible="False" Text="{Binding Settings.PropMoverExFilePath, Mode=OneWay}"/>
+                    <TextBox Grid.Column="1" Margin="0,0,8,0" IsHitTestVisible="False" Text="{Binding Settings.PropMoverExFilePath, Mode=TwoWay}"/>
                     <Button Grid.Column="2" Width="60" Content="Select" Command="{Binding SelectPropMoverExFileCommand}"/>
                 </Grid>
 

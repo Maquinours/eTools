@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Models
 {
-    public class Settings
+    public class Settings : INotifyPropertyChanged
     {
         private static Settings _instance = new Settings();
 
@@ -30,6 +32,13 @@ namespace eTools_Ultimate.Models
         private string _propItemFilePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}spec_Item.txt";
         private string _propItemTxtFilePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}propItem.txt";
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public static Settings Instance
         {
             get => _instance;
@@ -39,72 +48,72 @@ namespace eTools_Ultimate.Models
         public int ResourcesVersion
         {
             get => this._resourcesVersion;
-            set => this._resourcesVersion = value;
+            set { if (this.ResourcesVersion != value) { this._resourcesVersion = value; this.NotifyPropertyChanged(); } }
         }
         public string ResourcesFolderPath
         {
             get => this._resourcesFolderPath;
-            set => this._resourcesFolderPath = value;
+            set { if (this.ResourcesFolderPath != value) { this._resourcesFolderPath = value; this.NotifyPropertyChanged(); } }
         }
         public string IconsFolderPath
         {
             get => this._iconsFolderPath;
-            set => this._iconsFolderPath = value;
+            set { if (this.IconsFolderPath != value) { this._iconsFolderPath = value; this.NotifyPropertyChanged(); } }
         }
         public string TexturesFolderPath
         {
             get => this._texturesFolderPath;
-            set => this._texturesFolderPath = value;
+            set { if (this.TexturesFolderPath != value) { this._texturesFolderPath = value; this.NotifyPropertyChanged(); } }
         }
 
         public string SoundsConfigFilePath
         {
             get => this._soundsConfigFilePath;
-            set => this._soundsConfigFilePath = value;
+            set { if (this.SoundsConfigFilePath != value) { this._soundsConfigFilePath = value; this.NotifyPropertyChanged(); } }
         }
         public string SoundsFolderPath
         {
             get => this._soundsFolderPath;
-            set => this._soundsFolderPath = value;
+            set { if(this.SoundsFolderPath != value) { this._soundsFolderPath = value; this.NotifyPropertyChanged(); } }
         }
 
         // Movers settings
         public string PropMoverFilePath
         {
             get => this._propMoverFilePath;
-            set => this._propMoverFilePath = value;
+            set { if (this.PropMoverFilePath != value) { this._propMoverFilePath = value; this.NotifyPropertyChanged(); } }
         }
         public string PropMoverTxtFilePath
         {
             get => this._propMoverTxtFilePath;
-            set => this._propMoverTxtFilePath = value;
+            set { if (this.PropMoverTxtFilePath != value) { this._propMoverTxtFilePath = value; this.NotifyPropertyChanged(); } }
         }
         public string PropMoverExFilePath
         {
             get => this._propMoverExFilePath;
-            set => this._propMoverExFilePath = value;
+            set { if (this.PropMoverExFilePath != value) { this._propMoverExFilePath = value; this.NotifyPropertyChanged(); } }
         }
         public bool Mover64BitHp
         {
             get => this._mover64BitHp;
-            set => this._mover64BitHp = value;
+            set { if (this.Mover64BitHp != value) { this._mover64BitHp = value; this.NotifyPropertyChanged(); } }
         }
         public bool Mover64BitAtk
         {
             get => this._mover64BitAtk;
-            set => this._mover64BitAtk = value;
+            set { if (this.Mover64BitAtk != value) { this._mover64BitAtk = value; this.NotifyPropertyChanged(); } }
         }
 
         // Items settings
         public string PropItemFilePath
         {
             get => this._propItemFilePath;
-            set => this._propItemFilePath = value;
+            set { if (this.PropItemFilePath != value) { this._propItemFilePath = value; this.NotifyPropertyChanged(); } }
         }
         public string PropItemTxtFilePath
         {
             get => this._propItemTxtFilePath;
-            set => this._propItemTxtFilePath = value;
+            set { if (this.PropItemTxtFilePath != value) { this._propItemTxtFilePath = value; this.NotifyPropertyChanged(); } }
         }
     }
 }

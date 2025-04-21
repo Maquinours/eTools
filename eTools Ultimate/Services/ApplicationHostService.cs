@@ -2,6 +2,7 @@
 using eTools_Ultimate.Views.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Windows;
 using Wpf.Ui;
 
 namespace eTools_Ultimate.Services
@@ -48,7 +49,32 @@ namespace eTools_Ultimate.Services
                 _navigationWindow = (
                     _serviceProvider.GetService(typeof(INavigationWindow)) as INavigationWindow
                 )!;
-                _navigationWindow!.ShowWindow();
+
+                bool loadingError = false;
+                eTools_Ultimate.Views.Windows.SplashScreen splashScreen = new eTools_Ultimate.Views.Windows.SplashScreen();
+                splashScreen.Show();
+                try
+                {
+                    await Task.Run(() =>
+                    {
+                        SettingsService.Load();
+                        StringsService.Instance.Load();
+                        ItemsService.Instance.Load();
+                    });
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.MessageBox.Show(ex.Message, "Error", System.Windows.MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                finally
+                {
+                    splashScreen.Close();
+                    _navigationWindow!.ShowWindow();
+                    if (loadingError)
+                        _navigationWindow!.Navigate(typeof(ResourcePathPage));
+                    else
+                        _navigationWindow!.Navigate(typeof(DashboardPage));
+                }
             }
 
             await Task.CompletedTask;
