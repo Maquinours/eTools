@@ -30,6 +30,9 @@
     <None Remove="Views\Pages\PaintPaletteIcon.png" />
     <None Remove="Views\Pages\SettingPageBanner.jpg" />
     <None Remove="Views\Windows\SplashScreen.png" />
+    <None Remove="Views\Pages\Settings\Kiyo.jpg" />
+    <None Remove="Views\Pages\Settings\Logo.png" />
+    <None Remove="Views\Windows\WarningIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -49,6 +52,10 @@
     <Resource Include="Views\Pages\PaintPaletteIcon.png" />
     <Resource Include="Views\Pages\SettingPageBanner.jpg" />
     <Resource Include="Views\Windows\SplashScreen.png" />
+    <Resource Include="Views\Pages\Settings\Kiyo.jpg" />
+    <Resource Include="Views\Pages\Settings\Maqui.jpg" />
+    <Resource Include="Views\Pages\Settings\Logo.png" />
+    <Resource Include="Views\Windows\WarningIcon.png" />
   </ItemGroup>
 
   <ItemGroup>

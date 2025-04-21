@@ -12,8 +12,11 @@
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    Foreground="{DynamicResource ApplicationForegroundBrush}"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <SolidColorBrush x:Key="ApplicationForegroundBrush" Color="#000000"/>
+    </Page.Resources>
 
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Auto">
@@ -21,7 +24,7 @@
                 <!-- App Logo und Titel -->
                 <StackPanel HorizontalAlignment="Center" Margin="0,20,0,40">
                     <Image 
-                        Source="/Assets/Logo.png" 
+                        Source="/Views/Pages/Settings/Logo.png" 
                         Width="400" 
                         Height="120" 
                         />
@@ -117,6 +120,66 @@
                                     TextWrapping="Wrap"/>
                             </Grid>
                         </StackPanel>
+                    </StackPanel>
+                </ui:Card>
+
+                <!-- Team -->
+                <ui:Card Margin="0,0,0,15" Padding="15">
+                    <StackPanel>
+                        <TextBlock 
+                            Text="Development Team" 
+                            FontWeight="SemiBold" 
+                            FontSize="16" 
+                            Margin="0,0,0,10"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Erster Entwickler -->
+                            <StackPanel Grid.Column="0" HorizontalAlignment="Center" Margin="0,0,10,0">
+                                <Grid Width="150" Height="150" Margin="0,0,0,10">
+                                    <Ellipse 
+                                        Fill="Gray"
+                                        Stroke="Gray"
+                                        StrokeThickness="2"/>
+                                    <Ellipse>
+                                        <Ellipse.Fill>
+                                            <ImageBrush 
+                                                ImageSource="/Views/Pages/Settings/Maqui.jpg"
+                                                Stretch="UniformToFill"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                </Grid>
+                                <TextBlock 
+                                    Text="Maqui" 
+                                    FontWeight="SemiBold" 
+                                    HorizontalAlignment="Center"/>
+                            </StackPanel>
+
+                            <!-- Zweiter Entwickler -->
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Center" Margin="10,0,0,0">
+                                <Grid Width="150" Height="150" Margin="0,0,0,10">
+                                    <Ellipse 
+                                        Fill="Gray"
+                                        Stroke="Gray"
+                                        StrokeThickness="2"/>
+                                    <Ellipse>
+                                        <Ellipse.Fill>
+                                            <ImageBrush 
+                                                ImageSource="/Views/Pages/Settings/Kiyo.jpg"
+                                                Stretch="UniformToFill"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                </Grid>
+                                <TextBlock 
+                                    Text="Kiyo" 
+                                    FontWeight="SemiBold" 
+                                    HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </Grid>
                     </StackPanel>
                 </ui:Card>
 
