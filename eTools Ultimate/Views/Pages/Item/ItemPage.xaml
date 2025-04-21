@@ -91,7 +91,8 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <TextBox Grid.Row="1"
-                                x:Name="ItemIdTextBox"/>
+                                x:Name="ItemIdTextBox"
+                                 Text="{Binding Path=Prop.DwId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     <!-- In-game name (IDS key) -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -111,7 +112,8 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <TextBox Grid.Row="1"
-                                x:Name="IdsKeyTextBox"/>
+                                x:Name="IdsKeyTextBox"
+                                 Text="{Binding Prop.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     <!-- InGame Name -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -131,7 +133,8 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <TextBox Grid.Row="1"
-                                x:Name="InGameNameTextBox"/>
+                                x:Name="InGameNameTextBox"
+                                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     <!-- Description -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -153,7 +156,8 @@
                         <TextBox Grid.Row="1"
                                 x:Name="DescriptionTextBox"
                                 TextWrapping="Wrap"
-                                AcceptsReturn="True"/>
+                                AcceptsReturn="True"
+                                 Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     <!-- File Name -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -199,7 +203,8 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBox Grid.Column="0"
-                                    x:Name="ItemIconTextBox"/>
+                                    x:Name="ItemIconTextBox"
+                                     Text="{Binding Prop.SzIcon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <ui:Button Grid.Column="1"
                                     Content="..."
                                     VerticalAlignment="Center"
@@ -209,11 +214,12 @@
                                     Height="32"
                                     Margin="10,0,0,0"
                                     Background="{DynamicResource ControlFillColorDefaultBrush}"
-                                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                    BorderBrush="{DynamicResource CoIntrolElevationBorderBrush}"
                                     BorderThickness="1">
                                 <Image x:Name="ItemIconPreview"
                                         Stretch="Uniform"
-                                        Margin="2">
+                                        Margin="2"
+                                       Source="{Binding Icon}">
                                     <Image.OpacityMask>
                                         <ImageBrush ImageSource="/Assets/wpfui-icon-256.png"/>
                                     </Image.OpacityMask>
@@ -239,7 +245,8 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <TextBox Grid.Row="1"
-                                x:Name="PenyaValueTextBox"/>
+                                x:Name="PenyaValueTextBox"
+                                 Text="{Binding Prop.DwCost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     <!-- Tradeable & Shop-able -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -1687,7 +1694,8 @@
                           Background="Transparent"
                           ItemTemplate="{StaticResource ItemListTemplate}"
                           SelectionChanged="VirtualizingGridView_SelectionChanged"
-                          ItemsSource="{Binding Items}">
+                          ItemsSource="{Binding Items}"
+                          IsSynchronizedWithCurrentItem="True">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Background"
@@ -1725,7 +1733,7 @@
         <ScrollViewer Grid.Column="2"
                 VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="20">
-                <ContentControl ContentTemplate="{StaticResource GeneralSectionTemplate}"/>
+                <ContentControl Content="{Binding Items}" ContentTemplate="{StaticResource GeneralSectionTemplate}"/>
                 <Separator Margin="0,10,0,5"/>
                 <ContentControl ContentTemplate="{StaticResource InventoryStackSectionTemplate}"/>
                 <Separator Margin="0,10,0,5"/>
