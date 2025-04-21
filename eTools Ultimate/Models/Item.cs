@@ -1,4 +1,5 @@
 using DDSImageParser;
+using eTools_Ultimate.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -7,6 +8,8 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace eTools_Ultimate.Models
 {
@@ -630,33 +633,48 @@ namespace eTools_Ultimate.Models
 
         public string Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; this.Model.DwIndex = value; } } }
 
-        // TODO:  readd it
-        //public string Name
-        //{
-        //    get => Project.GetInstance().GetString(Prop.SzName);
-        //    set { Project.GetInstance().ChangeStringValue(Prop.SzName, value); }
-        //}
-        //public string Description
-        //{
-        //    get => Project.GetInstance().GetString(Prop.SzCommand);
-        //    set { Project.GetInstance().ChangeStringValue(Prop.SzCommand, value); }
-        //}
+        public string Name
+        {
+            get => StringsService.Instance.GetString(Prop.SzName);
+            set { StringsService.Instance.ChangeStringValue(Prop.SzName, value); }
+        }
+        public string Description
+        {
+            get => StringsService.Instance.GetString(Prop.SzCommand);
+            set { StringsService.Instance.ChangeStringValue(Prop.SzCommand, value); }
+        }
 
-        //public Image Icon
-        //{
-        //    get
-        //    {
-        //        string filePath = $"{Settings.GetInstance().IconsFolderPath}{this.Prop.SzIcon}";
-        //        if (!File.Exists(filePath))
-        //        {
-        //            using (var ms = new MemoryStream(ItemsEditor.Resources.Images.NotFoundImage))
-        //            {
-        //                return Image.FromStream(ms);
-        //            }
-        //        }
-        //        return new DDSImage(File.OpenRead(filePath)).BitmapImage;
-        //    }
-        //}
+        public ImageSource? Icon
+        {
+            get
+            {
+                string filePath = $"{Settings.Instance.IconsFolderPath}{this.Prop.SzIcon}";
+                if (!File.Exists(filePath))
+                {
+                    return null;
+                    //using (var ms = new MemoryStream(ItemsEditor.Resources.Images.NotFoundImage))
+                    //{
+                    //    return Image.FromStream(ms);
+                    //}
+                }
+                var bitmap = new DDSImage(File.OpenRead(filePath)).BitmapImage;
+
+                // Bitmap to bitmap image
+                using (var memory = new MemoryStream())
+                {
+                    bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+                    memory.Position = 0;
+
+                    var bitmapImage = new BitmapImage();
+                    bitmapImage.BeginInit();
+                    bitmapImage.StreamSource = memory;
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmapImage.EndInit();
+                    bitmapImage.Freeze();
+                    return bitmapImage;
+                }
+            }
+        }
 
         public BindingList<Dest> Dests
         {

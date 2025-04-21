@@ -520,7 +520,7 @@
                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                        BorderThickness="1"
                        Margin="0,0,8,0">
-                    <Image Stretch="Uniform" Margin="2"/>
+                    <Image Stretch="Uniform" Margin="2" Source="{Binding Icon}" />
                 </Border>
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
                     <TextBlock Text="{Binding Name}" FontWeight="SemiBold"/>
@@ -566,7 +566,8 @@
                          BorderThickness="0"
                          Background="Transparent"
                          ItemTemplate="{StaticResource ItemListTemplate}"
-                         SelectionChanged="VirtualizingGridView_SelectionChanged">
+                         SelectionChanged="VirtualizingGridView_SelectionChanged"
+                         ItemsSource="{Binding Items}">
                 </ListView>
             </Border>
         </Grid>

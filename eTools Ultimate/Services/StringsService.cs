@@ -54,5 +54,15 @@ namespace eTools_Ultimate.Services
                 }
             }
         }
+
+        public string GetString(string ids)
+        {
+            return this.Strings[ids];
+        }
+
+        public void ChangeStringValue(string ids, string newValue)
+        {
+            this.Strings[ids] = newValue;
+        }
     }
 }
