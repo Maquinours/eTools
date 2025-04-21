@@ -5,12 +5,16 @@ using Microsoft.Win32;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using eTools_Ultimate.Models;
+using System.Collections.ObjectModel;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
     public partial class ResourcePathViewModel : ObservableObject
     {
         public Settings Settings => Settings.Instance;
+
+        [ObservableProperty]
+        public int[] _possibleResourceVersions = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 
         [RelayCommand]
         private void Browse()

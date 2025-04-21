@@ -100,24 +100,10 @@
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Version" Margin="0,0,8,0"/>
                     <ComboBox Grid.Column="1" 
-                              SelectedItem="{Binding Settings.ResourcesVersion, Mode=TwoWay}" 
+                              ItemsSource="{Binding PossibleResourceVersions}"
+                              SelectedValue="{Binding Settings.ResourcesVersion, Mode=TwoWay}" 
                               HorizontalAlignment="Left" 
-                              Width="100">
-                        <ComboBox.Items>
-                            <ComboBoxItem Content="11"/>
-                            <ComboBoxItem Content="12"/>
-                            <ComboBoxItem Content="13"/>
-                            <ComboBoxItem Content="14"/>
-                            <ComboBoxItem Content="15"/>
-                            <ComboBoxItem Content="16"/>
-                            <ComboBoxItem Content="17"/>
-                            <ComboBoxItem Content="18"/>
-                            <ComboBoxItem Content="19"/>
-                            <ComboBoxItem Content="20"/>
-                            <ComboBoxItem Content="21"/>
-                            <ComboBoxItem Content="22"/>
-                        </ComboBox.Items>
-                    </ComboBox>
+                              Width="100"/>
                 </Grid>
             </Grid>
 
