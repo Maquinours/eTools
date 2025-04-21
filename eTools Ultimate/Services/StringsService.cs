@@ -7,6 +7,7 @@ using eTools_Ultimate.Models;
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Exceptions;
 using Scan;
+using System.IO;
 
 namespace eTools_Ultimate.Services
 {
@@ -27,8 +28,12 @@ namespace eTools_Ultimate.Services
 
             foreach (string filePath in filesList)
             {
+                if (!File.Exists(filePath))
+                    throw new FileNotFoundException($"File not found: {filePath}");
+
                 using (Scanner scanner = new Scanner())
                 {
+
                     scanner.Load(filePath);
 
                     while (true)

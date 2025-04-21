@@ -1,4 +1,6 @@
-﻿using eTools_Ultimate.ViewModels.Windows;
+﻿using eTools_Ultimate.Services;
+using eTools_Ultimate.ViewModels.Windows;
+using eTools_Ultimate.Views.Pages;
 using Wpf.Ui;
 using Wpf.Ui.Abstractions;
 using Wpf.Ui.Appearance;
@@ -60,6 +62,31 @@ namespace eTools_Ultimate.Views.Windows
         public void SetServiceProvider(IServiceProvider serviceProvider)
         {
             throw new NotImplementedException();
+        }
+
+        private void FluentWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            bool loadingError = false;
+            SplashScreen splashScreen = new SplashScreen();
+            splashScreen.Show();
+            try
+            {
+                StringsService.Instance.Load();
+            }
+            catch (Exception ex)
+            {
+                loadingError = true;
+                splashScreen.Close();
+                System.Windows.MessageBox.Show(ex.Message, "Error", System.Windows.MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                splashScreen.Close();
+                if (loadingError)
+                    Navigate(typeof(SettingsPage));
+                else
+                    Navigate(typeof(DashboardPage));
+            }
         }
     }
 }
