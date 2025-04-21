@@ -64,6 +64,7 @@ namespace eTools_Ultimate.Services
                 }
                 catch (Exception ex)
                 {
+                    loadingError = true;
                     System.Windows.MessageBox.Show(ex.Message, "Error", System.Windows.MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 finally
