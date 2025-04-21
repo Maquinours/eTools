@@ -187,7 +187,7 @@
                         <ui:TextBlock
                             Appearance="Secondary"
                             Foreground="Gray"
-                            Text="eTools Ultimate"
+                            Text="Learn more about eTools Ultimate"
                             TextWrapping="WrapWithOverflow" />
                     </StackPanel>
                 </Grid>
