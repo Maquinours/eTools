@@ -8,6 +8,7 @@
     xmlns:models="clr-namespace:eTools_Ultimate.Models"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
     Title="ItemPage"
     d:DataContext="{d:DesignInstance local:ItemPage,
                                      IsDesignTimeCreatable=False}"
@@ -17,10 +18,10 @@
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     ScrollViewer.CanContentScroll="False"
-    mc:Ignorable="d"
-    xmlns:selectors="clr-namespace:eTools_Ultimate.Selectors">
+    mc:Ignorable="d">
 
     <Page.Resources>
+        <converters:NumberFormatConverter x:Key="NumberFormatConverter"/>
         <!-- Gemeinsame Styles -->
         <Style x:Key="InfoIconStyle"
                 TargetType="ui:SymbolIcon">
@@ -244,9 +245,12 @@
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <TextBox Grid.Row="1"
+                        <ui:NumberBox Grid.Row="1"
                                 x:Name="PenyaValueTextBox"
-                                 Text="{Binding Prop.DwCost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                Value="{Binding Prop.DwCost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Minimum="0"
+                                Maximum="2147483647"
+                                SpinButtonPlacementMode="Inline"/>
                     </Grid>
                     <!-- Tradeable & Shop-able -->
                     <Grid Style="{StaticResource FormFieldStyle}">
