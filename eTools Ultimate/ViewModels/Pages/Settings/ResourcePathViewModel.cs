@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using eTools_Ultimate.Models;
 using System.Collections.ObjectModel;
+using eTools_Ultimate.Helpers;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
@@ -56,33 +57,25 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private void SelectResourcesFolder()
         {
-            string path = Settings.ResourcesFolderPath;
-            SelectFolder("Ressourcen-Ordner auswählen", ref path);
-            Settings.ResourcesFolderPath = path;
+            Settings.ResourcesFolderPath = FileFolderSelector.SelectFolder(Settings.ResourcesFolderPath, title: Resources.Texts.SelectResourcesFolder);
         }
 
         [RelayCommand]
         private void SelectIconsFolder()
         {
-            string path = Settings.IconsFolderPath;
-            SelectFolder("Icons-Ordner auswählen", ref path);
-            Settings.IconsFolderPath = path;
+            Settings.IconsFolderPath = FileFolderSelector.SelectFolder(Settings.IconsFolderPath, title: Resources.Texts.SelectIconsFolder);
         }
 
         [RelayCommand]
         private void SelectTexturesFolder()
         {
-            string path = Settings.TexturesFolderPath;
-            SelectFolder("Texturen-Ordner auswählen", ref path);
-            Settings.TexturesFolderPath = path;
+            Settings.TexturesFolderPath = FileFolderSelector.SelectFolder(Settings.TexturesFolderPath, title: Resources.Texts.SelectTexturesFolder);
         }
 
         [RelayCommand]
         private void SelectSoundsFolder()
         {
-            string path = Settings.SoundsFolderPath;
-            SelectFolder("Sound-Ordner auswählen", ref path);
-            Settings.SoundsFolderPath = path;
+            Settings.SoundsFolderPath = FileFolderSelector.SelectFolder(Settings.SoundsFolderPath, title: Resources.Texts.SelectSoundsFolder);
         }
 
         [RelayCommand]
@@ -136,31 +129,33 @@ namespace eTools_Ultimate.ViewModels.Pages
             OnPropertyChanged(nameof(Settings));
         }
 
-        private void SelectFolder(string title, ref string path)
-        {
-            var dialog = new OpenFileDialog
-            {
-                Title = title,
-                CheckFileExists = false,
-                CheckPathExists = true,
-                FileName = "Ordner auswählen",
-                ValidateNames = false
-            };
+        //private void SelectFolder(string title, ref string path)
+        //{
+        //    FileFolderSelector.SelectFolder();
 
-            if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
-            {
-                dialog.InitialDirectory = path;
-            }
+        //    var dialog = new OpenFileDialog
+        //    {
+        //        Title = title,
+        //        CheckFileExists = false,
+        //        CheckPathExists = true,
+        //        FileName = "Ordner auswählen",
+        //        ValidateNames = false
+        //    };
 
-            if (dialog.ShowDialog() == true)
-            {
-                string selectedPath = Path.GetDirectoryName(dialog.FileName);
-                if (!string.IsNullOrEmpty(selectedPath))
-                {
-                    path = selectedPath;
-                }
-            }
-        }
+        //    if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
+        //    {
+        //        dialog.InitialDirectory = path;
+        //    }
+
+        //    if (dialog.ShowDialog() == true)
+        //    {
+        //        string selectedPath = Path.GetDirectoryName(dialog.FileName);
+        //        if (!string.IsNullOrEmpty(selectedPath))
+        //        {
+        //            path = selectedPath;
+        //        }
+        //    }
+        //}
 
         private void SelectFile(string title, string filter, ref string filePath)
         {

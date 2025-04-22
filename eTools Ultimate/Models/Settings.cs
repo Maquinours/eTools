@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace eTools_Ultimate.Models
 {
@@ -53,17 +54,17 @@ namespace eTools_Ultimate.Models
         public string ResourcesFolderPath
         {
             get => this._resourcesFolderPath;
-            set { if (this.ResourcesFolderPath != value) { this._resourcesFolderPath = value; this.NotifyPropertyChanged(); } }
+            set { if (this.ResourcesFolderPath != value) { this._resourcesFolderPath = value + (!value.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar : string.Empty); this.NotifyPropertyChanged(); } }
         }
         public string IconsFolderPath
         {
             get => this._iconsFolderPath;
-            set { if (this.IconsFolderPath != value) { this._iconsFolderPath = value; this.NotifyPropertyChanged(); } }
+            set { if (this.IconsFolderPath != value) { this._iconsFolderPath = value + (!value.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar : string.Empty); this.NotifyPropertyChanged(); } }
         }
         public string TexturesFolderPath
         {
             get => this._texturesFolderPath;
-            set { if (this.TexturesFolderPath != value) { this._texturesFolderPath = value; this.NotifyPropertyChanged(); } }
+            set { if (this.TexturesFolderPath != value) { this._texturesFolderPath = value + (!value.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar : string.Empty); this.NotifyPropertyChanged(); } }
         }
 
         public string SoundsConfigFilePath
@@ -74,7 +75,7 @@ namespace eTools_Ultimate.Models
         public string SoundsFolderPath
         {
             get => this._soundsFolderPath;
-            set { if(this.SoundsFolderPath != value) { this._soundsFolderPath = value; this.NotifyPropertyChanged(); } }
+            set { if(this.SoundsFolderPath != value) { this._soundsFolderPath = value + (!value.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar : string.Empty); this.NotifyPropertyChanged(); } }
         }
 
         // Movers settings
