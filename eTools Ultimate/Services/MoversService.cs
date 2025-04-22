@@ -39,6 +39,11 @@ namespace eTools_Ultimate.Services
             }
         }
 
+        public Mover? GetMoverById(string dwId)
+        {
+            return this.Movers.FirstOrDefault(x => x.Id == dwId);
+        }
+
         public void Load()
         {
             this.ClearMovers();

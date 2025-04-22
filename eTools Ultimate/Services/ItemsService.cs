@@ -26,6 +26,11 @@ namespace eTools_Ultimate.Services
             this.Items.Clear();
         }
 
+        public Item? GetItemById(string dwId)
+        {
+            return this.Items.FirstOrDefault(x => x.Id == dwId);
+        }
+
         public void Load()
         {
             this.ClearItems();

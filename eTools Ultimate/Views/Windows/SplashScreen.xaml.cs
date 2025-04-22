@@ -39,6 +39,11 @@ namespace eTools_Ultimate.Views.Windows
                     LoadingText.Text = "Loading items...";
                 });
                 ItemsService.Instance.Load();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    LoadingText.Text = "Loading models...";
+                });
+                ModelsService.Instance.Load();
             }).ConfigureAwait(true);
         }
     }
