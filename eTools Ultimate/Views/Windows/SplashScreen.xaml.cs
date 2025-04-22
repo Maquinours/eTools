@@ -21,6 +21,11 @@ namespace eTools_Ultimate.Views.Windows
                 SettingsService.Load();
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    LoadingText.Text = "Loading defines...";
+                });
+                DefinesService.Instance.Load();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
                     LoadingText.Text = "Loading strings...";
                 });
                 StringsService.Instance.Load();
@@ -34,7 +39,7 @@ namespace eTools_Ultimate.Views.Windows
                     LoadingText.Text = "Loading items...";
                 });
                 ItemsService.Instance.Load();
-            });
+            }).ConfigureAwait(true);
         }
     }
 } 
