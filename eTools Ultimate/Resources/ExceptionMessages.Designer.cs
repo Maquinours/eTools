@@ -68,5 +68,14 @@ namespace eTools_Ultimate.Resources {
                 return ResourceManager.GetString("IncorrectlyFormattedFile", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à No file path configuration found for sound with ID {0}.
+        /// </summary>
+        internal static string SoundConfigNotFound {
+            get {
+                return ResourceManager.GetString("SoundConfigNotFound", resourceCulture);
+            }
+        }
     }
 }

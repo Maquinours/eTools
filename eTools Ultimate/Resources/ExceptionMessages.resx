@@ -120,4 +120,7 @@
   <data name="IncorrectlyFormattedFile" xml:space="preserve">
     <value>The file "{0}" is incorrectly formatted.</value>
   </data>
+  <data name="SoundConfigNotFound" xml:space="preserve">
+    <value>No file path configuration found for sound with ID {0}</value>
+  </data>
 </root>

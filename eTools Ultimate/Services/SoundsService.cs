@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using eTools_Ultimate.Models;
 using System.IO;
+using eTools_Ultimate.Exceptions;
+using System.Media;
 
 namespace eTools_Ultimate.Services
 {
@@ -38,6 +40,17 @@ namespace eTools_Ultimate.Services
                     this.Sounds.Add(id, fileName);
                 }
             }
+        }
+
+        public void PlaySound(string id)
+        {
+            if (!Sounds.TryGetValue(id, out string? fileName)) throw new SoundConfigNotFoundException(id);
+
+            string filePath = $@"{Settings.Instance.SoundsFolderPath}{fileName}";
+            if (!File.Exists(filePath))
+                throw new FileNotFoundException($"Sound file not found: {filePath}");
+
+            new SoundPlayer(filePath).Play();
         }
     }
 }
