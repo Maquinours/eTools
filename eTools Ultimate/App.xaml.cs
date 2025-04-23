@@ -49,6 +49,16 @@ namespace eTools_Ultimate
                 services.AddSingleton<DashboardPage>();
                 services.AddSingleton<DashboardViewModel>();
                 services.AddSingleton<ItemPage>();
+                services.AddSingleton<SkillPage>();
+                services.AddSingleton<QuestPage>();
+                services.AddSingleton<NpcPage>();
+                services.AddSingleton<GiftboxPage>();
+                services.AddSingleton<CollectorPage>();
+                services.AddSingleton<EventPage>();
+                services.AddSingleton<AccessoryPage>();
+                services.AddSingleton<ExchangerPage>();
+                services.AddSingleton<TextClientPage>();
+                services.AddSingleton<MoverPage>();
                 services.AddSingleton<DataViewModel>();
 
                 // Settings pages

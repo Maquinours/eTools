@@ -31,6 +31,8 @@ namespace eTools_Ultimate.Models
         // Items settings
         private string _propItemFilePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}spec_Item.txt";
         private string _propItemTxtFilePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}propItem.txt";
+        private string _itemIconsPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Item\";
+        private string _itemPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Item\";
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -114,6 +116,19 @@ namespace eTools_Ultimate.Models
         {
             get => this._propItemTxtFilePath;
             set { if (this.PropItemTxtFilePath != value) { this._propItemTxtFilePath = value; this.NotifyPropertyChanged(); } }
+        }
+
+        // Neue Item-Properties
+        public string ItemIconsPath
+        {
+            get => this._itemIconsPath;
+            set { if (this.ItemIconsPath != value) { this._itemIconsPath = value; this.NotifyPropertyChanged(); } }
+        }
+        
+        public string ItemPath
+        {
+            get => this._itemPath;
+            set { if (this.ItemPath != value) { this._itemPath = value; this.NotifyPropertyChanged(); } }
         }
     }
 }

@@ -214,16 +214,12 @@
                                     Width="32"
                                     Height="32"
                                     Margin="10,0,0,0"
-                                    Background="{DynamicResource ControlFillColorDefaultBrush}"
                                     BorderBrush="{DynamicResource CoIntrolElevationBorderBrush}"
-                                    BorderThickness="1">
+                                    BorderThickness="1" Cursor="">
                                 <Image x:Name="ItemIconPreview"
-                                        Stretch="Uniform"
+
                                         Margin="2"
                                        Source="{Binding Icon}">
-                                    <Image.OpacityMask>
-                                        <ImageBrush ImageSource="/Assets/wpfui-icon-256.png"/>
-                                    </Image.OpacityMask>
                                 </Image>
                             </Border>
                         </Grid>
@@ -1741,7 +1737,7 @@
 
     </Page.Resources>
 
-    <Grid>
+    <Grid x:Name="RootGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
@@ -1817,27 +1813,48 @@
         <!-- Right Side - Form -->
         <ScrollViewer Grid.Column="2"
                 VerticalScrollBarVisibility="Auto">
-            <StackPanel Margin="20">
-                <ContentControl Content="{Binding ViewModel.ItemsView}" ContentTemplate="{StaticResource GeneralSectionTemplate}"/>
-                <Separator Margin="0,10,0,5"/>
-                <ContentControl ContentTemplate="{StaticResource InventoryStackSectionTemplate}"/>
-                <Separator Margin="0,10,0,5"/>
-                <ContentControl ContentTemplate="{StaticResource CharacterRequirementsSectionTemplate}"/>
-                <Separator Margin="0,10,0,5"/>
-                <ContentControl ContentTemplate="{StaticResource TypeClassificationSectionTemplate}"/>
-                <Separator Margin="0,10,0,5"/>
-                <ContentControl ContentTemplate="{StaticResource CombatStatsSectionTemplate}"/>
-                <Separator Margin="0,10,0,5"/>
-                <ContentControl ContentTemplate="{StaticResource SkillTriggersSectionTemplate}"/>
-                <Separator Margin="0,10,0,5"/>
-                <ContentControl ContentTemplate="{StaticResource ResistanceAlignmentSectionTemplate}"/>
-                <Separator Margin="0,10,0,5"/>
-                <ContentControl ContentTemplate="{StaticResource CraftingEnhancementSectionTemplate}"/>
-                <Separator Margin="0,10,0,5"/>
-                <ContentControl ContentTemplate="{StaticResource SoundSectionTemplate}"/>
-                <Separator Margin="0,10,0,5"/>
-                <ContentControl ContentTemplate="{StaticResource FlagsConditionsSectionTemplate}"/>
-            </StackPanel>
+            <Grid>
+                <!-- Add und Delete Buttons oben rechts -->
+                <StackPanel Orientation="Horizontal" 
+                          HorizontalAlignment="Right" 
+                          VerticalAlignment="Top"
+                          Margin="0,10,20,0"
+                          ZIndex="1">
+                    <ui:Button x:Name="AddButton" 
+                             Content="Add" 
+                             Appearance="Primary"
+                             Margin="0,0,10,0"
+                             Click="AddButton_Click"/>
+                    <ui:Button x:Name="DeleteButton" 
+                             Content="Delete" 
+                             Appearance="Danger"
+                             Click="DeleteButton_Click"/>
+                </StackPanel>
+                
+                <!-- Formulare -->
+                <StackPanel Margin="20">
+                    <ContentControl Content="{Binding ViewModel.ItemsView}" ContentTemplate="{StaticResource GeneralSectionTemplate}"/>
+                    <Separator Margin="0,10,0,5"/>
+                    <ContentControl ContentTemplate="{StaticResource InventoryStackSectionTemplate}"/>
+                    <Separator Margin="0,10,0,5"/>
+                    <ContentControl ContentTemplate="{StaticResource CharacterRequirementsSectionTemplate}"/>
+                    <Separator Margin="0,10,0,5"/>
+                    <ContentControl ContentTemplate="{StaticResource TypeClassificationSectionTemplate}"/>
+                    <Separator Margin="0,10,0,5"/>
+                    <ContentControl ContentTemplate="{StaticResource CombatStatsSectionTemplate}"/>
+                    <Separator Margin="0,10,0,5"/>
+                    <ContentControl ContentTemplate="{StaticResource SkillTriggersSectionTemplate}"/>
+                    <Separator Margin="0,10,0,5"/>
+                    <ContentControl ContentTemplate="{StaticResource ResistanceAlignmentSectionTemplate}"/>
+                    <Separator Margin="0,10,0,5"/>
+                    <ContentControl ContentTemplate="{StaticResource CraftingEnhancementSectionTemplate}"/>
+                    <Separator Margin="0,10,0,5"/>
+                    <ContentControl ContentTemplate="{StaticResource SoundSectionTemplate}"/>
+                    <Separator Margin="0,10,0,5"/>
+                    <ContentControl ContentTemplate="{StaticResource FlagsConditionsSectionTemplate}"/>
+                </StackPanel>
+            </Grid>
         </ScrollViewer>
     </Grid>
+
 </Page>

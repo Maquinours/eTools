@@ -16,6 +16,15 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         public int[] _possibleResourceVersions = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 
+        [ObservableProperty]
+        private bool _isAdvancedSettingsVisible = false;
+
+        [RelayCommand]
+        private void ToggleAdvancedSettings()
+        {
+            IsAdvancedSettingsVisible = !IsAdvancedSettingsVisible;
+        }
+
         [RelayCommand]
         private void Browse()
         {
@@ -134,6 +143,22 @@ namespace eTools_Ultimate.ViewModels.Pages
             SelectFile("PropMoverEx-Datei auswählen", "Inc-Dateien (*.inc)|*.inc|Alle Dateien (*.*)|*.*", ref path);
             Settings.PropMoverExFilePath = path;
             OnPropertyChanged(nameof(Settings));
+        }
+
+        [RelayCommand]
+        private void SelectItemIcons()
+        {
+            string path = Settings.ItemIconsPath;
+            SelectFolder("Item Icons-Ordner auswählen", ref path);
+            Settings.ItemIconsPath = path;
+        }
+
+        [RelayCommand]
+        private void SelectItemPath()
+        {
+            string path = Settings.ItemPath;
+            SelectFolder("Item-Pfad auswählen", ref path);
+            Settings.ItemPath = path;
         }
 
         private void SelectFolder(string title, ref string path)

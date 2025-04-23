@@ -24,7 +24,6 @@
         <ui:TextBlock
             Margin="0,0,0,8"
             FontTypography="BodyStrong"
-            Foreground="White"
             Text="Appearance &amp; behavior" />
         
         <!-- Theme Selection -->
@@ -41,7 +40,6 @@
                         Text="App theme" />
                     <ui:TextBlock
                         Grid.Row="1"
-                        Foreground="White"
                         Text="Select which app theme to display" />
                 </Grid>
             </ui:CardControl.Header>

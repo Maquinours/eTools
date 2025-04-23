@@ -25,10 +25,7 @@
   <ItemGroup>
     <None Remove="Assets\wpfui-icon-256.png" />
     <None Remove="Assets\wpfui-icon-1024.png" />
-    <None Remove="Views\Pages\AboutIcon.png" />
-    <None Remove="Views\Pages\FolderPathIcon.png" />
-    <None Remove="Views\Pages\PaintPaletteIcon.png" />
-    <None Remove="Views\Pages\SettingPageBanner.jpg" />
+    <None Remove="Views\Pages\Settings\SettingPageBanner.png" />
     <None Remove="Views\Windows\SplashScreen.png" />
     <None Remove="Views\Pages\Settings\Kiyo.jpg" />
     <None Remove="Views\Pages\Settings\Logo.png" />
@@ -47,10 +44,7 @@
   <ItemGroup>
     <Resource Include="Assets\wpfui-icon-256.png" />
     <Resource Include="Assets\wpfui-icon-1024.png" />
-    <Resource Include="Views\Pages\AboutIcon.png" />
-    <Resource Include="Views\Pages\FolderPathIcon.png" />
-    <Resource Include="Views\Pages\PaintPaletteIcon.png" />
-    <Resource Include="Views\Pages\SettingPageBanner.jpg" />
+    <Resource Include="Views\Pages\Settings\SettingPageBanner.png" />
     <Resource Include="Views\Windows\SplashScreen.png" />
     <Resource Include="Views\Pages\Settings\Kiyo.jpg" />
     <Resource Include="Views\Pages\Settings\Maqui.jpg" />
@@ -60,6 +54,7 @@
 
   <ItemGroup>
     <Folder Include="Assets\Icons\" />
+    <Folder Include="Views\Pages\Skill\" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using eTools_Ultimate.Services;
+using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Pages;
 using System.Collections.ObjectModel;
 using Wpf.Ui.Abstractions.Controls;
@@ -12,11 +12,11 @@ using System;
 
 namespace eTools_Ultimate.Views.Pages
 {
-    public partial class ItemPage : System.Windows.Controls.Page, INavigableView<DataViewModel>
+    public partial class SkillPage : System.Windows.Controls.Page, INavigableView<DataViewModel>
     {
         public DataViewModel ViewModel { get; }
 
-        public ItemPage(DataViewModel viewModel)
+        public SkillPage(DataViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = this;
@@ -24,31 +24,26 @@ namespace eTools_Ultimate.Views.Pages
             InitializeComponent();
         }
 
-        private void DataGrid_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void SkillsListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            // Die Logik zur Verarbeitung der Auswahländerung in der ListView
         }
 
-        private void VirtualizingGridView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-        }
-        
-        // Event handler for the Add button
+        // Event-Handler für den Hinzufügen-Button
         private void AddButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             try
             {
-                // For now, use simple MessageBox
-                // Once WPF UI is properly set up, this can be replaced with ContentDialog
                 var result = System.Windows.MessageBox.Show(
-                    "Test", 
-                    "Add Item",
+                    "Would you like to add a new skill?",
+                    "Add Skill",
                     System.Windows.MessageBoxButton.OKCancel,
                     System.Windows.MessageBoxImage.Information);
                 
                 if (result == System.Windows.MessageBoxResult.OK)
                 {
-                    // Here the logic for adding a new item could be implemented
-                    Console.WriteLine("Item is being added");
+                    // Hier könnte die Logik zum Hinzufügen eines neuen Skills implementiert werden
+                    Console.WriteLine("Skill wird hinzugefügt");
                 }
             }
             catch(Exception ex)
@@ -59,27 +54,25 @@ namespace eTools_Ultimate.Views.Pages
                     System.Windows.MessageBoxButton.OK,
                     System.Windows.MessageBoxImage.Error);
                 
-                Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
+                Console.WriteLine($"Fehler: {ex.Message}\n{ex.StackTrace}");
             }
         }
         
-        // Event handler for the Delete button
+        // Event-Handler für den Löschen-Button
         private void DeleteButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             try
             {
-                // For now, use simple MessageBox
-                // Once WPF UI is properly set up, this can be replaced with ContentDialog
                 var result = System.Windows.MessageBox.Show(
-                    "Are you sure you want to permanently delete this item?",
-                    "Delete Item",
+                    "Are you sure you want to permanently delete this skill?",
+                    "Delete Skill",
                     System.Windows.MessageBoxButton.YesNo,
                     System.Windows.MessageBoxImage.Warning);
                 
                 if (result == System.Windows.MessageBoxResult.Yes)
                 {
-                    // Here the logic for deleting the selected item could be implemented
-                    Console.WriteLine("Item is being deleted");
+                    // Hier könnte die Logik zum Löschen des ausgewählten Skills implementiert werden
+                    Console.WriteLine("Skill wird gelöscht");
                 }
             }
             catch(Exception ex)
@@ -90,8 +83,8 @@ namespace eTools_Ultimate.Views.Pages
                     System.Windows.MessageBoxButton.OK,
                     System.Windows.MessageBoxImage.Error);
                 
-                Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
+                Console.WriteLine($"Fehler: {ex.Message}\n{ex.StackTrace}");
             }
         }
     }
-}
+} 
