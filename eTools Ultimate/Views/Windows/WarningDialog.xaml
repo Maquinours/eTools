@@ -50,7 +50,7 @@
                     Margin="0,0,10,0"
                     Click="GoToResourcePath_Click"/>
             <Button Content="Close Application" 
-                    Width="120" 
+                    Width="135" 
                     Height="30"
                     Click="CloseApplication_Click"/>
         </StackPanel>

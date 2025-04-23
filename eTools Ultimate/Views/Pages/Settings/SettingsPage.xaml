@@ -37,9 +37,9 @@
             </Border.Background>
             <Border CornerRadius="8">
                 <Border.Background>
-                    <ImageBrush ImageSource="/Views/Pages/SettingPageBanner.jpg"
+                    <ImageBrush
                     RenderOptions.BitmapScalingMode="HighQuality"
-                    Stretch="UniformToFill"  />
+                    Stretch="UniformToFill" ImageSource="pack://application:,,,/Views/Pages/Settings/SettingPageBanner.png"  />
                 </Border.Background>
                 <Grid>
                     <StackPanel
@@ -50,7 +50,7 @@
                         <ui:TextBlock
                             FontTypography="Title"
                             Foreground="#FFFFFF"
-                            Text="Settings" />
+                            Text="Settings" FontWeight="Bold" />
                     </StackPanel>
                     <ui:TextBlock
                         Margin="12"
@@ -97,7 +97,11 @@
                         Width="60"
                         Height="auto"
                         Margin="24,0,0,0"
-                        Source="/Views/Pages/FolderPathIcon.png" />
+                        Source="/Views/Pages/Settings/FolderPathIcon.png" >
+                        <Image.OpacityMask>
+                            <ImageBrush ImageSource="/Views/Pages/Settings/FolderPathIcon.png"/>
+                        </Image.OpacityMask>
+                    </Image>
 
                     <StackPanel
                         Grid.Column="1"
@@ -135,7 +139,11 @@
                         Width="60"
                         Height="Auto"
                         Margin="24,0,0,0"
-                        Source="/Views/Pages/PaintPaletteIcon.png" />
+                        Source="pack://application:,,,/Views/Pages/Settings/PaintPaletteIcon.png" >
+                        <Image.OpacityMask>
+                            <ImageBrush ImageSource="pack://application:,,,/Views/Pages/Settings/PaintPaletteIcon.png"/>
+                        </Image.OpacityMask>
+                    </Image>
 
                     <StackPanel
                         Grid.Column="1"
@@ -173,7 +181,11 @@
                         Width="60"
                         Height="Auto"
                         Margin="24,0,0,0"
-                        Source="/Views/Pages/AboutIcon.png" />
+                        Source="pack://application:,,,/Views/Pages/Settings/AboutIcon.png" >
+                        <Image.OpacityMask>
+                            <ImageBrush ImageSource="pack://application:,,,/Views/Pages/Settings/AboutIcon.png"/>
+                        </Image.OpacityMask>
+                    </Image>
 
                     <StackPanel
                         Grid.Column="1"

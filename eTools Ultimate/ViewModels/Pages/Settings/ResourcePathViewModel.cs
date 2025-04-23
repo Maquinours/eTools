@@ -17,6 +17,15 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         public int[] _possibleResourceVersions = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 
+        [ObservableProperty]
+        private bool _isAdvancedSettingsVisible = false;
+
+        [RelayCommand]
+        private void ToggleAdvancedSettings()
+        {
+            IsAdvancedSettingsVisible = !IsAdvancedSettingsVisible;
+        }
+
         [RelayCommand]
         private void Browse()
         {
