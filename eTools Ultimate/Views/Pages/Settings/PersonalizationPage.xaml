@@ -54,8 +54,8 @@
                 MinWidth="200"
                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                 SelectionChanged="ComboBox_SelectionChanged">
-                <ComboBoxItem Content="Light" IsSelected="{Binding IsLightTheme}" Style="{StaticResource AppComboBoxItemStyle}" />
-                <ComboBoxItem Content="Dark" IsSelected="{Binding IsDarkTheme}" Style="{StaticResource AppComboBoxItemStyle}" />
+                <ComboBoxItem Content="Light" IsSelected="{Binding IsLightTheme}"/>
+                <ComboBoxItem Content="Dark" IsSelected="{Binding IsDarkTheme}"/>
             </ComboBox>
         </ui:CardControl>
 

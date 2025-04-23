@@ -18,6 +18,13 @@
     Foreground="{DynamicResource ApplicationForegroundBrush}"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <!-- WPF UI Design System Resources -->
+        <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="#212121"/>
+        <SolidColorBrush x:Key="ApplicationForegroundBrush" Color="#212121"/>
+    </Page.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
