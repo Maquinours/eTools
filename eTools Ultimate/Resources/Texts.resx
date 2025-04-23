@@ -123,8 +123,29 @@
   <data name="SelectIconsFolder" xml:space="preserve">
     <value>Select the icons folder</value>
   </data>
+  <data name="SelectItemIconsFolder" xml:space="preserve">
+    <value>Select the item icons folder</value>
+  </data>
+  <data name="SelectItemPropFile" xml:space="preserve">
+    <value>Select the item prop file</value>
+  </data>
+  <data name="SelectItemTextFile" xml:space="preserve">
+    <value>Select the item text file</value>
+  </data>
+  <data name="SelectMoverPropExFile" xml:space="preserve">
+    <value>Select the mover prop ex file</value>
+  </data>
+  <data name="SelectMoverPropFile" xml:space="preserve">
+    <value>Select the mover prop file</value>
+  </data>
+  <data name="SelectMoverTextFile" xml:space="preserve">
+    <value>Select the mover text file</value>
+  </data>
   <data name="SelectResourcesFolder" xml:space="preserve">
     <value>Select the resources folder</value>
+  </data>
+  <data name="SelectSoundConfigFile" xml:space="preserve">
+    <value>Select the sound configuration file</value>
   </data>
   <data name="SelectSoundsFolder" xml:space="preserve">
     <value>Select the sounds folder</value>

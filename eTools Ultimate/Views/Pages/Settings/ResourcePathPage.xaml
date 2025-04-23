@@ -256,7 +256,7 @@
                                 </TextBlock.Style>
                             </TextBlock>
                         </Grid>
-                        <Button Grid.Column="2" Width="60" Command="{Binding SelectItemIconsCommand}" HorizontalAlignment="Center" Height="35">
+                        <Button Grid.Column="2" Width="60" Command="{Binding SelectItemIconsFolderCommand}" HorizontalAlignment="Center" Height="35">
                             <ui:SymbolIcon Symbol="FolderOpen20"/>
                         </Button>
                     </Grid>
@@ -298,7 +298,7 @@
                                 </TextBlock.Style>
                             </TextBlock>
                         </Grid>
-                        <Button Grid.Column="2" Width="60" Command="{Binding SelectPropFileCommand}" HorizontalAlignment="Center" Height="35">
+                        <Button Grid.Column="2" Width="60" Command="{Binding SelectPropItemFileCommand}" HorizontalAlignment="Center" Height="35">
                             <ui:SymbolIcon Symbol="FolderOpen20"/>
                         </Button>
                     </Grid>
@@ -326,7 +326,7 @@
                                 </TextBlock.Style>
                             </TextBlock>
                         </Grid>
-                        <Button Grid.Column="2" Width="60" Command="{Binding SelectTextFileCommand}" HorizontalAlignment="Center" Height="35">
+                        <Button Grid.Column="2" Width="60" Command="{Binding SelectPropItemTxtFileCommand}" HorizontalAlignment="Center" Height="35">
                             <ui:SymbolIcon Symbol="FolderOpen20"/>
                         </Button>
                     </Grid>
@@ -409,7 +409,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMoverEx file" Margin="0,0,8,0"/>
-                        <Grid Grid.Column="1" Margin="0,0,8,0">
+                        <Grid Grid.Column="1" Margin="0,0,8,0" Cursor="">
                             <TextBox x:Name="PropMoverExFilePathTextbox" IsHitTestVisible="False" Text="{Binding Settings.PropMoverExFilePath, Mode=TwoWay}"/>
                             <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultPropMoverExFilePath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
                                 <TextBlock.Style>
@@ -424,7 +424,7 @@
                                 </TextBlock.Style>
                             </TextBlock>
                         </Grid>
-                        <Button Grid.Column="2" Width="60" Command="{Binding SelectPropMoverExFileCommand}" HorizontalAlignment="Center" Height="35">
+                        <Button Grid.Column="2" Width="60" Command="{Binding SelectPropMoverExFileCommand}" IsHitTestVisible="False" HorizontalAlignment="Center" Height="35">
                             <ui:SymbolIcon Symbol="FolderOpen20"/>
                         </Button>
                     </Grid>

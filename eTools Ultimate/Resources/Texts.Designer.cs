@@ -79,11 +79,74 @@ namespace eTools_Ultimate.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select the item icons folder.
+        /// </summary>
+        internal static string SelectItemIconsFolder {
+            get {
+                return ResourceManager.GetString("SelectItemIconsFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select the item prop file.
+        /// </summary>
+        internal static string SelectItemPropFile {
+            get {
+                return ResourceManager.GetString("SelectItemPropFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select the item text file.
+        /// </summary>
+        internal static string SelectItemTextFile {
+            get {
+                return ResourceManager.GetString("SelectItemTextFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select the mover prop ex file.
+        /// </summary>
+        internal static string SelectMoverPropExFile {
+            get {
+                return ResourceManager.GetString("SelectMoverPropExFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select the mover prop file.
+        /// </summary>
+        internal static string SelectMoverPropFile {
+            get {
+                return ResourceManager.GetString("SelectMoverPropFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select the mover text file.
+        /// </summary>
+        internal static string SelectMoverTextFile {
+            get {
+                return ResourceManager.GetString("SelectMoverTextFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Select the resources folder.
         /// </summary>
         internal static string SelectResourcesFolder {
             get {
                 return ResourceManager.GetString("SelectResourcesFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select the sound configuration file.
+        /// </summary>
+        internal static string SelectSoundConfigFile {
+            get {
+                return ResourceManager.GetString("SelectSoundConfigFile", resourceCulture);
             }
         }
         

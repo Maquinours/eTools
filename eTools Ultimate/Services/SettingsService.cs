@@ -144,12 +144,37 @@ namespace eTools_Ultimate.Services
                     writer.WriteLine($"{SettingsKeywords.PropItemPath}\t\"{Settings.Instance.PropItemFilePath}\"");
                 if (Settings.Instance.PropItemTxtFilePath != null)
                     writer.WriteLine($"{SettingsKeywords.PropItemTxtPath}\t\"{Settings.Instance.PropItemTxtFilePath}\"");
+                if(Settings.Instance.ItemIconsFolderPath != null)
+                    writer.WriteLine($"{SettingsKeywords.IconsPath}\t\"{Settings.Instance.ItemIconsFolderPath}\"");
             }
         }
 
         private static void SettingsChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-                Save();
+            switch(e.PropertyName)
+            {
+                case nameof(Settings.ResourcesVersion):
+                case nameof(Settings.ResourcesFolderPath):
+                case nameof(Settings.ClientFolderPath):
+
+                case nameof(Settings.IconsFolderPath):
+                case nameof(Settings.TexturesFolderPath):
+                case nameof(Settings.SoundsConfigFilePath):
+                case nameof(Settings.SoundsFolderPath):
+
+                case nameof(Settings.PropMoverFilePath):
+                case nameof(Settings.PropMoverTxtFilePath):
+                case nameof(Settings.PropMoverExFilePath):
+                case nameof(Settings.Mover64BitHp):
+                case nameof(Settings.Mover64BitAtk):
+
+                case nameof(Settings.PropItemFilePath):
+                case nameof(Settings.PropItemTxtFilePath):
+                case nameof(Settings.ItemIconsFolderPath):
+                    Save();
+                    break;
+
+            }
         }
     }
 }

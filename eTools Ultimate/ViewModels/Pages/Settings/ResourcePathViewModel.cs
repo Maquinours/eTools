@@ -75,6 +75,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             Settings.ClientFolderPath = FileFolderSelector.SelectFolder(Settings.ClientFolderPath, title: Resources.Texts.SelectClientFolder);
         }
 
+        // Not used for now, should be used for skills and other resources
         [RelayCommand]
         private void SelectIconsFolder()
         {
@@ -84,115 +85,55 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private void SelectTexturesFolder()
         {
-            Settings.TexturesFolderPath = FileFolderSelector.SelectFolder(Settings.TexturesFolderPath, title: Resources.Texts.SelectTexturesFolder);
+            Settings.TexturesFolderPath = FileFolderSelector.SelectFolder(Settings.TexturesFolderPath ?? Settings.DefaultTexturesFolderPath, title: Resources.Texts.SelectTexturesFolder);
         }
 
         [RelayCommand]
         private void SelectSoundsFolder()
         {
-            Settings.SoundsFolderPath = FileFolderSelector.SelectFolder(Settings.SoundsFolderPath, title: Resources.Texts.SelectSoundsFolder);
+            Settings.SoundsFolderPath = FileFolderSelector.SelectFolder(Settings.SoundsFolderPath ?? Settings.DefaultSoundsFolderPath, title: Resources.Texts.SelectSoundsFolder);
+        }
+
+        [RelayCommand]
+        private void SelectItemIconsFolder()
+        {
+            Settings.ItemIconsFolderPath = FileFolderSelector.SelectFolder(Settings.ItemIconsFolderPath ?? Settings.DefaultItemIconsFolderPath, title: Resources.Texts.SelectItemIconsFolder);
         }
 
         [RelayCommand]
         private void SelectPropItemFile()
         {
-            string path = Settings.PropItemFilePath;
-            SelectFile("Prop-Datei auswählen", "Inc-Dateien (*.inc)|*.inc|Alle Dateien (*.*)|*.*", ref path);
-            Settings.PropItemFilePath = path;
+            Settings.PropItemFilePath = FileFolderSelector.SelectFile(Settings.PropItemFilePath ?? Settings.DefaultPropItemFilePath, title: Resources.Texts.SelectItemPropFile);
         }
 
         [RelayCommand]
         private void SelectPropItemTxtFile()
         {
-            string path = Settings.PropItemTxtFilePath;
-            SelectFile("Text-Datei auswählen", "Textdateien (*.txt)|*.txt|Alle Dateien (*.*)|*.*", ref path);
-            Settings.PropItemTxtFilePath = path;
+            Settings.PropItemTxtFilePath = FileFolderSelector.SelectFile(Settings.PropItemTxtFilePath ?? Settings.DefaultPropItemTxtFilePath, title: Resources.Texts.SelectItemTextFile);
         }
 
         [RelayCommand]
         private void SelectSoundsConfig()
         {
-            string path = Settings.SoundsConfigFilePath;
-            SelectFile("Sound-Konfigurationsdatei auswählen", "Inc-Dateien (*.inc)|*.inc|Alle Dateien (*.*)|*.*", ref path);
-            Settings.SoundsConfigFilePath = path;
+            Settings.SoundsConfigFilePath = FileFolderSelector.SelectFile(Settings.SoundsConfigFilePath ?? Settings.DefaultSoundsConfigFilePath, title: Resources.Texts.SelectSoundConfigFile);
         }
 
         [RelayCommand]
         private void SelectPropMoverFile()
         {
-            string path = Settings.PropMoverFilePath;
-            SelectFile("PropMover-Datei auswählen", "Prop-Dateien (*.txt)|*.txt|Alle Dateien (*.*)|*.*", ref path);
-            Settings.PropMoverFilePath = path;
-            OnPropertyChanged(nameof(Settings));
+            Settings.PropMoverFilePath = FileFolderSelector.SelectFile(Settings.PropMoverFilePath ?? Settings.DefaultPropMoverFilePath, title: Resources.Texts.SelectMoverPropFile);
         }
 
         [RelayCommand]
         private void SelectPropMoverTextFile()
         {
-            string path = Settings.PropMoverTxtFilePath;
-            SelectFile("PropMover.txt-Datei auswählen", "Text-Dateien (*.txt)|*.txt|Alle Dateien (*.*)|*.*", ref path);
-            Settings.PropMoverTxtFilePath = path;
-            OnPropertyChanged(nameof(Settings));
+            Settings.PropMoverTxtFilePath = FileFolderSelector.SelectFile(Settings.PropMoverTxtFilePath ?? Settings.DefaultPropMoverTxtFilePath, title: Resources.Texts.SelectMoverTextFile);
         }
 
         [RelayCommand]
         private void SelectPropMoverExFile()
         {
-            string path = Settings.PropMoverExFilePath;
-            SelectFile("PropMoverEx-Datei auswählen", "Inc-Dateien (*.inc)|*.inc|Alle Dateien (*.*)|*.*", ref path);
-            Settings.PropMoverExFilePath = path;
-            OnPropertyChanged(nameof(Settings));
-        }
-
-        //private void SelectFolder(string title, ref string path)
-        //{
-        //    FileFolderSelector.SelectFolder();
-
-        //    var dialog = new OpenFileDialog
-        //    {
-        //        Title = title,
-        //        CheckFileExists = false,
-        //        CheckPathExists = true,
-        //        FileName = "Ordner auswählen",
-        //        ValidateNames = false
-        //    };
-
-        //    if (!string.IsNullOrEmpty(path) && Directory.Exists(path))
-        //    {
-        //        dialog.InitialDirectory = path;
-        //    }
-
-        //    if (dialog.ShowDialog() == true)
-        //    {
-        //        string selectedPath = Path.GetDirectoryName(dialog.FileName);
-        //        if (!string.IsNullOrEmpty(selectedPath))
-        //        {
-        //            path = selectedPath;
-        //        }
-        //    }
-        //}
-
-        private void SelectFile(string title, string filter, ref string filePath)
-        {
-            var dialog = new OpenFileDialog
-            {
-                Title = title,
-                Filter = filter,
-                CheckFileExists = true
-            };
-
-            if (!string.IsNullOrEmpty(filePath))
-            {
-                string directoryPath = Path.GetDirectoryName(filePath);
-                if (Directory.Exists(directoryPath))
-                {
-                    dialog.InitialDirectory = directoryPath;
-                }
-                dialog.FileName = Path.GetFileName(filePath);
-            }
-
-            if (dialog.ShowDialog() == true)
-                filePath = dialog.FileName;
+            Settings.PropMoverExFilePath = FileFolderSelector.SelectFile(Settings.PropMoverExFilePath ?? Settings.PropMoverExFilePath, title: Resources.Texts.SelectMoverPropExFile);
         }
         #endregion
     }
