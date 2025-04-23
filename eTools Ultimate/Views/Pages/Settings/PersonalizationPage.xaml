@@ -13,17 +13,22 @@
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    Foreground="{DynamicResource ApplicationForegroundBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
     <Page.Resources>
         <converters:ThemeToIndexConverter x:Key="ThemeToIndexConverter" />
+        
+        <Style x:Key="AppComboBoxItemStyle" TargetType="ComboBoxItem">
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+        </Style>
     </Page.Resources>
 
     <StackPanel Margin="0,0,0,24">
         <ui:TextBlock
             Margin="0,0,0,8"
             FontTypography="BodyStrong"
+            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
             Text="Appearance &amp; behavior" />
         
         <!-- Theme Selection -->
@@ -37,17 +42,20 @@
                     <ui:TextBlock
                         Grid.Row="0"
                         FontTypography="Body"
+                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                         Text="App theme" />
                     <ui:TextBlock
                         Grid.Row="1"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                         Text="Select which app theme to display" />
                 </Grid>
             </ui:CardControl.Header>
             <ComboBox
                 MinWidth="200"
+                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                 SelectionChanged="ComboBox_SelectionChanged">
-                <ComboBoxItem Content="Light" IsSelected="{Binding IsLightTheme}" />
-                <ComboBoxItem Content="Dark" IsSelected="{Binding IsDarkTheme}" />
+                <ComboBoxItem Content="Light" IsSelected="{Binding IsLightTheme}" Style="{StaticResource AppComboBoxItemStyle}" />
+                <ComboBoxItem Content="Dark" IsSelected="{Binding IsDarkTheme}" Style="{StaticResource AppComboBoxItemStyle}" />
             </ComboBox>
         </ui:CardControl>
 

@@ -12,7 +12,7 @@
     Title="MoverPage"
     d:DataContext="{d:DesignInstance local:MoverPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="768"
+    d:DesignHeight="1700"
     d:DesignWidth="1024"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -48,7 +48,7 @@
             <Setter Property="FontWeight"
                     Value="SemiBold"/>
             <Setter Property="Foreground"
-                    Value="#000000"/>
+                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
         <Style x:Key="SectionHeaderStyle"
                 TargetType="TextBlock">
@@ -59,30 +59,8 @@
             <Setter Property="Margin"
                     Value="0,15,0,15"/>
             <Setter Property="Foreground"
-                    Value="#000000"/>
+                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
-        
-        <!-- WPF UI Design System Resources -->
-        <SolidColorBrush x:Key="ControlElevationBorderBrush"
-                Color="#1A000000"/>
-        <SolidColorBrush x:Key="ControlFillColorDefaultBrush"
-                Color="#F3F3F3"/>
-        <SolidColorBrush x:Key="TextFillColorSecondaryBrush"
-                Color="#9E9E9E"/>
-        <SolidColorBrush x:Key="TextFillColorPrimaryBrush"
-                Color="#000000"/>
-        <SolidColorBrush x:Key="TextOnAccentFillColorPrimaryBrush"
-                Color="#FFFFFF"/>
-        <SolidColorBrush x:Key="ApplicationBackgroundBrush"
-                Color="#FFFFFF"/>
-        <SolidColorBrush x:Key="ControlStrokeColorDefaultBrush"
-                Color="#1A000000"/>
-        <SolidColorBrush x:Key="CardBackgroundFillColorDefaultBrush"
-                Color="#F3F3F3"/>
-        <SolidColorBrush x:Key="ControlFillColorSecondaryBrush"
-                Color="#E5E5E5"/>
-        <SolidColorBrush x:Key="AccentFillColorDefaultBrush"
-                Color="#0078D7"/>
         
         <!-- TextBox Style -->
         <Style x:Key="AppTextBoxStyle" 
@@ -91,7 +69,7 @@
             <Setter Property="Background" 
                     Value="{DynamicResource ControlFillColorDefaultBrush}"/>
             <Setter Property="Foreground" 
-                    Value="#000000"/>
+                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
             <Setter Property="BorderBrush" 
                     Value="{DynamicResource ControlElevationBorderBrush}"/>
             <Setter Property="Padding" 
@@ -105,7 +83,7 @@
             <Setter Property="Background" 
                     Value="{DynamicResource ControlFillColorDefaultBrush}"/>
             <Setter Property="Foreground" 
-                    Value="#000000"/>
+                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
             <Setter Property="BorderBrush" 
                     Value="{DynamicResource ControlElevationBorderBrush}"/>
         </Style>
@@ -133,7 +111,7 @@
             <Setter Property="BorderThickness" 
                     Value="0"/>
             <Setter Property="Foreground" 
-                    Value="#000000"/>
+                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
         
         <!-- ListViewItem Style -->
@@ -142,7 +120,7 @@
             <Setter Property="Background" 
                     Value="Transparent"/>
             <Setter Property="Foreground" 
-                    Value="#000000"/>
+                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" 
                          Value="True">
@@ -154,7 +132,7 @@
                     <Setter Property="Background" 
                             Value="{DynamicResource ControlFillColorDefaultBrush}"/>
                     <Setter Property="Foreground" 
-                            Value="#000000"/>
+                            Value="{DynamicResource TextFillColorPrimaryBrush}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -1048,7 +1026,7 @@
         </DataTemplate>
     </Page.Resources>
 
-    <Grid x:Name="RootGrid" Background="{DynamicResource ApplicationBackgroundBrush}">
+    <Grid x:Name="RootGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
@@ -1157,7 +1135,7 @@
               IsOpen="False"
               StaysOpen="False"
               AllowsTransparency="True">
-            <Border Background="{DynamicResource ApplicationBackgroundBrush}"
+            <Border Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}"
                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                    BorderThickness="1"
                    CornerRadius="8"

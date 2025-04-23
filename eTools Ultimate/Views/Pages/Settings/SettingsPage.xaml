@@ -63,12 +63,6 @@
             </Border>
         </Border>
 
-        <!--<controls:GalleryNavigationPresenter
-            Grid.Row="1"
-            Margin="0,24,0,0"
-            Padding="0"
-            ItemsSource="{Binding ViewModel.NavigationCards, Mode=OneWay}" />-->
-
         <Grid Grid.Row="1" Margin="0,24,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -95,9 +89,8 @@
 
                     <Image
                         Width="60"
-                        Height="auto"
-                        Margin="24,0,0,0"
-                        Source="/Views/Pages/Settings/FolderPathIcon.png" >
+                        Height="Auto"
+                        Margin="24,0,0,0" Source="/Views/Pages/Settings/FolderPathIcon.png" >
                         <Image.OpacityMask>
                             <ImageBrush ImageSource="/Views/Pages/Settings/FolderPathIcon.png"/>
                         </Image.OpacityMask>
@@ -110,7 +103,7 @@
                         <ui:TextBlock
                             Margin="0"
                             FontTypography="BodyStrong"
-                            Text="Resurce Path"
+                            Text="Resource Path"
                             TextWrapping="WrapWithOverflow" />
                         <ui:TextBlock
                             Appearance="Secondary"
@@ -138,10 +131,9 @@
                     <Image
                         Width="60"
                         Height="Auto"
-                        Margin="24,0,0,0"
-                        Source="pack://application:,,,/Views/Pages/Settings/PaintPaletteIcon.png" >
+                        Margin="24,0,0,0" Source="/Views/Pages/Settings/PaintPaletteIcon.png" >
                         <Image.OpacityMask>
-                            <ImageBrush ImageSource="pack://application:,,,/Views/Pages/Settings/PaintPaletteIcon.png"/>
+                            <ImageBrush ImageSource="/Views/Pages/Settings/PaintPaletteIcon.png"/>
                         </Image.OpacityMask>
                     </Image>
 
@@ -180,10 +172,11 @@
                     <Image
                         Width="60"
                         Height="Auto"
-                        Margin="24,0,0,0"
-                        Source="pack://application:,,,/Views/Pages/Settings/AboutIcon.png" >
+                        Margin="24,0,0,0" Source="/Views/Pages/Settings/AboutIcon.png" >
                         <Image.OpacityMask>
-                            <ImageBrush ImageSource="pack://application:,,,/Views/Pages/Settings/AboutIcon.png"/>
+                            <ImageBrush>
+                                <ImageBrush.ImageSource>/Views/Pages/Settings/AboutIcon.png</ImageBrush.ImageSource>
+                            </ImageBrush>
                         </Image.OpacityMask>
                     </Image>
 
