@@ -30,6 +30,12 @@ namespace eTools_Ultimate.Services
         // Items settings
         internal const string PropItemPath = "PropItemPath";
         internal const string PropItemTxtPath = "PropItemTxtPath";
+        internal const string ItemIconsPath = "ItemIconsPath";
+
+        // Skills settings
+        internal const string PropSkillPath = "PropSkillPath";
+        internal const string PropSkillTxtPath = "PropSkillTxtPath";
+        internal const string SkillIconsPath = "SkillIconsPath";
     }
 
     internal class SettingsService
@@ -102,6 +108,20 @@ namespace eTools_Ultimate.Services
                             case SettingsKeywords.PropItemTxtPath:
                                 Settings.Instance.PropItemTxtFilePath = scanner.GetToken();
                                 break;
+                            case SettingsKeywords.ItemIconsPath:
+                                Settings.Instance.ItemIconsFolderPath = scanner.GetToken();
+                                break;
+
+                            // Skills settings
+                            case SettingsKeywords.PropSkillPath:
+                                Settings.Instance.PropSkillFilePath = scanner.GetToken();
+                                break;
+                            case SettingsKeywords.PropSkillTxtPath:
+                                Settings.Instance.PropSkillTxtFilePath = scanner.GetToken();
+                                break;
+                            case SettingsKeywords.SkillIconsPath:
+                                Settings.Instance.SkillIconsFolderPath = scanner.GetToken();
+                                break;
                         }
                     }
                 }
@@ -114,7 +134,7 @@ namespace eTools_Ultimate.Services
             using (StreamWriter writer = new StreamWriter(SettingsFilePath))
             {
                 // General settings
-                writer.WriteLine($"{SettingsKeywords.ResourcesVersion}\t\"{Settings.Instance.ResourcesVersion}\"");
+                writer.WriteLine($"{SettingsKeywords.ResourcesVersion}\t{Settings.Instance.ResourcesVersion}");
                 writer.WriteLine($"{SettingsKeywords.ResourcesPath}\t\"{Settings.Instance.ResourcesFolderPath}\"");
                 writer.WriteLine($"{SettingsKeywords.ClientPath}\t\"{Settings.Instance.ClientFolderPath}\"");
 
@@ -145,7 +165,15 @@ namespace eTools_Ultimate.Services
                 if (Settings.Instance.PropItemTxtFilePath != null)
                     writer.WriteLine($"{SettingsKeywords.PropItemTxtPath}\t\"{Settings.Instance.PropItemTxtFilePath}\"");
                 if(Settings.Instance.ItemIconsFolderPath != null)
-                    writer.WriteLine($"{SettingsKeywords.IconsPath}\t\"{Settings.Instance.ItemIconsFolderPath}\"");
+                    writer.WriteLine($"{SettingsKeywords.ItemIconsPath}\t\"{Settings.Instance.ItemIconsFolderPath}\"");
+
+                // Skills settings
+                if (Settings.Instance.PropSkillFilePath != null)
+                    writer.WriteLine($"{SettingsKeywords.PropSkillPath}\t\"{Settings.Instance.PropSkillFilePath}\"");
+                if (Settings.Instance.PropSkillTxtFilePath != null)
+                    writer.WriteLine($"{SettingsKeywords.PropSkillTxtPath}\t\"{Settings.Instance.PropSkillTxtFilePath}\"");
+                if (Settings.Instance.SkillIconsFolderPath != null)
+                    writer.WriteLine($"{SettingsKeywords.SkillIconsPath}\t\"{Settings.Instance.SkillIconsFolderPath}\"");
             }
         }
 
