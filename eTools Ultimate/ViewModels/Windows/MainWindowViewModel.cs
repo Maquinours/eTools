@@ -18,11 +18,18 @@ namespace eTools_Ultimate.ViewModels.Windows
                 Icon = new SymbolIcon { Symbol = SymbolRegular.Home24 },
                 TargetPageType = typeof(Views.Pages.DashboardPage)
             },
+            new NavigationViewItemSeparator(),
             new NavigationViewItem()
             {
                 Content = "Items",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.ShoppingBag24 },
                 TargetPageType = typeof(Views.Pages.ItemPage)
+            },
+            new NavigationViewItem()
+            {
+                Content = "Movers",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.PersonArrowRight24 },
+                TargetPageType = typeof(Views.Pages.MoverPage)
             },
             new NavigationViewItem()
             {
@@ -71,12 +78,6 @@ namespace eTools_Ultimate.ViewModels.Windows
                 Content = "Exchangers",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.ArrowSync24 },
                 TargetPageType = typeof(Views.Pages.ExchangerPage)
-            },
-            new NavigationViewItem()
-            {
-                Content = "Movers",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.PersonArrowRight24 },
-                TargetPageType = typeof(Views.Pages.MoverPage)
             },
             new NavigationViewItem()
             {
