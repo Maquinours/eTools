@@ -66,13 +66,13 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private void SelectResourcesFolder()
         {
-            Settings.ResourcesFolderPath = FileFolderSelector.SelectFolder(Settings.ResourcesFolderPath, title: Resources.Texts.SelectResourcesFolder);
+            Settings.ResourcesFolderPath = FileFolderSelector.SelectFolder(Settings.ResourcesFolderPath, title: Resources.Texts.SelectResourcesFolder) ?? "";
         }
 
         [RelayCommand]
         private void SelectClientFolder()
         {
-            Settings.ClientFolderPath = FileFolderSelector.SelectFolder(Settings.ClientFolderPath, title: Resources.Texts.SelectClientFolder);
+            Settings.ClientFolderPath = FileFolderSelector.SelectFolder(Settings.ClientFolderPath, title: Resources.Texts.SelectClientFolder) ?? "";
         }
 
         // Not used for now, should be used for skills and other resources
@@ -133,7 +133,25 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private void SelectPropMoverExFile()
         {
-            Settings.PropMoverExFilePath = FileFolderSelector.SelectFile(Settings.PropMoverExFilePath ?? Settings.PropMoverExFilePath, title: Resources.Texts.SelectMoverPropExFile);
+            Settings.PropMoverExFilePath = FileFolderSelector.SelectFile(Settings.PropMoverExFilePath ?? Settings.DefaultPropMoverExFilePath, title: Resources.Texts.SelectMoverPropExFile);
+        }
+
+        [RelayCommand]
+        private void SelectPropSkillFile()
+        {
+            Settings.PropSkillFilePath = FileFolderSelector.SelectFile(Settings.PropSkillFilePath ?? Settings.DefaultPropSkillFilePath, title: Resources.Texts.SelectSkillPropFile);
+        }
+
+        [RelayCommand]
+        private void SelectPropSkillTextFile()
+        {
+            Settings.PropSkillTxtFilePath = FileFolderSelector.SelectFile(Settings.PropSkillTxtFilePath ?? Settings.DefaultPropSkillTxtFilePath, title: Resources.Texts.SelectSkillTextFile);
+        }
+
+        [RelayCommand]
+        private void SelectSkillIconsFolder()
+        {
+            Settings.SkillIconsFolderPath = FileFolderSelector.SelectFile(Settings.SkillIconsFolderPath ?? Settings.DefaultSkillIconsFolderPath, title: Resources.Texts.SelectSkillIconsFolder);
         }
         #endregion
     }

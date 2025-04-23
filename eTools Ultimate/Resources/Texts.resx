@@ -144,6 +144,15 @@
   <data name="SelectResourcesFolder" xml:space="preserve">
     <value>Select the resources folder</value>
   </data>
+  <data name="SelectSkillIconsFolder" xml:space="preserve">
+    <value>Select the skill icons folder</value>
+  </data>
+  <data name="SelectSkillPropFile" xml:space="preserve">
+    <value>Select the skill prop file</value>
+  </data>
+  <data name="SelectSkillTextFile" xml:space="preserve">
+    <value>Select the skill text file</value>
+  </data>
   <data name="SelectSoundConfigFile" xml:space="preserve">
     <value>Select the sound configuration file</value>
   </data>

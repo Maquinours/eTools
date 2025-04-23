@@ -142,6 +142,33 @@ namespace eTools_Ultimate.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select the skill icons folder.
+        /// </summary>
+        internal static string SelectSkillIconsFolder {
+            get {
+                return ResourceManager.GetString("SelectSkillIconsFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select the skill prop file.
+        /// </summary>
+        internal static string SelectSkillPropFile {
+            get {
+                return ResourceManager.GetString("SelectSkillPropFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select the skill text file.
+        /// </summary>
+        internal static string SelectSkillTextFile {
+            get {
+                return ResourceManager.GetString("SelectSkillTextFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Select the sound configuration file.
         /// </summary>
         internal static string SelectSoundConfigFile {

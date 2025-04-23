@@ -36,6 +36,11 @@ namespace eTools_Ultimate.Models
         private string? _propItemTxtFilePath;
         private string? _itemIconsFolderPath;
 
+        // Skills settings
+        private string? _propSkillFilePath;
+        private string? _propSkillTxtFilePath;
+        private string? _skillIconsFolderPath;
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -304,6 +309,8 @@ namespace eTools_Ultimate.Models
                 string? val = value;
                 if (string.IsNullOrWhiteSpace(val))
                     val = null;
+                else if (!val.EndsWith(Path.DirectorySeparatorChar))
+                    val += Path.DirectorySeparatorChar;
                 if (val == this.DefaultItemIconsFolderPath)
                     val = null;
                 if (this.ItemIconsFolderPath != val)
@@ -314,5 +321,64 @@ namespace eTools_Ultimate.Models
             }
         }
         public string? DefaultItemIconsFolderPath => $"{this.ClientFolderPath}Item{Path.DirectorySeparatorChar}";
+
+        public string? PropSkillFilePath
+        {
+            get => this._propSkillFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultPropSkillFilePath)
+                    val = null;
+                if (this.PropSkillFilePath != val)
+                {
+                    this._propSkillFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultPropSkillFilePath => $"{this.ResourcesFolderPath}propSkill.txt";
+
+        public string? PropSkillTxtFilePath
+        {
+            get => this._propSkillTxtFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultPropSkillTxtFilePath)
+                    val = null;
+                if (this.PropSkillTxtFilePath != val)
+                {
+                    this._propSkillTxtFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultPropSkillTxtFilePath => $"{this.ResourcesFolderPath}propSkill.txt.txt";
+
+        public string? SkillIconsFolderPath
+        {
+            get => this._skillIconsFolderPath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                else if (!val.EndsWith(Path.DirectorySeparatorChar))
+                    val += Path.DirectorySeparatorChar;
+                if (val == this.DefaultSkillIconsFolderPath)
+                    val = null;
+                if (this.SkillIconsFolderPath != val)
+                {
+                    this._skillIconsFolderPath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string? DefaultSkillIconsFolderPath => $"{this.ClientFolderPath}Icon{Path.DirectorySeparatorChar}";
     }
 }
