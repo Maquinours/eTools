@@ -10,7 +10,7 @@ namespace eTools_Ultimate.Helpers
 {
     internal class FileFolderSelector
     {
-        public static string SelectFolder(string path, string? title = null)
+        public static string SelectFolder(string? path, string? title = null)
         {
             OpenFolderDialog folderDialog = new OpenFolderDialog()
             {

@@ -648,7 +648,7 @@ namespace eTools_Ultimate.Models
         {
             get
             {
-                string filePath = $"{Settings.Instance.IconsFolderPath}{this.Prop.SzIcon}";
+                string filePath = $"{Settings.Instance.ItemIconsFolderPath ?? Settings.Instance.DefaultItemIconsFolderPath}{this.Prop.SzIcon}";
                 if (!File.Exists(filePath))
                 {
                     return null;

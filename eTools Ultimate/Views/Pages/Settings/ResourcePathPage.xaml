@@ -67,8 +67,8 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Client folder" Margin="0,0,8,0"/>
-                    <TextBox Grid.Column="1" Text="{Binding Settings.IconsFolderPath, Mode=TwoWay}" Margin="0,0,8,0"/>
-                    <Button Grid.Column="2" Width="60" Command="{Binding SelectIconsFolderCommand}" HorizontalAlignment="Center" Height="35">
+                    <TextBox Grid.Column="1" Text="{Binding Settings.ClientFolderPath, Mode=TwoWay}" Margin="0,0,8,0"/>
+                    <Button Grid.Column="2" Width="60" Command="{Binding SelectClientFolderCommand}" HorizontalAlignment="Center" Height="35">
                         <ui:SymbolIcon Symbol="FolderOpen20"/>
                     </Button>
                 </Grid>
@@ -143,7 +143,21 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Texture folder" Margin="0,0,8,0"/>
-                        <TextBox Grid.Column="1" Text="{Binding Settings.TexturesFolderPath, Mode=TwoWay}" Margin="0,0,8,0"/>
+                        <Grid Grid.Column="1" Margin="0,0,8,0">
+                            <TextBox x:Name="TexturesFolderPathTextBox" Text="{Binding Settings.TexturesFolderPath, Mode=TwoWay}"/>
+                            <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultTexturesFolderPath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=TexturesFolderPathTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
                         <Button Grid.Column="2" Width="60" Command="{Binding SelectTexturesFolderCommand}" HorizontalAlignment="Center" Height="35">
                             <ui:SymbolIcon Symbol="FolderOpen20"/>
                         </Button>
@@ -157,7 +171,21 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Sounds config file" Margin="0,0,8,0"/>
-                        <TextBox Grid.Column="1" Text="{Binding Settings.SoundsConfigFilePath, Mode=TwoWay}" Margin="0,0,8,0"/>
+                        <Grid Grid.Column="1" Margin="0,0,8,0">
+                            <TextBox x:Name="SoundsConfigFilePathTextBox" Text="{Binding Settings.SoundsConfigFilePath, Mode=TwoWay}"/>
+                            <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultSoundsConfigFilePath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=SoundsConfigFilePathTextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
                         <Button Grid.Column="2" Width="60" Command="{Binding SelectSoundsConfigCommand}" HorizontalAlignment="Center" Height="35">
                             <ui:SymbolIcon Symbol="FolderOpen20"/>
                         </Button>
@@ -171,7 +199,21 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Sounds folder" Margin="0,0,8,0"/>
-                        <TextBox Grid.Column="1" Text="{Binding Settings.SoundsFolderPath, Mode=TwoWay}" Margin="0,0,8,0"/>
+                        <Grid Grid.Column="1" Margin="0,0,8,0">
+                            <TextBox x:Name="SoundsFolderPathTextbox" Text="{Binding Settings.SoundsFolderPath, Mode=TwoWay}"/>
+                            <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultSoundsFolderPath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=SoundsFolderPathTextbox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
                         <Button Grid.Column="2" Width="60" Command="{Binding SelectSoundsFolderCommand}" HorizontalAlignment="Center" Height="35">
                             <ui:SymbolIcon Symbol="FolderOpen20"/>
                         </Button>
@@ -199,7 +241,21 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Icons folder" Margin="0,0,8,0"/>
-                        <TextBox Grid.Column="1" Text="{Binding Settings.ItemIconsPath, Mode=TwoWay}" Margin="0,0,8,0"/>
+                        <Grid Grid.Column="1" Margin="0,0,8,0">
+                            <TextBox x:Name="ItemIconsFolderPathTextbox" Text="{Binding Settings.ItemIconsFolderPath, Mode=TwoWay}"/>
+                            <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultItemIconsFolderPath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=ItemIconsFolderPathTextbox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
                         <Button Grid.Column="2" Width="60" Command="{Binding SelectItemIconsCommand}" HorizontalAlignment="Center" Height="35">
                             <ui:SymbolIcon Symbol="FolderOpen20"/>
                         </Button>
@@ -227,7 +283,21 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Spec_Item file" Margin="0,0,8,0"/>
-                        <TextBox Grid.Column="1" Text="{Binding Settings.PropItemFilePath, Mode=TwoWay}" Margin="0,0,8,0"/>
+                        <Grid Grid.Column="1" Margin="0,0,8,0">
+                            <TextBox x:Name="PropItemFilePathTextbox" Text="{Binding Settings.PropItemFilePath, Mode=TwoWay}"/>
+                            <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultPropItemFilePath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=PropItemFilePathTextbox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
                         <Button Grid.Column="2" Width="60" Command="{Binding SelectPropFileCommand}" HorizontalAlignment="Center" Height="35">
                             <ui:SymbolIcon Symbol="FolderOpen20"/>
                         </Button>
@@ -241,7 +311,21 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropItem.txt file" Margin="0,0,8,0"/>
-                        <TextBox Grid.Column="1" Text="{Binding Settings.PropItemTxtFilePath, Mode=TwoWay}" Margin="0,0,8,0" Cursor="IBeam"/>
+                        <Grid Grid.Column="1" Margin="0,0,8,0">
+                            <TextBox x:Name="PropItemTxtFilePathTextbox" Text="{Binding Settings.PropItemTxtFilePath, Mode=TwoWay}" Cursor="IBeam"/>
+                            <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultPropItemTxtFilePath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=PropItemTxtFilePathTextbox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
                         <Button Grid.Column="2" Width="60" Command="{Binding SelectTextFileCommand}" HorizontalAlignment="Center" Height="35">
                             <ui:SymbolIcon Symbol="FolderOpen20"/>
                         </Button>
@@ -269,7 +353,21 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMover file" Margin="0,0,8,0"/>
-                        <TextBox Grid.Column="1" Margin="0,0,8,0" Text="{Binding Settings.PropMoverFilePath, Mode=TwoWay}"/>
+                        <Grid Grid.Column="1" Margin="0,0,8,0">
+                            <TextBox x:Name="PropMoverFilePathTextbox" Text="{Binding Settings.PropMoverFilePath, Mode=TwoWay}"/>
+                            <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultPropMoverFilePath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=PropMoverFilePathTextbox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
                         <Button Grid.Column="2" Width="60" Command="{Binding SelectPropMoverFileCommand}" HorizontalAlignment="Center" Height="35">
                             <ui:SymbolIcon Symbol="FolderOpen20"/>
                         </Button>
@@ -283,7 +381,21 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMover.txt file" Margin="0,0,8,0"/>
-                        <TextBox Grid.Column="1" Margin="0,0,8,0" Text="{Binding Settings.PropMoverTxtFilePath, Mode=TwoWay}"/>
+                        <Grid Grid.Column="1" Margin="0,0,8,0">
+                            <TextBox x:Name="PropMoverTxtFilePathTextbox" Text="{Binding Settings.PropMoverTxtFilePath, Mode=TwoWay}"/>
+                            <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultPropMoverTxtFilePath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=PropMoverTxtFilePathTextbox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
                         <Button Grid.Column="2" Width="60" Command="{Binding SelectPropMoverTextFileCommand}" HorizontalAlignment="Center" Height="35">
                             <ui:SymbolIcon Symbol="FolderOpen20"/>
                         </Button>
@@ -297,7 +409,21 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMoverEx file" Margin="0,0,8,0"/>
-                        <TextBox Grid.Column="1" Margin="0,0,8,0" IsHitTestVisible="False" Text="{Binding Settings.PropMoverExFilePath, Mode=TwoWay}"/>
+                        <Grid Grid.Column="1" Margin="0,0,8,0">
+                            <TextBox x:Name="PropMoverExFilePathTextbox" IsHitTestVisible="False" Text="{Binding Settings.PropMoverExFilePath, Mode=TwoWay}"/>
+                            <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultPropMoverExFilePath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=PropMoverExFilePathTextbox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
                         <Button Grid.Column="2" Width="60" Command="{Binding SelectPropMoverExFileCommand}" HorizontalAlignment="Center" Height="35">
                             <ui:SymbolIcon Symbol="FolderOpen20"/>
                         </Button>

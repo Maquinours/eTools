@@ -40,7 +40,7 @@ namespace eTools_Ultimate.Services
 
             using (Scanner scanner = new Scanner())
             {
-                string filePath = settings.PropItemFilePath;
+                string filePath = settings.PropItemFilePath ?? settings.DefaultPropItemFilePath;
                 scanner.Load(filePath);
                 while (true)
                 {

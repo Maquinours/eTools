@@ -61,6 +61,15 @@ namespace eTools_Ultimate.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select the client folder.
+        /// </summary>
+        internal static string SelectClientFolder {
+            get {
+                return ResourceManager.GetString("SelectClientFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Select the icons folder.
         /// </summary>
         internal static string SelectIconsFolder {

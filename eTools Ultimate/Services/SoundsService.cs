@@ -25,7 +25,7 @@ namespace eTools_Ultimate.Services
         {
             this.Sounds.Clear();
 
-            string filePath = Settings.Instance.SoundsConfigFilePath;
+            string filePath = Settings.Instance.SoundsConfigFilePath ?? Settings.Instance.DefaultSoundsConfigFilePath;
             if (!File.Exists(filePath))
                 throw new FileNotFoundException($"File not found: {filePath}");
 
@@ -46,7 +46,7 @@ namespace eTools_Ultimate.Services
         {
             if (!Sounds.TryGetValue(id, out string? fileName)) throw new SoundConfigNotFoundException(id);
 
-            string filePath = $@"{Settings.Instance.SoundsFolderPath}{fileName}";
+            string filePath = $@"{Settings.Instance.SoundsFolderPath ?? Settings.Instance.DefaultSoundsFolderPath}{fileName}";
             if (!File.Exists(filePath))
                 throw new FileNotFoundException($"Sound file not found: {filePath}");
 

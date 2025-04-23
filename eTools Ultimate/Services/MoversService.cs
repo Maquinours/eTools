@@ -54,7 +54,7 @@ namespace eTools_Ultimate.Services
 
             using (Scanner scanner = new Scanner())
             {
-                string filePath = settings.PropMoverFilePath;
+                string filePath = settings.PropMoverFilePath ?? settings.DefaultPropMoverFilePath;
                 scanner.Load(filePath);
                 while (true)
                 {

@@ -14,6 +14,7 @@ namespace eTools_Ultimate.Services
         // General settings
         internal const string ResourcesVersion = "ResourcesVersion";
         internal const string ResourcesPath = "ResourcesPath";
+        internal const string ClientPath = "ClientPath";
         internal const string IconsPath = "IconsPath";
         internal const string TexturesPath = "TexturesPath";
         internal const string SoundsConfigPath = "SoundsConfigPath";
@@ -39,64 +40,72 @@ namespace eTools_Ultimate.Services
         {
             Settings.Instance.PropertyChanged -= SettingsChanged;
 
-            using (Scanner scanner = new Scanner())
+            string filePath = SettingsService.SettingsFilePath;
+
+            if (File.Exists(filePath))
             {
-                scanner.Load(SettingsService.SettingsFilePath);
-                while(true)
+                using (Scanner scanner = new Scanner())
                 {
-                    scanner.GetToken();
-                    if (scanner.EndOfStream) break;
-
-                    switch(scanner.Token)
+                    scanner.Load(filePath);
+                    while (true)
                     {
-                        // General settings
-                        case SettingsKeywords.ResourcesVersion:
-                            Settings.Instance.ResourcesVersion = scanner.GetNumber();
-                            break;
-                        case SettingsKeywords.ResourcesPath:
-                            Settings.Instance.ResourcesFolderPath = scanner.GetToken();
-                            break;
-                        case SettingsKeywords.IconsPath:
-                            Settings.Instance.IconsFolderPath = scanner.GetToken();
-                            break;
-                        case SettingsKeywords.TexturesPath:
-                            Settings.Instance.TexturesFolderPath = scanner.GetToken();
-                            break;
-                        case SettingsKeywords.SoundsConfigPath:
-                            Settings.Instance.SoundsConfigFilePath = scanner.GetToken();
-                            break;
-                        case SettingsKeywords.SoundsPath:
-                            Settings.Instance.SoundsFolderPath = scanner.GetToken();
-                            break;
+                        scanner.GetToken();
+                        if (scanner.EndOfStream) break;
 
-                        // Movers settings
-                        case SettingsKeywords.PropMoverPath:
-                            Settings.Instance.PropMoverFilePath = scanner.GetToken();
-                            break;
-                        case SettingsKeywords.PropMoverTxtPath:
-                            Settings.Instance.PropMoverTxtFilePath = scanner.GetToken();
-                            break;
-                        case SettingsKeywords.PropMoverExPath:
-                            Settings.Instance.PropMoverExFilePath = scanner.GetToken();
-                            break;
-                        case SettingsKeywords.Mover64BitHp:
-                            Settings.Instance.Mover64BitHp = true;
-                            break;
-                        case SettingsKeywords.Mover64BitAtk:
-                            Settings.Instance.Mover64BitAtk = true;
-                            break;
+                        switch (scanner.Token)
+                        {
+                            // General settings
+                            case SettingsKeywords.ResourcesVersion:
+                                Settings.Instance.ResourcesVersion = scanner.GetNumber();
+                                break;
+                            case SettingsKeywords.ResourcesPath:
+                                Settings.Instance.ResourcesFolderPath = scanner.GetToken();
+                                break;
+                            case SettingsKeywords.ClientPath:
+                                Settings.Instance.ClientFolderPath = scanner.GetToken();
+                                break;
 
-                        // Items settings
-                        case SettingsKeywords.PropItemPath:
-                            Settings.Instance.PropItemFilePath = scanner.GetToken();
-                            break;
-                        case SettingsKeywords.PropItemTxtPath:
-                            Settings.Instance.PropItemTxtFilePath = scanner.GetToken();
-                            break;
+                            case SettingsKeywords.IconsPath:
+                                Settings.Instance.IconsFolderPath = scanner.GetToken();
+                                break;
+                            case SettingsKeywords.TexturesPath:
+                                Settings.Instance.TexturesFolderPath = scanner.GetToken();
+                                break;
+                            case SettingsKeywords.SoundsConfigPath:
+                                Settings.Instance.SoundsConfigFilePath = scanner.GetToken();
+                                break;
+                            case SettingsKeywords.SoundsPath:
+                                Settings.Instance.SoundsFolderPath = scanner.GetToken();
+                                break;
+
+                            // Movers settings
+                            case SettingsKeywords.PropMoverPath:
+                                Settings.Instance.PropMoverFilePath = scanner.GetToken();
+                                break;
+                            case SettingsKeywords.PropMoverTxtPath:
+                                Settings.Instance.PropMoverTxtFilePath = scanner.GetToken();
+                                break;
+                            case SettingsKeywords.PropMoverExPath:
+                                Settings.Instance.PropMoverExFilePath = scanner.GetToken();
+                                break;
+                            case SettingsKeywords.Mover64BitHp:
+                                Settings.Instance.Mover64BitHp = true;
+                                break;
+                            case SettingsKeywords.Mover64BitAtk:
+                                Settings.Instance.Mover64BitAtk = true;
+                                break;
+
+                            // Items settings
+                            case SettingsKeywords.PropItemPath:
+                                Settings.Instance.PropItemFilePath = scanner.GetToken();
+                                break;
+                            case SettingsKeywords.PropItemTxtPath:
+                                Settings.Instance.PropItemTxtFilePath = scanner.GetToken();
+                                break;
+                        }
                     }
                 }
             }
-
             Settings.Instance.PropertyChanged += SettingsChanged;
         }
 
@@ -107,23 +116,34 @@ namespace eTools_Ultimate.Services
                 // General settings
                 writer.WriteLine($"{SettingsKeywords.ResourcesVersion}\t\"{Settings.Instance.ResourcesVersion}\"");
                 writer.WriteLine($"{SettingsKeywords.ResourcesPath}\t\"{Settings.Instance.ResourcesFolderPath}\"");
-                writer.WriteLine($"{SettingsKeywords.IconsPath}\t\"{Settings.Instance.IconsFolderPath}\"");
-                writer.WriteLine($"{SettingsKeywords.TexturesPath}\t\"{Settings.Instance.TexturesFolderPath}\"");
-                writer.WriteLine($"{SettingsKeywords.SoundsConfigPath}\t\"{Settings.Instance.SoundsConfigFilePath}\"");
-                writer.WriteLine($"{SettingsKeywords.SoundsPath}\t\"{Settings.Instance.SoundsFolderPath}\"");
+                writer.WriteLine($"{SettingsKeywords.ClientPath}\t\"{Settings.Instance.ClientFolderPath}\"");
+
+                if (Settings.Instance.IconsFolderPath != null)
+                    writer.WriteLine($"{SettingsKeywords.IconsPath}\t\"{Settings.Instance.IconsFolderPath}\"");
+                if (Settings.Instance.TexturesFolderPath != null)
+                    writer.WriteLine($"{SettingsKeywords.TexturesPath}\t\"{Settings.Instance.TexturesFolderPath}\"");
+                if (Settings.Instance.SoundsConfigFilePath != null)
+                    writer.WriteLine($"{SettingsKeywords.SoundsConfigPath}\t\"{Settings.Instance.SoundsConfigFilePath}\"");
+                if (Settings.Instance.SoundsFolderPath != null)
+                    writer.WriteLine($"{SettingsKeywords.SoundsPath}\t\"{Settings.Instance.SoundsFolderPath}\"");
 
                 // Movers settings
-                writer.WriteLine($"{SettingsKeywords.PropMoverPath}\t\"{Settings.Instance.PropMoverFilePath}\"");
-                writer.WriteLine($"{SettingsKeywords.PropMoverTxtPath}\t\"{Settings.Instance.PropMoverTxtFilePath}\"");
-                writer.WriteLine($"{SettingsKeywords.PropMoverExPath}\t\"{Settings.Instance.PropMoverExFilePath}\"");
+                if (Settings.Instance.PropMoverFilePath != null)
+                    writer.WriteLine($"{SettingsKeywords.PropMoverPath}\t\"{Settings.Instance.PropMoverFilePath}\"");
+                if (Settings.Instance.PropMoverTxtFilePath != null)
+                    writer.WriteLine($"{SettingsKeywords.PropMoverTxtPath}\t\"{Settings.Instance.PropMoverTxtFilePath}\"");
+                if (Settings.Instance.PropMoverExFilePath != null)
+                    writer.WriteLine($"{SettingsKeywords.PropMoverExPath}\t\"{Settings.Instance.PropMoverExFilePath}\"");
                 if(Settings.Instance.Mover64BitAtk)
                     writer.WriteLine(SettingsKeywords.Mover64BitAtk);
                 if (Settings.Instance.Mover64BitHp)
                     writer.WriteLine(SettingsKeywords.Mover64BitHp);
 
                 // Items settings
-                writer.WriteLine($"{SettingsKeywords.PropItemPath}\t\"{Settings.Instance.PropItemFilePath}\"");
-                writer.WriteLine($"{SettingsKeywords.PropItemTxtPath}\t\"{Settings.Instance.PropItemTxtFilePath}\"");
+                if (Settings.Instance.PropItemFilePath != null)
+                    writer.WriteLine($"{SettingsKeywords.PropItemPath}\t\"{Settings.Instance.PropItemFilePath}\"");
+                if (Settings.Instance.PropItemTxtFilePath != null)
+                    writer.WriteLine($"{SettingsKeywords.PropItemTxtPath}\t\"{Settings.Instance.PropItemTxtFilePath}\"");
             }
         }
 

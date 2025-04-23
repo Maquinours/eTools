@@ -17,29 +17,51 @@ namespace eTools_Ultimate.Models
         // General settings
         private int _resourcesVersion = 19;
         private string _resourcesFolderPath = System.AppDomain.CurrentDomain.BaseDirectory;
-        private string _iconsFolderPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Item\";
-        private string _texturesFolderPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Model\Texture\";
-        private string _soundsConfigFilePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Client\sound.inc";
-        private string _soundsFolderPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Sound\";
+        private string _clientFolderPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Client\";
+
+        private string? _iconsFolderPath;
+        private string? _texturesFolderPath;
+        private string? _soundsConfigFilePath;
+        private string? _soundsFolderPath;
 
         // Movers settings
-        private string _propMoverFilePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}propMover.txt";
-        private string _propMoverTxtFilePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}propMover.txt.txt";
-        private string _propMoverExFilePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}propMoverEx.inc";
+        private string? _propMoverFilePath;
+        private string? _propMoverTxtFilePath;
+        private string? _propMoverExFilePath;
         private bool _mover64BitHp = false;
         private bool _mover64BitAtk = false;
 
         // Items settings
-        private string _propItemFilePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}spec_Item.txt";
-        private string _propItemTxtFilePath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}propItem.txt";
-        private string _itemIconsPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Item\";
-        private string _itemPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Item\";
+        private string? _propItemFilePath;
+        private string? _propItemTxtFilePath;
+        private string? _itemIconsFolderPath;
+        private string? _itemPath;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            switch(propertyName)
+            {
+                case nameof(this.ResourcesFolderPath):
+                    NotifyPropertyChanged(nameof(this.DefaultTexturesFolderPath));
+                    NotifyPropertyChanged(nameof(this.DefaultPropMoverFilePath));
+                    NotifyPropertyChanged(nameof(this.DefaultPropMoverTxtFilePath));
+                    NotifyPropertyChanged(nameof(this.DefaultPropMoverExFilePath));
+                    NotifyPropertyChanged(nameof(this.DefaultPropItemFilePath));
+                    NotifyPropertyChanged(nameof(this.DefaultPropItemTxtFilePath));
+                    break;
+                case nameof(this.ClientFolderPath):
+                    NotifyPropertyChanged(nameof(this.DefaultIconsFolderPath));
+                    NotifyPropertyChanged(nameof(this.DefaultSoundsConfigFilePath));
+                    NotifyPropertyChanged(nameof(this.DefaultSoundsFolderPath));
+                    NotifyPropertyChanged(nameof(this.DefaultItemIconsFolderPath));
+                    break;
+                case nameof(this.ResourcesVersion):
+                    NotifyPropertyChanged(nameof(this.DefaultPropItemFilePath));
+                    break;
+            }
         }
 
         public static Settings Instance
@@ -58,44 +80,62 @@ namespace eTools_Ultimate.Models
             get => this._resourcesFolderPath;
             set { if (this.ResourcesFolderPath != value) { this._resourcesFolderPath = value + (!value.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar : string.Empty); this.NotifyPropertyChanged(); } }
         }
-        public string IconsFolderPath
+        public string ClientFolderPath
+        {
+            get => this._clientFolderPath;
+            set { if (this.ClientFolderPath != value) { this._clientFolderPath = value + (!value.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar : string.Empty); this.NotifyPropertyChanged(); } }
+        }
+
+        public string? IconsFolderPath
         {
             get => this._iconsFolderPath;
-            set { if (this.IconsFolderPath != value) { this._iconsFolderPath = value + (!value.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar : string.Empty); this.NotifyPropertyChanged(); } }
+            set { if (this.IconsFolderPath != value) { this._iconsFolderPath = string.IsNullOrWhiteSpace(value) ? null : value + (!value.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar : string.Empty); this.NotifyPropertyChanged(); } }
         }
-        public string TexturesFolderPath
+        public string DefaultIconsFolderPath => $"{this.ClientFolderPath}Icon{Path.DirectorySeparatorChar}";
+
+        public string? TexturesFolderPath
         {
             get => this._texturesFolderPath;
-            set { if (this.TexturesFolderPath != value) { this._texturesFolderPath = value + (!value.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar : string.Empty); this.NotifyPropertyChanged(); } }
+            set { if (this.TexturesFolderPath != value) { this._texturesFolderPath = string.IsNullOrWhiteSpace(value) ? null : value + (!value.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar : string.Empty); this.NotifyPropertyChanged(); } }
         }
+        public string DefaultTexturesFolderPath => $"{this.ResourcesFolderPath}Models{Path.DirectorySeparatorChar}Textures{Path.DirectorySeparatorChar}";
 
-        public string SoundsConfigFilePath
+        public string? SoundsConfigFilePath
         {
             get => this._soundsConfigFilePath;
-            set { if (this.SoundsConfigFilePath != value) { this._soundsConfigFilePath = value; this.NotifyPropertyChanged(); } }
+            set { if (this.SoundsConfigFilePath != value) { this._soundsConfigFilePath = string.IsNullOrWhiteSpace(value) ? null : value; this.NotifyPropertyChanged(); } }
         }
-        public string SoundsFolderPath
+        public string DefaultSoundsConfigFilePath => $"{this.ClientFolderPath}Client{Path.DirectorySeparatorChar}sound.inc";
+
+        public string? SoundsFolderPath
         {
             get => this._soundsFolderPath;
-            set { if(this.SoundsFolderPath != value) { this._soundsFolderPath = value + (!value.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar : string.Empty); this.NotifyPropertyChanged(); } }
+            set { if(this.SoundsFolderPath != value) { this._soundsFolderPath = string.IsNullOrWhiteSpace(value) ? null : value + (!value.EndsWith(Path.DirectorySeparatorChar.ToString()) ? Path.DirectorySeparatorChar : string.Empty); this.NotifyPropertyChanged(); } }
         }
+        public string DefaultSoundsFolderPath => $"{this.ClientFolderPath}Sound{Path.DirectorySeparatorChar}";
 
         // Movers settings
-        public string PropMoverFilePath
+        public string? PropMoverFilePath
         {
             get => this._propMoverFilePath;
-            set { if (this.PropMoverFilePath != value) { this._propMoverFilePath = value; this.NotifyPropertyChanged(); } }
+            set { if (this.PropMoverFilePath != value) { this._propMoverFilePath = string.IsNullOrWhiteSpace(value) ? null : value; this.NotifyPropertyChanged(); } }
         }
-        public string PropMoverTxtFilePath
+        public string DefaultPropMoverFilePath => $"{this.ResourcesFolderPath}propMover.txt";
+
+        public string? PropMoverTxtFilePath
         {
             get => this._propMoverTxtFilePath;
-            set { if (this.PropMoverTxtFilePath != value) { this._propMoverTxtFilePath = value; this.NotifyPropertyChanged(); } }
+            set { if (this.PropMoverTxtFilePath != value) { this._propMoverTxtFilePath = string.IsNullOrWhiteSpace(value) ? null : value; this.NotifyPropertyChanged(); } }
         }
-        public string PropMoverExFilePath
+        public string DefaultPropMoverTxtFilePath => $"{this.ResourcesFolderPath}propMover.txt.txt";
+
+        public string? PropMoverExFilePath
         {
             get => this._propMoverExFilePath;
-            set { if (this.PropMoverExFilePath != value) { this._propMoverExFilePath = value; this.NotifyPropertyChanged(); } }
+            set { if (this.PropMoverExFilePath != value) { this._propMoverExFilePath = string.IsNullOrWhiteSpace(value) ? null : value; this.NotifyPropertyChanged(); } }
         }
+        public string DefaultPropMoverExFilePath => $"{this.ResourcesFolderPath}propMoverEx.inc";
+
         public bool Mover64BitHp
         {
             get => this._mover64BitHp;
@@ -108,28 +148,32 @@ namespace eTools_Ultimate.Models
         }
 
         // Items settings
-        public string PropItemFilePath
+        public string? PropItemFilePath
         {
             get => this._propItemFilePath;
-            set { if (this.PropItemFilePath != value) { this._propItemFilePath = value; this.NotifyPropertyChanged(); } }
+            set { if (this.PropItemFilePath != value) { this._propItemFilePath = string.IsNullOrWhiteSpace(value) ? null : value; this.NotifyPropertyChanged(); } }
         }
-        public string PropItemTxtFilePath
+        public string DefaultPropItemFilePath => $"{this.ResourcesFolderPath}{(this.ResourcesVersion >= 16 ? "Spec_Item" : "propItem")}.txt";
+
+        public string? PropItemTxtFilePath
         {
             get => this._propItemTxtFilePath;
-            set { if (this.PropItemTxtFilePath != value) { this._propItemTxtFilePath = value; this.NotifyPropertyChanged(); } }
+            set { if (this.PropItemTxtFilePath != value) { this._propItemTxtFilePath = string.IsNullOrWhiteSpace(value) ? null : value; this.NotifyPropertyChanged(); } }
         }
+        public string DefaultPropItemTxtFilePath => $"{this.ResourcesFolderPath}propItem.txt.txt";
 
         // Neue Item-Properties
-        public string ItemIconsPath
+        public string? ItemIconsFolderPath
         {
-            get => this._itemIconsPath;
-            set { if (this.ItemIconsPath != value) { this._itemIconsPath = value; this.NotifyPropertyChanged(); } }
+            get => this._itemIconsFolderPath;
+            set { if (this.ItemIconsFolderPath != value) { this._itemIconsFolderPath = string.IsNullOrWhiteSpace(value) ? null : value; this.NotifyPropertyChanged(); } }
         }
-        
-        public string ItemPath
+        public string? DefaultItemIconsFolderPath => $"{this.ClientFolderPath}Item{Path.DirectorySeparatorChar}";
+
+        public string? ItemPath
         {
             get => this._itemPath;
-            set { if (this.ItemPath != value) { this._itemPath = value; this.NotifyPropertyChanged(); } }
+            set { if (this.ItemPath != value) { this._itemPath = string.IsNullOrWhiteSpace(value) ? null : value; this.NotifyPropertyChanged(); } }
         }
     }
 }

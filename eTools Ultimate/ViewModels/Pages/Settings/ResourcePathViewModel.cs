@@ -70,6 +70,12 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
+        private void SelectClientFolder()
+        {
+            Settings.ClientFolderPath = FileFolderSelector.SelectFolder(Settings.ClientFolderPath, title: Resources.Texts.SelectClientFolder);
+        }
+
+        [RelayCommand]
         private void SelectIconsFolder()
         {
             Settings.IconsFolderPath = FileFolderSelector.SelectFolder(Settings.IconsFolderPath, title: Resources.Texts.SelectIconsFolder);
