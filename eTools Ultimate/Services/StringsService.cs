@@ -24,7 +24,12 @@ namespace eTools_Ultimate.Services
             this.Strings.Clear();
 
             Settings settings = Settings.Instance;
-            string[] filesList = { settings.PropMoverTxtFilePath ?? settings.DefaultPropMoverTxtFilePath, settings.PropItemTxtFilePath ?? settings.DefaultPropItemTxtFilePath };
+            string[] filesList = 
+                [
+                settings.PropMoverTxtFilePath ?? settings.DefaultPropMoverTxtFilePath,
+                settings.PropItemTxtFilePath ?? settings.DefaultPropItemTxtFilePath,
+                settings.PropSkillTxtFilePath ?? settings.DefaultPropSkillTxtFilePath
+                ];
 
             foreach (string filePath in filesList)
             {

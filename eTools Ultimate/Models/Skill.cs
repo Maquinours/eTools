@@ -1,10 +1,16 @@
-﻿using System;
+﻿using DDSImageParser;
+using eTools_Ultimate.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using System.Collections.Specialized;
 
 namespace eTools_Ultimate.Models
 {
@@ -292,7 +298,98 @@ namespace eTools_Ultimate.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private void Prop_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(SkillProp.SzName):
+                    this.NotifyPropertyChanged(nameof(this.Name));
+                    break;
+                case nameof(ItemProp.SzIcon):
+                    this.NotifyPropertyChanged(nameof(this.Icon));
+                    break;
+            }
+        }
+
+        private void ProjectStrings_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (this.Prop == null) return;
+            if (e.Action == NotifyCollectionChangedAction.Reset)
+            {
+                NotifyPropertyChanged(nameof(this.Name));
+            }
+            else
+            {
+                if ((e.OldItems != null && e.OldItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)) || (e.NewItems != null && e.NewItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)))
+                    NotifyPropertyChanged(nameof(this.Name));
+            }
+        }
+
         private SkillProp _prop;
-        public SkillProp Prop { get => _prop; set { if (_prop != value) { _prop = value; NotifyPropertyChanged(); } } }
+        public SkillProp Prop
+        {
+            get => _prop;
+            set
+            {
+                if (value != this.Prop)
+                {
+                    if (this.Prop != null)
+                        this.Prop.PropertyChanged -= Prop_PropertyChanged;
+
+                    this._prop = value;
+                    this.Prop.PropertyChanged += Prop_PropertyChanged;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public string Name
+        {
+            get => StringsService.Instance.GetString(Prop.SzName);
+            set { StringsService.Instance.ChangeStringValue(Prop.SzName, value); }
+        }
+        public ImageSource? Icon
+        {
+            get
+            {
+                string filePath = $@"X:\Nouveau client 2022\Client\Icon\{this.Prop.SzIcon}";
+                if (!File.Exists(filePath))
+                {
+                    return null;
+                    //using (var ms = new MemoryStream(ItemsEditor.Resources.Images.NotFoundImage))
+                    //{
+                    //    return Image.FromStream(ms);
+                    //}
+                }
+                var bitmap = new DDSImage(File.OpenRead(filePath)).BitmapImage;
+
+                // Bitmap to bitmap image
+                using (var memory = new MemoryStream())
+                {
+                    bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+                    memory.Position = 0;
+
+                    var bitmapImage = new BitmapImage();
+                    bitmapImage.BeginInit();
+                    bitmapImage.StreamSource = memory;
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmapImage.EndInit();
+                    bitmapImage.Freeze();
+                    return bitmapImage;
+                }
+            }
+        }
+
+        public Skill()
+        {
+            StringsService.Instance.Strings.CollectionChanged += ProjectStrings_CollectionChanged;
+        }
+
+        public void Dispose()
+        {
+            StringsService.Instance.Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
+            if (this.Prop != null)
+                this.Prop.PropertyChanged -= Prop_PropertyChanged;
+        }
     }
 }

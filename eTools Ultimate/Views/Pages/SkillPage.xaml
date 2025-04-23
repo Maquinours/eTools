@@ -447,7 +447,7 @@
                     <TextBlock Text="{Binding Name}"
                             FontWeight="SemiBold"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                    <TextBlock Text="{Binding Id}"
+                    <TextBlock Text="{Binding Prop.DwId}"
                             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                             FontSize="12"/>
                 </StackPanel>
@@ -493,7 +493,7 @@
                           Background="Transparent"
                           ItemTemplate="{StaticResource SkillListTemplate}"
                           SelectionChanged="SkillsListView_SelectionChanged"
-                          ItemsSource="{Binding ViewModel.ItemsView}"
+                          ItemsSource="{Binding ViewModel.SkillsView}"
                           IsSynchronizedWithCurrentItem="True">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">

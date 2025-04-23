@@ -12,11 +12,11 @@ using System;
 
 namespace eTools_Ultimate.Views.Pages
 {
-    public partial class SkillPage : System.Windows.Controls.Page, INavigableView<DataViewModel>
+    public partial class SkillPage : System.Windows.Controls.Page, INavigableView<SkillsViewModel>
     {
-        public DataViewModel ViewModel { get; }
+        public SkillsViewModel ViewModel { get; }
 
-        public SkillPage(DataViewModel viewModel)
+        public SkillPage(SkillsViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = this;

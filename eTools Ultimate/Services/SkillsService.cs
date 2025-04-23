@@ -17,14 +17,20 @@ namespace eTools_Ultimate.Services
         private readonly ObservableCollection<Skill> skills = [];
         public ObservableCollection<Skill> Skills => skills;
 
+        private void ClearSkills()
+        {
+            foreach (Skill skill in this.skills)
+                skill.Dispose();
+            this.skills.Clear();
+        }
+
         public void Load()
         {
-            this.skills.Clear();
+            this.ClearSkills();
 
             Settings settings = Settings.Instance;
 
-            // Maybe make it a settings property
-            string filePath = $"{Settings.Instance.ResourcesFolderPath}propSkill.txt";
+            string filePath = settings.PropSkillFilePath ?? settings.DefaultPropSkillFilePath;
 
             using (Scanner scanner = new Scanner())
             {
@@ -176,6 +182,12 @@ namespace eTools_Ultimate.Services
                                 prop.BCanUseActionSlot = scanner.GetNumber();
                         }
                     }
+
+                    Skill skill = new Skill()
+                    {
+                        Prop = prop
+                    };
+                    this.Skills.Add(skill);
                 }
             }
         }
