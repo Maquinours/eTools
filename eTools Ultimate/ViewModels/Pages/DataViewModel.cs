@@ -18,7 +18,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         private string _searchText = string.Empty;
 
         [ObservableProperty]
-        public ICollectionView _itemsView = CollectionViewSource.GetDefaultView(ItemsService.Instance.Items);
+        private ICollectionView _itemsView = CollectionViewSource.GetDefaultView(ItemsService.Instance.Items);
 
         public string SearchText
         {
