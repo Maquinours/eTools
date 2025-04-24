@@ -208,13 +208,11 @@
                                      Text="{Binding Prop.SzIcon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <ui:Button Grid.Column="1"
                                     Content="..."
-                                    VerticalAlignment="Center"
-                                    Margin="5,0,0,0"/>
+                                    Margin="5,0,0,0" Height="36"/>
                             <Border Grid.Column="2"
                                     Width="32"
                                     Height="32"
                                     Margin="10,0,0,0"
-                                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                                     BorderThickness="1" Cursor="">
                                 <Image x:Name="ItemIconPreview"
 
@@ -695,7 +693,7 @@
                         <TextBox Grid.Row="1"
                                 x:Name="TypeTextBox"/>
                     </Grid>
-                    
+
                     <!-- Effect 1 -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -726,7 +724,7 @@
                                     Margin="5,0,0,0"/>
                         </Grid>
                     </Grid>
-                    
+
                     <!-- Effect 2 -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -757,7 +755,7 @@
                                     Margin="5,0,0,0"/>
                         </Grid>
                     </Grid>
-                    
+
                     <!-- Effect 3 -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -788,7 +786,7 @@
                                     Margin="5,0,0,0"/>
                         </Grid>
                     </Grid>
-                    
+
                     <!-- Effect 4 -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -819,7 +817,7 @@
                                     Margin="5,0,0,0"/>
                         </Grid>
                     </Grid>
-                    
+
                     <!-- Effect 5 -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -850,7 +848,7 @@
                                     Margin="5,0,0,0"/>
                         </Grid>
                     </Grid>
-                    
+
                     <!-- Effect 6 -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -1436,8 +1434,8 @@
                     </Grid>
                 </UniformGrid>
             </StackPanel>
-        </DataTemplate>        
-         
+        </DataTemplate>
+
         <!-- DataTemplate: Flags & Conditions Section -->
         <DataTemplate x:Key="FlagsConditionsSectionTemplate">
             <StackPanel>
@@ -1594,7 +1592,7 @@
                                 Maximum="999"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
-                    
+
                     <!-- Teleport to the Nearest town -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -1617,7 +1615,7 @@
                                 Content=""
                                 VerticalAlignment="Center"/>
                     </Grid>
-                    
+
                     <!-- World -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -1644,7 +1642,7 @@
                             <ComboBoxItem Content="Azria"/>
                         </ComboBox>
                     </Grid>
-                    
+
                     <!-- Position -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -1668,13 +1666,13 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <ui:NumberBox Grid.Column="0" x:Name="XPositionNumberBox" Margin="0,0,5,0" Text="X"/>
                             <ui:NumberBox Grid.Column="1" x:Name="YPositionNumberBox" Margin="5,0,5,0" Text="Y"/>
                             <ui:NumberBox Grid.Column="2" x:Name="ZPositionNumberBox" Margin="5,0,0,0" Text="Z"/>
                         </Grid>
                     </Grid>
-                    
+
                     <!-- Angle -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -1698,7 +1696,7 @@
                                 Maximum="360"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
-                    
+
                     <!-- Chaotic spawn key -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -1751,7 +1749,7 @@
                                 Minimum="0"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
-                    
+
                     <!-- Time -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -1776,7 +1774,7 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <ui:NumberBox Grid.Column="0" 
                                           x:Name="MinutesNumberBox" 
                                           Minimum="0"
@@ -1796,7 +1794,7 @@
                                        Margin="5,0,0,0"/>
                         </Grid>
                     </Grid>
-                    
+
                     <!-- SFX -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -1920,7 +1918,7 @@
                              Appearance="Danger"
                              Click="DeleteButton_Click"/>
                 </StackPanel>
-                
+
                 <!-- Formulare -->
                 <StackPanel Margin="20">
                     <ContentControl Content="{Binding ViewModel.ItemsView}" ContentTemplate="{StaticResource GeneralSectionTemplate}"/>
