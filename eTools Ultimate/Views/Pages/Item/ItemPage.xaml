@@ -214,7 +214,7 @@
                                     Width="32"
                                     Height="32"
                                     Margin="10,0,0,0"
-                                    BorderBrush="{DynamicResource CoIntrolElevationBorderBrush}"
+                                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                                     BorderThickness="1" Cursor="">
                                 <Image x:Name="ItemIconPreview"
 
@@ -223,30 +223,6 @@
                                 </Image>
                             </Border>
                         </Grid>
-                    </Grid>
-                    <!-- Penya Value -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Penya Value"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="In-game currency value"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="PenyaValueTextBox"
-                                Value="{Binding Prop.DwCost, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="2147483647"
-                                SpinButtonPlacementMode="Inline"/>
                     </Grid>
                     <!-- Tradeable & Shop-able -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -322,7 +298,7 @@
                         <TextBox Grid.Row="1"
                                 x:Name="PenyaPriceTextBox"/>
                     </Grid>
-                    <!-- Max durability -->
+                    <!-- Item durability -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -330,7 +306,7 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Max durability"
+                            <TextBlock Text="Item durability"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
@@ -340,47 +316,7 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <TextBox Grid.Row="1"
-                                x:Name="MaxDurabilityTextBox"/>
-                    </Grid>
-                    <!-- Abrasion per use -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Abrasion per use"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Durability decreased per use"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="AbrasionPerUseTextBox"/>
-                    </Grid>
-                    <!-- Maximum number of repairs -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Maximum number of repairs"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Maximum times the item can be repaired"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="MaxRepairsTextBox"/>
+                                x:Name="ItemDurabilityTextBox"/>
                     </Grid>
                 </UniformGrid>
             </StackPanel>
@@ -437,7 +373,7 @@
                         <TextBox Grid.Row="1"
                                 x:Name="RequiredItemLevelTextBox"/>
                     </Grid>
-                    <!-- Item rarity -->
+                    <!-- Level limit -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -445,24 +381,17 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Item rarity"
+                            <TextBlock Text="Level limit"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Rarity of the item"/>
+                                    <ToolTip Content="Level limit for the item"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="ItemRarityComboBox">
-                            <ComboBoxItem Content="Common"
-                                    IsSelected="True"/>
-                            <ComboBoxItem Content="Uncommon"/>
-                            <ComboBoxItem Content="Rare"/>
-                            <ComboBoxItem Content="Epic"/>
-                            <ComboBoxItem Content="Legendary"/>
-                        </ComboBox>
+                        <TextBox Grid.Row="1"
+                                x:Name="LevelLimitTextBox"/>
                     </Grid>
                     <!-- Usable flag -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -486,7 +415,7 @@
                                 OnContent="Yes"
                                 IsChecked="True"/>
                     </Grid>
-                    <!-- Level limit -->
+                    <!-- Minimum level limit -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -494,27 +423,7 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Level limit"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Level limit for the item"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="LevelLimitTextBox"/>
-                    </Grid>
-                    <!-- Minimum level required -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Minimum level required"
+                            <TextBlock Text="Minimum level limit"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
@@ -524,7 +433,7 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <TextBox Grid.Row="1"
-                                x:Name="MinLevelRequiredTextBox"/>
+                                x:Name="MinLevelLimitTextBox"/>
                     </Grid>
                     <!-- Maximum level limit -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -546,77 +455,17 @@
                         <TextBox Grid.Row="1"
                                 x:Name="MaxLevelLimitTextBox"/>
                     </Grid>
-                    <!-- Item group classification -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Item group classification"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Item group classification"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="ItemGroupClassificationTextBox"/>
-                    </Grid>
-                    <!-- Usage limit group -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Usage limit group"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Group defining usage limits"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="UsageLimitGroupTextBox"/>
-                    </Grid>
-                    <!-- Max duplication allowed -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Max duplication allowed"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Maximum number of duplicates allowed"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="MaxDuplicationAllowedTextBox"/>
-                    </Grid>
                 </UniformGrid>
             </StackPanel>
         </DataTemplate>
 
-        <!-- DataTemplate: Type & Classification Section -->
+        <!-- DataTemplate: Type Section -->
         <DataTemplate x:Key="TypeClassificationSectionTemplate">
             <StackPanel>
-                <TextBlock Text="Type &amp; Classification"
+                <TextBlock Text="Type"
                         Style="{StaticResource SectionHeaderStyle}"/>
                 <UniformGrid Columns="2">
-                    <!-- Primary item category -->
+                    <!-- Item Kind 1 -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -624,7 +473,7 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Primary item category"
+                            <TextBlock Text="Item Kind 1"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
@@ -634,9 +483,9 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ComboBox Grid.Row="1"
-                                x:Name="PrimaryItemCategoryComboBox"/>
+                                x:Name="ItemKind1ComboBox"/>
                     </Grid>
-                    <!-- Secondary category -->
+                    <!-- Item Kind 2 -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -644,7 +493,7 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Secondary category"
+                            <TextBlock Text="Item Kind 2"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
@@ -654,9 +503,9 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ComboBox Grid.Row="1"
-                                x:Name="SecondaryCategoryComboBox"/>
+                                x:Name="ItemKind2ComboBox"/>
                     </Grid>
-                    <!-- Subcategory / weapon type -->
+                    <!-- Item Kind 3 -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -664,7 +513,7 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Subcategory / weapon type"
+                            <TextBlock Text="Item Kind 3"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
@@ -674,127 +523,7 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ComboBox Grid.Row="1"
-                                x:Name="SubcategoryWeaponTypeComboBox"/>
-                    </Grid>
-                    <!-- Item type enum -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Item type enum"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Item type enum (_NONE, etc.)"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="ItemTypeEnumComboBox"/>
-                    </Grid>
-                    <!-- Weapon type -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Weapon type"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Weapon type (WT_MELEE_AXE, etc.)"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="WeaponTypeComboBox"/>
-                    </Grid>
-                    <!-- Main category -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Main category"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Main category (e.g. TYPE1_WEAPON)"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="MainCategoryComboBox"/>
-                    </Grid>
-                    <!-- Subcategory -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Subcategory"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Subcategory (e.g. TYPE2_WEAPON_ONEAXE)"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="SubcategoryComboBox"/>
-                    </Grid>
-                    <!-- Mesh / model group -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Mesh / model group"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Mesh / model group"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="MeshModelGroupTextBox"/>
-                    </Grid>
-                    <!-- Sub-part of model -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Sub-part of model"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Sub-part of model"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="SubPartOfModelTextBox"/>
+                                x:Name="ItemKind3ComboBox"/>
                     </Grid>
                 </UniformGrid>
             </StackPanel>
@@ -806,7 +535,7 @@
                 <TextBlock Text="Combat Stats &amp; Attributes"
                         Style="{StaticResource SectionHeaderStyle}"/>
                 <UniformGrid Columns="2">
-                    <!-- Minimum attack or stat bonus -->
+                    <!-- Minimum attack -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -814,19 +543,19 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Minimum attack or stat bonus"
+                            <TextBlock Text="Minimum attack"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Minimum attack or stat bonus value"/>
+                                    <ToolTip Content="Minimum attack value"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <TextBox Grid.Row="1"
-                                x:Name="MinAttackStatBonusTextBox"/>
+                                x:Name="MinAttackTextBox"/>
                     </Grid>
-                    <!-- Maximum attack or stat bonus -->
+                    <!-- Maximum attack -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -834,17 +563,17 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Maximum attack or stat bonus"
+                            <TextBlock Text="Maximum attack"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Maximum attack or stat bonus value"/>
+                                    <ToolTip Content="Maximum attack value"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <TextBox Grid.Row="1"
-                                x:Name="MaxAttackStatBonusTextBox"/>
+                                x:Name="MaxAttackTextBox"/>
                     </Grid>
                     <!-- Parry chance -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -926,7 +655,7 @@
                         <TextBox Grid.Row="1"
                                 x:Name="AttackRangeTextBox"/>
                     </Grid>
-                    <!-- Damage type modifier -->
+                    <!-- Parts -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -934,58 +663,225 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Damage type modifier"
+                            <TextBlock Text="Parts"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Modifier for damage type"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="DamageTypeModifierComboBox"/>
-                    </Grid>
-                    <!-- Stat reference for calculations -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Stat reference for calculations"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Character stat reference used for calculations"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="StatReferenceCalcComboBox"/>
-                    </Grid>
-                    <!-- Associated reference values -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Associated reference values"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Associated reference values for calculations"/>
+                                    <ToolTip Content="Item parts specification"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <TextBox Grid.Row="1"
-                                x:Name="AssociatedRefValuesTextBox"/>
+                                x:Name="PartsTextBox"/>
                     </Grid>
+                    <!-- Type -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Type"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Item type specification"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <TextBox Grid.Row="1"
+                                x:Name="TypeTextBox"/>
+                    </Grid>
+                    
+                    <!-- Effect 1 -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Effect 1"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="First effect applied by the item"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Grid.Column="0"
+                                    x:Name="Effect1ComboBox"
+                                    Margin="0,0,5,0"/>
+                            <TextBox Grid.Column="1"
+                                    x:Name="Effect1ValueTextBox"
+                                    Margin="5,0,0,0"/>
+                        </Grid>
+                    </Grid>
+                    
+                    <!-- Effect 2 -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Effect 2"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Second effect applied by the item"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Grid.Column="0"
+                                    x:Name="Effect2ComboBox"
+                                    Margin="0,0,5,0"/>
+                            <TextBox Grid.Column="1"
+                                    x:Name="Effect2ValueTextBox"
+                                    Margin="5,0,0,0"/>
+                        </Grid>
+                    </Grid>
+                    
+                    <!-- Effect 3 -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Effect 3"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Third effect applied by the item"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Grid.Column="0"
+                                    x:Name="Effect3ComboBox"
+                                    Margin="0,0,5,0"/>
+                            <TextBox Grid.Column="1"
+                                    x:Name="Effect3ValueTextBox"
+                                    Margin="5,0,0,0"/>
+                        </Grid>
+                    </Grid>
+                    
+                    <!-- Effect 4 -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Effect 4"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Fourth effect applied by the item"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Grid.Column="0"
+                                    x:Name="Effect4ComboBox"
+                                    Margin="0,0,5,0"/>
+                            <TextBox Grid.Column="1"
+                                    x:Name="Effect4ValueTextBox"
+                                    Margin="5,0,0,0"/>
+                        </Grid>
+                    </Grid>
+                    
+                    <!-- Effect 5 -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Effect 5"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Fifth effect applied by the item"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Grid.Column="0"
+                                    x:Name="Effect5ComboBox"
+                                    Margin="0,0,5,0"/>
+                            <TextBox Grid.Column="1"
+                                    x:Name="Effect5ValueTextBox"
+                                    Margin="5,0,0,0"/>
+                        </Grid>
+                    </Grid>
+                    
+                    <!-- Effect 6 -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Effect 6"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Sixth effect applied by the item"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <ComboBox Grid.Column="0"
+                                    x:Name="Effect6ComboBox"
+                                    Margin="0,0,5,0"/>
+                            <TextBox Grid.Column="1"
+                                    x:Name="Effect6ValueTextBox"
+                                    Margin="5,0,0,0"/>
+                        </Grid>
+                    </Grid>
+
                 </UniformGrid>
             </StackPanel>
         </DataTemplate>
@@ -1636,72 +1532,6 @@
                                 OnContent="Yes"
                                 IsChecked="False"/>
                     </Grid>
-                    <!-- Can be traded -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Can be traded"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Whether the item can be traded"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:ToggleSwitch Grid.Row="1"
-                                OffContent="No"
-                                OnContent="Yes"
-                                IsChecked="True"/>
-                    </Grid>
-                    <!-- Server transformation possible -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Server transformation possible"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Whether server transformation is possible"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:ToggleSwitch Grid.Row="1"
-                                OffContent="No"
-                                OnContent="Yes"
-                                IsChecked="False"/>
-                    </Grid>
-                    <!-- Can store potion effect -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Can store potion effect"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Whether the item can store potion effects"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:ToggleSwitch Grid.Row="1"
-                                OffContent="No"
-                                OnContent="Yes"
-                                IsChecked="False"/>
-                    </Grid>
                 </UniformGrid>
             </StackPanel>
         </DataTemplate>
@@ -1733,6 +1563,266 @@
                             FontSize="12"/>
                 </StackPanel>
             </Grid>
+        </DataTemplate>
+
+        <!-- DataTemplate: Blinkwing Section -->
+        <DataTemplate x:Key="BlinkwingSectionTemplate">
+            <StackPanel>
+                <TextBlock Text="Blinkwing"
+                        Style="{StaticResource SectionHeaderStyle}"/>
+                <UniformGrid Columns="2">
+                    <!-- Required Level -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Required Level"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Required level for teleportation"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox Grid.Row="1"
+                                x:Name="RequiredLevelNumberBox"
+                                Minimum="0"
+                                Maximum="999"
+                                SpinButtonPlacementMode="Inline"/>
+                    </Grid>
+                    
+                    <!-- Teleport to the Nearest town -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Teleport to the Nearest town"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Teleports to the nearest town"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <CheckBox Grid.Row="1"
+                                x:Name="NearestTownCheckbox"
+                                Content=""
+                                VerticalAlignment="Center"/>
+                    </Grid>
+                    
+                    <!-- World -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="World"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Target world for teleportation"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ComboBox Grid.Row="1"
+                                x:Name="WorldComboBox">
+                            <ComboBoxItem Content="Flaris" IsSelected="True"/>
+                            <ComboBoxItem Content="Saint Morning"/>
+                            <ComboBoxItem Content="Darkon"/>
+                            <ComboBoxItem Content="Harmonin"/>
+                            <ComboBoxItem Content="Azria"/>
+                        </ComboBox>
+                    </Grid>
+                    
+                    <!-- Position -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Position (X, Y, Z)"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Target position (X, Y, Z)"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <ui:NumberBox Grid.Column="0" x:Name="XPositionNumberBox" Margin="0,0,5,0" Text="X"/>
+                            <ui:NumberBox Grid.Column="1" x:Name="YPositionNumberBox" Margin="5,0,5,0" Text="Y"/>
+                            <ui:NumberBox Grid.Column="2" x:Name="ZPositionNumberBox" Margin="5,0,0,0" Text="Z"/>
+                        </Grid>
+                    </Grid>
+                    
+                    <!-- Angle -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Angle"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="View angle upon arrival"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox Grid.Row="1"
+                                x:Name="AngleNumberBox"
+                                Minimum="0"
+                                Maximum="360"
+                                SpinButtonPlacementMode="Inline"/>
+                    </Grid>
+                    
+                    <!-- Chaotic spawn key -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Chaotic spawn key"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Key for random spawn point"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <TextBox Grid.Row="1"
+                                x:Name="ChaoticSpawnKeyTextBox"/>
+                    </Grid>
+                </UniformGrid>
+            </StackPanel>
+        </DataTemplate>
+
+        <!-- DataTemplate: Misc Section -->
+        <DataTemplate x:Key="MiscSectionTemplate">
+            <StackPanel>
+                <TextBlock Text="Misc"
+                        Style="{StaticResource SectionHeaderStyle}"/>
+                <UniformGrid Columns="2">
+                    <!-- Casting time -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Casting time"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Time required for casting"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox Grid.Row="1"
+                                x:Name="CastingTimeNumberBox"
+                                Minimum="0"
+                                SpinButtonPlacementMode="Inline"/>
+                    </Grid>
+                    
+                    <!-- Time -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Time"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Duration"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <ui:NumberBox Grid.Column="0" 
+                                          x:Name="MinutesNumberBox" 
+                                          Minimum="0"
+                                          SpinButtonPlacementMode="Inline"/>
+                            <TextBlock Grid.Column="1" 
+                                       Text="min" 
+                                       VerticalAlignment="Center" 
+                                       Margin="5,0,10,0"/>
+                            <ui:NumberBox Grid.Column="2" 
+                                          x:Name="SecondsNumberBox" 
+                                          Minimum="0"
+                                          Maximum="59"
+                                          SpinButtonPlacementMode="Inline"/>
+                            <TextBlock Grid.Column="3" 
+                                       Text="sec" 
+                                       VerticalAlignment="Center" 
+                                       Margin="5,0,0,0"/>
+                        </Grid>
+                    </Grid>
+                    
+                    <!-- SFX -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="SFX"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Sound effect when used"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ComboBox Grid.Row="1"
+                                x:Name="SfxComboBox"
+                                ItemsSource="{Binding ViewModel.SfxSounds}"
+                                DisplayMemberPath="Name"
+                                SelectedValuePath="Id"
+                                SelectedValue="{Binding ViewModel.SelectedSfx, Mode=TwoWay}"/>
+                    </Grid>
+                </UniformGrid>
+            </StackPanel>
         </DataTemplate>
 
     </Page.Resources>
@@ -1843,11 +1933,11 @@
                     <Separator Margin="0,10,0,5"/>
                     <ContentControl ContentTemplate="{StaticResource CombatStatsSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
-                    <ContentControl ContentTemplate="{StaticResource SkillTriggersSectionTemplate}"/>
-                    <Separator Margin="0,10,0,5"/>
                     <ContentControl ContentTemplate="{StaticResource ResistanceAlignmentSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
-                    <ContentControl ContentTemplate="{StaticResource CraftingEnhancementSectionTemplate}"/>
+                    <ContentControl ContentTemplate="{StaticResource BlinkwingSectionTemplate}"/>
+                    <Separator Margin="0,10,0,5"/>
+                    <ContentControl ContentTemplate="{StaticResource MiscSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
                     <ContentControl ContentTemplate="{StaticResource SoundSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
