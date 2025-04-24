@@ -25,6 +25,10 @@
   <ItemGroup>
     <None Remove="Assets\wpfui-icon-256.png" />
     <None Remove="Assets\wpfui-icon-1024.png" />
+    <None Remove="Views\Pages\Collector\Colector404.png" />
+    <None Remove="Views\Pages\Collector\Colector404.png.jpg" />
+    <None Remove="Views\Pages\Giftbox\404Page.png" />
+    <None Remove="Views\Pages\Home\HomePage.png" />
     <None Remove="Views\Pages\Settings\AboutIcon.png" />
     <None Remove="Views\Pages\Settings\PaintPaletteIcon.png" />
     <None Remove="Views\Pages\Settings\SettingPageBanner.png" />
@@ -47,6 +51,10 @@
   <ItemGroup>
     <Resource Include="Assets\wpfui-icon-256.png" />
     <Resource Include="Assets\wpfui-icon-1024.png" />
+    <Resource Include="Views\Pages\Collector\Colector404.png" />
+    <Resource Include="Views\Pages\Collector\Colector404.png.jpg" />
+    <Resource Include="Views\Pages\Giftbox\404Page.png" />
+    <Resource Include="Views\Pages\Home\HomePage.png" />
     <Resource Include="Views\Pages\Settings\AboutIcon.png" />
     <Resource Include="Views\Pages\Settings\FolderPathIcon.png" />
     <Resource Include="Views\Pages\Settings\PaintPaletteIcon.png" />

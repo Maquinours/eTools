@@ -65,7 +65,7 @@
                         VerticalAlignment="Bottom"
                         FontTypography="Caption"
                         Foreground="#57FFFFFF"
-                        Text="eTools Ultimate" />
+                        Text="Created by eTools Ultimate" />
                 </Grid>
             </Border>
         </Border>

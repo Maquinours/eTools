@@ -21,12 +21,15 @@
     WindowCornerPreference="Round"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
+    
+    
     <ui:FluentWindow.InputBindings>
         <KeyBinding
             Key="F"
             Command="{Binding ElementName=AutoSuggestBox, Path=FocusCommand}"
             Modifiers="Control" />
     </ui:FluentWindow.InputBindings>
+
 
     <Grid>
         <ui:TitleBar
@@ -50,7 +53,8 @@
             MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}"
             OpenPaneLength="310"
             PaneDisplayMode="Left"
-            TitleBar="{Binding ElementName=TitleBar, Mode=OneWay}">
+            TitleBar="{Binding ElementName=TitleBar, Mode=OneWay}"
+            Navigated="RootNavigation_Navigated">
             <ui:NavigationView.Header>
                 <ui:BreadcrumbBar x:Name="BreadcrumbBar" Margin="42,32,42,20" />
             </ui:NavigationView.Header>

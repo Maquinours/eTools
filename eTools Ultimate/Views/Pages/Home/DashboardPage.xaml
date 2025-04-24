@@ -9,28 +9,158 @@
     Title="DashboardPage"
     d:DataContext="{d:DesignInstance local:DashboardPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="450"
+    d:DesignHeight="750"
     d:DesignWidth="800"
-    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
+    
 
-    <Grid VerticalAlignment="Top">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
+    <Page.Resources>
+        <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="#212121"/>
+        <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="#9E9E9E"/>
+        
+        
+        
+        <!-- Template for navigation cards -->
+        <DataTemplate x:Key="NavigationCardTemplate">
+            <ui:Card 
+                Margin="6"
+                Width="220"
+                Height="120"
+                Cursor="Hand"
+                Tag="{Binding}"
+                MouseLeftButtonDown="Card_MouseLeftButtonDown">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Left icon - larger size -->
+                    <ui:SymbolIcon 
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        FontSize="32"
+                        Margin="4,0,14,0"
+                        Symbol="{Binding Icon}" />
+                    
+                    <!-- Text in the middle -->
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock 
+                            FontSize="16"
+                            FontWeight="Medium"
+                            Text="{Binding Title}" />
+                        <TextBlock 
+                            Margin="0,4,0,0"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                            Text="{Binding Description}"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                    
+                    <!-- Right arrow -->
+                    <ui:SymbolIcon 
+                        Grid.Column="2"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Margin="8,0,0,0"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                        FontSize="16"
+                        Symbol="ChevronRight24" />
+                </Grid>
+            </ui:Card>
+        </DataTemplate>
+    </Page.Resources>
 
-        <ui:Button
-            Grid.Column="0"
-            Command="{Binding ViewModel.CounterIncrementCommand, Mode=OneWay}"
-            Content="Click me!"
-            Icon="Fluent24" />
-        <TextBlock
-            Grid.Column="1"
-            Margin="12,0,0,0"
-            VerticalAlignment="Center"
-            Text="{Binding ViewModel.Counter, Mode=OneWay}" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Banner styled like the SettingsPage -->
+        <Border x:Name="BannerBorder" Grid.Row="1" 
+                Height="200"
+                Margin="24,0,24,0"
+                CornerRadius="8">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Offset="0" Color="#2B5797" />
+                    <GradientStop Offset="1" Color="#0078D7" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Border CornerRadius="8">
+                <Border.Background>
+                    <ImageBrush 
+                        ImageSource="/Views/Pages/Home/HomePage.png" 
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Stretch="UniformToFill" />
+                </Border.Background>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel
+                        Grid.Row="0"
+                        Margin="48,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Background="Transparent">
+                        <ui:TextBlock
+                            FontTypography="Title"
+                            Foreground="#FFFFFF"
+                            Text="Welcome" 
+                            FontWeight="Bold" />
+                    </StackPanel>
+                    
+                    <Grid Grid.Row="1">
+                        <ui:TextBlock
+                            Margin="12"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            FontTypography="Caption"
+                            Foreground="#BFFFFFFF"
+                            Text="Created by eTools Ultimate" />
+                        
+                        <ui:Button
+                            Margin="12"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Appearance="Primary"
+                            Background="#4DFFFFFF"
+                            BorderBrush="#33FFFFFF"
+                            Foreground="#FFFFFF"
+                            Content="Patchlogs"
+                            Icon="History24"
+                            Click="PatchlogsButton_Click" />
+                    </Grid>
+                </Grid>
+            </Border>
+        </Border>
+
+        <!-- Navigation Cards with ScrollViewer -->
+        <ScrollViewer Grid.Row="2" 
+                     Margin="0,24,0,0" 
+                     VerticalScrollBarVisibility="Auto" 
+                     HorizontalScrollBarVisibility="Disabled">
+            <Grid Width="{Binding ActualWidth, ElementName=BannerBorder}" 
+                 HorizontalAlignment="Center" 
+                 VerticalAlignment="Top">
+                <ItemsControl 
+                    Margin="0,0,0,0" 
+                    ItemTemplate="{StaticResource NavigationCardTemplate}"
+                    ItemsSource="{Binding NavigationCards}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page>

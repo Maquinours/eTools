@@ -64,5 +64,12 @@ namespace eTools_Ultimate.Views.Windows
         {
             throw new NotImplementedException();
         }
+        private void RootNavigation_Navigated(NavigationView sender, NavigatedEventArgs args)
+        {
+            if (args.Page is DashboardPage)
+                BreadcrumbBar.Visibility = Visibility.Collapsed;
+            else
+                BreadcrumbBar.Visibility = Visibility.Visible;
+        }
     }
 }

@@ -20,12 +20,37 @@
     <Grid>
         <StackPanel 
             VerticalAlignment="Center" 
-            HorizontalAlignment="Center">
-            <TextBlock 
-                Text="Coming soon..." 
-                FontSize="36" 
-                FontWeight="Light"
-                Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
-        </StackPanel>
+            HorizontalAlignment="Center"/>
+        <Border
+            Grid.Row="0"
+            CornerRadius="8" Margin="220,90,220,90">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Offset="0" Color="#2B5797" />
+                    <GradientStop Offset="1" Color="#0078D7" />
+                </LinearGradientBrush>
+            </Border.Background>
+            <Border CornerRadius="8">
+                <Border.Background>
+                    <ImageBrush
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Stretch="UniformToFill" ImageSource="/Views/Pages/Giftbox/404Page.png"  />
+                </Border.Background>
+                <Grid>
+                    <StackPanel
+                        Margin="48,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Background="Transparent"/>
+                    <ui:TextBlock
+                        Margin="12"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        FontTypography="Caption"
+                        Foreground="#57FFFFFF"
+                        Text="eTools Ultimate" />
+                </Grid>
+            </Border>
+        </Border>
     </Grid>
 </Page> 
