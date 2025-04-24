@@ -1225,12 +1225,12 @@
                                                          HorizontalAlignment="Center" 
                                                          VerticalAlignment="Center"/>
                                             </Grid>
-                                            <TextBlock Text="Modell konnte nicht geladen werden" 
+                                            <TextBlock Text="Model could not be loaded" 
                                                      Foreground="White" 
                                                      FontWeight="SemiBold"
                                                      HorizontalAlignment="Center"
                                                      Margin="0,10,0,0"/>
-                                            <TextBlock Text="Bitte überprüfen Sie den Dateipfad" 
+                                            <TextBlock Text="Please check the file path" 
                                                      Foreground="#DDDDDD" 
                                                      HorizontalAlignment="Center"
                                                      TextWrapping="Wrap"
@@ -1241,7 +1241,7 @@
                                                     Padding="8,4" 
                                                     CornerRadius="4" 
                                                     Background="#33FFCC00">
-                                                <TextBlock Text="Datei: monster.o3d nicht gefunden" 
+                                                <TextBlock Text="File: monster.o3d not found" 
                                                          Foreground="#FFCC00" 
                                                          FontFamily="Consolas"
                                                          FontSize="12"
