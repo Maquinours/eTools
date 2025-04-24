@@ -946,36 +946,92 @@
                              Margin="0,0,0,20"/>
                     
                     <!-- Identifier -->
-                    <TextBlock Text="Identifier:" 
-                              Margin="0,0,0,5"/>
-                    <ComboBox x:Name="IdentifierComboBox"
-                            SelectedItem="{Binding SelectedIdentifier, Mode=TwoWay}"
-                            Style="{StaticResource AppComboBoxStyle}"
-                            Width="150"
-                            Margin="0,0,0,15">
-                        <ComboBoxItem Content="MTI_IDLE1"/>
-                        <ComboBoxItem Content="MTI_IDLE2"/>
-                        <ComboBoxItem Content="MTI_WALK"/>
-                        <ComboBoxItem Content="MTI_STAND"/>
-                        <ComboBoxItem Content="MTI_DMGI"/>
-                    </ComboBox>
+                    <TextBlock Text="Identifier:" Margin="0,0,0,5"/>
                     
-                    <!-- File -->
-                    <TextBlock Text="File:" 
-                              Margin="0,0,0,5"/>
                     <Grid Margin="0,0,0,15">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBox Grid.Column="0"
-                                x:Name="MotionFileTextBox"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding MotionFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        <ui:Button Grid.Column="1" 
-                                Content="..." 
-                                Width="30"
-                                Margin="5,0,0,0"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        
+                        <!-- Identifier Row -->
+                        <Grid Grid.Row="0" Margin="0,0,0,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            
+                            <!-- Label mit Info-Icon -->
+                            <StackPanel Grid.Row="0" 
+                                      Orientation="Horizontal"
+                                      Margin="0,0,0,5">
+                                <TextBlock Text="Identifier" 
+                                         FontWeight="SemiBold" 
+                                         FontSize="12"/>
+                                <ui:SymbolIcon Symbol="Info20"
+                                            Style="{StaticResource InfoIconStyle}">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="Typ der Animation"/>
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            
+                            <!-- Dropdown -->
+                            <Border Grid.Row="1"
+                                  Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                  BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                  BorderThickness="1"
+                                  CornerRadius="4">
+                                <ComboBox Style="{StaticResource AppComboBoxStyle}"
+                                        BorderThickness="0"
+                                        Background="Transparent"
+                                        SelectedIndex="0">
+                                    <ComboBoxItem Content="MTI_STAND"/>
+                                    <ComboBoxItem Content="MTI_WALK"/>
+                                    <ComboBoxItem Content="MTI_IDLE1"/>
+                                    <ComboBoxItem Content="MTI_IDLE2"/>
+                                    <ComboBoxItem Content="MTI_DMG1"/>
+                                </ComboBox>
+                            </Border>
+                        </Grid>
+                        
+                        <!-- File Row -->
+                        <Grid Grid.Row="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            
+                            <!-- Label mit Info-Icon -->
+                            <StackPanel Grid.Row="0" 
+                                      Orientation="Horizontal"
+                                      Margin="0,0,0,5">
+                                <TextBlock Text="File" 
+                                         FontWeight="SemiBold" 
+                                         FontSize="12"/>
+                                <ui:SymbolIcon Symbol="Info20"
+                                            Style="{StaticResource InfoIconStyle}">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="Animationsdatei"/>
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            
+                            <!-- File Input mit Button -->
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="0"
+                                       Style="{StaticResource AppTextBoxStyle}"
+                                       Text="stand"/>
+                                <ui:Button Grid.Column="1" 
+                                         Content="..." 
+                                         Width="30"
+                                         Margin="5,0,0,0"/>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </StackPanel>
                 
@@ -1198,37 +1254,133 @@
                             
                             <!-- Motions List -->
                             <Grid Grid.Column="1" Margin="10,10,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
-                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 
-                                <TextBlock Text="Verfügbare Animationen" 
+                                <!-- Linke Seite mit Add-Button und ListView -->
+                                <ui:Button Content="Add" 
+                                         Grid.Column="0"
                                          Grid.Row="0"
-                                         FontWeight="SemiBold"
+                                         Width="75"
+                                         HorizontalAlignment="Left"
+                                         Margin="0,0,10,5"/>
+                                
+                                <Border Grid.Column="0"
+                                        Grid.Row="1"
+                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                        BorderThickness="1"
+                                        Margin="0,0,10,0">
+                                    <ListView Style="{StaticResource AppListViewStyle}"
+                                              ItemContainerStyle="{StaticResource AppListViewItemStyle}">
+                                        <ListViewItem Content="MTI_STAND" IsSelected="True"/>
+                                        <ListViewItem Content="MTI_WALK"/>
+                                        <ListViewItem Content="MTI_IDLE1"/>
+                                        <ListViewItem Content="MTI_IDLE2"/>
+                                        <ListViewItem Content="MTI_DMG1"/>
+                                    </ListView>
+                                </Border>
+                                
+                                <!-- Rechte Seite mit Generate-Button und Einstellungen -->
+                                <ui:Button Content="Generate" 
+                                         Grid.Column="1"
+                                         Grid.Row="0"
+                                         HorizontalAlignment="Left"
+                                         Width="100"
                                          Margin="0,0,0,5"/>
                                 
-                                <ListView Grid.Row="1" 
-                                          Style="{StaticResource AppListViewStyle}"
-                                          ItemContainerStyle="{StaticResource AppListViewItemStyle}"
-                                          Height="200"
-                                          BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                          BorderThickness="1">
-                                    <ListViewItem>MTI_IDLE1 (idle.ani)</ListViewItem>
-                                    <ListViewItem>MTI_IDLE2 (idle2.ani)</ListViewItem>
-                                    <ListViewItem>MTI_WALK (walk.ani)</ListViewItem>
-                                    <ListViewItem>MTI_ATTACK1 (attack1.ani)</ListViewItem>
-                                    <ListViewItem>MTI_DMGFLY (damage.ani)</ListViewItem>
-                                </ListView>
-                                
-                                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
-                                    <ui:Button Content="Animation abspielen" 
-                                             Appearance="Secondary"
-                                             Margin="0,0,10,0"/>
-                                    <ui:Button Content="Bearbeiten" 
-                                             Appearance="Secondary"/>
-                                </StackPanel>
+                                <Grid Grid.Column="1" 
+                                      Grid.Row="1" Cursor="">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <!-- Identifier Row -->
+                                    <Grid Grid.Row="0" Margin="0,0,0,10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        
+                                        <!-- Label mit Info-Icon -->
+                                        <StackPanel Grid.Row="0" 
+                                                  Orientation="Horizontal"
+                                                  Margin="0,0,0,5">
+                                            <TextBlock Text="Identifier" 
+                                                     FontWeight="SemiBold" 
+                                                     FontSize="12"/>
+                                            <ui:SymbolIcon Symbol="Info20"
+                                                        Style="{StaticResource InfoIconStyle}">
+                                                <ui:SymbolIcon.ToolTip>
+                                                    <ToolTip Content="Typ der Animation"/>
+                                                </ui:SymbolIcon.ToolTip>
+                                            </ui:SymbolIcon>
+                                        </StackPanel>
+                                        
+                                        <!-- Dropdown -->
+                                        <Border Grid.Row="1"
+                                              Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                              BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                              BorderThickness="1"
+                                              CornerRadius="4">
+                                            <ComboBox Style="{StaticResource AppComboBoxStyle}"
+                                                    BorderThickness="0"
+                                                    Background="Transparent"
+                                                    SelectedIndex="0">
+                                                <ComboBoxItem Content="MTI_STAND"/>
+                                                <ComboBoxItem Content="MTI_WALK"/>
+                                                <ComboBoxItem Content="MTI_IDLE1"/>
+                                                <ComboBoxItem Content="MTI_IDLE2"/>
+                                                <ComboBoxItem Content="MTI_DMG1"/>
+                                            </ComboBox>
+                                        </Border>
+                                    </Grid>
+                                    
+                                    <!-- File Row -->
+                                    <Grid Grid.Row="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        
+                                        <!-- Label mit Info-Icon -->
+                                        <StackPanel Grid.Row="0" 
+                                                  Orientation="Horizontal"
+                                                  Margin="0,0,0,5">
+                                            <TextBlock Text="File" 
+                                                     FontWeight="SemiBold" 
+                                                     FontSize="12"/>
+                                            <ui:SymbolIcon Symbol="Info20"
+                                                        Style="{StaticResource InfoIconStyle}">
+                                                <ui:SymbolIcon.ToolTip>
+                                                    <ToolTip Content="Animationsdatei"/>
+                                                </ui:SymbolIcon.ToolTip>
+                                            </ui:SymbolIcon>
+                                        </StackPanel>
+                                        
+                                        <!-- File Input mit Button -->
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox Grid.Column="0"
+                                                   Style="{StaticResource AppTextBoxStyle}"
+                                                   Text="stand"/>
+                                            <ui:Button Grid.Column="1" 
+                                                     Content="..." 
+                                                     Width="30"
+                                                     Margin="5,0,0,0"/>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
                             </Grid>
                         </Grid>
                     </StackPanel>

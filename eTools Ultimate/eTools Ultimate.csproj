@@ -28,6 +28,7 @@
     <None Remove="Views\Pages\Settings\AboutIcon.png" />
     <None Remove="Views\Pages\Settings\PaintPaletteIcon.png" />
     <None Remove="Views\Pages\Settings\SettingPageBanner.png" />
+    <None Remove="Views\Windows\eToolsLogoIcon.png" />
     <None Remove="Views\Windows\SplashScreen.png" />
     <None Remove="Views\Pages\Settings\Kiyo.jpg" />
     <None Remove="Views\Pages\Settings\Logo.png" />
@@ -50,6 +51,7 @@
     <Resource Include="Views\Pages\Settings\FolderPathIcon.png" />
     <Resource Include="Views\Pages\Settings\PaintPaletteIcon.png" />
     <Resource Include="Views\Pages\Settings\SettingPageBanner.png" />
+    <Resource Include="Views\Windows\eToolsLogoIcon.png" />
     <Resource Include="Views\Windows\SplashScreen.png" />
     <Resource Include="Views\Pages\Settings\Kiyo.jpg" />
     <Resource Include="Views\Pages\Settings\Maqui.jpg" />
@@ -58,7 +60,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Assets\Icons\" />
     <Folder Include="Views\Pages\Skill\" />
   </ItemGroup>
 
