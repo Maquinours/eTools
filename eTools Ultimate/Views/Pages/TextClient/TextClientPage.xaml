@@ -14,18 +14,247 @@
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    
     ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <!-- DataTemplate for ListView Text Client -->
+        <DataTemplate x:Key="TextClientItemTemplate">
+            <Grid Margin="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Width="32"
+                        Height="32"
+                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        Margin="0,0,8,0">
+                    <TextBlock Text="T" 
+                               FontWeight="Bold" 
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                </Border>
+                <StackPanel Grid.Column="1"
+                        VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Name}"
+                            FontWeight="SemiBold"
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                    <TextBlock Text="{Binding Id}"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                            FontSize="12"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+
+        <!-- Common Styles -->
+        <Style x:Key="InfoIconStyle" TargetType="ui:SymbolIcon">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="5,0,0,0"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+        </Style>
+        <Style x:Key="FormFieldStyle" TargetType="Grid">
+            <Setter Property="Margin" Value="0,0,15,25"/>
+        </Style>
+        <Style x:Key="FieldLabelStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,15,0,15"/>
+        </Style>
+    </Page.Resources>
+
     <Grid>
-        <StackPanel 
-            VerticalAlignment="Center" 
-            HorizontalAlignment="Center">
-            <TextBlock 
-                Text="Coming soon..." 
-                FontSize="36" 
-                FontWeight="Light"
-                Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
-        </StackPanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Side - ListView -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Search Bar -->
+            <Grid Grid.Row="0"
+                    Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <ui:TextBox Grid.Column="0"
+                            PlaceholderText="Search text files..."
+                            Icon="Search24"
+                            Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+
+            <!-- Text Files List -->
+            <Border Grid.Row="1"
+                    CornerRadius="8"
+                    BorderThickness="1"
+                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    Margin="5,5,15,5">
+                <ListView x:Name="TextFilesListView"
+                          BorderThickness="0"
+                          Background="Transparent"
+                          ItemTemplate="{StaticResource TextClientItemTemplate}"
+                          SelectionChanged="TextFilesListView_SelectionChanged"
+                          ItemsSource="{Binding ViewModel.TextFilesView}"
+                          IsSynchronizedWithCurrentItem="True">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background"
+                                    Value="Transparent"/>
+                            <Setter Property="BorderBrush"
+                                    Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver"
+                                        Value="True">
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected"
+                                        Value="True">
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+                                    <Setter Property="Foreground"
+                                            Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </Border>
+        </Grid>
+
+        <!-- Separator -->
+        <GridSplitter Grid.Column="1"
+                      Width="5"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch"
+                      Background="{DynamicResource ControlElevationBorderBrush}"/>
+
+        <!-- Right Side - Form -->
+        <Grid Grid.Column="2" Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Header mit Add/Delete Buttons -->
+            <Grid Grid.Row="0" Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock 
+                    Grid.Column="0"
+                    Text="Text Editor" 
+                    FontSize="24" 
+                    FontWeight="Bold"/>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <ui:Button 
+                        Content="Add" 
+                        Icon="Add24" 
+                        Appearance="Primary" 
+                        Click="AddButton_Click"
+                        Margin="0,0,10,0"/>
+                    <ui:Button 
+                        Content="Delete" 
+                        Icon="Delete24"
+                        Click="DeleteButton_Click"
+                        Appearance="Danger"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Form Section with General Fields -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <!-- General Section -->
+                    <TextBlock Text="General" Style="{StaticResource SectionHeaderStyle}"/>
+
+                    <!-- Text ID -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="Text ID" Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Unique identifier for the text entry"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <TextBox Grid.Row="1" BorderThickness="1" />
+                    </Grid>
+
+                    <!-- Text TID Key -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="Text TID Key" Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Internal key used for text identification"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <TextBox Grid.Row="1" BorderThickness="1" />
+                    </Grid>
+
+                    <!-- InGame Text + Color -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="InGame Text" Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Text displayed in game"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" BorderThickness="1" />
+                            <Border 
+                                Grid.Column="1" 
+                                Width="30" 
+                                Height="30" 
+                                Margin="10,0,0,0" 
+                                Background="Red" 
+                                BorderThickness="1">
+                                <Border.ToolTip>
+                                    <ToolTip Content="Click to change color"/>
+                                </Border.ToolTip>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Page> 
