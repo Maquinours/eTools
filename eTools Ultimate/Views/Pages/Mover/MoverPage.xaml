@@ -1119,7 +1119,7 @@
                           BorderThickness="0"
                           Background="Transparent"
                           ItemTemplate="{StaticResource MoverItemTemplate}"
-                          ItemsSource="{Binding ViewModel.ItemsView}"
+                          ItemsSource="{Binding ViewModel.MoversView}"
                           IsSynchronizedWithCurrentItem="True">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">

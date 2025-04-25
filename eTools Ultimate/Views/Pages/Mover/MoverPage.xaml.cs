@@ -6,11 +6,11 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.Views.Pages
 {
-    public partial class MoverPage : Page, INavigableView<DataViewModel>
+    public partial class MoverPage : Page, INavigableView<MoversViewModel>
     {
-        public DataViewModel ViewModel { get; }
+        public MoversViewModel ViewModel { get; }
 
-        public MoverPage(DataViewModel viewModel)
+        public MoverPage(MoversViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = this;
