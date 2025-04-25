@@ -41,6 +41,10 @@ namespace eTools_Ultimate.Models
         private string? _propSkillTxtFilePath;
         private string? _skillIconsFolderPath;
 
+        // Texts settings
+        private string? _textsConfigFilePath;
+        private string? _textsTxtFilePath;
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -382,5 +386,44 @@ namespace eTools_Ultimate.Models
             }
         }
         public string? DefaultSkillIconsFolderPath => $"{this.ClientFolderPath}Icon{Path.DirectorySeparatorChar}";
+
+        // Texts settings
+        public string? TextsConfigFilePath
+        {
+            get => this._textsConfigFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultTextsConfigFilePath)
+                    val = null;
+                if (this.TextsConfigFilePath != val)
+                {
+                    this._textsConfigFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultTextsConfigFilePath => $"{this.ResourcesFolderPath}textClient.inc";
+
+        public string? TextsTxtFilePath
+        {
+            get => this._textsTxtFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultTextsTxtFilePath)
+                    val = null;
+                if (this.TextsTxtFilePath != val)
+                {
+                    this._textsTxtFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultTextsTxtFilePath => $"{this.ResourcesFolderPath}textClient.txt.txt";
     }
 }

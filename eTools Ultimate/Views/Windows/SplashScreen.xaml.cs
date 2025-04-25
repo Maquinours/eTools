@@ -36,6 +36,11 @@ namespace eTools_Ultimate.Views.Windows
                 SoundsService.Instance.Load();
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    LoadingText.Text = "Loading texts...";
+                });
+                TextsService.Instance.Load();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
                     LoadingText.Text = "Loading movers...";
                 });
                 MoversService.Instance.Load();
