@@ -352,7 +352,8 @@ namespace eTools_Ultimate.Models
         {
             get
             {
-                string filePath = $@"X:\Nouveau client 2022\Client\Icon\{this.Prop.SzIcon}";
+                Settings settings = Settings.Instance;
+                string filePath = $@"{settings.SkillIconsFolderPath ?? settings.DefaultSkillIconsFolderPath}{this.Prop.SzIcon}";
                 if (!File.Exists(filePath))
                 {
                     return null;

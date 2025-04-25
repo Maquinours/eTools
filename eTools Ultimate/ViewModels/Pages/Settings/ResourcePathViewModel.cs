@@ -151,7 +151,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private void SelectSkillIconsFolder()
         {
-            Settings.SkillIconsFolderPath = FileFolderSelector.SelectFile(Settings.SkillIconsFolderPath ?? Settings.DefaultSkillIconsFolderPath, title: Resources.Texts.SelectSkillIconsFolder);
+            Settings.SkillIconsFolderPath = FileFolderSelector.SelectFolder(Settings.SkillIconsFolderPath ?? Settings.DefaultSkillIconsFolderPath, title: Resources.Texts.SelectSkillIconsFolder);
         }
         #endregion
     }
