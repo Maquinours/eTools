@@ -98,7 +98,7 @@ namespace eTools_Ultimate.Models
             get
             {
                 if (this.DwColor == null || !this.DwColor.StartsWith("0x")) return null;
-                string hex = $"#{this.DwColor.Replace("0x", "").ToUpper()}";
+                string hex = $"#{this.DwColor.Replace("0x", "").Substring(0, 8).ToUpper()}";
                 return (Color)ColorConverter.ConvertFromString(hex);
             }
             set
@@ -128,7 +128,10 @@ namespace eTools_Ultimate.Models
 
         public void Dispose()
         {
-            StringsService.Instance.Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
+            StringsService stringsService = StringsService.Instance;
+            stringsService.Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
+            if (String.IsNullOrWhiteSpace(this.Name) && !TextsService.Instance.Texts.Where(x => x != this && x.SzName == this.SzName).Any())
+                stringsService.RemoveString(this.SzName);
         }
     }
 }

@@ -1,3 +1,5 @@
+using eTools_Ultimate.Models;
+using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Pages;
 using System.Windows.Controls;
 using Wpf.Ui.Abstractions.Controls;
@@ -17,6 +19,7 @@ namespace eTools_Ultimate.Views.Pages
         }
         private void AddButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            if (TextFilesListView.SelectedItem is not Text text) return;
             try
             {
                 // For now, use simple MessageBox
@@ -30,6 +33,10 @@ namespace eTools_Ultimate.Views.Pages
                 if (result == System.Windows.MessageBoxResult.OK)
                 {
                     // Here the logic for adding a new item could be implemented
+                    Text newText = TextsService.Instance.AddText();
+                    this.ViewModel.TextsView.Refresh();
+                    this.ViewModel.TextsView.MoveCurrentTo(newText);
+                    this.TextFilesListView.ScrollIntoView(newText);
                     Console.WriteLine("Item is being added");
                 }
             }
@@ -48,6 +55,7 @@ namespace eTools_Ultimate.Views.Pages
         // Event handler for the Delete button
         private void DeleteButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            if (TextFilesListView.SelectedItem is not Text text) return;
             try
             {
                 // For now, use simple MessageBox
@@ -61,6 +69,7 @@ namespace eTools_Ultimate.Views.Pages
                 if (result == System.Windows.MessageBoxResult.Yes)
                 {
                     // Here the logic for deleting the selected item could be implemented
+                    TextsService.Instance.RemoveText(text);
                     Console.WriteLine("Item is being deleted");
                 }
             }

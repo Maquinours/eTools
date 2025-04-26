@@ -11,6 +11,7 @@ namespace eTools_Ultimate.Services
 {
     internal class TextsService
     {
+        private const string STRING_ID_PREFIX = "IDS_TEXTCLIENT_INC_";
         private static readonly Lazy<TextsService> _instance = new(() => new TextsService());
         public static TextsService Instance => _instance.Value;
 
@@ -49,14 +50,7 @@ namespace eTools_Ultimate.Services
                     // If the string is not in the strings service, then we generate a new key for it.
                     if (!stringsService.Strings.ContainsKey(szName))
                     {
-                        const string stringIdPrefix = "IDS_TEXTCLIENT_INC_";
-                        string identifier = string.Empty;
-                        for (int i = 0; true; i++)
-                        {
-                            identifier = stringIdPrefix + i.ToString("D6");
-                            if (!stringsService.Strings.ContainsKey(identifier))
-                                break;
-                        }
+                        string identifier = StringsService.Instance.GetNextStringIdentifier(STRING_ID_PREFIX);
                         StringsService.Instance.AddString(identifier, szName);
                         szName = identifier;
                     }
@@ -68,6 +62,22 @@ namespace eTools_Ultimate.Services
                     this.Texts.Add(text);
                 }
             }
+        }
+
+        public Text AddText()
+        {
+            StringsService stringsService = StringsService.Instance;
+            string szName = stringsService.GetNextStringIdentifier(STRING_ID_PREFIX);
+            stringsService.GenerateNewString(szName);
+            Text text = new("TID_", "0xFFFFFFFF", szName);
+            this.Texts.Add(text);
+            return text;
+        }
+
+        public void RemoveText(Text text)
+        {
+            text.Dispose();
+            this.Texts.Remove(text);
         }
     }
 }

@@ -87,5 +87,15 @@ namespace eTools_Ultimate.Services
         {
             this.Strings.Remove(stringIdentifier);
         }
+
+        public string GetNextStringIdentifier(string stringIdPrefix)
+        {
+            for (int i = 0; true; i++)
+            {
+                string identifier = stringIdPrefix + i.ToString("D6");
+                if (!this.Strings.ContainsKey(identifier))
+                    return identifier;
+            }
+        }
     }
 }
