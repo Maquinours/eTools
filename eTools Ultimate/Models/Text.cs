@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace eTools_Ultimate.Models
 {
@@ -16,6 +17,17 @@ namespace eTools_Ultimate.Models
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+            switch(propertyName)
+            {
+                case nameof(this.SzName):
+                    this.NotifyPropertyChanged(nameof(this.Name));
+                    break;
+                case nameof(this.DwColor):
+                    this.NotifyPropertyChanged(nameof(this.Color));
+                    this.NotifyPropertyChanged(nameof(this.SolidColorBrushColor));
+                    break;
+            }
         }
 
         private void ProjectStrings_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -64,7 +76,14 @@ namespace eTools_Ultimate.Models
             get => this._szName;
             set
             {
+                string lastSzName = this.SzName;
+                StringsService stringsService = StringsService.Instance;
+                if (!stringsService.Strings.ContainsKey(value))
+                    stringsService.GenerateNewString(value);
                 this._szName = value;
+                // If old string value is blank and nothing is using it, remove it from the strings service
+                if (String.IsNullOrWhiteSpace(StringsService.Instance.GetString(lastSzName)) && !TextsService.Instance.Texts.Where(x => x.SzName == lastSzName).Any()) 
+                    stringsService.RemoveString(lastSzName);
                 this.NotifyPropertyChanged();
             }
         }
@@ -72,6 +91,31 @@ namespace eTools_Ultimate.Models
         {
             get => StringsService.Instance.GetString(this._szName);
             set => StringsService.Instance.ChangeStringValue(this._szName, value);
+        }
+
+        public Color? Color
+        {
+            get
+            {
+                if (this.DwColor == null || !this.DwColor.StartsWith("0x")) return null;
+                string hex = $"#{this.DwColor.Replace("0x", "").ToUpper()}";
+                return (Color)ColorConverter.ConvertFromString(hex);
+            }
+            set
+            {
+                if(value != null)
+                    this.DwColor = $"0x{value?.A:X2}{value?.R:X2}{value?.G:X2}{value?.B:X2}";
+            }
+        }
+
+        public SolidColorBrush? SolidColorBrushColor
+        {
+            get
+            {
+                Color? color = this.Color;
+                if (color == null) return null;
+                return new SolidColorBrush((Color)color);
+            }
         }
 
         public Text(string dwId, string dwColor, string szName)

@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
     Title="TextClientPage"
     d:DataContext="{d:DesignInstance local:TextClientPage,
                                      IsDesignTimeCreatable=False}"
@@ -19,57 +20,63 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <!-- DataTemplate for ListView Text Client -->
-        <DataTemplate x:Key="TextClientItemTemplate">
-            <Grid Margin="4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Border Width="32"
-                        Height="32"
-                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                        BorderThickness="1"
-                        Margin="0,0,8,0">
-                    <TextBlock Text="T" 
-                               FontWeight="Bold" 
-                               HorizontalAlignment="Center" 
-                               VerticalAlignment="Center"
-                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
-                </Border>
-                <StackPanel Grid.Column="1"
-                        VerticalAlignment="Center">
-                    <TextBlock Text="{Binding Name}"
-                            FontWeight="SemiBold"
-                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                    <TextBlock Text="{Binding Id}"
-                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                            FontSize="12"/>
-                </StackPanel>
-            </Grid>
-        </DataTemplate>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary
+                        Source="pack://application:,,,/ColorPicker;component/Styles/DefaultColorPickerStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <!-- DataTemplate for ListView Text Client -->
+            <DataTemplate x:Key="TextClientItemTemplate">
+                <Grid Margin="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Width="32"
+                            Height="32"
+                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            Margin="0,0,8,0">
+                        <TextBlock Text="T" 
+                                   FontWeight="Bold" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center"
+                                   Foreground="{Binding SolidColorBrushColor}"/>
+                    </Border>
+                    <StackPanel Grid.Column="1"
+                            VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Name}"
+                                FontWeight="SemiBold"
+                                Foreground="{Binding SolidColorBrushColor}"/>
+                        <TextBlock Text="{Binding DwId}"
+                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                FontSize="12"/>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
 
-        <!-- Common Styles -->
-        <Style x:Key="InfoIconStyle" TargetType="ui:SymbolIcon">
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Margin" Value="5,0,0,0"/>
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
-        </Style>
-        <Style x:Key="FormFieldStyle" TargetType="Grid">
-            <Setter Property="Margin" Value="0,0,15,25"/>
-        </Style>
-        <Style x:Key="FieldLabelStyle" TargetType="TextBlock">
-            <Setter Property="Margin" Value="0,0,0,5"/>
-            <Setter Property="FontWeight" Value="SemiBold"/>
-        </Style>
-        <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="24"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Margin" Value="0,15,0,15"/>
-        </Style>
+            <!-- Common Styles -->
+            <Style x:Key="InfoIconStyle" TargetType="ui:SymbolIcon">
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Margin" Value="5,0,0,0"/>
+                <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+            </Style>
+            <Style x:Key="FormFieldStyle" TargetType="Grid">
+                <Setter Property="Margin" Value="0,0,15,25"/>
+            </Style>
+            <Style x:Key="FieldLabelStyle" TargetType="TextBlock">
+                <Setter Property="Margin" Value="0,0,0,5"/>
+                <Setter Property="FontWeight" Value="SemiBold"/>
+            </Style>
+            <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="Margin" Value="0,15,0,15"/>
+            </Style>
+        </ResourceDictionary>
     </Page.Resources>
 
     <Grid>
@@ -109,8 +116,7 @@
                           BorderThickness="0"
                           Background="Transparent"
                           ItemTemplate="{StaticResource TextClientItemTemplate}"
-                          SelectionChanged="TextFilesListView_SelectionChanged"
-                          ItemsSource="{Binding ViewModel.TextFilesView}"
+                          ItemsSource="{Binding ViewModel.TextsView}"
                           IsSynchronizedWithCurrentItem="True">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
@@ -200,7 +206,7 @@
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <TextBox Grid.Row="1" BorderThickness="1" />
+                        <TextBox Grid.Row="1" BorderThickness="1" Text="{Binding SelectedItem.DwId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=TextFilesListView}" />
                     </Grid>
 
                     <!-- Text TID Key -->
@@ -217,7 +223,7 @@
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <TextBox Grid.Row="1" BorderThickness="1" />
+                        <TextBox Grid.Row="1" BorderThickness="1" Text="{Binding SelectedItem.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=TextFilesListView}" />
                     </Grid>
 
                     <!-- InGame Text + Color -->
@@ -239,18 +245,24 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0" BorderThickness="1" />
-                            <Border 
+                            <TextBox Grid.Column="0" BorderThickness="1" Text="{Binding SelectedItem.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=TextFilesListView}" />
+                            <Button
+                                x:Name="OpenPickerButton"
                                 Grid.Column="1" 
                                 Width="30" 
                                 Height="30" 
                                 Margin="10,0,0,0" 
-                                Background="Red" 
-                                BorderThickness="1">
-                                <Border.ToolTip>
+                                Background="{Binding SelectedItem.SolidColorBrushColor, Mode=OneWay, ElementName=TextFilesListView}" 
+                                BorderThickness="1" Click="OpenPickerButton_Click">
+                                <Button.ToolTip>
                                     <ToolTip Content="Click to change color"/>
-                                </Border.ToolTip>
-                            </Border>
+                                </Button.ToolTip>
+                            </Button>
+                            <Popup x:Name="ColorPickerPopup" PlacementTarget="{Binding ElementName=OpenPickerButton}" StaysOpen="False">
+                                <colorpicker:StandardColorPicker
+                                    Style="{StaticResource DefaultColorPickerStyle}"
+                                    SelectedColor="{Binding SelectedItem.Color, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=TextFilesListView}" />
+                            </Popup>
                         </Grid>
                     </Grid>
                 </StackPanel>

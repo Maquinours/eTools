@@ -62,6 +62,7 @@ namespace eTools_Ultimate
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SkillsViewModel>();
                 services.AddSingleton<MoversViewModel>();
+                services.AddSingleton<TextClientViewModel>();
 
                 // Settings pages
                 services.AddSingleton<SettingsPage>();

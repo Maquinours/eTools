@@ -76,5 +76,16 @@ namespace eTools_Ultimate.Services
             if (!this.Strings.ContainsKey(stringIdentifier))
                 this.Strings.Add(stringIdentifier, "");
         }
+
+        public void AddString(string identifier, string value)
+        {
+            if (!this.Strings.ContainsKey(identifier))
+                this.Strings.Add(identifier, value);
+        }
+
+        public void RemoveString(string stringIdentifier)
+        {
+            this.Strings.Remove(stringIdentifier);
+        }
     }
 }

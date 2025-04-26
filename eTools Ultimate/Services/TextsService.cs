@@ -29,6 +29,7 @@ namespace eTools_Ultimate.Services
             this.Clear();
 
             Settings settings = Settings.Instance;
+            StringsService stringsService = StringsService.Instance;
 
             string filePath = settings.TextsConfigFilePath ?? settings.DefaultTextsConfigFilePath;
 
@@ -44,6 +45,22 @@ namespace eTools_Ultimate.Services
                     string dwColor = scanner.GetToken();
                     scanner.GetToken(); // {
                     string szName = scanner.GetToken();
+
+                    // If the string is not in the strings service, then we generate a new key for it.
+                    if (!stringsService.Strings.ContainsKey(szName))
+                    {
+                        const string stringIdPrefix = "IDS_TEXTCLIENT_INC_";
+                        string identifier = string.Empty;
+                        for (int i = 0; true; i++)
+                        {
+                            identifier = stringIdPrefix + i.ToString("D6");
+                            if (!stringsService.Strings.ContainsKey(identifier))
+                                break;
+                        }
+                        StringsService.Instance.AddString(identifier, szName);
+                        szName = identifier;
+                    }
+
                     scanner.GetToken(); // }
 
                     Text text = new(dwId, dwColor, szName);
