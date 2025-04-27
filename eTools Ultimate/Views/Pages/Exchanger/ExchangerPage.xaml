@@ -5,7 +5,10 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:eTools_Ultimate.Models"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
     Title="ExchangerPage"
     d:DataContext="{d:DesignInstance local:ExchangerPage,
                                      IsDesignTimeCreatable=False}"
@@ -17,15 +20,498 @@
     ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d">
 
-    <Grid>
-        <StackPanel 
-            VerticalAlignment="Center" 
-            HorizontalAlignment="Center">
-            <TextBlock 
-                Text="Coming soon..." 
-                FontSize="36" 
-                FontWeight="Light"
-                Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
-        </StackPanel>
+    <Page.Resources>
+        <converters:NumberFormatConverter x:Key="NumberFormatConverter"/>
+        <!-- Common Styles -->
+        <Style x:Key="InfoIconStyle"
+                TargetType="ui:SymbolIcon">
+            <Setter Property="HorizontalAlignment"
+                    Value="Right"/>
+            <Setter Property="VerticalAlignment"
+                    Value="Center"/>
+            <Setter Property="FontSize"
+                    Value="16"/>
+            <Setter Property="Margin"
+                    Value="5,0,0,0"/>
+            <Setter Property="Foreground"
+                    Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+        </Style>
+        <Style x:Key="FormFieldStyle"
+                TargetType="Grid">
+            <Setter Property="Margin"
+                    Value="0,0,15,5"/>
+        </Style>
+        <Style x:Key="FieldLabelStyle"
+                TargetType="TextBlock">
+            <Setter Property="Margin"
+                    Value="0,0,0,2"/>
+            <Setter Property="FontWeight"
+                    Value="SemiBold"/>
+            <Setter Property="Foreground"
+                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+        </Style>
+        <Style x:Key="SectionHeaderStyle"
+                TargetType="TextBlock">
+            <Setter Property="FontSize"
+                    Value="24"/>
+            <Setter Property="FontWeight"
+                    Value="Bold"/>
+            <Setter Property="Margin"
+                    Value="0,10,0,8"/>
+            <Setter Property="Foreground"
+                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+        </Style>
+        
+        <!-- TextBox Style -->
+        <Style x:Key="AppTextBoxStyle" 
+               TargetType="TextBox" 
+               BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="Background" 
+                    Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+            <Setter Property="Foreground" 
+                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+            <Setter Property="BorderBrush" 
+                    Value="{DynamicResource ControlElevationBorderBrush}"/>
+            <Setter Property="Padding" 
+                    Value="8,3"/>
+            <Setter Property="MinHeight"
+                    Value="28"/>
+        </Style>
+        
+        <!-- ComboBox Style -->
+        <Style x:Key="AppComboBoxStyle" 
+               TargetType="ComboBox" 
+               BasedOn="{StaticResource {x:Type ComboBox}}">
+            <Setter Property="Background" 
+                    Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+            <Setter Property="Foreground" 
+                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+            <Setter Property="BorderBrush" 
+                    Value="{DynamicResource ControlElevationBorderBrush}"/>
+        </Style>
+        
+        <!-- Exchanger Item Template -->
+        <DataTemplate x:Key="ExchangerItemTemplate">
+            <Grid Margin="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Width="32"
+                        Height="32"
+                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                        BorderThickness="1"
+                        Margin="0,0,8,0">
+                    <TextBlock Text="{Binding ID}"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Center"
+                              FontWeight="SemiBold"/>
+                </Border>
+                <StackPanel Grid.Column="1"
+                        VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Name}"
+                            FontWeight="SemiBold"
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                    <TextBlock Text="{Binding Key}"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                            FontSize="12"/>
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
+        
+        <!-- Exchange Requirement Template -->
+        <DataTemplate x:Key="ExchangeRequirementTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0"
+                         Text="{Binding ItemID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Style="{StaticResource AppTextBoxStyle}"/>
+                <ui:NumberBox Grid.Column="1"
+                             Value="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                             Minimum="1"
+                             Maximum="9999"
+                             Width="80"
+                             SpinButtonPlacementMode="Inline"
+                             MinHeight="28"
+                             Margin="5,0,0,0"/>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid x:Name="RootGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Left Side - ListView -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Search Bar -->
+            <Border Grid.Row="0"
+                    Margin="5,10,15,5"
+                    CornerRadius="8">
+                <ui:TextBox PlaceholderText="Search exchanger..."
+                            Icon="Search24"
+                            Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Border>
+
+            <!-- Exchanger List -->
+            <Border Grid.Row="1"
+                    CornerRadius="8"
+                    BorderThickness="1"
+                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    Margin="5,5,15,5">
+                <ListView x:Name="ExchangersListView"
+                          BorderThickness="0"
+                          Background="Transparent"
+                          ItemTemplate="{StaticResource ExchangerItemTemplate}"
+                          ItemsSource="{Binding ViewModel.ExchangersView}"
+                          IsSynchronizedWithCurrentItem="True">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background"
+                                    Value="Transparent"/>
+                            <Setter Property="BorderBrush"
+                                    Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver"
+                                        Value="True">
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected"
+                                        Value="True">
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+                                    <Setter Property="Foreground"
+                                            Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </Border>
+        </Grid>
+
+        <!-- Separator -->
+        <GridSplitter Grid.Column="1"
+                      Width="5"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Stretch"
+                      Background="{DynamicResource ControlElevationBorderBrush}"/>
+
+        <!-- Right Side - Form -->
+        <ScrollViewer Grid.Column="2"
+                VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <!-- Add und Delete Buttons oben rechts -->
+                <StackPanel Orientation="Horizontal" 
+                          HorizontalAlignment="Right" 
+                          VerticalAlignment="Top"
+                          Margin="0,10,20,0"
+                          ZIndex="1">
+                    <ui:Button x:Name="AddButton" 
+                             Content="Add" 
+                             Appearance="Primary"
+                             Margin="0,0,10,0"/>
+                    <ui:Button x:Name="DeleteButton" 
+                             Content="Delete" 
+                             Appearance="Danger"/>
+                </StackPanel>
+                
+                <!-- Formulare -->
+                <StackPanel Margin="20">
+                    <TextBlock Text="Basic Information"
+                            Style="{StaticResource SectionHeaderStyle}"/>
+                    <UniformGrid Columns="2">
+                        <!-- MMI_Key -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0"
+                                    Orientation="Horizontal">
+                                <TextBlock Text="Exchanger MMI_Key"
+                                        Style="{StaticResource FieldLabelStyle}"/>
+                                <ui:SymbolIcon Symbol="Info20"
+                                        Style="{StaticResource InfoIconStyle}">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="The MMI key for the exchanger (e.g. MMI_CHANGTICKET01)"/>
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <TextBox Grid.Row="1"
+                                    x:Name="MMIKeyTextBox"
+                                    Style="{StaticResource AppTextBoxStyle}"
+                                    Text="{Binding ExchangerKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
+                        <!-- Name -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0"
+                                    Orientation="Horizontal">
+                                <TextBlock Text="Exchanger Name"
+                                        Style="{StaticResource FieldLabelStyle}"/>
+                                <ui:SymbolIcon Symbol="Info20"
+                                        Style="{StaticResource InfoIconStyle}">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="Display name of the exchanger (IDS_TEXTCLIENT_INC_)"/>
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <TextBox Grid.Row="1"
+                                    x:Name="NameTextBox"
+                                    Style="{StaticResource AppTextBoxStyle}"
+                                    Text="{Binding ExchangerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
+                        <!-- Result Message - Success -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0"
+                                    Orientation="Horizontal">
+                                <TextBlock Text="Success Message"
+                                        Style="{StaticResource FieldLabelStyle}"/>
+                                <ui:SymbolIcon Symbol="Info20"
+                                        Style="{StaticResource InfoIconStyle}">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="Message displayed on successful exchange"/>
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <TextBox Grid.Row="1"
+                                    x:Name="SuccessMessageTextBox"
+                                    Style="{StaticResource AppTextBoxStyle}"
+                                    Text="{Binding SuccessMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
+                        <!-- Result Message - Fail -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0"
+                                    Orientation="Horizontal">
+                                <TextBlock Text="Fail Message"
+                                        Style="{StaticResource FieldLabelStyle}"/>
+                                <ui:SymbolIcon Symbol="Info20"
+                                        Style="{StaticResource InfoIconStyle}">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="Message displayed on failed exchange"/>
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <TextBox Grid.Row="1"
+                                    x:Name="FailMessageTextBox"
+                                    Style="{StaticResource AppTextBoxStyle}"
+                                    Text="{Binding FailMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </Grid>
+                        <!-- Description -->
+                        <Grid Style="{StaticResource FormFieldStyle}" Grid.ColumnSpan="2" Margin="0,0,15,8">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0"
+                                    Orientation="Horizontal">
+                                <TextBlock Text="Description"
+                                        Style="{StaticResource FieldLabelStyle}"/>
+                                <ui:SymbolIcon Symbol="Info20"
+                                        Style="{StaticResource InfoIconStyle}">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="Description of the exchanger (TID_MMI_CHANGTICKET01_TEXT01)"/>
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <TextBox Grid.Row="1"
+                                    x:Name="DescriptionTextBox"
+                                    Style="{StaticResource AppTextBoxStyle}"
+                                    Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                    AcceptsReturn="True"
+                                    TextWrapping="Wrap"
+                                    Height="60"/>
+                        </Grid>
+                    </UniformGrid>
+                    
+                    <Separator Margin="0,5,0,5"/>
+                    
+                    <TextBlock Text="Exchange Requirements"
+                            Style="{StaticResource SectionHeaderStyle}"/>
+                    
+                    <!-- DataGrid für Exchange Requirements -->
+                    <Grid Margin="0,5,0,10">
+                        <!-- TabControl statt TabView -->
+                        <TabControl BorderThickness="1" BorderBrush="{DynamicResource ControlElevationBorderBrush}">
+                            <TabItem Header="Conditions">
+                                <Grid Margin="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <!-- Tabellenheader -->
+                                    <Grid Grid.Row="0" Margin="0,0,0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Item ID" FontWeight="SemiBold"/>
+                                        <TextBlock Grid.Column="1" Text="Quantity" FontWeight="SemiBold" Width="80" HorizontalAlignment="Center"/>
+                                    </Grid>
+                                    
+                                    <!-- Items Liste -->
+                                    <ListView Grid.Row="1" 
+                                             ItemsSource="{Binding ViewModel.ConditionsCollection, Mode=TwoWay}"
+                                             ItemTemplate="{StaticResource ExchangeRequirementTemplate}"
+                                             BorderThickness="0"
+                                             Background="Transparent"
+                                             MaxHeight="150">
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="Padding" Value="0,2"/>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                    </ListView>
+                                    
+                                    <!-- Add/Remove Buttons -->
+                                    <StackPanel Grid.Row="2" 
+                                              Orientation="Horizontal" 
+                                              HorizontalAlignment="Right" 
+                                              Margin="0,5,0,0">
+                                        <ui:Button Content="Add" 
+                                                 Appearance="Secondary" 
+                                                 Icon="Add12" 
+                                                 Margin="0,0,5,0"/>
+                                        <ui:Button Content="Remove" 
+                                                 Appearance="Secondary" 
+                                                 Icon="Delete12"/>
+                                    </StackPanel>
+                                </Grid>
+                            </TabItem>
+                            
+                            <TabItem Header="Remove">
+                                <Grid Margin="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <!-- Tabellenheader -->
+                                    <Grid Grid.Row="0" Margin="0,0,0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Item ID" FontWeight="SemiBold"/>
+                                        <TextBlock Grid.Column="1" Text="Quantity" FontWeight="SemiBold" Width="80" HorizontalAlignment="Center"/>
+                                    </Grid>
+                                    
+                                    <!-- Items Liste -->
+                                    <ListView Grid.Row="1" 
+                                             ItemsSource="{Binding ViewModel.RemoveCollection, Mode=TwoWay}"
+                                             ItemTemplate="{StaticResource ExchangeRequirementTemplate}"
+                                             BorderThickness="0"
+                                             Background="Transparent"
+                                             MaxHeight="150">
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="Padding" Value="0,2"/>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                    </ListView>
+                                    
+                                    <!-- Add/Remove Buttons -->
+                                    <StackPanel Grid.Row="2" 
+                                              Orientation="Horizontal" 
+                                              HorizontalAlignment="Right" 
+                                              Margin="0,5,0,0">
+                                        <ui:Button Content="Add" 
+                                                 Appearance="Secondary" 
+                                                 Icon="Add12" 
+                                                 Margin="0,0,5,0"/>
+                                        <ui:Button Content="Remove" 
+                                                 Appearance="Secondary" 
+                                                 Icon="Delete12"/>
+                                    </StackPanel>
+                                </Grid>
+                            </TabItem>
+                            
+                            <TabItem Header="Pay">
+                                <Grid Margin="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <!-- Tabellenheader -->
+                                    <Grid Grid.Row="0" Margin="0,0,0,5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Item ID" FontWeight="SemiBold"/>
+                                        <TextBlock Grid.Column="1" Text="Amount" FontWeight="SemiBold" Width="80" HorizontalAlignment="Center"/>
+                                    </Grid>
+                                    
+                                    <!-- Items Liste -->
+                                    <ListView Grid.Row="1" 
+                                             ItemsSource="{Binding ViewModel.PayCollection, Mode=TwoWay}"
+                                             ItemTemplate="{StaticResource ExchangeRequirementTemplate}"
+                                             BorderThickness="0"
+                                             Background="Transparent"
+                                             MaxHeight="150">
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="Padding" Value="0,2"/>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                    </ListView>
+                                    
+                                    <!-- Add/Remove Buttons -->
+                                    <StackPanel Grid.Row="2" 
+                                              Orientation="Horizontal" 
+                                              HorizontalAlignment="Right" 
+                                              Margin="0,5,0,0">
+                                        <ui:Button Content="Add" 
+                                                 Appearance="Secondary" 
+                                                 Icon="Add12" 
+                                                 Margin="0,0,5,0"/>
+                                        <ui:Button Content="Remove" 
+                                                 Appearance="Secondary" 
+                                                 Icon="Delete12"/>
+                                    </StackPanel>
+                                </Grid>
+                            </TabItem>
+                        </TabControl>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </Page> 
