@@ -84,6 +84,8 @@
         <Border x:Name="BannerBorder" Grid.Row="1" 
                 Height="200"
                 Margin="24,0,24,0"
+                Cursor="Hand"
+                MouseLeftButtonDown="OpenChangelogDialog"
                 CornerRadius="8">
             <Border.Background>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -136,7 +138,7 @@
                             Foreground="#FFFFFF"
                             Content="Patchlogs"
                             Icon="History24"
-                            Click="PatchlogsButton_Click" />
+                            Click="OpenChangelogDialog" />
                     </Grid>
                 </Grid>
             </Border>
@@ -162,5 +164,10 @@
                 </ItemsControl>
             </Grid>
         </ScrollViewer>
+        
+        <!-- Changelog-Dialog (ausgeblendet) -->
+        <Frame x:Name="ChangelogFrame" 
+               Visibility="Collapsed"
+               Grid.RowSpan="3" />
     </Grid>
 </Page>

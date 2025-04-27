@@ -9,6 +9,7 @@ using System.Linq;
 using Wpf.Ui;
 using System.Windows.Controls;
 using System.Windows.Media;
+using eTools_Ultimate.Views.Windows;
 
 namespace eTools_Ultimate.Views.Pages
 {
@@ -75,34 +76,22 @@ namespace eTools_Ultimate.Views.Pages
         }
         
         /// <summary>
-        /// Event handler for the Patchlogs button
+        /// Opens the changelog dialog
         /// </summary>
-        private void PatchlogsButton_Click(object sender, RoutedEventArgs e)
+        private void OpenChangelogDialog(object sender, RoutedEventArgs e)
         {
-            // Patchlogs content
-            string patchlogsContent = 
-                "Version 1.2.0 (Current)\n" +
-                "• New dashboard design with improved navigation cards\n" +
-                "• Added hover effects and arrows for better UX\n" +
-                "• Adjusted banner and made it responsive\n" +
-                "• Enabled scrolling in dashboard\n" +
-                "• Added patchlogs feature\n\n" +
-                "Version 1.1.0\n" +
-                "• Implemented theme switching\n" +
-                "• Performance improvements\n" +
-                "• Fixed navigation bugs\n" +
-                "• Added new icons\n\n" +
-                "Version 1.0.0\n" +
-                "• Initial application release\n" +
-                "• Implemented core functionality\n" +
-                "• Created user interface";
-            
-            // Show message box with patchlogs
-            System.Windows.MessageBox.Show(
-                patchlogsContent,
-                "Patchlogs - Latest Changes",
-                System.Windows.MessageBoxButton.OK,
-                System.Windows.MessageBoxImage.Information);
+            try
+            {
+                // Open the modern changelog
+                ChangelogFrame.Content = new ChangelogDialog();
+                ChangelogFrame.Visibility = Visibility.Visible;
+                System.Diagnostics.Debug.WriteLine("Changelog dialog was opened. Frame name: " + ChangelogFrame.Name);
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine("Error opening the changelog dialog: " + ex.Message);
+                System.Windows.MessageBox.Show("Error opening the changelog dialog: " + ex.Message, "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
         }
     }
 }

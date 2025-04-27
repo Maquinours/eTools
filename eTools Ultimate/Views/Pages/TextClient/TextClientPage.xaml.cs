@@ -25,7 +25,7 @@ namespace eTools_Ultimate.Views.Pages
                 // For now, use simple MessageBox
                 // Once WPF UI is properly set up, this can be replaced with ContentDialog
                 var result = System.Windows.MessageBox.Show(
-                    "Test",
+                    "Are you sure you want to create a new text client?",
                     "Add Item",
                     System.Windows.MessageBoxButton.OKCancel,
                     System.Windows.MessageBoxImage.Information);
