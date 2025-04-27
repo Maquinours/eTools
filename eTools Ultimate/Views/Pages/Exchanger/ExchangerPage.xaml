@@ -472,15 +472,16 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <TextBlock Grid.Column="0" Text="Item ID" FontWeight="SemiBold"/>
                                         <TextBlock Grid.Column="1" Text="Amount" FontWeight="SemiBold" Width="80" HorizontalAlignment="Center"/>
+                                        <TextBlock Grid.Column="2" Text="Chance %" FontWeight="SemiBold" Width="80" HorizontalAlignment="Center" Margin="5,0,0,0"/>
                                     </Grid>
                                     
                                     <!-- Items Liste -->
                                     <ListView Grid.Row="1" 
                                              ItemsSource="{Binding ViewModel.PayCollection, Mode=TwoWay}"
-                                             ItemTemplate="{StaticResource ExchangeRequirementTemplate}"
                                              BorderThickness="0"
                                              Background="Transparent"
                                              MaxHeight="150">
@@ -491,6 +492,36 @@
                                                 <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
                                             </Style>
                                         </ListView.ItemContainerStyle>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBox Grid.Column="0"
+                                                           Text="{Binding ItemID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                           Style="{StaticResource AppTextBoxStyle}"/>
+                                                    <ui:NumberBox Grid.Column="1"
+                                                                 Value="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                                                 Minimum="1"
+                                                                 Maximum="9999"
+                                                                 Width="80"
+                                                                 SpinButtonPlacementMode="Inline"
+                                                                 MinHeight="28"
+                                                                 Margin="5,0,0,0"/>
+                                                    <ui:NumberBox Grid.Column="2"
+                                                                 Value="{Binding Chance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                                                 Minimum="0"
+                                                                 Maximum="100"
+                                                                 Width="80"
+                                                                 SpinButtonPlacementMode="Inline"
+                                                                 MinHeight="28"
+                                                                 Margin="5,0,0,0"/>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
                                     </ListView>
                                     
                                     <!-- Add/Remove Buttons -->
