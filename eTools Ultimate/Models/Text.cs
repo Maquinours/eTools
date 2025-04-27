@@ -104,7 +104,7 @@ namespace eTools_Ultimate.Models
             set
             {
                 if(value != null)
-                    this.DwColor = $"0x{value?.A:X2}{value?.R:X2}{value?.G:X2}{value?.B:X2}";
+                    this.DwColor = $"0x{value?.A:X2}{value?.R:X2}{value?.G:X2}{value?.B:X2}".ToLower();
             }
         }
 
