@@ -45,6 +45,9 @@ namespace eTools_Ultimate.Models
         private string? _textsConfigFilePath;
         private string? _textsTxtFilePath;
 
+        // GiftBoxes settings
+        private string? _giftboxesConfigFilePath;
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -425,5 +428,24 @@ namespace eTools_Ultimate.Models
             }
         }
         public string DefaultTextsTxtFilePath => $"{this.ResourcesFolderPath}textClient.txt.txt";
+
+        public string? GiftBoxesConfigFilePath
+        {
+            get => this._giftboxesConfigFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultGiftBoxesConfigFilePath)
+                    val = null;
+                if (this.GiftBoxesConfigFilePath != val)
+                {
+                    this._giftboxesConfigFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultGiftBoxesConfigFilePath => $"{this.ResourcesFolderPath}propGiftbox.inc";
     }
 }

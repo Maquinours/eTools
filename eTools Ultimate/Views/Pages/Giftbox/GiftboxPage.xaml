@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="GiftboxPage"
+    d:DataContext="{d:DesignInstance local:GiftboxPage, IsDesignTimeCreatable=False}"
     d:DesignHeight="768"
     d:DesignWidth="1024"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
@@ -131,17 +132,17 @@
                         BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                         BorderThickness="1"
                         Margin="0,0,8,0">
-                    <ui:SymbolIcon
-                        Symbol="GiftCard24"
-                        FontSize="16"
-                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                    <Image 
+                        Stretch="Uniform"
+                        Margin="2"
+                        Source="{Binding Item.Icon}"/>
                 </Border>
                 <StackPanel Grid.Column="1"
                         VerticalAlignment="Center">
-                    <TextBlock Text="{Binding Name}"
+                    <TextBlock Text="{Binding Item.Name}"
                             FontWeight="SemiBold"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                    <TextBlock Text="{Binding Id}" 
+                    <TextBlock Text="{Binding Item.Id}" 
                             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                             FontSize="12"/>
                 </StackPanel>
@@ -169,7 +170,7 @@
                 PlaceholderText="Search giftbox..." 
                 Icon="Search24"
                 Margin="5,5,15,10"
-                Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <!-- Giftbox List -->
             <Border Grid.Row="1"
@@ -183,7 +184,7 @@
                     BorderThickness="0"
                     Background="Transparent"
                     ItemTemplate="{StaticResource GiftboxListTemplate}"
-                    ItemsSource="{Binding GiftboxCollection}"
+                    ItemsSource="{Binding ViewModel.GiftboxesView}"
                     IsSynchronizedWithCurrentItem="True"
                     SelectionChanged="GiftboxListView_SelectionChanged">
                     <ListView.ItemContainerStyle>
@@ -233,9 +234,9 @@
                     FontTypography="Title"
                     FontSize="24"
                     Margin="0,0,0,10" >
-                    <Run Text="Items in "/>
-                    <Run Text="Giftbox "/>
-                    <Run Language="de-de" Text="XYZ"/>
+                    <Run Text="Items in"/>
+                    <Run Text="Giftbox"/>
+                    <Run Text="{Binding SelectedItem.Item.Name, ElementName=GiftboxListView}"/>
                 </ui:TextBlock>
 
                 <ui:Button 
@@ -250,19 +251,24 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <ui:TextBlock 
+                <ui:SymbolIcon 
                     Grid.Column="0"
+                    Symbol="GiftCard24"
+                    FontSize="16"
+                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                <ui:TextBlock 
+                    Grid.Column="1"
                     Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                     FontTypography="Caption" >
-                    <Run Text="II_SYS_SYS_SCR_"/>
-                    <Run Language="de-de" Text="XYZ"/>
-                    <Run Text=" "/>
+                    <Run Text="Items in box :"/>
+                    <Run Text="{Binding SelectedItem.Items.Count, Mode=OneWay, ElementName=GiftboxListView}"/>
                 </ui:TextBlock>
 
                 <ui:SymbolIcon
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Symbol="Info24"
                     FontSize="16"
                     Margin="5,0,0,0"
@@ -273,14 +279,17 @@
             <!-- Probability information -->
             <ui:TextBlock 
                 Grid.Row="2"
-                Text="Total Probability: 10000 (100%)" 
                 Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                Margin="0,0,0,10" />
+                Margin="0,0,0,10">
+                Total probability :
+                <Run Text="{Binding SelectedItem.TotalProbability, Mode=OneWay, ElementName=GiftboxListView}" />
+                (<Run Text="{Binding SelectedItem.TotalProbabilityPercent, Mode=OneWay, ElementName=GiftboxListView}" /><!-- -->%)
+            </ui:TextBlock>
 
             <!-- Data Grid -->
             <ui:Card Grid.Row="3" Padding="10" Margin="0,0,0,0" VerticalAlignment="Top">
                 <DataGrid 
-                    ItemsSource="{Binding GiftboxItems}"
+                    ItemsSource="{Binding SelectedItem.Items, ElementName=GiftboxListView}"
                     AutoGenerateColumns="False"
                     IsReadOnly="True"
                     Background="Transparent"
@@ -313,21 +322,53 @@
                         </Style>
                     </DataGrid.Resources>
                     <DataGrid.Columns>
-                        <DataGridTextColumn 
-                            Header="Item ID" 
-                            Binding="{Binding ItemId}" 
-                            Width="*" />
+                        <DataGridTemplateColumn Header="Item" Width="*" SortMemberPath="Item.Name">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border
+                                            Width="32" 
+                                            Height="32"
+                                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                            BorderThickness="1"
+                                            Margin="0,0,8,0">
+                                            <Image
+                                                Stretch="Uniform"
+                                                Margin="2"
+                                                Source="{Binding Item.Icon}"/>
+                                        </Border>
+                                        <StackPanel
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center">
+                                            <TextBlock
+                                                Text="{Binding Item.Name}"
+                                                FontWeight="SemiBold"
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                            <TextBlock
+                                                Text="{Binding Item.Id}"
+                                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                FontSize="12"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
                         <DataGridTextColumn 
                             Header="Probability" 
-                            Binding="{Binding Probability}" 
+                            Binding="{Binding DwProbability}" 
                             Width="Auto" />
                         <DataGridTextColumn 
                             Header="Quantity" 
-                            Binding="{Binding Quantity}" 
+                            Binding="{Binding NNum}" 
                             Width="Auto" />
                         <DataGridTextColumn 
                             Header="%" 
-                            Binding="{Binding Percent}" 
+                            Binding="{Binding ProbabilityPercent}" 
                             Width="Auto" />
                         <DataGridTemplateColumn 
                             Header="Actions" 

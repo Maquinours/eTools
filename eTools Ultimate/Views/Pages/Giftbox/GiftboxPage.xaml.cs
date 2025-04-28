@@ -4,11 +4,11 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.Views.Pages
 {
-    public partial class GiftboxPage : Page, INavigableView<DataViewModel>
+    public partial class GiftboxPage : Page, INavigableView<GiftBoxesViewModel>
     {
-        public DataViewModel ViewModel { get; }
+        public GiftBoxesViewModel ViewModel { get; }
 
-        public GiftboxPage(DataViewModel viewModel)
+        public GiftboxPage(GiftBoxesViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = this;
