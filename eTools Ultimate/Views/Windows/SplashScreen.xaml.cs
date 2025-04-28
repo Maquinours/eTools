@@ -51,6 +51,11 @@ namespace eTools_Ultimate.Views.Windows
                 ItemsService.Instance.Load();
                 Application.Current.Dispatcher.Invoke(() =>
                 {
+                    LoadingText.Text = "Loading giftboxes...";
+                });
+                GiftBoxesService.Instance.Load();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
                     LoadingText.Text = "Loading skills...";
                 });
                 SkillsService.Instance.Load();
