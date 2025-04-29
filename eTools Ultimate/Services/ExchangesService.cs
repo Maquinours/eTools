@@ -49,8 +49,6 @@ namespace eTools_Ultimate.Services
 
                     scanner.GetToken(); // {
 
-                    if (!definesService.Defines.ContainsKey(mmiId)) continue;
-
                     while (true)
                     {
                         string token = scanner.GetToken();
