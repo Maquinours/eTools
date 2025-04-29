@@ -48,6 +48,9 @@ namespace eTools_Ultimate.Models
         // GiftBoxes settings
         private string? _giftboxesConfigFilePath;
 
+        // Exchangers settings
+        private string? _exchangesConfigFilePath;
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -447,5 +450,24 @@ namespace eTools_Ultimate.Models
             }
         }
         public string DefaultGiftBoxesConfigFilePath => $"{this.ResourcesFolderPath}propGiftbox.inc";
+
+        public string? ExchangesConfigFilePath
+        {
+            get => this._exchangesConfigFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultExchangesConfigFilePath)
+                    val = null;
+                if (this.ExchangesConfigFilePath != val)
+                {
+                    this._exchangesConfigFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultExchangesConfigFilePath => $"{this.ResourcesFolderPath}Exchange_Script.txt";
     }
 }

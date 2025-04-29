@@ -103,14 +103,14 @@
                         BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                         BorderThickness="1"
                         Margin="0,0,8,0">
-                    <TextBlock Text="{Binding ID}"
+                    <TextBlock Text=""
                               VerticalAlignment="Center"
                               HorizontalAlignment="Center"
                               FontWeight="SemiBold"/>
                 </Border>
                 <StackPanel Grid.Column="1"
                         VerticalAlignment="Center">
-                    <TextBlock Text="{Binding Name}"
+                    <TextBlock Text="{Binding MmiId}"
                             FontWeight="SemiBold"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
                     <TextBlock Text="{Binding Key}"
@@ -176,7 +176,7 @@
                           BorderThickness="0"
                           Background="Transparent"
                           ItemTemplate="{StaticResource ExchangerItemTemplate}"
-                          ItemsSource="{Binding ViewModel.ExchangersView}"
+                          ItemsSource="{Binding ViewModel.ExchangesView}"
                           IsSynchronizedWithCurrentItem="True">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
