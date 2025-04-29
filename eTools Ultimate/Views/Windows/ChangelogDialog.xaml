@@ -95,7 +95,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <Rectangle Grid.Row="0" Fill="Transparent" MouseLeftButtonDown="CloseButton_Click"/>
+        <Rectangle Grid.Row="0" Fill="Transparent" />
         
         <ui:Card Background="{DynamicResource ApplicationBackgroundBrush}" 
                  BorderBrush="{DynamicResource ControlElevationBorderBrush}" 

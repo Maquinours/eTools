@@ -279,75 +279,6 @@
                                     Style="{StaticResource AppTextBoxStyle}"
                                     Text="{Binding ExchangerName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </Grid>
-                        <!-- Result Message - Success -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0"
-                                    Orientation="Horizontal">
-                                <TextBlock Text="Success Message"
-                                        Style="{StaticResource FieldLabelStyle}"/>
-                                <ui:SymbolIcon Symbol="Info20"
-                                        Style="{StaticResource InfoIconStyle}">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="Message displayed on successful exchange"/>
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-                            <TextBox Grid.Row="1"
-                                    x:Name="SuccessMessageTextBox"
-                                    Style="{StaticResource AppTextBoxStyle}"
-                                    Text="{Binding SuccessMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        </Grid>
-                        <!-- Result Message - Fail -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0"
-                                    Orientation="Horizontal">
-                                <TextBlock Text="Fail Message"
-                                        Style="{StaticResource FieldLabelStyle}"/>
-                                <ui:SymbolIcon Symbol="Info20"
-                                        Style="{StaticResource InfoIconStyle}">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="Message displayed on failed exchange"/>
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-                            <TextBox Grid.Row="1"
-                                    x:Name="FailMessageTextBox"
-                                    Style="{StaticResource AppTextBoxStyle}"
-                                    Text="{Binding FailMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        </Grid>
-                        <!-- Description -->
-                        <Grid Style="{StaticResource FormFieldStyle}" Grid.ColumnSpan="2" Margin="0,0,15,8">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0"
-                                    Orientation="Horizontal">
-                                <TextBlock Text="Description"
-                                        Style="{StaticResource FieldLabelStyle}"/>
-                                <ui:SymbolIcon Symbol="Info20"
-                                        Style="{StaticResource InfoIconStyle}">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="Description of the exchanger (TID_MMI_CHANGTICKET01_TEXT01)"/>
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-                            <TextBox Grid.Row="1"
-                                    x:Name="DescriptionTextBox"
-                                    Style="{StaticResource AppTextBoxStyle}"
-                                    Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                    AcceptsReturn="True"
-                                    TextWrapping="Wrap"
-                                    Height="60"/>
-                        </Grid>
                     </UniformGrid>
                     
                     <Separator Margin="0,5,0,5"/>
@@ -540,6 +471,41 @@
                                 </Grid>
                             </TabItem>
                         </TabControl>
+                    </Grid>
+                    
+                    <TextBlock Text="Description"
+                            Style="{StaticResource SectionHeaderStyle}"/>
+                    
+                    <!-- DataGrid für Description -->
+                    <Grid Margin="0,5,0,10">
+                        <Border BorderThickness="1" 
+                                BorderBrush="{DynamicResource ControlElevationBorderBrush}" 
+                                Padding="10">
+                            <DataGrid AutoGenerateColumns="False" 
+                                      Background="Transparent"
+                                      BorderThickness="0"
+                                      GridLinesVisibility="Horizontal"
+                                      CanUserAddRows="True"
+                                      CanUserDeleteRows="True"
+                                      CanUserResizeRows="False"
+                                      MaxHeight="200"
+                                      ItemsSource="{Binding ViewModel.DescriptionCollection, Mode=TwoWay}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Success" 
+                                                        Binding="{Binding Success, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                        Width="*"/>
+                                    <DataGridTextColumn Header="TID" 
+                                                        Binding="{Binding SuccessTID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                        Width="*"/>
+                                    <DataGridTextColumn Header="Fail" 
+                                                        Binding="{Binding Fail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                        Width="*"/>
+                                    <DataGridTextColumn Header="TID" 
+                                                        Binding="{Binding FailTID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                        Width="*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Border>
                     </Grid>
                 </StackPanel>
             </Grid>
