@@ -220,16 +220,8 @@
                           HorizontalAlignment="Right" 
                           VerticalAlignment="Top"
                           Margin="0,10,20,0"
-                          ZIndex="1">
-                    <ui:Button x:Name="AddButton" 
-                             Content="Add" 
-                             Appearance="Primary"
-                             Margin="0,0,10,0"/>
-                    <ui:Button x:Name="DeleteButton" 
-                             Content="Delete" 
-                             Appearance="Danger"/>
-                </StackPanel>
-                
+                          ZIndex="1"/>
+
                 <!-- Formulare -->
                 <StackPanel Margin="20">
                     <TextBlock Text="Basic Information"
@@ -281,21 +273,108 @@
                         </Grid>
                     </UniformGrid>
                     
-                    <Separator Margin="0,5,0,5"/>
+                    <Separator Margin="0,15,0,15"/>
                     
-                    <TextBlock Text="Exchange Requirements"
-                            Style="{StaticResource SectionHeaderStyle}"/>
+                    <Grid Margin="0,0,0,15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Text="Sets" 
+                                 Style="{StaticResource SectionHeaderStyle}"
+                                 VerticalAlignment="Center"
+                                 Grid.Column="0"/>
+                        
+                        <StackPanel Grid.Column="1" 
+                                   Orientation="Horizontal" 
+                                   HorizontalAlignment="Right">
+                            <ui:Button Content="Add Set" 
+                                     Icon="Add12"
+                                     Appearance="Success"
+                                     Margin="0,0,10,0" Background="#FF1DC6F1"/>
+                            <ui:Button Content="Delete Set" 
+                                     Icon="Delete12"
+                                     Appearance="Danger"/>
+                        </StackPanel>
+                    </Grid>
+                    
+                    <!-- Set Selection -->
+                    <Border BorderThickness="1"
+                          BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                          CornerRadius="8"
+                          Margin="0,0,0,20">
+                        <ListView x:Name="SetListView"
+                                 Height="120"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 Margin="5"
+                                 SelectedIndex="0">
+                            <ListViewItem Content="Set 1"/>
+                            <ListViewItem Content="Set 2"/>
+                            <ListViewItem Content="Set 3"/>
+                            <ListViewItem Content="Set 4"/>
+                            <ListViewItem Content="Set 5"/>
+                            <ListViewItem Content="Set 6"/>
+                            <ListViewItem Content="Set 7"/>
+                            <ListViewItem Content="Set 8"/>
+                            <ListViewItem Content="Set 9"/>
+                            <ListViewItem Content="Set 10"/>
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Background" Value="Transparent"/>
+                                    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+                                    <Setter Property="Padding" Value="8,4"/>
+                                    <Setter Property="Margin" Value="2"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}"/>
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </Border>
+                    
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <TextBlock Text="Exchange Requirements"
+                                 Style="{StaticResource SectionHeaderStyle}"
+                                 VerticalAlignment="Center"
+                                 Grid.Column="0"/>
+                        
+                        <StackPanel Grid.Column="1" 
+                                   Orientation="Horizontal" 
+                                   HorizontalAlignment="Right">
+                            <ui:Button Content="Add Item" 
+                                     Icon="Add12"
+                                     Appearance="Success"
+                                     Margin="0,0,10,0" Background="#FF1DC6F1"/>
+                            <ui:Button Content="Delete Item" 
+                                     Icon="Delete12"
+                                     Appearance="Danger"/>
+                        </StackPanel>
+                    </Grid>
                     
                     <!-- DataGrid für Exchange Requirements -->
-                    <Grid Margin="0,5,0,10">
-                        <!-- TabControl statt TabView -->
-                        <TabControl BorderThickness="1" BorderBrush="{DynamicResource ControlElevationBorderBrush}">
+                    <Grid Margin="0,0,0,20">
+                        <!-- TabControl -->
+                        <TabControl BorderThickness="1" 
+                                   BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                   Background="{DynamicResource CardBackgroundFillColorDefaultBrush}">
                             <TabItem Header="Conditions">
                                 <Grid Margin="10">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="*"/>
-                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     
                                     <!-- Tabellenheader -->
@@ -323,20 +402,6 @@
                                             </Style>
                                         </ListView.ItemContainerStyle>
                                     </ListView>
-                                    
-                                    <!-- Add/Remove Buttons -->
-                                    <StackPanel Grid.Row="2" 
-                                              Orientation="Horizontal" 
-                                              HorizontalAlignment="Right" 
-                                              Margin="0,5,0,0">
-                                        <ui:Button Content="Add" 
-                                                 Appearance="Secondary" 
-                                                 Icon="Add12" 
-                                                 Margin="0,0,5,0"/>
-                                        <ui:Button Content="Remove" 
-                                                 Appearance="Secondary" 
-                                                 Icon="Delete12"/>
-                                    </StackPanel>
                                 </Grid>
                             </TabItem>
                             
@@ -345,7 +410,6 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="*"/>
-                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     
                                     <!-- Tabellenheader -->
@@ -373,20 +437,6 @@
                                             </Style>
                                         </ListView.ItemContainerStyle>
                                     </ListView>
-                                    
-                                    <!-- Add/Remove Buttons -->
-                                    <StackPanel Grid.Row="2" 
-                                              Orientation="Horizontal" 
-                                              HorizontalAlignment="Right" 
-                                              Margin="0,5,0,0">
-                                        <ui:Button Content="Add" 
-                                                 Appearance="Secondary" 
-                                                 Icon="Add12" 
-                                                 Margin="0,0,5,0"/>
-                                        <ui:Button Content="Remove" 
-                                                 Appearance="Secondary" 
-                                                 Icon="Delete12"/>
-                                    </StackPanel>
                                 </Grid>
                             </TabItem>
                             
@@ -395,7 +445,6 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="*"/>
-                                        <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
                                     
                                     <!-- Tabellenheader -->
@@ -454,59 +503,13 @@
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                     </ListView>
-                                    
-                                    <!-- Add/Remove Buttons -->
-                                    <StackPanel Grid.Row="2" 
-                                              Orientation="Horizontal" 
-                                              HorizontalAlignment="Right" 
-                                              Margin="0,5,0,0">
-                                        <ui:Button Content="Add" 
-                                                 Appearance="Secondary" 
-                                                 Icon="Add12" 
-                                                 Margin="0,0,5,0"/>
-                                        <ui:Button Content="Remove" 
-                                                 Appearance="Secondary" 
-                                                 Icon="Delete12"/>
-                                    </StackPanel>
                                 </Grid>
                             </TabItem>
                         </TabControl>
                     </Grid>
-                    
-                    <TextBlock Text="Description"
-                            Style="{StaticResource SectionHeaderStyle}"/>
-                    
+
                     <!-- DataGrid für Description -->
-                    <Grid Margin="0,5,0,10">
-                        <Border BorderThickness="1" 
-                                BorderBrush="{DynamicResource ControlElevationBorderBrush}" 
-                                Padding="10">
-                            <DataGrid AutoGenerateColumns="False" 
-                                      Background="Transparent"
-                                      BorderThickness="0"
-                                      GridLinesVisibility="Horizontal"
-                                      CanUserAddRows="True"
-                                      CanUserDeleteRows="True"
-                                      CanUserResizeRows="False"
-                                      MaxHeight="200"
-                                      ItemsSource="{Binding ViewModel.DescriptionCollection, Mode=TwoWay}">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Success" 
-                                                        Binding="{Binding Success, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                                        Width="*"/>
-                                    <DataGridTextColumn Header="TID" 
-                                                        Binding="{Binding SuccessTID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                                        Width="*"/>
-                                    <DataGridTextColumn Header="Fail" 
-                                                        Binding="{Binding Fail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                                        Width="*"/>
-                                    <DataGridTextColumn Header="TID" 
-                                                        Binding="{Binding FailTID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                                                        Width="*"/>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </Border>
-                    </Grid>
+                    <Grid Margin="0,5,0,10"/>
                 </StackPanel>
             </Grid>
         </ScrollViewer>
