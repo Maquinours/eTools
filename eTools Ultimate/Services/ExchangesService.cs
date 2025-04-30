@@ -46,6 +46,8 @@ namespace eTools_Ultimate.Services
 
                     List<ExchangeDescription> descriptions = new();
                     List<ExchangeSet> sets = new();
+                    List<ExchangeSmeltSet> smeltSets = new();
+                    List<ExchangeEnchantMoveSet> enchantMoveSets = new();
 
                     scanner.GetToken(); // {
 
@@ -240,9 +242,219 @@ namespace eTools_Ultimate.Services
                                     sets.Add(set);
                                     break;
                                 }
+                            case "SET_SMELT":
+                                {
+                                    string textId = scanner.GetToken();
+                                    List<ExchangeSmeltSetResultMsg> resultMessages = new();
+                                    List<ExchangeSmeltSetCondition> conditions = new();
+                                    List<ExchangeSmeltSetPay> pays = new();
+
+                                    scanner.GetToken(); // {
+                                    while (true)
+                                    {
+                                        string token2 = scanner.GetToken();
+
+                                        if (token2 == "}") break;
+                                        if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                        switch (token2)
+                                        {
+                                            case "RESULTMSG":
+                                                {
+                                                    scanner.GetToken(); // {
+                                                    while (true)
+                                                    {
+                                                        string textId2 = scanner.GetToken();
+
+                                                        if (textId2 == "}") break;
+                                                        if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                                        ExchangeSmeltSetResultMsg resultMsg = new(textId2);
+                                                        resultMessages.Add(resultMsg);
+                                                    }
+
+                                                    break;
+                                                }
+                                            case "CONDITION":
+                                                {
+                                                    scanner.GetToken(); // {
+                                                    while(true)
+                                                    {
+                                                        string dwItemId = scanner.GetToken();
+
+                                                        if (dwItemId == "}") break;
+                                                        if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                                        // Not sure we should keep that
+                                                        if (dwItemId == "PENYA")
+                                                            dwItemId = "II_GOLD_SEED1";
+
+                                                        int nItemQuantity = scanner.GetNumber();
+                                                        int dwMinGeneralEnchant = scanner.GetNumber();
+                                                        int dwMaxGeneralEnchant = scanner.GetNumber();
+
+                                                        int dwMinAttributeEnchant = scanner.GetNumber();
+                                                        int dwMaxAttributeEnchant = scanner.GetNumber();
+
+                                                        int byAttributeKind = scanner.GetNumber();
+                                                        bool bCheckScriptAttribute = scanner.GetNumber() != 0;
+
+                                                        ExchangeSmeltSetCondition condition = new(dwItemId, nItemQuantity, dwMinGeneralEnchant, dwMaxGeneralEnchant, dwMinAttributeEnchant, dwMaxAttributeEnchant, byAttributeKind, bCheckScriptAttribute);
+                                                        conditions.Add(condition);
+                                                    }
+
+                                                    break;
+                                                }
+                                            case "REMOVE":
+                                                {
+                                                    scanner.GetToken(); // {
+                                                    do
+                                                    {
+                                                        scanner.GetToken();
+                                                    } while (scanner.Token != "}");
+
+                                                    break;
+                                                }
+                                            case "PAY":
+                                                {
+                                                    int nPayNum = scanner.GetNumber();
+                                                    scanner.GetToken(); // {
+                                                    while(true)
+                                                    {
+                                                        string dwItemId = scanner.GetToken();
+
+                                                        if (dwItemId == "}") break;
+                                                        if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                                        int nItemQuantity = scanner.GetNumber();
+                                                        int dwPaymentProb = scanner.GetNumber();
+                                                        int byItemFlag = scanner.GetNumber();
+
+                                                        int dwMinGeneralEnchant = scanner.GetNumber();
+                                                        int dwMaxGeneralEnchant = scanner.GetNumber();
+
+                                                        int dwMinAttributeEnchant = scanner.GetNumber();
+                                                        int dwMaxAttributeEnchant = scanner.GetNumber();
+
+                                                        int byAttributeKind = scanner.GetNumber();
+                                                        bool bCheckAttribute = scanner.GetNumber() != 0;
+
+                                                        ExchangeSmeltSetPay pay = new(dwItemId, nItemQuantity, dwPaymentProb, byItemFlag, dwMinGeneralEnchant, dwMaxGeneralEnchant, dwMinAttributeEnchant, dwMaxAttributeEnchant, byAttributeKind, bCheckAttribute);
+                                                        pays.Add(pay);
+                                                    }
+
+                                                    break;
+                                                }
+                                        }
+                                    }
+                                    ExchangeSmeltSet smeltSet = new(resultMessages, conditions, pays);
+                                    smeltSets.Add(smeltSet);
+
+                                    break;
+                                }
+
+                            case "SET_ENCHANT_MOVE":
+                                {
+                                    string textId = scanner.GetToken();
+                                    List<ExchangeEnchantMoveSetResultMsg> resultMessages = new();
+                                    List<ExchangeEnchantMoveSetCondition> conditions = new();
+                                    List<ExchangeEnchantMoveSetPay> pays = new();
+
+                                    scanner.GetToken(); // {
+                                    while (true)
+                                    {
+                                        string token2 = scanner.GetToken();
+
+                                        if (token2 == "}") break;
+                                        if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                        switch (token2)
+                                        {
+                                            case "RESULTMSG":
+                                                {
+                                                    scanner.GetToken(); // {
+                                                    while (true)
+                                                    {
+                                                        string textId2 = scanner.GetToken();
+
+                                                        if (textId2 == "}") break;
+                                                        if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                                        ExchangeEnchantMoveSetResultMsg resultMsg = new(textId2);
+                                                        resultMessages.Add(resultMsg);
+                                                    }
+
+                                                    break;
+                                                }
+                                            case "CONDITION":
+                                                {
+                                                    scanner.GetToken(); // {
+                                                    while (true)
+                                                    {
+                                                        string dwItemId = scanner.GetToken();
+
+                                                        if (dwItemId == "}") break;
+                                                        if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                                        // Not sure we should keep that
+                                                        if (dwItemId == "PENYA")
+                                                            dwItemId = "II_GOLD_SEED1";
+
+                                                        ExchangeEnchantMoveSetCondition condition = new(dwItemId);
+                                                        conditions.Add(condition);
+                                                    }
+
+                                                    break;
+                                                }
+                                            case "REMOVE":
+                                                {
+                                                    scanner.GetToken(); // {
+                                                    do
+                                                    {
+                                                        scanner.GetToken();
+                                                    } while (scanner.Token != "}");
+
+                                                    break;
+                                                }
+                                            case "PAY":
+                                                {
+                                                    int nPayNum = scanner.GetNumber();
+                                                    scanner.GetToken(); // {
+
+                                                    bool useCurrentToken = false;
+                                                    while (true)
+                                                    {
+                                                        string dwItemId = useCurrentToken ? scanner.Token : scanner.GetToken();
+
+                                                        if (dwItemId == "}") break;
+                                                        if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                                        string token3 = scanner.GetToken();
+                                                        if (Int32.TryParse(token3, new CultureInfo("en-EN"), out int byItemFlag))
+                                                            useCurrentToken = false;
+                                                        else
+                                                        {
+                                                            useCurrentToken = true;
+                                                            byItemFlag = 0;
+                                                        }
+
+                                                        ExchangeEnchantMoveSetPay pay = new(dwItemId, byItemFlag);
+                                                        pays.Add(pay);
+                                                    }
+
+                                                    break;
+                                                }
+                                        }
+                                    }
+
+                                    ExchangeEnchantMoveSet enchantMoveSet = new(resultMessages, conditions, pays);
+                                    enchantMoveSets.Add(enchantMoveSet);
+
+                                    break;
+                                }
                         }
                     }
-                    Exchange exchange = new(mmiId, descriptions, sets);
+                    Exchange exchange = new(mmiId, descriptions, sets, smeltSets, enchantMoveSets);
                     this.Exchanges.Add(exchange);
                 }
             }
