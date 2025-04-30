@@ -16,6 +16,7 @@
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource ApplicationForegroundBrush}"
+    ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -25,185 +26,187 @@
         <SolidColorBrush x:Key="ApplicationForegroundBrush" Color="#212121"/>
     </Page.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-
-        <Border
-            Grid.Row="0"
-            Height="200"
-            CornerRadius="8">
-            <Border.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Offset="0" Color="#2B5797" />
-                    <GradientStop Offset="1" Color="#0078D7" />
-                </LinearGradientBrush>
-            </Border.Background>
-            <Border CornerRadius="8">
-                <Border.Background>
-                    <ImageBrush
-                    RenderOptions.BitmapScalingMode="HighQuality"
-                    Stretch="UniformToFill" ImageSource="pack://application:,,,/Views/Pages/Settings/SettingPageBanner.png"  />
-                </Border.Background>
-                <Grid>
-                    <StackPanel
-                        Margin="48,0"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        Background="Transparent">
-                        <ui:TextBlock
-                            FontTypography="Title"
-                            Foreground="#FFFFFF"
-                            Text="Settings" FontWeight="Bold" />
-                    </StackPanel>
-                    <ui:TextBlock
-                        Margin="12"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom"
-                        FontTypography="Caption"
-                        Foreground="#57FFFFFF"
-                        Text="Created by eTools Ultimate" />
-                </Grid>
-            </Border>
-        </Border>
-
-        <Grid Grid.Row="1" Margin="0,24,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <ui:CardAction
+            <Border
                 Grid.Row="0"
-                Grid.Column="0"
-                Margin="0,0,4,0"
-                Padding="0"
-                VerticalAlignment="Stretch"
-                Command="{Binding ViewModel.NavigateToResourcePathCommand, Mode=OneWay}"
-                IsChevronVisible="False">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-
-                    <Image
-                        Width="60"
-                        Height="Auto"
-                        Margin="24,0,0,0" Source="/Views/Pages/Settings/FolderPathIcon.png" >
-                        <Image.OpacityMask>
-                            <ImageBrush ImageSource="/Views/Pages/Settings/FolderPathIcon.png"/>
-                        </Image.OpacityMask>
-                    </Image>
-
-                    <StackPanel
-                        Grid.Column="1"
-                        Margin="24"
-                        VerticalAlignment="Center">
+                Height="300"
+                CornerRadius="8">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Offset="0" Color="#2B5797" />
+                        <GradientStop Offset="1" Color="#0078D7" />
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border CornerRadius="8">
+                    <Border.Background>
+                        <ImageBrush
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Stretch="UniformToFill" ImageSource="pack://application:,,,/Views/Pages/Settings/SettingPageBanner.png"  />
+                    </Border.Background>
+                    <Grid>
+                        <StackPanel
+                            Margin="48,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="Transparent">
+                            <ui:TextBlock
+                                FontTypography="Title"
+                                Foreground="#FFFFFF"
+                                Text="Settings" FontWeight="Bold" />
+                        </StackPanel>
                         <ui:TextBlock
-                            Margin="0"
-                            FontTypography="BodyStrong"
-                            Text="Resource Path"
-                            TextWrapping="WrapWithOverflow" />
-                        <ui:TextBlock
-                            Appearance="Secondary"
-                            Foreground="Gray"
-                            Text="Loading all Paths."
-                            TextWrapping="WrapWithOverflow" />
-                    </StackPanel>
-                </Grid>
-            </ui:CardAction>
+                            Margin="12"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            FontTypography="Caption"
+                            Foreground="#57FFFFFF"
+                            Text="Created by eTools Ultimate" />
+                    </Grid>
+                </Border>
+            </Border>
 
-            <ui:CardAction
-                Grid.Row="0"
-                Grid.Column="1"
-                Margin="4,0,4,0"
-                Padding="0"
-                VerticalAlignment="Stretch"
-                Command="{Binding ViewModel.NavigateToPersonalizationCommand, Mode=OneWay}"
-                IsChevronVisible="False">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1" Margin="0,24,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-                    <Image
-                        Width="60"
-                        Height="Auto"
-                        Margin="24,0,0,0" Source="/Views/Pages/Settings/PaintPaletteIcon.png" >
-                        <Image.OpacityMask>
-                            <ImageBrush ImageSource="/Views/Pages/Settings/PaintPaletteIcon.png"/>
-                        </Image.OpacityMask>
-                    </Image>
+                <ui:CardAction
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0,0,4,0"
+                    Padding="0"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding ViewModel.NavigateToResourcePathCommand, Mode=OneWay}"
+                    IsChevronVisible="False">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                    <StackPanel
-                        Grid.Column="1"
-                        Margin="24"
-                        VerticalAlignment="Center">
-                        <ui:TextBlock
-                            Margin="0"
-                            FontTypography="BodyStrong"
-                            Text="Personalization"
-                            TextWrapping="WrapWithOverflow" />
-                        <ui:TextBlock
-                            Appearance="Secondary"
-                            Foreground="Gray"
-                            Text="Change Design and other parts"
-                            TextWrapping="WrapWithOverflow" />
-                    </StackPanel>
-                </Grid>
-            </ui:CardAction>
+                        <Image
+                            Width="60"
+                            Height="Auto"
+                            Margin="24,0,0,0" Source="/Views/Pages/Settings/FolderPathIcon.png" >
+                            <Image.OpacityMask>
+                                <ImageBrush ImageSource="/Views/Pages/Settings/FolderPathIcon.png"/>
+                            </Image.OpacityMask>
+                        </Image>
 
-            <ui:CardAction
-                Grid.Row="0"
-                Grid.Column="2"
-                Margin="4,0,4,0"
-                Padding="0"
-                VerticalAlignment="Stretch"
-                Command="{Binding ViewModel.NavigateToAboutCommand, Mode=OneWay}"
-                IsChevronVisible="False">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
+                        <StackPanel
+                            Grid.Column="1"
+                            Margin="24"
+                            VerticalAlignment="Center">
+                            <ui:TextBlock
+                                Margin="0"
+                                FontTypography="BodyStrong"
+                                Text="Resource Path"
+                                TextWrapping="WrapWithOverflow" />
+                            <ui:TextBlock
+                                Appearance="Secondary"
+                                Foreground="Gray"
+                                Text="Loading all Paths."
+                                TextWrapping="WrapWithOverflow" />
+                        </StackPanel>
+                    </Grid>
+                </ui:CardAction>
 
-                    <Image
-                        Width="60"
-                        Height="Auto"
-                        Margin="24,0,0,0" Source="/Views/Pages/Settings/AboutIcon.png" >
-                        <Image.OpacityMask>
-                            <ImageBrush>
-                                <ImageBrush.ImageSource>/Views/Pages/Settings/AboutIcon.png</ImageBrush.ImageSource>
-                            </ImageBrush>
-                        </Image.OpacityMask>
-                    </Image>
+                <ui:CardAction
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="4,0,4,0"
+                    Padding="0"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding ViewModel.NavigateToPersonalizationCommand, Mode=OneWay}"
+                    IsChevronVisible="False">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                    <StackPanel
-                        Grid.Column="1"
-                        Margin="24"
-                        VerticalAlignment="Center">
-                        <ui:TextBlock
-                            Margin="0"
-                            FontTypography="BodyStrong"
-                            Text="About"
-                            TextWrapping="WrapWithOverflow" />
-                        <ui:TextBlock
-                            Appearance="Secondary"
-                            Foreground="Gray"
-                            Text="Learn more about eTools Ultimate"
-                            TextWrapping="WrapWithOverflow" />
-                    </StackPanel>
-                </Grid>
-            </ui:CardAction>
+                        <Image
+                            Width="60"
+                            Height="Auto"
+                            Margin="24,0,0,0" Source="/Views/Pages/Settings/PaintPaletteIcon.png" >
+                            <Image.OpacityMask>
+                                <ImageBrush ImageSource="/Views/Pages/Settings/PaintPaletteIcon.png"/>
+                            </Image.OpacityMask>
+                        </Image>
+
+                        <StackPanel
+                            Grid.Column="1"
+                            Margin="24"
+                            VerticalAlignment="Center">
+                            <ui:TextBlock
+                                Margin="0"
+                                FontTypography="BodyStrong"
+                                Text="Personalization"
+                                TextWrapping="WrapWithOverflow" />
+                            <ui:TextBlock
+                                Appearance="Secondary"
+                                Foreground="Gray"
+                                Text="Change Design and other parts"
+                                TextWrapping="WrapWithOverflow" />
+                        </StackPanel>
+                    </Grid>
+                </ui:CardAction>
+
+                <ui:CardAction
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Margin="4,0,4,0"
+                    Padding="0"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding ViewModel.NavigateToAboutCommand, Mode=OneWay}"
+                    IsChevronVisible="False">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Image
+                            Width="60"
+                            Height="Auto"
+                            Margin="24,0,0,0" Source="/Views/Pages/Settings/AboutIcon.png" >
+                            <Image.OpacityMask>
+                                <ImageBrush>
+                                    <ImageBrush.ImageSource>/Views/Pages/Settings/AboutIcon.png</ImageBrush.ImageSource>
+                                </ImageBrush>
+                            </Image.OpacityMask>
+                        </Image>
+
+                        <StackPanel
+                            Grid.Column="1"
+                            Margin="24"
+                            VerticalAlignment="Center">
+                            <ui:TextBlock
+                                Margin="0"
+                                FontTypography="BodyStrong"
+                                Text="About"
+                                TextWrapping="WrapWithOverflow" />
+                            <ui:TextBlock
+                                Appearance="Secondary"
+                                Foreground="Gray"
+                                Text="Learn more about eTools Ultimate"
+                                TextWrapping="WrapWithOverflow" />
+                        </StackPanel>
+                    </Grid>
+                </ui:CardAction>
+            </Grid>
         </Grid>
-    </Grid>
+    </ScrollViewer>
 </Page>

@@ -1,4 +1,5 @@
 using System;
+using System.Windows.Media.Imaging;
 
 namespace eTools_Ultimate.Views.Pages
 {

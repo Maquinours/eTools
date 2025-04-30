@@ -66,7 +66,7 @@ namespace eTools_Ultimate.Views.Windows
         }
         private void RootNavigation_Navigated(NavigationView sender, NavigatedEventArgs args)
         {
-            if (args.Page is DashboardPage)
+            if (args.Page is DashboardPage or AboutPage or SettingsPage)
                 BreadcrumbBar.Visibility = Visibility.Collapsed;
             else
                 BreadcrumbBar.Visibility = Visibility.Visible;
