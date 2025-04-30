@@ -1098,7 +1098,7 @@
 
             <!-- Search Bar -->
             <Grid Grid.Row="0"
-                    Margin="10">
+                    Margin="5,5,15,5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>

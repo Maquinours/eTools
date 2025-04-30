@@ -62,12 +62,13 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="350"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
             <!-- Left Side: Search bar and ListView -->
-            <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="10">
+            <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -77,25 +78,38 @@
                 <ui:TextBox 
                     Grid.Row="0" 
                     PlaceholderText="Search NPC..." 
-                    Margin="0,0,0,10"
+                    Margin="5,5,15,10"
                     Icon="Search24"/>
                 
                 <!-- ListView for NPC list -->
-                <ListView 
-                    Grid.Row="1" 
-                    BorderThickness="1" 
-                    BorderBrush="{DynamicResource ControlElevationBorderBrush}" 
-                    Background="{DynamicResource ControlFillColorDefaultBrush}"
-                    Margin="0,0,0,0">
-                    <ListViewItem Content="NPC 1"/>
-                    <ListViewItem Content="NPC 2"/>
-                    <ListViewItem Content="NPC 3"/>
-                    <!-- More ListViewItems would be added dynamically -->
-                </ListView>
+                <Border Grid.Row="1"
+                        CornerRadius="8"
+                        BorderThickness="1"
+                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                        Margin="5,0,15,5">
+                    <ListView 
+                        BorderThickness="0" 
+                        Background="Transparent"
+                        Margin="0,0,0,0">
+                        <ListViewItem Content="NPC 1"/>
+                        <ListViewItem Content="NPC 2"/>
+                        <ListViewItem Content="NPC 3"/>
+                        <!-- More ListViewItems would be added dynamically -->
+                    </ListView>
+                </Border>
             </Grid>
 
+            <!-- Separator -->
+            <GridSplitter Grid.Column="1"
+                          Grid.RowSpan="2"
+                          Width="5"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Stretch"
+                          Background="{DynamicResource ControlElevationBorderBrush}"/>
+
             <!-- Right Side: NPC Details with Tabs -->
-            <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="10">
+            <Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
