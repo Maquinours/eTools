@@ -234,7 +234,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Row="0"
-                                    Orientation="Horizontal">
+                                    Orientation="Horizontal" Cursor="">
                                 <TextBlock Text="Exchanger MMI_Key"
                                         Style="{StaticResource FieldLabelStyle}"/>
                                 <ui:SymbolIcon Symbol="Info20"
@@ -247,7 +247,7 @@
                             <TextBox Grid.Row="1"
                                     x:Name="MMIKeyTextBox"
                                     Style="{StaticResource AppTextBoxStyle}"
-                                    Text="{Binding ExchangerKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    Text="{Binding SelectedItem.MmiId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=ExchangersListView}"/>
                         </Grid>
                         <!-- Name -->
                         <Grid Style="{StaticResource FormFieldStyle}">
@@ -309,17 +309,8 @@
                                  Background="Transparent"
                                  BorderThickness="0"
                                  Margin="5"
+                                  ItemsSource="{Binding SelectedItem.Sets, Mode=OneWay, ElementName=ExchangersListView}"
                                  SelectedIndex="0">
-                            <ListViewItem Content="Set 1"/>
-                            <ListViewItem Content="Set 2"/>
-                            <ListViewItem Content="Set 3"/>
-                            <ListViewItem Content="Set 4"/>
-                            <ListViewItem Content="Set 5"/>
-                            <ListViewItem Content="Set 6"/>
-                            <ListViewItem Content="Set 7"/>
-                            <ListViewItem Content="Set 8"/>
-                            <ListViewItem Content="Set 9"/>
-                            <ListViewItem Content="Set 10"/>
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="Background" Value="Transparent"/>
@@ -337,6 +328,36 @@
                                     </Style.Triggers>
                                 </Style>
                             </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Border Width="32"
+            Height="32"
+            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+            BorderThickness="1"
+            Margin="0,0,8,0">
+                                            <TextBlock Text=""
+                  VerticalAlignment="Center"
+                  HorizontalAlignment="Center"
+                  FontWeight="SemiBold"/>
+                                        </Border>
+                                        <StackPanel Grid.Column="1"
+            VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding TextId}"
+                FontWeight="SemiBold"
+                Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                            <TextBlock Text="{Binding Key}"
+                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                FontSize="12"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
                         </ListView>
                     </Border>
                     

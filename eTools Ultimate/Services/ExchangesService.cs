@@ -238,7 +238,7 @@ namespace eTools_Ultimate.Services
                                         }
                                     }
 
-                                    ExchangeSet set = new(resultMessages, conditions, removes, conditionPoints, removePoints, pays);
+                                    ExchangeSet set = new(textId, resultMessages, conditions, removes, conditionPoints, removePoints, pays);
                                     sets.Add(set);
                                     break;
                                 }

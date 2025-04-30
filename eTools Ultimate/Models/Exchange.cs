@@ -99,14 +99,21 @@ namespace eTools_Ultimate.Models
 
     internal class ExchangeSet
     {
+        private string _textId;
         private List<ExchangeSetResultMsg> _resultMessages;
         private List<ExchangeSetCondition> _conditions;
         private List<ExchangeSetRemove> _removes;
         private List<ExchangeSetConditionPoint> _conditionPoints;
         private List<ExchangeSetRemovePoint> _removePoints;
         private List<ExchangeSetPay> _pays;
+        
+        public string TextId
+        {
+            get => this._textId;
+        }
 
         internal ExchangeSet(
+            string textId,
             List<ExchangeSetResultMsg> resultMessages,
             List<ExchangeSetCondition> conditions,
             List<ExchangeSetRemove> removes,
@@ -114,6 +121,7 @@ namespace eTools_Ultimate.Models
             List<ExchangeSetRemovePoint> removePoints,
             List<ExchangeSetPay> pays)
         {
+            this._textId = textId;
             this._resultMessages = resultMessages;
             this._conditions = conditions;
             this._removes = removes;
@@ -279,6 +287,18 @@ namespace eTools_Ultimate.Models
         public string MmiId
         {
             get => this._mmiId;
+            set
+            {
+                if(this.MmiId != value)
+                {
+                    this._mmiId = value;
+                }
+            }
+        }
+
+        public List<ExchangeSet> Sets
+        {
+            get => this._sets;
         }
 
         public Exchange(string mmiId, List<ExchangeDescription> descriptions, List<ExchangeSet> sets, List<ExchangeSmeltSet> smeltSets, List<ExchangeEnchantMoveSet> enchantMoveSets)
