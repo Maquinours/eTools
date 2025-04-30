@@ -128,10 +128,10 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Column="0"
-                         Text="{Binding ItemID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Text="{Binding DwItemId, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                          Style="{StaticResource AppTextBoxStyle}"/>
                 <ui:NumberBox Grid.Column="1"
-                             Value="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                             Value="{Binding NItemNum, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                              Minimum="1"
                              Maximum="9999"
                              Width="80"
@@ -304,13 +304,15 @@
                           BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                           CornerRadius="8"
                           Margin="0,0,0,20">
-                        <ListView x:Name="SetListView"
-                                 Height="120"
-                                 Background="Transparent"
-                                 BorderThickness="0"
-                                 Margin="5"
-                                  ItemsSource="{Binding SelectedItem.Sets, Mode=OneWay, ElementName=ExchangersListView}"
-                                 SelectedIndex="0">
+                        <ListView 
+                            x:Name="SetListView"
+                            Height="120"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Margin="5"
+                            ItemsSource="{Binding SelectedItem.Sets, Mode=OneWay, ElementName=ExchangersListView}"
+                            SelectedIndex="0"
+                            IsSynchronizedWithCurrentItem="True">
                             <ListView.ItemContainerStyle>
                                 <Style TargetType="ListViewItem">
                                     <Setter Property="Background" Value="Transparent"/>
@@ -335,25 +337,31 @@
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Border Width="32"
-            Height="32"
-            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-            BorderThickness="1"
-            Margin="0,0,8,0">
-                                            <TextBlock Text=""
-                  VerticalAlignment="Center"
-                  HorizontalAlignment="Center"
-                  FontWeight="SemiBold"/>
+                                        <Border 
+                                            Width="32"
+                                            Height="32"
+                                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                            BorderThickness="1"
+                                            Margin="0,0,8,0">
+                                            <TextBlock 
+                                                Text="T" 
+                                                FontWeight="Bold" 
+                                                HorizontalAlignment="Center" 
+                                                VerticalAlignment="Center"
+                                                Foreground="{Binding Text.SolidColorBrushColor}"/>
                                         </Border>
-                                        <StackPanel Grid.Column="1"
-            VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding TextId}"
-                FontWeight="SemiBold"
-                Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                                            <TextBlock Text="{Binding Key}"
-                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                FontSize="12"/>
+                                        <StackPanel 
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center">
+                                            <TextBlock 
+                                                Text="{Binding Text.Name}"
+                                                FontWeight="SemiBold"
+                                                Foreground="{Binding Text.SolidColorBrushColor}"/>
+                                            <TextBlock
+                                                Text="{Binding Text.DwId}"
+                                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                FontSize="12"/>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
@@ -410,7 +418,7 @@
                                     
                                     <!-- Items Liste -->
                                     <ListView Grid.Row="1" 
-                                             ItemsSource="{Binding ViewModel.ConditionsCollection, Mode=TwoWay}"
+                                             ItemsSource="{Binding SelectedItem.Conditions, Mode=OneWay, ElementName=SetListView}"
                                              ItemTemplate="{StaticResource ExchangeRequirementTemplate}"
                                              BorderThickness="0"
                                              Background="Transparent"

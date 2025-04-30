@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eTools_Ultimate.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,11 +33,11 @@ namespace eTools_Ultimate.Models
 
         public string DwItemId
         {
-            get => this.DwItemId;
+            get => this._dwItemId;
         }
         public int NItemNum
         {
-            get => this.NItemNum;
+            get => this._nItemNum;
         }
 
         internal ExchangeSetCondition(string dwItemId, int nItemNum)
@@ -110,6 +111,16 @@ namespace eTools_Ultimate.Models
         public string TextId
         {
             get => this._textId;
+        }
+
+        public Text? Text
+        {
+            get => TextsService.Instance.Texts.FirstOrDefault(x => x.DwId == this.TextId);
+        }
+
+        public List<ExchangeSetCondition> Conditions
+        {
+            get => this._conditions;
         }
 
         internal ExchangeSet(
