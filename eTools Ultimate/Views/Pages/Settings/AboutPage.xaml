@@ -27,8 +27,8 @@
                     <Image 
                         Source="/Views/Pages/Settings/Logo.png" 
                         Width="500" 
-                        Height="200" 
-                        />
+                        Height="200"
+                        RenderOptions.BitmapScalingMode="HighQuality" />
                     <TextBlock 
                         Text="{Binding AppVersion}" 
                         FontSize="14" 
@@ -150,7 +150,8 @@
                                         <Ellipse.Fill>
                                             <ImageBrush 
                                                 ImageSource="/Views/Pages/Settings/Maqui.jpg"
-                                                Stretch="UniformToFill"/>
+                                                Stretch="UniformToFill" 
+                                                RenderOptions.BitmapScalingMode="HighQuality" />
                                         </Ellipse.Fill>
                                     </Ellipse>
                                 </Grid>
@@ -171,7 +172,8 @@
                                         <Ellipse.Fill>
                                             <ImageBrush 
                                                 ImageSource="/Views/Pages/Settings/Kiyo.jpg"
-                                                Stretch="UniformToFill"/>
+                                                Stretch="UniformToFill"
+                                                RenderOptions.BitmapScalingMode="HighQuality" />
                                         </Ellipse.Fill>
                                     </Ellipse>
                                 </Grid>

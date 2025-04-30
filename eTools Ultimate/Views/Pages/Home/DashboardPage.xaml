@@ -191,7 +191,8 @@
                    VerticalAlignment="Bottom"
                    Cursor="Hand"
                    ToolTip="View on GitHub"
-                   MouseLeftButtonDown="OpenGithubLink">
+                   MouseLeftButtonDown="OpenGithubLink"
+                   RenderOptions.BitmapScalingMode="HighQuality">
                 <Image.Effect>
                     <DropShadowEffect ShadowDepth="1" Opacity="0.3" BlurRadius="4" Color="#000000"/>
                 </Image.Effect>
@@ -208,7 +209,8 @@
                    VerticalAlignment="Bottom"
                    Cursor="Hand"
                    ToolTip="Join our Discord server"
-                   MouseLeftButtonDown="OpenDiscordLink">
+                   MouseLeftButtonDown="OpenDiscordLink"
+                   RenderOptions.BitmapScalingMode="HighQuality">
                 <Image.Effect>
                     <DropShadowEffect ShadowDepth="1" Opacity="0.3" BlurRadius="4" Color="#000000"/>
                 </Image.Effect>

@@ -18,7 +18,8 @@
             <Image Source="/Views/Windows/SplashScreen.png" 
                    Width="500" 
                    Height="150"
-                   Stretch="Uniform"/>
+                   Stretch="Uniform"
+                   RenderOptions.BitmapScalingMode="HighQuality" />
             <TextBlock
                         x:Name="LoadingText"
                         Text="Loading..." 
