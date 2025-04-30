@@ -297,10 +297,6 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTextColumn 
-                            Header="Probability" 
-                            Binding="{Binding DwProbability}" 
-                            Width="Auto" />
-                        <DataGridTextColumn 
                             Header="Quantity" 
                             Binding="{Binding NNum}" 
                             Width="Auto" />

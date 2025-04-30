@@ -26,7 +26,7 @@
         <DataTemplate x:Key="NavigationCardTemplate">
             <ui:Card 
                 Margin="6"
-                Width="220"
+                Width="230"
                 Height="120"
                 Cursor="Hand"
                 Tag="{Binding}"
@@ -132,10 +132,9 @@
                             Background="Transparent">
                             <ui:TextBlock
                                 FontTypography="Title"
-                                Foreground="#FFFFFF"
-                                Text="Welcome" 
+                                Foreground="#FFFFFF" 
                                 FontWeight="Bold"
-                                FontSize="32" />
+                                FontSize="32" Text="Welcome" />
                         </StackPanel>
 
                         <Grid Grid.Row="1">
