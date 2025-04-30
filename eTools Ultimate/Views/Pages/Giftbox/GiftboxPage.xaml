@@ -182,7 +182,7 @@
                     FontTypography="Title"
                     FontSize="24"
                     Margin="0,0,0,10" >
-                    <Run Text="Items in"/>
+                    <Run Text="Items in:"/>
                     <Run Text="{Binding SelectedItem.Item.Name, ElementName=GiftboxListView}"/>
                 </ui:TextBlock>
 
