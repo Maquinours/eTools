@@ -4,11 +4,11 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.Views.Pages
 {
-    public partial class ExchangerPage : Page, INavigableView<DataViewModel>
+    public partial class ExchangerPage : Page, INavigableView<ExchangesViewModel>
     {
-        public DataViewModel ViewModel { get; }
+        public ExchangesViewModel ViewModel { get; }
 
-        public ExchangerPage(DataViewModel viewModel)
+        public ExchangerPage(ExchangesViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = this;
