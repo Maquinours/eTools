@@ -63,6 +63,11 @@ namespace eTools_Ultimate.Views.Windows
                 {
                     LoadingText.Text = "Loading skills...";
                 });
+                CharactersService.Instance.Load();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    LoadingText.Text = "Loading characters...";
+                });
                 SkillsService.Instance.Load();
                 Application.Current.Dispatcher.Invoke(() =>
                 {

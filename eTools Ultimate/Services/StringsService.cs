@@ -30,6 +30,7 @@ namespace eTools_Ultimate.Services
                 settings.PropItemTxtFilePath ?? settings.DefaultPropItemTxtFilePath,
                 settings.PropSkillTxtFilePath ?? settings.DefaultPropSkillTxtFilePath,
                 settings.TextsTxtFilePath ?? settings.DefaultTextsTxtFilePath,
+                settings.CharactersStringsFilePath ?? settings.DefaultCharactersStringsFilePath
                 ];
 
             foreach (string filePath in filesList)

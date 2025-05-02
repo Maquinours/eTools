@@ -51,6 +51,11 @@ namespace eTools_Ultimate.Models
         // Exchangers settings
         private string? _exchangesConfigFilePath;
 
+        // Characters settings
+        private string? _charactersConfigFilePath;
+        private string? _charactersStringsFilePath;
+        private string? _charactersIconsFolderPath;
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -469,5 +474,64 @@ namespace eTools_Ultimate.Models
             }
         }
         public string DefaultExchangesConfigFilePath => $"{this.ResourcesFolderPath}Exchange_Script.txt";
+
+        public string? CharactersConfigFilePath
+        {
+            get => this._charactersConfigFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultCharactersConfigFilePath)
+                    val = null;
+                if (this.CharactersConfigFilePath != val)
+                {
+                    this._charactersConfigFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultCharactersConfigFilePath => $"{this.ResourcesFolderPath}character.inc";
+
+        public string? CharactersStringsFilePath
+        {
+            get => this._charactersStringsFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultCharactersStringsFilePath)
+                    val = null;
+                if (this.CharactersStringsFilePath != val)
+                {
+                    this._charactersStringsFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultCharactersStringsFilePath => $"{this.ResourcesFolderPath}character.txt.txt";
+
+        public string? CharactersIconsFolderFolderPath
+        {
+            get => this._charactersIconsFolderPath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                else if (!val.EndsWith(Path.DirectorySeparatorChar))
+                    val += Path.DirectorySeparatorChar;
+                if (val == this.DefaultTextsConfigFilePath)
+                    val = null;
+                if (this.TextsConfigFilePath != val)
+                {
+                    this._textsConfigFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultCharactersIconsFolderPath => $"{this.ClientFolderPath}Char{Path.DirectorySeparatorChar}";
     }
 }

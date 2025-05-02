@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.2" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.8" />
     <PackageReference Include="System.Drawing.Common" Version="9.0.4" />
     <PackageReference Include="WPF-UI" Version="4.0.2" />
     <PackageReference Include="WPF-UI.DependencyInjection" Version="4.0.2" />

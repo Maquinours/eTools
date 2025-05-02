@@ -4,11 +4,11 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.Views.Pages
 {
-    public partial class NpcPage : Page, INavigableView<DataViewModel>
+    public partial class NpcPage : Page, INavigableView<CharactersViewModel>
     {
-        public DataViewModel ViewModel { get; }
+        public CharactersViewModel ViewModel { get; }
 
-        public NpcPage(DataViewModel viewModel)
+        public NpcPage(CharactersViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = this;

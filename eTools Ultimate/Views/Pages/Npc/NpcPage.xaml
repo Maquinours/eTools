@@ -55,7 +55,6 @@
         </Style>
     </Page.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
     <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -79,7 +78,8 @@
                     Grid.Row="0" 
                     PlaceholderText="Search NPC..." 
                     Margin="5,5,15,10"
-                    Icon="Search24"/>
+                    Icon="Search24"
+                    Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Cursor="" />
                 
                 <!-- ListView for NPC list -->
                 <Border Grid.Row="1"
@@ -91,11 +91,61 @@
                     <ListView 
                         BorderThickness="0" 
                         Background="Transparent"
-                        Margin="0,0,0,0">
-                        <ListViewItem Content="NPC 1"/>
-                        <ListViewItem Content="NPC 2"/>
-                        <ListViewItem Content="NPC 3"/>
-                        <!-- More ListViewItems would be added dynamically -->
+                        Margin="0,0,0,0"
+                        ItemsSource="{Binding ViewModel.CharactersView}"
+                        IsSynchronizedWithCurrentItem="True">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Background"
+                                        Value="Transparent"/>
+                                <Setter Property="BorderBrush"
+                                        Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver"
+                                             Value="True">
+                                        <Setter Property="Background"
+                                                Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected"
+                                             Value="True">
+                                        <Setter Property="Background"
+                                                Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+                                        <Setter Property="Foreground"
+                                                Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Width="32"
+                                            Height="32"
+                                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                            BorderThickness="1"
+                                            Margin="0,0,8,0">
+                                        <Image Stretch="Uniform"
+                                               RenderOptions.BitmapScalingMode="HighQuality"
+                                               Margin="2"
+                                               Source="{Binding Icon}"/>
+                                    </Border>
+                                    <StackPanel Grid.Column="1"
+                                                VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}"
+                                                   FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                        <TextBlock Text="{Binding Id}"
+                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                   FontSize="12"/>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
                     </ListView>
                 </Border>
             </Grid>
@@ -108,8 +158,9 @@
                           VerticalAlignment="Stretch"
                           Background="{DynamicResource ControlElevationBorderBrush}"/>
 
+        <ScrollViewer Grid.Column="2" Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <!-- Right Side: NPC Details with Tabs -->
-            <Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Margin="10">
+            <Grid Grid.RowSpan="2" Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -534,6 +585,6 @@
                     </TabControl>
                 </StackPanel>
             </Grid>
+        </ScrollViewer>
     </Grid>
-    </ScrollViewer>
 </Page> 
