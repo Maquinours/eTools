@@ -36,16 +36,16 @@ namespace eTools_Ultimate.Views.Pages
         {
             // Add cards with the correct page types and icons
             
-            NavigationCards.Add(new NavigationCard("Item", "Navigate to the items page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_6.png", typeof(ItemPage)));
-            NavigationCards.Add(new NavigationCard("Mover", "Navigate to the movers page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_2.png", typeof(MoverPage)));
-            NavigationCards.Add(new NavigationCard("Skill", "Navigate to the skills page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_12.png", typeof(SkillPage)));
-            NavigationCards.Add(new NavigationCard("Quest", "Navigate to the quests page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_10.png", typeof(QuestPage)));
-            NavigationCards.Add(new NavigationCard("NPC", "Navigate to the NPCs page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_4.png", typeof(NpcPage)));
-            NavigationCards.Add(new NavigationCard("Event", "Navigate to the events page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_9.png", typeof(EventPage)));
-            NavigationCards.Add(new NavigationCard("Giftboxe", "Navigate to the giftboxes page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_5.png", typeof(GiftboxPage)));
-            NavigationCards.Add(new NavigationCard("Collector", "Navigate to the collectors page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_1.png", typeof(CollectorPage)));
-            NavigationCards.Add(new NavigationCard("Accessorie", "Navigate to the accessories page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_8.png", typeof(AccessoryPage)));
-            NavigationCards.Add(new NavigationCard("Exchanger", "Navigate to the exchanger page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_3.png", typeof(ExchangerPage)));
+            NavigationCards.Add(new NavigationCard("Items", "Navigate to the items page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_6.png", typeof(ItemPage)));
+            NavigationCards.Add(new NavigationCard("Movers", "Navigate to the movers page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_2.png", typeof(MoverPage)));
+            NavigationCards.Add(new NavigationCard("Skills", "Navigate to the skills page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_12.png", typeof(SkillPage)));
+            NavigationCards.Add(new NavigationCard("Quests", "Navigate to the quests page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_10.png", typeof(QuestPage)));
+            NavigationCards.Add(new NavigationCard("NPCs", "Navigate to the NPCs page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_4.png", typeof(NpcPage)));
+            NavigationCards.Add(new NavigationCard("Events", "Navigate to the events page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_9.png", typeof(EventPage)));
+            NavigationCards.Add(new NavigationCard("Giftboxes", "Navigate to the giftboxes page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_5.png", typeof(GiftboxPage)));
+            NavigationCards.Add(new NavigationCard("Collectors", "Navigate to the collectors page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_1.png", typeof(CollectorPage)));
+            NavigationCards.Add(new NavigationCard("Accessories", "Navigate to the accessories page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_8.png", typeof(AccessoryPage)));
+            NavigationCards.Add(new NavigationCard("Exchangers", "Navigate to the exchanger page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_3.png", typeof(ExchangerPage)));
             NavigationCards.Add(new NavigationCard("Text Client", "Navigate to the text client.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_7.png", typeof(TextClientPage)));
             NavigationCards.Add(new NavigationCard("Settings", "Navigate to the settings page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_11.png", typeof(SettingsPage)));
         }

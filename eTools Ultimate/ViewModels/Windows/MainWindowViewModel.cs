@@ -115,7 +115,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 },
                 new NavigationViewItem()
                 {
-                    Content = "TextClient",
+                    Content = "Text Client",
                     Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Views/Pages/Home/Icons/Icon_7.png", 25, 25),
                     TargetPageType = typeof(Views.Pages.TextClientPage)
                 }
