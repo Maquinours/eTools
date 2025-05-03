@@ -59,6 +59,7 @@ namespace eTools_Ultimate
                 services.AddSingleton<ExchangerPage>();
                 services.AddSingleton<TextClientPage>();
                 services.AddSingleton<MoverPage>();
+                services.AddSingleton<CouplePage>();
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SkillsViewModel>();
                 services.AddSingleton<MoversViewModel>();
@@ -66,6 +67,7 @@ namespace eTools_Ultimate
                 services.AddSingleton<GiftBoxesViewModel>();
                 services.AddSingleton<ExchangesViewModel>();
                 services.AddSingleton<CharactersViewModel>();
+                services.AddSingleton<CouplesViewModel>();
 
                 // Settings pages
                 services.AddSingleton<SettingsPage>();
