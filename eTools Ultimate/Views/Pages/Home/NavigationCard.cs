@@ -13,7 +13,7 @@ namespace eTools_Ultimate.Views.Pages
 
         public NavigationCard()
         {
-            // Default constructor for XAML
+            // Standardkonstruktor für XAML
         }
 
         public NavigationCard(string title, string description, string icon = "Fluent24", Type targetPageType = null, string tag = null)

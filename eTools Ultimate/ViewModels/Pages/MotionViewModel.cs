@@ -31,14 +31,14 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         public MotionViewModel()
         {
-            // In a real implementation, motions would be loaded here
+            // In einer echten Implementierung würden hier die Motions geladen
             LoadSampleData();
             
-            // Configure CollectionView for filtering and sorting
+            // CollectionView für Filterung und Sortierung konfigurieren
             MotionsView = CollectionViewSource.GetDefaultView(Motions);
             MotionsView.Filter = FilterMotions;
             
-            // Property Changed Handler for search text
+            // Property Changed Handler für den Suchtext
             this.PropertyChanged += (s, e) => 
             {
                 if (e.PropertyName == nameof(SearchText))
@@ -69,7 +69,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             var newMotion = new Motion
             {
-                MotionId = Motions.Count + 1, // In a real app, a unique ID should be generated
+                MotionId = Motions.Count + 1, // In einer realen App sollte eine eindeutige ID generiert werden
                 InGameName = "New Motion",
                 MotionIdKey = "MTN_NEW",
                 Description = "New motion description"
@@ -99,9 +99,9 @@ namespace eTools_Ultimate.ViewModels.Pages
                 return;
             }
 
-            // In a real app, data validation would be performed here
+            // In einer realen App würden hier die Daten validiert werden
 
-            // Update the properties of the selected motion
+            // Aktualisiere die Eigenschaften der ausgewählten Motion
             SelectedMotion.MotionId = EditableMotion.MotionId;
             SelectedMotion.MotionIdKey = EditableMotion.MotionIdKey;
             SelectedMotion.MotionIcon = EditableMotion.MotionIcon;
@@ -121,7 +121,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 return;
             }
 
-            // In a real app, a confirmation would be requested here
+            // In einer realen App würde hier eine Bestätigung angefordert werden
 
             Motions.Remove(SelectedMotion);
             SelectedMotion = null;
@@ -133,14 +133,14 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private void SaveAllChanges()
         {
-            // In a real app, all changes would be saved to a file or database here
+            // In einer realen App würden hier alle Änderungen in eine Datei oder Datenbank gespeichert werden
             StatusMessage = "All changes saved";
         }
 
         [RelayCommand]
         private void ReloadMotions()
         {
-            // In a real app, motions would be reloaded from a file or database here
+            // In einer realen App würden hier die Motions aus einer Datei oder Datenbank neu geladen werden
             LoadSampleData();
             StatusMessage = "Motions reloaded";
         }
@@ -149,7 +149,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             IsLoading = true;
 
-            // Sample data for demonstration
+            // Beispieldaten für die Demonstration
             Motions.Clear();
             Motions.Add(new Motion { MotionId = 1, MotionIdKey = "MTN_COMBAT", InGameName = "Combat Stance", PlayIdKey = "KEY_COMBAT", Description = "Basic combat stance motion" });
             Motions.Add(new Motion { MotionId = 2, MotionIdKey = "MTN_WALK", InGameName = "Walk", PlayIdKey = "KEY_WALK", Description = "Character walking motion" });

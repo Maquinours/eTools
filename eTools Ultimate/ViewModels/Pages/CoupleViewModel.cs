@@ -38,7 +38,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         private List<string> _skillTypes = new List<string> { "Couple Level", "Power Level", "Bless Level", "Miracle Level" };
 
-        // Current skill values for the selected level
+        // Aktuelle Skill-Werte für das ausgewählte Level
         [ObservableProperty]
         private int _currentPowerLevel = 0;
 
@@ -74,10 +74,10 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private void InitializeViewModel()
         {
-            // Filter items for the current level
+            // Items für den aktuellen Level filtern
             FilterItems();
 
-            // Set skill levels for the current level
+            // Skill-Levels für den aktuellen Level festlegen
             UpdateSkillLevels();
 
             _isInitialized = true;
@@ -85,22 +85,22 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         partial void OnSelectedLevelChanged(int value)
         {
-            // When level changes, we filter items again
+            // Wenn sich das Level ändert, filtern wir die Items neu
             FilterItems();
             
-            // And update skill levels
+            // Und aktualisieren die Skill-Levels
             UpdateSkillLevels();
         }
 
         private void FilterItems()
         {
-            // Filter items for the current level
+            // Filtern der Items nach dem ausgewählten Level
             _filteredItems.Clear();
             
             var filteredItems = CoupleService.Instance.CoupleItems
                 .Where(item => item.Level == _selectedLevel);
 
-            // If a search text exists, we filter also by that
+            // Wenn ein Suchtext existiert, filtern wir auch danach
             if (!string.IsNullOrWhiteSpace(_searchText))
             {
                 filteredItems = filteredItems.Where(item => 
@@ -115,7 +115,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private void UpdateSkillLevels()
         {
-            // Find highest skill level for the current level
+            // Höchstes Skill-Level für das aktuelle Level finden
             var skill = CoupleService.Instance.CoupleSkills
                 .Where(s => s.Level <= _selectedLevel)
                 .OrderByDescending(s => s.Level)

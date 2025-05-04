@@ -4,7 +4,7 @@ using Wpf.Ui.Abstractions.Controls;
 namespace eTools_Ultimate.Views.Pages
 {
     /// <summary>
-    /// Interaction logic for ResourcePathPage.xaml
+    /// Interaktionslogik für ResourcePathPage.xaml
     /// </summary>
     public partial class ResourcePathPage : INavigableView<ResourcePathViewModel>
     {
