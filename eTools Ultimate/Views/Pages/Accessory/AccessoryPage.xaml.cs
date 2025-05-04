@@ -16,7 +16,7 @@ using eTools_Ultimate.Models.Accessory;
 
 namespace eTools_Ultimate.Views.Pages.Accessory
 {
-    // Converter for English number formatting with commas as thousands separator
+    // Konverter für englische Zahlenformatierung mit Komma als Tausendertrennzeichen
     public class EnglishNumberConverter : IValueConverter
     {
         private static readonly NumberFormatInfo EnglishNumberFormat = new CultureInfo("en-US").NumberFormat;
@@ -35,7 +35,7 @@ namespace eTools_Ultimate.Views.Pages.Accessory
         {
             if (value is string stringValue)
             {
-                // Remove all non-digits (like commas) for conversion back
+                // Entferne alle Nicht-Ziffern (wie Kommas) für die Konvertierung zurück
                 string digitsOnly = string.Join("", stringValue.Where(c => char.IsDigit(c)));
                 
                 if (int.TryParse(digitsOnly, out int result))
@@ -159,7 +159,7 @@ namespace eTools_Ultimate.Views.Pages.Accessory
                     });
                 }
                 
-                // Add higher values for demonstration of thousands separators
+                // Füge höhere Werte für Demonstration von Tausendertrennzeichen hinzu
                 if (i > 15)
                 {
                     levelData.Attributes.Add(new AttributeData 
@@ -335,7 +335,7 @@ namespace eTools_Ultimate.Views.Pages.Accessory
             }
         }
 
-        // Helper method for info dialogs
+        // Helfer-Methode für Info-Dialoge
         private async void ShowInfoDialog(string title, string message)
         {
             try
@@ -364,13 +364,13 @@ namespace eTools_Ultimate.Views.Pages.Accessory
             }
         }
 
-        // TextChanged event for the TextBox
+        // TextChanged-Event für die TextBox
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            // Explicit type check for System.Windows.Controls.TextBox
+            // Explizite Typprüfung für System.Windows.Controls.TextBox
             if (sender is System.Windows.Controls.TextBox textBox && textBox.DataContext is AttributeData attribute)
             {
-                // Store the text for later processing
+                // Speichere den Text für die spätere Verarbeitung
                 _tempTextValues[attribute] = textBox.Text;
             }
         }

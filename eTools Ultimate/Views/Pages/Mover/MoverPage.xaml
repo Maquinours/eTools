@@ -898,7 +898,7 @@
             </StackPanel>
         </DataTemplate>
 
-        <!-- DataTemplate for the Motions Dialog -->
+        <!-- DataTemplate für den Motions Dialog -->
         <DataTemplate x:Key="MotionsDialogTemplate">
             <Grid Margin="20">
                 <Grid.RowDefinitions>
