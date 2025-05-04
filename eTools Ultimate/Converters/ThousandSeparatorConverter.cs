@@ -25,7 +25,7 @@ namespace eTools_Ultimate.Converters
         {
             if (value is string stringValue)
             {
-                // Entfernt alle Nicht-Ziffern für die Konvertierung zurück
+                // Removes all non-digits for conversion back
                 string digitsOnly = new string(stringValue.Where(c => char.IsDigit(c)).ToArray());
                 
                 if (int.TryParse(digitsOnly, out int result))

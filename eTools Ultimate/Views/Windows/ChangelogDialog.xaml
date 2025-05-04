@@ -16,7 +16,7 @@
     FocusVisualStyle="{x:Null}">
 
     <Page.Resources>
-        <!-- Iconstyles für die verschiedenen Änderungstypen -->
+        <!-- Icon styles for different change types -->
         <Style x:Key="IconBase" TargetType="ui:SymbolIcon">
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Margin" Value="0,0,8,0"/>
@@ -53,7 +53,7 @@
             <Setter Property="Symbol" Value="ArrowSync24"/>
         </Style>
         
-        <!-- Stile für die Textblöcke -->
+        <!-- Styles for text blocks -->
         <Style x:Key="VersionTitle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
@@ -76,7 +76,7 @@
             <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
         
-        <!-- DataTemplate für einen Bullet Point -->
+        <!-- DataTemplate for a bullet point -->
         <DataTemplate x:Key="BulletPointTemplate">
             <Grid Margin="0,4,0,4">
                 <Grid.ColumnDefinitions>
@@ -112,7 +112,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <!-- Header mit Schließen-Button -->
+                <!-- Header with Close Button -->
                 <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -136,7 +136,7 @@
                                Click="CloseButton_Click"/>
                 </Grid>
 
-                <!-- Legende -->
+                <!-- Legend -->
                 <WrapPanel Grid.Row="1" Margin="0,0,0,16">
                     <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
                         <ui:SymbolIcon Symbol="Add24" Foreground="#4CAF50" FontSize="12"/>
@@ -169,7 +169,7 @@
                     </StackPanel>
                 </WrapPanel>
 
-                <!-- Changelog-Inhalt mit Scrollbar -->
+                <!-- Changelog content with scrollbar -->
                 <ScrollViewer Grid.Row="2" 
                               VerticalScrollBarVisibility="Visible"
                               HorizontalScrollBarVisibility="Disabled"
@@ -177,11 +177,11 @@
                               Background="{DynamicResource ApplicationBackgroundBrush}"
                               PreviewMouseWheel="ScrollViewer_PreviewMouseWheel">
                     <StackPanel x:Name="ChangelogContent" Margin="0,8,16,0">
-                        <!-- Die Inhalte werden dynamisch im Code-Behind generiert -->
+                        <!-- The content is generated dynamically in the code-behind -->
                     </StackPanel>
                 </ScrollViewer>
                 
-                <!-- Schließen-Button am unteren Rand -->
+                <!-- Close button at the bottom -->
                 <ui:Button Grid.Row="3"
                           Content="Close"
                           HorizontalAlignment="Center"

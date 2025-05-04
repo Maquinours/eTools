@@ -24,7 +24,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             IsLightTheme = currentTheme == ApplicationTheme.Light;
             IsDarkTheme = currentTheme == ApplicationTheme.Dark;
             
-            // Standard-Werte für andere Einstellungen
+            // Default values for other settings
             IsCompactMode = false;
         }
 
