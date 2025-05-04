@@ -4,7 +4,7 @@ using Wpf.Ui.Abstractions.Controls;
 namespace eTools_Ultimate.Views.Pages
 {
     /// <summary>
-    /// Interaktionslogik für AboutPage.xaml
+    /// Interaction logic for AboutPage.xaml
     /// </summary>
     public partial class AboutPage : INavigableView<AboutViewModel>
     {
