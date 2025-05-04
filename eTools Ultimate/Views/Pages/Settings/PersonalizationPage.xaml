@@ -26,13 +26,13 @@
 
     <StackPanel Margin="0,0,0,24">
         <ui:TextBlock
-            Margin="0,0,0,8"
+            Margin="10,0,10,8"
             FontTypography="BodyStrong"
             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
             Text="Appearance &amp; behavior" />
         
         <!-- Theme Selection -->
-        <ui:CardControl Margin="0,0,0,12" Icon="{ui:SymbolIcon Color24}">
+        <ui:CardControl Margin="10,0,10,12" Icon="{ui:SymbolIcon Color24}">
             <ui:CardControl.Header>
                 <Grid>
                     <Grid.RowDefinitions>

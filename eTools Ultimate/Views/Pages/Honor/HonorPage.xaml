@@ -1,0 +1,265 @@
+<Page
+    x:Class="eTools_Ultimate.Views.Pages.Honor.HonorPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages.Honor"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:eTools_Ultimate.Models"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
+    Title="Honor List"
+    d:DataContext="{d:DesignInstance local:HonorPage, IsDesignTimeCreatable=False}"
+    d:DesignHeight="791"
+    d:DesignWidth="1024"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    ScrollViewer.CanContentScroll="False"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <!-- Standard Converter -->
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        
+        <!-- Common Styles -->
+        <Style x:Key="InfoIconStyle"
+               TargetType="ui:SymbolIcon">
+            <Setter Property="HorizontalAlignment"
+                    Value="Right"/>
+            <Setter Property="VerticalAlignment"
+                    Value="Center"/>
+            <Setter Property="FontSize"
+                    Value="16"/>
+            <Setter Property="Margin"
+                    Value="5,0,0,0"/>
+            <Setter Property="Foreground"
+                    Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+        </Style>
+        <Style x:Key="FormFieldStyle"
+               TargetType="Grid">
+            <Setter Property="Margin"
+                    Value="0,0,15,15"/>
+        </Style>
+        <Style x:Key="FieldLabelStyle"
+               TargetType="TextBlock">
+            <Setter Property="Margin"
+                    Value="0,0,0,5"/>
+            <Setter Property="FontWeight"
+                    Value="SemiBold"/>
+        </Style>
+        <Style x:Key="SectionHeaderStyle"
+               TargetType="TextBlock">
+            <Setter Property="FontSize"
+                    Value="24"/>
+            <Setter Property="FontWeight"
+                    Value="Bold"/>
+            <Setter Property="Margin"
+                    Value="0,15,0,15"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Main content -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="400" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Left side: List of honor entries -->
+            <Grid Grid.Column="0" Margin="0,0,20,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Search and filter -->
+                <Grid Grid.Row="0" Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <ui:TextBox 
+                        Grid.Column="0" 
+                        PlaceholderText="Search by title, ID, category..."
+                        Text="{Binding ViewModel.SearchText, UpdateSourceTrigger=PropertyChanged}" 
+                        Margin="0,0,10,0">
+                        <ui:TextBox.Icon>
+                            <ui:SymbolIcon Symbol="Search24" />
+                        </ui:TextBox.Icon>
+                    </ui:TextBox>
+
+                    <Button Grid.Column="1" Command="{Binding ViewModel.ReloadHonorItemsCommand}" ToolTip="Reload honor list">
+                        <ui:SymbolIcon Symbol="ArrowSync24" />
+                    </Button>
+                </Grid>
+
+                <!-- DataGrid for honor entries -->
+                <DataGrid 
+                    Grid.Row="1"
+                    ItemsSource="{Binding ViewModel.HonorItemsView}" 
+                    SelectedItem="{Binding ViewModel.SelectedHonorItem}"
+                    AutoGenerateColumns="False"
+                    IsReadOnly="True"
+                    SelectionMode="Single"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    BorderThickness="1"
+                    BorderBrush="{DynamicResource ControlElevationBorderBrush}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Index" Binding="{Binding Index}" Width="60" />
+                        <DataGridTextColumn Header="Title ID" Binding="{Binding TitleId}" Width="150" />
+                        <DataGridTextColumn Header="Title Name" Binding="{Binding TitleName}" Width="*" />
+                        <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="120" />
+                        <DataGridTextColumn Header="Sub Category" Binding="{Binding SubCategory}" Width="120" />
+                        <DataGridTextColumn Header="Req. Value" Binding="{Binding RequiredValue}" Width="100" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <!-- Right side: Edit form -->
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Header -->
+                <TextBlock 
+                    Grid.Row="0" 
+                    Text="Edit Honor Title" 
+                    Style="{StaticResource SectionHeaderStyle}" 
+                    Margin="0,0,0,20" />
+
+                <!-- Edit form -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <!-- Index -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="Index" Style="{StaticResource FieldLabelStyle}" />
+                            <ui:NumberBox Grid.Row="1" Value="{Binding ViewModel.EditableHonorItem.Index}" />
+                        </Grid>
+
+                        <!-- Title ID -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="Title ID" Style="{StaticResource FieldLabelStyle}" />
+                            <TextBox Grid.Row="1" Text="{Binding ViewModel.EditableHonorItem.TitleId, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+
+                        <!-- Title Name -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="Title Name" Style="{StaticResource FieldLabelStyle}" />
+                            <TextBox Grid.Row="1" Text="{Binding ViewModel.EditableHonorItem.TitleName, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+
+                        <!-- Category -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="Category" Style="{StaticResource FieldLabelStyle}" />
+                            <ComboBox Grid.Row="1" Text="{Binding ViewModel.EditableHonorItem.Category, UpdateSourceTrigger=PropertyChanged}" IsEditable="True">
+                                <ComboBoxItem Content="HI_COUNT_CHECK" />
+                                <ComboBoxItem Content="HI_ELASPED_TIME" />
+                                <ComboBoxItem Content="HI_USE_ITEM" />
+                                <ComboBoxItem Content="HI_EARN_TITLE" />
+                                <ComboBoxItem Content="HI_HUNT_MONSTER" />
+                            </ComboBox>
+                        </Grid>
+
+                        <!-- Sub Category -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="Sub Category" Style="{StaticResource FieldLabelStyle}" />
+                            <TextBox Grid.Row="1" Text="{Binding ViewModel.EditableHonorItem.SubCategory, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+
+                        <!-- Required Value -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="Required Value" Style="{StaticResource FieldLabelStyle}" />
+                            <ui:NumberBox Grid.Row="1" Value="{Binding ViewModel.EditableHonorItem.RequiredValue}" />
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- Buttons -->
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                    <Button 
+                        Content="New" 
+                        Command="{Binding ViewModel.AddHonorItemCommand}" 
+                        Margin="0,0,10,0" />
+                    <Button 
+                        Content="Save" 
+                        Command="{Binding ViewModel.UpdateHonorItemCommand}" 
+                        Margin="0,0,10,0" />
+                    <Button 
+                        Content="Delete" 
+                        Command="{Binding ViewModel.DeleteHonorItemCommand}" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <!-- Status bar -->
+        <Border Grid.Row="1" 
+                Background="{DynamicResource ControlFillColorDefaultBrush}" 
+                BorderBrush="{DynamicResource ControlElevationBorderBrush}" 
+                BorderThickness="0,1,0,0"
+                Padding="10"
+                Margin="0,20,0,0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock 
+                    Grid.Column="0" 
+                    Text="{Binding ViewModel.StatusMessage}" 
+                    VerticalAlignment="Center" 
+                    Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+
+                <Button 
+                    Grid.Column="1"
+                    Content="Save All Changes" 
+                    Command="{Binding ViewModel.SaveHonorItemsCommand}" 
+                    Margin="0,0,10,0" />
+
+                <ProgressBar 
+                    Grid.Column="2" 
+                    Width="100" 
+                    IsIndeterminate="{Binding ViewModel.IsLoading}" 
+                    Visibility="{Binding ViewModel.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            </Grid>
+        </Border>
+    </Grid>
+</Page> 

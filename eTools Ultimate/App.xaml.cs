@@ -2,6 +2,7 @@
 using eTools_Ultimate.ViewModels.Pages;
 using eTools_Ultimate.ViewModels.Windows;
 using eTools_Ultimate.Views.Pages;
+using eTools_Ultimate.Views.Pages.Motion;
 using eTools_Ultimate.Views.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -55,10 +56,13 @@ namespace eTools_Ultimate
                 services.AddSingleton<GiftboxPage>();
                 services.AddSingleton<CollectorPage>();
                 services.AddSingleton<EventPage>();
-                services.AddSingleton<AccessoryPage>();
+                services.AddSingleton<eTools_Ultimate.Views.Pages.Accessory.AccessoryPage>();
                 services.AddSingleton<ExchangerPage>();
                 services.AddSingleton<TextClientPage>();
                 services.AddSingleton<MoverPage>();
+                services.AddSingleton<CouplePage>();
+                services.AddSingleton<eTools_Ultimate.Views.Pages.Honor.HonorPage>();
+                services.AddSingleton<eTools_Ultimate.Views.Pages.Motion.MotionPage>();
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SkillsViewModel>();
                 services.AddSingleton<MoversViewModel>();
@@ -66,6 +70,9 @@ namespace eTools_Ultimate
                 services.AddSingleton<GiftBoxesViewModel>();
                 services.AddSingleton<ExchangesViewModel>();
                 services.AddSingleton<CharactersViewModel>();
+                services.AddSingleton<CouplesViewModel>();
+                services.AddSingleton<HonorViewModel>();
+                services.AddSingleton<MotionViewModel>();
 
                 // Settings pages
                 services.AddSingleton<SettingsPage>();
