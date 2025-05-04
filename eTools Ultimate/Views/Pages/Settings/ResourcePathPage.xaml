@@ -28,17 +28,15 @@
                      HorizontalScrollBarVisibility="Disabled" 
                      Padding="0,0,18,0">
             <StackPanel Margin="12,8,12,20">
-                <!-- Tooltip für Haupteinstellungen -->
-                <ui:CardControl Margin="0,10,0,10">
-                    <ui:CardControl.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon Symbol="Info20" Margin="0,0,8,0" OpacityMask="#FF0948DE"/>
-                            <TextBlock TextWrapping="Wrap" Text="Set the path for resource files in a typical Flyff setup."/>
-                        </StackPanel>
-                    </ui:CardControl.Header>
-                </ui:CardControl>
+                <!-- Tooltip for main settings -->
+                <ui:ToolTip Content="Main Settings" Title="Settings">
+                    <ui:SymbolIcon
+                        FontSize="14"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                        Symbol="Info24" />
+                </ui:ToolTip>
 
-                <!-- Grid mit 2x4 Layout für die Haupteinstellungen -->
+                <!-- Grid with 2x4 layout for main settings -->
                 <Grid Margin="0,10,0,12">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -115,15 +113,13 @@
 
                 <!-- Advanced Settings Sections -->
                 <StackPanel Visibility="{Binding IsAdvancedSettingsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <!-- Tooltip für erweiterte Einstellungen -->
-                    <ui:CardControl Margin="0,10,0,10">
-                        <ui:CardControl.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Symbol="Info20" Margin="0,0,8,0"/>
-                                <TextBlock TextWrapping="Wrap" Text="Set the path when using a custom structure."/>
-                            </StackPanel>
-                        </ui:CardControl.Header>
-                    </ui:CardControl>
+                    <!-- Tooltip for advanced settings -->
+                    <ui:ToolTip Content="Advanced Settings" Title="Settings">
+                        <ui:SymbolIcon
+                            FontSize="14"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                            Symbol="Info24" />
+                    </ui:ToolTip>
 
                     <!-- Custom Section -->
                     <ui:TextBlock Text="Custom" FontSize="16" Margin="0,10,0,0" FontWeight="Bold"/>
@@ -447,7 +443,7 @@
                             </Button>
                         </Grid>
 
-                        <!-- Checkboxes für PropMoverEx -->
+                        <!-- Checkboxes for PropMoverEx -->
                         <Grid Grid.Row="1" Grid.Column="1" Margin="10,0,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>

@@ -12,7 +12,7 @@ namespace eTools.Views.Windows
 
         private void GoToResourcePath_Click(object sender, RoutedEventArgs e)
         {
-            // Hier wird später die Logik für den "Go to Resource Path" Button implementiert
+            // The logic for the "Go to Resource Path" button will be implemented later
             this.Hide();
         }
 

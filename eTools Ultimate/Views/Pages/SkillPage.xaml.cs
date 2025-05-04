@@ -29,7 +29,7 @@ namespace eTools_Ultimate.Views.Pages
             // Die Logik zur Verarbeitung der Auswahländerung in der ListView
         }
 
-        // Event-Handler für den Hinzufügen-Button
+        // Event handler for the Add button
         private void AddButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             try
@@ -58,7 +58,7 @@ namespace eTools_Ultimate.Views.Pages
             }
         }
         
-        // Event-Handler für den Löschen-Button
+        // Event handler for the Delete button
         private void DeleteButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             try

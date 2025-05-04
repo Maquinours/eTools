@@ -6,7 +6,7 @@ using Wpf.Ui.Appearance;
 namespace eTools_Ultimate.Views.Pages
 {
     /// <summary>
-    /// Interaktionslogik für PersonalizationPage.xaml
+    /// Interaction logic for PersonalizationPage.xaml
     /// </summary>
     public partial class PersonalizationPage : INavigableView<PersonalizationViewModel>
     {
