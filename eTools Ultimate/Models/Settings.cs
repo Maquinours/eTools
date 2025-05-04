@@ -56,6 +56,10 @@ namespace eTools_Ultimate.Models
         private string? _charactersStringsFilePath;
         private string? _charactersIconsFolderPath;
 
+        // Honors settings
+        private string? _honorsPropFilePath;
+        private string? _honorsTxtFilePath;
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -533,5 +537,43 @@ namespace eTools_Ultimate.Models
             }
         }
         public string DefaultCharactersIconsFolderPath => $"{this.ClientFolderPath}Char{Path.DirectorySeparatorChar}";
+
+        public string? HonorsPropFilePath
+        {
+            get => this._honorsPropFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultHonorsPropFilePath)
+                    val = null;
+                if (this.HonorsPropFilePath != val)
+                {
+                    this._honorsPropFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultHonorsPropFilePath => $"{this.ResourcesFolderPath}honorList.txt";
+
+        public string? HonorsTxtFilePath
+        {
+            get => this._honorsTxtFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultHonorsTxtFilePath)
+                    val = null;
+                if (this.HonorsTxtFilePath != val)
+                {
+                    this._honorsTxtFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultHonorsTxtFilePath => $"{this.ResourcesFolderPath}honorList.txt.txt";
     }
 }

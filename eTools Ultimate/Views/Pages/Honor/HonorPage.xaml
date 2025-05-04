@@ -104,9 +104,9 @@
 
                 <!-- DataGrid for honor entries -->
                 <DataGrid 
+                    x:Name="HonorsDataGrid"
                     Grid.Row="1"
-                    ItemsSource="{Binding ViewModel.HonorItemsView}" 
-                    SelectedItem="{Binding ViewModel.SelectedHonorItem}"
+                    ItemsSource="{Binding ViewModel.HonorsView}" 
                     AutoGenerateColumns="False"
                     IsReadOnly="True"
                     SelectionMode="Single"
@@ -115,12 +115,12 @@
                     BorderThickness="1"
                     BorderBrush="{DynamicResource ControlElevationBorderBrush}">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Index" Binding="{Binding Index}" Width="60" />
-                        <DataGridTextColumn Header="Title ID" Binding="{Binding TitleId}" Width="150" />
-                        <DataGridTextColumn Header="Title Name" Binding="{Binding TitleName}" Width="*" />
-                        <DataGridTextColumn Header="Category" Binding="{Binding Category}" Width="120" />
-                        <DataGridTextColumn Header="Sub Category" Binding="{Binding SubCategory}" Width="120" />
-                        <DataGridTextColumn Header="Req. Value" Binding="{Binding RequiredValue}" Width="100" />
+                        <DataGridTextColumn Header="Index" Binding="{Binding NId}" Width="60" />
+                        <DataGridTextColumn Header="Title ID" Binding="{Binding StrTitle}" Width="150" />
+                        <DataGridTextColumn Header="Title Name" Binding="{Binding Title}" Width="*" />
+                        <DataGridTextColumn Header="Category" Binding="{Binding NLGrouping}" Width="120" />
+                        <DataGridTextColumn Header="Sub Category" Binding="{Binding NSGrouping}" Width="120" />
+                        <DataGridTextColumn Header="Req. Value" Binding="{Binding NNeed}" Width="100" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
@@ -150,7 +150,7 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="Index" Style="{StaticResource FieldLabelStyle}" />
-                            <ui:NumberBox Grid.Row="1" Value="{Binding ViewModel.EditableHonorItem.Index}" />
+                            <ui:NumberBox Grid.Row="1" Value="{Binding SelectedItem.NId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsDataGrid}" Cursor="Arrow" />
                         </Grid>
 
                         <!-- Title ID -->
@@ -160,7 +160,7 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="Title ID" Style="{StaticResource FieldLabelStyle}" />
-                            <TextBox Grid.Row="1" Text="{Binding ViewModel.EditableHonorItem.TitleId, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox Grid.Row="1" Text="{Binding SelectedItem.StrTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsDataGrid}" />
                         </Grid>
 
                         <!-- Title Name -->
@@ -170,7 +170,7 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="Title Name" Style="{StaticResource FieldLabelStyle}" />
-                            <TextBox Grid.Row="1" Text="{Binding ViewModel.EditableHonorItem.TitleName, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox Grid.Row="1" Text="{Binding SelectedItem.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsDataGrid}" />
                         </Grid>
 
                         <!-- Category -->
@@ -180,7 +180,7 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="Category" Style="{StaticResource FieldLabelStyle}" />
-                            <ComboBox Grid.Row="1" Text="{Binding ViewModel.EditableHonorItem.Category, UpdateSourceTrigger=PropertyChanged}" IsEditable="True">
+                            <ComboBox Grid.Row="1" Text="{Binding SelectedItem.NLGrouping, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsDataGrid}" IsEditable="True">
                                 <ComboBoxItem Content="HI_COUNT_CHECK" />
                                 <ComboBoxItem Content="HI_ELASPED_TIME" />
                                 <ComboBoxItem Content="HI_USE_ITEM" />
@@ -196,7 +196,7 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="Sub Category" Style="{StaticResource FieldLabelStyle}" />
-                            <TextBox Grid.Row="1" Text="{Binding ViewModel.EditableHonorItem.SubCategory, UpdateSourceTrigger=PropertyChanged}" />
+                            <TextBox Grid.Row="1" Text="{Binding SelectedItem.NSGrouping, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsDataGrid}" />
                         </Grid>
 
                         <!-- Required Value -->
@@ -206,7 +206,7 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <TextBlock Grid.Row="0" Text="Required Value" Style="{StaticResource FieldLabelStyle}" />
-                            <ui:NumberBox Grid.Row="1" Value="{Binding ViewModel.EditableHonorItem.RequiredValue}" />
+                            <ui:NumberBox Grid.Row="1" Value="{Binding SelectedItem.NNeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsDataGrid}" />
                         </Grid>
                     </StackPanel>
                 </ScrollViewer>

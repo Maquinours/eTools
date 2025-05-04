@@ -7,11 +7,11 @@ namespace eTools_Ultimate.Views.Pages.Honor
     /// <summary>
     /// Interaktionslogik für HonorPage.xaml
     /// </summary>
-    public partial class HonorPage : System.Windows.Controls.Page, INavigableView<HonorViewModel>
+    public partial class HonorPage : System.Windows.Controls.Page, INavigableView<HonorsViewModel>
     {
-        public HonorViewModel ViewModel { get; }
+        public HonorsViewModel ViewModel { get; }
 
-        public HonorPage(HonorViewModel viewModel)
+        public HonorPage(HonorsViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = this;
