@@ -46,8 +46,9 @@ namespace eTools_Ultimate.Views.Pages
             NavigationCards.Add(new NavigationCard("Collectors", "Navigate to the collectors page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_1.png", typeof(CollectorPage)));
             NavigationCards.Add(new NavigationCard("Accessories", "Navigate to the accessories page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_8.png", typeof(eTools_Ultimate.Views.Pages.Accessory.AccessoryPage)));
             NavigationCards.Add(new NavigationCard("Exchangers", "Navigate to the exchanger page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_3.png", typeof(ExchangerPage)));
-            NavigationCards.Add(new NavigationCard("Honor List", "Navigate to the honor list page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_7.png", typeof(Honor.HonorPage)));
+            NavigationCards.Add(new NavigationCard("Honor List", "Navigate to the honor list page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_14.png", typeof(Honor.HonorPage)));
             NavigationCards.Add(new NavigationCard("Couple", "Navigate to the couple page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_8.png", typeof(CouplePage)));
+            NavigationCards.Add(new NavigationCard("Motions", "Navigate to the motions page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_13.png", typeof(Motion.MotionPage)));
             NavigationCards.Add(new NavigationCard("Text Client", "Navigate to the text client.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_7.png", typeof(TextClientPage)));
             NavigationCards.Add(new NavigationCard("Settings", "Navigate to the settings page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_11.png", typeof(SettingsPage)));
         }

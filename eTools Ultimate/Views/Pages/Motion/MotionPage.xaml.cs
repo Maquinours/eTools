@@ -1,0 +1,50 @@
+using eTools_Ultimate.ViewModels.Pages;
+using System.Windows;
+using System.Windows.Controls;
+
+namespace eTools_Ultimate.Views.Pages.Motion
+{
+    /// <summary>
+    /// Interaction logic for MotionPage.xaml
+    /// </summary>
+    public partial class MotionPage : Page
+    {
+        public MotionViewModel ViewModel { get; }
+        
+        public MotionPage(MotionViewModel viewModel)
+        {
+            ViewModel = viewModel;
+            DataContext = this;
+            
+            InitializeComponent();
+        }
+
+        private void MotionsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Die Auswahl wird automatisch über das Binding aktualisiert
+            // ViewModel.SelectedMotion wird durch die ListView aktualisiert
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Eine neue Motion über das ViewModel erstellen
+            ViewModel.AddMotionCommand.Execute(null);
+        }
+
+        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Die aktuelle Motion über das ViewModel speichern
+            ViewModel.UpdateMotionCommand.Execute(null);
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Do you really want to delete this motion?", "Delete Motion", 
+                MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                // Die ausgewählte Motion über das ViewModel löschen
+                ViewModel.DeleteMotionCommand.Execute(null);
+            }
+        }
+    }
+} 

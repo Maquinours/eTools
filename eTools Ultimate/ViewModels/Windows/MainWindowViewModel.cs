@@ -73,6 +73,12 @@ namespace eTools_Ultimate.ViewModels.Windows
                 },
                 new NavigationViewItem()
                 {
+                    Content = "Motions",
+                    Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Views/Pages/Home/Icons/Icon_13.png", 25, 25),
+                    TargetPageType = typeof(Views.Pages.Motion.MotionPage)
+                },
+                new NavigationViewItem()
+                {
                     Content = "Quests",
                     Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Views/Pages/Home/Icons/Icon_10.png", 25, 25),
                     TargetPageType = typeof(Views.Pages.QuestPage)
@@ -116,7 +122,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 new NavigationViewItem()
                 {
                     Content = "Honor List",
-                    Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Views/Pages/Home/Icons/Icon_7.png", 25, 25),
+                    Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Views/Pages/Home/Icons/Icon_14.png", 25, 25),
                     TargetPageType = typeof(Views.Pages.Honor.HonorPage)
                 },
                 new NavigationViewItem()

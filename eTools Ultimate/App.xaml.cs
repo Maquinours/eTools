@@ -2,6 +2,7 @@
 using eTools_Ultimate.ViewModels.Pages;
 using eTools_Ultimate.ViewModels.Windows;
 using eTools_Ultimate.Views.Pages;
+using eTools_Ultimate.Views.Pages.Motion;
 using eTools_Ultimate.Views.Windows;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -61,6 +62,7 @@ namespace eTools_Ultimate
                 services.AddSingleton<MoverPage>();
                 services.AddSingleton<CouplePage>();
                 services.AddSingleton<eTools_Ultimate.Views.Pages.Honor.HonorPage>();
+                services.AddSingleton<eTools_Ultimate.Views.Pages.Motion.MotionPage>();
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SkillsViewModel>();
                 services.AddSingleton<MoversViewModel>();
@@ -70,6 +72,7 @@ namespace eTools_Ultimate
                 services.AddSingleton<CharactersViewModel>();
                 services.AddSingleton<CouplesViewModel>();
                 services.AddSingleton<HonorViewModel>();
+                services.AddSingleton<MotionViewModel>();
 
                 // Settings pages
                 services.AddSingleton<SettingsPage>();
