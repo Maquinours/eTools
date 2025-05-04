@@ -393,7 +393,7 @@
                         </StackPanel>
                     </Grid>
                     
-                    <!-- DataGrid für Exchange Requirements -->
+                    <!-- DataGrid for Exchange Requirements -->
                     <Grid Margin="0,0,0,20">
                         <!-- TabControl -->
                         <TabControl BorderThickness="1" 
@@ -537,7 +537,7 @@
                         </TabControl>
                     </Grid>
 
-                    <!-- DataGrid für Description -->
+                    <!-- DataGrid for Description -->
                     <Grid Margin="0,5,0,10"/>
                 </StackPanel>
             </Grid>

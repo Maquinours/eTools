@@ -12,23 +12,23 @@ namespace eTools_Ultimate.Services
         private static CoupleService _instance;
         public static CoupleService Instance => _instance ??= new CoupleService();
 
-        // Level-Anforderungen aus der couple.inc-Datei
+        // Level requirements from the couple.inc file
         public ObservableCollection<int> LevelRequirements { get; private set; } = new ObservableCollection<int>();
 
-        // Items aus der couple.inc-Datei
+        // Items from the couple.inc file
         public ObservableCollection<CoupleItem> CoupleItems { get; private set; } = new ObservableCollection<CoupleItem>();
 
-        // Skills aus der couple.inc-Datei
+        // Skills from the couple.inc file
         public ObservableCollection<CoupleSkill> CoupleSkills { get; private set; } = new ObservableCollection<CoupleSkill>();
 
         private CoupleService()
         {
-            // Initialisierung mit Dummy-Daten
+            // Initialization with dummy data
             InitializeDummyData();
         }
 
         /// <summary>
-        /// Dummy-Daten für das Design
+        /// Dummy data for design purposes
         /// </summary>
         private void InitializeDummyData()
         {
@@ -69,11 +69,11 @@ namespace eTools_Ultimate.Services
         }
 
         /// <summary>
-        /// Später: Laden der Daten aus couple.inc
+        /// Later: Loading data from couple.inc
         /// </summary>
         public void LoadCoupleDataFromFile(string filePath)
         {
-            // Implementierung zum Laden der Daten aus der couple.inc-Datei
+            // Implementation for loading data from the couple.inc file
         }
     }
 
@@ -89,10 +89,10 @@ namespace eTools_Ultimate.Services
 
         public string GenderText => Gender switch
         {
-            0 => "Männlich",
-            1 => "Weiblich",
-            2 => "Beide",
-            _ => "Unbekannt"
+            0 => "Male",
+            1 => "Female",
+            2 => "Both",
+            _ => "Unknown"
         };
     }
 

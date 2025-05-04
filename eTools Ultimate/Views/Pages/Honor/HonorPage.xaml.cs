@@ -5,7 +5,7 @@ using Wpf.Ui.Abstractions.Controls;
 namespace eTools_Ultimate.Views.Pages.Honor
 {
     /// <summary>
-    /// Interaktionslogik für HonorPage.xaml
+    /// Interaction logic for HonorPage.xaml
     /// </summary>
     public partial class HonorPage : System.Windows.Controls.Page, INavigableView<HonorViewModel>
     {
