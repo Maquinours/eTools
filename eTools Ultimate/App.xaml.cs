@@ -55,11 +55,12 @@ namespace eTools_Ultimate
                 services.AddSingleton<GiftboxPage>();
                 services.AddSingleton<CollectorPage>();
                 services.AddSingleton<EventPage>();
-                services.AddSingleton<AccessoryPage>();
+                services.AddSingleton<eTools_Ultimate.Views.Pages.Accessory.AccessoryPage>();
                 services.AddSingleton<ExchangerPage>();
                 services.AddSingleton<TextClientPage>();
                 services.AddSingleton<MoverPage>();
                 services.AddSingleton<CouplePage>();
+                services.AddSingleton<eTools_Ultimate.Views.Pages.Honor.HonorPage>();
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SkillsViewModel>();
                 services.AddSingleton<MoversViewModel>();
@@ -68,6 +69,7 @@ namespace eTools_Ultimate
                 services.AddSingleton<ExchangesViewModel>();
                 services.AddSingleton<CharactersViewModel>();
                 services.AddSingleton<CouplesViewModel>();
+                services.AddSingleton<HonorViewModel>();
 
                 // Settings pages
                 services.AddSingleton<SettingsPage>();

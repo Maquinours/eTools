@@ -105,13 +105,19 @@ namespace eTools_Ultimate.ViewModels.Windows
                 {
                     Content = "Accessories",
                     Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Views/Pages/Home/Icons/Icon_8.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.AccessoryPage)
+                    TargetPageType = typeof(Views.Pages.Accessory.AccessoryPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "Exchangers",
                     Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Views/Pages/Home/Icons/Icon_3.png", 25, 25),
                     TargetPageType = typeof(Views.Pages.ExchangerPage)
+                },
+                new NavigationViewItem()
+                {
+                    Content = "Honor List",
+                    Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Views/Pages/Home/Icons/Icon_7.png", 25, 25),
+                    TargetPageType = typeof(Views.Pages.Honor.HonorPage)
                 },
                 new NavigationViewItem()
                 {

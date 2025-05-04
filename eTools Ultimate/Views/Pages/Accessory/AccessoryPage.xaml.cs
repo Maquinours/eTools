@@ -10,10 +10,11 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using Wpf.Ui.Abstractions.Controls;
-
+using Wpf.Ui.Controls;
 using eTools_Ultimate.ViewModels.Pages;
+using eTools_Ultimate.Models.Accessory;
 
-namespace eTools_Ultimate.Views.Pages
+namespace eTools_Ultimate.Views.Pages.Accessory
 {
     // Konverter für englische Zahlenformatierung mit Komma als Tausendertrennzeichen
     public class EnglishNumberConverter : IValueConverter
@@ -49,6 +50,7 @@ namespace eTools_Ultimate.Views.Pages
 
     public partial class AccessoryPage : Page, INavigableView<DataViewModel>
     {
+        // Wir verzichten auf die direkte DialogHost-Referenz, da sie nicht benötigt wird
         public DataViewModel ViewModel { get; }
         
         // Collection of attribute types for dropdown selectors
@@ -176,21 +178,44 @@ namespace eTools_Ultimate.Views.Pages
         {
             if (parameter is AccessoryLevelData item)
             {
-                // Show confirmation dialog using standard MessageBox
-                var result = System.Windows.MessageBoxResult.None;
-                
-                // Verwende Standard-MessageBox, da WPF UI möglicherweise nicht richtig referenziert ist
-                result = System.Windows.MessageBox.Show(
-                    "Are you sure you want to delete this level?",
-                    "Delete Level",
-                    System.Windows.MessageBoxButton.YesNo,
-                    System.Windows.MessageBoxImage.Warning
-                );
-                
-                if (result == System.Windows.MessageBoxResult.Yes)
+                try
                 {
-                    // Delete logic - remove the level from the collection
-                    AccessoryLevels.Remove(item);
+                    // WPF UI ContentDialog verwenden anstelle von Standard-MessageBox
+                    var contentDialog = new ContentDialog
+                    {
+                        Title = "Delete Level",
+                        Content = "Are you sure you want to delete this level?",
+                        PrimaryButtonText = "Delete",
+                        CloseButtonText = "Cancel",
+                        DefaultButton = ContentDialogButton.Close
+                    };
+
+                    // Dialog anzeigen
+                    contentDialog.DialogHeight = 160;
+                    contentDialog.DialogWidth = 400;
+                    
+                    var result = await contentDialog.ShowAsync();
+                    
+                    if (result == ContentDialogResult.Primary)
+                    {
+                        // Delete logic - remove the level from the collection
+                        AccessoryLevels.Remove(item);
+                    }
+                }
+                catch (Exception)
+                {
+                    // Fallback zu standardem MessageBox wenn etwas schief geht
+                    var result = System.Windows.MessageBox.Show(
+                        "Are you sure you want to delete this level?",
+                        "Delete Level",
+                        System.Windows.MessageBoxButton.YesNo,
+                        System.Windows.MessageBoxImage.Warning
+                    );
+                    
+                    if (result == System.Windows.MessageBoxResult.Yes)
+                    {
+                        AccessoryLevels.Remove(item);
+                    }
                 }
             }
         }
@@ -202,7 +227,7 @@ namespace eTools_Ultimate.Views.Pages
                 // Check if we've reached the maximum number of attributes
                 if (levelData.Attributes.Count >= MaxAttributesPerLevel)
                 {
-                    System.Windows.MessageBox.Show($"Maximum number of attributes ({MaxAttributesPerLevel}) reached for this level.");
+                    ShowInfoDialog("Maximum Attributes", $"Maximum number of attributes ({MaxAttributesPerLevel}) reached for this level.");
                     return;
                 }
                 
@@ -227,7 +252,7 @@ namespace eTools_Ultimate.Views.Pages
                         // Don't allow deletion if it's the only attribute or if it's marked as not deletable
                         if (levelData.Attributes.Count <= 1 || !attribute.CanDelete)
                         {
-                            System.Windows.MessageBox.Show("This attribute cannot be deleted.");
+                            ShowInfoDialog("Cannot Delete", "This attribute cannot be deleted.");
                             return;
                         }
                         
@@ -310,6 +335,35 @@ namespace eTools_Ultimate.Views.Pages
             }
         }
 
+        // Helfer-Methode für Info-Dialoge
+        private async void ShowInfoDialog(string title, string message)
+        {
+            try
+            {
+                var contentDialog = new ContentDialog
+                {
+                    Title = title,
+                    Content = message,
+                    CloseButtonText = "OK",
+                    DefaultButton = ContentDialogButton.Close
+                };
+
+                contentDialog.DialogHeight = 140;
+                contentDialog.DialogWidth = 350;
+                await contentDialog.ShowAsync();
+            }
+            catch (Exception)
+            {
+                // Fallback zu standardem MessageBox wenn etwas schief geht
+                System.Windows.MessageBox.Show(
+                    message, 
+                    title, 
+                    System.Windows.MessageBoxButton.OK, 
+                    System.Windows.MessageBoxImage.Information
+                );
+            }
+        }
+
         // TextChanged-Event für die TextBox
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -319,104 +373,6 @@ namespace eTools_Ultimate.Views.Pages
                 // Speichere den Text für die spätere Verarbeitung
                 _tempTextValues[attribute] = textBox.Text;
             }
-        }
-    }
-
-    public class AccessoryLevelData : INotifyPropertyChanged
-    {
-        private int _level;
-        
-        public int Level 
-        { 
-            get => _level; 
-            set
-            {
-                if (_level != value)
-                {
-                    _level = value;
-                    OnPropertyChanged();
-                    OnPropertyChanged(nameof(LevelDisplay));
-                }
-            }
-        }
-        
-        // Collection of attributes for this level
-        public ObservableCollection<AttributeData> Attributes { get; } = new ObservableCollection<AttributeData>();
-        
-        // Display properties
-        public string LevelDisplay => Level.ToString();
-        
-        // INotifyPropertyChanged implementation
-        public event PropertyChangedEventHandler PropertyChanged;
-        
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-    
-    public class AttributeData : INotifyPropertyChanged
-    {
-        private string _attributeName;
-        private int _attributeValue;
-        private bool _canDelete = true;
-        
-        public string AttributeName 
-        { 
-            get => _attributeName; 
-            set
-            {
-                if (_attributeName != value)
-                {
-                    _attributeName = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        
-        public int AttributeValue 
-        { 
-            get => _attributeValue; 
-            set
-            {
-                if (_attributeValue != value)
-                {
-                    _attributeValue = value;
-                    OnPropertyChanged();
-                    OnPropertyChanged(nameof(FormattedValue));
-                }
-            }
-        }
-        
-        // Formattierter Wert mit englischen Tausendertrennzeichen
-        public string FormattedValue
-        {
-            get
-            {
-                NumberFormatInfo nfi = new CultureInfo("en-US").NumberFormat;
-                return AttributeValue.ToString("N0", nfi);
-            }
-        }
-        
-        public bool CanDelete 
-        { 
-            get => _canDelete; 
-            set
-            {
-                if (_canDelete != value)
-                {
-                    _canDelete = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-        
-        // INotifyPropertyChanged implementation
-        public event PropertyChangedEventHandler PropertyChanged;
-        
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 
@@ -440,4 +396,4 @@ namespace eTools_Ultimate.Views.Pages
             remove { CommandManager.RequerySuggested -= value; }
         }
     }
-} 
+}
