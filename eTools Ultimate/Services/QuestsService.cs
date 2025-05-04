@@ -15,19 +15,19 @@ namespace eTools_Ultimate.Services
         private static readonly Lazy<ExchangesService> _instance = new(() => new());
         public static ExchangesService Instance => _instance.Value;
 
-        private readonly ObservableCollection<Quest> _quests = [];
-        public ObservableCollection<Quest> Quests => this._quests;
+        //private readonly ObservableCollection<Quest> _quests = [];
+        //public ObservableCollection<Quest> Quests => this._quests;
 
-        private void ClearExchanges()
-        {
-            foreach (Quest quest in this.Quests)
-                quest.Dispose();
-            this.Quests.Clear();
-        }
+        //private void ClearExchanges()
+        //{
+        //    foreach (Quest quest in this.Quests)
+        //        quest.Dispose();
+        //    this.Quests.Clear();
+        //}
 
         public void Load()
         {
-            this.ClearExchanges();
+            //this.ClearExchanges();
 
             Settings settings = Settings.Instance;
             StringsService stringsService = StringsService.Instance;
