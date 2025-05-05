@@ -186,7 +186,7 @@
                     </StackPanel>
                 </ui:Card>
 
-                <!-- Systemanforderungen -->
+                <!-- System Requirements -->
                 <ui:Card Margin="0,0,0,15" Padding="15">
                     <StackPanel>
                         <TextBlock 

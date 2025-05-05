@@ -8,12 +8,10 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:vm="clr-namespace:eTools_Ultimate.ViewModels.Pages"
     Title="ResourcePath"
-    d:DataContext="{d:DesignInstance vm:ResourcePathViewModel,
+    d:DataContext="{d:DesignInstance Type=vm:ResourcePathViewModel,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="1000"
     d:DesignWidth="800"
-    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d">
@@ -28,13 +26,8 @@
                      HorizontalScrollBarVisibility="Disabled" 
                      Padding="0,0,18,0">
             <StackPanel Margin="12,8,12,20">
-                <!-- Tooltip for main settings -->
-                <ui:ToolTip Content="Main Settings" Title="Settings">
-                    <ui:SymbolIcon
-                        FontSize="14"
-                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                        Symbol="Info24" />
-                </ui:ToolTip>
+                <!-- Info for main settings -->
+                <ui:InfoBar Title="Settings" Message="Main Settings"/>
 
                 <!-- Grid with 2x4 layout for main settings -->
                 <Grid Margin="0,10,0,12">
@@ -113,16 +106,11 @@
 
                 <!-- Advanced Settings Sections -->
                 <StackPanel Visibility="{Binding IsAdvancedSettingsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <!-- Tooltip for advanced settings -->
-                    <ui:ToolTip Content="Advanced Settings" Title="Settings">
-                        <ui:SymbolIcon
-                            FontSize="14"
-                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                            Symbol="Info24" />
-                    </ui:ToolTip>
+                    <!-- Info for advanced settings -->
+                    <ui:InfoBar Title="Settings" Message="Advanced Settings"/>
 
                     <!-- Custom Section -->
-                    <ui:TextBlock Text="Custom" FontSize="16" Margin="0,10,0,0" FontWeight="Bold"/>
+                    <TextBlock Text="Custom" FontSize="16" Margin="0,10,0,0" FontWeight="Bold"/>
 
                     <!-- Custom - Basic Files -->
                     <Grid Margin="0,10,0,12">
@@ -249,7 +237,7 @@
                     </Grid>
 
                     <!-- Item Section -->
-                    <ui:TextBlock Text="Item" FontSize="16" Margin="0,10,0,0" FontWeight="Bold"/>
+                    <TextBlock Text="Item" FontSize="16" Margin="0,10,0,0" FontWeight="Bold"/>
 
                     <Grid Margin="0,10,0,12">
                         <Grid.ColumnDefinitions>
@@ -347,7 +335,7 @@
                     </Grid>
 
                     <!-- Mover Section -->
-                    <ui:TextBlock Text="Mover" FontSize="16" Margin="0,10,0,0" FontWeight="Bold"/>
+                    <TextBlock Text="Mover" FontSize="16" Margin="0,10,0,0" FontWeight="Bold"/>
 
                     <Grid Margin="0,10,0,12">
                         <Grid.ColumnDefinitions>
@@ -457,7 +445,7 @@
                     </Grid>
 
                     <!-- Skill Section -->
-                    <ui:TextBlock Text="Skill" FontSize="16" Margin="0,10,0,0" FontWeight="Bold"/>
+                    <TextBlock Text="Skill" FontSize="16" Margin="0,10,0,0" FontWeight="Bold"/>
 
                     <Grid Margin="0,10,0,12">
                         <Grid.ColumnDefinitions>

@@ -26,7 +26,7 @@ namespace eTools_Ultimate.Views.Pages
 
         private void SkillsListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            // Die Logik zur Verarbeitung der Auswahländerung in der ListView
+            // Logic for processing selection changes in the ListView
         }
 
         // Event handler for the Add button
@@ -42,8 +42,8 @@ namespace eTools_Ultimate.Views.Pages
                 
                 if (result == System.Windows.MessageBoxResult.OK)
                 {
-                    // Hier könnte die Logik zum Hinzufügen eines neuen Skills implementiert werden
-                    Console.WriteLine("Skill wird hinzugefügt");
+                    // Here you could implement the logic for adding a new skill
+                    Console.WriteLine("Skill is being added");
                 }
             }
             catch(Exception ex)
@@ -54,7 +54,7 @@ namespace eTools_Ultimate.Views.Pages
                     System.Windows.MessageBoxButton.OK,
                     System.Windows.MessageBoxImage.Error);
                 
-                Console.WriteLine($"Fehler: {ex.Message}\n{ex.StackTrace}");
+                Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
             }
         }
         
@@ -71,8 +71,8 @@ namespace eTools_Ultimate.Views.Pages
                 
                 if (result == System.Windows.MessageBoxResult.Yes)
                 {
-                    // Hier könnte die Logik zum Löschen des ausgewählten Skills implementiert werden
-                    Console.WriteLine("Skill wird gelöscht");
+                    // Here you could implement the logic for deleting the selected skill
+                    Console.WriteLine("Skill is being deleted");
                 }
             }
             catch(Exception ex)
@@ -83,7 +83,7 @@ namespace eTools_Ultimate.Views.Pages
                     System.Windows.MessageBoxButton.OK,
                     System.Windows.MessageBoxImage.Error);
                 
-                Console.WriteLine($"Fehler: {ex.Message}\n{ex.StackTrace}");
+                Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
             }
         }
     }

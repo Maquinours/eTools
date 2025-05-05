@@ -215,7 +215,7 @@
                 </Image.Effect>
             </Image>
 
-            <!-- Changelog-Dialog (ausgeblendet) -->
+            <!-- Changelog-Dialog (hidden) -->
             <Frame x:Name="ChangelogFrame" 
                    Visibility="Collapsed"
                    Grid.RowSpan="3" />
