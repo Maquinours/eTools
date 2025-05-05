@@ -72,7 +72,7 @@ namespace eTools_Ultimate
                 services.AddSingleton<CharactersViewModel>();
                 services.AddSingleton<CouplesViewModel>();
                 services.AddSingleton<HonorViewModel>();
-                services.AddSingleton<MotionViewModel>();
+                services.AddSingleton<MotionsViewModel>();
                 services.AddSingleton<HonorsViewModel>();
 
                 // Settings pages

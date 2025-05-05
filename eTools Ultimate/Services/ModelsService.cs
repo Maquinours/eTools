@@ -117,7 +117,7 @@ namespace eTools_Ultimate.Services
                         {
                             while (true)
                             {
-                                Motion motion = new Motion();
+                                ModelMotion motion = new ModelMotion();
                                 if (scanner.EndOfStream)
                                     throw new IncorrectlyFormattedFileException(filePath);
                                 motion.SzMotion = scanner.GetToken(); // motion name or }

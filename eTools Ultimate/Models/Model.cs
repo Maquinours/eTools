@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Models
 {
-    public class Motion : INotifyPropertyChanged
+    public class ModelMotion : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -77,7 +77,7 @@ namespace eTools_Ultimate.Models
         private int _bShadow;
         private string _nTextureEx;
         private int _bRenderFlag;
-        private List<Motion> _motions;
+        private List<ModelMotion> _motions;
 
         public int DwType { get => this._dwType; set { if (this.DwType != value) { this._dwType = value; this.NotifyPropertyChanged(); } } }
         public string DwIndex { get => this._dwIndex; set { if (this.DwIndex != value) { this._dwIndex = value; this.NotifyPropertyChanged(); } } }
@@ -93,7 +93,7 @@ namespace eTools_Ultimate.Models
         public string NTextureEx { get => this._nTextureEx; set { if (this.NTextureEx != value) { this._nTextureEx = value; this.NotifyPropertyChanged(); } } }
         public int BRenderFlag { get => this._bRenderFlag; set { if (this.BRenderFlag != value) { this._bRenderFlag = value; this.NotifyPropertyChanged(); } } }
 
-        public List<Motion> Motions { get => this._motions; private set { if (this.Motions != value) { this._motions = value; this.NotifyPropertyChanged(); } } }
+        public List<ModelMotion> Motions { get => this._motions; private set { if (this.Motions != value) { this._motions = value; this.NotifyPropertyChanged(); } } }
 
         // TODO: maybe readd it
         //public ModelBrace Brace // Maybe we should watch for braces changes to handle refresh problems, but I'm not sure if it's necessary for now.
@@ -104,7 +104,7 @@ namespace eTools_Ultimate.Models
 
         public ModelElem()
         {
-            this.Motions = new List<Motion>();
+            this.Motions = new List<ModelMotion>();
         }
     }
 }

@@ -1,171 +1,173 @@
+using DDSImageParser;
+using eTools_Ultimate.Services;
 using System;
 using System.ComponentModel;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace eTools_Ultimate.Models.Motions
+namespace eTools_Ultimate.Models
 {
-    public class Motion : INotifyPropertyChanged
+    public class Motion : INotifyPropertyChanged, IDisposable
     {
-        private int _motionId;
-        private string _motionIdKey;
-        private string _motionIcon;
-        private string _playIdKey;
-        private string _inGameName;
-        private string _description;
-        private BitmapImage _motionIconImage;
+        private int _nVer;
+        private string _dwId;
+        private string _dwMotion;
+        private string _szIconName;
+        private int _dwPlay;
+        private string _szName;
+        private string _szDesc;
 
-        /// <summary>
-        /// Unique identifier for the motion
-        /// </summary>
-        public int MotionId
-        {
-            get => _motionId;
-            set
-            {
-                if (_motionId != value)
-                {
-                    _motionId = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        /// <summary>
-        /// Internal key identifier for the motion
-        /// </summary>
-        public string MotionIdKey
-        {
-            get => _motionIdKey;
-            set
-            {
-                if (_motionIdKey != value)
-                {
-                    _motionIdKey = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Path to the icon image
-        /// </summary>
-        public string MotionIcon
-        {
-            get => _motionIcon;
-            set
-            {
-                if (_motionIcon != value)
-                {
-                    _motionIcon = value;
-                    OnPropertyChanged();
-                    LoadIconImage();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Key used to trigger the motion animation
-        /// </summary>
-        public string PlayIdKey
-        {
-            get => _playIdKey;
-            set
-            {
-                if (_playIdKey != value)
-                {
-                    _playIdKey = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Name displayed in game
-        /// </summary>
-        public string InGameName
-        {
-            get => _inGameName;
-            set
-            {
-                if (_inGameName != value)
-                {
-                    _inGameName = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Description of the motion
-        /// </summary>
-        public string Description
-        {
-            get => _description;
-            set
-            {
-                if (_description != value)
-                {
-                    _description = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Image for the motion icon
-        /// </summary>
-        public BitmapImage MotionIconImage
-        {
-            get => _motionIconImage;
-            set
-            {
-                if (_motionIconImage != value)
-                {
-                    _motionIconImage = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Loads the icon image from the file path
-        /// </summary>
-        private void LoadIconImage()
-        {
-            if (string.IsNullOrEmpty(MotionIcon))
-                return;
-
-            try
-            {
-                if (File.Exists(MotionIcon))
-                {
-                    BitmapImage bitmap = new BitmapImage();
-                    bitmap.BeginInit();
-                    bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmap.UriSource = new Uri(MotionIcon, UriKind.Absolute);
-                    bitmap.EndInit();
-                    MotionIconImage = bitmap;
-                }
-                else
-                {
-                    // Default placeholder image could be set here
-                    MotionIconImage = null;
-                }
-            }
-            catch (Exception)
-            {
-                // Log exception
-                MotionIconImage = null;
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public int NVer
+        {
+            get => this._nVer;
+            set
+            {
+                if (this.NVer != value)
+                {
+                    this._nVer = value;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DwId
+        {
+            get => this._dwId;
+            set
+            {
+                if(this.DwId != value)
+                {
+                    this._dwId = value;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DwMotion
+        {
+            get => this._dwMotion;
+            set
+            {
+                if (this.DwMotion != value)
+                {
+                    this._dwMotion = value;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string SzIconName
+        {
+            get => this._szIconName;
+            set
+            {
+                if (this.SzIconName != value)
+                {
+                    this._szIconName = value;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public int DwPlay
+        {
+            get => this._dwPlay;
+            set
+            {
+                if (this.DwPlay != value)
+                {
+                    this._dwPlay = value;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string SzName
+        {
+            get => this._szName;
+            set
+            {
+                if (this.SzName != value)
+                {
+                    this._szName = value;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string SzDesc
+        {
+            get => this._szDesc;
+            set
+            {
+                if (this.SzDesc != value)
+                {
+                    this._szDesc = value;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public string Name
+        {
+            get => StringsService.Instance.GetString(this.SzName);
+            set => StringsService.Instance.ChangeStringValue(this.SzName, value);
+        }
+
+        public string Description
+        {
+            get => StringsService.Instance.GetString(this.SzDesc);
+            set => StringsService.Instance.ChangeStringValue(this.SzDesc, value);
+        }
+
+        public ImageSource? Icon
+        {
+            get
+            {
+                string filePath = $"{Settings.Instance.IconsFolderPath ?? Settings.Instance.DefaultIconsFolderPath}{this.SzIconName}";
+                if (!File.Exists(filePath))
+                {
+                    return null;
+                    //using (var ms = new MemoryStream(ItemsEditor.Resources.Images.NotFoundImage))
+                    //{
+                    //    return Image.FromStream(ms);
+                    //}
+                }
+                var bitmap = new DDSImage(File.OpenRead(filePath)).BitmapImage;
+
+                // Bitmap to bitmap image
+                using (var memory = new MemoryStream())
+                {
+                    bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+                    memory.Position = 0;
+
+                    var bitmapImage = new BitmapImage();
+                    bitmapImage.BeginInit();
+                    bitmapImage.StreamSource = memory;
+                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                    bitmapImage.EndInit();
+                    bitmapImage.Freeze();
+                    return bitmapImage;
+                }
+            }
+        }
+
+        public Motion(int nVer, string dwId, string dwMotion, string szIconName, int dwPlay, string szName, string szDesc)
+        {
+            this._nVer = nVer;
+            this._dwId = dwId;
+            this._dwMotion = dwMotion;
+            this._szIconName = szIconName;
+            this._dwPlay = dwPlay;
+            this._szName = szName;
+            this._szDesc = szDesc;
+        }
+
+        public void Dispose()
+        {
+
         }
     }
 } 

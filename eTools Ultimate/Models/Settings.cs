@@ -60,6 +60,10 @@ namespace eTools_Ultimate.Models
         private string? _honorsPropFilePath;
         private string? _honorsTxtFilePath;
 
+        // Motions settings
+        private string? _motionsPropFilePath;
+        private string? _motionsTxtFilePath;
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -575,5 +579,43 @@ namespace eTools_Ultimate.Models
             }
         }
         public string DefaultHonorsTxtFilePath => $"{this.ResourcesFolderPath}honorList.txt.txt";
+
+        public string? MotionsPropFilePath
+        {
+            get => this._motionsPropFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultMotionsPropFilePath)
+                    val = null;
+                if (this.MotionsPropFilePath != val)
+                {
+                    this._motionsPropFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultMotionsPropFilePath => $"{this.ResourcesFolderPath}propMotion.txt";
+
+        public string? MotionsTxtFilePath
+        {
+            get => this._motionsTxtFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultMotionsTxtFilePath)
+                    val = null;
+                if (this.MotionsTxtFilePath != val)
+                {
+                    this._motionsTxtFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultMotionsTxtFilePath => $"{this.ResourcesFolderPath}propMotion.txt.txt";
     }
 }

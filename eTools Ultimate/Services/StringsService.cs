@@ -32,6 +32,7 @@ namespace eTools_Ultimate.Services
                 settings.TextsTxtFilePath ?? settings.DefaultTextsTxtFilePath,
                 settings.CharactersStringsFilePath ?? settings.DefaultCharactersStringsFilePath,
                 settings.HonorsTxtFilePath ?? settings.DefaultHonorsTxtFilePath,
+                settings.MotionsTxtFilePath ?? settings.DefaultMotionsTxtFilePath
                 ];
 
             foreach (string filePath in filesList)
