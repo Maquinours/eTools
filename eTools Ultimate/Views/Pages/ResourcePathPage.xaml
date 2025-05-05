@@ -1,8 +1,0 @@
-<ui:ToolTip Content="Main Settings" Title="Settings">
-                        <ui:SymbolIcon
-                            FontSize="14"
-                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                            Symbol="Info24" />
-                    </ui:ToolTip>
-
-                    <!-- Grid with 2x4 layout for main settings --> 

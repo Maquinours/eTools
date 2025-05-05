@@ -29,7 +29,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 Height = height
             };
             
-            // Set rendering options for high quality
+            // Setze die Renderoptionen für hohe Qualität
             RenderOptions.SetBitmapScalingMode(image, BitmapScalingMode.HighQuality);
             
             return image;

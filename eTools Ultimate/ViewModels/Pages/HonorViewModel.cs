@@ -55,7 +55,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (_selectedHonorItem != null)
             {
-                // Create a copy of the selected item for editing
+                // Erstelle eine Kopie des ausgewählten Items für die Bearbeitung
                 EditableHonorItem = new HonorItem
                 {
                     Index = _selectedHonorItem.Index,

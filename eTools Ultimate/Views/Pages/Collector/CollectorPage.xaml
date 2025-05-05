@@ -91,7 +91,7 @@
                                 Icon="{ui:SymbolIcon Add24}"/>
                         </Grid>
                         
-                        <!-- DataGrid for Items -->
+                        <!-- DataGrid für Items -->
                         <ui:DataGrid 
                             Grid.Row="2"
                             ItemsSource="{Binding CollectingItems}" 
