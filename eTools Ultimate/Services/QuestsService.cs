@@ -51,7 +51,7 @@ namespace eTools_Ultimate.Services
                     int nBlock = 1;
                     while (nBlock != 0)
                     {
-                        switch(scanner.GetToken())
+                        switch (scanner.GetToken())
                         {
                             case "{":
                                 nBlock++;
@@ -92,7 +92,7 @@ namespace eTools_Ultimate.Services
                                     scanner.GetToken(); // (
                                     string characterKey = scanner.GetToken();
                                     scanner.GetToken(); // ) or ,
-                                    if(scanner.Token == ",")
+                                    if (scanner.Token == ",")
                                     {
                                         string nLang = scanner.GetToken();
                                         scanner.GetToken(); // ) or ,
@@ -264,7 +264,7 @@ namespace eTools_Ultimate.Services
                                     int beginSetAddItemNum = scanner.GetNumber();
                                     break;
                                 }
-                                // VER >= 9
+                            // VER >= 9
                             case "SetBeginCondPetExp":
                                 {
                                     scanner.GetToken(); // (
@@ -284,7 +284,7 @@ namespace eTools_Ultimate.Services
                                     int beginCondTutorialState = scanner.GetNumber();
                                     break;
                                 }
-                                // VER >= 15
+                            // VER >= 15
                             case "SetBeginCondTSP":
                                 {
                                     scanner.GetToken(); // (
@@ -343,7 +343,7 @@ namespace eTools_Ultimate.Services
                                     int endCondSkillLevel = scanner.GetNumber();
                                     break;
                                 }
-                                // VER >= 8
+                            // VER >= 8
                             case "SetEndCondLevel":
                                 {
                                     scanner.GetToken(); // (
@@ -352,7 +352,7 @@ namespace eTools_Ultimate.Services
                                     int endCondLevelMax = scanner.GetNumber();
                                     break;
                                 }
-                                // VER >= 10
+                            // VER >= 10
                             case "SetEndCondExpPercent":
                                 {
                                     scanner.GetToken(); // (
@@ -400,7 +400,7 @@ namespace eTools_Ultimate.Services
                                     string itemIdx = scanner.GetToken();
                                     scanner.GetToken(); // ,
                                     int itemNum = scanner.GetNumber();
-                                    if(scanner.GetToken() == ",")
+                                    if (scanner.GetToken() == ",")
                                     {
                                         float goalPositionX = scanner.GetFloat();
                                         scanner.GetToken(); // ,
@@ -418,7 +418,7 @@ namespace eTools_Ultimate.Services
                                     string moverIdx = scanner.GetToken();
                                     scanner.GetToken(); // ,
                                     string moverNum = scanner.GetToken();
-                                    if(scanner.GetToken() == ",")
+                                    if (scanner.GetToken() == ",")
                                     {
                                         float goalPositionX = scanner.GetFloat();
                                         scanner.GetToken(); // ,
@@ -441,7 +441,7 @@ namespace eTools_Ultimate.Services
                                     scanner.GetToken(); // ,
                                     int bottom = scanner.GetNumber();
                                     // TODO: if VER >= 15
-                                    if(scanner.GetToken() == ",")
+                                    if (scanner.GetToken() == ",")
                                     {
                                         string patrolDestinationId = scanner.GetToken();
                                         scanner.GetToken(); // ,
@@ -504,7 +504,7 @@ namespace eTools_Ultimate.Services
                             // VER >= 9
                             case "SetEndCondPetLevel":
                                 {
-                                    scanner .GetToken(); // (
+                                    scanner.GetToken(); // (
                                     int endCondPetLevel = scanner.GetNumber();
                                     break;
                                 }
@@ -516,7 +516,7 @@ namespace eTools_Ultimate.Services
                                 }
                             case "SetEndCondDisguise":
                                 {
-                                    scanner .GetToken(); // (
+                                    scanner.GetToken(); // (
                                     string endCondDisguiseMoverIdx = scanner.GetToken();
                                     break;
                                 }
@@ -528,7 +528,313 @@ namespace eTools_Ultimate.Services
                                     int param = scanner.GetNumber(); // Not sure it is param
                                     break;
                                 }
-                                // TODO : add other cases
+                            case "SetEndCondTSP":
+                                {
+                                    scanner.GetToken(); // (
+                                    int endCondTsp = scanner.GetNumber();
+                                    break;
+                                }
+                            case "SetDlgRewardItem":
+                                {
+                                    scanner.GetToken(); // (
+                                    int idx = scanner.GetNumber();
+                                    scanner.GetToken(); // ,
+                                    string itemIdx = scanner.GetToken();
+                                    scanner.GetToken(); // ,
+                                    int itemNum = scanner.GetNumber();
+                                    break;
+                                }
+                            case "SetEndRewardItem":
+                                {
+                                    scanner.GetToken(); // (
+                                    string sex = scanner.GetToken();
+                                    scanner.GetToken(); // ,
+                                    int type = scanner.GetNumber();
+                                    scanner.GetToken(); // ,
+                                    string jobOrItem = scanner.GetToken();
+                                    scanner.GetToken(); // ,
+                                    string itemIdx = scanner.GetToken();
+                                    scanner.GetToken(); // ,
+                                    int itemNum = scanner.GetNumber();
+
+                                    int byFlag;
+                                    if (scanner.GetToken() == ",")
+                                        byFlag = scanner.GetNumber();
+
+                                    break;
+                                }
+                            case "SetEndRewardItemWithAbilityOption":
+                                {
+                                    scanner.GetToken(); // (
+                                    string sex = scanner.GetToken();
+                                    scanner.GetToken(); // ,
+                                    int type = scanner.GetNumber();
+                                    scanner.GetToken(); // ,
+                                    string jobOrItem = scanner.GetToken();
+                                    scanner.GetToken(); // ,
+                                    string itemIdx = scanner.GetToken();
+                                    scanner.GetToken(); // ,
+                                    int itemNum = scanner.GetNumber();
+                                    scanner.GetToken(); // ,
+                                    int abilityOption = scanner.GetNumber();
+
+                                    int byFlag;
+                                    if (scanner.GetToken() == ",")
+                                        byFlag = scanner.GetNumber();
+
+                                    break;
+                                }
+                            case "SetEndRewardGold":
+                                {
+                                    scanner.GetToken(); // (
+                                    int endRewardGoldMin = scanner.GetNumber();
+                                    scanner.GetToken(); // ,
+                                    int endRewardGoldMax = scanner.GetNumber();
+                                    break;
+                                }
+                            case "SetEndRewardPetLevelup":
+                                {
+                                    bool bEndRewardPetLevelup = true;
+                                    break;
+                                }
+                            case "SetEndRewardExp":
+                                {
+                                    scanner.GetToken(); // (
+                                    int endRewardExpMin = scanner.GetNumber();
+                                    scanner.GetToken(); // ,
+                                    int endRewardExpMax = scanner.GetNumber();
+                                    break;
+                                }
+                            case "SetEndRewardSkillPoint":
+                                {
+                                    scanner.GetToken(); // (
+                                    int endRewardSkillPoint = scanner.GetNumber();
+                                    break;
+                                }
+                            // VER >= 8
+                            case "SetEndRewardPKValue":
+                                {
+                                    scanner.GetToken(); // (
+                                    int endRewardPKValueMin = scanner.GetNumber();
+                                    scanner.GetToken(); // ,
+                                    int endRewardPKValueMax = scanner.GetNumber();
+                                    break;
+                                }
+                            case "SetEndRewardTeleport":
+                                {
+                                    scanner.GetToken(); // (
+                                    string endRewardTeleportWorld = scanner.GetToken();
+                                    scanner.GetToken(); // ,
+                                    int endRewardTeleportPosX = scanner.GetNumber();
+                                    scanner.GetToken(); // ,
+                                    int endRewardTeleportPosY = scanner.GetNumber();
+                                    scanner.GetToken(); // ,
+                                    int endRewardTeleportPosZ = scanner.GetNumber();
+                                    break;
+                                }
+                            case "SetEndRewardHide":
+                                {
+                                    scanner.GetToken(); // (
+                                    bool endRewardHide = scanner.GetNumber() != 0;
+                                    break;
+                                }
+                            case "SetEndRemoveQuest":
+                                {
+                                    scanner.GetToken(); // (
+                                    List<string> removeQuests = new();
+                                    do
+                                    {
+                                        removeQuests.Add(scanner.GetToken());
+                                        scanner.GetToken();
+                                        if (scanner.Token == ")") break;
+                                        if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+                                    } while (true);
+                                    break;
+                                }
+                            case "SetEndRemoveItem":
+                                {
+                                    scanner.GetToken(); // (
+                                    int nIdx = scanner.GetNumber();
+                                    scanner.GetToken(); // ,
+                                    string itemIdx = scanner.GetToken();
+                                    scanner.GetToken(); // ,
+                                    int itemNum = scanner.GetNumber();
+                                    break;
+                                }
+                            case "SetEndRemoveGold":
+                                {
+                                    scanner.GetToken(); // (
+                                    int endRemoveGold = scanner.GetNumber();
+                                    break;
+                                }
+                            case "SetRepeat":
+                                {
+                                    scanner.GetToken(); // (
+                                    bool bRepeat = scanner.GetNumber() != 0;
+                                    break;
+                                }
+                            case "QuestItem":
+                                {
+                                    scanner.GetToken(); // (
+                                    string moverIdx = scanner.GetToken();
+                                    scanner.GetToken(); // ,
+                                    string itemIdx = scanner.GetToken();
+                                    scanner.GetToken(); // ,
+                                    int probability = scanner.GetNumber();
+                                    scanner.GetToken(); // ,
+                                    int number = scanner.GetNumber();
+                                    scanner.GetToken(); // )
+                                    break;
+                                }
+                            case "SetEndRewardTSP":
+                                {
+                                    scanner.GetToken(); // (
+                                    int endRewardTSP = scanner.GetNumber();
+                                    break;
+                                }
+                            case "SetEndRemoveTSP":
+                                {
+                                    scanner.GetToken(); // (
+                                    int endRemoveTSP = scanner.GetNumber();
+                                    break;
+                                }
+                            case "SetDialog":
+                                {
+                                    scanner.GetToken(); // (
+                                    string num = scanner.GetToken(); // key
+                                    scanner.GetToken(); // ,
+                                    string str = scanner.GetToken();
+                                    scanner.GetToken(); // )
+                                    scanner.GetToken(); // ;
+                                    break;
+                                }
+                            case "SetPatrolZoneName":
+                                {
+                                    scanner.GetToken(); // (
+                                    string patrolZoneName = scanner.GetToken();
+                                    scanner.GetToken(); // )
+                                    scanner.GetToken(); // ;
+                                    break;
+                                }
+                            case "SetHeadQuest":
+                                {
+                                    scanner.GetToken(); // (
+                                    string headQuest = scanner.GetToken();
+                                    if (!Int32.TryParse(headQuest, out int headQuestNumber))
+                                        headQuestNumber = definesService.Defines[headQuest];
+
+                                    if (settings.ResourcesVersion >= 15 && headQuestNumber >= 1800 && headQuestNumber <= 1999)
+                                    {
+                                        switch (headQuestNumber)
+                                        {
+                                            case 1992:
+                                                {
+                                                    headQuest = "QUEST_KIND_EVENT";
+                                                    break;
+                                                }
+                                            case 1993:
+                                            case 1994:
+                                            case 1995:
+                                            case 1997:
+                                            case 1998:
+                                                {
+                                                    headQuest = "QUEST_KIND_NORMAL";
+                                                    break;
+                                                }
+                                            case 1996:
+                                                {
+                                                    headQuest = "QUEST_KIND_SCENARIO";
+                                                    break;
+                                                }
+                                            case 1999:
+                                                {
+                                                    headQuest = "QUEST_KIND_REQUEST";
+                                                    break;
+                                                }
+                                            default:
+                                                {
+                                                    headQuest = "QUEST_KIND_SCENARIO";
+                                                    break;
+                                                }
+                                        }
+                                    }
+                                    else
+                                        headQuest = definesService.Defines.Where(x => x.Key.StartsWith("QUEST_KIND_") && x.Value == headQuestNumber).First().Key;
+
+
+                                    break;
+                                }
+                            case "SetQuestType":
+                                {
+                                    scanner.GetToken(); // (
+                                    string questType = scanner.GetToken();
+                                    if (Int32.TryParse(questType, out int questTypeNumber))
+                                        questType = definesService.Defines.Where(x => x.Key.StartsWith("QT_") && x.Value == questTypeNumber).First().Key;
+                                    break;
+                                }
+                            case "SetRemove":
+                                {
+                                    scanner.GetToken(); // (
+                                    string token = scanner.GetToken();
+                                    if (!Int32.TryParse(token, out int value))
+                                        value = definesService.Defines[token];
+                                    bool noRemove = !(value != 0);
+                                    break;
+                                }
+                            case "state":
+                                {
+                                    int nState = scanner.GetNumber();
+                                    while (true)
+                                    {
+                                        scanner.GetToken(); // key or anything
+
+                                        if (scanner.Token[0] == '}') break;
+                                        if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                        switch (scanner.Token)
+                                        {
+                                            case "QuestItem":
+                                                {
+                                                    scanner.GetToken(); // (
+                                                    string dwMoverIdx = scanner.GetToken();
+                                                    scanner.GetToken(); // ,
+                                                    string dwItemIdx = scanner.GetToken();
+                                                    scanner.GetToken(); // ,
+                                                    int dwProbability = scanner.GetNumber();
+                                                    scanner.GetToken(); // ,
+                                                    int dwNumber = scanner.GetNumber();
+                                                    scanner.GetToken(); // )
+                                                    break;
+                                                }
+                                            case "SetDesc":
+                                                {
+                                                    scanner.GetToken(); // (
+                                                    string szDesc = scanner.GetToken();
+                                                    scanner.GetToken(); // )
+                                                    scanner.GetToken(); // ;
+                                                    break;
+                                                }
+                                            case "SetCond":
+                                                {
+                                                    scanner.GetToken(); // (
+                                                    scanner.GetToken(); // IDS (not used)
+                                                    scanner.GetToken(); // )
+                                                    scanner.GetToken(); // ;
+                                                    break;
+                                                }
+                                            case "SetStatus":
+                                                {
+                                                    scanner.GetToken(); // (
+                                                    scanner.GetToken(); // IDS (not used)
+                                                    scanner.GetToken(); // )
+                                                    scanner.GetToken(); // ;
+                                                    break;
+                                                }
+                                        }
+                                    }
+
+                                    break;
+                                }
                         }
                     }
                 }
