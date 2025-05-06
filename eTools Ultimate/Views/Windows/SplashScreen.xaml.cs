@@ -84,6 +84,11 @@ namespace eTools_Ultimate.Views.Windows
                     LoadingText.Text = "Loading motions...";
                 });
                 MotionsService.Instance.Load();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    LoadingText.Text = "Loading accessories...";
+                });
+                AccessoriesService.Instance.Load();
             }).ConfigureAwait(true);
         }
     }

@@ -1,14 +1,18 @@
 ﻿using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
-using System.Collections.ObjectModel;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class DataViewModel : ObservableObject, INavigationAware
+    public partial class AccessoriesViewModel : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -18,7 +22,11 @@ namespace eTools_Ultimate.ViewModels.Pages
         private string _searchText = string.Empty;
 
         [ObservableProperty]
-        private ICollectionView _itemsView = CollectionViewSource.GetDefaultView(ItemsService.Instance.Items);
+        private ICollectionView _accessoriesView = CollectionViewSource.GetDefaultView(AccessoriesService.Instance.Accessories);
+
+        private static string[] _possibleDstValues = [.. DefinesService.Instance.Defines.Where(x => x.Key.StartsWith("DST_")).Select(x => x.Key)];
+
+        public static string[] PossibleDstValues => AccessoriesViewModel._possibleDstValues;
 
         public string SearchText
         {
@@ -29,7 +37,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     _searchText = value;
                     OnPropertyChanged(nameof(this.SearchText));
-                    ItemsView.Refresh();
+                    AccessoriesView.Refresh();
                 }
             }
         }
@@ -66,17 +74,22 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             Colors = colorCollection;
 
-            ItemsView.Filter = new Predicate<object>(FilterItem);
+            AccessoriesView.Filter = new Predicate<object>(FilterItem);
 
             _isInitialized = true;
         }
 
         private bool FilterItem(object obj)
         {
-            if (obj is not Item item) return false;
+            if (obj is not Accessory accessory) return false;
             if (string.IsNullOrEmpty(this.SearchText)) return true;
-            string lowerSearch = this.SearchText.ToLower();
-            return item.Name.ToLower().Contains(lowerSearch) || item.Id.ToLower().Contains(lowerSearch);
+
+            string searchTextLower = this.SearchText.ToLower();
+
+            if (accessory.DwItemId.ToLower().Contains(searchTextLower)) return true;
+
+            if (accessory.Item is not Item item) return false;
+            return item.Name.ToLower().Contains(this.SearchText.ToLower());
         }
     }
 }
