@@ -50,7 +50,16 @@ namespace eTools_Ultimate.ViewModels.Windows
                 {
                     Content = "Dashboard",
                     Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Views/Windows/eToolsLogoIcon.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.DashboardPage)
+                    TargetPageType = typeof(Views.Pages.DashboardPage),
+                    MenuItemsSource = new object[]
+                    {
+                        new NavigationViewItem() 
+                        {
+                            Content = "Change Log",
+                            Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Views/Pages/Home/Icons/Icon_15.png", 25, 25),
+                            TargetPageType = typeof(eTools.Views.Pages.ChangeLog.ChangeLogView)
+                        }
+                    }
                 },
                 new NavigationViewItemSeparator(),
                 new NavigationViewItem()

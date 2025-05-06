@@ -158,9 +158,9 @@
                           VerticalAlignment="Stretch"
                           Background="{DynamicResource ControlElevationBorderBrush}"/>
 
-        <ScrollViewer Grid.Column="2" Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <ScrollViewer Grid.Column="2" Grid.RowSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <!-- Right Side: NPC Details with Tabs -->
-            <Grid Grid.RowSpan="2" Margin="10">
+            <Grid Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
