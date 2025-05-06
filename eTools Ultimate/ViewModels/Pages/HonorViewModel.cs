@@ -47,7 +47,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         partial void OnSearchTextChanged(string value)
         {
-            // Filteranpassung, wenn der Suchtext geändert wird
+            // Adjust filter when search text changes
             HonorItemsView.Refresh();
         }
 
@@ -164,7 +164,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             var newItem = new HonorItem
             {
-                // Standardwerte setzen
+                // Set default values
                 Index = HonorService.Instance.HonorItems.Count > 0 
                     ? HonorService.Instance.HonorItems.Max(i => i.Index) + 1 
                     : 0,
@@ -189,7 +189,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 return;
             }
 
-            // Aktualisiere die Eigenschaften des ausgewählten Items
+            // Update the properties of the selected item
             SelectedHonorItem.Category = EditableHonorItem.Category;
             SelectedHonorItem.SubCategory = EditableHonorItem.SubCategory;
             SelectedHonorItem.RequiredValue = EditableHonorItem.RequiredValue;
@@ -199,7 +199,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             HonorService.Instance.UpdateHonorItem(SelectedHonorItem);
             StatusMessage = "Honor-Eintrag aktualisiert.";
 
-            // Aktualisiere die Ansicht
+            // Refresh the view
             HonorItemsView.Refresh();
         }
 
@@ -216,7 +216,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             SelectedHonorItem = null;
             StatusMessage = "Honor-Eintrag gelöscht.";
 
-            // Aktualisiere die Ansicht
+            // Refresh the view
             HonorItemsView.Refresh();
         }
     }

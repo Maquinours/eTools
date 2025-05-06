@@ -50,7 +50,7 @@ namespace eTools_Ultimate.Views.Pages.Accessory
 
     public partial class AccessoryPage : Page, INavigableView<DataViewModel>
     {
-        // Wir verzichten auf die direkte DialogHost-Referenz, da sie nicht benötigt wird
+        // Skip direct DialogHost reference since it is not needed
         public DataViewModel ViewModel { get; }
         
         // Collection of attribute types for dropdown selectors
@@ -316,11 +316,11 @@ namespace eTools_Ultimate.Views.Pages.Accessory
                 // Get the text value from the dictionary
                 if (_tempTextValues.TryGetValue(attribute, out string text))
                 {
-                    // Versuche, den neuen Wert zu parsen
+                    // Try to parse the new value
                     string cleanText = text.Replace(",", "");
                     if (int.TryParse(cleanText, out int newValue))
                     {
-                        // Negativen Wert nicht zulassen
+                        // Check lower bound
                         if (newValue < 0)
                         {
                             newValue = 0;

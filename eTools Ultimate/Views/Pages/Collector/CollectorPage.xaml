@@ -18,7 +18,12 @@
     mc:Ignorable="d">
 
     <Grid>
-        <!-- Hauptinhalt mit TabControl -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Main content with TabControl -->
         <ui:Card Margin="12" VerticalAlignment="Top">
             <TabControl>
                 <TabItem Header="Enchant">
@@ -71,11 +76,11 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         
-                        <!-- Suchleiste -->
+                        <!-- Search Bar -->
                         <ui:TextBox
                             Grid.Row="0"
                             Margin="0,8,0,8"
-                            PlaceholderText="Suchen..."
+                            PlaceholderText="Search..."
                             Icon="{ui:SymbolIcon Search24}"/>
                         
                         <!-- Status und Add Button -->

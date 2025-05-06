@@ -22,7 +22,7 @@
 
     <Page.Resources>
         <converters:NumberFormatConverter x:Key="NumberFormatConverter"/>
-        <!-- Gemeinsame Styles -->
+        <!-- Common Styles -->
         <Style x:Key="InfoIconStyle"
                 TargetType="ui:SymbolIcon">
             <Setter Property="HorizontalAlignment"

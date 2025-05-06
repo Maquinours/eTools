@@ -19,9 +19,8 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         public PersonalizationViewModel()
         {
-            // Initialisiere Thema basierend auf aktuellem System-Theme
-            var currentTheme = ApplicationThemeManager.GetAppTheme();
-            IsLightTheme = currentTheme == ApplicationTheme.Light;
+            // Initialize theme based on current system theme
+            ApplicationTheme currentTheme = ApplicationThemeManager.GetAppTheme();
             IsDarkTheme = currentTheme == ApplicationTheme.Dark;
             
             // Standard-Werte für andere Einstellungen
