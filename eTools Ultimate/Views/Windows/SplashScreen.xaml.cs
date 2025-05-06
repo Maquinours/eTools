@@ -78,7 +78,7 @@ namespace eTools_Ultimate.Views.Windows
                 {
                     LoadingText.Text = "Loading honors...";
                 });
-                ModelsService.Instance.Load();
+                HonorsService.Instance.Load();
                 Application.Current.Dispatcher.Invoke(() =>
                 {
                     LoadingText.Text = "Loading motions...";
