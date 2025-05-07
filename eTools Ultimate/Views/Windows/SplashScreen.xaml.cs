@@ -89,6 +89,7 @@ namespace eTools_Ultimate.Views.Windows
                     LoadingText.Text = "Loading accessories...";
                 });
                 AccessoriesService.Instance.Load();
+                ChangesTrackerService.Instance.Init();
             }).ConfigureAwait(true);
         }
     }
