@@ -86,6 +86,10 @@ namespace eTools_Ultimate
                 services.AddSingleton<PersonalizationViewModel>();
                 services.AddSingleton<AboutPage>();
                 services.AddSingleton<AboutViewModel>();
+
+                // ChangeLog Page
+                services.AddSingleton<eTools.Views.Pages.ChangeLog.ChangeLogView>();
+                services.AddSingleton<eTools_Ultimate.ViewModels.Pages.ChangeLog.ChangeLogViewModel>();
             }).Build();
 
         /// <summary>
