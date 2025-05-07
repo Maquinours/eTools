@@ -470,24 +470,25 @@
             </Grid.RowDefinitions>
 
             <!-- Search Bar -->
-            <Grid Grid.Row="0"
-                    Margin="5,5,15,5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <ui:TextBox Grid.Column="0"
-                            PlaceholderText="Search skills..."
+            <Border Grid.Row="0"
+                    BorderThickness="1,1,1,0"
+                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    Margin="0,0,10,0">
+                <ui:TextBox 
+                            PlaceholderText="Suche..."
                             Icon="Search24"
+                            BorderThickness="0"
+                            Margin="10,10,10,10"
                             Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </Grid>
+            </Border>
 
             <!-- Skill List -->
             <Border Grid.Row="1"
-                    CornerRadius="8"
-                    BorderThickness="1"
+                    BorderThickness="1,0,1,1"
                     BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                     Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    Margin="5,5,15,5">
+                    Margin="0,0,10,0">
                 <ListView x:Name="SkillsListView"
                           BorderThickness="0"
                           Background="Transparent"
@@ -523,10 +524,22 @@
 
         <!-- Separator -->
         <GridSplitter Grid.Column="1"
-                      Width="5"
+                      Width="10"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Stretch"
-                      Background="{DynamicResource ControlElevationBorderBrush}"/>
+                      Background="Transparent">
+            <GridSplitter.Template>
+                <ControlTemplate TargetType="{x:Type GridSplitter}">
+                    <Grid Background="Transparent">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
+                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
+                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </GridSplitter.Template>
+        </GridSplitter>
 
         <!-- Right Side - Form -->
         <ScrollViewer Grid.Column="2"
@@ -538,14 +551,31 @@
                           VerticalAlignment="Top"
                           Margin="0,10,20,0"
                           ZIndex="1">
+                    <ui:Button
+                             ToolTip="Undo">
+                        <ui:SymbolIcon Symbol="ArrowUndo24"/>
+                    </ui:Button>
+                    <ui:Button
+                             Margin="10,0,10,0"
+                             ToolTip="Redo">
+                        <ui:SymbolIcon Symbol="ArrowRedo24"/>
+                    </ui:Button>
+                    <ui:Button x:Name="SaveButton" 
+                             Content="Save" 
+                             Margin="0,0,10,0"
+                             Click="SaveButton_Click"/>
+                    <ui:Button x:Name="ExpertButton" 
+                             Content="Expert" 
+                             Appearance="Secondary"
+                             Margin="0,0,10,0"/>
                     <ui:Button x:Name="AddButton" 
                              Content="Add" 
-                             Appearance="Primary"
+                             Background="#2F70AF"
                              Margin="0,0,10,0"
                              Click="AddButton_Click"/>
                     <ui:Button x:Name="DeleteButton" 
                              Content="Delete" 
-                             Appearance="Danger"
+                             Background="#FD292F"
                              Click="DeleteButton_Click"/>
                 </StackPanel>
                 

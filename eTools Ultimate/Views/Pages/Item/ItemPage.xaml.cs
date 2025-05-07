@@ -93,5 +93,36 @@ namespace eTools_Ultimate.Views.Pages
                 Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
             }
         }
+        
+        // Event handler for the Save button
+        private void SaveButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            try
+            {
+                // For now, use simple MessageBox
+                // Once WPF UI is properly set up, this can be replaced with ContentDialog
+                var result = System.Windows.MessageBox.Show(
+                    "Do you want to save the changes?",
+                    "Save",
+                    System.Windows.MessageBoxButton.YesNo,
+                    System.Windows.MessageBoxImage.Question);
+                
+                if (result == System.Windows.MessageBoxResult.Yes)
+                {
+                    // Here the logic for saving the item could be implemented
+                    Console.WriteLine("Item is being saved");
+                }
+            }
+            catch(Exception ex)
+            {
+                System.Windows.MessageBox.Show(
+                    $"Error saving: {ex.Message}",
+                    "Error",
+                    System.Windows.MessageBoxButton.OK,
+                    System.Windows.MessageBoxImage.Error);
+                
+                Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
+            }
+        }
     }
 }

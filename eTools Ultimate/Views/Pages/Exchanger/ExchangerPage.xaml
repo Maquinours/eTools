@@ -158,20 +158,24 @@
 
             <!-- Search Bar -->
             <Border Grid.Row="0"
-                    Margin="5,10,15,5"
-                    CornerRadius="8">
-                <ui:TextBox PlaceholderText="Search exchanger..."
+                    BorderThickness="1,1,1,0"
+                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    Margin="0,0,10,0">
+                <ui:TextBox 
+                            PlaceholderText="Suche..."
                             Icon="Search24"
+                            BorderThickness="0"
+                            Margin="10,10,10,10"
                             Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
 
             <!-- Exchanger List -->
             <Border Grid.Row="1"
-                    CornerRadius="8"
-                    BorderThickness="1"
+                    BorderThickness="1,0,1,1"
                     BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                     Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    Margin="5,5,15,5">
+                    Margin="0,0,10,0">
                 <ListView x:Name="ExchangersListView"
                           BorderThickness="0"
                           Background="Transparent"
@@ -206,10 +210,22 @@
 
         <!-- Separator -->
         <GridSplitter Grid.Column="1"
-                      Width="5"
+                      Width="10"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Stretch"
-                      Background="{DynamicResource ControlElevationBorderBrush}"/>
+                      Background="Transparent">
+            <GridSplitter.Template>
+                <ControlTemplate TargetType="{x:Type GridSplitter}">
+                    <Grid Background="Transparent">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
+                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
+                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </GridSplitter.Template>
+        </GridSplitter>
 
         <!-- Right Side - Form -->
         <ScrollViewer Grid.Column="2"
@@ -220,7 +236,15 @@
                           HorizontalAlignment="Right" 
                           VerticalAlignment="Top"
                           Margin="0,10,20,0"
-                          ZIndex="1"/>
+                          ZIndex="1">
+                    <ui:Button x:Name="SaveButton" 
+                             Content="Save" 
+                             Click="SaveButton_Click"/>
+                    <ui:Button x:Name="ExpertButton" 
+                             Content="Expert" 
+                             Appearance="Secondary" 
+                             Margin="0,0,10,0"/>
+                </StackPanel>
 
                 <!-- Formulare -->
                 <StackPanel Margin="20">
@@ -291,11 +315,11 @@
                                    HorizontalAlignment="Right">
                             <ui:Button Content="Add Set" 
                                      Icon="Add12"
-                                     Appearance="Success"
-                                     Margin="0,0,10,0" Background="#FF1DC6F1"/>
+                                     Background="#2F70AF"
+                                     Margin="0,0,10,0"/>
                             <ui:Button Content="Delete Set" 
                                      Icon="Delete12"
-                                     Appearance="Danger"/>
+                                     Background="#FD292F"/>
                         </StackPanel>
                     </Grid>
                     
@@ -385,11 +409,11 @@
                                    HorizontalAlignment="Right">
                             <ui:Button Content="Add Item" 
                                      Icon="Add12"
-                                     Appearance="Success"
-                                     Margin="0,0,10,0" Background="#FF1DC6F1"/>
+                                     Background="#2F70AF"
+                                     Margin="0,0,10,0"/>
                             <ui:Button Content="Delete Item" 
                                      Icon="Delete12"
-                                     Appearance="Danger"/>
+                                     Background="#FD292F"/>
                         </StackPanel>
                     </Grid>
                     
