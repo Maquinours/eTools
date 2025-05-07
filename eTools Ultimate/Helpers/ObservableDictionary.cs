@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Helpers
 {
-    public class ObservableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, INotifyCollectionChanged, INotifyPropertyChanged
+    public class ObservableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, INotifyCollectionChanged, INotifyPropertyChanged where TKey : notnull
     {
         public ObservableDictionary() : base() { }
         public ObservableDictionary(int capacity) : base(capacity) { }
@@ -17,8 +17,8 @@ namespace eTools_Ultimate.Helpers
         public ObservableDictionary(int capacity, IEqualityComparer<TKey> comparer) : base(capacity, comparer) { }
         public ObservableDictionary(IDictionary<TKey, TValue> dictionary, IEqualityComparer<TKey> comparer) : base(dictionary, comparer) { }
 
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event NotifyCollectionChangedEventHandler? CollectionChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public new TValue this[TKey key]
         {
@@ -28,9 +28,9 @@ namespace eTools_Ultimate.Helpers
             }
             set
             {
-                TValue oldValue;
+                TValue? oldValue;
                 bool exist = base.TryGetValue(key, out oldValue);
-                var oldItem = new KeyValuePair<TKey, TValue>(key, oldValue);
+                var oldItem = new KeyValuePair<TKey, TValue?>(key, oldValue);
                 base[key] = value;
                 var newItem = new KeyValuePair<TKey, TValue>(key, value);
                 if (exist)
@@ -58,7 +58,7 @@ namespace eTools_Ultimate.Helpers
 
         public new bool Remove(TKey key)
         {
-            TValue value;
+            TValue? value;
             if (base.TryGetValue(key, out value))
             {
                 var item = new KeyValuePair<TKey, TValue>(key, base[key]);
