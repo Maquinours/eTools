@@ -202,7 +202,7 @@ namespace eTools_Ultimate.Views.Pages.Accessory
 
                 var position = item.TransformToAncestor(AccessoryScrollViewer)
                                          .Transform(new Point(0, 0));
-                AccessoryScrollViewer.ScrollToVerticalOffset(position.Y);
+                AccessoryScrollViewer.ScrollToVerticalOffset(position.Y + AccessoryScrollViewer.VerticalOffset);
             }, DispatcherPriority.Render);
         }
 
