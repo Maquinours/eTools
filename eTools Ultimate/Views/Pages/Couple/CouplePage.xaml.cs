@@ -4,11 +4,11 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.Views.Pages
 {
-    public partial class CouplePage : Page, INavigableView<CouplesViewModel>
+    public partial class CouplePage : Page, INavigableView<CoupleViewModel>
     {
-        public CouplesViewModel ViewModel { get; }
+        public CoupleViewModel ViewModel { get; }
 
-        public CouplePage(CouplesViewModel viewModel)
+        public CouplePage(CoupleViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = this;

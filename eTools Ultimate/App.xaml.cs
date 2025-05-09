@@ -70,7 +70,7 @@ namespace eTools_Ultimate
                 services.AddSingleton<GiftBoxesViewModel>();
                 services.AddSingleton<ExchangesViewModel>();
                 services.AddSingleton<CharactersViewModel>();
-                services.AddSingleton<CouplesViewModel>();
+                services.AddSingleton<CoupleViewModel>();
                 services.AddSingleton<HonorViewModel>();
                 services.AddSingleton<MotionsViewModel>();
                 services.AddSingleton<HonorsViewModel>();

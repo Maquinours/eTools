@@ -132,10 +132,11 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    public class CoupleLevel(int nExp, List<CoupleLevelItem> items) : INotifyPropertyChanged
+    public class CoupleLevel(int nExp, List<CoupleLevelItem> items, List<CoupleLevelSkill> skills) : INotifyPropertyChanged
     {
         private int _nExp = nExp;
-        private readonly ObservableCollection<CoupleLevelItem> _items = new ObservableCollection<CoupleLevelItem>(items);
+        private readonly ObservableCollection<CoupleLevelItem> _items = [.. items];
+        private readonly ObservableCollection<CoupleLevelSkill> _skills = [.. skills];
 
         public int NExp
         {
@@ -150,6 +151,7 @@ namespace eTools_Ultimate.Models
             }
         }
         public ObservableCollection<CoupleLevelItem> Items => this._items;
+        public ObservableCollection<CoupleLevelSkill> Skills => this._skills;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
