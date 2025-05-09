@@ -18,6 +18,8 @@ using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
 using System.Windows.Media;
 using System.Windows.Threading;
+using System.Windows.Media.Animation;
+using eTools_Ultimate.Helpers;
 
 namespace eTools_Ultimate.Views.Pages.Accessory
 {
@@ -195,27 +197,28 @@ namespace eTools_Ultimate.Views.Pages.Accessory
             accessory.AbilityOptionData.Insert(i, abilityOptionData);
 
             Dispatcher.InvokeAsync(() => {
-                var item = FindVisualChildren<Grid>(this)
+                var item = FindVisualChildHelper.FindVisualChildren<Grid>(this)
                 .FirstOrDefault(tb => tb.Tag == abilityOptionData);
 
                 if (item is null) return;
 
                 var position = item.TransformToAncestor(AccessoryScrollViewer)
                                          .Transform(new Point(0, 0));
+
+                DoubleAnimation verticalAnimation = new DoubleAnimation();
+
+                verticalAnimation.From = AccessoryScrollViewer.VerticalOffset;
+                verticalAnimation.To = position.Y + AccessoryScrollViewer.VerticalOffset;
+                verticalAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
+
+                Storyboard storyboard = new Storyboard();
+
+                storyboard.Children.Add(verticalAnimation);
+                Storyboard.SetTarget(verticalAnimation, AccessoryScrollViewer);
+                Storyboard.SetTargetProperty(verticalAnimation, new PropertyPath(ScrollAnimationBehavior.VerticalOffsetProperty)); // Attached dependency property
+                storyboard.Begin();
                 AccessoryScrollViewer.ScrollToVerticalOffset(position.Y + AccessoryScrollViewer.VerticalOffset);
             }, DispatcherPriority.Render);
-        }
-
-        public static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
-        {
-            if (depObj == null) yield return (T)Enumerable.Empty<T>();
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(depObj); i++)
-            {
-                DependencyObject ithChild = VisualTreeHelper.GetChild(depObj, i);
-                if (ithChild == null) continue;
-                if (ithChild is T t) yield return t;
-                foreach (T childOfChild in FindVisualChildren<T>(ithChild)) yield return childOfChild;
-            }
         }
 
         //private void InitializeSampleData()
