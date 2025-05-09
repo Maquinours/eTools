@@ -86,5 +86,34 @@ namespace eTools_Ultimate.Views.Pages
                 Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
             }
         }
+
+        // Event-Handler für den Speichern-Button
+        private void SaveButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            try
+            {
+                var result = System.Windows.MessageBox.Show(
+                    "Do you want to save the changes?",
+                    "Save",
+                    System.Windows.MessageBoxButton.YesNo,
+                    System.Windows.MessageBoxImage.Question);
+                
+                if (result == System.Windows.MessageBoxResult.Yes)
+                {
+                    // Here the logic for saving could be implemented
+                    Console.WriteLine("Skill is being saved");
+                }
+            }
+            catch(Exception ex)
+            {
+                System.Windows.MessageBox.Show(
+                    $"Error saving: {ex.Message}",
+                    "Error",
+                    System.Windows.MessageBoxButton.OK,
+                    System.Windows.MessageBoxImage.Error);
+                
+                Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
+            }
+        }
     }
 } 

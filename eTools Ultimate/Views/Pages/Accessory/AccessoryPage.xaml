@@ -112,24 +112,25 @@
             </Grid.RowDefinitions>
 
             <!-- Search Bar -->
-            <Grid Grid.Row="0"
-                  Margin="5,5,15,5">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <ui:TextBox Grid.Column="0"
-                            PlaceholderText="Search accessories..."
+            <Border Grid.Row="0"
+                    BorderThickness="1,1,1,0"
+                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    Margin="0,0,10,0">
+                <ui:TextBox 
+                            PlaceholderText="Suche..."
                             Icon="Search24"
+                            BorderThickness="0"
+                            Margin="10,10,10,10"
                             Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </Grid>
+            </Border>
 
             <!-- Accessory List -->
             <Border Grid.Row="1"
-                    CornerRadius="8"
-                    BorderThickness="1"
+                    BorderThickness="1,0,1,1"
                     BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                     Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    Margin="5,5,15,5">
+                    Margin="0,0,10,0">
                 <ListView x:Name="AccessoriesListView"
                           Style="{StaticResource AppListViewStyle}"
                           ItemsSource="{Binding ViewModel.AccessoriesView}"
@@ -179,10 +180,22 @@
 
         <!-- Separator -->
         <GridSplitter Grid.Column="1"
-                      Width="5"
+                      Width="10"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Stretch"
-                      Background="{DynamicResource ControlElevationBorderBrush}"/>
+                      Background="Transparent">
+            <GridSplitter.Template>
+                <ControlTemplate TargetType="{x:Type GridSplitter}">
+                    <Grid Background="Transparent">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
+                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
+                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </GridSplitter.Template>
+        </GridSplitter>
 
         <!-- Right Side - Details -->
         <Border Grid.Column="2"

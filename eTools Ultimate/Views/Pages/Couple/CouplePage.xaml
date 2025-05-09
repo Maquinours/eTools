@@ -68,27 +68,31 @@
             </Grid.RowDefinitions>
 
             <!-- Search Box -->
-            <ui:TextBox 
-                Grid.Row="0"
-                Margin="15,15,15,10"
-                PlaceholderText="Couple suchen..."
-                Icon="Search24"
-                Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
-                <ui:TextBox.Resources>
-                    <Style TargetType="ui:SymbolIcon">
-                        <Setter Property="FontSize" Value="13"/>
-                    </Style>
-                </ui:TextBox.Resources>
-            </ui:TextBox>
+            <Border Grid.Row="0"
+                    BorderThickness="1,1,1,0"
+                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    Margin="0,0,10,0">
+                <ui:TextBox 
+                            PlaceholderText="Suche..."
+                            Icon="Search24"
+                            BorderThickness="0"
+                            Margin="10,10,10,10"
+                            Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
+                    <ui:TextBox.Resources>
+                        <Style TargetType="ui:SymbolIcon">
+                            <Setter Property="FontSize" Value="13"/>
+                        </Style>
+                    </ui:TextBox.Resources>
+                </ui:TextBox>
+            </Border>
 
             <!-- Items List -->
-            <Border 
-                Grid.Row="1"
-                Margin="15,0,15,15"
-                CornerRadius="8"
-                Background="{DynamicResource ControlFillColorDefaultBrush}"
-                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                BorderThickness="1">
+            <Border Grid.Row="1"
+                    BorderThickness="1,0,1,1"
+                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    Margin="0,0,10,0">
                 <TabControl Background="Transparent" BorderThickness="0">
                     <TabItem Header="Allgemein">
                         <ListView 
@@ -147,10 +151,22 @@
 
         <!-- Separator -->
         <GridSplitter Grid.Column="1"
-                      Width="5"
+                      Width="10"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Stretch"
-                      Background="{DynamicResource ControlElevationBorderBrush}"/>
+                      Background="Transparent">
+            <GridSplitter.Template>
+                <ControlTemplate TargetType="{x:Type GridSplitter}">
+                    <Grid Background="Transparent">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
+                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
+                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </GridSplitter.Template>
+        </GridSplitter>
 
         <!-- Right Side - Level Information and Skills -->
         <Grid Grid.Column="2" Margin="15">
@@ -161,13 +177,13 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!-- Level Information Header -->
+            <!-- Level Information -->
             <ui:TextBlock 
                 Grid.Row="0" 
                 FontTypography="Title"
                 FontSize="24"
                 Margin="0,0,0,15"
-                Text="Level Informationen" />
+                Text="Level Information" />
 
             <!-- Level Information Chart -->
             <ui:Card Grid.Row="1" Padding="15" Margin="0,0,0,15">
@@ -212,13 +228,13 @@
                 </StackPanel>
             </ui:Card>
 
-            <!-- Skill Freischaltungen -->
+            <!-- Skill Unlocks -->
             <ui:TextBlock 
                 Grid.Row="2" 
                 FontTypography="Title"
                 FontSize="18"
                 Margin="0,0,0,10"
-                Text="Skill Freischaltungen" />
+                Text="Skill Unlocks" />
 
             <!-- Skill Tabs -->
             <ui:Card Grid.Row="3" Padding="0" Margin="0,0,0,0">
