@@ -83,7 +83,7 @@
                         </StackPanel>
                         <TextBox Grid.Row="1"
                                 x:Name="MotionIdTextBox"
-                                Text="{Binding Path=MotionId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                Text="{Binding Path=DwId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     
                     <!-- Motion ID Key -->
@@ -105,7 +105,7 @@
                         </StackPanel>
                         <TextBox Grid.Row="1"
                                 x:Name="MotionIdKeyTextBox"
-                                Text="{Binding Path=MotionIdKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                Text="{Binding Path=DwMotion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     
                     <!-- Motion Icon -->
@@ -133,7 +133,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBox Grid.Column="0"
                                     x:Name="MotionIconTextBox"
-                                    Text="{Binding Path=MotionIcon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    Text="{Binding Path=SzIconName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <ui:Button Grid.Column="1"
                                     Content="..."
                                     Margin="5,0,0,0" Height="36"/>
@@ -170,7 +170,7 @@
                         </StackPanel>
                         <TextBox Grid.Row="1"
                                 x:Name="PlayIdKeyTextBox"
-                                Text="{Binding Path=PlayIdKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                Text="{Binding Path=DwPlay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     
                     <!-- InGame Name -->
@@ -192,7 +192,7 @@
                         </StackPanel>
                         <TextBox Grid.Row="1"
                                 x:Name="InGameNameTextBox"
-                                Text="{Binding Path=InGameName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     
                     <!-- Description -->
@@ -217,7 +217,7 @@
                                 TextWrapping="Wrap"
                                 AcceptsReturn="True"
                                 MinHeight="100"
-                                Text="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                Text="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Cursor="IBeam"/>
                     </Grid>
                 </UniformGrid>
             </StackPanel>
@@ -386,7 +386,7 @@
 
                     <!-- Form -->
                     <StackPanel Margin="20">
-                        <ContentControl Content="{Binding ViewModel.EditableMotion}" ContentTemplate="{StaticResource MotionDetailsSectionTemplate}"/>
+                        <ContentControl Content="{Binding ViewModel.MotionsView}" ContentTemplate="{StaticResource MotionDetailsSectionTemplate}"/>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
