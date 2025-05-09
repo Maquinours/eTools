@@ -1,3 +1,4 @@
+using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Pages;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,6 +25,18 @@ namespace eTools_Ultimate.Views.Pages.Motion
         {
             // Die Auswahl wird automatisch über das Binding aktualisiert
             // ViewModel.SelectedMotion wird durch die ListView aktualisiert
+        }
+
+        [RelayCommand]
+        private void Undo()
+        {
+            ChangesTrackerService.Instance.Undo(ViewModel.MotionsView.CurrentItem);
+        }
+
+        [RelayCommand]
+        private void Redo()
+        {
+            ChangesTrackerService.Instance.Redo(ViewModel.MotionsView.CurrentItem);
         }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)

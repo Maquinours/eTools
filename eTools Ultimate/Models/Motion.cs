@@ -1,4 +1,5 @@
 using DDSImageParser;
+using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Services;
 using System;
 using System.ComponentModel;
@@ -21,93 +22,44 @@ namespace eTools_Ultimate.Models
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        private void NotifyPropertyChanged<T>(string propertyName, T oldValue, T newValue)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedExtendedEventArgs(propertyName, oldValue, newValue));
         }
         public int NVer
         {
             get => this._nVer;
-            set
-            {
-                if (this.NVer != value)
-                {
-                    this._nVer = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set => SetValue(ref this._nVer, value);
         }
         public string DwId
         {
             get => this._dwId;
-            set
-            {
-                if(this.DwId != value)
-                {
-                    this._dwId = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set => SetValue(ref this._dwId, value);
         }
         public string DwMotion
         {
             get => this._dwMotion;
-            set
-            {
-                if (this.DwMotion != value)
-                {
-                    this._dwMotion = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set => SetValue(ref this._dwMotion, value);
         }
         public string SzIconName
         {
             get => this._szIconName;
-            set
-            {
-                if (this.SzIconName != value)
-                {
-                    this._szIconName = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set => SetValue(ref this._szIconName, value);
         }
         public int DwPlay
         {
             get => this._dwPlay;
-            set
-            {
-                if (this.DwPlay != value)
-                {
-                    this._dwPlay = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set => SetValue(ref this._dwPlay, value);
         }
         public string SzName
         {
             get => this._szName;
-            set
-            {
-                if (this.SzName != value)
-                {
-                    this._szName = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set => SetValue(ref this._szName, value);
         }
         public string SzDesc
         {
             get => this._szDesc;
-            set
-            {
-                if (this.SzDesc != value)
-                {
-                    this._szDesc = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set => SetValue(ref this._szDesc, value);
         }
 
         public string Name
@@ -168,6 +120,19 @@ namespace eTools_Ultimate.Models
         public void Dispose()
         {
 
+        }
+
+        private void SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+                return;
+
+            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new Exception($"Motion SetValue with not safe to assign directly property {propertyName}");
+
+            T old = field;
+            field = value;
+            this.NotifyPropertyChanged(propertyName, old, value);
+            return;
         }
     }
 } 
