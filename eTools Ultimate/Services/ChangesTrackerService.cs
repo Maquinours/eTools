@@ -156,11 +156,11 @@ namespace eTools_Ultimate.Services
             object? oldValue = extendedArgs.OldValue;
 
             // We avoid creating a new change for every change. We merge all changes separated by less than one second.
-            int lastChangeIndex = this._pastChanges.FindLastIndex(x => x.Item == sender && x.PropertyName == args.PropertyName);
-            if(lastChangeIndex != -1)
+            if(this._pastChanges.Count > 0)
             {
+                int lastChangeIndex = this._pastChanges.Count - 1;
                 Change lastChange = this._pastChanges[lastChangeIndex];
-                if (Math.Abs((lastChange.ChangedAt - nowDate).TotalSeconds) < 1)
+                if(lastChange.Item == sender && lastChange.PropertyName == args.PropertyName)
                 {
                     oldValue = lastChange.OldValue;
                     this._pastChanges.RemoveAt(lastChangeIndex);
