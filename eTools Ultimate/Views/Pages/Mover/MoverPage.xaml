@@ -163,7 +163,7 @@
                         <TextBox Grid.Row="1"
                                 x:Name="IdTextBox"
                                 Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding MoverID, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                Text="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     <!-- Name -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -185,7 +185,7 @@
                         <TextBox Grid.Row="1"
                                 x:Name="NameTextBox"
                                 Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding MoverName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     <!-- File -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -212,13 +212,14 @@
                             <TextBox Grid.Column="0"
                                     x:Name="FileTextBox"
                                     Style="{StaticResource AppTextBoxStyle}"
-                                    Text="{Binding FilePath, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    Text="{Binding Model.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             <ui:Button Grid.Column="1" 
                                     Content="..." 
                                     Width="30"
                                     Margin="5,0,0,0"/>
                         </Grid>
                     </Grid>
+                    <!-- Move this part to Model & motions -->
                     <!-- Scale -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -238,7 +239,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="ScaleNumberBox"
-                                Value="{Binding Scale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Model.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0.1"
                                 Maximum="10"
                                 SpinButtonPlacementMode="Inline"/>
@@ -260,6 +261,7 @@
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
+                        <!-- TODO: We probably do not need this as we already know that this item will be a mover. -->
                         <ComboBox Grid.Row="1"
                                 x:Name="ModelTypeComboBox"
                                 Style="{StaticResource AppComboBoxStyle}"
@@ -290,7 +292,8 @@
                         <ComboBox Grid.Row="1"
                                 x:Name="BraceComboBox"
                                 Style="{StaticResource AppComboBoxStyle}"
-                                Text="{Binding Brace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                Text="{Binding Model.Brace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <!-- TODO : binding for combobox items -->
                             <ComboBoxItem Content="Monster"/>
                             <ComboBoxItem Content="NPC"/>
                             <ComboBoxItem Content="Object"/>
@@ -319,7 +322,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1" Grid.Column="0"
                                 x:Name="EXPNumberBox"
-                                Value="{Binding EXP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.NExpValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="1000000"
                                 SpinButtonPlacementMode="Inline"/>
@@ -361,7 +364,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="STRNumberBox"
-                                Value="{Binding STR, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.DwStr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="100000"
                                 SpinButtonPlacementMode="Inline"/>
@@ -385,7 +388,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="STANumberBox"
-                                Value="{Binding STA, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.DwSta, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="100000"
                                 SpinButtonPlacementMode="Inline"/>
@@ -409,7 +412,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="DEXNumberBox"
-                                Value="{Binding DEX, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.DwDex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="100000"
                                 SpinButtonPlacementMode="Inline"/>
@@ -433,7 +436,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="INTNumberBox"
-                                Value="{Binding INT, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.DwInt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="100000"
                                 SpinButtonPlacementMode="Inline"/>
@@ -462,7 +465,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="HPNumberBox"
-                                Value="{Binding HP, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.DwAddHp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="1000000"
                                 SpinButtonPlacementMode="Inline"/>
@@ -486,7 +489,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="ArmorNumberBox"
-                                Value="{Binding Armor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.DwNaturalArmor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="100000"
                                 SpinButtonPlacementMode="Inline"/>
@@ -510,7 +513,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="MagicResistanceNumberBox"
-                                Value="{Binding MagicResistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.DwResisMgic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="100000"
                                 SpinButtonPlacementMode="Inline"/>
@@ -534,7 +537,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="ATKMinNumberBox"
-                                Value="{Binding ATKMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.DwAtkMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="100000"
                                 SpinButtonPlacementMode="Inline"/>
@@ -558,7 +561,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="ATKMaxNumberBox"
-                                Value="{Binding ATKMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.DwAtkMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="100000"
                                 SpinButtonPlacementMode="Inline"/>
@@ -582,7 +585,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="ATKDelayNumberBox"
-                                Value="{Binding ATKDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.DwReAttackDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="10000"
                                 SpinButtonPlacementMode="Inline"/>
@@ -606,7 +609,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="SpeedNumberBox"
-                                Value="{Binding Speed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.FSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="100"
                                 SpinButtonPlacementMode="Inline"/>
@@ -633,9 +636,10 @@
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
+                        <!-- TODO : Need more work to make it work -->
                         <ComboBox Grid.Row="1"
                                 x:Name="ElementComboBox"
-                                Text="{Binding Element, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                Text="{Binding Prop.EElementType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <ComboBoxItem Content="None"/>
                             <ComboBoxItem Content="Fire"/>
                             <ComboBoxItem Content="Water"/>
@@ -663,7 +667,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="RatioNumberBox"
-                                Value="{Binding Ratio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.WElementAtk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="100"
                                 SpinButtonPlacementMode="Inline"/>
@@ -687,7 +691,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="WaterResistanceNumberBox"
-                                Value="{Binding WaterResistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.NResistWater, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="100"
                                 SpinButtonPlacementMode="Inline"/>
@@ -711,7 +715,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="FireResistanceNumberBox"
-                                Value="{Binding FireResistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.NResistFire, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="100"
                                 SpinButtonPlacementMode="Inline"/>
@@ -735,7 +739,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="WindResistanceNumberBox"
-                                Value="{Binding WindResistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.NResistWind, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="100"
                                 SpinButtonPlacementMode="Inline"/>
@@ -759,7 +763,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="EarthResistanceNumberBox"
-                                Value="{Binding EarthResistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.NResistEarth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="100"
                                 SpinButtonPlacementMode="Inline"/>
@@ -783,7 +787,7 @@
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
                                 x:Name="ElectricityResistanceNumberBox"
-                                Value="{Binding ElectricityResistance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Prop.NResistElecricity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="100"
                                 SpinButtonPlacementMode="Inline"/>
@@ -798,6 +802,7 @@
                 <TextBlock Text="Combat Settings"
                         Style="{StaticResource SectionHeaderStyle}"/>
                 <UniformGrid Columns="2">
+                    <!-- TODO : As I know, there is no attack range parameter -->
                     <!-- Attack Range -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -846,6 +851,7 @@
                                 Maximum="10"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
+                    <!-- Not handled for now -->
                     <!-- Aggro Range -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -870,6 +876,7 @@
                                 Maximum="500"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
+                    <!-- Not handled for now -->
                     <!-- Patrol Range -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -1205,13 +1212,14 @@
                 
                 <!-- Formulare -->
                 <StackPanel Margin="20">
-                    <ContentControl Content="{Binding ViewModel}" ContentTemplate="{StaticResource BasicInfoSectionTemplate}"/>
+                    <ContentControl Content="{Binding ViewModel.MoversView}" ContentTemplate="{StaticResource BasicInfoSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
-                    <ContentControl Content="{Binding ViewModel}" ContentTemplate="{StaticResource StatsSectionTemplate}"/>
+                    <ContentControl Content="{Binding ViewModel.MoversView}" ContentTemplate="{StaticResource StatsSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
-                    <ContentControl Content="{Binding ViewModel}" ContentTemplate="{StaticResource CombatSettingsSectionTemplate}"/>
+                    <ContentControl Content="{Binding ViewModel.MoversView}" ContentTemplate="{StaticResource CombatSettingsSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
                     
+                    <!-- TODO: create a DataTemplate for this part. This part is not already binded. -->
                     <!-- Model & Motions Section -->
                     <StackPanel>
                         <TextBlock Text="Model &amp; Motions"
@@ -1306,8 +1314,10 @@
                                         BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                                         BorderThickness="1"
                                         Margin="0,0,10,0">
+                                    <!-- TODO: create a listview item template before binding it -->
                                     <ListView Style="{StaticResource AppListViewStyle}"
-                                              ItemContainerStyle="{StaticResource AppListViewItemStyle}">
+                                              ItemContainerStyle="{StaticResource AppListViewItemStyle}"
+                                              ItemsSource="{Binding Model.Motions}">
                                         <ListViewItem Content="MTI_STAND" IsSelected="True"/>
                                         <ListViewItem Content="MTI_WALK"/>
                                         <ListViewItem Content="MTI_IDLE1"/>

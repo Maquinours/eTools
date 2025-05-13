@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using eTools_Ultimate.Services;
 
 namespace eTools_Ultimate.Models
 {
@@ -95,12 +96,11 @@ namespace eTools_Ultimate.Models
 
         public List<ModelMotion> Motions { get => this._motions; private set { if (this.Motions != value) { this._motions = value; this.NotifyPropertyChanged(); } } }
 
-        // TODO: maybe readd it
-        //public ModelBrace Brace // Maybe we should watch for braces changes to handle refresh problems, but I'm not sure if it's necessary for now.
-        //{
-        //    get => Project.GetInstance().GetBraceByModel(this);
-        //    set { if (this.Brace != value) { Project.GetInstance().SetBraceToModel(this, value); this.NotifyPropertyChanged(); } }
-        //}
+        public ModelBrace Brace // Maybe we should watch for braces changes to handle refresh problems, but I'm not sure if it's necessary for now.
+        {
+            get => ModelsService.Instance.GetBraceByModel(this);
+            set { if (this.Brace != value) { ModelsService.Instance.SetBraceToModel(this, value); this.NotifyPropertyChanged(); } }
+        }
 
         public ModelElem()
         {

@@ -166,5 +166,44 @@ namespace eTools_Ultimate.Services
             //    };
             //}
         }
+
+        private void GetBracesRecursively(List<ModelBrace> braces, ModelBrace brace)
+        {
+            braces.Add(brace);
+            foreach (ModelBrace subBrace in brace.Braces)
+            {
+                GetBracesRecursively(braces, subBrace);
+            }
+        }
+
+        private ModelBrace[] GetBracesByType(int type)
+        {
+            List<ModelBrace> braces = [];
+            foreach (MainModelBrace mainBrace in models)
+            {
+                if (mainBrace.IType != type) continue;
+                GetBracesRecursively(braces, mainBrace);
+            }
+
+            return braces.ToArray();
+        }
+
+        public ModelBrace GetBraceByModel(ModelElem model)
+        {
+            foreach (ModelBrace brace in GetBracesByType(model.DwType))
+            {
+                foreach (ModelElem tempModel in brace.Models)
+                    if (tempModel == model)
+                        return brace;
+            }
+            throw new Exception("ModelsService::GetBraceByModel Exception : Model not found");
+        }
+
+        public void SetBraceToModel(ModelElem model, ModelBrace brace)
+        {
+            ModelBrace oldBrace = GetBraceByModel(model);
+            oldBrace?.Models.Remove(model); // Remove old
+            brace.Models.Add(model); // Add to new
+        }
     }
 }
