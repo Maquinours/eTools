@@ -8,6 +8,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using eTools_Ultimate.Models;
 using System.Runtime.InteropServices;
+using eTools_Ultimate.Services;
 
 namespace eTools_Ultimate.Views.Pages
 {
@@ -141,6 +142,10 @@ namespace eTools_Ultimate.Views.Pages
             if (_d3dHost is null) return;
             if (ViewModel.MoversView.CurrentItem is not Mover mover) return;
             NativeMethods.LoadModel(_d3dHost._native, mover.Model.Model3DFilePath);
+
+            int textureEx = DefinesService.Instance.Defines[mover.Model.NTextureEx];
+            if (textureEx != 0)
+                NativeMethods.SetTextureEx(_d3dHost._native, textureEx);
         }
 
         [RelayCommand]
@@ -159,6 +164,15 @@ namespace eTools_Ultimate.Views.Pages
                     break;
                 }
             }
+        }
+
+        private void ModelTextureExTextBlock_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (_d3dHost is null) return;
+            if (ViewModel.MoversView.CurrentItem is not Mover mover) return;
+
+            int textureEx = DefinesService.Instance.Defines[mover.Model.NTextureEx];
+            NativeMethods.SetTextureEx(_d3dHost._native, textureEx);
         }
     }
 } 

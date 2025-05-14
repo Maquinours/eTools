@@ -1250,6 +1250,13 @@
                                         Visibility="Collapsed" 
                                         Text="{Binding ViewModel.MoversView.CurrentItem.Model.Model3DFilePath, Mode=OneWay}"
                                         TextChanged="Model3DFilePathTextBlock_TextChanged" />
+                                    <!-- TODO: Transform this into a viewable combobox -->
+                                    <TextBox 
+                                        x:Name="ModelTextureExTextBlock"
+                                        Visibility="Collapsed" 
+                                        Text="{Binding ViewModel.MoversView.CurrentItem.Model.NTextureEx, Mode=OneWay}"
+                                        TextChanged="ModelTextureExTextBlock_TextChanged"
+                                        />
                                     <Image
                                         x:Name="DxImage" 
                                         Stretch="UniformToFill" 
@@ -1395,7 +1402,7 @@
                                                     BorderThickness="0"
                                                     Background="Transparent"
                                                     ItemsSource="{Binding ViewModel.MotionsPossibilities, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                    SelectedItem="{Binding SelectedItem.IMotion, ElementName=MotionsListView}"/>
+                                                    SelectedItem="{Binding SelectedItem.IMotion, ElementName=MotionsListView}" Cursor=""/>
                                         </Border>
                                     </Grid>
                                     

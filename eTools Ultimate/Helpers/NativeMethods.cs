@@ -46,6 +46,9 @@ namespace eTools_Ultimate.Helpers
         public static extern void ZoomCamera(IntPtr engine, float delta);
 
         [DllImport("3DModelRenderer.dll")]
+        public static extern void SetTextureEx(IntPtr engine, int textureEx);
+
+        [DllImport("3DModelRenderer.dll")]
         public static extern void ResizeViewport(IntPtr engine, int width, int height);
     }
 }
