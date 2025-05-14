@@ -20,6 +20,7 @@ namespace eTools_Ultimate.Models
         private string _clientFolderPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Client\";
 
         private string? _iconsFolderPath;
+        private string? _modelsFolderPath;
         private string? _texturesFolderPath;
         private string? _soundsConfigFilePath;
         private string? _soundsFolderPath;
@@ -177,6 +178,27 @@ namespace eTools_Ultimate.Models
             }
         }
         public string DefaultTexturesFolderPath => $"{this.ResourcesFolderPath}Model{Path.DirectorySeparatorChar}Texture{Path.DirectorySeparatorChar}";
+
+        public string? ModelsFolderPath
+        {
+            get => this._modelsFolderPath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                else if (!val.EndsWith(Path.DirectorySeparatorChar))
+                    val += Path.DirectorySeparatorChar;
+                if (val == this.DefaultModelsFolderPath)
+                    val = null;
+                if (this.ModelsFolderPath != val)
+                {
+                    this._modelsFolderPath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultModelsFolderPath => $"{this.ResourcesFolderPath}Model{Path.DirectorySeparatorChar}";
 
         public string? SoundsConfigFilePath
         {
