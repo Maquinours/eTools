@@ -81,6 +81,8 @@ namespace eTools_Ultimate.Models
                     NotifyPropertyChanged(nameof(this.DefaultPropItemTxtFilePath));
                     NotifyPropertyChanged(nameof(this.DefaultPropSkillFilePath));
                     NotifyPropertyChanged(nameof(this.DefaultPropSkillTxtFilePath));
+                    // TODO: add missing elements
+                    NotifyPropertyChanged(nameof(this.DefaultModelsFolderPath));
                     break;
                 case nameof(this.ClientFolderPath):
                     NotifyPropertyChanged(nameof(this.DefaultIconsFolderPath));

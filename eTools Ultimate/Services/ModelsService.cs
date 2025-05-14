@@ -21,9 +21,10 @@ namespace eTools_Ultimate.Services
         private void ClearBraceRecursively(ModelBrace brace)
         {
             foreach (ModelBrace child in brace.Braces)
-            {
                 ClearBraceRecursively(child);
-            }
+            foreach (ModelElem model in brace.Models)
+                model.Dispose();
+
             brace.Braces.Clear();
             brace.Models.Clear();
         }

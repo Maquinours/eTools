@@ -134,5 +134,12 @@ namespace eTools_Ultimate.Views.Pages
             NativeMethods.ZoomCamera(_d3dHost._native, e.Delta);
             e.Handled = true;
         }
+
+        private void Model3DFilePathTextBlock_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (_d3dHost is null) return;
+            if (ViewModel.MoversView.CurrentItem is not Mover mover) return;
+            NativeMethods.LoadModel(_d3dHost._native, mover.Model.Model3DFilePath);
+        }
     }
 } 
