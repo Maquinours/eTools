@@ -19,6 +19,9 @@ namespace eTools_Ultimate.Services
         private readonly ObservableDictionary<string, int> _defines = [];
         public ObservableDictionary<string, int> Defines => this._defines;
 
+        // TODO: handle defines changes. (defines is not changing for now so it's not useful right not)
+        public ReadOnlyDictionary<string, int> MotionDefines => new(this.Defines.Where(x => x.Key.StartsWith("MTI_")).ToDictionary());
+
         public void Load()
         {
             this.Defines.Clear();

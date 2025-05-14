@@ -38,6 +38,8 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
+        public string[] MotionsPossibilities => [.. DefinesService.Instance.MotionDefines.Select(x => x.Key)];
+
         public Task OnNavigatedToAsync()
         {
             if (!_isInitialized)

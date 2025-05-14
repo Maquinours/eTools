@@ -9,6 +9,7 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     Title="MoverPage"
     d:DataContext="{d:DesignInstance local:MoverPage,
                                      IsDesignTimeCreatable=False}"
@@ -124,6 +125,8 @@
                     Value="Transparent"/>
             <Setter Property="Foreground" 
                     Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" 
                          Value="True">
@@ -1222,7 +1225,6 @@
                     <ContentControl Content="{Binding ViewModel.MoversView}" ContentTemplate="{StaticResource CombatSettingsSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
                     
-                    <!-- TODO: create a DataTemplate for this part. This part is not already binded. -->
                     <!-- Model & Motions Section -->
                     <StackPanel>
                         <TextBlock Text="Model &amp; Motions"
@@ -1319,21 +1321,29 @@
                                          Width="75"
                                          HorizontalAlignment="Left"
                                          Margin="0,0,10,5"/>
-                                
+
                                 <Border Grid.Column="0"
                                         Grid.Row="1"
                                         BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                                         BorderThickness="1"
                                         Margin="0,0,10,0">
-                                    <!-- TODO: create a listview item template before binding it -->
-                                    <ListView Style="{StaticResource AppListViewStyle}"
+                                    <ListView
+                                              x:Name="MotionsListView"
+                                              Style="{StaticResource AppListViewStyle}"
                                               ItemContainerStyle="{StaticResource AppListViewItemStyle}"
-                                              ItemsSource="{Binding Model.Motions}">
-                                        <ListViewItem Content="MTI_STAND" IsSelected="True"/>
-                                        <ListViewItem Content="MTI_WALK"/>
-                                        <ListViewItem Content="MTI_IDLE1"/>
-                                        <ListViewItem Content="MTI_IDLE2"/>
-                                        <ListViewItem Content="MTI_DMG1"/>
+                                              ItemsSource="{Binding ViewModel.MoversView.CurrentItem.Model.Motions}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                    <TextBlock Text="{Binding IMotion, Mode=OneWay}" />
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="MouseDown">
+                                                            <i:InvokeCommandAction Command="{Binding DataContext.PlayMotionCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
                                     </ListView>
                                 </Border>
                                 
@@ -1384,13 +1394,8 @@
                                             <ComboBox Style="{StaticResource AppComboBoxStyle}"
                                                     BorderThickness="0"
                                                     Background="Transparent"
-                                                    SelectedIndex="0">
-                                                <ComboBoxItem Content="MTI_STAND"/>
-                                                <ComboBoxItem Content="MTI_WALK"/>
-                                                <ComboBoxItem Content="MTI_IDLE1"/>
-                                                <ComboBoxItem Content="MTI_IDLE2"/>
-                                                <ComboBoxItem Content="MTI_DMG1"/>
-                                            </ComboBox>
+                                                    ItemsSource="{Binding ViewModel.MotionsPossibilities, RelativeSource={RelativeSource AncestorType=Page}}"
+                                                    SelectedItem="{Binding SelectedItem.IMotion, ElementName=MotionsListView}"/>
                                         </Border>
                                     </Grid>
                                     
@@ -1424,7 +1429,7 @@
                                             </Grid.ColumnDefinitions>
                                             <TextBox Grid.Column="0"
                                                    Style="{StaticResource AppTextBoxStyle}"
-                                                   Text="stand"/>
+                                                   Text="{Binding SelectedItem.SzMotion, ElementName=MotionsListView}" Cursor="IBeam"/>
                                             <ui:Button Grid.Column="1" 
                                                      Content="..." 
                                                      Width="30"

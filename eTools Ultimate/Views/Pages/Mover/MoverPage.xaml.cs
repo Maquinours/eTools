@@ -7,6 +7,7 @@ using eTools_Ultimate.Helpers;
 using System.Windows.Interop;
 using System.Windows.Media;
 using eTools_Ultimate.Models;
+using System.Runtime.InteropServices;
 
 namespace eTools_Ultimate.Views.Pages
 {
@@ -140,6 +141,24 @@ namespace eTools_Ultimate.Views.Pages
             if (_d3dHost is null) return;
             if (ViewModel.MoversView.CurrentItem is not Mover mover) return;
             NativeMethods.LoadModel(_d3dHost._native, mover.Model.Model3DFilePath);
+        }
+
+        [RelayCommand]
+        private void PlayMotion(ModelMotion motion)
+        {
+            string lowerMotionKey = motion.SzMotion.ToLower();
+            if (_d3dHost is null) return;
+            int numMotions = NativeMethods.GetNumMotions(_d3dHost._native);
+            for(int i = 0; i < numMotions; i++)
+            {
+                IntPtr motionNamePtr = NativeMethods.GetMotionName(_d3dHost._native, i);
+                string? motionName = Marshal.PtrToStringAnsi(motionNamePtr);
+                if(motionName?.ToLower() == lowerMotionKey)
+                {
+                    NativeMethods.PlayMotion(_d3dHost._native, i);
+                    break;
+                }
+            }
         }
     }
 } 
