@@ -248,7 +248,7 @@
                                 Value="{Binding Model.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0.1"
                                 Maximum="10"
-                                SpinButtonPlacementMode="Inline"/>
+                                SpinButtonPlacementMode="Inline" ValueChanged="ScaleNumberBox_ValueChanged"/>
                     </Grid>
                     <!-- Model Type -->
                     <Grid Style="{StaticResource FormFieldStyle}">

@@ -49,6 +49,9 @@ namespace eTools_Ultimate.Helpers
         public static extern void SetTextureEx(IntPtr engine, int textureEx);
 
         [DllImport("3DModelRenderer.dll")]
+        public static extern void SetScale(IntPtr engine, float scale);
+
+        [DllImport("3DModelRenderer.dll")]
         public static extern void ResizeViewport(IntPtr engine, int width, int height);
     }
 }

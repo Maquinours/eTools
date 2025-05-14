@@ -144,8 +144,11 @@ namespace eTools_Ultimate.Views.Pages
             NativeMethods.LoadModel(_d3dHost._native, mover.Model.Model3DFilePath);
 
             int textureEx = DefinesService.Instance.Defines[mover.Model.NTextureEx];
+            float scale = mover.Model.FScale;
             if (textureEx != 0)
                 NativeMethods.SetTextureEx(_d3dHost._native, textureEx);
+            if (scale != 1)
+                NativeMethods.SetScale(_d3dHost._native, scale);
         }
 
         [RelayCommand]
@@ -173,6 +176,15 @@ namespace eTools_Ultimate.Views.Pages
 
             int textureEx = DefinesService.Instance.Defines[mover.Model.NTextureEx];
             NativeMethods.SetTextureEx(_d3dHost._native, textureEx);
+        }
+
+        private void ScaleNumberBox_ValueChanged(object sender, NumberBoxValueChangedEventArgs args)
+        {
+            if (_d3dHost is null) return;
+            if (ViewModel.MoversView.CurrentItem is not Mover mover) return;
+
+            float scale = mover.Model.FScale;
+            NativeMethods.SetScale(_d3dHost._native, scale);
         }
     }
 } 
