@@ -143,6 +143,30 @@
             </Style.Triggers>
         </Style>
 
+        <!-- Add filter icon styles in the Page.Resources -->
+        <Style x:Key="FilterButtonStyle"
+                TargetType="ui:Button">
+            <Setter Property="Margin"
+                    Value="10,0,0,0"/>
+            <Setter Property="Width"
+                    Value="32"/>
+            <Setter Property="Height"
+                    Value="32"/>
+            <Setter Property="ToolTip"
+                    Value="Filter Fields"/>
+        </Style>
+
+        <!-- Add filter checkbox style in the Page.Resources -->
+        <Style x:Key="FilterCheckBoxStyle"
+                TargetType="CheckBox">
+            <Setter Property="Margin"
+                    Value="5,5,5,5"/>
+            <Setter Property="VerticalAlignment"
+                    Value="Center"/>
+            <Setter Property="Foreground"
+                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+        </Style>
+
         <!-- DataTemplate: Basic Info Section -->
         <DataTemplate x:Key="BasicInfoSectionTemplate">
             <StackPanel>
@@ -911,7 +935,7 @@
             </StackPanel>
         </DataTemplate>
 
-        <!-- DataTemplate für den Motions Dialog -->
+        <!-- DataTemplate for the Motions Dialog -->
         <DataTemplate x:Key="MotionsDialogTemplate">
             <Grid Margin="20">
                 <Grid.RowDefinitions>
@@ -923,7 +947,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 
-                <!-- Linke Seite mit der Liste -->
+                <!-- Left side with list -->
                 <Border Grid.Row="0" Grid.Column="0"
                        BorderThickness="1"
                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
@@ -942,7 +966,7 @@
                     </ListView>
                 </Border>
                 
-                <!-- Rechte Seite mit Details -->
+                <!-- Right side with details -->
                 <StackPanel Grid.Row="0" Grid.Column="1">
                     <!-- Add Button -->
                     <ui:Button x:Name="AddMotionButton"
@@ -974,7 +998,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             
-                            <!-- Label mit Info-Icon -->
+                            <!-- Label with info icon -->
                             <StackPanel Grid.Row="0" 
                                       Orientation="Horizontal"
                                       Margin="0,0,0,5">
@@ -984,7 +1008,7 @@
                                 <ui:SymbolIcon Symbol="Info20"
                                             Style="{StaticResource InfoIconStyle}">
                                     <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="Typ der Animation"/>
+                                        <ToolTip Content="Animation type"/>
                                     </ui:SymbolIcon.ToolTip>
                                 </ui:SymbolIcon>
                             </StackPanel>
@@ -1015,7 +1039,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             
-                            <!-- Label mit Info-Icon -->
+                            <!-- Label with info icon -->
                             <StackPanel Grid.Row="0" 
                                       Orientation="Horizontal"
                                       Margin="0,0,0,5">
@@ -1025,12 +1049,12 @@
                                 <ui:SymbolIcon Symbol="Info20"
                                             Style="{StaticResource InfoIconStyle}">
                                     <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="Animationsdatei"/>
+                                        <ToolTip Content="Animation file"/>
                                     </ui:SymbolIcon.ToolTip>
                                 </ui:SymbolIcon>
                             </StackPanel>
                             
-                            <!-- File Input mit Button -->
+                            <!-- File input with button -->
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -1038,7 +1062,7 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBox Grid.Column="0"
                                        Style="{StaticResource AppTextBoxStyle}"
-                                       Text="stand"/>
+                                       Text="{Binding SelectedItem.SzMotion, ElementName=MotionsListView}" Cursor="IBeam"/>
                                 <ui:Button Grid.Column="1" 
                                          Content="..." 
                                          Width="30"
@@ -1048,7 +1072,7 @@
                     </Grid>
                 </StackPanel>
                 
-                <!-- Buttons unten -->
+                <!-- Buttons at the bottom -->
                 <StackPanel Grid.Row="1" Grid.ColumnSpan="2"
                           Orientation="Horizontal"
                           HorizontalAlignment="Right"
@@ -1116,7 +1140,7 @@
                     Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                     Margin="0,0,10,0">
                 <ui:TextBox 
-                            PlaceholderText="Suche..."
+                            PlaceholderText="Search..."
                             Icon="Search24"
                             BorderThickness="0"
                             Margin="10,10,10,10"
@@ -1181,52 +1205,70 @@
         </GridSplitter>
 
         <!-- Right Side - Form -->
-        <ScrollViewer Grid.Column="2"
-                VerticalScrollBarVisibility="Auto">
-            <Grid>
-                <!-- Add und Delete Buttons oben rechts -->
-                <StackPanel Orientation="Horizontal" 
-                          HorizontalAlignment="Right" 
-                          VerticalAlignment="Top"
-                          Margin="0,10,20,0"
-                          ZIndex="1">
-                    <ui:Button
-                             ToolTip="Undo">
-                        <ui:SymbolIcon Symbol="ArrowUndo24"/>
-                    </ui:Button>
-                    <ui:Button
-                             Margin="10,0,10,0"
-                             ToolTip="Redo">
-                        <ui:SymbolIcon Symbol="ArrowRedo24"/>
-                    </ui:Button>
-                    <ui:Button x:Name="SaveButton" 
-                             Content="Save" 
-                             Margin="0,0,10,0"
-                             Click="SaveButton_Click"/>
-                    <ui:Button x:Name="ExpertButton" 
-                             Content="Expert" 
-                             Appearance="Secondary"
-                             Margin="0,0,10,0"/>
-                    <ui:Button x:Name="AddButton" 
-                             Content="Add" 
-                             Background="#2F70AF"
-                             Margin="0,0,10,0"/>
-                    <ui:Button x:Name="DeleteButton" 
-                             Content="Delete" 
-                             Background="#FD292F"/>
-                </StackPanel>
-                
-                <!-- Formulare -->
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- Fixed button bar -->
+            <StackPanel Grid.Row="0" 
+                      Orientation="Horizontal" 
+                      HorizontalAlignment="Right" 
+                      VerticalAlignment="Top"
+                      Margin="0,10,20,10"
+                      ZIndex="100">
+                <ui:Button
+                         ToolTip="Undo">
+                    <ui:SymbolIcon Symbol="ArrowUndo24"/>
+                </ui:Button>
+                <ui:Button
+                         Margin="10,0,10,0"
+                         ToolTip="Redo">
+                    <ui:SymbolIcon Symbol="ArrowRedo24"/>
+                </ui:Button>
+                <ui:Button x:Name="SaveButton" 
+                         Content="Save" 
+                         Margin="0,0,10,0"
+                         Click="SaveButton_Click"/>
+                <ui:Button x:Name="ExpertButton" 
+                         Content="Expert" 
+                         Appearance="Secondary"
+                         Margin="0,0,10,0"/>
+                <ui:Button x:Name="FilterButton" 
+                         Appearance="Secondary"
+                         Margin="0,0,10,0"
+                         Click="FilterButton_Click">
+                    <ui:SymbolIcon Symbol="Filter24"/>
+                </ui:Button>
+                <ui:Button x:Name="AddButton" 
+                         Content="Add" 
+                         Background="#2F70AF"
+                         Margin="0,0,10,0"/>
+                <ui:Button x:Name="DeleteButton" 
+                         Content="Delete" 
+                         Background="#FD292F"/>
+            </StackPanel>
+            
+            <!-- Scrollable content -->
+            <ScrollViewer Grid.Row="1"
+                    VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="20">
-                    <ContentControl Content="{Binding ViewModel.MoversView}" ContentTemplate="{StaticResource BasicInfoSectionTemplate}"/>
-                    <Separator Margin="0,10,0,5"/>
-                    <ContentControl Content="{Binding ViewModel.MoversView}" ContentTemplate="{StaticResource StatsSectionTemplate}"/>
-                    <Separator Margin="0,10,0,5"/>
-                    <ContentControl Content="{Binding ViewModel.MoversView}" ContentTemplate="{StaticResource CombatSettingsSectionTemplate}"/>
-                    <Separator Margin="0,10,0,5"/>
+                    <ContentControl x:Name="BasicInfoSection" 
+                                   Content="{Binding ViewModel.MoversView}" 
+                                   ContentTemplate="{StaticResource BasicInfoSectionTemplate}"/>
+                    <Separator x:Name="BasicInfoSeparator" Margin="0,10,0,5"/>
+                    <ContentControl x:Name="StatsSection" 
+                                   Content="{Binding ViewModel.MoversView}" 
+                                   ContentTemplate="{StaticResource StatsSectionTemplate}"/>
+                    <Separator x:Name="StatsSeparator" Margin="0,10,0,5"/>
+                    <ContentControl x:Name="CombatSettingsSection" 
+                                   Content="{Binding ViewModel.MoversView}" 
+                                   ContentTemplate="{StaticResource CombatSettingsSectionTemplate}"/>
+                    <Separator x:Name="CombatSettingsSeparator" Margin="0,10,0,5"/>
                     
                     <!-- Model & Motions Section -->
-                    <StackPanel>
+                    <StackPanel x:Name="ModelMotionsSection">
                         <TextBlock Text="Model &amp; Motions"
                                 Style="{StaticResource SectionHeaderStyle}"/>
                         
@@ -1263,50 +1305,6 @@
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         MouseRightButtonDown="DxImage_MouseRightButtonDown" MouseWheel="DxImage_MouseWheel" />
-
-                                    <!-- Fehlermeldung Overlay -->
-                                    <!-- <Border Background="#99000000" 
-                                            VerticalAlignment="Center" 
-                                            HorizontalAlignment="Center"
-                                            Padding="15"
-                                            CornerRadius="6">
-                                        <StackPanel>
-                                            <Grid>
-                                                <Ellipse Width="40" 
-                                                         Height="40" 
-                                                         Fill="#FFCC00" 
-                                                         HorizontalAlignment="Center"/>
-                                                <TextBlock Text="!" 
-                                                         FontSize="30" 
-                                                         FontWeight="Bold" 
-                                                         Foreground="Black" 
-                                                         HorizontalAlignment="Center" 
-                                                         VerticalAlignment="Center"/>
-                                            </Grid>
-                                            <TextBlock Text="Model could not be loaded" 
-                                                     Foreground="White" 
-                                                     FontWeight="SemiBold"
-                                                     HorizontalAlignment="Center"
-                                                     Margin="0,10,0,0"/>
-                                            <TextBlock Text="Please check the file path" 
-                                                     Foreground="#DDDDDD" 
-                                                     HorizontalAlignment="Center"
-                                                     TextWrapping="Wrap"
-                                                     Margin="0,5,0,0"/>
-                                            <Border BorderBrush="#FFCC00" 
-                                                    BorderThickness="1" 
-                                                    Margin="0,10,0,0" 
-                                                    Padding="8,4" 
-                                                    CornerRadius="4" 
-                                                    Background="#33FFCC00">
-                                                <TextBlock Text="File: monster.o3d not found" 
-                                                         Foreground="#FFCC00" 
-                                                         FontFamily="Consolas"
-                                                         FontSize="12"
-                                                         HorizontalAlignment="Center"/>
-                                            </Border>
-                                        </StackPanel>
-                                    </Border> -->
                                 </Grid>
                             </Border>
                             
@@ -1321,7 +1319,7 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 
-                                <!-- Linke Seite mit Add-Button und ListView -->
+                                <!-- Left side with Add-Button and ListView -->
                                 <ui:Button Content="Add" 
                                          Grid.Column="0"
                                          Grid.Row="0"
@@ -1354,7 +1352,7 @@
                                     </ListView>
                                 </Border>
                                 
-                                <!-- Rechte Seite mit Generate-Button und Einstellungen -->
+                                <!-- Right side with Generate-Button and settings -->
                                 <ui:Button Content="Generate" 
                                          Grid.Column="1"
                                          Grid.Row="0"
@@ -1377,7 +1375,7 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         
-                                        <!-- Label mit Info-Icon -->
+                                        <!-- Label with info icon -->
                                         <StackPanel Grid.Row="0" 
                                                   Orientation="Horizontal"
                                                   Margin="0,0,0,5">
@@ -1387,7 +1385,7 @@
                                             <ui:SymbolIcon Symbol="Info20"
                                                         Style="{StaticResource InfoIconStyle}">
                                                 <ui:SymbolIcon.ToolTip>
-                                                    <ToolTip Content="Typ der Animation"/>
+                                                    <ToolTip Content="Animation type"/>
                                                 </ui:SymbolIcon.ToolTip>
                                             </ui:SymbolIcon>
                                         </StackPanel>
@@ -1413,7 +1411,7 @@
                                             <RowDefinition Height="Auto"/>
                                         </Grid.RowDefinitions>
                                         
-                                        <!-- Label mit Info-Icon -->
+                                        <!-- Label with info icon -->
                                         <StackPanel Grid.Row="0" 
                                                   Orientation="Horizontal"
                                                   Margin="0,0,0,5">
@@ -1423,12 +1421,12 @@
                                             <ui:SymbolIcon Symbol="Info20"
                                                         Style="{StaticResource InfoIconStyle}">
                                                 <ui:SymbolIcon.ToolTip>
-                                                    <ToolTip Content="Animationsdatei"/>
+                                                    <ToolTip Content="Animation file"/>
                                                 </ui:SymbolIcon.ToolTip>
                                             </ui:SymbolIcon>
                                         </StackPanel>
                                         
-                                        <!-- File Input mit Button -->
+                                        <!-- File input with button -->
                                         <Grid Grid.Row="1">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
@@ -1438,7 +1436,7 @@
                                                    Style="{StaticResource AppTextBoxStyle}"
                                                    Text="{Binding SelectedItem.SzMotion, ElementName=MotionsListView}" Cursor="IBeam"/>
                                             <ui:Button Grid.Column="1" 
-                                                     Content="..." 
+                                                     Content="..."
                                                      Width="30"
                                                      Margin="5,0,0,0"/>
                                         </Grid>
@@ -1448,8 +1446,8 @@
                         </Grid>
                     </StackPanel>
                 </StackPanel>
-            </Grid>
-        </ScrollViewer>
+            </ScrollViewer>
+        </Grid>
         
         <!-- Motion Dialog -->
         <Popup x:Name="MotionsPopup" 
@@ -1464,6 +1462,387 @@
                    CornerRadius="8"
                    Padding="10">
                 <ContentControl ContentTemplate="{StaticResource MotionsDialogTemplate}"/>
+            </Border>
+        </Popup>
+
+        <!-- Add Filter Popup -->
+        <Popup x:Name="FilterPopup" 
+              PlacementTarget="{Binding ElementName=FilterButton}" 
+              Placement="Bottom"
+              IsOpen="False"
+              StaysOpen="False"
+              AllowsTransparency="True">
+            <Border Background="{DynamicResource ApplicationBackgroundBrush}"
+                   BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                   BorderThickness="1"
+                   CornerRadius="8"
+                   Padding="15"
+                   MaxHeight="500">
+                <Grid Width="270">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                                Margin="0,0,5,0"
+                                Padding="0,0,10,0">
+                        <StackPanel Width="245">
+                            <TextBlock Text="Filter Sections" 
+                                     FontWeight="Bold" 
+                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                     Margin="0,0,0,10"/>
+                            
+                            <!-- Section Filters -->
+                            <CheckBox x:Name="BasicInfoSectionCheckBox" 
+                                     Content="Basic Information" 
+                                     Style="{StaticResource FilterCheckBoxStyle}"
+                                     IsChecked="True"
+                                     Checked="SectionFilter_Checked"
+                                     Unchecked="SectionFilter_Unchecked"
+                                     Tag="BasicInfoSection"/>
+                            
+                            <CheckBox x:Name="StatsSectionCheckBox" 
+                                     Content="Stats" 
+                                     Style="{StaticResource FilterCheckBoxStyle}"
+                                     IsChecked="True"
+                                     Checked="SectionFilter_Checked"
+                                     Unchecked="SectionFilter_Unchecked"
+                                     Tag="StatsSection"/>
+                            
+                            <CheckBox x:Name="CombatSettingsSectionCheckBox" 
+                                     Content="Combat Settings" 
+                                     Style="{StaticResource FilterCheckBoxStyle}"
+                                     IsChecked="True"
+                                     Checked="SectionFilter_Checked"
+                                     Unchecked="SectionFilter_Unchecked"
+                                     Tag="CombatSettingsSection"/>
+                            
+                            <CheckBox x:Name="ModelMotionsSectionCheckBox" 
+                                     Content="Model &amp; Motions" 
+                                     Style="{StaticResource FilterCheckBoxStyle}"
+                                     IsChecked="True"
+                                     Checked="SectionFilter_Checked"
+                                     Unchecked="SectionFilter_Unchecked"
+                                     Tag="ModelMotionsSection"/>
+                            
+                            <Separator x:Name="SectionSeparator"
+                                     Margin="0,10,0,10" 
+                                     Background="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+                            
+                            <TextBlock Text="Filter Fields" 
+                                     FontWeight="Bold" 
+                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                     Margin="0,0,0,10"/>
+                            
+                            <Expander Header="Basic Information Fields" 
+                                     Margin="0,0,0,5"
+                                     IsExpanded="False">
+                                <StackPanel x:Name="BasicInfoFieldsPanel">
+                                    <CheckBox x:Name="IdFieldCheckBox" 
+                                             Content="ID" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="IdField"/>
+                                    
+                                    <CheckBox x:Name="NameFieldCheckBox" 
+                                             Content="Name" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="NameField"/>
+                                    
+                                    <CheckBox x:Name="FileFieldCheckBox" 
+                                             Content="File" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="FileField"/>
+                                    
+                                    <CheckBox x:Name="ScaleFieldCheckBox" 
+                                             Content="Scale" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="ScaleField"/>
+                                    
+                                    <CheckBox x:Name="ModelTypeFieldCheckBox" 
+                                             Content="Model Type" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="ModelTypeField"/>
+                                    
+                                    <CheckBox x:Name="BraceFieldCheckBox" 
+                                             Content="Brace" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="BraceField"/>
+                                    
+                                    <CheckBox x:Name="EXPFieldCheckBox" 
+                                             Content="EXP" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="EXPField"/>
+                                </StackPanel>
+                            </Expander>
+                            
+                            <Expander Header="Stats Fields" 
+                                     Margin="0,0,0,5"
+                                     IsExpanded="False">
+                                <StackPanel x:Name="StatsFieldsPanel">
+                                    <!-- Base Stats -->
+                                    <TextBlock Text="Base Stats" 
+                                             FontWeight="SemiBold" 
+                                             Margin="5,5,0,5"/>
+                                    
+                                    <CheckBox x:Name="STRFieldCheckBox" 
+                                             Content="STR" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="STRField"/>
+                                    
+                                    <CheckBox x:Name="STAFieldCheckBox" 
+                                             Content="STA" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="STAField"/>
+                                    
+                                    <CheckBox x:Name="DEXFieldCheckBox" 
+                                             Content="DEX" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="DEXField"/>
+                                    
+                                    <CheckBox x:Name="INTFieldCheckBox" 
+                                             Content="INT" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="INTField"/>
+                                    
+                                    <!-- Misc Stats -->
+                                    <TextBlock Text="Misc Stats" 
+                                             FontWeight="SemiBold" 
+                                             Margin="5,10,0,5"/>
+                                    
+                                    <CheckBox x:Name="HPFieldCheckBox" 
+                                             Content="HP" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="HPField"/>
+                                    
+                                    <CheckBox x:Name="ArmorFieldCheckBox" 
+                                             Content="Armor" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="ArmorField"/>
+                                    
+                                    <CheckBox x:Name="MagicResistanceFieldCheckBox" 
+                                             Content="Magic Resistance" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="MagicResistanceField"/>
+                                    
+                                    <CheckBox x:Name="ATKMinFieldCheckBox" 
+                                             Content="ATK Min" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="ATKMinField"/>
+                                    
+                                    <CheckBox x:Name="ATKMaxFieldCheckBox" 
+                                             Content="ATK Max" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="ATKMaxField"/>
+                                    
+                                    <CheckBox x:Name="ATKDelayFieldCheckBox" 
+                                             Content="ATK Delay" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="ATKDelayField"/>
+                                    
+                                    <CheckBox x:Name="SpeedFieldCheckBox" 
+                                             Content="Speed" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="SpeedField"/>
+                                    
+                                    <!-- Elementary -->
+                                    <TextBlock Text="Elementary" 
+                                             FontWeight="SemiBold" 
+                                             Margin="5,10,0,5"/>
+                                    
+                                    <CheckBox x:Name="ElementFieldCheckBox" 
+                                             Content="Element" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="ElementField"/>
+                                    
+                                    <CheckBox x:Name="RatioFieldCheckBox" 
+                                             Content="Ratio" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="RatioField"/>
+                                    
+                                    <CheckBox x:Name="WaterResistanceFieldCheckBox" 
+                                             Content="Water Resistance" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="WaterResistanceField"/>
+                                    
+                                    <CheckBox x:Name="FireResistanceFieldCheckBox" 
+                                             Content="Fire Resistance" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="FireResistanceField"/>
+                                    
+                                    <CheckBox x:Name="WindResistanceFieldCheckBox" 
+                                             Content="Wind Resistance" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="WindResistanceField"/>
+                                    
+                                    <CheckBox x:Name="EarthResistanceFieldCheckBox" 
+                                             Content="Earth Resistance" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="EarthResistanceField"/>
+                                    
+                                    <CheckBox x:Name="ElectricityResistanceFieldCheckBox" 
+                                             Content="Electricity Resistance" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="ElectricityResistanceField"/>
+                                </StackPanel>
+                            </Expander>
+                            
+                            <Expander Header="Combat Settings Fields" 
+                                     Margin="0,0,0,5"
+                                     IsExpanded="False">
+                                <StackPanel x:Name="CombatSettingsFieldsPanel">
+                                    <CheckBox x:Name="AttackRangeFieldCheckBox" 
+                                             Content="Attack Range" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="AttackRangeField"/>
+                                    
+                                    <CheckBox x:Name="AttackSpeedFieldCheckBox" 
+                                             Content="Attack Speed" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="AttackSpeedField"/>
+                                    
+                                    <CheckBox x:Name="AggroRangeFieldCheckBox" 
+                                             Content="Aggro Range" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="AggroRangeField"/>
+                                    
+                                    <CheckBox x:Name="PatrolRangeFieldCheckBox" 
+                                             Content="Patrol Range" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="PatrolRangeField"/>
+                                </StackPanel>
+                            </Expander>
+                            
+                            <Expander Header="Model &amp; Motions Fields" 
+                                     Margin="0,0,0,5"
+                                     IsExpanded="False">
+                                <StackPanel x:Name="ModelMotionsFieldsPanel">
+                                    <CheckBox x:Name="ModelDisplayCheckBox" 
+                                             Content="3D Model Display" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="ModelDisplay"/>
+                                    
+                                    <CheckBox x:Name="MotionsListCheckBox" 
+                                             Content="Motions List" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="MotionsList"/>
+                                    
+                                    <CheckBox x:Name="IdentifierFieldCheckBox" 
+                                             Content="Identifier" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="IdentifierField"/>
+                                    
+                                    <CheckBox x:Name="MotionFileFieldCheckBox" 
+                                             Content="Motion File" 
+                                             Style="{StaticResource FilterCheckBoxStyle}"
+                                             IsChecked="True"
+                                             Checked="FieldFilter_Checked"
+                                             Unchecked="FieldFilter_Unchecked"
+                                             Tag="MotionFileField"/>
+                                </StackPanel>
+                            </Expander>
+                            
+                            <Button Content="Reset All Filters" 
+                                   Margin="0,10,0,0"
+                                   HorizontalAlignment="Stretch"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                   Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                   BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                   Click="ResetFilters_Click"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
             </Border>
         </Popup>
     </Grid>
