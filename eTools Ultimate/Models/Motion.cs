@@ -10,15 +10,15 @@ using System.Windows.Media.Imaging;
 
 namespace eTools_Ultimate.Models
 {
-    public class Motion : INotifyPropertyChanged, IDisposable
+    public class Motion(int nVer, int dwId, int dwMotion, string szIconName, int dwPlay, string szName, string szDesc) : INotifyPropertyChanged, IDisposable
     {
-        private int _nVer;
-        private string _dwId;
-        private string _dwMotion;
-        private string _szIconName;
-        private int _dwPlay;
-        private string _szName;
-        private string _szDesc;
+        private int _nVer = nVer;
+        private int _dwId = dwId;
+        private int _dwMotion = dwMotion;
+        private string _szIconName = szIconName;
+        private int _dwPlay = dwPlay;
+        private string _szName = szName;
+        private string _szDesc = szDesc;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -31,12 +31,12 @@ namespace eTools_Ultimate.Models
             get => this._nVer;
             set => SetValue(ref this._nVer, value);
         }
-        public string DwId
+        public int DwId
         {
             get => this._dwId;
             set => SetValue(ref this._dwId, value);
         }
-        public string DwMotion
+        public int DwMotion
         {
             get => this._dwMotion;
             set => SetValue(ref this._dwMotion, value);
@@ -104,17 +104,6 @@ namespace eTools_Ultimate.Models
                     return bitmapImage;
                 }
             }
-        }
-
-        public Motion(int nVer, string dwId, string dwMotion, string szIconName, int dwPlay, string szName, string szDesc)
-        {
-            this._nVer = nVer;
-            this._dwId = dwId;
-            this._dwMotion = dwMotion;
-            this._szIconName = szIconName;
-            this._dwPlay = dwPlay;
-            this._szName = szName;
-            this._szDesc = szDesc;
         }
 
         public void Dispose()
