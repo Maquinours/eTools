@@ -9,6 +9,7 @@ using eTools_Ultimate.Models;
 using System.IO;
 using eTools_Ultimate.Exceptions;
 using System.Media;
+using eTools_Ultimate.Helpers;
 
 namespace eTools_Ultimate.Services
 {
@@ -18,8 +19,8 @@ namespace eTools_Ultimate.Services
         private static readonly Lazy<SoundsService> _instance = new(() => new SoundsService());
         public static SoundsService Instance => _instance.Value;
 
-        private Dictionary<string, string> _sounds = new();
-        public Dictionary<string, string> Sounds => _sounds;
+        private Dictionary<int, string> _sounds = new();
+        public Dictionary<int, string> Sounds => _sounds;
 
         public void Load()
         {
@@ -29,20 +30,20 @@ namespace eTools_Ultimate.Services
             if (!File.Exists(filePath))
                 throw new FileNotFoundException($"File not found: {filePath}");
 
-            using (Scanner scanner = new Scanner())
+            using (Script script = new())
             {
-                scanner.Load(filePath);
+                script.Load(filePath);
                 while (true)
                 {
-                    string id = scanner.GetToken();
-                    if (scanner.EndOfStream) break;
-                    string fileName = scanner.GetToken();
-                    this.Sounds.Add(id, fileName);
+                    int id = script.GetNumber();
+                    if (script.EndOfStream) break;
+                    string fileName = script.GetToken();
+                    this.Sounds[id] = fileName;
                 }
             }
         }
 
-        public void PlaySound(string id)
+        public void PlaySound(int id)
         {
             if (!Sounds.TryGetValue(id, out string? fileName)) throw new SoundConfigNotFoundException(id);
 
