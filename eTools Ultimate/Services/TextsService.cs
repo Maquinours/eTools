@@ -1,4 +1,5 @@
-﻿using eTools_Ultimate.Models;
+﻿using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models;
 using Scan;
 using System;
 using System.Collections.Generic;
@@ -34,18 +35,18 @@ namespace eTools_Ultimate.Services
 
             string filePath = settings.TextsConfigFilePath ?? settings.DefaultTextsConfigFilePath;
 
-            using (Scanner scanner = new())
+            using (Script script = new())
             {
-                scanner.Load(filePath);
+                script.Load(filePath);
 
                 while (true)
                 {
-                    string dwId = scanner.GetToken();
-                    if (scanner.EndOfStream) break;
+                    int dwId = script.GetNumber();
+                    if (script.EndOfStream) break;
                     
-                    string dwColor = scanner.GetToken();
-                    scanner.GetToken(); // {
-                    string szName = scanner.GetToken();
+                    string dwColor = script.GetToken();
+                    script.GetToken(); // {
+                    string szName = script.GetToken();
 
                     // If the string is not in the strings service, then we generate a new key for it.
                     if (!stringsService.Strings.ContainsKey(szName))
@@ -55,7 +56,7 @@ namespace eTools_Ultimate.Services
                         szName = identifier;
                     }
 
-                    scanner.GetToken(); // }
+                    script.GetToken(); // }
 
                     Text text = new(dwId, dwColor, szName);
 

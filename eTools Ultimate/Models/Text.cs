@@ -43,11 +43,11 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        private string _dwId;
+        private int _dwId;
         private string _dwColor;
         private string _szName;
 
-        public string DwId
+        public int DwId
         {
             get => this._dwId;
             set 
@@ -118,7 +118,7 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public Text(string dwId, string dwColor, string szName)
+        public Text(int dwId, string dwColor, string szName)
         {
             this._dwId = dwId;
             this._dwColor = dwColor;
