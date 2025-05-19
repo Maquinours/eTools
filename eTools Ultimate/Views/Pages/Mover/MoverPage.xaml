@@ -2068,6 +2068,7 @@
                     <ContentControl x:Name="ModelMobilityMovementSection" 
                                    Content="{Binding ViewModel.MoversView}" 
                                    ContentTemplate="{StaticResource ModelMobilityMovementSectionTemplate}"/>
+                    <Separator x:Name="ModelMobilityMovementSeparator" Margin="0,10,0,5" Visibility="Collapsed"/>
                 </StackPanel>
         </ScrollViewer>
         </Grid>
@@ -2160,13 +2161,13 @@
                                      Unchecked="SectionFilter_Unchecked"
                                      Tag="SoundSection"/>
                             
-                            <CheckBox x:Name="ModelMotionsSectionCheckBox" 
-                                     Content="Model &amp; Motions" 
+                            <CheckBox x:Name="ModelMobilityMovementSectionCheckBox" 
+                                     Content="Model / Mobility / Movement" 
                                      Style="{StaticResource FilterCheckBoxStyle}"
                                      IsChecked="True"
                                      Checked="SectionFilter_Checked"
                                      Unchecked="SectionFilter_Unchecked"
-                                     Tag="ModelMotionsSection"/>
+                                     Tag="ModelMobilityMovementSection"/>
                             
                             <Separator x:Name="SectionSeparator"
                                      Margin="0,10,0,10" 
@@ -2247,15 +2248,11 @@
                                 </StackPanel>
                             </Expander>
                             
+                            <!-- Stats Fields -->
                             <Expander Header="Stats Fields" 
                                      Margin="0,0,0,5"
                                      IsExpanded="False">
                                 <StackPanel x:Name="StatsFieldsPanel">
-                                    <!-- Base Stats -->
-                                    <TextBlock Text="Base Stats" 
-                                             FontWeight="SemiBold" 
-                                             Margin="5,5,0,5"/>
-                                    
                                     <CheckBox x:Name="STRFieldCheckBox" 
                                              Content="STR" 
                                              Style="{StaticResource FilterCheckBoxStyle}"
@@ -2288,67 +2285,6 @@
                                              Unchecked="FieldFilter_Unchecked"
                                              Tag="INTField"/>
                                     
-                                    <!-- Misc Stats -->
-                                    <TextBlock Text="Misc Stats" 
-                                             FontWeight="SemiBold" 
-                                             Margin="5,10,0,5"/>
-                                    
-                                    <CheckBox x:Name="HPFieldCheckBox" 
-                                             Content="HP" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="HPField"/>
-                                    
-                                    <CheckBox x:Name="ArmorFieldCheckBox" 
-                                             Content="Armor" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ArmorField"/>
-                                    
-                                    <CheckBox x:Name="MagicResistanceFieldCheckBox" 
-                                             Content="Magic Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="MagicResistanceField"/>
-                                    
-                                    <CheckBox x:Name="ATKMinFieldCheckBox" 
-                                             Content="ATK Min" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ATKMinField"/>
-                                    
-                                    <CheckBox x:Name="ATKMaxFieldCheckBox" 
-                                             Content="ATK Max" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ATKMaxField"/>
-                                    
-                                    <CheckBox x:Name="ATKDelayFieldCheckBox" 
-                                             Content="ATK Delay" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ATKDelayField"/>
-                                    
-                                    <CheckBox x:Name="SpeedFieldCheckBox" 
-                                             Content="Speed" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="SpeedField"/>
-                                    
                                     <CheckBox x:Name="HitRateFieldCheckBox" 
                                              Content="Hit Rate" 
                                              Style="{StaticResource FilterCheckBoxStyle}"
@@ -2364,67 +2300,6 @@
                                              Checked="FieldFilter_Checked"
                                              Unchecked="FieldFilter_Unchecked"
                                              Tag="EvasionRateField"/>
-                                    
-                                    <!-- Elementary -->
-                                    <TextBlock Text="Elementary" 
-                                             FontWeight="SemiBold" 
-                                             Margin="5,10,0,5"/>
-                                    
-                                    <CheckBox x:Name="ElementFieldCheckBox" 
-                                             Content="Element" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ElementField"/>
-                                    
-                                    <CheckBox x:Name="RatioFieldCheckBox" 
-                                             Content="Ratio" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="RatioField"/>
-                                    
-                                    <CheckBox x:Name="WaterResistanceFieldCheckBox" 
-                                             Content="Water Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="WaterResistanceField"/>
-                                    
-                                    <CheckBox x:Name="FireResistanceFieldCheckBox" 
-                                             Content="Fire Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="FireResistanceField"/>
-                                    
-                                    <CheckBox x:Name="WindResistanceFieldCheckBox" 
-                                             Content="Wind Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="WindResistanceField"/>
-                                    
-                                    <CheckBox x:Name="EarthResistanceFieldCheckBox" 
-                                             Content="Earth Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="EarthResistanceField"/>
-                                    
-                                    <CheckBox x:Name="ElectricityResistanceFieldCheckBox" 
-                                             Content="Electricity Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ElectricityResistanceField"/>
                                 </StackPanel>
                             </Expander>
                             
@@ -2464,7 +2339,7 @@
                                              Unchecked="FieldFilter_Unchecked"
                                              Tag="ActionRadiusField"/>
                                     
-                                    <CheckBox x:Name="CombatATKMinFieldCheckBox" 
+                                    <CheckBox x:Name="ATKMinFieldCheckBox" 
                                              Content="Attack min." 
                                              Style="{StaticResource FilterCheckBoxStyle}"
                                              IsChecked="True"
@@ -2472,7 +2347,7 @@
                                              Unchecked="FieldFilter_Unchecked"
                                              Tag="ATKMinField"/>
                                     
-                                    <CheckBox x:Name="CombatATKMaxFieldCheckBox" 
+                                    <CheckBox x:Name="ATKMaxFieldCheckBox" 
                                              Content="Attack max." 
                                              Style="{StaticResource FilterCheckBoxStyle}"
                                              IsChecked="True"
@@ -2512,7 +2387,7 @@
                                              Unchecked="FieldFilter_Unchecked"
                                              Tag="AttackSpeedField"/>
                                     
-                                    <CheckBox x:Name="CombatATKDelayFieldCheckBox" 
+                                    <CheckBox x:Name="ATKDelayFieldCheckBox" 
                                              Content="Attack Delay" 
                                              Style="{StaticResource FilterCheckBoxStyle}"
                                              IsChecked="True"
@@ -2520,7 +2395,7 @@
                                              Unchecked="FieldFilter_Unchecked"
                                              Tag="ATKDelayField"/>
                                     
-                                    <CheckBox x:Name="CombatHPFieldCheckBox" 
+                                    <CheckBox x:Name="HPFieldCheckBox" 
                                              Content="Health Points" 
                                              Style="{StaticResource FilterCheckBoxStyle}"
                                              IsChecked="True"

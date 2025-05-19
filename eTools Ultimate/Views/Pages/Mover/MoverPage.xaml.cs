@@ -55,7 +55,7 @@ namespace eTools_Ultimate.Views.Pages
             sectionSeparators["DefensiveStatsResistancesSection"] = "DefensiveStatsResistancesSeparator";
             sectionSeparators["ElementalDamageTypesSection"] = "ElementalDamageTypesSeparator";
             sectionSeparators["SoundSection"] = "SoundSeparator";
-            sectionSeparators["ModelMotionsSection"] = "ModelMotionsSeparator";
+            sectionSeparators["ModelMobilityMovementSection"] = "ModelMobilityMovementSeparator";
             
             // Initialize section fields tracking
             sectionFields["BasicInfoSection"] = new List<string> { 
@@ -66,13 +66,7 @@ namespace eTools_Ultimate.Views.Pages
             // Stats fields
             sectionFields["StatsSection"] = new List<string> { 
                 "STRField", "STAField", "DEXField", "INTField",
-                "HPField", "ArmorField", "MagicResistanceField",
-                "ATKMinField", "ATKMaxField", "ATKDelayField", "SpeedField",
-                "HitRateField", "EvasionRateField",
-                "ElementField", "ElementAttackField", "CorrectionValueField",
-                "WaterResistanceField", "FireResistanceField",
-                "WindResistanceField", "EarthResistanceField", "ElectricityResistanceField",
-                "AbrasionField", "HardnessField"
+                "HitRateField", "EvasionRateField"
             };
             
             // Combat/Battle fields
@@ -103,7 +97,7 @@ namespace eTools_Ultimate.Views.Pages
             };
             
             // Model & Motions fields
-            sectionFields["ModelMotionsSection"] = new List<string> { 
+            sectionFields["ModelMobilityMovementSection"] = new List<string> { 
                 "ModelDisplay", "MotionsList", "MotionFileField", "IdentifierField", "ReferenceField",
                 "ScaleField", "SpeedField", "FlyingField", "AdditionalTexturesField",
                 "JumpHeightField", "AirJumpField", "FlyLevelField"
@@ -387,7 +381,7 @@ namespace eTools_Ultimate.Views.Pages
                     GetSectionByName("DefensiveStatsResistancesSection"),
                     GetSectionByName("ElementalDamageTypesSection"),
                     GetSectionByName("SoundSection"),
-                    GetSectionByName("ModelMotionsSection")
+                    GetSectionByName("ModelMobilityMovementSection")
                 };
                 
                 // Apply visibility to each section
@@ -423,7 +417,7 @@ namespace eTools_Ultimate.Views.Pages
                     GetSectionByName("DefensiveStatsResistancesSection"),
                     GetSectionByName("ElementalDamageTypesSection"),
                     GetSectionByName("SoundSection"),
-                    GetSectionByName("ModelMotionsSection")
+                    GetSectionByName("ModelMobilityMovementSection")
                 };
                 
                 // Apply visibility to each section
@@ -769,7 +763,7 @@ namespace eTools_Ultimate.Views.Pages
                 "DefensiveStatsResistancesSectionCheckBox",
                 "ElementalDamageTypesSectionCheckBox",
                 "SoundSectionCheckBox",
-                "ModelMotionsSectionCheckBox"
+                "ModelMobilityMovementSectionCheckBox"
             };
             
             foreach (var checkBoxName in sectionCheckBoxes)
@@ -836,7 +830,7 @@ namespace eTools_Ultimate.Views.Pages
                         GetSectionByName("DefensiveStatsResistancesSection"),
                         GetSectionByName("ElementalDamageTypesSection"),
                         GetSectionByName("SoundSection"),
-                        GetSectionByName("ModelMotionsSection")
+                        GetSectionByName("ModelMobilityMovementSection")
                     };
                     
                     // Apply visibility to each section
