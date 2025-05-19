@@ -143,7 +143,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 new NavigationViewItem()
                 {
                     Content = "Couple",
-                    Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Views/Pages/Home/Icons/Icon_16.png", 25, 25),
+                    Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Views/Pages/Home/Icons/Icon_8.png", 25, 25),
                     TargetPageType = typeof(Views.Pages.CouplePage)
                 }
             };

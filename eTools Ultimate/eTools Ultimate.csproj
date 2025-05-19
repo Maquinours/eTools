@@ -43,7 +43,6 @@
     <None Remove="Views\Pages\Home\Icons\Icon_13.png" />
     <None Remove="Views\Pages\Home\Icons\Icon_14.png" />
     <None Remove="Views\Pages\Home\Icons\Icon_15.png" />
-    <None Remove="Views\Pages\Home\Icons\Icon_16.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -83,7 +82,6 @@
     <Resource Include="Views\Pages\Home\Icons\Icon_13.png" />
     <Resource Include="Views\Pages\Home\Icons\Icon_14.png" />
     <Resource Include="Views\Pages\Home\Icons\Icon_15.png" />
-    <Resource Include="Views\Pages\Home\Icons\Icon_16.png" />
     <Resource Include="Views\Pages\Settings\AboutIcon.png" />
     <Resource Include="Views\Pages\Settings\FolderPathIcon.png" />
     <Resource Include="Views\Pages\Settings\PaintPaletteIcon.png" />
