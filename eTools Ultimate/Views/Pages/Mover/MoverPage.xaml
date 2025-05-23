@@ -13,7 +13,7 @@
     Title="MoverPage"
     d:DataContext="{d:DesignInstance local:MoverPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="3522"
+    d:DesignHeight="2122"
     d:DesignWidth="1024"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -143,37 +143,13 @@
             </Style.Triggers>
         </Style>
 
-        <!-- Add filter icon styles in the Page.Resources -->
-        <Style x:Key="FilterButtonStyle"
-                TargetType="ui:Button">
-            <Setter Property="Margin"
-                    Value="10,0,0,0"/>
-            <Setter Property="Width"
-                    Value="32"/>
-            <Setter Property="Height"
-                    Value="32"/>
-            <Setter Property="ToolTip"
-                    Value="Filter Fields"/>
-        </Style>
-
-        <!-- Add filter checkbox style in the Page.Resources -->
-        <Style x:Key="FilterCheckBoxStyle"
-                TargetType="CheckBox">
-            <Setter Property="Margin"
-                    Value="5,5,5,5"/>
-            <Setter Property="VerticalAlignment"
-                    Value="Center"/>
-            <Setter Property="Foreground"
-                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-        </Style>
-
         <!-- DataTemplate: Basic Info Section -->
         <DataTemplate x:Key="BasicInfoSectionTemplate">
             <StackPanel>
                 <TextBlock Text="Basic Information"
                         Style="{StaticResource SectionHeaderStyle}"/>
                 <UniformGrid Columns="2">
-                    <!-- Define ID -->
+                    <!-- Mover ID -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -181,41 +157,19 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Define ID"
+                            <TextBlock Text="ID"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Internal Mover-ID (from defineObj.h)"/>
+                                    <ToolTip Content="Unique ID of the mover"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <TextBox Grid.Row="1"
-                                x:Name="DefineIdTextBox"
+                                x:Name="IdTextBox"
                                 Style="{StaticResource AppTextBoxStyle}"
                                 Text="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-                    <!-- ID Key -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="ID Key"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Internal Mover-ID Key"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="IdKeyTextBox"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding IdKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                     <!-- Name -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -230,7 +184,7 @@
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Ingame display name"/>
+                                    <ToolTip Content="Display name of the mover"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -239,7 +193,7 @@
                                 Style="{StaticResource AppTextBoxStyle}"
                                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
-                    <!-- Description -->
+                    <!-- File -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -247,21 +201,32 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Description"
+                            <TextBlock Text="File"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Mover description"/>
+                                    <ToolTip Content="File path for the mover"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="DescriptionTextBox"
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0"
+                                    x:Name="FileTextBox"
                                     Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    Text="{Binding Model.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <ui:Button Grid.Column="1" 
+                                    Content="..." 
+                                    Width="30"
+                                    Margin="5,0,0,0"/>
                         </Grid>
-                    <!-- Killable -->
+                    </Grid>
+                    <!-- Move this part to Model & motions -->
+                    <!-- Scale -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -269,94 +234,109 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Killable"
+                            <TextBlock Text="Scale"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Can be killed?"/>
+                                    <ToolTip Content="Scale factor for the mover"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox Grid.Row="1"
+                                x:Name="ScaleNumberBox"
+                                Value="{Binding Model.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Minimum="0.1"
+                                Maximum="10"
+                                SpinButtonPlacementMode="Inline" ValueChanged="ScaleNumberBox_ValueChanged"/>
+                    </Grid>
+                    <!-- Model Type -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Model Type"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Type of the mover model"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <!-- TODO: We probably do not need this as we already know that this item will be a mover. -->
+                        <ComboBox Grid.Row="1"
+                                x:Name="ModelTypeComboBox"
+                                Style="{StaticResource AppComboBoxStyle}"
+                                Text="{Binding ModelType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBoxItem Content="Monster"/>
+                            <ComboBoxItem Content="NPC"/>
+                            <ComboBoxItem Content="Object"/>
+                            <ComboBoxItem Content="Item"/>
+                        </ComboBox>
+                    </Grid>
+                    <!-- Brace -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Brace"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Brace type of the mover"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ComboBox Grid.Row="1"
-                                x:Name="KillableComboBox"
+                                x:Name="BraceComboBox"
                                 Style="{StaticResource AppComboBoxStyle}"
-                                Text="{Binding Killable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="Yes"/>
-                            <ComboBoxItem Content="No"/>
+                                Text="{Binding Model.Brace, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <!-- TODO : binding for combobox items -->
+                            <ComboBoxItem Content="Monster"/>
+                            <ComboBoxItem Content="NPC"/>
+                            <ComboBoxItem Content="Object"/>
                         </ComboBox>
                     </Grid>
-                    <!-- Penya -->
+                    <!-- EXP -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Row="0" Grid.ColumnSpan="2"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Penya"
+                            <TextBlock Text="EXP"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Ingame currency"/>
+                                    <ToolTip Content="Experience gained from defeating the mover"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="PenyaNumberBox"
-                                Value="{Binding Prop.Penya, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="1000000"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    <!-- Duration -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Duration"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Hold/lifetime duration"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="DurationNumberBox"
-                                Value="{Binding Prop.Duration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100000"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    <!-- EXP Value -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="EXP Value"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Experience gained from the mover"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
+                        <ui:NumberBox Grid.Row="1" Grid.Column="0"
                                 x:Name="EXPNumberBox"
                                 Value="{Binding Prop.NExpValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="1000000"
                                 SpinButtonPlacementMode="Inline"/>
+                        <!-- Motions Button -->
+                        <ui:Button Grid.Row="1" Grid.Column="1"
+                                 x:Name="MotionsButton"
+                                 Content="Motions"
+                                 Margin="10,0,0,0"/>
                     </Grid>
                 </UniformGrid>
             </StackPanel>
@@ -367,6 +347,9 @@
             <StackPanel>
                 <TextBlock Text="Stats"
                         Style="{StaticResource SectionHeaderStyle}"/>
+                
+                <!-- Base Stats Section -->
+                <TextBlock Text="Base Stats" FontWeight="SemiBold" Margin="0,10,0,5"/>
                 <UniformGrid Columns="2">
                     <!-- STR -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -381,7 +364,7 @@
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Strength"/>
+                                    <ToolTip Content="Strength stat"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -405,7 +388,7 @@
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Stamina"/>
+                                    <ToolTip Content="Stamina stat"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -429,7 +412,7 @@
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Speed"/>
+                                    <ToolTip Content="Dexterity stat"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -453,7 +436,7 @@
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Intelligence"/>
+                                    <ToolTip Content="Intelligence stat"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -464,65 +447,12 @@
                                 Maximum="100000"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
-                    <!-- Hit Rate -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Hit Rate"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Hit chance"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="HitRateNumberBox"
-                                Value="{Binding Prop.HitRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    <!-- Evasion Rate -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Evasion Rate"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Evasion rate"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="EvasionRateNumberBox"
-                                Value="{Binding Prop.EvasionRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
                 </UniformGrid>
-            </StackPanel>
-        </DataTemplate>
-
-        <!-- DataTemplate: Combat/Battle Section -->
-        <DataTemplate x:Key="CombatBattleSectionTemplate">
-            <StackPanel>
-                <TextBlock Text="Combat / Battle"
-                        Style="{StaticResource SectionHeaderStyle}"/>
+                
+                <!-- Misc Stats Section -->
+                <TextBlock Text="Misc Stats" FontWeight="SemiBold" Margin="0,10,0,5"/>
                 <UniformGrid Columns="2">
-                    <!-- Artificial Intelligence (AI) -->
+                    <!-- HP -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -530,274 +460,12 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Artificial Intelligence (AI)"
+                            <TextBlock Text="HP"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Mover behavior"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="AIComboBox"
-                                Style="{StaticResource AppComboBoxStyle}"
-                                Text="{Binding AI, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="Normal"/>
-                            <ComboBoxItem Content="Aggressive"/>
-                            <ComboBoxItem Content="Passive"/>
-                        </ComboBox>
-                    </Grid>
-                    <!-- Belligerence -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Belligerence"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Aggro behavior"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="BelligerenceComboBox"
-                                Style="{StaticResource AppComboBoxStyle}"
-                                Text="{Binding Belligerence, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="Neutral"/>
-                            <ComboBoxItem Content="Aggressive"/>
-                            <ComboBoxItem Content="Passive"/>
-                        </ComboBox>
-                    </Grid>
-                    <!-- Level -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Level"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Level of the mover"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="LevelNumberBox"
-                                Value="{Binding Prop.Level, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="1"
-                                Maximum="1000"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    <!-- Action Radius -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Action Radius"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Radius for attack/pursuit"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="ActionRadiusNumberBox"
-                                Value="{Binding Prop.ActionRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="500"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    <!-- Attack min. -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Attack min."
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Minimum attack damage"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="ATKMinNumberBox"
-                                Value="{Binding Prop.DwAtkMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100000"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    <!-- Attack max. -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Attack max."
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Maximum attack damage"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="ATKMaxNumberBox"
-                                Value="{Binding Prop.DwAtkMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100000"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    <!-- Attack Animation 1 -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Attack Animation 1"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Attack animations"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="AttackAnim1TextBox"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Prop.AttackAnim1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-                    <!-- Attack Animation 2 -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Attack Animation 2"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Attack animations"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="AttackAnim2TextBox"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Prop.AttackAnim2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-                    <!-- Attack Animation 3 -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Attack Animation 3"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Attack animations"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="AttackAnim3TextBox"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Prop.AttackAnim3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-                    <!-- Attack Speed -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Attack Speed"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Attack speed"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="AttackSpeedNumberBox"
-                                Value="{Binding AttackSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="10"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    <!-- Attack Delay -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Attack Delay"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Time between attacks"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="ATKDelayNumberBox"
-                                Value="{Binding Prop.DwReAttackDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="10000"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    <!-- Health Points -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Health Points"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Health Points"/>
+                                    <ToolTip Content="Health points of the mover"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -808,40 +476,6 @@
                                 Maximum="1000000"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
-                    <!-- Mana Points -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Mana Points"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Mana Points"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="MPNumberBox"
-                                Value="{Binding Prop.ManaPoints, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="1000000"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                </UniformGrid>
-            </StackPanel>
-        </DataTemplate>
-
-        <!-- DataTemplate: Defensive Stats & Resistances Section -->
-        <DataTemplate x:Key="DefensiveStatsResistancesSectionTemplate">
-            <StackPanel>
-                <TextBlock Text="Defensive Stats &amp; Resistances"
-                        Style="{StaticResource SectionHeaderStyle}"/>
-                <UniformGrid Columns="2">
                     <!-- Armor -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -855,7 +489,7 @@
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Base armor"/>
+                                    <ToolTip Content="Armor value"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -864,54 +498,6 @@
                                 Value="{Binding Prop.DwNaturalArmor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
                                 Maximum="100000"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    <!-- Abrasion -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Abrasion"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Armor wear and tear"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="AbrasionNumberBox"
-                                Value="{Binding Prop.Abrasion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    <!-- Hardness -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Hardness"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Armor hardness"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="HardnessNumberBox"
-                                Value="{Binding Prop.Hardness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
                     <!-- Magic Resistance -->
@@ -927,7 +513,7 @@
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Magic resistance"/>
+                                    <ToolTip Content="Magic resistance value"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -938,7 +524,7 @@
                                 Maximum="100000"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
-                    <!-- Resistance Electricity -->
+                    <!-- ATK Min -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -946,23 +532,23 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Resistance Electricity"
+                            <TextBlock Text="ATK Min."
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Lightning resistance"/>
+                                    <ToolTip Content="Minimum attack value"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                x:Name="ElectricityResistanceNumberBox"
-                                Value="{Binding Prop.NResistElecricity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                x:Name="ATKMinNumberBox"
+                                Value="{Binding Prop.DwAtkMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
-                                Maximum="100"
+                                Maximum="100000"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
-                    <!-- Resistance Fire -->
+                    <!-- ATK Max -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -970,23 +556,23 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Resistance Fire"
+                            <TextBlock Text="ATK Max."
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Fire resistance"/>
+                                    <ToolTip Content="Maximum attack value"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                x:Name="FireResistanceNumberBox"
-                                Value="{Binding Prop.NResistFire, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                x:Name="ATKMaxNumberBox"
+                                Value="{Binding Prop.DwAtkMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
-                                Maximum="100"
+                                Maximum="100000"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
-                    <!-- Resistance Wind -->
+                    <!-- ATK Delay -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -994,23 +580,23 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Resistance Wind"
+                            <TextBlock Text="ATK Delay"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Wind resistance"/>
+                                    <ToolTip Content="Attack delay value"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                x:Name="WindResistanceNumberBox"
-                                Value="{Binding Prop.NResistWind, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                x:Name="ATKDelayNumberBox"
+                                Value="{Binding Prop.DwReAttackDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
                                 Minimum="0"
-                                Maximum="100"
+                                Maximum="10000"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
-                    <!-- Resistance Water -->
+                    <!-- Speed -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -1018,12 +604,94 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Resistance Water"
+                            <TextBlock Text="Speed"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Water resistance"/>
+                                    <ToolTip Content="Movement speed"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox Grid.Row="1"
+                                x:Name="SpeedNumberBox"
+                                Value="{Binding Prop.FSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Minimum="0"
+                                Maximum="100"
+                                SpinButtonPlacementMode="Inline"/>
+                    </Grid>
+                </UniformGrid>
+                
+                <!-- Elementary Section -->
+                <TextBlock Text="Elementary" FontWeight="SemiBold" Margin="0,10,0,5"/>
+                <UniformGrid Columns="2">
+                    <!-- Element -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Element"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Element type"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <!-- TODO : Need more work to make it work -->
+                        <ComboBox Grid.Row="1"
+                                x:Name="ElementComboBox"
+                                Text="{Binding Prop.EElementType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBoxItem Content="None"/>
+                            <ComboBoxItem Content="Fire"/>
+                            <ComboBoxItem Content="Water"/>
+                            <ComboBoxItem Content="Earth"/>
+                            <ComboBoxItem Content="Wind"/>
+                            <ComboBoxItem Content="Electricity"/>
+                        </ComboBox>
+                    </Grid>
+                    <!-- Ratio -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Ratio"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Elemental ratio"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox Grid.Row="1"
+                                x:Name="RatioNumberBox"
+                                Value="{Binding Prop.WElementAtk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Minimum="0"
+                                Maximum="100"
+                                SpinButtonPlacementMode="Inline"/>
+                    </Grid>
+                    <!-- Water Resistance -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Water Resistance"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Water resistance value"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -1034,7 +702,7 @@
                                 Maximum="100"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
-                    <!-- Resistance Earth -->
+                    <!-- Fire Resistance -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -1042,12 +710,60 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Resistance Earth"
+                            <TextBlock Text="Fire Resistance"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Earth resistance"/>
+                                    <ToolTip Content="Fire resistance value"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox Grid.Row="1"
+                                x:Name="FireResistanceNumberBox"
+                                Value="{Binding Prop.NResistFire, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Minimum="0"
+                                Maximum="100"
+                                SpinButtonPlacementMode="Inline"/>
+                    </Grid>
+                    <!-- Wind Resistance -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Wind Resistance"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Wind resistance value"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox Grid.Row="1"
+                                x:Name="WindResistanceNumberBox"
+                                Value="{Binding Prop.NResistWind, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Minimum="0"
+                                Maximum="100"
+                                SpinButtonPlacementMode="Inline"/>
+                    </Grid>
+                    <!-- Earth Resistance -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Earth Resistance"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Earth resistance value"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -1058,11 +774,144 @@
                                 Maximum="100"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
+                    <!-- Electricity Resistance -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Electricity Resistance"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Electricity resistance value"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox Grid.Row="1"
+                                x:Name="ElectricityResistanceNumberBox"
+                                Value="{Binding Prop.NResistElecricity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Minimum="0"
+                                Maximum="100"
+                                SpinButtonPlacementMode="Inline"/>
+                    </Grid>
                 </UniformGrid>
             </StackPanel>
         </DataTemplate>
 
-        <!-- DataTemplate for the Motions Dialog -->
+        <!-- DataTemplate: Combat Settings Section -->
+        <DataTemplate x:Key="CombatSettingsSectionTemplate">
+            <StackPanel>
+                <TextBlock Text="Combat Settings"
+                        Style="{StaticResource SectionHeaderStyle}"/>
+                <UniformGrid Columns="2">
+                    <!-- TODO : As I know, there is no attack range parameter -->
+                    <!-- Attack Range -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Attack Range"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Range of attacks"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox Grid.Row="1"
+                                x:Name="AttackRangeNumberBox"
+                                Value="{Binding AttackRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Minimum="0"
+                                Maximum="500"
+                                SpinButtonPlacementMode="Inline"/>
+                    </Grid>
+                    <!-- Attack Speed -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Attack Speed"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Speed of attacks"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox Grid.Row="1"
+                                x:Name="AttackSpeedNumberBox"
+                                Value="{Binding AttackSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Minimum="0"
+                                Maximum="10"
+                                SpinButtonPlacementMode="Inline"/>
+                    </Grid>
+                    <!-- Not handled for now -->
+                    <!-- Aggro Range -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Aggro Range"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Range at which mover becomes aggressive"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox Grid.Row="1"
+                                x:Name="AggroRangeNumberBox"
+                                Value="{Binding AggroRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Minimum="0"
+                                Maximum="500"
+                                SpinButtonPlacementMode="Inline"/>
+                    </Grid>
+                    <!-- Not handled for now -->
+                    <!-- Patrol Range -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0"
+                                Orientation="Horizontal">
+                            <TextBlock Text="Patrol Range"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Range of patrol movement"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox Grid.Row="1"
+                                x:Name="PatrolRangeNumberBox"
+                                Value="{Binding PatrolRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Minimum="0"
+                                Maximum="1000"
+                                SpinButtonPlacementMode="Inline"/>
+                    </Grid>
+                </UniformGrid>
+            </StackPanel>
+        </DataTemplate>
+
+        <!-- DataTemplate für den Motions Dialog -->
         <DataTemplate x:Key="MotionsDialogTemplate">
             <Grid Margin="20">
                 <Grid.RowDefinitions>
@@ -1074,7 +923,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 
-                <!-- Left side with list -->
+                <!-- Linke Seite mit der Liste -->
                 <Border Grid.Row="0" Grid.Column="0"
                        BorderThickness="1"
                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
@@ -1093,7 +942,7 @@
                     </ListView>
                 </Border>
                 
-                <!-- Right side with details -->
+                <!-- Rechte Seite mit Details -->
                 <StackPanel Grid.Row="0" Grid.Column="1">
                     <!-- Add Button -->
                     <ui:Button x:Name="AddMotionButton"
@@ -1125,7 +974,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             
-                            <!-- Label with info icon -->
+                            <!-- Label mit Info-Icon -->
                             <StackPanel Grid.Row="0" 
                                       Orientation="Horizontal"
                                       Margin="0,0,0,5">
@@ -1135,7 +984,7 @@
                                 <ui:SymbolIcon Symbol="Info20"
                                             Style="{StaticResource InfoIconStyle}">
                                     <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="Animation type"/>
+                                        <ToolTip Content="Typ der Animation"/>
                                     </ui:SymbolIcon.ToolTip>
                                 </ui:SymbolIcon>
                             </StackPanel>
@@ -1166,7 +1015,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             
-                            <!-- Label with info icon -->
+                            <!-- Label mit Info-Icon -->
                             <StackPanel Grid.Row="0" 
                                       Orientation="Horizontal"
                                       Margin="0,0,0,5">
@@ -1176,12 +1025,12 @@
                                 <ui:SymbolIcon Symbol="Info20"
                                             Style="{StaticResource InfoIconStyle}">
                                     <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="Animation file"/>
+                                        <ToolTip Content="Animationsdatei"/>
                                     </ui:SymbolIcon.ToolTip>
                                 </ui:SymbolIcon>
                             </StackPanel>
                             
-                            <!-- File input with button -->
+                            <!-- File Input mit Button -->
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -1189,7 +1038,7 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBox Grid.Column="0"
                                        Style="{StaticResource AppTextBoxStyle}"
-                                       Text="{Binding SelectedItem.SzMotion, ElementName=MotionsListView}" Cursor="IBeam"/>
+                                       Text="stand"/>
                                 <ui:Button Grid.Column="1" 
                                          Content="..." 
                                          Width="30"
@@ -1199,7 +1048,7 @@
                     </Grid>
                 </StackPanel>
                 
-                <!-- Buttons at the bottom -->
+                <!-- Buttons unten -->
                 <StackPanel Grid.Row="1" Grid.ColumnSpan="2"
                           Orientation="Horizontal"
                           HorizontalAlignment="Right"
@@ -1244,660 +1093,6 @@
                 </StackPanel>
             </Grid>
         </DataTemplate>
-
-        <!-- DataTemplate: Elementar & Schadenstypen Section -->
-        <DataTemplate x:Key="ElementalDamageTypesSectionTemplate">
-            <StackPanel>
-                <TextBlock Text="Elementar &amp; Damage Types"
-                        Style="{StaticResource SectionHeaderStyle}"/>
-                <UniformGrid Columns="2">
-                    <!-- Element Type -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Element Type"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Element type (Fire, Water etc.)"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="ElementComboBox"
-                                Text="{Binding Prop.EElementType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="None"/>
-                            <ComboBoxItem Content="Fire"/>
-                            <ComboBoxItem Content="Water"/>
-                            <ComboBoxItem Content="Earth"/>
-                            <ComboBoxItem Content="Wind"/>
-                            <ComboBoxItem Content="Electricity"/>
-                        </ComboBox>
-        </Grid>
-                    <!-- Element Attack -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Element Attack"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Elemental damage"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="ElementAttackNumberBox"
-                                Value="{Binding Prop.WElementAtk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    <!-- Correction Value -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Correction Value"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Damage correction value"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="CorrectionValueNumberBox"
-                                Value="{Binding Prop.CorrectionValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                </UniformGrid>
-            </StackPanel>
-        </DataTemplate>
-
-        <!-- DataTemplate: Sound Section -->
-        <DataTemplate x:Key="SoundSectionTemplate">
-            <StackPanel>
-                <TextBlock Text="Sound"
-                        Style="{StaticResource SectionHeaderStyle}"/>
-                <UniformGrid Columns="2">
-                    <!-- Sound Attack 1 -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Sound Attack 1"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Attack sound"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="SoundAttack1TextBox"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Prop.SoundAttack1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-                    <!-- Sound Attack 2 -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Sound Attack 2"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Attack sound"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="SoundAttack2TextBox"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Prop.SoundAttack2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-                    <!-- Sound Die 1 -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Sound Die 1"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Death sound"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="SoundDie1TextBox"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Prop.SoundDie1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-                    <!-- Sound Die 2 -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Sound Die 2"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Death sound"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="SoundDie2TextBox"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Prop.SoundDie2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-                    <!-- Sound Damage 1 -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Sound Damage 1"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Damage sound"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="SoundDamage1TextBox"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Prop.SoundDamage1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-                    <!-- Sound Damage 2 -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Sound Damage 2"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Damage sound"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="SoundDamage2TextBox"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Prop.SoundDamage2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-                    <!-- Sound Damage 3 -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Sound Damage 3"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Damage sound"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="SoundDamage3TextBox"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Prop.SoundDamage3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-                    <!-- Sound Idle 1 -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Sound Idle 1"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Stand/Idle sounds"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="SoundIdle1TextBox"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Prop.SoundIdle1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-                    <!-- Sound Idle 2 -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="Sound Idle 2"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Stand/Idle sounds"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="SoundIdle2TextBox"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Prop.SoundIdle2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-                </UniformGrid>
-            </StackPanel>
-        </DataTemplate>
-
-        <!-- DataTemplate: Model, Mobility & Movement Section -->
-        <DataTemplate x:Key="ModelMobilityMovementSectionTemplate">
-                    <StackPanel>
-                <TextBlock Text="Model / Mobility / Movement"
-                                Style="{StaticResource SectionHeaderStyle}"/>
-                        
-                <!-- Oberer Bereich: 3D Model links, Animation List rechts -->
-                <Grid Margin="0,10,0,20">
-                            <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="347*"/>
-                        <ColumnDefinition Width="384*"/>
-                            </Grid.ColumnDefinitions>
-                            
-                    <!-- 3D Model Display (Links) -->
-                            <Border Grid.Column="0" 
-                                    Background="{DynamicResource ControlFillColorDefaultBrush}"
-                                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="4"
-                            Margin="0,0,378,0" Grid.ColumnSpan="2">
-                                <Grid>
-                                    <TextBox 
-                                        x:Name="Model3DFilePathTextBlock" 
-                                        Visibility="Collapsed" 
-                                        Text="{Binding ViewModel.MoversView.CurrentItem.Model.Model3DFilePath, Mode=OneWay}"
-                                        TextChanged="Model3DFilePathTextBlock_TextChanged" />
-                                    <TextBox 
-                                        x:Name="ModelTextureExTextBlock"
-                                        Visibility="Collapsed" 
-                                        Text="{Binding ViewModel.MoversView.CurrentItem.Model.NTextureEx, Mode=OneWay}"
-                                        TextChanged="ModelTextureExTextBlock_TextChanged"
-                                        />
-                                    <Image
-                                        x:Name="DxImage" 
-                                        Stretch="UniformToFill" 
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                MouseRightButtonDown="DxImage_MouseRightButtonDown" 
-                                MouseWheel="DxImage_MouseWheel" />
-                                </Grid>
-                            </Border>
-                            
-                    <!-- Animation List und Buttons (Rechts) -->
-                    <Grid Grid.Column="1" Margin="25,0,0,0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <!-- Animation List -->
-                        <Border Grid.Column="0"
-                                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                BorderThickness="1"
-                                Height="250">
-                            <ListView
-                                x:Name="MotionsListView"
-                                Style="{StaticResource AppListViewStyle}"
-                                ItemContainerStyle="{StaticResource AppListViewItemStyle}"
-                                ItemsSource="{Binding ViewModel.MoversView.CurrentItem.Model.Motions}">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                            <TextBlock Text="{Binding IMotion, Mode=OneWay}" />
-                                            <i:Interaction.Triggers>
-                                                <i:EventTrigger EventName="MouseDown">
-                                                    <i:InvokeCommandAction Command="{Binding DataContext.PlayMotionCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" />
-                                                </i:EventTrigger>
-                                            </i:Interaction.Triggers>
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
-                        </Border>
-
-                        <!-- Buttons -->
-                        <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10,0,0,0">
-                            <ui:Button x:Name="AddMotionButton"
-                                     Content="Add"
-                                     Appearance="Secondary"
-                                     HorizontalAlignment="Stretch"
-                                     Margin="0,0,0,10"/>
-
-                            <ui:Button x:Name="DeleteMotionButton"
-                                     Content="Delete"
-                                     Appearance="Secondary"
-                                     HorizontalAlignment="Stretch"
-                                     Margin="0,0,0,10"/>
-
-                            <ui:Button x:Name="GenerateMotionButton"
-                                     Content="Generate"
-                                     Appearance="Secondary"
-                                     HorizontalAlignment="Stretch"/>
-                        </StackPanel>
-                    </Grid>
-                </Grid>
-
-                <!-- Unterer Bereich: Restliche Felder im zweier Grid -->
-                <UniformGrid Columns="2" Margin="0,10,0,0">
-                    <!-- Motion File -->
-                    <Grid Style="{StaticResource FormFieldStyle}" Grid.ColumnSpan="2">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="File"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Animation file"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox Grid.Column="0"
-                                   Style="{StaticResource AppTextBoxStyle}"
-                                   Text="{Binding SelectedItem.SzMotion, ElementName=MotionsListView}"/>
-                            <ui:Button Grid.Column="1"
-                                     Content="..."
-                                     Width="30"
-                                     Margin="5,0,0,0"/>
-                        </Grid>
-                    </Grid>
-
-                    <!-- Identifier -->
-                                <Grid Style="{StaticResource FormFieldStyle}">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Grid.Row="0"
-                                            Orientation="Horizontal">
-                            <TextBlock Text="Identifier"
-                                                Style="{StaticResource FieldLabelStyle}"/>
-                                        <ui:SymbolIcon Symbol="Info20"
-                                                Style="{StaticResource InfoIconStyle}">
-                                            <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Animation type"/>
-                                            </ui:SymbolIcon.ToolTip>
-                                        </ui:SymbolIcon>
-                                    </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                Style="{StaticResource AppComboBoxStyle}"
-                                ItemsSource="{Binding ViewModel.MotionsPossibilities, RelativeSource={RelativeSource AncestorType=Page}}"
-                                SelectedItem="{Binding SelectedItem.IMotion, ElementName=MotionsListView}"/>
-                                </Grid>
-                                
-                    <!-- Reference Dropdown -->
-                                <Grid Style="{StaticResource FormFieldStyle}">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Grid.Row="0"
-                                            Orientation="Horizontal">
-                            <TextBlock Text="Reference"
-                                                Style="{StaticResource FieldLabelStyle}"/>
-                                        <ui:SymbolIcon Symbol="Info20"
-                                                Style="{StaticResource InfoIconStyle}">
-                                            <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Model reference"/>
-                                            </ui:SymbolIcon.ToolTip>
-                                        </ui:SymbolIcon>
-                                    </StackPanel>
-                                    <ComboBox Grid.Row="1"
-                                x:Name="ReferenceComboBox"
-                                            Style="{StaticResource AppComboBoxStyle}"
-                                SelectionChanged="ReferenceComboBox_SelectionChanged">
-                            <ComboBoxItem Content="None"/>
-                            <ComboBoxItem Content="Model A"/>
-                            <ComboBoxItem Content="Model B"/>
-                            <ComboBoxItem Content="Model C"/>
-                                    </ComboBox>
-                                </Grid>
-                                
-                    <!-- Scale -->
-                                <Grid Style="{StaticResource FormFieldStyle}">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Grid.Row="0"
-                                            Orientation="Horizontal">
-                            <TextBlock Text="Scale"
-                                                Style="{StaticResource FieldLabelStyle}"/>
-                                        <ui:SymbolIcon Symbol="Info20"
-                                                Style="{StaticResource InfoIconStyle}">
-                                            <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Scale factor"/>
-                                            </ui:SymbolIcon.ToolTip>
-                                        </ui:SymbolIcon>
-                                    </StackPanel>
-                                    <ui:NumberBox Grid.Row="1"
-                                x:Name="ScaleNumberBox"
-                                Value="{Binding Model.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0.1"
-                                Maximum="10"
-                                SpinButtonPlacementMode="Inline" 
-                                ValueChanged="ScaleNumberBox_ValueChanged"/>
-                                </Grid>
-                                
-                    <!-- Speed -->
-                                <Grid Style="{StaticResource FormFieldStyle}">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Grid.Row="0"
-                                            Orientation="Horizontal">
-                            <TextBlock Text="Speed"
-                                                Style="{StaticResource FieldLabelStyle}"/>
-                                        <ui:SymbolIcon Symbol="Info20"
-                                                Style="{StaticResource InfoIconStyle}">
-                                            <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Movement speed"/>
-                                            </ui:SymbolIcon.ToolTip>
-                                        </ui:SymbolIcon>
-                                    </StackPanel>
-                                    <ui:NumberBox Grid.Row="1"
-                                x:Name="SpeedNumberBox"
-                                Value="{Binding Prop.FSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                            Minimum="0"
-                                Maximum="100"
-                                            SpinButtonPlacementMode="Inline"/>
-                                </Grid>
-                                
-                    <!-- Flying -->
-                                <Grid Style="{StaticResource FormFieldStyle}">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Grid.Row="0"
-                                            Orientation="Horizontal">
-                            <TextBlock Text="Flying"
-                                                Style="{StaticResource FieldLabelStyle}"/>
-                                        <ui:SymbolIcon Symbol="Info20"
-                                                Style="{StaticResource InfoIconStyle}">
-                                            <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Can fly?"/>
-                                            </ui:SymbolIcon.ToolTip>
-                                        </ui:SymbolIcon>
-                                    </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="FlyingComboBox"
-                                Style="{StaticResource AppComboBoxStyle}"
-                                Text="{Binding Prop.Flying, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="Yes"/>
-                            <ComboBoxItem Content="No"/>
-                        </ComboBox>
-                                </Grid>
-                                
-                    <!-- Additional Textures -->
-                                <Grid Style="{StaticResource FormFieldStyle}">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Grid.Row="0"
-                                            Orientation="Horizontal">
-                            <TextBlock Text="Additional Textures"
-                                                Style="{StaticResource FieldLabelStyle}"/>
-                                        <ui:SymbolIcon Symbol="Info20"
-                                                Style="{StaticResource InfoIconStyle}">
-                                            <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Additional textures"/>
-                                            </ui:SymbolIcon.ToolTip>
-                                        </ui:SymbolIcon>
-                                    </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="AdditionalTexturesComboBox"
-                                Style="{StaticResource AppComboBoxStyle}"
-                                        BorderThickness="1"
-                                Text="{Binding Model.NTextureEx, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                                </Grid>
-
-                    <!-- Jump Height -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                        <StackPanel Grid.Row="0" 
-                                Orientation="Horizontal">
-                            <TextBlock Text="Jump Height"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                                            <ui:SymbolIcon Symbol="Info20"
-                                                        Style="{StaticResource InfoIconStyle}">
-                                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Jump height"/>
-                                                </ui:SymbolIcon.ToolTip>
-                                            </ui:SymbolIcon>
-                                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="JumpHeightNumberBox"
-                                Value="{Binding Prop.JumpHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
-                                    </Grid>
-                                    
-                    <!-- Air Jump -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                        </Grid.RowDefinitions>
-                                    <StackPanel Grid.Row="0" 
-                                Orientation="Horizontal">
-                            <TextBlock Text="Air Jump"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                                        <ui:SymbolIcon Symbol="Info20"
-                                                    Style="{StaticResource InfoIconStyle}">
-                                            <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Number of air jumps"/>
-                                            </ui:SymbolIcon.ToolTip>
-                                        </ui:SymbolIcon>
-                                    </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="AirJumpNumberBox"
-                                Value="{Binding Prop.AirJump, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="10"
-                                SpinButtonPlacementMode="Inline"/>
-                            </Grid>
-                            
-                    <!-- Fly Level -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                        <StackPanel Grid.Row="0" 
-                                Orientation="Horizontal">
-                            <TextBlock Text="Fly Level"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                                            <ui:SymbolIcon Symbol="Info20"
-                                                        Style="{StaticResource InfoIconStyle}">
-                                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Flight level"/>
-                                                </ui:SymbolIcon.ToolTip>
-                                            </ui:SymbolIcon>
-                                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="FlyLevelNumberBox"
-                                Value="{Binding Prop.FlyLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
-                                        </Grid>
-                </UniformGrid>
-            </StackPanel>
-        </DataTemplate>
     </Page.Resources>
 
     <Grid x:Name="RootGrid">
@@ -1921,7 +1116,7 @@
                     Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                     Margin="0,0,10,0">
                 <ui:TextBox 
-                            PlaceholderText="Search..."
+                            PlaceholderText="Suche..."
                             Icon="Search24"
                             BorderThickness="0"
                             Margin="10,10,10,10"
@@ -1964,7 +1159,7 @@
                     </ListView.ItemContainerStyle>
                 </ListView>
             </Border>
-                        </Grid>
+        </Grid>
 
         <!-- Separator -->
         <GridSplitter Grid.Column="1"
@@ -1979,26 +1174,22 @@
                             <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
                             <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
                             <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
-                </StackPanel>
-            </Grid>
+                        </StackPanel>
+                    </Grid>
                 </ControlTemplate>
             </GridSplitter.Template>
         </GridSplitter>
 
         <!-- Right Side - Form -->
-        <Grid Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <!-- Fixed button bar -->
-            <StackPanel Grid.Row="0" 
-                      Orientation="Horizontal" 
+        <ScrollViewer Grid.Column="2"
+                VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <!-- Add und Delete Buttons oben rechts -->
+                <StackPanel Orientation="Horizontal" 
                           HorizontalAlignment="Right" 
                           VerticalAlignment="Top"
-                      Margin="0,10,20,10"
-                      ZIndex="100">
+                          Margin="0,10,20,0"
+                          ZIndex="1">
                     <ui:Button
                              ToolTip="Undo">
                         <ui:SymbolIcon Symbol="ArrowUndo24"/>
@@ -2016,12 +1207,6 @@
                              Content="Expert" 
                              Appearance="Secondary"
                              Margin="0,0,10,0"/>
-                <ui:Button x:Name="FilterButton" 
-                         Appearance="Secondary"
-                         Margin="0,0,10,0"
-                         Click="FilterButton_Click">
-                    <ui:SymbolIcon Symbol="Filter24"/>
-                </ui:Button>
                     <ui:Button x:Name="AddButton" 
                              Content="Add" 
                              Background="#2F70AF"
@@ -2031,46 +1216,240 @@
                              Background="#FD292F"/>
                 </StackPanel>
                 
-            <!-- Scrollable content -->
-            <ScrollViewer Grid.Row="1"
-                    VerticalScrollBarVisibility="Auto">
+                <!-- Formulare -->
                 <StackPanel Margin="20">
-                    <ContentControl x:Name="BasicInfoSection" 
-                                   Content="{Binding ViewModel.MoversView}" 
-                                   ContentTemplate="{StaticResource BasicInfoSectionTemplate}"/>
-                    <Separator x:Name="BasicInfoSeparator" Margin="0,10,0,5"/>
+                    <ContentControl Content="{Binding ViewModel.MoversView}" ContentTemplate="{StaticResource BasicInfoSectionTemplate}"/>
+                    <Separator Margin="0,10,0,5"/>
+                    <ContentControl Content="{Binding ViewModel.MoversView}" ContentTemplate="{StaticResource StatsSectionTemplate}"/>
+                    <Separator Margin="0,10,0,5"/>
+                    <ContentControl Content="{Binding ViewModel.MoversView}" ContentTemplate="{StaticResource CombatSettingsSectionTemplate}"/>
+                    <Separator Margin="0,10,0,5"/>
                     
-                    <ContentControl x:Name="StatsSection" 
-                                   Content="{Binding ViewModel.MoversView}" 
-                                   ContentTemplate="{StaticResource StatsSectionTemplate}"/>
-                    <Separator x:Name="StatsSeparator" Margin="0,10,0,5"/>
-                    
-                    <ContentControl x:Name="CombatBattleSection" 
-                                   Content="{Binding ViewModel.MoversView}" 
-                                   ContentTemplate="{StaticResource CombatBattleSectionTemplate}"/>
-                    <Separator x:Name="CombatBattleSeparator" Margin="0,10,0,5"/>
-                    
-                    <ContentControl x:Name="DefensiveStatsResistancesSection" 
-                                   Content="{Binding ViewModel.MoversView}" 
-                                   ContentTemplate="{StaticResource DefensiveStatsResistancesSectionTemplate}"/>
-                    <Separator x:Name="DefensiveStatsResistancesSeparator" Margin="0,10,0,5"/>
-                    
-                    <ContentControl x:Name="ElementalDamageTypesSection" 
-                                   Content="{Binding ViewModel.MoversView}" 
-                                   ContentTemplate="{StaticResource ElementalDamageTypesSectionTemplate}"/>
-                    <Separator x:Name="ElementalDamageTypesSeparator" Margin="0,10,0,5"/>
-                    
-                    <ContentControl x:Name="SoundSection" 
-                                   Content="{Binding ViewModel.MoversView}" 
-                                   ContentTemplate="{StaticResource SoundSectionTemplate}"/>
-                    <Separator x:Name="SoundSeparator" Margin="0,10,0,5"/>
-                    
-                    <ContentControl x:Name="ModelMobilityMovementSection" 
-                                   Content="{Binding ViewModel.MoversView}" 
-                                   ContentTemplate="{StaticResource ModelMobilityMovementSectionTemplate}"/>
+                    <!-- Model & Motions Section -->
+                    <StackPanel>
+                        <TextBlock Text="Model &amp; Motions"
+                                Style="{StaticResource SectionHeaderStyle}"/>
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <!-- 3D Model Display -->
+                            <Border Grid.Column="0" 
+                                    Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="4"
+                                    Height="250" 
+                                    Margin="0,10,10,10">
+                                <Grid>
+                                    <TextBox 
+                                        x:Name="Model3DFilePathTextBlock" 
+                                        Visibility="Collapsed" 
+                                        Text="{Binding ViewModel.MoversView.CurrentItem.Model.Model3DFilePath, Mode=OneWay}"
+                                        TextChanged="Model3DFilePathTextBlock_TextChanged" />
+                                    <!-- TODO: Transform this into a viewable combobox -->
+                                    <TextBox 
+                                        x:Name="ModelTextureExTextBlock"
+                                        Visibility="Collapsed" 
+                                        Text="{Binding ViewModel.MoversView.CurrentItem.Model.NTextureEx, Mode=OneWay}"
+                                        TextChanged="ModelTextureExTextBlock_TextChanged"
+                                        />
+                                    <Image
+                                        x:Name="DxImage" 
+                                        Stretch="UniformToFill" 
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        MouseRightButtonDown="DxImage_MouseRightButtonDown" MouseWheel="DxImage_MouseWheel" />
+
+                                    <!-- Fehlermeldung Overlay -->
+                                    <!-- <Border Background="#99000000" 
+                                            VerticalAlignment="Center" 
+                                            HorizontalAlignment="Center"
+                                            Padding="15"
+                                            CornerRadius="6">
+                                        <StackPanel>
+                                            <Grid>
+                                                <Ellipse Width="40" 
+                                                         Height="40" 
+                                                         Fill="#FFCC00" 
+                                                         HorizontalAlignment="Center"/>
+                                                <TextBlock Text="!" 
+                                                         FontSize="30" 
+                                                         FontWeight="Bold" 
+                                                         Foreground="Black" 
+                                                         HorizontalAlignment="Center" 
+                                                         VerticalAlignment="Center"/>
+                                            </Grid>
+                                            <TextBlock Text="Model could not be loaded" 
+                                                     Foreground="White" 
+                                                     FontWeight="SemiBold"
+                                                     HorizontalAlignment="Center"
+                                                     Margin="0,10,0,0"/>
+                                            <TextBlock Text="Please check the file path" 
+                                                     Foreground="#DDDDDD" 
+                                                     HorizontalAlignment="Center"
+                                                     TextWrapping="Wrap"
+                                                     Margin="0,5,0,0"/>
+                                            <Border BorderBrush="#FFCC00" 
+                                                    BorderThickness="1" 
+                                                    Margin="0,10,0,0" 
+                                                    Padding="8,4" 
+                                                    CornerRadius="4" 
+                                                    Background="#33FFCC00">
+                                                <TextBlock Text="File: monster.o3d not found" 
+                                                         Foreground="#FFCC00" 
+                                                         FontFamily="Consolas"
+                                                         FontSize="12"
+                                                         HorizontalAlignment="Center"/>
+                                            </Border>
+                                        </StackPanel>
+                                    </Border> -->
+                                </Grid>
+                            </Border>
+                            
+                            <!-- Motions List -->
+                            <Grid Grid.Column="1" Margin="10,10,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                
+                                <!-- Linke Seite mit Add-Button und ListView -->
+                                <ui:Button Content="Add" 
+                                         Grid.Column="0"
+                                         Grid.Row="0"
+                                         Width="75"
+                                         HorizontalAlignment="Left"
+                                         Margin="0,0,10,5"/>
+
+                                <Border Grid.Column="0"
+                                        Grid.Row="1"
+                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                        BorderThickness="1"
+                                        Margin="0,0,10,0">
+                                    <ListView
+                                              x:Name="MotionsListView"
+                                              Style="{StaticResource AppListViewStyle}"
+                                              ItemContainerStyle="{StaticResource AppListViewItemStyle}"
+                                              ItemsSource="{Binding ViewModel.MoversView.CurrentItem.Model.Motions}">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                                    <TextBlock Text="{Binding IMotion, Mode=OneWay}" />
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="MouseDown">
+                                                            <i:InvokeCommandAction Command="{Binding DataContext.PlayMotionCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </Border>
+                                
+                                <!-- Rechte Seite mit Generate-Button und Einstellungen -->
+                                <ui:Button Content="Generate" 
+                                         Grid.Column="1"
+                                         Grid.Row="0"
+                                         HorizontalAlignment="Left"
+                                         Width="100"
+                                         Margin="0,0,0,5"/>
+                                
+                                <Grid Grid.Column="1" 
+                                      Grid.Row="1" Cursor="">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <!-- Identifier Row -->
+                                    <Grid Grid.Row="0" Margin="0,0,0,10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        
+                                        <!-- Label mit Info-Icon -->
+                                        <StackPanel Grid.Row="0" 
+                                                  Orientation="Horizontal"
+                                                  Margin="0,0,0,5">
+                                            <TextBlock Text="Identifier" 
+                                                     FontWeight="SemiBold" 
+                                                     FontSize="12"/>
+                                            <ui:SymbolIcon Symbol="Info20"
+                                                        Style="{StaticResource InfoIconStyle}">
+                                                <ui:SymbolIcon.ToolTip>
+                                                    <ToolTip Content="Typ der Animation"/>
+                                                </ui:SymbolIcon.ToolTip>
+                                            </ui:SymbolIcon>
+                                        </StackPanel>
+                                        
+                                        <!-- Dropdown -->
+                                        <Border Grid.Row="1"
+                                              Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                              BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                              BorderThickness="1"
+                                              CornerRadius="4">
+                                            <ComboBox Style="{StaticResource AppComboBoxStyle}"
+                                                    BorderThickness="0"
+                                                    Background="Transparent"
+                                                    ItemsSource="{Binding ViewModel.MotionsPossibilities, RelativeSource={RelativeSource AncestorType=Page}}"
+                                                    SelectedItem="{Binding SelectedItem.IMotion, ElementName=MotionsListView}" Cursor=""/>
+                                        </Border>
+                                    </Grid>
+                                    
+                                    <!-- File Row -->
+                                    <Grid Grid.Row="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        
+                                        <!-- Label mit Info-Icon -->
+                                        <StackPanel Grid.Row="0" 
+                                                  Orientation="Horizontal"
+                                                  Margin="0,0,0,5">
+                                            <TextBlock Text="File" 
+                                                     FontWeight="SemiBold" 
+                                                     FontSize="12"/>
+                                            <ui:SymbolIcon Symbol="Info20"
+                                                        Style="{StaticResource InfoIconStyle}">
+                                                <ui:SymbolIcon.ToolTip>
+                                                    <ToolTip Content="Animationsdatei"/>
+                                                </ui:SymbolIcon.ToolTip>
+                                            </ui:SymbolIcon>
+                                        </StackPanel>
+                                        
+                                        <!-- File Input mit Button -->
+                                        <Grid Grid.Row="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox Grid.Column="0"
+                                                   Style="{StaticResource AppTextBoxStyle}"
+                                                   Text="{Binding SelectedItem.SzMotion, ElementName=MotionsListView}" Cursor="IBeam"/>
+                                            <ui:Button Grid.Column="1" 
+                                                     Content="..." 
+                                                     Width="30"
+                                                     Margin="5,0,0,0"/>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
                 </StackPanel>
+            </Grid>
         </ScrollViewer>
-        </Grid>
         
         <!-- Motion Dialog -->
         <Popup x:Name="MotionsPopup" 
@@ -2085,757 +1464,6 @@
                    CornerRadius="8"
                    Padding="10">
                 <ContentControl ContentTemplate="{StaticResource MotionsDialogTemplate}"/>
-            </Border>
-        </Popup>
-
-        <!-- Add Filter Popup -->
-        <Popup x:Name="FilterPopup" 
-              PlacementTarget="{Binding ElementName=FilterButton}" 
-              Placement="Bottom"
-              IsOpen="False"
-              StaysOpen="False"
-              AllowsTransparency="True">
-            <Border Background="{DynamicResource ApplicationBackgroundBrush}"
-                   BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                   BorderThickness="1"
-                   CornerRadius="8"
-                   Padding="15"
-                   MaxHeight="500">
-                <Grid Width="270">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                                Margin="0,0,5,0"
-                                Padding="0,0,10,0">
-                        <StackPanel Width="245">
-                            <TextBlock Text="Filter Sections" 
-                                     FontWeight="Bold" 
-                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                     Margin="0,0,0,10"/>
-                            
-                            <!-- Section Filters -->
-                            <CheckBox x:Name="BasicInfoSectionCheckBox" 
-                                     Content="Basic Information" 
-                                     Style="{StaticResource FilterCheckBoxStyle}"
-                                     IsChecked="True"
-                                     Checked="SectionFilter_Checked"
-                                     Unchecked="SectionFilter_Unchecked"
-                                     Tag="BasicInfoSection"/>
-                            
-                            <CheckBox x:Name="StatsSectionCheckBox" 
-                                     Content="Stats" 
-                                     Style="{StaticResource FilterCheckBoxStyle}"
-                                     IsChecked="True"
-                                     Checked="SectionFilter_Checked"
-                                     Unchecked="SectionFilter_Unchecked"
-                                     Tag="StatsSection"/>
-                            
-                            <CheckBox x:Name="CombatBattleSectionCheckBox" 
-                                     Content="Combat / Battle" 
-                                     Style="{StaticResource FilterCheckBoxStyle}"
-                                     IsChecked="True"
-                                     Checked="SectionFilter_Checked"
-                                     Unchecked="SectionFilter_Unchecked"
-                                     Tag="CombatBattleSection"/>
-                            
-                            <CheckBox x:Name="DefensiveStatsResistancesSectionCheckBox" 
-                                     Content="Defensive Stats &amp; Resistances" 
-                                     Style="{StaticResource FilterCheckBoxStyle}"
-                                     IsChecked="True"
-                                     Checked="SectionFilter_Checked"
-                                     Unchecked="SectionFilter_Unchecked"
-                                     Tag="DefensiveStatsResistancesSection"/>
-                            
-                            <CheckBox x:Name="ElementalDamageTypesSectionCheckBox" 
-                                     Content="Elementar &amp; Damage Types" 
-                                     Style="{StaticResource FilterCheckBoxStyle}"
-                                     IsChecked="True"
-                                     Checked="SectionFilter_Checked"
-                                     Unchecked="SectionFilter_Unchecked"
-                                     Tag="ElementalDamageTypesSection"/>
-                            
-                            <CheckBox x:Name="SoundSectionCheckBox" 
-                                     Content="Sound" 
-                                     Style="{StaticResource FilterCheckBoxStyle}"
-                                     IsChecked="True"
-                                     Checked="SectionFilter_Checked"
-                                     Unchecked="SectionFilter_Unchecked"
-                                     Tag="SoundSection"/>
-                            
-                            <CheckBox x:Name="ModelMotionsSectionCheckBox" 
-                                     Content="Model &amp; Motions" 
-                                     Style="{StaticResource FilterCheckBoxStyle}"
-                                     IsChecked="True"
-                                     Checked="SectionFilter_Checked"
-                                     Unchecked="SectionFilter_Unchecked"
-                                     Tag="ModelMotionsSection"/>
-                            
-                            <Separator x:Name="SectionSeparator"
-                                     Margin="0,10,0,10" 
-                                     Background="{DynamicResource ControlStrokeColorDefaultBrush}"/>
-                            
-                            <TextBlock Text="Filter Fields" 
-                                     FontWeight="Bold" 
-                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                     Margin="0,0,0,10"/>
-                            
-                            <Expander Header="Basic Information Fields" 
-                                     Margin="0,0,0,5"
-                                     IsExpanded="False">
-                                <StackPanel x:Name="BasicInfoFieldsPanel">
-                                    <CheckBox x:Name="IdFieldCheckBox" 
-                                             Content="ID" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="IdField"/>
-                                    
-                                    <CheckBox x:Name="IdKeyFieldCheckBox" 
-                                             Content="ID Key" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="IdKeyField"/>
-                                    
-                                    <CheckBox x:Name="NameFieldCheckBox" 
-                                             Content="Name" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="NameField"/>
-                                    
-                                    <CheckBox x:Name="DescriptionFieldCheckBox" 
-                                             Content="Description" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="DescriptionField"/>
-                                    
-                                    <CheckBox x:Name="KillableFieldCheckBox" 
-                                             Content="Killable" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="KillableField"/>
-                                    
-                                    <CheckBox x:Name="PenyaFieldCheckBox" 
-                                             Content="Penya" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="PenyaField"/>
-                                    
-                                    <CheckBox x:Name="DurationFieldCheckBox" 
-                                             Content="Duration" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="DurationField"/>
-                                    
-                                    <CheckBox x:Name="EXPFieldCheckBox" 
-                                             Content="EXP" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="EXPField"/>
-                                </StackPanel>
-                            </Expander>
-                            
-                            <Expander Header="Stats Fields" 
-                                     Margin="0,0,0,5"
-                                     IsExpanded="False">
-                                <StackPanel x:Name="StatsFieldsPanel">
-                                    <!-- Base Stats -->
-                                    <TextBlock Text="Base Stats" 
-                                             FontWeight="SemiBold" 
-                                             Margin="5,5,0,5"/>
-                                    
-                                    <CheckBox x:Name="STRFieldCheckBox" 
-                                             Content="STR" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="STRField"/>
-                                    
-                                    <CheckBox x:Name="STAFieldCheckBox" 
-                                             Content="STA" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="STAField"/>
-                                    
-                                    <CheckBox x:Name="DEXFieldCheckBox" 
-                                             Content="DEX" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="DEXField"/>
-                                    
-                                    <CheckBox x:Name="INTFieldCheckBox" 
-                                             Content="INT" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="INTField"/>
-                                    
-                                    <!-- Misc Stats -->
-                                    <TextBlock Text="Misc Stats" 
-                                             FontWeight="SemiBold" 
-                                             Margin="5,10,0,5"/>
-                                    
-                                    <CheckBox x:Name="HPFieldCheckBox" 
-                                             Content="HP" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="HPField"/>
-                                    
-                                    <CheckBox x:Name="ArmorFieldCheckBox" 
-                                             Content="Armor" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ArmorField"/>
-                                    
-                                    <CheckBox x:Name="MagicResistanceFieldCheckBox" 
-                                             Content="Magic Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="MagicResistanceField"/>
-                                    
-                                    <CheckBox x:Name="ATKMinFieldCheckBox" 
-                                             Content="ATK Min" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ATKMinField"/>
-                                    
-                                    <CheckBox x:Name="ATKMaxFieldCheckBox" 
-                                             Content="ATK Max" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ATKMaxField"/>
-                                    
-                                    <CheckBox x:Name="ATKDelayFieldCheckBox" 
-                                             Content="ATK Delay" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ATKDelayField"/>
-                                    
-                                    <CheckBox x:Name="SpeedFieldCheckBox" 
-                                             Content="Speed" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="SpeedField"/>
-                                    
-                                    <CheckBox x:Name="HitRateFieldCheckBox" 
-                                             Content="Hit Rate" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="HitRateField"/>
-                                    
-                                    <CheckBox x:Name="EvasionRateFieldCheckBox" 
-                                             Content="Evasion Rate" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="EvasionRateField"/>
-                                    
-                                    <!-- Elementary -->
-                                    <TextBlock Text="Elementary" 
-                                             FontWeight="SemiBold" 
-                                             Margin="5,10,0,5"/>
-                                    
-                                    <CheckBox x:Name="ElementFieldCheckBox" 
-                                             Content="Element" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ElementField"/>
-                                    
-                                    <CheckBox x:Name="RatioFieldCheckBox" 
-                                             Content="Ratio" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="RatioField"/>
-                                    
-                                    <CheckBox x:Name="WaterResistanceFieldCheckBox" 
-                                             Content="Water Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="WaterResistanceField"/>
-                                    
-                                    <CheckBox x:Name="FireResistanceFieldCheckBox" 
-                                             Content="Fire Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="FireResistanceField"/>
-                                    
-                                    <CheckBox x:Name="WindResistanceFieldCheckBox" 
-                                             Content="Wind Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="WindResistanceField"/>
-                                    
-                                    <CheckBox x:Name="EarthResistanceFieldCheckBox" 
-                                             Content="Earth Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="EarthResistanceField"/>
-                                    
-                                    <CheckBox x:Name="ElectricityResistanceFieldCheckBox" 
-                                             Content="Electricity Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ElectricityResistanceField"/>
-                                </StackPanel>
-                            </Expander>
-                            
-                            <Expander Header="Combat/Battle Fields" 
-                                     Margin="0,0,0,5"
-                                     IsExpanded="False">
-                                <StackPanel x:Name="CombatBattleFieldsPanel">
-                                    <CheckBox x:Name="AIFieldCheckBox" 
-                                             Content="Artificial Intelligence (AI)" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="AIField"/>
-                                    
-                                    <CheckBox x:Name="BelligerenceFieldCheckBox" 
-                                             Content="Belligerence" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="BelligerenceField"/>
-                                    
-                                    <CheckBox x:Name="LevelFieldCheckBox" 
-                                             Content="Level" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="LevelField"/>
-                                    
-                                    <CheckBox x:Name="ActionRadiusFieldCheckBox" 
-                                             Content="Action Radius" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ActionRadiusField"/>
-                                    
-                                    <CheckBox x:Name="CombatATKMinFieldCheckBox" 
-                                             Content="Attack min." 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ATKMinField"/>
-                                    
-                                    <CheckBox x:Name="CombatATKMaxFieldCheckBox" 
-                                             Content="Attack max." 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ATKMaxField"/>
-                                    
-                                    <CheckBox x:Name="AttackAnim1FieldCheckBox" 
-                                             Content="Attack Animation 1" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="AttackAnim1Field"/>
-                                    
-                                    <CheckBox x:Name="AttackAnim2FieldCheckBox" 
-                                             Content="Attack Animation 2" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="AttackAnim2Field"/>
-                                    
-                                    <CheckBox x:Name="AttackAnim3FieldCheckBox" 
-                                             Content="Attack Animation 3" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="AttackAnim3Field"/>
-                                    
-                                    <CheckBox x:Name="AttackSpeedFieldCheckBox" 
-                                             Content="Attack Speed" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="AttackSpeedField"/>
-                                    
-                                    <CheckBox x:Name="CombatATKDelayFieldCheckBox" 
-                                             Content="Attack Delay" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ATKDelayField"/>
-                                    
-                                    <CheckBox x:Name="CombatHPFieldCheckBox" 
-                                             Content="Health Points" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="HPField"/>
-                                    
-                                    <CheckBox x:Name="MPFieldCheckBox" 
-                                             Content="Mana Points" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="MPField"/>
-                                </StackPanel>
-                            </Expander>
-                            
-                            <Expander Header="Defensive Stats &amp; Resistances Fields" 
-                                     Margin="0,0,0,5"
-                                     IsExpanded="False">
-                                <StackPanel x:Name="DefensiveStatsResistancesFieldsPanel">
-                                    <CheckBox x:Name="DefensiveArmorFieldCheckBox" 
-                                             Content="Armor" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ArmorField"/>
-                                    
-                                    <CheckBox x:Name="AbrasionFieldCheckBox" 
-                                             Content="Abrasion" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="AbrasionField"/>
-                                    
-                                    <CheckBox x:Name="HardnessFieldCheckBox" 
-                                             Content="Hardness" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="HardnessField"/>
-                                    
-                                    <CheckBox x:Name="DefensiveMagicResistanceFieldCheckBox" 
-                                             Content="Magic Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="MagicResistanceField"/>
-                                    
-                                    <CheckBox x:Name="DefensiveElectricityResistanceFieldCheckBox" 
-                                             Content="Electricity Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ElectricityResistanceField"/>
-                                    
-                                    <CheckBox x:Name="DefensiveFireResistanceFieldCheckBox" 
-                                             Content="Fire Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="FireResistanceField"/>
-                                    
-                                    <CheckBox x:Name="DefensiveWindResistanceFieldCheckBox" 
-                                             Content="Wind Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="WindResistanceField"/>
-                                    
-                                    <CheckBox x:Name="DefensiveWaterResistanceFieldCheckBox" 
-                                             Content="Water Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="WaterResistanceField"/>
-                                    
-                                    <CheckBox x:Name="DefensiveEarthResistanceFieldCheckBox" 
-                                             Content="Earth Resistance" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="EarthResistanceField"/>
-                                </StackPanel>
-                            </Expander>
-                            
-                            <Expander Header="Elementar &amp; Damage Types Fields" 
-                                     Margin="0,0,0,5"
-                                     IsExpanded="False">
-                                <StackPanel x:Name="ElementalDamageTypesFieldsPanel">
-                                    <CheckBox x:Name="ElementalElementFieldCheckBox" 
-                                             Content="Element Type" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ElementField"/>
-                                    
-                                    <CheckBox x:Name="ElementAttackFieldCheckBox" 
-                                             Content="Element Attack" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ElementAttackField"/>
-                                    
-                                    <CheckBox x:Name="CorrectionValueFieldCheckBox" 
-                                             Content="Correction Value" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="CorrectionValueField"/>
-                                </StackPanel>
-                            </Expander>
-                            
-                            <Expander Header="Sound Fields" 
-                                     Margin="0,0,0,5"
-                                     IsExpanded="False">
-                                <StackPanel x:Name="SoundFieldsPanel">
-                                    <CheckBox x:Name="SoundAttack1FieldCheckBox" 
-                                             Content="Sound Attack 1" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="SoundAttack1Field"/>
-                                    
-                                    <CheckBox x:Name="SoundAttack2FieldCheckBox" 
-                                             Content="Sound Attack 2" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="SoundAttack2Field"/>
-                                    
-                                    <CheckBox x:Name="SoundDie1FieldCheckBox" 
-                                             Content="Sound Die 1" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="SoundDie1Field"/>
-                                    
-                                    <CheckBox x:Name="SoundDie2FieldCheckBox" 
-                                             Content="Sound Die 2" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="SoundDie2Field"/>
-                                    
-                                    <CheckBox x:Name="SoundDamage1FieldCheckBox" 
-                                             Content="Sound Damage 1" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="SoundDamage1Field"/>
-                                    
-                                    <CheckBox x:Name="SoundDamage2FieldCheckBox" 
-                                             Content="Sound Damage 2" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="SoundDamage2Field"/>
-                                    
-                                    <CheckBox x:Name="SoundDamage3FieldCheckBox" 
-                                             Content="Sound Damage 3" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="SoundDamage3Field"/>
-                                    
-                                    <CheckBox x:Name="SoundIdle1FieldCheckBox" 
-                                             Content="Sound Idle 1" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="SoundIdle1Field"/>
-                                    
-                                    <CheckBox x:Name="SoundIdle2FieldCheckBox" 
-                                             Content="Sound Idle 2" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="SoundIdle2Field"/>
-                                </StackPanel>
-                            </Expander>
-                            
-                            <Expander Header="Model &amp; Motions Fields" 
-                                     Margin="0,0,0,5"
-                                     IsExpanded="False">
-                                <StackPanel x:Name="ModelMotionsFieldsPanel">
-                                    <CheckBox x:Name="ModelDisplayCheckBox" 
-                                             Content="3D Model Display" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ModelDisplay"/>
-                                    
-                                    <CheckBox x:Name="MotionsListCheckBox" 
-                                             Content="Motions List" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="MotionsList"/>
-                                    
-                                    <CheckBox x:Name="MotionFileFieldCheckBox" 
-                                             Content="Motion File" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="MotionFileField"/>
-                                    
-                                    <CheckBox x:Name="IdentifierFieldCheckBox" 
-                                             Content="Identifier" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="IdentifierField"/>
-                                    
-                                    <CheckBox x:Name="ReferenceFieldCheckBox" 
-                                             Content="Reference" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ReferenceField"/>
-                                    
-                                    <CheckBox x:Name="ScaleModelFieldCheckBox" 
-                                             Content="Scale" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="ScaleField"/>
-                                    
-                                    <CheckBox x:Name="SpeedModelFieldCheckBox" 
-                                             Content="Speed" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="SpeedField"/>
-                                    
-                                    <CheckBox x:Name="FlyingFieldCheckBox" 
-                                             Content="Flying" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="FlyingField"/>
-                                    
-                                    <CheckBox x:Name="AdditionalTexturesFieldCheckBox" 
-                                             Content="Additional Textures" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="AdditionalTexturesField"/>
-                                    
-                                    <CheckBox x:Name="JumpHeightFieldCheckBox" 
-                                             Content="Jump Height" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="JumpHeightField"/>
-                                    
-                                    <CheckBox x:Name="AirJumpFieldCheckBox" 
-                                             Content="Air Jump" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="AirJumpField"/>
-                                    
-                                    <CheckBox x:Name="FlyLevelFieldCheckBox" 
-                                             Content="Fly Level" 
-                                             Style="{StaticResource FilterCheckBoxStyle}"
-                                             IsChecked="True"
-                                             Checked="FieldFilter_Checked"
-                                             Unchecked="FieldFilter_Unchecked"
-                                             Tag="FlyLevelField"/>
-                                </StackPanel>
-                            </Expander>
-                            
-                            <Button Content="Reset All Filters" 
-                                   Margin="0,10,0,0"
-                                   HorizontalAlignment="Stretch"
-                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                   Background="{DynamicResource ControlFillColorDefaultBrush}"
-                                   BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                   Click="ResetFilters_Click"/>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Grid>
             </Border>
         </Popup>
     </Grid>
