@@ -31,13 +31,7 @@ namespace eTools_Ultimate.Helpers
         public static extern bool LoadModel(IntPtr engine, string path);
 
         [DllImport("3DModelRenderer.dll")]
-        public static extern int GetNumMotions(IntPtr engine);
-
-        [DllImport("3DModelRenderer.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr GetMotionName(IntPtr engine, int index);
-
-        [DllImport("3DModelRenderer.dll")]
-        public static extern void PlayMotion(IntPtr engine, int index);
+        public static extern void PlayMotion(IntPtr engine, string path, int playType = 2);
 
         [DllImport("3DModelRenderer.dll")]
         public static extern void RotateCamera(IntPtr engine, int x, int y);
@@ -53,5 +47,8 @@ namespace eTools_Ultimate.Helpers
 
         [DllImport("3DModelRenderer.dll")]
         public static extern void ResizeViewport(IntPtr engine, int width, int height);
+
+        [DllImport("3DModelRenderer.dll")]
+        public static extern void SetParts(IntPtr engine, string path);
     }
 }

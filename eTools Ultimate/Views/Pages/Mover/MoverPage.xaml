@@ -169,7 +169,7 @@
                         <TextBox Grid.Row="1"
                                 x:Name="IdTextBox"
                                 Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                Text="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" TextChanged="IdTextBox_TextChanged"/>
                     </Grid>
                     <!-- Name -->
                     <Grid Style="{StaticResource FormFieldStyle}">

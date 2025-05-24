@@ -9,6 +9,7 @@ using System.Windows.Media;
 using eTools_Ultimate.Models;
 using System.Runtime.InteropServices;
 using eTools_Ultimate.Services;
+using System.IO;
 
 namespace eTools_Ultimate.Views.Pages
 {
@@ -141,6 +142,7 @@ namespace eTools_Ultimate.Views.Pages
         {
             if (_d3dHost is null) return;
             if (ViewModel.MoversView.CurrentItem is not Mover mover) return;
+            if (mover.Id == "MI_MALE" || mover.Id == "MI_FEMALE") return;
             NativeMethods.LoadModel(_d3dHost._native, mover.Model.Model3DFilePath);
 
             int textureEx = DefinesService.Instance.Defines[mover.Model.NTextureEx];
@@ -154,19 +156,28 @@ namespace eTools_Ultimate.Views.Pages
         [RelayCommand]
         private void PlayMotion(ModelMotion motion)
         {
-            string lowerMotionKey = motion.SzMotion.ToLower();
             if (_d3dHost is null) return;
-            int numMotions = NativeMethods.GetNumMotions(_d3dHost._native);
-            for(int i = 0; i < numMotions; i++)
-            {
-                IntPtr motionNamePtr = NativeMethods.GetMotionName(_d3dHost._native, i);
-                string? motionName = Marshal.PtrToStringAnsi(motionNamePtr);
-                if(motionName?.ToLower() == lowerMotionKey)
-                {
-                    NativeMethods.PlayMotion(_d3dHost._native, i);
-                    break;
-                }
-            }
+            if(MoversListView.SelectedItem is not Mover mover) return;
+
+            string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+            string root = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
+            string lowerMotionKey = motion.SzMotion;
+
+            string fileMotion = $@"{modelsFolderPath}\{root}_{lowerMotionKey}.ani";
+
+            NativeMethods.PlayMotion(_d3dHost._native, fileMotion);
+
+            //int numMotions = NativeMethods.GetNumMotions(_d3dHost._native);
+            //for(int i = 0; i < numMotions; i++)
+            //{
+            //    IntPtr motionNamePtr = NativeMethods.GetMotionName(_d3dHost._native, i);
+            //    string? motionName = Marshal.PtrToStringAnsi(motionNamePtr);
+            //    if(motionName?.ToLower() == lowerMotionKey)
+            //    {
+            //        NativeMethods.PlayMotion(_d3dHost._native, i);
+            //        break;
+            //    }
+            //}
         }
 
         private void ModelTextureExTextBlock_TextChanged(object sender, TextChangedEventArgs e)
@@ -185,6 +196,54 @@ namespace eTools_Ultimate.Views.Pages
 
             float scale = mover.Model.FScale;
             NativeMethods.SetScale(_d3dHost._native, scale);
+        }
+
+        private void IdTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(_d3dHost is null) return;
+            if (sender is not System.Windows.Controls.TextBox idTextbox || idTextbox.Name != "IdTextBox") return;
+
+            switch(idTextbox.Text)
+            {
+                case "MI_MALE":
+                    {
+                        string[] parts = [
+                            "Part_maleHair06.o3d",
+                            "Part_maleHead01.o3d",
+                            "Part_maleHand.o3d",
+                            "Part_maleLower.o3d",
+                            "Part_maleUpper.o3d",
+                            "Part_maleFoot.o3d",
+                        ];
+
+                        string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+                        string[] partsPath = [.. parts.Select(part => $"{modelsFolderPath}{part}")];
+
+                        foreach(string partPath in partsPath)
+                        {
+                            NativeMethods.SetParts(_d3dHost._native, partPath);
+                        }
+                        break;
+                    }
+                case "MI_FEMALE":
+                    {
+                        string[] parts = [
+                            "Part_femaleHair06.o3d",
+                            "Part_femaleHead01.o3d",
+                            "Part_femaleHand.o3d",
+                            "Part_femaleLower.o3d",
+                            "Part_femaleUpper.o3d",
+                            "Part_femaleFoot.o3d",
+                        ];
+                        string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+                        string[] partsPath = [.. parts.Select(part => $"{modelsFolderPath}{part}")];
+                        foreach (string partPath in partsPath)
+                        {
+                            NativeMethods.SetParts(_d3dHost._native, partPath);
+                        }
+                        break;
+                    }
+            }
         }
     }
 } 
