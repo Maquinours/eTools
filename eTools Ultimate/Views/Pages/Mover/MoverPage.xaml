@@ -1337,6 +1337,7 @@
                                     <ListView
                                               x:Name="MotionsListView"
                                               Style="{StaticResource AppListViewStyle}"
+                                              Height="200"
                                               ItemContainerStyle="{StaticResource AppListViewItemStyle}"
                                               ItemsSource="{Binding ViewModel.MoversView.CurrentItem.Model.Motions}">
                                         <ListView.ItemTemplate>
