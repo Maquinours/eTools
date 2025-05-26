@@ -145,7 +145,7 @@
                                     BorderBrush="{DynamicResource ControlElevationBorderBrush}">
                                 <Image x:Name="MotionIconPreview"
                                         Margin="2"
-                                        Source="{Binding MotionIconImage}">
+                                        Source="{Binding Icon}">
                                 </Image>
                             </Border>
                         </Grid>
