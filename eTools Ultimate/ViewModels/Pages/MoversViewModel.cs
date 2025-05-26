@@ -2,6 +2,7 @@
 using eTools_Ultimate.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -39,6 +40,9 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         public string[] MotionsPossibilities => [.. DefinesService.Instance.MotionDefines.Select(x => x.Key)];
+
+        // TODO: can be improved to only display existing textures files.
+        public ReadOnlyDictionary<string, int> AdditionalTexturePossibilities => DefinesService.Instance.AdditionalTextureDefines;
 
         public Task OnNavigatedToAsync()
         {

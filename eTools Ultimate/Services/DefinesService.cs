@@ -21,6 +21,7 @@ namespace eTools_Ultimate.Services
 
         // TODO: handle defines changes. (defines is not changing for now so it's not useful right not)
         public ReadOnlyDictionary<string, int> MotionDefines => new(this.Defines.Where(x => x.Key.StartsWith("MTI_")).ToDictionary());
+        public ReadOnlyDictionary<string, int> AdditionalTextureDefines => new(this.Defines.Where(x => x.Key.StartsWith("ATEX_")).ToDictionary());
 
         public void Load()
         {
