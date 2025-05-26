@@ -1590,7 +1590,9 @@
                                     <ui:Button Grid.Column="1" 
                                              Content="..." 
                                              Width="30"
-                                             Margin="5,0,0,0"/>
+                                             Margin="5,0,0,0"
+                                             Command="{Binding DataContext.SelectModelFileCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                    />
                                 </Grid>
                             </Grid>
 

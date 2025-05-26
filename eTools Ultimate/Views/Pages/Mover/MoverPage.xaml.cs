@@ -180,6 +180,32 @@ namespace eTools_Ultimate.Views.Pages
             //}
         }
 
+        [RelayCommand]
+        private void SelectModelFile()
+        {
+            if (ViewModel.MoversView.CurrentItem is not Mover mover) return;
+
+            string? filePath = FileFolderSelector.SelectFile(mover.Model.Model3DFilePath, eTools_Ultimate.Resources.Texts.SelectMoverModelFile, $"{eTools_Ultimate.Resources.Texts.Mover3DFile}|mvr_*.o3d");
+
+            string? directoryPath = Path.GetDirectoryName(filePath);
+            string? fileName = Path.GetFileNameWithoutExtension(filePath);
+            string? fileExtension = Path.GetExtension(filePath);
+            string? modelsFolderPath = Path.GetDirectoryName(Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath);
+
+            if (
+                filePath is null || 
+                directoryPath is null || 
+                fileName is null || 
+                fileExtension is null ||
+                !directoryPath.Equals(modelsFolderPath, StringComparison.OrdinalIgnoreCase) || 
+                !fileName.StartsWith("mvr_", StringComparison.OrdinalIgnoreCase) ||
+                !fileExtension.Equals(".o3d", StringComparison.OrdinalIgnoreCase)
+                )
+                return;
+
+            mover.Model.SzName = fileName.Substring(4);
+        }
+
         private void ModelTextureExTextBlock_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (_d3dHost is null) return;
