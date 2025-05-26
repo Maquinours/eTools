@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,6 +45,26 @@ namespace eTools_Ultimate.ViewModels.Pages
         // TODO: can be improved to only display existing textures files.
         public ReadOnlyDictionary<string, int> AdditionalTexturePossibilities => DefinesService.Instance.AdditionalTextureDefines;
 
+        public string[] ModelFilePossibilities
+        {
+            get
+            {
+                Settings settings = Settings.Instance;
+                string modelsFolderPath = settings.ModelsFolderPath ?? settings.DefaultModelsFolderPath;
+                if (string.IsNullOrEmpty(modelsFolderPath) || !Directory.Exists(modelsFolderPath))
+                    return [];
+                return [.. Directory.GetFiles(modelsFolderPath, "mvr_*.o3d", SearchOption.TopDirectoryOnly).Select(x => Path.GetFileNameWithoutExtension(x).Substring(4))];
+            }
+        }
+
+        private FileSystemWatcher _modelsDirectoryWatcher = new()
+        {
+            Filter = "mvr_*.o3d",
+            NotifyFilter = NotifyFilters.FileName,
+            IncludeSubdirectories = false,
+            EnableRaisingEvents = false
+        };
+
         public Task OnNavigatedToAsync()
         {
             if (!_isInitialized)
@@ -78,7 +99,28 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             MoversView.Filter = new Predicate<object>(FilterItem);
 
+            Settings.Instance.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName == nameof(Settings.ModelsFolderPath) || e.PropertyName == nameof(Settings.DefaultModelsFolderPath))
+                {
+                    InitializeModelsDirectoryWatcherPath();
+                    OnPropertyChanged(nameof(ModelFilePossibilities));
+                }
+            };
+
+            this._modelsDirectoryWatcher.Renamed += (sender, e) => OnPropertyChanged(nameof(ModelFilePossibilities));
+            this._modelsDirectoryWatcher.Created += (sender, e) => OnPropertyChanged(nameof(ModelFilePossibilities));
+            this._modelsDirectoryWatcher.Deleted += (sender, e) => OnPropertyChanged(nameof(ModelFilePossibilities));
+            InitializeModelsDirectoryWatcherPath();
+
             _isInitialized = true;
+        }
+
+        private void InitializeModelsDirectoryWatcherPath()
+        {
+            this._modelsDirectoryWatcher.EnableRaisingEvents = false;
+            this._modelsDirectoryWatcher.Path = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+            this._modelsDirectoryWatcher.EnableRaisingEvents = true;
         }
 
         private bool FilterItem(object obj)

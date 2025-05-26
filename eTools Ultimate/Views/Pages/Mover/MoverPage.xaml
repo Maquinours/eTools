@@ -1584,9 +1584,9 @@
                                         <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0"
-                                            Style="{StaticResource AppTextBoxStyle}"
-                                            Text="{Binding ViewModel.MoversView.CurrentItem.Model.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <ui:AutoSuggestBox Grid.Column="0"
+                                            Text="{Binding ViewModel.MoversView.CurrentItem.Model.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            OriginalItemsSource="{Binding ViewModel.ModelFilePossibilities, Mode=OneWay}"/>
                                     <ui:Button Grid.Column="1" 
                                              Content="..." 
                                              Width="30"
