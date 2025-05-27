@@ -44,7 +44,7 @@ namespace eTools_Ultimate.Services
                     int dwId = script.GetNumber();
                     if (script.EndOfStream) break;
                     
-                    string dwColor = script.GetToken();
+                    int dwColor = script.GetNumber();
                     script.GetToken(); // {
                     string szName = script.GetToken();
 
@@ -70,7 +70,7 @@ namespace eTools_Ultimate.Services
             StringsService stringsService = StringsService.Instance;
             string szName = stringsService.GetNextStringIdentifier(STRING_ID_PREFIX);
             stringsService.GenerateNewString(szName);
-            Text text = new("TID_", "0xFFFFFFFF", szName);
+            Text text = new(-1, unchecked((int)0xFFFFFFFF), szName);
             this.Texts.Add(text);
             return text;
         }

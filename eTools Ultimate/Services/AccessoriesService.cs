@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using eTools_Ultimate.Models;
 using eTools_Ultimate.Exceptions;
+using eTools_Ultimate.Helpers;
 
 namespace eTools_Ultimate.Services
 {
@@ -32,28 +33,28 @@ namespace eTools_Ultimate.Services
             this.ClearAccessories();
 
             string filePath = $"{Settings.Instance.ResourcesFolderPath}accessory.inc"; // TODO: add settings value
-            using (Scanner scanner = new())
+            using (Script script = new())
             {
-                scanner.Load(filePath);
+                script.Load(filePath);
 
                 while(true)
                 {
-                    scanner.GetToken();
+                    script.GetToken();
 
-                    if (scanner.EndOfStream) break;
+                    if (script.EndOfStream) break;
 
-                    switch(scanner.Token)
+                    switch(script.Token)
                     {
                         case "Probability":
                             {
-                                scanner.GetToken(); // {
+                                script.GetToken(); // {
 
                                 while(true)
                                 {
-                                    int probability = scanner.GetNumber();
+                                    int probability = script.GetNumber();
 
-                                    if (scanner.Token == "}") break;
-                                    if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+                                    if (script.Token == "}") break;
+                                    if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
                                     this.Probabilities.Add(probability);
                                 }
@@ -62,38 +63,38 @@ namespace eTools_Ultimate.Services
                             }
                         case "Accessory":
                             {
-                                scanner.GetToken(); // {
+                                script.GetToken(); // {
 
                                 while(true)
                                 {
-                                    string dwItemId = scanner.GetToken();
+                                    int dwItemId = script.GetNumber();
 
-                                    if (scanner.Token == "}") break;
-                                    if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+                                    if (script.Token == "}") break;
+                                    if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
-                                    scanner.GetToken(); // {
+                                    script.GetToken(); // {
 
                                     List<AccessoryAbilityOptionData> abilityOptionData = [];
 
                                     while(true)
                                     {
-                                        int nAbilityOption = scanner.GetNumber();
+                                        int nAbilityOption = script.GetNumber();
 
-                                        if (scanner.Token == "}") break;
-                                        if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+                                        if (script.Token == "}") break;
+                                        if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
-                                        scanner.GetToken(); // {
+                                        script.GetToken(); // {
 
                                         List<AccessoryAbilityOptionDstData> dstData = [];
 
                                         while(true)
                                         {
-                                            string nDst = scanner.GetToken();
+                                            int nDst = script.GetNumber();
 
-                                            if (scanner.Token == "}") break;
-                                            if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+                                            if (script.Token == "}") break;
+                                            if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
-                                            int nAdj = scanner.GetNumber();
+                                            int nAdj = script.GetNumber();
 
                                             AccessoryAbilityOptionDstData dstDataItem = new(nDst, nAdj);
                                             dstData.Add(dstDataItem);

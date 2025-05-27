@@ -181,7 +181,7 @@ namespace eTools_Ultimate.Views.Pages.Accessory
         private void AddDstData(AccessoryAbilityOptionData abilityOptionData)
         {
             string dst = AccessoriesViewModel.PossibleDstValues.First();
-            AccessoryAbilityOptionDstData dstData = new(dst, 0);
+            AccessoryAbilityOptionDstData dstData = new(DefinesService.Instance.Defines[dst], 0);
             abilityOptionData.DstData.Add(dstData);
         }
 

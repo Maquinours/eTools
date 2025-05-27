@@ -44,10 +44,17 @@ namespace eTools_Ultimate.Helpers
 			return false;
         }
 
-		private bool LookupDefine(string str, out int value)
+		private static bool LookupDefine(string str, out int value)
 		{
 			return DefinesService.Instance.Defines.TryGetValue(str, out value);
 		}
+
+		public static int GetDefineNum(string str)
+		{
+			if(LookupDefine(str, out int value))
+				return value;
+			return -1;
+        }
 
         public override string GetToken(bool bComma = false)
         {

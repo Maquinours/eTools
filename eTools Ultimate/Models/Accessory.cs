@@ -10,10 +10,10 @@ namespace eTools_Ultimate.Models
 {
     public class AccessoryAbilityOptionDstData
     {
-        private string _nDst;
+        private int _nDst;
         private int _nAdj;
 
-        public string NDst
+        public int NDst
         {
             get => this._nDst;
             set => this._nDst = value;
@@ -24,7 +24,7 @@ namespace eTools_Ultimate.Models
             set => this._nAdj = value;
         }
 
-        public AccessoryAbilityOptionDstData(string nDst, int nAdj)
+        public AccessoryAbilityOptionDstData(int nDst, int nAdj)
         {
             this._nDst = nDst;
             this._nAdj = nAdj;
@@ -55,10 +55,10 @@ namespace eTools_Ultimate.Models
 
     public class Accessory : IDisposable
     {
-        private string _dwItemId;
+        private int _dwItemId;
         private ObservableCollection<AccessoryAbilityOptionData> _abilityOptionData;
 
-        public string DwItemId
+        public int DwItemId
         {
             get => this._dwItemId;
             set => this._dwItemId = value;
@@ -71,7 +71,7 @@ namespace eTools_Ultimate.Models
 
         public Item? Item => ItemsService.Instance.Items.Where(x => x.Id == this.DwItemId).FirstOrDefault();
 
-        public Accessory(string dwItemId, List<AccessoryAbilityOptionData> abilityOptionData)
+        public Accessory(int dwItemId, List<AccessoryAbilityOptionData> abilityOptionData)
         {
             this._dwItemId = dwItemId;
             this._abilityOptionData = [..abilityOptionData];

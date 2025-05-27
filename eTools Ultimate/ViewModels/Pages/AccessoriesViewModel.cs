@@ -84,12 +84,10 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (obj is not Accessory accessory) return false;
             if (string.IsNullOrEmpty(this.SearchText)) return true;
 
-            string searchTextLower = this.SearchText.ToLower();
-
-            if (accessory.DwItemId.ToLower().Contains(searchTextLower)) return true;
+            //if (DefinesService.Instance.Defines.FirstOrDefault(x => x.Key.StartsWith("II_") && x.Value == accessory.DwItemId).Key.Contains(this.SearchText, StringComparison.OrdinalIgnoreCase)) return true;
 
             if (accessory.Item is not Item item) return false;
-            return item.Name.ToLower().Contains(this.SearchText.ToLower());
+            return item.Name.Contains(this.SearchText, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

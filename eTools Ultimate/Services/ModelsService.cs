@@ -46,44 +46,45 @@ namespace eTools_Ultimate.Services
             // Maybe make it a settings property
             string filePath = $"{Settings.Instance.ResourcesFolderPath}mdlDyna.inc";
 
-            using (Scanner scanner = new Scanner()) 
+            using (Script script = new()) 
             {
-                scanner.Load(filePath);
+                script.Load(filePath);
 
                 string szObject;
                 while (true)
                 {
-                    MainModelBrace mainBrace = new MainModelBrace
+                    MainModelBrace mainBrace = new()
                     {
-                        SzName = scanner.GetToken() // Name of the main brace
+                        SzName = script.GetToken() // Name of the main brace
                     };
-                    if (scanner.EndOfStream) break; // If there is no more brace
-                    mainBrace.IType = scanner.GetNumber(); // Type of the main brace
-                    scanner.GetToken(); // {
-                    scanner.GetToken(); // object name or }
+                    if (script.EndOfStream) break; // If there is no more brace
+                    mainBrace.IType = script.GetNumber(); // Type of the main brace
+                    script.GetToken(); // {
+                    script.GetToken(); // object name or }
                     this.models.Add(mainBrace);
-                    List<ModelBrace> currBraces = new List<ModelBrace> // List containing current brace and its parents (last element is current brace)
-                {
+                    List<ModelBrace> currBraces =
+                // List containing current brace and its parents (last element is current brace)
+                [
                     mainBrace
-                };
+                ];
                     ModelBrace currBrace = mainBrace;
                     while (currBraces.Count > 0)
                     {
-                        if (scanner.Token == "}") // End of current brace
+                        if (script.Token == "}") // End of current brace
                         {
                             currBraces.RemoveAt(currBraces.Count - 1);
                             if (currBraces.Count != 0)
                             {
                                 currBrace = currBraces[currBraces.Count - 1];
-                                scanner.GetToken();
+                                script.GetToken();
                             }
                             continue;
                         }
-                        if (scanner.EndOfStream)
+                        if (script.EndOfStream)
                             throw new IncorrectlyFormattedFileException(filePath);
-                        szObject = scanner.Token;
-                        scanner.GetToken();
-                        if (scanner.Token == "{") // Start of a new brace
+                        szObject = script.Token;
+                        int iObject = script.GetNumber();
+                        if (script.Token == "{") // Start of a new brace
                         {
                             ModelBrace tempBrace = new ModelBrace
                             {
@@ -92,41 +93,42 @@ namespace eTools_Ultimate.Services
                             currBrace.Braces.Add(tempBrace);
                             currBrace = tempBrace;
                             currBraces.Add(currBrace);
-                            scanner.GetToken();
+                            script.GetToken();
                             continue;
                         }
                         // Model element
-                        ModelElem modelElem = new ModelElem();
-                        string iObject = scanner.Token;
-                        modelElem.DwType = mainBrace.IType;
-                        modelElem.DwIndex = iObject;
-                        modelElem.SzName = szObject;
-                        modelElem.DwModelType = scanner.GetToken();
-                        modelElem.SzPart = scanner.GetToken();
-                        modelElem.BFly = scanner.GetNumber();
-                        modelElem.DwDistant = scanner.GetToken();
-                        modelElem.BPick = scanner.GetNumber();
-                        modelElem.FScale = scanner.GetFloat();
-                        modelElem.BTrans = scanner.GetNumber();
-                        modelElem.BShadow = scanner.GetNumber();
-                        modelElem.NTextureEx = scanner.GetToken();
-                        modelElem.BRenderFlag = scanner.GetNumber();
+                        ModelElem modelElem = new()
+                        {
+                            DwType = mainBrace.IType,
+                            DwIndex = iObject,
+                            SzName = szObject,
+                            DwModelType = script.GetNumber(),
+                            SzPart = script.GetToken(),
+                            BFly = script.GetNumber(),
+                            DwDistant = script.GetNumber(),
+                            BPick = script.GetNumber(),
+                            FScale = script.GetFloat(),
+                            BTrans = script.GetNumber(),
+                            BShadow = script.GetNumber(),
+                            NTextureEx = script.GetNumber(),
+                            BRenderFlag = script.GetNumber()
+                        };
 
-                        scanner.GetToken();
-                        if (scanner.Token == "{")
+                        script.GetToken();
+                        if (script.Token == "{")
                         {
                             while (true)
                             {
                                 ModelMotion motion = new ModelMotion();
-                                if (scanner.EndOfStream)
+                                if (script.EndOfStream)
                                     throw new IncorrectlyFormattedFileException(filePath);
-                                motion.SzMotion = scanner.GetToken(); // motion name or }
+                                motion.SzMotion = script.GetToken(); // motion name or }
                                 if (motion.SzMotion == "}")
                                     break;
-                                motion.IMotion = scanner.GetToken();
+                                motion.IMotion = script.GetToken();
                                 modelElem.Motions.Add(motion);
                             }
-                            scanner.GetToken();
+                            script.GetToken();
                         }
                         currBrace.Models.Add(modelElem); // We add the current model to the current brace
                         if (modelElem.DwType == defines["OT_MOVER"]) // If model corresponds to a mover

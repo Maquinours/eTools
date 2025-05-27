@@ -1,4 +1,5 @@
 ﻿using eTools_Ultimate.Services;
+using SixLabors.ImageSharp.ColorSpaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -44,7 +45,7 @@ namespace eTools_Ultimate.Models
         }
 
         private int _dwId;
-        private string _dwColor;
+        private int _dwColor;
         private string _szName;
 
         public int DwId
@@ -59,7 +60,7 @@ namespace eTools_Ultimate.Models
                 }
             }
         }
-        public string DwColor
+        public int DwColor
         {
             get => this._dwColor;
             set
@@ -93,18 +94,26 @@ namespace eTools_Ultimate.Models
             set => StringsService.Instance.ChangeStringValue(this._szName, value);
         }
 
-        public Color? Color
+        public Color Color
         {
             get
             {
-                if (this.DwColor == null || !this.DwColor.StartsWith("0x")) return null;
-                string hex = $"#{this.DwColor.Replace("0x", "").Substring(0, 8).ToUpper()}";
-                return (Color)ColorConverter.ConvertFromString(hex);
+                //if (this.DwColor == null || !this.DwColor.StartsWith("0x")) return null;
+                byte a = (byte)((DwColor >> 24) & 0xFF);
+                byte r = (byte)((DwColor >> 16) & 0xFF);
+                byte g = (byte)((DwColor >> 8) & 0xFF);
+                byte b = (byte)(DwColor & 0xFF);
+
+                Color color = System.Windows.Media.Color.FromArgb(a, r, g, b);
+                return color;
             }
             set
             {
-                if(value != null)
-                    this.DwColor = $"0x{value?.A:X2}{value?.R:X2}{value?.G:X2}{value?.B:X2}".ToLower();
+                int colorValue = (Color.A << 24) | (Color.R << 16) | (Color.G << 8) | Color.B;
+                if(colorValue != DwColor)
+                {
+                    DwColor = colorValue;
+                }
             }
         }
 
@@ -118,7 +127,7 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public Text(int dwId, string dwColor, string szName)
+        public Text(int dwId, int dwColor, string szName)
         {
             this._dwId = dwId;
             this._dwColor = dwColor;

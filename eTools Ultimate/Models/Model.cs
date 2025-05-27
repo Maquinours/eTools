@@ -66,32 +66,32 @@ namespace eTools_Ultimate.Models
         }
 
         private int _dwType;
-        private string _dwIndex;
+        private int _dwIndex;
         private string _szName;
-        private string _dwModelType;
+        private int _dwModelType;
         private string _szPart;
         private int _bFly;
-        private string _dwDistant;
+        private int _dwDistant;
         private int _bPick;
         private float _fScale;
         private int _bTrans;
         private int _bShadow;
-        private string _nTextureEx;
+        private int _nTextureEx;
         private int _bRenderFlag;
         private List<ModelMotion> _motions;
 
         public int DwType { get => this._dwType; set { if (this.DwType != value) { this._dwType = value; this.NotifyPropertyChanged(); } } }
-        public string DwIndex { get => this._dwIndex; set { if (this.DwIndex != value) { this._dwIndex = value; this.NotifyPropertyChanged(); } } }
+        public int DwIndex { get => this._dwIndex; set { if (this.DwIndex != value) { this._dwIndex = value; this.NotifyPropertyChanged(); } } }
         public string SzName { get => this._szName; set { if (this.SzName != value) { this._szName = value; this.NotifyPropertyChanged(); } } }
-        public string DwModelType { get => this._dwModelType; set { if (this.DwModelType != value) { this._dwModelType = value; this.NotifyPropertyChanged(); } } }
+        public int DwModelType { get => this._dwModelType; set { if (this.DwModelType != value) { this._dwModelType = value; this.NotifyPropertyChanged(); } } }
         public string SzPart { get => this._szPart; set { if (this.SzPart != value) { this._szPart = value; this.NotifyPropertyChanged(); } } }
         public int BFly { get => this._bFly; set { if (this.BFly != value) { this._bFly = value; this.NotifyPropertyChanged(); } } }
-        public string DwDistant { get => this._dwDistant; set { if (this.DwDistant != value) { this._dwDistant = value; this.NotifyPropertyChanged(); } } }
+        public int DwDistant { get => this._dwDistant; set { if (this.DwDistant != value) { this._dwDistant = value; this.NotifyPropertyChanged(); } } }
         public int BPick { get => this._bPick; set { if (this.BPick != value) { this._bPick = value; this.NotifyPropertyChanged(); } } }
         public float FScale { get => this._fScale; set { if (this.FScale != value) { this._fScale = value; this.NotifyPropertyChanged(); } } }
         public int BTrans { get => this._bTrans; set { if (this.BTrans != value) { this._bTrans = value; this.NotifyPropertyChanged(); } } }
         public int BShadow { get => this._bShadow; set { if (this.BShadow != value) { this._bShadow = value; this.NotifyPropertyChanged(); } } }
-        public string NTextureEx { get => this._nTextureEx; set { if (this.NTextureEx != value) { this._nTextureEx = value; this.NotifyPropertyChanged(); } } }
+        public int NTextureEx { get => this._nTextureEx; set { if (this.NTextureEx != value) { this._nTextureEx = value; this.NotifyPropertyChanged(); } } }
         public int BRenderFlag { get => this._bRenderFlag; set { if (this.BRenderFlag != value) { this._bRenderFlag = value; this.NotifyPropertyChanged(); } } }
 
         public List<ModelMotion> Motions { get => this._motions; private set { if (this.Motions != value) { this._motions = value; this.NotifyPropertyChanged(); } } }
