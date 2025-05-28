@@ -634,7 +634,15 @@ namespace eTools_Ultimate.Models
 
         public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; this.Model.DwIndex = value; } } }
 
-        public string Identifier => DefinesService.Instance.ReversedItemDefines.TryGetValue(this.Id, out string? identifier) ? identifier : this.Id.ToString();
+        public string Identifier
+        {
+            get => DefinesService.Instance.ReversedItemDefines.TryGetValue(this.Id, out string? identifier) ? identifier : this.Id.ToString();
+            set 
+            {
+                if(DefinesService.Instance.Defines.TryGetValue(value, out int val) || Int32.TryParse(value, out val))
+                    this.Id = val;
+            }
+        }
 
         public string Name
         {

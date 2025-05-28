@@ -166,9 +166,10 @@
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <TextBox Grid.Row="1"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <ui:AutoSuggestBox Grid.Row="1"
+                                Text="{Binding Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                OriginalItemsSource="{Binding Path=ViewModel.MoverIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                                DisplayMemberPath="Value"/>
                     </Grid>
 
                     <!-- ID Key -->
@@ -1501,6 +1502,10 @@
                                     Height="250" 
                                     Margin="0,0,10,0">
                                 <Grid>
+                                    <TextBox x:Name="IdentifierTextBlock"
+                                             Visibility="Collapsed" 
+                                             Text="{Binding ViewModel.MoversView.CurrentItem.Identifier, Mode=OneWay}"
+                                             TextChanged="MoverIdentifierTextBox_TextChanged" />
                                     <TextBox x:Name="Model3DFilePathTextBlock" 
                                             Visibility="Collapsed" 
                                             Text="{Binding ViewModel.MoversView.CurrentItem.Model.Model3DFilePath, Mode=OneWay}"
@@ -1537,7 +1542,7 @@
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
                                                 <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                                    <TextBlock Text="{Binding IMotion, Mode=OneWay}" />
+                                                    <TextBlock Text="{Binding MotionTypeIdentifier, Mode=OneWay}" />
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="MouseDown">
                                                             <i:InvokeCommandAction Command="{Binding DataContext.PlayMotionCommand, RelativeSource={RelativeSource AncestorType=Page}}" 

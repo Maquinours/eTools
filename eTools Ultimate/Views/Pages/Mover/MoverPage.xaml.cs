@@ -224,12 +224,12 @@ namespace eTools_Ultimate.Views.Pages
             NativeMethods.SetScale(_d3dHost._native, scale);
         }
 
-        private void IdTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void MoverIdentifierTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             if(_d3dHost is null) return;
-            if (sender is not System.Windows.Controls.TextBox idTextbox || idTextbox.Name != "IdTextBox") return;
+            if (ViewModel.MoversView.CurrentItem is not Mover mover) return;
 
-            switch(idTextbox.Text)
+            switch (mover.Identifier)
             {
                 case "MI_MALE":
                     {

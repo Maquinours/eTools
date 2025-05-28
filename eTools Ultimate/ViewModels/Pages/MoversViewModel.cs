@@ -52,6 +52,8 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
+        public List<KeyValuePair<int, string>> MoverIdentifiers => DefinesService.Instance.ReversedMoverDefines.ToList();
+
         private FileSystemWatcher _modelsDirectoryWatcher = new()
         {
             Filter = "mvr_*.o3d",

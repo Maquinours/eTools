@@ -24,6 +24,7 @@ namespace eTools_Ultimate.Services
         private readonly Dictionary<int, string> _reversedMotionDefines = [];
         private readonly Dictionary<int, string> _reversedMenuItemDefines = [];
         private readonly Dictionary<int, string> _reversedTextDefines = [];
+        private readonly Dictionary<int, string> _reversedMotionTypeDefines = [];
 
         public ObservableDictionary<string, int> Defines => this._defines;
 
@@ -33,6 +34,7 @@ namespace eTools_Ultimate.Services
         public Dictionary<int, string> ReversedMotionDefines => this._reversedMotionDefines;
         public Dictionary<int, string> ReversedMenuItemDefines => this._reversedMenuItemDefines;
         public Dictionary<int, string> ReversedTextDefines => this._reversedTextDefines;
+        public Dictionary<int, string> ReversedMotionTypeDefines => this._reversedMotionTypeDefines;
 
         public void Load()
         {
@@ -60,18 +62,20 @@ namespace eTools_Ultimate.Services
                         if (!this.Defines.ContainsKey(key))
                         {
                             this.Defines[key] = value;
-                            if(key.StartsWith("II_"))
+                            if (key.StartsWith("II_"))
                                 this.ReversedItemDefines[value] = key;
-                            else if(key.StartsWith("MI_"))
+                            else if (key.StartsWith("MI_"))
                                 this.ReversedMoverDefines[value] = key;
                             else if (key.StartsWith("SI_"))
                                 this.ReversedSkillDefines[value] = key;
-                            else if(key.StartsWith("MOT_"))
+                            else if (key.StartsWith("MOT_"))
                                 this.ReversedMotionDefines[value] = key;
-                            else if(key.StartsWith("MMI_"))
+                            else if (key.StartsWith("MMI_"))
                                 this.ReversedMenuItemDefines[value] = key;
-                            else if(key.StartsWith("TID_"))
+                            else if (key.StartsWith("TID_"))
                                 this.ReversedTextDefines[value] = key;
+                            else if (key.StartsWith("MTI_"))
+                                this.ReversedMotionTypeDefines[value] = key;
                         }
                         scanner.GetToken();
                     }

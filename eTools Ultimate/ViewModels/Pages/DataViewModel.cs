@@ -20,6 +20,8 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         private ICollectionView _itemsView = CollectionViewSource.GetDefaultView(ItemsService.Instance.Items);
 
+        public List<KeyValuePair<int, string>> ItemIdentifiers => DefinesService.Instance.ReversedItemDefines.ToList();
+
         public string SearchText
         {
             get => _searchText;

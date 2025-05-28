@@ -269,7 +269,15 @@ namespace eTools_Ultimate.Models
 
         public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; this.Model.DwIndex = value; } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
 
-        public string Identifier => DefinesService.Instance.ReversedMoverDefines.TryGetValue(this.Id, out string? identifier) ? identifier : this.Id.ToString();
+        public string Identifier
+        {
+            get => DefinesService.Instance.ReversedMoverDefines.TryGetValue(this.Id, out string? identifier) ? identifier : this.Id.ToString();
+            set
+            {
+                if (DefinesService.Instance.Defines.TryGetValue(value, out int val) || Int32.TryParse(value, out val))
+                    this.Id = val;
+            }
+        }
 
         public string Name { get => StringsService.Instance.GetString(Prop.SzName); set { if (value != this.Name) { StringsService.Instance.ChangeStringValue(Prop.SzName, value); } } } // We don't notify changes cause ProjectStrings_CollectionChanged is already doing it
 

@@ -23,6 +23,15 @@ namespace eTools_Ultimate.Models
 
         public string SzMotion { get => this._szMotion; set { this._szMotion = value; this.NotifyPropertyChanged(); } }
         public int IMotion { get => this._iMotion; set { this._iMotion = value; this.NotifyPropertyChanged(); } }
+        public string MotionTypeIdentifier
+        {
+            get => DefinesService.Instance.ReversedMotionTypeDefines.TryGetValue(this.IMotion, out string? identifier) ? identifier : this.IMotion.ToString();
+            set
+            {
+                if (DefinesService.Instance.Defines.TryGetValue(value, out int val) || Int32.TryParse(value, out val))
+                    this.IMotion = val;
+            }
+        }
     }
 
     public class ModelBrace : INotifyPropertyChanged
