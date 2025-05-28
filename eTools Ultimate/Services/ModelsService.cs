@@ -126,7 +126,7 @@ namespace eTools_Ultimate.Services
                                 motion.SzMotion = script.GetToken(); // motion name or }
                                 if (motion.SzMotion == "}")
                                     break;
-                                motion.IMotion = script.GetToken();
+                                motion.IMotion = script.GetNumber();
                                 modelElem.Motions.Add(motion);
                             }
                             script.GetToken();

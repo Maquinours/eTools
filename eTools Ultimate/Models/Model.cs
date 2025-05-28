@@ -19,10 +19,10 @@ namespace eTools_Ultimate.Models
         }
 
         private string _szMotion;
-        private string _iMotion;
+        private int _iMotion;
 
         public string SzMotion { get => this._szMotion; set { this._szMotion = value; this.NotifyPropertyChanged(); } }
-        public string IMotion { get => this._iMotion; set { this._iMotion = value; this.NotifyPropertyChanged(); } }
+        public int IMotion { get => this._iMotion; set { this._iMotion = value; this.NotifyPropertyChanged(); } }
     }
 
     public class ModelBrace : INotifyPropertyChanged
