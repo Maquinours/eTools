@@ -61,6 +61,15 @@ namespace eTools_Ultimate.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Mover O3D file.
+        /// </summary>
+        internal static string Mover3DFile {
+            get {
+                return ResourceManager.GetString("Mover3DFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Select the client folder.
         /// </summary>
         internal static string SelectClientFolder {
@@ -102,6 +111,15 @@ namespace eTools_Ultimate.Resources {
         internal static string SelectItemTextFile {
             get {
                 return ResourceManager.GetString("SelectItemTextFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select the model file associated to the mover.
+        /// </summary>
+        internal static string SelectMoverModelFile {
+            get {
+                return ResourceManager.GetString("SelectMoverModelFile", resourceCulture);
             }
         }
         

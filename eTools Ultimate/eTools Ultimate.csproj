@@ -8,6 +8,7 @@
     <UseWPF>true</UseWPF>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -42,6 +43,15 @@
     <None Remove="Views\Pages\Home\Icons\Icon_13.png" />
     <None Remove="Views\Pages\Home\Icons\Icon_14.png" />
     <None Remove="Views\Pages\Home\Icons\Icon_15.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\NativeLibs\3DModelRenderer.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\NativeLibs\assimp-vc140-mt.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>

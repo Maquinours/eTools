@@ -56,13 +56,23 @@ namespace eTools_Ultimate.Models
         public int IType { get => this._iType; set { if (this.IType != value) { this._iType = value; this.NotifyPropertyChanged(); } } }
     }
 
-    public class ModelElem : INotifyPropertyChanged
+    public class ModelElem : INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+            switch(propertyName)
+            {
+                case nameof(this.DwType):
+                case nameof(this.DwModelType):
+                case nameof(this.SzName):
+                    NotifyPropertyChanged(nameof(this.Model3DFilePath));
+                    // Add handles to settings path
+                    break;
+            }
         }
 
         private int _dwType;
@@ -102,9 +112,56 @@ namespace eTools_Ultimate.Models
             set { if (this.Brace != value) { ModelsService.Instance.SetBraceToModel(this, value); this.NotifyPropertyChanged(); } }
         }
 
+        public string Model3DFilePath
+        {
+            get
+            {
+                Settings settings = Settings.Instance;
+                string modelsFolderPath = settings.ModelsFolderPath ?? settings.DefaultModelsFolderPath;
+
+                string result = modelsFolderPath;
+
+                if (this.DwModelType == "MODELTYPE_BILLBOARD")
+                {
+                    result += this.SzName;
+                    return result;
+                }
+
+
+                if (this.DwType == DefinesService.Instance.Defines["OT_SFX"] && this.SzName.Contains('_'))
+                    result += this.SzName;
+
+                else
+                {
+                    string root = Constants.ModelFilenameRoot[this.DwType];
+                    result += $"{root}_{this.SzName}";
+                }
+
+                if (this.DwModelType != "MODELTYPE_SFX")
+                    result += ".o3d";
+                return result;
+            }
+        }
+
         public ModelElem()
         {
             this.Motions = new List<ModelMotion>();
+            Settings.Instance.PropertyChanged += this.Settings_PropertyChanged;
+        }
+
+        public void Dispose()
+        {
+            Settings.Instance.PropertyChanged -= this.Settings_PropertyChanged;
+        }
+
+        private void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case nameof(Settings.ModelsFolderPath):
+                    NotifyPropertyChanged(nameof(this.Model3DFilePath));
+                    break;
+            }
         }
     }
 }

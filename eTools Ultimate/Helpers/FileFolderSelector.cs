@@ -24,7 +24,7 @@ namespace eTools_Ultimate.Helpers
                 return folderDialog.FolderName;
             return path;
         }
-        public static string? SelectFile(string? path, string? title = null)
+        public static string? SelectFile(string? path, string? title = null, string? filter = null)
         {
             OpenFileDialog fileDialog = new OpenFileDialog()
             {
@@ -38,6 +38,9 @@ namespace eTools_Ultimate.Helpers
             }
             if (title != null)
                 fileDialog.Title = title;
+            if (filter != null)
+                fileDialog.Filter = filter;
+
             if (fileDialog.ShowDialog() == true)
                 return fileDialog.FileName;
             return path;
