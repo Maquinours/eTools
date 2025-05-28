@@ -137,7 +137,7 @@ namespace eTools_Ultimate.Models
                     result += $"{root}_{this.SzName}";
                 }
 
-                if (DefinesService.Instance.Defines.TryGetValue("MODELTYPE_SFX", out int sfxModelTypeValue) && this.DwModelType == sfxModelTypeValue)
+                if (DefinesService.Instance.Defines.TryGetValue("MODELTYPE_SFX", out int sfxModelTypeValue) && this.DwModelType != sfxModelTypeValue)
                     result += ".o3d";
                 return result;
             }
