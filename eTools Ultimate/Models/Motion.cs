@@ -26,6 +26,12 @@ namespace eTools_Ultimate.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedExtendedEventArgs(propertyName, oldValue, newValue));
         }
+
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public int NVer
         {
             get => this._nVer;
@@ -34,7 +40,11 @@ namespace eTools_Ultimate.Models
         public int DwId
         {
             get => this._dwId;
-            set => SetValue(ref this._dwId, value);
+            set
+            {
+                if(SetValue(ref this._dwId, value))
+                    NotifyPropertyChanged(nameof(this.Identifier));
+            }
         }
         public int DwMotion
         {
@@ -62,6 +72,7 @@ namespace eTools_Ultimate.Models
             set => SetValue(ref this._szDesc, value);
         }
 
+        public string Identifier => DefinesService.Instance.ReversedMotionDefines.TryGetValue(this.DwId, out string? identifier) ? identifier : this.DwId.ToString();
         public string Name
         {
             get => StringsService.Instance.GetString(this.SzName);
@@ -111,17 +122,17 @@ namespace eTools_Ultimate.Models
 
         }
 
-        private void SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
         {
             if (EqualityComparer<T>.Default.Equals(field, value))
-                return;
+                return false;
 
             if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new Exception($"Motion SetValue with not safe to assign directly property {propertyName}");
 
             T old = field;
             field = value;
             this.NotifyPropertyChanged(propertyName, old, value);
-            return;
+            return true;
         }
     }
 } 

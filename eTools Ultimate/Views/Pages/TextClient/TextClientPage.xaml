@@ -49,7 +49,7 @@
                         <TextBlock Text="{Binding Name}"
                                 FontWeight="SemiBold"
                                 Foreground="{Binding SolidColorBrushColor}"/>
-                        <TextBlock Text="{Binding DwId}"
+                        <TextBlock Text="{Binding Identifier}"
                                 Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                 FontSize="12"/>
                     </StackPanel>

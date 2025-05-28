@@ -57,9 +57,13 @@ namespace eTools_Ultimate.Models
                 {
                     this._dwId = value;
                     this.NotifyPropertyChanged();
+                    this.NotifyPropertyChanged(nameof(this.Identifier));
                 }
             }
         }
+
+        public string Identifier => DefinesService.Instance.ReversedTextDefines.TryGetValue(this.DwId, out string? identifier) ? identifier : this.DwId.ToString();
+
         public int DwColor
         {
             get => this._dwColor;

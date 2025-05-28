@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System.Collections.Specialized;
+using System.Data.Common;
 
 namespace eTools_Ultimate.Models
 {
@@ -305,8 +306,11 @@ namespace eTools_Ultimate.Models
                 case nameof(SkillProp.SzName):
                     this.NotifyPropertyChanged(nameof(this.Name));
                     break;
-                case nameof(ItemProp.SzIcon):
+                case nameof(SkillProp.SzIcon):
                     this.NotifyPropertyChanged(nameof(this.Icon));
+                    break;
+                case nameof(SkillProp.DwId):
+                    this.NotifyPropertyChanged(nameof(this.Identifier));
                     break;
             }
         }
@@ -324,6 +328,8 @@ namespace eTools_Ultimate.Models
                     NotifyPropertyChanged(nameof(this.Name));
             }
         }
+
+        public string Identifier => DefinesService.Instance.ReversedSkillDefines.TryGetValue(this.Prop.DwId, out string? identifier) ? identifier : this.Prop.DwId.ToString();
 
         private SkillProp _prop;
         public SkillProp Prop

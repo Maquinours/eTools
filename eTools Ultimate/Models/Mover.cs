@@ -227,6 +227,7 @@ namespace eTools_Ultimate.Models
                     break;
                 case nameof(MoverProp.DwId):
                     this.NotifyPropertyChanged(nameof(this.Id));
+                    this.NotifyPropertyChanged(nameof(this.Identifier));
                     break;
                     // TODO: reimplement this
                 //case nameof(MoverProp.EElementType):
@@ -267,6 +268,8 @@ namespace eTools_Ultimate.Models
         public ModelElem Model { get => this._model; set { if (value != this.Model) { this._model = value; NotifyPropertyChanged(); } } }
 
         public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; this.Model.DwIndex = value; } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
+
+        public string Identifier => DefinesService.Instance.ReversedMoverDefines.TryGetValue(this.Id, out string? identifier) ? identifier : this.Id.ToString();
 
         public string Name { get => StringsService.Instance.GetString(Prop.SzName); set { if (value != this.Name) { StringsService.Instance.ChangeStringValue(Prop.SzName, value); } } } // We don't notify changes cause ProjectStrings_CollectionChanged is already doing it
 

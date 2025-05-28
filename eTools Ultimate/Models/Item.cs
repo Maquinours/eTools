@@ -575,6 +575,7 @@ namespace eTools_Ultimate.Models
                     break;
                 case nameof(ItemProp.DwId):
                     this.NotifyPropertyChanged(nameof(this.Id));
+                    this.NotifyPropertyChanged(nameof(this.Identifier));
                     break;
             }
         }
@@ -632,6 +633,8 @@ namespace eTools_Ultimate.Models
         public ModelElem Model { get => _model; set { _model = value; NotifyPropertyChanged(); } }
 
         public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; this.Model.DwIndex = value; } } }
+
+        public string Identifier => DefinesService.Instance.ReversedItemDefines.TryGetValue(this.Id, out string? identifier) ? identifier : this.Id.ToString();
 
         public string Name
         {

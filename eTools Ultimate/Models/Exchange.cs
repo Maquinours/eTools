@@ -307,6 +307,8 @@ namespace eTools_Ultimate.Models
             }
         }
 
+        public string MmiIdentifier => DefinesService.Instance.ReversedMenuItemDefines.TryGetValue(this.MmiId, out string? identifier) ? identifier : this.MmiId.ToString();
+
         public List<ExchangeSet> Sets
         {
             get => this._sets;
