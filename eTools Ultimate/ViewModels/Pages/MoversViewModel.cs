@@ -40,11 +40,6 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        public string[] MotionsPossibilities => [.. DefinesService.Instance.MotionDefines.Select(x => x.Key)];
-
-        // TODO: can be improved to only display existing textures files.
-        public ReadOnlyDictionary<string, int> AdditionalTexturePossibilities => DefinesService.Instance.AdditionalTextureDefines;
-
         public string[] ModelFilePossibilities
         {
             get

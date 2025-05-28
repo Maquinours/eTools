@@ -142,10 +142,10 @@ namespace eTools_Ultimate.Views.Pages
         {
             if (_d3dHost is null) return;
             if (ViewModel.MoversView.CurrentItem is not Mover mover) return;
-            if (mover.Id == "MI_MALE" || mover.Id == "MI_FEMALE") return;
+            if ((DefinesService.Instance.Defines.TryGetValue("MI_MALE", out int maleValue) && mover.Id == maleValue) || (DefinesService.Instance.Defines.TryGetValue("MI_FEMALE", out int femaleValue) && mover.Id == femaleValue)) return;
             NativeMethods.LoadModel(_d3dHost._native, mover.Model.Model3DFilePath);
 
-            int textureEx = DefinesService.Instance.Defines[mover.Model.NTextureEx];
+            int textureEx = mover.Model.NTextureEx;
             float scale = mover.Model.FScale;
             if (textureEx != 0)
                 NativeMethods.SetTextureEx(_d3dHost._native, textureEx);
@@ -211,7 +211,7 @@ namespace eTools_Ultimate.Views.Pages
             if (_d3dHost is null) return;
             if (ViewModel.MoversView.CurrentItem is not Mover mover) return;
 
-            int textureEx = DefinesService.Instance.Defines[mover.Model.NTextureEx];
+            int textureEx = mover.Model.NTextureEx;
             NativeMethods.SetTextureEx(_d3dHost._native, textureEx);
         }
 

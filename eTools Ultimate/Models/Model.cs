@@ -121,14 +121,14 @@ namespace eTools_Ultimate.Models
 
                 string result = modelsFolderPath;
 
-                if (this.DwModelType == "MODELTYPE_BILLBOARD")
+                if (DefinesService.Instance.Defines.TryGetValue("MODELTYPE_BILLBOARD", out int billboardModelTypeValue) && this.DwModelType == billboardModelTypeValue)
                 {
                     result += this.SzName;
                     return result;
                 }
 
 
-                if (this.DwType == DefinesService.Instance.Defines["OT_SFX"] && this.SzName.Contains('_'))
+                if (DefinesService.Instance.Defines.TryGetValue("OT_SFX", out int sfxObjectTypeValue) && this.DwType == sfxObjectTypeValue && this.SzName.Contains('_'))
                     result += this.SzName;
 
                 else
@@ -137,7 +137,7 @@ namespace eTools_Ultimate.Models
                     result += $"{root}_{this.SzName}";
                 }
 
-                if (this.DwModelType != "MODELTYPE_SFX")
+                if (DefinesService.Instance.Defines.TryGetValue("MODELTYPE_SFX", out int sfxModelTypeValue) && this.DwModelType == sfxModelTypeValue)
                     result += ".o3d";
                 return result;
             }
