@@ -39,12 +39,12 @@
         <Style x:Key="FormFieldStyle"
                TargetType="Grid">
             <Setter Property="Margin"
-                    Value="0,0,15,25"/>
+                    Value="0,0,15,10"/>
         </Style>
         <Style x:Key="FieldLabelStyle"
                TargetType="TextBlock">
             <Setter Property="Margin"
-                    Value="0,0,0,5"/>
+                    Value="0,0,0,2"/>
             <Setter Property="FontWeight"
                     Value="SemiBold"/>
         </Style>
@@ -55,7 +55,7 @@
             <Setter Property="FontWeight"
                     Value="Bold"/>
             <Setter Property="Margin"
-                    Value="0,15,0,15"/>
+                    Value="0,10,0,10"/>
         </Style>
 
         <!-- DataTemplate: Motion Details Section -->
@@ -63,9 +63,9 @@
             <StackPanel>
                 <TextBlock Text="Motion Details"
                         Style="{StaticResource SectionHeaderStyle}"/>
-                <UniformGrid Columns="2">
+                <UniformGrid Columns="2" Margin="0,10,0,0">
                     <!-- Motion ID -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
+                    <Grid Style="{StaticResource FormFieldStyle}" Margin="0,0,15,20">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -87,7 +87,7 @@
                     </Grid>
                     
                     <!-- Motion ID Key -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
+                    <Grid Style="{StaticResource FormFieldStyle}" Margin="0,0,15,20">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -109,7 +109,7 @@
                     </Grid>
                     
                     <!-- Motion Icon -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
+                    <Grid Style="{StaticResource FormFieldStyle}" Margin="0,0,15,20">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -152,7 +152,7 @@
                     </Grid>
                     
                     <!-- Play ID Key -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
+                    <Grid Style="{StaticResource FormFieldStyle}" Margin="0,0,15,20">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -174,7 +174,7 @@
                     </Grid>
                     
                     <!-- InGame Name -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
+                    <Grid Style="{StaticResource FormFieldStyle}" Margin="0,0,15,20">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -196,7 +196,7 @@
                     </Grid>
                     
                     <!-- Description -->
-                    <Grid Style="{StaticResource FormFieldStyle}" Grid.ColumnSpan="2">
+                    <Grid Style="{StaticResource FormFieldStyle}" Grid.ColumnSpan="2" Margin="0,0,15,20">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -214,10 +214,10 @@
                         </StackPanel>
                         <TextBox Grid.Row="1"
                                 x:Name="DescriptionTextBox"
-                                TextWrapping="Wrap"
-                                AcceptsReturn="True"
-                                MinHeight="100"
-                                Text="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Cursor="IBeam"/>
+                                TextWrapping="NoWrap"
+                                AcceptsReturn="False"
+                                Height="Auto"
+                                Text="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                 </UniformGrid>
             </StackPanel>
@@ -256,7 +256,6 @@
     <Grid x:Name="RootGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
         <Grid Grid.Row="0">
@@ -393,39 +392,5 @@
                 </Grid>
             </ScrollViewer>
         </Grid>
-        
-        <!-- Status bar / Footer -->
-        <Border Grid.Row="1" 
-                Background="{DynamicResource ControlFillColorDefaultBrush}" 
-                BorderBrush="{DynamicResource ControlElevationBorderBrush}" 
-                BorderThickness="0,1,0,0"
-                Padding="10"
-                Margin="0,20,0,0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <TextBlock 
-                    Grid.Column="0" 
-                    Text="{Binding ViewModel.StatusMessage}" 
-                    VerticalAlignment="Center" 
-                    Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
-
-                <Button 
-                    Grid.Column="1"
-                    Content="Save All Changes" 
-                    Command="{Binding ViewModel.SaveAllChangesCommand}" 
-                    Margin="0,0,10,0" />
-
-                <ProgressBar 
-                    Grid.Column="2" 
-                    Width="100" 
-                    IsIndeterminate="{Binding ViewModel.IsLoading}" 
-                    Visibility="{Binding ViewModel.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            </Grid>
-        </Border>
     </Grid>
 </Page> 
