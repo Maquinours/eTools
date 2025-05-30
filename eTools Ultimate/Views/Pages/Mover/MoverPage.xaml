@@ -618,11 +618,10 @@
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Belligerence, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
+                        <ui:AutoSuggestBox Grid.Row="1"
+                                OriginalItemsSource="{Binding Path=ViewModel.BelligerenceIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding BelligerenceIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                DisplayMemberPath="Value" />
                     </Grid>
 
                     <!-- Action Radius -->

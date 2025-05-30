@@ -229,6 +229,9 @@ namespace eTools_Ultimate.Models
                     this.NotifyPropertyChanged(nameof(this.Id));
                     this.NotifyPropertyChanged(nameof(this.Identifier));
                     break;
+                case nameof(MoverProp.DwBelligerence):
+                    this.NotifyPropertyChanged(nameof(this.BelligerenceIdentifier));
+                    break;
                     // TODO: reimplement this
                 //case nameof(MoverProp.EElementType):
                 //    this.NotifyPropertyChanged(nameof(this.ElementType));
@@ -283,6 +286,16 @@ namespace eTools_Ultimate.Models
 
         //public string ElementType { get => Project.GetInstance().GetElementNameById(Prop.EElementType); set { if (value != this.ElementType) { Prop.EElementType = Project.GetInstance().GetElementIdByName(value); } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
         //public MoverTypes Type { get => Project.GetInstance().GetMoverType(this); set { if (value != this.Type) { Project.GetInstance().SetMoverType(this, value); } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
+
+        public string BelligerenceIdentifier
+        {
+            get => DefinesService.Instance.ReversedBelligerenceDefines.TryGetValue(this.Prop.DwBelligerence, out string? identifier) ? identifier : this.Prop.DwBelligerence.ToString();
+            set
+            {
+                if (DefinesService.Instance.Defines.TryGetValue(value, out int val) || Int32.TryParse(value, out val))
+                    this.Prop.DwBelligerence = val;
+            }
+        }
 
         public Mover()
         {
