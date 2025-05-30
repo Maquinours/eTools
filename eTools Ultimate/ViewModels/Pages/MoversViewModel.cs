@@ -54,6 +54,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         public List<KeyValuePair<int, string>> MoverIdentifiers => DefinesService.Instance.ReversedMoverDefines.ToList();
         public List<KeyValuePair<int, string>> BelligerenceIdentifiers => DefinesService.Instance.ReversedBelligerenceDefines.ToList();
+        public List<KeyValuePair<int, string>> AiIdentifiers => DefinesService.Instance.ReversedAiDefines.ToList();
 
         private FileSystemWatcher _modelsDirectoryWatcher = new()
         {

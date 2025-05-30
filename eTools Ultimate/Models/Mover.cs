@@ -232,13 +232,16 @@ namespace eTools_Ultimate.Models
                 case nameof(MoverProp.DwBelligerence):
                     this.NotifyPropertyChanged(nameof(this.BelligerenceIdentifier));
                     break;
+                case nameof(MoverProp.DwAi):
+                    this.NotifyPropertyChanged(nameof(this.AiIdentifier));
+                    break;
                     // TODO: reimplement this
-                //case nameof(MoverProp.EElementType):
-                //    this.NotifyPropertyChanged(nameof(this.ElementType));
-                //    break;
-                //case nameof(MoverProp.DwAi):
-                //    this.NotifyPropertyChanged(nameof(this.Type));
-                //    break;
+                    //case nameof(MoverProp.EElementType):
+                    //    this.NotifyPropertyChanged(nameof(this.ElementType));
+                    //    break;
+                    //case nameof(MoverProp.DwAi):
+                    //    this.NotifyPropertyChanged(nameof(this.Type));
+                    //    break;
             }
         }
 
@@ -294,6 +297,16 @@ namespace eTools_Ultimate.Models
             {
                 if (DefinesService.Instance.Defines.TryGetValue(value, out int val) || Int32.TryParse(value, out val))
                     this.Prop.DwBelligerence = val;
+            }
+        }
+
+        public string AiIdentifier
+        {
+            get => DefinesService.Instance.ReversedAiDefines.TryGetValue(this.Prop.DwAi, out string? identifier) ? identifier : this.Prop.DwAi.ToString();
+            set
+            {
+                if (DefinesService.Instance.Defines.TryGetValue(value, out int val) || Int32.TryParse(value, out val))
+                    this.Prop.DwAi = val;
             }
         }
 

@@ -26,6 +26,7 @@ namespace eTools_Ultimate.Services
         private readonly Dictionary<int, string> _reversedTextDefines = [];
         private readonly Dictionary<int, string> _reversedMotionTypeDefines = [];
         private readonly Dictionary<int, string> _reversedBelligerenceDefines = [];
+        private readonly Dictionary<int, string> _reversedAiDefines = [];
 
         public ObservableDictionary<string, int> Defines => this._defines;
 
@@ -37,6 +38,7 @@ namespace eTools_Ultimate.Services
         public Dictionary<int, string> ReversedTextDefines => this._reversedTextDefines;
         public Dictionary<int, string> ReversedMotionTypeDefines => this._reversedMotionTypeDefines;
         public Dictionary<int, string> ReversedBelligerenceDefines => this._reversedBelligerenceDefines;
+        public Dictionary<int, string> ReversedAiDefines => this._reversedAiDefines;
 
         public void Load()
         {
@@ -80,6 +82,8 @@ namespace eTools_Ultimate.Services
                                 this.ReversedMotionTypeDefines[value] = key;
                             else if(key.StartsWith("BELLI_"))
                                 this.ReversedBelligerenceDefines[value] = key;
+                            else if(key.StartsWith("AII_"))
+                                this.ReversedAiDefines[value] = key;
                         }
                         scanner.GetToken();
                     }

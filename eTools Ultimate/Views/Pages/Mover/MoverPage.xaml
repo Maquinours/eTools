@@ -592,13 +592,10 @@
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                Style="{StaticResource AppComboBoxStyle}"
-                                SelectedValue="{Binding AIType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="Monster"/>
-                            <ComboBoxItem Content="Guard"/>
-                            <ComboBoxItem Content="Peaceful"/>
-                        </ComboBox>
+                        <ui:AutoSuggestBox Grid.Row="1"
+                                           OriginalItemsSource="{Binding Path=ViewModel.AiIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                                           Text="{Binding AiIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                           DisplayMemberPath="Value" />
                     </Grid>
 
                     <!-- Belligerence -->
