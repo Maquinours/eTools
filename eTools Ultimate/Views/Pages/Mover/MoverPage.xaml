@@ -1134,6 +1134,7 @@
 
                     <!-- Correction Value -->
                     <!-- TODO: probably remove it as I don't know what bind it should be -->
+                    <!--
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -1156,6 +1157,7 @@
                                 Maximum="100"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
+                    -->
                 </UniformGrid>
             </StackPanel>
         </DataTemplate>
