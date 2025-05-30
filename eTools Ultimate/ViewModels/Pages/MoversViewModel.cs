@@ -1,4 +1,5 @@
-﻿using eTools_Ultimate.Models;
+﻿using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
@@ -52,6 +54,61 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
+        private string[] _object3DMaterialTextures = [];
+        public string[] Object3DMaterialTextures 
+        {
+            get => _object3DMaterialTextures;
+            set
+            {
+                if (_object3DMaterialTextures != value)
+                {
+                    _object3DMaterialTextures = value;
+                    OnPropertyChanged(nameof(Object3DMaterialTextures));
+                    OnPropertyChanged(nameof(ModelTexturesPossibilities));
+                }
+            }
+        }
+
+        public int[] ModelTexturesPossibilities
+        {
+            get
+            {
+                Settings settings = Settings.Instance;
+                string texturesFolderPath = settings.TexturesFolderPath ?? settings.DefaultTexturesFolderPath;
+
+                if (string.IsNullOrEmpty(texturesFolderPath) || !Directory.Exists(texturesFolderPath))
+                    return [];
+
+                List<int> availableAdditionalTextures = [];
+                if (Object3DMaterialTextures.Length > 0)
+                {
+                    string textureFile = Object3DMaterialTextures[0];
+                    var pattern = $"{textureFile}-et??.dds";
+                    string[] files = [.. Directory.GetFiles(texturesFolderPath, pattern, SearchOption.TopDirectoryOnly).Select(x => Path.GetFileNameWithoutExtension(x))];
+                    foreach (string file in files)
+                    {
+                        string fileName = file;
+                        if (Int32.TryParse(fileName.Substring(fileName.Length - 2), out int index))
+                            availableAdditionalTextures.Add(index);
+                    }
+                    for (int i = availableAdditionalTextures.Count - 1; i >= 0; i--)
+                    {
+                        int textureIndex = availableAdditionalTextures[i];
+                        foreach (string materialTextureFile in Object3DMaterialTextures)
+                        {
+                            if (!File.Exists($"{texturesFolderPath}{materialTextureFile}-et{textureIndex:D2}.dds"))
+                            {
+                                availableAdditionalTextures.Remove(textureIndex);
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                return [0, .. availableAdditionalTextures];
+            }
+        }
+
         public List<KeyValuePair<int, string>> MoverIdentifiers => DefinesService.Instance.ReversedMoverDefines.ToList();
         public List<KeyValuePair<int, string>> BelligerenceIdentifiers => DefinesService.Instance.ReversedBelligerenceDefines.ToList();
         public List<KeyValuePair<int, string>> AiIdentifiers => DefinesService.Instance.ReversedAiDefines.ToList();
@@ -59,6 +116,14 @@ namespace eTools_Ultimate.ViewModels.Pages
         private FileSystemWatcher _modelsDirectoryWatcher = new()
         {
             Filter = "mvr_*.o3d",
+            NotifyFilter = NotifyFilters.FileName,
+            IncludeSubdirectories = false,
+            EnableRaisingEvents = false
+        };
+
+        private FileSystemWatcher _texturesDirectoryWatcher = new()
+        {
+            Filter = "*.dds", // Could be improved
             NotifyFilter = NotifyFilters.FileName,
             IncludeSubdirectories = false,
             EnableRaisingEvents = false
@@ -105,12 +170,18 @@ namespace eTools_Ultimate.ViewModels.Pages
                     InitializeModelsDirectoryWatcherPath();
                     OnPropertyChanged(nameof(ModelFilePossibilities));
                 }
+                else if(e.PropertyName == nameof(Settings.TexturesFolderPath) || e.PropertyName == nameof(Settings.DefaultTexturesFolderPath))
+                {
+                    InitializeTexturesDirectoryWatcherPath();
+                    OnPropertyChanged(nameof(ModelTexturesPossibilities));
+                }
             };
 
             this._modelsDirectoryWatcher.Renamed += (sender, e) => OnPropertyChanged(nameof(ModelFilePossibilities));
             this._modelsDirectoryWatcher.Created += (sender, e) => OnPropertyChanged(nameof(ModelFilePossibilities));
             this._modelsDirectoryWatcher.Deleted += (sender, e) => OnPropertyChanged(nameof(ModelFilePossibilities));
             InitializeModelsDirectoryWatcherPath();
+            InitializeTexturesDirectoryWatcherPath();
 
             _isInitialized = true;
         }
@@ -122,11 +193,23 @@ namespace eTools_Ultimate.ViewModels.Pages
             this._modelsDirectoryWatcher.EnableRaisingEvents = true;
         }
 
+        private void InitializeTexturesDirectoryWatcherPath()
+        {
+            this._texturesDirectoryWatcher.EnableRaisingEvents = false;
+            this._texturesDirectoryWatcher.Path = Settings.Instance.TexturesFolderPath ?? Settings.Instance.DefaultTexturesFolderPath;
+            this._texturesDirectoryWatcher.EnableRaisingEvents = true;
+        }
+
         private bool FilterItem(object obj)
         {
             if (obj is not Mover mover) return false;
             if (string.IsNullOrEmpty(this.SearchText)) return true;
             return mover.Name.ToLower().Contains(this.SearchText.ToLower());
+        }
+
+        public void UpdateModelTexturesPossibilities()
+        {
+            OnPropertyChanged(nameof(ModelTexturesPossibilities));
         }
     }
 }

@@ -257,7 +257,18 @@
                         </StackPanel>
                         <ComboBox Grid.Row="1"
                                 Style="{StaticResource AppComboBoxStyle}"
-                                SelectedValue="{Binding IsKillable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                SelectedValue="{Binding Prop.BKillable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValuePath="Tag">
+                            <ComboBoxItem Content="Yes">
+                                <ComboBoxItem.Tag>
+                                    <sys:Int32>1</sys:Int32>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                            <ComboBoxItem Content="No">
+                                <ComboBoxItem.Tag>
+                                    <sys:Int32>0</sys:Int32>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
                             <ComboBoxItem Content="YES"/>
                             <ComboBoxItem Content="NO"/>
                         </ComboBox>
@@ -1589,7 +1600,8 @@
                                     </Grid.ColumnDefinitions>
                                     <ui:AutoSuggestBox Grid.Column="0"
                                             Text="{Binding ViewModel.MoversView.CurrentItem.Model.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                            OriginalItemsSource="{Binding ViewModel.ModelFilePossibilities, Mode=OneWay}"/>
+                                            OriginalItemsSource="{Binding ViewModel.ModelFilePossibilities, Mode=OneWay}"
+                                            TextChanged="AutoSuggestBox_TextChanged"/>
                                     <ui:Button Grid.Column="1" 
                                              Content="..." 
                                              Width="30"
@@ -1734,9 +1746,7 @@
                                 </StackPanel>
                                 <ComboBox Grid.Row="1"
                                         Style="{StaticResource AppComboBoxStyle}"
-                                        ItemsSource="{Binding ViewModel.AdditionalTexturePossibilities}"
-                                        DisplayMemberPath="Key"
-                                        SelectedValuePath="Key"
+                                        ItemsSource="{Binding ViewModel.ModelTexturesPossibilities}"
                                         SelectedValue="{Binding ViewModel.MoversView.CurrentItem.Model.NTextureEx, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
 

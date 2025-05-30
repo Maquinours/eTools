@@ -151,6 +151,19 @@ namespace eTools_Ultimate.Views.Pages
                 NativeMethods.SetTextureEx(_d3dHost._native, textureEx);
             if (scale != 1)
                 NativeMethods.SetScale(_d3dHost._native, scale);
+
+            int texturesLength = NativeMethods.GetMaterialTexturesSize(_d3dHost._native);
+
+            List<string> textureFiles = [];
+            for (int i = 0; i < texturesLength; i++)
+            {
+                IntPtr textureName = NativeMethods.GetMaterialTexture(_d3dHost._native, i);
+                string? texture = Marshal.PtrToStringAnsi(textureName);
+                texture = Path.GetFileNameWithoutExtension(texture);
+                if (texture is not null)
+                    textureFiles.Add(texture);
+            }
+            ViewModel.Object3DMaterialTextures = [.. textureFiles];
         }
 
         [RelayCommand]
@@ -270,6 +283,11 @@ namespace eTools_Ultimate.Views.Pages
                         break;
                     }
             }
+        }
+
+        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            ViewModel.UpdateModelTexturesPossibilities();
         }
     }
 } 
