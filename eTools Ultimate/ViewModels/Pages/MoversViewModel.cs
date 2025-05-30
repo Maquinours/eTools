@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Media.TextFormatting;
 using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
@@ -88,7 +89,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                     foreach (string file in files)
                     {
                         string fileName = file;
-                        if (Int32.TryParse(fileName.Substring(fileName.Length - 2), out int index))
+                        if (int.TryParse(fileName.AsSpan(fileName.Length - 2), out int index))
                             availableAdditionalTextures.Add(index);
                     }
                     for (int i = availableAdditionalTextures.Count - 1; i >= 0; i--)
@@ -123,7 +124,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private FileSystemWatcher _texturesDirectoryWatcher = new()
         {
-            Filter = "*.dds", // Could be improved
+            Filter = "*.dds",
             NotifyFilter = NotifyFilters.FileName,
             IncludeSubdirectories = false,
             EnableRaisingEvents = false
@@ -181,6 +182,10 @@ namespace eTools_Ultimate.ViewModels.Pages
             this._modelsDirectoryWatcher.Created += (sender, e) => OnPropertyChanged(nameof(ModelFilePossibilities));
             this._modelsDirectoryWatcher.Deleted += (sender, e) => OnPropertyChanged(nameof(ModelFilePossibilities));
             InitializeModelsDirectoryWatcherPath();
+
+            this._texturesDirectoryWatcher.Renamed += OnTextureFileChanged;
+            this._texturesDirectoryWatcher.Created += OnTextureFileChanged;
+            this._texturesDirectoryWatcher.Deleted += OnTextureFileChanged;
             InitializeTexturesDirectoryWatcherPath();
 
             _isInitialized = true;
@@ -198,6 +203,27 @@ namespace eTools_Ultimate.ViewModels.Pages
             this._texturesDirectoryWatcher.EnableRaisingEvents = false;
             this._texturesDirectoryWatcher.Path = Settings.Instance.TexturesFolderPath ?? Settings.Instance.DefaultTexturesFolderPath;
             this._texturesDirectoryWatcher.EnableRaisingEvents = true;
+        }
+
+        private void OnTextureFileChanged(object sender, FileSystemEventArgs e)
+        {
+            string fileName = Path.GetFileName(e.FullPath);
+
+            foreach(string materialTexture in Object3DMaterialTextures)
+            {
+                string prefix = $"{materialTexture}-et";
+                string suffix = ".dds";
+
+                if(fileName.StartsWith(prefix, StringComparison.OrdinalIgnoreCase) && fileName.EndsWith(suffix, StringComparison.OrdinalIgnoreCase) && fileName.Length == prefix.Length + 2 + suffix.Length)
+                {
+                    string textureIndex = fileName.Substring(prefix.Length, 2);
+                    if (textureIndex.All(char.IsDigit))
+                    {
+                        OnPropertyChanged(nameof(ModelTexturesPossibilities));
+                        break;
+                    }
+                }
+            }
         }
 
         private bool FilterItem(object obj)

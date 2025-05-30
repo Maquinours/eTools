@@ -1730,17 +1730,17 @@
                             </Grid>
                             -->
 
-                            <!-- Additional Texture -->
+                            <!-- Texture -->
                             <Grid Style="{StaticResource FormFieldStyle}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Additional Texture" Style="{StaticResource FieldLabelStyle}"/>
+                                    <TextBlock Text="Texture" Style="{StaticResource FieldLabelStyle}"/>
                                     <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
                                         <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Additional texture"/>
+                                            <ToolTip Content="Texture"/>
                                         </ui:SymbolIcon.ToolTip>
                                     </ui:SymbolIcon>
                                 </StackPanel>
