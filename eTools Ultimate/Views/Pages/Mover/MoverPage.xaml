@@ -1515,6 +1515,13 @@
                                             VerticalAlignment="Center"
                                             MouseRightButtonDown="DxImage_MouseRightButtonDown" 
                                             MouseWheel="DxImage_MouseWheel" />
+                                    <ui:Button ToolTip="Reference Model"
+                                             HorizontalAlignment="Right"
+                                             VerticalAlignment="Top"
+                                             Margin="0,5,5,0"
+                                             Panel.ZIndex="1">
+                                        <ui:SymbolIcon Symbol="ImageReflection24"/>
+                                    </ui:Button>
                                 </Grid>
                             </Border>
 
@@ -1554,11 +1561,17 @@
                                 <StackPanel Grid.Column="1" 
                                             Margin="10,0,0,0"
                                             VerticalAlignment="Top">
-                                    <ui:Button Content="Add" 
-                                               Margin="0,0,0,10"/>
-                                    <ui:Button Content="Delete" 
-                                               Margin="0,0,0,10"/>
-                                    <ui:Button Content="Generate"/>
+                                    <ui:Button ToolTip="Add Motion"
+                                               Margin="0,0,0,10">
+                                        <ui:SymbolIcon Symbol="Add24"/>
+                                    </ui:Button>
+                                    <ui:Button ToolTip="Delete Motion"
+                                               Margin="0,0,0,10">
+                                        <ui:SymbolIcon Symbol="Delete24"/>
+                                    </ui:Button>
+                                    <ui:Button ToolTip="Generate Motions">
+                                        <ui:SymbolIcon Symbol="ArrowSync24"/>
+                                    </ui:Button>
                                 </StackPanel>
                             </Grid>
                         </Grid>
