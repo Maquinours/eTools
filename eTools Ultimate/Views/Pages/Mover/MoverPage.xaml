@@ -1493,40 +1493,48 @@
                             </Grid.ColumnDefinitions>
 
                             <!-- 3D Model Preview -->
-                            <Border Grid.Column="0"
-                                    Background="{DynamicResource ControlFillColorDefaultBrush}"
-                                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="4"
-                                    Height="250" 
-                                    Margin="0,0,10,0">
-                                <Grid>
-                                    <TextBox x:Name="Model3DFilePathTextBlock" 
-                                            Visibility="Collapsed" 
-                                            Text="{Binding ViewModel.MoversView.CurrentItem.Model.Model3DFilePath, Mode=OneWay}"
-                                            TextChanged="Model3DFilePathTextBlock_TextChanged" />
-                                    <TextBox x:Name="ModelTextureExTextBlock"
-                                            Visibility="Collapsed" 
-                                            Text="{Binding ViewModel.MoversView.CurrentItem.Model.NTextureEx, Mode=OneWay}"
-                                            TextChanged="ModelTextureExTextBlock_TextChanged"/>
-                                    <Image x:Name="DxImage" 
-                                            Stretch="UniformToFill" 
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            MouseRightButtonDown="DxImage_MouseRightButtonDown" 
-                                            MouseWheel="DxImage_MouseWheel" />
-                                    <ui:Button ToolTip="Reference Model"
-                                             HorizontalAlignment="Right"
-                                             VerticalAlignment="Top"
-                                             Margin="0,5,5,0"
-                                             Panel.ZIndex="1">
-                                        <ui:SymbolIcon Symbol="ImageReflection24"/>
-                                    </ui:Button>
-                                </Grid>
-                            </Border>
+                            <Grid Grid.Column="0" Margin="0,0,10,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="250"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0"
+                                        Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="4">
+                                    <Grid>
+                                        <TextBox x:Name="Model3DFilePathTextBlock" 
+                                                Visibility="Collapsed" 
+                                                Text="{Binding ViewModel.MoversView.CurrentItem.Model.Model3DFilePath, Mode=OneWay}"
+                                                TextChanged="Model3DFilePathTextBlock_TextChanged" />
+                                        <TextBox x:Name="ModelTextureExTextBlock"
+                                                Visibility="Collapsed" 
+                                                Text="{Binding ViewModel.MoversView.CurrentItem.Model.NTextureEx, Mode=OneWay}"
+                                                TextChanged="ModelTextureExTextBlock_TextChanged"/>
+                                        <Image x:Name="DxImage" 
+                                                Stretch="UniformToFill" 
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                MouseRightButtonDown="DxImage_MouseRightButtonDown" 
+                                                MouseWheel="DxImage_MouseWheel" />
+                                        <ui:Button ToolTip="Reference Model"
+                                                 HorizontalAlignment="Right"
+                                                 VerticalAlignment="Top"
+                                                 Margin="0,5,5,0"
+                                                 Panel.ZIndex="1">
+                                            <ui:SymbolIcon Symbol="ImageReflection24"/>
+                                        </ui:Button>
+                                    </Grid>
+                                </Border>
+                            </Grid>
 
                             <!-- Motions Container -->
                             <Grid Grid.Column="1" Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="185"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
@@ -1535,8 +1543,7 @@
                                 <!-- Motion List -->
                                 <Border Grid.Column="0"
                                         BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                        BorderThickness="1"
-                                        Height="250">
+                                        BorderThickness="1">
                                     <ListView x:Name="MotionsListView"
                                               Style="{StaticResource AppListViewStyle}"
                                               ItemContainerStyle="{StaticResource AppListViewItemStyle}"
@@ -1573,256 +1580,146 @@
                                         <ui:SymbolIcon Symbol="ArrowSync24"/>
                                     </ui:Button>
                                 </StackPanel>
+
+                                <!-- Motion Fields -->
+                                <UniformGrid Grid.Row="1" Grid.ColumnSpan="2" Columns="2" Margin="0,10,0,0">
+                                    <!-- Motion Key -->
+                                    <Grid Style="{StaticResource FormFieldStyle}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="32"/>
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                            <TextBlock Text="Motion Key" Style="{StaticResource FieldLabelStyle}"/>
+                                            <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
+                                                <ui:SymbolIcon.ToolTip>
+                                                    <ToolTip Content="Key identifier for the motion"/>
+                                                </ui:SymbolIcon.ToolTip>
+                                            </ui:SymbolIcon>
+                                        </StackPanel>
+                                        <TextBox Grid.Row="1"
+                                                Height="32"
+                                                Style="{StaticResource AppTextBoxStyle}"/>
+                                    </Grid>
+
+                                    <!-- Motion File -->
+                                    <Grid Style="{StaticResource FormFieldStyle}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="32"/>
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                            <TextBlock Text="Motion File" Style="{StaticResource FieldLabelStyle}"/>
+                                            <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
+                                                <ui:SymbolIcon.ToolTip>
+                                                    <ToolTip Content="File path for the motion"/>
+                                                </ui:SymbolIcon.ToolTip>
+                                            </ui:SymbolIcon>
+                                        </StackPanel>
+                                        <Grid Grid.Row="1" Height="32">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox Grid.Column="0"
+                                                    Style="{StaticResource AppTextBoxStyle}"
+                                                    Height="32"/>
+                                            <ui:Button Grid.Column="1"
+                                                     Content="..."
+                                                     Width="30"
+                                                     Height="32"
+                                                     Margin="5,0,0,0"/>
+                                        </Grid>
+                                    </Grid>
+                                </UniformGrid>
                             </Grid>
                         </Grid>
 
                         <!-- Model Settings -->
-                        <UniformGrid Columns="2">
-                            <!-- File -->
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="File" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Model file path"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <Grid Grid.Row="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <ui:AutoSuggestBox Grid.Column="0"
-                                            Text="{Binding ViewModel.MoversView.CurrentItem.Model.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                            OriginalItemsSource="{Binding ViewModel.ModelFilePossibilities, Mode=OneWay}"/>
-                                    <ui:Button Grid.Column="1" 
-                                             Content="..." 
-                                             Width="30"
-                                             Margin="5,0,0,0"
-                                             Command="{Binding DataContext.SelectModelFileCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                    />
+                        <StackPanel>
+                            <!-- First Row -->
+                            <UniformGrid Columns="2">
+                                <!-- File -->
+                                <Grid Style="{StaticResource FormFieldStyle}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="32"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Text="File" Style="{StaticResource FieldLabelStyle}"/>
+                                        <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="Model file path"/>
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <Grid Grid.Row="1" Height="32">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ui:AutoSuggestBox Grid.Column="0"
+                                                Height="32"
+                                                Text="{Binding ViewModel.MoversView.CurrentItem.Model.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                OriginalItemsSource="{Binding ViewModel.ModelFilePossibilities, Mode=OneWay}"/>
+                                        <ui:Button Grid.Column="1" 
+                                                 Content="..." 
+                                                 Width="30"
+                                                 Height="32"
+                                                 Margin="5,0,0,0"
+                                                 Command="{Binding DataContext.SelectModelFileCommand, RelativeSource={RelativeSource AncestorType=Page}}"/>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
 
-                            <!-- Identifier -->
-                            <!-- Model identifier is identical to mover identifier, we don't need that -->
-                            <!-- <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Identifier" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Model identifier"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <TextBox Grid.Row="1"
-                                        Style="{StaticResource AppTextBoxStyle}"
-                                        Text="{Binding ModelIdentifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            </Grid>
-                            -->
+                                <!-- Scale -->
+                                <Grid Style="{StaticResource FormFieldStyle}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="32"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Text="Scale" Style="{StaticResource FieldLabelStyle}"/>
+                                        <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="Model scale factor"/>
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <ui:NumberBox Grid.Row="1"
+                                            Value="{Binding ViewModel.MoversView.CurrentItem.Model.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Minimum="0.1"
+                                            Maximum="10"
+                                            Height="32"
+                                            SpinButtonPlacementMode="Inline"/>
+                                </Grid>
+                            </UniformGrid>
 
-                            <!-- Reference -->
-                            <!-- TODO: It should be implemented somewhere else -->
-                            <!--
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Reference" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Model reference type"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <ComboBox Grid.Row="1"
-                                        Style="{StaticResource AppComboBoxStyle}"
-                                        SelectedValue="{Binding ModelReference, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                    <ComboBoxItem Content="MMI_MALE"/>
-                                    <ComboBoxItem Content="MMI_FEMALE"/>
-                                    <ComboBoxItem Content="MMI_MONSTER"/>
-                                    <ComboBoxItem Content="MMI_ANIMAL"/>
-                                    <ComboBoxItem Content="MMI_ITEM"/>
-                                </ComboBox>
-                            </Grid>
-                            -->
-
-                            <!-- Scale -->
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Scale" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Model scale factor"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <ui:NumberBox Grid.Row="1"
-                                        Value="{Binding ViewModel.MoversView.CurrentItem.Model.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                        Minimum="0.1"
-                                        Maximum="10"
-                                        SpinButtonPlacementMode="Inline"/>
-                            </Grid>
-
-                            <!-- Speed -->
-                            <!-- TODO: Maybe add it in another category-->
-                            <!-- 
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Speed" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Movement speed"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <ui:NumberBox Grid.Row="1"
-                                        Value="{Binding Prop.FSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                        Minimum="0"
-                                        Maximum="100"
-                                        SpinButtonPlacementMode="Inline"/>
-                            </Grid>
-                            -->
-
-                            <!-- Flying -->
-                            <!-- TODO: Maybe add it in another category-->
-                            <!-- 
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Flying" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Flying capability"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <ComboBox Grid.Row="1"
-                                        Style="{StaticResource AppComboBoxStyle}"
-                                        SelectedValue="{Binding IsFlying, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                    <ComboBoxItem Content="No"/>
-                                    <ComboBoxItem Content="Yes"/>
-                                </ComboBox>
-                            </Grid>
-                            -->
-
-                            <!-- Additional Texture -->
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Additional Texture" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Additional texture"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <ComboBox Grid.Row="1"
-                                        Style="{StaticResource AppComboBoxStyle}"
-                                        ItemsSource="{Binding ViewModel.AdditionalTexturePossibilities}"
-                                        DisplayMemberPath="Key"
-                                        SelectedValuePath="Key"
-                                        SelectedValue="{Binding ViewModel.MoversView.CurrentItem.Model.NTextureEx, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            </Grid>
-
-                            <!-- Jump Height -->
-                            <!-- DwJumpIng is not used in Flyff system -->
-                            <!--
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Jump Height" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Maximum jump height"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <ui:NumberBox Grid.Row="1"
-                                        Value="{Binding JumpHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                        Minimum="0"
-                                        Maximum="1000"
-                                        SpinButtonPlacementMode="Inline"/>
-                            </Grid>
-                            -->
-                            
-                            <!-- Air Jump -->
-                            <!-- DwAirJump is not used in Flyff system -->
-                            <!--
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Air Jump" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Air jump capability"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <ComboBox Grid.Row="1"
-                                        Style="{StaticResource AppComboBoxStyle}"
-                                        SelectedValue="{Binding CanAirJump, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                    <ComboBoxItem Content="No"/>
-                                    <ComboBoxItem Content="Yes"/>
-                                </ComboBox>
-                            </Grid>
-                            -->
-
-                            <!-- Fly Level -->
-                            <!-- Does not exists -->
-                            <!--
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Fly Level" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Flying height level"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <ui:NumberBox Grid.Row="1"
-                                        Value="{Binding FlyLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                        Minimum="0"
-                                        Maximum="1000"
-                                        SpinButtonPlacementMode="Inline"/>
-                            </Grid>
-                            -->
-                        </UniformGrid>
+                            <!-- Second Row -->
+                            <UniformGrid Columns="2">
+                                <!-- Additional Texture -->
+                                <Grid Style="{StaticResource FormFieldStyle}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="32"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Text="Additional Texture" Style="{StaticResource FieldLabelStyle}"/>
+                                        <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="Additional texture"/>
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <ComboBox Grid.Row="1"
+                                            Height="32"
+                                            Style="{StaticResource AppComboBoxStyle}"
+                                            ItemsSource="{Binding ViewModel.AdditionalTexturePossibilities}"
+                                            DisplayMemberPath="Key"
+                                            SelectedValuePath="Key"
+                                            SelectedValue="{Binding ViewModel.MoversView.CurrentItem.Model.NTextureEx, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Grid>
+                            </UniformGrid>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </Grid>
