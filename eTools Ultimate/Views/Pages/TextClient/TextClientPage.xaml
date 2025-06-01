@@ -186,6 +186,16 @@
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
                     <ui:Button 
+                        ToolTip="Undo"
+                        Margin="0,0,0,0">
+                        <ui:SymbolIcon Symbol="ArrowUndo24"/>
+                    </ui:Button>
+                    <ui:Button
+                        Margin="10,0,10,0"
+                        ToolTip="Redo">
+                        <ui:SymbolIcon Symbol="ArrowRedo24"/>
+                    </ui:Button>
+                    <ui:Button 
                         Content="Save" 
                         Margin="0,0,10,0"
                         Click="SaveButton_Click"/>
@@ -204,7 +214,8 @@
                         Content="Delete" 
                         Icon="Delete24"
                         Click="DeleteButton_Click"
-                        Background="#FD292F"/>
+                        Background="#FD292F"
+                        Margin="0,0,0,0"/>
                 </StackPanel>
             </Grid>
 

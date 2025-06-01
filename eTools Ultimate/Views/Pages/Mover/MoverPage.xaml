@@ -20,7 +20,7 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d"
-    Loaded="Page_Loaded" 
+    Loaded="Page_Loaded"
     MouseMove="Page_MouseMove"
     MouseRightButtonUp="Page_MouseRightButtonUp">
 
@@ -28,7 +28,7 @@
         <converters:NumberFormatConverter x:Key="NumberFormatConverter"/>
         <!-- Common Styles -->
         <Style x:Key="InfoIconStyle"
-                TargetType="ui:SymbolIcon">
+               TargetType="ui:SymbolIcon">
             <Setter Property="HorizontalAlignment"
                     Value="Right"/>
             <Setter Property="VerticalAlignment"
@@ -41,12 +41,12 @@
                     Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
         <Style x:Key="FormFieldStyle"
-                TargetType="Grid">
+               TargetType="Grid">
             <Setter Property="Margin"
                     Value="0,0,15,25"/>
         </Style>
         <Style x:Key="FieldLabelStyle"
-                TargetType="TextBlock">
+               TargetType="TextBlock">
             <Setter Property="Margin"
                     Value="0,0,0,5"/>
             <Setter Property="FontWeight"
@@ -55,7 +55,7 @@
                     Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
         <Style x:Key="SectionHeaderStyle"
-                TargetType="TextBlock">
+               TargetType="TextBlock">
             <Setter Property="FontSize"
                     Value="24"/>
             <Setter Property="FontWeight"
@@ -65,79 +65,81 @@
             <Setter Property="Foreground"
                     Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
-        
+
         <!-- TextBox Style -->
-        <Style x:Key="AppTextBoxStyle" 
-               TargetType="TextBox" 
+        <Style x:Key="AppTextBoxStyle"
+               TargetType="TextBox"
                BasedOn="{StaticResource {x:Type TextBox}}">
-            <Setter Property="Background" 
+            <Setter Property="Background"
                     Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-            <Setter Property="Foreground" 
+            <Setter Property="Foreground"
                     Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-            <Setter Property="BorderBrush" 
+            <Setter Property="BorderBrush"
                     Value="{DynamicResource ControlElevationBorderBrush}"/>
-            <Setter Property="Padding" 
+            <Setter Property="Padding"
                     Value="8,5"/>
         </Style>
-        
+
         <!-- ComboBox Style -->
-        <Style x:Key="AppComboBoxStyle" 
-               TargetType="ComboBox" 
+        <Style x:Key="AppComboBoxStyle"
+               TargetType="ComboBox"
                BasedOn="{StaticResource {x:Type ComboBox}}">
-            <Setter Property="Background" 
+            <Setter Property="Background"
                     Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-            <Setter Property="Foreground" 
+            <Setter Property="Foreground"
                     Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-            <Setter Property="BorderBrush" 
+            <Setter Property="BorderBrush"
                     Value="{DynamicResource ControlElevationBorderBrush}"/>
         </Style>
-        
+
         <!-- Button Style -->
-        <Style x:Key="AppButtonStyle" 
+        <Style x:Key="AppButtonStyle"
                TargetType="Button">
-            <Setter Property="Background" 
+            <Setter Property="Background"
                     Value="#2D2D2D"/>
-            <Setter Property="Foreground" 
+            <Setter Property="Foreground"
                     Value="White"/>
-            <Setter Property="BorderBrush" 
+            <Setter Property="BorderBrush"
                     Value="#3F3F3F"/>
-            <Setter Property="Padding" 
+            <Setter Property="Padding"
                     Value="8,5"/>
         </Style>
-        
+
         <!-- ListView Style -->
-        <Style x:Key="AppListViewStyle" 
+        <Style x:Key="AppListViewStyle"
                TargetType="ListView">
-            <Setter Property="Background" 
+            <Setter Property="Background"
                     Value="Transparent"/>
-            <Setter Property="BorderBrush" 
+            <Setter Property="BorderBrush"
                     Value="Transparent"/>
-            <Setter Property="BorderThickness" 
+            <Setter Property="BorderThickness"
                     Value="0"/>
-            <Setter Property="Foreground" 
+            <Setter Property="Foreground"
                     Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
-        
+
         <!-- ListViewItem Style -->
-        <Style x:Key="AppListViewItemStyle" 
+        <Style x:Key="AppListViewItemStyle"
                TargetType="ListViewItem">
-            <Setter Property="Background" 
+            <Setter Property="Background"
                     Value="Transparent"/>
-            <Setter Property="Foreground" 
+            <Setter Property="Foreground"
                     Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment"
+                    Value="Stretch"/>
             <Style.Triggers>
-                <Trigger Property="IsMouseOver" 
+                <Trigger Property="IsMouseOver"
                          Value="True">
-                    <Setter Property="Background" 
+                    <Setter Property="Background"
                             Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
                 </Trigger>
-                <Trigger Property="IsSelected" 
+                <Trigger Property="IsSelected"
                          Value="True">
-                    <Setter Property="Background" 
+                    <Setter Property="Background"
                             Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-                    <Setter Property="Foreground" 
+                    <Setter Property="Foreground"
                             Value="{DynamicResource TextFillColorPrimaryBrush}"/>
                 </Trigger>
             </Style.Triggers>
@@ -147,7 +149,7 @@
         <DataTemplate x:Key="BasicInfoSectionTemplate">
             <StackPanel>
                 <TextBlock Text="Basic Information"
-                        Style="{StaticResource SectionHeaderStyle}"/>
+                           Style="{StaticResource SectionHeaderStyle}"/>
                 <UniformGrid Columns="2">
                     <!-- Define ID -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -156,20 +158,20 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Define ID"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Define ID of the mover"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:AutoSuggestBox Grid.Row="1"
-                                Text="{Binding Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                                OriginalItemsSource="{Binding Path=ViewModel.MoverIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
-                                DisplayMemberPath="Value"/>
+                                           Text="{Binding Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                           OriginalItemsSource="{Binding Path=ViewModel.MoverIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                                           DisplayMemberPath="Value"/>
                     </Grid>
 
                     <!-- ID Key -->
@@ -179,19 +181,19 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="ID Key"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="ID Key of the mover"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <TextBox Grid.Row="1"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding IdKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                 Style="{StaticResource AppTextBoxStyle}"
+                                 Text="{Binding IdKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
 
                     <!-- Name -->
@@ -201,20 +203,20 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Name"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Name of the mover"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <TextBox Grid.Row="1"
-                                    Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        </Grid>
+                                 Style="{StaticResource AppTextBoxStyle}"
+                                 Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
 
                     <!-- Description -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -223,19 +225,19 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Description"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Description of the mover"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <TextBox Grid.Row="1"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                 Style="{StaticResource AppTextBoxStyle}"
+                                 Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
 
                     <!-- Killable -->
@@ -245,20 +247,20 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Killable"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Can the mover be killed"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ComboBox Grid.Row="1"
-                                Style="{StaticResource AppComboBoxStyle}"
-                                SelectedValue="{Binding Prop.BKillable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                SelectedValuePath="Tag">
+                                  Style="{StaticResource AppComboBoxStyle}"
+                                  SelectedValue="{Binding Prop.BKillable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedValuePath="Tag">
                             <ComboBoxItem Content="Yes">
                                 <ComboBoxItem.Tag>
                                     <sys:Int32>1</sys:Int32>
@@ -335,21 +337,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="EXP Value"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Experience value gained"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.NExpValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Minimum="0"
-                                Maximum="999999999"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.NExpValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      Minimum="0"
+                                      Maximum="999999999"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
                 </UniformGrid>
             </StackPanel>
@@ -359,7 +361,7 @@
         <DataTemplate x:Key="StatsSectionTemplate">
             <StackPanel>
                 <TextBlock Text="Stats"
-                        Style="{StaticResource SectionHeaderStyle}"/>
+                           Style="{StaticResource SectionHeaderStyle}"/>
                 <UniformGrid Columns="2">
                     <!-- STR -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -368,21 +370,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="STR"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Strength stat"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.DwStr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="2147483647"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.DwStr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                      Minimum="0"
+                                      Maximum="2147483647"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- STA -->
@@ -392,21 +394,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="STA"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Stamina stat"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.DwSta, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="2147483647"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.DwSta, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                      Minimum="0"
+                                      Maximum="2147483647"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- DEX -->
@@ -416,21 +418,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="DEX"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Dexterity stat"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.DwDex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="2147483647"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.DwDex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                      Minimum="0"
+                                      Maximum="2147483647"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- INT -->
@@ -440,21 +442,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="INT"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Intelligence stat"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.DwInt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="2147483647"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.DwInt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                      Minimum="0"
+                                      Maximum="2147483647"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- Hit Rate -->
@@ -464,21 +466,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Hit Rate"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Chance to hit target"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.DwHR, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.DwHR, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                      Minimum="0"
+                                      Maximum="100"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- Evasion Rate -->
@@ -488,21 +490,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Evasion Rate"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Chance to evade attacks"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.DwER, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.DwER, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                      Minimum="0"
+                                      Maximum="100"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
                 </UniformGrid>
             </StackPanel>
@@ -512,7 +514,7 @@
         <DataTemplate x:Key="CombatSettingsSectionTemplate">
             <StackPanel>
                 <TextBlock Text="Combat / Battle"
-                        Style="{StaticResource SectionHeaderStyle}"/>
+                           Style="{StaticResource SectionHeaderStyle}"/>
                 <UniformGrid Columns="2">
                     <!-- Level -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -521,21 +523,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Level"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Level of the mover"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.DwLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="1"
-                                Maximum="2147483647"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.DwLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                      Minimum="1"
+                                      Maximum="2147483647"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- Health Points -->
@@ -545,21 +547,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Health Points"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Maximum health points"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.DwAddHp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Minimum="1"
-                                Maximum="2147483647"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.DwAddHp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      Minimum="1"
+                                      Maximum="2147483647"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- Mana Points -->
@@ -569,21 +571,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Mana Points"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Maximum mana points"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.DwAddMp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="2147483647"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.DwAddMp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                      Minimum="0"
+                                      Maximum="2147483647"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- Artificial Intelligence -->
@@ -593,11 +595,11 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Artificial Intelligence (AI)"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="AI behavior type"/>
                                 </ui:SymbolIcon.ToolTip>
@@ -606,7 +608,7 @@
                         <ui:AutoSuggestBox Grid.Row="1"
                                            OriginalItemsSource="{Binding Path=ViewModel.AiIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
                                            Text="{Binding AiIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                                           DisplayMemberPath="Value" />
+                                           DisplayMemberPath="Value"/>
                     </Grid>
 
                     <!-- Belligerence -->
@@ -616,20 +618,20 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Belligerence"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Aggression level"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:AutoSuggestBox Grid.Row="1"
-                                OriginalItemsSource="{Binding Path=ViewModel.BelligerenceIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
-                                Text="{Binding BelligerenceIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                                DisplayMemberPath="Value" />
+                                           OriginalItemsSource="{Binding Path=ViewModel.BelligerenceIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                                           Text="{Binding BelligerenceIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                           DisplayMemberPath="Value"/>
                     </Grid>
 
                     <!-- Action Radius -->
@@ -666,21 +668,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Attack min."
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Minimum attack damage"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.DwAtkMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Minimum="0"
-                                Maximum="2147483647"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.DwAtkMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      Minimum="0"
+                                      Maximum="2147483647"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- Attack max. -->
@@ -690,21 +692,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Attack max."
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Maximum attack damage"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.DwAtkMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Minimum="0"
-                                Maximum="2147483647"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.DwAtkMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      Minimum="0"
+                                      Maximum="2147483647"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- Attack Animation 1 -->
@@ -714,19 +716,19 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Attack Animation 1"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Primary attack animation"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <TextBox Grid.Row="1"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding AttackAnim1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                 Style="{StaticResource AppTextBoxStyle}"
+                                 Text="{Binding AttackAnim1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
 
                     <!-- Attack Animation 2 -->
@@ -736,19 +738,19 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Attack Animation 2"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Secondary attack animation"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <TextBox Grid.Row="1"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding AttackAnim2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                 Style="{StaticResource AppTextBoxStyle}"
+                                 Text="{Binding AttackAnim2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
 
                     <!-- Attack Animation 3 -->
@@ -758,19 +760,19 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Attack Animation 3"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Tertiary attack animation"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <TextBox Grid.Row="1"
-                                Style="{StaticResource AppTextBoxStyle}"
-                                Text="{Binding AttackAnim3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                 Style="{StaticResource AppTextBoxStyle}"
+                                 Text="{Binding AttackAnim3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
 
                     <!-- Attack Speed -->
@@ -807,21 +809,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Attack Delay"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Delay between attacks"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.DwReAttackDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="10000"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.DwReAttackDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                      Minimum="0"
+                                      Maximum="10000"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
                 </UniformGrid>
             </StackPanel>
@@ -831,7 +833,7 @@
         <DataTemplate x:Key="DefensiveStatsSectionTemplate">
             <StackPanel>
                 <TextBlock Text="Defensive Stats &amp; Resistances"
-                        Style="{StaticResource SectionHeaderStyle}"/>
+                           Style="{StaticResource SectionHeaderStyle}"/>
                 <UniformGrid Columns="2">
                     <!-- Armor -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -840,21 +842,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Armor"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Base armor value"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.DwNaturalArmor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="2147483647"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.DwNaturalArmor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                      Minimum="0"
+                                      Maximum="2147483647"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- Abrasion -->
@@ -918,21 +920,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Magic Resistance"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="General magic resistance"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.DwResisMgic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.DwResisMgic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                      Minimum="0"
+                                      Maximum="100"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- Resistance Electricity -->
@@ -942,21 +944,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Resistance Electricity"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Resistance to electricity damage"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.NResistElecricity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.NResistElecricity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                      Minimum="0"
+                                      Maximum="100"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- Resistance Fire -->
@@ -966,21 +968,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Resistance Fire"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Resistance to fire damage"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.NResistFire, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.NResistFire, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                      Minimum="0"
+                                      Maximum="100"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- Resistance Wind -->
@@ -990,21 +992,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Resistance Wind"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Resistance to wind damage"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.NResistWind, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.NResistWind, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                      Minimum="0"
+                                      Maximum="100"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- Resistance Water -->
@@ -1014,21 +1016,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Resistance Water"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Resistance to water damage"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.NResistWater, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.NResistWater, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                      Minimum="0"
+                                      Maximum="100"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- Resistance Earth -->
@@ -1038,21 +1040,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Resistance Earth"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Resistance to earth damage"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.NResistEarth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.NResistEarth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                      Minimum="0"
+                                      Maximum="100"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
                 </UniformGrid>
             </StackPanel>
@@ -1062,7 +1064,7 @@
         <DataTemplate x:Key="ElementalSectionTemplate">
             <StackPanel>
                 <TextBlock Text="Elementar &amp; Damage Types"
-                        Style="{StaticResource SectionHeaderStyle}"/>
+                           Style="{StaticResource SectionHeaderStyle}"/>
                 <UniformGrid Columns="2">
                     <!-- Element Type -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -1071,20 +1073,20 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Element Type"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Type of elemental damage"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ComboBox Grid.Row="1"
-                                Style="{StaticResource AppComboBoxStyle}"
-                                SelectedValue="{Binding Prop.EElementType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                SelectedValuePath="Tag">
+                                  Style="{StaticResource AppComboBoxStyle}"
+                                  SelectedValue="{Binding Prop.EElementType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedValuePath="Tag">
                             <ComboBoxItem Content="None">
                                 <ComboBoxItem.Tag>
                                     <sys:Int32>0</sys:Int32>
@@ -1126,21 +1128,21 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
+                                    Orientation="Horizontal">
                             <TextBlock Text="Element Attack"
-                                    Style="{StaticResource FieldLabelStyle}"/>
+                                       Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                                           Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Elemental attack value"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Prop.WElementAtk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                Minimum="0"
-                                Maximum="2147483647"
-                                SpinButtonPlacementMode="Inline"/>
+                                      Value="{Binding Prop.WElementAtk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                      Minimum="0"
+                                      Maximum="2147483647"
+                                      SpinButtonPlacementMode="Inline"/>
                     </Grid>
 
                     <!-- Correction Value -->
@@ -1184,83 +1186,88 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                
+
                 <!-- Linke Seite mit der Liste -->
-                <Border Grid.Row="0" Grid.Column="0"
-                       BorderThickness="1"
-                       BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                       Margin="0,0,10,0">
-                    <ListView x:Name="MotionsListView" 
-                             Style="{StaticResource AppListViewStyle}"
-                             ItemsSource="{Binding MotionsList}"
-                             SelectedItem="{Binding SelectedMotion, Mode=TwoWay}"
-                             Height="200"
-                             Width="150">
+                <Border Grid.Row="0"
+                        Grid.Column="0"
+                        BorderThickness="1"
+                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                        Margin="0,0,10,0">
+                    <ListView x:Name="MotionsListView"
+                              Style="{StaticResource AppListViewStyle}"
+                              ItemsSource="{Binding MotionsList}"
+                              SelectedItem="{Binding SelectedMotion, Mode=TwoWay}"
+                              Height="200"
+                              Width="150">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding}" Margin="5"/>
+                                <TextBlock Text="{Binding}"
+                                        Margin="5"/>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
                 </Border>
-                
+
                 <!-- Rechte Seite mit Details -->
-                <StackPanel Grid.Row="0" Grid.Column="1">
+                <StackPanel Grid.Row="0"
+                        Grid.Column="1">
                     <!-- Add Button -->
                     <ui:Button x:Name="AddMotionButton"
-                             Content="Add"
-                             Appearance="Secondary"
-                             HorizontalAlignment="Stretch"
-                             Margin="0,0,0,10"/>
-                    
+                               Content="Add"
+                               Appearance="Secondary"
+                               HorizontalAlignment="Stretch"
+                               Margin="0,0,0,10"/>
+
                     <!-- Generate Button -->
                     <ui:Button x:Name="GenerateMotionButton"
-                             Content="Generate"
-                             Appearance="Secondary"
-                             HorizontalAlignment="Stretch"
-                             Margin="0,0,0,20"/>
-                    
+                               Content="Generate"
+                               Appearance="Secondary"
+                               HorizontalAlignment="Stretch"
+                               Margin="0,0,0,20"/>
+
                     <!-- Identifier -->
-                    <TextBlock Text="Identifier:" Margin="0,0,0,5"/>
-                    
+                    <TextBlock Text="Identifier:"
+                            Margin="0,0,0,5"/>
+
                     <Grid Margin="0,0,0,15">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        
+
                         <!-- Identifier Row -->
-                        <Grid Grid.Row="0" Margin="0,0,0,10">
+                        <Grid Grid.Row="0"
+                                Margin="0,0,0,10">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            
+
                             <!-- Label mit Info-Icon -->
-                            <StackPanel Grid.Row="0" 
-                                      Orientation="Horizontal"
-                                      Margin="0,0,0,5">
-                                <TextBlock Text="Identifier" 
-                                         FontWeight="SemiBold" 
-                                         FontSize="12"/>
+                            <StackPanel Grid.Row="0"
+                                        Orientation="Horizontal"
+                                        Margin="0,0,0,5">
+                                <TextBlock Text="Identifier"
+                                           FontWeight="SemiBold"
+                                           FontSize="12"/>
                                 <ui:SymbolIcon Symbol="Info20"
-                                            Style="{StaticResource InfoIconStyle}">
+                                               Style="{StaticResource InfoIconStyle}">
                                     <ui:SymbolIcon.ToolTip>
                                         <ToolTip Content="Typ der Animation"/>
                                     </ui:SymbolIcon.ToolTip>
                                 </ui:SymbolIcon>
                             </StackPanel>
-                            
+
                             <!-- Dropdown -->
                             <Border Grid.Row="1"
-                                  Background="{DynamicResource ControlFillColorDefaultBrush}"
-                                  BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                  BorderThickness="1"
-                                  CornerRadius="4">
+                                    Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="4">
                                 <ComboBox Style="{StaticResource AppComboBoxStyle}"
-                                        BorderThickness="0"
-                                        Background="Transparent"
-                                        SelectedIndex="0">
+                                          BorderThickness="0"
+                                          Background="Transparent"
+                                          SelectedIndex="0">
                                     <ComboBoxItem Content="MTI_STAND"/>
                                     <ComboBoxItem Content="MTI_WALK"/>
                                     <ComboBoxItem Content="MTI_IDLE1"/>
@@ -1269,29 +1276,29 @@
                                 </ComboBox>
                             </Border>
                         </Grid>
-                        
+
                         <!-- File Row -->
                         <Grid Grid.Row="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            
+
                             <!-- Label mit Info-Icon -->
-                            <StackPanel Grid.Row="0" 
-                                      Orientation="Horizontal"
-                                      Margin="0,0,0,5">
-                                <TextBlock Text="File" 
-                                         FontWeight="SemiBold" 
-                                         FontSize="12"/>
+                            <StackPanel Grid.Row="0"
+                                        Orientation="Horizontal"
+                                        Margin="0,0,0,5">
+                                <TextBlock Text="File"
+                                           FontWeight="SemiBold"
+                                           FontSize="12"/>
                                 <ui:SymbolIcon Symbol="Info20"
-                                            Style="{StaticResource InfoIconStyle}">
+                                               Style="{StaticResource InfoIconStyle}">
                                     <ui:SymbolIcon.ToolTip>
                                         <ToolTip Content="Animationsdatei"/>
                                     </ui:SymbolIcon.ToolTip>
                                 </ui:SymbolIcon>
                             </StackPanel>
-                            
+
                             <!-- File Input mit Button -->
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
@@ -1299,29 +1306,30 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <TextBox Grid.Column="0"
-                                       Style="{StaticResource AppTextBoxStyle}"
-                                       Text="stand"/>
-                                <ui:Button Grid.Column="1" 
-                                         Content="..." 
-                                         Width="30"
-                                         Margin="5,0,0,0"/>
+                                         Style="{StaticResource AppTextBoxStyle}"
+                                         Text="stand"/>
+                                <ui:Button Grid.Column="1"
+                                           Content="..."
+                                           Width="30"
+                                           Margin="5,0,0,0"/>
                             </Grid>
                         </Grid>
                     </Grid>
                 </StackPanel>
-                
+
                 <!-- Buttons unten -->
-                <StackPanel Grid.Row="1" Grid.ColumnSpan="2"
-                          Orientation="Horizontal"
-                          HorizontalAlignment="Right"
-                          Margin="0,15,0,0">
+                <StackPanel Grid.Row="1"
+                        Grid.ColumnSpan="2"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Margin="0,15,0,0">
                     <ui:Button x:Name="OkButton"
-                             Content="OK"
-                             Appearance="Primary"
-                             Margin="0,0,10,0"/>
+                               Content="OK"
+                               Appearance="Primary"
+                               Margin="0,0,10,0"/>
                     <ui:Button x:Name="CancelButton"
-                             Content="Cancel"
-                             Appearance="Secondary"/>
+                               Content="Cancel"
+                               Appearance="Secondary"/>
                 </StackPanel>
             </Grid>
         </DataTemplate>
@@ -1340,18 +1348,18 @@
                         BorderThickness="1"
                         Margin="0,0,8,0">
                     <TextBlock Text="{Binding ID}"
-                              VerticalAlignment="Center"
-                              HorizontalAlignment="Center"
-                              FontWeight="SemiBold"/>
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontWeight="SemiBold"/>
                 </Border>
                 <StackPanel Grid.Column="1"
-                        VerticalAlignment="Center">
+                            VerticalAlignment="Center">
                     <TextBlock Text="{Binding Name}"
-                            FontWeight="SemiBold"
-                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
+                               FontWeight="SemiBold"
+                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
                     <TextBlock Text="{Binding ModelType}"
-                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                            FontSize="12"/>
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                               FontSize="12"/>
                 </StackPanel>
             </Grid>
         </DataTemplate>
@@ -1377,12 +1385,12 @@
                     BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                     Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                     Margin="0,0,10,0">
-                <ui:TextBox 
-                            PlaceholderText="Suche..."
-                            Icon="Search24"
-                            BorderThickness="0"
-                            Margin="10,10,10,10"
-                            Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <ui:TextBox
+                    PlaceholderText="Suche..."
+                    Icon="Search24"
+                    BorderThickness="0"
+                    Margin="10,10,10,10"
+                    Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
 
             <!-- Mover List -->
@@ -1405,12 +1413,12 @@
                                     Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver"
-                                        Value="True">
+                                         Value="True">
                                     <Setter Property="Background"
                                             Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
                                 </Trigger>
                                 <Trigger Property="IsSelected"
-                                        Value="True">
+                                         Value="True">
                                     <Setter Property="Background"
                                             Value="{DynamicResource ControlFillColorDefaultBrush}"/>
                                     <Setter Property="Foreground"
@@ -1432,10 +1440,20 @@
             <GridSplitter.Template>
                 <ControlTemplate TargetType="{x:Type GridSplitter}">
                     <Grid Background="Transparent">
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
-                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
-                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
+                        <StackPanel VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                            <Rectangle Width="2"
+                                    Height="20"
+                                    Fill="{DynamicResource TextFillColorSecondaryBrush}"
+                                    Margin="0,2,0,2"/>
+                            <Rectangle Width="2"
+                                    Height="20"
+                                    Fill="{DynamicResource TextFillColorSecondaryBrush}"
+                                    Margin="0,2,0,2"/>
+                            <Rectangle Width="2"
+                                    Height="20"
+                                    Fill="{DynamicResource TextFillColorSecondaryBrush}"
+                                    Margin="0,2,0,2"/>
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>
@@ -1444,57 +1462,310 @@
 
         <!-- Right Side - Form -->
         <ScrollViewer Grid.Column="2"
-                VerticalScrollBarVisibility="Auto">
+                      VerticalScrollBarVisibility="Auto">
             <Grid>
                 <!-- Add und Delete Buttons oben rechts -->
-                <StackPanel Orientation="Horizontal" 
-                          HorizontalAlignment="Right" 
-                          VerticalAlignment="Top"
-                          Margin="0,10,20,0"
-                          ZIndex="1">
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Margin="0,10,20,0"
+                            ZIndex="1">
                     <ui:Button
-                             ToolTip="Undo">
+                        ToolTip="Undo">
                         <ui:SymbolIcon Symbol="ArrowUndo24"/>
                     </ui:Button>
                     <ui:Button
-                             Margin="10,0,10,0"
-                             ToolTip="Redo">
+                        Margin="10,0,10,0"
+                        ToolTip="Redo">
                         <ui:SymbolIcon Symbol="ArrowRedo24"/>
                     </ui:Button>
-                    <ui:Button x:Name="SaveButton" 
-                             Content="Save" 
-                             Margin="0,0,10,0"
-                             Click="SaveButton_Click"/>
-                    <ui:Button x:Name="ExpertButton" 
-                             Content="Expert" 
-                             Appearance="Secondary"
-                             Margin="0,0,10,0"/>
-                    <ui:Button x:Name="AddButton" 
-                             Content="Add" 
-                             Background="#2F70AF"
-                             Margin="0,0,10,0"/>
-                    <ui:Button x:Name="DeleteButton" 
-                             Content="Delete" 
-                             Background="#FD292F"/>
+                    <ui:Button x:Name="SaveButton"
+                               Content="Save"
+                               Margin="0,0,10,0"
+                               Click="SaveButton_Click"/>
+                    <ui:Button x:Name="ExpertButton"
+                               Content="Expert"
+                               Appearance="Secondary"
+                               Margin="0,0,10,0"/>
+                    <ui:Button x:Name="FilterButton"
+                               Content="Filter"
+                               Appearance="Secondary"
+                               Margin="0,0,10,0">
+                        <ui:Button.ContextMenu>
+                            <ContextMenu Background="{DynamicResource ApplicationBackgroundBrush}">
+                                <ScrollViewer MaxHeight="600"
+                                              VerticalScrollBarVisibility="Auto"
+                                              Padding="0,0,15,0">
+                                    <StackPanel MinWidth="250">
+                                        <TextBlock Text="Filter Sections"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                   FontWeight="SemiBold"
+                                                   Margin="10,5,0,5"/>
+
+                                        <Border Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                Padding="10,5">
+                                            <StackPanel>
+                                                <CheckBox Content="Basic Information"
+                                                          IsChecked="True"
+                                                          Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                          Margin="0,2"/>
+                                                <CheckBox Content="Stats"
+                                                          IsChecked="True"
+                                                          Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                          Margin="0,2"/>
+                                                <CheckBox Content="Combat / Battle"
+                                                          IsChecked="True"
+                                                          Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                          Margin="0,2"/>
+                                                <CheckBox Content="Defensive Stats &amp; Resistances"
+                                                          IsChecked="True"
+                                                          Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                          Margin="0,2"/>
+                                                <CheckBox Content="Elementar &amp; Damage Types"
+                                                          IsChecked="True"
+                                                          Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                          Margin="0,2"/>
+                                                <CheckBox Content="Sound"
+                                                          IsChecked="True"
+                                                          Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                          Margin="0,2"/>
+                                                <CheckBox Content="Model / Mobility / Movement"
+                                                          IsChecked="True"
+                                                          Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                          Margin="0,2"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <TextBlock Text="Filter Fields"
+                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                   FontWeight="SemiBold"
+                                                   Margin="10,10,0,5"/>
+
+                                        <Border Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                Margin="0,0,0,5">
+                                            <Expander Header="Basic Information Fields"
+                                                      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                      Background="Transparent">
+                                                <StackPanel Margin="20,5,5,5">
+                                                    <CheckBox Content="ID"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="ID Key"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Name"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Description"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Killable"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Penya"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Duration"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="EXP"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                </StackPanel>
+                                            </Expander>
+                                        </Border>
+
+                                        <Border Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                Margin="0,0,0,5">
+                                            <Expander Header="Stats Fields"
+                                                      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                      Background="Transparent">
+                                                <StackPanel Margin="20,5,5,5">
+                                                    <CheckBox Content="STR"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="STA"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="DEX"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="INT"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Hit Rate"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Evasion Rate"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                </StackPanel>
+                                            </Expander>
+                                        </Border>
+
+                                        <Border Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                Margin="0,0,0,5">
+                                            <Expander Header="Combat/Battle Fields"
+                                                      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                      Background="Transparent">
+                                                <StackPanel Margin="20,5,5,5">
+                                                    <CheckBox Content="Level"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Health Points"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Mana Points"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Artificial Intelligence (AI)"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Belligerence"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Attack min."
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Attack max."
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Attack Animation 1"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Attack Animation 2"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Attack Animation 3"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Attack Delay"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                </StackPanel>
+                                            </Expander>
+                                        </Border>
+
+                                        <Border Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                Margin="0,0,0,5">
+                                            <Expander Header="Defensive Stats Fields"
+                                                      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                      Background="Transparent">
+                                                <StackPanel Margin="20,5,5,5">
+                                                    <CheckBox Content="Armor"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Magic Resistance"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Resistance Electricity"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Resistance Fire"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Resistance Wind"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Resistance Water"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Resistance Earth"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                </StackPanel>
+                                            </Expander>
+                                        </Border>
+
+                                        <Border Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                Margin="0,0,0,5">
+                                            <Expander Header="Elemental Fields"
+                                                      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                      Background="Transparent">
+                                                <StackPanel Margin="20,5,5,5">
+                                                    <CheckBox Content="Element Type"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Element Attack"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Correction Value"
+                                                            IsChecked="True"
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                </StackPanel>
+                                            </Expander>
+                                        </Border>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </ContextMenu>
+                        </ui:Button.ContextMenu>
+                    </ui:Button>
+                    <ui:Button x:Name="AddButton"
+                               Content="Add"
+                               Background="#2F70AF"
+                               Margin="0,0,10,0"/>
+                    <ui:Button x:Name="DeleteButton"
+                               Content="Delete"
+                               Background="#FD292F"/>
                 </StackPanel>
-                
+
                 <!-- Formulare -->
                 <StackPanel Margin="20">
-                    <ContentControl Content="{Binding ViewModel.MoversView}" ContentTemplate="{StaticResource BasicInfoSectionTemplate}"/>
+                    <ContentControl Content="{Binding ViewModel.MoversView}"
+                            ContentTemplate="{StaticResource BasicInfoSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
-                    <ContentControl Content="{Binding ViewModel.MoversView}" ContentTemplate="{StaticResource StatsSectionTemplate}"/>
+                    <ContentControl Content="{Binding ViewModel.MoversView}"
+                            ContentTemplate="{StaticResource StatsSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
-                    <ContentControl Content="{Binding ViewModel.MoversView}" ContentTemplate="{StaticResource CombatSettingsSectionTemplate}"/>
+                    <ContentControl Content="{Binding ViewModel.MoversView}"
+                            ContentTemplate="{StaticResource CombatSettingsSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
-                    <ContentControl Content="{Binding ViewModel.MoversView}" ContentTemplate="{StaticResource DefensiveStatsSectionTemplate}"/>
+                    <ContentControl Content="{Binding ViewModel.MoversView}"
+                            ContentTemplate="{StaticResource DefensiveStatsSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
-                    <ContentControl Content="{Binding ViewModel.MoversView}" ContentTemplate="{StaticResource ElementalSectionTemplate}"/>
-                    
+                    <ContentControl Content="{Binding ViewModel.MoversView}"
+                            ContentTemplate="{StaticResource ElementalSectionTemplate}"/>
+
                     <!-- Model & Motions Section -->
                     <StackPanel>
                         <TextBlock Text="Model"
-                                Style="{StaticResource SectionHeaderStyle}"/>
-                        
+                                   Style="{StaticResource SectionHeaderStyle}"/>
+
                         <!-- Preview and Motions Container -->
                         <Grid Margin="0,0,0,15">
                             <Grid.ColumnDefinitions>
@@ -1503,37 +1774,50 @@
                             </Grid.ColumnDefinitions>
 
                             <!-- 3D Model Preview -->
-                            <Border Grid.Column="0"
-                                    Background="{DynamicResource ControlFillColorDefaultBrush}"
-                                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="4"
-                                    Height="250" 
+                            <Grid Grid.Column="0"
                                     Margin="0,0,10,0">
-                                <Grid>
-                                    <TextBox x:Name="IdentifierTextBlock"
-                                             Visibility="Collapsed" 
-                                             Text="{Binding ViewModel.MoversView.CurrentItem.Identifier, Mode=OneWay}"
-                                             TextChanged="MoverIdentifierTextBox_TextChanged" />
-                                    <TextBox x:Name="Model3DFilePathTextBlock" 
-                                            Visibility="Collapsed" 
-                                            Text="{Binding ViewModel.MoversView.CurrentItem.Model.Model3DFilePath, Mode=OneWay}"
-                                            TextChanged="Model3DFilePathTextBlock_TextChanged" />
-                                    <TextBox x:Name="ModelTextureExTextBlock"
-                                            Visibility="Collapsed" 
-                                            Text="{Binding ViewModel.MoversView.CurrentItem.Model.NTextureEx, Mode=OneWay}"
-                                            TextChanged="ModelTextureExTextBlock_TextChanged"/>
-                                    <Image x:Name="DxImage" 
-                                            Stretch="UniformToFill" 
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            MouseRightButtonDown="DxImage_MouseRightButtonDown" 
-                                            MouseWheel="DxImage_MouseWheel" />
-                                </Grid>
-                            </Border>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="250"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.Row="0"
+                                        Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="4">
+                                    <Grid>
+                                        <TextBox x:Name="Model3DFilePathTextBlock"
+                                                 Visibility="Collapsed"
+                                                 Text="{Binding ViewModel.MoversView.CurrentItem.Model.Model3DFilePath, Mode=OneWay}"
+                                                 TextChanged="Model3DFilePathTextBlock_TextChanged"/>
+                                        <TextBox x:Name="ModelTextureExTextBlock"
+                                                 Visibility="Collapsed"
+                                                 Text="{Binding ViewModel.MoversView.CurrentItem.Model.NTextureEx, Mode=OneWay}"
+                                                 TextChanged="ModelTextureExTextBlock_TextChanged"/>
+                                        <Image x:Name="DxImage"
+                                               Stretch="UniformToFill"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"
+                                               MouseRightButtonDown="DxImage_MouseRightButtonDown"
+                                               MouseWheel="DxImage_MouseWheel"/>
+                                        <ui:Button ToolTip="Reference Model"
+                                                   HorizontalAlignment="Right"
+                                                   VerticalAlignment="Top"
+                                                   Margin="0,5,5,0"
+                                                   Panel.ZIndex="1">
+                                            <ui:SymbolIcon Symbol="ImageReflection24"/>
+                                        </ui:Button>
+                                    </Grid>
+                                </Border>
+                            </Grid>
 
                             <!-- Motions Container -->
-                            <Grid Grid.Column="1" Margin="10,0,0,0">
+                            <Grid Grid.Column="1"
+                                    Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="185"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
@@ -1542,20 +1826,20 @@
                                 <!-- Motion List -->
                                 <Border Grid.Column="0"
                                         BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                        BorderThickness="1"
-                                        Height="250">
+                                        BorderThickness="1">
                                     <ListView x:Name="MotionsListView"
                                               Style="{StaticResource AppListViewStyle}"
                                               ItemContainerStyle="{StaticResource AppListViewItemStyle}"
                                               ItemsSource="{Binding ViewModel.MoversView.CurrentItem.Model.Motions}">
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
-                                                <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                                    <TextBlock Text="{Binding MotionTypeIdentifier, Mode=OneWay}" />
+                                                <Grid HorizontalAlignment="Stretch"
+                                                        VerticalAlignment="Stretch">
+                                                    <TextBlock Text="{Binding MotionTypeIdentifier, Mode=OneWay}"/>
                                                     <i:Interaction.Triggers>
                                                         <i:EventTrigger EventName="MouseDown">
-                                                            <i:InvokeCommandAction Command="{Binding DataContext.PlayMotionCommand, RelativeSource={RelativeSource AncestorType=Page}}" 
-                                                                                 CommandParameter="{Binding}" />
+                                                            <i:InvokeCommandAction Command="{Binding DataContext.PlayMotionCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                                                                   CommandParameter="{Binding}"/>
                                                         </i:EventTrigger>
                                                     </i:Interaction.Triggers>
                                                 </Grid>
@@ -1565,281 +1849,198 @@
                                 </Border>
 
                                 <!-- Buttons neben der Liste -->
-                                <StackPanel Grid.Column="1" 
+                                <StackPanel Grid.Column="1"
                                             Margin="10,0,0,0"
                                             VerticalAlignment="Top">
-                                    <ui:Button Content="Add" 
-                                               Margin="0,0,0,10"/>
-                                    <ui:Button Content="Delete" 
-                                               Margin="0,0,0,10"/>
-                                    <ui:Button Content="Generate"/>
+                                    <ui:Button ToolTip="Add Motion"
+                                               Margin="0,0,0,10">
+                                        <ui:SymbolIcon Symbol="Add24"/>
+                                    </ui:Button>
+                                    <ui:Button ToolTip="Delete Motion"
+                                               Margin="0,0,0,10">
+                                        <ui:SymbolIcon Symbol="Delete24"/>
+                                    </ui:Button>
+                                    <ui:Button ToolTip="Generate Motions">
+                                        <ui:SymbolIcon Symbol="ArrowSync24"/>
+                                    </ui:Button>
                                 </StackPanel>
+
+                                <!-- Motion Fields -->
+                                <UniformGrid Grid.Row="1"
+                                        Grid.ColumnSpan="2"
+                                        Columns="2"
+                                        Margin="0,10,0,0">
+                                    <!-- Motion Key -->
+                                    <Grid Style="{StaticResource FormFieldStyle}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="32"/>
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="0"
+                                                Orientation="Horizontal">
+                                            <TextBlock Text="Motion Key"
+                                                    Style="{StaticResource FieldLabelStyle}"/>
+                                            <ui:SymbolIcon Symbol="Info20"
+                                                    Style="{StaticResource InfoIconStyle}">
+                                                <ui:SymbolIcon.ToolTip>
+                                                    <ToolTip Content="Key identifier for the motion"/>
+                                                </ui:SymbolIcon.ToolTip>
+                                            </ui:SymbolIcon>
+                                        </StackPanel>
+                                        <TextBox Grid.Row="1"
+                                                 Height="32"
+                                                 Style="{StaticResource AppTextBoxStyle}"/>
+                                    </Grid>
+
+                                    <!-- Motion File -->
+                                    <Grid Style="{StaticResource FormFieldStyle}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="32"/>
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="0"
+                                                Orientation="Horizontal">
+                                            <TextBlock Text="Motion File"
+                                                    Style="{StaticResource FieldLabelStyle}"/>
+                                            <ui:SymbolIcon Symbol="Info20"
+                                                    Style="{StaticResource InfoIconStyle}">
+                                                <ui:SymbolIcon.ToolTip>
+                                                    <ToolTip Content="File path for the motion"/>
+                                                </ui:SymbolIcon.ToolTip>
+                                            </ui:SymbolIcon>
+                                        </StackPanel>
+                                        <Grid Grid.Row="1"
+                                                Height="32">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox Grid.Column="0"
+                                                     Style="{StaticResource AppTextBoxStyle}"
+                                                     Height="32"/>
+                                            <ui:Button Grid.Column="1"
+                                                       Content="..."
+                                                       Width="30"
+                                                       Height="32"
+                                                       Margin="5,0,0,0"/>
+                                        </Grid>
+                                    </Grid>
+                                </UniformGrid>
                             </Grid>
                         </Grid>
 
                         <!-- Model Settings -->
-                        <UniformGrid Columns="2">
-                            <!-- File -->
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="File" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Model file path"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <Grid Grid.Row="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <ui:AutoSuggestBox Grid.Column="0"
-                                            Text="{Binding ViewModel.MoversView.CurrentItem.Model.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                            OriginalItemsSource="{Binding ViewModel.ModelFilePossibilities, Mode=OneWay}"
-                                            TextChanged="AutoSuggestBox_TextChanged"/>
-                                    <ui:Button Grid.Column="1" 
-                                             Content="..." 
-                                             Width="30"
-                                             Margin="5,0,0,0"
-                                             Command="{Binding DataContext.SelectModelFileCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                    />
+                        <StackPanel>
+                            <!-- First Row -->
+                            <UniformGrid Columns="2">
+                                <!-- File -->
+                                <Grid Style="{StaticResource FormFieldStyle}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="32"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0"
+                                            Orientation="Horizontal">
+                                        <TextBlock Text="File"
+                                                Style="{StaticResource FieldLabelStyle}"/>
+                                        <ui:SymbolIcon Symbol="Info20"
+                                                Style="{StaticResource InfoIconStyle}">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="Model file path"/>
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <Grid Grid.Row="1"
+                                            Height="32">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <ui:AutoSuggestBox Grid.Column="0"
+                                                           Height="32"
+                                                           Text="{Binding ViewModel.MoversView.CurrentItem.Model.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                           OriginalItemsSource="{Binding ViewModel.ModelFilePossibilities, Mode=OneWay}"/>
+                                        <ui:Button Grid.Column="1"
+                                                   Content="..."
+                                                   Width="30"
+                                                   Height="32"
+                                                   Margin="5,0,0,0"
+                                                   Command="{Binding DataContext.SelectModelFileCommand, RelativeSource={RelativeSource AncestorType=Page}}"/>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
 
-                            <!-- Identifier -->
-                            <!-- Model identifier is identical to mover identifier, we don't need that -->
-                            <!-- <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Identifier" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Model identifier"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <TextBox Grid.Row="1"
-                                        Style="{StaticResource AppTextBoxStyle}"
-                                        Text="{Binding ModelIdentifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            </Grid>
-                            -->
+                                <!-- Scale -->
+                                <Grid Style="{StaticResource FormFieldStyle}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="32"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0"
+                                            Orientation="Horizontal">
+                                        <TextBlock Text="Scale"
+                                                Style="{StaticResource FieldLabelStyle}"/>
+                                        <ui:SymbolIcon Symbol="Info20"
+                                                Style="{StaticResource InfoIconStyle}">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="Model scale factor"/>
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <ui:NumberBox Grid.Row="1"
+                                                  Value="{Binding ViewModel.MoversView.CurrentItem.Model.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  Minimum="0.1"
+                                                  Maximum="10"
+                                                  Height="32"
+                                                  SpinButtonPlacementMode="Inline"/>
+                                </Grid>
+                            </UniformGrid>
 
-                            <!-- Reference -->
-                            <!-- TODO: It should be implemented somewhere else -->
-                            <!--
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Reference" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Model reference type"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <ComboBox Grid.Row="1"
-                                        Style="{StaticResource AppComboBoxStyle}"
-                                        SelectedValue="{Binding ModelReference, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                    <ComboBoxItem Content="MMI_MALE"/>
-                                    <ComboBoxItem Content="MMI_FEMALE"/>
-                                    <ComboBoxItem Content="MMI_MONSTER"/>
-                                    <ComboBoxItem Content="MMI_ANIMAL"/>
-                                    <ComboBoxItem Content="MMI_ITEM"/>
-                                </ComboBox>
-                            </Grid>
-                            -->
-
-                            <!-- Scale -->
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Scale" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Model scale factor"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <ui:NumberBox Grid.Row="1"
-                                        Value="{Binding ViewModel.MoversView.CurrentItem.Model.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                        Minimum="0.1"
-                                        Maximum="10"
-                                        SpinButtonPlacementMode="Inline"/>
-                            </Grid>
-
-                            <!-- Speed -->
-                            <!-- TODO: Maybe add it in another category-->
-                            <!-- 
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Speed" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Movement speed"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <ui:NumberBox Grid.Row="1"
-                                        Value="{Binding Prop.FSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                        Minimum="0"
-                                        Maximum="100"
-                                        SpinButtonPlacementMode="Inline"/>
-                            </Grid>
-                            -->
-
-                            <!-- Flying -->
-                            <!-- TODO: Maybe add it in another category-->
-                            <!-- 
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Flying" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Flying capability"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <ComboBox Grid.Row="1"
-                                        Style="{StaticResource AppComboBoxStyle}"
-                                        SelectedValue="{Binding IsFlying, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                    <ComboBoxItem Content="No"/>
-                                    <ComboBoxItem Content="Yes"/>
-                                </ComboBox>
-                            </Grid>
-                            -->
-
-                            <!-- Texture -->
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Texture" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Texture"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <ComboBox Grid.Row="1"
-                                        Style="{StaticResource AppComboBoxStyle}"
-                                        ItemsSource="{Binding ViewModel.ModelTexturesPossibilities}"
-                                        SelectedValue="{Binding ViewModel.MoversView.CurrentItem.Model.NTextureEx, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            </Grid>
-
-                            <!-- Jump Height -->
-                            <!-- DwJumpIng is not used in Flyff system -->
-                            <!--
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Jump Height" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Maximum jump height"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <ui:NumberBox Grid.Row="1"
-                                        Value="{Binding JumpHeight, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                        Minimum="0"
-                                        Maximum="1000"
-                                        SpinButtonPlacementMode="Inline"/>
-                            </Grid>
-                            -->
-                            
-                            <!-- Air Jump -->
-                            <!-- DwAirJump is not used in Flyff system -->
-                            <!--
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Air Jump" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Air jump capability"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <ComboBox Grid.Row="1"
-                                        Style="{StaticResource AppComboBoxStyle}"
-                                        SelectedValue="{Binding CanAirJump, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                                    <ComboBoxItem Content="No"/>
-                                    <ComboBoxItem Content="Yes"/>
-                                </ComboBox>
-                            </Grid>
-                            -->
-
-                            <!-- Fly Level -->
-                            <!-- Does not exists -->
-                            <!--
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Text="Fly Level" Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20" Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Flying height level"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <ui:NumberBox Grid.Row="1"
-                                        Value="{Binding FlyLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                        Minimum="0"
-                                        Maximum="1000"
-                                        SpinButtonPlacementMode="Inline"/>
-                            </Grid>
-                            -->
-                        </UniformGrid>
+                            <!-- Second Row -->
+                            <UniformGrid Columns="2">
+                                <!-- Additional Texture -->
+                                <Grid Style="{StaticResource FormFieldStyle}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="32"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0"
+                                            Orientation="Horizontal">
+                                        <TextBlock Text="Additional Texture"
+                                                Style="{StaticResource FieldLabelStyle}"/>
+                                        <ui:SymbolIcon Symbol="Info20"
+                                                Style="{StaticResource InfoIconStyle}">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="Additional texture"/>
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <ComboBox Grid.Row="1"
+                                              Height="32"
+                                              Style="{StaticResource AppComboBoxStyle}"
+                                              ItemsSource="{Binding ViewModel.AdditionalTexturePossibilities}"
+                                              DisplayMemberPath="Key"
+                                              SelectedValuePath="Key"
+                                              SelectedValue="{Binding ViewModel.MoversView.CurrentItem.Model.NTextureEx, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                </Grid>
+                            </UniformGrid>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </Grid>
         </ScrollViewer>
-        
+
         <!-- Motion Dialog -->
-        <Popup x:Name="MotionsPopup" 
-              PlacementTarget="{Binding ElementName=MotionsButton}" 
-              Placement="Center"
-              IsOpen="False"
-              StaysOpen="False"
-              AllowsTransparency="True">
+        <Popup x:Name="MotionsPopup"
+               PlacementTarget="{Binding ElementName=MotionsButton}"
+               Placement="Center"
+               IsOpen="False"
+               StaysOpen="False"
+               AllowsTransparency="True">
             <Border Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}"
-                   BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                   BorderThickness="1"
-                   CornerRadius="8"
-                   Padding="10">
+                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="10">
                 <ContentControl ContentTemplate="{StaticResource MotionsDialogTemplate}"/>
             </Border>
         </Popup>

@@ -237,13 +237,32 @@
                           VerticalAlignment="Top"
                           Margin="0,10,20,0"
                           ZIndex="1">
+                    <ui:Button 
+                             ToolTip="Undo">
+                        <ui:SymbolIcon Symbol="ArrowUndo24"/>
+                    </ui:Button>
+                    <ui:Button
+                             Margin="10,0,10,0"
+                             ToolTip="Redo">
+                        <ui:SymbolIcon Symbol="ArrowRedo24"/>
+                    </ui:Button>
                     <ui:Button x:Name="SaveButton" 
                              Content="Save" 
+                             Margin="0,0,10,0"
                              Click="SaveButton_Click"/>
                     <ui:Button x:Name="ExpertButton" 
                              Content="Expert" 
                              Appearance="Secondary" 
                              Margin="0,0,10,0"/>
+                    <ui:Button x:Name="AddButton"
+                             Content="Add" 
+                             Icon="Add24" 
+                             Background="#2F70AF" 
+                             Margin="0,0,10,0"/>
+                    <ui:Button x:Name="DeleteButton"
+                             Content="Delete" 
+                             Icon="Delete24"
+                             Background="#FD292F"/>
                 </StackPanel>
 
                 <!-- Formulare -->
