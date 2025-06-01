@@ -9,7 +9,7 @@
     Title="NpcPage"
     d:DataContext="{d:DesignInstance local:NpcPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="1209"
+    d:DesignHeight="2209"
     d:DesignWidth="1024"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -830,6 +830,246 @@
                     <ContentControl ContentTemplate="{StaticResource TabsSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
                     <ContentControl ContentTemplate="{StaticResource ShopSectionTemplate}"/>
+                    
+                    <!-- Neuer Shop-Bereich -->
+                    <StackPanel>
+                        <TextBlock Text="Shop Items" 
+                                Style="{StaticResource SectionHeaderStyle}"/>
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Linke Seite: Verfügbare Items -->
+                            <Grid Grid.Column="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <ui:TextBox Grid.Row="0"
+                                        PlaceholderText="Items suchen..."
+                                        Icon="Search24"
+                                        Margin="0,0,0,10"/>
+
+                                <ListView Grid.Row="1"
+                                        AllowDrop="True"
+                                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                        BorderThickness="1"
+                                        Height="300">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="4">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Border Width="32"
+                                                        Height="32"
+                                                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                                        BorderThickness="1"
+                                                        Margin="0,0,8,0">
+                                                    <Image Source="{Binding Icon}"
+                                                           Stretch="Uniform"
+                                                           RenderOptions.BitmapScalingMode="HighQuality"
+                                                           Margin="2"/>
+                                                </Border>
+                                                <StackPanel Grid.Column="1">
+                                                    <TextBlock Text="{Binding Name}"
+                                                             FontWeight="SemiBold"/>
+                                                    <TextBlock Text="{Binding ItemId}"
+                                                             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                             FontSize="12"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </Grid>
+
+                            <!-- Mittlerer Bereich: Pfeile -->
+                            <StackPanel Grid.Column="1"
+                                      Margin="10,0"
+                                      VerticalAlignment="Center">
+                                <ui:Button Margin="0,5">
+                                    <ui:SymbolIcon Symbol="ArrowRight24"/>
+                                </ui:Button>
+                                <ui:Button Margin="0,5">
+                                    <ui:SymbolIcon Symbol="ArrowLeft24"/>
+                                </ui:Button>
+                            </StackPanel>
+
+                            <!-- Rechte Seite: Shop Items -->
+                            <Grid Grid.Column="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="Items im Shop"
+                                         FontWeight="SemiBold"
+                                         Margin="0,0,0,10"/>
+
+                                <!-- Tab Buttons -->
+                                <StackPanel Grid.Row="1" 
+                                          Orientation="Horizontal" 
+                                          Margin="0,0,0,10">
+                                    <ui:Button Content="Tab 1" 
+                                              Width="60" 
+                                              Margin="0,0,5,0"
+                                              Appearance="Primary"/>
+                                    <ui:Button Content="Tab 2" 
+                                              Width="60" 
+                                              Margin="0,0,5,0"
+                                              Appearance="Secondary"/>
+                                    <ui:Button Content="Tab 3" 
+                                              Width="60" 
+                                              Margin="0,0,5,0"
+                                              Appearance="Secondary"/>
+                                    <ui:Button Content="Tab 4" 
+                                              Width="60" 
+                                              Appearance="Secondary"/>
+                                </StackPanel>
+
+                                <ListView Grid.Row="2"
+                                        AllowDrop="True"
+                                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                        BorderThickness="1"
+                                        Height="300">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="4">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Border Width="32"
+                                                        Height="32"
+                                                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                                        BorderThickness="1"
+                                                        Margin="0,0,8,0">
+                                                    <Image Source="{Binding Icon}"
+                                                           Stretch="Uniform"
+                                                           RenderOptions.BitmapScalingMode="HighQuality"
+                                                           Margin="2"/>
+                                                </Border>
+                                                <StackPanel Grid.Column="1">
+                                                    <TextBlock Text="{Binding Name}"
+                                                             FontWeight="SemiBold"/>
+                                                    <TextBlock Text="{Binding ItemId}"
+                                                             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                             FontSize="12"/>
+                                                </StackPanel>
+                                                <ui:Button Grid.Column="2"
+                                                         Appearance="Danger"
+                                                         Icon="Delete24"
+                                                         ToolTip="Entfernen"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </Grid>
+                        </Grid>
+
+                        <!-- Übersichtsliste -->
+                        <TextBlock Text="Shop Übersicht"
+                                 Style="{StaticResource SectionHeaderStyle}"
+                                 Margin="0,20,0,10"/>
+                        
+                        <Grid>
+                            <!-- Header -->
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0" 
+                                  Background="{DynamicResource ControlFillColorDefaultBrush}">
+                                <Border Padding="10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="100"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <TextBlock Text="Icon" 
+                                                Grid.Column="0" 
+                                                FontWeight="SemiBold"/>
+                                        <TextBlock Text="Item Name" 
+                                                Grid.Column="1" 
+                                                FontWeight="SemiBold"/>
+                                        <TextBlock Text="Menge" 
+                                                Grid.Column="2" 
+                                                FontWeight="SemiBold"/>
+                                        <TextBlock Text="Preis" 
+                                                Grid.Column="3" 
+                                                FontWeight="SemiBold"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+
+                            <!-- Liste -->
+                            <ListView Grid.Row="1"
+                                     Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                     BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                     BorderThickness="1"
+                                     Margin="0,0,0,20">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="4">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="50"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="100"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Border Grid.Column="0"
+                                                    Width="32"
+                                                    Height="32"
+                                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                                    BorderThickness="1">
+                                                <Image Source="{Binding Icon}"
+                                                       Stretch="Uniform"
+                                                       RenderOptions.BitmapScalingMode="HighQuality"
+                                                       Margin="2"/>
+                                            </Border>
+
+                                            <TextBlock Grid.Column="1"
+                                                     Text="{Binding Name}"
+                                                     VerticalAlignment="Center"/>
+
+                                            <ui:NumberBox Grid.Column="2"
+                                                       Value="{Binding Amount}"
+                                                       Minimum="1"
+                                                       Maximum="9999"
+                                                       Width="80"
+                                                       HorizontalAlignment="Left"/>
+
+                                            <ui:NumberBox Grid.Column="3"
+                                                       Value="{Binding Price}"
+                                                       Minimum="0"
+                                                       Maximum="999999999"
+                                                       Width="80"
+                                                       HorizontalAlignment="Left"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </Grid>
+                    </StackPanel>
                 </StackPanel>
             </Grid>
         </ScrollViewer>
