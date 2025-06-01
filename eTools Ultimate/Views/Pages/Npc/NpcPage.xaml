@@ -32,6 +32,72 @@
             <Setter Property="Foreground"
                     Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
+        
+        <!-- MultiSelect ComboBox Style -->
+        <Style x:Key="MultiSelectComboBox" TargetType="ComboBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton x:Name="ToggleButton"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                        BorderThickness="1"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border x:Name="Border"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock x:Name="Text" 
+                                                         Margin="5,2"
+                                                         Text="Menü-Optionen auswählen..."/>
+                                                <Path x:Name="Arrow"
+                                                      Grid.Column="1"
+                                                      Fill="{DynamicResource TextFillColorPrimaryBrush}"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"
+                                                      Data="M0,0 L8,8 L16,0"
+                                                      Margin="5"/>
+                                            </Grid>
+                                        </Border>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <Popup x:Name="Popup"
+                                   AllowsTransparency="True"
+                                   IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                   PopupAnimation="Slide"
+                                   PlacementTarget="{Binding ElementName=ToggleButton}">
+                                <Border Background="{DynamicResource ApplicationBackgroundBrush}"
+                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                        BorderThickness="1"
+                                        MaxHeight="200">
+                                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                        <StackPanel x:Name="MenuItems">
+                                            <CheckBox Content="MMI_DIALOG" Margin="5,2"/>
+                                            <CheckBox Content="MMI_TRADE" Margin="5,2"/>
+                                            <CheckBox Content="MMI_EXCHANGE" Margin="5,2"/>
+                                            <CheckBox Content="MMI_UPGRADE" Margin="5,2"/>
+                                            <CheckBox Content="MMI_AUCTION" Margin="5,2"/>
+                                            <CheckBox Content="MMI_QUEST" Margin="5,2"/>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
         <Style x:Key="FormFieldStyle"
                 TargetType="Grid">
             <Setter Property="Margin"
@@ -53,6 +119,521 @@
             <Setter Property="Margin"
                     Value="0,15,0,15"/>
         </Style>
+
+        <!-- DataTemplate: General Section -->
+        <DataTemplate x:Key="GeneralSectionTemplate">
+            <StackPanel>
+                <TextBlock Text="General" 
+                        Style="{StaticResource SectionHeaderStyle}"/>
+                <UniformGrid Columns="2">
+                    <!-- NPC Name -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="NPC Name"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Name des NPCs"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:TextBox Grid.Row="1"
+                                PlaceholderText="NPC Namen eingeben"
+                                Height="32"/>
+                    </Grid>
+
+                    <!-- NPC Key -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="NPC Key"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="NPC Key ID"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:TextBox Grid.Row="1"
+                                PlaceholderText="IDS_CHARACTER_INC_XYZ"
+                                Height="32"/>
+                    </Grid>
+
+                    <!-- NPC Define -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="NPC Define"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="NPC Definition ID"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:TextBox Grid.Row="1"
+                                PlaceholderText="MaFl_Is"
+                                Height="32"/>
+                    </Grid>
+
+                    <!-- Dialog File -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="Dialog File"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Dialog Datei Pfad"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:TextBox Grid.Row="1"
+                                PlaceholderText="MaFl_Is.txt"
+                                Height="32"/>
+                    </Grid>
+
+                    <!-- NPC Image -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="NPC Image"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="NPC Bild Pfad"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ui:TextBox Grid.Column="0"
+                                    PlaceholderText="IDS_CHARACTER_INC_000064"
+                                    Height="32"/>
+                            <ui:Button Grid.Column="1"
+                                    Content="..."
+                                    Margin="5,0,0,0"/>
+                            <Border Grid.Column="2"
+                                    Width="32"
+                                    Height="32"
+                                    Margin="10,0,0,0"
+                                    BorderThickness="1">
+                                <Image x:Name="NpcImagePreview"
+                                        Margin="2"/>
+                            </Border>
+                        </Grid>
+                    </Grid>
+
+                    <!-- Menu -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="Menu"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Menü-Optionen"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <ComboBox Height="32"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalContentAlignment="Center"
+                                     Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                     BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                     BorderThickness="1">
+                                <ComboBox.Resources>
+                                    <Style TargetType="ComboBox">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ComboBox">
+                                                    <Border x:Name="MainBorder"
+                                                            Background="{TemplateBinding Background}"
+                                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                                            CornerRadius="4">
+                                                        <Grid>
+                                                            <ToggleButton Name="ToggleButton"
+                                                                        Height="32"
+                                                                        Background="Transparent"
+                                                                        BorderThickness="0"
+                                                                        IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        HorizontalAlignment="Stretch">
+                                                                <ToggleButton.Template>
+                                                                    <ControlTemplate TargetType="ToggleButton">
+                                                                        <Grid Background="Transparent">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="*"/>
+                                                                                <ColumnDefinition Width="Auto"/>
+                                                                            </Grid.ColumnDefinitions>
+                                                                            <ContentPresenter Margin="8,0,0,0"
+                                                                                            Content="Menü-Optionen auswählen..."
+                                                                                            VerticalAlignment="Center"/>
+                                                                            <Path Grid.Column="1"
+                                                                                  Margin="0,0,8,0"
+                                                                                  HorizontalAlignment="Right"
+                                                                                  VerticalAlignment="Center"
+                                                                                  Data="M0,0 L4,4 L8,0"
+                                                                                  Fill="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                                                        </Grid>
+                                                                    </ControlTemplate>
+                                                                </ToggleButton.Template>
+                                                            </ToggleButton>
+                                                            <Popup Name="PART_Popup"
+                                                                   AllowsTransparency="True"
+                                                                   IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                   Placement="Bottom"
+                                                                   PopupAnimation="Slide">
+                                                                <Border Background="{DynamicResource ApplicationBackgroundBrush}"
+                                                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                                                        BorderThickness="1"
+                                                                        MaxHeight="200"
+                                                                        MinWidth="{Binding ActualWidth, ElementName=MainBorder}"
+                                                                        CornerRadius="4">
+                                                                    <ScrollViewer>
+                                                                        <StackPanel>
+                                                                            <CheckBox Content="MMI_DIALOG" Margin="8,4" Height="32" VerticalContentAlignment="Center"/>
+                                                                            <CheckBox Content="MMI_TRADE" Margin="8,4" Height="32" VerticalContentAlignment="Center"/>
+                                                                            <CheckBox Content="MMI_EXCHANGE" Margin="8,4" Height="32" VerticalContentAlignment="Center"/>
+                                                                            <CheckBox Content="MMI_UPGRADE" Margin="8,4" Height="32" VerticalContentAlignment="Center"/>
+                                                                            <CheckBox Content="MMI_AUCTION" Margin="8,4" Height="32" VerticalContentAlignment="Center"/>
+                                                                            <CheckBox Content="MMI_QUEST" Margin="8,4" Height="32" VerticalContentAlignment="Center"/>
+                                                                        </StackPanel>
+                                                                    </ScrollViewer>
+                                                                </Border>
+                                                            </Popup>
+                                                        </Grid>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ComboBox.Resources>
+                            </ComboBox>
+                        </Grid>
+                    </Grid>
+                </UniformGrid>
+            </StackPanel>
+        </DataTemplate>
+
+        <!-- DataTemplate: Tabs Section -->
+        <DataTemplate x:Key="TabsSectionTemplate">
+            <StackPanel>
+                <TextBlock Text="Tabs" 
+                        Style="{StaticResource SectionHeaderStyle}"/>
+                <UniformGrid Columns="2">
+                    <!-- Tab Name 1 -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="Tab Name 1"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Name des ersten Tabs"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:TextBox Grid.Row="1"
+                                PlaceholderText="Tab 1"
+                                Name="TabName1"
+                                Height="32"/>
+                    </Grid>
+
+                    <!-- Tab Name 2 -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="Tab Name 2"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Name des zweiten Tabs"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:TextBox Grid.Row="1"
+                                PlaceholderText="Tab 2"
+                                Name="TabName2"
+                                Height="32"/>
+                    </Grid>
+
+                    <!-- Tab Name 3 -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="Tab Name 3"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Name des dritten Tabs"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:TextBox Grid.Row="1"
+                                PlaceholderText="Tab 3"
+                                Name="TabName3"
+                                Height="32"/>
+                    </Grid>
+
+                    <!-- Tab Name 4 -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="Tab Name 4"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Name des vierten Tabs"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:TextBox Grid.Row="1"
+                                PlaceholderText="Tab 4"
+                                Name="TabName4"
+                                Height="32"/>
+                    </Grid>
+                </UniformGrid>
+            </StackPanel>
+        </DataTemplate>
+
+        <!-- DataTemplate: Shop Section -->
+        <DataTemplate x:Key="ShopSectionTemplate">
+            <StackPanel>
+                <TextBlock Text="Shop" 
+                        Style="{StaticResource SectionHeaderStyle}"/>
+                <TabControl x:Name="ShopTabControl">
+                    <TabItem Header="{Binding ElementName=TabName1, Path=Text, TargetNullValue=Tab 1}">
+                        <DataGrid Name="DataGrid1" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Item ID" Binding="{Binding ItemId}" Width="100"/>
+                                <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" Width="*"/>
+                                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
+                                <DataGridTemplateColumn Header="Action" Width="80">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ui:Button
+                                                Content="Delete"
+                                                Appearance="Danger"
+                                                Padding="8,4"
+                                                FontSize="11"
+                                                Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                CommandParameter="{Binding}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="{Binding ElementName=TabName2, Path=Text, TargetNullValue=Tab 2}">
+                        <DataGrid Name="DataGrid2" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Item ID" Binding="{Binding ItemId}" Width="100"/>
+                                <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" Width="*"/>
+                                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
+                                <DataGridTemplateColumn Header="Action" Width="80">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ui:Button
+                                                Content="Delete"
+                                                Appearance="Danger"
+                                                Padding="8,4"
+                                                FontSize="11"
+                                                Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                CommandParameter="{Binding}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="{Binding ElementName=TabName3, Path=Text, TargetNullValue=Tab 3}">
+                        <DataGrid Name="DataGrid3" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Item ID" Binding="{Binding ItemId}" Width="100"/>
+                                <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" Width="*"/>
+                                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
+                                <DataGridTemplateColumn Header="Action" Width="80">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ui:Button
+                                                Content="Delete"
+                                                Appearance="Danger"
+                                                Padding="8,4"
+                                                FontSize="11"
+                                                Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                CommandParameter="{Binding}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="{Binding ElementName=TabName4, Path=Text, TargetNullValue=Tab 4}">
+                        <DataGrid Name="DataGrid4" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Item ID" Binding="{Binding ItemId}" Width="100"/>
+                                <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" Width="*"/>
+                                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
+                                <DataGridTemplateColumn Header="Action" Width="80">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <ui:Button
+                                                Content="Delete"
+                                                Appearance="Danger"
+                                                Padding="8,4"
+                                                FontSize="11"
+                                                Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                                CommandParameter="{Binding}"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                </TabControl>
+            </StackPanel>
+        </DataTemplate>
+
+        <!-- DataTemplate: Custom Section -->
+        <DataTemplate x:Key="CustomSectionTemplate">
+            <StackPanel>
+                <TextBlock Text="Custom" 
+                        Style="{StaticResource SectionHeaderStyle}"/>
+                <UniformGrid Columns="2">
+                    <!-- Vendor Type -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="Vendor Type"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Typ des Händlers"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:TextBox Grid.Row="1"
+                                PlaceholderText="II_CHP_RED"
+                                Height="32"/>
+                    </Grid>
+
+                    <!-- NPC Equip -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="NPC Equip"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Ausrüstung des NPCs"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:TextBox Grid.Row="1"
+                                PlaceholderText="II_ARM_S_CLO_DOMAS_21, ..."
+                                Height="32"/>
+                    </Grid>
+
+                    <!-- NPC Figure -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="NPC Figure"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Geschlecht des NPCs"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ComboBox Grid.Row="1" Height="32">
+                            <ComboBoxItem Content="Male"/>
+                            <ComboBoxItem Content="Female"/>
+                        </ComboBox>
+                    </Grid>
+
+                    <!-- Structure -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="Structure"
+                                    Style="{StaticResource FieldLabelStyle}"/>
+                            <ui:SymbolIcon Symbol="Info20"
+                                    Style="{StaticResource InfoIconStyle}">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="NPC Struktur"/>
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ComboBox Grid.Row="1" Height="32">
+                            <ComboBoxItem Content="SRT_CASHSHOP"/>
+                        </ComboBox>
+                    </Grid>
+                </UniformGrid>
+            </StackPanel>
+        </DataTemplate>
     </Page.Resources>
 
     <Grid>
@@ -242,401 +823,13 @@
 
                 <!-- Content Section - Removed nested ScrollViewer -->
                 <StackPanel Grid.Row="1">
-                    <TextBlock 
-                        Text="General" 
-                        Style="{StaticResource SectionHeaderStyle}" 
-                        Margin="0,0,0,10"/>
-                    
-                    <UniformGrid Columns="2">
-                        <!-- NPC Define -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Text="NPC Define"
-                                        Style="{StaticResource FieldLabelStyle}"/>
-                                <ui:SymbolIcon Symbol="Info20"
-                                        Style="{StaticResource InfoIconStyle}">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="NPC Definition ID"/>
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-                            <ui:TextBox Grid.Row="1"
-                                    PlaceholderText="MaFl_Is"
-                                    Height="32"/>
-                        </Grid>
-
-                        <!-- NPC Name -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Text="NPC Name"
-                                        Style="{StaticResource FieldLabelStyle}"/>
-                                <ui:SymbolIcon Symbol="Info20"
-                                        Style="{StaticResource InfoIconStyle}">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="NPC Name ID"/>
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-                            <ui:TextBox Grid.Row="1"
-                                    PlaceholderText="IDS_CHARACTER_INC_XYZ"
-                                    Height="32"/>
-                        </Grid>
-
-                        <!-- Tab Namen -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Text="Name Tab 1"
-                                        Style="{StaticResource FieldLabelStyle}"/>
-                                <ui:SymbolIcon Symbol="Info20"
-                                        Style="{StaticResource InfoIconStyle}">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="First Tab Name"/>
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-                            <ui:TextBox Grid.Row="1"
-                                    PlaceholderText="Tab 1"
-                                    Name="TabName1"
-                                    Height="32"/>
-                        </Grid>
-
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Text="Name Tab 2"
-                                        Style="{StaticResource FieldLabelStyle}"/>
-                                <ui:SymbolIcon Symbol="Info20"
-                                        Style="{StaticResource InfoIconStyle}">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="Second Tab Name"/>
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-                            <ui:TextBox Grid.Row="1"
-                                    PlaceholderText="Tab 2"
-                                    Name="TabName2"
-                                    Height="32"/>
-                        </Grid>
-
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Text="Name Tab 3"
-                                        Style="{StaticResource FieldLabelStyle}"/>
-                                <ui:SymbolIcon Symbol="Info20"
-                                        Style="{StaticResource InfoIconStyle}">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="Third Tab Name"/>
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-                            <ui:TextBox Grid.Row="1"
-                                    PlaceholderText="Tab 3"
-                                    Name="TabName3"
-                                    Height="32"/>
-                        </Grid>
-
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Text="Name Tab 4"
-                                        Style="{StaticResource FieldLabelStyle}"/>
-                                <ui:SymbolIcon Symbol="Info20"
-                                        Style="{StaticResource InfoIconStyle}">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="Fourth Tab Name"/>
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-                            <ui:TextBox Grid.Row="1"
-                                    PlaceholderText="Tab 4"
-                                    Name="TabName4"
-                                    Height="32"/>
-                        </Grid>
-
-                        <!-- NPC Image -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Text="NPC Image"
-                                        Style="{StaticResource FieldLabelStyle}"/>
-                                <ui:SymbolIcon Symbol="Info20"
-                                        Style="{StaticResource InfoIconStyle}">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="NPC Image Path"/>
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-                            <ui:TextBox Grid.Row="1"
-                                    PlaceholderText="IDS_CHARACTER_INC_000064"
-                                    Height="32"/>
-                        </Grid>
-
-                        <!-- Menu -->
-                        <Grid Style="{StaticResource FormFieldStyle}" Grid.ColumnSpan="2">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Text="Menu"
-                                        Style="{StaticResource FieldLabelStyle}"/>
-                                <ui:SymbolIcon Symbol="Info20"
-                                        Style="{StaticResource InfoIconStyle}">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="Menu Type"/>
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-                            <Border Grid.Row="1" BorderBrush="{DynamicResource ControlElevationBorderBrush}" BorderThickness="1" Background="{DynamicResource ControlFillColorDefaultBrush}" Height="Auto" MaxHeight="120">
-                                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                                    <WrapPanel Orientation="Vertical">
-                                        <CheckBox Content="MMI_DIALOG" Margin="5,5,10,2"/>
-                                        <CheckBox Content="MMI_TRADE" Margin="5,2,10,2"/>
-                                        <CheckBox Content="MMI_EXCHANGE" Margin="5,2,10,2"/>
-                                        <CheckBox Content="MMI_UPGRADE" Margin="5,2,10,2"/>
-                                        <CheckBox Content="MMI_AUCTION" Margin="5,2,10,2"/>
-                                        <CheckBox Content="MMI_QUEST" Margin="5,2,10,5"/>
-                                    </WrapPanel>
-                                </ScrollViewer>
-                            </Border>
-                        </Grid>
-                    </UniformGrid>
-
-                    <!-- "Custom" Section -->
-                    <TextBlock 
-                        Text="Custom" 
-                        Style="{StaticResource SectionHeaderStyle}"
-                        Margin="0,0,0,10"/>
-                    
-                    <UniformGrid Columns="2">
-                        <!-- Vendor Type -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Text="Vendor Type"
-                                        Style="{StaticResource FieldLabelStyle}"/>
-                                <ui:SymbolIcon Symbol="Info20"
-                                        Style="{StaticResource InfoIconStyle}">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="Vendor Type"/>
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-                            <ui:TextBox Grid.Row="1"
-                                    PlaceholderText="II_CHP_RED"
-                                    Height="32"/>
-                        </Grid>
-
-                        <!-- NPC Equip -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Text="NPC Equip"
-                                        Style="{StaticResource FieldLabelStyle}"/>
-                                <ui:SymbolIcon Symbol="Info20"
-                                        Style="{StaticResource InfoIconStyle}">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="NPC Equipment"/>
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-                            <ui:TextBox Grid.Row="1"
-                                    PlaceholderText="II_ARM_S_CLO_DOMAS_21, ..."
-                                    Height="32"/>
-                        </Grid>
-
-                        <!-- NPC Figure -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Text="NPC Figure"
-                                        Style="{StaticResource FieldLabelStyle}"/>
-                                <ui:SymbolIcon Symbol="Info20"
-                                        Style="{StaticResource InfoIconStyle}">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="NPC Gender"/>
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-                            <ComboBox Grid.Row="1" Margin="0,0,0,0" Height="32">
-                                <ComboBoxItem Content="Male"/>
-                                <ComboBoxItem Content="Female"/>
-                            </ComboBox>
-                        </Grid>
-
-                        <!-- Structure -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Text="Structure"
-                                        Style="{StaticResource FieldLabelStyle}"/>
-                                <ui:SymbolIcon Symbol="Info20"
-                                        Style="{StaticResource InfoIconStyle}">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="NPC Structure"/>
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-                            <ComboBox Grid.Row="1" Margin="0,0,0,0" Height="32">
-                                <ComboBoxItem Content="SRT_CASHSHOP"/>
-                            </ComboBox>
-                        </Grid>
-
-                        <!-- Dialog File -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Text="Dialog File"
-                                        Style="{StaticResource FieldLabelStyle}"/>
-                                <ui:SymbolIcon Symbol="Info20"
-                                        Style="{StaticResource InfoIconStyle}">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="Dialog File Path"/>
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-                            <ui:TextBox Grid.Row="1"
-                                    PlaceholderText="MaFl_Is.txt"
-                                    Height="32"/>
-                        </Grid>
-                    </UniformGrid>
-
-                    <!-- Shop Section with TabControl and DataGrid -->
-                    <TextBlock 
-                        Text="Shop" 
-                        Style="{StaticResource SectionHeaderStyle}"
-                        Margin="0,0,0,10"/>
-                        
-                    <TabControl x:Name="ShopTabControl">
-                        <TabItem Header="{Binding ElementName=TabName1, Path=Text, TargetNullValue=Tab 1}">
-                            <DataGrid Name="DataGrid1" AutoGenerateColumns="False">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Item ID" Binding="{Binding ItemId}" Width="100"/>
-                                    <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" Width="*"/>
-                                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
-                                    <DataGridTemplateColumn Header="Action" Width="80">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <ui:Button
-                                                    Content="Delete"
-                                                    Appearance="Danger"
-                                                    Padding="8,4"
-                                                    FontSize="11"
-                                                    Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                    CommandParameter="{Binding}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </TabItem>
-                        <TabItem Header="{Binding ElementName=TabName2, Path=Text, TargetNullValue=Tab 2}">
-                            <DataGrid Name="DataGrid2" AutoGenerateColumns="False">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Item ID" Binding="{Binding ItemId}" Width="100"/>
-                                    <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" Width="*"/>
-                                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
-                                    <DataGridTemplateColumn Header="Action" Width="80">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <ui:Button
-                                                    Content="Delete"
-                                                    Appearance="Danger"
-                                                    Padding="8,4"
-                                                    FontSize="11"
-                                                    Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                    CommandParameter="{Binding}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </TabItem>
-                        <TabItem Header="{Binding ElementName=TabName3, Path=Text, TargetNullValue=Tab 3}">
-                            <DataGrid Name="DataGrid3" AutoGenerateColumns="False">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Item ID" Binding="{Binding ItemId}" Width="100"/>
-                                    <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" Width="*"/>
-                                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
-                                    <DataGridTemplateColumn Header="Action" Width="80">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <ui:Button
-                                                    Content="Delete"
-                                                    Appearance="Danger"
-                                                    Padding="8,4"
-                                                    FontSize="11"
-                                                    Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                    CommandParameter="{Binding}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </TabItem>
-                        <TabItem Header="{Binding ElementName=TabName4, Path=Text, TargetNullValue=Tab 4}">
-                            <DataGrid Name="DataGrid4" AutoGenerateColumns="False">
-                                <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Item ID" Binding="{Binding ItemId}" Width="100"/>
-                                    <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" Width="*"/>
-                                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
-                                    <DataGridTemplateColumn Header="Action" Width="80">
-                                        <DataGridTemplateColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <ui:Button
-                                                    Content="Delete"
-                                                    Appearance="Danger"
-                                                    Padding="8,4"
-                                                    FontSize="11"
-                                                    Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                    CommandParameter="{Binding}"/>
-                                            </DataTemplate>
-                                        </DataGridTemplateColumn.CellTemplate>
-                                    </DataGridTemplateColumn>
-                                </DataGrid.Columns>
-                            </DataGrid>
-                        </TabItem>
-                    </TabControl>
+                    <ContentControl ContentTemplate="{StaticResource GeneralSectionTemplate}"/>
+                    <Separator Margin="0,10,0,5"/>
+                    <ContentControl ContentTemplate="{StaticResource CustomSectionTemplate}"/>
+                    <Separator Margin="0,10,0,5"/>
+                    <ContentControl ContentTemplate="{StaticResource TabsSectionTemplate}"/>
+                    <Separator Margin="0,10,0,5"/>
+                    <ContentControl ContentTemplate="{StaticResource ShopSectionTemplate}"/>
                 </StackPanel>
             </Grid>
         </ScrollViewer>
