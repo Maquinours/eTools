@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Page
     x:Class="eTools_Ultimate.Views.Pages.PersonalizationPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -13,26 +14,32 @@
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
     <Page.Resources>
         <converters:ThemeToIndexConverter x:Key="ThemeToIndexConverter" />
         
-        <Style x:Key="AppComboBoxItemStyle" TargetType="ComboBoxItem">
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+        <Style x:Key="CustomTimeInputStyle" TargetType="Grid">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding SelectedItem.Content, ElementName=AutoSaveCombo}" Value="Custom">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+            </Style.Triggers>
         </Style>
     </Page.Resources>
 
     <StackPanel Margin="0,0,0,24">
         <ui:TextBlock
-            Margin="10,0,10,8"
+            Margin="45,0,45,8"
             FontTypography="BodyStrong"
-            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
             Text="Appearance &amp; behavior" />
         
         <!-- Theme Selection -->
-        <ui:CardControl Margin="10,0,10,12" Icon="{ui:SymbolIcon Color24}">
+        <ui:CardControl Margin="45,0,45,12" Icon="{ui:SymbolIcon Color24}">
             <ui:CardControl.Header>
                 <Grid>
                     <Grid.RowDefinitions>
@@ -42,21 +49,90 @@
                     <ui:TextBlock
                         Grid.Row="0"
                         FontTypography="Body"
-                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                         Text="App theme" />
                     <ui:TextBlock
                         Grid.Row="1"
-                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                         Text="Select which app theme to display" />
                 </Grid>
             </ui:CardControl.Header>
             <ComboBox
                 MinWidth="200"
-                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                 SelectionChanged="ComboBox_SelectionChanged">
                 <ComboBoxItem Content="Light" IsSelected="{Binding IsLightTheme}"/>
                 <ComboBoxItem Content="Dark" IsSelected="{Binding IsDarkTheme}"/>
             </ComboBox>
+        </ui:CardControl>
+
+        <!-- TO-DO: Language Selection -->
+        <ui:CardControl Margin="45,0,45,12" Icon="{ui:SymbolIcon LocalLanguage24}">
+            <ui:CardControl.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ui:TextBlock
+                        Grid.Row="0"
+                        FontTypography="Body"
+                        Text="Application language" />
+                    <ui:TextBlock
+                        Grid.Row="1"
+                        Text="Choose your preferred language" />
+                </Grid>
+            </ui:CardControl.Header>
+            <ComboBox
+                MinWidth="200">
+                <ComboBoxItem Content="English (Default)" IsSelected="True"/>
+                <ComboBoxItem Content="German"/>
+                <ComboBoxItem Content="French"/>
+            </ComboBox>
+        </ui:CardControl>
+
+        <!-- TO-DO: Auto-Save Interval Selection -->
+        <ui:CardControl Margin="45,0,45,12" Icon="{ui:SymbolIcon Save24}">
+            <ui:CardControl.Header>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ui:TextBlock
+                        Grid.Row="0"
+                        FontTypography="Body"
+                        Text="Auto-save interval" />
+                    <ui:TextBlock
+                        Grid.Row="1"
+                        Text="Set the time interval for automatic saving" />
+                </Grid>
+            </ui:CardControl.Header>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox
+                    x:Name="AutoSaveCombo"
+                    MinWidth="120"
+                    Margin="0,0,8,0"
+                    SelectedIndex="0">
+                    <ComboBoxItem Content="5 minutes"/>
+                    <ComboBoxItem Content="15 minutes"/>
+                    <ComboBoxItem Content="30 minutes"/>
+                    <ComboBoxItem Content="Custom"/>
+                </ComboBox>
+                <Grid Style="{StaticResource CustomTimeInputStyle}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <ui:NumberBox Grid.Column="0" 
+                                x:Name="MinutesNumberBox" 
+                                MinWidth="100"
+                                Minimum="0"
+                                SpinButtonPlacementMode="Inline"/>
+                    <TextBlock Grid.Column="1" 
+                                Text="min" 
+                                VerticalAlignment="Center" 
+                                Margin="5,0,0,0"/>
+                </Grid>
+            </StackPanel>
         </ui:CardControl>
 
     </StackPanel>
