@@ -20,6 +20,12 @@ namespace eTools_Ultimate.Views.Pages
         private D3DImageHost? _d3dHost = null;
         private Point lastMousePosition;
         private bool isDragging = false;
+        private FileSystemWatcher _modelFileWatcher = new()
+        {
+            NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite | NotifyFilters.Size,
+            IncludeSubdirectories = false,
+            EnableRaisingEvents = false
+        };
 
         public MoverPage(MoversViewModel viewModel)
         {
@@ -90,6 +96,10 @@ namespace eTools_Ultimate.Views.Pages
             _d3dHost.BindBackBuffer();
             DxImage.Source = _d3dHost;
 
+            _modelFileWatcher.Renamed += (sender, e) => LoadModel();
+            _modelFileWatcher.Created += (sender, e) => LoadModel();
+            _modelFileWatcher.Deleted += (sender, e) => LoadModel();
+
             CompositionTarget.Rendering += (s, e) => _d3dHost.Render();
         }
 
@@ -138,7 +148,7 @@ namespace eTools_Ultimate.Views.Pages
             e.Handled = true;
         }
 
-        private void Model3DFilePathTextBlock_TextChanged(object sender, TextChangedEventArgs e)
+        private void LoadModel()
         {
             if (_d3dHost is null) return;
             if (ViewModel.MoversView.CurrentItem is not Mover mover) return;
@@ -164,6 +174,21 @@ namespace eTools_Ultimate.Views.Pages
                     textureFiles.Add(texture);
             }
             ViewModel.Object3DMaterialTextures = [.. textureFiles];
+        }
+
+        private void Model3DFilePathTextBlock_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (ViewModel.MoversView.CurrentItem is not Mover mover) return;
+            string? directory = Path.GetDirectoryName(mover.Model.Model3DFilePath);
+            string? fileName = Path.GetFileName(mover.Model.Model3DFilePath);
+            if (directory is not null && fileName is not null)
+            {
+                _modelFileWatcher.EnableRaisingEvents = false;
+                _modelFileWatcher.Path = directory;
+                _modelFileWatcher.Filter = fileName;
+                _modelFileWatcher.EnableRaisingEvents = true;
+            }
+            this.LoadModel();
         }
 
         [RelayCommand]
