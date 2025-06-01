@@ -1936,8 +1936,8 @@
                                 <!-- File -->
                                 <Grid Style="{StaticResource FormFieldStyle}">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="32"/>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <StackPanel Grid.Row="0"
                                             Orientation="Horizontal">
@@ -1950,14 +1950,12 @@
                                             </ui:SymbolIcon.ToolTip>
                                         </ui:SymbolIcon>
                                     </StackPanel>
-                                    <Grid Grid.Row="1"
-                                            Height="32">
+                                    <Grid Grid.Row="1">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <ui:AutoSuggestBox Grid.Column="0"
-                                                           Height="32"
                                                            Text="{Binding ViewModel.MoversView.CurrentItem.Model.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                            OriginalItemsSource="{Binding ViewModel.ModelFilePossibilities, Mode=OneWay}"/>
                                         <ui:Button Grid.Column="1"
@@ -1990,36 +1988,32 @@
                                                   Value="{Binding ViewModel.MoversView.CurrentItem.Model.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                   Minimum="0.1"
                                                   Maximum="10"
-                                                  Height="32"
                                                   SpinButtonPlacementMode="Inline"/>
                                 </Grid>
                             </UniformGrid>
 
                             <!-- Second Row -->
                             <UniformGrid Columns="2">
-                                <!-- Additional Texture -->
+                                <!-- Texture -->
                                 <Grid Style="{StaticResource FormFieldStyle}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="32"/>
+                                        <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
                                     <StackPanel Grid.Row="0"
                                             Orientation="Horizontal">
-                                        <TextBlock Text="Additional Texture"
+                                        <TextBlock Text="Texture"
                                                 Style="{StaticResource FieldLabelStyle}"/>
                                         <ui:SymbolIcon Symbol="Info20"
                                                 Style="{StaticResource InfoIconStyle}">
                                             <ui:SymbolIcon.ToolTip>
-                                                <ToolTip Content="Additional texture"/>
+                                                <ToolTip Content="Texture"/>
                                             </ui:SymbolIcon.ToolTip>
                                         </ui:SymbolIcon>
                                     </StackPanel>
                                     <ComboBox Grid.Row="1"
-                                              Height="32"
                                               Style="{StaticResource AppComboBoxStyle}"
-                                              ItemsSource="{Binding ViewModel.AdditionalTexturePossibilities}"
-                                              DisplayMemberPath="Key"
-                                              SelectedValuePath="Key"
+                                              ItemsSource="{Binding ViewModel.ModelTexturesPossibilities}"
                                               SelectedValue="{Binding ViewModel.MoversView.CurrentItem.Model.NTextureEx, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
                             </UniformGrid>
