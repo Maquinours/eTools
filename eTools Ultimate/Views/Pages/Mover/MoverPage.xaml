@@ -1459,6 +1459,219 @@
                              Content="Expert" 
                              Appearance="Secondary"
                              Margin="0,0,10,0"/>
+                    <ui:Button x:Name="FilterButton" 
+                             Content="Filter" 
+                             Appearance="Secondary"
+                             Margin="0,0,10,0">
+                        <ui:Button.ContextMenu>
+                            <ContextMenu Background="{DynamicResource ApplicationBackgroundBrush}">
+                                <ScrollViewer MaxHeight="600" 
+                                            VerticalScrollBarVisibility="Auto"
+                                            Padding="0,0,15,0">
+                                    <StackPanel MinWidth="250">
+                                        <TextBlock Text="Filter Sections"
+                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                 FontWeight="SemiBold"
+                                                 Margin="10,5,0,5"/>
+                                        
+                                        <Border Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                Padding="10,5">
+                                            <StackPanel>
+                                                <CheckBox Content="Basic Information" 
+                                                          IsChecked="True"
+                                                          Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                          Margin="0,2"/>
+                                                <CheckBox Content="Stats" 
+                                                          IsChecked="True"
+                                                          Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                          Margin="0,2"/>
+                                                <CheckBox Content="Combat / Battle" 
+                                                          IsChecked="True"
+                                                          Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                          Margin="0,2"/>
+                                                <CheckBox Content="Defensive Stats &amp; Resistances" 
+                                                          IsChecked="True"
+                                                          Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                          Margin="0,2"/>
+                                                <CheckBox Content="Elementar &amp; Damage Types" 
+                                                          IsChecked="True"
+                                                          Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                          Margin="0,2"/>
+                                                <CheckBox Content="Sound" 
+                                                          IsChecked="True"
+                                                          Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                          Margin="0,2"/>
+                                                <CheckBox Content="Model / Mobility / Movement" 
+                                                          IsChecked="True"
+                                                          Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                          Margin="0,2"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <TextBlock Text="Filter Fields"
+                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                 FontWeight="SemiBold"
+                                                 Margin="10,10,0,5"/>
+
+                                        <Border Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                Margin="0,0,0,5">
+                                            <Expander Header="Basic Information Fields"
+                                                      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                      Background="Transparent">
+                                                <StackPanel Margin="20,5,5,5">
+                                                    <CheckBox Content="ID" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="ID Key" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Name" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Description" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Killable" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Penya" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Duration" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="EXP" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                </StackPanel>
+                                            </Expander>
+                                        </Border>
+
+                                        <Border Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                Margin="0,0,0,5">
+                                            <Expander Header="Stats Fields"
+                                                      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                      Background="Transparent">
+                                                <StackPanel Margin="20,5,5,5">
+                                                    <CheckBox Content="STR" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="STA" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="DEX" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="INT" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Hit Rate" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Evasion Rate" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                </StackPanel>
+                                            </Expander>
+                                        </Border>
+
+                                        <Border Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                Margin="0,0,0,5">
+                                            <Expander Header="Combat/Battle Fields"
+                                                      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                      Background="Transparent">
+                                                <StackPanel Margin="20,5,5,5">
+                                                    <CheckBox Content="Level" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Health Points" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Mana Points" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Artificial Intelligence (AI)" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Belligerence" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Attack min." IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Attack max." IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Attack Animation 1" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Attack Animation 2" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Attack Animation 3" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Attack Delay" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                </StackPanel>
+                                            </Expander>
+                                        </Border>
+
+                                        <Border Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                Margin="0,0,0,5">
+                                            <Expander Header="Defensive Stats Fields"
+                                                      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                      Background="Transparent">
+                                                <StackPanel Margin="20,5,5,5">
+                                                    <CheckBox Content="Armor" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Magic Resistance" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Resistance Electricity" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Resistance Fire" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Resistance Wind" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Resistance Water" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Resistance Earth" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                </StackPanel>
+                                            </Expander>
+                                        </Border>
+
+                                        <Border Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                Margin="0,0,0,5">
+                                            <Expander Header="Elemental Fields"
+                                                      Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                      Background="Transparent">
+                                                <StackPanel Margin="20,5,5,5">
+                                                    <CheckBox Content="Element Type" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Element Attack" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                    <CheckBox Content="Correction Value" IsChecked="True" 
+                                                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                              Margin="0,2"/>
+                                                </StackPanel>
+                                            </Expander>
+                                        </Border>
+                                    </StackPanel>
+                                </ScrollViewer>
+                            </ContextMenu>
+                        </ui:Button.ContextMenu>
+                    </ui:Button>
                     <ui:Button x:Name="AddButton" 
                              Content="Add" 
                              Background="#2F70AF"
