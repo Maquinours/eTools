@@ -100,14 +100,12 @@ namespace eTools_Ultimate.Views.Pages
             _modelFileWatcher.Created += (sender, e) => LoadModel();
             _modelFileWatcher.Deleted += (sender, e) => LoadModel();
 
-            CompositionTarget.Rendering += (s, e) => _d3dHost.Render();
+            LoadModel();
         }
 
-        private void FileTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void CompositionTarget_Rendering(object? sender, EventArgs e)
         {
-            if (_d3dHost is null) return;
-            if (ViewModel.MoversView.CurrentItem is not Mover mover) return;
-            NativeMethods.LoadModel(_d3dHost._native, @$"{Settings.Instance.ResourcesFolderPath}Model\mvr_{mover.Model.SzName}.o3d");
+            _d3dHost?.Render();
         }
 
         private void DxImage_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -134,6 +132,7 @@ namespace eTools_Ultimate.Views.Pages
             NativeMethods.RotateCamera(_d3dHost._native, (int)(deltaPosition.X), (int)(deltaPosition.Y));
 
             lastMousePosition = mousePosition;
+            _d3dHost.Render();
         }
 
         private void Page_MouseRightButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -146,6 +145,8 @@ namespace eTools_Ultimate.Views.Pages
             if (_d3dHost is null) return;
             NativeMethods.ZoomCamera(_d3dHost._native, e.Delta);
             e.Handled = true;
+
+            _d3dHost.Render();
         }
 
         private void LoadModel()
@@ -153,6 +154,8 @@ namespace eTools_Ultimate.Views.Pages
             if (_d3dHost is null) return;
             if (ViewModel.MoversView.CurrentItem is not Mover mover) return;
             if ((DefinesService.Instance.Defines.TryGetValue("MI_MALE", out int maleValue) && mover.Id == maleValue) || (DefinesService.Instance.Defines.TryGetValue("MI_FEMALE", out int femaleValue) && mover.Id == femaleValue)) return;
+
+            CompositionTarget.Rendering -= CompositionTarget_Rendering;
             NativeMethods.LoadModel(_d3dHost._native, mover.Model.Model3DFilePath);
 
             int textureEx = mover.Model.NTextureEx;
@@ -174,6 +177,7 @@ namespace eTools_Ultimate.Views.Pages
                     textureFiles.Add(texture);
             }
             ViewModel.Object3DMaterialTextures = [.. textureFiles];
+            _d3dHost.Render();
         }
 
         private void Model3DFilePathTextBlock_TextChanged(object sender, TextChangedEventArgs e)
@@ -197,6 +201,8 @@ namespace eTools_Ultimate.Views.Pages
             if (_d3dHost is null) return;
             if(MoversListView.SelectedItem is not Mover mover) return;
 
+            CompositionTarget.Rendering -= CompositionTarget_Rendering;
+
             string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
             string root = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
             string lowerMotionKey = motion.SzMotion;
@@ -204,6 +210,8 @@ namespace eTools_Ultimate.Views.Pages
             string fileMotion = $@"{modelsFolderPath}\{root}_{lowerMotionKey}.ani";
 
             NativeMethods.PlayMotion(_d3dHost._native, fileMotion);
+
+            CompositionTarget.Rendering += CompositionTarget_Rendering;
 
             //int numMotions = NativeMethods.GetNumMotions(_d3dHost._native);
             //for(int i = 0; i < numMotions; i++)
@@ -251,6 +259,7 @@ namespace eTools_Ultimate.Views.Pages
 
             int textureEx = mover.Model.NTextureEx;
             NativeMethods.SetTextureEx(_d3dHost._native, textureEx);
+            _d3dHost.Render();
         }
 
         private void ScaleNumberBox_ValueChanged(object sender, NumberBoxValueChangedEventArgs args)
@@ -260,6 +269,7 @@ namespace eTools_Ultimate.Views.Pages
 
             float scale = mover.Model.FScale;
             NativeMethods.SetScale(_d3dHost._native, scale);
+            _d3dHost.Render();
         }
 
         private void MoverIdentifierTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -287,6 +297,7 @@ namespace eTools_Ultimate.Views.Pages
                         {
                             NativeMethods.SetParts(_d3dHost._native, partPath);
                         }
+                        _d3dHost.Render();
                         break;
                     }
                 case "MI_FEMALE":
@@ -305,6 +316,7 @@ namespace eTools_Ultimate.Views.Pages
                         {
                             NativeMethods.SetParts(_d3dHost._native, partPath);
                         }
+                        _d3dHost.Render();
                         break;
                     }
             }

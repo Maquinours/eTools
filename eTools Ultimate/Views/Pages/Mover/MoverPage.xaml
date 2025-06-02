@@ -1794,6 +1794,10 @@
                                                  Visibility="Collapsed"
                                                  Text="{Binding ViewModel.MoversView.CurrentItem.Model.NTextureEx, Mode=OneWay}"
                                                  TextChanged="ModelTextureExTextBlock_TextChanged"/>
+                                        <TextBox x:Name="MoverIdentifierTextBox"
+                                                 Visibility="Collapsed"
+                                                 Text="{Binding ViewModel.MoversView.CurrentItem.Identifier, Mode=OneWay}"
+                                                 TextChanged="MoverIdentifierTextBox_TextChanged" />
                                         <Image x:Name="DxImage"
                                                Stretch="UniformToFill"
                                                HorizontalAlignment="Center"
