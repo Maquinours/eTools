@@ -6,12 +6,13 @@
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:eTools_Ultimate.Models"
+    xmlns:pageViewModels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     Title="MoverPage"
-    d:DataContext="{d:DesignInstance local:MoverPage,
+    d:DataContext="{d:DesignInstance pageViewModels:MoversViewModel,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="4122"
     d:DesignWidth="1024"
@@ -170,7 +171,7 @@
                         </StackPanel>
                         <ui:AutoSuggestBox Grid.Row="1"
                                            Text="{Binding Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                                           OriginalItemsSource="{Binding Path=ViewModel.MoverIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                                           OriginalItemsSource="{Binding Path=MoverIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
                                            DisplayMemberPath="Value"/>
                     </Grid>
 
@@ -606,7 +607,7 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:AutoSuggestBox Grid.Row="1"
-                                           OriginalItemsSource="{Binding Path=ViewModel.AiIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                                           OriginalItemsSource="{Binding Path=AiIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
                                            Text="{Binding AiIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                            DisplayMemberPath="Value"/>
                     </Grid>
@@ -629,7 +630,7 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:AutoSuggestBox Grid.Row="1"
-                                           OriginalItemsSource="{Binding Path=ViewModel.BelligerenceIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                                           OriginalItemsSource="{Binding Path=BelligerenceIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
                                            Text="{Binding BelligerenceIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                            DisplayMemberPath="Value"/>
                     </Grid>
@@ -1390,7 +1391,7 @@
                     Icon="Search24"
                     BorderThickness="0"
                     Margin="10,10,10,10"
-                    Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                    Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
 
             <!-- Mover List -->
@@ -1403,7 +1404,7 @@
                           BorderThickness="0"
                           Background="Transparent"
                           ItemTemplate="{StaticResource MoverItemTemplate}"
-                          ItemsSource="{Binding ViewModel.MoversView}"
+                          ItemsSource="{Binding MoversView}"
                           IsSynchronizedWithCurrentItem="True">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
@@ -1746,19 +1747,19 @@
 
                 <!-- Formulare -->
                 <StackPanel Margin="20">
-                    <ContentControl Content="{Binding ViewModel.MoversView}"
+                    <ContentControl Content="{Binding MoversView}"
                             ContentTemplate="{StaticResource BasicInfoSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
-                    <ContentControl Content="{Binding ViewModel.MoversView}"
+                    <ContentControl Content="{Binding MoversView}"
                             ContentTemplate="{StaticResource StatsSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
-                    <ContentControl Content="{Binding ViewModel.MoversView}"
+                    <ContentControl Content="{Binding MoversView}"
                             ContentTemplate="{StaticResource CombatSettingsSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
-                    <ContentControl Content="{Binding ViewModel.MoversView}"
+                    <ContentControl Content="{Binding MoversView}"
                             ContentTemplate="{StaticResource DefensiveStatsSectionTemplate}"/>
                     <Separator Margin="0,10,0,5"/>
-                    <ContentControl Content="{Binding ViewModel.MoversView}"
+                    <ContentControl Content="{Binding MoversView}"
                             ContentTemplate="{StaticResource ElementalSectionTemplate}"/>
 
                     <!-- Model & Motions Section -->
@@ -1788,15 +1789,15 @@
                                     <Grid>
                                         <TextBox x:Name="Model3DFilePathTextBlock"
                                                  Visibility="Collapsed"
-                                                 Text="{Binding ViewModel.MoversView.CurrentItem.Model.Model3DFilePath, Mode=OneWay}"
+                                                 Text="{Binding MoversView.CurrentItem.Model.Model3DFilePath, Mode=OneWay}"
                                                  TextChanged="Model3DFilePathTextBlock_TextChanged"/>
                                         <TextBox x:Name="ModelTextureExTextBlock"
                                                  Visibility="Collapsed"
-                                                 Text="{Binding ViewModel.MoversView.CurrentItem.Model.NTextureEx, Mode=OneWay}"
+                                                 Text="{Binding MoversView.CurrentItem.Model.NTextureEx, Mode=OneWay}"
                                                  TextChanged="ModelTextureExTextBlock_TextChanged"/>
                                         <TextBox x:Name="MoverIdentifierTextBox"
                                                  Visibility="Collapsed"
-                                                 Text="{Binding ViewModel.MoversView.CurrentItem.Identifier, Mode=OneWay}"
+                                                 Text="{Binding MoversView.CurrentItem.Identifier, Mode=OneWay}"
                                                  TextChanged="MoverIdentifierTextBox_TextChanged" />
                                         <Image x:Name="DxImage"
                                                Stretch="UniformToFill"
@@ -1809,7 +1810,7 @@
                                                    VerticalAlignment="Top"
                                                    Margin="0,5,5,0"
                                                    Panel.ZIndex="1"
-                                                   Command="{Binding ViewModel.ShowReferenceModelContentDialogCommand}">
+                                                   Command="{Binding ShowReferenceModelContentDialogCommand}">
                                             <ui:SymbolIcon Symbol="ImageReflection24"/>
                                         </ui:Button>
                                     </Grid>
@@ -1835,22 +1836,8 @@
                                     <ListView x:Name="MotionsListView"
                                               Style="{StaticResource AppListViewStyle}"
                                               ItemContainerStyle="{StaticResource AppListViewItemStyle}"
-                                              ItemsSource="{Binding ViewModel.MoversView.CurrentItem.Model.Motions}">
-                                        <ListView.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid HorizontalAlignment="Stretch"
-                                                        VerticalAlignment="Stretch">
-                                                    <TextBlock Text="{Binding MotionTypeIdentifier, Mode=OneWay}"/>
-                                                    <i:Interaction.Triggers>
-                                                        <i:EventTrigger EventName="MouseDown">
-                                                            <i:InvokeCommandAction Command="{Binding DataContext.PlayMotionCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                                                   CommandParameter="{Binding}"/>
-                                                        </i:EventTrigger>
-                                                    </i:Interaction.Triggers>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ListView.ItemTemplate>
-                                    </ListView>
+                                              ItemsSource="{Binding MoversView.CurrentItem.Model.Motions}"
+                                              DisplayMemberPath="MotionTypeIdentifier" />
                                 </Border>
 
                                 <!-- Buttons neben der Liste -->
@@ -1893,7 +1880,7 @@
                                             </ui:SymbolIcon>
                                         </StackPanel>
                                         <ui:AutoSuggestBox Grid.Row="1"
-                                                 OriginalItemsSource="{Binding ViewModel.MotionIdentifiers, Mode=OneWay}"
+                                                 OriginalItemsSource="{Binding MotionIdentifiers, Mode=OneWay}"
                                                  DisplayMemberPath="Value"
                                                  Text="{Binding Path=SelectedItem.MotionTypeIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ElementName=MotionsListView}"/>
                                     </Grid>
@@ -1921,7 +1908,7 @@
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
                                             <ui:AutoSuggestBox Grid.Column="0"
-                                                     OriginalItemsSource="{Binding ViewModel.ModelMotionFilePossibilities, Mode=OneWay}"
+                                                     OriginalItemsSource="{Binding ModelMotionFilePossibilities, Mode=OneWay}"
                                                      Text="{Binding Path=SelectedItem.SzMotion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=MotionsListView}" />
                                             <ui:Button Grid.Column="1"
                                                        Content="..."
@@ -1961,8 +1948,8 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <ui:AutoSuggestBox Grid.Column="0"
-                                                           Text="{Binding ViewModel.MoversView.CurrentItem.Model.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                           OriginalItemsSource="{Binding ViewModel.ModelFilePossibilities, Mode=OneWay}"
+                                                           Text="{Binding MoversView.CurrentItem.Model.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                           OriginalItemsSource="{Binding ModelFilePossibilities, Mode=OneWay}"
                                                            TextChanged="AutoSuggestBox_TextChanged" />
                                         <ui:Button Grid.Column="1"
                                                    Content="..."
@@ -1991,7 +1978,7 @@
                                         </ui:SymbolIcon>
                                     </StackPanel>
                                     <ui:NumberBox Grid.Row="1"
-                                                  Value="{Binding ViewModel.MoversView.CurrentItem.Model.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                  Value="{Binding MoversView.CurrentItem.Model.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                   Minimum="0.1"
                                                   Maximum="10"
                                                   SpinButtonPlacementMode="Inline"/>
@@ -2019,8 +2006,8 @@
                                     </StackPanel>
                                     <ComboBox Grid.Row="1"
                                               Style="{StaticResource AppComboBoxStyle}"
-                                              ItemsSource="{Binding ViewModel.ModelTexturesPossibilities}"
-                                              SelectedValue="{Binding ViewModel.MoversView.CurrentItem.Model.NTextureEx, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                              ItemsSource="{Binding ModelTexturesPossibilities}"
+                                              SelectedValue="{Binding MoversView.CurrentItem.Model.NTextureEx, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                                 </Grid>
                             </UniformGrid>
                         </StackPanel>

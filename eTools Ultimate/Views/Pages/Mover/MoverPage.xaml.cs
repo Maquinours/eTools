@@ -31,7 +31,7 @@ namespace eTools_Ultimate.Views.Pages
         public MoverPage(MoversViewModel viewModel)
         {
             ViewModel = viewModel;
-            DataContext = this;
+            DataContext = viewModel;
 
             InitializeComponent();
         }
@@ -196,6 +196,7 @@ namespace eTools_Ultimate.Views.Pages
             this.LoadModel();
         }
 
+        // TODO: readd binding to play motion command
         [RelayCommand]
         private void PlayMotion(ModelMotion motion)
         {
