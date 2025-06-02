@@ -21,16 +21,43 @@ namespace eTools_Ultimate.ViewModels.Pages
 {
     public partial class MoversViewModel(IContentDialogService contentDialogService) : ObservableObject, INavigationAware
     {
+        #region Properties
         private bool _isInitialized = false;
-
-        [ObservableProperty]
-        private IEnumerable<DataColor> _colors;
-
-        private string _searchText = string.Empty;
 
         [ObservableProperty]
         private ICollectionView _moversView = CollectionViewSource.GetDefaultView(MoversService.Instance.Movers);
 
+        private string _searchText = string.Empty;
+
+        private string[] _object3DMaterialTextures = [];
+
+        #region File system watchers
+        private FileSystemWatcher _modelsDirectoryWatcher = new()
+        {
+            Filter = "mvr_*.o3d",
+            NotifyFilter = NotifyFilters.FileName,
+            IncludeSubdirectories = false,
+            EnableRaisingEvents = false
+        };
+
+        private FileSystemWatcher _motionDirectoryWatcher = new()
+        {
+            NotifyFilter = NotifyFilters.FileName,
+            IncludeSubdirectories = false,
+            EnableRaisingEvents = false
+        };
+
+        private FileSystemWatcher _texturesDirectoryWatcher = new()
+        {
+            Filter = "*.dds",
+            NotifyFilter = NotifyFilters.FileName,
+            IncludeSubdirectories = false,
+            EnableRaisingEvents = false
+        };
+        #endregion File system watchers
+        #endregion Properties
+
+        #region Fields
         public string SearchText
         {
             get => _searchText;
@@ -57,7 +84,6 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        private string[] _object3DMaterialTextures = [];
         public string[] Object3DMaterialTextures 
         {
             get => _object3DMaterialTextures;
@@ -131,29 +157,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         public List<KeyValuePair<int, string>> BelligerenceIdentifiers => DefinesService.Instance.ReversedBelligerenceDefines.ToList();
         public List<KeyValuePair<int, string>> AiIdentifiers => DefinesService.Instance.ReversedAiDefines.ToList();
         public List<KeyValuePair<int, string>> MotionIdentifiers => DefinesService.Instance.ReversedMotionTypeDefines.ToList();
-
-        private FileSystemWatcher _modelsDirectoryWatcher = new()
-        {
-            Filter = "mvr_*.o3d",
-            NotifyFilter = NotifyFilters.FileName,
-            IncludeSubdirectories = false,
-            EnableRaisingEvents = false
-        };
-
-        private FileSystemWatcher _motionDirectoryWatcher = new()
-        {
-            NotifyFilter = NotifyFilters.FileName,
-            IncludeSubdirectories = false,
-            EnableRaisingEvents = false
-        };
-
-        private FileSystemWatcher _texturesDirectoryWatcher = new()
-        {
-            Filter = "*.dds",
-            NotifyFilter = NotifyFilters.FileName,
-            IncludeSubdirectories = false,
-            EnableRaisingEvents = false
-        };
+        #endregion Fields
 
         public Task OnNavigatedToAsync()
         {
@@ -167,26 +171,6 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private void InitializeViewModel()
         {
-            var random = new Random();
-            var colorCollection = new List<DataColor>();
-
-            for (int i = 0; i < 8192; i++)
-                colorCollection.Add(
-                    new DataColor
-                    {
-                        Color = new SolidColorBrush(
-                            Color.FromArgb(
-                                (byte)200,
-                                (byte)random.Next(0, 250),
-                                (byte)random.Next(0, 250),
-                                (byte)random.Next(0, 250)
-                            )
-                        )
-                    }
-                );
-
-            Colors = colorCollection;
-
             MoversView.Filter = new Predicate<object>(FilterItem);
 
             Settings.Instance.PropertyChanged += (sender, e) =>
