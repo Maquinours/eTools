@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using eTools_Ultimate.Exceptions;
 using System.Globalization;
+using eTools_Ultimate.Helpers;
 
 namespace eTools_Ultimate.Services
 {
@@ -34,13 +35,14 @@ namespace eTools_Ultimate.Services
             StringsService stringsService = StringsService.Instance;
             DefinesService definesService = DefinesService.Instance;
 
-            using (Scanner scanner = new Scanner())
+            using (Scanner scanner = new())
             {
                 string filePath = settings.ExchangesConfigFilePath ?? settings.DefaultExchangesConfigFilePath;
                 scanner.Load(filePath);
                 while (true)
                 {
-                    string mmiId = scanner.GetToken();
+                    scanner.GetToken();
+                    int mmiId = Script.GetDefineNum(scanner.Token);
 
                     if (scanner.EndOfStream) break;
 
@@ -65,10 +67,12 @@ namespace eTools_Ultimate.Services
                                     scanner.GetToken(); // {
                                     while(true)
                                     {
-                                        string textId = scanner.GetToken();
+                                        scanner.GetToken();
 
-                                        if (textId == "}") break;
+                                        if (scanner.Token == "}") break;
                                         if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                        int textId = Script.GetDefineNum(scanner.Token);
 
                                         ExchangeDescription description = new(textId);
                                         descriptions.Add(description);
@@ -77,7 +81,9 @@ namespace eTools_Ultimate.Services
                                 }
                             case "SET":
                                 {
-                                    string textId = scanner.GetToken();
+                                    scanner.GetToken();
+                                    int textId = Script.GetDefineNum(scanner.Token);
+
                                     List<ExchangeSetResultMsg> resultMessages = new();
                                     List<ExchangeSetCondition> conditions = new();
                                     List<ExchangeSetRemove> removes = new();
@@ -100,10 +106,12 @@ namespace eTools_Ultimate.Services
                                                     scanner.GetToken(); // {
                                                     while(true)
                                                     {
-                                                        string textId2 = scanner.GetToken();
+                                                        scanner.GetToken();
 
-                                                        if (textId2 == "}") break;
+                                                        if (scanner.Token == "}") break;
                                                         if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                                        int textId2 = Script.GetDefineNum(scanner.Token);
 
                                                         ExchangeSetResultMsg resultMsg = new(textId2);
                                                         resultMessages.Add(resultMsg);
@@ -115,14 +123,23 @@ namespace eTools_Ultimate.Services
                                                     scanner.GetToken(); // {
                                                     while(true)
                                                     {
-                                                        string dwItemId = scanner.GetToken();
+                                                        int dwItemId;
 
-                                                        if (dwItemId == "}") break;
+                                                        scanner.GetToken();
+
+                                                        if (scanner.Token == "}") break;
                                                         if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
-                                                        
+
                                                         // Not sure we should keep that
-                                                        if (dwItemId == "PENYA")
-                                                            dwItemId = "II_GOLD_SEED1";
+                                                        if (scanner.Token == "PENYA")
+                                                        {
+                                                            if (DefinesService.Instance.Defines.TryGetValue("II_GOLD_SEED1", out int penyaItemId))
+                                                                dwItemId = penyaItemId;
+                                                            else
+                                                                throw new Exception($"PENYA item ID (II_GOLD_SEED1) not found in defines");
+                                                        }
+                                                        else
+                                                            dwItemId = Script.GetDefineNum(scanner.Token);
 
                                                         int nItemNum = scanner.GetNumber();
 
@@ -138,14 +155,23 @@ namespace eTools_Ultimate.Services
                                                     scanner.GetToken(); // {
                                                     while(true)
                                                     {
-                                                        string dwItemId = scanner.GetToken();
+                                                        int dwItemId;
 
-                                                        if (dwItemId == "}") break;
+                                                        scanner.GetToken();
+
+                                                        if (scanner.Token == "}") break;
                                                         if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
                                                         // Not sure we should keep that
-                                                        if (dwItemId == "PENYA")
-                                                            dwItemId = "II_GOLD_SEED1";
+                                                        if (scanner.Token == "PENYA")
+                                                        {
+                                                            if (DefinesService.Instance.Defines.TryGetValue("II_GOLD_SEED1", out int penyaItemId))
+                                                                dwItemId = penyaItemId;
+                                                            else
+                                                                throw new Exception($"PENYA item ID (II_GOLD_SEED1) not found in defines");
+                                                        }
+                                                        else
+                                                            dwItemId = Script.GetDefineNum(scanner.Token);
 
                                                         int nItemNum = scanner.GetNumber();
 
@@ -164,14 +190,16 @@ namespace eTools_Ultimate.Services
                                                     scanner.GetToken(); // {
                                                     while(true)
                                                     {
-                                                        string nType = scanner.GetToken();
+                                                        scanner.GetToken();
 
-                                                        if (nType == "}") break;
+                                                        int nType = Script.GetDefineNum(scanner.Token);
+
+                                                        if (scanner.Token == "}") break;
                                                         if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
                                                         int nPoint = scanner.GetNumber();
 
-                                                        if (!definesService.Defines.ContainsKey(nType) || definesService.Defines[nType] <= 0) // nType should be > 0
+                                                        if (nType <= 0) // nType should be > 0
                                                             throw new IncorrectlyFormattedFileException(filePath); // CExchange::Load_Script() - Invalid CONDITION_POINT Type
 
                                                         ExchangeSetConditionPoint conditionPoint = new(nType, nPoint);
@@ -186,14 +214,16 @@ namespace eTools_Ultimate.Services
                                                     scanner.GetToken(); // {
                                                     while (true)
                                                     {
-                                                        string nType = scanner.GetToken();
+                                                        scanner.GetToken();
 
-                                                        if (nType == "}") break;
+                                                        int nType = Script.GetDefineNum(scanner.Token);
+
+                                                        if (scanner.Token == "}") break;
                                                         if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
                                                         int nPoint = scanner.GetNumber();
 
-                                                        if (!definesService.Defines.ContainsKey(nType) || definesService.Defines[nType] <= 0) // nType should be > 0
+                                                        if (nType <= 0) // nType should be > 0
                                                             throw new IncorrectlyFormattedFileException(filePath); // CExchange::Load_Script() - Invalid REMOVE_POINT Type
 
                                                         ExchangeSetRemovePoint removePoint = new(nType, nPoint);
@@ -209,9 +239,9 @@ namespace eTools_Ultimate.Services
                                                     bool useCurrentToken = false;
                                                     while(true)
                                                     {
-                                                        string dwItemId = useCurrentToken ? scanner.Token : scanner.GetToken();
+                                                        int dwItemId = Script.GetDefineNum(useCurrentToken ? scanner.Token : scanner.GetToken());
 
-                                                        if (dwItemId == "}") break;
+                                                        if (scanner.Token == "}") break;
                                                         if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
                                                         int nItemNum = scanner.GetNumber();
@@ -244,7 +274,8 @@ namespace eTools_Ultimate.Services
                                 }
                             case "SET_SMELT":
                                 {
-                                    string textId = scanner.GetToken();
+                                    scanner.GetToken();
+                                    int textId = Script.GetDefineNum(scanner.Token);
                                     List<ExchangeSmeltSetResultMsg> resultMessages = new();
                                     List<ExchangeSmeltSetCondition> conditions = new();
                                     List<ExchangeSmeltSetPay> pays = new();
@@ -264,10 +295,12 @@ namespace eTools_Ultimate.Services
                                                     scanner.GetToken(); // {
                                                     while (true)
                                                     {
-                                                        string textId2 = scanner.GetToken();
+                                                        scanner.GetToken();
 
-                                                        if (textId2 == "}") break;
+                                                        if (scanner.Token == "}") break;
                                                         if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                                        int textId2 = Script.GetDefineNum(scanner.Token);
 
                                                         ExchangeSmeltSetResultMsg resultMsg = new(textId2);
                                                         resultMessages.Add(resultMsg);
@@ -280,14 +313,23 @@ namespace eTools_Ultimate.Services
                                                     scanner.GetToken(); // {
                                                     while(true)
                                                     {
-                                                        string dwItemId = scanner.GetToken();
+                                                        scanner.GetToken();
 
-                                                        if (dwItemId == "}") break;
+                                                        int dwItemId;
+
+                                                        if (scanner.Token == "}") break;
                                                         if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
                                                         // Not sure we should keep that
-                                                        if (dwItemId == "PENYA")
-                                                            dwItemId = "II_GOLD_SEED1";
+                                                        if (scanner.Token == "PENYA")
+                                                        {
+                                                            if (DefinesService.Instance.Defines.TryGetValue("II_GOLD_SEED1", out int penyaItemId))
+                                                                dwItemId = penyaItemId;
+                                                            else
+                                                                throw new Exception($"PENYA item ID (II_GOLD_SEED1) not found in defines");
+                                                        }
+                                                        else
+                                                            dwItemId = Script.GetDefineNum(scanner.Token);
 
                                                         int nItemQuantity = scanner.GetNumber();
                                                         int dwMinGeneralEnchant = scanner.GetNumber();
@@ -321,10 +363,12 @@ namespace eTools_Ultimate.Services
                                                     scanner.GetToken(); // {
                                                     while(true)
                                                     {
-                                                        string dwItemId = scanner.GetToken();
+                                                        scanner.GetToken();
 
-                                                        if (dwItemId == "}") break;
+                                                        if (scanner.Token == "}") break;
                                                         if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                                        int dwItemId = Script.GetDefineNum(scanner.Token);
 
                                                         int nItemQuantity = scanner.GetNumber();
                                                         int dwPaymentProb = scanner.GetNumber();
@@ -355,7 +399,8 @@ namespace eTools_Ultimate.Services
 
                             case "SET_ENCHANT_MOVE":
                                 {
-                                    string textId = scanner.GetToken();
+                                    scanner.GetToken();
+                                    int textId = Script.GetDefineNum(scanner.Token);
                                     List<ExchangeEnchantMoveSetResultMsg> resultMessages = new();
                                     List<ExchangeEnchantMoveSetCondition> conditions = new();
                                     List<ExchangeEnchantMoveSetPay> pays = new();
@@ -375,10 +420,12 @@ namespace eTools_Ultimate.Services
                                                     scanner.GetToken(); // {
                                                     while (true)
                                                     {
-                                                        string textId2 = scanner.GetToken();
+                                                        scanner.GetToken();
 
-                                                        if (textId2 == "}") break;
+                                                        if (scanner.Token == "}") break;
                                                         if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                                        int textId2 = Script.GetDefineNum(scanner.Token);
 
                                                         ExchangeEnchantMoveSetResultMsg resultMsg = new(textId2);
                                                         resultMessages.Add(resultMsg);
@@ -391,14 +438,23 @@ namespace eTools_Ultimate.Services
                                                     scanner.GetToken(); // {
                                                     while (true)
                                                     {
-                                                        string dwItemId = scanner.GetToken();
+                                                        scanner.GetToken();
 
-                                                        if (dwItemId == "}") break;
+                                                        int dwItemId;
+
+                                                        if (scanner.Token == "}") break;
                                                         if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
                                                         // Not sure we should keep that
-                                                        if (dwItemId == "PENYA")
-                                                            dwItemId = "II_GOLD_SEED1";
+                                                        if (scanner.Token == "PENYA")
+                                                        {
+                                                            if (DefinesService.Instance.Defines.TryGetValue("II_GOLD_SEED1", out int penyaItemId))
+                                                                dwItemId = penyaItemId;
+                                                            else
+                                                                throw new Exception($"PENYA item ID (II_GOLD_SEED1) not found in defines");
+                                                        }
+                                                        else
+                                                            dwItemId = Script.GetDefineNum(scanner.Token);
 
                                                         ExchangeEnchantMoveSetCondition condition = new(dwItemId);
                                                         conditions.Add(condition);
@@ -424,9 +480,9 @@ namespace eTools_Ultimate.Services
                                                     bool useCurrentToken = false;
                                                     while (true)
                                                     {
-                                                        string dwItemId = useCurrentToken ? scanner.Token : scanner.GetToken();
+                                                        int dwItemId = Script.GetDefineNum(useCurrentToken ? scanner.Token : scanner.GetToken());
 
-                                                        if (dwItemId == "}") break;
+                                                        if (scanner.Token == "}") break;
                                                         if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
                                                         string token3 = scanner.GetToken();

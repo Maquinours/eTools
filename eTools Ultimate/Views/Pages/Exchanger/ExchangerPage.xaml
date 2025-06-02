@@ -110,7 +110,7 @@
                 </Border>
                 <StackPanel Grid.Column="1"
                         VerticalAlignment="Center">
-                    <TextBlock Text="{Binding MmiId}"
+                    <TextBlock Text="{Binding MmiIdentifier}"
                             FontWeight="SemiBold"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
                     <TextBlock Text="{Binding Key}"
@@ -402,7 +402,7 @@
                                                 FontWeight="SemiBold"
                                                 Foreground="{Binding Text.SolidColorBrushColor}"/>
                                             <TextBlock
-                                                Text="{Binding Text.DwId}"
+                                                Text="{Binding Text.Identifier}"
                                                 Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                                 FontSize="12"/>
                                         </StackPanel>

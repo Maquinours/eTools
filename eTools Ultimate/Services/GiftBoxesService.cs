@@ -1,4 +1,5 @@
-﻿using eTools_Ultimate.Models;
+﻿using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models;
 using Scan;
 using System;
 using System.Collections.Generic;
@@ -32,33 +33,33 @@ namespace eTools_Ultimate.Services
             Settings settings = Settings.Instance;
             StringsService stringsService = StringsService.Instance;
 
-            using (Scanner scanner = new Scanner())
+            using (Script script = new())
             {
                 string filePath = settings.GiftBoxesConfigFilePath ?? settings.DefaultGiftBoxesConfigFilePath;
-                scanner.Load(filePath);
+                script.Load(filePath);
                 while (true)
                 {
-                    string type = scanner.GetToken();
-                    if (scanner.EndOfStream) break;
+                    string type = script.GetToken();
+                    if (script.EndOfStream) break;
 
-                    string dwGiftbox;
+                    int dwGiftbox;
                     List<GiftBoxItem> items = new();
 
-                    switch (scanner.Token)
+                    switch (script.Token)
                     {
                         case "GiftBox":
                             {
-                                dwGiftbox = scanner.GetToken();
-                                scanner.GetToken(); // {
+                                dwGiftbox = script.GetNumber();
+                                script.GetToken(); // {
                                 while (true)
                                 {
-                                    string item = scanner.GetToken();
+                                    int item = script.GetNumber();
 
-                                    if (scanner.Token == "}") break;
-                                    if (scanner.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
+                                    if (script.Token == "}") break;
+                                    if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
 
-                                    int probability = scanner.GetNumber() * 100;
-                                    int num = scanner.GetNumber();
+                                    int probability = script.GetNumber() * 100;
+                                    int num = script.GetNumber();
 
                                     GiftBoxItem giftBoxItem = new GiftBoxItem(item, probability, num);
                                     items.Add(giftBoxItem);
@@ -67,15 +68,15 @@ namespace eTools_Ultimate.Services
                             }
                         case "GiftBox2":
                             {
-                                dwGiftbox = scanner.GetToken();
-                                scanner.GetToken(); // {
+                                dwGiftbox = script.GetNumber();
+                                script.GetToken(); // {
                                 while (true)
                                 {
-                                    string item = scanner.GetToken();
-                                    if (scanner.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
-                                    if (scanner.Token == "}") break;
-                                    int probability = scanner.GetNumber();
-                                    int num = scanner.GetNumber();
+                                    int item = script.GetNumber();
+                                    if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
+                                    if (script.Token == "}") break;
+                                    int probability = script.GetNumber();
+                                    int num = script.GetNumber();
 
                                     GiftBoxItem giftBoxItem = new GiftBoxItem(item, probability, num);
                                     items.Add(giftBoxItem);
@@ -84,16 +85,16 @@ namespace eTools_Ultimate.Services
                             }
                         case "GiftBox3":
                             {
-                                dwGiftbox = scanner.GetToken();
-                                scanner.GetToken(); // {
+                                dwGiftbox = script.GetNumber();
+                                script.GetToken(); // {
                                 while (true)
                                 {
-                                    string item = scanner.GetToken();
-                                    if (scanner.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
-                                    if (scanner.Token == "}") break;
-                                    int probability = scanner.GetNumber() * 100;
-                                    int num = scanner.GetNumber();
-                                    int flag = scanner.GetNumber();
+                                    int item = script.GetNumber();
+                                    if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
+                                    if (script.Token == "}") break;
+                                    int probability = script.GetNumber() * 100;
+                                    int num = script.GetNumber();
+                                    int flag = script.GetNumber();
 
                                     GiftBoxItem giftBoxItem = new GiftBoxItem(item, probability, num, flag);
                                     items.Add(giftBoxItem);
@@ -103,18 +104,18 @@ namespace eTools_Ultimate.Services
                         case "GiftBox4":
                         case "GiftBox5":
                             {
-                                ushort precision = (ushort)(scanner.Token == "GiftBox4" ? 100 : 10);
-                                dwGiftbox = scanner.GetToken();
-                                scanner.GetToken(); // {
+                                ushort precision = (ushort)(script.Token == "GiftBox4" ? 100 : 10);
+                                dwGiftbox = script.GetNumber();
+                                script.GetToken(); // {
                                 while (true)
                                 {
-                                    string item = scanner.GetToken();
-                                    if (scanner.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
-                                    if (scanner.Token == "}") break;
-                                    int probability = scanner.GetNumber() * precision;
-                                    int num = scanner.GetNumber();
-                                    int flag = scanner.GetNumber();
-                                    int span = scanner.GetNumber();
+                                    int item = script.GetNumber();
+                                    if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
+                                    if (script.Token == "}") break;
+                                    int probability = script.GetNumber() * precision;
+                                    int num = script.GetNumber();
+                                    int flag = script.GetNumber();
+                                    int span = script.GetNumber();
 
                                     GiftBoxItem giftBoxItem = new GiftBoxItem(item, probability, num, flag, span);
                                     items.Add(giftBoxItem);
@@ -123,18 +124,18 @@ namespace eTools_Ultimate.Services
                             }
                         case "GiftBox6":
                             {
-                                dwGiftbox = scanner.GetToken();
-                                scanner.GetToken(); // {
+                                dwGiftbox = script.GetNumber();
+                                script.GetToken(); // {
                                 while (true)
                                 {
-                                    string item = scanner.GetToken();
-                                    if (scanner.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
-                                    if (scanner.Token == "}") break;
-                                    int probability = scanner.GetNumber() * 10;
-                                    int num = scanner.GetNumber();
-                                    int flag = scanner.GetNumber();
-                                    int span = scanner.GetNumber();
-                                    int abilityOption = scanner.GetNumber();
+                                    int item = script.GetNumber();
+                                    if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
+                                    if (script.Token == "}") break;
+                                    int probability = script.GetNumber() * 10;
+                                    int num = script.GetNumber();
+                                    int flag = script.GetNumber();
+                                    int span = script.GetNumber();
+                                    int abilityOption = script.GetNumber();
 
                                     GiftBoxItem giftBoxItem = new GiftBoxItem(item, probability, num, flag, span, abilityOption);
                                     items.Add(giftBoxItem);

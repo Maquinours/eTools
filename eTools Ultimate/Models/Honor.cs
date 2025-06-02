@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Models
 {
-    internal class Honor : IDisposable, INotifyPropertyChanged
+    internal class Honor(int nId, int nLGrouping, int nSGrouping, int nNeed, string strTitle) : IDisposable, INotifyPropertyChanged
     {
-        private int _nId;
-        private string _nLGrouping;
-        private string _nSGrouping;
-        private int _nNeed;
-        public string _strTitle;
+        private int _nId = nId;
+        private int _nLGrouping = nLGrouping;
+        private int _nSGrouping = nSGrouping;
+        private int _nNeed = nNeed;
+        public string _strTitle = strTitle;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -37,7 +37,7 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public string NLGrouping
+        public int NLGrouping
         {
             get => this._nLGrouping;
             set
@@ -50,7 +50,7 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public string NSGrouping
+        public int NSGrouping
         {
             get => this._nSGrouping;
             set
@@ -93,15 +93,6 @@ namespace eTools_Ultimate.Models
         {
             get => StringsService.Instance.GetString(this.StrTitle);
             set => StringsService.Instance.ChangeStringValue(this.StrTitle, value);
-        }
-
-        public Honor(int nId, string nLGrouping, string nSGrouping, int nNeed, string strTitle)
-        {
-            _nId = nId;
-            _nLGrouping = nLGrouping;
-            _nSGrouping = nSGrouping;
-            _nNeed = nNeed;
-            _strTitle = strTitle;
         }
 
         public void Dispose()

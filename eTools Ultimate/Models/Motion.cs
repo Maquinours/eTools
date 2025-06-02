@@ -10,15 +10,15 @@ using System.Windows.Media.Imaging;
 
 namespace eTools_Ultimate.Models
 {
-    public class Motion : INotifyPropertyChanged, IDisposable
+    public class Motion(int nVer, int dwId, int dwMotion, string szIconName, int dwPlay, string szName, string szDesc) : INotifyPropertyChanged, IDisposable
     {
-        private int _nVer;
-        private string _dwId;
-        private string _dwMotion;
-        private string _szIconName;
-        private int _dwPlay;
-        private string _szName;
-        private string _szDesc;
+        private int _nVer = nVer;
+        private int _dwId = dwId;
+        private int _dwMotion = dwMotion;
+        private string _szIconName = szIconName;
+        private int _dwPlay = dwPlay;
+        private string _szName = szName;
+        private string _szDesc = szDesc;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -26,17 +26,27 @@ namespace eTools_Ultimate.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedExtendedEventArgs(propertyName, oldValue, newValue));
         }
+
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public int NVer
         {
             get => this._nVer;
             set => SetValue(ref this._nVer, value);
         }
-        public string DwId
+        public int DwId
         {
             get => this._dwId;
-            set => SetValue(ref this._dwId, value);
+            set
+            {
+                if(SetValue(ref this._dwId, value))
+                    NotifyPropertyChanged(nameof(this.Identifier));
+            }
         }
-        public string DwMotion
+        public int DwMotion
         {
             get => this._dwMotion;
             set => SetValue(ref this._dwMotion, value);
@@ -62,6 +72,7 @@ namespace eTools_Ultimate.Models
             set => SetValue(ref this._szDesc, value);
         }
 
+        public string Identifier => DefinesService.Instance.ReversedMotionDefines.TryGetValue(this.DwId, out string? identifier) ? identifier : this.DwId.ToString();
         public string Name
         {
             get => StringsService.Instance.GetString(this.SzName);
@@ -106,33 +117,22 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public Motion(int nVer, string dwId, string dwMotion, string szIconName, int dwPlay, string szName, string szDesc)
-        {
-            this._nVer = nVer;
-            this._dwId = dwId;
-            this._dwMotion = dwMotion;
-            this._szIconName = szIconName;
-            this._dwPlay = dwPlay;
-            this._szName = szName;
-            this._szDesc = szDesc;
-        }
-
         public void Dispose()
         {
 
         }
 
-        private void SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
         {
             if (EqualityComparer<T>.Default.Equals(field, value))
-                return;
+                return false;
 
             if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new Exception($"Motion SetValue with not safe to assign directly property {propertyName}");
 
             T old = field;
             field = value;
             this.NotifyPropertyChanged(propertyName, old, value);
-            return;
+            return true;
         }
     }
 } 

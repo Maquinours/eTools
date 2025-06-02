@@ -18,9 +18,9 @@ namespace eTools_Ultimate.Models
 {
     internal class CharacterEquip
     {
-        private string _dwEquip; // Item ID
+        private int _dwEquip; // Item ID
 
-        internal CharacterEquip(string dwEquip)
+        internal CharacterEquip(int dwEquip)
         {
             this._dwEquip = dwEquip;
         }
@@ -28,12 +28,12 @@ namespace eTools_Ultimate.Models
 
     internal class CharacterFigure
     {
-        private string _moverIdx; // MI_
+        private int _moverIdx; // MI_
         private int _hairMesh;
-        private string _hairColor;
+        private int _hairColor;
         private int _headMesh;
 
-        internal CharacterFigure(string moverIdx, int hairMesh, string hairColor, int headMesh)
+        internal CharacterFigure(int moverIdx, int hairMesh, int hairColor, int headMesh)
         {
             this._moverIdx = moverIdx;
             this._hairMesh = hairMesh;
@@ -44,9 +44,9 @@ namespace eTools_Ultimate.Models
 
     internal class CharacterMusic
     {
-        private string _id;
+        private int _id;
 
-        internal CharacterMusic(string id)
+        internal CharacterMusic(int id)
         {
             this._id = id;
         }
@@ -57,8 +57,8 @@ namespace eTools_Ultimate.Models
         private string _id;
         private string _name; // IDS_
         private List<CharacterEquip> _equips;
-        private string? _dwMusicId;
-        private string? _nStructure;
+        private int? _dwMusicId;
+        private int? _nStructure;
         private string _szChar;
         private string _szDialog;
         private string _szDlgQuest;

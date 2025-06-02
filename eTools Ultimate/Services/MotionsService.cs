@@ -1,4 +1,5 @@
-﻿using eTools_Ultimate.Models;
+﻿using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models;
 using Scan;
 using System;
 using System.Collections.Generic;
@@ -30,24 +31,24 @@ namespace eTools_Ultimate.Services
 
             Settings settings = Settings.Instance;
 
-            using (Scanner scanner = new())
+            using (Script script = new())
             {
                 string filePath = settings.MotionsPropFilePath ?? settings.DefaultMotionsPropFilePath;
-                scanner.Load(filePath);
+                script.Load(filePath);
                 while (true)
                 {
-                    int nVer = scanner.GetNumber();
+                    int nVer = script.GetNumber();
 
-                    if (scanner.EndOfStream) break;
+                    if (script.EndOfStream) break;
 
-                    string dwId = scanner.GetToken();
-                    string dwMotion = scanner.GetToken();
-                    scanner.GetToken(); // ""
-                    string szIconName = scanner.GetToken();
-                    scanner.GetToken(); // ""
-                    int dwPlay = scanner.GetNumber();
-                    string szName = scanner.GetToken();
-                    string szDesc = scanner.GetToken();
+                    int dwId = script.GetNumber();
+                    int dwMotion = script.GetNumber();
+                    script.GetToken(); // ""
+                    string szIconName = script.GetToken();
+                    script.GetToken(); // ""
+                    int dwPlay = script.GetNumber();
+                    string szName = script.GetToken();
+                    string szDesc = script.GetToken();
 
                     Motion motion = new(nVer, dwId, dwMotion, szIconName, dwPlay, szName, szDesc);
                     this.Motions.Add(motion);

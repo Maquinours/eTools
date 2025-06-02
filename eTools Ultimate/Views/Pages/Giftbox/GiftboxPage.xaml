@@ -90,7 +90,7 @@
                     <TextBlock Text="{Binding Item.Name}"
                             FontWeight="SemiBold"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                    <TextBlock Text="{Binding Item.Id}" 
+                    <TextBlock Text="{Binding Item.Identifier}" 
                             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                             FontSize="12"/>
                 </StackPanel>
@@ -334,7 +334,7 @@
                                                 FontWeight="SemiBold"
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
                                             <TextBlock
-                                                Text="{Binding Item.Id}"
+                                                Text="{Binding Item.Identifier}"
                                                 Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                                 FontSize="12"/>
                                         </StackPanel>

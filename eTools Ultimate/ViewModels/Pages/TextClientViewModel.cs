@@ -79,7 +79,8 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (obj is not Text text) return false;
             if (string.IsNullOrEmpty(this.SearchText)) return true;
-            return text.Name.ToLower().Contains(this.SearchText.ToLower()) || text.DwId.ToLower().Contains(this.SearchText.ToLower());
+            return text.Name.Contains(this.SearchText, StringComparison.OrdinalIgnoreCase)
+                || DefinesService.Instance.Defines.FirstOrDefault(x => x.Key.StartsWith("TID_") && x.Value == text.DwId).Key.Contains(this.SearchText, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

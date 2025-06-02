@@ -7,7 +7,7 @@ using System.Windows.Interop;
 
 namespace eTools_Ultimate.Helpers
 {
-    class D3DImageHost : D3DImage, IDisposable
+    public class D3DImageHost : D3DImage, IDisposable
     {
         public IntPtr _surfacePointer;
         public IntPtr _native;

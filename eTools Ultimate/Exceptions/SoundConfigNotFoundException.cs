@@ -8,7 +8,7 @@ namespace eTools_Ultimate.Exceptions
 {
     public class SoundConfigNotFoundException : Exception
     {
-        public SoundConfigNotFoundException(string id)
+        public SoundConfigNotFoundException(int id)
             :
             base(string.Format(Resources.ExceptionMessages.SoundConfigNotFound, id))
         { }

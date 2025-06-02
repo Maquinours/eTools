@@ -18,14 +18,14 @@ namespace eTools_Ultimate.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private string _dwItem;
+        private int _dwItem;
         private int _dwProbability;
         private int _nNum;
         private int _nFlag;
         private int _nSpan;
         private int _nAbilityOption;
 
-        public string DwItem
+        public int DwItem
         {
             get => this._dwItem;
             set
@@ -108,7 +108,7 @@ namespace eTools_Ultimate.Models
 
         public double ProbabilityPercent => Math.Round(this.DwProbability / 1_000_000d * 100, 2);
 
-        public GiftBoxItem(string dwItem, int dwProbability, int nNum, int nFlag = 0, int nSpan = 0, int nAbilityOption = 0)
+        public GiftBoxItem(int dwItem, int dwProbability, int nNum, int nFlag = 0, int nSpan = 0, int nAbilityOption = 0)
         {
             this._dwItem = dwItem;
             this._dwProbability = dwProbability;
@@ -135,10 +135,10 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        private string _dwItem;
+        private int _dwItem;
         private List<GiftBoxItem> _items = new();
 
-        public string DwItem
+        public int DwItem
         {
             get => this._dwItem;
             set
@@ -161,7 +161,7 @@ namespace eTools_Ultimate.Models
         public int TotalProbability => this.Items.Sum(x => x.DwProbability);
         public double TotalProbabilityPercent => Math.Round(this.TotalProbability / 1_000_000d * 100, 2);
 
-        public GiftBox(string dwItem, List<GiftBoxItem> items)
+        public GiftBox(int dwItem, List<GiftBoxItem> items)
         {
             this._dwItem = dwItem;
             this._items = items;

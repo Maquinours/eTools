@@ -1,4 +1,5 @@
-﻿using eTools_Ultimate.Models;
+﻿using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models;
 using Scan;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace eTools_Ultimate.Services
             Settings settings = Settings.Instance;
             StringsService stringsService = StringsService.Instance;
 
-            using (Scanner scanner = new Scanner())
+            using (Script scanner = new())
             {
                 string filePath = settings.HonorsPropFilePath ?? settings.DefaultHonorsPropFilePath;
                 scanner.Load(filePath);
@@ -40,8 +41,8 @@ namespace eTools_Ultimate.Services
                     int nId = scanner.GetNumber();
                     if (scanner.EndOfStream) break;
 
-                    string nLGrouping = scanner.GetToken(); // Category
-                    string nSGrouping = scanner.GetToken(); // Subcategory
+                    int nLGrouping = scanner.GetNumber(); // Category
+                    int nSGrouping = scanner.GetNumber(); // Subcategory
                     int nNeed = scanner.GetNumber(); // Value
                     string strTitle = scanner.GetToken(); // Name
 

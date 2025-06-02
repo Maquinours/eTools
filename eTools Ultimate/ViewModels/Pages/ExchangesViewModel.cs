@@ -80,7 +80,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (obj is not Exchange exchange) return false;
             if (string.IsNullOrEmpty(this.SearchText)) return true;
-            return exchange.MmiId.ToLower().Contains(this.SearchText.ToLower());
+            return DefinesService.Instance.Defines.FirstOrDefault(x => x.Key.StartsWith("MMI_") && x.Value == exchange.MmiId).Key.Contains(this.SearchText, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

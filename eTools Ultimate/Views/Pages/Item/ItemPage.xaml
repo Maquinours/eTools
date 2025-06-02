@@ -91,9 +91,12 @@
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <TextBox Grid.Row="1"
+                        <ui:AutoSuggestBox Grid.Row="1"
                                 x:Name="ItemIdTextBox"
-                                 Text="{Binding Path=Prop.DwId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                 Text="{Binding Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                                 OriginalItemsSource="{Binding Path=ViewModel.ItemIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                                 DisplayMemberPath="Value"
+                                  />
                     </Grid>
                     <!-- In-game name (IDS key) -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -1556,7 +1559,7 @@
                     <TextBlock Text="{Binding Name}"
                             FontWeight="SemiBold"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                    <TextBlock Text="{Binding Id}"
+                    <TextBlock Text="{Binding Identifier}"
                             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                             FontSize="12"/>
                 </StackPanel>

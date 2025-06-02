@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using eTools_Ultimate.Exceptions;
 using System.Numerics;
+using eTools_Ultimate.Helpers;
 
 namespace eTools_Ultimate.Services
 {
@@ -24,14 +25,14 @@ namespace eTools_Ultimate.Services
             // Maybe make it a settings property
             string filePath = Settings.Instance.CharactersConfigFilePath ?? Settings.Instance.DefaultCharactersConfigFilePath;
 
-            using (Scanner scanner = new Scanner())
+            using (Script script = new())
             {
-                scanner.Load(filePath);
+                script.Load(filePath);
                 while(true)
                 {
-                    string id = scanner.GetToken();
+                    string id = script.GetToken();
 
-                    if (scanner.EndOfStream) break;
+                    if (script.EndOfStream) break;
 
                     string name = string.Empty;
                     List<CharacterEquip> equips = new();
@@ -43,13 +44,13 @@ namespace eTools_Ultimate.Services
                     string? szDlgQuest = null;
                     bool bOutput = true;
 
-                    scanner.GetToken(); // {
+                    script.GetToken(); // {
                     int nBlock = 1;
                     while(nBlock != 0)
                     {
-                        if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+                        if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
-                        string token = scanner.GetToken();
+                        string token = script.GetToken();
 
                         switch(token)
                         {
@@ -64,14 +65,14 @@ namespace eTools_Ultimate.Services
                                 break;
                             case "SetEquip":
                                 {
-                                    scanner.GetToken(); // (
-                                    while (scanner.Token != ")")
+                                    script.GetToken(); // (
+                                    while (script.Token != ")")
                                     {
-                                        if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+                                        if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
-                                        string dwEquip = scanner.GetToken();
+                                        int dwEquip = script.GetNumber();
 
-                                        scanner.GetToken(); // ,
+                                        script.GetToken(); // ,
 
                                         CharacterEquip equip = new(dwEquip);
                                         equips.Add(equip);
@@ -80,229 +81,229 @@ namespace eTools_Ultimate.Services
                                 }
                             case "m_szName":
                                 {
-                                    scanner.GetToken(); // =
-                                    name = scanner.GetToken();
+                                    script.GetToken(); // =
+                                    name = script.GetToken();
                                     break;
                                 }
                             case "SetName":
                                 {
-                                    scanner.GetToken(); // (
-                                    name = scanner.GetToken();
-                                    scanner.GetToken(); // )
-                                    scanner.GetToken(); // ;
+                                    script.GetToken(); // (
+                                    name = script.GetToken();
+                                    script.GetToken(); // )
+                                    script.GetToken(); // ;
                                     break;
                                 }
                             case "SetFigure":
                                 {
-                                    scanner.GetToken(); // (
-                                    string moverIdx = scanner.GetToken();
-                                    scanner.GetToken(); // ,
-                                    int hairMesh = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    string hairColor = scanner.GetToken();
-                                    scanner.GetToken(); // ,
-                                    int headMesh = scanner.GetNumber();
+                                    script.GetToken(); // (
+                                    int moverIdx = script.GetNumber();
+                                    script.GetToken(); // ,
+                                    int hairMesh = script.GetNumber();
+                                    script.GetToken(); // ,
+                                    int hairColor = script.GetNumber();
+                                    script.GetToken(); // ,
+                                    int headMesh = script.GetNumber();
                                     figure = new(moverIdx, hairMesh, hairColor, headMesh);
                                     // Should do more but flyff client is not doing it
                                     break;
                                 }
                             case "SetMusic":
                                 {
-                                    scanner.GetToken(); // (
-                                    string musicId = scanner.GetToken();
+                                    script.GetToken(); // (
+                                    int musicId = script.GetNumber();
                                     music = new CharacterMusic(musicId);
                                     // Should do more but flyff client is not doing it
                                     break;
                                 }
                             case "m_nStructure":
                                 {
-                                    scanner.GetToken(); // =
-                                    structure = scanner.GetToken();
+                                    script.GetToken(); // =
+                                    structure = script.GetToken();
                                     // Should do more but flyff client is not doing it
                                     break;
                                 }
                             case "m_szChar":
                                 {
-                                    scanner.GetToken(); // (
-                                    szChar = scanner.GetToken();
-                                    scanner.GetToken(); // )
-                                    scanner.GetToken(); // ;
+                                    script.GetToken(); // (
+                                    szChar = script.GetToken();
+                                    script.GetToken(); // )
+                                    script.GetToken(); // ;
                                     break;
                                 }
                             case "m_szDialog":
                                 {
-                                    scanner.GetToken(); // =
-                                    szDialog = scanner.GetToken();
+                                    script.GetToken(); // =
+                                    szDialog = script.GetToken();
                                     break;
                                 }
                             case "m_szDlgQuest":
                                 {
-                                    scanner.GetToken(); // =
-                                    szDlgQuest = scanner.GetToken();
+                                    script.GetToken(); // =
+                                    szDlgQuest = script.GetToken();
                                     break;
                                 }
                             case "SetImage":
                                 {
-                                    scanner.GetToken(); // (
-                                    szChar = scanner.GetToken();
-                                    scanner.GetToken(); // )
-                                    scanner.GetToken(); // ;
+                                    script.GetToken(); // (
+                                    szChar = script.GetToken();
+                                    script.GetToken(); // )
+                                    script.GetToken(); // ;
                                     break;
                                 }
                             case "AddMenuLang":
                                 {
-                                    scanner.GetToken(); // (
-                                    string lang = scanner.GetToken();
-                                    scanner.GetToken(); // ,
-                                    string mmi = scanner.GetToken();
-                                    scanner.GetToken(); // )
+                                    script.GetToken(); // (
+                                    string lang = script.GetToken();
+                                    script.GetToken(); // ,
+                                    string mmi = script.GetToken();
+                                    script.GetToken(); // )
                                     // TODO : add to character
                                     break;
                                 }
                             case "AddMenu":
                                 {
-                                    scanner.GetToken(); // (
-                                    string mmi = scanner.GetToken();
-                                    scanner.GetToken(); // )
+                                    script.GetToken(); // (
+                                    string mmi = script.GetToken();
+                                    script.GetToken(); // )
                                     // TODO : add to character
                                     break;
                                 }
                             case "AddVenderSlot":
                                 {
-                                    scanner.GetToken(); // (
-                                    int slotNumber = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    string slotName = scanner.GetToken();
-                                    scanner.GetToken(); // )
+                                    script.GetToken(); // (
+                                    int slotNumber = script.GetNumber();
+                                    script.GetToken(); // ,
+                                    string slotName = script.GetToken();
+                                    script.GetToken(); // )
                                     // TODO : add to character
                                     break;
                                 }
                             case "AddVendorSlot":
                                 {
-                                    scanner.GetToken(); // (
-                                    int slotNumber = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    string slotName = scanner.GetToken();
-                                    scanner.GetToken(); // )
-                                    scanner.GetToken(); // ;
+                                    script.GetToken(); // (
+                                    int slotNumber = script.GetNumber();
+                                    script.GetToken(); // ,
+                                    string slotName = script.GetToken();
+                                    script.GetToken(); // )
+                                    script.GetToken(); // ;
                                     // TODO : add to character
                                     break;
                                 }
                             case "AddVendorSlotLang":
                                 {
-                                    scanner.GetToken(); // (
-                                    string lang = scanner.GetToken();
-                                    scanner.GetToken(); // ,
-                                    int slotNumber = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    string slotName = scanner.GetToken();
-                                    scanner.GetToken(); // )
-                                    scanner.GetToken(); // ;
+                                    script.GetToken(); // (
+                                    string lang = script.GetToken();
+                                    script.GetToken(); // ,
+                                    int slotNumber = script.GetNumber();
+                                    script.GetToken(); // ,
+                                    string slotName = script.GetToken();
+                                    script.GetToken(); // )
+                                    script.GetToken(); // ;
                                     // TODO : add to character
                                     break;
                                 }
                             case "AddVendorItemLang":
                                 {
-                                    scanner.GetToken(); // (
-                                    string lang = scanner.GetToken();
-                                    scanner.GetToken(); // ,
-                                    int slot = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    string ik3 = scanner.GetToken();
-                                    scanner.GetToken(); // ,
-                                    string job = scanner.GetToken();
-                                    scanner.GetToken(); // ,
-                                    int uniqueMin = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    int uniqueMax = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    int totalNum = scanner.GetNumber();
+                                    script.GetToken(); // (
+                                    string lang = script.GetToken();
+                                    script.GetToken(); // ,
+                                    int slot = script.GetNumber();
+                                    script.GetToken(); // ,
+                                    string ik3 = script.GetToken();
+                                    script.GetToken(); // ,
+                                    string job = script.GetToken();
+                                    script.GetToken(); // ,
+                                    int uniqueMin = script.GetNumber();
+                                    script.GetToken(); // ,
+                                    int uniqueMax = script.GetNumber();
+                                    script.GetToken(); // ,
+                                    int totalNum = script.GetNumber();
                                     // TODO : add to character
                                     break;
                                 }
                             case "AddVenderItem":
                             case "AddVendorItem":
                                 {
-                                    scanner.GetToken(); // (
-                                    int slot = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    string ik3 = scanner.GetToken();
-                                    scanner.GetToken(); // ,
-                                    string job = scanner.GetToken();
-                                    scanner.GetToken(); // ,
-                                    int uniqueMin = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    int uniqueMax = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    int totalNum = scanner.GetNumber();
+                                    script.GetToken(); // (
+                                    int slot = script.GetNumber();
+                                    script.GetToken(); // ,
+                                    string ik3 = script.GetToken();
+                                    script.GetToken(); // ,
+                                    string job = script.GetToken();
+                                    script.GetToken(); // ,
+                                    int uniqueMin = script.GetNumber();
+                                    script.GetToken(); // ,
+                                    int uniqueMax = script.GetNumber();
+                                    script.GetToken(); // ,
+                                    int totalNum = script.GetNumber();
                                     // TODO : add to character
                                     break;
                                 }
                             case "AddVenderItem2":
                             case "AddVendorItem2":
                                 {
-                                    scanner.GetToken(); // (
-                                    int slot = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    string itemId = scanner.GetToken();
-                                    scanner.GetToken(); // )
+                                    script.GetToken(); // (
+                                    int slot = script.GetNumber();
+                                    script.GetToken(); // ,
+                                    string itemId = script.GetToken();
+                                    script.GetToken(); // )
                                     // TODO : add to character
                                     break;
                                 }
                             case "SetVenderType":
                                 {
-                                    scanner.GetToken(); // (
-                                    int venderType = scanner.GetNumber();
-                                    scanner.GetToken(); // )
+                                    script.GetToken(); // (
+                                    int venderType = script.GetNumber();
+                                    script.GetToken(); // )
                                     // TODO : add to character
                                     break;
                                 }
                             case "SetBuffSkill":
                                 {
-                                    scanner.GetToken(); // (
-                                    string skillId = scanner.GetToken();
-                                    scanner.GetToken(); // ,
-                                    int skillLevel = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    int minPlayerLevel = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    int maxPlayerLevel = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    int skillTime = scanner.GetNumber();
-                                    scanner.GetToken(); // )
+                                    script.GetToken(); // (
+                                    string skillId = script.GetToken();
+                                    script.GetToken(); // ,
+                                    int skillLevel = script.GetNumber();
+                                    script.GetToken(); // ,
+                                    int minPlayerLevel = script.GetNumber();
+                                    script.GetToken(); // ,
+                                    int maxPlayerLevel = script.GetNumber();
+                                    script.GetToken(); // ,
+                                    int skillTime = script.GetNumber();
+                                    script.GetToken(); // )
                                     // TODO : add to character
                                     break;
                                 }
                             case "SetLang":
                                 {
-                                    scanner.GetToken(); // (
-                                    string lang = scanner.GetToken();
-                                    scanner.GetToken(); // ) or ,
+                                    script.GetToken(); // (
+                                    string lang = script.GetToken();
+                                    script.GetToken(); // ) or ,
                                     string subLang = "LANG_KOR";
-                                    if (scanner.Token == ",")
-                                        subLang = scanner.GetToken();
+                                    if (script.Token == ",")
+                                        subLang = script.GetToken();
                                     else
-                                        scanner.GetToken(); // )
+                                        script.GetToken(); // )
                                     // TODO : add to character
                                     break;
                                 }
                             case "SetOutput":
                                 {
-                                    scanner.GetToken(); // (
-                                    if (scanner.GetToken().ToUpper() == "FALSE")
+                                    script.GetToken(); // (
+                                    if (script.GetToken().ToUpper() == "FALSE")
                                         bOutput = false;
-                                    scanner.GetToken(); // )
+                                    script.GetToken(); // )
                                     break;
                                 }
                             case "AddTeleport":
                                 {
-                                    scanner.GetToken(); // (
-                                    float x = scanner.GetFloat();
-                                    scanner.GetToken(); // ,
-                                    float y = scanner.GetFloat();
-                                    scanner.GetToken(); // ,
-                                    float z = scanner.GetFloat();
-                                    scanner.GetToken(); // )
+                                    script.GetToken(); // (
+                                    float x = script.GetFloat();
+                                    script.GetToken(); // ,
+                                    float y = script.GetFloat();
+                                    script.GetToken(); // ,
+                                    float z = script.GetFloat();
+                                    script.GetToken(); // )
                                     // TODO : add to character
                                     break;
                                 }

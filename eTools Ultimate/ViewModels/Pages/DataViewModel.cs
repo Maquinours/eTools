@@ -20,6 +20,8 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         private ICollectionView _itemsView = CollectionViewSource.GetDefaultView(ItemsService.Instance.Items);
 
+        public List<KeyValuePair<int, string>> ItemIdentifiers => DefinesService.Instance.ReversedItemDefines.ToList();
+
         public string SearchText
         {
             get => _searchText;
@@ -76,7 +78,9 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (obj is not Item item) return false;
             if (string.IsNullOrEmpty(this.SearchText)) return true;
             string lowerSearch = this.SearchText.ToLower();
-            return item.Name.ToLower().Contains(lowerSearch) || item.Id.ToLower().Contains(lowerSearch);
+            return item.Name.Contains(lowerSearch, StringComparison.OrdinalIgnoreCase)
+                //|| DefinesService.Instance.Defines.FirstOrDefault(x => x.Key.StartsWith("II_") && x.Value == item.Id).Key.Contains(lowerSearch, StringComparison.OrdinalIgnoreCase)
+                ;
         }
     }
 }
