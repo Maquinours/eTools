@@ -31,12 +31,15 @@ namespace eTools_Ultimate.Views.Pages
 
         private void MoversListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Diese Methode wird aufgerufen, wenn die Auswahl in der ListView geändert wird
-            if (e.AddedItems.Count > 0)
-            {
-                var selectedItem = e.AddedItems[0];
-                // Hier kann die Logik implementiert werden, um die Details des ausgewählten Items anzuzeigen
-            }
+            if(MoversListView.SelectedItem == null && MoversListView.Items.Count > 0)
+                MoversListView.SelectedIndex = 0;
+
+            //// Diese Methode wird aufgerufen, wenn die Auswahl in der ListView geändert wird
+            //if (e.AddedItems.Count > 0)
+            //{
+            //    var selectedItem = e.AddedItems[0];
+            //    // Hier kann die Logik implementiert werden, um die Details des ausgewählten Items anzuzeigen
+            //}
         }
 
         private void AddButton_Click(object sender, System.Windows.RoutedEventArgs e)

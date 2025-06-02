@@ -1405,7 +1405,8 @@
                           Background="Transparent"
                           ItemTemplate="{StaticResource MoverItemTemplate}"
                           ItemsSource="{Binding MoversView}"
-                          IsSynchronizedWithCurrentItem="True">
+                          IsSynchronizedWithCurrentItem="True"
+                          SelectionChanged="MoversListView_SelectionChanged">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Background"

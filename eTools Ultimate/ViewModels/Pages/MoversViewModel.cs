@@ -258,6 +258,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             //CompositionTarget.Rendering -= CompositionTarget_Rendering;
             Auto3DRendering = false;
             NativeMethods.LoadModel(D3dHost._native, mover.Model.Model3DFilePath);
+            // TODO: Add a reset method to handle ListView unselection.
 
             SetModelTexture();
             SetScale();
@@ -372,9 +373,11 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private void CurrentMover_Changed(object? sender, EventArgs e)
         {
-            if (MoversView.CurrentItem is not Mover mover) return;
-            mover.PropertyChanged += CurrentMover_PropertyChanged;
-            mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
+            if (MoversView.CurrentItem is Mover mover)
+            {
+                mover.PropertyChanged += CurrentMover_PropertyChanged;
+                mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
+            }
 
             OnPropertyChanged(nameof(ModelTexturesPossibilities));
             OnPropertyChanged(nameof(ModelMotionFilePossibilities));
