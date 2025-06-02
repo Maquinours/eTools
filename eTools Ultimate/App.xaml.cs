@@ -43,6 +43,9 @@ namespace eTools_Ultimate
                 // Service containing navigation, same as INavigationWindow... but without window
                 services.AddSingleton<INavigationService, NavigationService>();
 
+                // Service for handling content dialogs
+                services.AddSingleton<IContentDialogService, ContentDialogService>();
+
                 // Main window with navigation
                 services.AddSingleton<INavigationWindow, MainWindow>();
                 services.AddSingleton<MainWindowViewModel>();

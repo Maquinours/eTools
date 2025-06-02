@@ -1808,7 +1808,8 @@
                                                    HorizontalAlignment="Right"
                                                    VerticalAlignment="Top"
                                                    Margin="0,5,5,0"
-                                                   Panel.ZIndex="1">
+                                                   Panel.ZIndex="1"
+                                                   Command="{Binding ViewModel.ShowReferenceModelContentDialogCommand}">
                                             <ui:SymbolIcon Symbol="ImageReflection24"/>
                                         </ui:Button>
                                     </Grid>

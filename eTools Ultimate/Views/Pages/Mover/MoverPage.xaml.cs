@@ -10,6 +10,7 @@ using eTools_Ultimate.Models;
 using System.Runtime.InteropServices;
 using eTools_Ultimate.Services;
 using System.IO;
+using eTools_Ultimate.Views.Dialogs;
 
 namespace eTools_Ultimate.Views.Pages
 {

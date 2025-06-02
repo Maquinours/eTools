@@ -1,6 +1,7 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
+using eTools_Ultimate.Views.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,11 +14,12 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.TextFormatting;
+using Wpf.Ui;
 using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class MoversViewModel : ObservableObject, INavigationAware
+    public partial class MoversViewModel(IContentDialogService contentDialogService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -280,6 +282,14 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             OnPropertyChanged(nameof(ModelMotionFilePossibilities));
             InitializeMotionsDirectoryWatcherPath();
+        }
+
+        [RelayCommand]
+        private async Task ShowReferenceModelContentDialog()
+        {
+            var referenceModelContentDialog = new MoverReferenceModelDialog(contentDialogService.GetDialogHost());
+
+            _ = await referenceModelContentDialog.ShowAsync();
         }
     }
 }
