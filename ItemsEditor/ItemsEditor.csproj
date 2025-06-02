@@ -122,6 +122,48 @@
     <Compile Include="SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="WorldForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WorldForm.Designer.cs">
+      <DependentUpon>WorldForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TicketForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TicketForm.Designer.cs">
+      <DependentUpon>TicketForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TerrainObjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TerrainObjectForm.Designer.cs">
+      <DependentUpon>TerrainObjectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="JobForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="JobForm.Designer.cs">
+      <DependentUpon>JobForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PackitemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PackitemForm.Designer.cs">
+      <DependentUpon>PackitemForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LordForm.Designer.cs">
+      <DependentUpon>LordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DropEventForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DropEventForm.Designer.cs">
+      <DependentUpon>DropEventForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="ExpertEditorForm.resx">
       <DependentUpon>ExpertEditorForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -168,7 +210,7 @@
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.8 %28x86 et x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 et x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

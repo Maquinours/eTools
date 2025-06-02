@@ -10,6 +10,13 @@ using Wpf.Ui;
 using System.Windows.Controls;
 using System.Windows.Media;
 using eTools_Ultimate.Views.Windows;
+using eTools_Ultimate.Views.Pages.World;
+using eTools_Ultimate.Views.Pages.Ticket;
+using eTools_Ultimate.Views.Pages.TerrainObject;
+using eTools_Ultimate.Views.Pages.Job;
+using eTools_Ultimate.Views.Pages.Packitem;
+using eTools_Ultimate.Views.Pages.Lord;
+using eTools_Ultimate.Views.Pages.DropEvent;
 
 namespace eTools_Ultimate.Views.Pages
 {
@@ -50,6 +57,16 @@ namespace eTools_Ultimate.Views.Pages
             NavigationCards.Add(new NavigationCard("Couple", "Navigate to the couple page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_8.png", typeof(CouplePage)));
             NavigationCards.Add(new NavigationCard("Motions", "Navigate to the motions page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_13.png", typeof(Motion.MotionPage)));
             NavigationCards.Add(new NavigationCard("Text Client", "Navigate to the text client.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_7.png", typeof(TextClientPage)));
+            
+            // Neue Navigationskarten
+            NavigationCards.Add(new NavigationCard("World", "Navigate to the world editor.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_15.png", typeof(WorldPage)));
+            NavigationCards.Add(new NavigationCard("Ticket", "Navigate to the ticket editor.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_16.png", typeof(TicketPage)));
+            NavigationCards.Add(new NavigationCard("Terrain/Object", "Navigate to the terrain/object editor.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_17.png", typeof(TerrainObjectPage)));
+            NavigationCards.Add(new NavigationCard("Job", "Navigate to the job editor.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_18.png", typeof(JobPage)));
+            NavigationCards.Add(new NavigationCard("Packitem", "Navigate to the packitem editor.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_19.png", typeof(PackitemPage)));
+            NavigationCards.Add(new NavigationCard("Lord", "Navigate to the lord editor.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_20.png", typeof(LordPage)));
+            NavigationCards.Add(new NavigationCard("Drop Event", "Navigate to the drop event editor.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_21.png", typeof(DropEventPage)));
+            
             NavigationCards.Add(new NavigationCard("Settings", "Navigate to the settings page.", "/eTools Ultimate;component/Views/Pages/Home/Icons/Icon_11.png", typeof(SettingsPage)));
         }
         

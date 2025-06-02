@@ -765,5 +765,61 @@ namespace ItemsEditor
             cbBuffBeadStatType.DataBindings.Add(new Binding(nameof(ComboBox.Text), dst, nameof(Dest.Param), false, DataSourceUpdateMode.OnPropertyChanged));
             nudBuffBeadStatValue.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), dst, nameof(Dest.Value), false, DataSourceUpdateMode.OnPropertyChanged));
         }
+
+        private void tsmiWorldEditor_Click(object sender, EventArgs e)
+        {
+            using (var form = new WorldForm())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void tsmiTicketEditor_Click(object sender, EventArgs e)
+        {
+            using (var form = new TicketForm())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void tsmiTerrainObjectEditor_Click(object sender, EventArgs e)
+        {
+            using (var form = new TerrainObjectForm())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void tsmiJobEditor_Click(object sender, EventArgs e)
+        {
+            using (var form = new JobForm())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void tsmiPackitemEditor_Click(object sender, EventArgs e)
+        {
+            using (var form = new PackitemForm())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void tsmiLordEditor_Click(object sender, EventArgs e)
+        {
+            using (var form = new LordForm())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void tsmiDropEventEditor_Click(object sender, EventArgs e)
+        {
+            using (var form = new DropEventForm())
+            {
+                form.ShowDialog();
+            }
+        }
     }
 }

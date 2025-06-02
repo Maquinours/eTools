@@ -4,6 +4,13 @@ using eTools_Ultimate.ViewModels.Windows;
 using eTools_Ultimate.Views.Pages;
 using eTools_Ultimate.Views.Pages.Motion;
 using eTools_Ultimate.Views.Windows;
+using eTools_Ultimate.Views.Pages.World;
+using eTools_Ultimate.Views.Pages.Ticket;
+using eTools_Ultimate.Views.Pages.TerrainObject;
+using eTools_Ultimate.Views.Pages.Job;
+using eTools_Ultimate.Views.Pages.Packitem;
+using eTools_Ultimate.Views.Pages.Lord;
+using eTools_Ultimate.Views.Pages.DropEvent;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -75,6 +82,15 @@ namespace eTools_Ultimate
                 services.AddSingleton<MotionsViewModel>();
                 services.AddSingleton<HonorsViewModel>();
                 services.AddSingleton<AccessoriesViewModel>();
+
+                // Neue Seiten
+                services.AddSingleton<WorldPage>();
+                services.AddSingleton<TicketPage>();
+                services.AddSingleton<TerrainObjectPage>();
+                services.AddSingleton<JobPage>();
+                services.AddSingleton<PackitemPage>();
+                services.AddSingleton<LordPage>();
+                services.AddSingleton<DropEventPage>();
 
                 // Settings pages
                 services.AddSingleton<SettingsPage>();
