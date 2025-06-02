@@ -110,13 +110,36 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
+        public string[] ModelMotionFilePossibilities
+        {
+            get
+            {
+                Settings settings = Settings.Instance;
+                string modelsFolderPath = settings.ModelsFolderPath ?? settings.DefaultModelsFolderPath;
+                if (string.IsNullOrEmpty(modelsFolderPath) || !Directory.Exists(modelsFolderPath))
+                    return [];
+                if (MoversView.CurrentItem is not Mover mover)
+                    return [];
+                string root = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
+                return [.. Directory.GetFiles(modelsFolderPath, $"{root}_*.ani", SearchOption.TopDirectoryOnly).Select(x => Path.GetFileNameWithoutExtension(x).Substring($"{root}_".Length))];
+            }
+        }
+
         public List<KeyValuePair<int, string>> MoverIdentifiers => DefinesService.Instance.ReversedMoverDefines.ToList();
         public List<KeyValuePair<int, string>> BelligerenceIdentifiers => DefinesService.Instance.ReversedBelligerenceDefines.ToList();
         public List<KeyValuePair<int, string>> AiIdentifiers => DefinesService.Instance.ReversedAiDefines.ToList();
+        public List<KeyValuePair<int, string>> MotionIdentifiers => DefinesService.Instance.ReversedMotionTypeDefines.ToList();
 
         private FileSystemWatcher _modelsDirectoryWatcher = new()
         {
             Filter = "mvr_*.o3d",
+            NotifyFilter = NotifyFilters.FileName,
+            IncludeSubdirectories = false,
+            EnableRaisingEvents = false
+        };
+
+        private FileSystemWatcher _motionDirectoryWatcher = new()
+        {
             NotifyFilter = NotifyFilters.FileName,
             IncludeSubdirectories = false,
             EnableRaisingEvents = false
@@ -183,6 +206,11 @@ namespace eTools_Ultimate.ViewModels.Pages
             this._modelsDirectoryWatcher.Deleted += (sender, e) => OnPropertyChanged(nameof(ModelFilePossibilities));
             InitializeModelsDirectoryWatcherPath();
 
+            this._motionDirectoryWatcher.Renamed += (sender, e) => OnPropertyChanged(nameof(ModelMotionFilePossibilities));
+            this._motionDirectoryWatcher.Created += (sender, e) => OnPropertyChanged(nameof(ModelMotionFilePossibilities));
+            this._motionDirectoryWatcher.Deleted += (sender, e) => OnPropertyChanged(nameof(ModelMotionFilePossibilities));
+            InitializeMotionsDirectoryWatcherPath();
+
             this._texturesDirectoryWatcher.Renamed += OnTextureFileChanged;
             this._texturesDirectoryWatcher.Created += OnTextureFileChanged;
             this._texturesDirectoryWatcher.Deleted += OnTextureFileChanged;
@@ -203,6 +231,17 @@ namespace eTools_Ultimate.ViewModels.Pages
             this._texturesDirectoryWatcher.EnableRaisingEvents = false;
             this._texturesDirectoryWatcher.Path = Settings.Instance.TexturesFolderPath ?? Settings.Instance.DefaultTexturesFolderPath;
             this._texturesDirectoryWatcher.EnableRaisingEvents = true;
+        }
+
+        private void InitializeMotionsDirectoryWatcherPath()
+        {
+            this._motionDirectoryWatcher.EnableRaisingEvents = false;
+            if (MoversView.CurrentItem is not Mover mover) return;
+            string? prefix = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
+            if (prefix is null) return;
+            this._motionDirectoryWatcher.Path = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+            this._motionDirectoryWatcher.Filter = $"{prefix}_*.ani";
+            this._motionDirectoryWatcher.EnableRaisingEvents = true;
         }
 
         private void OnTextureFileChanged(object sender, FileSystemEventArgs e)
@@ -236,6 +275,11 @@ namespace eTools_Ultimate.ViewModels.Pages
         public void UpdateModelTexturesPossibilities()
         {
             OnPropertyChanged(nameof(ModelTexturesPossibilities));
+        }
+        public void UpdateModelMotionFilePossibilities()
+        {
+            OnPropertyChanged(nameof(ModelMotionFilePossibilities));
+            InitializeMotionsDirectoryWatcherPath();
         }
     }
 }

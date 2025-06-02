@@ -16,6 +16,12 @@ namespace eTools_Ultimate.Models
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            switch(propertyName)
+            {
+                case nameof(this.IMotion):
+                    this.NotifyPropertyChanged(nameof(this.MotionTypeIdentifier));
+                    break;
+            }
         }
 
         private string _szMotion;

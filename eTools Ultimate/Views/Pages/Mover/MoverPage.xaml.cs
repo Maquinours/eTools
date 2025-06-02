@@ -313,6 +313,7 @@ namespace eTools_Ultimate.Views.Pages
         private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
         {
             ViewModel.UpdateModelTexturesPossibilities();
+            ViewModel.UpdateModelMotionFilePossibilities();
         }
     }
 } 

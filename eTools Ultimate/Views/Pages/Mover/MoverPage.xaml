@@ -1873,8 +1873,8 @@
                                     <!-- Motion Key -->
                                     <Grid Style="{StaticResource FormFieldStyle}">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="32"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
                                         <StackPanel Grid.Row="0"
                                                 Orientation="Horizontal">
@@ -1887,16 +1887,17 @@
                                                 </ui:SymbolIcon.ToolTip>
                                             </ui:SymbolIcon>
                                         </StackPanel>
-                                        <TextBox Grid.Row="1"
-                                                 Height="32"
-                                                 Style="{StaticResource AppTextBoxStyle}"/>
+                                        <ui:AutoSuggestBox Grid.Row="1"
+                                                 OriginalItemsSource="{Binding ViewModel.MotionIdentifiers, Mode=OneWay}"
+                                                 DisplayMemberPath="Value"
+                                                 Text="{Binding Path=SelectedItem.MotionTypeIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ElementName=MotionsListView}"/>
                                     </Grid>
 
                                     <!-- Motion File -->
                                     <Grid Style="{StaticResource FormFieldStyle}">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="32"/>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="*"/>
                                         </Grid.RowDefinitions>
                                         <StackPanel Grid.Row="0"
                                                 Orientation="Horizontal">
@@ -1909,15 +1910,14 @@
                                                 </ui:SymbolIcon.ToolTip>
                                             </ui:SymbolIcon>
                                         </StackPanel>
-                                        <Grid Grid.Row="1"
-                                                Height="32">
+                                        <Grid Grid.Row="1">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="Auto"/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBox Grid.Column="0"
-                                                     Style="{StaticResource AppTextBoxStyle}"
-                                                     Height="32"/>
+                                            <ui:AutoSuggestBox Grid.Column="0"
+                                                     OriginalItemsSource="{Binding ViewModel.ModelMotionFilePossibilities, Mode=OneWay}"
+                                                     Text="{Binding Path=SelectedItem.SzMotion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=MotionsListView}" />
                                             <ui:Button Grid.Column="1"
                                                        Content="..."
                                                        Width="30"
@@ -1957,7 +1957,8 @@
                                         </Grid.ColumnDefinitions>
                                         <ui:AutoSuggestBox Grid.Column="0"
                                                            Text="{Binding ViewModel.MoversView.CurrentItem.Model.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                           OriginalItemsSource="{Binding ViewModel.ModelFilePossibilities, Mode=OneWay}"/>
+                                                           OriginalItemsSource="{Binding ViewModel.ModelFilePossibilities, Mode=OneWay}"
+                                                           TextChanged="AutoSuggestBox_TextChanged" />
                                         <ui:Button Grid.Column="1"
                                                    Content="..."
                                                    Width="30"
