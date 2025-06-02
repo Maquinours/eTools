@@ -1,4 +1,5 @@
-﻿using eTools_Ultimate.Services;
+﻿using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -12,12 +13,17 @@ namespace eTools_Ultimate.Models
 {
     public class MoverProp : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        private void NotifyPropertyChanged<T>(string propertyName, T oldValue, T newValue)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedExtendedEventArgs(propertyName, oldValue, newValue));
         }
+
+        //private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //}
 
         private int _dwId;
         private string _szName;
@@ -106,7 +112,7 @@ namespace eTools_Ultimate.Models
         private string _szNpcMark;
         private int _dwMadrigalGiftPoint;
 
-        public int DwId { get => _dwId; set { if (_dwId != value) { _dwId = value; NotifyPropertyChanged(); } } }
+        public int DwId { get => _dwId; set => SetValue(ref this._dwId, value); }
         public string SzName
         {
             get => _szName;
@@ -114,111 +120,130 @@ namespace eTools_Ultimate.Models
             {
                 if (_szName != value)
                 {
+                    string oldValue = this._szName;
                     StringsService stringsService = StringsService.Instance;
                     if (!stringsService.Strings.ContainsKey(value))
                         stringsService.GenerateNewString(value);
                     _szName = value;
-                    NotifyPropertyChanged();
+                    NotifyPropertyChanged(nameof(this._szName), oldValue, this._szName);
                 }
             }
         }
-        public int DwAi { get => _dwAi; set { if (_dwAi != value) { _dwAi = value; NotifyPropertyChanged(); } } }
-        public int DwStr { get => _dwStr; set { if (_dwStr != value) { _dwStr = value; NotifyPropertyChanged(); } } }
-        public int DwSta { get => _dwSta; set { if (_dwSta != value) { _dwSta = value; NotifyPropertyChanged(); } } }
-        public int DwDex { get => _dwDex; set { if (_dwDex != value) { _dwDex = value; NotifyPropertyChanged(); } } }
-        public int DwInt { get => _dwInt; set { if (_dwInt != value) { _dwInt = value; NotifyPropertyChanged(); } } }
-        public int DwHR { get => _dwHR; set { if (_dwHR != value) { _dwHR = value; NotifyPropertyChanged(); } } }
-        public int DwER { get => _dwER; set { if (_dwER != value) { _dwER = value; NotifyPropertyChanged(); } } }
-        public int DwRace { get => _dwRace; set { if (_dwRace != value) { _dwRace = value; NotifyPropertyChanged(); } } }
-        public int DwBelligerence { get => _dwBelligerence; set { if (_dwBelligerence != value) { _dwBelligerence = value; NotifyPropertyChanged(); } } }
-        public int DwGender { get => _dwGender; set { if (_dwGender != value) { _dwGender = value; NotifyPropertyChanged(); } } }
-        public int DwLevel { get => _dwLevel; set { if (_dwLevel != value) { _dwLevel = value; NotifyPropertyChanged(); } } }
-        public int DwFlightLevel { get => _dwFlightLevel; set { if (_dwFlightLevel != value) { _dwFlightLevel = value; NotifyPropertyChanged(); } } }
-        public int DwSize { get => _dwSize; set { if (_dwSize != value) { _dwSize = value; NotifyPropertyChanged(); } } }
-        public int DwClass { get => _dwClass; set { if (_dwClass != value) { _dwClass = value; NotifyPropertyChanged(); } } }
-        public int BIfParts { get => _bIfParts; set { if (_bIfParts != value) { _bIfParts = value; NotifyPropertyChanged(); } } }
-        public int NChaotic { get => _nChaotic; set { if (_nChaotic != value) { _nChaotic = value; NotifyPropertyChanged(); } } }
-        public int DwUseable { get => _dwUseable; set { if (_dwUseable != value) { _dwUseable = value; NotifyPropertyChanged(); } } }
-        public int DwActionRadius { get => _dwActionRadius; set { if (_dwActionRadius != value) { _dwActionRadius = value; NotifyPropertyChanged(); } } }
-        public long DwAtkMin { get => _dwAtkMin; set { if (_dwAtkMin != value) { _dwAtkMin = value; NotifyPropertyChanged(); } } } // We set it to long to handle 64 bits attack configurations
-        public long DwAtkMax { get => _dwAtkMax; set { if (_dwAtkMax != value) { _dwAtkMax = value; NotifyPropertyChanged(); } } }
-        public int DwAtk1 { get => _dwAtk1; set { if (_dwAtk1 != value) { _dwAtk1 = value; NotifyPropertyChanged(); } } }
-        public int DwAtk2 { get => _dwAtk2; set { if (_dwAtk2 != value) { _dwAtk2 = value; NotifyPropertyChanged(); } } }
-        public int DwAtk3 { get => _dwAtk3; set { if (_dwAtk3 != value) { _dwAtk3 = value; NotifyPropertyChanged(); } } }
-        public int DwAtk4 { get => _dwAtk4; set { if (_dwAtk4 != value) { _dwAtk4 = value; NotifyPropertyChanged(); } } }
-        public float FFrame { get => _fFrame; set { if (_fFrame != value) { _fFrame = value; NotifyPropertyChanged(); } } }
-        public int DwOrthograde { get => _dwOrthograde; set { if (_dwOrthograde != value) { _dwOrthograde = value; NotifyPropertyChanged(); } } }
-        public int DwThrustRate { get => _dwThrustRate; set { if (_dwThrustRate != value) { _dwThrustRate = value; NotifyPropertyChanged(); } } }
-        public int DwChestRate { get => _dwChestRate; set { if (_dwChestRate != value) { _dwChestRate = value; NotifyPropertyChanged(); } } }
-        public int DwHeadRate { get => _dwHeadRate; set { if (_dwHeadRate != value) { _dwHeadRate = value; NotifyPropertyChanged(); } } }
-        public int DwArmRate { get => _dwArmRate; set { if (_dwArmRate != value) { _dwArmRate = value; NotifyPropertyChanged(); } } }
-        public int DwLegRate { get => _dwLegRate; set { if (_dwLegRate != value) { _dwLegRate = value; NotifyPropertyChanged(); } } }
-        public int DwAttackSpeed { get => _dwAttackSpeed; set { if (_dwAttackSpeed != value) { _dwAttackSpeed = value; NotifyPropertyChanged(); } } }
-        public int DwReAttackDelay { get => _dwReAttackDelay; set { if (_dwReAttackDelay != value) { _dwReAttackDelay = value; NotifyPropertyChanged(); } } }
-        public long DwAddHp { get => _dwAddHp; set { if (_dwAddHp != value) { _dwAddHp = value; NotifyPropertyChanged(); } } }
-        public int DwAddMp { get => _dwAddMp; set { if (_dwAddMp != value) { _dwAddMp = value; NotifyPropertyChanged(); } } }
-        public int DwNaturalArmor { get => _dwNaturalArmor; set { if (_dwNaturalArmor != value) { _dwNaturalArmor = value; NotifyPropertyChanged(); } } }
-        public int NAbrasion { get => _nAbrasion; set { if (_nAbrasion != value) { _nAbrasion = value; NotifyPropertyChanged(); } } }
-        public int NHardness { get => _nHardness; set { if (_nHardness != value) { _nHardness = value; NotifyPropertyChanged(); } } }
-        public int DwAdjAtkDelay { get => _dwAdjAtkDelay; set { if (_dwAdjAtkDelay != value) { _dwAdjAtkDelay = value; NotifyPropertyChanged(); } } }
-        public int EElementType { get => _eElementType; set { if (_eElementType != value) { _eElementType = value; NotifyPropertyChanged(); } } }
-        public short WElementAtk { get => _wElementAtk; set { if (_wElementAtk != value) { _wElementAtk = value; NotifyPropertyChanged(); } } }
-        public int DwHideLevel { get => _dwHideLevel; set { if (_dwHideLevel != value) { _dwHideLevel = value; NotifyPropertyChanged(); } } }
-        public float FSpeed { get => _fSpeed; set { if (_fSpeed != value) { _fSpeed = value; NotifyPropertyChanged(); } } }
-        public int DwShelter { get => _dwShelter; set { if (_dwShelter != value) { _dwShelter = value; NotifyPropertyChanged(); } } }
-        public int DwFlying { get => _dwFlying; set { if (_dwFlying != value) { _dwFlying = value; NotifyPropertyChanged(); } } }
-        public int DwJumpIng { get => _dwJumpIng; set { if (_dwJumpIng != value) { _dwJumpIng = value; NotifyPropertyChanged(); } } }
-        public int DwAirJump { get => _dwAirJump; set { if (_dwAirJump != value) { _dwAirJump = value; NotifyPropertyChanged(); } } }
-        public int BTaming { get => _bTaming; set { if (_bTaming != value) { _bTaming = value; NotifyPropertyChanged(); } } }
-        public int DwResisMgic { get => _dwResisMgic; set { if (_dwResisMgic != value) { _dwResisMgic = value; NotifyPropertyChanged(); } } }
-        public int NResistElecricity { get => _nResistElecricity; set { if (_nResistElecricity != value) { _nResistElecricity = value; NotifyPropertyChanged(); } } }
-        public int NResistFire { get => _nResistFire; set { if (_nResistFire != value) { _nResistFire = value; NotifyPropertyChanged(); } } }
-        public int NResistWind { get => _nResistWind; set { if (_nResistWind != value) { _nResistWind = value; NotifyPropertyChanged(); } } }
-        public int NResistWater { get => _nResistWater; set { if (_nResistWater != value) { _nResistWater = value; NotifyPropertyChanged(); } } }
-        public int NResistEarth { get => _nResistEarth; set { if (_nResistEarth != value) { _nResistEarth = value; NotifyPropertyChanged(); } } }
-        public int DwCash { get => _dwCash; set { if (_dwCash != value) { _dwCash = value; NotifyPropertyChanged(); } } }
-        public int DwSourceMaterial { get => _dwSourceMaterial; set { if (_dwSourceMaterial != value) { _dwSourceMaterial = value; NotifyPropertyChanged(); } } }
-        public int DwMaterialAmount { get => _dwMaterialAmount; set { if (_dwMaterialAmount != value) { _dwMaterialAmount = value; NotifyPropertyChanged(); } } }
-        public int DwCohesion { get => _dwCohesion; set { if (_dwCohesion != value) { _dwCohesion = value; NotifyPropertyChanged(); } } }
-        public int DwHoldingTime { get => _dwHoldingTime; set { if (_dwHoldingTime != value) { _dwHoldingTime = value; NotifyPropertyChanged(); } } }
-        public int DwCorrectionValue { get => _dwCorrectionValue; set { if (_dwCorrectionValue != value) { _dwCorrectionValue = value; NotifyPropertyChanged(); } } }
-        public long NExpValue { get => _nExpValue; set { if (_nExpValue != value) { _nExpValue = value; NotifyPropertyChanged(); } } }
-        public int NFxpValue { get => _nFxpValue; set { if (_nFxpValue != value) { _nFxpValue = value; NotifyPropertyChanged(); } } }
-        public int NBodyState { get => _nBodyState; set { if (_nBodyState != value) { _nBodyState = value; NotifyPropertyChanged(); } } }
-        public int DwAddAbility { get => _dwAddAbility; set { if (_dwAddAbility != value) { _dwAddAbility = value; NotifyPropertyChanged(); } } }
-        public int BKillable { get => _bKillable; set { if (_bKillable != value) { _bKillable = value; NotifyPropertyChanged(); } } }
-        public int DwVirtItem1 { get => _dwVirtItem1; set { if (_dwVirtItem1 != value) { _dwVirtItem1 = value; NotifyPropertyChanged(); } } }
-        public int DwVirtItem2 { get => _dwVirtItem2; set { if (_dwVirtItem2 != value) { _dwVirtItem2 = value; NotifyPropertyChanged(); } } }
-        public int DwVirtItem3 { get => _dwVirtItem3; set { if (_dwVirtItem3 != value) { _dwVirtItem3 = value; NotifyPropertyChanged(); } } }
-        public int BVirtType1 { get => _bVirtType1; set { if (_bVirtType1 != value) { _bVirtType1 = value; NotifyPropertyChanged(); } } }
-        public int BVirtType2 { get => _bVirtType2; set { if (_bVirtType2 != value) { _bVirtType2 = value; NotifyPropertyChanged(); } } }
-        public int BVirtType3 { get => _bVirtType3; set { if (_bVirtType3 != value) { _bVirtType3 = value; NotifyPropertyChanged(); } } }
-        public int DwSndAtk1 { get => _dwSndAtk1; set { if (_dwSndAtk1 != value) { _dwSndAtk1 = value; NotifyPropertyChanged(); } } }
-        public int DwSndAtk2 { get => _dwSndAtk2; set { if (_dwSndAtk2 != value) { _dwSndAtk2 = value; NotifyPropertyChanged(); } } }
-        public int DwSndDie1 { get => _dwSndDie1; set { if (_dwSndDie1 != value) { _dwSndDie1 = value; NotifyPropertyChanged(); } } }
-        public int DwSndDie2 { get => _dwSndDie2; set { if (_dwSndDie2 != value) { _dwSndDie2 = value; NotifyPropertyChanged(); } } }
-        public int DwSndDmg1 { get => _dwSndDmg1; set { if (_dwSndDmg1 != value) { _dwSndDmg1 = value; NotifyPropertyChanged(); } } }
-        public int DwSndDmg2 { get => _dwSndDmg2; set { if (_dwSndDmg2 != value) { _dwSndDmg2 = value; NotifyPropertyChanged(); } } }
-        public int DwSndDmg3 { get => _dwSndDmg3; set { if (_dwSndDmg3 != value) { _dwSndDmg3 = value; NotifyPropertyChanged(); } } }
-        public int DwSndIdle1 { get => _dwSndIdle1; set { if (_dwSndIdle1 != value) { _dwSndIdle1 = value; NotifyPropertyChanged(); } } }
-        public int DwSndIdle2 { get => _dwSndIdle2; set { if (_dwSndIdle2 != value) { _dwSndIdle2 = value; NotifyPropertyChanged(); } } }
-        public string SzComment { get => _szComment; set { if (_szComment != value) { _szComment = value; NotifyPropertyChanged(); } } }
-        public int DwAreaColor { get => _dwAreaColor; set { if (_dwAreaColor != value) { _dwAreaColor = value; NotifyPropertyChanged(); } } }
-        public string SzNpcMark { get => _szNpcMark; set { if (_szNpcMark != value) { _szNpcMark = value; NotifyPropertyChanged(); } } }
-        public int DwMadrigalGiftPoint { get => _dwMadrigalGiftPoint; set { if (_dwMadrigalGiftPoint != value) { _dwMadrigalGiftPoint = value; NotifyPropertyChanged(); } } }
+        public int DwAi { get => _dwAi; set => SetValue(ref this._dwAi, value); }
+        public int DwStr { get => _dwStr; set => SetValue(ref this._dwStr, value); }
+        public int DwSta { get => _dwSta; set => SetValue(ref this._dwSta, value); }
+        public int DwDex { get => _dwDex; set => SetValue(ref this._dwDex, value); }
+        public int DwInt { get => _dwInt; set => SetValue(ref this._dwInt, value); }
+        public int DwHR { get => _dwHR; set => SetValue(ref this._dwHR, value); }
+        public int DwER { get => _dwER; set => SetValue(ref this._dwER, value); }
+        public int DwRace { get => _dwRace; set => SetValue(ref this._dwRace, value); }
+        public int DwBelligerence { get => _dwBelligerence; set => SetValue(ref this._dwBelligerence, value); }
+        public int DwGender { get => _dwGender; set => SetValue(ref this._dwGender, value); }
+        public int DwLevel { get => _dwLevel; set => SetValue(ref this._dwLevel, value); }
+        public int DwFlightLevel { get => _dwFlightLevel; set => SetValue(ref this._dwFlightLevel, value); }
+        public int DwSize { get => _dwSize; set => SetValue(ref this._dwSize, value); }
+        public int DwClass { get => _dwClass; set => SetValue(ref this._dwClass, value); }
+        public int BIfParts { get => _bIfParts; set => SetValue(ref this._bIfParts, value); }
+        public int NChaotic { get => _nChaotic; set => SetValue(ref this._nChaotic, value); }
+        public int DwUseable { get => _dwUseable; set => SetValue(ref this._dwUseable, value); }
+        public int DwActionRadius { get => _dwActionRadius; set => SetValue(ref this._dwActionRadius, value); }
+        public long DwAtkMin { get => _dwAtkMin; set => SetValue(ref this._dwAtkMin, value); } // We set it to long to handle 64 bits attack configurations
+        public long DwAtkMax { get => _dwAtkMax; set => SetValue(ref this._dwAtkMax, value); }
+        public int DwAtk1 { get => _dwAtk1; set => SetValue(ref this._dwAtk1, value); }
+        public int DwAtk2 { get => _dwAtk2; set => SetValue(ref this._dwAtk2, value); }
+        public int DwAtk3 { get => _dwAtk3; set => SetValue(ref this._dwAtk3, value); }
+        public int DwAtk4 { get => _dwAtk4; set => SetValue(ref this._dwAtk4, value); }
+        public float FFrame { get => _fFrame; set => SetValue(ref this._fFrame, value); }
+        public int DwOrthograde { get => _dwOrthograde; set => SetValue(ref this._dwOrthograde, value); }
+        public int DwThrustRate { get => _dwThrustRate; set => SetValue(ref this._dwThrustRate, value); }
+        public int DwChestRate { get => _dwChestRate; set => SetValue(ref this._dwChestRate, value); }
+        public int DwHeadRate { get => _dwHeadRate; set => SetValue(ref this._dwHeadRate, value); }
+        public int DwArmRate { get => _dwArmRate; set => SetValue(ref this._dwArmRate, value); }
+        public int DwLegRate { get => _dwLegRate; set => SetValue(ref this._dwLegRate, value); }
+        public int DwAttackSpeed { get => _dwAttackSpeed; set => SetValue(ref this._dwAttackSpeed, value); }
+        public int DwReAttackDelay { get => _dwReAttackDelay; set => SetValue(ref this._dwReAttackDelay, value); }
+        public long DwAddHp { get => _dwAddHp; set => SetValue(ref this._dwAddHp, value); }
+        public int DwAddMp { get => _dwAddMp; set => SetValue(ref this._dwAddMp, value); }
+        public int DwNaturalArmor { get => _dwNaturalArmor; set => SetValue(ref this._dwNaturalArmor, value); }
+        public int NAbrasion { get => _nAbrasion; set => SetValue(ref this._nAbrasion, value); }
+        public int NHardness { get => _nHardness; set => SetValue(ref this._nHardness, value); }
+        public int DwAdjAtkDelay { get => _dwAdjAtkDelay; set => SetValue(ref this._dwAdjAtkDelay, value); }
+        public int EElementType { get => _eElementType; set => SetValue(ref this._eElementType, value); }
+        public short WElementAtk { get => _wElementAtk; set => SetValue(ref this._wElementAtk, value); }
+        public int DwHideLevel { get => _dwHideLevel; set => SetValue(ref this._dwHideLevel, value); }
+        public float FSpeed { get => _fSpeed; set => SetValue(ref this._fSpeed, value); }
+        public int DwShelter { get => _dwShelter; set => SetValue(ref this._dwShelter, value); }
+        public int DwFlying { get => _dwFlying; set => SetValue(ref this._dwFlying, value); }
+        public int DwJumpIng { get => _dwJumpIng; set => SetValue(ref this._dwJumpIng, value); }
+        public int DwAirJump { get => _dwAirJump; set => SetValue(ref this._dwAirJump, value); }
+        public int BTaming { get => _bTaming; set => SetValue(ref this._bTaming, value); }
+        public int DwResisMgic { get => _dwResisMgic; set => SetValue(ref this._dwResisMgic, value); }
+        public int NResistElecricity { get => _nResistElecricity; set => SetValue(ref this._nResistElecricity, value); }
+        public int NResistFire { get => _nResistFire; set => SetValue(ref this._nResistFire, value); }
+        public int NResistWind { get => _nResistWind; set => SetValue(ref this._nResistWind, value); }
+        public int NResistWater { get => _nResistWater; set => SetValue(ref this._nResistWater, value); }
+        public int NResistEarth { get => _nResistEarth; set => SetValue(ref this._nResistEarth, value); }
+        public int DwCash { get => _dwCash; set => SetValue(ref this._dwCash, value); }
+        public int DwSourceMaterial { get => _dwSourceMaterial; set => SetValue(ref this._dwSourceMaterial, value); }
+        public int DwMaterialAmount { get => _dwMaterialAmount; set => SetValue(ref this._dwMaterialAmount, value); }
+        public int DwCohesion { get => _dwCohesion; set => SetValue(ref this._dwCohesion, value); }
+        public int DwHoldingTime { get => _dwHoldingTime; set => SetValue(ref this._dwHoldingTime, value); }
+        public int DwCorrectionValue { get => _dwCorrectionValue; set => SetValue(ref this._dwCorrectionValue, value); }
+        public long NExpValue { get => _nExpValue; set => SetValue(ref this._nExpValue, value); }
+        public int NFxpValue { get => _nFxpValue; set => SetValue(ref this._nFxpValue, value); }
+        public int NBodyState { get => _nBodyState; set => SetValue(ref this._nBodyState, value); }
+        public int DwAddAbility { get => _dwAddAbility; set => SetValue(ref this._dwAddAbility, value); }
+        public int BKillable { get => _bKillable; set => SetValue(ref this._bKillable, value); }
+        public int DwVirtItem1 { get => _dwVirtItem1; set => SetValue(ref this._dwVirtItem1, value); }
+        public int DwVirtItem2 { get => _dwVirtItem2; set => SetValue(ref this._dwVirtItem2, value); }
+        public int DwVirtItem3 { get => _dwVirtItem3; set => SetValue(ref this._dwVirtItem3, value); }
+        public int BVirtType1 { get => _bVirtType1; set => SetValue(ref this._bVirtType1, value); }
+        public int BVirtType2 { get => _bVirtType2; set => SetValue(ref this._bVirtType2, value); }
+        public int BVirtType3 { get => _bVirtType3; set => SetValue(ref this._bVirtType3, value); }
+        public int DwSndAtk1 { get => _dwSndAtk1; set => SetValue(ref this._dwSndAtk1, value); }
+        public int DwSndAtk2 { get => _dwSndAtk2; set => SetValue(ref this._dwSndAtk2, value); }
+        public int DwSndDie1 { get => _dwSndDie1; set => SetValue(ref this._dwSndDie1, value); }
+        public int DwSndDie2 { get => _dwSndDie2; set => SetValue(ref this._dwSndDie2, value); }
+        public int DwSndDmg1 { get => _dwSndDmg1; set => SetValue(ref this._dwSndDmg1, value); }
+        public int DwSndDmg2 { get => _dwSndDmg2; set => SetValue(ref this._dwSndDmg2, value); }
+        public int DwSndDmg3 { get => _dwSndDmg3; set => SetValue(ref this._dwSndDmg3, value); }
+        public int DwSndIdle1 { get => _dwSndIdle1; set => SetValue(ref this._dwSndIdle1, value); }
+        public int DwSndIdle2 { get => _dwSndIdle2; set => SetValue(ref this._dwSndIdle2, value); }
+        public string SzComment { get => _szComment; set => SetValue(ref this._szComment, value); }
+        public int DwAreaColor { get => _dwAreaColor; set => SetValue(ref this._dwAreaColor, value); }
+        public string SzNpcMark { get => _szNpcMark; set => SetValue(ref this._szNpcMark, value); }
+        public int DwMadrigalGiftPoint { get => _dwMadrigalGiftPoint; set => SetValue(ref this._dwMadrigalGiftPoint, value); }
+
+        private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+                return false;
+
+            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new Exception($"Mover SetValue with not safe to assign directly property {propertyName}");
+
+            T old = field;
+            field = value;
+            this.NotifyPropertyChanged(propertyName, old, value);
+            return true;
+        }
     }
 
     public class Mover : INotifyPropertyChanged
     {
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void NotifyPropertyChanged<T>(string propertyName, T oldValue, T newValue)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedExtendedEventArgs(propertyName, oldValue, newValue));
+        }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void Prop_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -264,14 +289,29 @@ namespace eTools_Ultimate.Models
                     if (this.Prop != null)
                         this.Prop.PropertyChanged -= Prop_PropertyChanged;
 
+                    MoverProp? oldValue = this.Prop;
+
                     this._prop = value;
-                    this.Prop.PropertyChanged += Prop_PropertyChanged;
-                    NotifyPropertyChanged();
+                    this._prop.PropertyChanged += Prop_PropertyChanged;
+
+                    NotifyPropertyChanged(nameof(this.Prop), oldValue, this.Prop);
                 }
             }
         }
 
-        public ModelElem Model { get => this._model; set { if (value != this.Model) { this._model = value; NotifyPropertyChanged(); } } }
+        public ModelElem Model 
+        {
+            get => this._model;
+            set 
+            {
+                if (value != this.Model)
+                {
+                    ModelElem? oldValue = this.Model;
+                    this._model = value;
+                    NotifyPropertyChanged(nameof(this.Model), oldValue, this.Model); 
+                } 
+            } 
+        }
 
         public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; this.Model.DwIndex = value; } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
 

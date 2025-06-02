@@ -1787,18 +1787,6 @@
                                         BorderThickness="1"
                                         CornerRadius="4">
                                     <Grid>
-                                        <TextBox x:Name="Model3DFilePathTextBlock"
-                                                 Visibility="Collapsed"
-                                                 Text="{Binding MoversView.CurrentItem.Model.Model3DFilePath, Mode=OneWay}"
-                                                 TextChanged="Model3DFilePathTextBlock_TextChanged"/>
-                                        <TextBox x:Name="ModelTextureExTextBlock"
-                                                 Visibility="Collapsed"
-                                                 Text="{Binding MoversView.CurrentItem.Model.NTextureEx, Mode=OneWay}"
-                                                 TextChanged="ModelTextureExTextBlock_TextChanged"/>
-                                        <TextBox x:Name="MoverIdentifierTextBox"
-                                                 Visibility="Collapsed"
-                                                 Text="{Binding MoversView.CurrentItem.Identifier, Mode=OneWay}"
-                                                 TextChanged="MoverIdentifierTextBox_TextChanged" />
                                         <Image x:Name="DxImage"
                                                Stretch="UniformToFill"
                                                HorizontalAlignment="Center"
@@ -1949,8 +1937,7 @@
                                         </Grid.ColumnDefinitions>
                                         <ui:AutoSuggestBox Grid.Column="0"
                                                            Text="{Binding MoversView.CurrentItem.Model.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                           OriginalItemsSource="{Binding ModelFilePossibilities, Mode=OneWay}"
-                                                           TextChanged="AutoSuggestBox_TextChanged" />
+                                                           OriginalItemsSource="{Binding ModelFilePossibilities, Mode=OneWay}" />
                                         <ui:Button Grid.Column="1"
                                                    Content="..."
                                                    Width="30"
