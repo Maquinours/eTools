@@ -99,6 +99,11 @@ namespace eTools_Ultimate.Views.Windows
                     LoadingText.Text = "Loading tickets...";
                 });
                 TicketsService.Instance.Load();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    LoadingText.Text = "Loading pack items...";
+                });
+                PackItemsService.Instance.Load();
                 ChangesTrackerService.Instance.Init();
             }).ConfigureAwait(true);
         }

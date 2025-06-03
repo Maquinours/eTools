@@ -68,6 +68,9 @@ namespace eTools_Ultimate.Models
         // Tickets settings
         private string? _ticketsPropFilePath;
 
+        // PackItems settings
+        private string? _packItemsPropFilePath;
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -663,5 +666,24 @@ namespace eTools_Ultimate.Models
             }
         }
         public string DefaultTicketsPropFilePath => $"{this.ResourcesFolderPath}ticket.inc";
+
+        public string? PackItemsPropFilePath
+        {
+            get => this._packItemsPropFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultPackItemsPropFile)
+                    val = null;
+                if (this.PackItemsPropFilePath != val)
+                {
+                    this._packItemsPropFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultPackItemsPropFile => $"{this.ResourcesFolderPath}propPackItem.inc";
     }
 }
