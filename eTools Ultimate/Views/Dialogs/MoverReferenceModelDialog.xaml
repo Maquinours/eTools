@@ -1,62 +1,22 @@
-﻿<Window x:Class="eTools_Ultimate.Views.Dialogs.MoverReferenceModelDialog"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Reference Model" Height="250" Width="400"
-        WindowStartupLocation="CenterOwner"
-        ResizeMode="NoResize">
-    
-    <Grid Margin="20">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
+﻿<ui:ContentDialog
+    x:Class="eTools_Ultimate.Views.Dialogs.MoverReferenceModelDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:eTools_Ultimate.Views.Dialogs"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Reference model"
+    d:DesignHeight="1000"
+    d:DesignWidth="750"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    CloseButtonText="Close"
+    DialogMaxWidth="750"
+    mc:Ignorable="d">
 
-        <!-- Close Button-->
-        <Button Grid.Row="0" 
-                Content="✕"
-                HorizontalAlignment="Right" 
-                VerticalAlignment="Top"
-                Width="24" 
-                Height="24"
-                Margin="0,-15,-15,0"
-                Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
-                Click="CloseButton_Click"/>
+    <ui:ContentDialog.Resources>
+        <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:MoverReferenceModelDialog}" />
+    </ui:ContentDialog.Resources>
 
-        <!-- Titel Reference Model -->
-        <TextBlock Grid.Row="0"
-                   Text="Reference Model"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   FontSize="20"
-                   FontWeight="SemiBold"
-                   Margin="0,0,0,20"/>
-
-        <!-- TextBox-->
-        <TextBox Grid.Row="1"
-                 Text="Select a Model..."
-                 VerticalAlignment="Center"
-                 HorizontalAlignment="Stretch"
-                 Padding="5"
-                 FontStyle="Italic"
-                 Foreground="Gray"/>
-
-        <!-- Button Panel -->
-        <StackPanel Grid.Row="2" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    Margin="0,20,0,0">
-            <Button Content="OK" 
-                    Width="80" 
-                    Height="30"
-                    IsDefault="True"
-                    Click="OkButton_Click"/>
-            <Button Content="Cancel" 
-                    Width="80" 
-                    Height="30"
-                    IsCancel="True"
-                    Margin="10,0,0,0"
-                    Click="CancelButton_Click"/>
-        </StackPanel>
-    </Grid>
-</Window>
+</ui:ContentDialog>
