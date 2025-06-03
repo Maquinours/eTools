@@ -65,6 +65,12 @@ namespace eTools_Ultimate.Models
         private string? _motionsPropFilePath;
         private string? _motionsTxtFilePath;
 
+        // Tickets settings
+        private string? _ticketsPropFilePath;
+
+        // PackItems settings
+        private string? _packItemsPropFilePath;
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -641,5 +647,43 @@ namespace eTools_Ultimate.Models
             }
         }
         public string DefaultMotionsTxtFilePath => $"{this.ResourcesFolderPath}propMotion.txt.txt";
+
+        public string? TicketsPropFilePath
+        {
+            get => this._ticketsPropFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultTicketsPropFilePath)
+                    val = null;
+                if (this.TicketsPropFilePath != val)
+                {
+                    this._ticketsPropFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultTicketsPropFilePath => $"{this.ResourcesFolderPath}ticket.inc";
+
+        public string? PackItemsPropFilePath
+        {
+            get => this._packItemsPropFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultPackItemsPropFile)
+                    val = null;
+                if (this.PackItemsPropFilePath != val)
+                {
+                    this._packItemsPropFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultPackItemsPropFile => $"{this.ResourcesFolderPath}propPackItem.inc";
     }
 }
