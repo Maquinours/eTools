@@ -94,6 +94,11 @@ namespace eTools_Ultimate.Views.Windows
                     LoadingText.Text = "Loading couple configuration...";
                 });
                 CoupleService.Instance.Load();
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    LoadingText.Text = "Loading tickets...";
+                });
+                TicketsService.Instance.Load();
                 ChangesTrackerService.Instance.Init();
             }).ConfigureAwait(true);
         }
