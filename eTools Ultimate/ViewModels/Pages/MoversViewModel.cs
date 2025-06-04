@@ -60,6 +60,21 @@ namespace eTools_Ultimate.ViewModels.Pages
             EnableRaisingEvents = false
         };
         #endregion File system watchers
+
+        #region Filter properties
+        [ObservableProperty]
+        private bool _showBasicInformationSection = true;
+        [ObservableProperty]
+        private bool _showStatsSection = true;
+        [ObservableProperty]
+        private bool _showBattleSection = true;
+        [ObservableProperty]
+        private bool _showDefensiveStatsSection = true;
+        [ObservableProperty]
+        private bool _showElementalSection = true;
+        [ObservableProperty]
+        private bool _showModelSection = true;
+        #endregion Filter properties
         #endregion Properties
 
         #region Fields

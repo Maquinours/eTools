@@ -27,6 +27,7 @@
 
     <Page.Resources>
         <converters:NumberFormatConverter x:Key="NumberFormatConverter"/>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <!-- Common Styles -->
         <Style x:Key="InfoIconStyle"
                TargetType="ui:SymbolIcon">
@@ -1489,11 +1490,11 @@
                                Content="Expert"
                                Appearance="Secondary"
                                Margin="0,0,10,0"/>
-                    <ui:Button x:Name="FilterButton"
+                    <ui:DropDownButton x:Name="FilterButton"
                                Content="Filter"
                                Appearance="Secondary"
                                Margin="0,0,10,0">
-                        <ui:Button.ContextMenu>
+                        <ui:DropDownButton.Flyout>
                             <ContextMenu Background="{DynamicResource ApplicationBackgroundBrush}">
                                 <ScrollViewer MaxHeight="600"
                                               VerticalScrollBarVisibility="Auto"
@@ -1508,23 +1509,23 @@
                                                 Padding="10,5">
                                             <StackPanel>
                                                 <CheckBox Content="Basic Information"
-                                                          IsChecked="True"
+                                                          IsChecked="{Binding ShowBasicInformationSection, Mode=TwoWay}"
                                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                           Margin="0,2"/>
                                                 <CheckBox Content="Stats"
-                                                          IsChecked="True"
+                                                          IsChecked="{Binding ShowStatsSection, Mode=TwoWay}"
                                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                           Margin="0,2"/>
                                                 <CheckBox Content="Combat / Battle"
-                                                          IsChecked="True"
+                                                          IsChecked="{Binding ShowBattleSection, Mode=TwoWay}"
                                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                           Margin="0,2"/>
                                                 <CheckBox Content="Defensive Stats &amp; Resistances"
-                                                          IsChecked="True"
+                                                          IsChecked="{Binding ShowDefensiveStatsSection, Mode=TwoWay}"
                                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                           Margin="0,2"/>
                                                 <CheckBox Content="Elementar &amp; Damage Types"
-                                                          IsChecked="True"
+                                                          IsChecked="{Binding ShowElementalSection, Mode=TwoWay}"
                                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                           Margin="0,2"/>
                                                 <CheckBox Content="Sound"
@@ -1532,7 +1533,7 @@
                                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                           Margin="0,2"/>
                                                 <CheckBox Content="Model / Mobility / Movement"
-                                                          IsChecked="True"
+                                                          IsChecked="{Binding ShowModelSection, Mode=TwoWay}"
                                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                           Margin="0,2"/>
                                             </StackPanel>
@@ -1735,8 +1736,8 @@
                                     </StackPanel>
                                 </ScrollViewer>
                             </ContextMenu>
-                        </ui:Button.ContextMenu>
-                    </ui:Button>
+                        </ui:DropDownButton.Flyout>
+                    </ui:DropDownButton>
                     <ui:Button x:Name="AddButton"
                                Content="Add"
                                Background="#2F70AF"
@@ -1749,22 +1750,23 @@
                 <!-- Formulare -->
                 <StackPanel Margin="20">
                     <ContentControl Content="{Binding MoversView}"
-                            ContentTemplate="{StaticResource BasicInfoSectionTemplate}"/>
-                    <Separator Margin="0,10,0,5"/>
+                            ContentTemplate="{StaticResource BasicInfoSectionTemplate}" Visibility="{Binding ShowBasicInformationSection, Mode=OneWay, Converter={StaticResource BoolToVis}}"/>
+                    <Separator Margin="0,10,0,5" Visibility="{Binding ShowBasicInformationSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
                     <ContentControl Content="{Binding MoversView}"
-                            ContentTemplate="{StaticResource StatsSectionTemplate}"/>
-                    <Separator Margin="0,10,0,5"/>
+                            ContentTemplate="{StaticResource StatsSectionTemplate}" Visibility="{Binding ShowStatsSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
+                    <Separator Margin="0,10,0,5" Visibility="{Binding ShowStatsSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
                     <ContentControl Content="{Binding MoversView}"
-                            ContentTemplate="{StaticResource CombatSettingsSectionTemplate}"/>
-                    <Separator Margin="0,10,0,5"/>
+                            ContentTemplate="{StaticResource CombatSettingsSectionTemplate}" Visibility="{Binding ShowBattleSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
+                    <Separator Margin="0,10,0,5" Visibility="{Binding ShowBattleSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
                     <ContentControl Content="{Binding MoversView}"
-                            ContentTemplate="{StaticResource DefensiveStatsSectionTemplate}"/>
-                    <Separator Margin="0,10,0,5"/>
+                            ContentTemplate="{StaticResource DefensiveStatsSectionTemplate}" Visibility="{Binding ShowDefensiveStatsSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
+                    <Separator Margin="0,10,0,5" Visibility="{Binding ShowDefensiveStatsSection, Mode=OneWay, Converter={StaticResource BoolToVis}}"/>
                     <ContentControl Content="{Binding MoversView}"
-                            ContentTemplate="{StaticResource ElementalSectionTemplate}"/>
+                            ContentTemplate="{StaticResource ElementalSectionTemplate}" Visibility="{Binding ShowElementalSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
+                    <Separator Margin="0,10,0,5" Visibility="{Binding ShowElementalSection, Mode=OneWay, Converter={StaticResource BoolToVis}}"/>
 
                     <!-- Model & Motions Section -->
-                    <StackPanel>
+                    <StackPanel Visibility="{Binding ShowModelSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" >
                         <TextBlock Text="Model"
                                    Style="{StaticResource SectionHeaderStyle}"/>
 
