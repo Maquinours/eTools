@@ -66,8 +66,8 @@ namespace eTools_Ultimate.Services
                     if (script.EndOfStream)
                         break;
 
-                    //if (!mp.DwId.StartsWith("MI_"))
-                    //    continue;
+                    if (mp.DwId == 0)
+                        continue;
 
                     mp.SzName = script.GetToken();
                     if (!mp.SzName.StartsWith("IDS_"))
