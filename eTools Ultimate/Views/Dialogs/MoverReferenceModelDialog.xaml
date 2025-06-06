@@ -6,17 +6,66 @@
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Dialogs"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Reference model"
-    d:DesignHeight="1000"
-    d:DesignWidth="750"
-    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    CloseButtonText="Close"
-    DialogMaxWidth="750"
+    Title="Select Reference Model"
+    Height="450"
+    Width="600"
+    IsPrimaryButtonEnabled="True"
+    IsSecondaryButtonEnabled="True"
+    PrimaryButtonText="Accept"
+    SecondaryButtonText="Cancel"
     mc:Ignorable="d">
 
-    <ui:ContentDialog.Resources>
-        <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:MoverReferenceModelDialog}" />
-    </ui:ContentDialog.Resources>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            Margin="0,0,0,10"
+            FontSize="16"
+            Text="Please select a reference model:" />
+
+        <ui:Card Grid.Row="1" Margin="0,0,0,10">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <ui:TextBox
+                    Grid.Row="0"
+                    Margin="0,0,0,10"
+                    PlaceholderText="Search models..."
+                    Icon="Search24" />
+
+                <ListView
+                    Grid.Row="1"
+                    x:Name="ModelsListView"
+                    Height="250"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <ui:SymbolIcon
+                                    Grid.Column="0"
+                                    Margin="0,0,10,0"
+                                    Symbol="Document24" />
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="{Binding Name}" FontWeight="SemiBold" />
+                                    <TextBlock Text="{Binding Description}" Opacity="0.7" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
+        </ui:Card>
+    </Grid>
 
 </ui:ContentDialog>
