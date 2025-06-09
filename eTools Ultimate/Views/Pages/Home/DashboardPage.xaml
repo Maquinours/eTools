@@ -110,7 +110,7 @@
                 <Border CornerRadius="8">
                     <Border.Background>
                         <ImageBrush 
-                            ImageSource="/Views/Pages/Home/HomePage.png" 
+                            ImageSource="/Assets/Images/HomePage.png" 
                             RenderOptions.BitmapScalingMode="HighQuality"
                             Stretch="UniformToFill" />
                     </Border.Background>
@@ -187,7 +187,7 @@
 
             <!-- GitHub Button -->
             <Image Grid.Row="2"
-                   Source="/eTools Ultimate;component/Views/Pages/Home/github.png" 
+                   Source="/eTools Ultimate;component/Assets/Icons/github.png" 
                    Width="36" 
                    Height="36" 
                    Stretch="Uniform"
@@ -207,7 +207,7 @@
 
             <!-- Discord Button -->
             <Image Grid.Row="2"
-                   Source="/eTools Ultimate;component/Views/Pages/Home/discord.png" 
+                   Source="/eTools Ultimate;component/Assets/Icons/discord.png" 
                    Width="36" 
                    Height="36" 
                    Stretch="Uniform"

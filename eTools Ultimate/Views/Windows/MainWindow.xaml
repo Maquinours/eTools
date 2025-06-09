@@ -38,7 +38,7 @@
             Grid.Row="0"
             CloseWindowByDoubleClickOnIcon="True" Margin="35,0,0,-5">
             <ui:TitleBar.Icon>
-                <ui:ImageIcon Source="pack://application:,,,/eTools Ultimate;component/Views/Windows/eToolsLogoIcon.png" 
+                <ui:ImageIcon Source="pack://application:,,,/eTools Ultimate;component/Assets/Icons/eTools.png" 
                               Width="18" Height="18" 
                               Margin="0,0,0,0"
                               RenderOptions.BitmapScalingMode="HighQuality" />

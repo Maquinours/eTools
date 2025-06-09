@@ -13,8 +13,9 @@
 
   <ItemGroup>
     <Content Include="wpfui-icon.ico" />
-    <Resource Include="Views\Pages\Home\discord.png" />
-    <Resource Include="Views\Pages\Home\github.png" />
+    <Resource Include="Assets\Icons\discord.png" />
+    <Resource Include="Assets\Icons\eTools.png" />
+    <Resource Include="Assets\Icons\github.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,14 +36,9 @@
     <None Remove="Views\Pages\Settings\AboutIcon.png" />
     <None Remove="Views\Pages\Settings\PaintPaletteIcon.png" />
     <None Remove="Views\Pages\Settings\SettingPageBanner.png" />
-    <None Remove="Views\Windows\eToolsLogoIcon.png" />
-    <None Remove="Views\Windows\SplashScreen.png" />
     <None Remove="Views\Pages\Settings\Kiyo.jpg" />
     <None Remove="Views\Pages\Settings\Logo.png" />
     <None Remove="Views\Windows\WarningIcon.png" />
-    <None Remove="Views\Pages\Home\Icons\Icon_13.png" />
-    <None Remove="Views\Pages\Home\Icons\Icon_14.png" />
-    <None Remove="Views\Pages\Home\Icons\Icon_15.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -64,30 +60,29 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Images\HomePage.png" />
+    <Resource Include="Assets\Images\SplashScreen.png" />
     <Resource Include="Assets\wpfui-icon-256.png" />
     <Resource Include="Assets\wpfui-icon-1024.png" />
-    <Resource Include="Views\Pages\Home\HomePage.png" />
-    <Resource Include="Views\Pages\Home\Icons\Icon_1.png" />
-    <Resource Include="Views\Pages\Home\Icons\Icon_2.png" />
-    <Resource Include="Views\Pages\Home\Icons\Icon_3.png" />
-    <Resource Include="Views\Pages\Home\Icons\Icon_4.png" />
-    <Resource Include="Views\Pages\Home\Icons\Icon_5.png" />
-    <Resource Include="Views\Pages\Home\Icons\Icon_6.png" />
-    <Resource Include="Views\Pages\Home\Icons\Icon_7.png" />
-    <Resource Include="Views\Pages\Home\Icons\Icon_8.png" />
-    <Resource Include="Views\Pages\Home\Icons\Icon_9.png" />
-    <Resource Include="Views\Pages\Home\Icons\Icon_10.png" />
-    <Resource Include="Views\Pages\Home\Icons\Icon_11.png" />
-    <Resource Include="Views\Pages\Home\Icons\Icon_12.png" />
-    <Resource Include="Views\Pages\Home\Icons\Icon_13.png" />
-    <Resource Include="Views\Pages\Home\Icons\Icon_14.png" />
-    <Resource Include="Views\Pages\Home\Icons\Icon_15.png" />
+    <Resource Include="Assets\Icons\Collector.png" />
+    <Resource Include="Assets\Icons\Movers.png" />
+    <Resource Include="Assets\Icons\Exchangers.png" />
+    <Resource Include="Assets\Icons\Characters.png" />
+    <Resource Include="Assets\Icons\Giftboxes.png" />
+    <Resource Include="Assets\Icons\Items.png" />
+    <Resource Include="Assets\Icons\Texts.png" />
+    <Resource Include="Assets\Icons\Accessories.png" />
+    <Resource Include="Assets\Icons\Events.png" />
+    <Resource Include="Assets\Icons\Quests.png" />
+    <Resource Include="Assets\Icons\Settings.png" />
+    <Resource Include="Assets\Icons\Skills.png" />
+    <Resource Include="Assets\Icons\Motions.png" />
+    <Resource Include="Assets\Icons\Honors.png" />
+    <Resource Include="Assets\Icons\World.png" />
     <Resource Include="Views\Pages\Settings\AboutIcon.png" />
     <Resource Include="Views\Pages\Settings\FolderPathIcon.png" />
     <Resource Include="Views\Pages\Settings\PaintPaletteIcon.png" />
     <Resource Include="Views\Pages\Settings\SettingPageBanner.png" />
-    <Resource Include="Views\Windows\eToolsLogoIcon.png" />
-    <Resource Include="Views\Windows\SplashScreen.png" />
     <Resource Include="Views\Pages\Settings\Kiyo.jpg" />
     <Resource Include="Views\Pages\Settings\Maqui.jpg" />
     <Resource Include="Views\Pages\Settings\Logo.png" />

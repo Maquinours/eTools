@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Image Source="/Views/Windows/SplashScreen.png" 
+            <Image Source="/Assets/Images/SplashScreen.png" 
                    Width="500" 
                    Height="150"
                    Stretch="Uniform"
