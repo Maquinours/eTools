@@ -277,7 +277,7 @@ namespace eTools_Ultimate.Models
         }
 
         private MoverProp _prop;
-        private ModelElem _model;
+        private ModelElem? _model;
 
         public MoverProp Prop
         {
@@ -299,7 +299,7 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public ModelElem Model 
+        public ModelElem? Model 
         {
             get => this._model;
             set 
@@ -313,7 +313,7 @@ namespace eTools_Ultimate.Models
             } 
         }
 
-        public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; this.Model.DwIndex = value; } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
+        public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; if(this.Model is not null) this.Model.DwIndex = value; } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
 
         public string Identifier
         {

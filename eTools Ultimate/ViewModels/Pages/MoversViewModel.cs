@@ -169,6 +169,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                     return [];
                 if (MoversView.CurrentItem is not Mover mover)
                     return [];
+                if (mover.Model is null)
+                    return [];
                 string root = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
                 return [.. Directory.GetFiles(modelsFolderPath, $"{root}_*.ani", SearchOption.TopDirectoryOnly).Select(x => Path.GetFileNameWithoutExtension(x).Substring($"{root}_".Length))];
             }
@@ -226,7 +228,8 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (MoversView.CurrentItem is Mover mover)
             {
                 mover.PropertyChanged += CurrentMover_PropertyChanged;
-                mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
+                if (mover.Model is not null)
+                    mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
             }
 
             _isInitialized = true;
@@ -250,6 +253,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             this._motionDirectoryWatcher.EnableRaisingEvents = false;
             if (MoversView.CurrentItem is not Mover mover) return;
+            if (mover.Model is null) return;
             string? prefix = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
             if (prefix is null) return;
             this._motionDirectoryWatcher.Path = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
@@ -269,6 +273,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (D3dHost is null) return;
             if (MoversView.CurrentItem is not Mover mover) return;
+            if (mover.Model is null) return; // TODO: Clear in this case
             if ((DefinesService.Instance.Defines.TryGetValue("MI_MALE", out int maleValue) && mover.Id == maleValue) || (DefinesService.Instance.Defines.TryGetValue("MI_FEMALE", out int femaleValue) && mover.Id == femaleValue)) return;
 
             //CompositionTarget.Rendering -= CompositionTarget_Rendering;
@@ -298,6 +303,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (D3dHost is null) return;
             if (MoversView.CurrentItem is not Mover mover) return;
+            if(mover.Model is null) return;
 
             int textureEx = mover.Model.NTextureEx;
             NativeMethods.SetTextureEx(D3dHost._native, textureEx);
@@ -309,6 +315,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (D3dHost is null) return;
             if (MoversView.CurrentItem is not Mover mover) return;
+            if (mover.Model is null) return;
 
             float scale = mover.Model.FScale;
             NativeMethods.SetScale(D3dHost._native, scale);
@@ -345,6 +352,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             OnPropertyChanged(nameof(ModelFilePossibilities));
             if (MoversView.CurrentItem is not Mover mover) return;
+            if (mover.Model is null) return;
 
             string modelPath = mover.Model.Model3DFilePath;
 
@@ -384,7 +392,8 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (MoversView.CurrentItem is not Mover mover) return;
             mover.PropertyChanged -= CurrentMover_PropertyChanged;
-            mover.Model.PropertyChanged -= CurrentMoverModel_PropertyChanged;
+            if(mover.Model is not null)
+                mover.Model.PropertyChanged -= CurrentMoverModel_PropertyChanged;
         }
 
         private void CurrentMover_Changed(object? sender, EventArgs e)
@@ -392,7 +401,8 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (MoversView.CurrentItem is Mover mover)
             {
                 mover.PropertyChanged += CurrentMover_PropertyChanged;
-                mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
+                if (mover.Model is not null)
+                    mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
             }
 
             OnPropertyChanged(nameof(ModelTexturesPossibilities));
@@ -443,6 +453,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         private void SelectModelFile()
         {
             if (MoversView.CurrentItem is not Mover mover) return;
+            if (mover.Model is null) return;
 
             string? filePath = FileFolderSelector.SelectFile(mover.Model.Model3DFilePath, eTools_Ultimate.Resources.Texts.SelectMoverModelFile, $"{eTools_Ultimate.Resources.Texts.Mover3DFile}|mvr_*.o3d");
 
