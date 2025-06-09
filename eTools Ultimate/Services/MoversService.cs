@@ -52,153 +52,162 @@ namespace eTools_Ultimate.Services
 
             ObservableDictionary<string, string> strings = StringsService.Instance.Strings;
 
+            int moverModelType = DefinesService.Instance.Defines["OT_MOVER"];
+            ModelElem[] moverModels = ModelsService.Instance.GetModelsByType(moverModelType);
+            Dictionary<int, ModelElem> moverModelsDictionary = moverModels.ToDictionary(x => x.DwIndex, x => x); // used to get better performance
+
             using (Script script = new())
             {
                 string filePath = settings.PropMoverFilePath ?? settings.DefaultPropMoverFilePath;
                 script.Load(filePath);
+                
                 while (true)
                 {
-                    MoverProp mp = new()
-                    {
-                        DwId = script.GetNumber()
-                    };
+                    int dwId = script.GetNumber();
 
                     if (script.EndOfStream)
                         break;
 
-                    if (mp.DwId == 0)
+                    if (dwId == 0)
                         continue;
 
-                    mp.SzName = script.GetToken();
-                    if (!mp.SzName.StartsWith("IDS_"))
+                    string szName = script.GetToken();
+                    if (!szName.StartsWith("IDS_"))
                     {
                         string txtKey = this.GetNextStringIdentifier();
-                        strings.Add(txtKey, mp.SzName);
-                        mp.SzName = txtKey;
+                        strings.Add(txtKey, szName);
+                        szName = txtKey;
                     }
-                    mp.DwAi = script.GetNumber();
-                    mp.DwStr = script.GetNumber();
-                    mp.DwSta = script.GetNumber();
-                    mp.DwDex = script.GetNumber();
-                    mp.DwInt = script.GetNumber();
-                    mp.DwHR = script.GetNumber();
-                    mp.DwER = script.GetNumber();
-                    mp.DwRace = script.GetNumber();
-                    mp.DwBelligerence = script.GetNumber();
-                    mp.DwGender = script.GetNumber();
-                    mp.DwLevel = script.GetNumber();
-                    mp.DwFlightLevel = script.GetNumber();
-                    mp.DwSize = script.GetNumber();
-                    mp.DwClass = script.GetNumber();
-                    mp.BIfParts = script.GetNumber(); // If mover can equip parts
+                    int dwAi = script.GetNumber();
+                    int dwStr = script.GetNumber();
+                    int dwSta = script.GetNumber();
+                    int dwDex = script.GetNumber();
+                    int dwInt = script.GetNumber();
+                    int dwHR = script.GetNumber();
+                    int dwER = script.GetNumber();
+                    int dwRace = script.GetNumber();
+                    int dwBelligerence = script.GetNumber();
+                    int dwGender = script.GetNumber();
+                    int dwLevel = script.GetNumber();
+                    int dwFlightLevel = script.GetNumber();
+                    int dwSize = script.GetNumber();
+                    int dwClass = script.GetNumber();
+                    int bIfParts = script.GetNumber(); // If mover can equip parts
 
-                    if (mp.BIfParts == -1)
-                        mp.BIfParts = 0;
+                    if (bIfParts == -1)
+                        bIfParts = 0;
 
-                    mp.NChaotic = script.GetNumber();
-                    mp.DwUseable = script.GetNumber();
-                    mp.DwActionRadius = script.GetNumber();
+                    int nChaotic = script.GetNumber();
+                    int dwUseable = script.GetNumber();
+                    int dwActionRadius = script.GetNumber();
+                    long dwAtkMin;
+                    long dwAtkMax;
                     if (settings.Mover64BitAtk)
                     {
-                        mp.DwAtkMin = script.GetInt64();
-                        mp.DwAtkMax = script.GetInt64();
+                        dwAtkMin = script.GetInt64();
+                        dwAtkMax = script.GetInt64();
                     }
                     else
                     {
-                        mp.DwAtkMin = script.GetNumber();
-                        mp.DwAtkMax = script.GetNumber();
+                        dwAtkMin = script.GetNumber();
+                        dwAtkMax = script.GetNumber();
                     }
-                    mp.DwAtk1 = script.GetNumber();     // Need expert mode to change
-                    mp.DwAtk2 = script.GetNumber();     // Need expert mode to change
-                    mp.DwAtk3 = script.GetNumber();     // Need expert mode to change
-                    mp.DwAtk4 = script.GetNumber();     // Need expert mode to change
-                    mp.FFrame = script.GetFloat();     // Need expert mode to change
+                    int dwAtk1 = script.GetNumber();     // Need expert mode to change
+                    int dwAtk2 = script.GetNumber();     // Need expert mode to change
+                    int dwAtk3 = script.GetNumber();     // Need expert mode to change
+                    int dwAtk4 = script.GetNumber();     // Need expert mode to change
+                    float fFrame = script.GetFloat();     // Need expert mode to change
 
-                    mp.DwOrthograde = script.GetNumber(); // Useless
-                    mp.DwThrustRate = script.GetNumber(); // Useless
-                    mp.DwChestRate = script.GetNumber(); // Useless
-                    mp.DwHeadRate = script.GetNumber(); // Useless
-                    mp.DwArmRate = script.GetNumber(); // Useless
-                    mp.DwLegRate = script.GetNumber(); // Useless
+                    int dwOrthograde = script.GetNumber(); // Useless
+                    int dwThrustRate = script.GetNumber(); // Useless
+                    int dwChestRate = script.GetNumber(); // Useless
+                    int dwHeadRate = script.GetNumber(); // Useless
+                    int dwArmRate = script.GetNumber(); // Useless
+                    int dwLegRate = script.GetNumber(); // Useless
 
-                    mp.DwAttackSpeed = script.GetNumber(); // Useless
-                    mp.DwReAttackDelay = script.GetNumber();
+                    int dwAttackSpeed = script.GetNumber(); // Useless
+                    int dwReAttackDelay = script.GetNumber();
+
+                    long dwAddHp;
                     if (settings.Mover64BitHp)
-                        mp.DwAddHp = script.GetInt64();
+                        dwAddHp = script.GetInt64();
                     else
-                        mp.DwAddHp = script.GetNumber();
-                    mp.DwAddMp = script.GetNumber();
-                    mp.DwNaturalArmor = script.GetNumber();
-                    mp.NAbrasion = script.GetNumber();
-                    mp.NHardness = script.GetNumber();
-                    mp.DwAdjAtkDelay = script.GetNumber();
+                        dwAddHp = script.GetNumber();
+                    int dwAddMp = script.GetNumber();
+                    int dwNaturalArmor = script.GetNumber();
+                    int nAbrasion = script.GetNumber();
+                    int nHardness = script.GetNumber();
+                    int dwAdjAtkDelay = script.GetNumber();
 
-                    mp.EElementType = script.GetNumber();
+                    int eElementType = script.GetNumber();
                     int elementAtk = script.GetNumber();
-                    if (elementAtk < short.MinValue || elementAtk > short.MaxValue) throw new Exception($"WElementAtk from mover {mp.DwId} value is below or above max short value : {elementAtk}"); // ERROR
-                    mp.WElementAtk = (short)elementAtk; // The atk and def value from element
+                    if (elementAtk < short.MinValue || elementAtk > short.MaxValue) throw new Exception($"WElementAtk from mover {dwId} value is below or above max short value : {elementAtk}"); // ERROR
+                    short wElementAtk = (short)elementAtk; // The atk and def value from element
 
-                    mp.DwHideLevel = script.GetNumber(); // Expert mode
-                    mp.FSpeed = script.GetFloat(); // Speed
-                    mp.DwShelter = script.GetNumber(); // Useless
-                    mp.DwFlying = script.GetNumber(); // Expert mode
-                    mp.DwJumpIng = script.GetNumber(); // Useless
-                    mp.DwAirJump = script.GetNumber(); // Useless
-                    mp.BTaming = script.GetNumber(); // Useless
-                    mp.DwResisMgic = script.GetNumber(); // Magic resist
+                    int dwHideLevel = script.GetNumber(); // Expert mode
+                    float fSpeed = script.GetFloat(); // Speed
+                    int dwShelter = script.GetNumber(); // Useless
+                    int dwFlying = script.GetNumber(); // Expert mode
+                    int dwJumpIng = script.GetNumber(); // Useless
+                    int dwAirJump = script.GetNumber(); // Useless
+                    int bTaming = script.GetNumber(); // Useless
+                    int dwResisMgic = script.GetNumber(); // Magic resist
 
-                    mp.NResistElecricity = (int)(script.GetFloat() * 100);
-                    mp.NResistFire = (int)(script.GetFloat() * 100);
-                    mp.NResistWind = (int)(script.GetFloat() * 100);
-                    mp.NResistWater = (int)(script.GetFloat() * 100);
-                    mp.NResistEarth = (int)(script.GetFloat() * 100);
+                    int nResistElecricity = (int)(script.GetFloat() * 100);
+                    int nResistFire = (int)(script.GetFloat() * 100);
+                    int nResistWind = (int)(script.GetFloat() * 100);
+                    int nResistWater = (int)(script.GetFloat() * 100);
+                    int nResistEarth = (int)(script.GetFloat() * 100);
 
-                    mp.DwCash = script.GetNumber(); // Useless
-                    mp.DwSourceMaterial = script.GetNumber(); // Useless
-                    mp.DwMaterialAmount = script.GetNumber(); // Useless
-                    mp.DwCohesion = script.GetNumber(); // Useless
-                    mp.DwHoldingTime = script.GetNumber(); // Useless
-                    mp.DwCorrectionValue = script.GetNumber(); // Taux de loot (en %)
-                    mp.NExpValue = script.GetInt64(); // Exp sent to killer
-                    mp.NFxpValue = script.GetNumber(); // Flight exp sent to killer (expert mode)
-                    mp.NBodyState = script.GetNumber(); // Useless 
-                    mp.DwAddAbility = script.GetNumber(); // Useless
-                    mp.BKillable = script.GetNumber(); // If monster, always true, otherwise, false
+                    int dwCash = script.GetNumber(); // Useless
+                    int dwSourceMaterial = script.GetNumber(); // Useless
+                    int dwMaterialAmount = script.GetNumber(); // Useless
+                    int dwCohesion = script.GetNumber(); // Useless
+                    int dwHoldingTime = script.GetNumber(); // Useless
+                    int dwCorrectionValue = script.GetNumber(); // Taux de loot (en %)
+                    long nExpValue = script.GetInt64(); // Exp sent to killer
+                    int nFxpValue = script.GetNumber(); // Flight exp sent to killer (expert mode)
+                    int nBodyState = script.GetNumber(); // Useless 
+                    int dwAddAbility = script.GetNumber(); // Useless
+                    int bKillable = script.GetNumber(); // If monster, always true, otherwise, false
 
-                    mp.DwVirtItem1 = script.GetNumber();
-                    mp.DwVirtItem2 = script.GetNumber();
-                    mp.DwVirtItem3 = script.GetNumber();
-                    mp.BVirtType1 = script.GetNumber();
-                    mp.BVirtType2 = script.GetNumber();
-                    mp.BVirtType3 = script.GetNumber();
+                    int dwVirtItem1 = script.GetNumber();
+                    int dwVirtItem2 = script.GetNumber();
+                    int dwVirtItem3 = script.GetNumber();
+                    int bVirtType1 = script.GetNumber();
+                    int bVirtType2 = script.GetNumber();
+                    int bVirtType3 = script.GetNumber();
 
-                    mp.DwSndAtk1 = script.GetNumber(); // Useless
-                    mp.DwSndAtk2 = script.GetNumber(); // Useless
+                    int dwSndAtk1 = script.GetNumber(); // Useless
+                    int dwSndAtk2 = script.GetNumber(); // Useless
 
-                    mp.DwSndDie1 = script.GetNumber(); // Useless
-                    mp.DwSndDie2 = script.GetNumber(); // Useless
+                    int dwSndDie1 = script.GetNumber(); // Useless
+                    int dwSndDie2 = script.GetNumber(); // Useless
 
-                    mp.DwSndDmg1 = script.GetNumber(); // Useless
-                    mp.DwSndDmg2 = script.GetNumber(); // Sound used when mover take dmg (Expert mode)
-                    mp.DwSndDmg3 = script.GetNumber(); // Useless
+                    int dwSndDmg1 = script.GetNumber(); // Useless
+                    int dwSndDmg2 = script.GetNumber(); // Sound used when mover take dmg (Expert mode)
+                    int dwSndDmg3 = script.GetNumber(); // Useless
 
-                    mp.DwSndIdle1 = script.GetNumber(); // Sound played when mover is clicked
-                    mp.DwSndIdle2 = script.GetNumber(); // Useless
+                    int dwSndIdle1 = script.GetNumber(); // Sound played when mover is clicked
+                    int dwSndIdle2 = script.GetNumber(); // Useless
 
-                    mp.SzComment = script.GetToken(); // Comment (useless)
+                    string szComment = script.GetToken(); // Comment (useless)
 
-                    if (!mp.SzComment.StartsWith("IDS_"))
+                    if (!szComment.StartsWith("IDS_"))
                     {
                         string txtKey = this.GetNextStringIdentifier();
-                        strings.Add(txtKey, mp.SzComment);
-                        mp.SzComment = txtKey;
+                        strings.Add(txtKey, szComment);
+                        szComment = txtKey;
                     }
 
+                    int dwAreaColor = default;
+                    string szNpcMark = string.Empty;
+                    int dwMadrigalGiftPoint = default;
                     if (settings.ResourcesVersion >= 19)
                     {
-                        mp.DwAreaColor = script.GetNumber(); // Useless
-                        mp.SzNpcMark = script.GetToken(); // Useless
-                        mp.DwMadrigalGiftPoint = script.GetNumber(); // Useless
+                        dwAreaColor = script.GetNumber(); // Useless
+                        szNpcMark = script.GetToken(); // Useless
+                        dwMadrigalGiftPoint = script.GetNumber(); // Useless
                     }
 
                     /* It is possible to be at the end of stream there if there is no blank at the end of the
@@ -209,16 +218,103 @@ namespace eTools_Ultimate.Services
                     if (script.Token == "" && script.EndOfStream)
                         throw new IncorrectlyFormattedFileException(filePath);
 
-                    if (!strings.ContainsKey(mp.SzName))
-                        strings.Add(mp.SzName, "");          // If IDS is not defined, we add it to be defined.
-                    if (!strings.ContainsKey(mp.SzComment))
-                        strings.Add(mp.SzComment, "");          // If IDS is not defined, we add it to be defined.
-                    this.Movers.Add(
-                        new Mover()
-                        {
-                            Prop = mp
-                        }
-                    );
+                    if (!strings.ContainsKey(szName))
+                        strings.Add(szName, "");          // If IDS is not defined, we add it to be defined.
+                    if (!strings.ContainsKey(szComment))
+                        strings.Add(szComment, "");          // If IDS is not defined, we add it to be defined.
+
+                    MoverProp moverProp = new(
+                        dwId: dwId,
+                        szName: szName,
+                        dwAi: dwAi,
+                        dwStr: dwStr,
+                        dwSta: dwSta,
+                        dwDex: dwDex,
+                        dwInt: dwInt,
+                        dwHR: dwHR,
+                        dwER: dwER,
+                        dwRace: dwRace,
+                        dwBelligerence: dwBelligerence,
+                        dwGender: dwGender,
+                        dwLevel: dwLevel,
+                        dwFlightLevel: dwFlightLevel,
+                        dwSize: dwSize,
+                        dwClass: dwClass,
+                        bIfParts: bIfParts,
+                        nChaotic: nChaotic,
+                        dwUseable: dwUseable,
+                        dwActionRadius: dwActionRadius,
+                        dwAtkMin: dwAtkMin,
+                        dwAtkMax: dwAtkMax,
+                        dwAtk1: dwAtk1,
+                        dwAtk2: dwAtk2,
+                        dwAtk3: dwAtk3,
+                        dwAtk4: dwAtk4,
+                        fFrame: fFrame,
+                        dwOrthograde: dwOrthograde,
+                        dwThrustRate: dwThrustRate,
+                        dwChestRate: dwChestRate,
+                        dwHeadRate: dwHeadRate,
+                        dwArmRate: dwArmRate,
+                        dwLegRate: dwLegRate,
+                        dwAttackSpeed: dwAttackSpeed,
+                        dwReAttackDelay: dwReAttackDelay,
+                        dwAddHp: dwAddHp,
+                        dwAddMp: dwAddMp,
+                        dwNaturalArmor: dwNaturalArmor,
+                        nAbrasion: nAbrasion,
+                        nHardness: nHardness,
+                        dwAdjAtkDelay: dwAdjAtkDelay,
+                        eElementType: eElementType,
+                        wElementAtk: wElementAtk,
+                        dwHideLevel: dwHideLevel,
+                        fSpeed: fSpeed,
+                        dwShelter: dwShelter,
+                        dwFlying: dwFlying,
+                        dwJumpIng: dwJumpIng,
+                        dwAirJump: dwAirJump,
+                        bTaming: bTaming,
+                        dwResisMgic: dwResisMgic,
+                        nResistElecricity: nResistElecricity,
+                        nResistFire: nResistFire,
+                        nResistWind: nResistWind,
+                        nResistWater: nResistWater,
+                        nResistEarth: nResistEarth,
+                        dwCash: dwCash,
+                        dwSourceMaterial: dwSourceMaterial,
+                        dwMaterialAmount: dwMaterialAmount,
+                        dwCohesion: dwCohesion,
+                        dwHoldingTime: dwHoldingTime,
+                        dwCorrectionValue: dwCorrectionValue,
+                        nExpValue: nExpValue,
+                        nFxpValue: nFxpValue,
+                        nBodyState: nBodyState,
+                        dwAddAbility: dwAddAbility,
+                        bKillable: bKillable,
+                        dwVirtItem1: dwVirtItem1,
+                        dwVirtItem2: dwVirtItem2,
+                        dwVirtItem3: dwVirtItem3,
+                        bVirtType1: bVirtType1,
+                        bVirtType2: bVirtType2,
+                        bVirtType3: bVirtType3,
+                        dwSndAtk1: dwSndAtk1,
+                        dwSndAtk2: dwSndAtk2,
+                        dwSndDie1: dwSndDie1,
+                        dwSndDie2: dwSndDie2,
+                        dwSndDmg1: dwSndDmg1,
+                        dwSndDmg2: dwSndDmg2,
+                        dwSndDmg3: dwSndDmg3,
+                        dwSndIdle1: dwSndIdle1,
+                        dwSndIdle2: dwSndIdle2,
+                        szComment: szComment,
+                        dwAreaColor: dwAreaColor,
+                        szNpcMark: szNpcMark,
+                        dwMadrigalGiftPoint: dwMadrigalGiftPoint
+                        );
+                    ModelElem? model = moverModelsDictionary.GetValueOrDefault(dwId);
+                    Mover mover = new(moverProp, model);
+
+                    Movers.Add(mover);
                 }
             }
         }

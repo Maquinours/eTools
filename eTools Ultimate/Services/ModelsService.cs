@@ -40,10 +40,6 @@ namespace eTools_Ultimate.Services
         {
             this.ClearModels();
 
-            ObservableDictionary<string, int> defines = DefinesService.Instance.Defines;
-            MoversService moversService = MoversService.Instance;
-            ItemsService itemsService = ItemsService.Instance;
-
             // Maybe make it a settings property
             string filePath = $"{Settings.Instance.ResourcesFolderPath}mdlDyna.inc";
 
@@ -132,18 +128,6 @@ namespace eTools_Ultimate.Services
                             script.GetToken();
                         }
                         currBrace.Models.Add(modelElem); // We add the current model to the current brace
-                        if (modelElem.DwType == defines["OT_MOVER"]) // If model corresponds to a mover
-                        {
-                            Mover? mover = moversService.GetMoverById(modelElem.DwIndex);
-                            if (mover != null)
-                                mover.Model = modelElem; // We get the mover that the model is for and we set its model to the current model
-                        }
-                        else if (modelElem.DwType == defines["OT_ITEM"]) // If model corresponds to an item
-                        {
-                            Item? item = itemsService.GetItemById(modelElem.DwIndex);
-                            if (item != null)
-                                item.Model = modelElem; // We get the item that the model is for and we set its model to the current model
-                        }
                     }
                 }
             }
@@ -179,6 +163,20 @@ namespace eTools_Ultimate.Services
             }
         }
 
+        private ModelElem[] GetModelsRecursively(ModelBrace brace)
+        {
+            List<ModelElem> models = [];
+            foreach(ModelElem model in brace.Models)
+            {
+                models.Add(model);
+            }
+            foreach (ModelBrace modelBrace in brace.Braces)
+            {
+                models.AddRange(GetModelsRecursively(modelBrace));
+            }
+            return [.. models];
+        }
+
         private ModelBrace[] GetBracesByType(int type)
         {
             List<ModelBrace> braces = [];
@@ -189,6 +187,17 @@ namespace eTools_Ultimate.Services
             }
 
             return braces.ToArray();
+        }
+
+        public ModelElem[] GetModelsByType(int type)
+        {
+            List<ModelElem> models = [];
+            foreach(MainModelBrace mainBrace in Models)
+            {
+                if (mainBrace.IType != type) continue;
+                models.AddRange(GetModelsRecursively(mainBrace));
+            }
+            return [.. models];
         }
 
         public ModelBrace GetBraceByModel(ModelElem model)

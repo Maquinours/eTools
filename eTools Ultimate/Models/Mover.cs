@@ -11,7 +11,94 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Models
 {
-    public class MoverProp : INotifyPropertyChanged
+    public class MoverProp(
+        int dwId,
+        string szName,
+        int dwAi,
+        int dwStr,
+        int dwSta,
+        int dwDex,
+        int dwInt,
+        int dwHR,
+        int dwER,
+        int dwRace,
+        int dwBelligerence,
+        int dwGender,
+        int dwLevel,
+        int dwFlightLevel,
+        int dwSize,
+        int dwClass,
+        int bIfParts,
+        int nChaotic,
+        int dwUseable,
+        int dwActionRadius,
+        long dwAtkMin,
+        long dwAtkMax,
+        int dwAtk1,
+        int dwAtk2,
+        int dwAtk3,
+        int dwAtk4,
+        float fFrame,
+        int dwOrthograde,
+        int dwThrustRate,
+        int dwChestRate,
+        int dwHeadRate,
+        int dwArmRate,
+        int dwLegRate,
+        int dwAttackSpeed,
+        int dwReAttackDelay,
+        long dwAddHp,
+        int dwAddMp,
+        int dwNaturalArmor,
+        int nAbrasion,
+        int nHardness,
+        int dwAdjAtkDelay,
+        int eElementType,
+        short wElementAtk,
+        int dwHideLevel,
+        float fSpeed,
+        int dwShelter,
+        int dwFlying,
+        int dwJumpIng,
+        int dwAirJump,
+        int bTaming,
+        int dwResisMgic,
+        int nResistElecricity,
+        int nResistFire,
+        int nResistWind,
+        int nResistWater,
+        int nResistEarth,
+        int dwCash,
+        int dwSourceMaterial,
+        int dwMaterialAmount,
+        int dwCohesion,
+        int dwHoldingTime,
+        int dwCorrectionValue,
+        long nExpValue,
+        int nFxpValue,
+        int nBodyState,
+        int dwAddAbility,
+        int bKillable,
+        int dwVirtItem1,
+        int dwVirtItem2,
+        int dwVirtItem3,
+        int bVirtType1,
+        int bVirtType2,
+        int bVirtType3,
+        int dwSndAtk1,
+        int dwSndAtk2,
+        int dwSndDie1,
+        int dwSndDie2,
+        int dwSndDmg1,
+        int dwSndDmg2,
+        int dwSndDmg3,
+        int dwSndIdle1,
+        int dwSndIdle2,
+        string szComment,
+        int dwAreaColor,
+        string szNpcMark,
+        int dwMadrigalGiftPoint
+        ) : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -25,92 +112,92 @@ namespace eTools_Ultimate.Models
         //    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         //}
 
-        private int _dwId;
-        private string _szName;
-        private int _dwAi;
-        private int _dwStr;
-        private int _dwSta;
-        private int _dwDex;
-        private int _dwInt;
-        private int _dwHR;
-        private int _dwER;
-        private int _dwRace;
-        private int _dwBelligerence;
-        private int _dwGender;
-        private int _dwLevel;
-        private int _dwFlightLevel;
-        private int _dwSize;
-        private int _dwClass;
-        private int _bIfParts;
-        private int _nChaotic;
-        private int _dwUseable;
-        private int _dwActionRadius;
-        private long _dwAtkMin;
-        private long _dwAtkMax;
-        private int _dwAtk1;
-        private int _dwAtk2;
-        private int _dwAtk3;
-        private int _dwAtk4;
-        private float _fFrame;
-        private int _dwOrthograde;
-        private int _dwThrustRate;
-        private int _dwChestRate;
-        private int _dwHeadRate;
-        private int _dwArmRate;
-        private int _dwLegRate;
-        private int _dwAttackSpeed;
-        private int _dwReAttackDelay;
-        private long _dwAddHp;
-        private int _dwAddMp;
-        private int _dwNaturalArmor;
-        private int _nAbrasion;
-        private int _nHardness;
-        private int _dwAdjAtkDelay;
-        private int _eElementType;
-        private short _wElementAtk;
-        private int _dwHideLevel;
-        private float _fSpeed;
-        private int _dwShelter;
-        private int _dwFlying;
-        private int _dwJumpIng;
-        private int _dwAirJump;
-        private int _bTaming;
-        private int _dwResisMgic;
-        private int _nResistElecricity;
-        private int _nResistFire;
-        private int _nResistWind;
-        private int _nResistWater;
-        private int _nResistEarth;
-        private int _dwCash;
-        private int _dwSourceMaterial;
-        private int _dwMaterialAmount;
-        private int _dwCohesion;
-        private int _dwHoldingTime;
-        private int _dwCorrectionValue;
-        private long _nExpValue;
-        private int _nFxpValue;
-        private int _nBodyState;
-        private int _dwAddAbility;
-        private int _bKillable;
-        private int _dwVirtItem1;
-        private int _dwVirtItem2;
-        private int _dwVirtItem3;
-        private int _bVirtType1;
-        private int _bVirtType2;
-        private int _bVirtType3;
-        private int _dwSndAtk1;
-        private int _dwSndAtk2;
-        private int _dwSndDie1;
-        private int _dwSndDie2;
-        private int _dwSndDmg1;
-        private int _dwSndDmg2;
-        private int _dwSndDmg3;
-        private int _dwSndIdle1;
-        private int _dwSndIdle2;
-        private string _szComment;
-        private int _dwAreaColor;
-        private string _szNpcMark;
-        private int _dwMadrigalGiftPoint;
+        private int _dwId = dwId;
+        private string _szName = szName;
+        private int _dwAi = dwAi;
+        private int _dwStr = dwStr;
+        private int _dwSta = dwSta;
+        private int _dwDex = dwDex;
+        private int _dwInt = dwInt;
+        private int _dwHR = dwHR;
+        private int _dwER = dwER;
+        private int _dwRace = dwRace;
+        private int _dwBelligerence = dwBelligerence;
+        private int _dwGender = dwGender;
+        private int _dwLevel = dwLevel;
+        private int _dwFlightLevel = dwFlightLevel;
+        private int _dwSize = dwSize;
+        private int _dwClass = dwClass;
+        private int _bIfParts = bIfParts;
+        private int _nChaotic = nChaotic;
+        private int _dwUseable = dwUseable;
+        private int _dwActionRadius = dwActionRadius;
+        private long _dwAtkMin = dwAtkMin;
+        private long _dwAtkMax = dwAtkMax;
+        private int _dwAtk1 = dwAtk1;
+        private int _dwAtk2 = dwAtk2;
+        private int _dwAtk3 = dwAtk3;
+        private int _dwAtk4 = dwAtk4;
+        private float _fFrame = fFrame;
+        private int _dwOrthograde = dwOrthograde;
+        private int _dwThrustRate = dwThrustRate;
+        private int _dwChestRate = dwChestRate;
+        private int _dwHeadRate = dwHeadRate;
+        private int _dwArmRate = dwArmRate;
+        private int _dwLegRate = dwLegRate;
+        private int _dwAttackSpeed = dwAttackSpeed;
+        private int _dwReAttackDelay = dwReAttackDelay;
+        private long _dwAddHp = dwAddHp;
+        private int _dwAddMp = dwAddMp;
+        private int _dwNaturalArmor = dwNaturalArmor;
+        private int _nAbrasion = nAbrasion;
+        private int _nHardness = nHardness;
+        private int _dwAdjAtkDelay = dwAdjAtkDelay;
+        private int _eElementType = eElementType;
+        private short _wElementAtk = wElementAtk;
+        private int _dwHideLevel = dwHideLevel;
+        private float _fSpeed = fSpeed;
+        private int _dwShelter = dwShelter;
+        private int _dwFlying = dwFlying;
+        private int _dwJumpIng = dwJumpIng;
+        private int _dwAirJump = dwAirJump;
+        private int _bTaming = bTaming;
+        private int _dwResisMgic = dwResisMgic;
+        private int _nResistElecricity = nResistElecricity;
+        private int _nResistFire = nResistFire;
+        private int _nResistWind = nResistWind;
+        private int _nResistWater = nResistWater;
+        private int _nResistEarth = nResistEarth;
+        private int _dwCash = dwCash;
+        private int _dwSourceMaterial = dwSourceMaterial;
+        private int _dwMaterialAmount = dwMaterialAmount;
+        private int _dwCohesion = dwCohesion;
+        private int _dwHoldingTime = dwHoldingTime;
+        private int _dwCorrectionValue = dwCorrectionValue;
+        private long _nExpValue = nExpValue;
+        private int _nFxpValue = nFxpValue;
+        private int _nBodyState = nBodyState;
+        private int _dwAddAbility = dwAddAbility;
+        private int _bKillable = bKillable;
+        private int _dwVirtItem1 = dwVirtItem1;
+        private int _dwVirtItem2 = dwVirtItem2;
+        private int _dwVirtItem3 = dwVirtItem3;
+        private int _bVirtType1 = bVirtType1;
+        private int _bVirtType2 = bVirtType2;
+        private int _bVirtType3 = bVirtType3;
+        private int _dwSndAtk1 = dwSndAtk1;
+        private int _dwSndAtk2 = dwSndAtk2;
+        private int _dwSndDie1 = dwSndDie1;
+        private int _dwSndDie2 = dwSndDie2;
+        private int _dwSndDmg1 = dwSndDmg1;
+        private int _dwSndDmg2 = dwSndDmg2;
+        private int _dwSndDmg3 = dwSndDmg3;
+        private int _dwSndIdle1 = dwSndIdle1;
+        private int _dwSndIdle2 = dwSndIdle2;
+        private string _szComment = szComment;
+        private int _dwAreaColor = dwAreaColor;
+        private string _szNpcMark = szNpcMark;
+        private int _dwMadrigalGiftPoint = dwMadrigalGiftPoint;
 
         public int DwId { get => _dwId; set => SetValue(ref this._dwId, value); }
         public string SzName
@@ -270,34 +357,16 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        private void ProjectStrings_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void ProjectStrings_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             if (this.Prop != null && e.Action == NotifyCollectionChangedAction.Reset || (e.OldItems != null && e.OldItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)) || (e.NewItems != null && e.NewItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)))
                 NotifyPropertyChanged(nameof(this.Name));
         }
 
-        private MoverProp _prop;
+        private readonly MoverProp _prop;
         private ModelElem? _model;
 
-        public MoverProp Prop
-        {
-            get => this._prop;
-            set
-            {
-                if (value != this.Prop)
-                {
-                    if (this.Prop != null)
-                        this.Prop.PropertyChanged -= Prop_PropertyChanged;
-
-                    MoverProp? oldValue = this.Prop;
-
-                    this._prop = value;
-                    this._prop.PropertyChanged += Prop_PropertyChanged;
-
-                    NotifyPropertyChanged(nameof(this.Prop), oldValue, this.Prop);
-                }
-            }
-        }
+        public MoverProp Prop => this._prop;
 
         public ModelElem? Model 
         {
@@ -350,16 +419,19 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public Mover()
+        public Mover(MoverProp prop, ModelElem? model)
         {
+            _prop = prop;
+            _model = model;
+
+            Prop.PropertyChanged += Prop_PropertyChanged;
             StringsService.Instance.Strings.CollectionChanged += ProjectStrings_CollectionChanged;
         }
 
         public void Dispose()
         {
+            Prop.PropertyChanged -= Prop_PropertyChanged;
             StringsService.Instance.Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
-            if (this.Prop != null)
-                this.Prop.PropertyChanged -= Prop_PropertyChanged;
         }
     }
 }

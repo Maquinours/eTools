@@ -169,187 +169,358 @@ namespace eTools_Ultimate.Models
     //    }
     //}
 
-    public class ItemProp : INotifyPropertyChanged
+    public class ItemProp(
+        int nVer,
+        int dwId,
+        string szName,
+        int dwNum,
+        int dwPackMax,
+        int dwItemKind1,
+        int dwItemKind2,
+        int dwItemKind3,
+        int dwItemJob,
+        int bPermanence,
+        int dwUseable,
+        int dwItemSex,
+        int dwCost,
+        int dwEndurance,
+        int nAbrasion,
+        int nMaxRepair,
+        int dwHanded,
+        int dwFlag,
+        int dwParts,
+        int dwPartsub,
+        int bPartsFile,
+        int dwExclusive,
+        int dwBasePartsIgnore,
+        int dwItemLV,
+        int dwItemRare,
+        int dwShopAble,
+        int nLog,
+        int bCharged,
+        int dwLinkKindBullet,
+        int dwLinkKind,
+        int dwAbilityMin,
+        int dwAbilityMax,
+        short eItemType,
+        short wItemEAtk,
+        int dwParry,
+        int dwBlockRating,
+        int nAddSkillMin,
+        int nAddSkillMax,
+        int dwAtkStyle,
+        int dwWeaponType,
+        int dwItemAtkOrder1,
+        int dwItemAtkOrder2,
+        int dwItemAtkOrder3,
+        int dwItemAtkOrder4,
+        int tmContinuousPain,
+        int nShellQuantity,
+        int dwRecoil,
+        int dwLoadingTime,
+        int nAdjHitRate,
+        float fAttackSpeed,
+        int dwDmgShift,
+        int dwAttackRange,
+        int nProbability,
+        int dwDestParam1,
+        int dwDestParam2,
+        int dwDestParam3,
+        int dwDestParam4,
+        int dwDestParam5,
+        int dwDestParam6,
+        int nAdjParamVal1,
+        int nAdjParamVal2,
+        int nAdjParamVal3,
+        int nAdjParamVal4,
+        int nAdjParamVal5,
+        int nAdjParamVal6,
+        int dwChgParamVal1,
+        int dwChgParamVal2,
+        int dwChgParamVal3,
+        int dwChgParamVal4,
+        int dwChgParamVal5,
+        int dwChgParamVal6,
+        int nDestData11,
+        int nDestData12,
+        int nDestData13,
+        int nDestData14,
+        int nDestData15,
+        int nDestData16,
+        int dwActiveSkill,
+        int dwActiveSkillLv,
+        int dwActiveSkillRate,
+        int dwReqMp,
+        int dwReqFp,
+        int dwReqDisLV,
+        int dwReSkill1,
+        int dwReSkillLevel1,
+        int dwReSkill2,
+        int dwReSkillLevel2,
+        int dwSkillReadyType,
+        int dwSkillReady,
+        int dwSkillRange,
+        int dwSfxElemental,
+        int dwSfxObj,
+        int dwSfxObj2,
+        int dwSfxObj3,
+        int dwSfxObj4,
+        int dwSfxObj5,
+        int dwUseMotion,
+        int dwCircleTime,
+        int dwSkillTime,
+        int dwExeTarget,
+        int dwUseChance,
+        int dwSpellRegion,
+        int dwSpellType,
+        int dwReferStat1,
+        int dwReferStat2,
+        int dwReferTarget1,
+        int dwReferTarget2,
+        int dwReferValue1,
+        int dwReferValue2,
+        int dwSkillType,
+        int nItemResistElecricity,
+        int nItemResistFire,
+        int nItemResistWind,
+        int nItemResistWater,
+        int nItemResistEarth,
+        int nEvildoing,
+        int dwExpertLV,
+        int dwExpertMax,
+        int dwSubDefine,
+        int dwExp,
+        int dwComboStyle,
+        float fFlightSpeed,
+        float fFlightLRAngle,
+        float fFlightTBAngle,
+        int dwFlightLimit,
+        int dwFFuelReMax,
+        int dwAFuelReMax,
+        int dwFuelRe,
+        int dwLimitLevel1,
+        int nReflect,
+        int dwSndAttack1,
+        int dwSndAttack2,
+        string szIcon,
+        int dwQuestId,
+        string szTextFileName,
+        string szCommand,
+        int nMinLimitLevel,
+        int nMaxLimitLevel,
+        int nItemGroup,
+        int nUseLimitGroup,
+        int nMaxDuplication,
+        int nEffectValue,
+        int nTargetMinEnchant,
+        int nTargetMaxEnchant,
+        int bResetBind,
+        int nBindCondition,
+        int nResetBindCondition,
+        int dwHitActiveSkillId,
+        int dwHitActiveSkillLv,
+        int dwHitActiveSkillProb,
+        int dwHitActiveSkillTarget,
+        int dwDamageActiveSkillId,
+        int dwDamageActiveSkillLv,
+        int dwDamageActiveSkillProb,
+        int dwDamageActiveSkillTarget,
+        int dwEquipActiveSkillId,
+        int dwEquipActiveSkillLv,
+        int dwSmelting,
+        int dwAttsmelting,
+        int dwGemsmelting,
+        int dwPierce,
+        int dwUprouse,
+        int bAbsoluteTime,
+        int dwItemGrade,
+        int bCanTrade,
+        int dwMainCategory,
+        int dwSubCategory,
+        int bCanHaveServerTransform,
+        int bCanSavePotion,
+        int bCanLooksChange,
+        int bIsLooksChangeMaterial
+        ) : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private int _nVer;
-        private int _dwId;
-        private string _szName;
-        private int _dwNum;
-        private int _dwPackMax;
-        private int _dwItemKind1;
-        private int _dwItemKind2;
-        private int _dwItemKind3;
-        private int _dwItemJob;
-        private int _bPermanence;
-        private int _dwUseable;
-        private int _dwItemSex;
-        private int _dwCost;
-        private int _dwEndurance;
-        private int _nAbrasion;
-        private int _nMaxRepair;
-        private int _dwHanded;
-        private int _dwFlag;
-        private int _dwParts;
-        private int _dwPartsub;
-        private int _bPartsFile;
-        private int _dwExclusive;
-        private int _dwBasePartsIgnore;
-        private int _dwItemLV;
-        private int _dwItemRare;
-        private int _dwShopAble;
-        private int _nLog;
-        private int _bCharged;
-        private int _dwLinkKindBullet;
-        private int _dwLinkKind;
-        private int _dwAbilityMin;
-        private int _dwAbilityMax;
-        private short _eItemType;
-        private short _wItemEAtk;
-        private int _dwParry;
-        private int _dwBlockRating;
-        private int _nAddSkillMin;
-        private int _nAddSkillMax;
-        private int _dwAtkStyle;
-        private int _dwWeaponType;
-        private int _dwItemAtkOrder1;
-        private int _dwItemAtkOrder2;
-        private int _dwItemAtkOrder3;
-        private int _dwItemAtkOrder4;
-        private int _tmContinuousPain;
-        private int _nShellQuantity;
-        private int _dwRecoil;
-        private int _dwLoadingTime;
-        private int _nAdjHitRate;
-        private float _fAttackSpeed;
-        private int _dwDmgShift;
-        private int _dwAttackRange;
-        private int _nProbability;
-        private int _dwDestParam1;
-        private int _dwDestParam2;
-        private int _dwDestParam3;
-        private int _dwDestParam4;
-        private int _dwDestParam5;
-        private int _dwDestParam6;
-        private int _nAdjParamVal1;
-        private int _nAdjParamVal2;
-        private int _nAdjParamVal3;
-        private int _nAdjParamVal4;
-        private int _nAdjParamVal5;
-        private int _nAdjParamVal6;
-        private int _dwChgParamVal1;
-        private int _dwChgParamVal2;
-        private int _dwChgParamVal3;
-        private int _dwChgParamVal4;
-        private int _dwChgParamVal5;
-        private int _dwChgParamVal6;
-        private int _nDestData11;
-        private int _nDestData12;
-        private int _nDestData13;
-        private int _nDestData14;
-        private int _nDestData15;
-        private int _nDestData16;
-
-        private int _dwActiveSkill;
-        private int _dwActiveSkillLv;
-        private int _dwActiveSkillRate;
-        private int _dwReqMp;
-        private int _dwReqFp;
-        private int _dwReqDisLV;
-        private int _dwReSkill1;
-        private int _dwReSkillLevel1;
-        private int _dwReSkill2;
-        private int _dwReSkillLevel2;
-        private int _dwSkillReadyType;
-        private int _dwSkillReady;
-        private int _dwSkillRange;
-        private int _dwSfxElemental;
-        private int _dwSfxObj;
-        private int _dwSfxObj2;
-        private int _dwSfxObj3;
-        private int _dwSfxObj4;
-        private int _dwSfxObj5;
-        private int _dwUseMotion;
-        private int _dwCircleTime;
-        private int _dwSkillTime;
-        private int _dwExeTarget;
-        private int _dwUseChance;
-        private int _dwSpellRegion;
-        private int _dwSpellType;
-        private int _dwReferStat1;
-        private int _dwReferStat2;
-        private int _dwReferTarget1;
-        private int _dwReferTarget2;
-        private int _dwReferValue1;
-        private int _dwReferValue2;
-        private int _dwSkillType;
-        private int _nItemResistElecricity;
-        private int _nItemResistFire;
-        private int _nItemResistWind;
-        private int _nItemResistWater;
-        private int _nItemResistEarth;
-        private int _nEvildoing;
-        private int _dwExpertLV;
-        private int _dwExpertMax;
-        private int _dwSubDefine;
-        private int _dwExp;
-        private int _dwComboStyle;
-        private float _fFlightSpeed;
-        private float _fFlightLRAngle;
-        private float _fFlightTBAngle;
-        private int _dwFlightLimit;
-        private int _dwFFuelReMax;
-        private int _dwAFuelReMax;
-        private int _dwFuelRe;
-        private int _dwLimitLevel1;
-        private int _nReflect;
-        private int _dwSndAttack1;
-        private int _dwSndAttack2;
-        private string _szIcon;
-        private int _dwQuestId;
-        private string _szTextFileName;
-        private string _szCommand;
-        private int _nMinLimitLevel;
-        private int _nMaxLimitLevel;
-        private int _nItemGroup;
-        private int _nUseLimitGroup;
-        private int _nMaxDuplication;
-        private int _nEffectValue;
-        private int _nTargetMinEnchant;
-        private int _nTargetMaxEnchant;
-        private int _bResetBind;
-        private int _nBindCondition;
-        private int _nResetBindCondition;
-        private int _dwHitActiveSkillId;
-        private int _dwHitActiveSkillLv;
-        private int _dwHitActiveSkillProb;
-        private int _dwHitActiveSkillTarget;
-        private int _dwDamageActiveSkillId;
-        private int _dwDamageActiveSkillLv;
-        private int _dwDamageActiveSkillProb;
-        private int _dwDamageActiveSkillTarget;
-        private int _dwEquipActiveSkillId;
-        private int _dwEquipActiveSkillLv;
-        private int _dwSmelting;
-        private int _dwAttsmelting;
-        private int _dwGemsmelting;
-        private int _dwPierce;
-        private int _dwUprouse;
-        private int _bAbsoluteTime;
-        private int _dwItemGrade;
-        private int _bCanTrade;
-        private int _dwMainCategory;
-        private int _dwSubCategory;
-        private int _bCanHaveServerTransform;
-        private int _bCanSavePotion;
-        private int _bCanLooksChange;
-        private int _bIsLooksChangeMaterial;
+        private int _nVer = nVer;
+        private int _dwId = dwId;
+        private string _szName = szName;
+        private int _dwNum = dwNum;
+        private int _dwPackMax = dwPackMax;
+        private int _dwItemKind1 = dwItemKind1;
+        private int _dwItemKind2 = dwItemKind2;
+        private int _dwItemKind3 = dwItemKind3;
+        private int _dwItemJob = dwItemJob;
+        private int _bPermanence = bPermanence;
+        private int _dwUseable = dwUseable;
+        private int _dwItemSex = dwItemSex;
+        private int _dwCost = dwCost;
+        private int _dwEndurance = dwEndurance;
+        private int _nAbrasion = nAbrasion;
+        private int _nMaxRepair = nMaxRepair;
+        private int _dwHanded = dwHanded;
+        private int _dwFlag = dwFlag;
+        private int _dwParts = dwParts;
+        private int _dwPartsub = dwPartsub;
+        private int _bPartsFile = bPartsFile;
+        private int _dwExclusive = dwExclusive;
+        private int _dwBasePartsIgnore = dwBasePartsIgnore;
+        private int _dwItemLV = dwItemLV;
+        private int _dwItemRare = dwItemRare;
+        private int _dwShopAble = dwShopAble;
+        private int _nLog = nLog;
+        private int _bCharged = bCharged;
+        private int _dwLinkKindBullet = dwLinkKindBullet;
+        private int _dwLinkKind = dwLinkKind;
+        private int _dwAbilityMin = dwAbilityMin;
+        private int _dwAbilityMax = dwAbilityMax;
+        private short _eItemType = eItemType;
+        private short _wItemEAtk = wItemEAtk;
+        private int _dwParry = dwParry;
+        private int _dwBlockRating = dwBlockRating;
+        private int _nAddSkillMin = nAddSkillMin;
+        private int _nAddSkillMax = nAddSkillMax;
+        private int _dwAtkStyle = dwAtkStyle;
+        private int _dwWeaponType = dwWeaponType;
+        private int _dwItemAtkOrder1 = dwItemAtkOrder1;
+        private int _dwItemAtkOrder2 = dwItemAtkOrder2;
+        private int _dwItemAtkOrder3 = dwItemAtkOrder3;
+        private int _dwItemAtkOrder4 = dwItemAtkOrder4;
+        private int _tmContinuousPain = tmContinuousPain;
+        private int _nShellQuantity = nShellQuantity;
+        private int _dwRecoil = dwRecoil;
+        private int _dwLoadingTime = dwLoadingTime;
+        private int _nAdjHitRate = nAdjHitRate;
+        private float _fAttackSpeed = fAttackSpeed;
+        private int _dwDmgShift = dwDmgShift;
+        private int _dwAttackRange = dwAttackRange;
+        private int _nProbability = nProbability;
+        private int _dwDestParam1 = dwDestParam1;
+        private int _dwDestParam2 = dwDestParam2;
+        private int _dwDestParam3 = dwDestParam3;
+        private int _dwDestParam4 = dwDestParam4;
+        private int _dwDestParam5 = dwDestParam5;
+        private int _dwDestParam6 = dwDestParam6;
+        private int _nAdjParamVal1 = nAdjParamVal1;
+        private int _nAdjParamVal2 = nAdjParamVal2;
+        private int _nAdjParamVal3 = nAdjParamVal3;
+        private int _nAdjParamVal4 = nAdjParamVal4;
+        private int _nAdjParamVal5 = nAdjParamVal5;
+        private int _nAdjParamVal6 = nAdjParamVal6;
+        private int _dwChgParamVal1 = dwChgParamVal1;
+        private int _dwChgParamVal2 = dwChgParamVal2;
+        private int _dwChgParamVal3 = dwChgParamVal3;
+        private int _dwChgParamVal4 = dwChgParamVal4;
+        private int _dwChgParamVal5 = dwChgParamVal5;
+        private int _dwChgParamVal6 = dwChgParamVal6;
+        private int _nDestData11 = nDestData11;
+        private int _nDestData12 = nDestData12;
+        private int _nDestData13 = nDestData13;
+        private int _nDestData14 = nDestData14;
+        private int _nDestData15 = nDestData15;
+        private int _nDestData16 = nDestData16;
+        private int _dwActiveSkill = dwActiveSkill;
+        private int _dwActiveSkillLv = dwActiveSkillLv;
+        private int _dwActiveSkillRate = dwActiveSkillRate;
+        private int _dwReqMp = dwReqMp;
+        private int _dwReqFp = dwReqFp;
+        private int _dwReqDisLV = dwReqDisLV;
+        private int _dwReSkill1 = dwReSkill1;
+        private int _dwReSkillLevel1 = dwReSkillLevel1;
+        private int _dwReSkill2 = dwReSkill2;
+        private int _dwReSkillLevel2 = dwReSkillLevel2;
+        private int _dwSkillReadyType = dwSkillReadyType;
+        private int _dwSkillReady = dwSkillReady;
+        private int _dwSkillRange = dwSkillRange;
+        private int _dwSfxElemental = dwSfxElemental;
+        private int _dwSfxObj = dwSfxObj;
+        private int _dwSfxObj2 = dwSfxObj2;
+        private int _dwSfxObj3 = dwSfxObj3;
+        private int _dwSfxObj4 = dwSfxObj4;
+        private int _dwSfxObj5 = dwSfxObj5;
+        private int _dwUseMotion = dwUseMotion;
+        private int _dwCircleTime = dwCircleTime;
+        private int _dwSkillTime = dwSkillTime;
+        private int _dwExeTarget = dwExeTarget;
+        private int _dwUseChance = dwUseChance;
+        private int _dwSpellRegion = dwSpellRegion;
+        private int _dwSpellType = dwSpellType;
+        private int _dwReferStat1 = dwReferStat1;
+        private int _dwReferStat2 = dwReferStat2;
+        private int _dwReferTarget1 = dwReferTarget1;
+        private int _dwReferTarget2 = dwReferTarget2;
+        private int _dwReferValue1 = dwReferValue1;
+        private int _dwReferValue2 = dwReferValue2;
+        private int _dwSkillType = dwSkillType;
+        private int _nItemResistElecricity = nItemResistElecricity;
+        private int _nItemResistFire = nItemResistFire;
+        private int _nItemResistWind = nItemResistWind;
+        private int _nItemResistWater = nItemResistWater;
+        private int _nItemResistEarth = nItemResistEarth;
+        private int _nEvildoing = nEvildoing;
+        private int _dwExpertLV = dwExpertLV;
+        private int _dwExpertMax = dwExpertMax;
+        private int _dwSubDefine = dwSubDefine;
+        private int _dwExp = dwExp;
+        private int _dwComboStyle = dwComboStyle;
+        private float _fFlightSpeed = fFlightSpeed;
+        private float _fFlightLRAngle = fFlightLRAngle;
+        private float _fFlightTBAngle = fFlightTBAngle;
+        private int _dwFlightLimit = dwFlightLimit;
+        private int _dwFFuelReMax = dwFFuelReMax;
+        private int _dwAFuelReMax = dwAFuelReMax;
+        private int _dwFuelRe = dwFuelRe;
+        private int _dwLimitLevel1 = dwLimitLevel1;
+        private int _nReflect = nReflect;
+        private int _dwSndAttack1 = dwSndAttack1;
+        private int _dwSndAttack2 = dwSndAttack2;
+        private string _szIcon = szIcon;
+        private int _dwQuestId = dwQuestId;
+        private string _szTextFileName = szTextFileName;
+        private string _szCommand = szCommand;
+        private int _nMinLimitLevel = nMinLimitLevel;
+        private int _nMaxLimitLevel = nMaxLimitLevel;
+        private int _nItemGroup = nItemGroup;
+        private int _nUseLimitGroup = nUseLimitGroup;
+        private int _nMaxDuplication = nMaxDuplication;
+        private int _nEffectValue = nEffectValue;
+        private int _nTargetMinEnchant = nTargetMinEnchant;
+        private int _nTargetMaxEnchant = nTargetMaxEnchant;
+        private int _bResetBind = bResetBind;
+        private int _nBindCondition = nBindCondition;
+        private int _nResetBindCondition = nResetBindCondition;
+        private int _dwHitActiveSkillId = dwHitActiveSkillId;
+        private int _dwHitActiveSkillLv = dwHitActiveSkillLv;
+        private int _dwHitActiveSkillProb = dwHitActiveSkillProb;
+        private int _dwHitActiveSkillTarget = dwHitActiveSkillTarget;
+        private int _dwDamageActiveSkillId = dwDamageActiveSkillId;
+        private int _dwDamageActiveSkillLv = dwDamageActiveSkillLv;
+        private int _dwDamageActiveSkillProb = dwDamageActiveSkillProb;
+        private int _dwDamageActiveSkillTarget = dwDamageActiveSkillTarget;
+        private int _dwEquipActiveSkillId = dwEquipActiveSkillId;
+        private int _dwEquipActiveSkillLv = dwEquipActiveSkillLv;
+        private int _dwSmelting = dwSmelting;
+        private int _dwAttsmelting = dwAttsmelting;
+        private int _dwGemsmelting = dwGemsmelting;
+        private int _dwPierce = dwPierce;
+        private int _dwUprouse = dwUprouse;
+        private int _bAbsoluteTime = bAbsoluteTime;
+        private int _dwItemGrade = dwItemGrade;
+        private int _bCanTrade = bCanTrade;
+        private int _dwMainCategory = dwMainCategory;
+        private int _dwSubCategory = dwSubCategory;
+        private int _bCanHaveServerTransform = bCanHaveServerTransform;
+        private int _bCanSavePotion = bCanSavePotion;
+        private int _bCanLooksChange = bCanLooksChange;
+        private int _bIsLooksChangeMaterial = bIsLooksChangeMaterial;
 
         public int NVer { get => _nVer; set { if (value != NVer) { _nVer = value; NotifyPropertyChanged(); } } }
         public int DwId { get => _dwId; set { if (value != DwId) { _dwId = value; NotifyPropertyChanged(); } } }
@@ -525,14 +696,14 @@ namespace eTools_Ultimate.Models
     }
     public class Item : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void Prop_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -580,7 +751,7 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        private void ProjectStrings_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void ProjectStrings_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             if (this.Prop == null) return;
             if (e.Action == NotifyCollectionChangedAction.Reset)
@@ -610,29 +781,15 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        private ItemProp _prop;
-        private ModelElem _model;
+        private readonly ItemProp _prop;
+        private ModelElem? _model;
         //private BindingList<Dest> _dests;
 
-        public ItemProp Prop
-        { 
-            get => _prop;
-            set 
-            {
-                if(value != this.Prop)
-                {
-                    if (this.Prop != null)
-                        this.Prop.PropertyChanged -= Prop_PropertyChanged;
+        public ItemProp Prop => _prop;
 
-                    this._prop = value;
-                    this.Prop.PropertyChanged += Prop_PropertyChanged;
-                    NotifyPropertyChanged();
-                }
-            }
-        }
-        public ModelElem Model { get => _model; set { _model = value; NotifyPropertyChanged(); } }
+        public ModelElem? Model { get => _model; set { _model = value; NotifyPropertyChanged(); } }
 
-        public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; this.Model.DwIndex = value; } } }
+        public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; if(this.Model is not null) this.Model.DwIndex = value; } } }
 
         public string Identifier
         {
@@ -851,9 +1008,10 @@ namespace eTools_Ultimate.Models
         //    get => this.Dests.Where(x => x.Param == "DST_HP" || x.Param == "DST_FP" || x.Param == "DST_MP").Any();
         //}
 
-        public Item()
+        public Item(ItemProp prop, ModelElem? model)
         {
-            //this.CreateDests();
+            _prop = prop;
+            _model = model;
             StringsService.Instance.Strings.CollectionChanged += ProjectStrings_CollectionChanged;
             // TODO: readd this
             //Settings.GetInstance().PropertyChanged += Settings_PropertyChanged;
@@ -864,8 +1022,7 @@ namespace eTools_Ultimate.Models
             StringsService.Instance.Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
             // TODO: readd this
             //Settings.GetInstance().PropertyChanged -= Settings_PropertyChanged;
-            if (this.Prop != null)
-                this.Prop.PropertyChanged -= Prop_PropertyChanged;
+            this.Prop.PropertyChanged -= Prop_PropertyChanged;
         }
 
         //private void CreateDests()

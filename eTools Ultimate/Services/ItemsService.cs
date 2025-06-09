@@ -39,211 +39,262 @@ namespace eTools_Ultimate.Services
             Settings settings = Settings.Instance;
             StringsService stringsService = StringsService.Instance;
 
+            int itemModelType = DefinesService.Instance.Defines["OT_ITEM"];
+            ModelElem[] itemModels = ModelsService.Instance.GetModelsByType(itemModelType);
+            Dictionary<int, ModelElem> itemModelsDictionary = itemModels.ToDictionary(x => x.DwIndex, x => x); // used to get better performance
+
+
             using (Script script = new())
             {
                 string filePath = settings.PropItemFilePath ?? settings.DefaultPropItemFilePath;
                 script.Load(filePath);
                 while (true)
                 {
-                    ItemProp prop = new ItemProp
-                    {
-                        NVer = script.GetNumber()
-                    };
+                    int NVer = script.GetNumber();
+
                     if (script.EndOfStream)
                         break;
-                    prop.DwId = script.GetNumber();
-                    prop.SzName = script.GetToken();
-                    prop.DwNum = script.GetNumber();
-                    prop.DwPackMax = script.GetNumber();
-                    prop.DwItemKind1 = script.GetNumber();
-                    prop.DwItemKind2 = script.GetNumber();
-                    prop.DwItemKind3 = script.GetNumber();
-                    prop.DwItemJob = script.GetNumber();
-                    prop.BPermanence = script.GetNumber();
-                    prop.DwUseable = script.GetNumber();
-                    prop.DwItemSex = script.GetNumber();
-                    prop.DwCost = script.GetNumber();
-                    prop.DwEndurance = script.GetNumber();
-                    prop.NAbrasion = script.GetNumber();
-                    prop.NMaxRepair = script.GetNumber();
-                    prop.DwHanded = script.GetNumber(); // HD_
-                    prop.DwFlag = script.GetNumber();
-                    prop.DwParts = script.GetNumber();
-                    prop.DwPartsub = script.GetNumber();
-                    prop.BPartsFile = script.GetNumber();
-                    prop.DwExclusive = script.GetNumber(); // PARTS_
-                    prop.DwBasePartsIgnore = script.GetNumber(); // PARTS_
-                    prop.DwItemLV = script.GetNumber();
-                    prop.DwItemRare = script.GetNumber();
-                    prop.DwShopAble = script.GetNumber();
-                    prop.NLog = script.GetNumber();
-                    prop.BCharged = script.GetNumber();
-                    prop.DwLinkKindBullet = script.GetNumber(); // IK2 or IK3
-                    prop.DwLinkKind = script.GetNumber(); // MI; CI; PK
-                    prop.DwAbilityMin = script.GetNumber();
-                    prop.DwAbilityMax = script.GetNumber();
-                    prop.EItemType = (short)script.GetNumber();
-                    prop.WItemEAtk = (short)script.GetNumber();
-                    prop.DwParry = script.GetNumber();
-                    prop.DwBlockRating = script.GetNumber();
-                    prop.NAddSkillMin = script.GetNumber();
-                    prop.NAddSkillMax = script.GetNumber();
-                    prop.DwAtkStyle = script.GetNumber(); // Unused
-                    prop.DwWeaponType = script.GetNumber(); // WT_
-                    prop.DwItemAtkOrder1 = script.GetNumber(); // AS_ or int
-                    prop.DwItemAtkOrder2 = script.GetNumber(); // AS_ or int
-                    prop.DwItemAtkOrder3 = script.GetNumber(); // AS_ or int
-                    prop.DwItemAtkOrder4 = script.GetNumber(); // AS_ or int
-                    prop.TmContinuousPain = script.GetNumber(); // Unused
-                    prop.NShellQuantity = script.GetNumber();
-                    prop.DwRecoil = script.GetNumber(); // Unused
-                    prop.DwLoadingTime = script.GetNumber();
-                    prop.NAdjHitRate = script.GetNumber(); // Unused
-                    prop.FAttackSpeed = script.GetNumber();
-                    prop.DwDmgShift = script.GetNumber(); // Unused
-                    prop.DwAttackRange = script.GetNumber(); // AR_
-                    prop.NProbability = script.GetNumber();
-                    prop.DwDestParam1 = script.GetNumber();
-                    prop.DwDestParam2 = script.GetNumber();
-                    prop.DwDestParam3 = script.GetNumber();
+
+                    int dwId = script.GetNumber();
+                    string szName = script.GetToken();
+                    int dwNum = script.GetNumber();
+                    int dwPackMax = script.GetNumber();
+                    int dwItemKind1 = script.GetNumber();
+                    int dwItemKind2 = script.GetNumber();
+                    int dwItemKind3 = script.GetNumber();
+                    int dwItemJob = script.GetNumber();
+                    int bPermanence = script.GetNumber();
+                    int dwUseable = script.GetNumber();
+                    int dwItemSex = script.GetNumber();
+                    int dwCost = script.GetNumber();
+                    int dwEndurance = script.GetNumber();
+                    int nAbrasion = script.GetNumber();
+                    int nMaxRepair = script.GetNumber();
+                    int dwHanded = script.GetNumber(); // HD_
+                    int dwFlag = script.GetNumber();
+                    int dwParts = script.GetNumber();
+                    int dwPartsub = script.GetNumber();
+                    int bPartsFile = script.GetNumber();
+                    int dwExclusive = script.GetNumber(); // PARTS_
+                    int dwBasePartsIgnore = script.GetNumber(); // PARTS_
+                    int dwItemLV = script.GetNumber();
+                    int dwItemRare = script.GetNumber();
+                    int dwShopAble = script.GetNumber();
+                    int nLog = script.GetNumber();
+                    int bCharged = script.GetNumber();
+                    int dwLinkKindBullet = script.GetNumber(); // IK2 or IK3
+                    int dwLinkKind = script.GetNumber(); // MI; CI; PK
+                    int dwAbilityMin = script.GetNumber();
+                    int dwAbilityMax = script.GetNumber();
+                    short eItemType = (short)script.GetNumber();
+                    short wItemEAtk = (short)script.GetNumber();
+                    int dwParry = script.GetNumber();
+                    int dwBlockRating = script.GetNumber();
+                    int nAddSkillMin = script.GetNumber();
+                    int nAddSkillMax = script.GetNumber();
+                    int dwAtkStyle = script.GetNumber(); // Unused
+                    int dwWeaponType = script.GetNumber(); // WT_
+                    int dwItemAtkOrder1 = script.GetNumber(); // AS_ or int
+                    int dwItemAtkOrder2 = script.GetNumber(); // AS_ or int
+                    int dwItemAtkOrder3 = script.GetNumber(); // AS_ or int
+                    int dwItemAtkOrder4 = script.GetNumber(); // AS_ or int
+                    int tmContinuousPain = script.GetNumber(); // Unused
+                    int nShellQuantity = script.GetNumber();
+                    int dwRecoil = script.GetNumber(); // Unused
+                    int dwLoadingTime = script.GetNumber();
+                    int nAdjHitRate = script.GetNumber(); // Unused
+                    float fAttackSpeed = script.GetFloat();
+                    int dwDmgShift = script.GetNumber(); // Unused
+                    int dwAttackRange = script.GetNumber(); // AR_
+                    int nProbability = script.GetNumber();
+                    int dwDestParam1 = script.GetNumber();
+                    int dwDestParam2 = script.GetNumber();
+                    int dwDestParam3 = script.GetNumber();
+                    int dwDestParam4 = default;
+                    int dwDestParam5 = default;
+                    int dwDestParam6 = default;
                     if (settings.ResourcesVersion >= 19)
                     {
-                        prop.DwDestParam4 = script.GetNumber();
-                        prop.DwDestParam5 = script.GetNumber();
-                        prop.DwDestParam6 = script.GetNumber();
+                        dwDestParam4 = script.GetNumber();
+                        dwDestParam5 = script.GetNumber();
+                        dwDestParam6 = script.GetNumber();
                     }
-                    prop.NAdjParamVal1 = script.GetNumber();
-                    prop.NAdjParamVal2 = script.GetNumber();
-                    prop.NAdjParamVal3 = script.GetNumber();
+                    int nAdjParamVal1 = script.GetNumber();
+                    int nAdjParamVal2 = script.GetNumber();
+                    int nAdjParamVal3 = script.GetNumber();
+                    int nAdjParamVal4 = default;
+                    int nAdjParamVal5 = default;
+                    int nAdjParamVal6 = default;
                     if (settings.ResourcesVersion >= 19)
                     {
-                        prop.NAdjParamVal4 = script.GetNumber();
-                        prop.NAdjParamVal5 = script.GetNumber();
-                        prop.NAdjParamVal6 = script.GetNumber();
+                        nAdjParamVal4 = script.GetNumber();
+                        nAdjParamVal5 = script.GetNumber();
+                        nAdjParamVal6 = script.GetNumber();
                     }
                     // DwChgParamVal is unused
-                    prop.DwChgParamVal1 = script.GetNumber();
-                    prop.DwChgParamVal2 = script.GetNumber();
-                    prop.DwChgParamVal3 = script.GetNumber();
+                    int dwChgParamVal1 = script.GetNumber();
+                    int dwChgParamVal2 = script.GetNumber();
+                    int dwChgParamVal3 = script.GetNumber();
+                    int dwChgParamVal4 = default;
+                    int dwChgParamVal5 = default;
+                    int dwChgParamVal6 = default;
                     if (settings.ResourcesVersion >= 19)
                     {
-                        prop.DwChgParamVal4 = script.GetNumber();
-                        prop.DwChgParamVal5 = script.GetNumber();
-                        prop.DwChgParamVal6 = script.GetNumber();
+                        dwChgParamVal4 = script.GetNumber();
+                        dwChgParamVal5 = script.GetNumber();
+                        dwChgParamVal6 = script.GetNumber();
                     }
-                    prop.NDestData11 = script.GetNumber();
-                    prop.NDestData12 = script.GetNumber();
-                    prop.NDestData13 = script.GetNumber();
+                    int nDestData11 = script.GetNumber();
+                    int nDestData12 = script.GetNumber();
+                    int nDestData13 = script.GetNumber();
+                    int nDestData14 = default;
+                    int nDestData15 = default;
+                    int nDestData16 = default;
                     if (settings.ResourcesVersion >= 19)
                     {
-                        prop.NDestData14 = script.GetNumber();
-                        prop.NDestData15 = script.GetNumber();
-                        prop.NDestData16 = script.GetNumber();
+                        nDestData14 = script.GetNumber();
+                        nDestData15 = script.GetNumber();
+                        nDestData16 = script.GetNumber();
                     }
-                    prop.DwActiveSkill = script.GetNumber(); // SI_ or II_
-                    prop.DwActiveSkillLv = script.GetNumber();
-                    prop.DwActiveSkillRate = script.GetNumber();
-                    prop.DwReqMp = script.GetNumber();
-                    prop.DwReqFp = script.GetNumber(); // Unused
-                    prop.DwReqDisLV = script.GetNumber(); // Unused
-                    prop.DwReSkill1 = script.GetNumber(); // Unused
-                    prop.DwReSkillLevel1 = script.GetNumber(); // Unused
-                    prop.DwReSkill2 = script.GetNumber(); // Unused
-                    prop.DwReSkillLevel2 = script.GetNumber(); // Unused
-                    prop.DwSkillReadyType = script.GetNumber();
-                    prop.DwSkillReady = script.GetNumber();
-                    prop.DwSkillRange = script.GetNumber();
-                    prop.DwSfxElemental = script.GetNumber(); // ELEMENTAL_
-                    prop.DwSfxObj = script.GetNumber(); // XI_
-                    prop.DwSfxObj2 = script.GetNumber(); // XI_
-                    prop.DwSfxObj3 = script.GetNumber(); // XI_
-                    prop.DwSfxObj4 = script.GetNumber(); // XI_
-                    prop.DwSfxObj5 = script.GetNumber(); // XI_
-                    prop.DwUseMotion = script.GetNumber(); // MTI_
-                    prop.DwCircleTime = script.GetNumber();
-                    prop.DwSkillTime = script.GetNumber();
-                    prop.DwExeTarget = script.GetNumber(); // EXT_ or int
-                    prop.DwUseChance = script.GetNumber(); // WUI_
-                    prop.DwSpellRegion = script.GetNumber(); // SRO_
-                    prop.DwSpellType = script.GetNumber(); // Unused
-                    prop.DwReferStat1 = script.GetNumber(); // WEAPON_ or BARUNA_ or ARMOR_
-                    prop.DwReferStat2 = script.GetNumber(); // DST_
-                    prop.DwReferTarget1 = script.GetNumber(); // II_ or int
-                    prop.DwReferTarget2 = script.GetNumber(); // II_ or int
-                    prop.DwReferValue1 = script.GetNumber();
-                    prop.DwReferValue2 = script.GetNumber(); // Unused
-                    prop.DwSkillType = script.GetNumber(); // Unused
-                    prop.NItemResistElecricity = (int)(script.GetFloat() * 100.0f);
-                    prop.NItemResistFire = (int)(script.GetFloat() * 100.0f);
-                    prop.NItemResistWind = (int)(script.GetFloat() * 100.0f);
-                    prop.NItemResistWater = (int)(script.GetFloat() * 100.0f);
-                    prop.NItemResistEarth = (int)(script.GetFloat() * 100.0f);
-                    prop.NEvildoing = script.GetNumber();
-                    prop.DwExpertLV = script.GetNumber(); // Unused
-                    prop.DwExpertMax = script.GetNumber(); // Unused
-                    prop.DwSubDefine = script.GetNumber(); // SND_
-                    prop.DwExp = script.GetNumber(); // Unused
-                    prop.DwComboStyle = script.GetNumber(); // CT_
-                    prop.FFlightSpeed = script.GetFloat();
-                    prop.FFlightLRAngle = script.GetFloat();
-                    prop.FFlightTBAngle = script.GetFloat();
-                    prop.DwFlightLimit = script.GetNumber();
-                    prop.DwFFuelReMax = script.GetNumber();
-                    prop.DwAFuelReMax = script.GetNumber();
-                    prop.DwFuelRe = script.GetNumber();
-                    prop.DwLimitLevel1 = script.GetNumber();
-                    prop.NReflect = script.GetNumber();
-                    prop.DwSndAttack1 = script.GetNumber(); // SND_
-                    prop.DwSndAttack2 = script.GetNumber(); // SND_
+                    int dwActiveSkill = script.GetNumber(); // SI_ or II_
+                    int dwActiveSkillLv = script.GetNumber();
+                    int dwActiveSkillRate = script.GetNumber();
+                    int dwReqMp = script.GetNumber();
+                    int dwReqFp = script.GetNumber(); // Unused
+                    int dwReqDisLV = script.GetNumber(); // Unused
+                    int dwReSkill1 = script.GetNumber(); // Unused
+                    int dwReSkillLevel1 = script.GetNumber(); // Unused
+                    int dwReSkill2 = script.GetNumber(); // Unused
+                    int dwReSkillLevel2 = script.GetNumber(); // Unused
+                    int dwSkillReadyType = script.GetNumber();
+                    int dwSkillReady = script.GetNumber();
+                    int dwSkillRange = script.GetNumber();
+                    int dwSfxElemental = script.GetNumber(); // ELEMENTAL_
+                    int dwSfxObj = script.GetNumber(); // XI_
+                    int dwSfxObj2 = script.GetNumber(); // XI_
+                    int dwSfxObj3 = script.GetNumber(); // XI_
+                    int dwSfxObj4 = script.GetNumber(); // XI_
+                    int dwSfxObj5 = script.GetNumber(); // XI_
+                    int dwUseMotion = script.GetNumber(); // MTI_
+                    int dwCircleTime = script.GetNumber();
+                    int dwSkillTime = script.GetNumber();
+                    int dwExeTarget = script.GetNumber(); // EXT_ or int
+                    int dwUseChance = script.GetNumber(); // WUI_
+                    int dwSpellRegion = script.GetNumber(); // SRO_
+                    int dwSpellType = script.GetNumber(); // Unused
+                    int dwReferStat1 = script.GetNumber(); // WEAPON_ or BARUNA_ or ARMOR_
+                    int dwReferStat2 = script.GetNumber(); // DST_
+                    int dwReferTarget1 = script.GetNumber(); // II_ or int
+                    int dwReferTarget2 = script.GetNumber(); // II_ or int
+                    int dwReferValue1 = script.GetNumber();
+                    int dwReferValue2 = script.GetNumber(); // Unused
+                    int dwSkillType = script.GetNumber(); // Unused
+                    int nItemResistElecricity = (int)(script.GetFloat() * 100.0f);
+                    int nItemResistFire = (int)(script.GetFloat() * 100.0f);
+                    int nItemResistWind = (int)(script.GetFloat() * 100.0f);
+                    int nItemResistWater = (int)(script.GetFloat() * 100.0f);
+                    int nItemResistEarth = (int)(script.GetFloat() * 100.0f);
+                    int nEvildoing = script.GetNumber();
+                    int dwExpertLV = script.GetNumber(); // Unused
+                    int dwExpertMax = script.GetNumber(); // Unused
+                    int dwSubDefine = script.GetNumber(); // SND_
+                    int dwExp = script.GetNumber(); // Unused
+                    int dwComboStyle = script.GetNumber(); // CT_
+                    float fFlightSpeed = script.GetFloat();
+                    float fFlightLRAngle = script.GetFloat();
+                    float fFlightTBAngle = script.GetFloat();
+                    int dwFlightLimit = script.GetNumber();
+                    int dwFFuelReMax = script.GetNumber();
+                    int dwAFuelReMax = script.GetNumber();
+                    int dwFuelRe = script.GetNumber();
+                    int dwLimitLevel1 = script.GetNumber();
+                    int nReflect = script.GetNumber();
+                    int dwSndAttack1 = script.GetNumber(); // SND_
+                    int dwSndAttack2 = script.GetNumber(); // SND_
                     script.GetToken(); // ""
-                    prop.SzIcon = script.GetToken();
+                    string szIcon = script.GetToken();
                     script.GetToken(); // ""
-                    prop.DwQuestId = script.GetNumber();
+                    int dwQuestId = script.GetNumber();
                     script.GetToken(); // ""
-                    prop.SzTextFileName = script.GetToken();
+                    string szTextFileName = script.GetToken();
                     script.GetToken(); // ""
-                    prop.SzCommand = script.GetToken();
+                    string szCommand = script.GetToken();
+                    int nMinLimitLevel = default;
+                    int nMaxLimitLevel = default;
+                    int nItemGroup = default;
+                    int nUseLimitGroup = default;
+                    int nMaxDuplication = default;
+                    int nEffectValue = default;
+                    int nTargetMinEnchant = default;
+                    int nTargetMaxEnchant = default;
+                    int bResetBind = default;
+                    int nBindCondition = default;
+                    int nResetBindCondition = default;
+                    int dwHitActiveSkillId = default;
+                    int dwHitActiveSkillLv = default;
+                    int dwHitActiveSkillProb = default;
+                    int dwHitActiveSkillTarget = default;
+                    int dwDamageActiveSkillId = default;
+                    int dwDamageActiveSkillLv = default;
+                    int dwDamageActiveSkillProb = default;
+                    int dwDamageActiveSkillTarget = default;
+                    int dwEquipActiveSkillId = default;
+                    int dwEquipActiveSkillLv = default;
+                    int dwSmelting = default;
+                    int dwAttsmelting = default;
+                    int dwGemsmelting = default;
+                    int dwPierce = default;
+                    int dwUprouse = default;
+                    int bAbsoluteTime = default;
+                    int dwItemGrade = default;
+                    int bCanTrade = default;
+                    int dwMainCategory = default;
+                    int dwSubCategory = default;
+                    int bCanHaveServerTransform = default;
+                    int bCanSavePotion = default;
+                    int bCanLooksChange = default;
+                    int bIsLooksChangeMaterial = default;
                     if (settings.ResourcesVersion >= 16)
                     {
-                        prop.NMinLimitLevel = script.GetNumber();
-                        prop.NMaxLimitLevel = script.GetNumber();
-                        prop.NItemGroup = script.GetNumber();
-                        prop.NUseLimitGroup = script.GetNumber();
-                        prop.NMaxDuplication = script.GetNumber();
-                        prop.NEffectValue = script.GetNumber();
-                        prop.NTargetMinEnchant = script.GetNumber();
-                        prop.NTargetMaxEnchant = script.GetNumber();
-                        prop.BResetBind = script.GetNumber();
-                        prop.NBindCondition = script.GetNumber();
-                        prop.NResetBindCondition = script.GetNumber();
-                        prop.DwHitActiveSkillId = script.GetNumber(); // SI_
-                        prop.DwHitActiveSkillLv = script.GetNumber();
-                        prop.DwHitActiveSkillProb = script.GetNumber();
-                        prop.DwHitActiveSkillTarget = script.GetNumber(); // IST_
-                        prop.DwDamageActiveSkillId = script.GetNumber(); // SI_
-                        prop.DwDamageActiveSkillLv = script.GetNumber();
-                        prop.DwDamageActiveSkillProb = script.GetNumber();
-                        prop.DwDamageActiveSkillTarget = script.GetNumber(); // IST_
-                        prop.DwEquipActiveSkillId = script.GetNumber(); // Unused
-                        prop.DwEquipActiveSkillLv = script.GetNumber(); // Unused
-                        prop.DwSmelting = script.GetNumber();
-                        prop.DwAttsmelting = script.GetNumber();
-                        prop.DwGemsmelting = script.GetNumber();
-                        prop.DwPierce = script.GetNumber();
-                        prop.DwUprouse = script.GetNumber();
-                        prop.BAbsoluteTime = script.GetNumber();
+                        nMinLimitLevel = script.GetNumber();
+                        nMaxLimitLevel = script.GetNumber();
+                        nItemGroup = script.GetNumber();
+                        nUseLimitGroup = script.GetNumber();
+                        nMaxDuplication = script.GetNumber();
+                        nEffectValue = script.GetNumber();
+                        nTargetMinEnchant = script.GetNumber();
+                        nTargetMaxEnchant = script.GetNumber();
+                        bResetBind = script.GetNumber();
+                        nBindCondition = script.GetNumber();
+                        nResetBindCondition = script.GetNumber();
+                        dwHitActiveSkillId = script.GetNumber(); // SI_
+                        dwHitActiveSkillLv = script.GetNumber();
+                        dwHitActiveSkillProb = script.GetNumber();
+                        dwHitActiveSkillTarget = script.GetNumber(); // IST_
+                        dwDamageActiveSkillId = script.GetNumber(); // SI_
+                        dwDamageActiveSkillLv = script.GetNumber();
+                        dwDamageActiveSkillProb = script.GetNumber();
+                        dwDamageActiveSkillTarget = script.GetNumber(); // IST_
+                        dwEquipActiveSkillId = script.GetNumber(); // Unused
+                        dwEquipActiveSkillLv = script.GetNumber(); // Unused
+                        dwSmelting = script.GetNumber();
+                        dwAttsmelting = script.GetNumber();
+                        dwGemsmelting = script.GetNumber();
+                        dwPierce = script.GetNumber();
+                        dwUprouse = script.GetNumber();
+                        bAbsoluteTime = script.GetNumber();
                         if (settings.ResourcesVersion >= 18)
                         {
-                            prop.DwItemGrade = script.GetNumber(); // ITEM_GRADE_
-                            prop.BCanTrade = script.GetNumber();
-                            prop.DwMainCategory = script.GetNumber(); // TYPE1_
-                            prop.DwSubCategory = script.GetNumber(); // TYPE2_
-                            prop.BCanHaveServerTransform = script.GetNumber();
-                            prop.BCanSavePotion = script.GetNumber();
+                            dwItemGrade = script.GetNumber(); // ITEM_GRADE_
+                            bCanTrade = script.GetNumber();
+                            dwMainCategory = script.GetNumber(); // TYPE1_
+                            dwSubCategory = script.GetNumber(); // TYPE2_
+                            bCanHaveServerTransform = script.GetNumber();
+                            bCanSavePotion = script.GetNumber();
                             if (settings.ResourcesVersion >= 19)
                             {
-                                prop.BCanLooksChange = script.GetNumber();
-                                prop.BIsLooksChangeMaterial = script.GetNumber();
+                                bCanLooksChange = script.GetNumber();
+                                bIsLooksChangeMaterial = script.GetNumber();
                             }
                         }
                     }
@@ -256,14 +307,187 @@ namespace eTools_Ultimate.Services
                     if (script.Token == "" && script.EndOfStream)
                         throw new IncorrectlyFormattedFileException(filePath);
 
-                    Item item = new Item
-                    {
-                        Prop = prop
-                    };
-                    if (!stringsService.Strings.ContainsKey(prop.SzName))
-                        stringsService.Strings.Add(prop.SzName, "");          // If IDS is not defined, we add it to be defined.
-                    if (!stringsService.Strings.ContainsKey(prop.SzCommand))
-                        stringsService.Strings.Add(prop.SzCommand, "");
+                    if (!stringsService.Strings.ContainsKey(szName))
+                        stringsService.Strings.Add(szName, "");          // If IDS is not defined, we add it to be defined.
+                    if (!stringsService.Strings.ContainsKey(szCommand))
+                        stringsService.Strings.Add(szCommand, "");
+
+                    ItemProp itemProp = new(
+                        nVer: NVer,
+                        dwId: dwId,
+                        szName: szName,
+                        dwNum: dwNum,
+                        dwPackMax: dwPackMax,
+                        dwItemKind1: dwItemKind1,
+                        dwItemKind2: dwItemKind2,
+                        dwItemKind3: dwItemKind3,
+                        dwItemJob: dwItemJob,
+                        bPermanence: bPermanence,
+                        dwUseable: dwUseable,
+                        dwItemSex: dwItemSex,
+                        dwCost: dwCost,
+                        dwEndurance: dwEndurance,
+                        nAbrasion: nAbrasion,
+                        nMaxRepair: nMaxRepair,
+                        dwHanded: dwHanded,
+                        dwFlag: dwFlag,
+                        dwParts: dwParts,
+                        dwPartsub: dwPartsub,
+                        bPartsFile: bPartsFile,
+                        dwExclusive: dwExclusive,
+                        dwBasePartsIgnore: dwBasePartsIgnore,
+                        dwItemLV: dwItemLV,
+                        dwItemRare: dwItemRare,
+                        dwShopAble: dwShopAble,
+                        nLog: nLog,
+                        bCharged: bCharged,
+                        dwLinkKindBullet: dwLinkKindBullet,
+                        dwLinkKind: dwLinkKind,
+                        dwAbilityMin: dwAbilityMin,
+                        dwAbilityMax: dwAbilityMax,
+                        eItemType: eItemType,
+                        wItemEAtk: wItemEAtk,
+                        dwParry: dwParry,
+                        dwBlockRating: dwBlockRating,
+                        nAddSkillMin: nAddSkillMin,
+                        nAddSkillMax: nAddSkillMax,
+                        dwAtkStyle: dwAtkStyle,
+                        dwWeaponType: dwWeaponType,
+                        dwItemAtkOrder1: dwItemAtkOrder1,
+                        dwItemAtkOrder2: dwItemAtkOrder2,
+                        dwItemAtkOrder3: dwItemAtkOrder3,
+                        dwItemAtkOrder4: dwItemAtkOrder4,
+                        tmContinuousPain: tmContinuousPain,
+                        nShellQuantity: nShellQuantity,
+                        dwRecoil: dwRecoil,
+                        dwLoadingTime: dwLoadingTime,
+                        nAdjHitRate: nAdjHitRate,
+                        fAttackSpeed: fAttackSpeed,
+                        dwDmgShift: dwDmgShift,
+                        dwAttackRange: dwAttackRange,
+                        nProbability: nProbability,
+                        dwDestParam1: dwDestParam1,
+                        dwDestParam2: dwDestParam2,
+                        dwDestParam3: dwDestParam3,
+                        dwDestParam4: dwDestParam4,
+                        dwDestParam5: dwDestParam5,
+                        dwDestParam6: dwDestParam6,
+                        nAdjParamVal1: nAdjParamVal1,
+                        nAdjParamVal2: nAdjParamVal2,
+                        nAdjParamVal3: nAdjParamVal3,
+                        nAdjParamVal4: nAdjParamVal4,
+                        nAdjParamVal5: nAdjParamVal5,
+                        nAdjParamVal6: nAdjParamVal6,
+                        dwChgParamVal1: dwChgParamVal1,
+                        dwChgParamVal2: dwChgParamVal2,
+                        dwChgParamVal3: dwChgParamVal3,
+                        dwChgParamVal4: dwChgParamVal4,
+                        dwChgParamVal5: dwChgParamVal5,
+                        dwChgParamVal6: dwChgParamVal6,
+                        nDestData11: nDestData11,
+                        nDestData12: nDestData12,
+                        nDestData13: nDestData13,
+                        nDestData14: nDestData14,
+                        nDestData15: nDestData15,
+                        nDestData16: nDestData16,
+                        dwActiveSkill: dwActiveSkill,
+                        dwActiveSkillLv: dwActiveSkillLv,
+                        dwActiveSkillRate: dwActiveSkillRate,
+                        dwReqMp: dwReqMp,
+                        dwReqFp: dwReqFp,
+                        dwReqDisLV: dwReqDisLV,
+                        dwReSkill1: dwReSkill1,
+                        dwReSkillLevel1: dwReSkillLevel1,
+                        dwReSkill2: dwReSkill2,
+                        dwReSkillLevel2: dwReSkillLevel2,
+                        dwSkillReadyType: dwSkillReadyType,
+                        dwSkillReady: dwSkillReady,
+                        dwSkillRange: dwSkillRange,
+                        dwSfxElemental: dwSfxElemental,
+                        dwSfxObj: dwSfxObj,
+                        dwSfxObj2: dwSfxObj2,
+                        dwSfxObj3: dwSfxObj3,
+                        dwSfxObj4: dwSfxObj4,
+                        dwSfxObj5: dwSfxObj5,
+                        dwUseMotion: dwUseMotion,
+                        dwCircleTime: dwCircleTime,
+                        dwSkillTime: dwSkillTime,
+                        dwExeTarget: dwExeTarget,
+                        dwUseChance: dwUseChance,
+                        dwSpellRegion: dwSpellRegion,
+                        dwSpellType: dwSpellType,
+                        dwReferStat1: dwReferStat1,
+                        dwReferStat2: dwReferStat2,
+                        dwReferTarget1: dwReferTarget1,
+                        dwReferTarget2: dwReferTarget2,
+                        dwReferValue1: dwReferValue1,
+                        dwReferValue2: dwReferValue2,
+                        dwSkillType: dwSkillType,
+                        nItemResistElecricity: nItemResistElecricity,
+                        nItemResistFire: nItemResistFire,
+                        nItemResistWind: nItemResistWind,
+                        nItemResistWater: nItemResistWater,
+                        nItemResistEarth: nItemResistEarth,
+                        nEvildoing: nEvildoing,
+                        dwExpertLV: dwExpertLV,
+                        dwExpertMax: dwExpertMax,
+                        dwSubDefine: dwSubDefine,
+                        dwExp: dwExp,
+                        dwComboStyle: dwComboStyle,
+                        fFlightSpeed: fFlightSpeed,
+                        fFlightLRAngle: fFlightLRAngle,
+                        fFlightTBAngle: fFlightTBAngle,
+                        dwFlightLimit: dwFlightLimit,
+                        dwFFuelReMax: dwFFuelReMax,
+                        dwAFuelReMax: dwAFuelReMax,
+                        dwFuelRe: dwFuelRe,
+                        dwLimitLevel1: dwLimitLevel1,
+                        nReflect: nReflect,
+                        dwSndAttack1: dwSndAttack1,
+                        dwSndAttack2: dwSndAttack2,
+                        szIcon: szIcon,
+                        dwQuestId: dwQuestId,
+                        szTextFileName: szTextFileName,
+                        szCommand: szCommand,
+                        nMinLimitLevel: nMinLimitLevel,
+                        nMaxLimitLevel: nMaxLimitLevel,
+                        nItemGroup: nItemGroup,
+                        nUseLimitGroup: nUseLimitGroup,
+                        nMaxDuplication: nMaxDuplication,
+                        nEffectValue: nEffectValue,
+                        nTargetMinEnchant: nTargetMinEnchant,
+                        nTargetMaxEnchant: nTargetMaxEnchant,
+                        bResetBind: bResetBind,
+                        nBindCondition: nBindCondition,
+                        nResetBindCondition: nResetBindCondition,
+                        dwHitActiveSkillId: dwHitActiveSkillId,
+                        dwHitActiveSkillLv: dwHitActiveSkillLv,
+                        dwHitActiveSkillProb: dwHitActiveSkillProb,
+                        dwHitActiveSkillTarget: dwHitActiveSkillTarget,
+                        dwDamageActiveSkillId: dwDamageActiveSkillId,
+                        dwDamageActiveSkillLv: dwDamageActiveSkillLv,
+                        dwDamageActiveSkillProb: dwDamageActiveSkillProb,
+                        dwDamageActiveSkillTarget: dwDamageActiveSkillTarget,
+                        dwEquipActiveSkillId: dwEquipActiveSkillId,
+                        dwEquipActiveSkillLv: dwEquipActiveSkillLv,
+                        dwSmelting: dwSmelting,
+                        dwAttsmelting: dwAttsmelting,
+                        dwGemsmelting: dwGemsmelting,
+                        dwPierce: dwPierce,
+                        dwUprouse: dwUprouse,
+                        bAbsoluteTime: bAbsoluteTime,
+                        dwItemGrade: dwItemGrade,
+                        bCanTrade: bCanTrade,
+                        dwMainCategory: dwMainCategory,
+                        dwSubCategory: dwSubCategory,
+                        bCanHaveServerTransform: bCanHaveServerTransform,
+                        bCanSavePotion: bCanSavePotion,
+                        bCanLooksChange: bCanLooksChange,
+                        bIsLooksChangeMaterial: bIsLooksChangeMaterial
+                        );
+                    ModelElem? model = itemModelsDictionary.GetValueOrDefault(dwId);
+                    Item item = new(itemProp, model);
+
                     this.Items.Add(item);
                 }
             }
