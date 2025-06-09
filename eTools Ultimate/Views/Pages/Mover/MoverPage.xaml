@@ -172,30 +172,8 @@
                         </StackPanel>
                         <ui:AutoSuggestBox Grid.Row="1"
                                            Text="{Binding Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
-                                           OriginalItemsSource="{Binding Path=MoverIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                                           OriginalItemsSource="{Binding Path=ViewModel.MoverIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
                                            DisplayMemberPath="Value"/>
-                    </Grid>
-
-                    <!-- ID Key -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                    Orientation="Horizontal">
-                            <TextBlock Text="ID Key"
-                                       Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                           Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="ID Key of the mover"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                 Style="{StaticResource AppTextBoxStyle}"
-                                 Text="{Binding IdKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
 
                     <!-- Name -->
@@ -218,28 +196,6 @@
                         <TextBox Grid.Row="1"
                                  Style="{StaticResource AppTextBoxStyle}"
                                  Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                    </Grid>
-
-                    <!-- Description -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                    Orientation="Horizontal">
-                            <TextBlock Text="Description"
-                                       Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                           Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Description of the mover"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox Grid.Row="1"
-                                 Style="{StaticResource AppTextBoxStyle}"
-                                 Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
 
                     <!-- Killable -->
@@ -608,7 +564,7 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:AutoSuggestBox Grid.Row="1"
-                                           OriginalItemsSource="{Binding Path=AiIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                                           OriginalItemsSource="{Binding Path=ViewModel.AiIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
                                            Text="{Binding AiIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                            DisplayMemberPath="Value"/>
                     </Grid>
@@ -631,7 +587,7 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:AutoSuggestBox Grid.Row="1"
-                                           OriginalItemsSource="{Binding Path=BelligerenceIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                                           OriginalItemsSource="{Binding Path=ViewModel.BelligerenceIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
                                            Text="{Binding BelligerenceIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
                                            DisplayMemberPath="Value"/>
                     </Grid>
@@ -1338,32 +1294,16 @@
 
         <!-- Mover Item Template -->
         <DataTemplate x:Key="MoverItemTemplate">
-            <Grid Margin="4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Border Width="32"
-                        Height="32"
-                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                        BorderThickness="1"
-                        Margin="0,0,8,0">
-                    <TextBlock Text="{Binding ID}"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               FontWeight="SemiBold"/>
-                </Border>
-                <StackPanel Grid.Column="1"
-                            VerticalAlignment="Center">
-                    <TextBlock Text="{Binding Name}"
+            <StackPanel Grid.Column="1"
+                            VerticalAlignment="Center"
+                            Margin="4">
+                <TextBlock Text="{Binding Name}"
                                FontWeight="SemiBold"
                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                    <TextBlock Text="{Binding ModelType}"
+                <TextBlock Text="{Binding Identifier}"
                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                FontSize="12"/>
-                </StackPanel>
-            </Grid>
+            </StackPanel>
         </DataTemplate>
     </Page.Resources>
 
@@ -2005,21 +1945,5 @@
                 </StackPanel>
             </Grid>
         </ScrollViewer>
-
-        <!-- Motion Dialog -->
-        <Popup x:Name="MotionsPopup"
-               PlacementTarget="{Binding ElementName=MotionsButton}"
-               Placement="Center"
-               IsOpen="False"
-               StaysOpen="False"
-               AllowsTransparency="True">
-            <Border Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}"
-                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                    BorderThickness="1"
-                    CornerRadius="8"
-                    Padding="10">
-                <ContentControl ContentTemplate="{StaticResource MotionsDialogTemplate}"/>
-            </Border>
-        </Popup>
     </Grid>
 </Page> 
