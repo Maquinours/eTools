@@ -489,7 +489,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
                 //if (contentDialogViewModel.MoversView.CurrentItem is null) // TODO: remove reference model
                 if (contentDialogViewModel.MoversView.CurrentItem is not Mover referenceMover) return;
-                ModelElem referenceModel = referenceMover.Model;
+                if(referenceMover.Model is not ModelElem referenceModel) return;
                 NativeMethods.SetReferenceModel(D3dHost._native, referenceModel.Model3DFilePath);
                 NativeMethods.SetReferenceScale(D3dHost._native, referenceModel.FScale);
                 NativeMethods.SetReferenceTextureEx(D3dHost._native, referenceModel.NTextureEx);
