@@ -6,19 +6,31 @@
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Dialogs"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:dialogViewModels="clr-namespace:eTools_Ultimate.ViewModels.Controls.Dialogs"
     Title="Select Reference Model"
-    Height="200"
-    Width="600"
     IsPrimaryButtonEnabled="True"
-    IsSecondaryButtonEnabled="True"
     PrimaryButtonText="Accept"
-    SecondaryButtonText="Cancel"
+    d:DataContext="{d:DesignInstance dialogViewModels:MoverReferenceModelViewModel,
+                                 IsDesignTimeCreatable=False}"
     mc:Ignorable="d">
-
-    <Grid Margin="20">
+    <ui:ContentDialog.Resources>
+        <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:MoverReferenceModelDialog}" />
+        <Style x:Key="AppListViewStyle"
+       TargetType="ListView">
+            <Setter Property="Background"
+            Value="Transparent"/>
+            <Setter Property="BorderBrush"
+            Value="Transparent"/>
+            <Setter Property="BorderThickness"
+            Value="0"/>
+            <Setter Property="Foreground"
+            Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+        </Style>
+    </ui:ContentDialog.Resources>
+    <Grid Margin="20, 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <TextBlock
@@ -27,31 +39,44 @@
             FontSize="16"
             Text="Please select a reference model:" />
 
-        <ui:Card Grid.Row="1" Margin="0">
-            <ComboBox
-                x:Name="ModelsComboBox"
-                Width="Auto"
-                Margin="10"
-                ItemsSource="{Binding Models}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <ui:SymbolIcon
-                                Grid.Column="0"
-                                Margin="0,0,10,0"
-                                Symbol="Document24" />
-                            <TextBlock 
-                                Grid.Column="1" 
-                                Text="{Binding Name}" 
-                                VerticalAlignment="Center"/>
-                        </Grid>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
+        <ui:Card Grid.Row="1" Margin="0,0,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <ui:TextBox
+                    Grid.Row="0"
+                    Margin="0,0,0,10"
+                    PlaceholderText="Search models..."
+                    Icon="Search24"
+                    Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+                <ListView
+                    Grid.Row="1"
+                    x:Name="ModelsListView"
+                    Style="{StaticResource AppListViewStyle}"
+                    Height="250"
+                    ItemsSource="{Binding MoversView, Mode=OneWay}"
+                    IsSynchronizedWithCurrentItem="True"
+                    ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="{Binding Name, Mode=OneWay}" FontWeight="SemiBold" />
+                                    <TextBlock Text="{Binding Identifier, Mode=OneWay}" Opacity="0.7" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Grid>
         </ui:Card>
     </Grid>
 

@@ -56,5 +56,12 @@ namespace eTools_Ultimate.Helpers
 
         [DllImport("3DModelRenderer.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr GetMaterialTexture(IntPtr engine, int index);
+
+        [DllImport("3DModelRenderer.dll")]
+        public static extern void SetReferenceModel(IntPtr engine, string filename);
+        [DllImport("3DModelRenderer.dll")]
+        public static extern void SetReferenceTextureEx(IntPtr engine, int textureEx);
+        [DllImport("3DModelRenderer.dll")]
+        public static extern void SetReferenceScale(IntPtr engine, float scale);
     }
 }

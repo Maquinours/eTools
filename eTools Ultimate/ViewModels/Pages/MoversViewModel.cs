@@ -1,6 +1,7 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
+using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using eTools_Ultimate.Views.Dialogs;
 using System;
 using System.Collections.Generic;
@@ -467,9 +468,23 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private async Task ShowReferenceModelContentDialog()
         {
-            var referenceModelContentDialog = new MoverReferenceModelDialog(contentDialogService.GetDialogHost());
+            if(D3dHost is null) return;
 
-            await referenceModelContentDialog.ShowAsync();
+            var contentDialog = new MoverReferenceModelDialog(contentDialogService.GetDialogHost());
+
+            if(await contentDialog.ShowAsync() == Wpf.Ui.Controls.ContentDialogResult.Primary)
+            {
+                if (contentDialog.DataContext is not MoverReferenceModelViewModel contentDialogViewModel) return;
+
+                //if (contentDialogViewModel.MoversView.CurrentItem is null) // TODO: remove reference model
+                if (contentDialogViewModel.MoversView.CurrentItem is not Mover referenceMover) return;
+                ModelElem referenceModel = referenceMover.Model;
+                NativeMethods.SetReferenceModel(D3dHost._native, referenceModel.Model3DFilePath);
+                NativeMethods.SetReferenceScale(D3dHost._native, referenceModel.FScale);
+                NativeMethods.SetReferenceTextureEx(D3dHost._native, referenceModel.NTextureEx);
+                if (!Auto3DRendering)
+                    D3dHost.Render();
+            }
         }
         #endregion
     }

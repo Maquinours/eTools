@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eTools_Ultimate.ViewModels.Controls.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,7 @@ namespace eTools_Ultimate.Views.Dialogs
         : base(contentPresenter)
         {
             InitializeComponent();
+            DataContext = new MoverReferenceModelViewModel();
         }
     }
 }

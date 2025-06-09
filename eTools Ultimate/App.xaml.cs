@@ -19,6 +19,8 @@ using System.Reflection;
 using System.Windows.Threading;
 using Wpf.Ui;
 using Wpf.Ui.DependencyInjection;
+using eTools_Ultimate.Views.Dialogs;
+using eTools_Ultimate.ViewModels.Controls.Dialogs;
 
 namespace eTools_Ultimate
 {
