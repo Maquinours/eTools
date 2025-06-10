@@ -7,6 +7,9 @@
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="True">
+    <Window.TaskbarItemInfo>
+        <TaskbarItemInfo x:Name="taskbarItemInfo" ProgressState="Normal" />
+    </Window.TaskbarItemInfo>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
