@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="TestScrollVersion" xml:space="preserve">
+    <value>{"version":"Test Scroll Version","date":"2024-07-20","modifications":[{"text":"TEST: This entry is for testing the scroll function","type":0},{"text":"TEST: Another test entry to verify the scroll function","type":0},{"text":"TEST: Long text to test the text wrapping function in the scroll view. This text should be long enough to demonstrate and test the text wrapping function.","type":0},{"text":"TEST: Another long text entry to test the scroll function and the general user interface of the changelog dialog.","type":0},{"text":"TEST: Fifth test entry","type":0},{"text":"TEST: Sixth test entry","type":0},{"text":"TEST: Seventh test entry","type":0},{"text":"TEST: Eighth test entry","type":0},{"text":"TEST: Ninth test entry","type":0},{"text":"TEST: Tenth test entry","type":0}]}</value>
+  </data>
+  <data name="Version_1_0_0" xml:space="preserve">
+    <value>{"version":"Version 1.0.0","date":"2023-09-15","modifications":[{"text":"Initial release of eTools Ultimate","type":0},{"text":"Basic functionality for editing items","type":0},{"text":"Support for loading and saving Spec_Item.txt files","type":0},{"text":"Dark mode UI implemented","type":0}]}</value>
+  </data>
+  <data name="Version_1_2_0" xml:space="preserve">
+    <value>{"version":"Version 1.2.0","date":"2023-11-15","modifications":[{"text":"Added support for analyzing defineItem.h to extract item IDs","type":0},{"text":"Added support for analyzing mdlDyna.inc to obtain model filenames","type":0},{"text":"Reorganization of the General area with new field order","type":1},{"text":"Moved icon display from Visual Properties to the General area","type":1},{"text":"Improved image loading with support for DDS files","type":4},{"text":"Changed tradeable control to a modern toggle switch","type":1},{"text":"Updated changelog with a grouped accordion view","type":5},{"text":"Added dedicated changelog page","type":0},{"text":"Added dedicated changelog page","type":5},{"text":"Added maximum stack size limit (9999) with help text","type":0}]}</value>
+  </data>
+  <data name="Version_1_2_3" xml:space="preserve">
+    <value>{"version":"Version 1.2.3","date":"2024-06-20","modifications":[{"text":"Extended DDS texture preview with zoom controls","type":0},{"text":"Added detailed tooltips explaining DDS format options","type":0},{"text":"Improved transparency handling for DDS textures with pink backgrounds","type":4},{"text":"Implemented intelligent format detection for better DDS rendering","type":0},{"text":"Added pixel-perfect rendering for clearer icon display","type":4},{"text":"Consistent dark mode formatting across all dialog components","type":1},{"text":"Removed item rarity field from the editor interface","type":2},{"text":"Optimized changelog display with improved layout","type":4},{"text":"Fixed various UI formatting inconsistencies","type":3}]}</value>
+  </data>
+  <data name="Version_1_2_4" xml:space="preserve">
+    <value>{"version":"Version 1.2.4","date":"2024-06-25","modifications":[{"text":"Completely redesigned DDS texture preview with extended zoom options (1x-10x)","type":4},{"text":"Optimized display of DDS textures with pixel-perfect scaling","type":4},{"text":"Dynamic size adjustment of the preview window based on zoom level and image content","type":0},{"text":"Improved dialog user interface with clearer arrangement and better accessibility","type":4},{"text":"Removed duplicate close buttons in the preview window","type":3},{"text":"Optimized dialog size for different zoom levels","type":1},{"text":"More precise image rendering function for DDS textures","type":4},{"text":"Improved dialog interaction prevents accidental closure","type":3},{"text":"Consistent dark mode styling across all preview window components","type":4}]}</value>
+  </data>
+  <data name="Version_1_2_5" xml:space="preserve">
+    <value>{"version":"Version 1.2.5","date":"2024-07-02","modifications":[{"text":"Converted table layout to a compact grid layout in the 'Collect' tab","type":1},{"text":"Implemented SortableGridItem component for drag-and-drop functionality in grid format","type":0},{"text":"Optimized item display with two-column layout for better space efficiency","type":4},{"text":"Redesigned probability fields to display inline with element names","type":1},{"text":"Fixed data loading issues by passing availableItems directly through the component hierarchy","type":3},{"text":"Improved layout of collection items for better visualization and reduced scrolling","type":4},{"text":"Removed faulty references to NPCTab that caused linter errors","type":3},{"text":"Optimized formatting with uniform width constraints for probability inputs","type":4}]}</value>
+  </data>
+</root>

@@ -5,136 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         xmlns:local="clr-namespace:eTools_Ultimate.Views.Dialogs"
+        xmlns:dialogViewModels="clr-namespace:eTools_Ultimate.ViewModels.Controls.Dialogs"
+        xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
         ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
         ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+        d:DataContext="{d:DesignInstance dialogViewModels:PatchNotesViewModel, IsDesignTimeCreatable=False}"
         mc:Ignorable="d" >
     <ui:ContentDialog.Resources>
         <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:PatchNotesDialog}" />
-        <!-- Styles for consistent design -->
-        <Style x:Key="HeaderTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="20" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-        </Style>
-
-        <Style x:Key="LabelTextStyle" TargetType="TextBlock">
-            <Setter Property="FontWeight" Value="Medium" />
-            <Setter Property="Margin" Value="0,0,0,4" />
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-        </Style>
-
-        <Style x:Key="SecondaryTextStyle" TargetType="TextBlock">
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
-        </Style>
-
-        <Style x:Key="CardStyle" TargetType="ui:Card">
-            <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
-        </Style>
-
-        <!-- DataGrid Styles for better Dark/Light Mode adaptation -->
-        <Style x:Key="DataGridStyle" TargetType="DataGrid">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="GridLinesVisibility" Value="Horizontal" />
-            <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
-            <Setter Property="HeadersVisibility" Value="Column" />
-            <Setter Property="CanUserAddRows" Value="False" />
-            <Setter Property="CanUserDeleteRows" Value="False" />
-            <Setter Property="IsReadOnly" Value="True" />
-            <Setter Property="AutoGenerateColumns" Value="False" />
-            <Setter Property="AlternatingRowBackground" Value="#424242" />
-            <Setter Property="RowBackground" Value="Transparent" />
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-            <Setter Property="RowHeight" Value="50" />
-        </Style>
-
-        <!-- Verbesserte Stile für DataGrid Spalten -->
-        <Style x:Key="DataGridColumnHeaderStyle" TargetType="DataGridColumnHeader">
-            <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
-            <Setter Property="BorderThickness" Value="0,0,0,1" />
-            <Setter Property="Padding" Value="8,8" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-        </Style>
-
-        <Style x:Key="DataGridCellStyle" TargetType="DataGridCell">
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Padding" Value="8,4" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="DataGridCell">
-                        <Border Background="{TemplateBinding Background}" 
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter VerticalAlignment="Center" />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Type Badge Styles -->
-        <Style x:Key="AddBadgeStyle" TargetType="ui:Badge">
-            <Setter Property="Appearance" Value="Success" />
-        </Style>
-
-        <Style x:Key="ModifyBadgeStyle" TargetType="ui:Badge">
-            <Setter Property="Appearance" Value="Caution" />
-        </Style>
-
-        <Style x:Key="DeleteBadgeStyle" TargetType="ui:Badge">
-            <Setter Property="Appearance" Value="Danger" />
-        </Style>
-
-        <Style x:Key="InfoBadgeStyle" TargetType="ui:Badge">
-            <Setter Property="Appearance" Value="Info" />
-        </Style>
-
-        <!-- ContextMenu for additional log entry functions -->
-        <ContextMenu x:Key="LogEntryContextMenu">
-            <MenuItem Header="Restore">
-                <MenuItem.Icon>
-                    <ui:SymbolIcon Symbol="ArrowClockwise24" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="Show Details">
-                <MenuItem.Icon>
-                    <ui:SymbolIcon Symbol="Info24" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="Before/After Comparison">
-                <MenuItem.Icon>
-                    <ui:SymbolIcon Symbol="ArrowSyncCircle24" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <Separator />
-            <MenuItem Header="Export Entry Changes">
-                <MenuItem.Icon>
-                    <ui:SymbolIcon Symbol="ArrowUpload24" />
-                </MenuItem.Icon>
-            </MenuItem>
-            <MenuItem Header="Hide from List">
-                <MenuItem.Icon>
-                    <ui:SymbolIcon Symbol="Eye24" />
-                </MenuItem.Icon>
-            </MenuItem>
-        </ContextMenu>
-
-        <!-- Converter -->
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <!--
-        <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
-        <converters:ChangeTypeToAppearanceConverter x:Key="ChangeTypeToAppearanceConverter" />
-        -->
-
         <!-- Iconstyles für die verschiedenen Änderungstypen -->
         <Style x:Key="IconBase" TargetType="ui:SymbolIcon">
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,0,8,0"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
         </Style>
 
         <Style x:Key="AddedIcon" TargetType="ui:SymbolIcon" BasedOn="{StaticResource IconBase}">
@@ -142,420 +25,156 @@
             <Setter Property="Symbol" Value="Add24"/>
         </Style>
 
-        <Style x:Key="ModifyIcon" TargetType="ui:SymbolIcon" BasedOn="{StaticResource IconBase}">
+        <Style x:Key="ChangedIcon" TargetType="ui:SymbolIcon" BasedOn="{StaticResource IconBase}">
             <Setter Property="Foreground" Value="#FF9800"/>
             <Setter Property="Symbol" Value="Wrench24"/>
         </Style>
 
-        <Style x:Key="DeleteIcon" TargetType="ui:SymbolIcon" BasedOn="{StaticResource IconBase}">
+        <Style x:Key="RemovedIcon" TargetType="ui:SymbolIcon" BasedOn="{StaticResource IconBase}">
             <Setter Property="Foreground" Value="#F44336"/>
             <Setter Property="Symbol" Value="Delete24"/>
         </Style>
 
-        <Style x:Key="InfoIcon" TargetType="ui:SymbolIcon" BasedOn="{StaticResource IconBase}">
-            <Setter Property="Foreground" Value="#2196F3"/>
-            <Setter Property="Symbol" Value="Info24"/>
+        <Style x:Key="FixedIcon" TargetType="ui:SymbolIcon" BasedOn="{StaticResource IconBase}">
+            <Setter Property="Foreground" Value="#9C27B0"/>
+            <Setter Property="Symbol" Value="Bug24"/>
         </Style>
+
+        <Style x:Key="ImprovedIcon" TargetType="ui:SymbolIcon" BasedOn="{StaticResource IconBase}">
+            <Setter Property="Foreground" Value="#2196F3"/>
+            <Setter Property="Symbol" Value="ArrowCircleUp24"/>
+        </Style>
+
+        <Style x:Key="UpdatedIcon" TargetType="ui:SymbolIcon" BasedOn="{StaticResource IconBase}">
+            <Setter Property="Foreground" Value="#FFD700"/>
+            <Setter Property="Symbol" Value="ArrowSync24"/>
+        </Style>
+
+        <!-- Stile für die Textblöcke -->
+        <Style x:Key="VersionTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+            <Setter Property="Margin" Value="0,8,0,4"/>
+        </Style>
+
+        <Style x:Key="VersionDate" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+            <Setter Property="Margin" Value="8,10,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="ChangeText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+        </Style>
+
+        <!-- DataTemplate für einen Bullet Point -->
+        <DataTemplate x:Key="BulletPointTemplate">
+            <Grid Margin="0,4,0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ContentControl Grid.Column="0" Content="{Binding Icon}"/>
+                <TextBlock Grid.Column="1" Text="{Binding Text}" Style="{StaticResource ChangeText}"/>
+            </Grid>
+        </DataTemplate>
+        <converters:PatchModificationTypeToSymbolConverter x:Key="PatchModificationTypeToSymbolConverter" />
+        <converters:PatchModificationTypeToForegroundConverter x:Key="PatchModificationTypeToForegroundConverter" />
+        <converters:PatchModificationTypeToTextConverter x:Key="PatchModificationTypeToTextConverter" />
     </ui:ContentDialog.Resources>
 
-    <!--
-    <Page.DataContext>
-        <viewmodel:ChangeLogViewModel>
-            <viewmodel:ChangeLogViewModel.AreFiltersVisible>False</viewmodel:ChangeLogViewModel.AreFiltersVisible>
-        </viewmodel:ChangeLogViewModel>
-    </Page.DataContext>
-    -->
-
-    <Grid Margin="12">
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Header - ohne Close-Button -->
-        <Grid Grid.Row="0" Margin="0,0,0,12">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+        <Grid Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <ui:Button Appearance="Transparent" ToolTip="Sort: Newest First" Padding="8,4" Margin="0,0,12,0">
-                    <StackPanel Orientation="Horizontal">
-                        <ui:SymbolIcon Symbol="ArrowCircleDown24" Margin="0,0,4,0" />
-                        <TextBlock Text="Newest First" />
-                    </StackPanel>
-                </ui:Button>
-                <ui:Button Appearance="Transparent" ToolTip="Show/Hide Filters" Padding="8,4" Margin="0,0,12,0"
-                      Command="{Binding ToggleFiltersVisibilityCommand}">
-                    <ui:SymbolIcon Symbol="Filter24" />
-                </ui:Button>
-                <ui:Button Appearance="Transparent" ToolTip="Export Log" Padding="8,4" Margin="0,0,12,0">
-                    <ui:SymbolIcon Symbol="ArrowDownload24" />
-                </ui:Button>
-                <ui:Button Appearance="Transparent" ToolTip="Delete Logs" Padding="8,4"
-                      Foreground="{DynamicResource SystemFillColorCriticalBrush}">
-                    <ui:SymbolIcon Symbol="Delete24" />
-                </ui:Button>
-            </StackPanel>
-        </Grid>
+            <TextBlock Grid.Row="0"
+                           Text="Patch notes"
+                           FontSize="24" 
+                           FontWeight="Bold" 
+                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                           HorizontalAlignment="Center"
+                           TextWrapping="Wrap"
+                           Margin="0,0,0,16"/>
 
-        <!-- View Mode & Entry Count-->
-        <Grid Grid.Row="1" Margin="0,0,0,12">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+            <!-- Legende -->
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding ModificationTypes, Mode=OneWay}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Grid.Row="1" Margin="0,0,0,16"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,16,0">
+                            <ui:SymbolIcon Symbol="{Binding Mode=OneWay, Converter={StaticResource PatchModificationTypeToSymbolConverter}}" Foreground="{Binding Mode=OneWay, Converter={StaticResource PatchModificationTypeToForegroundConverter}}" FontSize="12"/>
+                            <TextBlock Text="{Binding Mode=OneWay, Converter={StaticResource PatchModificationTypeToTextConverter}}" Margin="4,0,0,0" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
 
-            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
-                <TextBlock Text="View Mode:" VerticalAlignment="Center" Margin="0,0,8,0" 
-                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                <RadioButton Content="List" IsChecked="{Binding IsListViewMode}" Margin="0,0,8,0" 
-                         Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                <RadioButton Content="Accordion" IsChecked="{Binding IsListViewMode, Converter={StaticResource InverseBooleanConverter}}" 
-                         Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-            </StackPanel>
+            <!-- Changelog-Inhalt mit Scrollbar -->
+            <ScrollViewer Grid.Row="2" 
+                           VerticalScrollBarVisibility="Visible"
+                           HorizontalScrollBarVisibility="Disabled"
+                           Height="400"
+                           Background="{DynamicResource ApplicationBackgroundBrush}">
+                <StackPanel x:Name="ChangelogContent" Margin="0,8,16,0">
+                    <ItemsControl ItemsSource="{Binding Patches, Mode=OneWay}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0, 0, 0, 20">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                        <TextBlock Text="{Binding Version, Mode=OneWay}" FontSize="18" FontWeight="SemiBold" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Margin="0, 8, 0, 4" />
+                                        <TextBlock FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="8, 10, 0, 0" VerticalAlignment="Center">
+                                                <Run Text="- " />
+                                                <Run Text="{Binding Date, Mode=OneWay, StringFormat=D}" />
+                                        </TextBlock>
+                                    </StackPanel>
+                                    <StackPanel Margin="16, 8, 0, 0" Grid.Row="1">
+                                        <ItemsControl ItemsSource="{Binding Modifications, Mode=OneWay}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid Margin="0, 4, 0, 4">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="Auto" />
+                                                            <ColumnDefinition Width="*" />
+                                                        </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Text="{Binding EntriesCount}" 
-                       Style="{StaticResource SecondaryTextStyle}"
-                       VerticalAlignment="Center" />
-                <TextBlock Text=" entries found" 
-                       Style="{StaticResource SecondaryTextStyle}"
-                       VerticalAlignment="Center" Margin="4,0,0,0" />
-            </StackPanel>
-        </Grid>
-
-        <!-- Search and Filters -->
-        <ui:Card Grid.Row="2" Margin="0,0,0,12" Style="{StaticResource CardStyle}"
-            Visibility="{Binding AreFiltersVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                <!-- Search box -->
-                <Grid Grid.Row="0" Margin="0,0,0,12">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <ui:TextBox 
-                    Grid.Column="0"
-                    PlaceholderText="Search logs..."
-                    Margin="0,0,8,0">
-                        <ui:TextBox.Icon>
-                            <ui:SymbolIcon Symbol="Search24" />
-                        </ui:TextBox.Icon>
-                    </ui:TextBox>
-
-                    <ui:Button 
-                    Grid.Column="1"
-                    Content="Reset Filters"
-                    Appearance="Secondary"
-                    Command="{Binding ClearFiltersCommand}"
-                    VerticalAlignment="Center" />
-                </Grid>
-
-                <!-- Filter Fields -->
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
-                    <!-- Item Name Filter -->
-                    <StackPanel Grid.Column="0" Grid.Row="0" Margin="0,0,8,12">
-                        <TextBlock Text="Item Name" Style="{StaticResource LabelTextStyle}" />
-                        <ui:TextBox PlaceholderText="Filter by item name...">
-                            <ui:TextBox.Icon>
-                                <ui:SymbolIcon Symbol="Tag24" />
-                            </ui:TextBox.Icon>
-                        </ui:TextBox>
-                    </StackPanel>
-
-                    <!-- Field Filter -->
-                    <StackPanel Grid.Column="1" Grid.Row="0" Margin="0,0,8,12">
-                        <TextBlock Text="Field" Style="{StaticResource LabelTextStyle}" />
-                        <ui:TextBox PlaceholderText="Filter by field name...">
-                            <ui:TextBox.Icon>
-                                <ui:SymbolIcon Symbol="TextT24" />
-                            </ui:TextBox.Icon>
-                        </ui:TextBox>
-                    </StackPanel>
-
-                    <!-- Value Changed Filter -->
-                    <StackPanel Grid.Column="2" Grid.Row="0" Margin="0,0,0,12">
-                        <TextBlock Text="Content" Style="{StaticResource LabelTextStyle}" />
-                        <ui:TextBox PlaceholderText="Filter by content change...">
-                            <ui:TextBox.Icon>
-                                <ui:SymbolIcon Symbol="Edit24" />
-                            </ui:TextBox.Icon>
-                        </ui:TextBox>
-                    </StackPanel>
-
-                    <!-- Date From -->
-                    <StackPanel Grid.Column="0" Grid.Row="1" Margin="0,0,8,0">
-                        <TextBlock Text="Date From" Style="{StaticResource LabelTextStyle}" />
-                        <DatePicker SelectedDate="{Binding DateFrom}" />
-                    </StackPanel>
-
-                    <!-- Date To -->
-                    <StackPanel Grid.Column="1" Grid.Row="1" Margin="0,0,8,0">
-                        <TextBlock Text="Date To" Style="{StaticResource LabelTextStyle}" />
-                        <DatePicker SelectedDate="{Binding DateTo}" />
-                    </StackPanel>
-
-                    <!-- Type Filter -->
-                    <StackPanel Grid.Column="2" Grid.Row="1" Margin="0,0,0,0">
-                        <TextBlock Text="Change Type" Style="{StaticResource LabelTextStyle}" />
-                        <ComboBox ItemsSource="{Binding ChangeTypes}" 
-                              SelectedItem="{Binding SelectedChangeType}"
-                              DisplayMemberPath="DisplayName"
-                              Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                              Background="{DynamicResource ControlFillColorDefaultBrush}" />
-                    </StackPanel>
-                </Grid>
-            </Grid>
-        </ui:Card>
-
-        <!-- Change Log Table -->
-        <ui:Card Grid.Row="3" Style="{StaticResource CardStyle}">
-            <Grid>
-                <!-- Empty Data Display -->
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,40"
-                      Visibility="{Binding HasNoEntries, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <ui:SymbolIcon Symbol="Document48" FontSize="48" Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
-                    <TextBlock Text="No log entries found" 
-                         Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                         FontSize="16" 
-                         HorizontalAlignment="Center"
-                         Margin="0,12" />
-                    <TextBlock Text="Adjust the filters or reset them to see results" 
-                         Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                         HorizontalAlignment="Center"
-                         TextWrapping="Wrap"
-                         MaxWidth="400" />
+                                                        <!-- TODO: add symbol and foreground bindings -->
+                                                        <ui:SymbolIcon Symbol="{Binding Type, Mode=OneWay, Converter={StaticResource PatchModificationTypeToSymbolConverter}}" Foreground="{Binding Type, Mode=OneWay, Converter={StaticResource PatchModificationTypeToForegroundConverter}}" Grid.Column="0" FontSize="16" Margin="0, 0, 8, 0" VerticalAlignment="Top" />
+                                                        <TextBlock Grid.Column="1" Text="{Binding Text, Mode=OneWay}" FontSize="13" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
-
-                <!-- DataGrid with improved column styling -->
-                <DataGrid Style="{StaticResource DataGridStyle}"
-                    ItemsSource="{Binding LogEntries}"
-                    ContextMenu="{StaticResource LogEntryContextMenu}"
-                    Visibility="{Binding HasEntries, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-                    CellStyle="{StaticResource DataGridCellStyle}"
-                    AutoGenerateColumns="False"
-                    HorizontalScrollBarVisibility="Auto">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Timestamp" Width="Auto" MinWidth="120" Binding="{Binding Timestamp}">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                            <DataGridTextColumn.CellStyle>
-                                <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle}">
-                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorAltSecondaryBrush}" />
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                        </DataGridTextColumn>
-
-                        <!-- Verbesserte Typ-Spalte mit farbigen Icons -->
-                        <DataGridTemplateColumn Header="Type" Width="Auto" MinWidth="60">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <ui:SymbolIcon FontSize="18" 
-                                                  HorizontalAlignment="Center" 
-                                                  VerticalAlignment="Center">
-                                            <ui:SymbolIcon.Style>
-                                                <Style TargetType="ui:SymbolIcon">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding ChangeType}" Value="Add">
-                                                            <Setter Property="Symbol" Value="Add24" />
-                                                            <Setter Property="Foreground" Value="#4CAF50" />
-                                                            <Setter Property="ToolTip" Value="Added" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding ChangeType}" Value="Modify">
-                                                            <Setter Property="Symbol" Value="Wrench24" />
-                                                            <Setter Property="Foreground" Value="#FF9800" />
-                                                            <Setter Property="ToolTip" Value="Modified" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding ChangeType}" Value="Delete">
-                                                            <Setter Property="Symbol" Value="Delete24" />
-                                                            <Setter Property="Foreground" Value="#F44336" />
-                                                            <Setter Property="ToolTip" Value="Deleted" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding ChangeType}" Value="Info">
-                                                            <Setter Property="Symbol" Value="Info24" />
-                                                            <Setter Property="Foreground" Value="#2196F3" />
-                                                            <Setter Property="ToolTip" Value="Information" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </ui:SymbolIcon.Style>
-                                        </ui:SymbolIcon>
-                                    </Grid>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                            <DataGridTemplateColumn.CellStyle>
-                                <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle}">
-                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorAltSecondaryBrush}" />
-                                </Style>
-                            </DataGridTemplateColumn.CellStyle>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTextColumn Header="Item" Width="*" MinWidth="120" Binding="{Binding Item}">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                    <Setter Property="FontWeight" Value="Medium" />
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                        </DataGridTextColumn>
-
-                        <DataGridTextColumn Header="Field" Width="*" MinWidth="120" Binding="{Binding Field}">
-                            <DataGridTextColumn.ElementStyle>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                </Style>
-                            </DataGridTextColumn.ElementStyle>
-                            <DataGridTextColumn.CellStyle>
-                                <Style TargetType="DataGridCell" BasedOn="{StaticResource DataGridCellStyle}">
-                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorAltSecondaryBrush}" />
-                                </Style>
-                            </DataGridTextColumn.CellStyle>
-                        </DataGridTextColumn>
-
-                        <!-- Kombinierte Value-Spalte mit Pfeil zwischen Old und New -->
-                        <DataGridTemplateColumn Header="Value Change" Width="*" MinWidth="200">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                        <!-- Old Value -->
-                                        <TextBlock Text="{Binding OldValue}" 
-                                             Foreground="{DynamicResource TextFillColorPrimaryBrush}" 
-                                             VerticalAlignment="Center"
-                                             TextWrapping="Wrap" />
-
-                                        <!-- Arrow - nur anzeigen wenn beide Werte vorhanden sind -->
-                                        <StackPanel Orientation="Horizontal" Margin="4,0">
-                                            <StackPanel.Style>
-                                                <Style TargetType="StackPanel">
-                                                    <Setter Property="Visibility" Value="Visible" />
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding NewValue}" Value="">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding NewValue}" Value="{x:Null}">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding OldValue}" Value="">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding OldValue}" Value="{x:Null}">
-                                                            <Setter Property="Visibility" Value="Collapsed" />
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </StackPanel.Style>
-                                            <ui:SymbolIcon Symbol="ArrowRight24" FontSize="14" 
-                                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                                    VerticalAlignment="Center" />
-                                        </StackPanel>
-
-                                        <!-- New Value -->
-                                        <TextBlock Text="{Binding NewValue}" 
-                                             Foreground="{DynamicResource TextFillColorPrimaryBrush}" 
-                                             VerticalAlignment="Center"
-                                             TextWrapping="Wrap" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-
-                        <DataGridTemplateColumn Header="Actions" Width="Auto" MinWidth="80">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                        <ui:Button
-                                        Appearance="Transparent"
-                                        ToolTip="Restore"
-                                        Command="{Binding DataContext.RestoreEntryCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                        CommandParameter="{Binding}"
-                                        Margin="0,0,4,0">
-                                            <ui:SymbolIcon Symbol="ArrowClockwise24" />
-                                        </ui:Button>
-                                        <ui:Button
-                                        Appearance="Transparent"
-                                        ToolTip="Show Details"
-                                        Command="{Binding DataContext.ShowDetailsCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                        CommandParameter="{Binding}">
-                                            <ui:SymbolIcon Symbol="Info24" />
-                                        </ui:Button>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
-        </ui:Card>
-
-        <!-- Pagination -->
-        <Grid Grid.Row="4" Margin="0,8,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-
-            <!-- Pagination -->
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <ui:Button 
-                Appearance="Secondary" 
-                Padding="8,4"
-                Margin="0,0,4,0" 
-                Command="{Binding PreviousPageCommand}"
-                IsEnabled="{Binding CanGoToPreviousPage}">
-                    <ui:SymbolIcon Symbol="ChevronLeft24" />
-                </ui:Button>
-
-                <TextBlock Text="{Binding CurrentPage}" 
-                VerticalAlignment="Center"
-                Margin="4,0,0,0"
-                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                <TextBlock Text="of" 
-                VerticalAlignment="Center"
-                Margin="4,0"
-                Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
-                <TextBlock Text="{Binding TotalPages}" 
-                VerticalAlignment="Center"
-                Margin="0,0,4,0"
-                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-
-                <ui:Button 
-                Appearance="Secondary" 
-                Padding="8,4"
-                Margin="4,0,0,0"
-                Command="{Binding NextPageCommand}"
-                IsEnabled="{Binding CanGoToNextPage}">
-                    <ui:SymbolIcon Symbol="ChevronRight24" />
-                </ui:Button>
-            </StackPanel>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </ui:ContentDialog>

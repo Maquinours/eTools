@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eTools_Ultimate.ViewModels.Controls.Dialogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace eTools_Ultimate.Views.Dialogs
         public PatchNotesDialog(ContentPresenter? contentPresenter)
             : base(contentPresenter)
         {
+            DataContext = new PatchNotesViewModel();
             InitializeComponent();
         }
     }
