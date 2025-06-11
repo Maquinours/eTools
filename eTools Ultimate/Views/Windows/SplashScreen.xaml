@@ -1,14 +1,25 @@
 <Window x:Class="eTools_Ultimate.Views.Windows.SplashScreen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewmodels="clr-namespace:eTools_Ultimate.ViewModels.Windows"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         Title="SplashScreen" Height="250" Width="450"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        d:DataContext="{d:DesignInstance viewmodels:SplashScreenViewModel, IsDesignTimeCreatable=False}"
+        mc:Ignorable="d">
+    <behaviors:Interaction.Triggers>
+        <behaviors:EventTrigger EventName="Loaded">
+            <behaviors:InvokeCommandAction Command="{Binding LoadCommand}"/>
+        </behaviors:EventTrigger>
+    </behaviors:Interaction.Triggers>
     <Window.TaskbarItemInfo>
-        <TaskbarItemInfo x:Name="taskbarItemInfo" ProgressState="Normal" />
+        <TaskbarItemInfo x:Name="taskbarItemInfo" ProgressState="Normal" ProgressValue="{Binding LoadingProgress, Mode=OneWay}" />
     </Window.TaskbarItemInfo>
     <Grid>
         <Grid.RowDefinitions>
@@ -25,7 +36,7 @@
                    RenderOptions.BitmapScalingMode="HighQuality" />
             <TextBlock
                         x:Name="LoadingText"
-                        Text="Loading..." 
+                        Text="{Binding LoadingText}" 
                        HorizontalAlignment="Center"
                        Margin="0,10,0,0"
                        Foreground="White" FontSize="12"/>

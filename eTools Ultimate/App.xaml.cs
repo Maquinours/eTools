@@ -55,6 +55,10 @@ namespace eTools_Ultimate
                 // Service for handling content dialogs
                 services.AddSingleton<IContentDialogService, ContentDialogService>();
 
+                // Splash screen
+                services.AddSingleton<eTools_Ultimate.Views.Windows.SplashScreen>();
+                services.AddSingleton<SplashScreenViewModel>();
+
                 // Main window with navigation
                 services.AddSingleton<INavigationWindow, MainWindow>();
                 services.AddSingleton<MainWindowViewModel>();
