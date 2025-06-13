@@ -21,7 +21,7 @@ namespace eTools_Ultimate.ViewModels.Windows
         [ObservableProperty]
         private double _loadingProgress = 0;
 
-        public EventHandler? Loaded;
+        public event EventHandler? Loaded;
 
         [RelayCommand]
         public async Task Load()
@@ -70,7 +70,7 @@ namespace eTools_Ultimate.ViewModels.Windows
 
             Loaded?.Invoke(this, EventArgs.Empty);
 
-            if (serviceProvider.GetService(typeof(INavigationWindow)) is not MainWindow mainWindow) throw new Exception("SplashScreenViewModel::Load exception : Unable to find MainWindow");
+            if (serviceProvider.GetService(typeof(INavigationWindow)) is not MainWindow mainWindow) throw new InvalidOperationException("SplashScreenViewModel::Load exception : Unable to find MainWindow");
 
             mainWindow.ShowWindow();
             mainWindow.Navigate(typeof(DashboardPage));

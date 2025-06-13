@@ -15,9 +15,6 @@ namespace eTools_Ultimate.ViewModels.Pages
     public partial class HonorsViewModel : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
-        
-        [ObservableProperty]
-        private IEnumerable<DataColor> _colors;
 
         private string _searchText = string.Empty;
 

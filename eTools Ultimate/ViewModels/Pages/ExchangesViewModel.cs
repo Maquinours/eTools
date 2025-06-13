@@ -14,11 +14,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 {
     public partial class ExchangesViewModel : ObservableObject, INavigationAware
     {
-
         private bool _isInitialized = false;
-
-        [ObservableProperty]
-        private IEnumerable<DataColor> _colors;
 
         private string _searchText = string.Empty;
 

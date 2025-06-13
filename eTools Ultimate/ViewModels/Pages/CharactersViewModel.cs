@@ -17,9 +17,6 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private bool _isInitialized = false;
 
-        [ObservableProperty]
-        private IEnumerable<DataColor> _colors;
-
         private string _searchText = string.Empty;
 
         [ObservableProperty]
