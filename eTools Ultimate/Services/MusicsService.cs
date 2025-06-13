@@ -46,7 +46,6 @@ namespace eTools_Ultimate.Services
 
                 Musics.Add(music);
             }
-            PlayMusic(Musics.Last());
         }
 
         public void PlayMusic(Music music)
