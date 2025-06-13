@@ -30,7 +30,6 @@ namespace eTools_Ultimate.Services
             this.ClearHonors();
 
             Settings settings = Settings.Instance;
-            StringsService stringsService = StringsService.Instance;
 
             using (Script scanner = new())
             {

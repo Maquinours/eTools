@@ -31,7 +31,6 @@ namespace eTools_Ultimate.Services
             this.ClearGiftBoxes();
 
             Settings settings = Settings.Instance;
-            StringsService stringsService = StringsService.Instance;
 
             using (Script script = new())
             {
@@ -50,7 +49,7 @@ namespace eTools_Ultimate.Services
                         case "GiftBox":
                             {
                                 dwGiftbox = script.GetNumber();
-                                script.GetToken(); // {
+                                script.GetToken(); // "{"
                                 while (true)
                                 {
                                     int item = script.GetNumber();
@@ -69,7 +68,7 @@ namespace eTools_Ultimate.Services
                         case "GiftBox2":
                             {
                                 dwGiftbox = script.GetNumber();
-                                script.GetToken(); // {
+                                script.GetToken(); // "{"
                                 while (true)
                                 {
                                     int item = script.GetNumber();
@@ -86,7 +85,7 @@ namespace eTools_Ultimate.Services
                         case "GiftBox3":
                             {
                                 dwGiftbox = script.GetNumber();
-                                script.GetToken(); // {
+                                script.GetToken(); // "{"
                                 while (true)
                                 {
                                     int item = script.GetNumber();
@@ -106,7 +105,7 @@ namespace eTools_Ultimate.Services
                             {
                                 ushort precision = (ushort)(script.Token == "GiftBox4" ? 100 : 10);
                                 dwGiftbox = script.GetNumber();
-                                script.GetToken(); // {
+                                script.GetToken(); // "{"
                                 while (true)
                                 {
                                     int item = script.GetNumber();
@@ -125,7 +124,7 @@ namespace eTools_Ultimate.Services
                         case "GiftBox6":
                             {
                                 dwGiftbox = script.GetNumber();
-                                script.GetToken(); // {
+                                script.GetToken(); // "{"
                                 while (true)
                                 {
                                     int item = script.GetNumber();

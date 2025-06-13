@@ -45,7 +45,7 @@ namespace eTools_Ultimate.Services
                     if (script.EndOfStream) break;
                     
                     int dwColor = script.GetNumber();
-                    script.GetToken(); // {
+                    script.GetToken(); // "{"
                     string szName = script.GetToken();
 
                     // If the string is not in the strings service, then we generate a new key for it.
@@ -56,7 +56,7 @@ namespace eTools_Ultimate.Services
                         szName = identifier;
                     }
 
-                    script.GetToken(); // }
+                    script.GetToken(); // "}"
 
                     Text text = new(dwId, dwColor, szName);
 

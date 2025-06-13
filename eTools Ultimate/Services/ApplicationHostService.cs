@@ -38,7 +38,7 @@ namespace eTools_Ultimate.Services
             {
                 _navigationWindow = (serviceProvider.GetService(typeof(INavigationWindow)) as INavigationWindow)!;
 
-                Views.Windows.SplashScreen splashScreen = serviceProvider.GetService(typeof(Views.Windows.SplashScreen)) as Views.Windows.SplashScreen ?? throw new Exception("SplashScreen service not found");
+                Views.Windows.SplashScreen splashScreen = serviceProvider.GetService(typeof(Views.Windows.SplashScreen)) as Views.Windows.SplashScreen ?? throw new InvalidOperationException("SplashScreen service not found");
                 splashScreen.Show();
             }
 

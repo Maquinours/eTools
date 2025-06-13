@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using eTools_Ultimate.Exceptions;
 using System.Globalization;
 using eTools_Ultimate.Helpers;
+using System.IO;
 
 namespace eTools_Ultimate.Services
 {
@@ -32,8 +33,6 @@ namespace eTools_Ultimate.Services
             this.ClearExchanges();
 
             Settings settings = Settings.Instance;
-            StringsService stringsService = StringsService.Instance;
-            DefinesService definesService = DefinesService.Instance;
 
             using (Scanner scanner = new())
             {
@@ -51,7 +50,7 @@ namespace eTools_Ultimate.Services
                     List<ExchangeSmeltSet> smeltSets = new();
                     List<ExchangeEnchantMoveSet> enchantMoveSets = new();
 
-                    scanner.GetToken(); // {
+                    scanner.GetToken(); // "{"
 
                     while (true)
                     {
@@ -64,7 +63,7 @@ namespace eTools_Ultimate.Services
                         {
                             case "DESCRIPTION":
                                 {
-                                    scanner.GetToken(); // {
+                                    scanner.GetToken(); // "{"
                                     while(true)
                                     {
                                         scanner.GetToken();
@@ -91,7 +90,7 @@ namespace eTools_Ultimate.Services
                                     List<ExchangeSetRemovePoint> removePoints = new();
                                     List<ExchangeSetPay> pays = new();
 
-                                    scanner.GetToken(); // {
+                                    scanner.GetToken(); // "{"
                                     while(true)
                                     {
                                         string token2 = scanner.GetToken();
@@ -103,7 +102,7 @@ namespace eTools_Ultimate.Services
                                         {
                                             case "RESULTMSG":
                                                 {
-                                                    scanner.GetToken(); // {
+                                                    scanner.GetToken(); // "{"
                                                     while(true)
                                                     {
                                                         scanner.GetToken();
@@ -120,7 +119,7 @@ namespace eTools_Ultimate.Services
                                                 }
                                             case "CONDITION":
                                                 {
-                                                    scanner.GetToken(); // {
+                                                    scanner.GetToken(); // "{"
                                                     while(true)
                                                     {
                                                         int dwItemId;
@@ -136,7 +135,7 @@ namespace eTools_Ultimate.Services
                                                             if (DefinesService.Instance.Defines.TryGetValue("II_GOLD_SEED1", out int penyaItemId))
                                                                 dwItemId = penyaItemId;
                                                             else
-                                                                throw new Exception($"PENYA item ID (II_GOLD_SEED1) not found in defines");
+                                                                throw new InvalidDataException($"PENYA item ID (II_GOLD_SEED1) not found in defines");
                                                         }
                                                         else
                                                             dwItemId = Script.GetDefineNum(scanner.Token);
@@ -152,7 +151,7 @@ namespace eTools_Ultimate.Services
                                                 }
                                             case "REMOVE":
                                                 {
-                                                    scanner.GetToken(); // {
+                                                    scanner.GetToken(); // "{"
                                                     while(true)
                                                     {
                                                         int dwItemId;
@@ -168,7 +167,7 @@ namespace eTools_Ultimate.Services
                                                             if (DefinesService.Instance.Defines.TryGetValue("II_GOLD_SEED1", out int penyaItemId))
                                                                 dwItemId = penyaItemId;
                                                             else
-                                                                throw new Exception($"PENYA item ID (II_GOLD_SEED1) not found in defines");
+                                                                throw new InvalidDataException($"PENYA item ID (II_GOLD_SEED1) not found in defines");
                                                         }
                                                         else
                                                             dwItemId = Script.GetDefineNum(scanner.Token);
@@ -187,7 +186,7 @@ namespace eTools_Ultimate.Services
                                                 {
                                                     if (settings.ResourcesVersion < 15) break;
 
-                                                    scanner.GetToken(); // {
+                                                    scanner.GetToken(); // "{"
                                                     while(true)
                                                     {
                                                         scanner.GetToken();
@@ -211,7 +210,7 @@ namespace eTools_Ultimate.Services
                                                 {
                                                     if (settings.ResourcesVersion < 15) break;
 
-                                                    scanner.GetToken(); // {
+                                                    scanner.GetToken(); // "{"
                                                     while (true)
                                                     {
                                                         scanner.GetToken();
@@ -235,7 +234,7 @@ namespace eTools_Ultimate.Services
                                                 {
                                                     int nPayNum = scanner.GetNumber();
 
-                                                    scanner.GetToken(); // {
+                                                    scanner.GetToken(); // "{"
                                                     bool useCurrentToken = false;
                                                     while(true)
                                                     {
@@ -247,9 +246,7 @@ namespace eTools_Ultimate.Services
                                                         int nItemNum = scanner.GetNumber();
                                                         int nPayProb = scanner.GetNumber();
 
-                                                        //scanner.SetMark();
                                                         string token3 = scanner.GetToken();
-                                                        //scanner.GoMark();
                                                         if (Int32.TryParse(token3, new CultureInfo("en-EN"), out int byFalg))
                                                             useCurrentToken = false;
                                                         else
@@ -280,7 +277,7 @@ namespace eTools_Ultimate.Services
                                     List<ExchangeSmeltSetCondition> conditions = new();
                                     List<ExchangeSmeltSetPay> pays = new();
 
-                                    scanner.GetToken(); // {
+                                    scanner.GetToken(); // "{"
                                     while (true)
                                     {
                                         string token2 = scanner.GetToken();
@@ -292,7 +289,7 @@ namespace eTools_Ultimate.Services
                                         {
                                             case "RESULTMSG":
                                                 {
-                                                    scanner.GetToken(); // {
+                                                    scanner.GetToken(); // "{"
                                                     while (true)
                                                     {
                                                         scanner.GetToken();
@@ -310,7 +307,7 @@ namespace eTools_Ultimate.Services
                                                 }
                                             case "CONDITION":
                                                 {
-                                                    scanner.GetToken(); // {
+                                                    scanner.GetToken(); // "{"
                                                     while(true)
                                                     {
                                                         scanner.GetToken();
@@ -326,7 +323,7 @@ namespace eTools_Ultimate.Services
                                                             if (DefinesService.Instance.Defines.TryGetValue("II_GOLD_SEED1", out int penyaItemId))
                                                                 dwItemId = penyaItemId;
                                                             else
-                                                                throw new Exception($"PENYA item ID (II_GOLD_SEED1) not found in defines");
+                                                                throw new InvalidDataException($"PENYA item ID (II_GOLD_SEED1) not found in defines");
                                                         }
                                                         else
                                                             dwItemId = Script.GetDefineNum(scanner.Token);
@@ -349,7 +346,7 @@ namespace eTools_Ultimate.Services
                                                 }
                                             case "REMOVE":
                                                 {
-                                                    scanner.GetToken(); // {
+                                                    scanner.GetToken(); // "{"
                                                     do
                                                     {
                                                         scanner.GetToken();
@@ -360,7 +357,7 @@ namespace eTools_Ultimate.Services
                                             case "PAY":
                                                 {
                                                     int nPayNum = scanner.GetNumber();
-                                                    scanner.GetToken(); // {
+                                                    scanner.GetToken(); // "{"
                                                     while(true)
                                                     {
                                                         scanner.GetToken();
@@ -405,7 +402,7 @@ namespace eTools_Ultimate.Services
                                     List<ExchangeEnchantMoveSetCondition> conditions = new();
                                     List<ExchangeEnchantMoveSetPay> pays = new();
 
-                                    scanner.GetToken(); // {
+                                    scanner.GetToken(); // "{"
                                     while (true)
                                     {
                                         string token2 = scanner.GetToken();
@@ -417,7 +414,7 @@ namespace eTools_Ultimate.Services
                                         {
                                             case "RESULTMSG":
                                                 {
-                                                    scanner.GetToken(); // {
+                                                    scanner.GetToken(); // "{"
                                                     while (true)
                                                     {
                                                         scanner.GetToken();
@@ -435,7 +432,7 @@ namespace eTools_Ultimate.Services
                                                 }
                                             case "CONDITION":
                                                 {
-                                                    scanner.GetToken(); // {
+                                                    scanner.GetToken(); // "{"
                                                     while (true)
                                                     {
                                                         scanner.GetToken();
@@ -451,7 +448,7 @@ namespace eTools_Ultimate.Services
                                                             if (DefinesService.Instance.Defines.TryGetValue("II_GOLD_SEED1", out int penyaItemId))
                                                                 dwItemId = penyaItemId;
                                                             else
-                                                                throw new Exception($"PENYA item ID (II_GOLD_SEED1) not found in defines");
+                                                                throw new InvalidDataException($"PENYA item ID (II_GOLD_SEED1) not found in defines");
                                                         }
                                                         else
                                                             dwItemId = Script.GetDefineNum(scanner.Token);
@@ -464,7 +461,7 @@ namespace eTools_Ultimate.Services
                                                 }
                                             case "REMOVE":
                                                 {
-                                                    scanner.GetToken(); // {
+                                                    scanner.GetToken(); // "{"
                                                     do
                                                     {
                                                         scanner.GetToken();
@@ -475,7 +472,7 @@ namespace eTools_Ultimate.Services
                                             case "PAY":
                                                 {
                                                     int nPayNum = scanner.GetNumber();
-                                                    scanner.GetToken(); // {
+                                                    scanner.GetToken(); // "{"
 
                                                     bool useCurrentToken = false;
                                                     while (true)

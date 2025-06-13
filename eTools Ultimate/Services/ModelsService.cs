@@ -16,8 +16,8 @@ namespace eTools_Ultimate.Services
         private static readonly Lazy<ModelsService> _instance = new(() => new ModelsService());
         public static ModelsService Instance => _instance.Value;
 
-        private readonly ObservableCollection<MainModelBrace> models = [];
-        public ObservableCollection<MainModelBrace> Models => models;
+        private readonly ObservableCollection<MainModelBrace> _models = [];
+        public ObservableCollection<MainModelBrace> Models => _models;
         private void ClearBraceRecursively(ModelBrace brace)
         {
             foreach (ModelBrace child in brace.Braces)
@@ -31,9 +31,9 @@ namespace eTools_Ultimate.Services
 
         private void ClearModels()
         {
-            foreach (MainModelBrace brace in this.models) // Avoid memory leaks
+            foreach (MainModelBrace brace in this.Models) // Avoid memory leaks
                 ClearBraceRecursively(brace);
-            this.models.Clear();
+            this.Models.Clear();
         }
 
         public void Load()
@@ -56,9 +56,9 @@ namespace eTools_Ultimate.Services
                     };
                     if (script.EndOfStream) break; // If there is no more brace
                     mainBrace.IType = script.GetNumber(); // Type of the main brace
-                    script.GetToken(); // {
+                    script.GetToken(); // "{"
                     script.GetToken(); // object name or }
-                    this.models.Add(mainBrace);
+                    this.Models.Add(mainBrace);
                     List<ModelBrace> currBraces =
                 // List containing current brace and its parents (last element is current brace)
                 [
@@ -131,27 +131,6 @@ namespace eTools_Ultimate.Services
                     }
                 }
             }
-
-            // TODO: maybe readd it
-            //foreach(Mover mover in moversService.Movers.Where(x => x.Model == null)) // We add a default model for each mover who doesn't have any
-            //{
-            //    mover.Model = new ModelElem
-            //    {
-            //        DwType = defines["OT_MOVER"],
-            //        SzName = "",
-            //        DwIndex = mover.Prop.DwId,
-            //        DwModelType = "MODELTYPE_ANIMATED_MESH",
-            //        SzPart = "",
-            //        BFly = 0,
-            //        DwDistant = "MD_MID",
-            //        BPick = 0,
-            //        FScale = 1f,
-            //        BTrans = 0,
-            //        BShadow = 1,
-            //        NTextureEx = "ATEX_NONE",
-            //        BRenderFlag = 1
-            //    };
-            //}
         }
 
         private void GetBracesRecursively(List<ModelBrace> braces, ModelBrace brace)
@@ -180,7 +159,7 @@ namespace eTools_Ultimate.Services
         private ModelBrace[] GetBracesByType(int type)
         {
             List<ModelBrace> braces = [];
-            foreach (MainModelBrace mainBrace in models)
+            foreach (MainModelBrace mainBrace in Models)
             {
                 if (mainBrace.IType != type) continue;
                 GetBracesRecursively(braces, mainBrace);
@@ -208,7 +187,7 @@ namespace eTools_Ultimate.Services
                     if (tempModel == model)
                         return brace;
             }
-            throw new Exception("ModelsService::GetBraceByModel Exception : Model not found");
+            throw new InvalidOperationException("ModelsService::GetBraceByModel Exception : Model not found");
         }
 
         public void SetBraceToModel(ModelElem model, ModelBrace brace)

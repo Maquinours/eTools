@@ -38,7 +38,7 @@ namespace eTools_Ultimate.Services
         internal const string SkillIconsPath = "SkillIconsPath";
     }
 
-    internal class SettingsService
+    internal static class SettingsService
     {
         private static string SettingsFolderPath { get => $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\eTools\"; }
         private static string SettingsFilePath { get => $"{SettingsFolderPath}eTools.ini"; }
@@ -177,7 +177,7 @@ namespace eTools_Ultimate.Services
             }
         }
 
-        private static void SettingsChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private static void SettingsChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             switch(e.PropertyName)
             {

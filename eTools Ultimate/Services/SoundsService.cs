@@ -19,7 +19,7 @@ namespace eTools_Ultimate.Services
         private static readonly Lazy<SoundsService> _instance = new(() => new SoundsService());
         public static SoundsService Instance => _instance.Value;
 
-        private Dictionary<int, string> _sounds = new();
+        private readonly Dictionary<int, string> _sounds = new();
         public Dictionary<int, string> Sounds => _sounds;
 
         public void Load()

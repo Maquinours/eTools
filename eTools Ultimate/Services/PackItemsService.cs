@@ -45,7 +45,7 @@ namespace eTools_Ultimate.Services
                         int dwPackItem = script.GetNumber();
 
                         int nSpan = script.GetNumber();
-                        script.GetToken(); // {
+                        script.GetToken(); // "{"
 
                         List<PackItemItem> packItemItems = [];
                         while(true)

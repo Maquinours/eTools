@@ -51,7 +51,7 @@
         </StackPanel>
 
         <TextBlock Grid.Row="2" 
-                   Text="{Binding ViewModel.AppVersion, Mode=OneWay}"
+                   Text="aaaaaaaaaa"
                    HorizontalAlignment="Right" 
                    Margin="0,2,0,0"
                    Foreground="Gray"/>

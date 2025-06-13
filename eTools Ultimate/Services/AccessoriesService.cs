@@ -15,8 +15,8 @@ namespace eTools_Ultimate.Services
         private static readonly Lazy<AccessoriesService> _instance = new(() => new());
         public static AccessoriesService Instance => _instance.Value;
 
-        private List<int> _probabilities = [];
-        private List<Accessory> _accessories = [];
+        private readonly List<int> _probabilities = [];
+        private readonly List<Accessory> _accessories = [];
 
         public List<int> Probabilities => this._probabilities;
         public List<Accessory> Accessories => this._accessories;
@@ -47,7 +47,7 @@ namespace eTools_Ultimate.Services
                     {
                         case "Probability":
                             {
-                                script.GetToken(); // {
+                                script.GetToken(); // "{"
 
                                 while(true)
                                 {
@@ -63,7 +63,7 @@ namespace eTools_Ultimate.Services
                             }
                         case "Accessory":
                             {
-                                script.GetToken(); // {
+                                script.GetToken(); // "{"
 
                                 while(true)
                                 {
@@ -72,7 +72,7 @@ namespace eTools_Ultimate.Services
                                     if (script.Token == "}") break;
                                     if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
-                                    script.GetToken(); // {
+                                    script.GetToken(); // "{"
 
                                     List<AccessoryAbilityOptionData> abilityOptionData = [];
 
@@ -83,7 +83,7 @@ namespace eTools_Ultimate.Services
                                         if (script.Token == "}") break;
                                         if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
-                                        script.GetToken(); // {
+                                        script.GetToken(); // "{"
 
                                         List<AccessoryAbilityOptionDstData> dstData = [];
 

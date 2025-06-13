@@ -24,7 +24,7 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
         {
             ResourceSet? resourceSet = PatchNotes.ResourceManager.GetResourceSet(CultureInfo.CurrentCulture, true, true);
 
-            if (resourceSet is null) throw new Exception("Patch notes resource set is null");
+            if (resourceSet is null) throw new InvalidOperationException("Patch notes resource set is null");
 
             List<Patch> patches = [];
 
@@ -35,9 +35,9 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
 
             foreach (DictionaryEntry resourceEntry in resourceSet)
             {
-                if (resourceEntry.Value is not string value) throw new Exception("Patch note entry is not a string");
+                if (resourceEntry.Value is not string value) throw new InvalidOperationException("Patch note entry is not a string");
 
-                Patch patch = JsonSerializer.Deserialize<Patch>(value, jsonSerializerOptions) ?? throw new Exception("Patch note entry deserialize result is null");
+                Patch patch = JsonSerializer.Deserialize<Patch>(value, jsonSerializerOptions) ?? throw new InvalidOperationException("Patch note entry deserialize result is null");
 
                 patches.Add(patch);
             }

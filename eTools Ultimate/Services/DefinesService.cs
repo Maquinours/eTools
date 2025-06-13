@@ -72,7 +72,7 @@ namespace eTools_Ultimate.Services
                         }
                         string key = scanner.GetToken();
                         int value = scanner.GetNumber();
-                        if (scanner.Token.StartsWith("#")) continue;
+                        if (scanner.Token.StartsWith('#')) continue;
                         if (!this.Defines.ContainsKey(key))
                         {
                             this.Defines[key] = value;
@@ -109,10 +109,6 @@ namespace eTools_Ultimate.Services
                     }
                 }
             }
-            //if (!defines.ContainsKey("BELLI_PEACEFUL")) // Must have BELLI_PEACEFUL
-            //    throw new MissingDefineException("BELLI_PEACEFUL");
-            //if (!defines.ContainsKey("RANK_LOW")) // Must have RANK_LOW
-            //    throw new MissingDefineException("RANK_LOW");
         }
     }
 }

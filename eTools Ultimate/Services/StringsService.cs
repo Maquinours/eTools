@@ -93,11 +93,13 @@ namespace eTools_Ultimate.Services
 
         public string GetNextStringIdentifier(string stringIdPrefix)
         {
-            for (int i = 0; true; i++)
+            int i = 0;
+            while(true)
             {
                 string identifier = stringIdPrefix + i.ToString("D6");
                 if (!this.Strings.ContainsKey(identifier))
                     return identifier;
+                i++;
             }
         }
     }
