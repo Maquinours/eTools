@@ -71,6 +71,9 @@ namespace eTools_Ultimate.Models
         // PackItems settings
         private string? _packItemsPropFilePath;
 
+        // Musics settings
+        private string? _musicsConfigFilePath;
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -685,5 +688,24 @@ namespace eTools_Ultimate.Models
             }
         }
         public string DefaultPackItemsPropFile => $"{this.ResourcesFolderPath}propPackItem.inc";
+
+        public string? MusicsConfigFilePath
+        {
+            get => this._musicsConfigFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultMusicsConfigFilePath)
+                    val = null;
+                if (this.MusicsConfigFilePath != val)
+                {
+                    this._musicsConfigFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultMusicsConfigFilePath => $"{this.ClientFolderPath}Music{Path.DirectorySeparatorChar}default.bgm";
     }
 }

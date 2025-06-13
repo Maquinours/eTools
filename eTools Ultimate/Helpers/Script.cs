@@ -127,5 +127,27 @@ namespace eTools_Ultimate.Helpers
                 return "=";
             return number.ToString(CultureInfo.InvariantCulture);
         }
+
+		public static bool TryGetNumberFromString(string str, out int number)
+		{
+			if (DefinesService.Instance.Defines.TryGetValue(str, out int result))
+            {
+                number = result;
+				return true;
+            }
+			if (str == "=")
+			{
+				number = -1;
+				return true;
+			}
+			if(Int32.TryParse(str, out result))
+			{
+				number = result;
+				return true;
+			}
+
+			number = default;
+			return false;
+		}
     }
 }

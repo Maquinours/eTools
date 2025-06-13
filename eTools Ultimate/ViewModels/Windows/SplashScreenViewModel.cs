@@ -36,6 +36,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 ("Loading skills...", SkillsService.Instance.Load),
                 ("Loading characters...", CharactersService.Instance.Load),
                 ("Loading sounds config...", SoundsService.Instance.Load),
+                ("Loading musics config...", MusicsService.Instance.Load),
                 ("Loading texts...", TextsService.Instance.Load),
                 ("Loading giftboxes...", GiftBoxesService.Instance.Load),
                 ("Loading exchanges...", ExchangesService.Instance.Load),
