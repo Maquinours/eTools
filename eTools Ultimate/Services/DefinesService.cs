@@ -27,6 +27,10 @@ namespace eTools_Ultimate.Services
         private readonly Dictionary<int, string> _reversedMotionTypeDefines = [];
         private readonly Dictionary<int, string> _reversedBelligerenceDefines = [];
         private readonly Dictionary<int, string> _reversedAiDefines = [];
+        private readonly Dictionary<int, string> _reversedRankDefines = [];
+        private readonly Dictionary<int, string> _reversedVirtualTypeDefines = [];
+        private readonly Dictionary<int, string> _reversedSoundDefines = [];
+        private readonly Dictionary<int, string> _reversedAreaDefines = [];
 
         public ObservableDictionary<string, int> Defines => this._defines;
 
@@ -39,6 +43,10 @@ namespace eTools_Ultimate.Services
         public Dictionary<int, string> ReversedMotionTypeDefines => this._reversedMotionTypeDefines;
         public Dictionary<int, string> ReversedBelligerenceDefines => this._reversedBelligerenceDefines;
         public Dictionary<int, string> ReversedAiDefines => this._reversedAiDefines;
+        public Dictionary<int, string> ReversedRankDefines => this._reversedRankDefines;
+        public Dictionary<int, string> ReversedVirtualTypeDefines => this._reversedVirtualTypeDefines;
+        public Dictionary<int, string> ReversedSoundDefines => this._reversedSoundDefines;
+        public Dictionary<int, string> ReversedAreaDefines => this._reversedAreaDefines;
 
         public void Load()
         {
@@ -80,10 +88,18 @@ namespace eTools_Ultimate.Services
                                 this.ReversedTextDefines[value] = key;
                             else if (key.StartsWith("MTI_"))
                                 this.ReversedMotionTypeDefines[value] = key;
-                            else if(key.StartsWith("BELLI_"))
+                            else if (key.StartsWith("BELLI_"))
                                 this.ReversedBelligerenceDefines[value] = key;
-                            else if(key.StartsWith("AII_"))
+                            else if (key.StartsWith("AII_"))
                                 this.ReversedAiDefines[value] = key;
+                            else if (key.StartsWith("RANK_"))
+                                this.ReversedRankDefines[value] = key;
+                            else if (key.StartsWith("VT_"))
+                                this.ReversedVirtualTypeDefines[value] = key;
+                            else if (key.StartsWith("SND_"))
+                                this.ReversedSoundDefines[value] = key;
+                            else if (key.StartsWith("AREA_"))
+                                this.ReversedAreaDefines[value] = key;
                         }
                         scanner.GetToken();
                     }

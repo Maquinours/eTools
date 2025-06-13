@@ -2,6 +2,7 @@
 using Scan;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -98,6 +99,33 @@ namespace eTools_Ultimate.Helpers
 			}
 
 			return Token;
+        }
+
+		public static string NumberToString(int number)
+		{
+			if (number == -1)
+				return "=";
+			return number.ToString(CultureInfo.InvariantCulture);
+		}
+        public static string NumberToString(int number, Dictionary<int, string> reverseDefines)
+        {
+			if (reverseDefines.TryGetValue(number, out string? result))
+				return result;
+            if (number == -1)
+                return "=";
+            return number.ToString(CultureInfo.InvariantCulture);
+        }
+        public static string Int64ToString(long number)
+        {
+            if (number == -1)
+                return "=";
+            return number.ToString(CultureInfo.InvariantCulture);
+        }
+        public static string FloatToString(float number)
+        {
+            if (number == -1f)
+                return "=";
+            return number.ToString(CultureInfo.InvariantCulture);
         }
     }
 }
