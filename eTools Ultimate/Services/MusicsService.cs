@@ -15,6 +15,8 @@ namespace eTools_Ultimate.Services
 
         public List<Music> Musics = [];
 
+        private NAudio.Wave.WaveOutEvent _waveOut = new();
+
         private void Clear()
         {
             foreach (Music music in Musics)
@@ -44,6 +46,14 @@ namespace eTools_Ultimate.Services
 
                 Musics.Add(music);
             }
+            PlayMusic(Musics.Last());
+        }
+
+        public void PlayMusic(Music music)
+        {
+            NAudio.Vorbis.VorbisWaveReader vorbisStream = new(music.FilePath);
+            _waveOut.Init(vorbisStream);
+            _waveOut.Play();
         }
     }
 }
