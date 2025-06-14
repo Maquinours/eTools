@@ -1305,6 +1305,33 @@
                                FontSize="12"/>
             </StackPanel>
         </DataTemplate>
+
+        <!-- Model Warning Template -->
+        <DataTemplate x:Key="ModelWarningTemplate">
+            <Border Background="{DynamicResource LayerFillColorDefaultBrush}"
+                    Opacity="0.95"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
+                <StackPanel HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <ui:SymbolIcon Symbol="Warning24"
+                                  FontSize="48"
+                                  Foreground="{DynamicResource SystemFillColorCautionBrush}"
+                                  Margin="0,0,0,10"/>
+                    <TextBlock Text="No Model Available"
+                             FontSize="16"
+                             FontWeight="SemiBold"
+                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                             HorizontalAlignment="Center"
+                             Margin="0,0,0,10"/>
+                    <TextBlock Text="The 3D model could not be loaded or is not specified."
+                             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                             TextAlignment="Center"
+                             TextWrapping="Wrap"
+                             MaxWidth="250"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
     </Page.Resources>
 
     <Grid x:Name="RootGrid">
@@ -1736,6 +1763,9 @@
                                                VerticalAlignment="Center"
                                                MouseRightButtonDown="DxImage_MouseRightButtonDown"
                                                MouseWheel="DxImage_MouseWheel"/>
+                                        <ContentControl Content="{Binding}"
+                                                      ContentTemplate="{StaticResource ModelWarningTemplate}"
+                                                      Visibility="{Binding IsModelAvailable, Converter={StaticResource BoolToVis}, ConverterParameter=Inverse}"/>
                                         <ui:Button ToolTip="Reference Model"
                                                    HorizontalAlignment="Right"
                                                    VerticalAlignment="Top"
