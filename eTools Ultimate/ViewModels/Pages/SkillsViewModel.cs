@@ -61,8 +61,6 @@ namespace eTools_Ultimate.ViewModels.Pages
                     }
                 );
 
-            Colors = colorCollection;
-
             SkillsView.Filter = new Predicate<object>(FilterItem);
 
             _isInitialized = true;

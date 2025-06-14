@@ -65,8 +65,6 @@ namespace eTools_Ultimate.ViewModels.Pages
                     }
                 );
 
-            Colors = colorCollection;
-
             GiftboxesView.Filter = new Predicate<object>(FilterItem);
 
             _isInitialized = true;

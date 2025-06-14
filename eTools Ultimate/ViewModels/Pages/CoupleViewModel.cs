@@ -65,8 +65,6 @@ namespace eTools_Ultimate.ViewModels.Pages
                     }
                 );
 
-            Colors = colorCollection;
-
             CoupleView.Filter = new Predicate<object>(FilterItem);
 
             _isInitialized = true;

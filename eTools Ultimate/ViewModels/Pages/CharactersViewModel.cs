@@ -66,8 +66,6 @@ namespace eTools_Ultimate.ViewModels.Pages
                     }
                 );
 
-            Colors = colorCollection;
-
             CharactersView.Filter = new Predicate<object>(FilterItem);
 
             _isInitialized = true;

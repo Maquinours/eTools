@@ -63,8 +63,6 @@ namespace eTools_Ultimate.ViewModels.Pages
                     }
                 );
 
-            Colors = colorCollection;
-
             ItemsView.Filter = new Predicate<object>(FilterItem);
 
             _isInitialized = true;
