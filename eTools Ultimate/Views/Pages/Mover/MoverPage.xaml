@@ -1305,6 +1305,33 @@
                                FontSize="12"/>
             </StackPanel>
         </DataTemplate>
+
+        <!-- Model Warning Template -->
+        <DataTemplate x:Key="ModelWarningTemplate">
+            <Border Background="{DynamicResource LayerFillColorDefaultBrush}"
+                    Opacity="0.95"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch">
+                <StackPanel HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <ui:SymbolIcon Symbol="Warning24"
+                                  FontSize="48"
+                                  Foreground="{DynamicResource SystemFillColorCautionBrush}"
+                                  Margin="0,0,0,10"/>
+                    <TextBlock Text="No Model Available"
+                             FontSize="16"
+                             FontWeight="SemiBold"
+                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                             HorizontalAlignment="Center"
+                             Margin="0,0,0,10"/>
+                    <TextBlock Text="The 3D model could not be loaded or is not specified."
+                             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                             TextAlignment="Center"
+                             TextWrapping="Wrap"
+                             MaxWidth="250"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
     </Page.Resources>
 
     <Grid x:Name="RootGrid">
@@ -1705,6 +1732,131 @@
                             ContentTemplate="{StaticResource ElementalSectionTemplate}" Visibility="{Binding ShowElementalSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
                     <Separator Margin="0,10,0,5" Visibility="{Binding ShowElementalSection, Mode=OneWay, Converter={StaticResource BoolToVis}}"/>
 
+                    <!-- Sound Section -->
+                    <StackPanel>
+                        <TextBlock Text="Sound"
+                                   Style="{StaticResource SectionHeaderStyle}"/>
+                        <UniformGrid Columns="2">
+                            <!-- Sound 1 -->
+                            <Grid Style="{StaticResource FormFieldStyle}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0"
+                                        Orientation="Horizontal">
+                                    <TextBlock Text="Sound 1"
+                                            Style="{StaticResource FieldLabelStyle}"/>
+                                    <ui:SymbolIcon Symbol="Info20"
+                                            Style="{StaticResource InfoIconStyle}">
+                                        <ui:SymbolIcon.ToolTip>
+                                            <ToolTip Content="Primary sound file"/>
+                                        </ui:SymbolIcon.ToolTip>
+                                    </ui:SymbolIcon>
+                                </StackPanel>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0"
+                                             Style="{StaticResource AppTextBoxStyle}"
+                                             Text="{Binding Sound1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <ui:Button Grid.Column="1"
+                                               Content="..."
+                                               Width="30"
+                                               Height="32"
+                                               Margin="5,0,5,0"/>
+                                    <ui:Button Grid.Column="2"
+                                               Width="40"
+                                               Height="32">
+                                        <ui:SymbolIcon Symbol="Play24"/>
+                                    </ui:Button>
+                                </Grid>
+                            </Grid>
+
+                            <!-- Sound 2 -->
+                            <Grid Style="{StaticResource FormFieldStyle}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0"
+                                        Orientation="Horizontal">
+                                    <TextBlock Text="Sound 2"
+                                            Style="{StaticResource FieldLabelStyle}"/>
+                                    <ui:SymbolIcon Symbol="Info20"
+                                            Style="{StaticResource InfoIconStyle}">
+                                        <ui:SymbolIcon.ToolTip>
+                                            <ToolTip Content="Secondary sound file"/>
+                                        </ui:SymbolIcon.ToolTip>
+                                    </ui:SymbolIcon>
+                                </StackPanel>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0"
+                                             Style="{StaticResource AppTextBoxStyle}"
+                                             Text="{Binding Sound2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <ui:Button Grid.Column="1"
+                                               Content="..."
+                                               Width="30"
+                                               Height="32"
+                                               Margin="5,0,5,0"/>
+                                    <ui:Button Grid.Column="2"
+                                               Width="40"
+                                               Height="32">
+                                        <ui:SymbolIcon Symbol="Play24"/>
+                                    </ui:Button>
+                                </Grid>
+                            </Grid>
+
+                            <!-- Sound 3 -->
+                            <Grid Style="{StaticResource FormFieldStyle}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0"
+                                        Orientation="Horizontal">
+                                    <TextBlock Text="Sound 3"
+                                            Style="{StaticResource FieldLabelStyle}"/>
+                                    <ui:SymbolIcon Symbol="Info20"
+                                            Style="{StaticResource InfoIconStyle}">
+                                        <ui:SymbolIcon.ToolTip>
+                                            <ToolTip Content="Tertiary sound file"/>
+                                        </ui:SymbolIcon.ToolTip>
+                                    </ui:SymbolIcon>
+                                </StackPanel>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0"
+                                             Style="{StaticResource AppTextBoxStyle}"
+                                             Text="{Binding Sound3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <ui:Button Grid.Column="1"
+                                               Content="..."
+                                               Width="30"
+                                               Height="32"
+                                               Margin="5,0,5,0"/>
+                                    <ui:Button Grid.Column="2"
+                                               Width="40"
+                                               Height="32">
+                                        <ui:SymbolIcon Symbol="Play24"/>
+                                    </ui:Button>
+                                </Grid>
+                            </Grid>
+                        </UniformGrid>
+                    </StackPanel>
+                    <Separator Margin="0,10,0,5"/>
+
                     <!-- Model & Motions Section -->
                     <StackPanel Visibility="{Binding ShowModelSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" >
                         <TextBlock Text="Model"
@@ -1736,6 +1888,9 @@
                                                VerticalAlignment="Center"
                                                MouseRightButtonDown="DxImage_MouseRightButtonDown"
                                                MouseWheel="DxImage_MouseWheel"/>
+                                        <ContentControl Content="{Binding}"
+                                                      ContentTemplate="{StaticResource ModelWarningTemplate}"
+                                                      Visibility="{Binding IsModelAvailable, Converter={StaticResource BoolToVis}, ConverterParameter=Inverse}"/>
                                         <ui:Button ToolTip="Reference Model"
                                                    HorizontalAlignment="Right"
                                                    VerticalAlignment="Top"
