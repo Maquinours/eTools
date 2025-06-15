@@ -196,6 +196,15 @@ namespace eTools_Ultimate.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Select a sound file.
+        /// </summary>
+        internal static string SelectSoundFile {
+            get {
+                return ResourceManager.GetString("SelectSoundFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Select the sounds folder.
         /// </summary>
         internal static string SelectSoundsFolder {

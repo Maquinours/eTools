@@ -162,6 +162,9 @@
   <data name="SelectSoundConfigFile" xml:space="preserve">
     <value>Select the sound configuration file</value>
   </data>
+  <data name="SelectSoundFile" xml:space="preserve">
+    <value>Select a sound file</value>
+  </data>
   <data name="SelectSoundsFolder" xml:space="preserve">
     <value>Select the sounds folder</value>
   </data>

@@ -347,6 +347,16 @@ namespace eTools_Ultimate.Models
                 case nameof(MoverProp.DwAi):
                     this.NotifyPropertyChanged(nameof(this.AiIdentifier));
                     break;
+                case nameof(MoverProp.DwSndDmg2):
+                    this.NotifyPropertyChanged(nameof(this.SndDmg2Identifier));
+                    this.NotifyPropertyChanged(nameof(this.SndDmg2));
+                    // TODO: Add trigger if sound is changed
+                    break;
+                case nameof(MoverProp.DwSndIdle1):
+                    this.NotifyPropertyChanged(nameof(this.SndIdle1Identifier));
+                    this.NotifyPropertyChanged(nameof(this.SndIdle1));
+                    // TODO: Add trigger if sound is changed
+                    break;
                     // TODO: reimplement this
                     //case nameof(MoverProp.EElementType):
                     //    this.NotifyPropertyChanged(nameof(this.ElementType));
@@ -419,6 +429,30 @@ namespace eTools_Ultimate.Models
             }
         }
 
+        public string SndDmg2Identifier
+        {
+            get => Script.NumberToString(Prop.DwSndDmg2, DefinesService.Instance.ReversedSoundDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    this.Prop.DwSndDmg2 = val;
+            }
+        }
+
+        public string SndIdle1Identifier
+        {
+            get => Script.NumberToString(Prop.DwSndIdle1, DefinesService.Instance.ReversedSoundDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    this.Prop.DwSndIdle1 = val;
+            }
+        }
+
+        public Sound? SndDmg2 => SoundsService.Instance.Sounds.FirstOrDefault(s => s.Prop.Id == this.Prop.DwSndDmg2);
+
+        public Sound? SndIdle1 => SoundsService.Instance.Sounds.FirstOrDefault(s => s.Prop.Id == this.Prop.DwSndIdle1);
+
         public Mover(MoverProp prop, ModelElem? model)
         {
             _prop = prop;
@@ -426,6 +460,7 @@ namespace eTools_Ultimate.Models
 
             Prop.PropertyChanged += Prop_PropertyChanged;
             StringsService.Instance.Strings.CollectionChanged += ProjectStrings_CollectionChanged;
+            // TODO: Add trigger if any sound is changed/added/deleted
         }
 
         public void Dispose()

@@ -10,6 +10,7 @@ using System.IO;
 using eTools_Ultimate.Exceptions;
 using System.Media;
 using eTools_Ultimate.Helpers;
+using NAudio.Wave;
 
 namespace eTools_Ultimate.Services
 {
@@ -17,41 +18,78 @@ namespace eTools_Ultimate.Services
     {
 
         private static readonly Lazy<SoundsService> _instance = new(() => new SoundsService());
+
+        private readonly List<Sound> _sounds = new();
+
+        private readonly NAudio.Wave.WaveOutEvent _waveOut = new();
+
+        private string? _playingFilePath = null;
         public static SoundsService Instance => _instance.Value;
-
-        private readonly Dictionary<int, string> _sounds = new();
-        public Dictionary<int, string> Sounds => _sounds;
-
-        public void Load()
+        public List<Sound> Sounds => _sounds;
+        public string? PlayingFilePath
         {
-            this.Sounds.Clear();
-
-            string filePath = Settings.Instance.SoundsConfigFilePath ?? Settings.Instance.DefaultSoundsConfigFilePath;
-            if (!File.Exists(filePath))
-                throw new FileNotFoundException($"File not found: {filePath}");
-
-            using (Script script = new())
+            get => _playingFilePath;
+            private set
             {
-                script.Load(filePath);
-                while (true)
+                if(_playingFilePath != value)
                 {
-                    int id = script.GetNumber();
-                    if (script.EndOfStream) break;
-                    string fileName = script.GetToken();
-                    this.Sounds[id] = fileName;
+                    _playingFilePath = value;
                 }
             }
         }
 
-        public void PlaySound(int id)
+        public SoundsService()
         {
-            if (!Sounds.TryGetValue(id, out string? fileName)) throw new SoundConfigNotFoundException(id);
+            _waveOut.PlaybackStopped += WaveOut_PlaybackStopped;
+        }
 
-            string filePath = $@"{Settings.Instance.SoundsFolderPath ?? Settings.Instance.DefaultSoundsFolderPath}{fileName}";
-            if (!File.Exists(filePath))
-                throw new FileNotFoundException($"Sound file not found: {filePath}");
+        private void WaveOut_PlaybackStopped(object? sender, StoppedEventArgs e)
+        {
+            PlayingFilePath = null;
+        }
 
-            new SoundPlayer(filePath).Play();
+        public void Clear()
+        {
+            foreach (Sound sound in Sounds)
+                sound.Dispose();
+            Sounds.Clear();
+        }
+
+        public void Load()
+        {
+            Clear();
+
+            string filePath = Settings.Instance.SoundsConfigFilePath ?? Settings.Instance.DefaultSoundsConfigFilePath;
+
+            using Script script = new();
+            script.Load(filePath);
+
+            while (true)
+            {
+                int id = script.GetNumber();
+
+                if (script.EndOfStream) break;
+
+                string szSoundFileName = script.GetToken();
+
+                SoundProp soundProp = new(id, szSoundFileName);
+                Sound sound = new(soundProp);
+
+                Sounds.Add(sound);
+            }
+        }
+
+        public void PlaySound(Sound sound)
+        {
+            if (_waveOut.PlaybackState == PlaybackState.Playing)
+                _waveOut.Stop();
+
+            string filePath = sound.FilePath;
+
+            AudioFileReader stream = new(filePath);
+            _waveOut.Init(stream);
+            _waveOut.Play();
+            PlayingFilePath = filePath;
         }
     }
 }

@@ -1737,7 +1737,7 @@
                         <TextBlock Text="Sound"
                                    Style="{StaticResource SectionHeaderStyle}"/>
                         <UniformGrid Columns="2">
-                            <!-- Sound 1 -->
+                            <!-- SFX hit sound -->
                             <Grid Style="{StaticResource FormFieldStyle}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -1745,12 +1745,12 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Grid.Row="0"
                                         Orientation="Horizontal">
-                                    <TextBlock Text="Sound 1"
+                                    <TextBlock Text="SFX hit sound"
                                             Style="{StaticResource FieldLabelStyle}"/>
                                     <ui:SymbolIcon Symbol="Info20"
                                             Style="{StaticResource InfoIconStyle}">
                                         <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Primary sound file"/>
+                                            <ToolTip Content="Sound played when an SFX hit the mover"/>
                                         </ui:SymbolIcon.ToolTip>
                                     </ui:SymbolIcon>
                                 </StackPanel>
@@ -1760,23 +1760,27 @@
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0"
-                                             Style="{StaticResource AppTextBoxStyle}"
-                                             Text="{Binding Sound1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <ui:AutoSuggestBox Grid.Column="0"
+                                             OriginalItemsSource="{Binding SoundIdentifiers}"
+                                             DisplayMemberPath="Value"
+                                             Text="{Binding MoversView.CurrentItem.SndDmg2Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"/>
                                     <ui:Button Grid.Column="1"
                                                Content="..."
                                                Width="30"
                                                Height="32"
-                                               Margin="5,0,5,0"/>
+                                               Margin="5,0,5,0"
+                                               Command="{Binding SelectSndDmg2FileCommand, Mode=OneWay}"/>
                                     <ui:Button Grid.Column="2"
                                                Width="40"
-                                               Height="32">
+                                               Height="32"
+                                               Command="{Binding PlaySoundCommand, Mode=OneWay}"
+                                               CommandParameter="{Binding MoversView.CurrentItem.SndDmg2, Mode=OneWay}">
                                         <ui:SymbolIcon Symbol="Play24"/>
                                     </ui:Button>
                                 </Grid>
                             </Grid>
 
-                            <!-- Sound 2 -->
+                            <!-- Click sound -->
                             <Grid Style="{StaticResource FormFieldStyle}">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto"/>
@@ -1784,12 +1788,12 @@
                                 </Grid.RowDefinitions>
                                 <StackPanel Grid.Row="0"
                                         Orientation="Horizontal">
-                                    <TextBlock Text="Sound 2"
+                                    <TextBlock Text="Click sound"
                                             Style="{StaticResource FieldLabelStyle}"/>
                                     <ui:SymbolIcon Symbol="Info20"
                                             Style="{StaticResource InfoIconStyle}">
                                         <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Secondary sound file"/>
+                                            <ToolTip Content="Sound played when the mover is clicked"/>
                                         </ui:SymbolIcon.ToolTip>
                                     </ui:SymbolIcon>
                                 </StackPanel>
@@ -1799,56 +1803,21 @@
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0"
-                                             Style="{StaticResource AppTextBoxStyle}"
-                                             Text="{Binding Sound2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                    <ui:AutoSuggestBox Grid.Column="0"
+                                             OriginalItemsSource="{Binding SoundIdentifiers}"
+                                             DisplayMemberPath="Value"
+                                             Text="{Binding MoversView.CurrentItem.SndIdle1Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Cursor=""/>
                                     <ui:Button Grid.Column="1"
                                                Content="..."
                                                Width="30"
                                                Height="32"
-                                               Margin="5,0,5,0"/>
+                                               Margin="5,0,5,0"
+                                               Command="{Binding SelectSndIdle1FileCommand, Mode=OneWay}"/>
                                     <ui:Button Grid.Column="2"
                                                Width="40"
-                                               Height="32">
-                                        <ui:SymbolIcon Symbol="Play24"/>
-                                    </ui:Button>
-                                </Grid>
-                            </Grid>
-
-                            <!-- Sound 3 -->
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0"
-                                        Orientation="Horizontal">
-                                    <TextBlock Text="Sound 3"
-                                            Style="{StaticResource FieldLabelStyle}"/>
-                                    <ui:SymbolIcon Symbol="Info20"
-                                            Style="{StaticResource InfoIconStyle}">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="Tertiary sound file"/>
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <Grid Grid.Row="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0"
-                                             Style="{StaticResource AppTextBoxStyle}"
-                                             Text="{Binding Sound3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                    <ui:Button Grid.Column="1"
-                                               Content="..."
-                                               Width="30"
                                                Height="32"
-                                               Margin="5,0,5,0"/>
-                                    <ui:Button Grid.Column="2"
-                                               Width="40"
-                                               Height="32">
+                                               Command="{Binding PlaySoundCommand, Mode=OneWay}"
+                                               CommandParameter="{Binding MoversView.CurrentItem.SndIdle1, Mode=OneWay}">
                                         <ui:SymbolIcon Symbol="Play24"/>
                                     </ui:Button>
                                 </Grid>

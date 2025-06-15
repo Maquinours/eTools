@@ -180,6 +180,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         public List<KeyValuePair<int, string>> BelligerenceIdentifiers => DefinesService.Instance.ReversedBelligerenceDefines.ToList();
         public List<KeyValuePair<int, string>> AiIdentifiers => DefinesService.Instance.ReversedAiDefines.ToList();
         public List<KeyValuePair<int, string>> MotionIdentifiers => DefinesService.Instance.ReversedMotionTypeDefines.ToList();
+        public List<KeyValuePair<int, string>> SoundIdentifiers => DefinesService.Instance.ReversedSoundDefines.ToList();
         #endregion Fields
 
         public Task OnNavigatedToAsync()
@@ -496,6 +497,43 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (!Auto3DRendering)
                     D3dHost.Render();
             }
+        }
+
+        [RelayCommand]
+        private void PlaySound(Sound? sound)
+        {
+            if(sound is not null)
+                SoundsService.Instance.PlaySound(sound);
+        }
+
+        [RelayCommand]
+        private void SelectSndDmg2File()
+        {
+            if (MoversView.CurrentItem is not Mover mover) return;
+
+            string initialPath = mover.SndDmg2?.FilePath ?? Settings.Instance.SoundsFolderPath ?? Settings.Instance.DefaultSoundsFolderPath;
+
+            string? filePath = FileFolderSelector.SelectFile(initialPath, eTools_Ultimate.Resources.Texts.SelectSoundFile, "Sound file|*.wav");
+            if (filePath is null) return;
+
+            Sound? newSound = SoundsService.Instance.Sounds.FirstOrDefault(x => x.FilePath.Equals(filePath, StringComparison.OrdinalIgnoreCase));
+            if (newSound is null) return;
+            mover.Prop.DwSndDmg2 = newSound.Prop.Id;
+        }
+
+        [RelayCommand]
+        private void SelectSndIdle1File()
+        {
+            if (MoversView.CurrentItem is not Mover mover) return;
+
+            string initialPath = mover.SndIdle1?.FilePath ?? Settings.Instance.SoundsFolderPath ?? Settings.Instance.DefaultSoundsFolderPath;
+
+            string? filePath = FileFolderSelector.SelectFile(initialPath, eTools_Ultimate.Resources.Texts.SelectSoundFile, "Sound file|*.wav");
+            if (filePath is null) return;
+
+            Sound? newSound = SoundsService.Instance.Sounds.FirstOrDefault(x => x.FilePath.Equals(filePath, StringComparison.OrdinalIgnoreCase));
+            if (newSound is null) return;
+            mover.Prop.DwSndIdle1 = newSound.Prop.Id;
         }
         #endregion
     }
