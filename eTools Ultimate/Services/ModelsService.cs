@@ -116,13 +116,14 @@ namespace eTools_Ultimate.Services
                         {
                             while (true)
                             {
-                                ModelMotion motion = new ModelMotion();
                                 if (script.EndOfStream)
                                     throw new IncorrectlyFormattedFileException(filePath);
-                                motion.SzMotion = script.GetToken(); // motion name or }
-                                if (motion.SzMotion == "}")
+                                string szMotion = script.GetToken(); // motion name or }
+                                if (script.Token == "}")
                                     break;
-                                motion.IMotion = script.GetNumber();
+                                int iMotion = script.GetNumber();
+
+                                ModelMotion motion = new ModelMotion(iMotion, szMotion);
                                 modelElem.Motions.Add(motion);
                             }
                             script.GetToken();

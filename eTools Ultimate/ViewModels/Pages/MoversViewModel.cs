@@ -578,6 +578,92 @@ namespace eTools_Ultimate.ViewModels.Pages
                 MoversView.Refresh();
             }
         }
+
+        [RelayCommand]
+        private async Task AddMoverMotion()
+        {
+            if (MoversView.CurrentItem is not Mover mover) return;
+            if (mover.Model is null) return;
+
+            ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
+                new SimpleContentDialogCreateOptions()
+                {
+                    Title = "Add a motion",
+                    Content = $"Are you sure you want to add a motion to the mover {mover.Identifier} ?",
+                    PrimaryButtonText = "Add",
+                    CloseButtonText = "Cancel",
+                }
+            );
+            if (result == ContentDialogResult.Primary)
+            {
+                ModelMotion motion = new(-1, "");
+                mover.Model.Motions.Add(motion);
+                mover.Model.MotionsView.MoveCurrentTo(motion);
+                mover.Model.MotionsView.Refresh();
+            }
+        }
+
+        [RelayCommand]
+        private async Task RemoveMoverMotion()
+        {
+            if (MoversView.CurrentItem is not Mover mover) return;
+            if (mover.Model is null) return;
+            if (mover.Model.MotionsView.CurrentItem is not ModelMotion motion) return;
+
+            ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
+                new SimpleContentDialogCreateOptions()
+                {
+                    Title = "Remove a motion",
+                    Content = $"Are you sure you want to remove the motion {motion.MotionTypeIdentifier} from the mover {mover.Identifier} ?",
+                    PrimaryButtonText = "Remove",
+                    CloseButtonText = "Cancel",
+                }
+            );
+            if (result == ContentDialogResult.Primary)
+            {
+                mover.Model.Motions.Remove(motion);
+                mover.Model.MotionsView.Refresh();
+            }
+        }
+
+        [RelayCommand]
+        private void GenerateMoverMotions()
+        {
+            if (MoversView.CurrentItem is not Mover mover) return;
+            if (mover.Model is null) return;
+
+            string folderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath; // Models folder path
+            string filterPrefix = $"{Constants.ModelFilenameRoot[mover.Model.DwType]}_{mover.Model.SzName}_"; // Filter prefix for motion files
+            string filter = $"{filterPrefix}*.ani"; // Entire filter
+            string[] filePossibilities = [..Directory.GetFiles(folderPath, filter).Select(x => Path.GetFileNameWithoutExtension(x)[filterPrefix.Length..])]; // All .ani files for this model
+            string[] motionTypeDefines = [.. DefinesService.Instance.ReversedMotionTypeDefines.Select(x => x.Value)]; // All motion type identifiers
+
+            int generatedCount = 0;
+            foreach (string filePossibility in filePossibilities)
+            {
+                string potentialTypeIdentifier = $"MTI_{filePossibility}";
+                string? typeIdentifier = motionTypeDefines.FirstOrDefault(x => x.Equals(potentialTypeIdentifier, StringComparison.OrdinalIgnoreCase));
+
+                if (typeIdentifier is null) continue; // No valid motion type identifier found
+
+                int typeId = DefinesService.Instance.Defines[typeIdentifier]; // type ID from type identifier
+
+                if (mover.Model.Motions.Any(x => x.IMotion == typeId)) continue; // Motion with this type already exists
+
+                ModelMotion modelMotion = new(typeId, filePossibility);
+                mover.Model.Motions.Add(modelMotion);
+                generatedCount++;
+            }
+
+            contentDialogService.ShowSimpleDialogAsync(
+                new SimpleContentDialogCreateOptions()
+                {
+                    Title = "Motions generated",
+                    Content = generatedCount > 1 ? $"{generatedCount} motions have been bound automatically." : $"{generatedCount} motion has been bound automatically",
+                    CloseButtonText = "Close",
+                }
+            );
+        }
         #endregion
     }
 }

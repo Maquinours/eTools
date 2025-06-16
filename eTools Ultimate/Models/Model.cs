@@ -1,15 +1,18 @@
-﻿using System;
+﻿using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Services;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using eTools_Ultimate.Services;
+using System.Windows.Data;
 
 namespace eTools_Ultimate.Models
 {
-    public class ModelMotion : INotifyPropertyChanged
+    public class ModelMotion(int iMotion, string szMotion) : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -24,18 +27,18 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        private string _szMotion;
-        private int _iMotion;
+        private int _iMotion = iMotion;
+        private string _szMotion = szMotion;
 
-        public string SzMotion { get => this._szMotion; set { this._szMotion = value; this.NotifyPropertyChanged(); } }
         public int IMotion { get => this._iMotion; set { this._iMotion = value; this.NotifyPropertyChanged(); } }
+        public string SzMotion { get => this._szMotion; set { this._szMotion = value; this.NotifyPropertyChanged(); } }
         public string MotionTypeIdentifier
         {
-            get => DefinesService.Instance.ReversedMotionTypeDefines.TryGetValue(this.IMotion, out string? identifier) ? identifier : this.IMotion.ToString();
+            get => Script.NumberToString(IMotion, DefinesService.Instance.ReversedMotionTypeDefines);
             set
             {
-                if (DefinesService.Instance.Defines.TryGetValue(value, out int val) || Int32.TryParse(value, out val))
-                    this.IMotion = val;
+                if (Script.TryGetNumberFromString(value, out int val))
+                    IMotion = val;
             }
         }
     }
@@ -103,7 +106,7 @@ namespace eTools_Ultimate.Models
         private int _bShadow;
         private int _nTextureEx;
         private int _bRenderFlag;
-        private List<ModelMotion> _motions;
+        private ObservableCollection<ModelMotion> _motions;
 
         public int DwType { get => this._dwType; set { if (this.DwType != value) { this._dwType = value; this.NotifyPropertyChanged(); } } }
         public int DwIndex { get => this._dwIndex; set { if (this.DwIndex != value) { this._dwIndex = value; this.NotifyPropertyChanged(); } } }
@@ -119,7 +122,7 @@ namespace eTools_Ultimate.Models
         public int NTextureEx { get => this._nTextureEx; set { if (this.NTextureEx != value) { this._nTextureEx = value; this.NotifyPropertyChanged(); } } }
         public int BRenderFlag { get => this._bRenderFlag; set { if (this.BRenderFlag != value) { this._bRenderFlag = value; this.NotifyPropertyChanged(); } } }
 
-        public List<ModelMotion> Motions { get => this._motions; private set { if (this.Motions != value) { this._motions = value; this.NotifyPropertyChanged(); } } }
+        public ObservableCollection<ModelMotion> Motions { get => this._motions; private set { if (this.Motions != value) { this._motions = value; this.NotifyPropertyChanged(); } } }
 
         public ModelBrace Brace // Maybe we should watch for braces changes to handle refresh problems, but I'm not sure if it's necessary for now.
         {
@@ -158,9 +161,11 @@ namespace eTools_Ultimate.Models
             }
         }
 
+        public ICollectionView MotionsView => CollectionViewSource.GetDefaultView(Motions);
+
         public ModelElem()
         {
-            this.Motions = new List<ModelMotion>();
+            this.Motions = [];
             Settings.Instance.PropertyChanged += this.Settings_PropertyChanged;
         }
 

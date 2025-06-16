@@ -1815,8 +1815,9 @@
                                     <ListView
                                         x:Name="MotionsListView"
                                         DisplayMemberPath="MotionTypeIdentifier"
+                                        IsSynchronizedWithCurrentItem="True"
                                         ItemContainerStyle="{StaticResource AppListViewItemStyle}"
-                                        ItemsSource="{Binding MoversView.CurrentItem.Model.Motions}"
+                                        ItemsSource="{Binding MoversView.CurrentItem.Model.MotionsView}"
                                         Style="{StaticResource AppListViewStyle}" />
                                 </Border>
 
@@ -1825,13 +1826,19 @@
                                     Grid.Column="1"
                                     Margin="10,0,0,0"
                                     VerticalAlignment="Top">
-                                    <ui:Button Margin="0,0,0,10" ToolTip="Add Motion">
+                                    <ui:Button
+                                        Margin="0,0,0,10"
+                                        Command="{Binding AddMoverMotionCommand, Mode=OneWay}"
+                                        ToolTip="Add Motion">
                                         <ui:SymbolIcon Symbol="Add24" />
                                     </ui:Button>
-                                    <ui:Button Margin="0,0,0,10" ToolTip="Delete Motion">
+                                    <ui:Button
+                                        Margin="0,0,0,10"
+                                        Command="{Binding RemoveMoverMotionCommand, Mode=OneWay}"
+                                        ToolTip="Delete Motion">
                                         <ui:SymbolIcon Symbol="Delete24" />
                                     </ui:Button>
-                                    <ui:Button ToolTip="Generate Motions">
+                                    <ui:Button Command="{Binding GenerateMoverMotionsCommand, Mode=OneWay}" ToolTip="Generate Motions">
                                         <ui:SymbolIcon Symbol="ArrowSync24" />
                                     </ui:Button>
                                 </StackPanel>
