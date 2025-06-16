@@ -255,8 +255,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="999999999"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.NExpValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
@@ -285,8 +283,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="2147483647"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.DwStr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
@@ -307,8 +303,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="2147483647"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.DwSta, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
@@ -329,8 +323,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="2147483647"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.DwDex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
@@ -351,8 +343,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="2147483647"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.DwInt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
@@ -373,8 +363,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="100"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.DwHR, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
@@ -395,8 +383,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="100"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.DwER, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
@@ -425,8 +411,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="2147483647"
-                            Minimum="1"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.DwLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
@@ -447,8 +431,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="2147483647"
-                            Minimum="1"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.DwAddHp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
@@ -469,8 +451,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="2147483647"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.DwAddMp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
@@ -560,8 +540,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="2147483647"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.DwAtkMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
@@ -582,8 +560,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="2147483647"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.DwAtkMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
@@ -691,8 +667,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="10000"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.DwReAttackDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
@@ -721,8 +695,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="2147483647"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.DwNaturalArmor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
@@ -797,8 +769,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="100"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.DwResisMgic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
@@ -819,8 +789,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="100"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.NResistElecricity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
@@ -841,8 +809,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="100"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.NResistFire, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
@@ -863,8 +829,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="100"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.NResistWind, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
@@ -885,8 +849,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="100"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.NResistWater, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
@@ -907,8 +869,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="100"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.NResistEarth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
@@ -990,8 +950,6 @@
                         </StackPanel>
                         <ui:NumberBox
                             Grid.Row="1"
-                            Maximum="2147483647"
-                            Minimum="0"
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.WElementAtk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
@@ -1764,7 +1722,6 @@
                                     </Grid.ColumnDefinitions>
                                     <ui:AutoSuggestBox
                                         Grid.Column="0"
-                                        Cursor=""
                                         DisplayMemberPath="Value"
                                         OriginalItemsSource="{Binding SoundIdentifiers}"
                                         Text="{Binding MoversView.CurrentItem.SndIdle1Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
@@ -1992,8 +1949,6 @@
                                     </StackPanel>
                                     <ui:NumberBox
                                         Grid.Row="1"
-                                        Maximum="10"
-                                        Minimum="0.1"
                                         SpinButtonPlacementMode="Inline"
                                         Value="{Binding MoversView.CurrentItem.Model.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </Grid>
