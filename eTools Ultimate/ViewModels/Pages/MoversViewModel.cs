@@ -3,6 +3,7 @@ using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using eTools_Ultimate.Views.Dialogs;
+using Notification.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +14,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.TextFormatting;
 using Wpf.Ui;
@@ -655,14 +657,12 @@ namespace eTools_Ultimate.ViewModels.Pages
                 generatedCount++;
             }
 
-            contentDialogService.ShowSimpleDialogAsync(
-                new SimpleContentDialogCreateOptions()
-                {
-                    Title = "Motions generated",
-                    Content = generatedCount > 1 ? $"{generatedCount} motions have been bound automatically." : $"{generatedCount} motion has been bound automatically",
-                    CloseButtonText = "Close",
-                }
-            );
+            var notificationManager = new NotificationManager();
+            notificationManager.Show(
+                title: "Motions generated",
+                message: generatedCount > 1 ? $"{generatedCount} motions have been bound automatically." : $"{generatedCount} motion has been bound automatically",
+                type:NotificationType.Success, "WindowArea"
+                );
         }
         #endregion
     }
