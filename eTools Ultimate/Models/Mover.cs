@@ -132,8 +132,8 @@ namespace eTools_Ultimate.Models
         private int _nChaotic = nChaotic;
         private int _dwUseable = dwUseable;
         private int _dwActionRadius = dwActionRadius;
-        private long _dwAtkMin = dwAtkMin;
-        private long _dwAtkMax = dwAtkMax;
+        private long _dwAtkMin = !Settings.Instance.Mover64BitAtk ? Math.Clamp(dwAtkMin, int.MinValue, int.MaxValue) : dwAtkMin;
+        private long _dwAtkMax = !Settings.Instance.Mover64BitAtk ? Math.Clamp(dwAtkMax, int.MinValue, int.MaxValue) : dwAtkMax;
         private int _dwAtk1 = dwAtk1;
         private int _dwAtk2 = dwAtk2;
         private int _dwAtk3 = dwAtk3;
@@ -147,7 +147,7 @@ namespace eTools_Ultimate.Models
         private int _dwLegRate = dwLegRate;
         private int _dwAttackSpeed = dwAttackSpeed;
         private int _dwReAttackDelay = dwReAttackDelay;
-        private long _dwAddHp = dwAddHp;
+        private long _dwAddHp = !Settings.Instance.Mover64BitHp ? Math.Clamp(dwAddHp, int.MinValue, int.MaxValue) : dwAddHp;
         private int _dwAddMp = dwAddMp;
         private int _dwNaturalArmor = dwNaturalArmor;
         private int _nAbrasion = nAbrasion;
@@ -234,8 +234,30 @@ namespace eTools_Ultimate.Models
         public int NChaotic { get => _nChaotic; set => SetValue(ref this._nChaotic, value); }
         public int DwUseable { get => _dwUseable; set => SetValue(ref this._dwUseable, value); }
         public int DwActionRadius { get => _dwActionRadius; set => SetValue(ref this._dwActionRadius, value); }
-        public long DwAtkMin { get => _dwAtkMin; set => SetValue(ref this._dwAtkMin, value); } // We set it to long to handle 64 bits attack configurations
-        public long DwAtkMax { get => _dwAtkMax; set => SetValue(ref this._dwAtkMax, value); }
+        public long DwAtkMin 
+        { 
+            get => _dwAtkMin; 
+            set
+            {
+                // If mover is configured to use 64 bit attack, we can set it directly, otherwise we limit it between int.MaxValue and int.MinValue
+                long val = value;
+                if (!Settings.Instance.Mover64BitAtk)
+                    val = Math.Clamp(val, int.MinValue, int.MaxValue);
+                SetValue(ref this._dwAtkMin, val);
+            }
+        }
+        public long DwAtkMax 
+        { 
+            get => _dwAtkMax;
+            set 
+            {
+                // If mover is configured to use 64 bit attack, we can set it directly, otherwise we limit it between int.MaxValue and int.MinValue
+                long val = value;
+                if (!Settings.Instance.Mover64BitAtk)
+                    val = Math.Clamp(val, int.MinValue, int.MaxValue);
+                SetValue(ref this._dwAtkMax, val);
+            } 
+        }
         public int DwAtk1 { get => _dwAtk1; set => SetValue(ref this._dwAtk1, value); }
         public int DwAtk2 { get => _dwAtk2; set => SetValue(ref this._dwAtk2, value); }
         public int DwAtk3 { get => _dwAtk3; set => SetValue(ref this._dwAtk3, value); }
@@ -249,7 +271,18 @@ namespace eTools_Ultimate.Models
         public int DwLegRate { get => _dwLegRate; set => SetValue(ref this._dwLegRate, value); }
         public int DwAttackSpeed { get => _dwAttackSpeed; set => SetValue(ref this._dwAttackSpeed, value); }
         public int DwReAttackDelay { get => _dwReAttackDelay; set => SetValue(ref this._dwReAttackDelay, value); }
-        public long DwAddHp { get => _dwAddHp; set => SetValue(ref this._dwAddHp, value); }
+        public long DwAddHp 
+        {
+            get => _dwAddHp; 
+            set
+            {
+                // If mover is configured to use 64 bit hp, we can set it directly, otherwise we limit it between int.MaxValue and int.MinValue
+                long val = value;
+                if(!Settings.Instance.Mover64BitHp)
+                    val = Math.Clamp(val, int.MinValue, int.MaxValue);
+                SetValue(ref this._dwAddHp, val);
+            }
+        }
         public int DwAddMp { get => _dwAddMp; set => SetValue(ref this._dwAddMp, value); }
         public int DwNaturalArmor { get => _dwNaturalArmor; set => SetValue(ref this._dwNaturalArmor, value); }
         public int NAbrasion { get => _nAbrasion; set => SetValue(ref this._nAbrasion, value); }
