@@ -20,13 +20,13 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <!-- WPF UI Design System Resources -->
-        <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#FFFFFF"/>
-        <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="#212121"/>
-        <SolidColorBrush x:Key="ApplicationForegroundBrush" Color="#212121"/>
+        <!--  WPF UI Design System Resources  -->
+        <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="#212121" />
+        <SolidColorBrush x:Key="ApplicationForegroundBrush" Color="#212121" />
     </Page.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -47,8 +47,9 @@
                 <Border CornerRadius="8">
                     <Border.Background>
                         <ImageBrush
-                        RenderOptions.BitmapScalingMode="HighQuality"
-                        Stretch="UniformToFill" ImageSource="pack://application:,,,/Views/Pages/Settings/SettingPageBanner.png"  />
+                            ImageSource="pack://application:,,,/Views/Pages/Settings/SettingPageBanner.png"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Stretch="UniformToFill" />
                     </Border.Background>
                     <Grid>
                         <StackPanel
@@ -58,8 +59,9 @@
                             Background="Transparent">
                             <ui:TextBlock
                                 FontTypography="Title"
+                                FontWeight="Bold"
                                 Foreground="#FFFFFF"
-                                Text="Settings" FontWeight="Bold" />
+                                Text="Settings" />
                         </StackPanel>
                         <ui:TextBlock
                             Margin="12"
@@ -99,9 +101,10 @@
                         <Image
                             Width="60"
                             Height="Auto"
-                            Margin="24,0,0,0" Source="/Views/Pages/Settings/FolderPathIcon.png" >
+                            Margin="24,0,0,0"
+                            Source="/Views/Pages/Settings/FolderPathIcon.png">
                             <Image.OpacityMask>
-                                <ImageBrush ImageSource="/Views/Pages/Settings/FolderPathIcon.png"/>
+                                <ImageBrush ImageSource="/Views/Pages/Settings/FolderPathIcon.png" />
                             </Image.OpacityMask>
                         </Image>
 
@@ -140,9 +143,10 @@
                         <Image
                             Width="60"
                             Height="Auto"
-                            Margin="24,0,0,0" Source="/Views/Pages/Settings/PaintPaletteIcon.png" >
+                            Margin="24,0,0,0"
+                            Source="/Views/Pages/Settings/PaintPaletteIcon.png">
                             <Image.OpacityMask>
-                                <ImageBrush ImageSource="/Views/Pages/Settings/PaintPaletteIcon.png"/>
+                                <ImageBrush ImageSource="/Views/Pages/Settings/PaintPaletteIcon.png" />
                             </Image.OpacityMask>
                         </Image>
 
@@ -181,7 +185,8 @@
                         <Image
                             Width="60"
                             Height="Auto"
-                            Margin="24,0,0,0" Source="/Views/Pages/Settings/AboutIcon.png" >
+                            Margin="24,0,0,0"
+                            Source="/Views/Pages/Settings/AboutIcon.png">
                             <Image.OpacityMask>
                                 <ImageBrush>
                                     <ImageBrush.ImageSource>/Views/Pages/Settings/AboutIcon.png</ImageBrush.ImageSource>

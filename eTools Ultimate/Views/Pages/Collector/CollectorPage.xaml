@@ -19,47 +19,45 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Main content with TabControl -->
+        <!--  Main content with TabControl  -->
         <ui:Card Margin="12" VerticalAlignment="Top">
             <TabControl>
                 <TabItem Header="Enchant">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        
-                        <ui:DataGrid 
+
+                        <ui:DataGrid
                             Grid.Row="1"
-                            ItemsSource="{Binding CollectingEnchant}" 
                             AutoGenerateColumns="False"
-                            IsReadOnly="True">
+                            IsReadOnly="True"
+                            ItemsSource="{Binding CollectingEnchant}">
                             <ui:DataGrid.Columns>
-                                <DataGridTextColumn 
-                                    Header="Enchant Level" 
-                                    Binding="{Binding Level}" 
-                                    Width="150"/>
-                                <DataGridTextColumn 
-                                    Header="Chance (out of 1.000.000)" 
-                                    Binding="{Binding Probability}" 
-                                    Width="200"/>
-                                <DataGridTextColumn 
-                                    Header="Percentage" 
-                                    Binding="{Binding PercentageFormatted}" 
-                                    Width="100"/>
-                                <DataGridTemplateColumn 
-                                    Header="Action" 
-                                    Width="80">
+                                <DataGridTextColumn
+                                    Width="150"
+                                    Binding="{Binding Level}"
+                                    Header="Enchant Level" />
+                                <DataGridTextColumn
+                                    Width="200"
+                                    Binding="{Binding Probability}"
+                                    Header="Chance (out of 1.000.000)" />
+                                <DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding PercentageFormatted}"
+                                    Header="Percentage" />
+                                <DataGridTemplateColumn Width="80" Header="Action">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ui:Button
                                                 Appearance="Transparent"
                                                 Icon="{ui:SymbolIcon Delete24}"
-                                                ToolTip="Delete Item"/>
+                                                ToolTip="Delete Item" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -67,63 +65,59 @@
                         </ui:DataGrid>
                     </Grid>
                 </TabItem>
-                
+
                 <TabItem Header="Items">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        
-                        <!-- Search Bar -->
+
+                        <!--  Search Bar  -->
                         <ui:TextBox
                             Grid.Row="0"
                             Margin="0,8,0,8"
-                            PlaceholderText="Search..."
-                            Icon="{ui:SymbolIcon Search24}"/>
-                        
-                        <!-- Status und Add Button -->
+                            Icon="{ui:SymbolIcon Search24}"
+                            PlaceholderText="Search..." />
+
+                        <!--  Status und Add Button  -->
                         <Grid Grid.Row="1" Margin="0,0,0,8">
-                            <ui:TextBlock 
-                                Text="Total Probability 1.000.000/1.000.000" 
-                                VerticalAlignment="Center"/>
-                            
-                            <ui:Button 
-                                Content="Add Item"
+                            <ui:TextBlock VerticalAlignment="Center" Text="Total Probability 1.000.000/1.000.000" />
+
+                            <ui:Button
                                 HorizontalAlignment="Right"
                                 Appearance="Primary"
-                                Icon="{ui:SymbolIcon Add24}"/>
+                                Content="Add Item"
+                                Icon="{ui:SymbolIcon Add24}" />
                         </Grid>
-                        
-                        <!-- DataGrid für Items -->
-                        <ui:DataGrid 
+
+                        <!--  DataGrid für Items  -->
+                        <ui:DataGrid
                             Grid.Row="2"
-                            ItemsSource="{Binding CollectingItems}" 
                             AutoGenerateColumns="False"
-                            IsReadOnly="True">
+                            IsReadOnly="True"
+                            ItemsSource="{Binding CollectingItems}">
                             <ui:DataGrid.Columns>
-                                <DataGridTextColumn 
-                                    Header="Item ID" 
-                                    Binding="{Binding ItemId}" 
-                                    Width="200"/>
-                                <DataGridTextColumn 
-                                    Header="Chance (out of 1.000.000)" 
-                                    Binding="{Binding Probability}" 
-                                    Width="200"/>
-                                <DataGridTextColumn 
-                                    Header="Percentage" 
-                                    Binding="{Binding PercentageFormatted}" 
-                                    Width="100"/>
-                                <DataGridTemplateColumn 
-                                    Header="Action" 
-                                    Width="80">
+                                <DataGridTextColumn
+                                    Width="200"
+                                    Binding="{Binding ItemId}"
+                                    Header="Item ID" />
+                                <DataGridTextColumn
+                                    Width="200"
+                                    Binding="{Binding Probability}"
+                                    Header="Chance (out of 1.000.000)" />
+                                <DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding PercentageFormatted}"
+                                    Header="Percentage" />
+                                <DataGridTemplateColumn Width="80" Header="Action">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ui:Button
                                                 Appearance="Transparent"
                                                 Icon="{ui:SymbolIcon Delete24}"
-                                                ToolTip="Delete Item"/>
+                                                ToolTip="Delete Item" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -131,41 +125,39 @@
                         </ui:DataGrid>
                     </Grid>
                 </TabItem>
-                
+
                 <TabItem Header="Premium Items">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        
-                        <ui:DataGrid 
+
+                        <ui:DataGrid
                             Grid.Row="1"
-                            ItemsSource="{Binding PremiumItems}" 
                             AutoGenerateColumns="False"
-                            IsReadOnly="True">
+                            IsReadOnly="True"
+                            ItemsSource="{Binding PremiumItems}">
                             <ui:DataGrid.Columns>
-                                <DataGridTextColumn 
-                                    Header="Item ID" 
-                                    Binding="{Binding ItemId}" 
-                                    Width="200"/>
-                                <DataGridTextColumn 
-                                    Header="Chance (out of 1.000.000)" 
-                                    Binding="{Binding Probability}" 
-                                    Width="200"/>
-                                <DataGridTextColumn 
-                                    Header="Percentage" 
-                                    Binding="{Binding PercentageFormatted}" 
-                                    Width="100"/>
-                                <DataGridTemplateColumn 
-                                    Header="Action" 
-                                    Width="80">
+                                <DataGridTextColumn
+                                    Width="200"
+                                    Binding="{Binding ItemId}"
+                                    Header="Item ID" />
+                                <DataGridTextColumn
+                                    Width="200"
+                                    Binding="{Binding Probability}"
+                                    Header="Chance (out of 1.000.000)" />
+                                <DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding PercentageFormatted}"
+                                    Header="Percentage" />
+                                <DataGridTemplateColumn Width="80" Header="Action">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ui:Button
                                                 Appearance="Transparent"
                                                 Icon="{ui:SymbolIcon Delete24}"
-                                                ToolTip="Delete Item"/>
+                                                ToolTip="Delete Item" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -173,41 +165,39 @@
                         </ui:DataGrid>
                     </Grid>
                 </TabItem>
-                
+
                 <TabItem Header="Premium Status Items">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        
-                        <ui:DataGrid 
+
+                        <ui:DataGrid
                             Grid.Row="1"
-                            ItemsSource="{Binding PremiumStatusItems}" 
                             AutoGenerateColumns="False"
-                            IsReadOnly="True">
+                            IsReadOnly="True"
+                            ItemsSource="{Binding PremiumStatusItems}">
                             <ui:DataGrid.Columns>
-                                <DataGridTextColumn 
-                                    Header="Item ID" 
-                                    Binding="{Binding ItemId}" 
-                                    Width="200"/>
-                                <DataGridTextColumn 
-                                    Header="Chance (out of 1.000.000)" 
-                                    Binding="{Binding Probability}" 
-                                    Width="200"/>
-                                <DataGridTextColumn 
-                                    Header="Percentage" 
-                                    Binding="{Binding PercentageFormatted}" 
-                                    Width="100"/>
-                                <DataGridTemplateColumn 
-                                    Header="Action" 
-                                    Width="80">
+                                <DataGridTextColumn
+                                    Width="200"
+                                    Binding="{Binding ItemId}"
+                                    Header="Item ID" />
+                                <DataGridTextColumn
+                                    Width="200"
+                                    Binding="{Binding Probability}"
+                                    Header="Chance (out of 1.000.000)" />
+                                <DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding PercentageFormatted}"
+                                    Header="Percentage" />
+                                <DataGridTemplateColumn Width="80" Header="Action">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ui:Button
                                                 Appearance="Transparent"
                                                 Icon="{ui:SymbolIcon Delete24}"
-                                                ToolTip="Delete Item"/>
+                                                ToolTip="Delete Item" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>

@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="QuestPage"
-    d:DataContext="{d:DesignInstance local:QuestPage, IsDesignTimeCreatable=False}"
+    d:DataContext="{d:DesignInstance local:QuestPage,
+                                     IsDesignTimeCreatable=False}"
     d:DesignHeight="768"
     d:DesignWidth="1024"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
@@ -17,210 +18,436 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Linke Seite -->
+        <!--  Linke Seite  -->
         <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
             <Grid Margin="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <!-- General Section -->
-                <TextBlock Text="General" Foreground="#00A2FF" FontSize="16" Margin="0,0,0,10"/>
-                
+                <!--  General Section  -->
+                <TextBlock
+                    Margin="0,0,0,10"
+                    FontSize="16"
+                    Foreground="#00A2FF"
+                    Text="General" />
+
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="ID" Grid.Row="0" Grid.Column="0" Margin="0,0,10,5" VerticalAlignment="Center"/>
-                    <TextBlock Text="138" Grid.Row="0" Grid.Column="1" Margin="0,0,0,5"/>
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0,0,10,5"
+                        VerticalAlignment="Center"
+                        Text="ID" />
+                    <TextBlock
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="0,0,0,5"
+                        Text="138" />
 
-                    <TextBlock Text="Title" Grid.Row="1" Grid.Column="0" Margin="0,0,10,5" VerticalAlignment="Center"/>
-                    <TextBox Text="Door of Dark" Grid.Row="1" Grid.Column="1" Margin="0,0,0,5" Background="#333333"/>
+                    <TextBlock
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="0,0,10,5"
+                        VerticalAlignment="Center"
+                        Text="Title" />
+                    <TextBox
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="0,0,0,5"
+                        Background="#333333"
+                        Text="Door of Dark" />
 
-                    <TextBlock Text="Category" Grid.Row="2" Grid.Column="0" Margin="0,0,10,5" VerticalAlignment="Center"/>
-                    <ComboBox Text="General" Grid.Row="2" Grid.Column="1" Margin="0,0,0,5" Background="#333333"/>
+                    <TextBlock
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Margin="0,0,10,5"
+                        VerticalAlignment="Center"
+                        Text="Category" />
+                    <ComboBox
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Margin="0,0,0,5"
+                        Background="#333333"
+                        Text="General" />
 
-                    <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="0,5">
-                        <CheckBox Content="Repeat" Margin="0,0,10,0"/>
-                        <CheckBox Content="Remove" Margin="0,0,10,0"/>
-                        <CheckBox Content="Hide Reward Information"/>
+                    <StackPanel
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Margin="0,5"
+                        Orientation="Horizontal">
+                        <CheckBox Margin="0,0,10,0" Content="Repeat" />
+                        <CheckBox Margin="0,0,10,0" Content="Remove" />
+                        <CheckBox Content="Hide Reward Information" />
                     </StackPanel>
 
-                    <TextBlock Text="Begin NPC" Grid.Row="4" Grid.Column="0" Margin="0,5,10,5" VerticalAlignment="Center"/>
-                    <ComboBox Text="masa_saimayor" Grid.Row="4" Grid.Column="1" Margin="0,5,0,5" Background="#333333"/>
+                    <TextBlock
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        Margin="0,5,10,5"
+                        VerticalAlignment="Center"
+                        Text="Begin NPC" />
+                    <ComboBox
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Margin="0,5,0,5"
+                        Background="#333333"
+                        Text="masa_saimayor" />
 
-                    <TextBlock Text="End NPC" Grid.Row="5" Grid.Column="0" Margin="0,5,10,5" VerticalAlignment="Center"/>
-                    <ComboBox Text="masa_saimayor" Grid.Row="5" Grid.Column="1" Margin="0,5,0,5" Background="#333333"/>
+                    <TextBlock
+                        Grid.Row="5"
+                        Grid.Column="0"
+                        Margin="0,5,10,5"
+                        VerticalAlignment="Center"
+                        Text="End NPC" />
+                    <ComboBox
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Margin="0,5,0,5"
+                        Background="#333333"
+                        Text="masa_saimayor" />
                 </Grid>
 
-                <TextBlock Text="Location" Grid.Row="2" Margin="0,10,0,5"/>
+                <TextBlock
+                    Grid.Row="2"
+                    Margin="0,10,0,5"
+                    Text="Location" />
 
-                <!-- Dialog Sections -->
+                <!--  Dialog Sections  -->
                 <StackPanel Grid.Row="3" Margin="0,10,0,0">
-                    <TextBlock Text="Quest Complete Dialog" Foreground="Yellow" Margin="0,0,0,5"/>
-                    <TextBox Text="Thank you, you did a great job." Height="60" Background="#333333" TextWrapping="Wrap"/>
-                    
-                    <TextBox Text="Dialog" Height="60" Background="#1A1A1A" Margin="0,5" TextWrapping="Wrap"/>
-                    <TextBox Text="Dialog" Height="60" Background="#1A1A1A" Margin="0,5" TextWrapping="Wrap"/>
+                    <TextBlock
+                        Margin="0,0,0,5"
+                        Foreground="Yellow"
+                        Text="Quest Complete Dialog" />
+                    <TextBox
+                        Height="60"
+                        Background="#333333"
+                        Text="Thank you, you did a great job."
+                        TextWrapping="Wrap" />
 
-                    <TextBlock Text="Quest Fail Dialog" Foreground="Yellow" Margin="0,10,0,5"/>
-                    <TextBox Text="It is very easy to find the entrance of the temple in Fantasy Desert." Height="60" Background="#333333" TextWrapping="Wrap"/>
-                    
-                    <TextBox Text="Dialog" Height="60" Background="#1A1A1A" Margin="0,5" TextWrapping="Wrap"/>
-                    <TextBox Text="Dialog" Height="60" Background="#1A1A1A" Margin="0,5" TextWrapping="Wrap"/>
+                    <TextBox
+                        Height="60"
+                        Margin="0,5"
+                        Background="#1A1A1A"
+                        Text="Dialog"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        Height="60"
+                        Margin="0,5"
+                        Background="#1A1A1A"
+                        Text="Dialog"
+                        TextWrapping="Wrap" />
+
+                    <TextBlock
+                        Margin="0,10,0,5"
+                        Foreground="Yellow"
+                        Text="Quest Fail Dialog" />
+                    <TextBox
+                        Height="60"
+                        Background="#333333"
+                        Text="It is very easy to find the entrance of the temple in Fantasy Desert."
+                        TextWrapping="Wrap" />
+
+                    <TextBox
+                        Height="60"
+                        Margin="0,5"
+                        Background="#1A1A1A"
+                        Text="Dialog"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        Height="60"
+                        Margin="0,5"
+                        Background="#1A1A1A"
+                        Text="Dialog"
+                        TextWrapping="Wrap" />
                 </StackPanel>
             </Grid>
         </ScrollViewer>
 
-        <!-- Vertikale Linie -->
-        <Rectangle Grid.Column="1" Width="1" Fill="#404040" Margin="0,10"/>
+        <!--  Vertikale Linie  -->
+        <Rectangle
+            Grid.Column="1"
+            Width="1"
+            Margin="0,10"
+            Fill="#404040" />
 
-        <!-- Rechte Seite -->
+        <!--  Rechte Seite  -->
         <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
             <Grid Margin="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <!-- Quest Dialog Section -->
+                <!--  Quest Dialog Section  -->
                 <StackPanel Grid.Row="0">
-                    <TextBlock Text="Quest Introduction Dialog" Foreground="Yellow" Margin="0,0,0,5"/>
-                    <TextBox TextWrapping="Wrap" Height="60" Background="#333333" 
-                             Text="Excuse me. If you are not busy, would you please listen to my story? Have"/>
-                    
-                    <TextBox TextWrapping="Wrap" Height="60" Background="#333333" Margin="0,5"
-                             Text="The Ivillis Temple was built by the followers of Ivillis, a leader from be"/>
-                    
-                    <TextBox TextWrapping="Wrap" Height="60" Background="#333333" Margin="0,5"
-                             Text="The temple is located in the Fantasy Desert, in the southern part of Saint"/>
-                    
-                    <TextBox TextWrapping="Wrap" Height="60" Background="#333333" Margin="0,5"
-                             Text="You see…every mayor has to explore all the Islands of Madrigal. In the cou"/>
-                    
-                    <TextBox TextWrapping="Wrap" Height="60" Background="#333333" Margin="0,5"
-                             Text="Would you please help me? I beg of you."/>
+                    <TextBlock
+                        Margin="0,0,0,5"
+                        Foreground="Yellow"
+                        Text="Quest Introduction Dialog" />
+                    <TextBox
+                        Height="60"
+                        Background="#333333"
+                        Text="Excuse me. If you are not busy, would you please listen to my story? Have"
+                        TextWrapping="Wrap" />
 
-                    <TextBlock Text="Quest Accept Dialog" Foreground="Yellow" Margin="0,10,0,5"/>
-                    <TextBox TextWrapping="Wrap" Height="60" Background="#333333"
-                             Text="Thank you! Please, investigate the entrance of the temple for anything dan"/>
+                    <TextBox
+                        Height="60"
+                        Margin="0,5"
+                        Background="#333333"
+                        Text="The Ivillis Temple was built by the followers of Ivillis, a leader from be"
+                        TextWrapping="Wrap" />
 
-                    <TextBlock Text="Quest Deny Dialog" Foreground="Yellow" Margin="0,10,0,5"/>
-                    <TextBox TextWrapping="Wrap" Height="60" Background="#333333"
-                             Text="I cannot force you to help me if you are busy. But maybe, when you have th"/>
+                    <TextBox
+                        Height="60"
+                        Margin="0,5"
+                        Background="#333333"
+                        Text="The temple is located in the Fantasy Desert, in the southern part of Saint"
+                        TextWrapping="Wrap" />
 
-                    <TextBlock Text="Quest Details (Active)" Foreground="Gray" Margin="0,10,0,5"/>
-                    <TextBox Text="Quest Detail" Height="60" Background="#1A1A1A"/>
+                    <TextBox
+                        Height="60"
+                        Margin="0,5"
+                        Background="#333333"
+                        Text="You see…every mayor has to explore all the Islands of Madrigal. In the cou"
+                        TextWrapping="Wrap" />
 
-                    <TextBlock Text="Quest Details (Finished)" Foreground="Yellow" Margin="0,10,0,5"/>
-                    <TextBox Text="Quest Detail" Height="60" Background="#1A1A1A"/>
+                    <TextBox
+                        Height="60"
+                        Margin="0,5"
+                        Background="#333333"
+                        Text="Would you please help me? I beg of you."
+                        TextWrapping="Wrap" />
+
+                    <TextBlock
+                        Margin="0,10,0,5"
+                        Foreground="Yellow"
+                        Text="Quest Accept Dialog" />
+                    <TextBox
+                        Height="60"
+                        Background="#333333"
+                        Text="Thank you! Please, investigate the entrance of the temple for anything dan"
+                        TextWrapping="Wrap" />
+
+                    <TextBlock
+                        Margin="0,10,0,5"
+                        Foreground="Yellow"
+                        Text="Quest Deny Dialog" />
+                    <TextBox
+                        Height="60"
+                        Background="#333333"
+                        Text="I cannot force you to help me if you are busy. But maybe, when you have th"
+                        TextWrapping="Wrap" />
+
+                    <TextBlock
+                        Margin="0,10,0,5"
+                        Foreground="Gray"
+                        Text="Quest Details (Active)" />
+                    <TextBox
+                        Height="60"
+                        Background="#1A1A1A"
+                        Text="Quest Detail" />
+
+                    <TextBlock
+                        Margin="0,10,0,5"
+                        Foreground="Yellow"
+                        Text="Quest Details (Finished)" />
+                    <TextBox
+                        Height="60"
+                        Background="#1A1A1A"
+                        Text="Quest Detail" />
                 </StackPanel>
 
-                <!-- Begin Conditions Section -->
+                <!--  Begin Conditions Section  -->
                 <StackPanel Grid.Row="1" Margin="0,20,0,0">
-                    <TextBlock Text="Begin Conditions" Foreground="#00A2FF" FontSize="16" Margin="0,0,0,10"/>
-                    
+                    <TextBlock
+                        Margin="0,0,0,10"
+                        FontSize="16"
+                        Foreground="#00A2FF"
+                        Text="Begin Conditions" />
+
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="General" Grid.Row="0" Grid.Column="0" Margin="0,0,10,5" Foreground="Yellow"/>
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,10,5"
+                            Foreground="Yellow"
+                            Text="General" />
 
-                        <TextBlock Text="Level" Grid.Row="1" Grid.Column="0" Margin="0,0,10,5"/>
-                        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
-                            <TextBox Text="45" Width="50" Background="#333333"/>
-                            <TextBox Text="70" Width="50" Margin="5,0,0,0" Background="#333333"/>
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,10,5"
+                            Text="Level" />
+                        <StackPanel
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Orientation="Horizontal">
+                            <TextBox
+                                Width="50"
+                                Background="#333333"
+                                Text="45" />
+                            <TextBox
+                                Width="50"
+                                Margin="5,0,0,0"
+                                Background="#333333"
+                                Text="70" />
                         </StackPanel>
 
-                        <TextBlock Text="Sex" Grid.Row="2" Grid.Column="0" Margin="0,5,10,5"/>
-                        <ComboBox Text="Any" Grid.Row="2" Grid.Column="1" Background="#333333"/>
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="0,5,10,5"
+                            Text="Sex" />
+                        <ComboBox
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Background="#333333"
+                            Text="Any" />
 
-                        <TextBlock Text="Required Skill" Grid.Row="3" Grid.Column="0" Margin="0,5,10,5"/>
-                        <ComboBox Text="[None]" Grid.Row="3" Grid.Column="1" Background="#333333"/>
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="0,5,10,5"
+                            Text="Required Skill" />
+                        <ComboBox
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Background="#333333"
+                            Text="[None]" />
 
-                        <TextBlock Text="Skill Level" Grid.Row="4" Grid.Column="0" Margin="0,5,10,5"/>
-                        <TextBox Text="0" Grid.Row="4" Grid.Column="1" Background="#333333"/>
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Margin="0,5,10,5"
+                            Text="Skill Level" />
+                        <TextBox
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Background="#333333"
+                            Text="0" />
 
-                        <TextBlock Text="Min. PK Value" Grid.Row="5" Grid.Column="0" Margin="0,5,10,5"/>
-                        <TextBox Text="0" Grid.Row="5" Grid.Column="1" Background="#333333"/>
+                        <TextBlock
+                            Grid.Row="5"
+                            Grid.Column="0"
+                            Margin="0,5,10,5"
+                            Text="Min. PK Value" />
+                        <TextBox
+                            Grid.Row="5"
+                            Grid.Column="1"
+                            Background="#333333"
+                            Text="0" />
                     </Grid>
 
-                    <!-- Party and Guild Settings -->
+                    <!--  Party and Guild Settings  -->
                     <Grid Margin="0,20,0,0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <!-- Party Settings -->
+                        <!--  Party Settings  -->
                         <StackPanel Grid.Column="0" Margin="0,0,5,0">
-                            <TextBlock Text="Party Settings" Foreground="Yellow"/>
-                            <ComboBox Text="Ignore" Background="#333333" Margin="0,5"/>
-                            <CheckBox Content="Party Leader" Margin="0,5"/>
-                            <TextBlock Text="Type" Margin="0,5,0,0"/>
-                            <ComboBox Text="Exact Amount" Background="#333333" Margin="0,5"/>
-                            <TextBlock Text="Amount" Margin="0,5,0,0"/>
-                            <TextBox Text="0" Background="#333333"/>
+                            <TextBlock Foreground="Yellow" Text="Party Settings" />
+                            <ComboBox
+                                Margin="0,5"
+                                Background="#333333"
+                                Text="Ignore" />
+                            <CheckBox Margin="0,5" Content="Party Leader" />
+                            <TextBlock Margin="0,5,0,0" Text="Type" />
+                            <ComboBox
+                                Margin="0,5"
+                                Background="#333333"
+                                Text="Exact Amount" />
+                            <TextBlock Margin="0,5,0,0" Text="Amount" />
+                            <TextBox Background="#333333" Text="0" />
                         </StackPanel>
 
-                        <!-- Guild Settings -->
+                        <!--  Guild Settings  -->
                         <StackPanel Grid.Column="1" Margin="5,0,0,0">
-                            <TextBlock Text="Guild Settings" Foreground="Yellow"/>
-                            <ComboBox Text="Ignore" Background="#333333" Margin="0,5"/>
-                            <CheckBox Content="Guild Leader" Margin="0,5"/>
-                            <TextBlock Text="Type" Margin="0,5,0,0"/>
-                            <ComboBox Text="Exact Amount" Background="#333333" Margin="0,5"/>
-                            <TextBlock Text="Amount" Margin="0,5,0,0"/>
-                            <TextBox Text="0" Background="#333333"/>
+                            <TextBlock Foreground="Yellow" Text="Guild Settings" />
+                            <ComboBox
+                                Margin="0,5"
+                                Background="#333333"
+                                Text="Ignore" />
+                            <CheckBox Margin="0,5" Content="Guild Leader" />
+                            <TextBlock Margin="0,5,0,0" Text="Type" />
+                            <ComboBox
+                                Margin="0,5"
+                                Background="#333333"
+                                Text="Exact Amount" />
+                            <TextBlock Margin="0,5,0,0" Text="Amount" />
+                            <TextBox Background="#333333" Text="0" />
                         </StackPanel>
                     </Grid>
 
-                    <!-- Job Settings -->
+                    <!--  Job Settings  -->
                     <StackPanel Margin="0,20,0,0">
-                        <TextBlock Text="Job Settings" Foreground="Yellow"/>
+                        <TextBlock Foreground="Yellow" Text="Job Settings" />
                         <Grid Margin="0,5,0,0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Text="Job Class" Grid.Row="0" Grid.Column="0" Margin="0,0,10,5"/>
-                            <ComboBox Grid.Row="0" Grid.Column="1" Background="#333333"/>
+                            <TextBlock
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Margin="0,0,10,5"
+                                Text="Job Class" />
+                            <ComboBox
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Background="#333333" />
 
-                            <TextBlock Text="Required Job Class" Grid.Row="1" Grid.Column="0" Margin="0,5,10,5"/>
-                            <ComboBox Grid.Row="1" Grid.Column="1" Background="#333333"/>
+                            <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Margin="0,5,10,5"
+                                Text="Required Job Class" />
+                            <ComboBox
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Background="#333333" />
                         </Grid>
                     </StackPanel>
                 </StackPanel>

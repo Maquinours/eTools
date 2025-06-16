@@ -18,14 +18,12 @@
     mc:Ignorable="d">
 
     <Grid>
-        <StackPanel 
-            VerticalAlignment="Center" 
-            HorizontalAlignment="Center">
-            <TextBlock 
-                Text="Coming soon..." 
-                FontSize="36" 
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock
+                FontSize="36"
                 FontWeight="Light"
-                Foreground="{DynamicResource TextFillColorSecondaryBrush}"/>
+                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                Text="Coming soon..." />
         </StackPanel>
     </Grid>
 </Page> 

@@ -17,86 +17,126 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     </Page.Resources>
 
     <Grid>
-        <ScrollViewer x:Name="MainScrollViewer" 
-                     VerticalScrollBarVisibility="Auto" 
-                     HorizontalScrollBarVisibility="Disabled" 
-                     Padding="0,0,18,0">
+        <ScrollViewer
+            x:Name="MainScrollViewer"
+            Padding="0,0,18,0"
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="45,8,45,20">
-                <!-- Info for main settings -->
-                <ui:InfoBar Title="Settings" Message="Main Settings"/>
+                <!--  Info for main settings  -->
+                <ui:InfoBar Title="Settings" Message="Main Settings" />
 
-                <!-- Grid mit 2x4 Layout für die Haupteinstellungen -->
+                <!--  Grid mit 2x4 Layout für die Haupteinstellungen  -->
                 <Grid Margin="0,10,0,12">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
 
-                    <!-- Zeile 0, Spalte 0: Resource folder -->
-                    <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,10,10">
+                    <!--  Zeile 0, Spalte 0: Resource folder  -->
+                    <Grid
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0,0,10,10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Resource folder" Margin="0,0,8,0"/>
-                        <TextBox Grid.Column="1" Text="{Binding Settings.ResourcesFolderPath, Mode=TwoWay}" Margin="0,0,8,0"/>
-                        <Button Grid.Column="2" Width="60" Command="{Binding SelectResourcesFolderCommand}" HorizontalAlignment="Center" Height="35">
-                            <ui:SymbolIcon Symbol="FolderOpen20"/>
+                        <TextBlock
+                            Grid.Column="0"
+                            Margin="0,0,8,0"
+                            VerticalAlignment="Center"
+                            Text="Resource folder" />
+                        <TextBox
+                            Grid.Column="1"
+                            Margin="0,0,8,0"
+                            Text="{Binding Settings.ResourcesFolderPath, Mode=TwoWay}" />
+                        <Button
+                            Grid.Column="2"
+                            Width="60"
+                            Height="35"
+                            HorizontalAlignment="Center"
+                            Command="{Binding SelectResourcesFolderCommand}">
+                            <ui:SymbolIcon Symbol="FolderOpen20" />
                         </Button>
                     </Grid>
 
-                    <!-- Zeile 0, Spalte 1: Client folder -->
-                    <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,0,10">
+                    <!--  Zeile 0, Spalte 1: Client folder  -->
+                    <Grid
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="10,0,0,10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Client folder" Margin="0,0,8,0"/>
-                        <TextBox Grid.Column="1" Text="{Binding Settings.ClientFolderPath, Mode=TwoWay}" Margin="0,0,8,0"/>
-                        <Button Grid.Column="2" Width="60" Command="{Binding SelectClientFolderCommand}" HorizontalAlignment="Center" Height="35">
-                            <ui:SymbolIcon Symbol="FolderOpen20"/>
+                        <TextBlock
+                            Grid.Column="0"
+                            Margin="0,0,8,0"
+                            VerticalAlignment="Center"
+                            Text="Client folder" />
+                        <TextBox
+                            Grid.Column="1"
+                            Margin="0,0,8,0"
+                            Text="{Binding Settings.ClientFolderPath, Mode=TwoWay}" />
+                        <Button
+                            Grid.Column="2"
+                            Width="60"
+                            Height="35"
+                            HorizontalAlignment="Center"
+                            Command="{Binding SelectClientFolderCommand}">
+                            <ui:SymbolIcon Symbol="FolderOpen20" />
                         </Button>
                     </Grid>
 
-                    <!-- Zeile 1, Spalte 0: Version -->
-                    <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,10,0">
+                    <!--  Zeile 1, Spalte 0: Version  -->
+                    <Grid
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="0,0,10,0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="120"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Version" Margin="0,0,8,0"/>
-                        <ComboBox Grid.Column="1" 
-                                  ItemsSource="{Binding PossibleResourceVersions}"
-                                  SelectedValue="{Binding Settings.ResourcesVersion, Mode=TwoWay}" 
-                                  HorizontalAlignment="Left" 
-                                  Width="100"/>
+                        <TextBlock
+                            Grid.Column="0"
+                            Margin="0,0,8,0"
+                            VerticalAlignment="Center"
+                            Text="Version" />
+                        <ComboBox
+                            Grid.Column="1"
+                            Width="100"
+                            HorizontalAlignment="Left"
+                            ItemsSource="{Binding PossibleResourceVersions}"
+                            SelectedValue="{Binding Settings.ResourcesVersion, Mode=TwoWay}" />
                     </Grid>
                 </Grid>
 
-                <!-- Separator before Custom Section -->
-                <Separator Margin="0,10,0,5"/>
+                <!--  Separator before Custom Section  -->
+                <Separator Margin="0,10,0,5" />
 
-                <!-- Advanced settingsn Button -->
+                <!--  Advanced settingsn Button  -->
                 <Grid Margin="0,5,0,5">
-                    <Button Content="Advanced settings" 
-                            Command="{Binding ToggleAdvancedSettingsCommand}"
-                            HorizontalAlignment="Left"
-                            Padding="15,5">
+                    <Button
+                        Padding="15,5"
+                        HorizontalAlignment="Left"
+                        Command="{Binding ToggleAdvancedSettingsCommand}"
+                        Content="Advanced settings">
                         <Button.Style>
-                            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                            <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding IsAdvancedSettingsVisible}" Value="True">
-                                        <Setter Property="Background" Value="#FF0078D7"/>
+                                        <Setter Property="Background" Value="#FF0078D7" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -104,440 +144,713 @@
                     </Button>
                 </Grid>
 
-                <!-- Advanced Settings Sections -->
+                <!--  Advanced Settings Sections  -->
                 <StackPanel Visibility="{Binding IsAdvancedSettingsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <!-- Info for advanced settings -->
-                    <ui:InfoBar Title="Settings" Message="Advanced Settings"/>
+                    <!--  Info for advanced settings  -->
+                    <ui:InfoBar Title="Settings" Message="Advanced Settings" />
 
-                    <!-- Custom Section -->
-                    <TextBlock Text="Custom" FontSize="16" Margin="0,10,0,0" FontWeight="Bold"/>
+                    <!--  Custom Section  -->
+                    <TextBlock
+                        Margin="0,10,0,0"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Text="Custom" />
 
-                    <!-- Custom - Basic Files -->
+                    <!--  Custom - Basic Files  -->
                     <Grid Margin="0,10,0,12">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <!-- Zeile 0, Spalte 0: Texture folder -->
-                        <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,10,10">
+                        <!--  Zeile 0, Spalte 0: Texture folder  -->
+                        <Grid
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,10,10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Texture folder" Margin="0,0,8,0"/>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="Texture folder" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
-                                <TextBox x:Name="TexturesFolderPathTextBox" Text="{Binding Settings.TexturesFolderPath, Mode=TwoWay}"/>
-                                <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultTexturesFolderPath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBox x:Name="TexturesFolderPathTextBox" Text="{Binding Settings.TexturesFolderPath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultTexturesFolderPath, Mode=OneWay}">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Text, ElementName=TexturesFolderPathTextBox}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
                             </Grid>
-                            <Button Grid.Column="2" Width="60" Command="{Binding SelectTexturesFolderCommand}" HorizontalAlignment="Center" Height="35">
-                                <ui:SymbolIcon Symbol="FolderOpen20"/>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectTexturesFolderCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
                             </Button>
                         </Grid>
 
-                        <!-- Zeile 0, Spalte 1: Icons folder -->
-                        <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,0,10">
+                        <!--  Zeile 0, Spalte 1: Icons folder  -->
+                        <Grid
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="10,0,0,10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Icons folder" Margin="0,0,8,0"/>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="Icons folder" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
-                                <TextBox x:Name="IconsFolderPathTextbox" Text="{Binding Settings.IconsFolderPath, Mode=TwoWay}"/>
-                                <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultIconsFolderPath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBox x:Name="IconsFolderPathTextbox" Text="{Binding Settings.IconsFolderPath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultIconsFolderPath, Mode=OneWay}">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Text, ElementName=IconsFolderPathTextbox}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
                             </Grid>
-                            <Button Grid.Column="2" Width="60" Command="{Binding SelectItemIconsCommand}" HorizontalAlignment="Center" Height="35">
-                                <ui:SymbolIcon Symbol="FolderOpen20"/>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectItemIconsCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
                             </Button>
                         </Grid>
 
-                        <!-- Zeile 1, Spalte 0: Sounds folder -->
-                        <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,10,10">
+                        <!--  Zeile 1, Spalte 0: Sounds folder  -->
+                        <Grid
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,10,10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Sounds folder" Margin="0,0,8,0"/>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="Sounds folder" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
-                                <TextBox x:Name="SoundsFolderPathTextbox" Text="{Binding Settings.SoundsFolderPath, Mode=TwoWay}"/>
-                                <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultSoundsFolderPath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBox x:Name="SoundsFolderPathTextbox" Text="{Binding Settings.SoundsFolderPath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultSoundsFolderPath, Mode=OneWay}">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Text, ElementName=SoundsFolderPathTextbox}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
                             </Grid>
-                            <Button Grid.Column="2" Width="60" Command="{Binding SelectSoundsFolderCommand}" HorizontalAlignment="Center" Height="35">
-                                <ui:SymbolIcon Symbol="FolderOpen20"/>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectSoundsFolderCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
                             </Button>
                         </Grid>
 
-                        <!-- Zeile 1, Spalte 1: Sounds config file -->
-                        <Grid Grid.Row="1" Grid.Column="1" Margin="10,0,0,10">
+                        <!--  Zeile 1, Spalte 1: Sounds config file  -->
+                        <Grid
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="10,0,0,10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Sounds config file" Margin="0,0,8,0"/>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="Sounds config file" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
-                                <TextBox x:Name="SoundsConfigFilePathTextBox" Text="{Binding Settings.SoundsConfigFilePath, Mode=TwoWay}"/>
-                                <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultSoundsConfigFilePath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBox x:Name="SoundsConfigFilePathTextBox" Text="{Binding Settings.SoundsConfigFilePath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultSoundsConfigFilePath, Mode=OneWay}">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Text, ElementName=SoundsConfigFilePathTextBox}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
                             </Grid>
-                            <Button Grid.Column="2" Width="60" Command="{Binding SelectSoundsConfigCommand}" HorizontalAlignment="Center" Height="35">
-                                <ui:SymbolIcon Symbol="FolderOpen20"/>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectSoundsConfigCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
                             </Button>
                         </Grid>
                     </Grid>
 
-                    <!-- Item Section -->
-                    <TextBlock Text="Item" FontSize="16" Margin="0,10,0,0" FontWeight="Bold"/>
+                    <!--  Item Section  -->
+                    <TextBlock
+                        Margin="0,10,0,0"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Text="Item" />
 
                     <Grid Margin="0,10,0,12">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <!-- Prop file (Spec_Item file) -->
-                        <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,10,10">
+                        <!--  Prop file (Spec_Item file)  -->
+                        <Grid
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,10,10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Spec_Item file" Margin="0,0,8,0"/>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="Spec_Item file" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
-                                <TextBox x:Name="PropItemFilePathTextbox" Text="{Binding Settings.PropItemFilePath, Mode=TwoWay}"/>
-                                <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultPropItemFilePath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBox x:Name="PropItemFilePathTextbox" Text="{Binding Settings.PropItemFilePath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultPropItemFilePath, Mode=OneWay}">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Text, ElementName=PropItemFilePathTextbox}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
                             </Grid>
-                            <Button Grid.Column="2" Width="60" Command="{Binding SelectPropFileCommand}" HorizontalAlignment="Center" Height="35">
-                                <ui:SymbolIcon Symbol="FolderOpen20"/>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectPropFileCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
                             </Button>
                         </Grid>
 
-                        <!-- Text file (PropItem.txt file) -->
-                        <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,0,10">
+                        <!--  Text file (PropItem.txt file)  -->
+                        <Grid
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="10,0,0,10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropItem.txt file" Margin="0,0,8,0"/>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="PropItem.txt file" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
-                                <TextBox x:Name="PropItemTxtFilePathTextbox" Text="{Binding Settings.PropItemTxtFilePath, Mode=TwoWay}" Cursor="IBeam"/>
-                                <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultPropItemTxtFilePath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBox
+                                    x:Name="PropItemTxtFilePathTextbox"
+                                    Cursor="IBeam"
+                                    Text="{Binding Settings.PropItemTxtFilePath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultPropItemTxtFilePath, Mode=OneWay}">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Text, ElementName=PropItemTxtFilePathTextbox}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
                             </Grid>
-                            <Button Grid.Column="2" Width="60" Command="{Binding SelectTextFileCommand}" HorizontalAlignment="Center" Height="35">
-                                <ui:SymbolIcon Symbol="FolderOpen20"/>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectTextFileCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
                             </Button>
                         </Grid>
 
-                        <!-- Item Item folder-->
-                        <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,10,10">
+                        <!--  Item Item folder  -->
+                        <Grid
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,10,10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Item folder" Margin="0,0,8,0"/>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="Item folder" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
-                                <TextBox x:Name="ItemIconsFolderPathTextbox"  Text="{Binding Settings.ItemIconsFolderPath, Mode=TwoWay}"/>
-                                <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultItemIconsFolderPath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBox x:Name="ItemIconsFolderPathTextbox" Text="{Binding Settings.ItemIconsFolderPath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultItemIconsFolderPath, Mode=OneWay}">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Text, ElementName=ItemIconsFolderPathTextbox}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
                             </Grid>
-                            <Button Grid.Column="2" Width="60" Command="{Binding SelectItemIconsFolderCommand}" HorizontalAlignment="Center" Height="35">
-                                <ui:SymbolIcon Symbol="FolderOpen20"/>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectItemIconsFolderCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
                             </Button>
                         </Grid>
                     </Grid>
 
-                    <!-- Mover Section -->
-                    <TextBlock Text="Mover" FontSize="16" Margin="0,10,0,0" FontWeight="Bold"/>
+                    <!--  Mover Section  -->
+                    <TextBlock
+                        Margin="0,10,0,0"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Text="Mover" />
 
                     <Grid Margin="0,10,0,12">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <!-- PropMover file -->
-                        <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,10,10">
+                        <!--  PropMover file  -->
+                        <Grid
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,10,10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMover file" Margin="0,0,8,0"/>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="PropMover file" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
-                                <TextBox x:Name="PropMoverFilePathTextbox" Text="{Binding Settings.PropMoverFilePath, Mode=TwoWay}"/>
-                                <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultPropMoverFilePath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBox x:Name="PropMoverFilePathTextbox" Text="{Binding Settings.PropMoverFilePath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultPropMoverFilePath, Mode=OneWay}">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Text, ElementName=PropMoverFilePathTextbox}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
                             </Grid>
-                            <Button Grid.Column="2" Width="60" Command="{Binding SelectPropMoverFileCommand}" HorizontalAlignment="Center" Height="35">
-                                <ui:SymbolIcon Symbol="FolderOpen20"/>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectPropMoverFileCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
                             </Button>
                         </Grid>
 
-                        <!-- PropMover Text file -->
-                        <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,0,10">
+                        <!--  PropMover Text file  -->
+                        <Grid
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="10,0,0,10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMover.txt file" Margin="0,0,8,0"/>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="PropMover.txt file" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
-                                <TextBox x:Name="PropMoverTxtFilePathTextbox" Text="{Binding Settings.PropMoverTxtFilePath, Mode=TwoWay}"/>
-                                <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultPropMoverTxtFilePath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBox x:Name="PropMoverTxtFilePathTextbox" Text="{Binding Settings.PropMoverTxtFilePath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultPropMoverTxtFilePath, Mode=OneWay}">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Text, ElementName=PropMoverTxtFilePathTextbox}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
                             </Grid>
-                            <Button Grid.Column="2" Width="60" Command="{Binding SelectPropMoverTextFileCommand}" HorizontalAlignment="Center" Height="35">
-                                <ui:SymbolIcon Symbol="FolderOpen20"/>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectPropMoverTextFileCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
                             </Button>
                         </Grid>
 
-                        <!-- PropMoverEx file -->
-                        <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,10,0">
+                        <!--  PropMoverEx file  -->
+                        <Grid
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,10,0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropMoverEx file" Margin="0,0,8,0"/>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="PropMoverEx file" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
-                                <TextBox x:Name="PropMoverExFilePathTextbox" IsHitTestVisible="False" Text="{Binding Settings.PropMoverExFilePath, Mode=TwoWay}"/>
-                                <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultPropMoverExFilePath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBox
+                                    x:Name="PropMoverExFilePathTextbox"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.PropMoverExFilePath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultPropMoverExFilePath, Mode=OneWay}">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Text, ElementName=PropMoverExFilePathTextbox}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
                             </Grid>
-                            <Button Grid.Column="2" Width="60" Command="{Binding SelectPropMoverExFileCommand}" HorizontalAlignment="Center" Height="35">
-                                <ui:SymbolIcon Symbol="FolderOpen20"/>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectPropMoverExFileCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
                             </Button>
                         </Grid>
 
-                        <!-- Checkboxes für PropMoverEx -->
-                        <Grid Grid.Row="1" Grid.Column="1" Margin="10,0,0,0">
+                        <!--  Checkboxes für PropMoverEx  -->
+                        <Grid
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="10,0,0,0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="64 Bit" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                            <CheckBox Grid.Column="1" Content="HP" IsChecked="{Binding Settings.Mover64BitHp, Mode=TwoWay}" Margin="75,0,0,0" Width="55"/>
-                            <CheckBox Grid.Column="2" Content="ATK" IsChecked="{Binding Settings.Mover64BitAtk, Mode=TwoWay}" VerticalAlignment="Center" Margin="0,0,0,0"/>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,10,0"
+                                VerticalAlignment="Center"
+                                Text="64 Bit" />
+                            <CheckBox
+                                Grid.Column="1"
+                                Width="55"
+                                Margin="75,0,0,0"
+                                Content="HP"
+                                IsChecked="{Binding Settings.Mover64BitHp, Mode=TwoWay}" />
+                            <CheckBox
+                                Grid.Column="2"
+                                Margin="0,0,0,0"
+                                VerticalAlignment="Center"
+                                Content="ATK"
+                                IsChecked="{Binding Settings.Mover64BitAtk, Mode=TwoWay}" />
                         </Grid>
                     </Grid>
 
-                    <!-- Skill Section -->
-                    <TextBlock Text="Skill" FontSize="16" Margin="0,10,0,0" FontWeight="Bold"/>
+                    <!--  Skill Section  -->
+                    <TextBlock
+                        Margin="0,10,0,0"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Text="Skill" />
 
                     <Grid Margin="0,10,0,12">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <!-- PropSkill file -->
-                        <Grid Grid.Row="0" Grid.Column="0" Margin="0,0,10,10">
+                        <!--  PropSkill file  -->
+                        <Grid
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,10,10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropSkill file" Margin="0,0,8,0"/>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="PropSkill file" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
-                                <TextBox x:Name="PropSkillFilePathTextbox" Text="{Binding Settings.PropSkillFilePath, Mode=TwoWay}"/>
-                                <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultPropSkillFilePath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBox x:Name="PropSkillFilePathTextbox" Text="{Binding Settings.PropSkillFilePath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultPropSkillFilePath, Mode=OneWay}">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Text, ElementName=PropSkillFilePathTextbox}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
                             </Grid>
-                            <Button Grid.Column="2" Width="60" Command="{Binding SelectPropSkillFileCommand}" HorizontalAlignment="Center" Height="35">
-                                <ui:SymbolIcon Symbol="FolderOpen20"/>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectPropSkillFileCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
                             </Button>
                         </Grid>
 
-                        <!-- PropSkill.txt file -->
-                        <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,0,10">
+                        <!--  PropSkill.txt file  -->
+                        <Grid
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="10,0,0,10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="PropSkill.txt file" Margin="0,0,8,0"/>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="PropSkill.txt file" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
-                                <TextBox x:Name="PropSkillTxtFilePathTextbox" Text="{Binding Settings.PropSkillTxtFilePath, Mode=TwoWay}"/>
-                                <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultPropSkillTxtFilePath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBox x:Name="PropSkillTxtFilePathTextbox" Text="{Binding Settings.PropSkillTxtFilePath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultPropSkillTxtFilePath, Mode=OneWay}">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Text, ElementName=PropSkillTxtFilePathTextbox}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
                             </Grid>
-                            <Button Grid.Column="2" Width="60" Command="{Binding SelectPropSkillTextFileCommand}" HorizontalAlignment="Center" Height="35">
-                                <ui:SymbolIcon Symbol="FolderOpen20"/>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectPropSkillTextFileCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
                             </Button>
                         </Grid>
 
-                        <!-- Skill Icon folder -->
-                        <Grid Grid.Row="1" Grid.Column="0" Margin="0,0,10,10">
+                        <!--  Skill Icon folder  -->
+                        <Grid
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,10,10">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="120"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="Icon folder" Margin="0,0,8,0"/>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="Icon folder" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
-                                <TextBox x:Name="SkillIconsFolderPathTextbox" Text="{Binding Settings.SkillIconsFolderPath, Mode=TwoWay}"/>
-                                <TextBlock IsHitTestVisible="False" Text="{Binding Settings.DefaultSkillIconsFolderPath, Mode=OneWay}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,10,0" Foreground="DarkGray">
+                                <TextBox x:Name="SkillIconsFolderPathTextbox" Text="{Binding Settings.SkillIconsFolderPath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultSkillIconsFolderPath, Mode=OneWay}">
                                     <TextBlock.Style>
                                         <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Setter Property="Visibility" Value="Collapsed" />
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Text, ElementName=SkillIconsFolderPathTextbox}" Value="">
-                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Visibility" Value="Visible" />
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </TextBlock.Style>
                                 </TextBlock>
                             </Grid>
-                            <Button Grid.Column="2" Width="60" Command="{Binding SelectSkillIconsFolderCommand}" HorizontalAlignment="Center" Height="35">
-                                <ui:SymbolIcon Symbol="FolderOpen20"/>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectSkillIconsFolderCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
                             </Button>
                         </Grid>
                     </Grid>

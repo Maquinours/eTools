@@ -2,9 +2,9 @@
     x:Class="eTools_Ultimate.Views.Pages.Accessory.AccessoryPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages.Accessory"
-    xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="AccessoryPage"
@@ -20,78 +20,55 @@
 
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        
-        <!-- TextBox Style -->
-        <Style x:Key="AppTextBoxStyle" 
-               TargetType="TextBox" 
-               BasedOn="{StaticResource {x:Type TextBox}}">
-            <Setter Property="Background" 
-                    Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-            <Setter Property="Foreground" 
-                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-            <Setter Property="BorderBrush" 
-                    Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
-            <Setter Property="Padding" 
-                    Value="8,5"/>
+
+        <!--  TextBox Style  -->
+        <Style
+            x:Key="AppTextBoxStyle"
+            BasedOn="{StaticResource {x:Type TextBox}}"
+            TargetType="TextBox">
+            <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+            <Setter Property="Padding" Value="8,5" />
         </Style>
-        
-        <!-- ComboBox Style -->
-        <Style x:Key="AppComboBoxStyle" 
-               TargetType="ComboBox" 
-               BasedOn="{StaticResource {x:Type ComboBox}}">
-            <Setter Property="Background" 
-                    Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-            <Setter Property="Foreground" 
-                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-            <Setter Property="BorderBrush" 
-                    Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+
+        <!--  ComboBox Style  -->
+        <Style
+            x:Key="AppComboBoxStyle"
+            BasedOn="{StaticResource {x:Type ComboBox}}"
+            TargetType="ComboBox">
+            <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
         </Style>
-        
-        <!-- Button Style -->
-        <Style x:Key="AppButtonStyle" 
-               TargetType="Button">
-            <Setter Property="Background" 
-                    Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-            <Setter Property="Foreground" 
-                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-            <Setter Property="BorderBrush" 
-                    Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
-            <Setter Property="Padding" 
-                    Value="8,5"/>
+
+        <!--  Button Style  -->
+        <Style x:Key="AppButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+            <Setter Property="Padding" Value="8,5" />
         </Style>
-        
-        <!-- ListView Style -->
-        <Style x:Key="AppListViewStyle" 
-               TargetType="ListView">
-            <Setter Property="Background" 
-                    Value="Transparent"/>
-            <Setter Property="BorderBrush" 
-                    Value="Transparent"/>
-            <Setter Property="BorderThickness" 
-                    Value="0"/>
-            <Setter Property="Foreground" 
-                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+
+        <!--  ListView Style  -->
+        <Style x:Key="AppListViewStyle" TargetType="ListView">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
         </Style>
-        
-        <!-- ListViewItem Style -->
-        <Style x:Key="AppListViewItemStyle" 
-               TargetType="ListViewItem">
-            <Setter Property="Background" 
-                    Value="Transparent"/>
-            <Setter Property="Foreground" 
-                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+
+        <!--  ListViewItem Style  -->
+        <Style x:Key="AppListViewItemStyle" TargetType="ListViewItem">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
             <Style.Triggers>
-                <Trigger Property="IsMouseOver" 
-                         Value="True">
-                    <Setter Property="Background" 
-                            Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
                 </Trigger>
-                <Trigger Property="IsSelected" 
-                         Value="True">
-                    <Setter Property="Background" 
-                            Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-                    <Setter Property="Foreground" 
-                            Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -99,77 +76,81 @@
 
     <Grid x:Name="RootGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Left Side - ListView -->
+        <!--  Left Side - ListView  -->
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!-- Search Bar -->
-            <Border Grid.Row="0"
-                    BorderThickness="1,1,1,0"
-                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    Margin="0,0,10,0">
-                <ui:TextBox 
-                            PlaceholderText="Suche..."
-                            Icon="Search24"
-                            BorderThickness="0"
-                            Margin="10,10,10,10"
-                            Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <!--  Search Bar  -->
+            <Border
+                Grid.Row="0"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,1,1,0">
+                <ui:TextBox
+                    Margin="10,10,10,10"
+                    BorderThickness="0"
+                    Icon="Search24"
+                    PlaceholderText="Suche..."
+                    Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Border>
 
-            <!-- Accessory List -->
-            <Border Grid.Row="1"
-                    BorderThickness="1,0,1,1"
-                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    Margin="0,0,10,0">
-                <ListView x:Name="AccessoriesListView"
-                          Style="{StaticResource AppListViewStyle}"
-                          ItemsSource="{Binding ViewModel.AccessoriesView}"
-                          BorderThickness="0"
-                          Background="Transparent"
-                          SelectedIndex="0">
+            <!--  Accessory List  -->
+            <Border
+                Grid.Row="1"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,0,1,1">
+                <ListView
+                    x:Name="AccessoriesListView"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ItemsSource="{Binding ViewModel.AccessoriesView}"
+                    SelectedIndex="0"
+                    Style="{StaticResource AppListViewStyle}">
                     <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem" BasedOn="{StaticResource AppListViewItemStyle}">
-                            <Setter Property="Padding" 
-                                    Value="8,4" />
-                            <Setter Property="Margin" 
-                                    Value="0,1" />
+                        <Style BasedOn="{StaticResource AppListViewItemStyle}" TargetType="ListViewItem">
+                            <Setter Property="Padding" Value="8,4" />
+                            <Setter Property="Margin" Value="0,1" />
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="4">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Border Width="32"
-                                        Height="32"
-                                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                                        BorderThickness="1"
-                                        Margin="0,0,8,0">
-                                    <Image Stretch="Uniform"
-                                           Margin="2"
-                                           Source="{Binding Item.Icon}"/>
+                                <Border
+                                    Width="32"
+                                    Height="32"
+                                    Margin="0,0,8,0"
+                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1">
+                                    <Image
+                                        Margin="2"
+                                        Source="{Binding Item.Icon}"
+                                        Stretch="Uniform" />
                                 </Border>
-                                <StackPanel Grid.Column="1"
-                                            VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Item.Name}"
-                                               FontWeight="SemiBold"
-                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                                    <TextBlock Text="{Binding Item.Identifier}"
-                                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                               FontSize="12"/>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{Binding Item.Name}" />
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding Item.Identifier}" />
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
@@ -178,32 +159,46 @@
             </Border>
         </Grid>
 
-        <!-- Separator -->
-        <GridSplitter Grid.Column="1"
-                      Width="10"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Stretch"
-                      Background="Transparent">
+        <!--  Separator  -->
+        <GridSplitter
+            Grid.Column="1"
+            Width="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Stretch"
+            Background="Transparent">
             <GridSplitter.Template>
                 <ControlTemplate TargetType="{x:Type GridSplitter}">
                     <Grid Background="Transparent">
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
-                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
-                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>
             </GridSplitter.Template>
         </GridSplitter>
 
-        <!-- Right Side - Details -->
-        <Border Grid.Column="2"
-                Padding="16"
-                Margin="5,5,5,5"
-                BorderBrush="Transparent"
-                BorderThickness="0"
-                CornerRadius="8">
+        <!--  Right Side - Details  -->
+        <Border
+            Grid.Column="2"
+            Margin="5,5,5,5"
+            Padding="16"
+            BorderBrush="Transparent"
+            BorderThickness="0"
+            CornerRadius="8">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -211,7 +206,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <!-- Accessory Title -->
+                <!--  Accessory Title  -->
                 <StackPanel Grid.Row="0" Margin="0,0,0,16">
                     <TextBlock
                         FontSize="24"
@@ -220,65 +215,71 @@
                     <TextBlock>
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0} - {1}">
-                                <Binding Path="SelectedItem.Item.Name" ElementName="AccessoriesListView" />
-                                <Binding Path="SelectedItem.Item.Description" ElementName="AccessoriesListView" />
+                                <Binding ElementName="AccessoriesListView" Path="SelectedItem.Item.Name" />
+                                <Binding ElementName="AccessoriesListView" Path="SelectedItem.Item.Description" />
                             </MultiBinding>
                         </TextBlock.Text>
                     </TextBlock>
                 </StackPanel>
 
-                <!-- Accessory Actions -->
-                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,16">
+                <!--  Accessory Actions  -->
+                <StackPanel
+                    Grid.Row="1"
+                    Margin="0,0,0,16"
+                    Orientation="Horizontal">
                     <ui:Button
                         Margin="0,0,8,0"
                         Appearance="Secondary"
-                        Icon="Add24"
+                        Command="{Binding DataContext.AddAbilityOptionDataCommand, RelativeSource={RelativeSource AncestorType=Page}}"
                         Content="New Level"
-                        Command="{Binding DataContext.AddAbilityOptionDataCommand, RelativeSource={RelativeSource AncestorType=Page}}"/>
+                        Icon="Add24" />
                 </StackPanel>
 
-                <!-- Accessory Stats - Card View -->
-                <ScrollViewer x:Name="AccessoryScrollViewer" Grid.Row="2" VerticalScrollBarVisibility="Auto">
+                <!--  Accessory Stats - Card View  -->
+                <ScrollViewer
+                    x:Name="AccessoryScrollViewer"
+                    Grid.Row="2"
+                    VerticalScrollBarVisibility="Auto">
                     <ItemsControl ItemsSource="{Binding SelectedItem.AbilityOptionData, Mode=OneWay, ElementName=AccessoriesListView}">
-                        <!-- Single column layout -->
+                        <!--  Single column layout  -->
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Border 
-                                    BorderThickness="1"
-                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                                    CornerRadius="6"
+                                <Border
                                     Margin="0,0,0,12"
-                                    Padding="16">
+                                    Padding="16"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="6">
                                     <Grid Tag="{Binding}">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
-                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
 
-                                        <!-- Level Header with Actions -->
+                                        <!--  Level Header with Actions  -->
                                         <Grid Grid.Row="0" Margin="0,0,0,8">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock 
+                                            <TextBlock
                                                 Grid.Column="0"
-                                                Text="{Binding NAbilityOption, StringFormat='Level {0}'}"
+                                                VerticalAlignment="Center"
                                                 FontSize="18"
                                                 FontWeight="SemiBold"
-                                                VerticalAlignment="Center" />
+                                                Text="{Binding NAbilityOption, StringFormat='Level {0}'}" />
 
                                             <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                                <!-- Delete with Confirmation -->
+                                                <!--  Delete with Confirmation  -->
                                                 <ui:Button
                                                     Margin="4,0"
                                                     Padding="6,2"
-                                                    ToolTip="Delete Level"
                                                     Appearance="Danger"
                                                     Command="{Binding DataContext.DeleteAbilityOptionDataCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                    CommandParameter="{Binding}">
+                                                    CommandParameter="{Binding}"
+                                                    ToolTip="Delete Level">
                                                     <Grid>
                                                         <ui:SymbolIcon Symbol="Delete24" />
                                                     </Grid>
@@ -286,7 +287,7 @@
                                             </StackPanel>
                                         </Grid>
 
-                                        <!-- Attributes -->
+                                        <!--  Attributes  -->
                                         <ItemsControl Grid.Row="1" ItemsSource="{Binding DstData}">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
@@ -297,88 +298,99 @@
                                                             <ColumnDefinition Width="Auto" />
                                                         </Grid.ColumnDefinitions>
 
-                                                        <!-- Attribute Dropdown -->
-                                                        <ComboBox 
+                                                        <!--  Attribute Dropdown  -->
+                                                        <ComboBox
                                                             Grid.Column="0"
                                                             Margin="0,0,12,0"
                                                             FontSize="14"
-                                                            Style="{StaticResource AppComboBoxStyle}"
+                                                            ItemsSource="{Binding ViewModel.PossibleDstValues, RelativeSource={RelativeSource AncestorType=Page}}"
                                                             SelectedItem="{Binding NDst, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                                            ItemsSource="{Binding ViewModel.PossibleDstValues, RelativeSource={RelativeSource AncestorType=Page}}" />
+                                                            Style="{StaticResource AppComboBoxStyle}" />
 
-                                                        <!-- Value Input mit manueller Eingabe und Pfeilen -->
+                                                        <!--  Value Input mit manueller Eingabe und Pfeilen  -->
                                                         <Grid Grid.Column="1" Margin="0,0,8,0">
                                                             <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="*"/>
-                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="Auto" />
                                                             </Grid.ColumnDefinitions>
 
-                                                            <!-- Editierbare Textbox -->
-                                                            <TextBox 
+                                                            <!--  Editierbare Textbox  -->
+                                                            <TextBox
                                                                 Name="ValueTextBox"
                                                                 Grid.Column="0"
-                                                                Style="{StaticResource AppTextBoxStyle}"
                                                                 HorizontalContentAlignment="Right"
                                                                 VerticalContentAlignment="Center"
                                                                 FontSize="14"
+                                                                Style="{StaticResource AppTextBoxStyle}"
                                                                 Text="{Binding NAdj, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                                                 <TextBox.InputBindings>
-                                                                    <KeyBinding Key="Return" 
-                                                                               Command="{Binding DataContext.UpdateValueCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                                               CommandParameter="{Binding}"/>
+                                                                    <KeyBinding
+                                                                        Key="Return"
+                                                                        Command="{Binding DataContext.UpdateValueCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                                                        CommandParameter="{Binding}" />
                                                                 </TextBox.InputBindings>
                                                             </TextBox>
 
-                                                            <!-- Spinner-Knöpfe -->
-                                                            <StackPanel Grid.Column="1" Orientation="Vertical" Width="24" Margin="2,0,0,0">
-                                                                <Button 
-                                                                    Content="▲" 
-                                                                    Height="16" 
-                                                                    Padding="0" 
+                                                            <!--  Spinner-Knöpfe  -->
+                                                            <StackPanel
+                                                                Grid.Column="1"
+                                                                Width="24"
+                                                                Margin="2,0,0,0"
+                                                                Orientation="Vertical">
+                                                                <Button
+                                                                    Height="16"
                                                                     Margin="0,0,0,1"
-                                                                    Style="{StaticResource AppButtonStyle}"
+                                                                    Padding="0"
                                                                     BorderThickness="1"
                                                                     Command="{Binding DataContext.IncrementValueCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                                    CommandParameter="{Binding}"/>
-                                                                <Button 
-                                                                    Content="▼" 
-                                                                    Height="16" 
-                                                                    Padding="0" 
+                                                                    CommandParameter="{Binding}"
+                                                                    Content="▲"
+                                                                    Style="{StaticResource AppButtonStyle}" />
+                                                                <Button
+                                                                    Height="16"
                                                                     Margin="0,1,0,0"
-                                                                    Style="{StaticResource AppButtonStyle}"
+                                                                    Padding="0"
                                                                     BorderThickness="1"
                                                                     Command="{Binding DataContext.DecrementValueCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                                    CommandParameter="{Binding}"/>
+                                                                    CommandParameter="{Binding}"
+                                                                    Content="▼"
+                                                                    Style="{StaticResource AppButtonStyle}" />
                                                             </StackPanel>
                                                         </Grid>
 
-                                                        <!-- Delete Attribute Button -->
-                                                        <Button 
+                                                        <!--  Delete Attribute Button  -->
+                                                        <Button
                                                             Grid.Column="2"
                                                             Padding="4"
-                                                            Style="{StaticResource AppButtonStyle}"
                                                             BorderThickness="1"
-                                                            Visibility="{Binding CanDelete, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                             Command="{Binding DataContext.DeleteDstDataCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                            CommandParameter="{Binding}">
-                                                            <TextBlock Text="❌" FontSize="12" />
+                                                            CommandParameter="{Binding}"
+                                                            Style="{StaticResource AppButtonStyle}"
+                                                            Visibility="{Binding CanDelete, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                                            <TextBlock FontSize="12" Text="❌" />
                                                         </Button>
                                                     </Grid>
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
                                         </ItemsControl>
 
-                                        <!-- Add Attribute Button -->
-                                        <Button 
-                                            Grid.Row="2" 
+                                        <!--  Add Attribute Button  -->
+                                        <Button
+                                            Grid.Row="2"
                                             Margin="0,8,0,0"
-                                            Style="{StaticResource AppButtonStyle}"
                                             HorizontalAlignment="Left"
                                             Command="{Binding DataContext.AddDstDataCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                            CommandParameter="{Binding}">
+                                            CommandParameter="{Binding}"
+                                            Style="{StaticResource AppButtonStyle}">
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="➕" FontSize="12" VerticalAlignment="Center" />
-                                                <TextBlock Text="Add Attribute" Margin="4,0,0,0" VerticalAlignment="Center" />
+                                                <TextBlock
+                                                    VerticalAlignment="Center"
+                                                    FontSize="12"
+                                                    Text="➕" />
+                                                <TextBlock
+                                                    Margin="4,0,0,0"
+                                                    VerticalAlignment="Center"
+                                                    Text="Add Attribute" />
                                             </StackPanel>
                                         </Button>
                                     </Grid>
@@ -389,6 +401,9 @@
                 </ScrollViewer>
             </Grid>
         </Border>
-        <ContentPresenter Grid.Column="0" Grid.ColumnSpan="3" x:Name="RootContentDialogPresenter" />
+        <ContentPresenter
+            x:Name="RootContentDialogPresenter"
+            Grid.Column="0"
+            Grid.ColumnSpan="3" />
     </Grid>
 </Page>

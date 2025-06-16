@@ -25,34 +25,40 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center">
-            <Image Source="/Views/Windows/WarningIcon.png" 
-                   Width="32" 
-                   Height="32" 
-                   Margin="0,0,10,0"/>
-            <TextBlock Text="Not all files could be loaded." 
-                       TextAlignment="Center" 
-                       VerticalAlignment="Center"
-                       TextWrapping="Wrap"/>
+        <StackPanel
+            Grid.Row="0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+            <Image
+                Width="32"
+                Height="32"
+                Margin="0,0,10,0"
+                Source="/Views/Windows/WarningIcon.png" />
+            <TextBlock
+                VerticalAlignment="Center"
+                Text="Not all files could be loaded."
+                TextAlignment="Center"
+                TextWrapping="Wrap" />
         </StackPanel>
 
-        <StackPanel Grid.Row="1" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center"
-                    Margin="0,20,0,0">
-            <Button Content="Go to Resource Path" 
-                    Width="120" 
-                    Height="30" 
-                    Margin="0,0,10,0"
-                    Click="GoToResourcePath_Click"/>
-            <Button Content="Close Application" 
-                    Width="135" 
-                    Height="30"
-                    Click="CloseApplication_Click"/>
+        <StackPanel
+            Grid.Row="1"
+            Margin="0,20,0,0"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+            <Button
+                Width="120"
+                Height="30"
+                Margin="0,0,10,0"
+                Click="GoToResourcePath_Click"
+                Content="Go to Resource Path" />
+            <Button
+                Width="135"
+                Height="30"
+                Click="CloseApplication_Click"
+                Content="Close Application" />
         </StackPanel>
     </Grid>
 </ui:ContentDialog> 

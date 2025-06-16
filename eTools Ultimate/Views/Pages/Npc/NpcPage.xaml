@@ -18,76 +18,76 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <!-- Common Styles -->
-        <Style x:Key="InfoIconStyle"
-                TargetType="ui:SymbolIcon">
-            <Setter Property="HorizontalAlignment"
-                    Value="Right"/>
-            <Setter Property="VerticalAlignment"
-                    Value="Center"/>
-            <Setter Property="FontSize"
-                    Value="16"/>
-            <Setter Property="Margin"
-                    Value="5,0,0,0"/>
-            <Setter Property="Foreground"
-                    Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+        <!--  Common Styles  -->
+        <Style x:Key="InfoIconStyle" TargetType="ui:SymbolIcon">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="5,0,0,0" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
         </Style>
-        
-        <!-- MultiSelect ComboBox Style -->
+
+        <!--  MultiSelect ComboBox Style  -->
         <Style x:Key="MultiSelectComboBox" TargetType="ComboBox">
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
                         <Grid>
-                            <ToggleButton x:Name="ToggleButton"
-                                        Background="{TemplateBinding Background}"
-                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                        BorderThickness="1"
-                                        Foreground="{TemplateBinding Foreground}"
-                                        IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                            <ToggleButton
+                                x:Name="ToggleButton"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                BorderThickness="1"
+                                Foreground="{TemplateBinding Foreground}"
+                                IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
                                 <ToggleButton.Template>
                                     <ControlTemplate TargetType="ToggleButton">
-                                        <Border x:Name="Border"
-                                                Background="{TemplateBinding Background}"
-                                                BorderBrush="{TemplateBinding BorderBrush}"
-                                                BorderThickness="{TemplateBinding BorderThickness}">
+                                        <Border
+                                            x:Name="Border"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
-                                                <TextBlock x:Name="Text" 
-                                                         Margin="5,2"
-                                                         Text="Menü-Optionen auswählen..."/>
-                                                <Path x:Name="Arrow"
-                                                      Grid.Column="1"
-                                                      Fill="{DynamicResource TextFillColorPrimaryBrush}"
-                                                      HorizontalAlignment="Center"
-                                                      VerticalAlignment="Center"
-                                                      Data="M0,0 L8,8 L16,0"
-                                                      Margin="5"/>
+                                                <TextBlock
+                                                    x:Name="Text"
+                                                    Margin="5,2"
+                                                    Text="Menü-Optionen auswählen..." />
+                                                <Path
+                                                    x:Name="Arrow"
+                                                    Grid.Column="1"
+                                                    Margin="5"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Data="M0,0 L8,8 L16,0"
+                                                    Fill="{DynamicResource TextFillColorPrimaryBrush}" />
                                             </Grid>
                                         </Border>
                                     </ControlTemplate>
                                 </ToggleButton.Template>
                             </ToggleButton>
-                            <Popup x:Name="Popup"
-                                   AllowsTransparency="True"
-                                   IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                                   PopupAnimation="Slide"
-                                   PlacementTarget="{Binding ElementName=ToggleButton}">
-                                <Border Background="{DynamicResource ApplicationBackgroundBrush}"
-                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                        BorderThickness="1"
-                                        MaxHeight="200">
+                            <Popup
+                                x:Name="Popup"
+                                AllowsTransparency="True"
+                                IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                PlacementTarget="{Binding ElementName=ToggleButton}"
+                                PopupAnimation="Slide">
+                                <Border
+                                    MaxHeight="200"
+                                    Background="{DynamicResource ApplicationBackgroundBrush}"
+                                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                    BorderThickness="1">
                                     <ScrollViewer VerticalScrollBarVisibility="Auto">
                                         <StackPanel x:Name="MenuItems">
-                                            <CheckBox Content="MMI_DIALOG" Margin="5,2"/>
-                                            <CheckBox Content="MMI_TRADE" Margin="5,2"/>
-                                            <CheckBox Content="MMI_EXCHANGE" Margin="5,2"/>
-                                            <CheckBox Content="MMI_UPGRADE" Margin="5,2"/>
-                                            <CheckBox Content="MMI_AUCTION" Margin="5,2"/>
-                                            <CheckBox Content="MMI_QUEST" Margin="5,2"/>
+                                            <CheckBox Margin="5,2" Content="MMI_DIALOG" />
+                                            <CheckBox Margin="5,2" Content="MMI_TRADE" />
+                                            <CheckBox Margin="5,2" Content="MMI_EXCHANGE" />
+                                            <CheckBox Margin="5,2" Content="MMI_UPGRADE" />
+                                            <CheckBox Margin="5,2" Content="MMI_AUCTION" />
+                                            <CheckBox Margin="5,2" Content="MMI_QUEST" />
                                         </StackPanel>
                                     </ScrollViewer>
                                 </Border>
@@ -97,237 +97,252 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
-        <Style x:Key="FormFieldStyle"
-                TargetType="Grid">
-            <Setter Property="Margin"
-                    Value="0,0,15,10"/>
+
+        <Style x:Key="FormFieldStyle" TargetType="Grid">
+            <Setter Property="Margin" Value="0,0,15,10" />
         </Style>
-        <Style x:Key="FieldLabelStyle"
-                TargetType="TextBlock">
-            <Setter Property="Margin"
-                    Value="0,0,0,5"/>
-            <Setter Property="FontWeight"
-                    Value="SemiBold"/>
+        <Style x:Key="FieldLabelStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,0,0,5" />
+            <Setter Property="FontWeight" Value="SemiBold" />
         </Style>
-        <Style x:Key="SectionHeaderStyle"
-                TargetType="TextBlock">
-            <Setter Property="FontSize"
-                    Value="24"/>
-            <Setter Property="FontWeight"
-                    Value="Bold"/>
-            <Setter Property="Margin"
-                    Value="0,15,0,15"/>
+        <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="0,15,0,15" />
         </Style>
 
-        <!-- DataTemplate: General Section -->
+        <!--  DataTemplate: General Section  -->
         <DataTemplate x:Key="GeneralSectionTemplate">
             <StackPanel>
-                <TextBlock Text="General" 
-                        Style="{StaticResource SectionHeaderStyle}"/>
+                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="General" />
                 <UniformGrid Columns="2">
-                    <!-- NPC Name -->
+                    <!--  NPC Name  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="NPC Name"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="NPC Name" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Name des NPCs"/>
+                                    <ToolTip Content="Name des NPCs" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ui:TextBox Grid.Row="1"
-                                PlaceholderText="NPC Namen eingeben"
-                                Height="32"/>
+                        <ui:TextBox
+                            Grid.Row="1"
+                            Height="32"
+                            PlaceholderText="NPC Namen eingeben" />
                     </Grid>
 
-                    <!-- NPC Key -->
+                    <!--  NPC Key  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="NPC Key"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="NPC Key" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="NPC Key ID"/>
+                                    <ToolTip Content="NPC Key ID" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ui:TextBox Grid.Row="1"
-                                PlaceholderText="IDS_CHARACTER_INC_XYZ"
-                                Height="32"/>
+                        <ui:TextBox
+                            Grid.Row="1"
+                            Height="32"
+                            PlaceholderText="IDS_CHARACTER_INC_XYZ" />
                     </Grid>
 
-                    <!-- NPC Define -->
+                    <!--  NPC Define  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="NPC Define"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="NPC Define" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="NPC Definition ID"/>
+                                    <ToolTip Content="NPC Definition ID" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ui:TextBox Grid.Row="1"
-                                PlaceholderText="MaFl_Is"
-                                Height="32"/>
+                        <ui:TextBox
+                            Grid.Row="1"
+                            Height="32"
+                            PlaceholderText="MaFl_Is" />
                     </Grid>
 
-                    <!-- Dialog File -->
+                    <!--  Dialog File  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="Dialog File"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Dialog File" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Dialog Datei Pfad"/>
+                                    <ToolTip Content="Dialog Datei Pfad" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ui:TextBox Grid.Row="1"
-                                PlaceholderText="MaFl_Is.txt"
-                                Height="32"/>
+                        <ui:TextBox
+                            Grid.Row="1"
+                            Height="32"
+                            PlaceholderText="MaFl_Is.txt" />
                     </Grid>
 
-                    <!-- NPC Image -->
+                    <!--  NPC Image  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="NPC Image"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="NPC Image" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="NPC Bild Pfad"/>
+                                    <ToolTip Content="NPC Bild Pfad" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <ui:TextBox Grid.Column="0"
-                                    PlaceholderText="IDS_CHARACTER_INC_000064"
-                                    Height="32"/>
-                            <ui:Button Grid.Column="1"
-                                    Content="..."
-                                    Margin="5,0,0,0"/>
-                            <Border Grid.Column="2"
-                                    Width="32"
-                                    Height="32"
-                                    Margin="10,0,0,0"
-                                    BorderThickness="1">
-                                <Image x:Name="NpcImagePreview"
-                                        Margin="2"/>
+                            <ui:TextBox
+                                Grid.Column="0"
+                                Height="32"
+                                PlaceholderText="IDS_CHARACTER_INC_000064" />
+                            <ui:Button
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                Content="..." />
+                            <Border
+                                Grid.Column="2"
+                                Width="32"
+                                Height="32"
+                                Margin="10,0,0,0"
+                                BorderThickness="1">
+                                <Image x:Name="NpcImagePreview" Margin="2" />
                             </Border>
                         </Grid>
                     </Grid>
 
-                    <!-- Menu -->
+                    <!--  Menu  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="Menu"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Menu" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Menü-Optionen"/>
+                                    <ToolTip Content="Menü-Optionen" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <Grid Grid.Row="1">
-                            <ComboBox Height="32"
-                                     HorizontalAlignment="Stretch"
-                                     VerticalContentAlignment="Center"
-                                     Background="{DynamicResource ControlFillColorDefaultBrush}"
-                                     BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                     BorderThickness="1">
+                            <ComboBox
+                                Height="32"
+                                HorizontalAlignment="Stretch"
+                                VerticalContentAlignment="Center"
+                                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                BorderThickness="1">
                                 <ComboBox.Resources>
                                     <Style TargetType="ComboBox">
                                         <Setter Property="Template">
                                             <Setter.Value>
                                                 <ControlTemplate TargetType="ComboBox">
-                                                    <Border x:Name="MainBorder"
-                                                            Background="{TemplateBinding Background}"
-                                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                                            CornerRadius="4">
+                                                    <Border
+                                                        x:Name="MainBorder"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="4">
                                                         <Grid>
-                                                            <ToggleButton Name="ToggleButton"
-                                                                        Height="32"
-                                                                        Background="Transparent"
-                                                                        BorderThickness="0"
-                                                                        IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                                                        HorizontalAlignment="Stretch">
+                                                            <ToggleButton
+                                                                Name="ToggleButton"
+                                                                Height="32"
+                                                                HorizontalAlignment="Stretch"
+                                                                Background="Transparent"
+                                                                BorderThickness="0"
+                                                                IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
                                                                 <ToggleButton.Template>
                                                                     <ControlTemplate TargetType="ToggleButton">
                                                                         <Grid Background="Transparent">
                                                                             <Grid.ColumnDefinitions>
-                                                                                <ColumnDefinition Width="*"/>
-                                                                                <ColumnDefinition Width="Auto"/>
+                                                                                <ColumnDefinition Width="*" />
+                                                                                <ColumnDefinition Width="Auto" />
                                                                             </Grid.ColumnDefinitions>
-                                                                            <ContentPresenter Margin="8,0,0,0"
-                                                                                            Content="Menü-Optionen auswählen..."
-                                                                                            VerticalAlignment="Center"/>
-                                                                            <Path Grid.Column="1"
-                                                                                  Margin="0,0,8,0"
-                                                                                  HorizontalAlignment="Right"
-                                                                                  VerticalAlignment="Center"
-                                                                                  Data="M0,0 L4,4 L8,0"
-                                                                                  Fill="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                                                            <ContentPresenter
+                                                                                Margin="8,0,0,0"
+                                                                                VerticalAlignment="Center"
+                                                                                Content="Menü-Optionen auswählen..." />
+                                                                            <Path
+                                                                                Grid.Column="1"
+                                                                                Margin="0,0,8,0"
+                                                                                HorizontalAlignment="Right"
+                                                                                VerticalAlignment="Center"
+                                                                                Data="M0,0 L4,4 L8,0"
+                                                                                Fill="{DynamicResource TextFillColorPrimaryBrush}" />
                                                                         </Grid>
                                                                     </ControlTemplate>
                                                                 </ToggleButton.Template>
                                                             </ToggleButton>
-                                                            <Popup Name="PART_Popup"
-                                                                   AllowsTransparency="True"
-                                                                   IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
-                                                                   Placement="Bottom"
-                                                                   PopupAnimation="Slide">
-                                                                <Border Background="{DynamicResource ApplicationBackgroundBrush}"
-                                                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                                                        BorderThickness="1"
-                                                                        MaxHeight="200"
-                                                                        MinWidth="{Binding ActualWidth, ElementName=MainBorder}"
-                                                                        CornerRadius="4">
+                                                            <Popup
+                                                                Name="PART_Popup"
+                                                                AllowsTransparency="True"
+                                                                IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                Placement="Bottom"
+                                                                PopupAnimation="Slide">
+                                                                <Border
+                                                                    MinWidth="{Binding ActualWidth, ElementName=MainBorder}"
+                                                                    MaxHeight="200"
+                                                                    Background="{DynamicResource ApplicationBackgroundBrush}"
+                                                                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                                                    BorderThickness="1"
+                                                                    CornerRadius="4">
                                                                     <ScrollViewer>
                                                                         <StackPanel>
-                                                                            <CheckBox Content="MMI_DIALOG" Margin="8,4" Height="32" VerticalContentAlignment="Center"/>
-                                                                            <CheckBox Content="MMI_TRADE" Margin="8,4" Height="32" VerticalContentAlignment="Center"/>
-                                                                            <CheckBox Content="MMI_EXCHANGE" Margin="8,4" Height="32" VerticalContentAlignment="Center"/>
-                                                                            <CheckBox Content="MMI_UPGRADE" Margin="8,4" Height="32" VerticalContentAlignment="Center"/>
-                                                                            <CheckBox Content="MMI_AUCTION" Margin="8,4" Height="32" VerticalContentAlignment="Center"/>
-                                                                            <CheckBox Content="MMI_QUEST" Margin="8,4" Height="32" VerticalContentAlignment="Center"/>
+                                                                            <CheckBox
+                                                                                Height="32"
+                                                                                Margin="8,4"
+                                                                                VerticalContentAlignment="Center"
+                                                                                Content="MMI_DIALOG" />
+                                                                            <CheckBox
+                                                                                Height="32"
+                                                                                Margin="8,4"
+                                                                                VerticalContentAlignment="Center"
+                                                                                Content="MMI_TRADE" />
+                                                                            <CheckBox
+                                                                                Height="32"
+                                                                                Margin="8,4"
+                                                                                VerticalContentAlignment="Center"
+                                                                                Content="MMI_EXCHANGE" />
+                                                                            <CheckBox
+                                                                                Height="32"
+                                                                                Margin="8,4"
+                                                                                VerticalContentAlignment="Center"
+                                                                                Content="MMI_UPGRADE" />
+                                                                            <CheckBox
+                                                                                Height="32"
+                                                                                Margin="8,4"
+                                                                                VerticalContentAlignment="Center"
+                                                                                Content="MMI_AUCTION" />
+                                                                            <CheckBox
+                                                                                Height="32"
+                                                                                Margin="8,4"
+                                                                                VerticalContentAlignment="Center"
+                                                                                Content="MMI_QUEST" />
                                                                         </StackPanel>
                                                                     </ScrollViewer>
                                                                 </Border>
@@ -346,125 +361,128 @@
             </StackPanel>
         </DataTemplate>
 
-        <!-- DataTemplate: Tabs Section -->
+        <!--  DataTemplate: Tabs Section  -->
         <DataTemplate x:Key="TabsSectionTemplate">
             <StackPanel>
-                <TextBlock Text="Tabs" 
-                        Style="{StaticResource SectionHeaderStyle}"/>
+                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Tabs" />
                 <UniformGrid Columns="2">
-                    <!-- Tab Name 1 -->
+                    <!--  Tab Name 1  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="Tab Name 1"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Tab Name 1" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Name des ersten Tabs"/>
+                                    <ToolTip Content="Name des ersten Tabs" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ui:TextBox Grid.Row="1"
-                                PlaceholderText="Tab 1"
-                                Name="TabName1"
-                                Height="32"/>
+                        <ui:TextBox
+                            Name="TabName1"
+                            Grid.Row="1"
+                            Height="32"
+                            PlaceholderText="Tab 1" />
                     </Grid>
 
-                    <!-- Tab Name 2 -->
+                    <!--  Tab Name 2  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="Tab Name 2"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Tab Name 2" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Name des zweiten Tabs"/>
+                                    <ToolTip Content="Name des zweiten Tabs" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ui:TextBox Grid.Row="1"
-                                PlaceholderText="Tab 2"
-                                Name="TabName2"
-                                Height="32"/>
+                        <ui:TextBox
+                            Name="TabName2"
+                            Grid.Row="1"
+                            Height="32"
+                            PlaceholderText="Tab 2" />
                     </Grid>
 
-                    <!-- Tab Name 3 -->
+                    <!--  Tab Name 3  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="Tab Name 3"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Tab Name 3" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Name des dritten Tabs"/>
+                                    <ToolTip Content="Name des dritten Tabs" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ui:TextBox Grid.Row="1"
-                                PlaceholderText="Tab 3"
-                                Name="TabName3"
-                                Height="32"/>
+                        <ui:TextBox
+                            Name="TabName3"
+                            Grid.Row="1"
+                            Height="32"
+                            PlaceholderText="Tab 3" />
                     </Grid>
 
-                    <!-- Tab Name 4 -->
+                    <!--  Tab Name 4  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="Tab Name 4"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Tab Name 4" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Name des vierten Tabs"/>
+                                    <ToolTip Content="Name des vierten Tabs" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ui:TextBox Grid.Row="1"
-                                PlaceholderText="Tab 4"
-                                Name="TabName4"
-                                Height="32"/>
+                        <ui:TextBox
+                            Name="TabName4"
+                            Grid.Row="1"
+                            Height="32"
+                            PlaceholderText="Tab 4" />
                     </Grid>
                 </UniformGrid>
             </StackPanel>
         </DataTemplate>
 
-        <!-- DataTemplate: Shop Section -->
+        <!--  DataTemplate: Shop Section  -->
         <DataTemplate x:Key="ShopSectionTemplate">
             <StackPanel>
-                <TextBlock Text="Shop" 
-                        Style="{StaticResource SectionHeaderStyle}"/>
+                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Shop" />
                 <TabControl x:Name="ShopTabControl">
                     <TabItem Header="{Binding ElementName=TabName1, Path=Text, TargetNullValue=Tab 1}">
                         <DataGrid Name="DataGrid1" AutoGenerateColumns="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Item ID" Binding="{Binding ItemId}" Width="100"/>
-                                <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" Width="*"/>
-                                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
-                                <DataGridTemplateColumn Header="Action" Width="80">
+                                <DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding ItemId}"
+                                    Header="Item ID" />
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding ItemName}"
+                                    Header="Item Name" />
+                                <DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding Price}"
+                                    Header="Price" />
+                                <DataGridTemplateColumn Width="80" Header="Action">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ui:Button
-                                                Content="Delete"
-                                                Appearance="Danger"
                                                 Padding="8,4"
-                                                FontSize="11"
+                                                Appearance="Danger"
                                                 Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                CommandParameter="{Binding}"/>
+                                                CommandParameter="{Binding}"
+                                                Content="Delete"
+                                                FontSize="11" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -474,19 +492,28 @@
                     <TabItem Header="{Binding ElementName=TabName2, Path=Text, TargetNullValue=Tab 2}">
                         <DataGrid Name="DataGrid2" AutoGenerateColumns="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Item ID" Binding="{Binding ItemId}" Width="100"/>
-                                <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" Width="*"/>
-                                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
-                                <DataGridTemplateColumn Header="Action" Width="80">
+                                <DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding ItemId}"
+                                    Header="Item ID" />
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding ItemName}"
+                                    Header="Item Name" />
+                                <DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding Price}"
+                                    Header="Price" />
+                                <DataGridTemplateColumn Width="80" Header="Action">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ui:Button
-                                                Content="Delete"
-                                                Appearance="Danger"
                                                 Padding="8,4"
-                                                FontSize="11"
+                                                Appearance="Danger"
                                                 Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                CommandParameter="{Binding}"/>
+                                                CommandParameter="{Binding}"
+                                                Content="Delete"
+                                                FontSize="11" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -496,19 +523,28 @@
                     <TabItem Header="{Binding ElementName=TabName3, Path=Text, TargetNullValue=Tab 3}">
                         <DataGrid Name="DataGrid3" AutoGenerateColumns="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Item ID" Binding="{Binding ItemId}" Width="100"/>
-                                <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" Width="*"/>
-                                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
-                                <DataGridTemplateColumn Header="Action" Width="80">
+                                <DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding ItemId}"
+                                    Header="Item ID" />
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding ItemName}"
+                                    Header="Item Name" />
+                                <DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding Price}"
+                                    Header="Price" />
+                                <DataGridTemplateColumn Width="80" Header="Action">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ui:Button
-                                                Content="Delete"
-                                                Appearance="Danger"
                                                 Padding="8,4"
-                                                FontSize="11"
+                                                Appearance="Danger"
                                                 Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                CommandParameter="{Binding}"/>
+                                                CommandParameter="{Binding}"
+                                                Content="Delete"
+                                                FontSize="11" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -518,19 +554,28 @@
                     <TabItem Header="{Binding ElementName=TabName4, Path=Text, TargetNullValue=Tab 4}">
                         <DataGrid Name="DataGrid4" AutoGenerateColumns="False">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Item ID" Binding="{Binding ItemId}" Width="100"/>
-                                <DataGridTextColumn Header="Item Name" Binding="{Binding ItemName}" Width="*"/>
-                                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
-                                <DataGridTemplateColumn Header="Action" Width="80">
+                                <DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding ItemId}"
+                                    Header="Item ID" />
+                                <DataGridTextColumn
+                                    Width="*"
+                                    Binding="{Binding ItemName}"
+                                    Header="Item Name" />
+                                <DataGridTextColumn
+                                    Width="100"
+                                    Binding="{Binding Price}"
+                                    Header="Price" />
+                                <DataGridTemplateColumn Width="80" Header="Action">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <ui:Button
-                                                Content="Delete"
-                                                Appearance="Danger"
                                                 Padding="8,4"
-                                                FontSize="11"
+                                                Appearance="Danger"
                                                 Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                CommandParameter="{Binding}"/>
+                                                CommandParameter="{Binding}"
+                                                Content="Delete"
+                                                FontSize="11" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
@@ -541,94 +586,87 @@
             </StackPanel>
         </DataTemplate>
 
-        <!-- DataTemplate: Custom Section -->
+        <!--  DataTemplate: Custom Section  -->
         <DataTemplate x:Key="CustomSectionTemplate">
             <StackPanel>
-                <TextBlock Text="Custom" 
-                        Style="{StaticResource SectionHeaderStyle}"/>
+                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Custom" />
                 <UniformGrid Columns="2">
-                    <!-- Vendor Type -->
+                    <!--  Vendor Type  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="Vendor Type"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Vendor Type" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Typ des Händlers"/>
+                                    <ToolTip Content="Typ des Händlers" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ui:TextBox Grid.Row="1"
-                                PlaceholderText="II_CHP_RED"
-                                Height="32"/>
+                        <ui:TextBox
+                            Grid.Row="1"
+                            Height="32"
+                            PlaceholderText="II_CHP_RED" />
                     </Grid>
 
-                    <!-- NPC Equip -->
+                    <!--  NPC Equip  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="NPC Equip"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="NPC Equip" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Ausrüstung des NPCs"/>
+                                    <ToolTip Content="Ausrüstung des NPCs" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ui:TextBox Grid.Row="1"
-                                PlaceholderText="II_ARM_S_CLO_DOMAS_21, ..."
-                                Height="32"/>
+                        <ui:TextBox
+                            Grid.Row="1"
+                            Height="32"
+                            PlaceholderText="II_ARM_S_CLO_DOMAS_21, ..." />
                     </Grid>
 
-                    <!-- NPC Figure -->
+                    <!--  NPC Figure  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="NPC Figure"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="NPC Figure" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Geschlecht des NPCs"/>
+                                    <ToolTip Content="Geschlecht des NPCs" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ComboBox Grid.Row="1" Height="32">
-                            <ComboBoxItem Content="Male"/>
-                            <ComboBoxItem Content="Female"/>
+                            <ComboBoxItem Content="Male" />
+                            <ComboBoxItem Content="Female" />
                         </ComboBox>
                     </Grid>
 
-                    <!-- Structure -->
+                    <!--  Structure  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Text="Structure"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Structure" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="NPC Struktur"/>
+                                    <ToolTip Content="NPC Struktur" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ComboBox Grid.Row="1" Height="32">
-                            <ComboBoxItem Content="SRT_CASHSHOP"/>
+                            <ComboBoxItem Content="SRT_CASHSHOP" />
                         </ComboBox>
                     </Grid>
                 </UniformGrid>
@@ -637,254 +675,274 @@
     </Page.Resources>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  Left Side: Search bar and ListView  -->
+        <Grid
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="3*"/>
-            </Grid.ColumnDefinitions>
 
-            <!-- Left Side: Search bar and ListView -->
-            <Grid Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                
-                <!-- Search bar -->
-                <Border Grid.Row="0"
-                        BorderThickness="1,1,1,0"
-                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                        Margin="0,0,10,0">
-                    <ui:TextBox 
-                                PlaceholderText="Suche..."
-                                Icon="Search24"
-                                BorderThickness="0"
-                                Margin="10,10,10,10"
-                                Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Cursor="" />
-                </Border>
-                
-                <!-- ListView for NPC list -->
-                <Border Grid.Row="1"
-                        BorderThickness="1,0,1,1"
-                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                        Margin="0,0,10,0">
-                    <ListView 
-                        BorderThickness="0" 
-                        Background="Transparent"
-                        Margin="0,0,0,0"
-                        ItemsSource="{Binding ViewModel.CharactersView}"
-                        IsSynchronizedWithCurrentItem="True">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="Background"
-                                        Value="Transparent"/>
-                                <Setter Property="BorderBrush"
-                                        Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver"
-                                             Value="True">
-                                        <Setter Property="Background"
-                                                Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
-                                    </Trigger>
-                                    <Trigger Property="IsSelected"
-                                             Value="True">
-                                        <Setter Property="Background"
-                                                Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-                                        <Setter Property="Foreground"
-                                                Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="4">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Border Width="32"
-                                            Height="32"
-                                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                                            BorderThickness="1"
-                                            Margin="0,0,8,0">
-                                        <Image Stretch="Uniform"
-                                               RenderOptions.BitmapScalingMode="HighQuality"
-                                               Margin="2"
-                                               Source="{Binding Icon}"/>
-                                    </Border>
-                                    <StackPanel Grid.Column="1"
-                                                VerticalAlignment="Center">
-                                        <TextBlock Text="{Binding Name}"
-                                                   FontWeight="SemiBold"
-                                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                                        <TextBlock Text="{Binding Id}"
-                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                                   FontSize="12"/>
-                                    </StackPanel>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Border>
-            </Grid>
+            <!--  Search bar  -->
+            <Border
+                Grid.Row="0"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,1,1,0">
+                <ui:TextBox
+                    Margin="10,10,10,10"
+                    BorderThickness="0"
+                    Cursor=""
+                    Icon="Search24"
+                    PlaceholderText="Suche..."
+                    Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Border>
 
-            <!-- Separator -->
-            <GridSplitter Grid.Column="1"
-                          Grid.RowSpan="2"
-                          Width="10"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Stretch"
-                          Background="Transparent">
-                <GridSplitter.Template>
-                    <ControlTemplate TargetType="{x:Type GridSplitter}">
-                        <Grid Background="Transparent">
-                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
-                                <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
-                                <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
-                            </StackPanel>
-                        </Grid>
-                    </ControlTemplate>
-                </GridSplitter.Template>
-            </GridSplitter>
+            <!--  ListView for NPC list  -->
+            <Border
+                Grid.Row="1"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,0,1,1">
+                <ListView
+                    Margin="0,0,0,0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    IsSynchronizedWithCurrentItem="True"
+                    ItemsSource="{Binding ViewModel.CharactersView}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Width="32"
+                                    Height="32"
+                                    Margin="0,0,8,0"
+                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1">
+                                    <Image
+                                        Margin="2"
+                                        RenderOptions.BitmapScalingMode="HighQuality"
+                                        Source="{Binding Icon}"
+                                        Stretch="Uniform" />
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{Binding Name}" />
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding Id}" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+        </Grid>
 
-        <ScrollViewer Grid.Column="2" Grid.RowSpan="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-            <!-- Right Side: NPC Details with Tabs -->
+        <!--  Separator  -->
+        <GridSplitter
+            Grid.RowSpan="2"
+            Grid.Column="1"
+            Width="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Stretch"
+            Background="Transparent">
+            <GridSplitter.Template>
+                <ControlTemplate TargetType="{x:Type GridSplitter}">
+                    <Grid Background="Transparent">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </GridSplitter.Template>
+        </GridSplitter>
+
+        <ScrollViewer
+            Grid.RowSpan="2"
+            Grid.Column="2"
+            HorizontalScrollBarVisibility="Disabled"
+            VerticalScrollBarVisibility="Auto">
+            <!--  Right Side: NPC Details with Tabs  -->
             <Grid Margin="10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <!-- Title and Add Item Button -->
+                <!--  Title and Add Item Button  -->
                 <Grid Grid.Row="0" Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    
-                    <TextBlock 
-                        Text="NPC Details" 
-                        FontSize="20" 
-                        FontWeight="SemiBold" 
-                        VerticalAlignment="Center"/>
-                    
-                    <ui:Button 
-                        Grid.Column="1"
-                        ToolTip="Undo">
-                        <ui:SymbolIcon Symbol="ArrowUndo24"/>
+
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontSize="20"
+                        FontWeight="SemiBold"
+                        Text="NPC Details" />
+
+                    <ui:Button Grid.Column="1" ToolTip="Undo">
+                        <ui:SymbolIcon Symbol="ArrowUndo24" />
                     </ui:Button>
-                    
-                    <ui:Button 
+
+                    <ui:Button
                         Grid.Column="2"
                         Margin="10,0,10,0"
                         ToolTip="Redo">
-                        <ui:SymbolIcon Symbol="ArrowRedo24"/>
+                        <ui:SymbolIcon Symbol="ArrowRedo24" />
                     </ui:Button>
-                    
-                    <ui:Button 
-                        Grid.Column="3" 
-                        Content="Save" 
-                        Margin="0,0,10,0"/>
-                    
-                    <ui:Button 
-                        Grid.Column="4" 
-                        Content="Expert" 
-                        Icon="Settings24" 
+
+                    <ui:Button
+                        Grid.Column="3"
+                        Margin="0,0,10,0"
+                        Content="Save" />
+
+                    <ui:Button
+                        Grid.Column="4"
+                        Margin="0,0,10,0"
                         Appearance="Secondary"
-                        Margin="0,0,10,0"/>
-                    
-                    <ui:Button 
-                        Grid.Column="5" 
-                        Content="Add" 
-                        Icon="Add24" 
+                        Content="Expert"
+                        Icon="Settings24" />
+
+                    <ui:Button
+                        Grid.Column="5"
+                        Margin="0,0,10,0"
                         Background="#2F70AF"
-                        Margin="0,0,10,0"/>
-                    
-                    <ui:Button 
-                        Grid.Column="6" 
-                        Content="Delete" 
-                        Icon="Delete24" 
-                        Background="#FD292F"/>
+                        Content="Add"
+                        Icon="Add24" />
+
+                    <ui:Button
+                        Grid.Column="6"
+                        Background="#FD292F"
+                        Content="Delete"
+                        Icon="Delete24" />
                 </Grid>
 
-                <!-- Content Section - Removed nested ScrollViewer -->
+                <!--  Content Section - Removed nested ScrollViewer  -->
                 <StackPanel Grid.Row="1">
-                    <ContentControl ContentTemplate="{StaticResource GeneralSectionTemplate}"/>
-                    <Separator Margin="0,10,0,5"/>
-                    <ContentControl ContentTemplate="{StaticResource CustomSectionTemplate}"/>
-                    <Separator Margin="0,10,0,5"/>
-                    <ContentControl ContentTemplate="{StaticResource TabsSectionTemplate}"/>
-                    <Separator Margin="0,10,0,5"/>
-                    <ContentControl ContentTemplate="{StaticResource ShopSectionTemplate}"/>
-                    
-                    <!-- Neuer Shop-Bereich -->
+                    <ContentControl ContentTemplate="{StaticResource GeneralSectionTemplate}" />
+                    <Separator Margin="0,10,0,5" />
+                    <ContentControl ContentTemplate="{StaticResource CustomSectionTemplate}" />
+                    <Separator Margin="0,10,0,5" />
+                    <ContentControl ContentTemplate="{StaticResource TabsSectionTemplate}" />
+                    <Separator Margin="0,10,0,5" />
+                    <ContentControl ContentTemplate="{StaticResource ShopSectionTemplate}" />
+
+                    <!--  Neuer Shop-Bereich  -->
                     <StackPanel>
-                        <TextBlock Text="Shop Items" 
-                                Style="{StaticResource SectionHeaderStyle}"/>
-                        
+                        <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Shop Items" />
+
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <!-- Linke Seite: Verfügbare Items -->
+                            <!--  Linke Seite: Verfügbare Items  -->
                             <Grid Grid.Column="0">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
 
-                                <ui:TextBox Grid.Row="0"
-                                        PlaceholderText="Items suchen..."
-                                        Icon="Search24"
-                                        Margin="0,0,0,10"/>
+                                <ui:TextBox
+                                    Grid.Row="0"
+                                    Margin="0,0,0,10"
+                                    Icon="Search24"
+                                    PlaceholderText="Items suchen..." />
 
-                                <ListView Grid.Row="1"
-                                        AllowDrop="True"
-                                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                                        BorderThickness="1"
-                                        Height="300">
+                                <ListView
+                                    Grid.Row="1"
+                                    Height="300"
+                                    AllowDrop="True"
+                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid Margin="4">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
                                                 </Grid.ColumnDefinitions>
-                                                <Border Width="32"
-                                                        Height="32"
-                                                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                                                        BorderThickness="1"
-                                                        Margin="0,0,8,0">
-                                                    <Image Source="{Binding Icon}"
-                                                           Stretch="Uniform"
-                                                           RenderOptions.BitmapScalingMode="HighQuality"
-                                                           Margin="2"/>
+                                                <Border
+                                                    Width="32"
+                                                    Height="32"
+                                                    Margin="0,0,8,0"
+                                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                                    BorderThickness="1">
+                                                    <Image
+                                                        Margin="2"
+                                                        RenderOptions.BitmapScalingMode="HighQuality"
+                                                        Source="{Binding Icon}"
+                                                        Stretch="Uniform" />
                                                 </Border>
                                                 <StackPanel Grid.Column="1">
-                                                    <TextBlock Text="{Binding Name}"
-                                                             FontWeight="SemiBold"/>
-                                                    <TextBlock Text="{Binding ItemId}"
-                                                             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                                             FontSize="12"/>
+                                                    <TextBlock FontWeight="SemiBold" Text="{Binding Name}" />
+                                                    <TextBlock
+                                                        FontSize="12"
+                                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                        Text="{Binding ItemId}" />
                                                 </StackPanel>
                                             </Grid>
                                         </DataTemplate>
@@ -892,87 +950,98 @@
                                 </ListView>
                             </Grid>
 
-                            <!-- Mittlerer Bereich: Pfeile -->
-                            <StackPanel Grid.Column="1"
-                                      Margin="10,0"
-                                      VerticalAlignment="Center">
+                            <!--  Mittlerer Bereich: Pfeile  -->
+                            <StackPanel
+                                Grid.Column="1"
+                                Margin="10,0"
+                                VerticalAlignment="Center">
                                 <ui:Button Margin="0,5">
-                                    <ui:SymbolIcon Symbol="ArrowRight24"/>
+                                    <ui:SymbolIcon Symbol="ArrowRight24" />
                                 </ui:Button>
                                 <ui:Button Margin="0,5">
-                                    <ui:SymbolIcon Symbol="ArrowLeft24"/>
+                                    <ui:SymbolIcon Symbol="ArrowLeft24" />
                                 </ui:Button>
                             </StackPanel>
 
-                            <!-- Rechte Seite: Shop Items -->
+                            <!--  Rechte Seite: Shop Items  -->
                             <Grid Grid.Column="2">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
 
-                                <TextBlock Text="Items im Shop"
-                                         FontWeight="SemiBold"
-                                         Margin="0,0,0,10"/>
+                                <TextBlock
+                                    Margin="0,0,0,10"
+                                    FontWeight="SemiBold"
+                                    Text="Items im Shop" />
 
-                                <!-- Tab Buttons -->
-                                <StackPanel Grid.Row="1" 
-                                          Orientation="Horizontal" 
-                                          Margin="0,0,0,10">
-                                    <ui:Button Content="Tab 1" 
-                                              Width="60" 
-                                              Margin="0,0,5,0"
-                                              Appearance="Primary"/>
-                                    <ui:Button Content="Tab 2" 
-                                              Width="60" 
-                                              Margin="0,0,5,0"
-                                              Appearance="Secondary"/>
-                                    <ui:Button Content="Tab 3" 
-                                              Width="60" 
-                                              Margin="0,0,5,0"
-                                              Appearance="Secondary"/>
-                                    <ui:Button Content="Tab 4" 
-                                              Width="60" 
-                                              Appearance="Secondary"/>
+                                <!--  Tab Buttons  -->
+                                <StackPanel
+                                    Grid.Row="1"
+                                    Margin="0,0,0,10"
+                                    Orientation="Horizontal">
+                                    <ui:Button
+                                        Width="60"
+                                        Margin="0,0,5,0"
+                                        Appearance="Primary"
+                                        Content="Tab 1" />
+                                    <ui:Button
+                                        Width="60"
+                                        Margin="0,0,5,0"
+                                        Appearance="Secondary"
+                                        Content="Tab 2" />
+                                    <ui:Button
+                                        Width="60"
+                                        Margin="0,0,5,0"
+                                        Appearance="Secondary"
+                                        Content="Tab 3" />
+                                    <ui:Button
+                                        Width="60"
+                                        Appearance="Secondary"
+                                        Content="Tab 4" />
                                 </StackPanel>
 
-                                <ListView Grid.Row="2"
-                                        AllowDrop="True"
-                                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                                        BorderThickness="1"
-                                        Height="300">
+                                <ListView
+                                    Grid.Row="2"
+                                    Height="300"
+                                    AllowDrop="True"
+                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1">
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
                                             <Grid Margin="4">
                                                 <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto"/>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="Auto"/>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
-                                                <Border Width="32"
-                                                        Height="32"
-                                                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                                                        BorderThickness="1"
-                                                        Margin="0,0,8,0">
-                                                    <Image Source="{Binding Icon}"
-                                                           Stretch="Uniform"
-                                                           RenderOptions.BitmapScalingMode="HighQuality"
-                                                           Margin="2"/>
+                                                <Border
+                                                    Width="32"
+                                                    Height="32"
+                                                    Margin="0,0,8,0"
+                                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                                    BorderThickness="1">
+                                                    <Image
+                                                        Margin="2"
+                                                        RenderOptions.BitmapScalingMode="HighQuality"
+                                                        Source="{Binding Icon}"
+                                                        Stretch="Uniform" />
                                                 </Border>
                                                 <StackPanel Grid.Column="1">
-                                                    <TextBlock Text="{Binding Name}"
-                                                             FontWeight="SemiBold"/>
-                                                    <TextBlock Text="{Binding ItemId}"
-                                                             Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                                             FontSize="12"/>
+                                                    <TextBlock FontWeight="SemiBold" Text="{Binding Name}" />
+                                                    <TextBlock
+                                                        FontSize="12"
+                                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                        Text="{Binding ItemId}" />
                                                 </StackPanel>
-                                                <ui:Button Grid.Column="2"
-                                                         Appearance="Danger"
-                                                         Icon="Delete24"
-                                                         ToolTip="Entfernen"/>
+                                                <ui:Button
+                                                    Grid.Column="2"
+                                                    Appearance="Danger"
+                                                    Icon="Delete24"
+                                                    ToolTip="Entfernen" />
                                             </Grid>
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
@@ -980,90 +1049,100 @@
                             </Grid>
                         </Grid>
 
-                        <!-- Übersichtsliste -->
-                        <TextBlock Text="Shop Übersicht"
-                                 Style="{StaticResource SectionHeaderStyle}"
-                                 Margin="0,20,0,10"/>
-                        
+                        <!--  Übersichtsliste  -->
+                        <TextBlock
+                            Margin="0,20,0,10"
+                            Style="{StaticResource SectionHeaderStyle}"
+                            Text="Shop Übersicht" />
+
                         <Grid>
-                            <!-- Header -->
+                            <!--  Header  -->
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
 
-                            <Grid Grid.Row="0" 
-                                  Background="{DynamicResource ControlFillColorDefaultBrush}">
+                            <Grid Grid.Row="0" Background="{DynamicResource ControlFillColorDefaultBrush}">
                                 <Border Padding="10">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="50"/>
-                                            <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="100"/>
-                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="50" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="100" />
+                                            <ColumnDefinition Width="100" />
                                         </Grid.ColumnDefinitions>
-                                        
-                                        <TextBlock Text="Icon" 
-                                                Grid.Column="0" 
-                                                FontWeight="SemiBold"/>
-                                        <TextBlock Text="Item Name" 
-                                                Grid.Column="1" 
-                                                FontWeight="SemiBold"/>
-                                        <TextBlock Text="Menge" 
-                                                Grid.Column="2" 
-                                                FontWeight="SemiBold"/>
-                                        <TextBlock Text="Preis" 
-                                                Grid.Column="3" 
-                                                FontWeight="SemiBold"/>
+
+                                        <TextBlock
+                                            Grid.Column="0"
+                                            FontWeight="SemiBold"
+                                            Text="Icon" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            FontWeight="SemiBold"
+                                            Text="Item Name" />
+                                        <TextBlock
+                                            Grid.Column="2"
+                                            FontWeight="SemiBold"
+                                            Text="Menge" />
+                                        <TextBlock
+                                            Grid.Column="3"
+                                            FontWeight="SemiBold"
+                                            Text="Preis" />
                                     </Grid>
                                 </Border>
                             </Grid>
 
-                            <!-- Liste -->
-                            <ListView Grid.Row="1"
-                                     Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                                     BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                                     BorderThickness="1"
-                                     Margin="0,0,0,20">
+                            <!--  Liste  -->
+                            <ListView
+                                Grid.Row="1"
+                                Margin="0,0,0,20"
+                                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                BorderThickness="1">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Margin="4">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="50"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="100"/>
-                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="50" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="100" />
+                                                <ColumnDefinition Width="100" />
                                             </Grid.ColumnDefinitions>
 
-                                            <Border Grid.Column="0"
-                                                    Width="32"
-                                                    Height="32"
-                                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                                                    BorderThickness="1">
-                                                <Image Source="{Binding Icon}"
-                                                       Stretch="Uniform"
-                                                       RenderOptions.BitmapScalingMode="HighQuality"
-                                                       Margin="2"/>
+                                            <Border
+                                                Grid.Column="0"
+                                                Width="32"
+                                                Height="32"
+                                                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                                BorderThickness="1">
+                                                <Image
+                                                    Margin="2"
+                                                    RenderOptions.BitmapScalingMode="HighQuality"
+                                                    Source="{Binding Icon}"
+                                                    Stretch="Uniform" />
                                             </Border>
 
-                                            <TextBlock Grid.Column="1"
-                                                     Text="{Binding Name}"
-                                                     VerticalAlignment="Center"/>
+                                            <TextBlock
+                                                Grid.Column="1"
+                                                VerticalAlignment="Center"
+                                                Text="{Binding Name}" />
 
-                                            <ui:NumberBox Grid.Column="2"
-                                                       Value="{Binding Amount}"
-                                                       Minimum="1"
-                                                       Maximum="9999"
-                                                       Width="80"
-                                                       HorizontalAlignment="Left"/>
+                                            <ui:NumberBox
+                                                Grid.Column="2"
+                                                Width="80"
+                                                HorizontalAlignment="Left"
+                                                Maximum="9999"
+                                                Minimum="1"
+                                                Value="{Binding Amount}" />
 
-                                            <ui:NumberBox Grid.Column="3"
-                                                       Value="{Binding Price}"
-                                                       Minimum="0"
-                                                       Maximum="999999999"
-                                                       Width="80"
-                                                       HorizontalAlignment="Left"/>
+                                            <ui:NumberBox
+                                                Grid.Column="3"
+                                                Width="80"
+                                                HorizontalAlignment="Left"
+                                                Maximum="999999999"
+                                                Minimum="0"
+                                                Value="{Binding Price}" />
                                         </Grid>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>

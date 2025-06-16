@@ -7,7 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="CouplePage"
-    d:DataContext="{d:DesignInstance local:CouplePage, IsDesignTimeCreatable=False}"
+    d:DataContext="{d:DesignInstance local:CouplePage,
+                                     IsDesignTimeCreatable=False}"
     d:DesignHeight="768"
     d:DesignWidth="1024"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
@@ -17,37 +18,37 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <!-- Common Styles -->
+        <!--  Common Styles  -->
         <Style x:Key="InfoIconStyle" TargetType="ui:SymbolIcon">
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="16"/>
-            <Setter Property="Margin" Value="5,0,0,0"/>
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="5,0,0,0" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
         </Style>
 
         <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="24"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Margin" Value="0,15,0,15"/>
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="0,15,0,15" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
         </Style>
 
-        <!-- ListViewItem Style -->
+        <!--  ListViewItem Style  -->
         <Style x:Key="CoupleListViewItemStyle" TargetType="ListViewItem">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="Padding" Value="10,8"/>
-            <Setter Property="Margin" Value="0,1"/>
-            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="10,8" />
+            <Setter Property="Margin" Value="0,1" />
+            <Setter Property="BorderThickness" Value="0" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
+                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
                 </Trigger>
                 <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -60,45 +61,47 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Left Side - Search and List -->
+        <!--  Left Side - Search and List  -->
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!-- Search Box -->
-            <Border Grid.Row="0"
-                    BorderThickness="1,1,1,0"
-                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    Margin="0,0,10,0">
-                <ui:TextBox 
-                            PlaceholderText="Suche..."
-                            Icon="Search24"
-                            BorderThickness="0"
-                            Margin="10,10,10,10"
-                            Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
+            <!--  Search Box  -->
+            <Border
+                Grid.Row="0"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,1,1,0">
+                <ui:TextBox
+                    Margin="10,10,10,10"
+                    BorderThickness="0"
+                    Icon="Search24"
+                    PlaceholderText="Suche..."
+                    Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
                     <ui:TextBox.Resources>
                         <Style TargetType="ui:SymbolIcon">
-                            <Setter Property="FontSize" Value="13"/>
+                            <Setter Property="FontSize" Value="13" />
                         </Style>
                     </ui:TextBox.Resources>
                 </ui:TextBox>
             </Border>
 
-            <!-- Items List -->
-            <Border Grid.Row="1"
-                    BorderThickness="1,0,1,1"
-                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    Margin="0,0,10,0">
+            <!--  Items List  -->
+            <Border
+                Grid.Row="1"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,0,1,1">
                 <TabControl Background="Transparent" BorderThickness="0">
                     <TabItem Header="Allgemein">
-                        <ListView 
+                        <ListView
                             x:Name="LevelListView"
-                            BorderThickness="0"
                             Background="Transparent"
+                            BorderThickness="0"
                             ItemsSource="{Binding ViewModel.LevelRequirements}"
                             SelectedIndex="{Binding ViewModel.SelectedLevel, Mode=TwoWay}"
                             SelectionChanged="LevelListView_SelectionChanged">
@@ -114,15 +117,15 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                             <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem" BasedOn="{StaticResource CoupleListViewItemStyle}" />
+                                <Style BasedOn="{StaticResource CoupleListViewItemStyle}" TargetType="ListViewItem" />
                             </ListView.ItemContainerStyle>
                         </ListView>
                     </TabItem>
                     <TabItem Header="Items">
-                        <ListView 
+                        <ListView
                             x:Name="ItemsListView"
-                            BorderThickness="0"
                             Background="Transparent"
+                            BorderThickness="0"
                             ItemsSource="{Binding ViewModel.FilteredItems}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
@@ -131,17 +134,17 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding ItemName}" Grid.Column="0" />
-                                        <StackPanel Orientation="Horizontal" Grid.Column="1">
-                                            <TextBlock Text="{Binding GenderText}" Margin="10,0" />
-                                            <TextBlock Text="{Binding Probability}" Foreground="{DynamicResource AccentButtonBackground}" />
-                                            <TextBlock Text="%" Foreground="{DynamicResource AccentButtonBackground}" />
+                                        <TextBlock Grid.Column="0" Text="{Binding ItemName}" />
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                            <TextBlock Margin="10,0" Text="{Binding GenderText}" />
+                                            <TextBlock Foreground="{DynamicResource AccentButtonBackground}" Text="{Binding Probability}" />
+                                            <TextBlock Foreground="{DynamicResource AccentButtonBackground}" Text="%" />
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                             <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem" BasedOn="{StaticResource CoupleListViewItemStyle}" />
+                                <Style BasedOn="{StaticResource CoupleListViewItemStyle}" TargetType="ListViewItem" />
                             </ListView.ItemContainerStyle>
                         </ListView>
                     </TabItem>
@@ -149,26 +152,39 @@
             </Border>
         </Grid>
 
-        <!-- Separator -->
-        <GridSplitter Grid.Column="1"
-                      Width="10"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Stretch"
-                      Background="Transparent">
+        <!--  Separator  -->
+        <GridSplitter
+            Grid.Column="1"
+            Width="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Stretch"
+            Background="Transparent">
             <GridSplitter.Template>
                 <ControlTemplate TargetType="{x:Type GridSplitter}">
                     <Grid Background="Transparent">
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
-                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
-                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>
             </GridSplitter.Template>
         </GridSplitter>
 
-        <!-- Right Side - Level Information and Skills -->
+        <!--  Right Side - Level Information and Skills  -->
         <Grid Grid.Column="2" Margin="15">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -177,16 +193,19 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!-- Level Information -->
-            <ui:TextBlock 
-                Grid.Row="0" 
-                FontTypography="Title"
-                FontSize="24"
+            <!--  Level Information  -->
+            <ui:TextBlock
+                Grid.Row="0"
                 Margin="0,0,0,15"
+                FontSize="24"
+                FontTypography="Title"
                 Text="Level Information" />
 
-            <!-- Level Information Chart -->
-            <ui:Card Grid.Row="1" Padding="15" Margin="0,0,0,15">
+            <!--  Level Information Chart  -->
+            <ui:Card
+                Grid.Row="1"
+                Margin="0,0,0,15"
+                Padding="15">
                 <StackPanel>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -200,105 +219,155 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Level:" Margin="0,0,10,5" FontWeight="SemiBold" />
-                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding ViewModel.SelectedLevel}" />
-                        
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Benötigte EP:" Margin="0,0,10,5" FontWeight="SemiBold" />
-                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ViewModel.LevelRequirements[ViewModel.SelectedLevel]}" />
-                        
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Power Level:" Margin="0,0,10,5" FontWeight="SemiBold" />
-                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding ViewModel.CurrentPowerLevel}" />
-                        
-                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Bless Level:" Margin="0,0,10,5" FontWeight="SemiBold" />
-                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding ViewModel.CurrentBlessLevel}" />
-                        
-                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Miracle Level:" Margin="0,0,10,5" FontWeight="SemiBold" />
-                        <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding ViewModel.CurrentMiracleLevel}" />
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,10,5"
+                            FontWeight="SemiBold"
+                            Text="Level:" />
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Text="{Binding ViewModel.SelectedLevel}" />
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,10,5"
+                            FontWeight="SemiBold"
+                            Text="Benötigte EP:" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="{Binding ViewModel.LevelRequirements[ViewModel.SelectedLevel]}" />
+
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="0,0,10,5"
+                            FontWeight="SemiBold"
+                            Text="Power Level:" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Text="{Binding ViewModel.CurrentPowerLevel}" />
+
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="0,0,10,5"
+                            FontWeight="SemiBold"
+                            Text="Bless Level:" />
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Text="{Binding ViewModel.CurrentBlessLevel}" />
+
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Margin="0,0,10,5"
+                            FontWeight="SemiBold"
+                            Text="Miracle Level:" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Text="{Binding ViewModel.CurrentMiracleLevel}" />
                     </Grid>
-                    
-                    <TextBlock Text="Erfahrungspunkte-Chart" HorizontalAlignment="Center" Margin="0,15,0,5" />
-                    <Border Height="150" Background="{DynamicResource ControlFillColorSecondaryBrush}" CornerRadius="4">
-                        <!-- Hier könnte später ein Chart implementiert werden -->
-                        <TextBlock Text="Visualisierung der Erfahrungspunkte über Level" 
-                                   HorizontalAlignment="Center" 
-                                   VerticalAlignment="Center"
-                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+
+                    <TextBlock
+                        Margin="0,15,0,5"
+                        HorizontalAlignment="Center"
+                        Text="Erfahrungspunkte-Chart" />
+                    <Border
+                        Height="150"
+                        Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                        CornerRadius="4">
+                        <!--  Hier könnte später ein Chart implementiert werden  -->
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                            Text="Visualisierung der Erfahrungspunkte über Level" />
                     </Border>
                 </StackPanel>
             </ui:Card>
 
-            <!-- Skill Unlocks -->
-            <ui:TextBlock 
-                Grid.Row="2" 
-                FontTypography="Title"
-                FontSize="18"
+            <!--  Skill Unlocks  -->
+            <ui:TextBlock
+                Grid.Row="2"
                 Margin="0,0,0,10"
+                FontSize="18"
+                FontTypography="Title"
                 Text="Skill Unlocks" />
 
-            <!-- Skill Tabs -->
-            <ui:Card Grid.Row="3" Padding="0" Margin="0,0,0,0">
+            <!--  Skill Tabs  -->
+            <ui:Card
+                Grid.Row="3"
+                Margin="0,0,0,0"
+                Padding="0">
                 <TabControl Background="Transparent" BorderThickness="0">
                     <TabItem Header="Couple Level">
-                        <DataGrid 
+                        <DataGrid
+                            Margin="10"
                             AutoGenerateColumns="False"
-                            IsReadOnly="True"
                             Background="Transparent"
                             BorderThickness="0"
-                            Margin="10"
                             GridLinesVisibility="Horizontal"
-                            HorizontalGridLinesBrush="{DynamicResource ControlElevationBorderBrush}">
+                            HorizontalGridLinesBrush="{DynamicResource ControlElevationBorderBrush}"
+                            IsReadOnly="True">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Level" Width="Auto" />
-                                <DataGridTextColumn Header="Geschlecht" Width="Auto" />
-                                <DataGridTextColumn Header="Dauer (Std.)" Width="Auto" />
-                                <DataGridTextColumn Header="Menge" Width="Auto" />
-                                <DataGridTextColumn Header="Wahrscheinlichkeit" Width="*" />
+                                <DataGridTextColumn Width="Auto" Header="Level" />
+                                <DataGridTextColumn Width="Auto" Header="Geschlecht" />
+                                <DataGridTextColumn Width="Auto" Header="Dauer (Std.)" />
+                                <DataGridTextColumn Width="Auto" Header="Menge" />
+                                <DataGridTextColumn Width="*" Header="Wahrscheinlichkeit" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem>
                     <TabItem Header="Power Level">
-                        <DataGrid 
+                        <DataGrid
+                            Margin="10"
                             AutoGenerateColumns="False"
-                            IsReadOnly="True"
                             Background="Transparent"
                             BorderThickness="0"
-                            Margin="10"
                             GridLinesVisibility="Horizontal"
-                            HorizontalGridLinesBrush="{DynamicResource ControlElevationBorderBrush}">
+                            HorizontalGridLinesBrush="{DynamicResource ControlElevationBorderBrush}"
+                            IsReadOnly="True">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Level" Width="Auto" />
-                                <DataGridTextColumn Header="Beschreibung" Width="*" />
+                                <DataGridTextColumn Width="Auto" Header="Level" />
+                                <DataGridTextColumn Width="*" Header="Beschreibung" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem>
                     <TabItem Header="Bless Level">
-                        <DataGrid 
+                        <DataGrid
+                            Margin="10"
                             AutoGenerateColumns="False"
-                            IsReadOnly="True"
                             Background="Transparent"
                             BorderThickness="0"
-                            Margin="10"
                             GridLinesVisibility="Horizontal"
-                            HorizontalGridLinesBrush="{DynamicResource ControlElevationBorderBrush}">
+                            HorizontalGridLinesBrush="{DynamicResource ControlElevationBorderBrush}"
+                            IsReadOnly="True">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Level" Width="Auto" />
-                                <DataGridTextColumn Header="Beschreibung" Width="*" />
+                                <DataGridTextColumn Width="Auto" Header="Level" />
+                                <DataGridTextColumn Width="*" Header="Beschreibung" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem>
                     <TabItem Header="Miracle Level">
-                        <DataGrid 
+                        <DataGrid
+                            Margin="10"
                             AutoGenerateColumns="False"
-                            IsReadOnly="True"
                             Background="Transparent"
                             BorderThickness="0"
-                            Margin="10"
                             GridLinesVisibility="Horizontal"
-                            HorizontalGridLinesBrush="{DynamicResource ControlElevationBorderBrush}">
+                            HorizontalGridLinesBrush="{DynamicResource ControlElevationBorderBrush}"
+                            IsReadOnly="True">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Level" Width="Auto" />
-                                <DataGridTextColumn Header="Beschreibung" Width="*" />
+                                <DataGridTextColumn Width="Auto" Header="Level" />
+                                <DataGridTextColumn Width="*" Header="Beschreibung" />
                             </DataGrid.Columns>
                         </DataGrid>
                     </TabItem>
