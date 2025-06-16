@@ -1,15 +1,19 @@
-﻿using Scan;
+﻿using eTools_Ultimate.Exceptions;
+using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models;
+using Scan;
+using SixLabors.ImageSharp.Metadata.Profiles.Exif;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using eTools_Ultimate.Models;
-using eTools_Ultimate.Helpers;
-using eTools_Ultimate.Exceptions;
+using System.Windows.Controls;
+using System.Xml.Linq;
 
 namespace eTools_Ultimate.Services
 {
@@ -511,6 +515,202 @@ namespace eTools_Ultimate.Services
                 }
                 writer.Write("\r\n");
             }
+        }
+
+        public Mover CreateMover()
+        {
+            int dwId = -1;
+            string szName = MoversService.GetNextStringIdentifier();
+            StringsService.Instance.AddString(szName, "");
+            if (!DefinesService.Instance.Defines.TryGetValue("AII_NONE", out int dwAi))
+                dwAi = -1;
+            int dwStr = -1;
+            int dwSta = -1;
+            int dwDex = -1;
+            int dwInt = -1;
+            int dwHR = -1;
+            int dwER = -1;
+            int dwRace = -1;
+            if (!DefinesService.Instance.Defines.TryGetValue("BELLI_PEACEFUL", out int dwBelligerence))
+                dwBelligerence = -1;
+            int dwGender = -1;
+            int dwLevel = -1;
+            int dwFlightLevel = -1;
+            int dwSize = -1;
+            if (!DefinesService.Instance.Defines.TryGetValue("RANK_CITIZEN", out int dwClass))
+                dwClass = -1;
+            int bIfParts = 0;
+            int nChaotic = -1;
+            int dwUseable = -1;
+            int dwActionRadius = -1;
+            int dwAtkMin = -1;
+            int dwAtkMax = -1;
+            int dwAtk1 = -1;
+            int dwAtk2 = -1;
+            int dwAtk3 = -1;
+            int dwAtk4 = -1;
+            int fFrame = -1;
+            int dwOrthograde = -1;
+            int dwThrustRate = -1;
+            int dwChestRate = -1;
+            int dwHeadRate = -1;
+            int dwArmRate = -1;
+            int dwLegRate = -1;
+            int dwAttackSpeed = -1;
+            int dwReAttackDelay = -1;
+            int dwAddHp = -1;
+            int dwAddMp = -1;
+            int dwNaturalArmor = -1;
+            int nAbrasion = -1;
+            int nHardness = -1;
+            int dwAdjAtkDelay = -1;
+            short eElementType = 0;
+            short wElementAtk = 0;
+            int dwHideLevel = 0;
+            float fSpeed = 0.1f;
+            int dwShelter = -1;
+            int dwFlying = 0;
+            int dwJumpIng = -1;
+            int dwAirJump = -1;
+            int bTaming = -1;
+            int dwResisMgic = 0;
+            int nResistElecricity = 0;
+            int nResistFire = 0;
+            int nResistWind = 0;
+            int nResistWater = 0;
+            int nResistEarth = 0;
+            int dwCash = -1;
+            int dwSourceMaterial = -1;
+            int dwMaterialAmount = -1;
+            int dwCohesion = -1;
+            int dwHoldingTime = -1;
+            int dwCorrectionValue = -1;
+            int nExpValue = 0;
+            int nFxpValue = 0;
+            int nBodyState = -1;
+            int dwAddAbility = -1;
+            int bKillable = 0;
+            int dwVirtItem1 = -1;
+            int dwVirtItem2 = -1;
+            int dwVirtItem3 = -1;
+            int bVirtType1 = -1;
+            int bVirtType2 = -1;
+            int bVirtType3 = -1;
+            int dwSndAtk1 = -1;
+            int dwSndAtk2 = -1;
+            int dwSndDie1 = -1;
+            int dwSndDie2 = -1;
+            int dwSndDmg1 = -1;
+            int dwSndDmg2 = -1;
+            int dwSndDmg3 = -1;
+            int dwSndIdle1 = -1;
+            int dwSndIdle2 = -1;
+            string szComment = MoversService.GetNextStringIdentifier();
+            StringsService.Instance.AddString(szComment, "");
+            if (!DefinesService.Instance.Defines.TryGetValue("AREA_NORMAL", out int dwAreaColor))
+                dwAreaColor = -1;
+            string szNpcMark = "=";
+            int dwMadrigalGiftPoint = 0;
+
+            MoverProp moverProp = new(
+                        dwId: dwId,
+                        szName: szName,
+                        dwAi: dwAi,
+                        dwStr: dwStr,
+                        dwSta: dwSta,
+                        dwDex: dwDex,
+                        dwInt: dwInt,
+                        dwHR: dwHR,
+                        dwER: dwER,
+                        dwRace: dwRace,
+                        dwBelligerence: dwBelligerence,
+                        dwGender: dwGender,
+                        dwLevel: dwLevel,
+                        dwFlightLevel: dwFlightLevel,
+                        dwSize: dwSize,
+                        dwClass: dwClass,
+                        bIfParts: bIfParts,
+                        nChaotic: nChaotic,
+                        dwUseable: dwUseable,
+                        dwActionRadius: dwActionRadius,
+                        dwAtkMin: dwAtkMin,
+                        dwAtkMax: dwAtkMax,
+                        dwAtk1: dwAtk1,
+                        dwAtk2: dwAtk2,
+                        dwAtk3: dwAtk3,
+                        dwAtk4: dwAtk4,
+                        fFrame: fFrame,
+                        dwOrthograde: dwOrthograde,
+                        dwThrustRate: dwThrustRate,
+                        dwChestRate: dwChestRate,
+                        dwHeadRate: dwHeadRate,
+                        dwArmRate: dwArmRate,
+                        dwLegRate: dwLegRate,
+                        dwAttackSpeed: dwAttackSpeed,
+                        dwReAttackDelay: dwReAttackDelay,
+                        dwAddHp: dwAddHp,
+                        dwAddMp: dwAddMp,
+                        dwNaturalArmor: dwNaturalArmor,
+                        nAbrasion: nAbrasion,
+                        nHardness: nHardness,
+                        dwAdjAtkDelay: dwAdjAtkDelay,
+                        eElementType: eElementType,
+                        wElementAtk: wElementAtk,
+                        dwHideLevel: dwHideLevel,
+                        fSpeed: fSpeed,
+                        dwShelter: dwShelter,
+                        dwFlying: dwFlying,
+                        dwJumpIng: dwJumpIng,
+                        dwAirJump: dwAirJump,
+                        bTaming: bTaming,
+                        dwResisMgic: dwResisMgic,
+                        nResistElecricity: nResistElecricity,
+                        nResistFire: nResistFire,
+                        nResistWind: nResistWind,
+                        nResistWater: nResistWater,
+                        nResistEarth: nResistEarth,
+                        dwCash: dwCash,
+                        dwSourceMaterial: dwSourceMaterial,
+                        dwMaterialAmount: dwMaterialAmount,
+                        dwCohesion: dwCohesion,
+                        dwHoldingTime: dwHoldingTime,
+                        dwCorrectionValue: dwCorrectionValue,
+                        nExpValue: nExpValue,
+                        nFxpValue: nFxpValue,
+                        nBodyState: nBodyState,
+                        dwAddAbility: dwAddAbility,
+                        bKillable: bKillable,
+                        dwVirtItem1: dwVirtItem1,
+                        dwVirtItem2: dwVirtItem2,
+                        dwVirtItem3: dwVirtItem3,
+                        bVirtType1: bVirtType1,
+                        bVirtType2: bVirtType2,
+                        bVirtType3: bVirtType3,
+                        dwSndAtk1: dwSndAtk1,
+                        dwSndAtk2: dwSndAtk2,
+                        dwSndDie1: dwSndDie1,
+                        dwSndDie2: dwSndDie2,
+                        dwSndDmg1: dwSndDmg1,
+                        dwSndDmg2: dwSndDmg2,
+                        dwSndDmg3: dwSndDmg3,
+                        dwSndIdle1: dwSndIdle1,
+                        dwSndIdle2: dwSndIdle2,
+                        szComment: szComment,
+                        dwAreaColor: dwAreaColor,
+                        szNpcMark: szNpcMark,
+                        dwMadrigalGiftPoint: dwMadrigalGiftPoint
+                        );
+            Mover mover = new(moverProp, null);
+
+            Movers.Add(mover);
+
+            return mover;
+        }
+
+        public void RemoveMover(Mover mover)
+        {
+            mover.Dispose();
+            Movers.Remove(mover);
         }
     }
 }

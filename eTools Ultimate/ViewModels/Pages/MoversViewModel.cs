@@ -17,6 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.TextFormatting;
 using Wpf.Ui;
 using Wpf.Ui.Abstractions.Controls;
+using Wpf.Ui.Controls;
+using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
@@ -534,6 +536,47 @@ namespace eTools_Ultimate.ViewModels.Pages
             Sound? newSound = SoundsService.Instance.Sounds.FirstOrDefault(x => x.FilePath.Equals(filePath, StringComparison.OrdinalIgnoreCase));
             if (newSound is null) return;
             mover.Prop.DwSndIdle1 = newSound.Prop.Id;
+        }
+
+        [RelayCommand]
+        private async Task AddMover()
+        {
+            ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
+                new SimpleContentDialogCreateOptions()
+                {
+                    Title = "Add a new mover",
+                    Content = "Are you sure you want to add a new mover ?",
+                    PrimaryButtonText = "Add",
+                    CloseButtonText = "Cancel",
+                }
+            );
+            if(result == ContentDialogResult.Primary)
+            {
+                Mover newMover = MoversService.Instance.CreateMover();
+                MoversView.MoveCurrentTo(newMover);
+                MoversView.Refresh();
+            }
+        }
+
+        [RelayCommand]
+        private async Task RemoveMover()
+        {
+            if (MoversView.CurrentItem is not Mover mover) return;
+
+            ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
+                new SimpleContentDialogCreateOptions()
+                {
+                    Title = "Remove a mover",
+                    Content = $"Are you sure you want to remove the mover {mover.Identifier} ?",
+                    PrimaryButtonText = "Remove",
+                    CloseButtonText = "Cancel",
+                }
+            );
+            if (result == ContentDialogResult.Primary)
+            {
+                MoversService.Instance.RemoveMover(mover);
+                MoversView.Refresh();
+            }
         }
         #endregion
     }

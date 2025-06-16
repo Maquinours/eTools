@@ -1618,10 +1618,12 @@
                         x:Name="AddButton"
                         Margin="0,0,10,0"
                         Background="#2F70AF"
+                        Command="{Binding AddMoverCommand}"
                         Content="Add" />
                     <ui:Button
                         x:Name="DeleteButton"
                         Background="#FD292F"
+                        Command="{Binding RemoveMoverCommand}"
                         Content="Delete" />
                 </StackPanel>
 
