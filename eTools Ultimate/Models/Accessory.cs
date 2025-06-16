@@ -53,7 +53,7 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    public class Accessory : IDisposable
+    public sealed class Accessory : IDisposable
     {
         private int _dwItemId;
         private ObservableCollection<AccessoryAbilityOptionData> _abilityOptionData;
@@ -69,7 +69,7 @@ namespace eTools_Ultimate.Models
             set => this._abilityOptionData = value;
         }
 
-        public Item? Item => ItemsService.Instance.Items.Where(x => x.Id == this.DwItemId).FirstOrDefault();
+        public Item? Item => ItemsService.Instance.Items.FirstOrDefault(x => x.Id == this.DwItemId);
 
         public Accessory(int dwItemId, List<AccessoryAbilityOptionData> abilityOptionData)
         {

@@ -12,7 +12,7 @@ using System.Windows.Media;
 
 namespace eTools_Ultimate.Models
 {
-    public class Text : INotifyPropertyChanged, IDisposable
+    public sealed class Text : INotifyPropertyChanged, IDisposable
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -31,7 +31,7 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        private void ProjectStrings_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void ProjectStrings_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == NotifyCollectionChangedAction.Reset)
             {

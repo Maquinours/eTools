@@ -339,7 +339,7 @@ namespace eTools_Ultimate.Models
             if (EqualityComparer<T>.Default.Equals(field, value))
                 return false;
 
-            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new Exception($"Mover SetValue with not safe to assign directly property {propertyName}");
+            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new InvalidOperationException($"Mover SetValue with not safe to assign directly property {propertyName}");
 
             T old = field;
             field = value;
@@ -348,7 +348,7 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    public class Mover : INotifyPropertyChanged
+    public sealed class Mover : INotifyPropertyChanged, IDisposable
     {
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -500,6 +500,8 @@ namespace eTools_Ultimate.Models
         {
             Prop.PropertyChanged -= Prop_PropertyChanged;
             StringsService.Instance.Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
+
+            GC.SuppressFinalize(this);
         }
     }
 }

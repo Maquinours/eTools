@@ -34,7 +34,7 @@ namespace eTools_Ultimate.Models
             if (EqualityComparer<T>.Default.Equals(field, value))
                 return false;
 
-            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new Exception($"Mover SetValue with not safe to assign directly property {propertyName}");
+            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new InvalidOperationException($"Mover SetValue with not safe to assign directly property {propertyName}");
 
             T old = field;
             field = value;
@@ -48,7 +48,7 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    public class Sound : INotifyPropertyChanged, IDisposable
+    public sealed class Sound : INotifyPropertyChanged, IDisposable
     {
         private readonly SoundProp _prop;
 
