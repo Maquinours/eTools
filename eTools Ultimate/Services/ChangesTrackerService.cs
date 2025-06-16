@@ -20,6 +20,7 @@ namespace eTools_Ultimate.Services
     enum ItemType
     {
         String,
+        Mover,
         Motion
     }
     readonly struct Change(ItemType itemType, object item, string? propertyName, ChangeType changeType, object? oldValue, object? newValue, DateTime changedAt)
@@ -63,10 +64,83 @@ namespace eTools_Ultimate.Services
             //    ?? throw new InvalidOperationException("ChangesTracker init error : Strings deserialize is null");
 
             stringsService.Strings.CollectionChanged += OnStringsCollectionChanged;
+            MoversService.Instance.Movers.CollectionChanged += Movers_CollectionChanged;
             MotionsService.Instance.Motions.CollectionChanged += OnMotionsCollectionChanged;
+
+            foreach(Mover mover in MoversService.Instance.Movers)
+                mover.Prop.PropertyChanged += MoverProp_PropertyChanged; ;
 
             foreach (Motion motion in MotionsService.Instance.Motions)
                 motion.PropertyChanged += OnMotionPropertyChanged;
+        }
+
+        private void Movers_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs args)
+        {
+            switch (args.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    {
+                        if (args.OldItems is not null) throw new InvalidOperationException("ChangeTracker::Movers_CollectionChanged Exception : OldItems is not null in Add action");
+                        if (args.NewItems is null) throw new InvalidOperationException("ChangeTracker::Movers_CollectionChanged Exception : NewItems is null in Add action");
+                        if (args.NewItems.Count != 1) throw new InvalidOperationException("ChangeTracker::Movers_CollectionChanged Exception : NewItems count is not 1 in Add action");
+                        if (args.NewItems[0] is not Mover newItem) throw new InvalidOperationException("ChangeTracker::Movers_CollectionChanged Exception : NewItem is not Mover in Add action");
+
+                        newItem.Prop.PropertyChanged += MoverProp_PropertyChanged;
+
+                        if (this._shouldRegister)
+                        {
+                            Change change = new(itemType: ItemType.Mover, item: newItem, propertyName: null, changeType: ChangeType.Add, oldValue: null, newValue: newItem, DateTime.Now);
+                            this._pastChanges.Add(change);
+                        }
+                        break;
+                    }
+                case NotifyCollectionChangedAction.Remove:
+                    {
+                        if (args.OldItems is null) throw new InvalidOperationException("ChangeTracker::Movers_CollectionChanged Exception : OldItems is null in Remove action");
+                        if (args.NewItems is not null) throw new InvalidOperationException("ChangeTracker::Movers_CollectionChanged Exception : NewItems is not null in Remove action");
+                        if (args.OldItems.Count != 1) throw new InvalidOperationException("ChangeTracker::Movers_CollectionChanged Exception : OldItems count is not 1 in Remove action");
+                        if (args.OldItems[0] is not Mover oldItem) throw new InvalidOperationException("ChangeTracker::Movers_CollectionChanged Exception : OldItem is not Mover in Remove action");
+
+                        oldItem.Prop.PropertyChanged -= MoverProp_PropertyChanged;
+
+                        if (this._shouldRegister)
+                        {
+                            Change change = new(itemType: ItemType.Mover, item: oldItem, propertyName: null, changeType: ChangeType.Add, oldValue: oldItem, newValue: null, DateTime.Now);
+                            this._pastChanges.Add(change);
+                        }
+                        break;
+                    }
+            }
+        }
+
+        private void MoverProp_PropertyChanged(object? sender, PropertyChangedEventArgs args)
+        {
+            if (!this._shouldRegister) return;
+            if (args is not PropertyChangedExtendedEventArgs extendedArgs) throw new InvalidOperationException("ChangeTracker::OnMotionPropertyChanged Exception : args is not PropertyChangedEventArgs");
+            if (sender is null) throw new InvalidOperationException("ChangeTracker::OnMotionPropertyChanged Exception : sender is null");
+
+            DateTime nowDate = DateTime.Now;
+
+            object? oldValue = extendedArgs.OldValue;
+            object? newValue = extendedArgs.NewValue;
+
+            // We avoid creating a new change for every change. We merge all changes separated by less than one second.
+            if (this._pastChanges.Count > 0)
+            {
+                int lastChangeIndex = this._pastChanges.Count - 1;
+                Change lastChange = this._pastChanges[lastChangeIndex];
+                if (lastChange.Item == sender && lastChange.PropertyName == args.PropertyName)
+                {
+                    oldValue = lastChange.OldValue;
+                    this._pastChanges.RemoveAt(lastChangeIndex);
+                }
+            }
+            if (oldValue != newValue)
+            {
+                Change change = new(ItemType.Mover, sender, args.PropertyName, ChangeType.Modify, oldValue, newValue, nowDate);
+                this._pastChanges.Add(change);
+                this._futureChanges.RemoveAll(x => x.Item == sender);
+            }
         }
 
         private void OnStringsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs args)
