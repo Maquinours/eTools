@@ -41,6 +41,8 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private string[] _object3DMaterialTextures = [];
 
+        private string? _modelViewerError = null;
+
         #region File system watchers
         private FileSystemWatcher _modelsDirectoryWatcher = new()
         {
@@ -96,6 +98,22 @@ namespace eTools_Ultimate.ViewModels.Pages
                 }
             }
         }
+
+        public string ModelViewerError
+        {
+            get => _modelViewerError;
+            set
+            {
+                if (_modelViewerError != value)
+                {
+                    _modelViewerError = value;
+                    OnPropertyChanged(nameof(ModelViewerError));
+                    OnPropertyChanged(nameof(HasModelViewerError));
+                }
+            }
+        }
+
+        public bool HasModelViewerError => ModelViewerError is not null;
 
         public string[] ModelFilePossibilities
         {
@@ -277,13 +295,27 @@ namespace eTools_Ultimate.ViewModels.Pages
         private void LoadModel()
         {
             Auto3DRendering = false;
+            ModelViewerError = null;
             if (D3dHost is null) return;
             NativeMethods.DeleteModel(D3dHost._native); // Clear the previous model if any
             NativeMethods.DeleteReferenceModel(D3dHost._native); // Clear the reference model if any
             D3dHost.Render();
-            if (MoversView.CurrentItem is not Mover mover) return;
-            if (mover.Model is null) return; // TODO: Clear in this case
+            if (MoversView.CurrentItem is not Mover mover)
+            {
+                ModelViewerError = "No mover selected.";
+                return;
+            }
+            if (mover.Model is null)
+            {
+                ModelViewerError = "No model associated with the selected mover.";
+                return;
+            }
             if ((DefinesService.Instance.Defines.TryGetValue("MI_MALE", out int maleValue) && mover.Id == maleValue) || (DefinesService.Instance.Defines.TryGetValue("MI_FEMALE", out int femaleValue) && mover.Id == femaleValue)) return;
+            if(!File.Exists(mover.Model.Model3DFilePath))
+            {
+                ModelViewerError = $"Model file not found: {mover.Model.Model3DFilePath}";
+                return;
+            }
 
             //CompositionTarget.Rendering -= CompositionTarget_Rendering;
             NativeMethods.LoadModel(D3dHost._native, mover.Model.Model3DFilePath);
@@ -312,6 +344,8 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (D3dHost is null) return;
             if (MoversView.CurrentItem is not Mover mover) return;
             if(mover.Model is null) return;
+
+
 
             int textureEx = mover.Model.NTextureEx;
             NativeMethods.SetTextureEx(D3dHost._native, textureEx);

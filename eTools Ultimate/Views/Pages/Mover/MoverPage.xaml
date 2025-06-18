@@ -1192,7 +1192,7 @@
                     <TextBlock
                         MaxWidth="250"
                         Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                        Text="The 3D model could not be loaded or is not specified."
+                        Text="{Binding Path=ModelViewerError, Mode=OneWay}"
                         TextAlignment="Center"
                         TextWrapping="Wrap" />
                 </StackPanel>
@@ -1782,7 +1782,7 @@
                                         <ContentControl
                                             Content="{Binding}"
                                             ContentTemplate="{StaticResource ModelWarningTemplate}"
-                                            Visibility="{Binding IsModelAvailable, Converter={StaticResource BoolToVis}, ConverterParameter=Inverse}" />
+                                            Visibility="{Binding HasModelViewerError, Converter={StaticResource BoolToVis}}" />
                                         <ui:Button
                                             Margin="0,5,5,0"
                                             HorizontalAlignment="Right"
