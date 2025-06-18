@@ -59,9 +59,17 @@ namespace eTools_Ultimate.Helpers
 
         [DllImport("3DModelRenderer.dll")]
         public static extern void SetReferenceModel(IntPtr engine, string filename);
+
         [DllImport("3DModelRenderer.dll")]
         public static extern void SetReferenceTextureEx(IntPtr engine, int textureEx);
+
         [DllImport("3DModelRenderer.dll")]
         public static extern void SetReferenceScale(IntPtr engine, float scale);
+
+        [DllImport("3DModelRenderer.dll")]
+        public static extern void DeleteModel(IntPtr engine);
+
+        [DllImport("3DModelRenderer.dll")]
+        public static extern void DeleteReferenceModel(IntPtr engine);
     }
 }

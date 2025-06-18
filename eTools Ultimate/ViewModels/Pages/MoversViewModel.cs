@@ -276,13 +276,16 @@ namespace eTools_Ultimate.ViewModels.Pages
         #region 3D model viewer methods
         private void LoadModel()
         {
+            Auto3DRendering = false;
             if (D3dHost is null) return;
+            NativeMethods.DeleteModel(D3dHost._native); // Clear the previous model if any
+            NativeMethods.DeleteReferenceModel(D3dHost._native); // Clear the reference model if any
+            D3dHost.Render();
             if (MoversView.CurrentItem is not Mover mover) return;
             if (mover.Model is null) return; // TODO: Clear in this case
             if ((DefinesService.Instance.Defines.TryGetValue("MI_MALE", out int maleValue) && mover.Id == maleValue) || (DefinesService.Instance.Defines.TryGetValue("MI_FEMALE", out int femaleValue) && mover.Id == femaleValue)) return;
 
             //CompositionTarget.Rendering -= CompositionTarget_Rendering;
-            Auto3DRendering = false;
             NativeMethods.LoadModel(D3dHost._native, mover.Model.Model3DFilePath);
             // TODO: Add a reset method to handle ListView unselection.
 
