@@ -310,16 +310,57 @@ namespace eTools_Ultimate.ViewModels.Pages
                 ModelViewerError = "No model associated with the selected mover.";
                 return;
             }
-            if ((DefinesService.Instance.Defines.TryGetValue("MI_MALE", out int maleValue) && mover.Id == maleValue) || (DefinesService.Instance.Defines.TryGetValue("MI_FEMALE", out int femaleValue) && mover.Id == femaleValue)) return;
-            if(!File.Exists(mover.Model.Model3DFilePath))
-            {
-                ModelViewerError = $"Model file not found: {mover.Model.Model3DFilePath}";
-                return;
-            }
 
-            //CompositionTarget.Rendering -= CompositionTarget_Rendering;
-            NativeMethods.LoadModel(D3dHost._native, mover.Model.Model3DFilePath);
-            // TODO: Add a reset method to handle ListView unselection.
+
+            if (mover.Identifier == "MI_MALE" || mover.Identifier == "MI_FEMALE")
+            {
+                string[] parts = mover.Identifier switch
+                {
+                    "MI_MALE" => [
+                        "Part_maleHair06.o3d",
+                        "Part_maleHead01.o3d",
+                        "Part_maleHand.o3d",
+                        "Part_maleLower.o3d",
+                        "Part_maleUpper.o3d",
+                        "Part_maleFoot.o3d",
+                    ],
+                    "MI_FEMALE" => [
+                        "Part_femaleHair06.o3d",
+                        "Part_femaleHead01.o3d",
+                        "Part_femaleHand.o3d",
+                        "Part_femaleLower.o3d",
+                        "Part_femaleUpper.o3d",
+                        "Part_femaleFoot.o3d",
+                    ],
+                    _ => throw new InvalidOperationException($"MoverViewModel::LoadModel exception : mover model is loaded like player but is not player. Identifier => {mover.Identifier}")
+                };
+                string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+                string[] partsPath = [.. parts.Select(part => $"{modelsFolderPath}{part}")];
+
+                foreach (string partPath in partsPath)
+                {
+                    if (!File.Exists(partPath))
+                    {
+                        ModelViewerError = $"Part model file not found: {partPath}";
+                        return;
+                    }
+                }
+
+                foreach (string partPath in partsPath)
+                {
+                    NativeMethods.SetParts(D3dHost._native, partPath);
+                }
+            }
+            else 
+            {
+                if (!File.Exists(mover.Model.Model3DFilePath))
+                {
+                    ModelViewerError = $"Model file not found: {mover.Model.Model3DFilePath}";
+                    return;
+                }
+                //CompositionTarget.Rendering -= CompositionTarget_Rendering;
+                NativeMethods.LoadModel(D3dHost._native, mover.Model.Model3DFilePath);
+            }
 
             SetModelTexture();
             SetScale();
@@ -434,7 +475,8 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (MoversView.CurrentItem is not Mover mover) return;
             mover.PropertyChanged -= CurrentMover_PropertyChanged;
-            if(mover.Model is not null)
+            mover.Prop.PropertyChanged -= CurrentMoverProp_PropertyChanged;
+            if (mover.Model is not null)
                 mover.Model.PropertyChanged -= CurrentMoverModel_PropertyChanged;
         }
 
@@ -443,6 +485,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (MoversView.CurrentItem is Mover mover)
             {
                 mover.PropertyChanged += CurrentMover_PropertyChanged;
+                mover.Prop.PropertyChanged += CurrentMoverProp_PropertyChanged;
                 if (mover.Model is not null)
                     mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
             }
@@ -467,6 +510,33 @@ namespace eTools_Ultimate.ViewModels.Pages
                 OnPropertyChanged(nameof(ModelMotionFilePossibilities));
                 InitializeMotionsDirectoryWatcherPath();
                 LoadModel();
+            }
+        }
+
+        private void CurrentMoverProp_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (sender is not MoverProp moverProp) 
+                throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called with non MoverProp sender");
+            if(MoversView.CurrentItem is not Mover mover) 
+                throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called when MoversView currentItem is not a mover");
+            if (moverProp != mover.Prop)
+                throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called with non current mover prop sender.");
+
+            if (e.PropertyName == nameof(Mover.Prop.DwId))
+            {
+                if(e is not PropertyChangedExtendedEventArgs extendedArgs) 
+                    throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called with non PropertyChangedExtendedEventArgs.");
+                if(extendedArgs.OldValue is not int oldId)
+                    throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called with non int old DwId value.");
+                if (extendedArgs.NewValue is not int newId)
+                    throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called with non int new DwId value.");
+
+                string oldIdentifier = Script.NumberToString(oldId, DefinesService.Instance.ReversedMoverDefines);
+                string newIdentifier = Script.NumberToString(newId, DefinesService.Instance.ReversedMoverDefines);
+
+                string[] playerMoverIdentifiers = ["MI_MALE", "MI_FEMALE"];
+                if (playerMoverIdentifiers.Contains(oldIdentifier) || playerMoverIdentifiers.Contains(newIdentifier))
+                    LoadModel();
             }
         }
 
@@ -527,12 +597,61 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             if(await contentDialog.ShowAsync() == Wpf.Ui.Controls.ContentDialogResult.Primary)
             {
+                NativeMethods.DeleteReferenceModel(D3dHost._native);
                 if (contentDialog.DataContext is not MoverReferenceModelViewModel contentDialogViewModel) return;
 
                 //if (contentDialogViewModel.MoversView.CurrentItem is null) // TODO: remove reference model
                 if (contentDialogViewModel.MoversView.CurrentItem is not Mover referenceMover) return;
                 if(referenceMover.Model is not ModelElem referenceModel) return;
-                NativeMethods.SetReferenceModel(D3dHost._native, referenceModel.Model3DFilePath);
+
+                if (referenceMover.Identifier == "MI_MALE" || referenceMover.Identifier == "MI_FEMALE")
+                {
+                    string[] parts = referenceMover.Identifier switch
+                    {
+                        "MI_MALE" => [
+                            "Part_maleHair06.o3d",
+                            "Part_maleHead01.o3d",
+                            "Part_maleHand.o3d",
+                            "Part_maleLower.o3d",
+                            "Part_maleUpper.o3d",
+                            "Part_maleFoot.o3d",
+                    ],
+                        "MI_FEMALE" => [
+                            "Part_femaleHair06.o3d",
+                            "Part_femaleHead01.o3d",
+                            "Part_femaleHand.o3d",
+                            "Part_femaleLower.o3d",
+                            "Part_femaleUpper.o3d",
+                            "Part_femaleFoot.o3d",
+                    ],
+                        _ => throw new InvalidOperationException($"MoverViewModel::ShowReferenceModelContentDialog exception : mover model is loaded like player but is not player. Identifier => {referenceMover.Identifier}")
+                    };
+                    string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+                    string[] partsPath = [.. parts.Select(part => $"{modelsFolderPath}{part}")];
+
+                    foreach (string partPath in partsPath)
+                    {
+                        if (!File.Exists(partPath))
+                        {
+                            ModelViewerError = $"Part model file not found: {partPath}";
+                            return;
+                        }
+                    }
+
+                    foreach (string partPath in partsPath)
+                    {
+                        NativeMethods.SetReferenceParts(D3dHost._native, partPath);
+                    }
+                }
+                else
+                {
+                    if (!File.Exists(referenceMover.Model.Model3DFilePath))
+                    {
+                        ModelViewerError = $"Model file not found: {referenceMover.Model.Model3DFilePath}";
+                        return;
+                    }
+                    NativeMethods.SetReferenceModel(D3dHost._native, referenceModel.Model3DFilePath);
+                }
                 NativeMethods.SetReferenceScale(D3dHost._native, referenceModel.FScale);
                 NativeMethods.SetReferenceTextureEx(D3dHost._native, referenceModel.NTextureEx);
                 if (!Auto3DRendering)

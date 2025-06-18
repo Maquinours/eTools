@@ -52,6 +52,9 @@ namespace eTools_Ultimate.Helpers
         public static extern void SetParts(IntPtr engine, string path);
 
         [DllImport("3DModelRenderer.dll")]
+        public static extern void SetReferenceParts(IntPtr engine, string path);
+
+        [DllImport("3DModelRenderer.dll")]
         public static extern int GetMaterialTexturesSize(IntPtr engine);
 
         [DllImport("3DModelRenderer.dll", CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
