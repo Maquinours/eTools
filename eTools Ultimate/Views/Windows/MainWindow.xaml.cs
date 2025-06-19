@@ -16,6 +16,7 @@ namespace eTools_Ultimate.Views.Windows
             MainWindowViewModel viewModel,
             INavigationViewPageProvider navigationViewPageProvider,
             INavigationService navigationService,
+            ISnackbarService snackbarService,
             IContentDialogService contentDialogService
         )
         {
@@ -28,6 +29,7 @@ namespace eTools_Ultimate.Views.Windows
             InitializeComponent();
             SetPageService(navigationViewPageProvider);
 
+            snackbarService.SetSnackbarPresenter(SnackbarPresenter);
             navigationService.SetNavigationControl(RootNavigation);
             contentDialogService.SetDialogHost(RootContentDialog);
         }

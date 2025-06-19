@@ -5,7 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="{Binding ViewModel.ApplicationTitle, Mode=OneWay}"
     Width="1200"
@@ -80,12 +79,6 @@
                 </Grid>
             </ui:NavigationView.ContentOverlay>
         </ui:NavigationView>
-
-        <notifications:NotificationArea
-            x:Name="WindowArea"
-            Panel.ZIndex="999"
-            MaxItems="3"
-            Position="BottomRight" />
 
         <ContentPresenter x:Name="RootContentDialog" Grid.Row="0" />
 

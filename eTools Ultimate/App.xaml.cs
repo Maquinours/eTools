@@ -55,6 +55,9 @@ namespace eTools_Ultimate
                 // Service for handling content dialogs
                 services.AddSingleton<IContentDialogService, ContentDialogService>();
 
+                // Service for handling snackbar notifications
+                services.AddSingleton<ISnackbarService, SnackbarService>();
+
                 // Splash screen
                 services.AddSingleton<eTools_Ultimate.Views.Windows.SplashScreen>();
                 services.AddSingleton<SplashScreenViewModel>();

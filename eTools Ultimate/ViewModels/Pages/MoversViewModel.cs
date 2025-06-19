@@ -3,7 +3,6 @@ using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using eTools_Ultimate.Views.Dialogs;
-using Notification.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,7 +23,7 @@ using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class MoversViewModel(IContentDialogService contentDialogService) : ObservableObject, INavigationAware
+    public partial class MoversViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService) : ObservableObject, INavigationAware
     {
         #region Properties
         private bool _isInitialized = false;
@@ -813,11 +812,12 @@ namespace eTools_Ultimate.ViewModels.Pages
                 generatedCount++;
             }
 
-            var notificationManager = new NotificationManager();
-            notificationManager.Show(
+            snackbarService.Show(
                 title: "Motions generated",
                 message: generatedCount > 1 ? $"{generatedCount} motions have been bound automatically." : $"{generatedCount} motion has been bound automatically",
-                type:NotificationType.Success, "WindowArea"
+                appearance: ControlAppearance.Success,
+                icon: null,
+                timeout: TimeSpan.FromSeconds(2)
                 );
         }
         #endregion
