@@ -79,6 +79,8 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         private bool _showElementalSection = true;
         [ObservableProperty]
+        private bool _showSoundsSection = true;
+        [ObservableProperty]
         private bool _showModelSection = true;
         #endregion Filter properties
         #endregion Properties
