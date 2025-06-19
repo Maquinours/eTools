@@ -1226,7 +1226,7 @@
                     Margin="10,10,10,10"
                     BorderThickness="0"
                     Icon="Search24"
-                    PlaceholderText="Suche..."
+                    PlaceholderText="Search..."
                     Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Border>
 
