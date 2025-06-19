@@ -1239,6 +1239,7 @@
                 BorderThickness="1,0,1,1">
                 <ListView
                     x:Name="MoversListView"
+                    dd:DragDrop.DragDropContext="MoversListView"
                     dd:DragDrop.IsDragSource="True"
                     dd:DragDrop.IsDropTarget="True"
                     dd:DragDrop.SelectDroppedItems="True"
@@ -1819,10 +1820,15 @@
                                     BorderThickness="1">
                                     <ListView
                                         x:Name="MotionsListView"
+                                        dd:DragDrop.DragDropContext="MoverMotionsListView"
+                                        dd:DragDrop.IsDragSource="True"
+                                        dd:DragDrop.IsDropTarget="True"
+                                        dd:DragDrop.SelectDroppedItems="True"
                                         DisplayMemberPath="MotionTypeIdentifier"
                                         IsSynchronizedWithCurrentItem="True"
                                         ItemContainerStyle="{StaticResource AppListViewItemStyle}"
                                         ItemsSource="{Binding MoversView.CurrentItem.Model.MotionsView}"
+                                        SelectionMode="Single"
                                         Style="{StaticResource AppListViewStyle}" />
                                 </Border>
 
