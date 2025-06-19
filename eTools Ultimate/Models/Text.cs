@@ -113,7 +113,7 @@ namespace eTools_Ultimate.Models
             }
             set
             {
-                int colorValue = (Color.A << 24) | (Color.R << 16) | (Color.G << 8) | Color.B;
+                int colorValue = (value.A << 24) | (value.R << 16) | (value.G << 8) | value.B;
                 if(colorValue != DwColor)
                 {
                     DwColor = colorValue;
