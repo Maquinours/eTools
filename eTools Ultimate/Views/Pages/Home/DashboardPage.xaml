@@ -194,54 +194,48 @@
             </Grid>
 
             <!--  GitHub Button  -->
-            <Image
+            <ui:Anchor
                 Grid.Row="2"
-                Width="36"
-                Height="36"
                 Margin="0,0,60,20"
+                Padding="0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
+                Background="Transparent"
+                BorderBrush="Transparent"
                 Cursor="Hand"
-                RenderOptions.BitmapScalingMode="HighQuality"
-                Source="/eTools Ultimate;component/Assets/Icons/github.png"
-                Stretch="Uniform"
+                MouseOverBackground="Transparent"
+                MouseOverBorderBrush="Transparent"
+                NavigateUri="https://github.com/Maquinours/eTools"
                 ToolTip="View on GitHub">
-                <Image.InputBindings>
-                    <MouseBinding Command="{Binding OpenGithubLinkCommand}" Gesture="LeftClick" />
-                </Image.InputBindings>
-                <Image.Effect>
-                    <DropShadowEffect
-                        BlurRadius="4"
-                        Opacity="0.3"
-                        ShadowDepth="1"
-                        Color="#000000" />
-                </Image.Effect>
-            </Image>
+                <Image
+                    Width="36"
+                    Height="36"
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                    Source="/eTools Ultimate;component/Assets/Icons/github.png"
+                    Stretch="Uniform" />
+            </ui:Anchor>
 
             <!--  Discord Button  -->
-            <Image
+            <ui:Anchor
                 Grid.Row="2"
-                Width="36"
-                Height="36"
                 Margin="0,0,20,20"
+                Padding="0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
+                Background="Transparent"
+                BorderBrush="Transparent"
                 Cursor="Hand"
-                RenderOptions.BitmapScalingMode="HighQuality"
-                Source="/eTools Ultimate;component/Assets/Icons/discord.png"
-                Stretch="Uniform"
+                MouseOverBackground="Transparent"
+                MouseOverBorderBrush="Transparent"
+                NavigateUri="https://discord.gg/aGZYxkjWxh"
                 ToolTip="Join our Discord server">
-                <Image.InputBindings>
-                    <MouseBinding Command="{Binding OpenDiscordLinkCommand}" Gesture="LeftClick" />
-                </Image.InputBindings>
-                <Image.Effect>
-                    <DropShadowEffect
-                        BlurRadius="4"
-                        Opacity="0.3"
-                        ShadowDepth="1"
-                        Color="#000000" />
-                </Image.Effect>
-            </Image>
+                <Image
+                    Width="36"
+                    Height="36"
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                    Source="/eTools Ultimate;component/Assets/Icons/discord.png"
+                    Stretch="Uniform" />
+            </ui:Anchor>
 
             <!--  Changelog-Dialog (hidden)  -->
             <Frame

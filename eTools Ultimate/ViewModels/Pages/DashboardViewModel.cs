@@ -60,33 +60,5 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             await patchNotesDialog.ShowAsync();
         }
-
-        [RelayCommand]
-        private void OpenDiscordLink()
-        {
-            // Discord invite link
-            string discordUrl = "https://discord.gg/aGZYxkjWxh";
-
-            // Open URL in default browser
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-            {
-                FileName = discordUrl,
-                UseShellExecute = true
-            });
-        }
-
-        [RelayCommand]
-        private void OpenGithubLink()
-        {
-            // GitHub repository link
-            string githubUrl = "https://github.com/Maquinours/eTools";
-
-            // Open URL in default browser
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-            {
-                FileName = githubUrl,
-                UseShellExecute = true
-            });
-        }
     }
 }
