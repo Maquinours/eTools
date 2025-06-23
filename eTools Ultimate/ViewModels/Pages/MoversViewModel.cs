@@ -225,6 +225,12 @@ namespace eTools_Ultimate.ViewModels.Pages
             return D3dHost;
         }
 
+        private void CompositionTarget_Rendering(object? sender, EventArgs e)
+        {
+            if (Auto3DRendering && D3dHost is not null)
+                D3dHost.Render();
+        }
+
         private void InitializeViewModel()
         {
             MoversView.Filter = new Predicate<object>(FilterItem);
@@ -255,6 +261,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (mover.Model is not null)
                     mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
             }
+
+            CompositionTarget.Rendering += CompositionTarget_Rendering;
 
             _isInitialized = true;
         }
@@ -470,6 +478,21 @@ namespace eTools_Ultimate.ViewModels.Pages
         private void ModelMotionFile_Changed(object sender, FileSystemEventArgs e)
         {
             OnPropertyChanged(nameof(ModelMotionFilePossibilities));
+
+            if (MoversView.CurrentItem is not Mover mover)
+                throw new InvalidOperationException("MoversViewModel::ModelMotionFile_Changed exception : MoversView.CurrentItem is not Mover");
+            if(mover.Model is null)
+                throw new InvalidOperationException("MoversViewModel::ModelMotionFile_Changed exception : mover.Model is null");
+            if (mover.Model.MotionsView.CurrentItem is not ModelMotion currentMotion) return;
+
+            string folder = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+            string? prefix = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
+            if (prefix is null) return;
+            string suffix = currentMotion.SzMotion;
+            string filePath = $"{folder}{prefix}_{suffix}.ani";
+
+            if (e.FullPath == filePath || (e is RenamedEventArgs renamedEvent && renamedEvent.OldFullPath == filePath))
+                StopMotion();
         }
 
         private void CurrentMover_Changing(object sender, CurrentChangingEventArgs e)
@@ -478,7 +501,11 @@ namespace eTools_Ultimate.ViewModels.Pages
             mover.PropertyChanged -= CurrentMover_PropertyChanged;
             mover.Prop.PropertyChanged -= CurrentMoverProp_PropertyChanged;
             if (mover.Model is not null)
+            {
                 mover.Model.PropertyChanged -= CurrentMoverModel_PropertyChanged;
+                if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
+                    currentMotion.PropertyChanged -= CurrentMotion_PropertyChanged;
+            }
         }
 
         private void CurrentMover_Changed(object? sender, EventArgs e)
@@ -488,7 +515,13 @@ namespace eTools_Ultimate.ViewModels.Pages
                 mover.PropertyChanged += CurrentMover_PropertyChanged;
                 mover.Prop.PropertyChanged += CurrentMoverProp_PropertyChanged;
                 if (mover.Model is not null)
+                {
                     mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
+                    mover.Model.MotionsView.CurrentChanging += MotionsView_CurrentChanging;
+                    mover.Model.MotionsView.CurrentChanged += MotionsView_CurrentChanged;
+                    if(mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
+                        currentMotion.PropertyChanged += CurrentMotion_PropertyChanged;
+                }
             }
 
             OnPropertyChanged(nameof(ModelTexturesPossibilities));
@@ -501,11 +534,19 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (e.PropertyName == nameof(Mover.Model))
             {
-                if (e is not PropertyChangedExtendedEventArgs extendedArgs) return;
+                if (e is not PropertyChangedExtendedEventArgs extendedArgs) throw new InvalidOperationException("Model property changed args is not PropertyChangedExtendedEventArgs");
                 if (extendedArgs.OldValue is ModelElem oldModel)
+                {
                     oldModel.PropertyChanged -= CurrentMoverModel_PropertyChanged;
+                    if (oldModel.MotionsView.CurrentItem is ModelMotion currentMotion)
+                        currentMotion.PropertyChanged -= CurrentMotion_PropertyChanged;
+                }
                 if (extendedArgs.NewValue is ModelElem newModel)
+                {
                     newModel.PropertyChanged += CurrentMoverModel_PropertyChanged;
+                    if (newModel.MotionsView.CurrentItem is ModelMotion currentMotion)
+                        currentMotion.PropertyChanged += CurrentMotion_PropertyChanged;
+                }
 
                 OnPropertyChanged(nameof(ModelTexturesPossibilities));
                 OnPropertyChanged(nameof(ModelMotionFilePossibilities));
@@ -558,6 +599,56 @@ namespace eTools_Ultimate.ViewModels.Pages
             {
                 SetScale();
             }
+        }
+
+        private void MotionsView_CurrentChanging(object sender, CurrentChangingEventArgs e)
+        {
+            if (sender is not ICollectionView motionsView) throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanging exception: sender is not ICollectionView");
+            if (MoversView.CurrentItem is not Mover mover)
+                throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanging exception: MoversView.CurrentItem is not Mover");
+            if (mover.Model is null)
+                throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanging exception: mover.Model is null");
+            if (motionsView != mover.Model.MotionsView)
+                throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanging exception: sender is not equal to mover model motions view");
+
+            if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
+                currentMotion.PropertyChanged -= CurrentMotion_PropertyChanged;
+            else if (mover.Model.MotionsView.CurrentItem != null)
+                throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanging exception: selected motion is neither ModelMotion nor null");
+
+            StopMotion();
+        }
+
+        private void MotionsView_CurrentChanged(object? sender, EventArgs e)
+        {
+            if (sender is not ICollectionView motionsView) throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanged exception: sender is not ICollectionView");
+            if (MoversView.CurrentItem is not Mover mover)
+                throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanged exception: MoversView.CurrentItem is not Mover");
+            if (mover.Model is null)
+                throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanged exception: mover.Model is null");
+            if (motionsView != mover.Model.MotionsView)
+                throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanged exception: sender is not equal to mover model motions view");
+
+            if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
+                currentMotion.PropertyChanged += CurrentMotion_PropertyChanged;
+            else if (mover.Model.MotionsView.CurrentItem != null)
+                throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanged exception: selected motion is neither ModelMotion nor null");
+
+            StopMotion();
+        }
+
+        private void CurrentMotion_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (sender is not ModelMotion modelMotion)
+                throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: sender is not ModelMotion");
+            if (MoversView.CurrentItem is not Mover mover)
+                throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: MoversView.CurrentItem is not Mover");
+            if (mover.Model is null)
+                throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: mover.Model is null");
+            if (modelMotion != mover.Model.MotionsView.CurrentItem)
+                throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: sender is not selected motion");
+            if (e.PropertyName == nameof(ModelMotion.SzMotion))
+                StopMotion();
         }
         #endregion Event handlers
 
@@ -821,6 +912,47 @@ namespace eTools_Ultimate.ViewModels.Pages
                 icon: null,
                 timeout: TimeSpan.FromSeconds(2)
                 );
+        }
+
+        [RelayCommand]
+        private void PlayMotion()
+        {
+            if (D3dHost is null) return;
+            if (MoversView.CurrentItem is not Mover mover) return;
+            if (mover.Model is null) return;
+            if (mover.Model.MotionsView.CurrentItem is not ModelMotion motion) return;
+
+            string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+            string root = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
+            string lowerMotionKey = motion.SzMotion;
+
+            string motionFile = $@"{modelsFolderPath}{root}_{lowerMotionKey}.ani";
+
+            if(!File.Exists(motionFile))
+            {
+                snackbarService.Show(
+                title: "Unable to play motion",
+                message: $"Motion file not found : {motionFile}",
+                appearance: ControlAppearance.Danger,
+                icon: null,
+                timeout: TimeSpan.FromSeconds(3)
+                );
+                //ModelViewerError = $"Motion file not found: {motionFile}";
+                return;
+            }
+
+            NativeMethods.PlayMotion(D3dHost._native, motionFile);
+
+            Auto3DRendering = true;
+        }
+
+        [RelayCommand]
+        private void StopMotion()
+        {
+            if (D3dHost is null) return;
+            NativeMethods.StopMotion(D3dHost._native);
+            Auto3DRendering = false;
+            D3dHost.Render();
         }
         #endregion
     }

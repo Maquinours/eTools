@@ -5,6 +5,7 @@
     xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -12,7 +13,6 @@
     xmlns:pageViewModels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     Title="MoverPage"
     d:DataContext="{d:DesignInstance pageViewModels:MoversViewModel,
                                      IsDesignTimeCreatable=False}"
@@ -1794,23 +1794,39 @@
                                             Margin="0,5,5,0"
                                             HorizontalAlignment="Right"
                                             VerticalAlignment="Top"
-                                            Orientation="Horizontal"
-                                            Panel.ZIndex="1">
-                                            <ui:Button
-                                                Margin="0,0,5,0"
-                                                Command="{Binding PlayModelPreviewCommand}"
-                                                ToolTip="Animation abspielen">
-                                                <ui:SymbolIcon Symbol="Play24" />
+                                            Panel.ZIndex="1"
+                                            Orientation="Horizontal">
+                                            <ui:Button Margin="0,0,5,0">
+                                                <ui:Button.Style>
+                                                    <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="False">
+                                                                <Setter Property="ToolTip" Value="Play selected motion" />
+                                                                <Setter Property="Command" Value="{Binding PlayMotionCommand, Mode=OneWay}" />
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="True">
+                                                                <Setter Property="ToolTip" Value="Stop current motion" />
+                                                                <Setter Property="Command" Value="{Binding StopMotionCommand, Mode=OneWay}" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </ui:Button.Style>
+                                                <ui:SymbolIcon>
+                                                    <ui:SymbolIcon.Style>
+                                                        <Style TargetType="ui:SymbolIcon">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="False">
+                                                                    <Setter Property="Symbol" Value="Play24" />
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="True">
+                                                                    <Setter Property="Symbol" Value="Stop24" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </ui:SymbolIcon.Style>
+                                                </ui:SymbolIcon>
                                             </ui:Button>
-                                            <ui:Button
-                                                Margin="0,0,5,0"
-                                                Command="{Binding StopModelPreviewCommand}"
-                                                ToolTip="Animation stoppen">
-                                                <ui:SymbolIcon Symbol="Stop24" />
-                                            </ui:Button>
-                                            <ui:Button
-                                                Command="{Binding ShowReferenceModelContentDialogCommand}"
-                                                ToolTip="Reference Model">
+                                            <ui:Button Command="{Binding ShowReferenceModelContentDialogCommand}" ToolTip="Reference Model">
                                                 <ui:SymbolIcon Symbol="ImageReflection24" />
                                             </ui:Button>
                                         </StackPanel>

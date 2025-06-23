@@ -31,7 +31,10 @@ namespace eTools_Ultimate.Helpers
         public static extern bool LoadModel(IntPtr engine, string path);
 
         [DllImport("3DModelRenderer.dll")]
-        public static extern void PlayMotion(IntPtr engine, string path, int playType = 2);
+        public static extern void PlayMotion(IntPtr engine, string path, int playType = 2); 
+
+        [DllImport("3DModelRenderer.dll")]
+        public static extern void StopMotion(IntPtr engine);
 
         [DllImport("3DModelRenderer.dll")]
         public static extern void RotateCamera(IntPtr engine, int x, int y);

@@ -53,15 +53,18 @@ namespace eTools_Ultimate.Helpers
 
         public void Render()
         {
-            if (_surfacePointer != IntPtr.Zero)
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                Lock();
-                NativeMethods.Render(_native);
-                int w = NativeMethods.GetSurfaceWidth(_native);
-                int h = NativeMethods.GetSurfaceHeight(_native);
-                AddDirtyRect(new Int32Rect(0, 0, w, h));
-                Unlock();
-            }
+                if (_surfacePointer != IntPtr.Zero)
+                {
+                    Lock();
+                    NativeMethods.Render(_native);
+                    int w = NativeMethods.GetSurfaceWidth(_native);
+                    int h = NativeMethods.GetSurfaceHeight(_native);
+                    AddDirtyRect(new Int32Rect(0, 0, w, h));
+                    Unlock();
+                }
+            });
         }
 
         public void Dispose()
