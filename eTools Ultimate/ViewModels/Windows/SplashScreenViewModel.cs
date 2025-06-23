@@ -45,7 +45,8 @@ namespace eTools_Ultimate.ViewModels.Windows
                 ("Loading accessories...", AccessoriesService.Instance.Load),
                 ("Loading couple configuration...", CoupleService.Instance.Load),
                 ("Loading tickets...", TicketsService.Instance.Load),
-                ("Loading pack items...", PackItemsService.Instance.Load)
+                ("Loading pack items...", PackItemsService.Instance.Load),
+                ("Loading terrains...", TerrainsService.Instance.Load)
                 ];
 
             await Task.Run(() =>

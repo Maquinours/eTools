@@ -5,8 +5,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:eTools_Ultimate.Models"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:viewmodels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
     Title="Terrain/Object"
+    d:DataContext="{d:DesignInstance viewmodels:TerrainsViewModel,
+                                     IsDesignTimeCreatable=False}"
     d:DesignHeight="800"
     d:DesignWidth="1200"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
@@ -16,8 +20,8 @@
 
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
-        
-        <!-- Common Styles -->
+
+        <!--  Common Styles  -->
         <Style x:Key="InfoIconStyle" TargetType="ui:SymbolIcon">
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="VerticalAlignment" Value="Center" />
@@ -40,7 +44,7 @@
             <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
         </Style>
 
-        <!-- Model Warning Template -->
+        <!--  Model Warning Template  -->
         <DataTemplate x:Key="ModelWarningTemplate">
             <Border
                 HorizontalAlignment="Stretch"
@@ -70,7 +74,7 @@
             </Border>
         </DataTemplate>
 
-        <!-- ListView Item Template -->
+        <!--  ListView Item Template  -->
         <DataTemplate x:Key="TerrainObjectListTemplate">
             <Grid Margin="4">
                 <Grid.ColumnDefinitions>
@@ -102,42 +106,42 @@
             </Grid>
         </DataTemplate>
 
-        <!-- Terrain Section Template -->
+        <!--  Terrain Section Template  -->
         <DataTemplate x:Key="TerrainSectionTemplate">
             <StackPanel>
                 <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Terrain Properties" />
                 <UniformGrid Columns="2">
-                    <!-- Folder Name -->
+                    <!--  Folder Name  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Folder Name" />
-                        <TextBox 
-                            Grid.Row="1" 
-                            Text="{Binding FolderName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBox
+                            Grid.Row="1"
                             Background="{DynamicResource ControlFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                            BorderBrush="{DynamicResource ControlElevationBorderBrush}" />
+                            Text="{Binding FolderName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
-                    <!-- Terrain ID -->
+                    <!--  Terrain ID  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Terrain ID" />
-                        <TextBox 
-                            Grid.Row="1" 
-                            Text="{Binding TerrainId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBox
+                            Grid.Row="1"
                             Background="{DynamicResource ControlFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                            BorderBrush="{DynamicResource ControlElevationBorderBrush}" />
+                            Text="{Binding TerrainId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
-                    <!-- Terrain Texture -->
+                    <!--  Terrain Texture  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -149,147 +153,147 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBox 
-                                Text="{Binding TerrainTexture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            <TextBox
                                 Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                BorderBrush="{DynamicResource ControlElevationBorderBrush}" />
+                                Text="{Binding TerrainTexture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <ui:Button
                                 Grid.Column="1"
                                 Margin="5,0,0,0"
-                                Content="..."
                                 Background="{DynamicResource ControlFillColorDefaultBrush}"
-                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                BorderBrush="{DynamicResource ControlElevationBorderBrush}" />
+                                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                Content="..."
+                                Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
                         </Grid>
                     </Grid>
 
-                    <!-- Water ID -->
+                    <!--  Water ID  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Water ID" />
-                        <TextBox 
-                            Grid.Row="1" 
-                            Text="{Binding WaterId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBox
+                            Grid.Row="1"
                             Background="{DynamicResource ControlFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                            BorderBrush="{DynamicResource ControlElevationBorderBrush}" />
+                            Text="{Binding WaterId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
-                    <!-- Water Texture Number -->
+                    <!--  Water Texture Number  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Water Texture Number" />
-                        <TextBox 
-                            Grid.Row="1" 
-                            Text="{Binding WaterTextureNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBox
+                            Grid.Row="1"
                             Background="{DynamicResource ControlFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                            BorderBrush="{DynamicResource ControlElevationBorderBrush}" />
+                            Text="{Binding WaterTextureNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                 </UniformGrid>
             </StackPanel>
         </DataTemplate>
 
-        <!-- Object Section Template -->
+        <!--  Object Section Template  -->
         <DataTemplate x:Key="ObjectSectionTemplate">
             <StackPanel>
                 <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Object Properties" />
                 <UniformGrid Columns="2">
-                    <!-- Folder Name -->
+                    <!--  Folder Name  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Folder Name" />
-                        <TextBox 
-                            Grid.Row="1" 
-                            Text="{Binding FolderName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBox
+                            Grid.Row="1"
                             Background="{DynamicResource ControlFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                            BorderBrush="{DynamicResource ControlElevationBorderBrush}" />
+                            Text="{Binding FolderName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
-                    <!-- Model ID -->
+                    <!--  Model ID  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Model ID" />
-                        <TextBox 
-                            Grid.Row="1" 
-                            Text="{Binding ModelId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBox
+                            Grid.Row="1"
                             Background="{DynamicResource ControlFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                            BorderBrush="{DynamicResource ControlElevationBorderBrush}" />
+                            Text="{Binding ModelId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
-                    <!-- Model Name -->
+                    <!--  Model Name  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Model Name" />
-                        <TextBox 
-                            Grid.Row="1" 
-                            Text="{Binding ModelName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBox
+                            Grid.Row="1"
                             Background="{DynamicResource ControlFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                            BorderBrush="{DynamicResource ControlElevationBorderBrush}" />
+                            Text="{Binding ModelName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
-                    <!-- Model Type -->
+                    <!--  Model Type  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Model Type" />
-                        <ComboBox 
-                            Grid.Row="1" 
-                            SelectedValue="{Binding ModelType, Mode=TwoWay}"
+                        <ComboBox
+                            Grid.Row="1"
                             Background="{DynamicResource ControlFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                            BorderBrush="{DynamicResource ControlElevationBorderBrush}">
+                            SelectedValue="{Binding ModelType, Mode=TwoWay}">
                             <ComboBoxItem Content="MODELTYPE_MESH" />
                             <ComboBoxItem Content="MODELTYPE_SFX" />
                             <ComboBoxItem Content="MODELTYPE_ANIMATED_MESH" />
                         </ComboBox>
                     </Grid>
 
-                    <!-- Model Size -->
+                    <!--  Model Size  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Model Size" />
-                        <TextBox 
-                            Grid.Row="1" 
-                            Text="{Binding ModelSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        <TextBox
+                            Grid.Row="1"
                             Background="{DynamicResource ControlFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                            BorderBrush="{DynamicResource ControlElevationBorderBrush}" />
+                            Text="{Binding ModelSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                 </UniformGrid>
 
-                <!-- Model Preview -->
+                <!--  Model Preview  -->
                 <Grid Margin="0,20,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <!-- 3D Model Preview -->
+                    <!--  3D Model Preview  -->
                     <Grid Grid.Column="0" Margin="0,0,10,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="250" />
@@ -317,35 +321,35 @@
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Top"
                                     Panel.ZIndex="1"
-                                    Command="{Binding ShowReferenceModelContentDialogCommand}"
                                     Background="{DynamicResource ControlFillColorDefaultBrush}"
-                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                     BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                    Command="{Binding ShowReferenceModelContentDialogCommand}"
+                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                     ToolTip="Reference Model">
                                     <ui:SymbolIcon Symbol="ImageReflection24" />
                                 </ui:Button>
-                                <!-- Play/Pause Buttons -->
+                                <!--  Play/Pause Buttons  -->
                                 <StackPanel
                                     Margin="5"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Top"
-                                    Orientation="Horizontal"
-                                    Panel.ZIndex="1">
-                                    <ui:Button 
-                                        Margin="0,0,5,0" 
-                                        ToolTip="Play"
-                                        Command="{Binding PlayModelCommand}"
+                                    Panel.ZIndex="1"
+                                    Orientation="Horizontal">
+                                    <ui:Button
+                                        Margin="0,0,5,0"
                                         Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                        Command="{Binding PlayModelCommand}"
                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}">
+                                        ToolTip="Play">
                                         <ui:SymbolIcon Symbol="Play24" />
                                     </ui:Button>
-                                    <ui:Button 
-                                        ToolTip="Pause"
-                                        Command="{Binding PauseModelCommand}"
+                                    <ui:Button
                                         Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                        Command="{Binding PauseModelCommand}"
                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}">
+                                        ToolTip="Pause">
                                         <ui:SymbolIcon Symbol="Pause24" />
                                     </ui:Button>
                                 </StackPanel>
@@ -364,14 +368,14 @@
             <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Left Side - ListView -->
+        <!--  Left Side - ListView  -->
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!-- Search Bar -->
+            <!--  Search Bar  -->
             <Border
                 Grid.Row="0"
                 Margin="0,0,10,0"
@@ -386,37 +390,39 @@
                     Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Border>
 
-            <!-- List -->
+            <!--  List  -->
             <Border
                 Grid.Row="1"
                 Margin="0,0,10,0"
                 Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                 BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                 BorderThickness="1,0,1,1">
-                <ListView
+                <TreeView
                     Background="Transparent"
                     BorderThickness="0"
-                    ItemTemplate="{StaticResource TerrainObjectListTemplate}"
-                    ItemsSource="{Binding Items}">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
-                                </Trigger>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>
+                    ItemsSource="{Binding TerrainsView}">
+                    <TreeView.Resources>
+                        <!--  Template pour les dossiers  -->
+                        <HierarchicalDataTemplate DataType="{x:Type models:TerrainBrace}" ItemsSource="{Binding Children}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📁 " />
+                                <TextBlock Text="{Binding Prop.Name}" />
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+
+                        <!--  Template pour les fichiers  -->
+                        <DataTemplate DataType="{x:Type models:Terrain}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📄 " />
+                                <TextBlock Text="{Binding Prop.DwId}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </TreeView.Resources>
+                </TreeView>
             </Border>
         </Grid>
 
-        <!-- Separator -->
+        <!--  Separator  -->
         <GridSplitter
             Grid.Column="1"
             Width="10"
@@ -447,10 +453,10 @@
             </GridSplitter.Template>
         </GridSplitter>
 
-        <!-- Right Side - Forms -->
+        <!--  Right Side - Forms  -->
         <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
             <Grid>
-                <!-- Header Buttons -->
+                <!--  Header Buttons  -->
                 <StackPanel
                     Margin="0,10,20,0"
                     HorizontalAlignment="Right"
@@ -478,15 +484,15 @@
                     <ui:Button
                         Margin="0,0,10,0"
                         Background="{DynamicResource AccentFillColorDefaultBrush}"
-                        Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
-                        Content="Add" />
+                        Content="Add"
+                        Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
                     <ui:Button
                         Background="{DynamicResource SystemFillColorCriticalBrush}"
-                        Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
-                        Content="Delete" />
+                        Content="Delete"
+                        Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}" />
                 </StackPanel>
 
-                <!-- Forms -->
+                <!--  Forms  -->
                 <StackPanel Margin="20">
                     <ContentControl ContentTemplate="{StaticResource TerrainSectionTemplate}" />
                     <Separator Margin="0,10,0,5" />

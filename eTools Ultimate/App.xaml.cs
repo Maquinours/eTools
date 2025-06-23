@@ -94,6 +94,7 @@ namespace eTools_Ultimate
                 services.AddSingleton<MotionsViewModel>();
                 services.AddSingleton<HonorsViewModel>();
                 services.AddSingleton<AccessoriesViewModel>();
+                services.AddSingleton<TerrainsViewModel>();
 
                 // Neue Seiten
                 services.AddSingleton<WorldPage>();
