@@ -308,103 +308,7 @@
 
                     <Separator Margin="0,15,0,15" />
 
-                    <Grid Margin="0,0,0,15">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <TextBlock
-                            Grid.Column="0"
-                            VerticalAlignment="Center"
-                            Style="{StaticResource SectionHeaderStyle}"
-                            Text="Sets" />
-
-                        <StackPanel
-                            Grid.Column="1"
-                            HorizontalAlignment="Right"
-                            Orientation="Horizontal">
-                            <ui:Button
-                                Margin="0,0,10,0"
-                                Background="#2F70AF"
-                                Content="Add Set"
-                                Icon="Add12" />
-                            <ui:Button
-                                Background="#FD292F"
-                                Content="Delete Set"
-                                Icon="Delete12" />
-                        </StackPanel>
-                    </Grid>
-
-                    <!--  Set Selection  -->
-                    <Border
-                        Margin="0,0,0,20"
-                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                        BorderThickness="1"
-                        CornerRadius="8">
-                        <ListView
-                            x:Name="SetListView"
-                            Height="120"
-                            Margin="5"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            IsSynchronizedWithCurrentItem="True"
-                            ItemsSource="{Binding SelectedItem.Sets, Mode=OneWay, ElementName=ExchangersListView}"
-                            SelectedIndex="0">
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="Background" Value="Transparent" />
-                                    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                                    <Setter Property="Padding" Value="8,4" />
-                                    <Setter Property="Margin" Value="2" />
-                                    <Style.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
-                                        </Trigger>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}" />
-                                            <Setter Property="Foreground" Value="White" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ListView.ItemContainerStyle>
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Margin="4">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Border
-                                            Width="32"
-                                            Height="32"
-                                            Margin="0,0,8,0"
-                                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                                            BorderThickness="1">
-                                            <TextBlock
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                FontWeight="Bold"
-                                                Foreground="{Binding Text.SolidColorBrushColor}"
-                                                Text="T" />
-                                        </Border>
-                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                            <TextBlock
-                                                FontWeight="SemiBold"
-                                                Foreground="{Binding Text.SolidColorBrushColor}"
-                                                Text="{Binding Text.Name}" />
-                                            <TextBlock
-                                                FontSize="12"
-                                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                                Text="{Binding Text.Identifier}" />
-                                        </StackPanel>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </Border>
-
+                    <!--  Exchange Requirements Section  -->
                     <Grid Margin="0,0,0,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -613,6 +517,106 @@
                             </TabItem>
                         </TabControl>
                     </Grid>
+
+                    <Separator Margin="0,10,0,15" />
+
+                    <!--  Sets Section  -->
+                    <Grid Margin="0,0,0,15">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock
+                            Grid.Column="0"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource SectionHeaderStyle}"
+                            Text="Sets" />
+
+                        <StackPanel
+                            Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                            <ui:Button
+                                Margin="0,0,10,0"
+                                Background="#2F70AF"
+                                Content="Add Set"
+                                Icon="Add12" />
+                            <ui:Button
+                                Background="#FD292F"
+                                Content="Delete Set"
+                                Icon="Delete12" />
+                        </StackPanel>
+                    </Grid>
+
+                    <!--  Set Selection  -->
+                    <Border
+                        Margin="0,0,0,20"
+                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="8">
+                        <ListView
+                            x:Name="SetListView"
+                            Height="300"
+                            Margin="5"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            IsSynchronizedWithCurrentItem="True"
+                            ItemsSource="{Binding SelectedItem.Sets, Mode=OneWay, ElementName=ExchangersListView}"
+                            SelectedIndex="0">
+                            <ListView.ItemContainerStyle>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                                    <Setter Property="Padding" Value="8,4" />
+                                    <Setter Property="Margin" Value="2" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}" />
+                                            <Setter Property="Foreground" Value="White" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ListView.ItemContainerStyle>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Border
+                                            Width="32"
+                                            Height="32"
+                                            Margin="0,0,8,0"
+                                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                            BorderThickness="1">
+                                            <TextBlock
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                FontWeight="Bold"
+                                                Foreground="{Binding Text.SolidColorBrushColor}"
+                                                Text="T" />
+                                        </Border>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock
+                                                FontWeight="SemiBold"
+                                                Foreground="{Binding Text.SolidColorBrushColor}"
+                                                Text="{Binding Text.Name}" />
+                                            <TextBlock
+                                                FontSize="12"
+                                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                Text="{Binding Text.Identifier}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Border>
 
                     <!--  DataGrid für Description  -->
                     <Grid Margin="0,5,0,10" />

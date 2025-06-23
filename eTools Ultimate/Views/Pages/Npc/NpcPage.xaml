@@ -55,7 +55,7 @@
                                                 <TextBlock
                                                     x:Name="Text"
                                                     Margin="5,2"
-                                                    Text="Menü-Optionen auswählen..." />
+                                                    Text="Select Menu Options..." />
                                                 <Path
                                                     x:Name="Arrow"
                                                     Grid.Column="1"
@@ -126,14 +126,14 @@
                             <TextBlock Style="{StaticResource FieldLabelStyle}" Text="NPC Name" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Name des NPCs" />
+                                    <ToolTip Content="Name of the NPC" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:TextBox
                             Grid.Row="1"
                             Height="32"
-                            PlaceholderText="NPC Namen eingeben" />
+                            PlaceholderText="Enter NPC name" />
                     </Grid>
 
                     <!--  NPC Key  -->
@@ -186,7 +186,7 @@
                             <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Dialog File" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Dialog Datei Pfad" />
+                                    <ToolTip Content="Dialog File Path" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -206,7 +206,7 @@
                             <TextBlock Style="{StaticResource FieldLabelStyle}" Text="NPC Image" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="NPC Bild Pfad" />
+                                    <ToolTip Content="NPC Image Path" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -245,7 +245,7 @@
                             <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Menu" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Menü-Optionen" />
+                                    <ToolTip Content="Menu Options" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -286,7 +286,7 @@
                                                                             <ContentPresenter
                                                                                 Margin="8,0,0,0"
                                                                                 VerticalAlignment="Center"
-                                                                                Content="Menü-Optionen auswählen..." />
+                                                                                Content="Select Menu Options..." />
                                                                             <Path
                                                                                 Grid.Column="1"
                                                                                 Margin="0,0,8,0"
@@ -376,7 +376,7 @@
                             <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Tab Name 1" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Name des ersten Tabs" />
+                                    <ToolTip Content="Name of the first Tab" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -397,7 +397,7 @@
                             <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Tab Name 2" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Name des zweiten Tabs" />
+                                    <ToolTip Content="Name of the second Tab" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -418,7 +418,7 @@
                             <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Tab Name 3" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Name des dritten Tabs" />
+                                    <ToolTip Content="Name of the third Tab" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -439,7 +439,7 @@
                             <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Tab Name 4" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Name des vierten Tabs" />
+                                    <ToolTip Content="Name of the fourth Tab" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -450,139 +450,6 @@
                             PlaceholderText="Tab 4" />
                     </Grid>
                 </UniformGrid>
-            </StackPanel>
-        </DataTemplate>
-
-        <!--  DataTemplate: Shop Section  -->
-        <DataTemplate x:Key="ShopSectionTemplate">
-            <StackPanel>
-                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Shop" />
-                <TabControl x:Name="ShopTabControl">
-                    <TabItem Header="{Binding ElementName=TabName1, Path=Text, TargetNullValue=Tab 1}">
-                        <DataGrid Name="DataGrid1" AutoGenerateColumns="False">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn
-                                    Width="100"
-                                    Binding="{Binding ItemId}"
-                                    Header="Item ID" />
-                                <DataGridTextColumn
-                                    Width="*"
-                                    Binding="{Binding ItemName}"
-                                    Header="Item Name" />
-                                <DataGridTextColumn
-                                    Width="100"
-                                    Binding="{Binding Price}"
-                                    Header="Price" />
-                                <DataGridTemplateColumn Width="80" Header="Action">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ui:Button
-                                                Padding="8,4"
-                                                Appearance="Danger"
-                                                Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                CommandParameter="{Binding}"
-                                                Content="Delete"
-                                                FontSize="11" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </TabItem>
-                    <TabItem Header="{Binding ElementName=TabName2, Path=Text, TargetNullValue=Tab 2}">
-                        <DataGrid Name="DataGrid2" AutoGenerateColumns="False">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn
-                                    Width="100"
-                                    Binding="{Binding ItemId}"
-                                    Header="Item ID" />
-                                <DataGridTextColumn
-                                    Width="*"
-                                    Binding="{Binding ItemName}"
-                                    Header="Item Name" />
-                                <DataGridTextColumn
-                                    Width="100"
-                                    Binding="{Binding Price}"
-                                    Header="Price" />
-                                <DataGridTemplateColumn Width="80" Header="Action">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ui:Button
-                                                Padding="8,4"
-                                                Appearance="Danger"
-                                                Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                CommandParameter="{Binding}"
-                                                Content="Delete"
-                                                FontSize="11" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </TabItem>
-                    <TabItem Header="{Binding ElementName=TabName3, Path=Text, TargetNullValue=Tab 3}">
-                        <DataGrid Name="DataGrid3" AutoGenerateColumns="False">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn
-                                    Width="100"
-                                    Binding="{Binding ItemId}"
-                                    Header="Item ID" />
-                                <DataGridTextColumn
-                                    Width="*"
-                                    Binding="{Binding ItemName}"
-                                    Header="Item Name" />
-                                <DataGridTextColumn
-                                    Width="100"
-                                    Binding="{Binding Price}"
-                                    Header="Price" />
-                                <DataGridTemplateColumn Width="80" Header="Action">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ui:Button
-                                                Padding="8,4"
-                                                Appearance="Danger"
-                                                Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                CommandParameter="{Binding}"
-                                                Content="Delete"
-                                                FontSize="11" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </TabItem>
-                    <TabItem Header="{Binding ElementName=TabName4, Path=Text, TargetNullValue=Tab 4}">
-                        <DataGrid Name="DataGrid4" AutoGenerateColumns="False">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn
-                                    Width="100"
-                                    Binding="{Binding ItemId}"
-                                    Header="Item ID" />
-                                <DataGridTextColumn
-                                    Width="*"
-                                    Binding="{Binding ItemName}"
-                                    Header="Item Name" />
-                                <DataGridTextColumn
-                                    Width="100"
-                                    Binding="{Binding Price}"
-                                    Header="Price" />
-                                <DataGridTemplateColumn Width="80" Header="Action">
-                                    <DataGridTemplateColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <ui:Button
-                                                Padding="8,4"
-                                                Appearance="Danger"
-                                                Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                CommandParameter="{Binding}"
-                                                Content="Delete"
-                                                FontSize="11" />
-                                        </DataTemplate>
-                                    </DataGridTemplateColumn.CellTemplate>
-                                </DataGridTemplateColumn>
-                            </DataGrid.Columns>
-                        </DataGrid>
-                    </TabItem>
-                </TabControl>
             </StackPanel>
         </DataTemplate>
 
@@ -601,7 +468,7 @@
                             <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Vendor Type" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Typ des Händlers" />
+                                    <ToolTip Content="Type of Vendor" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -621,7 +488,7 @@
                             <TextBlock Style="{StaticResource FieldLabelStyle}" Text="NPC Equip" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Ausrüstung des NPCs" />
+                                    <ToolTip Content="NPC Equipment" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -641,7 +508,7 @@
                             <TextBlock Style="{StaticResource FieldLabelStyle}" Text="NPC Figure" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Geschlecht des NPCs" />
+                                    <ToolTip Content="NPC Gender" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -661,7 +528,7 @@
                             <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Structure" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="NPC Struktur" />
+                                    <ToolTip Content="NPC Structure" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -707,7 +574,7 @@
                     BorderThickness="0"
                     Cursor=""
                     Icon="Search24"
-                    PlaceholderText="Suche..."
+                    PlaceholderText="Search..."
                     Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Border>
 
@@ -883,8 +750,6 @@
                     <ContentControl ContentTemplate="{StaticResource CustomSectionTemplate}" />
                     <Separator Margin="0,10,0,5" />
                     <ContentControl ContentTemplate="{StaticResource TabsSectionTemplate}" />
-                    <Separator Margin="0,10,0,5" />
-                    <ContentControl ContentTemplate="{StaticResource ShopSectionTemplate}" />
 
                     <!--  Neuer Shop-Bereich  -->
                     <StackPanel>
@@ -908,7 +773,7 @@
                                     Grid.Row="0"
                                     Margin="0,0,0,10"
                                     Icon="Search24"
-                                    PlaceholderText="Items suchen..." />
+                                    PlaceholderText="Search items..." />
 
                                 <ListView
                                     Grid.Row="1"
@@ -974,7 +839,7 @@
                                 <TextBlock
                                     Margin="0,0,0,10"
                                     FontWeight="SemiBold"
-                                    Text="Items im Shop" />
+                                    Text="Items in Shop" />
 
                                 <!--  Tab Buttons  -->
                                 <StackPanel
@@ -1053,7 +918,7 @@
                         <TextBlock
                             Margin="0,20,0,10"
                             Style="{StaticResource SectionHeaderStyle}"
-                            Text="Shop Übersicht" />
+                            Text="Shop Overview" />
 
                         <Grid>
                             <!--  Header  -->
@@ -1083,11 +948,11 @@
                                         <TextBlock
                                             Grid.Column="2"
                                             FontWeight="SemiBold"
-                                            Text="Menge" />
+                                            Text="Amount" />
                                         <TextBlock
                                             Grid.Column="3"
                                             FontWeight="SemiBold"
-                                            Text="Preis" />
+                                            Text="Price" />
                                     </Grid>
                                 </Border>
                             </Grid>

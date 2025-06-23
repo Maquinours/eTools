@@ -12,6 +12,7 @@
     xmlns:pageViewModels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     Title="MoverPage"
     d:DataContext="{d:DesignInstance pageViewModels:MoversViewModel,
                                      IsDesignTimeCreatable=False}"
@@ -1789,15 +1790,30 @@
                                             Content="{Binding}"
                                             ContentTemplate="{StaticResource ModelWarningTemplate}"
                                             Visibility="{Binding HasModelViewerError, Converter={StaticResource BoolToVis}}" />
-                                        <ui:Button
+                                        <StackPanel
                                             Margin="0,5,5,0"
                                             HorizontalAlignment="Right"
                                             VerticalAlignment="Top"
-                                            Panel.ZIndex="1"
-                                            Command="{Binding ShowReferenceModelContentDialogCommand}"
-                                            ToolTip="Reference Model">
-                                            <ui:SymbolIcon Symbol="ImageReflection24" />
-                                        </ui:Button>
+                                            Orientation="Horizontal"
+                                            Panel.ZIndex="1">
+                                            <ui:Button
+                                                Margin="0,0,5,0"
+                                                Command="{Binding PlayModelPreviewCommand}"
+                                                ToolTip="Animation abspielen">
+                                                <ui:SymbolIcon Symbol="Play24" />
+                                            </ui:Button>
+                                            <ui:Button
+                                                Margin="0,0,5,0"
+                                                Command="{Binding StopModelPreviewCommand}"
+                                                ToolTip="Animation stoppen">
+                                                <ui:SymbolIcon Symbol="Stop24" />
+                                            </ui:Button>
+                                            <ui:Button
+                                                Command="{Binding ShowReferenceModelContentDialogCommand}"
+                                                ToolTip="Reference Model">
+                                                <ui:SymbolIcon Symbol="ImageReflection24" />
+                                            </ui:Button>
+                                        </StackPanel>
                                     </Grid>
                                 </Border>
                             </Grid>
