@@ -1,25 +1,26 @@
+using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models;
+using eTools_Ultimate.Services;
+using eTools_Ultimate.ViewModels.Pages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
+using Wpf.Ui;
 using Wpf.Ui.Abstractions.Controls;
 using Wpf.Ui.Controls;
-using eTools_Ultimate.ViewModels.Pages;
-using Wpf.Ui;
 using Wpf.Ui.Extensions;
-using eTools_Ultimate.Models;
-using eTools_Ultimate.Services;
-using System.Windows.Media;
-using System.Windows.Threading;
-using System.Windows.Media.Animation;
-using eTools_Ultimate.Helpers;
 
 namespace eTools_Ultimate.Views.Pages.Accessory
 {
@@ -112,7 +113,9 @@ namespace eTools_Ultimate.Views.Pages.Accessory
         public AccessoryPage(AccessoriesViewModel viewModel)
         {
             ViewModel = viewModel;
-            DataContext = this;
+            DataContext = viewModel;
+
+            viewModel.LevelAdded += ViewModel_LevelAdded;
 
             // Initialize commands
             //DeleteWithConfirmationCommand = new RelayCommand(DeleteWithConfirmation);
@@ -128,96 +131,53 @@ namespace eTools_Ultimate.Views.Pages.Accessory
             //InitializeSampleData();
         }
 
-        [RelayCommand]
-        private async Task DeleteAbilityOptionData(AccessoryAbilityOptionData abilityOptionData)
+        private void ViewModel_LevelAdded(object? sender, LevelAddedEventArgs e)
         {
-            var contentDialogService = new ContentDialogService();
-            contentDialogService.SetDialogHost(RootContentDialogPresenter);
+            if (sender is not AccessoriesViewModel)
+                throw new InvalidOperationException("AccessoryPage::ViewModel_ScrollToLevel exception : sender is not AccessoriesViewModel");
+            if (sender != DataContext)
+                throw new InvalidOperationException("AccessoryPage::ViewModel_ScrollToLevel exception : sender is not DataContext");
 
-            ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
-                 new SimpleContentDialogCreateOptions()
-                 {
-                     Title = "Delete Level",
-                     Content = "Are you sure you want to delete this level?",
-                     PrimaryButtonText = "Delete",
-                     CloseButtonText = "Cancel",
-                 }
-                );
-
-            if (result == ContentDialogResult.Primary)
+            Dispatcher.InvokeAsync(() =>
             {
-                if (AccessoriesListView.SelectedItem is eTools_Ultimate.Models.Accessory accessory)
-                    accessory.AbilityOptionData.Remove(abilityOptionData);
-            }
-        }
-
-        [RelayCommand]
-        private async Task DeleteDstData(AccessoryAbilityOptionDstData dstData)
-        {
-            var contentDialogService = new ContentDialogService();
-            contentDialogService.SetDialogHost(RootContentDialogPresenter);
-
-            ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
-                 new SimpleContentDialogCreateOptions()
-                 {
-                     Title = "Delete Attribute",
-                     Content = "Are you sure you want to delete this attribute?",
-                     PrimaryButtonText = "Delete",
-                     CloseButtonText = "Cancel",
-                 }
-                );
-
-            if (result == ContentDialogResult.Primary)
-            {
-                if (AccessoriesListView.SelectedItem is eTools_Ultimate.Models.Accessory accessory)
-                {
-                    AccessoryAbilityOptionData? abilityOption = accessory.AbilityOptionData.Where(x => x.DstData.Contains(dstData)).FirstOrDefault();
-                    abilityOption?.DstData.Remove(dstData);
-                }
-            }
-        }
-
-        [RelayCommand]
-        private void AddDstData(AccessoryAbilityOptionData abilityOptionData)
-        {
-            string dst = AccessoriesViewModel.PossibleDstValues.First();
-            AccessoryAbilityOptionDstData dstData = new(DefinesService.Instance.Defines[dst], 0);
-            abilityOptionData.DstData.Add(dstData);
-        }
-
-        [RelayCommand]
-        private void AddAbilityOptionData()
-        {
-            if (AccessoriesListView.SelectedItem is not eTools_Ultimate.Models.Accessory accessory) return;
-
-            int i;
-            for (i = 0; accessory.AbilityOptionData.Where(x => x.NAbilityOption == i).Any(); i++) ;
-            
-            AccessoryAbilityOptionData abilityOptionData = new(i, []);
-            accessory.AbilityOptionData.Insert(i, abilityOptionData);
-
-            Dispatcher.InvokeAsync(() => {
-                var item = FindVisualChildHelper.FindVisualChildren<Grid>(this)
-                .FirstOrDefault(tb => tb.Tag == abilityOptionData);
+                var item = FindVisualChildHelper.FindVisualChildren<Border>(this)
+                .FirstOrDefault(tb => tb.Tag == e.Level);
 
                 if (item is null) return;
 
-                var position = item.TransformToAncestor(AccessoryScrollViewer)
-                                         .Transform(new Point(0, 0));
+                var position = item.TransformToAncestor(AccessoryScrollViewer.Content as Visual)
+                                             .Transform(new Point(0, 0));
 
-                DoubleAnimation verticalAnimation = new DoubleAnimation();
+                DoubleAnimation verticalAnimation = new()
+                {
+                    From = AccessoryScrollViewer.VerticalOffset,
+                    To = Math.Min(position.Y, AccessoryScrollViewer.ScrollableHeight),
+                    Duration = TimeSpan.FromSeconds(1)
+                };
 
-                verticalAnimation.From = AccessoryScrollViewer.VerticalOffset;
-                verticalAnimation.To = position.Y + AccessoryScrollViewer.VerticalOffset;
-                verticalAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
-
-                Storyboard storyboard = new Storyboard();
+                Storyboard storyboard = new();
 
                 storyboard.Children.Add(verticalAnimation);
                 Storyboard.SetTarget(verticalAnimation, AccessoryScrollViewer);
                 Storyboard.SetTargetProperty(verticalAnimation, new PropertyPath(ScrollAnimationBehavior.VerticalOffsetProperty)); // Attached dependency property
+
+                storyboard.Completed += (sender, e) =>
+                    {
+                        var brush = new SolidColorBrush(Colors.Transparent);
+                        item.Background = brush;
+
+                        var highlightAnim = new ColorAnimation
+                        {
+                            From = Colors.Transparent,
+                            To = (Color)ColorConverter.ConvertFromString("#E0C97F"),
+                            Duration = TimeSpan.FromMilliseconds(500),
+                            AutoReverse = true
+                        };
+
+                        brush.BeginAnimation(SolidColorBrush.ColorProperty, highlightAnim);
+                    };
+
                 storyboard.Begin();
-                AccessoryScrollViewer.ScrollToVerticalOffset(position.Y + AccessoryScrollViewer.VerticalOffset);
             }, DispatcherPriority.Render);
         }
 

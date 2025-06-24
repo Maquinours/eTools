@@ -1,4 +1,5 @@
-﻿using eTools_Ultimate.Models;
+﻿using CommunityToolkit.Mvvm.Messaging;
+using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Threading;
+using Wpf.Ui;
 using Wpf.Ui.Abstractions.Controls;
+using Wpf.Ui.Controls;
+using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class AccessoriesViewModel : ObservableObject, INavigationAware
+    public class LevelAddedEventArgs(AccessoryAbilityOptionData level)
     {
+        public AccessoryAbilityOptionData Level { get; } = level;
+    }
+
+    public partial class AccessoriesViewModel(IContentDialogService contentDialogService) : ObservableObject, INavigationAware
+    {
+        public event EventHandler<LevelAddedEventArgs>? LevelAdded;
+
         private bool _isInitialized = false;
 
         private string _searchText = string.Empty;
@@ -21,9 +33,10 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         private ICollectionView _accessoriesView = CollectionViewSource.GetDefaultView(AccessoriesService.Instance.Accessories);
 
-        private static string[] _possibleDstValues = [.. DefinesService.Instance.Defines.Where(x => x.Key.StartsWith("DST_")).Select(x => x.Key)];
+        [ObservableProperty]
+        private AccessoryAbilityOptionData? _lastAddedLevel = null;
 
-        public static string[] PossibleDstValues => AccessoriesViewModel._possibleDstValues;
+        public string[] _PossibleDstValues = [.. DefinesService.Instance.Defines.Where(x => x.Key.StartsWith("DST_")).Select(x => x.Key)];
 
         public string SearchText
         {
@@ -65,6 +78,95 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             if (accessory.Item is not Item item) return false;
             return item.Name.Contains(this.SearchText, StringComparison.OrdinalIgnoreCase);
+        }
+
+        [RelayCommand]
+        private async Task DeleteAbilityOptionData(AccessoryAbilityOptionData abilityOptionData)
+        {
+            if (AccessoriesView.CurrentItem is not Accessory accessory) return;
+
+            ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
+                 new SimpleContentDialogCreateOptions()
+                 {
+                     Title = "Delete Level",
+                     Content = "Are you sure you want to delete this level?",
+                     PrimaryButtonText = "Delete",
+                     CloseButtonText = "Cancel",
+                 }
+                );
+
+            if (result == ContentDialogResult.Primary)
+            {
+                accessory.AbilityOptionData.Remove(abilityOptionData);
+                //if (AccessoriesListView.SelectedItem is eTools_Ultimate.Models.Accessory accessory)
+                //    accessory.AbilityOptionData.Remove(abilityOptionData);
+            }
+        }
+
+        [RelayCommand]
+        private async Task DeleteDstData(AccessoryAbilityOptionDstData dstData)
+        {
+            if (AccessoriesView.CurrentItem is not Accessory accessory) return;
+
+            ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
+                 new SimpleContentDialogCreateOptions()
+                 {
+                     Title = "Delete Attribute",
+                     Content = "Are you sure you want to delete this attribute?",
+                     PrimaryButtonText = "Delete",
+                     CloseButtonText = "Cancel",
+                 }
+                );
+
+            if (result == ContentDialogResult.Primary)
+            {
+                AccessoryAbilityOptionData abilityOptionData = accessory.AbilityOptionData.First(x => x.DstData.Contains(dstData));
+                abilityOptionData.DstData.Remove(dstData);
+            }
+        }
+
+        [RelayCommand]
+        private void AddDstData(AccessoryAbilityOptionData abilityOptionData)
+        {
+            AccessoryAbilityOptionDstData dstData = new(-1, 0);
+            abilityOptionData.DstData.Add(dstData);
+        }
+
+        [RelayCommand]
+        private void AddAbilityOptionData()
+        {
+            if (AccessoriesView.CurrentItem is not Accessory accessory) return;
+
+            int i;
+            for (i = 0; accessory.AbilityOptionData.Where(x => x.NAbilityOption == i).Any(); i++) ;
+
+            AccessoryAbilityOptionData abilityOptionData = new(i, []);
+            accessory.AbilityOptionData.Insert(i, abilityOptionData);
+            LevelAdded?.Invoke(this, new LevelAddedEventArgs(abilityOptionData));
+
+            //Dispatcher.InvokeAsync(() => {
+            //    var item = FindVisualChildHelper.FindVisualChildren<Grid>(this)
+            //    .FirstOrDefault(tb => tb.Tag == abilityOptionData);
+
+            //    if (item is null) return;
+
+            //    var position = item.TransformToAncestor(AccessoryScrollViewer)
+            //                             .Transform(new Point(0, 0));
+
+            //    DoubleAnimation verticalAnimation = new DoubleAnimation();
+
+            //    verticalAnimation.From = AccessoryScrollViewer.VerticalOffset;
+            //    verticalAnimation.To = position.Y + AccessoryScrollViewer.VerticalOffset;
+            //    verticalAnimation.Duration = new Duration(TimeSpan.FromSeconds(1));
+
+            //    Storyboard storyboard = new Storyboard();
+
+            //    storyboard.Children.Add(verticalAnimation);
+            //    Storyboard.SetTarget(verticalAnimation, AccessoryScrollViewer);
+            //    Storyboard.SetTargetProperty(verticalAnimation, new PropertyPath(ScrollAnimationBehavior.VerticalOffsetProperty)); // Attached dependency property
+            //    storyboard.Begin();
+            //    AccessoryScrollViewer.ScrollToVerticalOffset(position.Y + AccessoryScrollViewer.VerticalOffset);
+            //}, DispatcherPriority.Render);
         }
     }
 }

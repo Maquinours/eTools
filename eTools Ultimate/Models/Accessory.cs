@@ -1,4 +1,5 @@
-﻿using eTools_Ultimate.Services;
+﻿using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,6 +23,16 @@ namespace eTools_Ultimate.Models
         {
             get => this._nAdj;
             set => this._nAdj = value;
+        }
+
+        public string DestIdentifier
+        {
+            get => Script.NumberToString(NDst, DefinesService.Instance.ReversedDestDefines);
+            set 
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    NDst = val;
+            }
         }
 
         public AccessoryAbilityOptionDstData(int nDst, int nAdj)

@@ -32,6 +32,7 @@ namespace eTools_Ultimate.Services
         private readonly Dictionary<int, string> _reversedSoundDefines = [];
         private readonly Dictionary<int, string> _reversedAreaDefines = [];
         private readonly Dictionary<int, string> _reversedMusicDefines = [];
+        private readonly Dictionary<int, string> _reversedDestDefines = [];
 
         public ObservableDictionary<string, int> Defines => this._defines;
 
@@ -49,6 +50,7 @@ namespace eTools_Ultimate.Services
         public Dictionary<int, string> ReversedSoundDefines => this._reversedSoundDefines;
         public Dictionary<int, string> ReversedAreaDefines => this._reversedAreaDefines;
         public Dictionary<int, string> ReversedMusicDefines => this._reversedMusicDefines;
+        public Dictionary<int, string> ReversedDestDefines => this._reversedDestDefines;
 
         public void Load()
         {
@@ -104,6 +106,8 @@ namespace eTools_Ultimate.Services
                                 this.ReversedAreaDefines[value] = key;
                             else if (key.StartsWith("BGM_"))
                                 this.ReversedMusicDefines[value] = key;
+                            else if (key.StartsWith("DST_"))
+                                this.ReversedDestDefines[value] = key;
                         }
                         scanner.GetToken();
                     }
