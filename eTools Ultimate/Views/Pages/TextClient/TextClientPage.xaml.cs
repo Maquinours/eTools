@@ -1,7 +1,13 @@
+using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Pages;
+using System;
 using System.Windows.Controls;
+using System.Windows.Forms;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Threading;
 using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.Views.Pages
@@ -13,81 +19,45 @@ namespace eTools_Ultimate.Views.Pages
         public TextClientPage(TextClientViewModel viewModel)
         {
             ViewModel = viewModel;
-            DataContext = this;
+            DataContext = viewModel;
+
+            viewModel.TextAdded += ViewModel_TextAdded;
 
             InitializeComponent();
         }
-        private void AddButton_Click(object sender, System.Windows.RoutedEventArgs e)
+
+        private void ViewModel_TextAdded(object? sender, TextAddedEventArgs e)
         {
-            if (TextFilesListView.SelectedItem is not Text text) return;
-            try
-            {
-                // For now, use simple MessageBox
-                // Once WPF UI is properly set up, this can be replaced with ContentDialog
-                var result = System.Windows.MessageBox.Show(
-                    "Are you sure you want to create a new text client?",
-                    "Add Item",
-                    System.Windows.MessageBoxButton.OKCancel,
-                    System.Windows.MessageBoxImage.Information);
+            if (sender is not TextClientViewModel)
+                throw new InvalidOperationException("TextClientPage::ViewModel_TextAdded exception : sender is not TextClientViewModel");
+            if (sender != DataContext)
+                throw new InvalidOperationException("TextClientPage::ViewModel_TextAdded exception : sender is not DataContext");
 
-                if (result == System.Windows.MessageBoxResult.OK)
-                {
-                    // Here the logic for adding a new item could be implemented
-                    Text newText = TextsService.Instance.AddText();
-                    this.ViewModel.TextsView.Refresh();
-                    this.ViewModel.TextsView.MoveCurrentTo(newText);
-                    this.TextFilesListView.ScrollIntoView(newText);
-                    Console.WriteLine("Item is being added");
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show(
-                    $"Error opening dialog: {ex.Message}",
-                    "Error",
-                    System.Windows.MessageBoxButton.OK,
-                    System.Windows.MessageBoxImage.Error);
+            TextFilesListView.ScrollIntoView(e.Text);
+            //Dispatcher.InvokeAsync(() =>
+            //{
+            //    var scrollViewer = FindVisualChildHelper.FindVisualChildren<ScrollViewer>(TextFilesListView).FirstOrDefault();
+            //    if (scrollViewer is null)
+            //        return;
 
-                Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
-            }
-        }
+            //    double initialOffset = scrollViewer.VerticalOffset;
+            //    TextFilesListView.ScrollIntoView(e.Text);
+            //    TextFilesListView.UpdateLayout();
 
-        // Event handler for the Delete button
-        private void DeleteButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if (TextFilesListView.SelectedItem is not Text text) return;
-            try
-            {
-                // For now, use simple MessageBox
-                // Once WPF UI is properly set up, this can be replaced with ContentDialog
-                var result = System.Windows.MessageBox.Show(
-                    "Are you sure you want to permanently delete this item?",
-                    "Delete Item",
-                    System.Windows.MessageBoxButton.YesNo,
-                    System.Windows.MessageBoxImage.Warning);
+            //    DoubleAnimation verticalAnimation = new()
+            //    {
+            //        From = initialOffset,
+            //        To = scrollViewer.VerticalOffset,
+            //        Duration = TimeSpan.FromSeconds(1)
+            //    };
 
-                if (result == System.Windows.MessageBoxResult.Yes)
-                {
-                    // Here the logic for deleting the selected item could be implemented
-                    TextsService.Instance.RemoveText(text);
-                    Console.WriteLine("Item is being deleted");
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show(
-                    $"Error opening dialog: {ex.Message}",
-                    "Error",
-                    System.Windows.MessageBoxButton.OK,
-                    System.Windows.MessageBoxImage.Error);
+            //    Storyboard storyboard = new();
 
-                Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
-            }
-        }
-
-        private void OpenPickerButton_Click(object sender, RoutedEventArgs e)
-        {
-            ColorPickerPopup.IsOpen = true;
+            //    storyboard.Children.Add(verticalAnimation);
+            //    Storyboard.SetTarget(verticalAnimation, scrollViewer);
+            //    Storyboard.SetTargetProperty(verticalAnimation, new PropertyPath(ScrollAnimationBehavior.VerticalOffsetProperty)); // Attached dependency property
+            //    storyboard.Begin();
+            //}, DispatcherPriority.Render);
         }
 
         // Event handler for the Save button

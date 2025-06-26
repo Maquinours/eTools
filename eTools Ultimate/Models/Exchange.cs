@@ -115,7 +115,7 @@ namespace eTools_Ultimate.Models
 
         public Text? Text
         {
-            get => TextsService.Instance.Texts.FirstOrDefault(x => x.DwId == this.TextId);
+            get => TextsService.Instance.Texts.FirstOrDefault(x => x.Prop.DwId == this.TextId);
         }
 
         public List<ExchangeSetCondition> Conditions

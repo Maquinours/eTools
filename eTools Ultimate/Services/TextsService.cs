@@ -58,7 +58,8 @@ namespace eTools_Ultimate.Services
 
                     script.GetToken(); // "}"
 
-                    Text text = new(dwId, dwColor, szName);
+                    TextProp textProp = new(dwId, dwColor, szName);
+                    Text text = new(textProp);
 
                     this.Texts.Add(text);
                 }
@@ -70,7 +71,10 @@ namespace eTools_Ultimate.Services
             StringsService stringsService = StringsService.Instance;
             string szName = stringsService.GetNextStringIdentifier(STRING_ID_PREFIX);
             stringsService.GenerateNewString(szName);
-            Text text = new(-1, unchecked((int)0xFFFFFFFF), szName);
+
+            TextProp textProp = new(-1, unchecked((int)0xFFFFFFFF), szName);
+            Text text = new(textProp);
+
             this.Texts.Add(text);
             return text;
         }

@@ -212,7 +212,7 @@ namespace eTools_Ultimate.Models
                     if (!stringsService.Strings.ContainsKey(value))
                         stringsService.GenerateNewString(value);
                     _szName = value;
-                    NotifyPropertyChanged(nameof(this._szName), oldValue, this._szName);
+                    NotifyPropertyChanged(nameof(this.SzName), oldValue, this.SzName);
                 }
             }
         }

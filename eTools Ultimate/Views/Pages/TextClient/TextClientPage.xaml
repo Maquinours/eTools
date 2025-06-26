@@ -7,8 +7,9 @@
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:viewmodels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
     Title="TextClientPage"
-    d:DataContext="{d:DesignInstance local:TextClientPage,
+    d:DataContext="{d:DesignInstance viewmodels:TextClientViewModel,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="768"
     d:DesignWidth="1024"
@@ -25,7 +26,7 @@
             </ResourceDictionary.MergedDictionaries>
             <!--  DataTemplate for ListView Text Client  -->
             <DataTemplate x:Key="TextClientItemTemplate">
-                <Grid Margin="4">
+                <Grid Margin="4" Tag="{Binding}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -106,7 +107,7 @@
                     BorderThickness="0"
                     Icon="Search24"
                     PlaceholderText="Search..."
-                    Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Border>
 
             <!--  Text Files List  -->
@@ -122,7 +123,7 @@
                     BorderThickness="0"
                     IsSynchronizedWithCurrentItem="True"
                     ItemTemplate="{StaticResource TextClientItemTemplate}"
-                    ItemsSource="{Binding ViewModel.TextsView}">
+                    ItemsSource="{Binding TextsView}">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Background" Value="Transparent" />
@@ -213,13 +214,13 @@
                     <ui:Button
                         Margin="0,0,10,0"
                         Background="#2F70AF"
-                        Click="AddButton_Click"
+                        Command="{Binding AddTextCommand}"
                         Content="Add"
                         Icon="Add24" />
                     <ui:Button
                         Margin="0,0,0,0"
                         Background="#FD292F"
-                        Click="DeleteButton_Click"
+                        Command="{Binding DeleteTextCommand}"
                         Content="Delete"
                         Icon="Delete24" />
                 </StackPanel>
@@ -245,30 +246,12 @@
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <TextBox
+                        <ui:AutoSuggestBox
                             Grid.Row="1"
                             BorderThickness="1"
-                            Text="{Binding SelectedItem.DwId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=TextFilesListView}" />
-                    </Grid>
-
-                    <!--  Text TID Key  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Text TID Key" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Internal key used for text identification" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox
-                            Grid.Row="1"
-                            BorderThickness="1"
-                            Text="{Binding SelectedItem.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=TextFilesListView}" />
+                            DisplayMemberPath="Value"
+                            OriginalItemsSource="{Binding TextIdentifiers, Mode=OneWay}"
+                            Text="{Binding TextsView.CurrentItem.Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                     </Grid>
 
                     <!--  InGame Text + Color  -->
@@ -302,13 +285,14 @@
                                 Margin="10,0,0,0"
                                 Background="{Binding SelectedItem.SolidColorBrushColor, Mode=OneWay, ElementName=TextFilesListView}"
                                 BorderThickness="1"
-                                Click="OpenPickerButton_Click">
+                                Command="{Binding OpenColorPickerCommand, Mode=OneWay}">
                                 <Button.ToolTip>
                                     <ToolTip Content="Click to change color" />
                                 </Button.ToolTip>
                             </Button>
                             <Popup
                                 x:Name="ColorPickerPopup"
+                                IsOpen="{Binding IsColorPickerOpened, Mode=TwoWay}"
                                 PlacementTarget="{Binding ElementName=OpenPickerButton}"
                                 StaysOpen="False">
                                 <colorpicker:StandardColorPicker SelectedColor="{Binding SelectedItem.Color, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=TextFilesListView}" Style="{StaticResource DefaultColorPickerStyle}" />
