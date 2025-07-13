@@ -7,9 +7,10 @@ using eTools_Ultimate.Views.Pages.Job;
 using eTools_Ultimate.Views.Pages.Lord;
 using eTools_Ultimate.Views.Pages.Motion;
 using eTools_Ultimate.Views.Pages.Packitem;
-using eTools_Ultimate.Views.Pages.TerrainObject;
+using eTools_Ultimate.Views.Pages.Object;
 using eTools_Ultimate.Views.Pages.Ticket;
 using eTools_Ultimate.Views.Pages.World;
+using eTools_Ultimate.Views.Pages.TerrainObject;
 using System.Windows.Navigation;
 using Wpf.Ui;
 using Wpf.Ui.Controls;
@@ -36,7 +37,8 @@ namespace eTools_Ultimate.ViewModels.Pages
             new("Text Client", "Navigate to the text client.", "/eTools Ultimate;component/Assets/Icons/Texts.png", typeof(TextClientPage)),
             new("World", "Navigate to the world editor.", "/eTools Ultimate;component/Assets/Icons/World.png", typeof(WorldPage)),
             new("Tickets", "Navigate to the ticket editor.", "/eTools Ultimate;component/Assets/Icons/Tickets.png", typeof(TicketPage)),
-            new("Terrain/Object", "Navigate to the terrain/object editor.", "/eTools Ultimate;component/Assets/Icons/Terrain.png", typeof(TerrainObjectPage)),
+            new("Object", "Navigate to the object editor.", "/eTools Ultimate;component/Assets/Icons/Terrain.png", typeof(ObjectPage)),
+            new("Terrain", "Navigate to the terrain editor.", "/eTools Ultimate;component/Assets/Icons/Terrain.png", typeof(TerrainObjectPage)),
             new("Job", "Navigate to the job editor.", "/eTools Ultimate;component/Assets/Icons/Job.png", typeof(JobPage)),
             new("Packitem", "Navigate to the packitem editor.", "/eTools Ultimate;component/Assets/Icons/PackItem.png", typeof(PackitemPage)),
             new("Lord", "Navigate to the lord editor.", "/eTools Ultimate;component/Assets/Icons/Lord.png", typeof(LordPage)),

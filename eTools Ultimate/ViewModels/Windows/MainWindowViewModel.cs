@@ -4,6 +4,7 @@ using Wpf.Ui.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System;
+using eTools_Ultimate.Views.Pages.TerrainObject;
 
 namespace eTools_Ultimate.ViewModels.Windows
 {
@@ -145,6 +146,12 @@ namespace eTools_Ultimate.ViewModels.Windows
                     Content = "Couple",
                     Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Accessories.png", 25, 25),
                     TargetPageType = typeof(Views.Pages.CouplePage)
+                },
+                new NavigationViewItem()
+                {
+                    Content = "Terrain/Object",
+                    Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Terrain.png", 25, 25),
+                    TargetPageType = typeof(Views.Pages.TerrainObject.TerrainObjectPage)
                 }
             };
 

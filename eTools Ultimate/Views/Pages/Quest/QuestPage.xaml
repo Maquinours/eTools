@@ -16,16 +16,16 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        <!--  Linke Seite  -->
-        <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
-            <Grid Margin="10">
+            <!--  Linke Seite  -->
+            <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -184,18 +184,16 @@
                         TextWrapping="Wrap" />
                 </StackPanel>
             </Grid>
-        </ScrollViewer>
 
-        <!--  Vertikale Linie  -->
-        <Rectangle
-            Grid.Column="1"
-            Width="1"
-            Margin="0,10"
-            Fill="#404040" />
+            <!--  Vertikale Linie  -->
+            <Rectangle
+                Grid.Column="1"
+                Width="1"
+                Margin="10,0"
+                Fill="#404040" />
 
-        <!--  Rechte Seite  -->
-        <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
-            <Grid Margin="10">
+            <!--  Rechte Seite  -->
+            <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -452,6 +450,6 @@
                     </StackPanel>
                 </StackPanel>
             </Grid>
-        </ScrollViewer>
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </Page> 
