@@ -82,6 +82,7 @@
     <Resource Include="Assets\Icons\Motions.png" />
     <Resource Include="Assets\Icons\Honors.png" />
     <Resource Include="Assets\Icons\World.png" />
+    <Resource Include="Assets\Icons\Terrain.png" />
     <Resource Include="Views\Pages\Settings\AboutIcon.png" />
     <Resource Include="Views\Pages\Settings\FolderPathIcon.png" />
     <Resource Include="Views\Pages\Settings\PaintPaletteIcon.png" />
