@@ -74,6 +74,9 @@ namespace eTools_Ultimate.Models
         // Musics settings
         private string? _musicsConfigFilePath;
 
+        // World texture
+        private string? _worldTextureFilePath;
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -708,5 +711,26 @@ namespace eTools_Ultimate.Models
             }
         }
         public string DefaultMusicsConfigFilePath => $"{this.ClientFolderPath}Music{Path.DirectorySeparatorChar}default.bgm";
+
+        public string? WorldTextureFilePath
+        {
+            get => this._worldTextureFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                else if (!val.EndsWith(Path.DirectorySeparatorChar))
+                    val += Path.DirectorySeparatorChar;
+                if (val == this.DefaultWorldTextureFilePath)
+                    val = null;
+                if (this.WorldTextureFilePath != val)
+                {
+                    this._worldTextureFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+        public string DefaultWorldTextureFilePath => $"{this.ResourcesFolderPath}World{Path.DirectorySeparatorChar}Texture{Path.DirectorySeparatorChar}";
     }
 }
