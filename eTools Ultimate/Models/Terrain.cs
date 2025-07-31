@@ -1,8 +1,11 @@
 ﻿using DDSImageParser;
+using eTools_Ultimate.Helpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
@@ -21,21 +24,41 @@ namespace eTools_Ultimate.Models
     //    public int[] PList => _pList;
     //}
 
-    public class TerrainBraceProp(string name, int frameCount)
+    public class TerrainBraceProp(string name, int frameCount) : INotifyPropertyChanged
     {
         private string _name = name;
         private int _frameCount = frameCount;
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public string Name
         {
             get => _name;
-            set => _name = value;
+            set => SetValue(ref _name, value);
         }
 
         public int FrameCount
         {
             get => _frameCount;
-            set => _frameCount = value;
+            set => SetValue(ref _frameCount, value);
+        }
+
+        private void NotifyPropertyChanged<T>(string propertyName, T oldValue, T newValue)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedExtendedEventArgs(propertyName, oldValue, newValue));
+        }
+
+        private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+                return false;
+
+            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new Exception($"Motion SetValue with not safe to assign directly property {propertyName}");
+
+            T old = field;
+            field = value;
+            this.NotifyPropertyChanged(propertyName, old, value);
+            return true;
         }
     }
     public class TerrainBrace(TerrainBraceProp prop, List<ITerrainItem> children) : ITerrainItem
@@ -47,7 +70,7 @@ namespace eTools_Ultimate.Models
         public List<ITerrainItem> Children => _children;
     }
 
-    public class TerrainProp(int dwId, int frameCount, string szTextureFileName, int bBlock, string szSoundFileName)
+    public class TerrainProp(int dwId, int frameCount, string szTextureFileName, int bBlock, string szSoundFileName) : INotifyPropertyChanged
     {
         private int _dwId = dwId;
         private int _frameCount = frameCount;
@@ -55,36 +78,58 @@ namespace eTools_Ultimate.Models
         private int _bBlock = bBlock;
         private string _szSoundFileName = szSoundFileName;
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public int DwId
         {
             get => _dwId;
-            set => _dwId = value;
+            set => SetValue(ref _dwId, value);
         }
         public int FrameCount
         {
             get => _frameCount;
-            set => _frameCount = value;
+            set => SetValue(ref _frameCount, value);
         }
         public string SzTextureFileName
         {
             get => _szTextureFileName;
-            set => _szTextureFileName = value;
+            set => SetValue(ref _szTextureFileName, value);
         }
         public int BBlock
         {
             get => _bBlock;
-            set => _bBlock = value;
+            set => SetValue(ref _bBlock, value);
         }
         public string SzSoundFileName
         {
             get => _szSoundFileName;
-            set => _szSoundFileName = value;
+            set => SetValue( ref _szSoundFileName, value);
+        }
+
+        private void NotifyPropertyChanged<T>(string propertyName, T oldValue, T newValue)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedExtendedEventArgs(propertyName, oldValue, newValue));
+        }
+
+        private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+                return false;
+
+            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new Exception($"Motion SetValue with not safe to assign directly property {propertyName}");
+
+            T old = field;
+            field = value;
+            this.NotifyPropertyChanged(propertyName, old, value);
+            return true;
         }
     }
 
-    public class Terrain(TerrainProp prop) : ITerrainItem
+    public class Terrain : ITerrainItem, INotifyPropertyChanged
     {
-        private readonly TerrainProp _prop = prop;
+        private readonly TerrainProp _prop;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public TerrainProp Prop => _prop;
 
@@ -118,6 +163,28 @@ namespace eTools_Ultimate.Models
                     return bitmapImage;
                 }
             }
+        }
+
+        public Terrain(TerrainProp prop)
+        {
+            _prop = prop;
+
+            Prop.PropertyChanged += Prop_PropertyChanged;
+        }
+
+        private void Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case nameof(TerrainProp.SzTextureFileName):
+                    NotifyPropertyChanged(nameof(TextureIcon));
+                    break;
+            }
+        }
+
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
