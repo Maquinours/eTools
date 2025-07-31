@@ -1,6 +1,8 @@
-﻿using eTools_Ultimate.Services;
+﻿using eTools_Ultimate.Models;
+using eTools_Ultimate.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -16,8 +18,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private string _searchText = string.Empty;
 
-        [ObservableProperty]
-        private ICollectionView _terrainsView = CollectionViewSource.GetDefaultView(TerrainsService.Instance.TerrainItems);
+        public ITerrainItem[] TerrainsView => [.. TerrainsService.Instance.TerrainItems.Where(x => x is TerrainBrace brace && brace.Prop.Name.Contains(SearchText, StringComparison.CurrentCultureIgnoreCase))];
 
         public string SearchText
         {
@@ -27,8 +28,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (_searchText != value)
                 {
                     _searchText = value;
-                    OnPropertyChanged(nameof(this.SearchText));
-                    TerrainsView.Refresh();
+                    OnPropertyChanged(nameof(SearchText));
+                    OnPropertyChanged(nameof(TerrainsView));
                 }
             }
         }
@@ -47,15 +48,41 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             //TerrainsView.Filter = new Predicate<object>(FilterItem);
 
+            TerrainsService.Instance.TerrainItems.CollectionChanged += TerrainItems_CollectionChanged;
+
             _isInitialized = true;
         }
 
-        //private bool FilterItem(object obj)
-        //{
-        //    if (obj is not Text text) return false;
-        //    if (string.IsNullOrEmpty(this.SearchText)) return true;
-        //    return text.Name.Contains(this.SearchText, StringComparison.OrdinalIgnoreCase)
-        //        || DefinesService.Instance.Defines.FirstOrDefault(x => x.Key.StartsWith("TID_") && x.Value == text.DwId).Key.Contains(this.SearchText, StringComparison.OrdinalIgnoreCase);
-        //}
+        private void TerrainItems_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(TerrainsView));
+            if(sender is not ObservableCollection<ITerrainItem> observableCollection)
+                throw new InvalidOperationException("TerrainsViewModel::TerrainItems_CollectionChanged exception : sender is not an ObservableCollection<ITerrainItem>.");
+            foreach(ITerrainItem item in observableCollection)
+            {
+                if(item is TerrainBrace terrainBrace)
+                {
+                    terrainBrace.Prop.PropertyChanged -= TerrainItem_PropertyChanged;
+                    terrainBrace.Prop.PropertyChanged += TerrainItem_PropertyChanged;
+                }
+                else if (item is Terrain terrain)
+                {
+                    terrain.Prop.PropertyChanged -= TerrainItem_PropertyChanged;
+                    terrain.Prop.PropertyChanged += TerrainItem_PropertyChanged;
+                }
+            }
+            throw new NotImplementedException();
+        }
+
+        // TODO: this is not triggered, fix this bug
+        private void TerrainItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case nameof(TerrainBraceProp.Name):
+                    OnPropertyChanged(nameof(TerrainsView));
+                    break;
+            }
+        }
     }
 }
