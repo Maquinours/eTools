@@ -731,6 +731,6 @@ namespace eTools_Ultimate.Models
                 }
             }
         }
-        public string DefaultWorldTextureFilePath => $"{this.ResourcesFolderPath}World{Path.DirectorySeparatorChar}Texture{Path.DirectorySeparatorChar}";
+        public string DefaultWorldTextureFilePath => $"{this.ClientFolderPath}World{Path.DirectorySeparatorChar}Texture{Path.DirectorySeparatorChar}";
     }
 }
