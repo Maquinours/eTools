@@ -254,12 +254,12 @@
                                                 <RowDefinition Height="Auto" />
                                             </Grid.RowDefinitions>
                                             <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Frame Count" />
-                                            <TextBox
+                                            <ui:NumberBox
                                                 Grid.Row="1"
                                                 Background="{DynamicResource ControlFillColorDefaultBrush}"
                                                 BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Text="{Binding Prop.FrameCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                Value="{Binding Prop.FrameCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                         </Grid>
                                     </UniformGrid>
                                 </StackPanel>
