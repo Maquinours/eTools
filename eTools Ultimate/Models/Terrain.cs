@@ -2,6 +2,7 @@
 using eTools_Ultimate.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -64,10 +65,22 @@ namespace eTools_Ultimate.Models
     public class TerrainBrace(TerrainBraceProp prop, List<ITerrainItem> children) : ITerrainItem
     {
         private readonly TerrainBraceProp _prop = prop;
-        private readonly List<ITerrainItem> _children = children;
+        private readonly ObservableCollection<ITerrainItem> _children = new(children);
 
         public TerrainBraceProp Prop => _prop;
-        public List<ITerrainItem> Children => _children;
+        public ObservableCollection<ITerrainItem> Children => _children;
+
+        public bool IsAncestorOf(ITerrainItem item)
+        {
+            foreach(ITerrainItem child in Children)
+            {
+                if (child == item) return true;
+
+                if (child is TerrainBrace childBrace && childBrace.IsAncestorOf(item))
+                    return true;
+            }
+            return false;
+        }
     }
 
     public class TerrainProp(int dwId, int frameCount, string szTextureFileName, int bBlock, string szSoundFileName) : INotifyPropertyChanged

@@ -1,5 +1,7 @@
-﻿using eTools_Ultimate.Models;
+﻿using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
+using GongSolutions.Wpf.DragDrop;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,7 +20,11 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private string _searchText = string.Empty;
 
-        public ITerrainItem[] TerrainsView => [.. TerrainsService.Instance.TerrainItems.Where(x => x is TerrainBrace brace && brace.Prop.Name.Contains(SearchText, StringComparison.CurrentCultureIgnoreCase))];
+        [ObservableProperty]
+        private ICollectionView _terrainsView = CollectionViewSource.GetDefaultView(TerrainsService.Instance.TerrainItems);
+
+        [ObservableProperty]
+        private IDropTarget _dragDropHandler = new TerrainsTreeViewDropHandler();
 
         public string SearchText
         {
@@ -29,7 +35,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     _searchText = value;
                     OnPropertyChanged(nameof(SearchText));
-                    OnPropertyChanged(nameof(TerrainsView));
+                    TerrainsView.Refresh();
                 }
             }
         }
@@ -46,7 +52,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private void InitializeViewModel()
         {
-            //TerrainsView.Filter = new Predicate<object>(FilterItem);
+            TerrainsView.Filter = new Predicate<object>(FilterItem);
 
             TerrainsService.Instance.TerrainItems.CollectionChanged += TerrainItems_CollectionChanged;
 
@@ -71,7 +77,6 @@ namespace eTools_Ultimate.ViewModels.Pages
                     terrain.Prop.PropertyChanged += TerrainItem_PropertyChanged;
                 }
             }
-            throw new NotImplementedException();
         }
 
         // TODO: this is not triggered, fix this bug
@@ -83,6 +88,13 @@ namespace eTools_Ultimate.ViewModels.Pages
                     OnPropertyChanged(nameof(TerrainsView));
                     break;
             }
+        }
+
+        private bool FilterItem(object obj)
+        {
+            if (obj is not TerrainBrace brace) return false;
+            if (string.IsNullOrEmpty(this.SearchText)) return true;
+            return brace.Prop.Name.ToLower().Contains(this.SearchText.ToLower());
         }
     }
 }
