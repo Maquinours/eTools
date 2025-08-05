@@ -21,8 +21,6 @@ namespace eTools_Ultimate.Services
 
         public void Load()
         {
-            List<TerrainProp> terrains = []; // TODO: Remove, used for testing
-
             string filePath = $"{Settings.Instance.ResourcesFolderPath}{Path.DirectorySeparatorChar}Terrain.inc"; // TODO: Use a proper path from Settings
 
             using Scanner scanner = new();
