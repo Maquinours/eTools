@@ -129,7 +129,7 @@
                     ItemsSource="{Binding TerrainsView}"
                     ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <TreeView.Resources>
-                        <!--  Template pour les dossiers  -->
+                        <!--  Template for braces  -->
                         <HierarchicalDataTemplate DataType="{x:Type models:TerrainBrace}" ItemsSource="{Binding Children}">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="📁 " />
@@ -137,7 +137,7 @@
                             </StackPanel>
                         </HierarchicalDataTemplate>
 
-                        <!--  Template pour les fichiers  -->
+                        <!--  Template for terrains  -->
                         <DataTemplate DataType="{x:Type models:Terrain}">
                             <StackPanel Orientation="Horizontal">
                                 <Border

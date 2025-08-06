@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -62,10 +63,10 @@ namespace eTools_Ultimate.Models
             return true;
         }
     }
-    public class TerrainBrace(TerrainBraceProp prop, List<ITerrainItem> children) : ITerrainItem
+    public class TerrainBrace(TerrainBraceProp prop, ObservableCollection<ITerrainItem> children) : ITerrainItem
     {
         private readonly TerrainBraceProp _prop = prop;
-        private readonly ObservableCollection<ITerrainItem> _children = new(children);
+        private readonly ObservableCollection<ITerrainItem> _children = children;
 
         public TerrainBraceProp Prop => _prop;
         public ObservableCollection<ITerrainItem> Children => _children;

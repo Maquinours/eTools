@@ -18,10 +18,18 @@ namespace eTools_Ultimate.Helpers
         {
             if (dropInfo.Data is not ITerrainItem sourceItem)
                 throw new InvalidOperationException("TerrainsTreeViewDropHandler::DragOver : dropInfo.Data is not ITerrainItem");
-            if(dropInfo.TargetItem is not ITerrainItem targetItem)
-                throw new InvalidOperationException("TerrainsTreeViewDropHandler::DragOver : dropInfo.TargetItem is not ITerrainItem");
 
-            if (sourceItem == targetItem || (sourceItem is TerrainBrace sourceBrace && sourceBrace.IsAncestorOf(targetItem)))
+            if (dropInfo.TargetItem is not null and not ITerrainItem)
+                throw new InvalidOperationException("TerrainsTreeViewDropHandler::DragOver : dropInfo.TargetItem is neither ITerrainItem nor null");
+
+            ITerrainItem? targetItem = dropInfo.TargetItem as ITerrainItem;
+
+            ObservableCollection<ITerrainItem> sourceCollection =
+                dropInfo.DragInfo.SourceCollection as ObservableCollection<ITerrainItem> ??
+                (dropInfo.DragInfo.SourceCollection as ICollectionView)?.SourceCollection as ObservableCollection<ITerrainItem> ??
+                throw new InvalidOperationException("TerrainsTreeViewDropHandler::Drop exception : Unable to find an ObservableCollection source");
+
+            if (targetItem != null && (sourceItem == targetItem || (sourceItem is TerrainBrace sourceBrace && sourceBrace.IsAncestorOf(targetItem))))
                 return;
 
             if (targetItem is TerrainBrace && (dropInfo.InsertPosition & RelativeInsertPosition.TargetItemCenter) != 0)
@@ -31,6 +39,13 @@ namespace eTools_Ultimate.Helpers
             }
             else if(dropInfo.InsertPosition == RelativeInsertPosition.BeforeTargetItem || dropInfo.InsertPosition == RelativeInsertPosition.AfterTargetItem)
             {
+                if (dropInfo.DragInfo.SourceCollection == dropInfo.TargetCollection)
+                {
+                    int sourceIndex = sourceCollection.IndexOf(sourceItem);
+                    int insertIndex = dropInfo.DragInfo.SourceCollection == dropInfo.TargetCollection && sourceIndex < dropInfo.UnfilteredInsertIndex ? dropInfo.UnfilteredInsertIndex - 1 : dropInfo.UnfilteredInsertIndex;
+                    if (insertIndex == sourceIndex) 
+                        return;
+                }
                 dropInfo.Effects = DragDropEffects.Move;
                 dropInfo.DropTargetAdorner = DropTargetAdorners.Insert;
             }
@@ -56,21 +71,9 @@ namespace eTools_Ultimate.Helpers
             if (sourceItem == targetItem || (sourceItem is TerrainBrace sourceBrace && sourceBrace.IsAncestorOf(targetItem)))
                 return;
 
+            int insertIndex = sourceCollection == targetCollection && sourceCollection.IndexOf(sourceItem) < dropInfo.UnfilteredInsertIndex ? dropInfo.UnfilteredInsertIndex - 1 : dropInfo.UnfilteredInsertIndex;
             sourceCollection.Remove(sourceItem);
-            targetCollection.Insert(dropInfo.InsertIndex, sourceItem);
-            //if (targetItem is TerrainBrace && (dropInfo.InsertPosition & RelativeInsertPosition.TargetItemCenter) != 0)
-            //{
-            //    sourceCollection.Remove(sourceItem);
-            //    targetCollection.Insert(dropInfo.InsertIndex, sourceItem);
-            //    //dropInfo.DragInfo.SourceCollection
-            //    //TerrainBrace? currentParent = TerrainsService.Instance.GetItemParent(sourceItem);
-            //    //if (currentParent == null) TerrainsService.Instance.TerrainItems.Remove(sourceItem);
-            //    //else currentParent.Children.Remove(sourceItem);
-
-            //    //targetBrace.Children.Insert(dropInfo.InsertIndex, sourceItem);
-            //}
-
-            //targetCollection.Add(item);
+            targetCollection.Insert(Math.Min(insertIndex, targetCollection.Count), sourceItem);
         }
     }
 }

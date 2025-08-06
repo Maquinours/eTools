@@ -77,6 +77,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                     terrain.Prop.PropertyChanged += TerrainItem_PropertyChanged;
                 }
             }
+            TerrainsView.Refresh();
         }
 
         // TODO: this is not triggered, fix this bug
@@ -92,9 +93,23 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private bool FilterItem(object obj)
         {
-            if (obj is not TerrainBrace brace) return false;
-            if (string.IsNullOrEmpty(this.SearchText)) return true;
-            return brace.Prop.Name.ToLower().Contains(this.SearchText.ToLower());
+            if (obj is ITerrainItem)
+            {
+                if (string.IsNullOrWhiteSpace(SearchText)) return true;
+                if (obj is TerrainBrace brace)
+                {
+                    if (brace.Prop.Name.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase))
+                        return true;
+
+                    return brace.Children.Any(FilterItem);
+                }
+                if (obj is Terrain terrain)
+                    return terrain.Prop.DwId.ToString().Contains(SearchText, StringComparison.InvariantCultureIgnoreCase) || terrain.Prop.SzTextureFileName.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase);
+                else
+                    throw new InvalidOperationException($"TerrainsViewModel::FilterItem exception : obj is ITerrainItem but neither ITerrainItem nor TerrainBrace or Terrain. obj type : {obj.GetType().Name}");
+            }
+            else
+                throw new InvalidOperationException($"TerrainsViewModel::FilterItem exception : obj is not ITerrainItem, but {obj.GetType().Name}");
         }
     }
 }
