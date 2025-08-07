@@ -127,6 +127,7 @@
                     Background="Transparent"
                     BorderThickness="0"
                     ItemsSource="{Binding TerrainsView}"
+                    Loaded="TerrainsTreeView_Loaded"
                     ScrollViewer.VerticalScrollBarVisibility="Auto">
                     <TreeView.Resources>
                         <!--  Template for braces  -->
