@@ -13,57 +13,14 @@
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="768"
     d:DesignWidth="1024"
-    ui:Design.Background="{StaticResource ApplicationBackgroundBrush}"
-    ui:Design.Foreground="{StaticResource TextFillColorPrimaryBrush}"
-    Foreground="{StaticResource TextFillColorPrimaryBrush}"
+
     ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d" Cursor="">
 
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        
-        <!--  Static Colors for Dark Theme  -->
-        <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="#FFFFFF" />
-        <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="#A0A0A0" />
-        <SolidColorBrush x:Key="ControlFillColorDefaultBrush" Color="#2D2D30" />
-        <SolidColorBrush x:Key="ControlFillColorSecondaryBrush" Color="#404040" />
-        <SolidColorBrush x:Key="ControlStrokeColorDefaultBrush" Color="#3F3F46" />
-        <SolidColorBrush x:Key="CardBackgroundFillColorDefaultBrush" Color="#1E1E1E" />
-        <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#1E1E1E" />
 
-        <!--  TextBox Style  -->
-        <Style
-            x:Key="AppTextBoxStyle"
-            BasedOn="{StaticResource {x:Type TextBox}}"
-            TargetType="TextBox">
-            <Setter Property="Background" Value="{StaticResource ControlFillColorDefaultBrush}" />
-            <Setter Property="Foreground" Value="{StaticResource TextFillColorPrimaryBrush}" />
-            <Setter Property="BorderBrush" Value="{StaticResource ControlStrokeColorDefaultBrush}" />
-            <Setter Property="Padding" Value="8,5" />
-        </Style>
-
-        <!--  ListView Style  -->
-        <Style x:Key="AppListViewStyle" TargetType="ListView">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Foreground" Value="{StaticResource TextFillColorPrimaryBrush}" />
-        </Style>
-
-        <!--  ListViewItem Style  -->
-        <Style x:Key="AppListViewItemStyle" TargetType="ListViewItem">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="{StaticResource TextFillColorPrimaryBrush}" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{StaticResource ControlFillColorSecondaryBrush}" />
-                </Trigger>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="{StaticResource ControlFillColorDefaultBrush}" />
-                    <Setter Property="Foreground" Value="{StaticResource TextFillColorPrimaryBrush}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <!--  Custom Styles - Let WPF UI handle theming automatically  -->
     </Page.Resources>
 
     <Grid x:Name="RootGrid">
@@ -84,8 +41,8 @@
             <Border
                 Grid.Row="0"
                 Margin="0,0,10,0"
-                Background="{StaticResource CardBackgroundFillColorDefaultBrush}"
-                BorderBrush="{StaticResource ControlStrokeColorDefaultBrush}"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                 BorderThickness="1,1,1,0">
                 <ui:TextBox
                     Margin="10,10,10,10"
@@ -99,8 +56,8 @@
             <Border
                 Grid.Row="1"
                 Margin="0,0,10,0"
-                Background="{StaticResource CardBackgroundFillColorDefaultBrush}"
-                BorderBrush="{StaticResource ControlStrokeColorDefaultBrush}"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                 BorderThickness="1,0,1,1">
                 <ListView
                     x:Name="AccessoriesListView"
@@ -108,11 +65,21 @@
                     BorderThickness="0"
                     ItemsSource="{Binding AccessoriesView}"
                     SelectedIndex="0"
-                    Style="{StaticResource AppListViewStyle}">
+                    IsSynchronizedWithCurrentItem="True"
+                    SelectionChanged="VirtualizingGridView_SelectionChanged">
                     <ListView.ItemContainerStyle>
-                        <Style BasedOn="{StaticResource AppListViewItemStyle}" TargetType="ListViewItem">
-                            <Setter Property="Padding" Value="8,4" />
-                            <Setter Property="Margin" Value="0,1" />
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                                </Trigger>
+                            </Style.Triggers>
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
@@ -126,8 +93,8 @@
                                     Width="32"
                                     Height="32"
                                     Margin="0,0,8,0"
-                                    Background="{StaticResource CardBackgroundFillColorDefaultBrush}"
-                                    BorderBrush="{StaticResource ControlStrokeColorDefaultBrush}"
+                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                                     BorderThickness="1">
                                     <Image
                                         Margin="2"
@@ -137,11 +104,11 @@
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                     <TextBlock
                                         FontWeight="SemiBold"
-                                        Foreground="{StaticResource TextFillColorPrimaryBrush}"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                         Text="{Binding Item.Name}" />
                                     <TextBlock
                                         FontSize="12"
-                                        Foreground="{StaticResource TextFillColorSecondaryBrush}"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                         Text="{Binding Item.Identifier}" />
                                 </StackPanel>
                             </Grid>
@@ -166,17 +133,17 @@
                                 Width="2"
                                 Height="20"
                                 Margin="0,2,0,2"
-                                Fill="{StaticResource TextFillColorSecondaryBrush}" />
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
                             <Rectangle
                                 Width="2"
                                 Height="20"
                                 Margin="0,2,0,2"
-                                Fill="{StaticResource TextFillColorSecondaryBrush}" />
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
                             <Rectangle
                                 Width="2"
                                 Height="20"
                                 Margin="0,2,0,2"
-                                Fill="{StaticResource TextFillColorSecondaryBrush}" />
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>
@@ -192,6 +159,12 @@
             BorderThickness="0"
             CornerRadius="8">
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                
                 <!--  Add and Delete Buttons top right  -->
                 <StackPanel
                     Margin="0,10,20,0"
@@ -199,12 +172,11 @@
                     VerticalAlignment="Top"
                     Orientation="Horizontal"
                     ZIndex="1">
-                    <ui:Button Command="{Binding UndoCommand}" ToolTip="Undo">
+                    <ui:Button ToolTip="Undo">
                         <ui:SymbolIcon Symbol="ArrowUndo24" />
                     </ui:Button>
                     <ui:Button
                         Margin="10,0,10,0"
-                        Command="{Binding RedoCommand}"
                         ToolTip="Redo">
                         <ui:SymbolIcon Symbol="ArrowRedo24" />
                     </ui:Button>
@@ -214,21 +186,15 @@
                         Click="SaveButton_Click"
                         Content="Save" />
                     <ui:Button
-                        x:Name="ExportButton"
+                        x:Name="ExpertButton"
                         Margin="0,0,10,0"
                         Appearance="Secondary"
-                        Content="Export" />
-                    <ui:Button
-                        x:Name="FilterButton"
-                        Margin="0,0,10,0"
-                        Appearance="Secondary"
-                        Content="Filter" />
+                        Content="Expert" />
+                    
                     <ui:Button
                         x:Name="AddButton"
                         Margin="0,0,10,0"
-                        Appearance="Primary"
-                        Background="{StaticResource ControlFillColorDefaultBrush}"
-                        Foreground="{StaticResource TextFillColorPrimaryBrush}"
+                        Background="#2F70AF"
                         Click="AddButton_Click"
                         Content="Add" />
                     <ui:Button
@@ -238,22 +204,20 @@
                         Click="DeleteButton_Click"
                         Content="Delete" />
                 </StackPanel>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
 
                 <!--  Accessory Title  -->
                 <StackPanel Grid.Row="0" Margin="0,0,0,16">
                     <TextBlock
                         FontSize="24"
                         FontWeight="Bold"
-                        Text="{Binding SelectedItem.Item.Identifier, Mode=OneWay, ElementName=AccessoriesListView}" />
-                    <TextBlock>
+                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                        Text="{Binding SelectedItem.Item.Name, Mode=OneWay, ElementName=AccessoriesListView}" />
+                    <TextBlock
+                        FontSize="14"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0} - {1}">
-                                <Binding ElementName="AccessoriesListView" Path="SelectedItem.Item.Name" />
+                                <Binding ElementName="AccessoriesListView" Path="SelectedItem.Item.Identifier" />
                                 <Binding ElementName="AccessoriesListView" Path="SelectedItem.Item.Description" />
                             </MultiBinding>
                         </TextBlock.Text>
@@ -285,7 +249,7 @@
                                 <Border
                                     Margin="0,0,0,12"
                                     Padding="16"
-                                    BorderBrush="{StaticResource ControlStrokeColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                                     BorderThickness="1"
                                     CornerRadius="6" Tag="{Binding}">
                                     <Grid>
@@ -307,6 +271,7 @@
                                                 VerticalAlignment="Center"
                                                 FontSize="18"
                                                 FontWeight="SemiBold"
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                 Text="{Binding NAbilityOption, StringFormat='Level {0}'}" />
 
                                             <StackPanel Grid.Column="1" Orientation="Horizontal">
@@ -342,6 +307,9 @@
                                                             Grid.Column="0"
                                                             Margin="0,0,12,0"
                                                             FontSize="14"
+                                                            Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                             OriginalItemsSource="{Binding DataContext.PossibleDstValues, RelativeSource={RelativeSource AncestorType=Page}}"
                                                             Text="{Binding DestIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
 
@@ -356,6 +324,9 @@
                                                             <ui:NumberBox
                                                                 Name="ValueTextBox"
                                                                 Grid.Column="0"
+                                                                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                                 Value="{Binding NAdj, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                                         </Grid>
 
@@ -391,9 +362,11 @@
                                                     VerticalAlignment="Center"
                                                     FontSize="12"
                                                     Margin="0,0,4,0"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                     Text="➕" />
                                                 <TextBlock
                                                     VerticalAlignment="Center"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                     Text="Add Attribute" />
                                             </StackPanel>
                                         </ui:Button>

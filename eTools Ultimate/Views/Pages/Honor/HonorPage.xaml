@@ -44,256 +44,316 @@
             <Setter Property="FontWeight" Value="Bold" />
             <Setter Property="Margin" Value="0,15,0,15" />
         </Style>
+
+
+
+        <!--  DataTemplate for Honor ListView Items  -->
+        <DataTemplate x:Key="HonorListTemplate">
+            <Grid Margin="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Border
+                    Width="32"
+                    Height="32"
+                    Margin="0,0,8,0"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                    BorderThickness="1">
+                    <ui:SymbolIcon
+                        FontSize="16"
+                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                        Symbol="Trophy24" />
+                </Border>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock
+                        FontWeight="SemiBold"
+                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                        Text="{Binding TitleName}" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                        Text="{Binding TitleId}" />
+                </StackPanel>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <Grid x:Name="RootGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
 
-        <!--  Main content  -->
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="400" />
-            </Grid.ColumnDefinitions>
+        <!--  Left Side - ListView  -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-            <!--  Left side: List of honor entries  -->
-            <Grid Grid.Column="0" Margin="0,0,20,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+            <!--  Search Bar  -->
+            <Border
+                Grid.Row="0"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,1,1,0">
+                <ui:TextBox
+                    Margin="10,10,10,10"
+                    BorderThickness="0"
+                    Icon="Search24"
+                    PlaceholderText="Suche nach Titeln..."
+                    Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Border>
 
-                <!--  Search and filter  -->
-                <Grid Grid.Row="0" Margin="0,0,0,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <ui:TextBox
-                        Grid.Column="0"
-                        Margin="0,0,10,0"
-                        PlaceholderText="Search by title, ID, category..."
-                        Text="{Binding ViewModel.SearchText, UpdateSourceTrigger=PropertyChanged}">
-                        <ui:TextBox.Icon>
-                            <ui:SymbolIcon Symbol="Search24" />
-                        </ui:TextBox.Icon>
-                    </ui:TextBox>
-
-                    <Button
-                        Grid.Column="1"
-                        Command="{Binding ViewModel.ReloadHonorItemsCommand}"
-                        ToolTip="Reload honor list">
-                        <ui:SymbolIcon Symbol="ArrowSync24" />
-                    </Button>
-                </Grid>
-
-                <!--  DataGrid for honor entries  -->
-                <DataGrid
-                    x:Name="HonorsDataGrid"
-                    Grid.Row="1"
-                    AutoGenerateColumns="False"
-                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                    BorderThickness="1"
-                    CanUserAddRows="False"
-                    CanUserDeleteRows="False"
-                    IsReadOnly="True"
+            <!--  Honor List  -->
+            <Border
+                Grid.Row="1"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,0,1,1">
+                <ListView
+                    x:Name="HonorsListView"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    IsSynchronizedWithCurrentItem="True"
+                    ItemTemplate="{StaticResource HonorListTemplate}"
                     ItemsSource="{Binding ViewModel.HonorsView}"
-                    SelectionMode="Single">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn
-                            Width="60"
-                            Binding="{Binding NId}"
-                            Header="Index" />
-                        <DataGridTextColumn
-                            Width="150"
-                            Binding="{Binding StrTitle}"
-                            Header="Title ID" />
-                        <DataGridTextColumn
-                            Width="*"
-                            Binding="{Binding Title}"
-                            Header="Title Name" />
-                        <DataGridTextColumn
-                            Width="120"
-                            Binding="{Binding NLGrouping}"
-                            Header="Category" />
-                        <DataGridTextColumn
-                            Width="120"
-                            Binding="{Binding NSGrouping}"
-                            Header="Sub Category" />
-                        <DataGridTextColumn
-                            Width="100"
-                            Binding="{Binding NNeed}"
-                            Header="Req. Value" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
+                    SelectionChanged="HonorsListView_SelectionChanged">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </Border>
+        </Grid>
 
-            <!--  Right side: Edit form  -->
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
+        <!--  Separator  -->
+        <GridSplitter
+            Grid.Column="1"
+            Width="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Stretch"
+            Background="Transparent">
+            <GridSplitter.Template>
+                <ControlTemplate TargetType="{x:Type GridSplitter}">
+                    <Grid Background="Transparent">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </GridSplitter.Template>
+        </GridSplitter>
 
-                <!--  Header  -->
-                <TextBlock
-                    Grid.Row="0"
-                    Margin="0,0,0,20"
-                    Style="{StaticResource SectionHeaderStyle}"
-                    Text="Edit Honor Title" />
-
-                <!--  Edit form  -->
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                    <StackPanel>
-                        <!--  Index  -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <TextBlock
-                                Grid.Row="0"
-                                Style="{StaticResource FieldLabelStyle}"
-                                Text="Index" />
-                            <ui:NumberBox
-                                Grid.Row="1"
-                                Cursor="Arrow"
-                                Value="{Binding SelectedItem.NId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsDataGrid}" />
-                        </Grid>
-
-                        <!--  Title ID  -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <TextBlock
-                                Grid.Row="0"
-                                Style="{StaticResource FieldLabelStyle}"
-                                Text="Title ID" />
-                            <TextBox Grid.Row="1" Text="{Binding SelectedItem.StrTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsDataGrid}" />
-                        </Grid>
-
-                        <!--  Title Name  -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <TextBlock
-                                Grid.Row="0"
-                                Style="{StaticResource FieldLabelStyle}"
-                                Text="Title Name" />
-                            <TextBox Grid.Row="1" Text="{Binding SelectedItem.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsDataGrid}" />
-                        </Grid>
-
-                        <!--  Category  -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <TextBlock
-                                Grid.Row="0"
-                                Style="{StaticResource FieldLabelStyle}"
-                                Text="Category" />
-                            <ComboBox
-                                Grid.Row="1"
-                                IsEditable="True"
-                                Text="{Binding SelectedItem.NLGrouping, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsDataGrid}">
-                                <ComboBoxItem Content="HI_COUNT_CHECK" />
-                                <ComboBoxItem Content="HI_ELASPED_TIME" />
-                                <ComboBoxItem Content="HI_USE_ITEM" />
-                                <ComboBoxItem Content="HI_EARN_TITLE" />
-                                <ComboBoxItem Content="HI_HUNT_MONSTER" />
-                            </ComboBox>
-                        </Grid>
-
-                        <!--  Sub Category  -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <TextBlock
-                                Grid.Row="0"
-                                Style="{StaticResource FieldLabelStyle}"
-                                Text="Sub Category" />
-                            <TextBox Grid.Row="1" Text="{Binding SelectedItem.NSGrouping, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsDataGrid}" />
-                        </Grid>
-
-                        <!--  Required Value  -->
-                        <Grid Style="{StaticResource FormFieldStyle}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <TextBlock
-                                Grid.Row="0"
-                                Style="{StaticResource FieldLabelStyle}"
-                                Text="Required Value" />
-                            <ui:NumberBox Grid.Row="1" Value="{Binding SelectedItem.NNeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsDataGrid}" />
-                        </Grid>
-                    </StackPanel>
-                </ScrollViewer>
-
-                <!--  Buttons  -->
+        <!--  Right Side - Form  -->
+        <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <!--  Action Buttons oben rechts  -->
                 <StackPanel
-                    Grid.Row="2"
-                    Margin="0,20,0,0"
+                    Margin="0,10,20,0"
                     HorizontalAlignment="Right"
-                    Orientation="Horizontal">
-                    <Button
-                        Margin="0,0,10,0"
-                        Command="{Binding ViewModel.AddHonorItemCommand}"
-                        Content="New" />
-                    <Button
+                    VerticalAlignment="Top"
+                    Orientation="Horizontal"
+                    ZIndex="1">
+                    <ui:Button ToolTip="Undo">
+                        <ui:SymbolIcon Symbol="ArrowUndo24" />
+                    </ui:Button>
+                    <ui:Button Margin="10,0,10,0" ToolTip="Redo">
+                        <ui:SymbolIcon Symbol="ArrowRedo24" />
+                    </ui:Button>
+                    <ui:Button
+                        x:Name="SaveButton"
                         Margin="0,0,10,0"
                         Command="{Binding ViewModel.UpdateHonorItemCommand}"
                         Content="Save" />
-                    <Button Command="{Binding ViewModel.DeleteHonorItemCommand}" Content="Delete" />
+                    <ui:Button
+                        x:Name="ExpertButton"
+                        Margin="0,0,10,0"
+                        Appearance="Secondary"
+                        Content="Expert" />
+                    
+                    <ui:Button
+                        x:Name="AddButton"
+                        Margin="0,0,10,0"
+                        Background="#2F70AF"
+                        Command="{Binding ViewModel.AddHonorItemCommand}"
+                        Content="Add" />
+                    <ui:Button
+                        x:Name="DeleteButton"
+                        Background="#FD292F"
+                        Command="{Binding ViewModel.DeleteHonorItemCommand}"
+                        Content="Delete" />
+                </StackPanel>
+
+                <!--  Formulare  -->
+                <StackPanel Margin="20">
+                    <!--  Honor Details Section  -->
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Honor Details" />
+                        <UniformGrid Columns="2">
+                            <!--  Index  -->
+                            <Grid Style="{StaticResource FormFieldStyle}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Index" />
+                                    <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                        <ui:SymbolIcon.ToolTip>
+                                            <ToolTip Content="Unique index of the honor title" />
+                                        </ui:SymbolIcon.ToolTip>
+                                    </ui:SymbolIcon>
+                                </StackPanel>
+                                <ui:NumberBox
+                                    x:Name="IndexNumberBox"
+                                    Grid.Row="1"
+                                    SpinButtonPlacementMode="Inline"
+                                    Value="{Binding SelectedItem.Index, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsListView}" />
+                            </Grid>
+
+                            <!--  Title ID  -->
+                            <Grid Style="{StaticResource FormFieldStyle}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Title ID" />
+                                    <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                        <ui:SymbolIcon.ToolTip>
+                                            <ToolTip Content="Unique identifier for the honor title" />
+                                        </ui:SymbolIcon.ToolTip>
+                                    </ui:SymbolIcon>
+                                </StackPanel>
+                                <TextBox
+                                    x:Name="TitleIdTextBox"
+                                    Grid.Row="1"
+                                    Text="{Binding SelectedItem.TitleId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsListView}" />
+                            </Grid>
+
+                            <!--  Title Name  -->
+                            <Grid Style="{StaticResource FormFieldStyle}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Title Name" />
+                                    <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                        <ui:SymbolIcon.ToolTip>
+                                            <ToolTip Content="Display name of the honor title" />
+                                        </ui:SymbolIcon.ToolTip>
+                                    </ui:SymbolIcon>
+                                </StackPanel>
+                                <TextBox
+                                    x:Name="TitleNameTextBox"
+                                    Grid.Row="1"
+                                    Text="{Binding SelectedItem.TitleName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsListView}" />
+                            </Grid>
+
+                            <!--  Category  -->
+                            <Grid Style="{StaticResource FormFieldStyle}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Category" />
+                                    <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                        <ui:SymbolIcon.ToolTip>
+                                            <ToolTip Content="Category of the honor title" />
+                                        </ui:SymbolIcon.ToolTip>
+                                    </ui:SymbolIcon>
+                                </StackPanel>
+                                <ComboBox
+                                    x:Name="CategoryComboBox"
+                                    Grid.Row="1"
+                                    IsEditable="True"
+                                    Text="{Binding SelectedItem.Category, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsListView}">
+                                    <ComboBoxItem Content="HI_COUNT_CHECK" />
+                                    <ComboBoxItem Content="HI_ELASPED_TIME" />
+                                    <ComboBoxItem Content="HI_USE_ITEM" />
+                                    <ComboBoxItem Content="HI_EARN_TITLE" />
+                                    <ComboBoxItem Content="HI_HUNT_MONSTER" />
+                                </ComboBox>
+                            </Grid>
+
+                            <!--  Sub Category  -->
+                            <Grid Style="{StaticResource FormFieldStyle}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Sub Category" />
+                                    <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                        <ui:SymbolIcon.ToolTip>
+                                            <ToolTip Content="Subcategory of the honor title" />
+                                        </ui:SymbolIcon.ToolTip>
+                                    </ui:SymbolIcon>
+                                </StackPanel>
+                                <TextBox
+                                    x:Name="SubCategoryTextBox"
+                                    Grid.Row="1"
+                                    Text="{Binding SelectedItem.SubCategory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsListView}" />
+                            </Grid>
+
+                            <!--  Required Value  -->
+                            <Grid Style="{StaticResource FormFieldStyle}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Required Value" />
+                                    <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                        <ui:SymbolIcon.ToolTip>
+                                            <ToolTip Content="Required value to obtain this honor title" />
+                                        </ui:SymbolIcon.ToolTip>
+                                    </ui:SymbolIcon>
+                                </StackPanel>
+                                <ui:NumberBox
+                                    x:Name="RequiredValueNumberBox"
+                                    Grid.Row="1"
+                                    Minimum="0"
+                                    SpinButtonPlacementMode="Inline"
+                                    Value="{Binding SelectedItem.RequiredValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsListView}" />
+                            </Grid>
+                        </UniformGrid>
+                    </StackPanel>
                 </StackPanel>
             </Grid>
-        </Grid>
-
-        <!--  Status bar  -->
-        <Border
-            Grid.Row="1"
-            Margin="0,20,0,0"
-            Padding="10"
-            Background="{DynamicResource ControlFillColorDefaultBrush}"
-            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-            BorderThickness="0,1,0,0">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <TextBlock
-                    Grid.Column="0"
-                    VerticalAlignment="Center"
-                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                    Text="{Binding ViewModel.StatusMessage}" />
-
-                <Button
-                    Grid.Column="1"
-                    Margin="0,0,10,0"
-                    Command="{Binding ViewModel.SaveHonorItemsCommand}"
-                    Content="Save All Changes" />
-
-                <ProgressBar
-                    Grid.Column="2"
-                    Width="100"
-                    IsIndeterminate="{Binding ViewModel.IsLoading}"
-                    Visibility="{Binding ViewModel.IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            </Grid>
-        </Border>
+        </ScrollViewer>
     </Grid>
 </Page> 

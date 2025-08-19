@@ -173,8 +173,8 @@
                     Width="32"
                     Height="32"
                     Margin="0,0,8,0"
-                    Background="#2D2D30"
-                    BorderBrush="#3F3F46"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                     BorderThickness="1">
                     <Image
                         Margin="2"
@@ -184,11 +184,11 @@
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
                     <TextBlock
                         FontWeight="SemiBold"
-                        Foreground="White"
+                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                         Text="{Binding Name}" />
                     <TextBlock
                         FontSize="12"
-                        Foreground="#B0B0B0"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                         Text="{Binding Identifier}" />
                 </StackPanel>
             </Grid>
@@ -214,53 +214,53 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <!--  Search Bar  -->
-                <Border
-                    Grid.Row="0"
-                    Margin="0,0,10,0"
-                    Background="#2D2D30"
-                    BorderBrush="#3F3F46"
-                    BorderThickness="1,1,1,0">
-                    <ui:TextBox
-                        Margin="10,10,10,10"
-                        BorderThickness="0"
-                        Icon="Search24"
-                        PlaceholderText="Suche..."
-                        Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                </Border>
+                            <!--  Search Bar  -->
+            <Border
+                Grid.Row="0"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,1,1,0">
+                <ui:TextBox
+                    Margin="10,10,10,10"
+                    BorderThickness="0"
+                    Icon="Search24"
+                    PlaceholderText="Suche..."
+                    Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Border>
 
-                <!--  Motion List  -->
-                <Border
-                    Grid.Row="1"
-                    Margin="0,0,10,0"
-                    Background="#2D2D30"
-                    BorderBrush="#3F3F46"
-                    BorderThickness="1,0,1,1">
-                    <ListView
-                        x:Name="MotionsListView"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        IsSynchronizedWithCurrentItem="True"
-                        ItemTemplate="{StaticResource MotionListTemplate}"
-                        ItemsSource="{Binding ViewModel.MotionsView}"
-                        SelectionChanged="MotionsListView_SelectionChanged">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="Background" Value="Transparent" />
-                                <Setter Property="BorderBrush" Value="#3F3F46" />
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#404040" />
-                                    </Trigger>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Background" Value="#2D2D30" />
-                                        <Setter Property="Foreground" Value="White" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
-                </Border>
+            <!--  Motion List  -->
+            <Border
+                Grid.Row="1"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,0,1,1">
+                <ListView
+                    x:Name="MotionsListView"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    IsSynchronizedWithCurrentItem="True"
+                    ItemTemplate="{StaticResource MotionListTemplate}"
+                    ItemsSource="{Binding ViewModel.MotionsView}"
+                    SelectionChanged="MotionsListView_SelectionChanged">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </Border>
             </Grid>
 
             <!--  Separator  -->
@@ -278,17 +278,17 @@
                                     Width="2"
                                     Height="20"
                                     Margin="0,2,0,2"
-                                    Fill="#B0B0B0" />
+                                    Fill="{DynamicResource TextFillColorSecondaryBrush}" />
                                 <Rectangle
                                     Width="2"
                                     Height="20"
                                     Margin="0,2,0,2"
-                                    Fill="#B0B0B0" />
+                                    Fill="{DynamicResource TextFillColorSecondaryBrush}" />
                                 <Rectangle
                                     Width="2"
                                     Height="20"
                                     Margin="0,2,0,2"
-                                    Fill="#B0B0B0" />
+                                    Fill="{DynamicResource TextFillColorSecondaryBrush}" />
                             </StackPanel>
                         </Grid>
                     </ControlTemplate>
@@ -358,8 +358,8 @@
                                     </Grid.RowDefinitions>
                                     <Border
                                         Grid.Row="0"
-                                        Background="#2D2D30"
-                                        BorderBrush="#3F3F46"
+                                        Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                                         BorderThickness="1"
                                         CornerRadius="4">
                                         <Grid>
@@ -368,47 +368,6 @@
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
                                                 Stretch="UniformToFill" />
-
-                                            <StackPanel
-                                                Margin="0,5,5,0"
-                                                HorizontalAlignment="Right"
-                                                VerticalAlignment="Top"
-                                                Panel.ZIndex="1"
-                                                Orientation="Horizontal">
-                                                <ui:Button Margin="0,0,5,0">
-                                                    <ui:Button.Style>
-                                                        <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
-                                                            <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="False">
-                                                                    <Setter Property="ToolTip" Value="Play selected motion" />
-                                                                    <Setter Property="Command" Value="{Binding PlayMotionCommand, Mode=OneWay}" />
-                                                                </DataTrigger>
-                                                                <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="True">
-                                                                    <Setter Property="ToolTip" Value="Stop current motion" />
-                                                                    <Setter Property="Command" Value="{Binding StopMotionCommand, Mode=OneWay}" />
-                                                                </DataTrigger>
-                                                            </Style.Triggers>
-                                                        </Style>
-                                                    </ui:Button.Style>
-                                                    <ui:SymbolIcon>
-                                                        <ui:SymbolIcon.Style>
-                                                            <Style TargetType="ui:SymbolIcon">
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="False">
-                                                                        <Setter Property="Symbol" Value="Play24" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="True">
-                                                                        <Setter Property="Symbol" Value="Stop24" />
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </ui:SymbolIcon.Style>
-                                                    </ui:SymbolIcon>
-                                                </ui:Button>
-                                                <ui:Button Command="{Binding ShowReferenceModelContentDialogCommand}" ToolTip="Reference Model">
-                                                    <ui:SymbolIcon Symbol="ImageReflection24" />
-                                                </ui:Button>
-                                            </StackPanel>
                                         </Grid>
                                     </Border>
                                     

@@ -18,5 +18,11 @@ namespace eTools_Ultimate.Views.Pages.Honor
 
             InitializeComponent();
         }
+
+        private void HonorsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Handle selection change if needed
+            // The selection is automatically synchronized with the ViewModel through IsSynchronizedWithCurrentItem="True"
+        }
     }
 } 

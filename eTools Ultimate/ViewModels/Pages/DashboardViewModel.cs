@@ -36,13 +36,13 @@ namespace eTools_Ultimate.ViewModels.Pages
             new("Motions", "Navigate to the motions page.", "/eTools Ultimate;component/Assets/Icons/Motions.png", typeof(MotionPage)),
             new("Text Client", "Navigate to the text client.", "/eTools Ultimate;component/Assets/Icons/Texts.png", typeof(TextClientPage)),
             new("World", "Navigate to the world editor.", "/eTools Ultimate;component/Assets/Icons/World.png", typeof(WorldPage)),
-            new("Tickets", "Navigate to the ticket editor.", "/eTools Ultimate;component/Assets/Icons/Tickets.png", typeof(TicketPage)),
+            new("Tickets", "Navigate to the ticket editor.", "/eTools Ultimate;component/Assets/Icons/ticket.png", typeof(TicketPage)),
             new("Object", "Navigate to the object editor.", "/eTools Ultimate;component/Assets/Icons/Terrain.png", typeof(ObjectPage)),
             new("Terrain", "Navigate to the terrain editor.", "/eTools Ultimate;component/Assets/Icons/Terrain.png", typeof(TerrainObjectPage)),
-            new("Job", "Navigate to the job editor.", "/eTools Ultimate;component/Assets/Icons/Job.png", typeof(JobPage)),
-            new("Packitem", "Navigate to the packitem editor.", "/eTools Ultimate;component/Assets/Icons/PackItem.png", typeof(PackitemPage)),
+            new("Job", "Navigate to the job editor.", "/eTools Ultimate;component/Assets/Icons/ticket.png", typeof(JobPage)),
+            new("Packitem", "Navigate to the packitem editor.", "/eTools Ultimate;component/Assets/Icons/ticket.png", typeof(PackitemPage)),
             new("Lord", "Navigate to the lord editor.", "/eTools Ultimate;component/Assets/Icons/Lord.png", typeof(LordPage)),
-            new("Drop Event", "Navigate to the drop event editor.", "/eTools Ultimate;component/Assets/Icons/DropEvent.png", typeof(DropEventPage)),
+            new("Drop Event", "Navigate to the drop event editor.", "/eTools Ultimate;component/Assets/Icons/ticket.png", typeof(DropEventPage)),
             new("Settings", "Navigate to the settings page.", "/eTools Ultimate;component/Assets/Icons/Settings.png", typeof(SettingsPage))
         ];
 

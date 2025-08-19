@@ -9,19 +9,18 @@
         Improved,
         Updated
     }
+    
     public record class PatchModification(string Text, PatchModificationType Type);
-    public record class Patch(string Version, DateTime Date, PatchModification[] Modifications);
-    //{
-    //    public string Version { get; }
-    //    public DateTime Date { get; }
-    //    public PatchModification[] Modifications {get; }
-
-    //    [JsonConstructor]
-    //    public Patch(string version, DateTime date, PatchModification[] modifications)
-    //    {
-    //        Version = version;
-    //        Date = date;
-    //        Modifications = modifications;
-    //    }
-    //}
+    
+    public record class PatchCategory
+    {
+        public PatchModification[] Added { get; init; } = [];
+        public PatchModification[] Changed { get; init; } = [];
+        public PatchModification[] Fixed { get; init; } = [];
+        public PatchModification[] Improved { get; init; } = [];
+        public PatchModification[] Removed { get; init; } = [];
+        public PatchModification[] Updated { get; init; } = [];
+    }
+    
+    public record class Patch(string Version, DateTime Date, PatchModification[] Modifications, string? DeveloperText = null, string? ImagePath = null, PatchCategory? Categories = null);
 }
