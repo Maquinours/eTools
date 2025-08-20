@@ -69,26 +69,6 @@
                             Text="{Binding Path=DwId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
-                    <!--  Motion ID Key  -->
-                    <Grid Margin="0,0,15,20" Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Motion ID Key" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Internal key identifier for the motion" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox
-                            x:Name="MotionIdKeyTextBox"
-                            Grid.Row="1"
-                            Text="{Binding Path=DwMotion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </Grid>
-
                     <!--  Motion Icon  -->
                     <Grid Margin="0,0,15,20" Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -131,26 +111,6 @@
                                     Source="{Binding Icon}" />
                             </Border>
                         </Grid>
-                    </Grid>
-
-                    <!--  Play ID Key  -->
-                    <Grid Margin="0,0,15,20" Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Play ID Key" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Key used to trigger the motion animation" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox
-                            x:Name="PlayIdKeyTextBox"
-                            Grid.Row="1"
-                            Text="{Binding Path=DwPlay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
                     <!--  InGame Name  -->
@@ -254,53 +214,53 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <!--  Search Bar  -->
-                <Border
-                    Grid.Row="0"
-                    Margin="0,0,10,0"
-                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                    BorderThickness="1,1,1,0">
-                    <ui:TextBox
-                        Margin="10,10,10,10"
-                        BorderThickness="0"
-                        Icon="Search24"
-                        PlaceholderText="Suche..."
-                        Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                </Border>
+                            <!--  Search Bar  -->
+            <Border
+                Grid.Row="0"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,1,1,0">
+                <ui:TextBox
+                    Margin="10,10,10,10"
+                    BorderThickness="0"
+                    Icon="Search24"
+                    PlaceholderText="Suche..."
+                    Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Border>
 
-                <!--  Motion List  -->
-                <Border
-                    Grid.Row="1"
-                    Margin="0,0,10,0"
-                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                    BorderThickness="1,0,1,1">
-                    <ListView
-                        x:Name="MotionsListView"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        IsSynchronizedWithCurrentItem="True"
-                        ItemTemplate="{StaticResource MotionListTemplate}"
-                        ItemsSource="{Binding ViewModel.MotionsView}"
-                        SelectionChanged="MotionsListView_SelectionChanged">
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="Background" Value="Transparent" />
-                                <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
-                                    </Trigger>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
-                                        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
-                </Border>
+            <!--  Motion List  -->
+            <Border
+                Grid.Row="1"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,0,1,1">
+                <ListView
+                    x:Name="MotionsListView"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    IsSynchronizedWithCurrentItem="True"
+                    ItemTemplate="{StaticResource MotionListTemplate}"
+                    ItemsSource="{Binding ViewModel.MotionsView}"
+                    SelectionChanged="MotionsListView_SelectionChanged">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </Border>
             </Grid>
 
             <!--  Separator  -->
@@ -367,10 +327,12 @@
                         <ui:Button
                             x:Name="AddButton"
                             Margin="0,0,10,0"
+                            HorizontalAlignment="Left"
                             Appearance="Primary"
                             Background="#2F70AF"
-                            Click="AddButton_Click"
-                            Content="Add" />
+                            Click="AddButton_Click">
+                            <TextBlock Text="Add" Foreground="White" />
+                        </ui:Button>
                         <ui:Button
                             x:Name="DeleteButton"
                             Background="#FD292F"
@@ -381,9 +343,46 @@
                     <!--  Form  -->
                     <StackPanel Margin="20">
                         <ContentControl Content="{Binding ViewModel.MotionsView}" ContentTemplate="{StaticResource MotionDetailsSectionTemplate}" />
+                        
+                        <!--  3D Model Preview Section  -->
+                        <StackPanel Margin="0,20,0,0">
+                            <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Model Preview" />
+                            
+                            <!--  Preview Container  -->
+                            <Grid Margin="0,0,0,15" HorizontalAlignment="Left">
+                                <!--  3D Model Preview  -->
+                                <Grid Width="500">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="250" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Border
+                                        Grid.Row="0"
+                                        Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="4">
+                                        <Grid>
+                                            <Image
+                                                x:Name="DxImage"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Stretch="UniformToFill" />
+                                        </Grid>
+                                    </Border>
+                                    
+                                    <!--  Loop Mode Dropdown  -->
+                                    <ComboBox Grid.Row="1" Margin="0,10,0,0" SelectedIndex="0">
+                                        <ComboBoxItem Content="Loop" />
+                                        <ComboBoxItem Content="One Time Keep" />
+                                        <ComboBoxItem Content="One Time" />
+                                    </ComboBox>
+                                </Grid>
+                            </Grid>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
         </Grid>
     </Grid>
-</Page> 
+</Page>

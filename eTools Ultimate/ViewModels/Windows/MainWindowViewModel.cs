@@ -119,6 +119,48 @@ namespace eTools_Ultimate.ViewModels.Windows
                     Content = "Terrain/Object",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Terrain.png", 25, 25),
                     TargetPageType = typeof(Views.Pages.TerrainObject.TerrainObjectPage)
+                },
+                new NavigationViewItem()
+                {
+                    Content = "World",
+                    Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/World.png", 25, 25),
+                    TargetPageType = typeof(Views.Pages.World.WorldPage)
+                },
+                new NavigationViewItem()
+                {
+                    Content = "Tickets",
+                    Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/ticket.png", 25, 25),
+                    TargetPageType = typeof(Views.Pages.Ticket.TicketPage)
+                },
+                new NavigationViewItem()
+                {
+                    Content = "Object",
+                    Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Terrain.png", 25, 25),
+                    TargetPageType = typeof(Views.Pages.Object.ObjectPage)
+                },
+                new NavigationViewItem()
+                {
+                    Content = "Job",
+                    Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/ticket.png", 25, 25),
+                    TargetPageType = typeof(Views.Pages.Job.JobPage)
+                },
+                new NavigationViewItem()
+                {
+                    Content = "Packitem",
+                    Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/ticket.png", 25, 25),
+                    TargetPageType = typeof(Views.Pages.Packitem.PackitemPage)
+                },
+                new NavigationViewItem()
+                {
+                    Content = "Lord",
+                    Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Lord.png", 25, 25),
+                    TargetPageType = typeof(Views.Pages.Lord.LordPage)
+                },
+                new NavigationViewItem()
+                {
+                    Content = "Drop Event",
+                    Icon = CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/ticket.png", 25, 25),
+                    TargetPageType = typeof(Views.Pages.DropEvent.DropEventPage)
                 }
             ];
 

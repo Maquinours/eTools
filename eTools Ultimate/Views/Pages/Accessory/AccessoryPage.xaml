@@ -13,48 +13,14 @@
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="768"
     d:DesignWidth="1024"
-    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+
     ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d" Cursor="">
 
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
 
-        <!--  TextBox Style  -->
-        <Style
-            x:Key="AppTextBoxStyle"
-            BasedOn="{StaticResource {x:Type TextBox}}"
-            TargetType="TextBox">
-            <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-            <Setter Property="Padding" Value="8,5" />
-        </Style>
-
-        <!--  ListView Style  -->
-        <Style x:Key="AppListViewStyle" TargetType="ListView">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-        </Style>
-
-        <!--  ListViewItem Style  -->
-        <Style x:Key="AppListViewItemStyle" TargetType="ListViewItem">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
-                </Trigger>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
-                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-                </Trigger>
-            </Style.Triggers>
-        </Style>
+        <!--  Custom Styles - Let WPF UI handle theming automatically  -->
     </Page.Resources>
 
     <Grid x:Name="RootGrid">
@@ -99,11 +65,21 @@
                     BorderThickness="0"
                     ItemsSource="{Binding AccessoriesView}"
                     SelectedIndex="0"
-                    Style="{StaticResource AppListViewStyle}">
+                    IsSynchronizedWithCurrentItem="True"
+                    SelectionChanged="VirtualizingGridView_SelectionChanged">
                     <ListView.ItemContainerStyle>
-                        <Style BasedOn="{StaticResource AppListViewItemStyle}" TargetType="ListViewItem">
-                            <Setter Property="Padding" Value="8,4" />
-                            <Setter Property="Margin" Value="0,1" />
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                                </Trigger>
+                            </Style.Triggers>
                         </Style>
                     </ListView.ItemContainerStyle>
                     <ListView.ItemTemplate>
@@ -188,17 +164,60 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
+                
+                <!--  Add and Delete Buttons top right  -->
+                <StackPanel
+                    Margin="0,10,20,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Orientation="Horizontal"
+                    ZIndex="1">
+                    <ui:Button ToolTip="Undo">
+                        <ui:SymbolIcon Symbol="ArrowUndo24" />
+                    </ui:Button>
+                    <ui:Button
+                        Margin="10,0,10,0"
+                        ToolTip="Redo">
+                        <ui:SymbolIcon Symbol="ArrowRedo24" />
+                    </ui:Button>
+                    <ui:Button
+                        x:Name="SaveButton"
+                        Margin="0,0,10,0"
+                        Click="SaveButton_Click"
+                        Content="Save" />
+                    <ui:Button
+                        x:Name="ExpertButton"
+                        Margin="0,0,10,0"
+                        Appearance="Secondary"
+                        Content="Expert" />
+                    
+                    <ui:Button
+                        x:Name="AddButton"
+                        Margin="0,0,10,0"
+                        Background="#2F70AF"
+                        Click="AddButton_Click"
+                        Content="Add" />
+                    <ui:Button
+                        x:Name="DeleteButton"
+                        Background="#FD292F"
+                        Foreground="White"
+                        Click="DeleteButton_Click"
+                        Content="Delete" />
+                </StackPanel>
 
                 <!--  Accessory Title  -->
                 <StackPanel Grid.Row="0" Margin="0,0,0,16">
                     <TextBlock
                         FontSize="24"
                         FontWeight="Bold"
-                        Text="{Binding SelectedItem.Item.Identifier, Mode=OneWay, ElementName=AccessoriesListView}" />
-                    <TextBlock>
+                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                        Text="{Binding SelectedItem.Item.Name, Mode=OneWay, ElementName=AccessoriesListView}" />
+                    <TextBlock
+                        FontSize="14"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}">
                         <TextBlock.Text>
                             <MultiBinding StringFormat="{}{0} - {1}">
-                                <Binding ElementName="AccessoriesListView" Path="SelectedItem.Item.Name" />
+                                <Binding ElementName="AccessoriesListView" Path="SelectedItem.Item.Identifier" />
                                 <Binding ElementName="AccessoriesListView" Path="SelectedItem.Item.Description" />
                             </MultiBinding>
                         </TextBlock.Text>
@@ -252,20 +271,22 @@
                                                 VerticalAlignment="Center"
                                                 FontSize="18"
                                                 FontWeight="SemiBold"
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                 Text="{Binding NAbilityOption, StringFormat='Level {0}'}" />
 
                                             <StackPanel Grid.Column="1" Orientation="Horizontal">
                                                 <!--  Delete with Confirmation  -->
                                                 <ui:Button
-                                                    Margin="4,0"
-                                                    Padding="6,2"
+                                                    Width="32"
+                                                    Height="32"
+                                                    Padding="0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
                                                     Appearance="Danger"
                                                     Command="{Binding DataContext.DeleteAbilityOptionDataCommand, RelativeSource={RelativeSource AncestorType=Page}}"
                                                     CommandParameter="{Binding}"
                                                     ToolTip="Delete Level">
-                                                    <Grid>
-                                                        <ui:SymbolIcon Symbol="Delete24" />
-                                                    </Grid>
+                                                    <ui:SymbolIcon Symbol="Delete24" />
                                                 </ui:Button>
                                             </StackPanel>
                                         </Grid>
@@ -286,6 +307,9 @@
                                                             Grid.Column="0"
                                                             Margin="0,0,12,0"
                                                             FontSize="14"
+                                                            Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                             OriginalItemsSource="{Binding DataContext.PossibleDstValues, RelativeSource={RelativeSource AncestorType=Page}}"
                                                             Text="{Binding DestIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
 
@@ -300,17 +324,25 @@
                                                             <ui:NumberBox
                                                                 Name="ValueTextBox"
                                                                 Grid.Column="0"
+                                                                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                                 Value="{Binding NAdj, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                                         </Grid>
 
                                                         <!--  Delete Attribute Button  -->
                                                         <ui:Button
                                                             Grid.Column="2"
-                                                            Padding="4"
-                                                            BorderThickness="1"
+                                                            Width="28"
+                                                            Height="28"
+                                                            Padding="0"
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Center"
+                                                            Appearance="Secondary"
                                                             Command="{Binding DataContext.DeleteDstDataCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                            CommandParameter="{Binding}">
-                                                            <TextBlock FontSize="12" Text="❌" />
+                                                            CommandParameter="{Binding}"
+                                                            ToolTip="Delete Attribute">
+                                                            <ui:SymbolIcon Symbol="Dismiss24" />
                                                         </ui:Button>
                                                     </Grid>
                                                 </DataTemplate>
@@ -318,23 +350,26 @@
                                         </ItemsControl>
 
                                         <!--  Add Attribute Button  -->
-                                        <Button
+                                        <ui:Button
                                             Grid.Row="2"
                                             Margin="0,8,0,0"
                                             HorizontalAlignment="Left"
+                                            Appearance="Secondary"
                                             Command="{Binding DataContext.AddDstDataCommand, RelativeSource={RelativeSource AncestorType=Page}}"
                                             CommandParameter="{Binding}">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock
                                                     VerticalAlignment="Center"
                                                     FontSize="12"
+                                                    Margin="0,0,4,0"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                     Text="➕" />
                                                 <TextBlock
-                                                    Margin="4,0,0,0"
                                                     VerticalAlignment="Center"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                     Text="Add Attribute" />
                                             </StackPanel>
-                                        </Button>
+                                        </ui:Button>
                                     </Grid>
                                 </Border>
                             </DataTemplate>

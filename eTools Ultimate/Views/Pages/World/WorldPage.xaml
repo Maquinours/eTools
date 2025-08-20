@@ -263,16 +263,13 @@
                         Margin="0,0,10,0"
                         Appearance="Secondary"
                         Content="Expert" />
+                    
                     <ui:Button
                         Margin="0,0,10,0"
-                        Appearance="Secondary"
-                        Content="Filter" />
-                    <ui:Button
-                        Margin="0,0,10,0"
-                        Background="{DynamicResource AccentFillColorDefaultBrush}"
+                        Background="#2F70AF"
                         Content="Add" />
                     <ui:Button
-                        Background="{DynamicResource SystemFillColorCriticalBrush}"
+                        Background="#FD292F"
                         Content="Delete" />
                 </StackPanel>
 

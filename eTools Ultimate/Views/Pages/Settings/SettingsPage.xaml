@@ -102,9 +102,9 @@
                             Width="60"
                             Height="Auto"
                             Margin="24,0,0,0"
-                            Source="/Views/Pages/Settings/FolderPathIcon.png">
+                            Source="/Assets/Icons/FolderIcon.png">
                             <Image.OpacityMask>
-                                <ImageBrush ImageSource="/Views/Pages/Settings/FolderPathIcon.png" />
+                                <ImageBrush ImageSource="/Assets/Icons/FolderIcon.png" />
                             </Image.OpacityMask>
                         </Image>
 
@@ -144,9 +144,9 @@
                             Width="60"
                             Height="Auto"
                             Margin="24,0,0,0"
-                            Source="/Views/Pages/Settings/PaintPaletteIcon.png">
+                            Source="/Assets/Icons/PersonalizationIcon.png">
                             <Image.OpacityMask>
-                                <ImageBrush ImageSource="/Views/Pages/Settings/PaintPaletteIcon.png" />
+                                <ImageBrush ImageSource="/Assets/Icons/PersonalizationIcon.png" />
                             </Image.OpacityMask>
                         </Image>
 
@@ -186,10 +186,10 @@
                             Width="60"
                             Height="Auto"
                             Margin="24,0,0,0"
-                            Source="/Views/Pages/Settings/AboutIcon.png">
+                            Source="/Assets/Icons/AboutIcon.png">
                             <Image.OpacityMask>
                                 <ImageBrush>
-                                    <ImageBrush.ImageSource>/Views/Pages/Settings/AboutIcon.png</ImageBrush.ImageSource>
+                                    <ImageBrush.ImageSource>/Assets/Icons/AboutIcon.png</ImageBrush.ImageSource>
                                 </ImageBrush>
                             </Image.OpacityMask>
                         </Image>

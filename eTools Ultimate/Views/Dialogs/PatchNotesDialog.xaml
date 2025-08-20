@@ -111,6 +111,13 @@
         <converters:PatchModificationTypeToSymbolConverter x:Key="PatchModificationTypeToSymbolConverter" />
         <converters:PatchModificationTypeToForegroundConverter x:Key="PatchModificationTypeToForegroundConverter" />
         <converters:PatchModificationTypeToTextConverter x:Key="PatchModificationTypeToTextConverter" />
+        
+        <!-- Visibility Converters -->
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
+        <converters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter" />
+        <converters:InverseObjectToVisibilityConverter x:Key="InverseObjectToVisibilityConverter" />
+        <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
     </ui:ContentDialog.Resources>
 
     <Grid>
@@ -126,15 +133,44 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <TextBlock
+            <!-- Banner -->
+            <Border 
                 Grid.Row="0"
-                Margin="0,0,0,16"
-                HorizontalAlignment="Center"
-                FontSize="24"
-                FontWeight="Bold"
-                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                Text="Patch notes"
-                TextWrapping="Wrap" />
+                Margin="0,0,0,20"
+                Background="{DynamicResource AccentFillColorDefaultBrush}"
+                CornerRadius="8"
+                Padding="20,16">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <!-- Icon -->
+                    <ui:SymbolIcon
+                        Grid.Column="0"
+                        Margin="0,0,16,0"
+                        FontSize="32"
+                        Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
+                        Symbol="DocumentText24" />
+                    
+                    <!-- Title and Subtitle -->
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock
+                            FontSize="24"
+                            FontWeight="Bold"
+                            Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
+                            Text="Patch Notes"
+                            TextWrapping="Wrap" />
+                        <TextBlock
+                            Margin="0,4,0,0"
+                            FontSize="14"
+                            Foreground="{DynamicResource TextOnAccentFillColorSecondaryBrush}"
+                            Text="Neueste Updates und Verbesserungen"
+                            TextWrapping="Wrap" />
+                    </StackPanel>
+                </Grid>
+            </Border>
 
             <!--  Legende  -->
             <ItemsControl Grid.Row="1" ItemsSource="{Binding ModificationTypes, Mode=OneWay}">
@@ -175,24 +211,223 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                        <TextBlock
-                                            Margin="0,8,0,4"
-                                            FontSize="18"
-                                            FontWeight="SemiBold"
-                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                            Text="{Binding Version, Mode=OneWay}" />
-                                        <TextBlock
-                                            Margin="8,10,0,0"
-                                            VerticalAlignment="Center"
-                                            FontSize="12"
-                                            Foreground="{DynamicResource TextFillColorSecondaryBrush}">
-                                            <Run Text="- " />
-                                            <Run Text="{Binding Date, Mode=OneWay, StringFormat=D}" />
-                                        </TextBlock>
+                                    <!-- Version Banner -->
+                                    <Border 
+                                        Grid.Row="0"
+                                        Margin="0,0,0,12"
+                                        Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="6"
+                                        Padding="12,8">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <!-- Version Icon -->
+                                            <ui:SymbolIcon
+                                                Grid.Column="0"
+                                                Margin="0,0,12,0"
+                                                FontSize="20"
+                                                Foreground="{DynamicResource AccentFillColorDefaultBrush}"
+                                                Symbol="Tag24" />
+                                            
+                                            <!-- Version Info -->
+                                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                <TextBlock
+                                                    FontSize="16"
+                                                    FontWeight="SemiBold"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    Text="{Binding Version, Mode=OneWay}"
+                                                    TextWrapping="Wrap" />
+                                            </StackPanel>
+                                            
+                                            <!-- Date -->
+                                            <TextBlock
+                                                Grid.Column="2"
+                                                VerticalAlignment="Center"
+                                                FontSize="12"
+                                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                Text="{Binding Date, Mode=OneWay, StringFormat='dd.MM.yyyy'}" />
+                                        </Grid>
+                                    </Border>
+                                    <!-- Developer Text -->
+                                    <TextBlock 
+                                        Grid.Row="1" 
+                                        Margin="16,8,16,8"
+                                        FontSize="14"
+                                        FontStyle="Italic"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding DeveloperText, Mode=OneWay}"
+                                        TextWrapping="Wrap"
+                                        Visibility="{Binding DeveloperText, Converter={StaticResource StringToVisibilityConverter}}" />
+                                    
+                                    <!-- Image -->
+                                    <Image 
+                                        Grid.Row="2" 
+                                        Margin="16,8,16,8"
+                                        Height="60"
+                                        Source="{Binding ImagePath, Mode=OneWay}"
+                                        Stretch="Uniform"
+                                        HorizontalAlignment="Left"
+                                        Visibility="{Binding ImagePath, Converter={StaticResource StringToVisibilityConverter}}" />
+                                    
+                                    <!-- Categories -->
+                                    <StackPanel Grid.Row="3" Margin="16,8,0,0" Visibility="{Binding Categories, Converter={StaticResource ObjectToVisibilityConverter}}">
+                                        <!-- Added -->
+                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Added.Count, Converter={StaticResource IntToVisibilityConverter}}">
+                                            <TextBlock 
+                                                FontSize="16" 
+                                                FontWeight="SemiBold" 
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                Text="Added"
+                                                Margin="0,0,0,8" />
+                                            <ItemsControl ItemsSource="{Binding Categories.Added, Mode=OneWay}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid Margin="0,4,0,4">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition Width="*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <ui:SymbolIcon
+                                                                Grid.Column="0"
+                                                                Margin="0,0,8,0"
+                                                                VerticalAlignment="Top"
+                                                                FontSize="16"
+                                                                Foreground="{Binding Type, Mode=OneWay, Converter={StaticResource PatchModificationTypeToForegroundConverter}}"
+                                                                Symbol="{Binding Type, Mode=OneWay, Converter={StaticResource PatchModificationTypeToSymbolConverter}}" />
+                                                            <TextBlock
+                                                                Grid.Column="1"
+                                                                VerticalAlignment="Center"
+                                                                FontSize="13"
+                                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                                Text="{Binding Text, Mode=OneWay}"
+                                                                TextWrapping="Wrap" />
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                        
+                                        <!-- Changed -->
+                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Changed.Count, Converter={StaticResource IntToVisibilityConverter}}">
+                                            <TextBlock 
+                                                FontSize="16" 
+                                                FontWeight="SemiBold" 
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                Text="Changed"
+                                                Margin="0,0,0,8" />
+                                            <ItemsControl ItemsSource="{Binding Categories.Changed, Mode=OneWay}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid Margin="0,4,0,4">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition Width="*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <ui:SymbolIcon
+                                                                Grid.Column="0"
+                                                                Margin="0,0,8,0"
+                                                                VerticalAlignment="Top"
+                                                                FontSize="16"
+                                                                Foreground="{Binding Type, Mode=OneWay, Converter={StaticResource PatchModificationTypeToForegroundConverter}}"
+                                                                Symbol="{Binding Type, Mode=OneWay, Converter={StaticResource PatchModificationTypeToSymbolConverter}}" />
+                                                            <TextBlock
+                                                                Grid.Column="1"
+                                                                VerticalAlignment="Center"
+                                                                FontSize="13"
+                                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                                Text="{Binding Text, Mode=OneWay}"
+                                                                TextWrapping="Wrap" />
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                        
+                                        <!-- Fixed -->
+                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Fixed.Count, Converter={StaticResource IntToVisibilityConverter}}">
+                                            <TextBlock 
+                                                FontSize="16" 
+                                                FontWeight="SemiBold" 
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                Text="Fixed"
+                                                Margin="0,0,0,8" />
+                                            <ItemsControl ItemsSource="{Binding Categories.Fixed, Mode=OneWay}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid Margin="0,4,0,4">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition Width="*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <ui:SymbolIcon
+                                                                Grid.Column="0"
+                                                                Margin="0,0,8,0"
+                                                                VerticalAlignment="Top"
+                                                                FontSize="16"
+                                                                Foreground="{Binding Type, Mode=OneWay, Converter={StaticResource PatchModificationTypeToForegroundConverter}}"
+                                                                Symbol="{Binding Type, Mode=OneWay, Converter={StaticResource PatchModificationTypeToSymbolConverter}}" />
+                                                            <TextBlock
+                                                                Grid.Column="1"
+                                                                VerticalAlignment="Center"
+                                                                FontSize="13"
+                                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                                Text="{Binding Text, Mode=OneWay}"
+                                                                TextWrapping="Wrap" />
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                        
+                                        <!-- Improved -->
+                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Improved.Count, Converter={StaticResource IntToVisibilityConverter}}">
+                                            <TextBlock 
+                                                FontSize="16" 
+                                                FontWeight="SemiBold" 
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                Text="Improved"
+                                                Margin="0,0,0,8" />
+                                            <ItemsControl ItemsSource="{Binding Categories.Improved, Mode=OneWay}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid Margin="0,4,0,4">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition Width="*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <ui:SymbolIcon
+                                                                Grid.Column="0"
+                                                                Margin="0,0,8,0"
+                                                                VerticalAlignment="Top"
+                                                                FontSize="16"
+                                                                Foreground="{Binding Type, Mode=OneWay, Converter={StaticResource PatchModificationTypeToForegroundConverter}}"
+                                                                Symbol="{Binding Type, Mode=OneWay, Converter={StaticResource PatchModificationTypeToSymbolConverter}}" />
+                                                            <TextBlock
+                                                                Grid.Column="1"
+                                                                VerticalAlignment="Center"
+                                                                FontSize="13"
+                                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                                Text="{Binding Text, Mode=OneWay}"
+                                                                TextWrapping="Wrap" />
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
                                     </StackPanel>
-                                    <StackPanel Grid.Row="1" Margin="16,8,0,0">
+                                    
+                                    <!-- Fallback: Old Modifications List -->
+                                    <StackPanel Grid.Row="4" Margin="16,8,0,0" Visibility="{Binding Categories, Converter={StaticResource InverseObjectToVisibilityConverter}}">
                                         <ItemsControl ItemsSource="{Binding Modifications, Mode=OneWay}">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
@@ -201,8 +436,6 @@
                                                             <ColumnDefinition Width="Auto" />
                                                             <ColumnDefinition Width="*" />
                                                         </Grid.ColumnDefinitions>
-
-                                                        <!--  TODO: add symbol and foreground bindings  -->
                                                         <ui:SymbolIcon
                                                             Grid.Column="0"
                                                             Margin="0,0,8,0"

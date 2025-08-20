@@ -1,4 +1,4 @@
-﻿using eTools_Ultimate.Models;
+using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
 using System;
 using System.Collections.Generic;

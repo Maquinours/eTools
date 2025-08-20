@@ -188,29 +188,12 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Scale" />
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <TextBox 
-                                Background="{DynamicResource ControlFillColorDefaultBrush}"
-                                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                Text="{Binding Scale, UpdateSourceTrigger=PropertyChanged}" />
-                            <StackPanel Grid.Column="1" Orientation="Horizontal">
-                                <ui:Button 
-                                    Appearance="Secondary"
-                                    Icon="Add12"
-                                    Margin="5,0,0,0"
-                                    Command="{Binding IncreaseScaleCommand}" />
-                                <ui:Button 
-                                    Appearance="Secondary"
-                                    Icon="Subtract12"
-                                    Margin="5,0,0,0"
-                                    Command="{Binding DecreaseScaleCommand}" />
-                            </StackPanel>
-                        </Grid>
+                        <TextBlock Grid.Row="0" Style="{StaticResource FieldLabelStyle}" Text="Scale" />
+                        <TextBox 
+                            Grid.Row="1"
+                            Background="{DynamicResource ControlFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                            Text="{Binding Scale, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                 </Grid>
 
