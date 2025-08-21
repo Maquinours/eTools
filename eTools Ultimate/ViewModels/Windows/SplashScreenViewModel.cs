@@ -1,4 +1,5 @@
-﻿using eTools_Ultimate.Services;
+﻿using eTools.Views.Windows;
+using eTools_Ultimate.Services;
 using eTools_Ultimate.Views.Pages;
 using eTools_Ultimate.Views.Windows;
 using System;
@@ -8,12 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Shell;
 using Wpf.Ui;
+using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Windows
 {
     public class CloseSplashScreenMessage { }
 
-    public partial class SplashScreenViewModel(IServiceProvider serviceProvider) : ObservableObject
+    public partial class SplashScreenViewModel(IServiceProvider serviceProvider, IContentDialogService contentDialogService) : ObservableObject
     {
         [ObservableProperty]
         private string _loadingText = string.Empty;
@@ -49,25 +51,27 @@ namespace eTools_Ultimate.ViewModels.Windows
                 ("Loading terrains...", TerrainsService.Instance.Load)
                 ];
 
-            await Task.Run(() =>
+            try
             {
-                for (int i = 0; i < loadingSteps.Length; i++)
+                await Task.Run(() =>
                 {
-                    (string text, Action loader) = loadingSteps[i];
-
-                    Application.Current.Dispatcher.Invoke(() =>
+                    for (int i = 0; i < loadingSteps.Length; i++)
                     {
-                        LoadingText = text;
-                    });
-                    loader();
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        LoadingProgress = (i + 1) / (double)loadingSteps.Length;
-                    });
-                }
+                        (string text, Action loader) = loadingSteps[i];
 
-                ChangesTrackerService.Instance.Init();
-            }).ConfigureAwait(true);
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            LoadingText = text;
+                        });
+                        loader();
+                        Application.Current.Dispatcher.Invoke(() =>
+                        {
+                            LoadingProgress = (i + 1) / (double)loadingSteps.Length;
+                        });
+                    }
+
+                    ChangesTrackerService.Instance.Init();
+                }).ConfigureAwait(true);
 
             Loaded?.Invoke(this, EventArgs.Empty);
 
@@ -75,6 +79,16 @@ namespace eTools_Ultimate.ViewModels.Windows
 
             mainWindow.ShowWindow();
             mainWindow.Navigate(typeof(DashboardPage));
+            } catch(Exception ex)
+            {
+                LoadingErrorWindow errorWindow = new(ex.Message);
+                errorWindow.ShowDialog();
+        //        MessageBox.Show($"Une erreur est survenue : {ex.Message}\n\nVoulez-vous ouvrir les paramètres ?",
+        //"Erreur",
+        //MessageBoxButton.YesNo,
+        //MessageBoxImage.Error);
+                //await contentDialogService.ShowSimpleDialogAsync(new() { Title = "Loading error", Content = ex.Message, PrimaryButtonText = "Access settings", CloseButtonText = "Close application" });
+            }
             //if (loadingError)
             //    _navigationWindow!.Navigate(typeof(ResourcePathPage));
             //else

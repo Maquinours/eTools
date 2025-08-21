@@ -69,5 +69,7 @@
             HorizontalAlignment="Right"
             Foreground="Gray"
             Text="aaaaaaaaaa" />
+
+        <ContentPresenter x:Name="RootContentDialog" Grid.Row="0" />
     </Grid>
 </Window> 
