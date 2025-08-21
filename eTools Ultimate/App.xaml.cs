@@ -122,10 +122,6 @@ namespace eTools_Ultimate
                 // ChangeLog Page
                 services.AddSingleton<eTools_Ultimate.Views.Pages.ChangeLog.ChangeLogView>();
                 services.AddSingleton<eTools_Ultimate.ViewModels.Pages.ChangeLog.ChangeLogViewModel>();
-
-                // PatchNotes Dialog
-                services.AddSingleton<eTools_Ultimate.Views.Dialogs.PatchNotesDialog>();
-                services.AddSingleton<eTools_Ultimate.ViewModels.Controls.Dialogs.PatchNotesViewModel>();
             }).Build();
 
         /// <summary>

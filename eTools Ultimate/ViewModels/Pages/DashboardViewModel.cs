@@ -1,7 +1,6 @@
 ﻿using eTools_Ultimate.Models;
 using eTools_Ultimate.Views.Dialogs;
 using eTools_Ultimate.Views.Pages;
-using Microsoft.Extensions.DependencyInjection;
 using eTools_Ultimate.Views.Pages.DropEvent;
 using eTools_Ultimate.Views.Pages.Honor;
 using eTools_Ultimate.Views.Pages.Job;
@@ -18,7 +17,7 @@ using Wpf.Ui.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class DashboardViewModel(IContentDialogService contentDialogService, INavigationService navigationService, IServiceProvider serviceProvider) : ObservableObject
+    public partial class DashboardViewModel(IContentDialogService contentDialogService, INavigationService navigationService) : ObservableObject
     {
         public NavigationCard[] NavigationCards { get; } =
         [
@@ -59,8 +58,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private async Task OpenPatchNotesDialog()
         {
-            var patchNotesDialog = serviceProvider.GetRequiredService<PatchNotesDialog>();
-            patchNotesDialog.SetContentPresenter(contentDialogService.GetDialogHost());
+            var patchNotesDialog = new PatchNotesDialog(contentDialogService.GetDialogHost());
 
             await patchNotesDialog.ShowAsync();
         }

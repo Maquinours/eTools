@@ -122,12 +122,6 @@ namespace eTools_Ultimate.ViewModels.Windows
                 },
                 new NavigationViewItem()
                 {
-                    Content = "Change Log",
-                    Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/World.png", 25, 25),
-                    TargetPageType = typeof(eTools_Ultimate.Views.Pages.ChangeLog.ChangeLogView)
-                },
-                new NavigationViewItem()
-                {
                     Content = "World",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/World.png", 25, 25),
                     TargetPageType = typeof(Views.Pages.World.WorldPage)
