@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Wpf.Ui.Controls;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace eTools_Ultimate.Views.Dialogs
 {
@@ -21,11 +22,26 @@ namespace eTools_Ultimate.Views.Dialogs
     /// </summary>
     public partial class PatchNotesDialog : ContentDialog
     {
-        public PatchNotesDialog(ContentPresenter? contentPresenter)
-            : base(contentPresenter)
+        private ContentPresenter? _contentPresenter;
+
+        public PatchNotesDialog(PatchNotesViewModel viewModel)
         {
-            DataContext = new PatchNotesViewModel();
+            DataContext = viewModel;
             InitializeComponent();
+        }
+
+        public void SetContentPresenter(ContentPresenter? contentPresenter)
+        {
+            _contentPresenter = contentPresenter;
+        }
+
+        public new async Task<ContentDialogResult> ShowAsync()
+        {
+            if (_contentPresenter != null)
+            {
+                return await base.ShowAsync(_contentPresenter);
+            }
+            return await base.ShowAsync();
         }
     }
 }
