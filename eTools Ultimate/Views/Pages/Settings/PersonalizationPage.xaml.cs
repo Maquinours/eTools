@@ -39,5 +39,20 @@ namespace eTools_Ultimate.Views.Pages
                 }
             }
         }
+
+        private void AutoSaveCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is ComboBox comboBox && comboBox.SelectedItem is ComboBoxItem selectedItem && CustomTimeGrid != null)
+            {
+                if (selectedItem.Content.ToString() == "Custom")
+                {
+                    CustomTimeGrid.Visibility = System.Windows.Visibility.Visible;
+                }
+                else
+                {
+                    CustomTimeGrid.Visibility = System.Windows.Visibility.Collapsed;
+                }
+            }
+        }
     }
 } 
