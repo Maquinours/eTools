@@ -11,47 +11,83 @@
     Title="DashboardPage"
     d:DataContext="{d:DesignInstance pageViewModels:DashboardViewModel,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="754"
-    d:DesignWidth="800"
+    d:DesignHeight="900"
+    d:DesignWidth="1400"
     ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d">
 
 
     <Page.Resources>
-        <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#FFFFFF" />
-        <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="#212121" />
-        <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="#9E9E9E" />
 
 
-
-        <!--  Template for navigation cards  -->
+        <!--  Template for navigation cards - Updated design like the image  -->
         <DataTemplate x:Key="NavigationCardTemplate">
-            <ui:Card
-                Width="230"
-                Height="120"
-                Margin="6"
+            <Border
+                Width="150"
+                Height="160"
+                Margin="8"
+                Background="#2D2D2D"
+                CornerRadius="12"
                 Cursor="Hand"
                 Tag="{Binding}">
+                <Border.Effect>
+                    <DropShadowEffect
+                        BlurRadius="10"
+                        Color="Black"
+                        Direction="270"
+                        Opacity="0.3"
+                        ShadowDepth="2" />
+                </Border.Effect>
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#3D3D3D" />
+                                <Setter Property="BorderBrush">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Offset="0" Color="#0065DC" />
+                                            <GradientStop Offset="1" Color="#00C2FF" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="BorderThickness" Value="1" />
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect
+                                            BlurRadius="25"
+                                            Color="#00BFFF"
+                                            Direction="270"
+                                            Opacity="1.0"
+                                            ShadowDepth="8" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
                 <behaviors:Interaction.Triggers>
                     <behaviors:EventTrigger EventName="MouseLeftButtonUp">
                         <behaviors:InvokeCommandAction Command="{Binding DataContext.OpenCardPageCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" />
                     </behaviors:EventTrigger>
                 </behaviors:Interaction.Triggers>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
 
-                    <!--  Left icon - larger size  -->
+                    <!--  Icon top left  -->
                     <Image
-                        Grid.Column="0"
-                        Width="48"
-                        Height="48"
-                        Margin="4,0,14,0"
+                        Grid.Row="0"
+                        Width="42"
+                        Height="42"
+                        Margin="0,0,0,5"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
+                        VerticalAlignment="Top"
                         RenderOptions.BitmapScalingMode="HighQuality"
                         RenderOptions.EdgeMode="Aliased"
                         Source="{Binding Icon}">
@@ -60,30 +96,39 @@
                         </Image.CacheMode>
                     </Image>
 
-                    <!--  Text in the middle  -->
-                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                        <TextBlock
-                            FontSize="16"
-                            FontWeight="Medium"
-                            Text="{Binding Title}" />
-                        <TextBlock
-                            Margin="0,4,0,0"
-                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                            Text="{Binding Description}"
-                            TextWrapping="Wrap" />
-                    </StackPanel>
+                    <!--  Title below icon  -->
+                    <TextBlock
+                        Grid.Row="1"
+                        FontSize="18"
+                        FontWeight="SemiBold"
+                        Foreground="#FFFFFF"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Margin="0,0,0,5"
+                        Text="{Binding Title}" />
 
-                    <!--  Right arrow  -->
+                    <!--  Description below title  -->
+                    <TextBlock
+                        Grid.Row="2"
+                        FontSize="12"
+                        Foreground="#CCCCCC"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Margin="0,0,0,20"
+                        Text="{Binding Description}"
+                        TextWrapping="Wrap" />
+
+                    <!--  External link arrow - bottom right footer area  -->
                     <ui:SymbolIcon
-                        Grid.Column="2"
-                        Margin="8,0,0,0"
+                        Grid.Row="2"
                         HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        FontSize="16"
-                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                        Symbol="ChevronRight24" />
+                        VerticalAlignment="Bottom"
+                        FontSize="17"
+                        Margin="0,0,0,7"
+                        Foreground="#1E9BFA"
+                        Symbol="Open48" />
                 </Grid>
-            </ui:Card>
+            </Border>
         </DataTemplate>
     </Page.Resources>
 
@@ -95,7 +140,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!--  Banner styled like the SettingsPage  -->
+            <!--  Banner  -->
             <Border
                 x:Name="BannerBorder"
                 Grid.Row="1"
@@ -105,10 +150,22 @@
                 Cursor="Arrow">
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Offset="0" Color="#2B5797" />
-                        <GradientStop Offset="1" Color="#0078D7" />
+                        <GradientStop Offset="0" Color="#6366F1" />
+                        <GradientStop Offset="0.3" Color="#8B5CF6" />
+                        <GradientStop Offset="0.7" Color="#A855F7" />
+                        <GradientStop Offset="1" Color="#C084FC" />
                     </LinearGradientBrush>
                 </Border.Background>
+                
+                <!--  Opacity mask for fade effect  -->
+                <Border.OpacityMask>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="White" />
+                        <GradientStop Offset="0.7" Color="White" />
+                        <GradientStop Offset="1" Color="Transparent" />
+                    </LinearGradientBrush>
+                </Border.OpacityMask>
+                
                 <Border CornerRadius="8">
                     <Border.Background>
                         <ImageBrush
@@ -122,20 +179,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <!--  Black banner with blur effect behind Welcome text  -->
-                        <Border
-                            Grid.Row="0"
-                            Height="100"
-                            VerticalAlignment="Center"
-                            Background="#4C000000">
-                            <Border.Effect>
-                                <BlurEffect
-                                    KernelType="Gaussian"
-                                    Radius="30"
-                                    RenderingBias="Quality" />
-                            </Border.Effect>
-                        </Border>
-
+                        <!--  Content overlay  -->
                         <StackPanel
                             Grid.Row="0"
                             Margin="48,0"
@@ -156,20 +200,72 @@
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Bottom"
                                 FontTypography="Caption"
-                                Foreground="#BFFFFFFF"
+                                Foreground="#FFFFFF"
                                 Text="Created by eTools Ultimate" />
 
-                            <ui:Button
+                            <Border
                                 Margin="12"
                                 HorizontalAlignment="Left"
                                 VerticalAlignment="Bottom"
-                                Appearance="Primary"
-                                Background="#4DFFFFFF"
-                                BorderBrush="#33FFFFFF"
-                                Command="{Binding OpenPatchNotesDialogCommand}"
-                                Content="Patchlogs"
-                                Foreground="#FFFFFF"
-                                Icon="History24" />
+                                Background="#2D2D2D"
+                                BorderBrush="Transparent"
+                                BorderThickness="1"
+                                CornerRadius="12"
+                                Cursor="Hand">
+                                <Border.Effect>
+                                    <DropShadowEffect
+                                        BlurRadius="10"
+                                        Color="Black"
+                                        Direction="270"
+                                        Opacity="0.3"
+                                        ShadowDepth="2" />
+                                </Border.Effect>
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#3D3D3D" />
+                                                <Setter Property="BorderBrush">
+                                                    <Setter.Value>
+                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                            <GradientStop Offset="0" Color="#0065DC" />
+                                                            <GradientStop Offset="1" Color="#00C2FF" />
+                                                        </LinearGradientBrush>
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="BorderThickness" Value="1" />
+                                                <Setter Property="Effect">
+                                                    <Setter.Value>
+                                                        <DropShadowEffect
+                                                            BlurRadius="25"
+                                                            Color="#00BFFF"
+                                                            Direction="270"
+                                                            Opacity="1.0"
+                                                            ShadowDepth="8" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                                <Setter Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <ScaleTransform ScaleX="0.98" ScaleY="0.98" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <behaviors:Interaction.Triggers>
+                                    <behaviors:EventTrigger EventName="MouseLeftButtonUp">
+                                        <behaviors:InvokeCommandAction Command="{Binding OpenPatchNotesDialogCommand}" />
+                                    </behaviors:EventTrigger>
+                                </behaviors:Interaction.Triggers>
+                                <TextBlock
+                                    Margin="16,12"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="14"
+                                    Foreground="#FFFFFF"
+                                    Text="Patchlogs" />
+                            </Border>
                         </Grid>
                     </Grid>
                 </Border>
