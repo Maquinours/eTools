@@ -23,6 +23,9 @@ namespace eTools_Ultimate.ViewModels.Windows
         [ObservableProperty]
         private double _loadingProgress = 0;
 
+        [ObservableProperty]
+        private string _version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "1.0.0";
+
         public event EventHandler? Loaded;
 
         [RelayCommand]
