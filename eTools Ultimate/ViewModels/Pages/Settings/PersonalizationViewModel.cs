@@ -1,8 +1,6 @@
-using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Wpf.Ui.Appearance;
-using Wpf.Ui.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
@@ -22,6 +20,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             // Initialize theme based on current system theme
             ApplicationTheme currentTheme = ApplicationThemeManager.GetAppTheme();
             IsDarkTheme = currentTheme == ApplicationTheme.Dark;
+            IsLightTheme = currentTheme == ApplicationTheme.Light;
             
             // Standard-Werte für andere Einstellungen
             IsCompactMode = false;

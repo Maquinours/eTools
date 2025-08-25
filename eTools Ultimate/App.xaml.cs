@@ -120,7 +120,7 @@ namespace eTools_Ultimate
                 services.AddSingleton<AboutViewModel>();
 
                 // ChangeLog Page
-                services.AddSingleton<eTools.Views.Pages.ChangeLog.ChangeLogView>();
+                services.AddSingleton<eTools_Ultimate.Views.Pages.ChangeLog.ChangeLogView>();
                 services.AddSingleton<eTools_Ultimate.ViewModels.Pages.ChangeLog.ChangeLogViewModel>();
             }).Build();
 
