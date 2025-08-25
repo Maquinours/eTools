@@ -15,7 +15,7 @@ namespace eTools_Ultimate.ViewModels.Windows
 {
     public class CloseSplashScreenMessage { }
 
-    public partial class SplashScreenViewModel(IServiceProvider serviceProvider, IContentDialogService contentDialogService) : ObservableObject
+    public partial class SplashScreenViewModel(IServiceProvider serviceProvider) : ObservableObject
     {
         [ObservableProperty]
         private string _loadingText = string.Empty;

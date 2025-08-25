@@ -8,15 +8,13 @@ namespace eTools_Ultimate.Views.Windows
 {
     public partial class SplashScreen : Window
     {
-        public SplashScreen(SplashScreenViewModel viewModel, IContentDialogService contentDialogService)
+        public SplashScreen(SplashScreenViewModel viewModel)
         {
             DataContext = viewModel;
 
             viewModel.Loaded += (s, e) => this.Close();
 
             InitializeComponent();
-
-            contentDialogService.SetDialogHost(RootContentDialog);
         }
     }
 } 

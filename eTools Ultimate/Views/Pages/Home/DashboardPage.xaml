@@ -203,6 +203,7 @@
                                 Foreground="#FFFFFF"
                                 Text="Created by eTools Ultimate" />
 
+                            <Button Command="{Binding OpenPatchNotesDialogCommand}">
                             <Border
                                 Margin="12"
                                 HorizontalAlignment="Left"
@@ -220,45 +221,40 @@
                                         Opacity="0.3"
                                         ShadowDepth="2" />
                                 </Border.Effect>
-                                <Border.Style>
-                                    <Style TargetType="Border">
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#3D3D3D" />
-                                                <Setter Property="BorderBrush">
-                                                    <Setter.Value>
-                                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                                                            <GradientStop Offset="0" Color="#0065DC" />
-                                                            <GradientStop Offset="1" Color="#00C2FF" />
-                                                        </LinearGradientBrush>
-                                                    </Setter.Value>
-                                                </Setter>
-                                                <Setter Property="BorderThickness" Value="1" />
-                                                <Setter Property="Effect">
-                                                    <Setter.Value>
-                                                        <DropShadowEffect
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#3D3D3D" />
+                                                    <Setter Property="BorderBrush">
+                                                        <Setter.Value>
+                                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                                <GradientStop Offset="0" Color="#0065DC" />
+                                                                <GradientStop Offset="1" Color="#00C2FF" />
+                                                            </LinearGradientBrush>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Setter Property="BorderThickness" Value="1" />
+                                                    <Setter Property="Effect">
+                                                        <Setter.Value>
+                                                            <DropShadowEffect
                                                             BlurRadius="25"
                                                             Color="#00BFFF"
                                                             Direction="270"
                                                             Opacity="1.0"
                                                             ShadowDepth="8" />
-                                                    </Setter.Value>
-                                                </Setter>
-                                                <Setter Property="RenderTransform">
-                                                    <Setter.Value>
-                                                        <ScaleTransform ScaleX="0.98" ScaleY="0.98" />
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Border.Style>
-                                <behaviors:Interaction.Triggers>
-                                    <behaviors:EventTrigger EventName="MouseLeftButtonUp">
-                                        <behaviors:InvokeCommandAction Command="{Binding OpenPatchNotesDialogCommand}" />
-                                    </behaviors:EventTrigger>
-                                </behaviors:Interaction.Triggers>
-                                <TextBlock
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Setter Property="RenderTransform">
+                                                        <Setter.Value>
+                                                            <ScaleTransform ScaleX="0.98" ScaleY="0.98" />
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <TextBlock
                                     Margin="16,12"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
@@ -266,6 +262,7 @@
                                     Foreground="#FFFFFF"
                                     Text="Patchlogs" />
                             </Border>
+                            </Button>
                         </Grid>
                     </Grid>
                 </Border>
