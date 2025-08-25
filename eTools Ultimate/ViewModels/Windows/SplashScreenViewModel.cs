@@ -51,6 +51,8 @@ namespace eTools_Ultimate.ViewModels.Windows
                 ("Loading terrains...", TerrainsService.Instance.Load)
                 ];
 
+            if (serviceProvider.GetService(typeof(INavigationWindow)) is not MainWindow mainWindow) throw new InvalidOperationException("SplashScreenViewModel::Load exception : Unable to find MainWindow");
+
             try
             {
                 await Task.Run(() =>
@@ -75,18 +77,24 @@ namespace eTools_Ultimate.ViewModels.Windows
 
             Loaded?.Invoke(this, EventArgs.Empty);
 
-            if (serviceProvider.GetService(typeof(INavigationWindow)) is not MainWindow mainWindow) throw new InvalidOperationException("SplashScreenViewModel::Load exception : Unable to find MainWindow");
-
             mainWindow.ShowWindow();
             mainWindow.Navigate(typeof(DashboardPage));
             } catch(Exception ex)
             {
                 LoadingErrorWindow errorWindow = new(ex.Message);
-                errorWindow.ShowDialog();
-        //        MessageBox.Show($"Une erreur est survenue : {ex.Message}\n\nVoulez-vous ouvrir les paramètres ?",
-        //"Erreur",
-        //MessageBoxButton.YesNo,
-        //MessageBoxImage.Error);
+                if(errorWindow.ShowDialog() == true)
+                {
+                    Loaded?.Invoke(this, EventArgs.Empty);
+                    mainWindow.ShowWindow();
+                    mainWindow.Navigate(typeof(ResourcePathPage));
+
+                }
+                else 
+                    Application.Current.Shutdown();
+                //        MessageBox.Show($"Une erreur est survenue : {ex.Message}\n\nVoulez-vous ouvrir les paramètres ?",
+                //"Erreur",
+                //MessageBoxButton.YesNo,
+                //MessageBoxImage.Error);
                 //await contentDialogService.ShowSimpleDialogAsync(new() { Title = "Loading error", Content = ex.Message, PrimaryButtonText = "Access settings", CloseButtonText = "Close application" });
             }
             //if (loadingError)

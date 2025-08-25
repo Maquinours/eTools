@@ -131,6 +131,11 @@ namespace eTools_Ultimate.Services
 
         public static void Save()
         {
+            string? settingsDirectory = Path.GetDirectoryName(SettingsFilePath) ?? throw new InvalidOperationException("SettingsService::Save exception : Settings directory is an invalid path");
+
+            if (!Directory.Exists(settingsDirectory))
+                Directory.CreateDirectory(settingsDirectory);
+
             using (StreamWriter writer = new StreamWriter(SettingsFilePath))
             {
                 // General settings
