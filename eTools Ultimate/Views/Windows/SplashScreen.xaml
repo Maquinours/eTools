@@ -58,7 +58,10 @@
                 Margin="0,10,0,0"
                 IsIndeterminate="True">
                 <ProgressBar.Foreground>
-                    <SolidColorBrush Color="#FFEB9A" />
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Offset="0" Color="#0065DC" />
+                        <GradientStop Offset="1" Color="#00C2FF" />
+                    </LinearGradientBrush>
                 </ProgressBar.Foreground>
             </ProgressBar>
         </StackPanel>
@@ -68,7 +71,7 @@
             Margin="0,2,0,0"
             HorizontalAlignment="Right"
             Foreground="Gray"
-            Text="aaaaaaaaaa" />
+            Text="{Binding Version}" />
 
         <ContentPresenter x:Name="RootContentDialog" Grid.Row="0" />
     </Grid>

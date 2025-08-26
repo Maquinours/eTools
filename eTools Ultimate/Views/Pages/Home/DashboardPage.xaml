@@ -20,7 +20,7 @@
     <Page.Resources>
 
 
-        <!--  Template for navigation cards - Updated design like the image  -->
+        <!--  Template for navigation cards -->
         <DataTemplate x:Key="NavigationCardTemplate">
             <Border
                 Width="150"
@@ -52,16 +52,6 @@
                                     </Setter.Value>
                                 </Setter>
                                 <Setter Property="BorderThickness" Value="1" />
-                                <Setter Property="Effect">
-                                    <Setter.Value>
-                                        <DropShadowEffect
-                                            BlurRadius="25"
-                                            Color="#00BFFF"
-                                            Direction="270"
-                                            Opacity="1.0"
-                                            ShadowDepth="8" />
-                                    </Setter.Value>
-                                </Setter>
                             </Trigger>
                         </Style.Triggers>
                     </Style>
@@ -110,23 +100,17 @@
                     <!--  Description below title  -->
                     <TextBlock
                         Grid.Row="2"
-                        FontSize="12"
+                        FontSize="14"
                         Foreground="#CCCCCC"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Margin="0,0,0,20"
                         Text="{Binding Description}"
-                        TextWrapping="Wrap" />
+                        TextWrapping="Wrap"
+                        TextOptions.TextFormattingMode="Display"
+                        TextOptions.TextRenderingMode="ClearType" />
 
-                    <!--  External link arrow - bottom right footer area  -->
-                    <ui:SymbolIcon
-                        Grid.Row="2"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom"
-                        FontSize="17"
-                        Margin="0,0,0,7"
-                        Foreground="#1E9BFA"
-                        Symbol="Open48" />
+
                 </Grid>
             </Border>
         </DataTemplate>
@@ -148,14 +132,7 @@
                 Margin="0,0,0,0"
                 CornerRadius="8"
                 Cursor="Arrow">
-                <Border.Background>
-                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                        <GradientStop Offset="0" Color="#6366F1" />
-                        <GradientStop Offset="0.3" Color="#8B5CF6" />
-                        <GradientStop Offset="0.7" Color="#A855F7" />
-                        <GradientStop Offset="1" Color="#C084FC" />
-                    </LinearGradientBrush>
-                </Border.Background>
+
                 
                 <!--  Opacity mask for fade effect  -->
                 <Border.OpacityMask>
@@ -203,7 +180,26 @@
                                 Foreground="#FFFFFF"
                                 Text="Created by eTools Ultimate" />
 
-                            <Button Command="{Binding OpenPatchNotesDialogCommand}">
+                            <Button Command="{Binding OpenPatchNotesDialogCommand}" Background="Transparent" BorderBrush="Transparent">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="BorderBrush" Value="Transparent" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <ContentPresenter />
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Setter Property="BorderBrush" Value="Transparent" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
                             <Border
                                 Margin="12"
                                 HorizontalAlignment="Left"
@@ -211,8 +207,10 @@
                                 Background="#2D2D2D"
                                 BorderBrush="Transparent"
                                 BorderThickness="1"
-                                CornerRadius="12"
-                                Cursor="Hand">
+                                CornerRadius="8"
+                                Cursor="Hand"
+                                Width="120"
+                                Height="36">
                                 <Border.Effect>
                                     <DropShadowEffect
                                         BlurRadius="10"
@@ -235,30 +233,15 @@
                                                         </Setter.Value>
                                                     </Setter>
                                                     <Setter Property="BorderThickness" Value="1" />
-                                                    <Setter Property="Effect">
-                                                        <Setter.Value>
-                                                            <DropShadowEffect
-                                                            BlurRadius="25"
-                                                            Color="#00BFFF"
-                                                            Direction="270"
-                                                            Opacity="1.0"
-                                                            ShadowDepth="8" />
-                                                        </Setter.Value>
-                                                    </Setter>
-                                                    <Setter Property="RenderTransform">
-                                                        <Setter.Value>
-                                                            <ScaleTransform ScaleX="0.98" ScaleY="0.98" />
-                                                        </Setter.Value>
-                                                    </Setter>
                                                 </Trigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Border.Style>
                                     <TextBlock
-                                    Margin="16,12"
+                                    Margin="12,8"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    FontSize="14"
+                                    FontSize="12"
                                     Foreground="#FFFFFF"
                                     Text="Patchlogs" />
                             </Border>
