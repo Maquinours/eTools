@@ -21,7 +21,7 @@ namespace eTools_Ultimate.Views.Pages.Motion
         public MotionPage(MotionsViewModel viewModel)
         {
             ViewModel = viewModel;
-            DataContext = this;
+            DataContext = viewModel;
             
             InitializeComponent();
         }

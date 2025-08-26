@@ -25,7 +25,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         private ICollectionView _motionsView = CollectionViewSource.GetDefaultView(MotionsService.Instance.Motions);
 
-        public List<KeyValuePair<int, string>> MotionIdentifiers = [.. DefinesService.Instance.ReversedMotionDefines];
+        public List<KeyValuePair<int, string>> MotionIdentifiers => [.. DefinesService.Instance.ReversedMotionDefines];
 
         public D3DImageHost? D3dHost { get; private set; } = null;
 

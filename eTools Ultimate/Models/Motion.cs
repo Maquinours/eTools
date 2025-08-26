@@ -7,6 +7,8 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Linq;
+using System.Collections;
 
 namespace eTools_Ultimate.Models
 {
@@ -136,11 +138,12 @@ namespace eTools_Ultimate.Models
             _prop = prop;
             Prop.PropertyChanged += Prop_PropertyChanged;
             Settings.Instance.PropertyChanged += Settings_PropertyChanged;
+            StringsService.Instance.Strings.CollectionChanged += Strings_CollectionChanged;
         }
 
         private void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 case nameof(Settings.IconsFolderPath):
                 case nameof(Settings.DefaultIconsFolderPath):
@@ -151,7 +154,7 @@ namespace eTools_Ultimate.Models
 
         private void Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 case nameof(Prop.DwId):
                     NotifyPropertyChanged(nameof(Identifier));
@@ -169,10 +172,39 @@ namespace eTools_Ultimate.Models
             }
         }
 
+        private void Strings_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            switch (e.Action)
+            {
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Add:
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Remove:
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Replace:
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Move:
+                    IEnumerable<KeyValuePair<string, string>> oldItems = e.OldItems?.Cast<KeyValuePair<string, string>>() ?? [];
+                    IEnumerable<KeyValuePair<string, string>> newItems = e.NewItems?.Cast<KeyValuePair<string, string>>() ?? [];
+
+                    HashSet<string> changedKeys = [.. oldItems
+                        .Concat(newItems)
+                        .Select(kvp => kvp.Key)];
+
+
+                    if (changedKeys.Contains(Prop.SzName))
+                        NotifyPropertyChanged(nameof(Name));
+                    if (changedKeys.Contains(Prop.SzDesc))
+                        NotifyPropertyChanged(nameof(Description));
+                    break;
+                case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
+                    NotifyPropertyChanged(nameof(Name));
+                    NotifyPropertyChanged(nameof(Description));
+                    break;
+            }
+        }
+
         public void Dispose()
         {
             Prop.PropertyChanged -= Prop_PropertyChanged;
             Settings.Instance.PropertyChanged -= Settings_PropertyChanged;
+            StringsService.Instance.Strings.CollectionChanged -= Strings_CollectionChanged;
             GC.SuppressFinalize(this);
         }
 
@@ -181,4 +213,4 @@ namespace eTools_Ultimate.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-} 
+}

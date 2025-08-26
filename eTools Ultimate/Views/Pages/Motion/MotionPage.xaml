@@ -8,8 +8,9 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:viewModels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
     Title="Motion Editor"
-    d:DataContext="{d:DesignInstance local:MotionPage,
+    d:DataContext="{d:DesignInstance viewModels:MotionsViewModel,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="791"
     d:DesignWidth="1600"
@@ -68,8 +69,9 @@
                         <ui:AutoSuggestBox
                             x:Name="MotionIdTextBox"
                             Grid.Row="1"
+                            DisplayMemberPath="Value"
                             OriginalItemsSource="{Binding DataContext.MotionIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
-                            Text="{Binding Path=Identifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            Text="{Binding Path=Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                     </Grid>
 
                     <!--  Motion Icon  -->
@@ -227,7 +229,7 @@
                         BorderThickness="0"
                         Icon="Search24"
                         PlaceholderText="Suche..."
-                        Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </Border>
 
                 <!--  Motion List  -->
@@ -243,7 +245,7 @@
                         BorderThickness="0"
                         IsSynchronizedWithCurrentItem="True"
                         ItemTemplate="{StaticResource MotionListTemplate}"
-                        ItemsSource="{Binding ViewModel.MotionsView}"
+                        ItemsSource="{Binding MotionsView}"
                         SelectionChanged="MotionsListView_SelectionChanged">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
@@ -343,7 +345,7 @@
 
                     <!--  Form  -->
                     <StackPanel Margin="20">
-                        <ContentControl Content="{Binding ViewModel.MotionsView}" ContentTemplate="{StaticResource MotionDetailsSectionTemplate}" />
+                        <ContentControl Content="{Binding MotionsView}" ContentTemplate="{StaticResource MotionDetailsSectionTemplate}" />
 
                         <!--  3D Model Preview Section  -->
                         <StackPanel Margin="0,20,0,0">
