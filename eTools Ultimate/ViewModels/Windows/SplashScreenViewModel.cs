@@ -75,7 +75,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                         });
                     }
 
-                    ChangesTrackerService.Instance.Init();
+                    //ChangesTrackerService.Instance.Init();
                 }).ConfigureAwait(true);
 
             Loaded?.Invoke(this, EventArgs.Empty);
