@@ -16,6 +16,8 @@
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Loaded="Page_Loaded"
+    MouseMove="Page_MouseMove"
     ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d">
 
@@ -63,10 +65,11 @@
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <TextBox
+                        <ui:AutoSuggestBox
                             x:Name="MotionIdTextBox"
                             Grid.Row="1"
-                            Text="{Binding Path=DwId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            OriginalItemsSource="{Binding DataContext.MotionIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                            Text="{Binding Path=Identifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
                     <!--  Motion Icon  -->
@@ -92,7 +95,7 @@
                             <TextBox
                                 x:Name="MotionIconTextBox"
                                 Grid.Column="0"
-                                Text="{Binding Path=SzIconName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding Path=Prop.SzIconName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <ui:Button
                                 Grid.Column="1"
                                 Height="36"
@@ -212,53 +215,53 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                            <!--  Search Bar  -->
-            <Border
-                Grid.Row="0"
-                Margin="0,0,10,0"
-                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                BorderThickness="1,1,1,0">
-                <ui:TextBox
-                    Margin="10,10,10,10"
-                    BorderThickness="0"
-                    Icon="Search24"
-                    PlaceholderText="Suche..."
-                    Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            </Border>
+                <!--  Search Bar  -->
+                <Border
+                    Grid.Row="0"
+                    Margin="0,0,10,0"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                    BorderThickness="1,1,1,0">
+                    <ui:TextBox
+                        Margin="10,10,10,10"
+                        BorderThickness="0"
+                        Icon="Search24"
+                        PlaceholderText="Suche..."
+                        Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </Border>
 
-            <!--  Motion List  -->
-            <Border
-                Grid.Row="1"
-                Margin="0,0,10,0"
-                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                BorderThickness="1,0,1,1">
-                <ListView
-                    x:Name="MotionsListView"
-                    Background="Transparent"
-                    BorderThickness="0"
-                    IsSynchronizedWithCurrentItem="True"
-                    ItemTemplate="{StaticResource MotionListTemplate}"
-                    ItemsSource="{Binding ViewModel.MotionsView}"
-                    SelectionChanged="MotionsListView_SelectionChanged">
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
-                                </Trigger>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
-                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>
-            </Border>
+                <!--  Motion List  -->
+                <Border
+                    Grid.Row="1"
+                    Margin="0,0,10,0"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                    BorderThickness="1,0,1,1">
+                    <ListView
+                        x:Name="MotionsListView"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        IsSynchronizedWithCurrentItem="True"
+                        ItemTemplate="{StaticResource MotionListTemplate}"
+                        ItemsSource="{Binding ViewModel.MotionsView}"
+                        SelectionChanged="MotionsListView_SelectionChanged">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                                        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </Border>
             </Grid>
 
             <!--  Separator  -->
@@ -329,7 +332,7 @@
                             Appearance="Primary"
                             Background="#2F70AF"
                             Click="AddButton_Click">
-                            <TextBlock Text="Add" Foreground="White" />
+                            <TextBlock Foreground="White" Text="Add" />
                         </ui:Button>
                         <ui:Button
                             x:Name="DeleteButton"
@@ -341,11 +344,11 @@
                     <!--  Form  -->
                     <StackPanel Margin="20">
                         <ContentControl Content="{Binding ViewModel.MotionsView}" ContentTemplate="{StaticResource MotionDetailsSectionTemplate}" />
-                        
+
                         <!--  3D Model Preview Section  -->
                         <StackPanel Margin="0,20,0,0">
                             <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Model Preview" />
-                            
+
                             <!--  Preview Container  -->
                             <Grid Margin="0,0,0,15" HorizontalAlignment="Left">
                                 <!--  3D Model Preview  -->
@@ -365,15 +368,33 @@
                                                 x:Name="DxImage"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
+                                                MouseRightButtonDown="DxImage_MouseRightButtonDown"
+                                                MouseWheel="DxImage_MouseWheel"
                                                 Stretch="UniformToFill" />
                                         </Grid>
                                     </Border>
-                                    
+
                                     <!--  Loop Mode Dropdown  -->
-                                    <ComboBox Grid.Row="1" Margin="0,10,0,0" SelectedIndex="0">
-                                        <ComboBoxItem Content="Loop" />
-                                        <ComboBoxItem Content="One Time Keep" />
-                                        <ComboBoxItem Content="One Time" />
+                                    <ComboBox
+                                        Grid.Row="1"
+                                        Margin="0,10,0,0"
+                                        SelectedValue="{Binding SelectedItem.Prop.DwPlay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=MotionsListView}"
+                                        SelectedValuePath="Tag">
+                                        <ComboBoxItem Content="One Time">
+                                            <ComboBoxItem.Tag>
+                                                <sys:Int32>0</sys:Int32>
+                                            </ComboBoxItem.Tag>
+                                        </ComboBoxItem>
+                                        <ComboBoxItem Content="One Time Keep">
+                                            <ComboBoxItem.Tag>
+                                                <sys:Int32>1</sys:Int32>
+                                            </ComboBoxItem.Tag>
+                                        </ComboBoxItem>
+                                        <ComboBoxItem Content="Loop">
+                                            <ComboBoxItem.Tag>
+                                                <sys:Int32>2</sys:Int32>
+                                            </ComboBoxItem.Tag>
+                                        </ComboBoxItem>
                                     </ComboBox>
                                 </Grid>
                             </Grid>

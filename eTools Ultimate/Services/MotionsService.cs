@@ -50,7 +50,8 @@ namespace eTools_Ultimate.Services
                     string szName = script.GetToken();
                     string szDesc = script.GetToken();
 
-                    Motion motion = new(nVer, dwId, dwMotion, szIconName, dwPlay, szName, szDesc);
+                    MotionProp prop = new(nVer, dwId, dwMotion, szIconName, dwPlay, szName, szDesc);
+                    Motion motion = new(prop);
                     this.Motions.Add(motion);
                 }
             }

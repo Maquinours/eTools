@@ -10,7 +10,7 @@ using System.Windows.Media.Imaging;
 
 namespace eTools_Ultimate.Models
 {
-    public class Motion(int nVer, int dwId, int dwMotion, string szIconName, int dwPlay, string szName, string szDesc) : INotifyPropertyChanged, IDisposable
+    public class MotionProp(int nVer, int dwId, int dwMotion, string szIconName, int dwPlay, string szName, string szDesc) : INotifyPropertyChanged
     {
         private int _nVer = nVer;
         private int _dwId = dwId;
@@ -22,16 +22,6 @@ namespace eTools_Ultimate.Models
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void NotifyPropertyChanged<T>(string propertyName, T oldValue, T newValue)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedExtendedEventArgs(propertyName, oldValue, newValue));
-        }
-
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         public int NVer
         {
             get => this._nVer;
@@ -40,11 +30,7 @@ namespace eTools_Ultimate.Models
         public int DwId
         {
             get => this._dwId;
-            set
-            {
-                if(SetValue(ref this._dwId, value))
-                    NotifyPropertyChanged(nameof(this.Identifier));
-            }
+            set => SetValue(ref this._dwId, value);
         }
         public int DwMotion
         {
@@ -72,56 +58,10 @@ namespace eTools_Ultimate.Models
             set => SetValue(ref this._szDesc, value);
         }
 
-        public string Identifier => DefinesService.Instance.ReversedMotionDefines.TryGetValue(this.DwId, out string? identifier) ? identifier : this.DwId.ToString();
-        public string Name
+        private void NotifyPropertyChanged<T>(string propertyName, T oldValue, T newValue)
         {
-            get => StringsService.Instance.GetString(this.SzName);
-            set => StringsService.Instance.ChangeStringValue(this.SzName, value);
+            PropertyChanged?.Invoke(this, new PropertyChangedExtendedEventArgs(propertyName, oldValue, newValue));
         }
-
-        public string Description
-        {
-            get => StringsService.Instance.GetString(this.SzDesc);
-            set => StringsService.Instance.ChangeStringValue(this.SzDesc, value);
-        }
-
-        public ImageSource? Icon
-        {
-            get
-            {
-                string filePath = $"{Settings.Instance.IconsFolderPath ?? Settings.Instance.DefaultIconsFolderPath}{this.SzIconName}";
-                if (!File.Exists(filePath))
-                {
-                    return null;
-                    //using (var ms = new MemoryStream(ItemsEditor.Resources.Images.NotFoundImage))
-                    //{
-                    //    return Image.FromStream(ms);
-                    //}
-                }
-                var bitmap = new DDSImage(File.OpenRead(filePath)).BitmapImage;
-
-                // Bitmap to bitmap image
-                using (var memory = new MemoryStream())
-                {
-                    bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
-                    memory.Position = 0;
-
-                    var bitmapImage = new BitmapImage();
-                    bitmapImage.BeginInit();
-                    bitmapImage.StreamSource = memory;
-                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmapImage.EndInit();
-                    bitmapImage.Freeze();
-                    return bitmapImage;
-                }
-            }
-        }
-
-        public void Dispose()
-        {
-
-        }
-
         private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
         {
             if (EqualityComparer<T>.Default.Equals(field, value))
@@ -133,6 +73,112 @@ namespace eTools_Ultimate.Models
             field = value;
             this.NotifyPropertyChanged(propertyName, old, value);
             return true;
+        }
+    }
+    public class Motion : INotifyPropertyChanged, IDisposable
+    {
+        private readonly MotionProp _prop;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public MotionProp Prop => _prop;
+
+        public string Identifier
+        {
+            get => Script.NumberToString(Prop.DwId, DefinesService.Instance.ReversedMotionDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int result))
+                    Prop.DwId = result;
+            }
+        }
+        public string Name
+        {
+            get => StringsService.Instance.GetString(Prop.SzName);
+            set => StringsService.Instance.ChangeStringValue(Prop.SzName, value);
+        }
+
+        public string Description
+        {
+            get => StringsService.Instance.GetString(Prop.SzDesc);
+            set => StringsService.Instance.ChangeStringValue(Prop.SzDesc, value);
+        }
+
+        public ImageSource? Icon // TODO: maybe refresh this property when file changes
+        {
+            get
+            {
+                string filePath = $"{Settings.Instance.IconsFolderPath ?? Settings.Instance.DefaultIconsFolderPath}{Prop.SzIconName}";
+                if (!File.Exists(filePath))
+                    return null;
+
+                // Bitmap to bitmap image
+                using var fs = File.OpenRead(filePath);
+                using var dds = new DDSImage(fs);
+                using var bitmap = dds.BitmapImage;
+                using var memory = new MemoryStream();
+
+                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+                memory.Position = 0;
+
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+                return bitmapImage;
+            }
+        }
+
+        public Motion(MotionProp prop)
+        {
+            _prop = prop;
+            Prop.PropertyChanged += Prop_PropertyChanged;
+            Settings.Instance.PropertyChanged += Settings_PropertyChanged;
+        }
+
+        private void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case nameof(Settings.IconsFolderPath):
+                case nameof(Settings.DefaultIconsFolderPath):
+                    NotifyPropertyChanged(nameof(Icon));
+                    break;
+            }
+        }
+
+        private void Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case nameof(Prop.DwId):
+                    NotifyPropertyChanged(nameof(Identifier));
+                    break;
+                case nameof(Prop.SzName):
+                    NotifyPropertyChanged(nameof(Name));
+                    break;
+                case nameof(Prop.SzDesc):
+                    NotifyPropertyChanged(nameof(Description));
+                    break;
+                case nameof(Prop.SzIconName):
+                    NotifyPropertyChanged(nameof(Icon));
+                    break;
+
+            }
+        }
+
+        public void Dispose()
+        {
+            Prop.PropertyChanged -= Prop_PropertyChanged;
+            Settings.Instance.PropertyChanged -= Settings_PropertyChanged;
+            GC.SuppressFinalize(this);
+        }
+
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 } 

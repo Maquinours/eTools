@@ -191,6 +191,11 @@ namespace eTools_Ultimate.Services
             throw new InvalidOperationException("ModelsService::GetBraceByModel Exception : Model not found");
         }
 
+        public ModelElem? GetModelByTypeAndId(int type, int id)
+        {
+            return GetModelsByType(type).FirstOrDefault(model => model.DwIndex == id);
+        }
+
         public void SetBraceToModel(ModelElem model, ModelBrace brace)
         {
             ModelBrace oldBrace = GetBraceByModel(model);
