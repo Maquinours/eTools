@@ -16,7 +16,7 @@ using Wpf.Ui.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class MotionsViewModel : ObservableObject, INavigationAware
+    public partial class MotionsViewModel(ISnackbarService snackbarService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -109,7 +109,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private void MotionProp_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 case nameof(MotionProp.DwMotion):
                 case nameof(MotionProp.DwPlay):
@@ -182,6 +182,40 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (obj is not Motion motion) return false;
             if (string.IsNullOrEmpty(this.SearchText)) return true;
             return motion.Name.ToLower().Contains(this.SearchText.ToLower());
+        }
+
+        [RelayCommand]
+        private void Save()
+        {
+            HashSet<string> stringIdentifiers = [];
+            foreach (Motion motion in MotionsService.Instance.Motions)
+            {
+                stringIdentifiers.Add(motion.Prop.SzName);
+                stringIdentifiers.Add(motion.Prop.SzDesc);
+            }
+
+            try
+            {
+                MotionsService.Instance.Save();
+                StringsService.Instance.Save(Settings.Instance.MotionsTxtFilePath ?? Settings.Instance.DefaultMotionsTxtFilePath, [.. stringIdentifiers]);
+
+                snackbarService.Show(
+                    title: "Motions saved",
+                    message: "Motions have been successfully saved.",
+                    appearance: ControlAppearance.Success,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            } catch(Exception ex)
+            {
+                snackbarService.Show(
+                    title: "An error has occured while saving",
+                    message: ex.Message,
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
         }
     }
 }

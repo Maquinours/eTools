@@ -320,7 +320,7 @@
                         <ui:Button
                             x:Name="SaveButton"
                             Margin="0,0,10,0"
-                            Click="SaveButton_Click"
+                            Command="{Binding SaveCommand}"
                             Content="Save" />
                         <ui:Button
                             x:Name="ExpertButton"
@@ -332,14 +332,12 @@
                             Margin="0,0,10,0"
                             HorizontalAlignment="Left"
                             Appearance="Primary"
-                            Background="#2F70AF"
-                            Click="AddButton_Click">
+                            Background="#2F70AF">
                             <TextBlock Foreground="White" Text="Add" />
                         </ui:Button>
                         <ui:Button
                             x:Name="DeleteButton"
                             Background="#FD292F"
-                            Click="DeleteButton_Click"
                             Content="Delete" />
                     </StackPanel>
 

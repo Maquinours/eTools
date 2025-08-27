@@ -64,6 +64,21 @@ namespace eTools_Ultimate.Services
             }
         }
 
+        public void Save(string filePath, string[] stringIdentifiers)
+        {
+            using StreamWriter writer = new StreamWriter(filePath, false, Encoding.UTF8);
+            foreach (string identifier in stringIdentifiers)
+            {
+                if (Strings.TryGetValue(identifier, out string? value))
+                {
+                    writer.Write(identifier);
+                    writer.Write("\t");
+                    writer.Write(value);
+                    writer.WriteLine();
+                }
+            }
+        }
+
         public string GetString(string ids)
         {
             return this.Strings[ids];

@@ -94,6 +94,17 @@ namespace eTools_Ultimate.Models
                     Prop.DwId = result;
             }
         }
+
+        public string MotionIdentifier
+        {
+            get => Script.NumberToString(Prop.DwMotion, DefinesService.Instance.ReversedMotionTypeDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int result))
+                    Prop.DwMotion = result;
+            }
+        }
+
         public string Name
         {
             get => StringsService.Instance.GetString(Prop.SzName);
