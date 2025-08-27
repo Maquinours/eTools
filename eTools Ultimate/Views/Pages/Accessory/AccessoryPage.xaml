@@ -165,64 +165,73 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 
-                <!--  Add and Delete Buttons top right  -->
-                <StackPanel
-                    Margin="0,10,20,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Orientation="Horizontal"
-                    ZIndex="1">
-                    <ui:Button ToolTip="Undo">
-                        <ui:SymbolIcon Symbol="ArrowUndo24" />
-                    </ui:Button>
-                    <ui:Button
-                        Margin="10,0,10,0"
-                        ToolTip="Redo">
-                        <ui:SymbolIcon Symbol="ArrowRedo24" />
-                    </ui:Button>
-                    <ui:Button
-                        x:Name="SaveButton"
-                        Margin="0,0,10,0"
-                        Click="SaveButton_Click"
-                        Content="Save" />
-                    <ui:Button
-                        x:Name="ExpertButton"
-                        Margin="0,0,10,0"
-                        Appearance="Secondary"
-                        Content="Expert" />
-                    
-                    <ui:Button
-                        x:Name="AddButton"
-                        Margin="0,0,10,0"
-                        Background="#2F70AF"
-                        Click="AddButton_Click"
-                        Content="Add" />
-                    <ui:Button
-                        x:Name="DeleteButton"
-                        Background="#FD292F"
-                        Foreground="White"
-                        Click="DeleteButton_Click"
-                        Content="Delete" />
-                </StackPanel>
+
 
                 <!--  Accessory Title  -->
-                <StackPanel Grid.Row="0" Margin="0,0,0,16">
-                    <TextBlock
-                        FontSize="24"
-                        FontWeight="Bold"
-                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                        Text="{Binding SelectedItem.Item.Name, Mode=OneWay, ElementName=AccessoriesListView}" />
-                    <TextBlock
-                        FontSize="14"
-                        Foreground="{DynamicResource TextFillColorSecondaryBrush}">
-                        <TextBlock.Text>
-                            <MultiBinding StringFormat="{}{0} - {1}">
-                                <Binding ElementName="AccessoriesListView" Path="SelectedItem.Item.Identifier" />
-                                <Binding ElementName="AccessoriesListView" Path="SelectedItem.Item.Description" />
-                            </MultiBinding>
-                        </TextBlock.Text>
-                    </TextBlock>
-                </StackPanel>
+                <Grid Grid.Row="0" Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackPanel Grid.Column="0" Margin="0,0,16,0">
+                        <TextBlock
+                            FontSize="24"
+                            FontWeight="Bold"
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                            Text="{Binding SelectedItem.Item.Name, Mode=OneWay, ElementName=AccessoriesListView}" />
+                        <TextBlock
+                            FontSize="14"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                            TextWrapping="Wrap">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} - {1}">
+                                    <Binding ElementName="AccessoriesListView" Path="SelectedItem.Item.Identifier" />
+                                    <Binding ElementName="AccessoriesListView" Path="SelectedItem.Item.Description" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
+                    
+                    <!--  Add and Delete Buttons top right  -->
+                    <StackPanel
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+                        <ui:Button ToolTip="Undo">
+                            <ui:SymbolIcon Symbol="ArrowUndo24" />
+                        </ui:Button>
+                        <ui:Button
+                            Margin="10,0,10,0"
+                            ToolTip="Redo">
+                            <ui:SymbolIcon Symbol="ArrowRedo24" />
+                        </ui:Button>
+                        <ui:Button
+                            x:Name="SaveButton"
+                            Margin="0,0,10,0"
+                            Click="SaveButton_Click"
+                            Content="Save" />
+                        <ui:Button
+                            x:Name="ExpertButton"
+                            Margin="0,0,10,0"
+                            Appearance="Secondary"
+                            Content="Expert" />
+                        
+                        <ui:Button
+                            x:Name="AddButton"
+                            Margin="0,0,10,0"
+                            Background="#2F70AF"
+                            Click="AddButton_Click"
+                            Content="Add" />
+                        <ui:Button
+                            x:Name="DeleteButton"
+                            Background="#FD292F"
+                            Foreground="White"
+                            Click="DeleteButton_Click"
+                            Content="Delete" />
+                    </StackPanel>
+                </Grid>
 
                 <!--  Accessory Actions  -->
                 <StackPanel
