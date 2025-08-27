@@ -59,7 +59,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Motion ID" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="ID" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Unique identifier for the motion" />
@@ -74,6 +74,28 @@
                             Text="{Binding Path=Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                     </Grid>
 
+                    <!--  Animation ID  -->
+                    <Grid Margin="0,0,15,20" Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Animation ID" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Secondary identifier for the motion" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:AutoSuggestBox
+                            x:Name="SecondaryMotionIdTextBox"
+                            Grid.Row="1"
+                            DisplayMemberPath="Value"
+                            OriginalItemsSource="{Binding DataContext.MotionIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                            Text="{Binding Path=SecondaryIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                    </Grid>
+
                     <!--  Motion Icon  -->
                     <Grid Margin="0,0,15,20" Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -81,7 +103,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Motion Icon" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="InGame Icon" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Icon image displayed for the motion" />
@@ -116,25 +138,6 @@
                         </Grid>
                     </Grid>
 
-                    <!--  InGame Name  -->
-                    <Grid Margin="0,0,15,20" Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="InGame Name" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Name displayed in game" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox
-                            x:Name="InGameNameTextBox"
-                            Grid.Row="1"
-                            Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </Grid>
 
                     <!--  Description  -->
                     <Grid
@@ -352,9 +355,10 @@
                             <!--  Preview Container  -->
                             <Grid Margin="0,0,0,15" HorizontalAlignment="Left">
                                 <!--  3D Model Preview  -->
-                                <Grid Width="500">
+                                <Grid Width="330">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="250" />
+                                        <RowDefinition Height="350" />
+                                        <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <Border
@@ -371,6 +375,28 @@
                                                 MouseRightButtonDown="DxImage_MouseRightButtonDown"
                                                 MouseWheel="DxImage_MouseWheel"
                                                 Stretch="UniformToFill" />
+                                            
+                                            <!--  Control Buttons Overlay  -->
+                                            <StackPanel
+                                                Margin="0,5,5,0"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Top"
+                                                Panel.ZIndex="1"
+                                                Orientation="Vertical">
+                                                <ui:Button 
+                                                    x:Name="StopButton" 
+                                                    Margin="0,0,0,5" 
+                                                    ToolTip="Stop Animation"
+                                                    Appearance="Secondary">
+                                                    <ui:SymbolIcon Symbol="Stop24" />
+                                                </ui:Button>
+                                                <ui:Button 
+                                                    x:Name="GenderChangeButton" 
+                                                    ToolTip="Change Gender"
+                                                    Appearance="Secondary">
+                                                    <ui:SymbolIcon Symbol="Person24" />
+                                                </ui:Button>
+                                            </StackPanel>
                                         </Grid>
                                     </Border>
 
