@@ -32,33 +32,6 @@ namespace eTools_Ultimate.Views.Pages.Motion
             // ViewModel.SelectedMotion wird durch die ListView aktualisiert
         }
 
-        [RelayCommand]
-        private void Undo()
-        {
-            ChangesTrackerService.Instance.Undo(ViewModel.MotionsView.CurrentItem);
-        }
-
-        [RelayCommand]
-        private void Redo()
-        {
-            ChangesTrackerService.Instance.Redo(ViewModel.MotionsView.CurrentItem);
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: implement this
-        }
-
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: implement this
-        }
-
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: implement this
-        }
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             var hwnd = new WindowInteropHelper(Window.GetWindow(this)).Handle;
@@ -102,27 +75,5 @@ namespace eTools_Ultimate.Views.Pages.Motion
             NativeMethods.ZoomCamera(ViewModel.D3dHost._native, e.Delta);
             e.Handled = true;
         }
-
-        //private void AddButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    // Eine neue Motion über das ViewModel erstellen
-        //    ViewModel.AddMotionCommand.Execute(null);
-        //}
-
-        //private void SaveButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    // Die aktuelle Motion über das ViewModel speichern
-        //    ViewModel.UpdateMotionCommand.Execute(null);
-        //}
-
-        //private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    if (MessageBox.Show("Do you really want to delete this motion?", "Delete Motion", 
-        //        MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-        //    {
-        //        // Die ausgewählte Motion über das ViewModel löschen
-        //        ViewModel.DeleteMotionCommand.Execute(null);
-        //    }
-        //}
     }
 } 
