@@ -84,16 +84,67 @@
                             <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Animation ID" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Secondary identifier for the motion" />
+                                    <ToolTip Content="ID of the animation that should be played with the motion" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:AutoSuggestBox
                             x:Name="SecondaryMotionIdTextBox"
                             Grid.Row="1"
-                            DisplayMemberPath="Value"
-                            OriginalItemsSource="{Binding DataContext.MotionIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
-                            Text="{Binding Path=SecondaryIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            OriginalItemsSource="{Binding DataContext.AnimationIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                            Text="{Binding Path=MotionIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                    </Grid>
+
+                    <!--  Name  -->
+                    <Grid
+                        Grid.ColumnSpan="2"
+                        Margin="0,0,15,20"
+                        Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Name" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Name of the motion. If defined, the character will say that name while playing the motion." />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <TextBox
+                            x:Name="NameTextBox"
+                            Grid.Row="1"
+                            Height="Auto"
+                            AcceptsReturn="False"
+                            Text="{Binding Path=Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            TextWrapping="NoWrap" />
+                    </Grid>
+
+                    <!--  Description  -->
+                    <Grid
+                        Grid.ColumnSpan="2"
+                        Margin="0,0,15,20"
+                        Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Description" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Description of the motion" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <TextBox
+                            x:Name="DescriptionTextBox"
+                            Grid.Row="1"
+                            Height="Auto"
+                            AcceptsReturn="False"
+                            Text="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            TextWrapping="NoWrap" />
                     </Grid>
 
                     <!--  Motion Icon  -->
@@ -103,7 +154,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="InGame Icon" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Icon" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Icon image displayed for the motion" />
@@ -138,31 +189,40 @@
                         </Grid>
                     </Grid>
 
-
-                    <!--  Description  -->
-                    <Grid
-                        Grid.ColumnSpan="2"
-                        Margin="0,0,15,20"
-                        Style="{StaticResource FormFieldStyle}">
+                    <!--  Play type  -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Description" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Play type" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Description of the motion" />
+                                    <ToolTip Content="Behavior of the animation when it ends." />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <TextBox
-                            x:Name="DescriptionTextBox"
+                        <ComboBox
                             Grid.Row="1"
-                            Height="Auto"
-                            AcceptsReturn="False"
-                            Text="{Binding Path=Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            TextWrapping="NoWrap" />
+                            SelectedValue="{Binding SelectedItem.Prop.DwPlay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=MotionsListView}"
+                            SelectedValuePath="Tag">
+                            <ComboBoxItem Content="One Time">
+                                <ComboBoxItem.Tag>
+                                    <sys:Int32>0</sys:Int32>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                            <ComboBoxItem Content="One Time Keep">
+                                <ComboBoxItem.Tag>
+                                    <sys:Int32>1</sys:Int32>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                            <ComboBoxItem Content="Loop">
+                                <ComboBoxItem.Tag>
+                                    <sys:Int32>2</sys:Int32>
+                                </ComboBoxItem.Tag>
+                            </ComboBoxItem>
+                        </ComboBox>
                     </Grid>
                 </UniformGrid>
             </StackPanel>
@@ -375,7 +435,7 @@
                                                 MouseRightButtonDown="DxImage_MouseRightButtonDown"
                                                 MouseWheel="DxImage_MouseWheel"
                                                 Stretch="UniformToFill" />
-                                            
+
                                             <!--  Control Buttons Overlay  -->
                                             <StackPanel
                                                 Margin="0,5,5,0"
@@ -383,45 +443,23 @@
                                                 VerticalAlignment="Top"
                                                 Panel.ZIndex="1"
                                                 Orientation="Vertical">
-                                                <ui:Button 
-                                                    x:Name="StopButton" 
-                                                    Margin="0,0,0,5" 
-                                                    ToolTip="Stop Animation"
-                                                    Appearance="Secondary">
-                                                    <ui:SymbolIcon Symbol="Stop24" />
+                                                <ui:Button
+                                                    Margin="0,0,0,5"
+                                                    Appearance="Secondary"
+                                                    Command="{Binding PlayModelPreviewMotionCommand}"
+                                                    ToolTip="Play the animation">
+                                                    <ui:SymbolIcon Symbol="Play24" />
                                                 </ui:Button>
-                                                <ui:Button 
-                                                    x:Name="GenderChangeButton" 
-                                                    ToolTip="Change Gender"
-                                                    Appearance="Secondary">
+                                                <ui:Button
+                                                    x:Name="GenderChangeButton"
+                                                    Appearance="Secondary"
+                                                    Command="{Binding ChangeModelPreviewGenderCommand}"
+                                                    ToolTip="Change model gender">
                                                     <ui:SymbolIcon Symbol="Person24" />
                                                 </ui:Button>
                                             </StackPanel>
                                         </Grid>
                                     </Border>
-
-                                    <!--  Loop Mode Dropdown  -->
-                                    <ComboBox
-                                        Grid.Row="1"
-                                        Margin="0,10,0,0"
-                                        SelectedValue="{Binding SelectedItem.Prop.DwPlay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=MotionsListView}"
-                                        SelectedValuePath="Tag">
-                                        <ComboBoxItem Content="One Time">
-                                            <ComboBoxItem.Tag>
-                                                <sys:Int32>0</sys:Int32>
-                                            </ComboBoxItem.Tag>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem Content="One Time Keep">
-                                            <ComboBoxItem.Tag>
-                                                <sys:Int32>1</sys:Int32>
-                                            </ComboBoxItem.Tag>
-                                        </ComboBoxItem>
-                                        <ComboBoxItem Content="Loop">
-                                            <ComboBoxItem.Tag>
-                                                <sys:Int32>2</sys:Int32>
-                                            </ComboBoxItem.Tag>
-                                        </ComboBoxItem>
-                                    </ComboBox>
                                 </Grid>
                             </Grid>
                         </StackPanel>

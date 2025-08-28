@@ -16,16 +16,59 @@ using Wpf.Ui.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
+    enum ModelGender
+    {
+        MALE,
+        FEMALE
+    }
+
     public partial class MotionsViewModel(ISnackbarService snackbarService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
         private string _searchText = string.Empty;
 
+        private ModelGender _modelPreviewGender = ModelGender.MALE;
+
+        private ModelGender ModelPreviewGender
+        {
+            get => _modelPreviewGender;
+            set
+            {
+                if (_modelPreviewGender != value)
+                {
+                    _modelPreviewGender = value;
+                    OnPropertyChanged(nameof(ModelPreviewGender));
+                    LoadModel();
+                    PlayMotion();
+                }
+            }
+        }
+
         [ObservableProperty]
         private ICollectionView _motionsView = CollectionViewSource.GetDefaultView(MotionsService.Instance.Motions);
 
         public List<KeyValuePair<int, string>> MotionIdentifiers => [.. DefinesService.Instance.ReversedMotionDefines];
+        public string[] AnimationIdentifiers // TODO : we need to throw a "property changed" event when male or female model motion changes, but not a priority.
+        {
+            get
+            {
+                int moverModelType = DefinesService.Instance.Defines["OT_MOVER"];
+                int maleMoverId = DefinesService.Instance.Defines["MI_MALE"];
+                int femaleMoverId = DefinesService.Instance.Defines["MI_FEMALE"];
+                ModelElem? maleMoverModel = ModelsService.Instance.GetModelByTypeAndId(moverModelType, maleMoverId);
+                ModelElem? femaleMoverModel = ModelsService.Instance.GetModelByTypeAndId(moverModelType, maleMoverId);
+                if (maleMoverModel is null || femaleMoverModel is null) return [];
+                ModelMotion[] maleMotions = [.. maleMoverModel.Motions];
+                ModelMotion[] femaleMotions = [.. femaleMoverModel.Motions];
+
+                ModelMotion[] common = [.. maleMotions.Where(m => femaleMotions.Any(f => f.IMotion == m.IMotion))];
+
+                string[] commonIdentifiers = [.. common.Select(x => DefinesService.Instance.ReversedMotionTypeDefines[x.IMotion])];
+
+                return commonIdentifiers;
+            }
+        }
 
         public D3DImageHost? D3dHost { get; private set; } = null;
 
@@ -122,14 +165,28 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (D3dHost is null) return;
 
-            string[] parts = [
-                        "Part_maleHair06.o3d",
+            NativeMethods.DeleteModel(D3dHost._native);
+            string[] parts = ModelPreviewGender switch
+            {
+                ModelGender.MALE => [
+                    "Part_maleHair06.o3d",
                         "Part_maleHead01.o3d",
                         "Part_maleHand.o3d",
                         "Part_maleLower.o3d",
                         "Part_maleUpper.o3d",
                         "Part_maleFoot.o3d",
-                    ];
+                    ],
+                ModelGender.FEMALE => [
+                    "Part_femaleHair06.o3d",
+                        "Part_femaleHead01.o3d",
+                        "Part_femaleHand.o3d",
+                        "Part_femaleLower.o3d",
+                        "Part_femaleUpper.o3d",
+                        "Part_femaleFoot.o3d",
+                    ],
+                _ => throw new InvalidOperationException("MotionsViewModel::LoadModel exception : ModelPreviewGender is neither MALE nor FEMALE")
+            };
+
             string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
             string[] partsPath = [.. parts.Select(part => $"{modelsFolderPath}{part}")];
 
@@ -144,17 +201,26 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (D3dHost is null) return;
             if (MotionsView.CurrentItem is not Motion motion) return;
 
-            string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
-            string root = "mvr_male";
+            NativeMethods.StopMotion(D3dHost._native);
+
             int motionType = motion.Prop.DwMotion;
 
+            string moverIdentifier = ModelPreviewGender switch
+            {
+                ModelGender.MALE => "MI_MALE",
+                ModelGender.FEMALE => "MI_FEMALE",
+                _ => throw new InvalidOperationException("MotionsViewModel::PlayMotion exception : ModelPreviewGender is neither MALE nor FEMALE")
+            };
+
             int moverModelType = DefinesService.Instance.Defines["OT_MOVER"];
-            int maleMoverId = DefinesService.Instance.Defines["MI_MALE"];
-            ModelElem? moverModel = ModelsService.Instance.GetModelByTypeAndId(moverModelType, maleMoverId);
+            int moverId = DefinesService.Instance.Defines[moverIdentifier];
+            ModelElem? moverModel = ModelsService.Instance.GetModelByTypeAndId(moverModelType, moverId);
             if (moverModel is null) return;
-            ModelMotion? modelMotion = moverModel?.Motions.FirstOrDefault(m => m.IMotion == motionType);
+            ModelMotion? modelMotion = moverModel.Motions.FirstOrDefault(m => m.IMotion == motionType);
             if (modelMotion is null) return;
 
+            string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+            string root = $"mvr_{moverModel.SzName}";
             string lowerMotionKey = modelMotion.SzMotion;
 
             string motionFile = $@"{modelsFolderPath}{root}_{lowerMotionKey}.ani";
@@ -216,6 +282,23 @@ namespace eTools_Ultimate.ViewModels.Pages
                     timeout: TimeSpan.FromSeconds(3)
                     );
             }
+        }
+
+        [RelayCommand]
+        private void ChangeModelPreviewGender()
+        {
+            ModelPreviewGender = ModelPreviewGender switch
+            {
+                ModelGender.MALE => ModelGender.FEMALE,
+                ModelGender.FEMALE => ModelGender.MALE,
+                _ => throw new InvalidOperationException("MotionsViewModel::ChangeModelPreviewGender exception : ModelPreviewGender is neither MALE nor FEMALE")
+            };
+        }
+
+        [RelayCommand]
+        private void PlayModelPreviewMotion()
+        {
+            PlayMotion();
         }
     }
 }
