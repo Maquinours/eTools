@@ -22,6 +22,8 @@ using Wpf.Ui;
 using Wpf.Ui.DependencyInjection;
 using eTools_Ultimate.Views.Dialogs;
 using eTools_Ultimate.ViewModels.Controls.Dialogs;
+using Lepo.i18n.DependencyInjection;
+using eTools_Ultimate.Resources;
 
 namespace eTools_Ultimate
 {
@@ -122,6 +124,13 @@ namespace eTools_Ultimate
                 // ChangeLog Page
                 services.AddSingleton<eTools_Ultimate.Views.Pages.ChangeLog.ChangeLogView>();
                 services.AddSingleton<eTools_Ultimate.ViewModels.Pages.ChangeLog.ChangeLogViewModel>();
+
+                // Localizers
+                services.AddStringLocalizer(b =>
+                {
+                    b.FromResource<Translations>(new("fr-FR"));
+                    b.FromResource<Translations>(new("de-DE"));
+                });
             }).Build();
 
         /// <summary>
