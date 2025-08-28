@@ -13,6 +13,7 @@ using System.Windows.Media;
 using Wpf.Ui;
 using Wpf.Ui.Abstractions.Controls;
 using Wpf.Ui.Controls;
+using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
@@ -22,7 +23,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         FEMALE
     }
 
-    public partial class MotionsViewModel(ISnackbarService snackbarService) : ObservableObject, INavigationAware
+    public partial class MotionsViewModel(ISnackbarService snackbarService, IContentDialogService contentDialogService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -299,6 +300,45 @@ namespace eTools_Ultimate.ViewModels.Pages
         private void PlayModelPreviewMotion()
         {
             PlayMotion();
+        }
+
+        [RelayCommand]
+        private void Add()
+        {
+            Settings settings = Settings.Instance;
+
+            string szName = StringsService.Instance.GetNextStringIdentifier("IDS_PROPMOTION_TXT_");
+            StringsService.Instance.AddString(szName, "");
+            string szDesc = StringsService.Instance.GetNextStringIdentifier("IDS_PROPMOTION_TXT_");
+            StringsService.Instance.AddString(szDesc, "");
+
+            MotionProp prop = new(nVer: Settings.Instance.ResourcesVersion, dwId: -1, dwMotion: 0, szIconName: "", dwPlay: 0, szName: szName, szDesc: szDesc);
+            Motion motion = new(prop);
+            MotionsService.Instance.Motions.Add(motion);
+            MotionsView.Refresh();
+            MotionsView.MoveCurrentTo(motion);
+        }
+
+        [RelayCommand]
+        private async Task Delete()
+        {
+            if (MotionsView.CurrentItem is not Motion motion) return;
+
+            ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
+                new SimpleContentDialogCreateOptions()
+                {
+                    Title = "Delete a motion",
+                    Content = $"Are you sure you want to delete the motion {motion.Identifier} ?",
+                    PrimaryButtonText = "Delete",
+                    CloseButtonText = "Cancel",
+                }
+            );
+            if (result == ContentDialogResult.Primary)
+            {
+                MotionsService.Instance.Motions.Remove(motion);
+                motion.Dispose();
+                MotionsView.Refresh();
+            }
         }
     }
 }

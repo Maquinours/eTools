@@ -28,8 +28,7 @@ namespace eTools_Ultimate.Views.Pages.Motion
 
         private void MotionsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Die Auswahl wird automatisch über das Binding aktualisiert
-            // ViewModel.SelectedMotion wird durch die ListView aktualisiert
+            MotionsListView.ScrollIntoView(MotionsListView.SelectedItem);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
