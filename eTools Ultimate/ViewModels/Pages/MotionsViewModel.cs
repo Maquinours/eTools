@@ -4,6 +4,7 @@ using eTools_Ultimate.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -339,6 +340,29 @@ namespace eTools_Ultimate.ViewModels.Pages
                 motion.Dispose();
                 MotionsView.Refresh();
             }
+        }
+
+        [RelayCommand]
+        private void SelectIconFile()
+        {
+            if (MotionsView.CurrentItem is not Motion motion) return;
+
+            string? filePath = FileFolderSelector.SelectFile(motion.IconFilePath, "Select an icon file", "DDS image|*.dds");
+
+            string? initialDirectoryPath = Path.GetDirectoryName(motion.IconFilePath);
+            string? directoryPath = Path.GetDirectoryName(filePath);
+            string? fileExtension = Path.GetExtension(filePath);
+            string? fileName = Path.GetFileName(filePath);
+
+            if (filePath is null ||
+                directoryPath is null ||
+                fileExtension is null ||
+                fileName is null ||
+                !directoryPath.Equals(initialDirectoryPath, StringComparison.OrdinalIgnoreCase) ||
+                !fileExtension.Equals(".dds")) 
+                return;
+
+            motion.Prop.SzIconName = fileName;
         }
     }
 }

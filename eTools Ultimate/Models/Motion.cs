@@ -117,11 +117,13 @@ namespace eTools_Ultimate.Models
             set => StringsService.Instance.ChangeStringValue(Prop.SzDesc, value);
         }
 
+        public string IconFilePath => $"{Settings.Instance.IconsFolderPath ?? Settings.Instance.DefaultIconsFolderPath}{Prop.SzIconName}";
+
         public ImageSource? Icon // TODO: maybe refresh this property when file changes
         {
             get
             {
-                string filePath = $"{Settings.Instance.IconsFolderPath ?? Settings.Instance.DefaultIconsFolderPath}{Prop.SzIconName}";
+                string filePath = IconFilePath;
                 if (!File.Exists(filePath))
                     return null;
 
@@ -158,6 +160,7 @@ namespace eTools_Ultimate.Models
             {
                 case nameof(Settings.IconsFolderPath):
                 case nameof(Settings.DefaultIconsFolderPath):
+                    NotifyPropertyChanged(nameof(IconFilePath));
                     NotifyPropertyChanged(nameof(Icon));
                     break;
             }
@@ -177,6 +180,7 @@ namespace eTools_Ultimate.Models
                     NotifyPropertyChanged(nameof(Description));
                     break;
                 case nameof(Prop.SzIconName):
+                    NotifyPropertyChanged(nameof(IconFilePath));
                     NotifyPropertyChanged(nameof(Icon));
                     break;
 

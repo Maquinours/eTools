@@ -31,11 +31,18 @@ namespace eTools_Ultimate.Helpers
                 ValidateNames = true,
                 CheckFileExists = true
             };
+
+            string? initialDirectoryPath = Path.GetDirectoryName(path);
             if (File.Exists(path))
             {
-                fileDialog.InitialDirectory = Path.GetDirectoryName(path);
+                fileDialog.InitialDirectory = initialDirectoryPath;
                 fileDialog.FileName = Path.GetFileName(path);
             }
+            else if(Directory.Exists(path))
+            {
+                fileDialog.InitialDirectory = initialDirectoryPath;
+            }
+
             if (title != null)
                 fileDialog.Title = title;
             if (filter != null)
