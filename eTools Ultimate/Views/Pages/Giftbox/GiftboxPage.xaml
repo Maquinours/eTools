@@ -252,7 +252,8 @@
                     Grid.Column="5"
                     Background="#2F70AF"
                     Content="Add Item"
-                    Icon="Add24" />
+                    Icon="Add24"
+                    Click="AddItemButton_Click" />
             </Grid>
 
             <!--  Box Info with Info Icon  -->
@@ -382,12 +383,17 @@
                                             Padding="8"
                                             Appearance="Secondary"
                                             Icon="Edit24"
-                                            ToolTip="Edit" />
+                                            ToolTip="Edit"
+                                            Click="EditItemButton_Click">
+                                            <ui:SymbolIcon Symbol="Edit24" />
+                                        </ui:Button>
                                         <ui:Button
                                             Padding="8"
                                             Appearance="Danger"
                                             Icon="Delete24"
-                                            ToolTip="Delete" />
+                                            ToolTip="Delete">
+                                            <ui:SymbolIcon Symbol="Delete24" />
+                                        </ui:Button>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

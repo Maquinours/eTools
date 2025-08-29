@@ -1,0 +1,317 @@
+<Window
+    x:Class="eTools_Ultimate.Views.Pages.AddGiftboxItemDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="Add New Item"
+    Height="500"
+    Width="600"
+    WindowStartupLocation="CenterOwner"
+    ResizeMode="CanResize"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Background="{DynamicResource ApplicationBackgroundBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    mc:Ignorable="d">
+
+    <Window.Resources>
+        <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Margin" Value="0,15,0,10" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Margin" Value="0,8,0,4" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+        </Style>
+
+        <!--  TextBox Style  -->
+        <Style
+            x:Key="AppTextBoxStyle"
+            BasedOn="{StaticResource {x:Type TextBox}}"
+            TargetType="TextBox">
+            <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+            <Setter Property="Padding" Value="8,5" />
+        </Style>
+
+        <!--  ComboBox Style  -->
+        <Style
+            x:Key="AppComboBoxStyle"
+            BasedOn="{StaticResource {x:Type ComboBox}}"
+            TargetType="ComboBox">
+            <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+        </Style>
+
+        <Style x:Key="FormFieldStyle" TargetType="Grid">
+            <Setter Property="Margin" Value="0,0,15,25" />
+        </Style>
+
+        <Style x:Key="InfoIconStyle" TargetType="ui:SymbolIcon">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="5,0,0,0" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+        </Style>
+    </Window.Resources>
+
+                <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                                <!-- Content Area -->
+                <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Visible" Margin="20,20,0,0">
+                    <StackPanel Margin="0,0,20,0">
+                <!-- Item Selection Section -->
+                <TextBlock Text="Search Item" Style="{StaticResource SectionHeaderStyle}" />
+                
+                <!-- Search Box -->
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource LabelStyle}" Text="Search Item" />
+                        <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                            <ui:SymbolIcon.ToolTip>
+                                <ToolTip Content="Search for items" />
+                            </ui:SymbolIcon.ToolTip>
+                        </ui:SymbolIcon>
+                    </StackPanel>
+                    <ui:AutoSuggestBox
+                        Grid.Row="1"
+                        DisplayMemberPath="Value"
+                        OriginalItemsSource="{Binding AvailableItems}"
+                        Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                </Grid>
+
+
+
+                <!-- Items List -->
+                <TextBlock Text="Select Item (Full Item List)" Style="{StaticResource LabelStyle}" />
+                <Border
+                    Height="200"
+                    Margin="0,0,0,15"
+                    Background="{DynamicResource ControlFillColorDefaultBrush}"
+                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="4">
+                    <ListView
+                        Background="Transparent"
+                        BorderThickness="0"
+                        ItemsSource="{Binding AvailableItems}"
+                        SelectedItem="{Binding SelectedItem}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="4">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Border
+                                        Grid.Column="0"
+                                        Width="32"
+                                        Height="32"
+                                        Margin="0,0,8,0"
+                                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                        BorderThickness="1">
+                                        <Image
+                                            Margin="2"
+                                            Source="{Binding Icon}"
+                                            Stretch="Uniform" />
+                                    </Border>
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock
+                                            FontWeight="SemiBold"
+                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                            Text="{Binding Name}" />
+                                        <TextBlock
+                                            FontSize="12"
+                                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                            Text="{Binding Identifier}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                                        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </Border>
+
+                <!-- Selected Item Preview -->
+                <TextBlock Text="Selected Item" Style="{StaticResource SectionHeaderStyle}" />
+                
+                <Border
+                    Margin="0,0,0,15"
+                    Background="{DynamicResource ControlFillColorDefaultBrush}"
+                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                    BorderThickness="1"
+                    Padding="15">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        
+                        <Border
+                            Grid.Column="0"
+                            Width="64"
+                            Height="64"
+                            Margin="0,0,15,0"
+                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                            BorderThickness="1"
+                            CornerRadius="4">
+                            <Image
+                                Margin="4"
+                                Source="{Binding SelectedItem.Icon}"
+                                Stretch="Uniform" />
+                        </Border>
+                        
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock
+                                FontSize="16"
+                                FontWeight="SemiBold"
+                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                Text="{Binding SelectedItem.Name}" />
+                            <TextBlock
+                                FontSize="12"
+                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                Text="{Binding SelectedItem.Identifier}" />
+                            <TextBlock
+                                FontSize="12"
+                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                Text="{Binding SelectedItem.Description}" />
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- Item Configuration Section -->
+                <TextBlock Text="Item Configuration" Style="{StaticResource SectionHeaderStyle}" />
+                
+                <!-- Quantity and Probability -->
+                <UniformGrid Columns="2">
+                    <!-- Quantity -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource LabelStyle}" Text="Quantity" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Quantity of the item" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox
+                            Grid.Row="1"
+                            SpinButtonPlacementMode="Inline"
+                            Value="{Binding Quantity}" />
+                    </Grid>
+
+                    <!-- Probability -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource LabelStyle}" Text="Probability (%)" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Probability percentage" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox
+                            Grid.Row="1"
+                            SpinButtonPlacementMode="Inline"
+                            Value="{Binding Probability}" />
+                    </Grid>
+                </UniformGrid>
+
+
+
+
+
+
+
+                <!-- Summary Preview -->
+                <TextBlock Text="Summary" Style="{StaticResource SectionHeaderStyle}" />
+                
+                <Border
+                    Margin="0,0,0,15"
+                    Background="{DynamicResource ControlFillColorDefaultBrush}"
+                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                    BorderThickness="1"
+                    Padding="15">
+                    <StackPanel>
+                        <TextBlock
+                            FontWeight="SemiBold"
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                            Text="Item Summary:" />
+                        <TextBlock
+                            Margin="0,5,0,0"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}">
+                            <Run Text="Item: " />
+                            <Run Text="{Binding SelectedItem.Name}" />
+                            <Run Text=" | Quantity: " />
+                            <Run Text="{Binding Quantity}" />
+                            <Run Text=" | Probability: " />
+                            <Run Text="{Binding Probability}" />
+                            <Run Text="%" />
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+                        <!-- Button Area -->
+                <Border
+                    Grid.Row="1"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                    BorderThickness="0,1,0,0"
+                    Padding="20">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <ui:Button
+                    Margin="0,0,10,0"
+                    Appearance="Secondary"
+                    Content="Cancel"
+                    Click="CancelButton_Click" />
+                <ui:Button
+                    Appearance="Primary"
+                    Content="Add"
+                    Click="AddButton_Click" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
