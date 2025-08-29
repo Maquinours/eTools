@@ -11,7 +11,7 @@ namespace eTools_Ultimate.Views.Pages
         public GiftboxPage(GiftBoxesViewModel viewModel)
         {
             ViewModel = viewModel;
-            DataContext = this;
+            DataContext = viewModel;
 
             InitializeComponent();
         }

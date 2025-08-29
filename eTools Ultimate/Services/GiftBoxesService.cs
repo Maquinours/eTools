@@ -60,7 +60,8 @@ namespace eTools_Ultimate.Services
                                     int probability = script.GetNumber() * 100;
                                     int num = script.GetNumber();
 
-                                    GiftBoxItem giftBoxItem = new GiftBoxItem(item, probability, num);
+                                    GiftBoxItemProp giftBoxItemProp = new(item, probability, num);
+                                    GiftBoxItem giftBoxItem = new(giftBoxItemProp);
                                     items.Add(giftBoxItem);
                                 }
                                 break;
@@ -77,7 +78,8 @@ namespace eTools_Ultimate.Services
                                     int probability = script.GetNumber();
                                     int num = script.GetNumber();
 
-                                    GiftBoxItem giftBoxItem = new GiftBoxItem(item, probability, num);
+                                    GiftBoxItemProp giftBoxItemProp = new(item, probability, num);
+                                    GiftBoxItem giftBoxItem = new(giftBoxItemProp);
                                     items.Add(giftBoxItem);
                                 }
                                 break;
@@ -95,7 +97,8 @@ namespace eTools_Ultimate.Services
                                     int num = script.GetNumber();
                                     int flag = script.GetNumber();
 
-                                    GiftBoxItem giftBoxItem = new GiftBoxItem(item, probability, num, flag);
+                                    GiftBoxItemProp giftBoxItemProp = new(item, probability, num, flag);
+                                    GiftBoxItem giftBoxItem = new(giftBoxItemProp);
                                     items.Add(giftBoxItem);
                                 }
                                 break;
@@ -116,7 +119,8 @@ namespace eTools_Ultimate.Services
                                     int flag = script.GetNumber();
                                     int span = script.GetNumber();
 
-                                    GiftBoxItem giftBoxItem = new GiftBoxItem(item, probability, num, flag, span);
+                                    GiftBoxItemProp giftBoxItemProp = new(item, probability, num, flag, span);
+                                    GiftBoxItem giftBoxItem = new(giftBoxItemProp);
                                     items.Add(giftBoxItem);
                                 }
                                 break;
@@ -136,14 +140,16 @@ namespace eTools_Ultimate.Services
                                     int span = script.GetNumber();
                                     int abilityOption = script.GetNumber();
 
-                                    GiftBoxItem giftBoxItem = new GiftBoxItem(item, probability, num, flag, span, abilityOption);
+                                    GiftBoxItemProp giftBoxItemProp = new(item, probability, num, flag, span, abilityOption);
+                                    GiftBoxItem giftBoxItem = new GiftBoxItem(giftBoxItemProp);
                                     items.Add(giftBoxItem);
                                 }
                                 break;
                             }
                         default: continue;
                     }
-                    GiftBox giftbox = new(dwGiftbox, items);
+                    GiftBoxProp giftBoxProp = new(dwGiftbox);
+                    GiftBox giftbox = new(giftBoxProp, items);
                     this.GiftBoxes.Add(giftbox);
                 }
             }

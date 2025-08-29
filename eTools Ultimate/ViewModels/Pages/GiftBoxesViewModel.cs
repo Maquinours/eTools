@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
+using Wpf.Ui;
 using Wpf.Ui.Abstractions.Controls;
+using Wpf.Ui.Controls;
+using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class GiftBoxesViewModel : ObservableObject, INavigationAware
+    public partial class GiftBoxesViewModel(IContentDialogService contentDialogService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -58,6 +61,29 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (string.IsNullOrEmpty(this.SearchText)) return true;
             Item? item = giftbox.Item;
             return item == null || item.Name.ToLower().Contains(this.SearchText.ToLower());
+        }
+
+        [RelayCommand]
+        private async Task RemoveGiftboxItem(GiftBoxItem item)
+        {
+            if (GiftboxesView.CurrentItem is not GiftBox giftbox) return;
+            if (!giftbox.Items.Contains(item)) return;
+
+            ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
+                 new SimpleContentDialogCreateOptions()
+                 {
+                     Title = "Remove giftbox item",
+                     Content = $"Are you sure you want to remove {item.Item?.Name} from the giftbox {giftbox.Item?.Name} ?",
+                     PrimaryButtonText = "Remove",
+                     CloseButtonText = "Cancel",
+                 }
+                );
+
+            if(result == ContentDialogResult.Primary)
+            {
+                giftbox.Items.Remove(item);
+                item.Dispose();
+            }
         }
     }
 }

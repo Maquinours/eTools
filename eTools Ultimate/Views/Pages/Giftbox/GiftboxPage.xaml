@@ -6,8 +6,9 @@
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:viewmodels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
     Title="GiftboxPage"
-    d:DataContext="{d:DesignInstance local:GiftboxPage,
+    d:DataContext="{d:DesignInstance viewmodels:GiftBoxesViewModel,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="768"
     d:DesignWidth="1024"
@@ -127,7 +128,7 @@
                     BorderThickness="0"
                     Icon="Search24"
                     PlaceholderText="Suche..."
-                    Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Border>
 
             <!--  Giftbox List  -->
@@ -143,7 +144,7 @@
                     BorderThickness="0"
                     IsSynchronizedWithCurrentItem="True"
                     ItemTemplate="{StaticResource GiftboxListTemplate}"
-                    ItemsSource="{Binding ViewModel.GiftboxesView}"
+                    ItemsSource="{Binding GiftboxesView}"
                     SelectionChanged="GiftboxListView_SelectionChanged">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
@@ -282,11 +283,11 @@
                 Grid.Row="2"
                 Margin="0,0,0,10"
                 Foreground="{DynamicResource TextFillColorSecondaryBrush}">
-                Total probability :<Run Text="{Binding SelectedItem.TotalProbability, Mode=OneWay, ElementName=GiftboxListView}" />
-                (<Run Text="{Binding SelectedItem.TotalProbabilityPercent, Mode=OneWay, ElementName=GiftboxListView}" />
+                Total probability :
                 <!--    -->
-                %)
-            </ui:TextBlock>
+                <Run Text="{Binding SelectedItem.TotalProbability, Mode=OneWay, ElementName=GiftboxListView}" />
+                (<Run Text="{Binding SelectedItem.TotalProbabilityPercent, Mode=OneWay, ElementName=GiftboxListView}" />
+                %)</ui:TextBlock>
 
             <!--  Data Grid  -->
             <ui:Card
@@ -296,6 +297,7 @@
                 VerticalAlignment="Top">
                 <DataGrid
                     VerticalAlignment="Top"
+                    VerticalContentAlignment="Center"
                     AutoGenerateColumns="False"
                     Background="Transparent"
                     BorderThickness="0"
@@ -318,13 +320,6 @@
                                     <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
                                 </Trigger>
                             </Style.Triggers>
-                        </Style>
-                        <Style TargetType="DataGridColumnHeader">
-                            <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
-                            <Setter Property="BorderThickness" Value="0,0,0,1" />
-                            <Setter Property="Padding" Value="10,5" />
                         </Style>
                     </DataGrid.Resources>
                     <DataGrid.Columns>
@@ -367,7 +362,7 @@
                         </DataGridTemplateColumn>
                         <DataGridTextColumn
                             Width="Auto"
-                            Binding="{Binding NNum}"
+                            Binding="{Binding Prop.NNum}"
                             Header="Quantity" />
                         <DataGridTextColumn
                             Width="Auto"
@@ -381,13 +376,15 @@
                                             Margin="0,0,4,0"
                                             Padding="8"
                                             Appearance="Secondary"
-                                            Icon="Edit24"
+                                            Icon="{ui:SymbolIcon Symbol=Edit24}"
                                             ToolTip="Edit" />
                                         <ui:Button
                                             Padding="8"
                                             Appearance="Danger"
-                                            Icon="Delete24"
-                                            ToolTip="Delete" />
+                                            Command="{Binding DataContext.RemoveGiftboxItemCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                            CommandParameter="{Binding}"
+                                            Icon="{ui:SymbolIcon Symbol=Delete24}"
+                                            ToolTip="Remove" />
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
