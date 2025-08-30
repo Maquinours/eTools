@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
@@ -20,61 +21,93 @@
 
     <Page.Resources>
         <!--  Common Styles  -->
-        <Style x:Key="InfoIconStyle" TargetType="ui:SymbolIcon">
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize" Value="16" />
-            <Setter Property="Margin" Value="5,0,0,0" />
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+        <Style x:Key="InfoIconStyle"
+                TargetType="ui:SymbolIcon">
+            <Setter Property="HorizontalAlignment"
+                    Value="Right"/>
+            <Setter Property="VerticalAlignment"
+                    Value="Center"/>
+            <Setter Property="FontSize"
+                    Value="16"/>
+            <Setter Property="Margin"
+                    Value="5,0,0,0"/>
+            <Setter Property="Foreground"
+                    Value="{DynamicResource TextFillColorSecondaryBrush}"/>
         </Style>
 
-        <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="24" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Margin" Value="0,15,0,15" />
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+        <Style x:Key="SectionHeaderStyle"
+                TargetType="TextBlock">
+            <Setter Property="FontSize"
+                    Value="24"/>
+            <Setter Property="FontWeight"
+                    Value="Bold"/>
+            <Setter Property="Margin"
+                    Value="0,15,0,15"/>
+            <Setter Property="Foreground"
+                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
         </Style>
 
         <!--  ListViewItem Style  -->
-        <Style x:Key="GiftboxListViewItemStyle" TargetType="ListViewItem">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-            <Setter Property="Padding" Value="10,8" />
-            <Setter Property="Margin" Value="0,1" />
-            <Setter Property="BorderThickness" Value="0" />
+        <Style x:Key="GiftboxListViewItemStyle"
+                TargetType="ListViewItem">
+            <Setter Property="Background"
+                    Value="Transparent"/>
+            <Setter Property="Foreground"
+                    Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Stretch"/>
+            <Setter Property="Padding"
+                    Value="10,8"/>
+            <Setter Property="Margin"
+                    Value="0,1"/>
+            <Setter Property="BorderThickness"
+                    Value="0"/>
             <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                <Trigger Property="IsMouseOver"
+                        Value="True">
+                    <Setter Property="Background"
+                            Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
                 </Trigger>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
-                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                <Trigger Property="IsSelected"
+                        Value="True">
+                    <Setter Property="Background"
+                            Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+                    <Setter Property="Foreground"
+                            Value="{DynamicResource TextFillColorPrimaryBrush}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
 
         <!--  Badge Style  -->
-        <Style x:Key="ItemCountBadgeStyle" TargetType="ui:Badge">
-            <Setter Property="Appearance" Value="Secondary" />
-            <Setter Property="MinWidth" Value="28" />
-            <Setter Property="HorizontalAlignment" Value="Right" />
-            <Setter Property="VerticalAlignment" Value="Center" />
+        <Style x:Key="ItemCountBadgeStyle"
+                TargetType="ui:Badge">
+            <Setter Property="Appearance"
+                    Value="Secondary"/>
+            <Setter Property="MinWidth"
+                    Value="28"/>
+            <Setter Property="HorizontalAlignment"
+                    Value="Right"/>
+            <Setter Property="VerticalAlignment"
+                    Value="Center"/>
         </Style>
 
         <!--  TextBlock Style for Giftbox Names  -->
-        <Style x:Key="GiftboxNameStyle" TargetType="ui:TextBlock">
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="5,0,0,0" />
+        <Style x:Key="GiftboxNameStyle"
+                TargetType="ui:TextBlock">
+            <Setter Property="FontWeight"
+                    Value="SemiBold"/>
+            <Setter Property="VerticalAlignment"
+                    Value="Center"/>
+            <Setter Property="Margin"
+                    Value="5,0,0,0"/>
         </Style>
 
         <!--  DataTemplate for Giftbox ListView Items  -->
         <DataTemplate x:Key="GiftboxListTemplate">
             <Grid Margin="4">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Border
                     Width="32"
@@ -86,17 +119,18 @@
                     <Image
                         Margin="2"
                         Source="{Binding Item.Icon}"
-                        Stretch="Uniform" />
+                        Stretch="Uniform"/>
                 </Border>
-                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <StackPanel Grid.Column="1"
+                        VerticalAlignment="Center">
                     <TextBlock
                         FontWeight="SemiBold"
                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                        Text="{Binding Item.Name}" />
+                        Text="{Binding Item.Name}"/>
                     <TextBlock
                         FontSize="12"
                         Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                        Text="{Binding Item.Identifier}" />
+                        Text="{Binding Item.Identifier}"/>
                 </StackPanel>
             </Grid>
         </DataTemplate>
@@ -104,16 +138,16 @@
 
     <Grid x:Name="RootGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
 
         <!--  Left Side - ListView  -->
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <!--  Search Bar  -->
@@ -127,8 +161,8 @@
                     Margin="10,10,10,10"
                     BorderThickness="0"
                     Icon="Search24"
-                    PlaceholderText="Suche..."
-                    Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    PlaceholderText="{i18n:StringLocalizer 'Search'}"
+                    Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
 
             <!--  Giftbox List  -->
@@ -148,15 +182,22 @@
                     SelectionChanged="GiftboxListView_SelectionChanged">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
-                            <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                            <Setter Property="Background"
+                                    Value="Transparent"/>
+                            <Setter Property="BorderBrush"
+                                    Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
                             <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                <Trigger Property="IsMouseOver"
+                                        Value="True">
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
                                 </Trigger>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
-                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                                <Trigger Property="IsSelected"
+                                        Value="True">
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource ControlFillColorDefaultBrush}"/>
+                                    <Setter Property="Foreground"
+                                            Value="{DynamicResource TextFillColorPrimaryBrush}"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -175,22 +216,23 @@
             <GridSplitter.Template>
                 <ControlTemplate TargetType="{x:Type GridSplitter}">
                     <Grid Background="Transparent">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
                             <Rectangle
                                 Width="2"
                                 Height="20"
                                 Margin="0,2,0,2"
-                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}"/>
                             <Rectangle
                                 Width="2"
                                 Height="20"
                                 Margin="0,2,0,2"
-                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}"/>
                             <Rectangle
                                 Width="2"
                                 Height="20"
                                 Margin="0,2,0,2"
-                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}"/>
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>
@@ -198,23 +240,24 @@
         </GridSplitter>
 
         <!--  Right Side - DataGrid  -->
-        <Grid Grid.Column="2" Margin="15">
+        <Grid Grid.Column="2"
+                Margin="15">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <!--  Header with Add Button  -->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <ui:TextBlock
@@ -222,59 +265,62 @@
                     Margin="0,0,0,10"
                     FontSize="24"
                     FontTypography="Title">
-                    <Run Text="Items in:" />
-                    <Run Text="{Binding SelectedItem.Item.Name, ElementName=GiftboxListView}" />
+                    <Run Text="{i18n:StringLocalizer 'ItemsIn'}"/>
+                    <Run Text="{Binding SelectedItem.Item.Name, ElementName=GiftboxListView}"/>
                 </ui:TextBlock>
 
-                <ui:Button Grid.Column="1" ToolTip="Undo">
-                    <ui:SymbolIcon Symbol="ArrowUndo24" />
+                <ui:Button Grid.Column="1"
+                        ToolTip="{i18n:StringLocalizer 'Undo'}">
+                    <ui:SymbolIcon Symbol="ArrowUndo24"/>
                 </ui:Button>
 
                 <ui:Button
                     Grid.Column="2"
                     Margin="10,0,10,0"
-                    ToolTip="Redo">
-                    <ui:SymbolIcon Symbol="ArrowRedo24" />
+                    ToolTip="{i18n:StringLocalizer 'Redo'}">
+                    <ui:SymbolIcon Symbol="ArrowRedo24"/>
                 </ui:Button>
 
                 <ui:Button
                     Grid.Column="3"
                     Margin="0,0,10,0"
-                    Content="Save" />
+                    Content="{i18n:StringLocalizer 'Save'}"/>
 
                 <ui:Button
                     Grid.Column="4"
                     Margin="0,0,10,0"
                     Appearance="Secondary"
-                    Content="Expert"
-                    Icon="Settings24" />
+                    Content="{i18n:StringLocalizer 'Expert'}"
+                    Icon="Settings24"/>
 
                 <ui:Button
                     Grid.Column="5"
                     Background="#2F70AF"
-                    Content="Add Item"
-                    Icon="Add24" />
+                    Content="{i18n:StringLocalizer 'AddItem'}"
+                    Icon="Add24"
+                    Click="AddItemButton_Click"/>
             </Grid>
 
             <!--  Box Info with Info Icon  -->
-            <Grid Grid.Row="1" Margin="0,0,0,10">
+            <Grid Grid.Row="1"
+                    Margin="0,0,0,10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <ui:SymbolIcon
                     Grid.Column="0"
                     FontSize="16"
                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                    Symbol="Box24" />
+                    Symbol="Box24"/>
                 <ui:TextBlock
                     Grid.Column="1"
                     Margin="5,0,0,0"
                     FontTypography="Caption"
                     Foreground="{DynamicResource TextFillColorSecondaryBrush}">
-                    <Run Text="Items in box :" />
-                    <Run Text="{Binding SelectedItem.Items.Count, Mode=OneWay, ElementName=GiftboxListView}" />
+                    <Run Text="{i18n:StringLocalizer 'ItemsInBox'}"/>
+                    <Run Text="{Binding SelectedItem.Items.Count, Mode=OneWay, ElementName=GiftboxListView}"/>
                 </ui:TextBlock>
             </Grid>
 
@@ -283,11 +329,13 @@
                 Grid.Row="2"
                 Margin="0,0,0,10"
                 Foreground="{DynamicResource TextFillColorSecondaryBrush}">
-                Total probability :
+                <Run Text="{i18n:StringLocalizer 'TotalProbability'}"/>
                 <!--    -->
-                <Run Text="{Binding SelectedItem.TotalProbability, Mode=OneWay, ElementName=GiftboxListView}" />
-                (<Run Text="{Binding SelectedItem.TotalProbabilityPercent, Mode=OneWay, ElementName=GiftboxListView}" />
-                %)</ui:TextBlock>
+                <Run Text="{Binding SelectedItem.TotalProbability, Mode=OneWay, ElementName=GiftboxListView}"/>
+                (
+                <Run Text="{Binding SelectedItem.TotalProbabilityPercent, Mode=OneWay, ElementName=GiftboxListView}"/>
+                %)
+            </ui:TextBlock>
 
             <!--  Data Grid  -->
             <ui:Card
@@ -310,14 +358,20 @@
                     ItemsSource="{Binding SelectedItem.Items, ElementName=GiftboxListView}">
                     <DataGrid.Resources>
                         <Style TargetType="DataGridRow">
-                            <Setter Property="Background" Value="Transparent" />
-                            <Setter Property="Height" Value="40" />
+                            <Setter Property="Background"
+                                    Value="Transparent"/>
+                            <Setter Property="Height"
+                                    Value="40"/>
                             <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                <Trigger Property="IsMouseOver"
+                                        Value="True">
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
                                 </Trigger>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                                <Trigger Property="IsSelected"
+                                        Value="True">
+                                    <Setter Property="Background"
+                                            Value="{DynamicResource ControlFillColorDefaultBrush}"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -325,14 +379,14 @@
                     <DataGrid.Columns>
                         <DataGridTemplateColumn
                             Width="*"
-                            Header="Item"
+                            Header="{i18n:StringLocalizer 'Item'}"
                             SortMemberPath="Item.Name">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid Margin="4">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <Border
                                             Width="32"
@@ -344,17 +398,18 @@
                                             <Image
                                                 Margin="2"
                                                 Source="{Binding Item.Icon}"
-                                                Stretch="Uniform" />
+                                                Stretch="Uniform"/>
                                         </Border>
-                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <StackPanel Grid.Column="1"
+                                                VerticalAlignment="Center">
                                             <TextBlock
                                                 FontWeight="SemiBold"
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Text="{Binding Item.Name}" />
+                                                Text="{Binding Item.Name}"/>
                                             <TextBlock
                                                 FontSize="12"
                                                 Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                                Text="{Binding Item.Identifier}" />
+                                                Text="{Binding Item.Identifier}"/>
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
@@ -363,12 +418,13 @@
                         <DataGridTextColumn
                             Width="Auto"
                             Binding="{Binding Prop.NNum}"
-                            Header="Quantity" />
+                            Header="{i18n:StringLocalizer 'Quantity'}"/>
                         <DataGridTextColumn
                             Width="Auto"
                             Binding="{Binding ProbabilityPercent}"
-                            Header="%" />
-                        <DataGridTemplateColumn Width="Auto" Header="Actions">
+                            Header="{i18n:StringLocalizer 'Percentage'}"/>
+                        <DataGridTemplateColumn Width="Auto"
+                                Header="{i18n:StringLocalizer 'Actions'}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -377,14 +433,14 @@
                                             Padding="8"
                                             Appearance="Secondary"
                                             Icon="{ui:SymbolIcon Symbol=Edit24}"
-                                            ToolTip="Edit" />
+                                            ToolTip="{i18n:StringLocalizer 'Edit'}"/>
                                         <ui:Button
                                             Padding="8"
                                             Appearance="Danger"
                                             Command="{Binding DataContext.RemoveGiftboxItemCommand, RelativeSource={RelativeSource AncestorType=Page}}"
                                             CommandParameter="{Binding}"
                                             Icon="{ui:SymbolIcon Symbol=Delete24}"
-                                            ToolTip="Remove" />
+                                            ToolTip="{i18n:StringLocalizer 'Remove'}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

@@ -130,6 +130,7 @@ namespace eTools_Ultimate
                 {
                     b.FromResource<Translations>(new("fr-FR"));
                     b.FromResource<Translations>(new("de-DE"));
+                    b.FromResource<Translations>(new("en-US"));
                 });
             }).Build();
 

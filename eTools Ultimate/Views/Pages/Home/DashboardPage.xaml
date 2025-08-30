@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:pageViewModels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
@@ -18,8 +19,6 @@
 
 
     <Page.Resources>
-
-
         <!--  Template for navigation cards -->
         <DataTemplate x:Key="NavigationCardTemplate">
             <Border
@@ -86,29 +85,29 @@
                         </Image.CacheMode>
                     </Image>
 
-                    <!--  Title below icon  -->
-                    <TextBlock
-                        Grid.Row="1"
-                        FontSize="18"
-                        FontWeight="SemiBold"
-                        Foreground="#FFFFFF"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Margin="0,0,0,5"
-                        Text="{Binding Title}" />
+                                         <!--  Title below icon  -->
+                     <TextBlock
+                         Grid.Row="1"
+                         FontSize="18"
+                         FontWeight="SemiBold"
+                         Foreground="#FFFFFF"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Margin="0,0,0,5"
+                         Text="{Binding Title}" />
 
-                    <!--  Description below title  -->
-                    <TextBlock
-                        Grid.Row="2"
-                        FontSize="14"
-                        Foreground="#CCCCCC"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Top"
-                        Margin="0,0,0,20"
-                        Text="{Binding Description}"
-                        TextWrapping="Wrap"
-                        TextOptions.TextFormattingMode="Display"
-                        TextOptions.TextRenderingMode="ClearType" />
+                     <!--  Description below title  -->
+                     <TextBlock
+                         Grid.Row="2"
+                         FontSize="14"
+                         Foreground="#CCCCCC"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Margin="0,0,0,20"
+                         Text="{Binding Description}"
+                         TextWrapping="Wrap"
+                         TextOptions.TextFormattingMode="Display"
+                         TextOptions.TextRenderingMode="ClearType" />
 
 
                 </Grid>
@@ -168,7 +167,7 @@
                                 FontTypography="Title"
                                 FontWeight="Bold"
                                 Foreground="#FFFFFF"
-                                Text="Welcome" />
+                                Text="{i18n:StringLocalizer 'Welcome'}" />
                         </StackPanel>
 
                         <Grid Grid.Row="1">
@@ -178,7 +177,7 @@
                                 VerticalAlignment="Bottom"
                                 FontTypography="Caption"
                                 Foreground="#FFFFFF"
-                                Text="Created by eTools Ultimate" />
+                                Text="{i18n:StringLocalizer 'CreatedBy'}" />
 
                             <Button Command="{Binding OpenPatchNotesDialogCommand}" Background="Transparent" BorderBrush="Transparent">
                                 <Button.Style>
@@ -243,7 +242,7 @@
                                     VerticalAlignment="Center"
                                     FontSize="12"
                                     Foreground="#FFFFFF"
-                                    Text="Patchlogs" />
+                                    Text="{i18n:StringLocalizer 'Patchlogs'}" />
                             </Border>
                             </Button>
                         </Grid>
@@ -282,7 +281,7 @@
                 MouseOverBackground="Transparent"
                 MouseOverBorderBrush="Transparent"
                 NavigateUri="https://github.com/Maquinours/eTools"
-                ToolTip="View on GitHub">
+                ToolTip="{i18n:StringLocalizer 'ViewOnGitHub'}">
                 <Image
                     Width="36"
                     Height="36"
@@ -304,7 +303,7 @@
                 MouseOverBackground="Transparent"
                 MouseOverBorderBrush="Transparent"
                 NavigateUri="https://discord.gg/aGZYxkjWxh"
-                ToolTip="Join our Discord server">
+                ToolTip="{i18n:StringLocalizer 'JoinDiscordServer'}">
                 <Image
                     Width="36"
                     Height="36"

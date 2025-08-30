@@ -23,7 +23,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                     {
                         new NavigationViewItem()
                         {
-                            Content = "Change Log",
+                            Content = "ChangeLog",
                             Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/World.png", 25, 25),
                             TargetPageType = typeof(eTools_Ultimate.Views.Pages.ChangeLog.ChangeLogView)
                         }
@@ -98,13 +98,13 @@ namespace eTools_Ultimate.ViewModels.Windows
                 },
                 new NavigationViewItem()
                 {
-                    Content = "Honor List",
+                    Content = "HonorList",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Honors.png", 25, 25),
                     TargetPageType = typeof(Views.Pages.Honor.HonorPage)
                 },
                 new NavigationViewItem()
                 {
-                    Content = "Text Client",
+                    Content = "TextClient",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Texts.png", 25, 25),
                     TargetPageType = typeof(Views.Pages.TextClientPage)
                 },
@@ -158,7 +158,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 },
                 new NavigationViewItem()
                 {
-                    Content = "Drop Event",
+                    Content = "DropEvent",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/ticket.png", 25, 25),
                     TargetPageType = typeof(Views.Pages.DropEvent.DropEventPage)
                 }
