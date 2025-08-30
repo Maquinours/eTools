@@ -19,7 +19,7 @@
 
 
     <Page.Resources>
-        <!--  Template for navigation cards -->
+        <!--  Template for navigation cards  -->
         <DataTemplate x:Key="NavigationCardTemplate">
             <Border
                 Width="150"
@@ -32,10 +32,10 @@
                 <Border.Effect>
                     <DropShadowEffect
                         BlurRadius="10"
-                        Color="Black"
                         Direction="270"
                         Opacity="0.3"
-                        ShadowDepth="2" />
+                        ShadowDepth="2"
+                        Color="Black" />
                 </Border.Effect>
                 <Border.Style>
                     <Style TargetType="Border">
@@ -85,29 +85,29 @@
                         </Image.CacheMode>
                     </Image>
 
-                                         <!--  Title below icon  -->
-                     <TextBlock
-                         Grid.Row="1"
-                         FontSize="18"
-                         FontWeight="SemiBold"
-                         Foreground="#FFFFFF"
-                         HorizontalAlignment="Left"
-                         VerticalAlignment="Top"
-                         Margin="0,0,0,5"
-                         Text="{Binding Title}" />
+                    <!--  Title below icon  -->
+                    <TextBlock
+                        Grid.Row="1"
+                        Margin="0,0,0,5"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="18"
+                        FontWeight="SemiBold"
+                        Foreground="#FFFFFF"
+                        Text="{Binding Title}" />
 
-                     <!--  Description below title  -->
-                     <TextBlock
-                         Grid.Row="2"
-                         FontSize="14"
-                         Foreground="#CCCCCC"
-                         HorizontalAlignment="Left"
-                         VerticalAlignment="Top"
-                         Margin="0,0,0,20"
-                         Text="{Binding Description}"
-                         TextWrapping="Wrap"
-                         TextOptions.TextFormattingMode="Display"
-                         TextOptions.TextRenderingMode="ClearType" />
+                    <!--  Description below title  -->
+                    <TextBlock
+                        Grid.Row="2"
+                        Margin="0,0,0,20"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        FontSize="14"
+                        Foreground="#CCCCCC"
+                        Text="{Binding Description}"
+                        TextOptions.TextFormattingMode="Display"
+                        TextOptions.TextRenderingMode="ClearType"
+                        TextWrapping="Wrap" />
 
 
                 </Grid>
@@ -132,7 +132,7 @@
                 CornerRadius="8"
                 Cursor="Arrow">
 
-                
+
                 <!--  Opacity mask for fade effect  -->
                 <Border.OpacityMask>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -141,7 +141,7 @@
                         <GradientStop Offset="1" Color="Transparent" />
                     </LinearGradientBrush>
                 </Border.OpacityMask>
-                
+
                 <Border CornerRadius="8">
                     <Border.Background>
                         <ImageBrush
@@ -177,9 +177,12 @@
                                 VerticalAlignment="Bottom"
                                 FontTypography="Caption"
                                 Foreground="#FFFFFF"
-                                Text="{i18n:StringLocalizer 'CreatedBy'}" />
+                                Text="{i18n:StringLocalizer 'Created by eTools Ultimate'}" />
 
-                            <Button Command="{Binding OpenPatchNotesDialogCommand}" Background="Transparent" BorderBrush="Transparent">
+                            <Button
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                Command="{Binding OpenPatchNotesDialogCommand}">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Background" Value="Transparent" />
@@ -199,25 +202,25 @@
                                         </Style.Triggers>
                                     </Style>
                                 </Button.Style>
-                            <Border
-                                Margin="12"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Bottom"
-                                Background="#2D2D2D"
-                                BorderBrush="Transparent"
-                                BorderThickness="1"
-                                CornerRadius="8"
-                                Cursor="Hand"
-                                Width="120"
-                                Height="36">
-                                <Border.Effect>
-                                    <DropShadowEffect
-                                        BlurRadius="10"
-                                        Color="Black"
-                                        Direction="270"
-                                        Opacity="0.3"
-                                        ShadowDepth="2" />
-                                </Border.Effect>
+                                <Border
+                                    Width="120"
+                                    Height="36"
+                                    Margin="12"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Background="#2D2D2D"
+                                    BorderBrush="Transparent"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Cursor="Hand">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="10"
+                                            Direction="270"
+                                            Opacity="0.3"
+                                            ShadowDepth="2"
+                                            Color="Black" />
+                                    </Border.Effect>
                                     <Border.Style>
                                         <Style TargetType="Border">
                                             <Style.Triggers>
@@ -237,13 +240,13 @@
                                         </Style>
                                     </Border.Style>
                                     <TextBlock
-                                    Margin="12,8"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    FontSize="12"
-                                    Foreground="#FFFFFF"
-                                    Text="{i18n:StringLocalizer 'Patchlogs'}" />
-                            </Border>
+                                        Margin="12,8"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        Foreground="#FFFFFF"
+                                        Text="{i18n:StringLocalizer 'Patchlogs'}" />
+                                </Border>
                             </Button>
                         </Grid>
                     </Grid>
@@ -281,7 +284,7 @@
                 MouseOverBackground="Transparent"
                 MouseOverBorderBrush="Transparent"
                 NavigateUri="https://github.com/Maquinours/eTools"
-                ToolTip="{i18n:StringLocalizer 'ViewOnGitHub'}">
+                ToolTip="{i18n:StringLocalizer 'View on GitHub'}">
                 <Image
                     Width="36"
                     Height="36"
@@ -303,7 +306,7 @@
                 MouseOverBackground="Transparent"
                 MouseOverBorderBrush="Transparent"
                 NavigateUri="https://discord.gg/aGZYxkjWxh"
-                ToolTip="{i18n:StringLocalizer 'JoinDiscordServer'}">
+                ToolTip="{i18n:StringLocalizer 'Join our Discord server'}">
                 <Image
                     Width="36"
                     Height="36"

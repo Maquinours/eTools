@@ -117,13 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  
-  <!-- Dashboard Page Translations -->
   <data name="Welcome" xml:space="preserve">
     <value>Willkommen</value>
     <comment>Welcome text on dashboard</comment>
   </data>
-  <data name="CreatedBy" xml:space="preserve">
+  <data name="Created by eTools Ultimate" xml:space="preserve">
     <value>Erstellt von eTools Ultimate</value>
     <comment>Created by text on dashboard</comment>
   </data>
@@ -131,142 +129,114 @@
     <value>Patchlogs</value>
     <comment>Patchlogs button text</comment>
   </data>
-  <data name="ViewOnGitHub" xml:space="preserve">
+  <data name="View on GitHub" xml:space="preserve">
     <value>Auf GitHub anzeigen</value>
     <comment>GitHub button tooltip</comment>
   </data>
-  <data name="JoinDiscordServer" xml:space="preserve">
+  <data name="Join our Discord server" xml:space="preserve">
     <value>Unserem Discord-Server beitreten</value>
     <comment>Discord button tooltip</comment>
   </data>
-  
-  <!-- Navigation Cards -->
   <data name="Items" xml:space="preserve">
     <value>Gegenstände</value>
     <comment>Items navigation card title</comment>
   </data>
-  <data name="ItemsDescription" xml:space="preserve">
+  <data name="Navigate to the items page." xml:space="preserve">
     <value>Navigiere zur Gegenstände-Seite.</value>
     <comment>Items navigation card description</comment>
   </data>
-  
   <data name="Movers" xml:space="preserve">
     <value>Beweger</value>
     <comment>Movers navigation card title</comment>
   </data>
-  <data name="MoversDescription" xml:space="preserve">
+  <data name="Navigate to the movers page." xml:space="preserve">
     <value>Navigiere zur Beweger-Seite.</value>
     <comment>Movers navigation card description</comment>
   </data>
-  
   <data name="Skills" xml:space="preserve">
     <value>Fähigkeiten</value>
     <comment>Skills navigation card title</comment>
   </data>
-  <data name="SkillsDescription" xml:space="preserve">
+  <data name="Navigate to the skills page." xml:space="preserve">
     <value>Navigiere zur Fähigkeiten-Seite.</value>
     <comment>Skills navigation card description</comment>
   </data>
-  
   <data name="Quests" xml:space="preserve">
     <value>Aufgaben</value>
     <comment>Quests navigation card title</comment>
   </data>
-  <data name="QuestsDescription" xml:space="preserve">
+  <data name="Navigate to the quests page." xml:space="preserve">
     <value>Navigiere zur Aufgaben-Seite.</value>
     <comment>Quests navigation card description</comment>
   </data>
-  
   <data name="NPCs" xml:space="preserve">
     <value>NSCs</value>
     <comment>NPCs navigation card title</comment>
   </data>
-  <data name="NPCsDescription" xml:space="preserve">
+  <data name="Navigate to the NPCs page." xml:space="preserve">
     <value>Navigiere zur NSC-Seite.</value>
     <comment>NPCs navigation card description</comment>
   </data>
-  
   <data name="Events" xml:space="preserve">
     <value>Ereignisse</value>
     <comment>Events navigation card title</comment>
   </data>
-  <data name="EventsDescription" xml:space="preserve">
+  <data name="Navigate to the events page." xml:space="preserve">
     <value>Navigiere zur Ereignisse-Seite.</value>
     <comment>Events navigation card description</comment>
   </data>
-  
   <data name="Giftboxes" xml:space="preserve">
     <value>Geschenkkisten</value>
     <comment>Giftboxes navigation card title</comment>
   </data>
-  <data name="GiftboxesDescription" xml:space="preserve">
+  <data name="Navigate to the giftboxes page." xml:space="preserve">
     <value>Navigiere zur Geschenkkisten-Seite.</value>
     <comment>Giftboxes navigation card description</comment>
   </data>
-  
   <data name="Collectors" xml:space="preserve">
     <value>Sammler</value>
     <comment>Collectors navigation card title</comment>
   </data>
-  <data name="CollectorsDescription" xml:space="preserve">
-    <value>Navigiere zur Sammler-Seite.</value>
-    <comment>Collectors navigation card description</comment>
-  </data>
-  
   <data name="Accessories" xml:space="preserve">
     <value>Zubehör</value>
     <comment>Accessories navigation card title</comment>
   </data>
-  <data name="AccessoriesDescription" xml:space="preserve">
+  <data name="Navigate to the accessories page." xml:space="preserve">
     <value>Navigiere zum Zubehör.</value>
     <comment>Accessories navigation card description</comment>
   </data>
-  
   <data name="Exchangers" xml:space="preserve">
     <value>Tauscher</value>
     <comment>Exchangers navigation card title</comment>
   </data>
-  <data name="ExchangersDescription" xml:space="preserve">
+  <data name="Navigate to the exchanger page." xml:space="preserve">
     <value>Navigiere zur Tauscher-Seite.</value>
     <comment>Exchangers navigation card description</comment>
   </data>
-  
-  <data name="HonorList" xml:space="preserve">
+  <data name="Honor List" xml:space="preserve">
     <value>Ehrenliste</value>
     <comment>Honor List navigation card title</comment>
   </data>
-  <data name="HonorListDescription" xml:space="preserve">
+  <data name="Navigate to the honor list page." xml:space="preserve">
     <value>Navigiere zur Ehrenliste.</value>
     <comment>Honor List navigation card description</comment>
   </data>
-  
   <data name="Couple" xml:space="preserve">
     <value>Paar</value>
     <comment>Couple navigation card title</comment>
   </data>
-  <data name="CoupleDescription" xml:space="preserve">
+  <data name="Navigate to the couple page." xml:space="preserve">
     <value>Navigiere zur Paar-Seite.</value>
     <comment>Couple navigation card description</comment>
   </data>
-  
   <data name="Motions" xml:space="preserve">
     <value>Bewegungen</value>
     <comment>Motions navigation card title</comment>
   </data>
-  <data name="MotionsDescription" xml:space="preserve">
-    <value>Navigiere zur Bewegungen-Seite.</value>
-    <comment>Motions navigation card description</comment>
-  </data>
-  
-  <data name="TextClient" xml:space="preserve">
+  <data name="Text Client" xml:space="preserve">
     <value>Text Client</value>
     <comment>Text Client navigation card title</comment>
   </data>
-  <data name="TextClientDescription" xml:space="preserve">
-    <value>Navigiere zum Text Client.</value>
-    <comment>Text Client navigation card description</comment>
-  </data>
-  
   <data name="World" xml:space="preserve">
     <value>Welt</value>
     <comment>World navigation card title</comment>
@@ -275,95 +245,63 @@
     <value>Welt Editor öffnen.</value>
     <comment>World navigation card description</comment>
   </data>
-  
   <data name="Tickets" xml:space="preserve">
     <value>Tickets</value>
     <comment>Tickets navigation card title</comment>
   </data>
-  <data name="TicketsDescription" xml:space="preserve">
-    <value>Ticket Editor öffnen.</value>
-    <comment>Tickets navigation card description</comment>
-  </data>
-  
   <data name="Object" xml:space="preserve">
     <value>Objekt</value>
     <comment>Object navigation card title</comment>
   </data>
-  <data name="ObjectDescription" xml:space="preserve">
+  <data name="Navigate to the object editor." xml:space="preserve">
     <value>Objekt Editor öffnen.</value>
     <comment>Object navigation card description</comment>
   </data>
-  
   <data name="Terrain" xml:space="preserve">
     <value>Terrain</value>
     <comment>Terrain navigation card title</comment>
   </data>
-  <data name="TerrainDescription" xml:space="preserve">
+  <data name="Navigate to the terrain editor." xml:space="preserve">
     <value>Terrain Editor öffnen.</value>
     <comment>Terrain navigation card description</comment>
   </data>
-  
   <data name="Job" xml:space="preserve">
     <value>Beruf</value>
     <comment>Job navigation card title</comment>
   </data>
-  <data name="JobDescription" xml:space="preserve">
-    <value>Beruf Editor öffnen.</value>
-    <comment>Job navigation card description</comment>
-  </data>
-  
   <data name="Packitem" xml:space="preserve">
     <value>Packgegenstand</value>
     <comment>Packitem navigation card title</comment>
   </data>
-  <data name="PackitemDescription" xml:space="preserve">
+  <data name="Navigate to the packitem editor." xml:space="preserve">
     <value>Packgegenstand Editor öffnen.</value>
     <comment>Packitem navigation card description</comment>
   </data>
-  
   <data name="Lord" xml:space="preserve">
     <value>Lord</value>
     <comment>Lord navigation card title</comment>
   </data>
-  <data name="LordDescription" xml:space="preserve">
-    <value>Lord Editor öffnen.</value>
-    <comment>Lord navigation card description</comment>
-  </data>
-  
-  <data name="DropEvent" xml:space="preserve">
+  <data name="Drop Event" xml:space="preserve">
     <value>Drop Event</value>
     <comment>Drop Event navigation card title</comment>
   </data>
-  <data name="DropEventDescription" xml:space="preserve">
-    <value>Drop Event Editor öffnen.</value>
-    <comment>Drop Event navigation card description</comment>
-  </data>
-  
   <data name="Settings" xml:space="preserve">
     <value>Einstellungen</value>
     <comment>Settings navigation card title</comment>
   </data>
-  <data name="SettingsDescription" xml:space="preserve">
+  <data name="Navigate to the settings page." xml:space="preserve">
     <value>Navigiere zur Einstellungen-Seite.</value>
     <comment>Settings navigation card description</comment>
   </data>
-  
-  <!-- Menu Items -->
   <data name="Dashboard" xml:space="preserve">
     <value>Dashboard</value>
     <comment>Dashboard menu item</comment>
   </data>
-  <data name="ChangeLog" xml:space="preserve">
-    <value>Änderungsprotokoll</value>
-    <comment>Change Log menu item</comment>
-  </data>
-  
-  <!-- Giftbox Page Translations -->
   <data name="Search" xml:space="preserve">
     <value>Suche...</value>
     <comment>Search placeholder text</comment>
   </data>
-  <data name="ItemsIn" xml:space="preserve">
+  <data name="Items in:" xml:space="preserve">
     <value>Gegenstände in:</value>
     <comment>Items in text</comment>
   </data>
@@ -383,15 +321,11 @@
     <value>Experte</value>
     <comment>Expert button text</comment>
   </data>
-  <data name="AddItem" xml:space="preserve">
-    <value>Gegenstand hinzufügen</value>
-    <comment>Add Item button text</comment>
-  </data>
-  <data name="ItemsInBox" xml:space="preserve">
+  <data name="Items in box:" xml:space="preserve">
     <value>Gegenstände in Box:</value>
     <comment>Items in box text</comment>
   </data>
-  <data name="TotalProbability" xml:space="preserve">
+  <data name="Total probability:" xml:space="preserve">
     <value>Gesamtwahrscheinlichkeit:</value>
     <comment>Total probability text</comment>
   </data>
@@ -403,7 +337,7 @@
     <value>Menge</value>
     <comment>Quantity column header</comment>
   </data>
-  <data name="Percentage" xml:space="preserve">
+  <data name="%" xml:space="preserve">
     <value>%</value>
     <comment>Percentage column header</comment>
   </data>
@@ -418,5 +352,41 @@
   <data name="Delete" xml:space="preserve">
     <value>Löschen</value>
     <comment>Delete button tooltip</comment>
+  </data>
+  <data name="Changelog" xml:space="preserve">
+    <value>Änderungsprotokoll</value>
+    <comment>Change Log menu item</comment>
+  </data>
+  <data name="Add item" xml:space="preserve">
+    <value>Gegenstand hinzufügen</value>
+    <comment>Add Item button text</comment>
+  </data>
+  <data name="Navigate to the collectors page." xml:space="preserve">
+    <value>Navigiere zur Sammler-Seite.</value>
+    <comment>Collectors navigation card description</comment>
+  </data>
+  <data name="Navigate to the drop event editor." xml:space="preserve">
+    <value>Drop Event Editor öffnen.</value>
+    <comment>Drop Event navigation card description</comment>
+  </data>
+  <data name="Navigate to the job editor." xml:space="preserve">
+    <value>Beruf Editor öffnen.</value>
+    <comment>Job navigation card description</comment>
+  </data>
+  <data name="Navigate to the motions page." xml:space="preserve">
+    <value>Navigiere zur Bewegungen-Seite.</value>
+    <comment>Motions navigation card description</comment>
+  </data>
+  <data name="Navigate to the lord editor." xml:space="preserve">
+    <value>Lord Editor öffnen.</value>
+    <comment>Lord navigation card description</comment>
+  </data>
+  <data name="Navigate to the ticket editor." xml:space="preserve">
+    <value>Ticket Editor öffnen.</value>
+    <comment>Tickets navigation card description</comment>
+  </data>
+  <data name="Navigate to the text client." xml:space="preserve">
+    <value>Navigiere zum Text Client.</value>
+    <comment>Text Client navigation card description</comment>
   </data>
 </root>
