@@ -5,6 +5,7 @@
     xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dialogViewModels="clr-namespace:eTools_Ultimate.ViewModels.Controls.Dialogs"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Dialogs"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
@@ -160,13 +161,13 @@
                             FontSize="24"
                             FontWeight="Bold"
                             Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
-                            Text="Patch Notes"
+                            Text="{i18n:StringLocalizer 'Patch Notes'}"
                             TextWrapping="Wrap" />
                         <TextBlock
                             Margin="0,4,0,0"
                             FontSize="14"
                             Foreground="{DynamicResource TextOnAccentFillColorSecondaryBrush}"
-                            Text="Neueste Updates und Verbesserungen"
+                            Text="{i18n:StringLocalizer 'Neueste Updates und Verbesserungen'}"
                             TextWrapping="Wrap" />
                     </StackPanel>
                 </Grid>
@@ -287,7 +288,7 @@
                                                 FontSize="16" 
                                                 FontWeight="SemiBold" 
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Text="Added"
+                                                Text="{i18n:StringLocalizer 'Added'}"
                                                 Margin="0,0,0,8" />
                                             <ItemsControl ItemsSource="{Binding Categories.Added, Mode=OneWay}">
                                                 <ItemsControl.ItemTemplate>
@@ -323,7 +324,7 @@
                                                 FontSize="16" 
                                                 FontWeight="SemiBold" 
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Text="Changed"
+                                                Text="{i18n:StringLocalizer 'Changed'}"
                                                 Margin="0,0,0,8" />
                                             <ItemsControl ItemsSource="{Binding Categories.Changed, Mode=OneWay}">
                                                 <ItemsControl.ItemTemplate>
@@ -359,7 +360,7 @@
                                                 FontSize="16" 
                                                 FontWeight="SemiBold" 
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Text="Fixed"
+                                                Text="{i18n:StringLocalizer 'Fixed'}"
                                                 Margin="0,0,0,8" />
                                             <ItemsControl ItemsSource="{Binding Categories.Fixed, Mode=OneWay}">
                                                 <ItemsControl.ItemTemplate>
@@ -395,7 +396,7 @@
                                                 FontSize="16" 
                                                 FontWeight="SemiBold" 
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Text="Improved"
+                                                Text="{i18n:StringLocalizer 'Improved'}"
                                                 Margin="0,0,0,8" />
                                             <ItemsControl ItemsSource="{Binding Categories.Improved, Mode=OneWay}">
                                                 <ItemsControl.ItemTemplate>

@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     Title="Lord"
     d:DesignHeight="450"
     d:DesignWidth="800"
@@ -15,6 +16,6 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
             FontSize="24"
-            Text="Lord Editor" />
+            Text="{i18n:StringLocalizer 'Lord Editor'}" />
     </Grid>
 </Page> 

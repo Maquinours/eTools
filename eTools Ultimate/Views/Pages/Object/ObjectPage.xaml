@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:viewmodels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     Title="Object"
     d:DataContext="{d:DesignInstance Type=viewmodels:ObjectsViewModel,
                                      IsDesignTimeCreatable=True}"
@@ -57,7 +58,7 @@
                         HorizontalAlignment="Center"
                         FontSize="16"
                         FontWeight="SemiBold"
-                        Text="No Model Available" />
+                        Text="{i18n:StringLocalizer 'No Model Available'}" />
                     <TextBlock
                         MaxWidth="250"
                         Foreground="{DynamicResource TextFillColorSecondaryBrush}"
@@ -110,7 +111,7 @@
         <!--  Right Panel - Object Properties  -->
         <ScrollViewer Grid.Column="2">
             <StackPanel Margin="10">
-                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Object Properties" />
+                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Object Properties'}" />
                 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -124,7 +125,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Object ID" />
+                        <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Object ID'}" />
                         <TextBox
                             Grid.Row="1"
                             Background="{DynamicResource ControlFillColorDefaultBrush}"
@@ -138,7 +139,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Object Model" />
+                        <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Object Model'}" />
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
@@ -170,15 +171,15 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Object Type" />
+                        <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Object Type'}" />
                         <ComboBox
                             Grid.Row="1"
                             Background="{DynamicResource ControlFillColorDefaultBrush}"
                             BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                             SelectedValue="{Binding ObjectType, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="MODELTYPE_SFX" />
-                            <ComboBoxItem Content="MODELTYPE_MESH" />
-                            <ComboBoxItem Content="MODELTYPE_ANIMATED_MESH" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'MODELTYPE_SFX'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'MODELTYPE_MESH'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'MODELTYPE_ANIMATED_MESH'}" />
                         </ComboBox>
                     </Grid>
 
@@ -188,7 +189,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Style="{StaticResource FieldLabelStyle}" Text="Scale" />
+                        <TextBlock Grid.Row="0" Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Scale'}" />
                         <TextBox 
                             Grid.Row="1"
                             Background="{DynamicResource ControlFillColorDefaultBrush}"
@@ -203,15 +204,15 @@
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
-                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Collision" />
+                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Collision'}" />
                     <CheckBox
                         Grid.Row="1"
-                        Content="Enable Collision"
+                        Content="{i18n:StringLocalizer 'Enable Collision'}"
                         IsChecked="{Binding HasCollision, UpdateSourceTrigger=PropertyChanged}" />
                 </Grid>
 
                 <!--  Model Preview  -->
-                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Model Preview" />
+                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Model Preview'}" />
                 <Border
                     Height="300"
                     Margin="0,10,0,0"

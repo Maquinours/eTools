@@ -9,6 +9,7 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:viewModels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     Title="Motion Editor"
     d:DataContext="{d:DesignInstance viewModels:MotionsViewModel,
                                      IsDesignTimeCreatable=False}"
@@ -50,7 +51,7 @@
         <!--  DataTemplate: Motion Details Section  -->
         <DataTemplate x:Key="MotionDetailsSectionTemplate">
             <StackPanel>
-                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Motion Details" />
+                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Motion Details'}" />
                 <UniformGrid Margin="0,10,0,0" Columns="2">
                     <!--  Motion ID  -->
                     <Grid Margin="0,0,15,20" Style="{StaticResource FormFieldStyle}">
@@ -59,10 +60,10 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="ID" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'ID'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Unique identifier for the motion" />
+                                    <ToolTip Content="{i18n:StringLocalizer 'Unique identifier for the motion'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -81,10 +82,10 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Animation ID" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Animation ID'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="ID of the animation that should be played with the motion" />
+                                    <ToolTip Content="{i18n:StringLocalizer 'ID of the animation that should be played with the motion'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -105,10 +106,10 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Name" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Name'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Name of the motion. If defined, the character will say that name while playing the motion." />
+                                    <ToolTip Content="{i18n:StringLocalizer 'Name of the motion. If defined, the character will say that name while playing the motion.'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -131,10 +132,10 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Description" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Description'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Description of the motion" />
+                                    <ToolTip Content="{i18n:StringLocalizer 'Description of the motion'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -154,10 +155,10 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Icon" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Icon'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Icon image displayed for the motion" />
+                                    <ToolTip Content="{i18n:StringLocalizer 'Icon image displayed for the motion'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -197,10 +198,10 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Play type" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Play type'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Behavior of the animation when it ends." />
+                                    <ToolTip Content="{i18n:StringLocalizer 'Behavior of the animation when it ends.'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -208,17 +209,17 @@
                             Grid.Row="1"
                             SelectedValue="{Binding SelectedItem.Prop.DwPlay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=MotionsListView}"
                             SelectedValuePath="Tag">
-                            <ComboBoxItem Content="One Time">
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'One Time'}">
                                 <ComboBoxItem.Tag>
                                     <sys:Int32>0</sys:Int32>
                                 </ComboBoxItem.Tag>
                             </ComboBoxItem>
-                            <ComboBoxItem Content="One Time Keep">
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'One Time Keep'}">
                                 <ComboBoxItem.Tag>
                                     <sys:Int32>1</sys:Int32>
                                 </ComboBoxItem.Tag>
                             </ComboBoxItem>
-                            <ComboBoxItem Content="Loop">
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Loop'}">
                                 <ComboBoxItem.Tag>
                                     <sys:Int32>2</sys:Int32>
                                 </ComboBoxItem.Tag>
@@ -288,12 +289,12 @@
                     Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                     BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                     BorderThickness="1,1,1,0">
-                    <ui:TextBox
-                        Margin="10,10,10,10"
-                        BorderThickness="0"
-                        Icon="Search24"
-                        PlaceholderText="Suche..."
-                        Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ui:TextBox
+                    Margin="10,10,10,10"
+                    BorderThickness="0"
+                    Icon="Search24"
+                    PlaceholderText="{i18n:StringLocalizer 'Suche...'}"
+                    Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </Border>
 
                 <!--  Motion List  -->
@@ -367,30 +368,30 @@
                 <Grid>
                     <!--  Add and Delete Buttons top right  -->
                     <StackPanel
-                        Margin="0,10,20,0"
+                        Margin="0,10,30,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
                         Orientation="Horizontal"
                         ZIndex="1">
-                        <ui:Button Command="{Binding UndoCommand}" ToolTip="Undo">
+                        <ui:Button Command="{Binding UndoCommand}" ToolTip="{i18n:StringLocalizer 'Undo'}">
                             <ui:SymbolIcon Symbol="ArrowUndo24" />
                         </ui:Button>
                         <ui:Button
                             Margin="10,0,10,0"
                             Command="{Binding RedoCommand}"
-                            ToolTip="Redo">
+                            ToolTip="{i18n:StringLocalizer 'Redo'}">
                             <ui:SymbolIcon Symbol="ArrowRedo24" />
                         </ui:Button>
                         <ui:Button
                             x:Name="SaveButton"
                             Margin="0,0,10,0"
                             Command="{Binding SaveCommand}"
-                            Content="Save" />
+                            Content="{i18n:StringLocalizer 'Save'}" />
                         <ui:Button
                             x:Name="ExpertButton"
                             Margin="0,0,10,0"
                             Appearance="Secondary"
-                            Content="Expert" />
+                            Content="{i18n:StringLocalizer 'Expert'}" />
                         <ui:Button
                             x:Name="AddButton"
                             Margin="0,0,10,0"
@@ -398,13 +399,13 @@
                             Appearance="Primary"
                             Background="#2F70AF"
                             Command="{Binding AddCommand}">
-                            <TextBlock Foreground="White" Text="Add" />
+                            <TextBlock Foreground="White" Text="{i18n:StringLocalizer 'Add'}" />
                         </ui:Button>
                         <ui:Button
                             x:Name="DeleteButton"
                             Background="#FD292F"
                             Command="{Binding DeleteCommand}"
-                            Content="Delete" />
+                            Content="{i18n:StringLocalizer 'Delete'}" />
                     </StackPanel>
 
                     <!--  Form  -->
@@ -413,7 +414,7 @@
 
                         <!--  3D Model Preview Section  -->
                         <StackPanel Margin="0,20,0,0">
-                            <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Model Preview" />
+                            <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Model Preview'}" />
 
                             <!--  Preview Container  -->
                             <Grid Margin="0,0,0,15" HorizontalAlignment="Left">
@@ -450,14 +451,14 @@
                                                     Margin="0,0,0,5"
                                                     Appearance="Secondary"
                                                     Command="{Binding PlayModelPreviewMotionCommand}"
-                                                    ToolTip="Play the animation">
+                                                    ToolTip="{i18n:StringLocalizer 'Play the animation'}">
                                                     <ui:SymbolIcon Symbol="Play24" />
                                                 </ui:Button>
                                                 <ui:Button
                                                     x:Name="GenderChangeButton"
                                                     Appearance="Secondary"
                                                     Command="{Binding ChangeModelPreviewGenderCommand}"
-                                                    ToolTip="Change model gender">
+                                                    ToolTip="{i18n:StringLocalizer 'Change model gender'}">
                                                     <ui:SymbolIcon Symbol="Person24" />
                                                 </ui:Button>
                                             </StackPanel>

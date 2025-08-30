@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Media;
 using Wpf.Ui.Abstractions.Controls;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {

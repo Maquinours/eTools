@@ -9,6 +9,7 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     Title="SkillPage"
     d:DataContext="{d:DesignInstance local:SkillPage,
                                      IsDesignTimeCreatable=False}"
@@ -71,7 +72,7 @@
         <!-- DataTemplate: Skill Basic Info Section -->
         <DataTemplate x:Key="BasicInfoSectionTemplate">
             <StackPanel>
-                <TextBlock Text="Basic Information"
+                <TextBlock Text="{i18n:StringLocalizer 'Basic Information'}"
                         Style="{StaticResource SectionHeaderStyle}"/>
                 <UniformGrid Columns="2">
                     <!-- ID -->
@@ -82,12 +83,12 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="ID"
+                            <TextBlock Text="{i18n:StringLocalizer 'ID'}"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Unique ID of the skill"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Unique ID of the skill'}"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -103,12 +104,12 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Name"
+                            <TextBlock Text="{i18n:StringLocalizer 'Name'}"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Display name of the skill"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Display name of the skill'}"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -124,12 +125,12 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Grade (Class Stage)"
+                            <TextBlock Text="{i18n:StringLocalizer 'Grade (Class Stage)'}"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Class stage, e.g. 1st, 2nd, 3rd"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Class stage, e.g. 1st, 2nd, 3rd'}"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -138,9 +139,9 @@
                                 SelectedValuePath="Value"
                                 DisplayMemberPath="Key"
                                 Text="{Binding Prop.DwItemKind1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="1st Grade"/>
-                            <ComboBoxItem Content="2nd Grade"/>
-                            <ComboBoxItem Content="3rd Grade"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer '1st Grade'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer '2nd Grade'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer '3rd Grade'}"/>
                         </ComboBox>
                     </Grid>
                     <!-- Job (Required Jobs) -->
@@ -151,12 +152,12 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Job (Required Class)"
+                            <TextBlock Text="{i18n:StringLocalizer 'Job (Required Class)'}"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Required player class(es) for this skill"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Required player class(es) for this skill'}"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -165,11 +166,11 @@
                                 SelectedValuePath="Value"
                                 DisplayMemberPath="Key"
                                 Text="{Binding Prop.DwItemJob, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="All"/>
-                            <ComboBoxItem Content="Warrior"/>
-                            <ComboBoxItem Content="Magician"/>
-                            <ComboBoxItem Content="Archer"/>
-                            <ComboBoxItem Content="Acrobat"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'All'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Warrior'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Magician'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Archer'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Acrobat'}"/>
                         </ComboBox>
                     </Grid>
                     <!-- Secondary Type -->
@@ -180,12 +181,12 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Secondary Type"
+                            <TextBlock Text="{i18n:StringLocalizer 'Secondary Type'}"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Secondary type of the skill"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Secondary type of the skill'}"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -194,10 +195,10 @@
                                 SelectedValuePath="Value"
                                 DisplayMemberPath="Key"
                                 Text="{Binding Prop.DwItemKind2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="Passive"/>
-                            <ComboBoxItem Content="Active"/>
-                            <ComboBoxItem Content="Buff"/>
-                            <ComboBoxItem Content="Debuff"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Passive'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Active'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Buff'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Debuff'}"/>
                         </ComboBox>
                     </Grid>
                     <!-- Max Level -->
@@ -208,12 +209,12 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Maximum Level"
+                            <TextBlock Text="{i18n:StringLocalizer 'Maximum Level'}"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Maximum level of the skill"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Maximum level of the skill'}"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -231,7 +232,7 @@
         <!-- DataTemplate: Skill Combat Details Section -->
         <DataTemplate x:Key="CombatDetailsSectionTemplate">
             <StackPanel>
-                <TextBlock Text="Combat Details"
+                <TextBlock Text="{i18n:StringLocalizer 'Combat Details'}"
                         Style="{StaticResource SectionHeaderStyle}"/>
                 <UniformGrid Columns="2">
                     <!-- Range -->
@@ -242,12 +243,12 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Range"
+                            <TextBlock Text="{i18n:StringLocalizer 'Range'}"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Range of the skill in units"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Range of the skill in units'}"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -263,12 +264,12 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Weapon Type"
+                            <TextBlock Text="{i18n:StringLocalizer 'Weapon Type'}"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Required weapon type for the skill"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Required weapon type for the skill'}"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -277,12 +278,12 @@
                                 SelectedValuePath="Value"
                                 DisplayMemberPath="Key"
                                 Text="{Binding Prop.DwLinkKind, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="None"/>
-                            <ComboBoxItem Content="Sword"/>
-                            <ComboBoxItem Content="Axe"/>
-                            <ComboBoxItem Content="Bow"/>
-                            <ComboBoxItem Content="Staff"/>
-                            <ComboBoxItem Content="Any"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'None'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Sword'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Axe'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Bow'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Staff'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Any'}"/>
                         </ComboBox>
                     </Grid>
                     <!-- Type -->
@@ -293,12 +294,12 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Type"
+                            <TextBlock Text="{i18n:StringLocalizer 'Type'}"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Skill type/category"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Skill type/category'}"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -306,11 +307,11 @@
                                 x:Name="TypeComboBox"
                                 SelectedValuePath="Value"
                                 Text="{Binding Prop.eItemType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="Normal"/>
-                            <ComboBoxItem Content="Buff"/>
-                            <ComboBoxItem Content="Debuff"/>
-                            <ComboBoxItem Content="AOE"/>
-                            <ComboBoxItem Content="Heal"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Normal'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Buff'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Debuff'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'AOE'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Heal'}"/>
                         </ComboBox>
                     </Grid>
                     <!-- Cooldown -->
@@ -321,12 +322,12 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Cooldown (Sec.)"
+                            <TextBlock Text="{i18n:StringLocalizer 'Cooldown (Sec.)'}"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Cooldown time in seconds"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Cooldown time in seconds'}"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -345,12 +346,12 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Target"
+                            <TextBlock Text="{i18n:StringLocalizer 'Target'}"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Possible targets of the skill (e.g. self, party)"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Possible targets of the skill (e.g. self, party)'}"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -359,11 +360,11 @@
                                 SelectedValuePath="Value"
                                 DisplayMemberPath="Key"
                                 Text="{Binding Prop.DwExeTarget, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="Self"/>
-                            <ComboBoxItem Content="Single Target"/>
-                            <ComboBoxItem Content="Party"/>
-                            <ComboBoxItem Content="Enemy Party"/>
-                            <ComboBoxItem Content="All"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Self'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Single Target'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Party'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Enemy Party'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'All'}"/>
                         </ComboBox>
                     </Grid>
                     <!-- Target Requirement -->
@@ -374,12 +375,12 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Target Requirement"
+                            <TextBlock Text="{i18n:StringLocalizer 'Target Requirement'}"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Condition to use the skill"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Condition to use the skill'}"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -388,11 +389,11 @@
                                 SelectedValuePath="Value"
                                 DisplayMemberPath="Key"
                                 Text="{Binding Prop.DwUseChance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="Anytime"/>
-                            <ComboBoxItem Content="In Combat"/>
-                            <ComboBoxItem Content="Out of Combat"/>
-                            <ComboBoxItem Content="HP below 50%"/>
-                            <ComboBoxItem Content="HP below 30%"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Anytime'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'In Combat'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Out of Combat'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'HP below 50%'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'HP below 30%'}"/>
                         </ComboBox>
                     </Grid>
                     <!-- Spell Region -->
@@ -403,12 +404,12 @@
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0"
                                 Orientation="Horizontal">
-                            <TextBlock Text="Spell Region"
+                            <TextBlock Text="{i18n:StringLocalizer 'Spell Region'}"
                                     Style="{StaticResource FieldLabelStyle}"/>
                             <ui:SymbolIcon Symbol="Info20"
                                     Style="{StaticResource InfoIconStyle}">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Effect area of the skill (AOE or single target)"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Effect area of the skill (AOE or single target)'}"/>
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -417,8 +418,8 @@
                                 SelectedValuePath="Value"
                                 DisplayMemberPath="Key"
                                 Text="{Binding Prop.DwSpellRegion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="Single Target"/>
-                            <ComboBoxItem Content="AOE Target"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Single Target'}"/>
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'AOE Target'}"/>
                         </ComboBox>
                     </Grid>
                 </UniformGrid>
@@ -476,7 +477,7 @@
                     Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                     Margin="0,0,10,0">
                 <ui:TextBox 
-                            PlaceholderText="Suche..."
+                            PlaceholderText="{i18n:StringLocalizer 'Suche...'}"
                             Icon="Search24"
                             BorderThickness="0"
                             Margin="10,10,10,10"
@@ -549,32 +550,32 @@
                 <StackPanel Orientation="Horizontal" 
                           HorizontalAlignment="Right" 
                           VerticalAlignment="Top"
-                          Margin="0,10,20,0"
+                          Margin="0,10,30,0"
                           ZIndex="1">
                     <ui:Button
-                             ToolTip="Undo">
+                             ToolTip="{i18n:StringLocalizer 'Undo'}">
                         <ui:SymbolIcon Symbol="ArrowUndo24"/>
                     </ui:Button>
                     <ui:Button
                              Margin="10,0,10,0"
-                             ToolTip="Redo">
+                             ToolTip="{i18n:StringLocalizer 'Redo'}">
                         <ui:SymbolIcon Symbol="ArrowRedo24"/>
                     </ui:Button>
                     <ui:Button x:Name="SaveButton" 
-                             Content="Save" 
+                             Content="{i18n:StringLocalizer 'Save'}" 
                              Margin="0,0,10,0"
                              Click="SaveButton_Click"/>
                     <ui:Button x:Name="ExpertButton" 
-                             Content="Expert" 
+                             Content="{i18n:StringLocalizer 'Expert'}" 
                              Appearance="Secondary"
                              Margin="0,0,10,0"/>
                     <ui:Button x:Name="AddButton" 
-                             Content="Add" 
+                             Content="{i18n:StringLocalizer 'Add'}" 
                              Background="#2F70AF"
                              Margin="0,0,10,0"
                              Click="AddButton_Click"/>
                     <ui:Button x:Name="DeleteButton" 
-                             Content="Delete" 
+                             Content="{i18n:StringLocalizer 'Delete'}" 
                              Background="#FD292F"
                              Click="DeleteButton_Click"/>
                 </StackPanel>

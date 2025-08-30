@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     Title="QuestPage"
     d:DataContext="{d:DesignInstance local:QuestPage,
                                      IsDesignTimeCreatable=False}"
@@ -38,7 +39,7 @@
                     Margin="0,0,0,10"
                     FontSize="16"
                     Foreground="#00A2FF"
-                    Text="General" />
+                    Text="{i18n:StringLocalizer 'General'}" />
 
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -59,7 +60,7 @@
                         Grid.Column="0"
                         Margin="0,0,10,5"
                         VerticalAlignment="Center"
-                        Text="ID" />
+                        Text="{i18n:StringLocalizer 'ID'}" />
                     <TextBlock
                         Grid.Row="0"
                         Grid.Column="1"
@@ -71,26 +72,26 @@
                         Grid.Column="0"
                         Margin="0,0,10,5"
                         VerticalAlignment="Center"
-                        Text="Title" />
+                        Text="{i18n:StringLocalizer 'Title'}" />
                     <TextBox
                         Grid.Row="1"
                         Grid.Column="1"
                         Margin="0,0,0,5"
                         Background="#333333"
-                        Text="Door of Dark" />
+                        Text="{i18n:StringLocalizer 'Door of Dark'}" />
 
                     <TextBlock
                         Grid.Row="2"
                         Grid.Column="0"
                         Margin="0,0,10,5"
                         VerticalAlignment="Center"
-                        Text="Category" />
+                        Text="{i18n:StringLocalizer 'Category'}" />
                     <ComboBox
                         Grid.Row="2"
                         Grid.Column="1"
                         Margin="0,0,0,5"
                         Background="#333333"
-                        Text="General" />
+                        Text="{i18n:StringLocalizer 'General'}" />
 
                     <StackPanel
                         Grid.Row="3"
@@ -108,7 +109,7 @@
                         Grid.Column="0"
                         Margin="0,5,10,5"
                         VerticalAlignment="Center"
-                        Text="Begin NPC" />
+                        Text="{i18n:StringLocalizer 'Begin NPC'}" />
                     <ComboBox
                         Grid.Row="4"
                         Grid.Column="1"
@@ -121,7 +122,7 @@
                         Grid.Column="0"
                         Margin="0,5,10,5"
                         VerticalAlignment="Center"
-                        Text="End NPC" />
+                        Text="{i18n:StringLocalizer 'End NPC'}" />
                     <ComboBox
                         Grid.Row="5"
                         Grid.Column="1"
@@ -133,18 +134,18 @@
                 <TextBlock
                     Grid.Row="2"
                     Margin="0,10,0,5"
-                    Text="Location" />
+                                            Text="{i18n:StringLocalizer 'Location'}" />
 
                 <!--  Dialog Sections  -->
                 <StackPanel Grid.Row="3" Margin="0,10,0,0">
                     <TextBlock
                         Margin="0,0,0,5"
                         Foreground="Yellow"
-                        Text="Quest Complete Dialog" />
+                        Text="{i18n:StringLocalizer 'Quest Complete Dialog'}" />
                     <TextBox
                         Height="60"
                         Background="#333333"
-                        Text="Thank you, you did a great job."
+                        Text="{i18n:StringLocalizer 'Thank you, you did a great job.'}"
                         TextWrapping="Wrap" />
 
                     <TextBox
@@ -163,24 +164,24 @@
                     <TextBlock
                         Margin="0,10,0,5"
                         Foreground="Yellow"
-                        Text="Quest Fail Dialog" />
+                        Text="{i18n:StringLocalizer 'Quest Fail Dialog'}" />
                     <TextBox
                         Height="60"
                         Background="#333333"
-                        Text="It is very easy to find the entrance of the temple in Fantasy Desert."
+                        Text="{i18n:StringLocalizer 'It is very easy to find the entrance of the temple in Fantasy Desert.'}"
                         TextWrapping="Wrap" />
 
                     <TextBox
                         Height="60"
                         Margin="0,5"
                         Background="#1A1A1A"
-                        Text="Dialog"
+                        Text="{i18n:StringLocalizer 'Dialog'}"
                         TextWrapping="Wrap" />
                     <TextBox
                         Height="60"
                         Margin="0,5"
                         Background="#1A1A1A"
-                        Text="Dialog"
+                        Text="{i18n:StringLocalizer 'Dialog'}"
                         TextWrapping="Wrap" />
                 </StackPanel>
             </Grid>
@@ -204,45 +205,45 @@
                     <TextBlock
                         Margin="0,0,0,5"
                         Foreground="Yellow"
-                        Text="Quest Introduction Dialog" />
+                        Text="{i18n:StringLocalizer 'Quest Introduction Dialog'}" />
                     <TextBox
                         Height="60"
                         Background="#333333"
-                        Text="Excuse me. If you are not busy, would you please listen to my story? Have"
+                        Text="{i18n:StringLocalizer 'Excuse me. If you are not busy, would you please listen to my story? Have'}"
                         TextWrapping="Wrap" />
 
                     <TextBox
                         Height="60"
                         Margin="0,5"
                         Background="#333333"
-                        Text="The Ivillis Temple was built by the followers of Ivillis, a leader from be"
+                        Text="{i18n:StringLocalizer 'The Ivillis Temple was built by the followers of Ivillis, a leader from be'}"
                         TextWrapping="Wrap" />
 
                     <TextBox
                         Height="60"
                         Margin="0,5"
                         Background="#333333"
-                        Text="The temple is located in the Fantasy Desert, in the southern part of Saint"
+                        Text="{i18n:StringLocalizer 'The temple is located in the Fantasy Desert, in the southern part of Saint'}"
                         TextWrapping="Wrap" />
 
                     <TextBox
                         Height="60"
                         Margin="0,5"
                         Background="#333333"
-                        Text="You see…every mayor has to explore all the Islands of Madrigal. In the cou"
+                        Text="{i18n:StringLocalizer 'You see…every mayor has to explore all the Islands of Madrigal. In the cou'}"
                         TextWrapping="Wrap" />
 
                     <TextBox
                         Height="60"
                         Margin="0,5"
                         Background="#333333"
-                        Text="Would you please help me? I beg of you."
+                        Text="{i18n:StringLocalizer 'Would you please help me? I beg of you.'}"
                         TextWrapping="Wrap" />
 
                     <TextBlock
                         Margin="0,10,0,5"
                         Foreground="Yellow"
-                        Text="Quest Accept Dialog" />
+                        Text="{i18n:StringLocalizer 'Quest Accept Dialog'}" />
                     <TextBox
                         Height="60"
                         Background="#333333"

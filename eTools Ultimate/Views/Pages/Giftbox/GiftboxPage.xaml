@@ -20,6 +20,8 @@
     mc:Ignorable="d">
 
     <Page.Resources>
+
+
         <!--  Common Styles  -->
         <Style x:Key="InfoIconStyle" TargetType="ui:SymbolIcon">
             <Setter Property="HorizontalAlignment" Value="Right" />
@@ -207,19 +209,43 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!--  Header with Add Button  -->
+            <!--  Add und Delete Buttons oben rechts  -->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
+                
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="0,10,0,0"
+                    Orientation="Horizontal">
+                    <ui:Button ToolTip="{i18n:StringLocalizer 'Undo'}">
+                        <ui:SymbolIcon Symbol="ArrowUndo24" />
+                    </ui:Button>
+                    <ui:Button Margin="10,0,10,0" ToolTip="{i18n:StringLocalizer 'Redo'}">
+                        <ui:SymbolIcon Symbol="ArrowRedo24" />
+                    </ui:Button>
+                    <ui:Button
+                        Margin="0,0,10,0"
+                        Content="{i18n:StringLocalizer 'Save'}" />
+                    <ui:Button
+                        Margin="0,0,10,0"
+                        Appearance="Secondary"
+                        Content="{i18n:StringLocalizer 'Expert'}"
+                        Icon="Settings24" />
+                    <ui:Button
+                        Margin="0,0,10,0"
+                        Background="#2F70AF"
+                        Click="AddItemButton_Click"
+                        Content="{i18n:StringLocalizer 'Add item'}"
+                        Icon="Add24" />
+                </StackPanel>
+            </Grid>
 
+            <!--  Title and Info  -->
+            <StackPanel Grid.Row="1" Margin="0,0,0,10">
                 <ui:TextBlock
-                    Grid.Column="0"
                     Margin="0,0,0,10"
                     FontSize="24"
                     FontTypography="Title">
@@ -227,73 +253,40 @@
                     <Run Text="{Binding SelectedItem.Item.Name, ElementName=GiftboxListView}" />
                 </ui:TextBlock>
 
-                <ui:Button Grid.Column="1" ToolTip="{i18n:StringLocalizer 'Undo'}">
-                    <ui:SymbolIcon Symbol="ArrowUndo24" />
-                </ui:Button>
+                <!--  Box Info with Info Icon  -->
+                <Grid Margin="0,0,0,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                <ui:Button
-                    Grid.Column="2"
-                    Margin="10,0,10,0"
-                    ToolTip="{i18n:StringLocalizer 'Redo'}">
-                    <ui:SymbolIcon Symbol="ArrowRedo24" />
-                </ui:Button>
+                    <ui:SymbolIcon
+                        Grid.Column="0"
+                        FontSize="16"
+                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                        Symbol="Box24" />
+                    <ui:TextBlock
+                        Grid.Column="1"
+                        Margin="5,0,0,0"
+                        FontTypography="Caption"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}">
+                        <Run Text="{i18n:StringLocalizer 'Items in box:'}" />
+                        <Run Text="{Binding SelectedItem.Items.Count, Mode=OneWay, ElementName=GiftboxListView}" />
+                    </ui:TextBlock>
+                </Grid>
 
-                <ui:Button
-                    Grid.Column="3"
-                    Margin="0,0,10,0"
-                    Content="{i18n:StringLocalizer 'Save'}" />
-
-                <ui:Button
-                    Grid.Column="4"
-                    Margin="0,0,10,0"
-                    Appearance="Secondary"
-                    Content="{i18n:StringLocalizer 'Expert'}"
-                    Icon="Settings24" />
-
-                <ui:Button
-                    Grid.Column="5"
-                    Background="#2F70AF"
-                    Click="AddItemButton_Click"
-                    Content="{i18n:StringLocalizer 'Add item'}"
-                    Icon="Add24" />
-            </Grid>
-
-            <!--  Box Info with Info Icon  -->
-            <Grid Grid.Row="1" Margin="0,0,0,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <ui:SymbolIcon
-                    Grid.Column="0"
-                    FontSize="16"
-                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                    Symbol="Box24" />
+                <!--  Probability information  -->
                 <ui:TextBlock
-                    Grid.Column="1"
-                    Margin="5,0,0,0"
-                    FontTypography="Caption"
                     Foreground="{DynamicResource TextFillColorSecondaryBrush}">
-                    <Run Text="{i18n:StringLocalizer 'Items in box:'}" />
-                    <Run Text="{Binding SelectedItem.Items.Count, Mode=OneWay, ElementName=GiftboxListView}" />
-                </ui:TextBlock>
-            </Grid>
-
-            <!--  Probability information  -->
-            <ui:TextBlock
-                Grid.Row="2"
-                Margin="0,0,0,10"
-                Foreground="{DynamicResource TextFillColorSecondaryBrush}">
-                <Run Text="{i18n:StringLocalizer 'Total probability:'}" />
-                <!--    -->
-                <Run Text="{Binding SelectedItem.TotalProbability, Mode=OneWay, ElementName=GiftboxListView}" />
-                (<Run Text="{Binding SelectedItem.TotalProbabilityPercent, Mode=OneWay, ElementName=GiftboxListView}" />
-                %)</ui:TextBlock>
+                    <Run Text="{i18n:StringLocalizer 'Total probability:'}" />
+                    <Run Text="{Binding SelectedItem.TotalProbability, Mode=OneWay, ElementName=GiftboxListView}" />
+                    (<Run Text="{Binding SelectedItem.TotalProbabilityPercent, Mode=OneWay, ElementName=GiftboxListView}" />
+                    %)</ui:TextBlock>
+            </StackPanel>
 
             <!--  Data Grid  -->
             <ui:Card
-                Grid.Row="3"
+                Grid.Row="2"
                 Margin="0,0,0,0"
                 Padding="10"
                 VerticalAlignment="Top">
@@ -378,6 +371,8 @@
                                             Margin="0,0,4,0"
                                             Padding="8"
                                             Appearance="Secondary"
+                                            Command="{Binding DataContext.EditGiftboxItemCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                            CommandParameter="{Binding}"
                                             Icon="{ui:SymbolIcon Symbol=Edit24}"
                                             ToolTip="{i18n:StringLocalizer 'Edit'}" />
                                         <ui:Button

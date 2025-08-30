@@ -39,13 +39,7 @@ namespace eTools_Ultimate.Views.Pages
 
         private void EditItemButton_Click(object sender, RoutedEventArgs e)
         {
-            var editDialog = new EditGiftboxItemDialog();
-            editDialog.Owner = Window.GetWindow(this);
-            
-            if (editDialog.ShowDialog() == true)
-            {
-
-            }
+            // This method is no longer used - we now use the Command in the ViewModel
         }
     }
 } 

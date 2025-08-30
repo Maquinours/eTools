@@ -8,6 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:vm="clr-namespace:eTools_Ultimate.ViewModels.Pages"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     Title="SettingsPage"
     d:DataContext="{d:DesignInstance vm:SettingsViewModel,
                                      IsDesignTimeCreatable=False}"
@@ -61,7 +62,7 @@
                                 FontTypography="Title"
                                 FontWeight="Bold"
                                 Foreground="#FFFFFF"
-                                Text="Settings" />
+                                Text="{i18n:StringLocalizer 'Settings'}" />
                         </StackPanel>
                         <ui:TextBlock
                             Margin="12"
@@ -69,7 +70,7 @@
                             VerticalAlignment="Bottom"
                             FontTypography="Caption"
                             Foreground="#57FFFFFF"
-                            Text="Created by eTools Ultimate" />
+                            Text="{i18n:StringLocalizer 'Created by eTools Ultimate'}" />
                     </Grid>
                 </Border>
             </Border>
@@ -115,12 +116,12 @@
                             <ui:TextBlock
                                 Margin="0"
                                 FontTypography="BodyStrong"
-                                Text="Resource Path"
+                                Text="{i18n:StringLocalizer 'Resource Path'}"
                                 TextWrapping="WrapWithOverflow" />
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="Loading all Paths."
+                                Text="{i18n:StringLocalizer 'Loading all Paths.'}"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>
@@ -157,12 +158,12 @@
                             <ui:TextBlock
                                 Margin="0"
                                 FontTypography="BodyStrong"
-                                Text="Personalization"
+                                Text="{i18n:StringLocalizer 'Personalization'}"
                                 TextWrapping="WrapWithOverflow" />
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="Change Design and other parts"
+                                Text="{i18n:StringLocalizer 'Change Design and other parts'}"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>
@@ -201,12 +202,12 @@
                             <ui:TextBlock
                                 Margin="0"
                                 FontTypography="BodyStrong"
-                                Text="About"
+                                Text="{i18n:StringLocalizer 'About'}"
                                 TextWrapping="WrapWithOverflow" />
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="Learn more about eTools Ultimate"
+                                Text="{i18n:StringLocalizer 'Learn more about eTools Ultimate'}"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>

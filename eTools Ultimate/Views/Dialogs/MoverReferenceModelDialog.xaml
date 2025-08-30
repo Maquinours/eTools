@@ -4,14 +4,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dialogViewModels="clr-namespace:eTools_Ultimate.ViewModels.Controls.Dialogs"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Dialogs"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Select Reference Model"
+    Title="{i18n:StringLocalizer 'Select Reference Model'}"
     d:DataContext="{d:DesignInstance dialogViewModels:MoverReferenceModelViewModel,
                                      IsDesignTimeCreatable=False}"
     IsPrimaryButtonEnabled="True"
-    PrimaryButtonText="Accept"
+    PrimaryButtonText="{i18n:StringLocalizer 'Accept'}"
     mc:Ignorable="d">
     <ui:ContentDialog.Resources>
         <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:MoverReferenceModelDialog}" />
@@ -32,7 +33,7 @@
             Grid.Row="0"
             Margin="0,0,0,10"
             FontSize="16"
-            Text="Please select a reference model:" />
+            Text="{i18n:StringLocalizer 'Please select a reference model:'}" />
 
         <ui:Card Grid.Row="1" Margin="0,0,0,0">
             <Grid>
@@ -45,7 +46,7 @@
                     Grid.Row="0"
                     Margin="0,0,0,10"
                     Icon="Search24"
-                    PlaceholderText="Search models..."
+                    PlaceholderText="{i18n:StringLocalizer 'Search models...'}"
                     Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <ListView

@@ -31,6 +31,11 @@ namespace eTools_Ultimate.Views.Pages
         private void VirtualizingGridView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
         }
+
+        private void ItemsListView_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            // Handle selection change if needed
+        }
         
         // Event handler for the Add button
         private void AddButton_Click(object sender, System.Windows.RoutedEventArgs e)

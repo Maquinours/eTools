@@ -5,7 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="Add New Item"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
+    Title="{i18n:StringLocalizer 'Add New Item'}"
     Height="500"
     Width="600"
     WindowStartupLocation="CenterOwner"
@@ -74,7 +75,7 @@
                 <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Visible" Margin="20,20,0,0">
                     <StackPanel Margin="0,0,20,0">
                 <!-- Item Selection Section -->
-                <TextBlock Text="Search Item" Style="{StaticResource SectionHeaderStyle}" />
+                <TextBlock Text="{i18n:StringLocalizer 'Search Item'}" Style="{StaticResource SectionHeaderStyle}" />
                 
                 <!-- Search Box -->
                 <Grid>
@@ -83,7 +84,7 @@
                         <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock Style="{StaticResource LabelStyle}" Text="Search Item" />
+                        <TextBlock Style="{StaticResource LabelStyle}" Text="{i18n:StringLocalizer 'Search Item'}" />
                         <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                             <ui:SymbolIcon.ToolTip>
                                 <ToolTip Content="Search for items" />
@@ -100,7 +101,7 @@
 
 
                 <!-- Items List -->
-                <TextBlock Text="Select Item (Full Item List)" Style="{StaticResource LabelStyle}" />
+                                        <TextBlock Text="{i18n:StringLocalizer 'Select Item (Full Item List)'}" Style="{StaticResource LabelStyle}" />
                 <Border
                     Height="200"
                     Margin="0,0,0,15"
@@ -165,7 +166,7 @@
                 </Border>
 
                 <!-- Selected Item Preview -->
-                <TextBlock Text="Selected Item" Style="{StaticResource SectionHeaderStyle}" />
+                <TextBlock Text="{i18n:StringLocalizer 'Selected Item'}" Style="{StaticResource SectionHeaderStyle}" />
                 
                 <Border
                     Margin="0,0,0,15"
@@ -213,7 +214,7 @@
                 </Border>
 
                 <!-- Item Configuration Section -->
-                <TextBlock Text="Item Configuration" Style="{StaticResource SectionHeaderStyle}" />
+                <TextBlock Text="{i18n:StringLocalizer 'Item Configuration'}" Style="{StaticResource SectionHeaderStyle}" />
                 
                 <!-- Quantity and Probability -->
                 <UniformGrid Columns="2">
@@ -224,7 +225,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource LabelStyle}" Text="Quantity" />
+                            <TextBlock Style="{StaticResource LabelStyle}" Text="{i18n:StringLocalizer 'Quantity'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Quantity of the item" />
@@ -244,7 +245,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource LabelStyle}" Text="Probability (%)" />
+                            <TextBlock Style="{StaticResource LabelStyle}" Text="{i18n:StringLocalizer 'Probability (%)'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Probability percentage" />
@@ -265,7 +266,7 @@
 
 
                 <!-- Summary Preview -->
-                <TextBlock Text="Summary" Style="{StaticResource SectionHeaderStyle}" />
+                <TextBlock Text="{i18n:StringLocalizer 'Summary'}" Style="{StaticResource SectionHeaderStyle}" />
                 
                 <Border
                     Margin="0,0,0,15"
@@ -277,11 +278,11 @@
                         <TextBlock
                             FontWeight="SemiBold"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                            Text="Item Summary:" />
+                            Text="{i18n:StringLocalizer 'Item Summary:'}" />
                         <TextBlock
                             Margin="0,5,0,0"
                             Foreground="{DynamicResource TextFillColorSecondaryBrush}">
-                            <Run Text="Item: " />
+                            <Run Text="{i18n:StringLocalizer 'Item: '}" />
                             <Run Text="{Binding SelectedItem.Name}" />
                             <Run Text=" | Quantity: " />
                             <Run Text="{Binding Quantity}" />

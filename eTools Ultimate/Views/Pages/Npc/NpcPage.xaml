@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     Title="NpcPage"
     d:DataContext="{d:DesignInstance local:NpcPage,
                                      IsDesignTimeCreatable=False}"
@@ -55,7 +56,7 @@
                                                 <TextBlock
                                                     x:Name="Text"
                                                     Margin="5,2"
-                                                    Text="Select Menu Options..." />
+                                                    Text="{i18n:StringLocalizer 'Select Menu Options...'}" />
                                                 <Path
                                                     x:Name="Arrow"
                                                     Grid.Column="1"
@@ -114,7 +115,7 @@
         <!--  DataTemplate: General Section  -->
         <DataTemplate x:Key="GeneralSectionTemplate">
             <StackPanel>
-                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="General" />
+                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'General'}" />
                 <UniformGrid Columns="2">
                     <!--  NPC Name  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -123,7 +124,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="NPC Name" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'NPC Name'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Name of the NPC" />
@@ -133,7 +134,7 @@
                         <ui:TextBox
                             Grid.Row="1"
                             Height="32"
-                            PlaceholderText="Enter NPC name" />
+                            PlaceholderText="{i18n:StringLocalizer 'Enter NPC name'}" />
                     </Grid>
 
                     <!--  NPC Key  -->
@@ -143,7 +144,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="NPC Key" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'NPC Key'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="NPC Key ID" />
@@ -153,7 +154,7 @@
                         <ui:TextBox
                             Grid.Row="1"
                             Height="32"
-                            PlaceholderText="IDS_CHARACTER_INC_XYZ" />
+                            PlaceholderText="{i18n:StringLocalizer 'IDS_CHARACTER_INC_XYZ'}" />
                     </Grid>
 
                     <!--  NPC Define  -->
@@ -163,7 +164,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="NPC Define" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'NPC Define'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="NPC Definition ID" />
@@ -173,7 +174,7 @@
                         <ui:TextBox
                             Grid.Row="1"
                             Height="32"
-                            PlaceholderText="MaFl_Is" />
+                            PlaceholderText="{i18n:StringLocalizer 'MaFl_Is'}" />
                     </Grid>
 
                     <!--  Dialog File  -->
@@ -183,7 +184,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Dialog File" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Dialog File'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Dialog File Path" />
@@ -193,7 +194,7 @@
                         <ui:TextBox
                             Grid.Row="1"
                             Height="32"
-                            PlaceholderText="MaFl_Is.txt" />
+                            PlaceholderText="{i18n:StringLocalizer 'MaFl_Is.txt'}" />
                     </Grid>
 
                     <!--  NPC Image  -->
@@ -203,7 +204,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="NPC Image" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'NPC Image'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="NPC Image Path" />
@@ -219,7 +220,7 @@
                             <ui:TextBox
                                 Grid.Column="0"
                                 Height="32"
-                                PlaceholderText="IDS_CHARACTER_INC_000064" />
+                                PlaceholderText="{i18n:StringLocalizer 'IDS_CHARACTER_INC_000064'}" />
                             <ui:Button
                                 Grid.Column="1"
                                 Margin="5,0,0,0"
@@ -242,7 +243,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Menu" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Menu'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Menu Options" />
@@ -364,7 +365,7 @@
         <!--  DataTemplate: Tabs Section  -->
         <DataTemplate x:Key="TabsSectionTemplate">
             <StackPanel>
-                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Tabs" />
+                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Tabs'}" />
                 <UniformGrid Columns="2">
                     <!--  Tab Name 1  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -373,7 +374,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Tab Name 1" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Tab Name 1'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Name of the first Tab" />
@@ -384,7 +385,7 @@
                             Name="TabName1"
                             Grid.Row="1"
                             Height="32"
-                            PlaceholderText="Tab 1" />
+                            PlaceholderText="{i18n:StringLocalizer 'Tab 1'}" />
                     </Grid>
 
                     <!--  Tab Name 2  -->
@@ -394,7 +395,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Tab Name 2" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Tab Name 2'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Name of the second Tab" />
@@ -405,7 +406,7 @@
                             Name="TabName2"
                             Grid.Row="1"
                             Height="32"
-                            PlaceholderText="Tab 2" />
+                            PlaceholderText="{i18n:StringLocalizer 'Tab 2'}" />
                     </Grid>
 
                     <!--  Tab Name 3  -->
@@ -415,7 +416,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Tab Name 3" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Tab Name 3'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Name of the third Tab" />
@@ -426,7 +427,7 @@
                             Name="TabName3"
                             Grid.Row="1"
                             Height="32"
-                            PlaceholderText="Tab 3" />
+                            PlaceholderText="{i18n:StringLocalizer 'Tab 3'}" />
                     </Grid>
 
                     <!--  Tab Name 4  -->
@@ -436,7 +437,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Tab Name 4" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Tab Name 4'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Name of the fourth Tab" />
@@ -447,7 +448,7 @@
                             Name="TabName4"
                             Grid.Row="1"
                             Height="32"
-                            PlaceholderText="Tab 4" />
+                            PlaceholderText="{i18n:StringLocalizer 'Tab 4'}" />
                     </Grid>
                 </UniformGrid>
             </StackPanel>
@@ -456,7 +457,7 @@
         <!--  DataTemplate: Custom Section  -->
         <DataTemplate x:Key="CustomSectionTemplate">
             <StackPanel>
-                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Custom" />
+                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Custom'}" />
                 <UniformGrid Columns="2">
                     <!--  Vendor Type  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -465,7 +466,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Vendor Type" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Vendor Type'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="Type of Vendor" />
@@ -475,7 +476,7 @@
                         <ui:TextBox
                             Grid.Row="1"
                             Height="32"
-                            PlaceholderText="II_CHP_RED" />
+                            PlaceholderText="{i18n:StringLocalizer 'II_CHP_RED'}" />
                     </Grid>
 
                     <!--  NPC Equip  -->
@@ -485,7 +486,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="NPC Equip" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'NPC Equip'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="NPC Equipment" />
@@ -495,7 +496,7 @@
                         <ui:TextBox
                             Grid.Row="1"
                             Height="32"
-                            PlaceholderText="II_ARM_S_CLO_DOMAS_21, ..." />
+                            PlaceholderText="{i18n:StringLocalizer 'II_ARM_S_CLO_DOMAS_21, ...'}" />
                     </Grid>
 
                     <!--  NPC Figure  -->
@@ -505,7 +506,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="NPC Figure" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'NPC Figure'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="NPC Gender" />
@@ -525,7 +526,7 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Structure" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Structure'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
                                     <ToolTip Content="NPC Structure" />
@@ -574,7 +575,7 @@
                     BorderThickness="0"
                     Cursor=""
                     Icon="Search24"
-                    PlaceholderText="Search..."
+                    PlaceholderText="{i18n:StringLocalizer 'Search...'}"
                     Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Border>
 
@@ -704,7 +705,7 @@
                         VerticalAlignment="Center"
                         FontSize="20"
                         FontWeight="SemiBold"
-                        Text="NPC Details" />
+                        Text="{i18n:StringLocalizer 'NPC Details'}" />
 
                     <ui:Button Grid.Column="1" ToolTip="Undo">
                         <ui:SymbolIcon Symbol="ArrowUndo24" />
@@ -753,7 +754,7 @@
 
                     <!--  Neuer Shop-Bereich  -->
                     <StackPanel>
-                        <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Shop Items" />
+                        <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Shop Items'}" />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -773,7 +774,7 @@
                                     Grid.Row="0"
                                     Margin="0,0,0,10"
                                     Icon="Search24"
-                                    PlaceholderText="Search items..." />
+                                    PlaceholderText="{i18n:StringLocalizer 'Search items...'}" />
 
                                 <ListView
                                     Grid.Row="1"
@@ -839,7 +840,7 @@
                                 <TextBlock
                                     Margin="0,0,0,10"
                                     FontWeight="SemiBold"
-                                    Text="Items in Shop" />
+                                    Text="{i18n:StringLocalizer 'Items in Shop'}" />
 
                                 <!--  Tab Buttons  -->
                                 <StackPanel
@@ -918,7 +919,7 @@
                         <TextBlock
                             Margin="0,20,0,10"
                             Style="{StaticResource SectionHeaderStyle}"
-                            Text="Shop Overview" />
+                            Text="{i18n:StringLocalizer 'Shop Overview'}" />
 
                         <Grid>
                             <!--  Header  -->
@@ -940,19 +941,19 @@
                                         <TextBlock
                                             Grid.Column="0"
                                             FontWeight="SemiBold"
-                                            Text="Icon" />
+                                            Text="{i18n:StringLocalizer 'Icon'}" />
                                         <TextBlock
                                             Grid.Column="1"
                                             FontWeight="SemiBold"
-                                            Text="Item Name" />
+                                            Text="{i18n:StringLocalizer 'Item Name'}" />
                                         <TextBlock
                                             Grid.Column="2"
                                             FontWeight="SemiBold"
-                                            Text="Amount" />
+                                            Text="{i18n:StringLocalizer 'Amount'}" />
                                         <TextBlock
                                             Grid.Column="3"
                                             FontWeight="SemiBold"
-                                            Text="Price" />
+                                            Text="{i18n:StringLocalizer 'Price'}" />
                                     </Grid>
                                 </Border>
                             </Grid>

@@ -8,6 +8,7 @@
     xmlns:viewmodels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     Title="AccessoryPage"
     d:DataContext="{d:DesignInstance viewmodels:AccessoriesViewModel,
                                      IsDesignTimeCreatable=False}"
@@ -48,7 +49,7 @@
                     Margin="10,10,10,10"
                     BorderThickness="0"
                     Icon="Search24"
-                    PlaceholderText="Suche..."
+                    PlaceholderText="{i18n:StringLocalizer 'Suche...'}"
                     Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Border>
 
@@ -199,37 +200,37 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
                         Orientation="Horizontal">
-                        <ui:Button ToolTip="Undo">
+                        <ui:Button ToolTip="{i18n:StringLocalizer 'Undo'}">
                             <ui:SymbolIcon Symbol="ArrowUndo24" />
                         </ui:Button>
                         <ui:Button
                             Margin="10,0,10,0"
-                            ToolTip="Redo">
+                            ToolTip="{i18n:StringLocalizer 'Redo'}">
                             <ui:SymbolIcon Symbol="ArrowRedo24" />
                         </ui:Button>
                         <ui:Button
                             x:Name="SaveButton"
                             Margin="0,0,10,0"
                             Click="SaveButton_Click"
-                            Content="Save" />
+                            Content="{i18n:StringLocalizer 'Save'}" />
                         <ui:Button
                             x:Name="ExpertButton"
                             Margin="0,0,10,0"
                             Appearance="Secondary"
-                            Content="Expert" />
+                            Content="{i18n:StringLocalizer 'Expert'}" />
                         
                         <ui:Button
                             x:Name="AddButton"
                             Margin="0,0,10,0"
                             Background="#2F70AF"
                             Click="AddButton_Click"
-                            Content="Add" />
+                            Content="{i18n:StringLocalizer 'Add'}" />
                         <ui:Button
                             x:Name="DeleteButton"
                             Background="#FD292F"
                             Foreground="White"
                             Click="DeleteButton_Click"
-                            Content="Delete" />
+                            Content="{i18n:StringLocalizer 'Delete'}" />
                     </StackPanel>
                 </Grid>
 
@@ -242,7 +243,7 @@
                         Margin="0,0,8,0"
                         Appearance="Secondary"
                         Command="{Binding DataContext.AddAbilityOptionDataCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                        Content="New Level"
+                        Content="{i18n:StringLocalizer 'New Level'}"
                         Icon="Add24" />
                 </StackPanel>
 
@@ -281,7 +282,7 @@
                                                 FontSize="18"
                                                 FontWeight="SemiBold"
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Text="{Binding NAbilityOption, StringFormat='Level {0}'}" />
+                                                Text="{Binding NAbilityOption, StringFormat={i18n:StringLocalizer 'Level {0}'}}" />
 
                                             <StackPanel Grid.Column="1" Orientation="Horizontal">
                                                 <!--  Delete with Confirmation  -->
@@ -294,7 +295,7 @@
                                                     Appearance="Danger"
                                                     Command="{Binding DataContext.DeleteAbilityOptionDataCommand, RelativeSource={RelativeSource AncestorType=Page}}"
                                                     CommandParameter="{Binding}"
-                                                    ToolTip="Delete Level">
+                                                    ToolTip="{i18n:StringLocalizer 'Delete Level'}">
                                                     <ui:SymbolIcon Symbol="Delete24" />
                                                 </ui:Button>
                                             </StackPanel>
@@ -350,7 +351,7 @@
                                                             Appearance="Secondary"
                                                             Command="{Binding DataContext.DeleteDstDataCommand, RelativeSource={RelativeSource AncestorType=Page}}"
                                                             CommandParameter="{Binding}"
-                                                            ToolTip="Delete Attribute">
+                                                            ToolTip="{i18n:StringLocalizer 'Delete Attribute'}">
                                                             <ui:SymbolIcon Symbol="Dismiss24" />
                                                         </ui:Button>
                                                     </Grid>
@@ -376,7 +377,7 @@
                                                 <TextBlock
                                                     VerticalAlignment="Center"
                                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                    Text="Add Attribute" />
+                                                    Text="{i18n:StringLocalizer 'Add Attribute'}" />
                                             </StackPanel>
                                         </ui:Button>
                                     </Grid>

@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:vm="clr-namespace:eTools_Ultimate.ViewModels.Pages"
     Title="PersonalizationPage"
     d:DataContext="{d:DesignInstance vm:PersonalizationViewModel,
@@ -29,13 +30,13 @@
                         <ui:TextBlock
                             Grid.Row="0"
                             FontTypography="Body"
-                            Text="App theme" />
-                        <ui:TextBlock Grid.Row="1" Text="Select which app theme to display" />
+                            Text="{i18n:StringLocalizer 'App theme'}" />
+                        <ui:TextBlock Grid.Row="1" Text="{i18n:StringLocalizer 'Select which app theme to display'}" />
                     </Grid>
                 </ui:CardControl.Header>
                 <ComboBox MinWidth="200" SelectionChanged="ComboBox_SelectionChanged">
-                    <ComboBoxItem Content="Light" IsSelected="{Binding IsLightTheme}" />
-                    <ComboBoxItem Content="Dark" IsSelected="{Binding IsDarkTheme}" />
+                                            <ComboBoxItem Content="{i18n:StringLocalizer 'Light'}" IsSelected="{Binding IsLightTheme}" />
+                        <ComboBoxItem Content="{i18n:StringLocalizer 'Dark'}" IsSelected="{Binding IsDarkTheme}" />
                 </ComboBox>
             </ui:CardControl>
 
@@ -50,14 +51,14 @@
                         <ui:TextBlock
                             Grid.Row="0"
                             FontTypography="Body"
-                            Text="Application language" />
-                        <ui:TextBlock Grid.Row="1" Text="Choose your preferred language" />
+                            Text="{i18n:StringLocalizer 'Application language'}" />
+                        <ui:TextBlock Grid.Row="1" Text="{i18n:StringLocalizer 'Choose your preferred language'}" />
                     </Grid>
                 </ui:CardControl.Header>
                 <ComboBox MinWidth="200">
-                    <ComboBoxItem Content="English (Default)" IsSelected="True" />
-                    <ComboBoxItem Content="German" />
-                    <ComboBoxItem Content="French" />
+                    <ComboBoxItem Content="{i18n:StringLocalizer 'English (Default)'}" IsSelected="True" />
+                    <ComboBoxItem Content="{i18n:StringLocalizer 'German'}" />
+                    <ComboBoxItem Content="{i18n:StringLocalizer 'French'}" />
                 </ComboBox>
             </ui:CardControl>
 
@@ -72,8 +73,8 @@
                         <ui:TextBlock
                             Grid.Row="0"
                             FontTypography="Body"
-                            Text="Auto-save interval" />
-                        <ui:TextBlock Grid.Row="1" Text="Set the time interval for automatic saving" />
+                            Text="{i18n:StringLocalizer 'Auto-save interval'}" />
+                        <ui:TextBlock Grid.Row="1" Text="{i18n:StringLocalizer 'Set the time interval for automatic saving'}" />
                     </Grid>
                 </ui:CardControl.Header>
                 <StackPanel Orientation="Horizontal">
@@ -83,10 +84,10 @@
                         Margin="0,0,8,0"
                         SelectedIndex="0"
                         SelectionChanged="AutoSaveCombo_SelectionChanged">
-                        <ComboBoxItem Content="5 minutes" />
-                        <ComboBoxItem Content="15 minutes" />
-                        <ComboBoxItem Content="30 minutes" />
-                        <ComboBoxItem Content="Custom" />
+                        <ComboBoxItem Content="{i18n:StringLocalizer '5 minutes'}" />
+                        <ComboBoxItem Content="{i18n:StringLocalizer '15 minutes'}" />
+                        <ComboBoxItem Content="{i18n:StringLocalizer '30 minutes'}" />
+                        <ComboBoxItem Content="{i18n:StringLocalizer 'Custom'}" />
                     </ComboBox>
                     <Grid x:Name="CustomTimeGrid" Visibility="Collapsed">
                         <Grid.ColumnDefinitions>
@@ -104,7 +105,7 @@
                             Grid.Column="1"
                             Margin="5,0,0,0"
                             VerticalAlignment="Center"
-                            Text="min" />
+                            Text="{i18n:StringLocalizer 'min'}" />
                     </Grid>
                 </StackPanel>
             </ui:CardControl>

@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     Title="EventPage"
     d:DataContext="{d:DesignInstance local:EventPage,
                                      IsDesignTimeCreatable=False}"
@@ -23,7 +24,7 @@
                 FontSize="36"
                 FontWeight="Light"
                 Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                Text="Coming soon..." />
+                Text="{i18n:StringLocalizer 'Coming soon...'}" />
         </StackPanel>
     </Grid>
 </Page> 

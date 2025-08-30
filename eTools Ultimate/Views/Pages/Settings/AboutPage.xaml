@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:vm="clr-namespace:eTools_Ultimate.ViewModels.Pages"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     Title="AboutPage"
     d:DataContext="{d:DesignInstance vm:AboutViewModel,
                                      IsDesignTimeCreatable=False}"
@@ -41,7 +42,7 @@
                 <ui:Card Margin="0,0,0,15" Padding="15">
                     <StackPanel>
                         <TextBlock 
-                            Text="About eTools Ultimate" 
+                            Text="{i18n:StringLocalizer 'About eTools Ultimate'}" 
                             FontWeight="SemiBold" 
                             FontSize="16" 
                             Margin="0,0,0,10"/>
@@ -52,7 +53,7 @@
                             Margin="0,0,0,15"/>
 
                         <TextBlock 
-                            Text="Our tool simplifies the editing process for developers." 
+                            Text="{i18n:StringLocalizer 'Our tool simplifies the editing process for developers.'}" 
                             TextWrapping="Wrap"/>
                     </StackPanel>
                 </ui:Card>
@@ -61,7 +62,7 @@
                 <ui:Card Margin="0,0,0,15" Padding="15">
                     <StackPanel>
                         <TextBlock 
-                            Text="Main Features" 
+                            Text="{i18n:StringLocalizer 'Main Features'}" 
                             FontWeight="SemiBold" 
                             FontSize="16" 
                             Margin="0,0,0,10"/>
@@ -81,7 +82,7 @@
 
                                 <TextBlock 
                                     Grid.Column="1" 
-                                    Text="Editing of .txt, .h and .inc files with structured interfaces" 
+                                    Text="{i18n:StringLocalizer 'Editing of .txt, .h and .inc files with structured interfaces'}" 
                                     TextWrapping="Wrap"/>
                             </Grid>
 
@@ -99,7 +100,7 @@
 
                                 <TextBlock 
                                     Grid.Column="1" 
-                                    Text="Advanced categorization by element types" 
+                                    Text="{i18n:StringLocalizer 'Advanced categorization by element types'}" 
                                     TextWrapping="Wrap"/>
                             </Grid>
 
@@ -117,7 +118,7 @@
 
                                 <TextBlock 
                                     Grid.Column="1" 
-                                    Text="Optimized for performance and user-friendliness" 
+                                    Text="{i18n:StringLocalizer 'Optimized for performance and user-friendliness'}" 
                                     TextWrapping="Wrap"/>
                             </Grid>
                         </StackPanel>
@@ -128,7 +129,7 @@
                 <ui:Card Margin="0,0,0,15" Padding="15">
                     <StackPanel>
                         <TextBlock 
-                            Text="Development Team" 
+                            Text="{i18n:StringLocalizer 'Development Team'}" 
                             FontWeight="SemiBold" 
                             FontSize="16" 
                             Margin="0,0,0,10"/>
@@ -190,7 +191,7 @@
                 <ui:Card Margin="0,0,0,15" Padding="15">
                     <StackPanel>
                         <TextBlock 
-                            Text="System Requirements" 
+                            Text="{i18n:StringLocalizer 'System Requirements'}" 
                             FontWeight="SemiBold" 
                             FontSize="16" 
                             Margin="0,0,0,10"/>
@@ -201,8 +202,8 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="Operating System:" FontWeight="SemiBold"/>
-                            <TextBlock Grid.Column="1" Text="Windows 10/11"/>
+                            <TextBlock Text="{i18n:StringLocalizer 'Operating System:'}" FontWeight="SemiBold"/>
+                            <TextBlock Grid.Column="1" Text="{i18n:StringLocalizer 'Windows 10/11'}"/>
                         </Grid>
 
                         <Grid Margin="0,0,0,5">
@@ -211,8 +212,8 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="Memory:" FontWeight="SemiBold"/>
-                            <TextBlock Grid.Column="1" Text="4 GB RAM minimum, 8 GB recommended"/>
+                            <TextBlock Text="{i18n:StringLocalizer 'Memory:'}" FontWeight="SemiBold"/>
+                            <TextBlock Grid.Column="1" Text="{i18n:StringLocalizer '4 GB RAM minimum, 8 GB recommended'}"/>
                         </Grid>
 
                         <Grid Margin="0,0,0,5">
@@ -221,8 +222,8 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="Disk Space:" FontWeight="SemiBold"/>
-                            <TextBlock Grid.Column="1" Text="200 MB available space"/>
+                            <TextBlock Text="{i18n:StringLocalizer 'Disk Space:'}" FontWeight="SemiBold"/>
+                            <TextBlock Grid.Column="1" Text="{i18n:StringLocalizer '200 MB available space'}"/>
                         </Grid>
                     </StackPanel>
                 </ui:Card>

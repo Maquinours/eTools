@@ -9,7 +9,8 @@
     xmlns:models="clr-namespace:eTools_Ultimate.Models"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="ExchangerPage"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
+    Title="{i18n:StringLocalizer 'Exchanger'}"
     d:DataContext="{d:DesignInstance local:ExchangerPage,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="768"
@@ -149,7 +150,7 @@
                     Margin="10,10,10,10"
                     BorderThickness="0"
                     Icon="Search24"
-                    PlaceholderText="Suche..."
+                    PlaceholderText="{i18n:StringLocalizer 'Search...'}"
                     Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Border>
 
@@ -228,38 +229,38 @@
                     VerticalAlignment="Top"
                     Orientation="Horizontal"
                     ZIndex="1">
-                    <ui:Button ToolTip="Undo">
+                    <ui:Button ToolTip="{i18n:StringLocalizer 'Undo'}">
                         <ui:SymbolIcon Symbol="ArrowUndo24" />
                     </ui:Button>
-                    <ui:Button Margin="10,0,10,0" ToolTip="Redo">
+                    <ui:Button Margin="10,0,10,0" ToolTip="{i18n:StringLocalizer 'Redo'}">
                         <ui:SymbolIcon Symbol="ArrowRedo24" />
                     </ui:Button>
                     <ui:Button
                         x:Name="SaveButton"
                         Margin="0,0,10,0"
                         Click="SaveButton_Click"
-                        Content="Save" />
+                        Content="{i18n:StringLocalizer 'Save'}" />
                     <ui:Button
                         x:Name="ExpertButton"
                         Margin="0,0,10,0"
                         Appearance="Secondary"
-                        Content="Expert" />
+                        Content="{i18n:StringLocalizer 'Expert'}" />
                     <ui:Button
                         x:Name="AddButton"
                         Margin="0,0,10,0"
                         Background="#2F70AF"
-                        Content="Add"
+                        Content="{i18n:StringLocalizer 'Add'}"
                         Icon="Add24" />
                     <ui:Button
                         x:Name="DeleteButton"
                         Background="#FD292F"
-                        Content="Delete"
+                        Content="{i18n:StringLocalizer 'Delete'}"
                         Icon="Delete24" />
                 </StackPanel>
 
                 <!--  Formulare  -->
                 <StackPanel Margin="20">
-                    <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="Basic Information" />
+                    <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Basic Information'}" />
                     <UniformGrid Columns="2">
                         <!--  MMI_Key  -->
                         <Grid Style="{StaticResource FormFieldStyle}">
@@ -271,10 +272,10 @@
                                 Grid.Row="0"
                                 Cursor=""
                                 Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Exchanger MMI_Key" />
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Exchanger MMI_Key'}" />
                                 <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                     <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="The MMI key for the exchanger (e.g. MMI_CHANGTICKET01)" />
+                                        <ToolTip Content="{i18n:StringLocalizer 'The MMI key for the exchanger (e.g. MMI_CHANGTICKET01)'}" />
                                     </ui:SymbolIcon.ToolTip>
                                 </ui:SymbolIcon>
                             </StackPanel>
@@ -291,10 +292,10 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="Exchanger Name" />
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Exchanger Name'}" />
                                 <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                     <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="Display name of the exchanger (IDS_TEXTCLIENT_INC_)" />
+                                        <ToolTip Content="{i18n:StringLocalizer 'Display name of the exchanger (IDS_TEXTCLIENT_INC_)'}" />
                                     </ui:SymbolIcon.ToolTip>
                                 </ui:SymbolIcon>
                             </StackPanel>
@@ -319,7 +320,7 @@
                             Grid.Column="0"
                             VerticalAlignment="Center"
                             Style="{StaticResource SectionHeaderStyle}"
-                            Text="Exchange Requirements" />
+                            Text="{i18n:StringLocalizer 'Exchange Requirements'}" />
 
                         <StackPanel
                             Grid.Column="1"
@@ -328,11 +329,11 @@
                             <ui:Button
                                 Margin="0,0,10,0"
                                 Background="#2F70AF"
-                                Content="Add Item"
+                                Content="{i18n:StringLocalizer 'Add Item'}"
                                 Icon="Add12" />
                             <ui:Button
                                 Background="#FD292F"
-                                Content="Delete Item"
+                                Content="{i18n:StringLocalizer 'Delete Item'}"
                                 Icon="Delete12" />
                         </StackPanel>
                     </Grid>
@@ -344,7 +345,7 @@
                             Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                             BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                             BorderThickness="1">
-                            <TabItem Header="Conditions">
+                            <TabItem Header="{i18n:StringLocalizer 'Conditions'}">
                                 <Grid Margin="10">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
@@ -360,13 +361,13 @@
                                         <TextBlock
                                             Grid.Column="0"
                                             FontWeight="SemiBold"
-                                            Text="Item ID" />
+                                            Text="{i18n:StringLocalizer 'Item ID'}" />
                                         <TextBlock
                                             Grid.Column="1"
                                             Width="80"
                                             HorizontalAlignment="Center"
                                             FontWeight="SemiBold"
-                                            Text="Quantity" />
+                                            Text="{i18n:StringLocalizer 'Quantity'}" />
                                     </Grid>
 
                                     <!--  Items Liste  -->
@@ -388,7 +389,7 @@
                                 </Grid>
                             </TabItem>
 
-                            <TabItem Header="Remove">
+                            <TabItem Header="{i18n:StringLocalizer 'Remove'}">
                                 <Grid Margin="10">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
@@ -404,13 +405,13 @@
                                         <TextBlock
                                             Grid.Column="0"
                                             FontWeight="SemiBold"
-                                            Text="Item ID" />
+                                            Text="{i18n:StringLocalizer 'Item ID'}" />
                                         <TextBlock
                                             Grid.Column="1"
                                             Width="80"
                                             HorizontalAlignment="Center"
                                             FontWeight="SemiBold"
-                                            Text="Quantity" />
+                                            Text="{i18n:StringLocalizer 'Quantity'}" />
                                     </Grid>
 
                                     <!--  Items Liste  -->
@@ -432,7 +433,7 @@
                                 </Grid>
                             </TabItem>
 
-                            <TabItem Header="Pay">
+                            <TabItem Header="{i18n:StringLocalizer 'Pay'}">
                                 <Grid Margin="10">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
@@ -449,20 +450,20 @@
                                         <TextBlock
                                             Grid.Column="0"
                                             FontWeight="SemiBold"
-                                            Text="Item ID" />
+                                            Text="{i18n:StringLocalizer 'Item ID'}" />
                                         <TextBlock
                                             Grid.Column="1"
                                             Width="80"
                                             HorizontalAlignment="Center"
                                             FontWeight="SemiBold"
-                                            Text="Amount" />
+                                            Text="{i18n:StringLocalizer 'Amount'}" />
                                         <TextBlock
                                             Grid.Column="2"
                                             Width="80"
                                             Margin="5,0,0,0"
                                             HorizontalAlignment="Center"
                                             FontWeight="SemiBold"
-                                            Text="Chance %" />
+                                            Text="{i18n:StringLocalizer 'Chance %'}" />
                                     </Grid>
 
                                     <!--  Items Liste  -->
@@ -531,7 +532,7 @@
                             Grid.Column="0"
                             VerticalAlignment="Center"
                             Style="{StaticResource SectionHeaderStyle}"
-                            Text="Sets" />
+                            Text="{i18n:StringLocalizer 'Sets'}" />
 
                         <StackPanel
                             Grid.Column="1"
@@ -540,11 +541,11 @@
                             <ui:Button
                                 Margin="0,0,10,0"
                                 Background="#2F70AF"
-                                Content="Add Set"
+                                Content="{i18n:StringLocalizer 'Add Set'}"
                                 Icon="Add12" />
                             <ui:Button
                                 Background="#FD292F"
-                                Content="Delete Set"
+                                Content="{i18n:StringLocalizer 'Delete Set'}"
                                 Icon="Delete12" />
                         </StackPanel>
                     </Grid>
@@ -600,7 +601,7 @@
                                                 VerticalAlignment="Center"
                                                 FontWeight="Bold"
                                                 Foreground="{Binding Text.SolidColorBrushColor}"
-                                                Text="T" />
+                                                Text="{i18n:StringLocalizer 'T'}" />
                                         </Border>
                                         <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                             <TextBlock

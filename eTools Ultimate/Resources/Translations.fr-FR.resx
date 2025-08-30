@@ -170,7 +170,7 @@
     <comment>Quests navigation card description</comment>
   </data>
   <data name="NPCs" xml:space="preserve">
-    <value>PNJ</value>
+    <value>NPCs</value>
     <comment>NPCs navigation card title</comment>
   </data>
   <data name="Navigate to the NPCs page." xml:space="preserve">
@@ -365,7 +365,7 @@
     <value>Naviguer vers la page des collectionneurs.</value>
     <comment>Collectors navigation card description</comment>
   </data>
-  <data name="Navigate to the drop event editor." xml:space="preserve">
+  <data name="Navigate to the drop event page." xml:space="preserve">
     <value>Ouvrir l'éditeur d'événements de drop.</value>
     <comment>Drop Event navigation card description</comment>
   </data>
@@ -388,5 +388,744 @@
   <data name="Navigate to the text client." xml:space="preserve">
     <value>Naviguer vers le client texte.</value>
     <comment>Text Client navigation card description</comment>
+  </data>
+  <!-- Quest Page Translations -->
+  <data name="ID" xml:space="preserve">
+    <value>ID</value>
+    <comment>ID field label</comment>
+  </data>
+  <data name="Door of Dark" xml:space="preserve">
+    <value>Porte des Ténèbres</value>
+    <comment>Door of Dark field label</comment>
+  </data>
+  <data name="Dialog" xml:space="preserve">
+    <value>Dialogue</value>
+    <comment>Dialog field label</comment>
+  </data>
+  <data name="Thank you! Please, investigate the entrance of the temple for anything dan" xml:space="preserve">
+    <value>Merci ! Veuillez enquêter à l'entrée du temple pour tout ce qui dan</value>
+    <comment>Thank you dialog text</comment>
+  </data>
+  <data name="Quest Deny Dialog" xml:space="preserve">
+    <value>Dialogue de refus de quête</value>
+    <comment>Quest Deny Dialog field label</comment>
+  </data>
+  <data name="I cannot force you to help me if you are busy. But maybe, when you have th" xml:space="preserve">
+    <value>Je ne peux pas vous forcer à m'aider si vous êtes occupé. Mais peut-être, quand vous avez th</value>
+    <comment>Quest deny dialog text</comment>
+  </data>
+  <data name="Quest Details (Active)" xml:space="preserve">
+    <value>Détails de quête (Actif)</value>
+    <comment>Quest Details (Active) field label</comment>
+  </data>
+  <data name="Quest Detail" xml:space="preserve">
+    <value>Détail de quête</value>
+    <comment>Quest Detail field label</comment>
+  </data>
+  <data name="Quest Details (Finished)" xml:space="preserve">
+    <value>Détails de quête (Terminé)</value>
+    <comment>Quest Details (Finished) field label</comment>
+  </data>
+  <data name="Begin Conditions" xml:space="preserve">
+    <value>Conditions de début</value>
+    <comment>Begin Conditions field label</comment>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>Général</value>
+    <comment>General field label</comment>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Niveau</value>
+    <comment>Level field label</comment>
+  </data>
+  <data name="Sex" xml:space="preserve">
+    <value>Sexe</value>
+    <comment>Sex field label</comment>
+  </data>
+  <data name="Any" xml:space="preserve">
+    <value>N'importe lequel</value>
+    <comment>Any option</comment>
+  </data>
+  <data name="Required Skill" xml:space="preserve">
+    <value>Compétence requise</value>
+    <comment>Required Skill field label</comment>
+  </data>
+  <data name="Skill Level" xml:space="preserve">
+    <value>Niveau de compétence</value>
+    <comment>Skill Level field label</comment>
+  </data>
+  <data name="Min. PK Value" xml:space="preserve">
+    <value>Valeur PK min.</value>
+    <comment>Min. PK Value field label</comment>
+  </data>
+  <data name="Party Settings" xml:space="preserve">
+    <value>Paramètres de groupe</value>
+    <comment>Party Settings section header</comment>
+  </data>
+  <data name="Ignore" xml:space="preserve">
+    <value>Ignorer</value>
+    <comment>Ignore option</comment>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+    <comment>Type field label</comment>
+  </data>
+  <data name="Exact Amount" xml:space="preserve">
+    <value>Montant exact</value>
+    <comment>Exact Amount option</comment>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Montant</value>
+    <comment>Amount field label</comment>
+  </data>
+  <data name="Guild Settings" xml:space="preserve">
+    <value>Paramètres de guilde</value>
+    <comment>Guild Settings section header</comment>
+  </data>
+  <data name="Job Settings" xml:space="preserve">
+    <value>Paramètres de métier</value>
+    <comment>Job Settings section header</comment>
+  </data>
+  <data name="Job Class" xml:space="preserve">
+    <value>Classe de métier</value>
+    <comment>Job Class field label</comment>
+  </data>
+  <data name="Required Job Class" xml:space="preserve">
+    <value>Classe de métier requise</value>
+    <comment>Required Job Class field label</comment>
+  </data>
+  <!-- Skill Page Translations -->
+  <data name="Basic Information" xml:space="preserve">
+    <value>Informations de base</value>
+    <comment>Basic Information section header</comment>
+  </data>
+  <data name="Grade (Class Stage)" xml:space="preserve">
+    <value>Grade (Étape de classe)</value>
+    <comment>Grade (Class Stage) field label</comment>
+  </data>
+  <data name="1st Grade" xml:space="preserve">
+    <value>1er Grade</value>
+    <comment>1st Grade option</comment>
+  </data>
+  <data name="2nd Grade" xml:space="preserve">
+    <value>2e Grade</value>
+    <comment>2nd Grade option</comment>
+  </data>
+  <data name="3rd Grade" xml:space="preserve">
+    <value>3e Grade</value>
+    <comment>3rd Grade option</comment>
+  </data>
+  <data name="Job (Required Class)" xml:space="preserve">
+    <value>Métier (Classe requise)</value>
+    <comment>Job (Required Class) field label</comment>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Tous</value>
+    <comment>All option</comment>
+  </data>
+  <data name="Warrior" xml:space="preserve">
+    <value>Guerrier</value>
+    <comment>Warrior option</comment>
+  </data>
+  <data name="Magician" xml:space="preserve">
+    <value>Magicien</value>
+    <comment>Magician option</comment>
+  </data>
+  <data name="Archer" xml:space="preserve">
+    <value>Archer</value>
+    <comment>Archer option</comment>
+  </data>
+  <data name="Acrobat" xml:space="preserve">
+    <value>Acrobate</value>
+    <comment>Acrobat option</comment>
+  </data>
+  <data name="Secondary Type" xml:space="preserve">
+    <value>Type secondaire</value>
+    <comment>Secondary Type field label</comment>
+  </data>
+  <data name="Passive" xml:space="preserve">
+    <value>Passif</value>
+    <comment>Passive option</comment>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Actif</value>
+    <comment>Active option</comment>
+  </data>
+  <data name="Buff" xml:space="preserve">
+    <value>Amélioration</value>
+    <comment>Buff option</comment>
+  </data>
+  <data name="Debuff" xml:space="preserve">
+    <value>Affaiblissement</value>
+    <comment>Debuff option</comment>
+  </data>
+  <data name="Maximum Level" xml:space="preserve">
+    <value>Niveau maximum</value>
+    <comment>Maximum Level field label</comment>
+  </data>
+  <data name="Combat Details" xml:space="preserve">
+    <value>Détails de combat</value>
+    <comment>Combat Details section header</comment>
+  </data>
+  <data name="Range" xml:space="preserve">
+    <value>Portée</value>
+    <comment>Range field label</comment>
+  </data>
+  <data name="Weapon Type" xml:space="preserve">
+    <value>Type d'arme</value>
+    <comment>Weapon Type field label</comment>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Aucun</value>
+    <comment>None option</comment>
+  </data>
+  <data name="Sword" xml:space="preserve">
+    <value>Épée</value>
+    <comment>Sword option</comment>
+  </data>
+  <data name="Axe" xml:space="preserve">
+    <value>Hache</value>
+    <comment>Axe option</comment>
+  </data>
+  <data name="Bow" xml:space="preserve">
+    <value>Arc</value>
+    <comment>Bow option</comment>
+  </data>
+  <data name="Staff" xml:space="preserve">
+    <value>Bâton</value>
+    <comment>Staff option</comment>
+  </data>
+  <data name="Normal" xml:space="preserve">
+    <value>Normal</value>
+    <comment>Normal option</comment>
+  </data>
+  <data name="AOE" xml:space="preserve">
+    <value>Zone</value>
+    <comment>AOE option</comment>
+  </data>
+  <data name="Heal" xml:space="preserve">
+    <value>Soin</value>
+    <comment>Heal option</comment>
+  </data>
+  <data name="Cooldown (Sec.)" xml:space="preserve">
+    <value>Temps de recharge (Sec.)</value>
+    <comment>Cooldown field label</comment>
+  </data>
+  <data name="Target" xml:space="preserve">
+    <value>Cible</value>
+    <comment>Target field label</comment>
+  </data>
+  <data name="Self" xml:space="preserve">
+    <value>Soi-même</value>
+    <comment>Self option</comment>
+  </data>
+  <data name="Single Target" xml:space="preserve">
+    <value>Cible unique</value>
+    <comment>Single Target option</comment>
+  </data>
+  <data name="Party" xml:space="preserve">
+    <value>Groupe</value>
+    <comment>Party option</comment>
+  </data>
+  <data name="Enemy Party" xml:space="preserve">
+    <value>Groupe ennemi</value>
+    <comment>Enemy Party option</comment>
+  </data>
+  <data name="Target Requirement" xml:space="preserve">
+    <value>Exigence de cible</value>
+    <comment>Target Requirement field label</comment>
+  </data>
+  <data name="Anytime" xml:space="preserve">
+    <value>À tout moment</value>
+    <comment>Anytime option</comment>
+  </data>
+  <data name="In Combat" xml:space="preserve">
+    <value>En combat</value>
+    <comment>In Combat option</comment>
+  </data>
+  <data name="Out of Combat" xml:space="preserve">
+    <value>Hors combat</value>
+    <comment>Out of Combat option</comment>
+  </data>
+  <data name="HP below 50%" xml:space="preserve">
+    <value>PV en dessous de 50%</value>
+    <comment>HP below 50% option</comment>
+  </data>
+  <data name="HP below 30%" xml:space="preserve">
+    <value>PV en dessous de 30%</value>
+    <comment>HP below 30% option</comment>
+  </data>
+  <data name="Spell Region" xml:space="preserve">
+    <value>Région de sort</value>
+    <comment>Spell Region field label</comment>
+  </data>
+  <data name="AOE Target" xml:space="preserve">
+    <value>Cible de zone</value>
+    <comment>AOE Target option</comment>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Ajouter</value>
+    <comment>Add button text</comment>
+  </data>
+  <!-- Edit Giftbox Item Dialog Translations -->
+  <data name="Edit Item" xml:space="preserve">
+    <value>Modifier l'objet</value>
+    <comment>Edit Item dialog title</comment>
+  </data>
+  <data name="Item Information" xml:space="preserve">
+    <value>Informations sur l'objet</value>
+    <comment>Item Information section header</comment>
+  </data>
+  <data name="Probability (%)" xml:space="preserve">
+    <value>Probabilité (%)</value>
+    <comment>Probability field label</comment>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Aperçu</value>
+    <comment>Preview section header</comment>
+  </data>
+  <data name="Item Summary:" xml:space="preserve">
+    <value>Résumé de l'objet:</value>
+    <comment>Item Summary label</comment>
+  </data>
+  <!-- Add Giftbox Item Dialog Translations -->
+  <data name="Add New Item" xml:space="preserve">
+    <value>Ajouter un nouvel objet</value>
+    <comment>Add New Item dialog title</comment>
+  </data>
+  <data name="Search Item" xml:space="preserve">
+    <value>Rechercher un objet</value>
+    <comment>Search Item section header</comment>
+  </data>
+  <data name="Select Item (Full Item List)" xml:space="preserve">
+    <value>Sélectionner un objet (Liste complète des objets)</value>
+    <comment>Select Item label</comment>
+  </data>
+  <data name="Selected Item" xml:space="preserve">
+    <value>Objet sélectionné</value>
+    <comment>Selected Item section header</comment>
+  </data>
+  <data name="Item Configuration" xml:space="preserve">
+    <value>Configuration de l'objet</value>
+    <comment>Item Configuration section header</comment>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>Résumé</value>
+    <comment>Summary section header</comment>
+  </data>
+  <data name="Item: " xml:space="preserve">
+    <value>Objet: </value>
+    <comment>Item label</comment>
+  </data>
+  <data name="Quantity: " xml:space="preserve">
+    <value>Quantité: </value>
+    <comment>Quantity label</comment>
+  </data>
+  <!-- Item Page Translations -->
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+    <comment>Description field label</comment>
+  </data>
+  <data name="File Name" xml:space="preserve">
+    <value>Nom de fichier</value>
+    <comment>File Name field label</comment>
+  </data>
+  <data name="Item Icon" xml:space="preserve">
+    <value>Icône d'objet</value>
+    <comment>Item Icon field label</comment>
+  </data>
+  <data name="Tradeable" xml:space="preserve">
+    <value>Échangeable</value>
+    <comment>Tradeable field label</comment>
+  </data>
+  <data name="Shop-able" xml:space="preserve">
+    <value>Vendable en boutique</value>
+    <comment>Shop-able field label</comment>
+  </data>
+  <data name="Inventory &amp; Stack" xml:space="preserve">
+    <value>Inventaire &amp; Pile</value>
+    <comment>Inventory &amp; Stack section header</comment>
+  </data>
+  <data name="Maximum stack size" xml:space="preserve">
+    <value>Taille de pile maximale</value>
+    <comment>Maximum stack size field label</comment>
+  </data>
+  <data name="Penya Price" xml:space="preserve">
+    <value>Prix en Penya</value>
+    <comment>Penya Price field label</comment>
+  </data>
+  <data name="Item durability" xml:space="preserve">
+    <value>Durabilité de l'objet</value>
+    <comment>Item durability field label</comment>
+  </data>
+  <data name="Character Requirements" xml:space="preserve">
+    <value>Exigences de personnage</value>
+    <comment>Character Requirements section header</comment>
+  </data>
+  <data name="Gender restriction (0 = both)" xml:space="preserve">
+    <value>Restriction de genre (0 = les deux)</value>
+    <comment>Gender restriction field label</comment>
+  </data>
+  <data name="Required item level" xml:space="preserve">
+    <value>Niveau d'objet requis</value>
+    <comment>Required item level field label</comment>
+  </data>
+  <data name="Level limit" xml:space="preserve">
+    <value>Limite de niveau</value>
+    <comment>Level limit field label</comment>
+  </data>
+  <data name="Usable flag (1 = yes)" xml:space="preserve">
+    <value>Drapeau utilisable (1 = oui)</value>
+    <comment>Usable flag field label</comment>
+  </data>
+  <data name="Minimum level limit" xml:space="preserve">
+    <value>Limite de niveau minimale</value>
+    <comment>Minimum level limit field label</comment>
+  </data>
+  <data name="Maximum level limit" xml:space="preserve">
+    <value>Limite de niveau maximale</value>
+    <comment>Maximum level limit field label</comment>
+  </data>
+  <data name="Item Kind 1" xml:space="preserve">
+    <value>Type d'objet 1</value>
+    <comment>Item Kind 1 field label</comment>
+  </data>
+  <data name="Item Kind 2" xml:space="preserve">
+    <value>Type d'objet 2</value>
+    <comment>Item Kind 2 field label</comment>
+  </data>
+  <data name="Item Kind 3" xml:space="preserve">
+    <value>Type d'objet 3</value>
+    <comment>Item Kind 3 field label</comment>
+  </data>
+  <data name="Combat Stats &amp; Attributes" xml:space="preserve">
+    <value>Statistiques de combat &amp; Attributs</value>
+    <comment>Combat Stats &amp; Attributes section header</comment>
+  </data>
+  <data name="Minimum attack" xml:space="preserve">
+    <value>Attaque minimale</value>
+    <comment>Minimum attack field label</comment>
+  </data>
+  <data name="Maximum attack" xml:space="preserve">
+    <value>Attaque maximale</value>
+    <comment>Maximum attack field label</comment>
+  </data>
+  <data name="Parry chance" xml:space="preserve">
+    <value>Chance de parade</value>
+    <comment>Parry chance field label</comment>
+  </data>
+  <data name="Block rate" xml:space="preserve">
+    <value>Taux de blocage</value>
+    <comment>Block rate field label</comment>
+  </data>
+  <data name="Attack speed" xml:space="preserve">
+    <value>Vitesse d'attaque</value>
+    <comment>Attack speed field label</comment>
+  </data>
+  <data name="Attack range" xml:space="preserve">
+    <value>Portée d'attaque</value>
+    <comment>Attack range field label</comment>
+  </data>
+  <data name="Parts" xml:space="preserve">
+    <value>Pièces</value>
+    <comment>Parts field label</comment>
+  </data>
+  <data name="Effect 1" xml:space="preserve">
+    <value>Effet 1</value>
+    <comment>Effect 1 field label</comment>
+  </data>
+  <data name="Effect 2" xml:space="preserve">
+    <value>Effet 2</value>
+    <comment>Effect 2 field label</comment>
+  </data>
+  <data name="Effect 3" xml:space="preserve">
+    <value>Effet 3</value>
+    <comment>Effect 3 field label</comment>
+  </data>
+  <data name="Effect 4" xml:space="preserve">
+    <value>Effet 4</value>
+    <comment>Effect 4 field label</comment>
+  </data>
+  <data name="Effect 5" xml:space="preserve">
+    <value>Effet 5</value>
+    <comment>Effect 5 field label</comment>
+  </data>
+  <data name="Effect 6" xml:space="preserve">
+    <value>Effet 6</value>
+    <comment>Effect 6 field label</comment>
+  </data>
+  <data name="Skill Triggers &amp; Activation" xml:space="preserve">
+    <value>Déclencheurs de compétence &amp; Activation</value>
+    <comment>Skill Triggers &amp; Activation section header</comment>
+  </data>
+  <data name="Active skill ID" xml:space="preserve">
+    <value>ID de compétence active</value>
+    <comment>Active skill ID field label</comment>
+  </data>
+  <data name="Active skill level" xml:space="preserve">
+    <value>Niveau de compétence active</value>
+    <comment>Active skill level field label</comment>
+  </data>
+  <data name="Active skill activation rate (%)" xml:space="preserve">
+    <value>Taux d'activation de compétence active (%)</value>
+    <comment>Active skill activation rate field label</comment>
+  </data>
+  <data name="MP required to use" xml:space="preserve">
+    <value>PM requis pour utiliser</value>
+    <comment>MP required to use field label</comment>
+  </data>
+  <data name="Required skills" xml:space="preserve">
+    <value>Compétences requises</value>
+    <comment>Required skills field label</comment>
+  </data>
+  <data name="Required skill levels" xml:space="preserve">
+    <value>Niveaux de compétence requis</value>
+    <comment>Required skill levels field label</comment>
+  </data>
+  <data name="Preparation type" xml:space="preserve">
+    <value>Type de préparation</value>
+    <comment>Preparation type field label</comment>
+  </data>
+  <data name="Preparation duration" xml:space="preserve">
+    <value>Durée de préparation</value>
+    <comment>Preparation duration field label</comment>
+  </data>
+  <data name="Skill range" xml:space="preserve">
+    <value>Portée de compétence</value>
+    <comment>Skill range field label</comment>
+  </data>
+  <data name="Animation motions when used" xml:space="preserve">
+    <value>Mouvements d'animation lors de l'utilisation</value>
+    <comment>Animation motions when used field label</comment>
+  </data>
+  <data name="Visual elemental effect" xml:space="preserve">
+    <value>Effet élémentaire visuel</value>
+    <comment>Visual elemental effect field label</comment>
+  </data>
+  <data name="Resistance &amp; Alignment" xml:space="preserve">
+    <value>Résistance &amp; Alignement</value>
+    <comment>Resistance &amp; Alignment section header</comment>
+  </data>
+  <data name="Electric resistance" xml:space="preserve">
+    <value>Résistance électrique</value>
+    <comment>Electric resistance field label</comment>
+  </data>
+  <data name="Fire resistance" xml:space="preserve">
+    <value>Résistance au feu</value>
+    <comment>Fire resistance field label</comment>
+  </data>
+  <data name="Wind resistance" xml:space="preserve">
+    <value>Résistance au vent</value>
+    <comment>Wind resistance field label</comment>
+  </data>
+  <data name="Water resistance" xml:space="preserve">
+    <value>Résistance à l'eau</value>
+    <comment>Water resistance field label</comment>
+  </data>
+  <data name="Earth resistance" xml:space="preserve">
+    <value>Résistance à la terre</value>
+    <comment>Earth resistance field label</comment>
+  </data>
+  <data name="Karma/alignment value" xml:space="preserve">
+    <value>Valeur karma/alignement</value>
+    <comment>Karma/alignment value field label</comment>
+  </data>
+  <data name="Crafting &amp; Enhancement" xml:space="preserve">
+    <value>Artisanat &amp; Amélioration</value>
+    <comment>Crafting &amp; Enhancement section header</comment>
+  </data>
+  <data name="Smelting level" xml:space="preserve">
+    <value>Niveau de fusion</value>
+    <comment>Smelting level field label</comment>
+  </data>
+  <data name="Attribute smelting" xml:space="preserve">
+    <value>Fusion d'attribut</value>
+    <comment>Attribute smelting field label</comment>
+  </data>
+  <data name="Gem smelting" xml:space="preserve">
+    <value>Fusion de gemme</value>
+    <comment>Gem smelting field label</comment>
+  </data>
+  <data name="Number of piercing slots" xml:space="preserve">
+    <value>Nombre d'emplacements de perçage</value>
+    <comment>Number of piercing slots field label</comment>
+  </data>
+  <data name="Upgrade flag" xml:space="preserve">
+    <value>Drapeau d'amélioration</value>
+    <comment>Upgrade flag field label</comment>
+  </data>
+  <data name="Flags &amp; Conditions" xml:space="preserve">
+    <value>Drapeaux &amp; Conditions</value>
+    <comment>Flags &amp; Conditions section header</comment>
+  </data>
+  <data name="Enable item logging" xml:space="preserve">
+    <value>Activer la journalisation d'objets</value>
+    <comment>Enable item logging field label</comment>
+  </data>
+  <data name="Charged item flag" xml:space="preserve">
+    <value>Drapeau d'objet chargé</value>
+    <comment>Charged item flag field label</comment>
+  </data>
+  <data name="Bind reset allowed" xml:space="preserve">
+    <value>Réinitialisation de liaison autorisée</value>
+    <comment>Bind reset allowed field label</comment>
+  </data>
+  <data name="Time-limited item" xml:space="preserve">
+    <value>Objet à durée limitée</value>
+    <comment>Time-limited item field label</comment>
+  </data>
+  <data name="Blinkwing" xml:space="preserve">
+    <value>Aile de clignotement</value>
+    <comment>Blinkwing section header</comment>
+  </data>
+  <data name="Required Level" xml:space="preserve">
+    <value>Niveau requis</value>
+    <comment>Required Level field label</comment>
+  </data>
+  <data name="Teleport to the Nearest town" xml:space="preserve">
+    <value>Téléportation vers la ville la plus proche</value>
+    <comment>Teleport to the Nearest town field label</comment>
+  </data>
+  <data name="Position (X, Y, Z)" xml:space="preserve">
+    <value>Position (X, Y, Z)</value>
+    <comment>Position field label</comment>
+  </data>
+  <data name="X" xml:space="preserve">
+    <value>X</value>
+    <comment>X coordinate label</comment>
+  </data>
+  <data name="Y" xml:space="preserve">
+    <value>Y</value>
+    <comment>Y coordinate label</comment>
+  </data>
+  <data name="Z" xml:space="preserve">
+    <value>Z</value>
+    <comment>Z coordinate label</comment>
+  </data>
+  <data name="Angle" xml:space="preserve">
+    <value>Angle</value>
+    <comment>Angle field label</comment>
+  </data>
+  <data name="Chaotic spawn key" xml:space="preserve">
+    <value>Clé d'apparition chaotique</value>
+    <comment>Chaotic spawn key field label</comment>
+  </data>
+  <data name="Misc" xml:space="preserve">
+    <value>Divers</value>
+    <comment>Misc section header</comment>
+  </data>
+  <data name="Casting time" xml:space="preserve">
+    <value>Temps d'incantation</value>
+    <comment>Casting time field label</comment>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Temps</value>
+    <comment>Time field label</comment>
+  </data>
+  <data name="min" xml:space="preserve">
+    <value>min</value>
+    <comment>Minutes abbreviation</comment>
+  </data>
+  <data name="sec" xml:space="preserve">
+    <value>sec</value>
+    <comment>Seconds abbreviation</comment>
+  </data>
+  <data name="SFX" xml:space="preserve">
+    <value>SFX</value>
+    <comment>SFX field label</comment>
+  </data>
+  <data name="Sound" xml:space="preserve">
+    <value>Son</value>
+    <comment>Sound section header</comment>
+  </data>
+  <data name="Attack Sound" xml:space="preserve">
+    <value>Son d'attaque</value>
+    <comment>Attack Sound field label</comment>
+  </data>
+  <data name="Critical Attack Sound" xml:space="preserve">
+    <value>Son d'attaque critique</value>
+    <comment>Critical Attack Sound field label</comment>
+  </data>
+  <data name="Suche..." xml:space="preserve">
+    <value>Rechercher...</value>
+    <comment>Search placeholder text</comment>
+  </data>
+  <data name="Filter Sections" xml:space="preserve">
+    <value>Filtrer les sections</value>
+    <comment>Filter Sections label</comment>
+  </data>
+  <data name="Filter Fields" xml:space="preserve">
+    <value>Filtrer les champs</value>
+    <comment>Filter Fields label</comment>
+  </data>
+  <!-- Exchanger Page Translations -->
+  <data name="Item ID" xml:space="preserve">
+    <value>ID d'objet</value>
+    <comment>Item ID field label</comment>
+  </data>
+  <data name="T" xml:space="preserve">
+    <value>T</value>
+    <comment>T field label</comment>
+  </data>
+  <!-- Personalization Page Translations -->
+  <data name="App theme" xml:space="preserve">
+    <value>Thème de l'application</value>
+    <comment>App theme label</comment>
+  </data>
+  <data name="Select which app theme to display" xml:space="preserve">
+    <value>Sélectionner le thème d'application à afficher</value>
+    <comment>App theme description</comment>
+  </data>
+  <data name="Application language" xml:space="preserve">
+    <value>Langue de l'application</value>
+    <comment>Application language label</comment>
+  </data>
+  <data name="Choose your preferred language" xml:space="preserve">
+    <value>Choisissez votre langue préférée</value>
+    <comment>Application language description</comment>
+  </data>
+  <data name="Auto-save interval" xml:space="preserve">
+    <value>Intervalle de sauvegarde automatique</value>
+    <comment>Auto-save interval label</comment>
+  </data>
+  <data name="Set the time interval for automatic saving" xml:space="preserve">
+    <value>Définir l'intervalle de temps pour la sauvegarde automatique</value>
+    <comment>Auto-save interval description</comment>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Clair</value>
+    <comment>Light theme option</comment>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Sombre</value>
+    <comment>Dark theme option</comment>
+  </data>
+  <data name="English (Default)" xml:space="preserve">
+    <value>Anglais (Par défaut)</value>
+    <comment>English language option</comment>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>Allemand</value>
+    <comment>German language option</comment>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>Français</value>
+    <comment>French language option</comment>
+  </data>
+  <data name="5 minutes" xml:space="preserve">
+    <value>5 minutes</value>
+    <comment>5 minutes option</comment>
+  </data>
+  <data name="15 minutes" xml:space="preserve">
+    <value>15 minutes</value>
+    <comment>15 minutes option</comment>
+  </data>
+  <data name="30 minutes" xml:space="preserve">
+    <value>30 minutes</value>
+    <comment>30 minutes option</comment>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Personnalisé</value>
+    <comment>Custom option</comment>
   </data>
 </root>

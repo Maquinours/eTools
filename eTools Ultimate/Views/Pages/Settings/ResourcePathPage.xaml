@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:vm="clr-namespace:eTools_Ultimate.ViewModels.Pages"
     Title="ResourcePath"
     d:DataContext="{d:DesignInstance Type=vm:ResourcePathViewModel,
@@ -28,7 +29,7 @@
             VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="45,8,45,20">
                 <!--  Info for main settings  -->
-                <ui:InfoBar Title="Settings" Message="Main Settings" />
+                <ui:InfoBar Title="{i18n:StringLocalizer 'Settings'}" Message="{i18n:StringLocalizer 'Main Settings'}" />
 
                 <!--  Grid mit 2x4 Layout für die Haupteinstellungen  -->
                 <Grid Margin="0,10,0,12">
@@ -55,7 +56,7 @@
                             Grid.Column="0"
                             Margin="0,0,8,0"
                             VerticalAlignment="Center"
-                            Text="Resource folder" />
+                            Text="{i18n:StringLocalizer 'Resource folder'}" />
                         <TextBox
                             Grid.Column="1"
                             Margin="0,0,8,0"
@@ -84,7 +85,7 @@
                             Grid.Column="0"
                             Margin="0,0,8,0"
                             VerticalAlignment="Center"
-                            Text="Client folder" />
+                            Text="{i18n:StringLocalizer 'Client folder'}" />
                         <TextBox
                             Grid.Column="1"
                             Margin="0,0,8,0"
@@ -112,7 +113,7 @@
                             Grid.Column="0"
                             Margin="0,0,8,0"
                             VerticalAlignment="Center"
-                            Text="Version" />
+                            Text="{i18n:StringLocalizer 'Version'}" />
                         <ComboBox
                             Grid.Column="1"
                             Width="100"
@@ -154,7 +155,7 @@
                         Margin="0,10,0,0"
                         FontSize="16"
                         FontWeight="Bold"
-                        Text="Custom" />
+                        Text="{i18n:StringLocalizer 'Custom'}" />
 
                     <!--  Custom - Basic Files  -->
                     <Grid Margin="0,10,0,12">
@@ -181,7 +182,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="Texture folder" />
+                                Text="{i18n:StringLocalizer 'Texture folder'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox x:Name="TexturesFolderPathTextBox" Text="{Binding Settings.TexturesFolderPath, Mode=TwoWay}" />
                                 <TextBlock
@@ -227,7 +228,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="Icons folder" />
+                                Text="{i18n:StringLocalizer 'Icons folder'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox x:Name="IconsFolderPathTextbox" Text="{Binding Settings.IconsFolderPath, Mode=TwoWay}" />
                                 <TextBlock
@@ -273,7 +274,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="Sounds folder" />
+                                Text="{i18n:StringLocalizer 'Sounds folder'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox x:Name="SoundsFolderPathTextbox" Text="{Binding Settings.SoundsFolderPath, Mode=TwoWay}" />
                                 <TextBlock
@@ -319,7 +320,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="Sounds config file" />
+                                Text="{i18n:StringLocalizer 'Sounds config file'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox x:Name="SoundsConfigFilePathTextBox" Text="{Binding Settings.SoundsConfigFilePath, Mode=TwoWay}" />
                                 <TextBlock
@@ -357,7 +358,7 @@
                         Margin="0,10,0,0"
                         FontSize="16"
                         FontWeight="Bold"
-                        Text="Item" />
+                        Text="{i18n:StringLocalizer 'Item'}" />
 
                     <Grid Margin="0,10,0,12">
                         <Grid.ColumnDefinitions>
@@ -383,7 +384,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="Spec_Item file" />
+                                Text="{i18n:StringLocalizer 'Spec_Item file'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox x:Name="PropItemFilePathTextbox" Text="{Binding Settings.PropItemFilePath, Mode=TwoWay}" />
                                 <TextBlock
@@ -429,7 +430,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="PropItem.txt file" />
+                                Text="{i18n:StringLocalizer 'PropItem.txt file'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox
                                     x:Name="PropItemTxtFilePathTextbox"
@@ -478,7 +479,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="Item folder" />
+                                Text="{i18n:StringLocalizer 'Item folder'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox x:Name="ItemIconsFolderPathTextbox" Text="{Binding Settings.ItemIconsFolderPath, Mode=TwoWay}" />
                                 <TextBlock
@@ -516,7 +517,7 @@
                         Margin="0,10,0,0"
                         FontSize="16"
                         FontWeight="Bold"
-                        Text="Mover" />
+                        Text="{i18n:StringLocalizer 'Mover'}" />
 
                     <Grid Margin="0,10,0,12">
                         <Grid.ColumnDefinitions>
@@ -542,7 +543,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="PropMover file" />
+                                Text="{i18n:StringLocalizer 'PropMover file'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox x:Name="PropMoverFilePathTextbox" Text="{Binding Settings.PropMoverFilePath, Mode=TwoWay}" />
                                 <TextBlock
@@ -588,7 +589,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="PropMover.txt file" />
+                                Text="{i18n:StringLocalizer 'PropMover.txt file'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox x:Name="PropMoverTxtFilePathTextbox" Text="{Binding Settings.PropMoverTxtFilePath, Mode=TwoWay}" />
                                 <TextBlock
@@ -634,7 +635,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="PropMoverEx file" />
+                                Text="{i18n:StringLocalizer 'PropMoverEx file'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox
                                     x:Name="PropMoverExFilePathTextbox"
@@ -704,7 +705,7 @@
                         Margin="0,10,0,0"
                         FontSize="16"
                         FontWeight="Bold"
-                        Text="Skill" />
+                        Text="{i18n:StringLocalizer 'Skill'}" />
 
                     <Grid Margin="0,10,0,12">
                         <Grid.ColumnDefinitions>
@@ -730,7 +731,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="PropSkill file" />
+                                Text="{i18n:StringLocalizer 'PropSkill file'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox x:Name="PropSkillFilePathTextbox" Text="{Binding Settings.PropSkillFilePath, Mode=TwoWay}" />
                                 <TextBlock
@@ -776,7 +777,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="PropSkill.txt file" />
+                                Text="{i18n:StringLocalizer 'PropSkill.txt file'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox x:Name="PropSkillTxtFilePathTextbox" Text="{Binding Settings.PropSkillTxtFilePath, Mode=TwoWay}" />
                                 <TextBlock
@@ -822,7 +823,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="Icon folder" />
+                                Text="{i18n:StringLocalizer 'Icon folder'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox x:Name="SkillIconsFolderPathTextbox" Text="{Binding Settings.SkillIconsFolderPath, Mode=TwoWay}" />
                                 <TextBlock
