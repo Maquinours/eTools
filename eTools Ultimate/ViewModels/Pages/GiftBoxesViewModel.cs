@@ -20,7 +20,7 @@ using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class GiftBoxesViewModel(IContentDialogService contentDialogService) : ObservableObject, INavigationAware
+    public partial class GiftBoxesViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -107,7 +107,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                  }
                 );
 
-            if(result == ContentDialogResult.Primary)
+            if (result == ContentDialogResult.Primary)
             {
                 giftbox.Items.Remove(item);
                 item.Dispose();
@@ -136,7 +136,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
                 // Now try the actual edit dialog using ContentDialog instead of Window
                 System.Diagnostics.Debug.WriteLine("Creating EditGiftboxItemDialog as ContentDialog...");
-                
+
                 // Create a simple content dialog for editing
                 var editResult = await contentDialogService.ShowSimpleDialogAsync(
                     new SimpleContentDialogCreateOptions()
@@ -160,7 +160,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             {
                 System.Diagnostics.Debug.WriteLine($"Error in EditGiftboxItem: {ex.Message}");
                 System.Diagnostics.Debug.WriteLine($"Stack trace: {ex.StackTrace}");
-                
+
                 // Show error dialog to user
                 await contentDialogService.ShowSimpleDialogAsync(
                     new SimpleContentDialogCreateOptions()
@@ -170,6 +170,33 @@ namespace eTools_Ultimate.ViewModels.Pages
                         CloseButtonText = "OK",
                     }
                 );
+            }
+        }
+
+        [RelayCommand]
+        private async Task Save()
+        {
+            try
+            {
+                await Task.Run(GiftBoxesService.Instance.Save);
+
+                snackbarService.Show(
+                    title: "GiftBoxes saved",
+                    message: "GiftBoxes have been successfully saved.",
+                    appearance: ControlAppearance.Success,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+            catch (Exception ex)
+            {
+                snackbarService.Show(
+                    title: "An error has occured while saving GiftBoxes",
+                    message: ex.Message,
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
             }
         }
     }
