@@ -2,6 +2,9 @@
 using CommunityToolkit.Mvvm.Input;
 using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
+using eTools_Ultimate.ViewModels.Controls.Dialogs;
+using eTools_Ultimate.Views.Dialogs;
+using eTools_Ultimate.Views.Pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -63,6 +66,29 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (string.IsNullOrEmpty(this.SearchText)) return true;
             Item? item = giftbox.Item;
             return item == null || item.Name.ToLower().Contains(this.SearchText.ToLower());
+        }
+
+        [RelayCommand]
+        private async Task AddGiftboxItem()
+        {
+            if (GiftboxesView.CurrentItem is not GiftBox giftbox) return;
+
+            var contentDialog = new AddGiftboxItemDialog(contentDialogService.GetDialogHost());
+
+            if (await contentDialog.ShowAsync() == ContentDialogResult.Primary)
+            {
+                if (contentDialog.DataContext is not AddGiftBoxItemDialogViewModel contentDialogViewModel) return;
+
+                if (contentDialogViewModel.ItemsView.CurrentItem is not Item item) return;
+
+                int quantity = contentDialogViewModel.Quantity;
+                int probability = (int)(contentDialogViewModel.Probability / 100d * 1_000_000);
+
+                GiftBoxItemProp giftBoxItemProp = new(dwItem: item.Prop.DwId, dwProbability: probability, nNum: quantity);
+                GiftBoxItem giftBoxItem = new(giftBoxItemProp);
+
+                giftbox.Items.Add(giftBoxItem);
+            }
         }
 
         [RelayCommand]

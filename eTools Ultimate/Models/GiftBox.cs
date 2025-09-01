@@ -82,7 +82,11 @@ namespace eTools_Ultimate.Models
             get => ItemsService.Instance.Items.Where(x => x.Id == Prop.DwItem).FirstOrDefault();
         }
 
-        public double ProbabilityPercent => Math.Round(Prop.DwProbability / 1_000_000d * 100, 2);
+        public double ProbabilityPercent 
+        {
+            get => Prop.DwProbability / 1_000_000d * 100;
+            set => Prop.DwProbability = (int)(value / 100d * 1_000_000);
+        }
 
         public GiftBoxItem(GiftBoxItemProp prop)
         {

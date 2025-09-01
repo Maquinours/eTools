@@ -27,16 +27,6 @@ namespace eTools_Ultimate.Views.Pages
             }
         }
 
-        private void AddItemButton_Click(object sender, RoutedEventArgs e)
-        {
-            var addDialog = new AddGiftboxItemDialog();
-            addDialog.Owner = Window.GetWindow(this);
-            
-            if (addDialog.ShowDialog() == true)
-            {
-            }
-        }
-
         private void EditItemButton_Click(object sender, RoutedEventArgs e)
         {
             // This method is no longer used - we now use the Command in the ViewModel
