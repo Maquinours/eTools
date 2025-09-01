@@ -239,7 +239,7 @@
   </data>
   <data name="World" xml:space="preserve">
     <value>Welt</value>
-    <comment>World navigation card title</comment>
+    <comment>World field label</comment>
   </data>
   <data name="WorldDescription" xml:space="preserve">
     <value>Welt Editor öffnen.</value>
@@ -335,7 +335,7 @@
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>Menge</value>
-    <comment>Quantity column header</comment>
+    <comment>Quantity field label</comment>
   </data>
   <data name="%" xml:space="preserve">
     <value>%</value>
@@ -389,7 +389,6 @@
     <value>Navigiere zum Text Client.</value>
     <comment>Text Client navigation card description</comment>
   </data>
-  <!-- Quest Page Translations -->
   <data name="ID" xml:space="preserve">
     <value>ID</value>
     <comment>ID field label</comment>
@@ -494,11 +493,6 @@
     <value>Erforderliche Berufsklasse</value>
     <comment>Required Job Class field label</comment>
   </data>
-  <!-- Skill Page Translations -->
-  <data name="ID" xml:space="preserve">
-    <value>ID</value>
-    <comment>ID field label</comment>
-  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
     <comment>Name field label</comment>
@@ -510,10 +504,6 @@
   <data name="Weapon Type" xml:space="preserve">
     <value>Waffentyp</value>
     <comment>Weapon Type field label</comment>
-  </data>
-  <data name="Type" xml:space="preserve">
-    <value>Typ</value>
-    <comment>Type field label</comment>
   </data>
   <data name="Cooldown (Sec.)" xml:space="preserve">
     <value>Abklingzeit (Sek.)</value>
@@ -531,7 +521,6 @@
     <value>Zauberbereich</value>
     <comment>Spell Region field label</comment>
   </data>
-  <!-- Edit Giftbox Item Dialog Translations -->
   <data name="Edit Item" xml:space="preserve">
     <value>Gegenstand bearbeiten</value>
     <comment>Edit Item dialog title</comment>
@@ -539,10 +528,6 @@
   <data name="Item Information" xml:space="preserve">
     <value>Gegenstands-Information</value>
     <comment>Item Information section header</comment>
-  </data>
-  <data name="Quantity" xml:space="preserve">
-    <value>Menge</value>
-    <comment>Quantity field label</comment>
   </data>
   <data name="Probability (%)" xml:space="preserve">
     <value>Wahrscheinlichkeit (%)</value>
@@ -556,7 +541,6 @@
     <value>Gegenstands-Zusammenfassung:</value>
     <comment>Item Summary label</comment>
   </data>
-  <!-- Add Giftbox Item Dialog Translations -->
   <data name="Add New Item" xml:space="preserve">
     <value>Neuen Gegenstand hinzufügen</value>
     <comment>Add New Item dialog title</comment>
@@ -589,7 +573,6 @@
     <value>Menge: </value>
     <comment>Quantity label</comment>
   </data>
-  <!-- Item Page Translations -->
   <data name="Description" xml:space="preserve">
     <value>Beschreibung</value>
     <comment>Description field label</comment>
@@ -854,10 +837,6 @@
     <value>Teleport zum nächsten Dorf</value>
     <comment>Teleport to the Nearest town field label</comment>
   </data>
-  <data name="World" xml:space="preserve">
-    <value>Welt</value>
-    <comment>World field label</comment>
-  </data>
   <data name="Position (X, Y, Z)" xml:space="preserve">
     <value>Position (X, Y, Z)</value>
     <comment>Position field label</comment>
@@ -930,7 +909,6 @@
     <value>Felder filtern</value>
     <comment>Filter Fields label</comment>
   </data>
-  <!-- Exchanger Page Translations -->
   <data name="Item ID" xml:space="preserve">
     <value>Gegenstands-ID</value>
     <comment>Item ID field label</comment>
@@ -939,7 +917,6 @@
     <value>T</value>
     <comment>T field label</comment>
   </data>
-  <!-- Personalization Page Translations -->
   <data name="App theme" xml:space="preserve">
     <value>App-Design</value>
     <comment>App theme label</comment>
@@ -999,5 +976,8 @@
   <data name="Custom" xml:space="preserve">
     <value>Benutzerdefiniert</value>
     <comment>Custom option</comment>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value />
   </data>
 </root>
