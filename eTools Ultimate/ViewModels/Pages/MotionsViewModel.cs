@@ -253,19 +253,22 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
-        private void Save()
+        private async Task Save()
         {
-            HashSet<string> stringIdentifiers = [];
-            foreach (Motion motion in MotionsService.Instance.Motions)
-            {
-                stringIdentifiers.Add(motion.Prop.SzName);
-                stringIdentifiers.Add(motion.Prop.SzDesc);
-            }
-
             try
             {
-                MotionsService.Instance.Save();
-                StringsService.Instance.Save(Settings.Instance.MotionsTxtFilePath ?? Settings.Instance.DefaultMotionsTxtFilePath, [.. stringIdentifiers]);
+                await Task.Run(() =>
+                {
+                    HashSet<string> stringIdentifiers = [];
+                    foreach (Motion motion in MotionsService.Instance.Motions)
+                    {
+                        stringIdentifiers.Add(motion.Prop.SzName);
+                        stringIdentifiers.Add(motion.Prop.SzDesc);
+                    }
+
+                    MotionsService.Instance.Save();
+                    StringsService.Instance.Save(Settings.Instance.MotionsTxtFilePath ?? Settings.Instance.DefaultMotionsTxtFilePath, [.. stringIdentifiers]);
+                });
 
                 snackbarService.Show(
                     title: "Motions saved",
@@ -274,7 +277,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                     icon: null,
                     timeout: TimeSpan.FromSeconds(3)
                     );
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 snackbarService.Show(
                     title: "An error has occured while saving",
@@ -359,7 +363,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 fileExtension is null ||
                 fileName is null ||
                 !directoryPath.Equals(initialDirectoryPath, StringComparison.OrdinalIgnoreCase) ||
-                !fileExtension.Equals(".dds")) 
+                !fileExtension.Equals(".dds"))
                 return;
 
             motion.Prop.SzIconName = fileName;
