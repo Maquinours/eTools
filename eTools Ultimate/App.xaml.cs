@@ -61,6 +61,8 @@ namespace eTools_Ultimate
                 // Service for handling snackbar notifications
                 services.AddSingleton<ISnackbarService, SnackbarService>();
 
+                services.AddSingleton<AppConfigService>();
+
                 // Splash screen
                 services.AddSingleton<eTools_Ultimate.Views.Windows.SplashScreen>();
                 services.AddSingleton<SplashScreenViewModel>();
@@ -130,6 +132,8 @@ namespace eTools_Ultimate
                 {
                     b.FromResource<Translations>(new("fr-FR"));
                     b.FromResource<Translations>(new("de-DE"));
+                    if(eTools_Ultimate.Properties.Settings.Default.Language != "Default")
+                        b.SetCulture(new(eTools_Ultimate.Properties.Settings.Default.Language));
                 });
             }).Build();
 

@@ -60,10 +60,14 @@
                         <ui:TextBlock Grid.Row="1" Text="{i18n:StringLocalizer 'Choose your preferred language'}" />
                     </Grid>
                 </ui:CardControl.Header>
-                <ComboBox MinWidth="200">
-                    <ComboBoxItem Content="{i18n:StringLocalizer 'English (Default)'}" IsSelected="True" />
-                    <ComboBoxItem Content="{i18n:StringLocalizer 'German'}" />
-                    <ComboBoxItem Content="{i18n:StringLocalizer 'French'}" />
+                <ComboBox
+                    MinWidth="200"
+                    SelectedValue="{Binding AppConfigService.Language, Mode=TwoWay}"
+                    SelectedValuePath="Tag">
+                    <ComboBoxItem Content="{Binding DefaultCultureOptionLabel}" Tag="Default" />
+                    <ComboBoxItem Content="{i18n:StringLocalizer 'English'}" Tag="en-EN" />
+                    <ComboBoxItem Content="{i18n:StringLocalizer 'German'}" Tag="de-DE" />
+                    <ComboBoxItem Content="{i18n:StringLocalizer 'French'}" Tag="fr-FR" />
                 </ComboBox>
             </ui:CardControl>
 
