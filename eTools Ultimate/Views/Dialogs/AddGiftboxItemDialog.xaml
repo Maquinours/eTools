@@ -57,7 +57,7 @@
                         <TextBlock Style="{StaticResource LabelStyle}" Text="{i18n:StringLocalizer 'Item'}" />
                         <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                             <ui:SymbolIcon.ToolTip>
-                                <ToolTip Content="Item that should be added in the giftbox" />
+                                <ToolTip Content="{i18n:StringLocalizer 'Item that should be added in the giftbox'}" />
                             </ui:SymbolIcon.ToolTip>
                         </ui:SymbolIcon>
                     </StackPanel>
@@ -142,7 +142,7 @@
                             <TextBlock Style="{StaticResource LabelStyle}" Text="{i18n:StringLocalizer 'Quantity'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Quantity of the item" />
+                                    <ToolTip Content="{i18n:StringLocalizer 'Quantity of the item'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
@@ -162,7 +162,7 @@
                             <TextBlock Style="{StaticResource LabelStyle}" Text="{i18n:StringLocalizer 'Probability (%)'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Probability percentage" />
+                                    <ToolTip Content="{i18n:StringLocalizer 'Probability percentage'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>

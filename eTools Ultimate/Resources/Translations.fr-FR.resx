@@ -1130,4 +1130,20 @@
   <data name="Search items..." xml:space="preserve">
     <value>Rechercher des objets...</value>
   </data>
+  <data name="Item that should be added in the giftbox" xml:space="preserve">
+    <value>Objet qui doit être ajouté dans la boîte cadeau</value>
+    <comment>Tooltip for item info icon in giftbox dialog</comment>
+  </data>
+  <data name="Quantity of the item" xml:space="preserve">
+    <value>Quantité de l'objet</value>
+    <comment>Tooltip for quantity info icon in giftbox dialog</comment>
+  </data>
+  <data name="Probability percentage" xml:space="preserve">
+    <value>Pourcentage de probabilité</value>
+    <comment>Tooltip for probability info icon in giftbox dialog</comment>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Supprimer</value>
+    <comment>Remove button tooltip</comment>
+  </data>
 </root>
