@@ -1,52 +1,48 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using System.Windows.Media;
+using Wpf.Ui.Abstractions.Controls;
 using Wpf.Ui.Appearance;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class PersonalizationViewModel : ObservableObject
+    public partial class PersonalizationViewModel: ObservableObject, INavigationAware
     {
-        [ObservableProperty]
-        private bool _isLightTheme;
+        private bool _isInitialized = false;
 
         [ObservableProperty]
-        private bool _isDarkTheme;
+        private ApplicationTheme _currentApplicationTheme = ApplicationTheme.Unknown;
 
-        [ObservableProperty]
-        private bool _isCompactMode;
-
-        public PersonalizationViewModel()
+        public Task OnNavigatedToAsync()
         {
-            // Initialize theme based on current system theme
-            ApplicationTheme currentTheme = ApplicationThemeManager.GetAppTheme();
-            IsDarkTheme = currentTheme == ApplicationTheme.Dark;
-            IsLightTheme = currentTheme == ApplicationTheme.Light;
-            
-            // Standard-Werte für andere Einstellungen
-            IsCompactMode = false;
+            if (!_isInitialized)
+                InitializeViewModel();
+
+            return Task.CompletedTask;
         }
 
-        [RelayCommand]
-        private void OnChangeTheme(string parameter)
+        public Task OnNavigatedFromAsync() => Task.CompletedTask;
+
+        partial void OnCurrentApplicationThemeChanged(ApplicationTheme oldValue, ApplicationTheme newValue)
         {
-            switch (parameter)
+            ApplicationThemeManager.Apply(newValue);
+        }
+
+        private void InitializeViewModel()
+        {
+            CurrentApplicationTheme = ApplicationThemeManager.GetAppTheme();
+
+            ApplicationThemeManager.Changed += OnThemeChanged;
+
+            _isInitialized = true;
+        }
+
+        private void OnThemeChanged(ApplicationTheme currentApplicationTheme, Color systemAccent)
+        {
+            // Update the theme if it has been changed elsewhere than in the settings.
+            if (CurrentApplicationTheme != currentApplicationTheme)
             {
-                case "theme_light":
-                    if (!IsLightTheme)
-                    {
-                        IsLightTheme = true;
-                        IsDarkTheme = false;
-                        ApplicationThemeManager.Apply(ApplicationTheme.Light);
-                    }
-                    break;
-                case "theme_dark":
-                    if (!IsDarkTheme)
-                    {
-                        IsDarkTheme = true;
-                        IsLightTheme = false;
-                        ApplicationThemeManager.Apply(ApplicationTheme.Dark);
-                    }
-                    break;
+                CurrentApplicationTheme = currentApplicationTheme;
             }
         }
     }
