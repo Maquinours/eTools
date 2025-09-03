@@ -135,7 +135,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             catch (Exception ex)
             {
                 snackbarService.Show(
-                    title: "An error has occured while saving texts",
+                    title: "An error has occured while saving texts.",
                     message: ex.Message,
                     appearance: ControlAppearance.Danger,
                     icon: null,
