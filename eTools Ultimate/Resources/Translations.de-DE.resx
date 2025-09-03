@@ -978,6 +978,173 @@
     <comment>Custom option</comment>
   </data>
   <data name="Close" xml:space="preserve">
-    <value />
+    <value>Schließen</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="Item that should be added in the giftbox" xml:space="preserve">
+    <value>Gegenstand, der in der Geschenkbox hinzugefügt werden soll</value>
+    <comment>Tooltip for item info icon in giftbox dialog</comment>
+  </data>
+  <data name="Quantity of the item" xml:space="preserve">
+    <value>Menge des Gegenstands</value>
+    <comment>Tooltip for quantity info icon in giftbox dialog</comment>
+  </data>
+  <data name="Probability percentage" xml:space="preserve">
+    <value>Wahrscheinlichkeitsprozentsatz</value>
+    <comment>Tooltip for probability info icon in giftbox dialog</comment>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Entfernen</value>
+    <comment>Remove button tooltip</comment>
+  </data>
+  <data name="Search items..." xml:space="preserve">
+    <value>Gegenstände suchen...</value>
+    <comment>Search items placeholder text</comment>
+  </data>
+  <data name="Basic Information" xml:space="preserve">
+    <value>Grundinformationen</value>
+    <comment>Basic Information section header</comment>
+  </data>
+  <data name="Grade (Class Stage)" xml:space="preserve">
+    <value>Grad (Klassenstufe)</value>
+    <comment>Grade (Class Stage) field label</comment>
+  </data>
+  <data name="1st Grade" xml:space="preserve">
+    <value>1. Grad</value>
+    <comment>1st Grade option</comment>
+  </data>
+  <data name="2nd Grade" xml:space="preserve">
+    <value>2. Grad</value>
+    <comment>2nd Grade option</comment>
+  </data>
+  <data name="3rd Grade" xml:space="preserve">
+    <value>3. Grad</value>
+    <comment>3rd Grade option</comment>
+  </data>
+  <data name="Job (Required Class)" xml:space="preserve">
+    <value>Beruf (Erforderliche Klasse)</value>
+    <comment>Job (Required Class) field label</comment>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Alle</value>
+    <comment>All option</comment>
+  </data>
+  <data name="Warrior" xml:space="preserve">
+    <value>Krieger</value>
+    <comment>Warrior option</comment>
+  </data>
+  <data name="Magician" xml:space="preserve">
+    <value>Magier</value>
+    <comment>Magician option</comment>
+  </data>
+  <data name="Archer" xml:space="preserve">
+    <value>Bogenschütze</value>
+    <comment>Archer option</comment>
+  </data>
+  <data name="Acrobat" xml:space="preserve">
+    <value>Akrobat</value>
+    <comment>Acrobat option</comment>
+  </data>
+  <data name="Secondary Type" xml:space="preserve">
+    <value>Sekundärer Typ</value>
+    <comment>Secondary Type field label</comment>
+  </data>
+  <data name="Passive" xml:space="preserve">
+    <value>Passiv</value>
+    <comment>Passive option</comment>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Aktiv</value>
+    <comment>Active option</comment>
+  </data>
+  <data name="Buff" xml:space="preserve">
+    <value>Verstärkung</value>
+    <comment>Buff option</comment>
+  </data>
+  <data name="Debuff" xml:space="preserve">
+    <value>Schwächung</value>
+    <comment>Debuff option</comment>
+  </data>
+  <data name="Maximum Level" xml:space="preserve">
+    <value>Maximales Level</value>
+    <comment>Maximum Level field label</comment>
+  </data>
+  <data name="Combat Details" xml:space="preserve">
+    <value>Kampfdetails</value>
+    <comment>Combat Details section header</comment>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Keine</value>
+    <comment>None option</comment>
+  </data>
+  <data name="Sword" xml:space="preserve">
+    <value>Schwert</value>
+    <comment>Sword option</comment>
+  </data>
+  <data name="Axe" xml:space="preserve">
+    <value>Axt</value>
+    <comment>Axe option</comment>
+  </data>
+  <data name="Bow" xml:space="preserve">
+    <value>Bogen</value>
+    <comment>Bow option</comment>
+  </data>
+  <data name="Staff" xml:space="preserve">
+    <value>Stab</value>
+    <comment>Staff option</comment>
+  </data>
+  <data name="Normal" xml:space="preserve">
+    <value>Normal</value>
+    <comment>Normal option</comment>
+  </data>
+  <data name="AOE" xml:space="preserve">
+    <value>Fläche</value>
+    <comment>AOE option</comment>
+  </data>
+  <data name="Heal" xml:space="preserve">
+    <value>Heilung</value>
+    <comment>Heal option</comment>
+  </data>
+  <data name="Self" xml:space="preserve">
+    <value>Selbst</value>
+    <comment>Self option</comment>
+  </data>
+  <data name="Single Target" xml:space="preserve">
+    <value>Einzelziel</value>
+    <comment>Single Target option</comment>
+  </data>
+  <data name="Party" xml:space="preserve">
+    <value>Gruppe</value>
+    <comment>Party option</comment>
+  </data>
+  <data name="Enemy Party" xml:space="preserve">
+    <value>Feindliche Gruppe</value>
+    <comment>Enemy Party option</comment>
+  </data>
+  <data name="Anytime" xml:space="preserve">
+    <value>Jederzeit</value>
+    <comment>Anytime option</comment>
+  </data>
+  <data name="In Combat" xml:space="preserve">
+    <value>Im Kampf</value>
+    <comment>In Combat option</comment>
+  </data>
+  <data name="Out of Combat" xml:space="preserve">
+    <value>Außerhalb des Kampfes</value>
+    <comment>Out of Combat option</comment>
+  </data>
+  <data name="HP below 50%" xml:space="preserve">
+    <value>LP unter 50%</value>
+    <comment>HP below 50% option</comment>
+  </data>
+  <data name="HP below 30%" xml:space="preserve">
+    <value>LP unter 30%</value>
+    <comment>HP below 30% option</comment>
+  </data>
+  <data name="AOE Target" xml:space="preserve">
+    <value>Flächenziel</value>
+    <comment>AOE Target option</comment>
   </data>
 </root>

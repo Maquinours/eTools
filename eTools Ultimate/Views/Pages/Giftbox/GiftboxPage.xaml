@@ -372,23 +372,13 @@
                         <DataGridTemplateColumn Width="Auto" Header="{i18n:StringLocalizer 'Actions'}">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <ui:Button
-                                            Margin="0,0,4,0"
-                                            Padding="8"
-                                            Appearance="Secondary"
-                                            Command="{Binding DataContext.EditGiftboxItemCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                            CommandParameter="{Binding}"
-                                            Icon="{ui:SymbolIcon Symbol=Edit24}"
-                                            ToolTip="{i18n:StringLocalizer 'Edit'}" />
-                                        <ui:Button
-                                            Padding="8"
-                                            Appearance="Danger"
-                                            Command="{Binding DataContext.RemoveGiftboxItemCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                            CommandParameter="{Binding}"
-                                            Icon="{ui:SymbolIcon Symbol=Delete24}"
-                                            ToolTip="{i18n:StringLocalizer 'Remove'}" />
-                                    </StackPanel>
+                                    <ui:Button
+                                        Padding="8"
+                                        Appearance="Danger"
+                                        Command="{Binding DataContext.RemoveGiftboxItemCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                        CommandParameter="{Binding}"
+                                        Icon="{ui:SymbolIcon Symbol=Delete24}"
+                                        ToolTip="{i18n:StringLocalizer 'Remove'}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
