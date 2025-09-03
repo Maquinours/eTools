@@ -20,7 +20,7 @@ public class TextAddedEventArgs(Text text)
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class TextClientViewModel(IContentDialogService contentDialogService) : ObservableObject, INavigationAware
+    public partial class TextClientViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -99,7 +99,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 }
                 );
 
-            if(result == ContentDialogResult.Primary)
+            if (result == ContentDialogResult.Primary)
                 TextsService.Instance.RemoveText(text);
         }
 
@@ -107,6 +107,41 @@ namespace eTools_Ultimate.ViewModels.Pages
         private void OpenColorPicker()
         {
             IsColorPickerOpened = true;
+        }
+
+        [RelayCommand]
+        private async Task Save()
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    HashSet<string> stringIdentifiers = [];
+                    foreach (Text text in TextsService.Instance.Texts)
+                        stringIdentifiers.Add(text.Prop.SzName);
+
+                    TextsService.Instance.Save();
+                    StringsService.Instance.Save(Settings.Instance.TextsTxtFilePath ?? Settings.Instance.DefaultTextsTxtFilePath, [.. stringIdentifiers]);
+                });
+
+                snackbarService.Show(
+                    title: "Texts saved",
+                    message: "Texts have been successfully saved.",
+                    appearance: ControlAppearance.Success,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+            catch (Exception ex)
+            {
+                snackbarService.Show(
+                    title: "An error has occured while saving texts",
+                    message: ex.Message,
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
         }
     }
 }

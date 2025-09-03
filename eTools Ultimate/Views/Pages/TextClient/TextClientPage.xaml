@@ -4,11 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:viewmodels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
-    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     Title="TextClientPage"
     d:DataContext="{d:DesignInstance viewmodels:TextClientViewModel,
                                      IsDesignTimeCreatable=False}"
@@ -196,7 +196,10 @@
                     FontWeight="Bold"
                     Text="{i18n:StringLocalizer 'Text Editor'}" />
 
-                <StackPanel Grid.Column="1" Margin="0,0,10,0" Orientation="Horizontal">
+                <StackPanel
+                    Grid.Column="1"
+                    Margin="0,0,10,0"
+                    Orientation="Horizontal">
                     <ui:Button Margin="0,0,0,0" ToolTip="{i18n:StringLocalizer 'Undo'}">
                         <ui:SymbolIcon Symbol="ArrowUndo24" />
                     </ui:Button>
@@ -205,7 +208,7 @@
                     </ui:Button>
                     <ui:Button
                         Margin="0,0,10,0"
-                        Click="SaveButton_Click"
+                        Command="{Binding SaveCommand}"
                         Content="{i18n:StringLocalizer 'Save'}" />
                     <ui:Button
                         Margin="0,0,10,0"
