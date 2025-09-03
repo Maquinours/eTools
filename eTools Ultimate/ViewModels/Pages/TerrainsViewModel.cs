@@ -10,11 +10,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using Wpf.Ui;
 using Wpf.Ui.Abstractions.Controls;
+using Wpf.Ui.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class TerrainsViewModel : ObservableObject, INavigationAware
+    public partial class TerrainsViewModel(ISnackbarService snackbarService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -62,11 +64,11 @@ namespace eTools_Ultimate.ViewModels.Pages
         private void TerrainItems_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             OnPropertyChanged(nameof(TerrainsView));
-            if(sender is not ObservableCollection<ITerrainItem> observableCollection)
+            if (sender is not ObservableCollection<ITerrainItem> observableCollection)
                 throw new InvalidOperationException("TerrainsViewModel::TerrainItems_CollectionChanged exception : sender is not an ObservableCollection<ITerrainItem>.");
-            foreach(ITerrainItem item in observableCollection)
+            foreach (ITerrainItem item in observableCollection)
             {
-                if(item is TerrainBrace terrainBrace)
+                if (item is TerrainBrace terrainBrace)
                 {
                     terrainBrace.Prop.PropertyChanged -= TerrainItem_PropertyChanged;
                     terrainBrace.Prop.PropertyChanged += TerrainItem_PropertyChanged;
@@ -83,7 +85,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         // TODO: this is not triggered, fix this bug
         private void TerrainItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 case nameof(TerrainBraceProp.Name):
                     OnPropertyChanged(nameof(TerrainsView));
@@ -110,6 +112,33 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
             else
                 throw new InvalidOperationException($"TerrainsViewModel::FilterItem exception : obj is not ITerrainItem, but {obj.GetType().Name}");
+        }
+
+        [RelayCommand]
+        private async Task Save()
+        {
+            try
+            {
+                await Task.Run(TerrainsService.Instance.Save);
+
+                snackbarService.Show(
+                    title: "Terrains saved",
+                    message: "Terrains have been successfully saved.",
+                    appearance: ControlAppearance.Success,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+            catch (Exception ex)
+            {
+                snackbarService.Show(
+                    title: "An error has occured while saving terrains.",
+                    message: ex.Message,
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
         }
     }
 }
