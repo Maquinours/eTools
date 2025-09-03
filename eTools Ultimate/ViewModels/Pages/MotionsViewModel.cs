@@ -281,7 +281,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             catch (Exception ex)
             {
                 snackbarService.Show(
-                    title: "An error has occured while saving",
+                    title: "An error has occured while saving motions.",
                     message: ex.Message,
                     appearance: ControlAppearance.Danger,
                     icon: null,
