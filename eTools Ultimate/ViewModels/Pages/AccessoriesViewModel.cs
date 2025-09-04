@@ -22,7 +22,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         public AccessoryAbilityOptionData Level { get; } = level;
     }
 
-    public partial class AccessoriesViewModel(IContentDialogService contentDialogService) : ObservableObject, INavigationAware
+    public partial class AccessoriesViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService) : ObservableObject, INavigationAware
     {
         public event EventHandler<LevelAddedEventArgs>? LevelAdded;
 
@@ -167,6 +167,33 @@ namespace eTools_Ultimate.ViewModels.Pages
             //    storyboard.Begin();
             //    AccessoryScrollViewer.ScrollToVerticalOffset(position.Y + AccessoryScrollViewer.VerticalOffset);
             //}, DispatcherPriority.Render);
+        }
+
+        [RelayCommand]
+        private async Task Save()
+        {
+            try
+            {
+                await Task.Run(AccessoriesService.Instance.Save);
+
+                snackbarService.Show(
+                    title: "Accessories saved",
+                    message: "Accessories have been successfully saved.",
+                    appearance: ControlAppearance.Success,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+            catch (Exception ex)
+            {
+                snackbarService.Show(
+                    title: "An error has occured while saving accessories.",
+                    message: ex.Message,
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
         }
     }
 }

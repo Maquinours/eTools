@@ -181,26 +181,6 @@ namespace eTools_Ultimate.Views.Pages.Accessory
             }, DispatcherPriority.Render);
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: Implement save functionality
-        }
-
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.AddAbilityOptionDataCommand.Execute(null);
-        }
-
-        private void DeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            // TODO: Implement delete functionality
-        }
-
-        private void VirtualizingGridView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            // Handle selection change if needed
-        }
-
         //private void InitializeSampleData()
         //{
         //    // Clear any existing items

@@ -4,19 +4,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages.Accessory"
-    xmlns:viewmodels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
+    xmlns:viewmodels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
     Title="AccessoryPage"
     d:DataContext="{d:DesignInstance viewmodels:AccessoriesViewModel,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="768"
     d:DesignWidth="1024"
-
+    Cursor=""
     ScrollViewer.CanContentScroll="False"
-    mc:Ignorable="d" Cursor="">
+    mc:Ignorable="d">
 
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -64,10 +64,9 @@
                     x:Name="AccessoriesListView"
                     Background="Transparent"
                     BorderThickness="0"
-                    ItemsSource="{Binding AccessoriesView}"
-                    SelectedIndex="0"
                     IsSynchronizedWithCurrentItem="True"
-                    SelectionChanged="VirtualizingGridView_SelectionChanged">
+                    ItemsSource="{Binding AccessoriesView}"
+                    SelectedIndex="0">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Background" Value="Transparent" />
@@ -165,7 +164,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                
+
 
 
                 <!--  Accessory Title  -->
@@ -174,7 +173,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    
+
                     <StackPanel Grid.Column="0" Margin="0,0,16,0">
                         <TextBlock
                             FontSize="24"
@@ -193,7 +192,7 @@
                             </TextBlock.Text>
                         </TextBlock>
                     </StackPanel>
-                    
+
                     <!--  Add and Delete Buttons top right  -->
                     <StackPanel
                         Grid.Column="1"
@@ -203,34 +202,31 @@
                         <ui:Button ToolTip="{i18n:StringLocalizer 'Undo'}">
                             <ui:SymbolIcon Symbol="ArrowUndo24" />
                         </ui:Button>
-                        <ui:Button
-                            Margin="10,0,10,0"
-                            ToolTip="{i18n:StringLocalizer 'Redo'}">
+                        <ui:Button Margin="10,0,10,0" ToolTip="{i18n:StringLocalizer 'Redo'}">
                             <ui:SymbolIcon Symbol="ArrowRedo24" />
                         </ui:Button>
                         <ui:Button
                             x:Name="SaveButton"
                             Margin="0,0,10,0"
-                            Click="SaveButton_Click"
+                            Command="{Binding SaveCommand}"
                             Content="{i18n:StringLocalizer 'Save'}" />
                         <ui:Button
                             x:Name="ExpertButton"
                             Margin="0,0,10,0"
                             Appearance="Secondary"
                             Content="{i18n:StringLocalizer 'Expert'}" />
-                        
+
                         <ui:Button
                             x:Name="AddButton"
                             Margin="0,0,10,0"
                             Background="#2F70AF"
-                            Click="AddButton_Click"
+                            Command="{Binding AddAbilityOptionDataCommand}"
                             Content="{i18n:StringLocalizer 'Add'}" />
                         <ui:Button
                             x:Name="DeleteButton"
                             Background="#FD292F"
-                            Foreground="White"
-                            Click="DeleteButton_Click"
-                            Content="{i18n:StringLocalizer 'Delete'}" />
+                            Content="{i18n:StringLocalizer 'Delete'}"
+                            Foreground="White" />
                     </StackPanel>
                 </Grid>
 
@@ -261,7 +257,8 @@
                                     Padding="16"
                                     BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                                     BorderThickness="1"
-                                    CornerRadius="6" Tag="{Binding}">
+                                    CornerRadius="6"
+                                    Tag="{Binding}">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
@@ -316,9 +313,9 @@
                                                         <ui:AutoSuggestBox
                                                             Grid.Column="0"
                                                             Margin="0,0,12,0"
-                                                            FontSize="14"
                                                             Background="{DynamicResource ControlFillColorDefaultBrush}"
                                                             BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                                            FontSize="14"
                                                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                             OriginalItemsSource="{Binding DataContext.PossibleDstValues, RelativeSource={RelativeSource AncestorType=Page}}"
                                                             Text="{Binding DestIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
@@ -369,9 +366,9 @@
                                             CommandParameter="{Binding}">
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock
+                                                    Margin="0,0,4,0"
                                                     VerticalAlignment="Center"
                                                     FontSize="12"
-                                                    Margin="0,0,4,0"
                                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                     Text="➕" />
                                                 <TextBlock
