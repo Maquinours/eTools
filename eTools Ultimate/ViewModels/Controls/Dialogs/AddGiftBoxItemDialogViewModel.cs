@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
         private string _searchText = string.Empty;
 
         [ObservableProperty]
-        private ICollectionView _itemsView = new ListCollectionView(ItemsService.Instance.Items);
+        private ICollectionView _itemsView = new ListCollectionView(App.Services.GetRequiredService<ItemsService>().Items);
 
         [ObservableProperty]
         private int _quantity = 1;

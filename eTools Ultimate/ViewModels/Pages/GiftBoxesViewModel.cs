@@ -20,14 +20,14 @@ using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class GiftBoxesViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService) : ObservableObject, INavigationAware
+    public partial class GiftBoxesViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, GiftBoxesService giftBoxesService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
         private string _searchText = string.Empty;
 
         [ObservableProperty]
-        private ICollectionView _giftboxesView = CollectionViewSource.GetDefaultView(GiftBoxesService.Instance.GiftBoxes);
+        private ICollectionView _giftboxesView = CollectionViewSource.GetDefaultView(giftBoxesService.GiftBoxes);
 
         public string SearchText
         {
@@ -178,7 +178,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             try
             {
-                await Task.Run(GiftBoxesService.Instance.Save);
+                await Task.Run(giftBoxesService.Save);
 
                 snackbarService.Show(
                     title: "GiftBoxes saved",

@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -57,29 +58,39 @@ namespace eTools_Ultimate.Models
 
         public string Identifier
         {
-            get => Script.NumberToString(_prop.Id, DefinesService.Instance.ReversedMusicDefines);
+            get => Script.NumberToString(_prop.Id, App.Services.GetRequiredService<DefinesService>().ReversedMusicDefines);
             set
             {
                 if (Script.TryGetNumberFromString(value, out int result))
                     Prop.Id = result;
             }
         }
-        public string FilePath => $"{Settings.Instance.ClientFolderPath}{Prop.SzMusicFileName}";
+        public string FilePath
+        {
+            get
+            {
+                Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+                return $"{settings.ClientFolderPath}{Prop.SzMusicFileName}";
+            }
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public Music(MusicProp prop)
         {
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
             _prop = prop;
 
             Prop.PropertyChanged += Prop_PropertyChanged;
-            Settings.Instance.PropertyChanged += Settings_PropertyChanged;
+            settings.PropertyChanged += Settings_PropertyChanged;
         }
 
         public void Dispose()
         {
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
             Prop.PropertyChanged -= Prop_PropertyChanged;
-            Settings.Instance.PropertyChanged -= Settings_PropertyChanged;
+            settings.PropertyChanged -= Settings_PropertyChanged;
         }
 
         private void Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)

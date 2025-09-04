@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,8 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Services
 {
-    internal class MotionsService
+    public class MotionsService(SettingsService settingsService)
     {
-        private static readonly Lazy<MotionsService> _instance = new(() => new());
-        public static MotionsService Instance => _instance.Value;
-
         private readonly ObservableCollection<Motion> _motions = [];
         public ObservableCollection<Motion> Motions => this._motions;
 
@@ -31,11 +29,9 @@ namespace eTools_Ultimate.Services
         {
             this.ClearMotions();
 
-            Settings settings = Settings.Instance;
-
             using (Script script = new())
             {
-                string filePath = settings.MotionsPropFilePath ?? settings.DefaultMotionsPropFilePath;
+                string filePath = settingsService.Settings.MotionsPropFilePath ?? settingsService.Settings.DefaultMotionsPropFilePath;
                 script.Load(filePath);
                 while (true)
                 {
@@ -61,7 +57,7 @@ namespace eTools_Ultimate.Services
 
         public void Save()
         {
-            Settings settings = Settings.Instance;
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
 
             string filePath = settings.MotionsPropFilePath ?? settings.DefaultMotionsPropFilePath;
 

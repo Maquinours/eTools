@@ -11,11 +11,8 @@ using System.IO;
 
 namespace eTools_Ultimate.Services
 {
-    internal class StringsService
+    public class StringsService(SettingsService settingsService)
     {
-        private static readonly Lazy<StringsService> _instance = new(() => new StringsService());
-        public static StringsService Instance => _instance.Value;
-
         private readonly ObservableDictionary<string, string> _strings = [];
         public ObservableDictionary<string, string> Strings => _strings;
 
@@ -23,16 +20,15 @@ namespace eTools_Ultimate.Services
         {
             this.Strings.Clear();
 
-            Settings settings = Settings.Instance;
             string[] filesList = 
                 [
-                settings.PropMoverTxtFilePath ?? settings.DefaultPropMoverTxtFilePath,
-                settings.PropItemTxtFilePath ?? settings.DefaultPropItemTxtFilePath,
-                settings.PropSkillTxtFilePath ?? settings.DefaultPropSkillTxtFilePath,
-                settings.TextsTxtFilePath ?? settings.DefaultTextsTxtFilePath,
-                settings.CharactersStringsFilePath ?? settings.DefaultCharactersStringsFilePath,
-                settings.HonorsTxtFilePath ?? settings.DefaultHonorsTxtFilePath,
-                settings.MotionsTxtFilePath ?? settings.DefaultMotionsTxtFilePath
+                settingsService.Settings.PropMoverTxtFilePath ?? settingsService.Settings.DefaultPropMoverTxtFilePath,
+                settingsService.Settings.PropItemTxtFilePath ?? settingsService.Settings.DefaultPropItemTxtFilePath,
+                settingsService.Settings.PropSkillTxtFilePath ?? settingsService.Settings.DefaultPropSkillTxtFilePath,
+                settingsService.Settings.TextsTxtFilePath ?? settingsService.Settings.DefaultTextsTxtFilePath,
+                settingsService.Settings.CharactersStringsFilePath ?? settingsService.Settings.DefaultCharactersStringsFilePath,
+                settingsService.Settings.HonorsTxtFilePath ?? settingsService.Settings.DefaultHonorsTxtFilePath,
+                settingsService.Settings.MotionsTxtFilePath ?? settingsService.Settings.DefaultMotionsTxtFilePath
                 ];
 
             foreach (string filePath in filesList)

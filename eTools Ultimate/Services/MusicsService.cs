@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +9,8 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Services
 {
-    public class MusicsService
+    public class MusicsService(SettingsService settingsService)
     {
-        private static readonly Lazy<MusicsService> _instance = new(() => new());
-        public static MusicsService Instance => _instance.Value;
-
         public List<Music> Musics = [];
 
         private NAudio.Wave.WaveOutEvent _waveOut = new();
@@ -28,7 +26,7 @@ namespace eTools_Ultimate.Services
         {
             Clear();
 
-            string filePath = Settings.Instance.MusicsConfigFilePath ?? Settings.Instance.DefaultMusicsConfigFilePath;
+            string filePath = settingsService.Settings.MusicsConfigFilePath ?? settingsService.Settings.DefaultMusicsConfigFilePath;
 
             using Script script = new();
             script.Load(filePath);

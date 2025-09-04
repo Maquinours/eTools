@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,7 +17,7 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
         private string _searchText = string.Empty;
 
         [ObservableProperty]
-        private ICollectionView _moversView = new ListCollectionView(MoversService.Instance.Movers);
+        private ICollectionView _moversView = new ListCollectionView(App.Services.GetRequiredService<MoversService>().Movers);
 
         public string SearchText
         {

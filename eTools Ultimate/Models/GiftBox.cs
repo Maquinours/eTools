@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -79,7 +80,7 @@ namespace eTools_Ultimate.Models
 
         public Item? Item
         {
-            get => ItemsService.Instance.Items.Where(x => x.Id == Prop.DwItem).FirstOrDefault();
+            get => App.Services.GetRequiredService<ItemsService>().Items.Where(x => x.Id == Prop.DwItem).FirstOrDefault();
         }
 
         public double ProbabilityPercent 
@@ -165,7 +166,7 @@ namespace eTools_Ultimate.Models
         public GiftBoxProp Prop => this._prop;
         public ObservableCollection<GiftBoxItem> Items => this._items;
 
-        public Item? Item => ItemsService.Instance.Items.Where(x => x.Id == Prop.DwItem).FirstOrDefault();
+        public Item? Item => App.Services.GetRequiredService<ItemsService>().Items.Where(x => x.Id == Prop.DwItem).FirstOrDefault();
         public int TotalProbability => this.Items.Sum(x => x.Prop.DwProbability);
         public double TotalProbabilityPercent => Math.Round(this.TotalProbability / 1_000_000d * 100, 2);
 

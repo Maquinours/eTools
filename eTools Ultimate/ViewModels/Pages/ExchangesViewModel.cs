@@ -12,14 +12,14 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class ExchangesViewModel : ObservableObject, INavigationAware
+    public partial class ExchangesViewModel(ExchangesService exchangesService, DefinesService definesService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
         private string _searchText = string.Empty;
 
         [ObservableProperty]
-        private ICollectionView _exchangesView = CollectionViewSource.GetDefaultView(ExchangesService.Instance.Exchanges);
+        private ICollectionView _exchangesView = CollectionViewSource.GetDefaultView(exchangesService.Exchanges);
 
         public string SearchText
         {
@@ -56,7 +56,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (obj is not Exchange exchange) return false;
             if (string.IsNullOrEmpty(this.SearchText)) return true;
-            return DefinesService.Instance.Defines.FirstOrDefault(x => x.Key.StartsWith("MMI_") && x.Value == exchange.MmiId).Key.Contains(this.SearchText, StringComparison.OrdinalIgnoreCase);
+            return definesService.Defines.FirstOrDefault(x => x.Key.StartsWith("MMI_") && x.Value == exchange.MmiId).Key.Contains(this.SearchText, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

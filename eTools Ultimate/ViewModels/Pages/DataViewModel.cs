@@ -9,16 +9,16 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class DataViewModel : ObservableObject, INavigationAware
+    public partial class DataViewModel(ItemsService itemsService, DefinesService definesService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
         private string _searchText = string.Empty;
 
         [ObservableProperty]
-        private ICollectionView _itemsView = CollectionViewSource.GetDefaultView(ItemsService.Instance.Items);
+        private ICollectionView _itemsView = CollectionViewSource.GetDefaultView(itemsService.Items);
 
-        public List<KeyValuePair<int, string>> ItemIdentifiers => DefinesService.Instance.ReversedItemDefines.ToList();
+        public List<KeyValuePair<int, string>> ItemIdentifiers => definesService.ReversedItemDefines.ToList();
 
         public string SearchText
         {

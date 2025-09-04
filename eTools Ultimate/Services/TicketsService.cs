@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
 using System.Collections.Generic;
@@ -10,11 +11,8 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Services
 {
-    public class TicketsService
+    public class TicketsService(SettingsService settingsService)
     {
-        private static readonly Lazy<TicketsService> _instance = new(() => new());
-        public static TicketsService Instance => _instance.Value;
-
         private readonly ObservableCollection<Ticket> _tickets = [];
         public ObservableCollection<Ticket> Tickets => this._tickets;
 
@@ -29,10 +27,9 @@ namespace eTools_Ultimate.Services
         {
             ClearTickets();
 
-            Settings settings = Settings.Instance;
             using (Script script = new())
             {
-                string filePath = settings.TicketsPropFilePath ?? settings.DefaultTicketsPropFilePath;
+                string filePath = settingsService.Settings.TicketsPropFilePath ?? settingsService.Settings.DefaultTicketsPropFilePath;
                 script.Load(filePath);
 
                 while (true)

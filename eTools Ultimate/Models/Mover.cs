@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -132,8 +133,8 @@ namespace eTools_Ultimate.Models
         private int _nChaotic = nChaotic;
         private int _dwUseable = dwUseable;
         private int _dwActionRadius = dwActionRadius;
-        private long _dwAtkMin = !Settings.Instance.Mover64BitAtk ? Math.Clamp(dwAtkMin, int.MinValue, int.MaxValue) : dwAtkMin;
-        private long _dwAtkMax = !Settings.Instance.Mover64BitAtk ? Math.Clamp(dwAtkMax, int.MinValue, int.MaxValue) : dwAtkMax;
+        private long _dwAtkMin = !App.Services.GetRequiredService<SettingsService>().Settings.Mover64BitAtk ? Math.Clamp(dwAtkMin, int.MinValue, int.MaxValue) : dwAtkMin;
+        private long _dwAtkMax = !App.Services.GetRequiredService<SettingsService>().Settings.Mover64BitAtk ? Math.Clamp(dwAtkMax, int.MinValue, int.MaxValue) : dwAtkMax;
         private int _dwAtk1 = dwAtk1;
         private int _dwAtk2 = dwAtk2;
         private int _dwAtk3 = dwAtk3;
@@ -147,7 +148,7 @@ namespace eTools_Ultimate.Models
         private int _dwLegRate = dwLegRate;
         private int _dwAttackSpeed = dwAttackSpeed;
         private int _dwReAttackDelay = dwReAttackDelay;
-        private long _dwAddHp = !Settings.Instance.Mover64BitHp ? Math.Clamp(dwAddHp, int.MinValue, int.MaxValue) : dwAddHp;
+        private long _dwAddHp = !App.Services.GetRequiredService<SettingsService>().Settings.Mover64BitHp ? Math.Clamp(dwAddHp, int.MinValue, int.MaxValue) : dwAddHp;
         private int _dwAddMp = dwAddMp;
         private int _dwNaturalArmor = dwNaturalArmor;
         private int _nAbrasion = nAbrasion;
@@ -208,7 +209,7 @@ namespace eTools_Ultimate.Models
                 if (_szName != value)
                 {
                     string oldValue = this._szName;
-                    StringsService stringsService = StringsService.Instance;
+                    StringsService stringsService = App.Services.GetRequiredService<StringsService>();
                     if (!stringsService.Strings.ContainsKey(value))
                         stringsService.GenerateNewString(value);
                     _szName = value;
@@ -239,9 +240,11 @@ namespace eTools_Ultimate.Models
             get => _dwAtkMin; 
             set
             {
+                Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
                 // If mover is configured to use 64 bit attack, we can set it directly, otherwise we limit it between int.MaxValue and int.MinValue
                 long val = value;
-                if (!Settings.Instance.Mover64BitAtk)
+                if (!settings.Mover64BitAtk)
                     val = Math.Clamp(val, int.MinValue, int.MaxValue);
                 SetValue(ref this._dwAtkMin, val);
             }
@@ -251,9 +254,10 @@ namespace eTools_Ultimate.Models
             get => _dwAtkMax;
             set 
             {
+                Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
                 // If mover is configured to use 64 bit attack, we can set it directly, otherwise we limit it between int.MaxValue and int.MinValue
                 long val = value;
-                if (!Settings.Instance.Mover64BitAtk)
+                if (!settings.Mover64BitAtk)
                     val = Math.Clamp(val, int.MinValue, int.MaxValue);
                 SetValue(ref this._dwAtkMax, val);
             } 
@@ -276,9 +280,10 @@ namespace eTools_Ultimate.Models
             get => _dwAddHp; 
             set
             {
+                Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
                 // If mover is configured to use 64 bit hp, we can set it directly, otherwise we limit it between int.MaxValue and int.MinValue
                 long val = value;
-                if(!Settings.Instance.Mover64BitHp)
+                if(!settings.Mover64BitHp)
                     val = Math.Clamp(val, int.MinValue, int.MaxValue);
                 SetValue(ref this._dwAddHp, val);
             }
@@ -429,42 +434,42 @@ namespace eTools_Ultimate.Models
 
         public string Identifier
         {
-            get => DefinesService.Instance.ReversedMoverDefines.TryGetValue(this.Id, out string? identifier) ? identifier : this.Id.ToString();
+            get => Script.NumberToString(Id, App.Services.GetRequiredService<DefinesService>().ReversedMoverDefines);
             set
             {
-                if (DefinesService.Instance.Defines.TryGetValue(value, out int val) || Int32.TryParse(value, out val))
-                    this.Id = val;
+                if (Script.TryGetNumberFromString(value, out int val))
+                    Id = val;
             }
         }
 
-        public string Name { get => StringsService.Instance.GetString(Prop.SzName); set { if (value != this.Name) { StringsService.Instance.ChangeStringValue(Prop.SzName, value); } } } // We don't notify changes cause ProjectStrings_CollectionChanged is already doing it
+        public string Name { get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName); set { if (value != this.Name) { App.Services.GetRequiredService<StringsService>().ChangeStringValue(Prop.SzName, value); } } } // We don't notify changes cause ProjectStrings_CollectionChanged is already doing it
 
         //public string ElementType { get => Project.GetInstance().GetElementNameById(Prop.EElementType); set { if (value != this.ElementType) { Prop.EElementType = Project.GetInstance().GetElementIdByName(value); } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
         //public MoverTypes Type { get => Project.GetInstance().GetMoverType(this); set { if (value != this.Type) { Project.GetInstance().SetMoverType(this, value); } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
 
         public string BelligerenceIdentifier
         {
-            get => DefinesService.Instance.ReversedBelligerenceDefines.TryGetValue(this.Prop.DwBelligerence, out string? identifier) ? identifier : this.Prop.DwBelligerence.ToString();
+            get => App.Services.GetRequiredService<DefinesService>().ReversedBelligerenceDefines.TryGetValue(this.Prop.DwBelligerence, out string? identifier) ? identifier : this.Prop.DwBelligerence.ToString();
             set
             {
-                if (DefinesService.Instance.Defines.TryGetValue(value, out int val) || Int32.TryParse(value, out val))
+                if (App.Services.GetRequiredService<DefinesService>().Defines.TryGetValue(value, out int val) || Int32.TryParse(value, out val))
                     this.Prop.DwBelligerence = val;
             }
         }
 
         public string AiIdentifier
         {
-            get => DefinesService.Instance.ReversedAiDefines.TryGetValue(this.Prop.DwAi, out string? identifier) ? identifier : this.Prop.DwAi.ToString();
+            get => App.Services.GetRequiredService<DefinesService>().ReversedAiDefines.TryGetValue(this.Prop.DwAi, out string? identifier) ? identifier : this.Prop.DwAi.ToString();
             set
             {
-                if (DefinesService.Instance.Defines.TryGetValue(value, out int val) || Int32.TryParse(value, out val))
+                if (App.Services.GetRequiredService<DefinesService>().Defines.TryGetValue(value, out int val) || Int32.TryParse(value, out val))
                     this.Prop.DwAi = val;
             }
         }
 
         public string SndDmg2Identifier
         {
-            get => Script.NumberToString(Prop.DwSndDmg2, DefinesService.Instance.ReversedSoundDefines);
+            get => Script.NumberToString(Prop.DwSndDmg2, App.Services.GetRequiredService<DefinesService>().ReversedSoundDefines);
             set
             {
                 if (Script.TryGetNumberFromString(value, out int val))
@@ -474,7 +479,7 @@ namespace eTools_Ultimate.Models
 
         public string SndIdle1Identifier
         {
-            get => Script.NumberToString(Prop.DwSndIdle1, DefinesService.Instance.ReversedSoundDefines);
+            get => Script.NumberToString(Prop.DwSndIdle1, App.Services.GetRequiredService<DefinesService>().ReversedSoundDefines);
             set
             {
                 if (Script.TryGetNumberFromString(value, out int val))
@@ -482,9 +487,9 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public Sound? SndDmg2 => SoundsService.Instance.Sounds.FirstOrDefault(s => s.Prop.Id == this.Prop.DwSndDmg2);
+        public Sound? SndDmg2 => App.Services.GetRequiredService<SoundsService>().Sounds.FirstOrDefault(s => s.Prop.Id == this.Prop.DwSndDmg2);
 
-        public Sound? SndIdle1 => SoundsService.Instance.Sounds.FirstOrDefault(s => s.Prop.Id == this.Prop.DwSndIdle1);
+        public Sound? SndIdle1 => App.Services.GetRequiredService<SoundsService>().Sounds.FirstOrDefault(s => s.Prop.Id == this.Prop.DwSndIdle1);
 
         public Mover(MoverProp prop, ModelElem? model)
         {
@@ -492,14 +497,14 @@ namespace eTools_Ultimate.Models
             _model = model;
 
             Prop.PropertyChanged += Prop_PropertyChanged;
-            StringsService.Instance.Strings.CollectionChanged += ProjectStrings_CollectionChanged;
+            App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged += ProjectStrings_CollectionChanged;
             // TODO: Add trigger if any sound is changed/added/deleted
         }
 
         public void Dispose()
         {
             Prop.PropertyChanged -= Prop_PropertyChanged;
-            StringsService.Instance.Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
+            App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
 
             GC.SuppressFinalize(this);
         }

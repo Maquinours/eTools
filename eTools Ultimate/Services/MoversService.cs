@@ -1,6 +1,7 @@
 ﻿using eTools_Ultimate.Exceptions;
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using SixLabors.ImageSharp.Metadata.Profiles.Exif;
 using System;
@@ -17,11 +18,8 @@ using System.Xml.Linq;
 
 namespace eTools_Ultimate.Services
 {
-    internal class MoversService
+    public class MoversService(ModelsService modelsService)
     {
-        private static readonly Lazy<MoversService> _instance = new(() => new MoversService());
-        public static MoversService Instance => _instance.Value;
-
         private readonly ObservableCollection<Mover> _movers = [];
         public ObservableCollection<Mover> Movers => this._movers;
 
@@ -34,7 +32,7 @@ namespace eTools_Ultimate.Services
         public static string GetNextStringIdentifier()
         {
             string stringStarter = "IDS_PROPMOVER_TXT_";
-            ObservableDictionary<string, string> strings = StringsService.Instance.Strings;
+            ObservableDictionary<string, string> strings = App.Services.GetRequiredService<StringsService>().Strings;
 
             int i = 0;
             while(true)
@@ -55,12 +53,13 @@ namespace eTools_Ultimate.Services
         {
             this.ClearMovers();
 
-            Settings settings = Settings.Instance;
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+            DefinesService definesService = App.Services.GetRequiredService<DefinesService>();
 
-            ObservableDictionary<string, string> strings = StringsService.Instance.Strings;
+            ObservableDictionary<string, string> strings = App.Services.GetRequiredService<StringsService>().Strings;
 
-            int moverModelType = DefinesService.Instance.Defines["OT_MOVER"];
-            ModelElem[] moverModels = ModelsService.Instance.GetModelsByType(moverModelType);
+            int moverModelType = definesService.Defines["OT_MOVER"];
+            ModelElem[] moverModels = modelsService.GetModelsByType(moverModelType);
             Dictionary<int, ModelElem> moverModelsDictionary = moverModels.ToDictionary(x => x.DwIndex, x => x); // used to get better performance
 
             using (Script script = new())
@@ -328,7 +327,10 @@ namespace eTools_Ultimate.Services
 
         public void Save()
         {
-            string filePath = Settings.Instance.PropMoverFilePath ?? Settings.Instance.DefaultPropMoverFilePath;
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+            DefinesService definesService = App.Services.GetRequiredService<DefinesService>();
+
+            string filePath = settings.PropMoverFilePath ?? settings.DefaultPropMoverFilePath;
 
             using StreamWriter writer = new(filePath, false, new UTF8Encoding(false));
 
@@ -338,11 +340,11 @@ namespace eTools_Ultimate.Services
             writer.WriteLine("// ========================================");
             foreach (MoverProp moverProp in Movers.Select(Mover => Mover.Prop))
             {
-                writer.Write(Script.NumberToString(moverProp.DwId, DefinesService.Instance.ReversedMoverDefines));
+                writer.Write(Script.NumberToString(moverProp.DwId, definesService.ReversedMoverDefines));
                 writer.Write("\t");
                 writer.Write(string.IsNullOrWhiteSpace(moverProp.SzName) ? @"""" : moverProp.SzName);
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwAi, DefinesService.Instance.ReversedAiDefines));
+                writer.Write(Script.NumberToString(moverProp.DwAi, definesService.ReversedAiDefines));
                 writer.Write("\t");
                 writer.Write(Script.NumberToString(moverProp.DwStr));
                 writer.Write("\t");
@@ -358,7 +360,7 @@ namespace eTools_Ultimate.Services
                 writer.Write("\t");
                 writer.Write(Script.NumberToString(moverProp.DwRace));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwBelligerence, DefinesService.Instance.ReversedBelligerenceDefines));
+                writer.Write(Script.NumberToString(moverProp.DwBelligerence, definesService.ReversedBelligerenceDefines));
                 writer.Write("\t");
                 writer.Write(Script.NumberToString(moverProp.DwGender));
                 writer.Write("\t");
@@ -368,7 +370,7 @@ namespace eTools_Ultimate.Services
                 writer.Write("\t");
                 writer.Write(Script.NumberToString(moverProp.DwSize));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwClass, DefinesService.Instance.ReversedRankDefines));
+                writer.Write(Script.NumberToString(moverProp.DwClass, definesService.ReversedRankDefines));
                 writer.Write("\t");
                 writer.Write(Script.NumberToString(moverProp.BIfParts));
                 writer.Write("\t");
@@ -382,13 +384,13 @@ namespace eTools_Ultimate.Services
                 writer.Write("\t");
                 writer.Write(Script.Int64ToString(moverProp.DwAtkMax));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwAtk1, DefinesService.Instance.ReversedItemDefines));
+                writer.Write(Script.NumberToString(moverProp.DwAtk1, definesService.ReversedItemDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwAtk2, DefinesService.Instance.ReversedItemDefines));
+                writer.Write(Script.NumberToString(moverProp.DwAtk2, definesService.ReversedItemDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwAtk3, DefinesService.Instance.ReversedItemDefines));
+                writer.Write(Script.NumberToString(moverProp.DwAtk3, definesService.ReversedItemDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwAtk4, DefinesService.Instance.ReversedItemDefines));
+                writer.Write(Script.NumberToString(moverProp.DwAtk4, definesService.ReversedItemDefines));
                 writer.Write("\t");
                 writer.Write(Script.FloatToString(moverProp.FFrame));
                 writer.Write("\t");
@@ -452,7 +454,7 @@ namespace eTools_Ultimate.Services
                 writer.Write("\t");
                 writer.Write(Script.NumberToString(moverProp.DwCash));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSourceMaterial, DefinesService.Instance.ReversedItemDefines));
+                writer.Write(Script.NumberToString(moverProp.DwSourceMaterial, definesService.ReversedItemDefines));
                 writer.Write("\t");
                 writer.Write(Script.NumberToString(moverProp.DwMaterialAmount));
                 writer.Write("\t");
@@ -472,9 +474,9 @@ namespace eTools_Ultimate.Services
                 writer.Write("\t");
                 writer.Write(Script.NumberToString(moverProp.BKillable));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwVirtItem1, DefinesService.Instance.ReversedItemDefines));
+                writer.Write(Script.NumberToString(moverProp.DwVirtItem1, definesService.ReversedItemDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwVirtItem2, DefinesService.Instance.ReversedVirtualTypeDefines));
+                writer.Write(Script.NumberToString(moverProp.DwVirtItem2, definesService.ReversedVirtualTypeDefines));
                 writer.Write("\t");
                 writer.Write(Script.NumberToString(moverProp.DwVirtItem3));
                 writer.Write("\t");
@@ -484,30 +486,30 @@ namespace eTools_Ultimate.Services
                 writer.Write("\t");
                 writer.Write(Script.NumberToString(moverProp.BVirtType3));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndAtk1, DefinesService.Instance.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(moverProp.DwSndAtk1, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndAtk2, DefinesService.Instance.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(moverProp.DwSndAtk2, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndDie1, DefinesService.Instance.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(moverProp.DwSndDie1, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndDie2, DefinesService.Instance.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(moverProp.DwSndDie2, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndDmg1, DefinesService.Instance.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(moverProp.DwSndDmg1, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndDmg2, DefinesService.Instance.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(moverProp.DwSndDmg2, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndDmg3, DefinesService.Instance.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(moverProp.DwSndDmg3, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndIdle1, DefinesService.Instance.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(moverProp.DwSndIdle1, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndIdle2, DefinesService.Instance.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(moverProp.DwSndIdle2, definesService.ReversedSoundDefines));
                 writer.Write("\t");
                 writer.Write(string.IsNullOrWhiteSpace(moverProp.SzComment) ? @"""" : moverProp.SzComment);
 
-                if(Settings.Instance.ResourcesVersion >= 19)
+                if(settings.ResourcesVersion >= 19)
                 {
                     writer.Write("\t");
-                    writer.Write(Script.NumberToString(moverProp.DwAreaColor, DefinesService.Instance.ReversedAreaDefines));
+                    writer.Write(Script.NumberToString(moverProp.DwAreaColor, definesService.ReversedAreaDefines));
                     writer.Write("\t");
                     writer.Write(string.IsNullOrWhiteSpace(moverProp.SzNpcMark) ? "=" : moverProp.SzNpcMark);
                     writer.Write("\t");
@@ -519,10 +521,12 @@ namespace eTools_Ultimate.Services
 
         public Mover CreateMover()
         {
+            DefinesService definesService = App.Services.GetRequiredService<DefinesService>();
+
             int dwId = -1;
             string szName = MoversService.GetNextStringIdentifier();
-            StringsService.Instance.AddString(szName, "");
-            if (!DefinesService.Instance.Defines.TryGetValue("AII_NONE", out int dwAi))
+            App.Services.GetRequiredService<StringsService>().AddString(szName, "");
+            if (!definesService.Defines.TryGetValue("AII_NONE", out int dwAi))
                 dwAi = -1;
             int dwStr = -1;
             int dwSta = -1;
@@ -531,13 +535,13 @@ namespace eTools_Ultimate.Services
             int dwHR = -1;
             int dwER = -1;
             int dwRace = -1;
-            if (!DefinesService.Instance.Defines.TryGetValue("BELLI_PEACEFUL", out int dwBelligerence))
+            if (!definesService.Defines.TryGetValue("BELLI_PEACEFUL", out int dwBelligerence))
                 dwBelligerence = -1;
             int dwGender = -1;
             int dwLevel = -1;
             int dwFlightLevel = -1;
             int dwSize = -1;
-            if (!DefinesService.Instance.Defines.TryGetValue("RANK_CITIZEN", out int dwClass))
+            if (!definesService.Defines.TryGetValue("RANK_CITIZEN", out int dwClass))
                 dwClass = -1;
             int bIfParts = 0;
             int nChaotic = -1;
@@ -606,8 +610,8 @@ namespace eTools_Ultimate.Services
             int dwSndIdle1 = -1;
             int dwSndIdle2 = -1;
             string szComment = MoversService.GetNextStringIdentifier();
-            StringsService.Instance.AddString(szComment, "");
-            if (!DefinesService.Instance.Defines.TryGetValue("AREA_NORMAL", out int dwAreaColor))
+            App.Services.GetRequiredService<StringsService>().AddString(szComment, "");
+            if (!definesService.Defines.TryGetValue("AREA_NORMAL", out int dwAreaColor))
                 dwAreaColor = -1;
             string szNpcMark = "=";
             int dwMadrigalGiftPoint = 0;

@@ -12,7 +12,7 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class CharactersViewModel : ObservableObject, INavigationAware
+    public partial class CharactersViewModel(CharactersService charactersService) : ObservableObject, INavigationAware
     {
 
         private bool _isInitialized = false;
@@ -20,7 +20,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         private string _searchText = string.Empty;
 
         [ObservableProperty]
-        private ICollectionView _charactersView = CollectionViewSource.GetDefaultView(CharactersService.Instance.Characters);
+        private ICollectionView _charactersView = CollectionViewSource.GetDefaultView(charactersService.Characters);
 
         public string SearchText
         {

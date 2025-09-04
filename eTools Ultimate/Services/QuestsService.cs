@@ -10,10 +10,8 @@ using eTools_Ultimate.Exceptions;
 
 namespace eTools_Ultimate.Services
 {
-    internal class QuestsService
+    internal class QuestsService(SettingsService settingsService, DefinesService definesService, StringsService stringsService)
     {
-        private static readonly Lazy<ExchangesService> _instance = new(() => new());
-        public static ExchangesService Instance => _instance.Value;
 
         //private readonly ObservableCollection<Quest> _quests = [];
         //public ObservableCollection<Quest> Quests => this._quests;
@@ -29,13 +27,13 @@ namespace eTools_Ultimate.Services
         {
             //this.ClearExchanges();
 
-            Settings settings = Settings.Instance;
-            StringsService stringsService = StringsService.Instance;
-            DefinesService definesService = DefinesService.Instance;
+            //Settings settings = Settings.Instance;
+            //StringsService stringsService = StringsService.Instance;
+            //DefinesService definesService = DefinesService.Instance;
 
             using (Scanner scanner = new Scanner())
             {
-                string filePath = settings.ExchangesConfigFilePath ?? settings.DefaultExchangesConfigFilePath;
+                string filePath = settingsService.Settings.ExchangesConfigFilePath ?? settingsService.Settings.DefaultExchangesConfigFilePath;
                 scanner.Load(filePath);
                 while (true)
                 {
@@ -723,7 +721,7 @@ namespace eTools_Ultimate.Services
                                     if (!Int32.TryParse(headQuest, out int headQuestNumber))
                                         headQuestNumber = definesService.Defines[headQuest];
 
-                                    if (settings.ResourcesVersion >= 15 && headQuestNumber >= 1800 && headQuestNumber <= 1999)
+                                    if (settingsService.Settings.ResourcesVersion >= 15 && headQuestNumber >= 1800 && headQuestNumber <= 1999)
                                     {
                                         switch (headQuestNumber)
                                         {

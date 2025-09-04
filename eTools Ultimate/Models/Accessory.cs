@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,7 +28,7 @@ namespace eTools_Ultimate.Models
 
         public string DestIdentifier
         {
-            get => Script.NumberToString(NDst, DefinesService.Instance.ReversedDestDefines);
+            get => Script.NumberToString(NDst, App.Services.GetRequiredService<DefinesService>().ReversedDestDefines);
             set 
             {
                 if (Script.TryGetNumberFromString(value, out int val))
@@ -80,7 +81,7 @@ namespace eTools_Ultimate.Models
             set => this._abilityOptionData = value;
         }
 
-        public Item? Item => ItemsService.Instance.Items.FirstOrDefault(x => x.Id == this.DwItemId);
+        public Item? Item => App.Services.GetRequiredService<ItemsService>().Items.FirstOrDefault(x => x.Id == this.DwItemId);
 
         public Accessory(int dwItemId, List<AccessoryAbilityOptionData> abilityOptionData)
         {

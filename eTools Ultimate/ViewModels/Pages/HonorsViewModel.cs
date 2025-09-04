@@ -14,14 +14,14 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class HonorsViewModel : ObservableObject, INavigationAware
+    public partial class HonorsViewModel(HonorsService honorsService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
         private string _searchText = string.Empty;
 
         [ObservableProperty]
-        private ICollectionView _honorsView = CollectionViewSource.GetDefaultView(HonorService.Instance.HonorItems);
+        private ICollectionView _honorsView = CollectionViewSource.GetDefaultView(honorsService.Honors);
 
         public string SearchText
         {
@@ -56,28 +56,28 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private bool FilterItem(object obj)
         {
-            if (obj is not HonorItem honor) return false;
+            if (obj is not Honor honor) return false;
             if (string.IsNullOrEmpty(this.SearchText)) return true;
-            return honor.TitleName.ToLower().Contains(this.SearchText.ToLower()) ||
-                   honor.TitleId.ToLower().Contains(this.SearchText.ToLower());
+            return honor.NId.ToString().Contains(this.SearchText.ToLower(), StringComparison.OrdinalIgnoreCase);
         }
 
         [RelayCommand]
         private void AddHonorItem()
         {
-            var newItem = new HonorItem
-            {
-                Index = HonorService.Instance.HonorItems.Count > 0 
-                    ? HonorService.Instance.HonorItems.Max(i => i.Index) + 1 
-                    : 0,
-                Category = "HI_COUNT_CHECK",
-                SubCategory = "HS_NEW",
-                RequiredValue = 100,
-                TitleId = $"IDS_TITLE_TXT_{(HonorService.Instance.HonorItems.Count > 0 ? HonorService.Instance.HonorItems.Max(i => i.Index) + 1 : 0):D4}",
-                TitleName = "Neuer Titel"
-            };
+            // TODO: implement adding a new HonorItem
+            //var newItem = new HonorItem
+            //{
+            //    Index = honorsService.Honors.Count > 0 
+            //        ? honorsService.Honors.Max(i => i.Index) + 1 
+            //        : 0,
+            //    Category = "HI_COUNT_CHECK",
+            //    SubCategory = "HS_NEW",
+            //    RequiredValue = 100,
+            //    TitleId = $"IDS_TITLE_TXT_{(honorsService.HonorItems.Count > 0 ? honorsService.HonorItems.Max(i => i.Index) + 1 : 0):D4}",
+            //    TitleName = "Neuer Titel"
+            //};
 
-            HonorService.Instance.AddHonorItem(newItem);
+            //honorsService.AddHonorItem(newItem);
         }
 
         [RelayCommand]

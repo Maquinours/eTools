@@ -1,5 +1,7 @@
 ﻿using DDSImageParser;
 using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -151,7 +153,9 @@ namespace eTools_Ultimate.Models
         {
             get
             {
-                string filePath = $"{Settings.Instance.WorldTextureFilePath ?? Settings.Instance.DefaultWorldTextureFilePath}{this.Prop.SzTextureFileName}";
+                Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
+                string filePath = $"{settings.WorldTextureFilePath ?? settings.DefaultWorldTextureFilePath}{this.Prop.SzTextureFileName}";
                 if (!File.Exists(filePath))
                 {
                     return null;

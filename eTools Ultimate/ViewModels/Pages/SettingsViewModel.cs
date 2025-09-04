@@ -9,10 +9,11 @@ using Wpf.Ui.Controls;
 using eTools_Ultimate.ViewModels.Windows;
 using eTools_Ultimate.Views.Windows;
 using Wpf.Ui;
+using eTools_Ultimate.Services;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class SettingsViewModel : ObservableObject, INavigationAware
+    public partial class SettingsViewModel(SettingsService settingsService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -28,7 +29,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         private string _textFileName = string.Empty;
 
-        public Settings Settings => Settings.Instance;
+        public Settings Settings => settingsService.Settings;
 
         public Task OnNavigatedToAsync()
         {

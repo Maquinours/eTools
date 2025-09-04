@@ -16,14 +16,14 @@ using Wpf.Ui.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class TerrainsViewModel(ISnackbarService snackbarService) : ObservableObject, INavigationAware
+    public partial class TerrainsViewModel(ISnackbarService snackbarService, TerrainsService terrainsService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
         private string _searchText = string.Empty;
 
         [ObservableProperty]
-        private ICollectionView _terrainsView = CollectionViewSource.GetDefaultView(TerrainsService.Instance.TerrainItems);
+        private ICollectionView _terrainsView = CollectionViewSource.GetDefaultView(terrainsService.TerrainItems);
 
         [ObservableProperty]
         private IDropTarget _dragDropHandler = new TerrainsTreeViewDropHandler();
@@ -56,7 +56,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             TerrainsView.Filter = new Predicate<object>(FilterItem);
 
-            TerrainsService.Instance.TerrainItems.CollectionChanged += TerrainItems_CollectionChanged;
+            terrainsService.TerrainItems.CollectionChanged += TerrainItems_CollectionChanged;
 
             _isInitialized = true;
         }
@@ -119,7 +119,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             try
             {
-                await Task.Run(TerrainsService.Instance.Save);
+                await Task.Run(terrainsService.Save);
 
                 snackbarService.Show(
                     title: "Terrains saved",

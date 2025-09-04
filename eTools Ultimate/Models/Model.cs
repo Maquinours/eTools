@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,7 +35,7 @@ namespace eTools_Ultimate.Models
         public string SzMotion { get => this._szMotion; set { this._szMotion = value; this.NotifyPropertyChanged(); } }
         public string MotionTypeIdentifier
         {
-            get => Script.NumberToString(IMotion, DefinesService.Instance.ReversedMotionTypeDefines);
+            get => Script.NumberToString(IMotion, App.Services.GetRequiredService<DefinesService>().ReversedMotionTypeDefines);
             set
             {
                 if (Script.TryGetNumberFromString(value, out int val))
@@ -67,7 +68,7 @@ namespace eTools_Ultimate.Models
             this.Models = new List<ModelElem>();
         }
     }
-    internal class MainModelBrace : ModelBrace
+    public class MainModelBrace : ModelBrace
     {
         private int _iType;
 
@@ -126,27 +127,29 @@ namespace eTools_Ultimate.Models
 
         public ModelBrace Brace // Maybe we should watch for braces changes to handle refresh problems, but I'm not sure if it's necessary for now.
         {
-            get => ModelsService.Instance.GetBraceByModel(this);
-            set { if (this.Brace != value) { ModelsService.Instance.SetBraceToModel(this, value); this.NotifyPropertyChanged(); } }
+            get => App.Services.GetRequiredService<ModelsService>().GetBraceByModel(this);
+            set { if (this.Brace != value) { App.Services.GetRequiredService<ModelsService>().SetBraceToModel(this, value); this.NotifyPropertyChanged(); } }
         }
 
         public string Model3DFilePath
         {
             get
             {
-                Settings settings = Settings.Instance;
+                Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+                Dictionary<string, int> defines = App.Services.GetRequiredService<DefinesService>().Defines;
+
                 string modelsFolderPath = settings.ModelsFolderPath ?? settings.DefaultModelsFolderPath;
 
                 string result = modelsFolderPath;
 
-                if (DefinesService.Instance.Defines.TryGetValue("MODELTYPE_BILLBOARD", out int billboardModelTypeValue) && this.DwModelType == billboardModelTypeValue)
+                if (defines.TryGetValue("MODELTYPE_BILLBOARD", out int billboardModelTypeValue) && this.DwModelType == billboardModelTypeValue)
                 {
                     result += this.SzName;
                     return result;
                 }
 
 
-                if (DefinesService.Instance.Defines.TryGetValue("OT_SFX", out int sfxObjectTypeValue) && this.DwType == sfxObjectTypeValue && this.SzName.Contains('_'))
+                if (defines.TryGetValue("OT_SFX", out int sfxObjectTypeValue) && this.DwType == sfxObjectTypeValue && this.SzName.Contains('_'))
                     result += this.SzName;
 
                 else
@@ -155,7 +158,7 @@ namespace eTools_Ultimate.Models
                     result += $"{root}_{this.SzName}";
                 }
 
-                if (DefinesService.Instance.Defines.TryGetValue("MODELTYPE_SFX", out int sfxModelTypeValue) && this.DwModelType != sfxModelTypeValue)
+                if (defines.TryGetValue("MODELTYPE_SFX", out int sfxModelTypeValue) && this.DwModelType != sfxModelTypeValue)
                     result += ".o3d";
                 return result;
             }
@@ -165,13 +168,17 @@ namespace eTools_Ultimate.Models
 
         public ModelElem()
         {
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
             this.Motions = [];
-            Settings.Instance.PropertyChanged += this.Settings_PropertyChanged;
+            settings.PropertyChanged += this.Settings_PropertyChanged;
         }
 
         public void Dispose()
         {
-            Settings.Instance.PropertyChanged -= this.Settings_PropertyChanged;
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
+            settings.PropertyChanged -= this.Settings_PropertyChanged;
         }
 
         private void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)

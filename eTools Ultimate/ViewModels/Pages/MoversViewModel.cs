@@ -23,7 +23,7 @@ using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class MoversViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService) : ObservableObject, INavigationAware
+    public partial class MoversViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, MoversService moversService, SettingsService settingsService, DefinesService definesService, SoundsService soundsService) : ObservableObject, INavigationAware
     {
         #region Properties
         private bool _isInitialized = false;
@@ -34,7 +34,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         private bool _auto3DRendering = false;
 
         [ObservableProperty]
-        private ICollectionView _moversView = CollectionViewSource.GetDefaultView(MoversService.Instance.Movers);
+        private ICollectionView _moversView = CollectionViewSource.GetDefaultView(moversService.Movers);
 
         private string _searchText = string.Empty;
 
@@ -120,8 +120,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             get
             {
-                Settings settings = Settings.Instance;
-                string modelsFolderPath = settings.ModelsFolderPath ?? settings.DefaultModelsFolderPath;
+                string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
                 if (string.IsNullOrEmpty(modelsFolderPath) || !Directory.Exists(modelsFolderPath))
                     return [];
                 return [.. Directory.GetFiles(modelsFolderPath, "mvr_*.o3d", SearchOption.TopDirectoryOnly).Select(x => Path.GetFileNameWithoutExtension(x).Substring(4))];
@@ -146,8 +145,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             get
             {
-                Settings settings = Settings.Instance;
-                string texturesFolderPath = settings.TexturesFolderPath ?? settings.DefaultTexturesFolderPath;
+                string texturesFolderPath = settingsService.Settings.TexturesFolderPath ?? settingsService.Settings.DefaultTexturesFolderPath;
 
                 if (string.IsNullOrEmpty(texturesFolderPath) || !Directory.Exists(texturesFolderPath))
                     return [];
@@ -186,8 +184,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             get
             {
-                Settings settings = Settings.Instance;
-                string modelsFolderPath = settings.ModelsFolderPath ?? settings.DefaultModelsFolderPath;
+                string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
                 if (string.IsNullOrEmpty(modelsFolderPath) || !Directory.Exists(modelsFolderPath))
                     return [];
                 if (MoversView.CurrentItem is not Mover mover)
@@ -199,11 +196,11 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        public List<KeyValuePair<int, string>> MoverIdentifiers => DefinesService.Instance.ReversedMoverDefines.ToList();
-        public List<KeyValuePair<int, string>> BelligerenceIdentifiers => DefinesService.Instance.ReversedBelligerenceDefines.ToList();
-        public List<KeyValuePair<int, string>> AiIdentifiers => DefinesService.Instance.ReversedAiDefines.ToList();
-        public List<KeyValuePair<int, string>> MotionIdentifiers => DefinesService.Instance.ReversedMotionTypeDefines.ToList();
-        public List<KeyValuePair<int, string>> SoundIdentifiers => DefinesService.Instance.ReversedSoundDefines.ToList();
+        public List<KeyValuePair<int, string>> MoverIdentifiers => definesService.ReversedMoverDefines.ToList();
+        public List<KeyValuePair<int, string>> BelligerenceIdentifiers => definesService.ReversedBelligerenceDefines.ToList();
+        public List<KeyValuePair<int, string>> AiIdentifiers => definesService.ReversedAiDefines.ToList();
+        public List<KeyValuePair<int, string>> MotionIdentifiers => definesService.ReversedMotionTypeDefines.ToList();
+        public List<KeyValuePair<int, string>> SoundIdentifiers => definesService.ReversedSoundDefines.ToList();
         #endregion Fields
 
         public Task OnNavigatedToAsync()
@@ -235,7 +232,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             MoversView.Filter = new Predicate<object>(FilterItem);
 
-            Settings.Instance.PropertyChanged += Settings_PropertyChanged;
+            settingsService.Settings.PropertyChanged += Settings_PropertyChanged;
 
             this._modelsDirectoryWatcher.Renamed += ModelFile_Changed;
             this._modelsDirectoryWatcher.Created += ModelFile_Changed;
@@ -270,14 +267,14 @@ namespace eTools_Ultimate.ViewModels.Pages
         private void InitializeModelsDirectoryWatcherPath()
         {
             this._modelsDirectoryWatcher.EnableRaisingEvents = false;
-            this._modelsDirectoryWatcher.Path = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+            this._modelsDirectoryWatcher.Path = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
             this._modelsDirectoryWatcher.EnableRaisingEvents = true;
         }
 
         private void InitializeTexturesDirectoryWatcherPath()
         {
             this._texturesDirectoryWatcher.EnableRaisingEvents = false;
-            this._texturesDirectoryWatcher.Path = Settings.Instance.TexturesFolderPath ?? Settings.Instance.DefaultTexturesFolderPath;
+            this._texturesDirectoryWatcher.Path = settingsService.Settings.TexturesFolderPath ?? settingsService.Settings.DefaultTexturesFolderPath;
             this._texturesDirectoryWatcher.EnableRaisingEvents = true;
         }
 
@@ -288,7 +285,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (mover.Model is null) return;
             string? prefix = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
             if (prefix is null) return;
-            this._motionDirectoryWatcher.Path = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+            this._motionDirectoryWatcher.Path = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
             this._motionDirectoryWatcher.Filter = $"{prefix}_*.ani";
             this._motionDirectoryWatcher.EnableRaisingEvents = true;
         }
@@ -343,7 +340,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                     ],
                     _ => throw new InvalidOperationException($"MoverViewModel::LoadModel exception : mover model is loaded like player but is not player. Identifier => {mover.Identifier}")
                 };
-                string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+                string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
                 string[] partsPath = [.. parts.Select(part => $"{modelsFolderPath}{part}")];
 
                 foreach (string partPath in partsPath)
@@ -485,7 +482,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 throw new InvalidOperationException("MoversViewModel::ModelMotionFile_Changed exception : mover.Model is null");
             if (mover.Model.MotionsView.CurrentItem is not ModelMotion currentMotion) return;
 
-            string folder = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+            string folder = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
             string? prefix = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
             if (prefix is null) return;
             string suffix = currentMotion.SzMotion;
@@ -573,8 +570,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (extendedArgs.NewValue is not int newId)
                     throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called with non int new DwId value.");
 
-                string oldIdentifier = Script.NumberToString(oldId, DefinesService.Instance.ReversedMoverDefines);
-                string newIdentifier = Script.NumberToString(newId, DefinesService.Instance.ReversedMoverDefines);
+                string oldIdentifier = Script.NumberToString(oldId, definesService.ReversedMoverDefines);
+                string newIdentifier = Script.NumberToString(newId, definesService.ReversedMoverDefines);
 
                 string[] playerMoverIdentifiers = ["MI_MALE", "MI_FEMALE"];
                 if (playerMoverIdentifiers.Contains(oldIdentifier) || playerMoverIdentifiers.Contains(newIdentifier))
@@ -664,7 +661,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             string? directoryPath = Path.GetDirectoryName(filePath);
             string? fileName = Path.GetFileNameWithoutExtension(filePath);
             string? fileExtension = Path.GetExtension(filePath);
-            string? modelsFolderPath = Path.GetDirectoryName(Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath);
+            string? modelsFolderPath = Path.GetDirectoryName(settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath);
 
             if (
                 filePath is null ||
@@ -718,7 +715,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                     ],
                         _ => throw new InvalidOperationException($"MoverViewModel::ShowReferenceModelContentDialog exception : mover model is loaded like player but is not player. Identifier => {referenceMover.Identifier}")
                     };
-                    string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+                    string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
                     string[] partsPath = [.. parts.Select(part => $"{modelsFolderPath}{part}")];
 
                     foreach (string partPath in partsPath)
@@ -755,7 +752,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         private void PlaySound(Sound? sound)
         {
             if(sound is not null)
-                SoundsService.Instance.PlaySound(sound);
+                soundsService.PlaySound(sound);
         }
 
         [RelayCommand]
@@ -763,12 +760,12 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (MoversView.CurrentItem is not Mover mover) return;
 
-            string initialPath = mover.SndDmg2?.FilePath ?? Settings.Instance.SoundsFolderPath ?? Settings.Instance.DefaultSoundsFolderPath;
+            string initialPath = mover.SndDmg2?.FilePath ?? settingsService.Settings.SoundsFolderPath ?? settingsService.Settings.DefaultSoundsFolderPath;
 
             string? filePath = FileFolderSelector.SelectFile(initialPath, eTools_Ultimate.Resources.Texts.SelectSoundFile, "Sound file|*.wav");
             if (filePath is null) return;
 
-            Sound? newSound = SoundsService.Instance.Sounds.FirstOrDefault(x => x.FilePath.Equals(filePath, StringComparison.OrdinalIgnoreCase));
+            Sound? newSound = soundsService.Sounds.FirstOrDefault(x => x.FilePath.Equals(filePath, StringComparison.OrdinalIgnoreCase));
             if (newSound is null) return;
             mover.Prop.DwSndDmg2 = newSound.Prop.Id;
         }
@@ -778,12 +775,12 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (MoversView.CurrentItem is not Mover mover) return;
 
-            string initialPath = mover.SndIdle1?.FilePath ?? Settings.Instance.SoundsFolderPath ?? Settings.Instance.DefaultSoundsFolderPath;
+            string initialPath = mover.SndIdle1?.FilePath ?? settingsService.Settings.SoundsFolderPath ?? settingsService.Settings.DefaultSoundsFolderPath;
 
             string? filePath = FileFolderSelector.SelectFile(initialPath, eTools_Ultimate.Resources.Texts.SelectSoundFile, "Sound file|*.wav");
             if (filePath is null) return;
 
-            Sound? newSound = SoundsService.Instance.Sounds.FirstOrDefault(x => x.FilePath.Equals(filePath, StringComparison.OrdinalIgnoreCase));
+            Sound? newSound = soundsService.Sounds.FirstOrDefault(x => x.FilePath.Equals(filePath, StringComparison.OrdinalIgnoreCase));
             if (newSound is null) return;
             mover.Prop.DwSndIdle1 = newSound.Prop.Id;
         }
@@ -802,7 +799,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             );
             if(result == ContentDialogResult.Primary)
             {
-                Mover newMover = MoversService.Instance.CreateMover();
+                Mover newMover = moversService.CreateMover();
                 MoversView.MoveCurrentTo(newMover);
                 MoversView.Refresh();
             }
@@ -824,7 +821,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             );
             if (result == ContentDialogResult.Primary)
             {
-                MoversService.Instance.RemoveMover(mover);
+                moversService.RemoveMover(mover);
                 MoversView.Refresh();
             }
         }
@@ -882,11 +879,11 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (MoversView.CurrentItem is not Mover mover) return;
             if (mover.Model is null) return;
 
-            string folderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath; // Models folder path
+            string folderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath; // Models folder path
             string filterPrefix = $"{Constants.ModelFilenameRoot[mover.Model.DwType]}_{mover.Model.SzName}_"; // Filter prefix for motion files
             string filter = $"{filterPrefix}*.ani"; // Entire filter
             string[] filePossibilities = [..Directory.GetFiles(folderPath, filter).Select(x => Path.GetFileNameWithoutExtension(x)[filterPrefix.Length..])]; // All .ani files for this model
-            string[] motionTypeDefines = [.. DefinesService.Instance.ReversedMotionTypeDefines.Select(x => x.Value)]; // All motion type identifiers
+            string[] motionTypeDefines = [.. definesService.ReversedMotionTypeDefines.Select(x => x.Value)]; // All motion type identifiers
 
             int generatedCount = 0;
             foreach (string filePossibility in filePossibilities)
@@ -896,7 +893,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
                 if (typeIdentifier is null) continue; // No valid motion type identifier found
 
-                int typeId = DefinesService.Instance.Defines[typeIdentifier]; // type ID from type identifier
+                int typeId = definesService.Defines[typeIdentifier]; // type ID from type identifier
 
                 if (mover.Model.Motions.Any(x => x.IMotion == typeId)) continue; // Motion with this type already exists
 
@@ -922,7 +919,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (mover.Model is null) return;
             if (mover.Model.MotionsView.CurrentItem is not ModelMotion motion) return;
 
-            string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+            string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
             string root = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
             string lowerMotionKey = motion.SzMotion;
 

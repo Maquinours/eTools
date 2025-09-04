@@ -24,7 +24,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         FEMALE
     }
 
-    public partial class MotionsViewModel(ISnackbarService snackbarService, IContentDialogService contentDialogService) : ObservableObject, INavigationAware
+    public partial class MotionsViewModel(ISnackbarService snackbarService, IContentDialogService contentDialogService, MotionsService motionsService, DefinesService definesService, SettingsService settingsService, StringsService stringsService, ModelsService modelsService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -48,25 +48,25 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [ObservableProperty]
-        private ICollectionView _motionsView = CollectionViewSource.GetDefaultView(MotionsService.Instance.Motions);
+        private ICollectionView _motionsView = CollectionViewSource.GetDefaultView(motionsService.Motions);
 
-        public List<KeyValuePair<int, string>> MotionIdentifiers => [.. DefinesService.Instance.ReversedMotionDefines];
+        public List<KeyValuePair<int, string>> MotionIdentifiers => [.. definesService.ReversedMotionDefines];
         public string[] AnimationIdentifiers // TODO : we need to throw a "property changed" event when male or female model motion changes, but not a priority.
         {
             get
             {
-                int moverModelType = DefinesService.Instance.Defines["OT_MOVER"];
-                int maleMoverId = DefinesService.Instance.Defines["MI_MALE"];
-                int femaleMoverId = DefinesService.Instance.Defines["MI_FEMALE"];
-                ModelElem? maleMoverModel = ModelsService.Instance.GetModelByTypeAndId(moverModelType, maleMoverId);
-                ModelElem? femaleMoverModel = ModelsService.Instance.GetModelByTypeAndId(moverModelType, maleMoverId);
+                int moverModelType = definesService.Defines["OT_MOVER"];
+                int maleMoverId = definesService.Defines["MI_MALE"];
+                int femaleMoverId = definesService.Defines["MI_FEMALE"];
+                ModelElem? maleMoverModel = modelsService.GetModelByTypeAndId(moverModelType, maleMoverId);
+                ModelElem? femaleMoverModel = modelsService.GetModelByTypeAndId(moverModelType, maleMoverId);
                 if (maleMoverModel is null || femaleMoverModel is null) return [];
                 ModelMotion[] maleMotions = [.. maleMoverModel.Motions];
                 ModelMotion[] femaleMotions = [.. femaleMoverModel.Motions];
 
                 ModelMotion[] common = [.. maleMotions.Where(m => femaleMotions.Any(f => f.IMotion == m.IMotion))];
 
-                string[] commonIdentifiers = [.. common.Select(x => DefinesService.Instance.ReversedMotionTypeDefines[x.IMotion])];
+                string[] commonIdentifiers = [.. common.Select(x => definesService.ReversedMotionTypeDefines[x.IMotion])];
 
                 return commonIdentifiers;
             }
@@ -189,7 +189,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 _ => throw new InvalidOperationException("MotionsViewModel::LoadModel exception : ModelPreviewGender is neither MALE nor FEMALE")
             };
 
-            string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+            string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
             string[] partsPath = [.. parts.Select(part => $"{modelsFolderPath}{part}")];
 
             foreach (string partPath in partsPath)
@@ -214,14 +214,14 @@ namespace eTools_Ultimate.ViewModels.Pages
                 _ => throw new InvalidOperationException("MotionsViewModel::PlayMotion exception : ModelPreviewGender is neither MALE nor FEMALE")
             };
 
-            int moverModelType = DefinesService.Instance.Defines["OT_MOVER"];
-            int moverId = DefinesService.Instance.Defines[moverIdentifier];
-            ModelElem? moverModel = ModelsService.Instance.GetModelByTypeAndId(moverModelType, moverId);
+            int moverModelType = definesService.Defines["OT_MOVER"];
+            int moverId = definesService.Defines[moverIdentifier];
+            ModelElem? moverModel = modelsService.GetModelByTypeAndId(moverModelType, moverId);
             if (moverModel is null) return;
             ModelMotion? modelMotion = moverModel.Motions.FirstOrDefault(m => m.IMotion == motionType);
             if (modelMotion is null) return;
 
-            string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
+            string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
             string root = $"mvr_{moverModel.SzName}";
             string lowerMotionKey = modelMotion.SzMotion;
 
@@ -260,14 +260,14 @@ namespace eTools_Ultimate.ViewModels.Pages
                 await Task.Run(() =>
                 {
                     HashSet<string> stringIdentifiers = [];
-                    foreach (Motion motion in MotionsService.Instance.Motions)
+                    foreach (Motion motion in motionsService.Motions)
                     {
                         stringIdentifiers.Add(motion.Prop.SzName);
                         stringIdentifiers.Add(motion.Prop.SzDesc);
                     }
 
-                    MotionsService.Instance.Save();
-                    StringsService.Instance.Save(Settings.Instance.MotionsTxtFilePath ?? Settings.Instance.DefaultMotionsTxtFilePath, [.. stringIdentifiers]);
+                    motionsService.Save();
+                    stringsService.Save(settingsService.Settings.MotionsTxtFilePath ?? settingsService.Settings.DefaultMotionsTxtFilePath, [.. stringIdentifiers]);
                 });
 
                 snackbarService.Show(
@@ -310,16 +310,14 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private void Add()
         {
-            Settings settings = Settings.Instance;
+            string szName = stringsService.GetNextStringIdentifier("IDS_PROPMOTION_TXT_");
+            stringsService.AddString(szName, "");
+            string szDesc = stringsService.GetNextStringIdentifier("IDS_PROPMOTION_TXT_");
+            stringsService.AddString(szDesc, "");
 
-            string szName = StringsService.Instance.GetNextStringIdentifier("IDS_PROPMOTION_TXT_");
-            StringsService.Instance.AddString(szName, "");
-            string szDesc = StringsService.Instance.GetNextStringIdentifier("IDS_PROPMOTION_TXT_");
-            StringsService.Instance.AddString(szDesc, "");
-
-            MotionProp prop = new(nVer: Settings.Instance.ResourcesVersion, dwId: -1, dwMotion: 0, szIconName: "", dwPlay: 0, szName: szName, szDesc: szDesc);
+            MotionProp prop = new(nVer: settingsService.Settings.ResourcesVersion, dwId: -1, dwMotion: 0, szIconName: "", dwPlay: 0, szName: szName, szDesc: szDesc);
             Motion motion = new(prop);
-            MotionsService.Instance.Motions.Add(motion);
+            motionsService.Motions.Add(motion);
             MotionsView.Refresh();
             MotionsView.MoveCurrentTo(motion);
         }
@@ -340,7 +338,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             );
             if (result == ContentDialogResult.Primary)
             {
-                MotionsService.Instance.Motions.Remove(motion);
+                motionsService.Motions.Remove(motion);
                 motion.Dispose();
                 MotionsView.Refresh();
             }

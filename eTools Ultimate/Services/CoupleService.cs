@@ -1,26 +1,24 @@
+using eTools_Ultimate.Exceptions;
+using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using eTools_Ultimate.Exceptions;
-using eTools_Ultimate.Helpers;
 
 namespace eTools_Ultimate.Services
 {
-    public class CoupleService
+    public class CoupleService(SettingsService settingsService)
     {
-        private static Lazy<CoupleService> _instance = new(() => new());
-        public static CoupleService Instance => _instance.Value;
-
         private readonly ObservableCollection<CoupleLevel> _coupleLevels = [];
         public ObservableCollection<CoupleLevel> CoupleLevels => this._coupleLevels;
 
         public void Load()
         {
-            Settings settings = Settings.Instance;
+            Settings settings = settingsService.Settings;
 
             // TODO: replace with settings prop
             string filePath = $"{settings.ResourcesFolderPath}couple.inc";

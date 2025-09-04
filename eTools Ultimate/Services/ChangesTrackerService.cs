@@ -43,11 +43,8 @@ namespace eTools_Ultimate.Services
         }
     }
 
-    class ChangesTrackerService
+    public class ChangesTrackerService(StringsService stringsService, MoversService moversService, MotionsService motionsService)
     {
-        private static readonly Lazy<ChangesTrackerService> _instance = new(() => new());
-        public static ChangesTrackerService Instance => _instance.Value;
-
         //private Dictionary<string, string> _initialStrings;
 
         private readonly List<Change> _pastChanges = [];
@@ -57,20 +54,18 @@ namespace eTools_Ultimate.Services
 
         public void Init()
         {
-            StringsService stringsService = StringsService.Instance;
-
             //this._initialStrings = 
             //    JsonSerializer.Deserialize<Dictionary<string, string>>(JsonSerializer.Serialize(stringsService.Strings))
             //    ?? throw new InvalidOperationException("ChangesTracker init error : Strings deserialize is null");
 
             stringsService.Strings.CollectionChanged += OnStringsCollectionChanged;
-            MoversService.Instance.Movers.CollectionChanged += Movers_CollectionChanged;
-            MotionsService.Instance.Motions.CollectionChanged += OnMotionsCollectionChanged;
+            moversService.Movers.CollectionChanged += Movers_CollectionChanged;
+            motionsService.Motions.CollectionChanged += OnMotionsCollectionChanged;
 
-            foreach(Mover mover in MoversService.Instance.Movers)
+            foreach(Mover mover in moversService.Movers)
                 mover.Prop.PropertyChanged += MoverProp_PropertyChanged; ;
 
-            foreach (Motion motion in MotionsService.Instance.Motions)
+            foreach (Motion motion in motionsService.Motions)
                 motion.PropertyChanged += OnMotionPropertyChanged;
         }
 

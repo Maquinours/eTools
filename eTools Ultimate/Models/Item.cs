@@ -1,5 +1,7 @@
 using DDSImageParser;
+using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -729,10 +731,10 @@ namespace eTools_Ultimate.Models
                 case nameof(ItemProp.DwItemAtkOrder4):
                     this.NotifyPropertyChanged(nameof(this.BlinkwingAngle));
                     break;
-                    // TODO: readd this
+                // TODO: readd this
                 //case nameof(ItemProp.SzTextFileName):
                 //    this.NotifyPropertyChanged(nameof(this.PaperingTexture));
-                    //break;
+                //break;
                 case nameof(ItemProp.SzIcon):
                     this.NotifyPropertyChanged(nameof(this.Icon));
                     break;
@@ -769,7 +771,7 @@ namespace eTools_Ultimate.Models
         }
         private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 // TODO: readd this
                 //case nameof(Settings.TexturesFolderPath):
@@ -789,34 +791,36 @@ namespace eTools_Ultimate.Models
 
         public ModelElem? Model { get => _model; set { _model = value; NotifyPropertyChanged(); } }
 
-        public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; if(this.Model is not null) this.Model.DwIndex = value; } } }
+        public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; if (this.Model is not null) this.Model.DwIndex = value; } } }
 
         public string Identifier
         {
-            get => DefinesService.Instance.ReversedItemDefines.TryGetValue(this.Id, out string? identifier) ? identifier : this.Id.ToString();
-            set 
+            get => Script.NumberToString(Id, App.Services.GetRequiredService<DefinesService>().ReversedItemDefines);
+            set
             {
-                if(DefinesService.Instance.Defines.TryGetValue(value, out int val) || Int32.TryParse(value, out val))
+                if (Script.TryGetNumberFromString(value, out int val))
                     this.Id = val;
             }
         }
 
         public string Name
         {
-            get => StringsService.Instance.GetString(Prop.SzName);
-            set { StringsService.Instance.ChangeStringValue(Prop.SzName, value); }
+            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName);
+            set => App.Services.GetRequiredService<StringsService>().ChangeStringValue(Prop.SzName, value);
         }
         public string Description
         {
-            get => StringsService.Instance.GetString(Prop.SzCommand);
-            set { StringsService.Instance.ChangeStringValue(Prop.SzCommand, value); }
+            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzCommand);
+            set => App.Services.GetRequiredService<StringsService>().ChangeStringValue(Prop.SzCommand, value);
         }
 
         public ImageSource? Icon
         {
             get
             {
-                string filePath = $"{Settings.Instance.ItemIconsFolderPath ?? Settings.Instance.DefaultItemIconsFolderPath}{this.Prop.SzIcon}";
+                Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
+                string filePath = $"{settings.ItemIconsFolderPath ?? settings.DefaultItemIconsFolderPath}{this.Prop.SzIcon}";
                 if (!File.Exists(filePath))
                 {
                     return null;
@@ -850,19 +854,21 @@ namespace eTools_Ultimate.Models
         //    private set { if (value != this.Dests) { this._dests = value; this.NotifyPropertyChanged(); } }
         //}
 
-        public bool IsBlinkwing => DefinesService.Instance.Defines.TryGetValue("IK2_BLINKWING", out int kind) && this.Prop.DwItemKind2 == kind;
+        public bool IsBlinkwing => App.Services.GetRequiredService<DefinesService>().Defines.TryGetValue("IK2_BLINKWING", out int kind) && this.Prop.DwItemKind2 == kind;
 
         public bool IsTownBlinkwing
         {
-            get => DefinesService.Instance.Defines.TryGetValue("IK3_TOWNBLINKWING", out int kind) && this.Prop.DwItemKind3 == kind;
+            get => App.Services.GetRequiredService<DefinesService>().Defines.TryGetValue("IK3_TOWNBLINKWING", out int kind) && this.Prop.DwItemKind3 == kind;
             set
             {
+                Dictionary<string, int> defines = App.Services.GetRequiredService<DefinesService>().Defines;
+
                 if (this.IsTownBlinkwing != value)
                 {
-                    if (!DefinesService.Instance.Defines.TryGetValue("IK2_BLINKWING", out int blinkwingKind2) || this.Prop.DwItemKind2 != blinkwingKind2) throw new System.Exception("Item is not a Blinkwing");
+                    if (!defines.TryGetValue("IK2_BLINKWING", out int blinkwingKind2) || this.Prop.DwItemKind2 != blinkwingKind2) throw new System.Exception("Item is not a Blinkwing");
                     if (value)
                     {
-                        if (!DefinesService.Instance.Defines.TryGetValue("IK3_TOWNBLINKWING", out int townBlinkwingKind3)) throw new System.Exception("Cannot get define value for IK3_TOWNBLINKWING");
+                        if (!defines.TryGetValue("IK3_TOWNBLINKWING", out int townBlinkwingKind3)) throw new System.Exception("Cannot get define value for IK3_TOWNBLINKWING");
                         this.Prop.DwItemKind3 = townBlinkwingKind3;
                         this.Prop.DwWeaponType = -1;
                         this.Prop.DwItemAtkOrder1 = -1;
@@ -873,17 +879,14 @@ namespace eTools_Ultimate.Models
                     }
                     else
                     {
-                        if (!DefinesService.Instance.Defines.TryGetValue("IK3_BLINKWING", out int blinkwingKind3)) throw new System.Exception("Cannot get define value for IK3_BLINKWING");
+                        if (!defines.TryGetValue("IK3_BLINKWING", out int blinkwingKind3)) throw new System.Exception("Cannot get define value for IK3_BLINKWING");
                         this.Prop.DwItemKind3 = blinkwingKind3;
                     }
                 }
             }
         }
 
-        public bool IsNormalBlinkwing
-        {
-            get => DefinesService.Instance.Defines.TryGetValue("IK3_BLINKWING", out int kind) && this.Prop.DwItemKind3 == kind;
-        }
+        public bool IsNormalBlinkwing => App.Services.GetRequiredService<DefinesService>().Defines.TryGetValue("IK3_BLINKWING", out int kind) && this.Prop.DwItemKind3 == kind;
 
         public int BlinkwingPositionX
         {
@@ -1012,14 +1015,14 @@ namespace eTools_Ultimate.Models
         {
             _prop = prop;
             _model = model;
-            StringsService.Instance.Strings.CollectionChanged += ProjectStrings_CollectionChanged;
+            App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged += ProjectStrings_CollectionChanged;
             // TODO: readd this
             //Settings.GetInstance().PropertyChanged += Settings_PropertyChanged;
         }
 
         public void Dispose()
         {
-            StringsService.Instance.Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
+            App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
             // TODO: readd this
             //Settings.GetInstance().PropertyChanged -= Settings_PropertyChanged;
             this.Prop.PropertyChanged -= Prop_PropertyChanged;

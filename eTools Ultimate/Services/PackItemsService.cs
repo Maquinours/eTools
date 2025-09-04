@@ -1,6 +1,7 @@
 ﻿using eTools_Ultimate.Exceptions;
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,11 +11,8 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Services
 {
-    public class PackItemsService
+    public class PackItemsService(SettingsService settingsService)
     {
-        private static readonly Lazy<PackItemsService> _instance = new(() => new());
-        public static PackItemsService Instance => _instance.Value;
-
         public ObservableCollection<PackItem> PackItems { get; } = [];
 
         private void Clear()
@@ -28,10 +26,9 @@ namespace eTools_Ultimate.Services
         {
             Clear();
 
-            Settings settings = Settings.Instance;
             using (Script script = new())
             {
-                string filePath = settings.PackItemsPropFilePath ?? settings.DefaultPackItemsPropFile;
+                string filePath = settingsService.Settings.PackItemsPropFilePath ?? settingsService.Settings.DefaultPackItemsPropFile;
                 script.Load(filePath);
 
                 while (true)

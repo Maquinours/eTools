@@ -20,7 +20,7 @@ public class TextAddedEventArgs(Text text)
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class TextClientViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService) : ObservableObject, INavigationAware
+    public partial class TextClientViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, TextsService textsService, DefinesService definesService, StringsService stringsService, SettingsService settingsService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -30,11 +30,11 @@ namespace eTools_Ultimate.ViewModels.Pages
         private bool _isColorPickerOpened = false;
 
         [ObservableProperty]
-        private ICollectionView _textsView = CollectionViewSource.GetDefaultView(TextsService.Instance.Texts);
+        private ICollectionView _textsView = CollectionViewSource.GetDefaultView(textsService.Texts);
 
         public event EventHandler<TextAddedEventArgs>? TextAdded;
 
-        public List<KeyValuePair<int, string>> TextIdentifiers => [.. DefinesService.Instance.ReversedTextDefines];
+        public List<KeyValuePair<int, string>> TextIdentifiers => [.. definesService.ReversedTextDefines];
 
         public string SearchText
         {
@@ -78,7 +78,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private void AddText()
         {
-            Text text = TextsService.Instance.AddText();
+            Text text = textsService.AddText();
             TextsView.MoveCurrentTo(text);
             TextAdded?.Invoke(this, new TextAddedEventArgs(text));
         }
@@ -100,7 +100,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 );
 
             if (result == ContentDialogResult.Primary)
-                TextsService.Instance.RemoveText(text);
+                textsService.RemoveText(text);
         }
 
         [RelayCommand]
@@ -117,11 +117,11 @@ namespace eTools_Ultimate.ViewModels.Pages
                 await Task.Run(() =>
                 {
                     HashSet<string> stringIdentifiers = [];
-                    foreach (Text text in TextsService.Instance.Texts)
+                    foreach (Text text in textsService.Texts)
                         stringIdentifiers.Add(text.Prop.SzName);
 
-                    TextsService.Instance.Save();
-                    StringsService.Instance.Save(Settings.Instance.TextsTxtFilePath ?? Settings.Instance.DefaultTextsTxtFilePath, [.. stringIdentifiers]);
+                    textsService.Save();
+                    stringsService.Save(settingsService.Settings.TextsTxtFilePath ?? settingsService.Settings.DefaultTextsTxtFilePath, [.. stringIdentifiers]);
                 });
 
                 snackbarService.Show(

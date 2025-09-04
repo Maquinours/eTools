@@ -4,12 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages.Honor"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:eTools_Ultimate.Models"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     Title="Honor List"
     d:DataContext="{d:DesignInstance local:HonorPage,
                                      IsDesignTimeCreatable=False}"
@@ -71,11 +71,11 @@
                     <TextBlock
                         FontWeight="SemiBold"
                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                        Text="{Binding TitleName}" />
+                        Text="{Binding Title}" />
                     <TextBlock
                         FontSize="12"
                         Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                        Text="{Binding TitleId}" />
+                        Text="{Binding NId}" />
                 </StackPanel>
             </Grid>
         </DataTemplate>
@@ -202,7 +202,7 @@
                         Margin="0,0,10,0"
                         Appearance="Secondary"
                         Content="{i18n:StringLocalizer 'Expert'}" />
-                    
+
                     <ui:Button
                         x:Name="AddButton"
                         Margin="0,0,10,0"
@@ -260,7 +260,7 @@
                                 <TextBox
                                     x:Name="TitleIdTextBox"
                                     Grid.Row="1"
-                                    Text="{Binding SelectedItem.TitleId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsListView}" />
+                                    Text="{Binding SelectedItem.NId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsListView}" />
                             </Grid>
 
                             <!--  Title Name  -->
@@ -280,7 +280,7 @@
                                 <TextBox
                                     x:Name="TitleNameTextBox"
                                     Grid.Row="1"
-                                    Text="{Binding SelectedItem.TitleName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsListView}" />
+                                    Text="{Binding SelectedItem.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=HonorsListView}" />
                             </Grid>
 
                             <!--  Category  -->

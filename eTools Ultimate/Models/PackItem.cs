@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -64,7 +65,7 @@ namespace eTools_Ultimate.Models
 
         public Item? Item
         {
-            get => ItemsService.Instance.Items.FirstOrDefault(item => item.Id == _prop.DwItemId);
+            get => App.Services.GetRequiredService<ItemsService>().Items.FirstOrDefault(item => item.Id == _prop.DwItemId);
         }
 
         public void Dispose()
@@ -120,7 +121,7 @@ namespace eTools_Ultimate.Models
 
         public Item? Item
         {
-            get => ItemsService.Instance.Items.FirstOrDefault(item => item.Id == _prop.DwPackItem);
+            get => App.Services.GetRequiredService<ItemsService>().Items.FirstOrDefault(item => item.Id == _prop.DwPackItem);
         }
 
         public void Dispose()

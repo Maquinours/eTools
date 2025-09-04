@@ -1,4 +1,5 @@
 ﻿using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
 using System.Collections.Generic;
@@ -47,7 +48,7 @@ namespace eTools_Ultimate.Helpers
 
 		private static bool LookupDefine(string str, out int value)
 		{
-			return DefinesService.Instance.Defines.TryGetValue(str, out value);
+			return App.Services.GetRequiredService<DefinesService>().Defines.TryGetValue(str, out value);
 		}
 
 		public static int GetDefineNum(string str)
@@ -77,7 +78,7 @@ namespace eTools_Ultimate.Helpers
 
 			if(TokenType == TokenType.IDENTIFIER)
 			{
-				if (StringsService.Instance.Strings.ContainsKey(Token))
+				if (App.Services.GetRequiredService<StringsService>().Strings.ContainsKey(Token))
 					return Token;
 				else
 				{
@@ -130,7 +131,7 @@ namespace eTools_Ultimate.Helpers
 
 		public static bool TryGetNumberFromString(string str, out int number)
 		{
-			if (DefinesService.Instance.Defines.TryGetValue(str, out int result))
+			if (App.Services.GetRequiredService<DefinesService>().Defines.TryGetValue(str, out int result))
             {
                 number = result;
 				return true;

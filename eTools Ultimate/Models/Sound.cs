@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -56,14 +57,22 @@ namespace eTools_Ultimate.Models
 
         public string Identifier
         {
-            get => Script.NumberToString(_prop.Id, DefinesService.Instance.ReversedMusicDefines);
+            get => Script.NumberToString(_prop.Id, App.Services.GetRequiredService<DefinesService>().ReversedMusicDefines);
             set
             {
                 if (Script.TryGetNumberFromString(value, out int result))
                     Prop.Id = result;
             }
         }
-        public string FilePath => $"{Settings.Instance.SoundsFolderPath ?? Settings.Instance.DefaultSoundsFolderPath}{Prop.SzSoundFileName}";
+        public string FilePath
+        {
+            get
+            {
+                Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
+                return $"{settings.SoundsFolderPath ?? settings.DefaultSoundsFolderPath}{Prop.SzSoundFileName}";
+            }
+        }
 
         //public bool IsPlaying => SoundsService.Instance.PlayingFilePath?.Equals(FilePath, StringComparison.OrdinalIgnoreCase) ?? false;
 
@@ -71,21 +80,25 @@ namespace eTools_Ultimate.Models
 
         public Sound(SoundProp prop)
         {
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
             _prop = prop;
 
             Prop.PropertyChanged += Prop_PropertyChanged;
-            Settings.Instance.PropertyChanged += Settings_PropertyChanged;
+            settings.PropertyChanged += Settings_PropertyChanged;
         }
 
         public void Dispose()
         {
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
             Prop.PropertyChanged -= Prop_PropertyChanged;
-            Settings.Instance.PropertyChanged -= Settings_PropertyChanged;
+            settings.PropertyChanged -= Settings_PropertyChanged;
         }
 
         public void Play()
         {
-            SoundsService.Instance.PlaySound(this);
+            App.Services.GetRequiredService<SoundsService>().PlaySound(this);
         }
 
         private void Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)

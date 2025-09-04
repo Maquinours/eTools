@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,7 +23,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         public AccessoryAbilityOptionData Level { get; } = level;
     }
 
-    public partial class AccessoriesViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService) : ObservableObject, INavigationAware
+    public partial class AccessoriesViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, AccessoriesService accessoriesService) : ObservableObject, INavigationAware
     {
         public event EventHandler<LevelAddedEventArgs>? LevelAdded;
 
@@ -31,12 +32,12 @@ namespace eTools_Ultimate.ViewModels.Pages
         private string _searchText = string.Empty;
 
         [ObservableProperty]
-        private ICollectionView _accessoriesView = CollectionViewSource.GetDefaultView(AccessoriesService.Instance.Accessories);
+        private ICollectionView _accessoriesView = CollectionViewSource.GetDefaultView(accessoriesService.Accessories);
 
         [ObservableProperty]
         private AccessoryAbilityOptionData? _lastAddedLevel = null;
 
-        public string[] _PossibleDstValues = [.. DefinesService.Instance.Defines.Where(x => x.Key.StartsWith("DST_")).Select(x => x.Key)];
+        public string[] _PossibleDstValues = [.. App.Services.GetRequiredService<DefinesService>().Defines.Where(x => x.Key.StartsWith("DST_")).Select(x => x.Key)];
 
         public string SearchText
         {
@@ -174,7 +175,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             try
             {
-                await Task.Run(AccessoriesService.Instance.Save);
+                await Task.Run(accessoriesService.Save);
 
                 snackbarService.Show(
                     title: "Accessories saved",

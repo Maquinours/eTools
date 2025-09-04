@@ -12,14 +12,14 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class CoupleViewModel : ObservableObject, INavigationAware
+    public partial class CoupleViewModel(CoupleService coupleService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
         private string _searchText = string.Empty;
 
         [ObservableProperty]
-        private ICollectionView _coupleView = CollectionViewSource.GetDefaultView(CoupleService.Instance.CoupleLevels);
+        private ICollectionView _coupleView = CollectionViewSource.GetDefaultView(coupleService.CoupleLevels);
 
         public string SearchText
         {

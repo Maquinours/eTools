@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
 using System.Collections.Generic;
@@ -23,11 +24,8 @@ namespace eTools_Ultimate.Services
         GiftBox6
     };
 
-    internal class GiftBoxesService
+    public class GiftBoxesService(SettingsService settingsService)
     {
-        private static readonly Lazy<GiftBoxesService> _instance = new(() => new GiftBoxesService());
-        public static GiftBoxesService Instance => _instance.Value;
-
         private readonly ObservableCollection<GiftBox> _giftboxes = [];
         public ObservableCollection<GiftBox> GiftBoxes => this._giftboxes;
 
@@ -42,11 +40,9 @@ namespace eTools_Ultimate.Services
         {
             this.ClearGiftBoxes();
 
-            Settings settings = Settings.Instance;
-
             using (Script script = new())
             {
-                string filePath = settings.GiftBoxesConfigFilePath ?? settings.DefaultGiftBoxesConfigFilePath;
+                string filePath = settingsService.Settings.GiftBoxesConfigFilePath ?? settingsService.Settings.DefaultGiftBoxesConfigFilePath;
                 script.Load(filePath);
                 while (true)
                 {
@@ -169,9 +165,7 @@ namespace eTools_Ultimate.Services
 
         public void Save()
         {
-            Settings settings = Settings.Instance;
-
-            string filePath = settings.GiftBoxesConfigFilePath ?? settings.DefaultGiftBoxesConfigFilePath;
+            string filePath = settingsService.Settings.GiftBoxesConfigFilePath ?? settingsService.Settings.DefaultGiftBoxesConfigFilePath;
 
             using StreamWriter writer = new(filePath, false, new UTF8Encoding(false));
             writer.WriteLine("// ========================================");

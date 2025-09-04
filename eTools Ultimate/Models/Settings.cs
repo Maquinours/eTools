@@ -12,8 +12,6 @@ namespace eTools_Ultimate.Models
 {
     public class Settings : INotifyPropertyChanged
     {
-        private static Settings _instance = new Settings();
-
         // General settings
         private int _resourcesVersion = 19;
         private string _resourcesFolderPath = System.AppDomain.CurrentDomain.BaseDirectory;
@@ -78,42 +76,6 @@ namespace eTools_Ultimate.Models
         private string? _worldTextureFilePath;
 
         public event PropertyChangedEventHandler? PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            switch(propertyName)
-            {
-                case nameof(this.ResourcesFolderPath):
-                    NotifyPropertyChanged(nameof(this.DefaultTexturesFolderPath));
-                    NotifyPropertyChanged(nameof(this.DefaultPropMoverFilePath));
-                    NotifyPropertyChanged(nameof(this.DefaultPropMoverTxtFilePath));
-                    NotifyPropertyChanged(nameof(this.DefaultPropMoverExFilePath));
-                    NotifyPropertyChanged(nameof(this.DefaultPropItemFilePath));
-                    NotifyPropertyChanged(nameof(this.DefaultPropItemTxtFilePath));
-                    NotifyPropertyChanged(nameof(this.DefaultPropSkillFilePath));
-                    NotifyPropertyChanged(nameof(this.DefaultPropSkillTxtFilePath));
-                    NotifyPropertyChanged(nameof(this.DefaultTextsConfigFilePath));
-                    // TODO: add missing elements
-                    NotifyPropertyChanged(nameof(this.DefaultModelsFolderPath));
-                    break;
-                case nameof(this.ClientFolderPath):
-                    NotifyPropertyChanged(nameof(this.DefaultIconsFolderPath));
-                    NotifyPropertyChanged(nameof(this.DefaultSoundsConfigFilePath));
-                    NotifyPropertyChanged(nameof(this.DefaultSoundsFolderPath));
-                    NotifyPropertyChanged(nameof(this.DefaultItemIconsFolderPath));
-                    NotifyPropertyChanged(nameof(this.DefaultSkillIconsFolderPath));
-                    break;
-                case nameof(this.ResourcesVersion):
-                    NotifyPropertyChanged(nameof(this.DefaultPropItemFilePath));
-                    break;
-            }
-        }
-
-        public static Settings Instance
-        {
-            get => _instance;
-        }
 
         // General settings
         public int ResourcesVersion
@@ -732,5 +694,36 @@ namespace eTools_Ultimate.Models
             }
         }
         public string DefaultWorldTextureFilePath => $"{this.ClientFolderPath}World{Path.DirectorySeparatorChar}Texture{Path.DirectorySeparatorChar}";
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            switch (propertyName)
+            {
+                case nameof(this.ResourcesFolderPath):
+                    NotifyPropertyChanged(nameof(this.DefaultTexturesFolderPath));
+                    NotifyPropertyChanged(nameof(this.DefaultPropMoverFilePath));
+                    NotifyPropertyChanged(nameof(this.DefaultPropMoverTxtFilePath));
+                    NotifyPropertyChanged(nameof(this.DefaultPropMoverExFilePath));
+                    NotifyPropertyChanged(nameof(this.DefaultPropItemFilePath));
+                    NotifyPropertyChanged(nameof(this.DefaultPropItemTxtFilePath));
+                    NotifyPropertyChanged(nameof(this.DefaultPropSkillFilePath));
+                    NotifyPropertyChanged(nameof(this.DefaultPropSkillTxtFilePath));
+                    NotifyPropertyChanged(nameof(this.DefaultTextsConfigFilePath));
+                    // TODO: add missing elements
+                    NotifyPropertyChanged(nameof(this.DefaultModelsFolderPath));
+                    break;
+                case nameof(this.ClientFolderPath):
+                    NotifyPropertyChanged(nameof(this.DefaultIconsFolderPath));
+                    NotifyPropertyChanged(nameof(this.DefaultSoundsConfigFilePath));
+                    NotifyPropertyChanged(nameof(this.DefaultSoundsFolderPath));
+                    NotifyPropertyChanged(nameof(this.DefaultItemIconsFolderPath));
+                    NotifyPropertyChanged(nameof(this.DefaultSkillIconsFolderPath));
+                    break;
+                case nameof(this.ResourcesVersion):
+                    NotifyPropertyChanged(nameof(this.DefaultPropItemFilePath));
+                    break;
+            }
+        }
     }
 }

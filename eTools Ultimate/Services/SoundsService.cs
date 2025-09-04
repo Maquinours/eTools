@@ -14,17 +14,16 @@ using NAudio.Wave;
 
 namespace eTools_Ultimate.Services
 {
-    internal class SoundsService
+    public class SoundsService
     {
-
-        private static readonly Lazy<SoundsService> _instance = new(() => new SoundsService());
-
         private readonly List<Sound> _sounds = new();
 
         private readonly NAudio.Wave.WaveOutEvent _waveOut = new();
 
         private string? _playingFilePath = null;
-        public static SoundsService Instance => _instance.Value;
+
+        private SettingsService _settingsService;
+
         public List<Sound> Sounds => _sounds;
         public string? PlayingFilePath
         {
@@ -38,8 +37,10 @@ namespace eTools_Ultimate.Services
             }
         }
 
-        public SoundsService()
+        public SoundsService(SettingsService settingsService)
         {
+            _settingsService = settingsService;
+
             _waveOut.PlaybackStopped += WaveOut_PlaybackStopped;
         }
 
@@ -59,7 +60,7 @@ namespace eTools_Ultimate.Services
         {
             Clear();
 
-            string filePath = Settings.Instance.SoundsConfigFilePath ?? Settings.Instance.DefaultSoundsConfigFilePath;
+            string filePath = _settingsService.Settings.SoundsConfigFilePath ?? _settingsService.Settings.DefaultSoundsConfigFilePath;
 
             using Script script = new();
             script.Load(filePath);

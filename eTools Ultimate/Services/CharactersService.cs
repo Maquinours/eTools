@@ -1,29 +1,29 @@
-﻿using eTools_Ultimate.Models;
+﻿using eTools_Ultimate.Exceptions;
+using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using eTools_Ultimate.Exceptions;
-using System.Numerics;
-using eTools_Ultimate.Helpers;
 
 namespace eTools_Ultimate.Services
 {
-    internal class CharactersService
+    public class CharactersService(SettingsService settingsService)
     {
-        private static readonly Lazy<CharactersService> _instance = new(() => new());
-        public static CharactersService Instance => _instance.Value;
-
         private readonly ObservableCollection<Character> _characters = [];
         public ObservableCollection<Character> Characters => this._characters;
 
         public void Load()
         {
+            Settings settings = settingsService.Settings;
+
             // Maybe make it a settings property
-            string filePath = Settings.Instance.CharactersConfigFilePath ?? Settings.Instance.DefaultCharactersConfigFilePath;
+            string filePath = settings.CharactersConfigFilePath ?? settings.DefaultCharactersConfigFilePath;
 
             using (Script script = new())
             {

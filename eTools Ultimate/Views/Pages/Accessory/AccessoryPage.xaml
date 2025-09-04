@@ -220,7 +220,6 @@
                             x:Name="AddButton"
                             Margin="0,0,10,0"
                             Background="#2F70AF"
-                            Command="{Binding AddAbilityOptionDataCommand}"
                             Content="{i18n:StringLocalizer 'Add'}" />
                         <ui:Button
                             x:Name="DeleteButton"

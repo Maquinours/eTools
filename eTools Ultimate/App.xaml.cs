@@ -63,6 +63,27 @@ namespace eTools_Ultimate
 
                 services.AddSingleton<AppConfigService>();
 
+                services.AddSingleton<SettingsService>();
+                services.AddSingleton<DefinesService>();
+                services.AddSingleton<StringsService>();
+                services.AddSingleton<ModelsService>();
+                services.AddSingleton<ItemsService>();
+                services.AddSingleton<MoversService>();
+                services.AddSingleton<SkillsService>();
+                services.AddSingleton<CharactersService>();
+                services.AddSingleton<SoundsService>();
+                services.AddSingleton<MusicsService>();
+                services.AddSingleton<TextsService>();
+                services.AddSingleton<GiftBoxesService>();
+                services.AddSingleton<ExchangesService>();
+                services.AddSingleton<HonorsService>();
+                services.AddSingleton<MotionsService>();
+                services.AddSingleton<AccessoriesService>();
+                services.AddSingleton<CoupleService>();
+                services.AddSingleton<TicketsService>();
+                services.AddSingleton<PackItemsService>();
+                services.AddSingleton<TerrainsService>();
+
                 // Splash screen
                 services.AddSingleton<eTools_Ultimate.Views.Windows.SplashScreen>();
                 services.AddSingleton<SplashScreenViewModel>();
@@ -95,7 +116,6 @@ namespace eTools_Ultimate
                 services.AddSingleton<ExchangesViewModel>();
                 services.AddSingleton<CharactersViewModel>();
                 services.AddSingleton<CoupleViewModel>();
-                services.AddSingleton<HonorViewModel>();
                 services.AddSingleton<MotionsViewModel>();
                 services.AddSingleton<HonorsViewModel>();
                 services.AddSingleton<AccessoriesViewModel>();

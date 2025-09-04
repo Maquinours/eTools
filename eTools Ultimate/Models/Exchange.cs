@@ -1,4 +1,5 @@
 ﻿using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,26 +8,26 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Models
 {
-    internal class ExchangeDescription
+    public class ExchangeDescription
     {
         private int _textId;
 
-        internal ExchangeDescription(int textId)
+        public ExchangeDescription(int textId)
         {
             this._textId = textId;
         }
     }
-    internal class ExchangeSetResultMsg
+    public class ExchangeSetResultMsg
     {
         private int _textId;
 
-        internal ExchangeSetResultMsg(int textId)
+        public ExchangeSetResultMsg(int textId)
         {
             this._textId = textId;
         }
     }
 
-    internal class ExchangeSetCondition
+    public class ExchangeSetCondition
     {
         private int _dwItemId;
         private int _nItemNum;
@@ -40,38 +41,38 @@ namespace eTools_Ultimate.Models
             get => this._nItemNum;
         }
 
-        internal ExchangeSetCondition(int dwItemId, int nItemNum)
+        public ExchangeSetCondition(int dwItemId, int nItemNum)
         {
             _dwItemId = dwItemId;
             _nItemNum = nItemNum;
         }
     }
 
-    internal class ExchangeSetRemove
+    public class ExchangeSetRemove
     {
         private int _dwItemId;
         private int _nItemNum;
 
-        internal ExchangeSetRemove(int dwItemId, int nItemNum)
+        public ExchangeSetRemove(int dwItemId, int nItemNum)
         {
             this._dwItemId = dwItemId;
             this._nItemNum = nItemNum;
         }
     }
 
-    internal class ExchangeSetConditionPoint
+    public class ExchangeSetConditionPoint
     {
         private int _nType;
         private int _nPoint;
 
-        internal ExchangeSetConditionPoint(int nType, int nPoint)
+        public ExchangeSetConditionPoint(int nType, int nPoint)
         {
             _nType = nType;
             _nPoint = nPoint;
         }
     }
 
-    internal class ExchangeSetRemovePoint
+    public class ExchangeSetRemovePoint
     {
         private int _nType;
         private int _nPoint;
@@ -82,14 +83,14 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    internal class ExchangeSetPay
+    public class ExchangeSetPay
     {
         private int _dwItemId;
         private int _nItemNum;
         private int _nPayProb;
         private int _byFalg;
 
-        internal ExchangeSetPay(int dwItemId, int nItemNum, int nPayProb, int byFalg)
+        public ExchangeSetPay(int dwItemId, int nItemNum, int nPayProb, int byFalg)
         {
             this._dwItemId = dwItemId;
             this._nItemNum = nItemNum;
@@ -98,7 +99,7 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    internal class ExchangeSet
+    public class ExchangeSet
     {
         private int _textId;
         private List<ExchangeSetResultMsg> _resultMessages;
@@ -115,7 +116,7 @@ namespace eTools_Ultimate.Models
 
         public Text? Text
         {
-            get => TextsService.Instance.Texts.FirstOrDefault(x => x.Prop.DwId == this.TextId);
+            get => App.Services.GetRequiredService<TextsService>().Texts.FirstOrDefault(x => x.Prop.DwId == this.TextId);
         }
 
         public List<ExchangeSetCondition> Conditions
@@ -123,7 +124,7 @@ namespace eTools_Ultimate.Models
             get => this._conditions;
         }
 
-        internal ExchangeSet(
+        public ExchangeSet(
             int textId,
             List<ExchangeSetResultMsg> resultMessages,
             List<ExchangeSetCondition> conditions,
@@ -142,16 +143,16 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    internal class ExchangeSmeltSetResultMsg
+    public class ExchangeSmeltSetResultMsg
     {
         private int _textId;
-        internal ExchangeSmeltSetResultMsg(int textId)
+        public ExchangeSmeltSetResultMsg(int textId)
         {
             this._textId = textId;
         }
     }
 
-    internal class ExchangeSmeltSetCondition
+    public class ExchangeSmeltSetCondition
     {
         private int _dwItemId;
         private int _nItemQuantity;
@@ -162,7 +163,7 @@ namespace eTools_Ultimate.Models
         private int _byAttributeKind;
         private bool _bCheckScriptAttribute;
 
-        internal ExchangeSmeltSetCondition(
+        public ExchangeSmeltSetCondition(
             int dwItemId,
             int nItemQuantity,
             int dwMinGeneralEnchant,
@@ -184,7 +185,7 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    internal class ExchangeSmeltSetPay
+    public class ExchangeSmeltSetPay
     {
         private int _dwItemId;
         private int _nItemQuantity;
@@ -197,7 +198,7 @@ namespace eTools_Ultimate.Models
         private int _byAttributeKind;
         private bool _bCheckAttribute;
 
-        internal ExchangeSmeltSetPay(
+        public ExchangeSmeltSetPay(
             int dwItemId,
             int nItemQuantity,
             int dwPaymentProb,
@@ -222,7 +223,7 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    internal class ExchangeSmeltSet
+    public class ExchangeSmeltSet
     {
         private List<ExchangeSmeltSetResultMsg> _resultMessages;
         private List<ExchangeSmeltSetCondition> _conditions;
@@ -239,7 +240,7 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    internal class ExchangeEnchantMoveSetResultMsg
+    public class ExchangeEnchantMoveSetResultMsg
     {
         private int _textId;
         internal ExchangeEnchantMoveSetResultMsg(int textId)
@@ -248,7 +249,7 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    internal class ExchangeEnchantMoveSetCondition
+    public class ExchangeEnchantMoveSetCondition
     {
         private int _dwItemId;
 
@@ -258,7 +259,7 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    internal class ExchangeEnchantMoveSetPay
+    public class ExchangeEnchantMoveSetPay
     {
         private int _dwItemId;
         private int _byItemFlag;
@@ -270,7 +271,7 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    internal class ExchangeEnchantMoveSet
+    public class ExchangeEnchantMoveSet
     {
         private List<ExchangeEnchantMoveSetResultMsg> _resultMessages;
         private List<ExchangeEnchantMoveSetCondition> _conditions;
@@ -287,7 +288,7 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    internal class Exchange : IDisposable
+    public class Exchange : IDisposable
     {
         private int _mmiId;
         private List<ExchangeDescription> _descriptions;
@@ -307,7 +308,7 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public string MmiIdentifier => DefinesService.Instance.ReversedMenuItemDefines.TryGetValue(this.MmiId, out string? identifier) ? identifier : this.MmiId.ToString();
+        public string MmiIdentifier => App.Services.GetRequiredService<DefinesService>().ReversedMenuItemDefines.TryGetValue(this.MmiId, out string? identifier) ? identifier : this.MmiId.ToString();
 
         public List<ExchangeSet> Sets
         {

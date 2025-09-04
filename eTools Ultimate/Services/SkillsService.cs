@@ -10,11 +10,8 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Services
 {
-    internal class SkillsService
+    public class SkillsService(SettingsService settingsService)
     {
-        private static readonly Lazy<SkillsService> _instance = new(() => new SkillsService());
-        public static SkillsService Instance => _instance.Value;
-
         private readonly ObservableCollection<Skill> skills = [];
         public ObservableCollection<Skill> Skills => skills;
 
@@ -29,9 +26,7 @@ namespace eTools_Ultimate.Services
         {
             this.ClearSkills();
 
-            Settings settings = Settings.Instance;
-
-            string filePath = settings.PropSkillFilePath ?? settings.DefaultPropSkillFilePath;
+            string filePath = settingsService.Settings.PropSkillFilePath ?? settingsService.Settings.DefaultPropSkillFilePath;
 
             using (Script script = new())
             {
@@ -172,14 +167,14 @@ namespace eTools_Ultimate.Services
                     prop.SzTextFileName = script.GetToken();
                     script.GetToken(); // ""
                     prop.SzCommand = script.GetToken();
-                    if(settings.ResourcesVersion >= 16)
+                    if(settingsService.Settings.ResourcesVersion >= 16)
                     {
                         prop.DwBuffTickType = script.GetNumber();
-                        if (settings.ResourcesVersion >= 18)
+                        if (settingsService.Settings.ResourcesVersion >= 18)
                         {
                             prop.DwMonsterGrade = script.GetNumber();
                             prop.DwEquipItemKeepSkill = script.GetNumber();
-                            if(settings.ResourcesVersion >= 19)
+                            if(settingsService.Settings.ResourcesVersion >= 19)
                                 prop.BCanUseActionSlot = script.GetNumber();
                         }
                     }

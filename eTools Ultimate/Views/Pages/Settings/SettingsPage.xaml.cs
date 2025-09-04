@@ -6,7 +6,6 @@ namespace eTools_Ultimate.Views.Pages
 {
     public partial class SettingsPage : INavigableView<SettingsViewModel>
     {
-        public static Settings Settings => Settings.Instance;
         public SettingsViewModel ViewModel { get; }
 
         public SettingsPage(SettingsViewModel viewModel)

@@ -1,6 +1,7 @@
 ﻿using eTools_Ultimate.Exceptions;
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
 using System.Collections.Generic;
@@ -13,16 +14,13 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Services
 {
-    class TerrainsService
+    public class TerrainsService
     {
-        private static readonly Lazy<TerrainsService> _instance = new(() => new());
-        public static TerrainsService Instance => _instance.Value;
-
         public ObservableCollection<ITerrainItem> TerrainItems { get; set; } = [];
 
         public void Load()
         {
-            string filePath = $"{Settings.Instance.ResourcesFolderPath}{Path.DirectorySeparatorChar}Terrain.inc"; // TODO: Use a proper path from Settings
+            string filePath = $"{App.Services.GetRequiredService<SettingsService>().Settings.ResourcesFolderPath}{Path.DirectorySeparatorChar}Terrain.inc"; // TODO: Use a proper path from Settings
 
             using Scanner scanner = new();
 
@@ -188,7 +186,7 @@ namespace eTools_Ultimate.Services
 
         public void Save()
         {
-            string filePath = $"{Settings.Instance.ResourcesFolderPath}{Path.DirectorySeparatorChar}Terrain.inc"; // TODO: Use a proper path from Settings
+            string filePath = $"{App.Services.GetRequiredService<SettingsService>().Settings.ResourcesFolderPath}{Path.DirectorySeparatorChar}Terrain.inc"; // TODO: Use a proper path from Settings
 
             using StreamWriter writer = new(filePath, false, new UTF8Encoding(false));
             writer.WriteLine("// ========================================");

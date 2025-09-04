@@ -15,7 +15,29 @@ namespace eTools_Ultimate.ViewModels.Windows
 {
     public class CloseSplashScreenMessage { }
 
-    public partial class SplashScreenViewModel(IServiceProvider serviceProvider) : ObservableObject
+    public partial class SplashScreenViewModel(
+        IServiceProvider serviceProvider,
+        SettingsService settingsService,
+        DefinesService definesService,
+        StringsService stringsService,
+        ModelsService modelsService,
+        ItemsService itemsService,
+        MoversService moversService,
+        SkillsService skillsService,
+        CharactersService charactersService,
+        SoundsService soundsService,
+        MusicsService musicsService,
+        TextsService textsService,
+        GiftBoxesService giftBoxesService,
+        ExchangesService exchangesService,
+        HonorsService honorsService,
+        MotionsService motionsService,
+        AccessoriesService accessoriesService,
+        CoupleService coupleService,
+        TicketsService ticketsService,
+        PackItemsService packItemsService,
+        TerrainsService terrainsService
+        ) : ObservableObject
     {
         [ObservableProperty]
         private string _loadingText = string.Empty;
@@ -32,26 +54,26 @@ namespace eTools_Ultimate.ViewModels.Windows
         public async Task Load()
         {
             (string text, Action loader)[] loadingSteps = [
-                ("Loading settings...", SettingsService.Load),
-                ("Loading defines...", DefinesService.Instance.Load),
-                ("Loading strings...", StringsService.Instance.Load),
-                ("Loading models...", ModelsService.Instance.Load),
-                ("Loading items...", ItemsService.Instance.Load),
-                ("Loading movers...", MoversService.Instance.Load),
-                ("Loading skills...", SkillsService.Instance.Load),
-                ("Loading characters...", CharactersService.Instance.Load),
-                ("Loading sounds config...", SoundsService.Instance.Load),
-                ("Loading musics config...", MusicsService.Instance.Load),
-                ("Loading texts...", TextsService.Instance.Load),
-                ("Loading giftboxes...", GiftBoxesService.Instance.Load),
-                ("Loading exchanges...", ExchangesService.Instance.Load),
-                ("Loading honors...", HonorsService.Instance.Load),
-                ("Loading motions...", MotionsService.Instance.Load),
-                ("Loading accessories...", AccessoriesService.Instance.Load),
-                ("Loading couple configuration...", CoupleService.Instance.Load),
-                ("Loading tickets...", TicketsService.Instance.Load),
-                ("Loading pack items...", PackItemsService.Instance.Load),
-                ("Loading terrains...", TerrainsService.Instance.Load)
+                ("Loading settings...", settingsService.Load),
+                ("Loading defines...", definesService.Load),
+                ("Loading strings...", stringsService.Load),
+                ("Loading models...", modelsService.Load),
+                ("Loading items...", itemsService.Load),
+                ("Loading movers...", moversService.Load),
+                ("Loading skills...", skillsService.Load),
+                ("Loading characters...", charactersService.Load),
+                ("Loading sounds config...", soundsService.Load),
+                ("Loading musics config...", musicsService.Load),
+                ("Loading texts...", textsService.Load),
+                ("Loading giftboxes...", giftBoxesService.Load),
+                ("Loading exchanges...", exchangesService.Load),
+                ("Loading honors...", honorsService.Load),
+                ("Loading motions...", motionsService.Load),
+                ("Loading accessories...", accessoriesService.Load),
+                ("Loading couple configuration...", coupleService.Load),
+                ("Loading tickets...", ticketsService.Load),
+                ("Loading pack items...", packItemsService.Load),
+                ("Loading terrains...", terrainsService.Load)
                 ];
 
             if (serviceProvider.GetService(typeof(INavigationWindow)) is not MainWindow mainWindow) throw new InvalidOperationException("SplashScreenViewModel::Load exception : Unable to find MainWindow");
@@ -78,21 +100,22 @@ namespace eTools_Ultimate.ViewModels.Windows
                     //ChangesTrackerService.Instance.Init();
                 }).ConfigureAwait(true);
 
-            Loaded?.Invoke(this, EventArgs.Empty);
+                Loaded?.Invoke(this, EventArgs.Empty);
 
-            mainWindow.ShowWindow();
-            mainWindow.Navigate(typeof(DashboardPage));
-            } catch(Exception ex)
+                mainWindow.ShowWindow();
+                mainWindow.Navigate(typeof(DashboardPage));
+            }
+            catch (Exception ex)
             {
                 LoadingErrorWindow errorWindow = new(ex.Message);
-                if(errorWindow.ShowDialog() == true)
+                if (errorWindow.ShowDialog() == true)
                 {
                     Loaded?.Invoke(this, EventArgs.Empty);
                     mainWindow.ShowWindow();
                     mainWindow.Navigate(typeof(ResourcePathPage));
 
                 }
-                else 
+                else
                     Application.Current.Shutdown();
                 //        MessageBox.Show($"Une erreur est survenue : {ex.Message}\n\nVoulez-vous ouvrir les paramètres ?",
                 //"Erreur",

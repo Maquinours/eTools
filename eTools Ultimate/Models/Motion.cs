@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Linq;
 using System.Collections;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace eTools_Ultimate.Models
 {
@@ -87,7 +88,7 @@ namespace eTools_Ultimate.Models
 
         public string Identifier
         {
-            get => Script.NumberToString(Prop.DwId, DefinesService.Instance.ReversedMotionDefines);
+            get => Script.NumberToString(Prop.DwId, App.Services.GetRequiredService<DefinesService>().ReversedMotionDefines);
             set
             {
                 if (Script.TryGetNumberFromString(value, out int result))
@@ -97,7 +98,7 @@ namespace eTools_Ultimate.Models
 
         public string MotionIdentifier
         {
-            get => Script.NumberToString(Prop.DwMotion, DefinesService.Instance.ReversedMotionTypeDefines);
+            get => Script.NumberToString(Prop.DwMotion, App.Services.GetRequiredService<DefinesService>().ReversedMotionTypeDefines);
             set
             {
                 if (Script.TryGetNumberFromString(value, out int result))
@@ -107,17 +108,24 @@ namespace eTools_Ultimate.Models
 
         public string Name
         {
-            get => StringsService.Instance.GetString(Prop.SzName);
-            set => StringsService.Instance.ChangeStringValue(Prop.SzName, value);
+            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName);
+            set => App.Services.GetRequiredService<StringsService>().ChangeStringValue(Prop.SzName, value);
         }
 
         public string Description
         {
-            get => StringsService.Instance.GetString(Prop.SzDesc);
-            set => StringsService.Instance.ChangeStringValue(Prop.SzDesc, value);
+            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzDesc);
+            set => App.Services.GetRequiredService<StringsService>().ChangeStringValue(Prop.SzDesc, value);
         }
 
-        public string IconFilePath => $"{Settings.Instance.IconsFolderPath ?? Settings.Instance.DefaultIconsFolderPath}{Prop.SzIconName}";
+        public string IconFilePath
+        {
+            get
+            {
+                Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+                return $"{settings.IconsFolderPath ?? settings.DefaultIconsFolderPath}{Prop.SzIconName}";
+            }
+        }
 
         public ImageSource? Icon // TODO: maybe refresh this property when file changes
         {
@@ -148,10 +156,13 @@ namespace eTools_Ultimate.Models
 
         public Motion(MotionProp prop)
         {
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
             _prop = prop;
             Prop.PropertyChanged += Prop_PropertyChanged;
-            Settings.Instance.PropertyChanged += Settings_PropertyChanged;
-            StringsService.Instance.Strings.CollectionChanged += Strings_CollectionChanged;
+
+            settings.PropertyChanged += Settings_PropertyChanged;
+            App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged += Strings_CollectionChanged;
         }
 
         private void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -217,9 +228,11 @@ namespace eTools_Ultimate.Models
 
         public void Dispose()
         {
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
             Prop.PropertyChanged -= Prop_PropertyChanged;
-            Settings.Instance.PropertyChanged -= Settings_PropertyChanged;
-            StringsService.Instance.Strings.CollectionChanged -= Strings_CollectionChanged;
+            settings.PropertyChanged -= Settings_PropertyChanged;
+            App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged -= Strings_CollectionChanged;
             GC.SuppressFinalize(this);
         }
 

@@ -13,6 +13,7 @@ using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Formats.Png;
 using SixLabors.ImageSharp.Formats.Jpeg;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace eTools_Ultimate.Models
 {
@@ -52,7 +53,7 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    internal class Character
+    public class Character
     {
         private string _id;
         private string _name; // IDS_
@@ -71,17 +72,19 @@ namespace eTools_Ultimate.Models
 
         public string Name
         {
-            get => StringsService.Instance.Strings.ContainsKey(this._name) ? StringsService.Instance.GetString(this._name) : "";
+            get => App.Services.GetRequiredService<StringsService>().Strings.ContainsKey(this._name) ? App.Services.GetRequiredService<StringsService>().GetString(this._name) : "";
         }
 
         public ImageSource? Icon
         {
             get
             {
-                StringsService stringsService = StringsService.Instance;
+                StringsService stringsService = App.Services.GetRequiredService<StringsService>();
+                Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
                 if (this._szChar == null || !stringsService.Strings.ContainsKey(this._szChar)) return null;
-                string icon = StringsService.Instance.GetString(this._szChar);
-                string filePath = $"{Settings.Instance.CharactersIconsFolderFolderPath ?? Settings.Instance.DefaultCharactersIconsFolderPath}{icon}";
+                string icon = stringsService.GetString(this._szChar);
+                string filePath = $"{settings.CharactersIconsFolderFolderPath ?? settings.DefaultCharactersIconsFolderPath}{icon}";
                 if (!File.Exists(filePath))
                 {
                     return null;

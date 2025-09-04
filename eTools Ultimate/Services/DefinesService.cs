@@ -1,21 +1,19 @@
-﻿using Scan;
+﻿using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models;
+using Microsoft.Extensions.DependencyInjection;
+using Scan;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using eTools_Ultimate.Helpers;
-using eTools_Ultimate.Models;
-using System.IO;
 
 namespace eTools_Ultimate.Services
 {
-    internal class DefinesService
+    public class DefinesService(SettingsService settingsService)
     {
-        private static readonly Lazy<DefinesService> _instance = new(() => new DefinesService());
-        public static DefinesService Instance => _instance.Value;
-
         private readonly ObservableDictionary<string, int> _defines = [];
 
         private readonly Dictionary<int, string> _reversedItemDefines = [];
@@ -54,10 +52,12 @@ namespace eTools_Ultimate.Services
 
         public void Load()
         {
+            Settings settings = settingsService.Settings;
+
             this.Defines.Clear();
             this.ReversedItemDefines.Clear();
 
-            string[] paths = Directory.EnumerateFiles(Settings.Instance.ResourcesFolderPath, "define*.h", SearchOption.TopDirectoryOnly).ToArray();
+            string[] paths = Directory.EnumerateFiles(settings.ResourcesFolderPath, "define*.h", SearchOption.TopDirectoryOnly).ToArray();
 
             foreach (string filePath in paths)
             {

@@ -13,11 +13,8 @@ using System.IO;
 
 namespace eTools_Ultimate.Services
 {
-    internal class ExchangesService
+    public class ExchangesService(SettingsService settingsService, DefinesService definesService)
     {
-        private static readonly Lazy<ExchangesService> _instance = new(() => new());
-        public static ExchangesService Instance => _instance.Value;
-
         private readonly ObservableCollection<Exchange> _exchanges = [];
         public ObservableCollection<Exchange> Exchanges => this._exchanges;
 
@@ -32,7 +29,7 @@ namespace eTools_Ultimate.Services
         {
             this.ClearExchanges();
 
-            Settings settings = Settings.Instance;
+            Settings settings = settingsService.Settings;
 
             using (Scanner scanner = new())
             {
@@ -132,7 +129,7 @@ namespace eTools_Ultimate.Services
                                                         // Not sure we should keep that
                                                         if (scanner.Token == "PENYA")
                                                         {
-                                                            if (DefinesService.Instance.Defines.TryGetValue("II_GOLD_SEED1", out int penyaItemId))
+                                                            if (definesService.Defines.TryGetValue("II_GOLD_SEED1", out int penyaItemId))
                                                                 dwItemId = penyaItemId;
                                                             else
                                                                 throw new InvalidDataException($"PENYA item ID (II_GOLD_SEED1) not found in defines");
@@ -164,7 +161,7 @@ namespace eTools_Ultimate.Services
                                                         // Not sure we should keep that
                                                         if (scanner.Token == "PENYA")
                                                         {
-                                                            if (DefinesService.Instance.Defines.TryGetValue("II_GOLD_SEED1", out int penyaItemId))
+                                                            if (definesService.Defines.TryGetValue("II_GOLD_SEED1", out int penyaItemId))
                                                                 dwItemId = penyaItemId;
                                                             else
                                                                 throw new InvalidDataException($"PENYA item ID (II_GOLD_SEED1) not found in defines");
@@ -320,7 +317,7 @@ namespace eTools_Ultimate.Services
                                                         // Not sure we should keep that
                                                         if (scanner.Token == "PENYA")
                                                         {
-                                                            if (DefinesService.Instance.Defines.TryGetValue("II_GOLD_SEED1", out int penyaItemId))
+                                                            if (definesService.Defines.TryGetValue("II_GOLD_SEED1", out int penyaItemId))
                                                                 dwItemId = penyaItemId;
                                                             else
                                                                 throw new InvalidDataException($"PENYA item ID (II_GOLD_SEED1) not found in defines");
@@ -445,7 +442,7 @@ namespace eTools_Ultimate.Services
                                                         // Not sure we should keep that
                                                         if (scanner.Token == "PENYA")
                                                         {
-                                                            if (DefinesService.Instance.Defines.TryGetValue("II_GOLD_SEED1", out int penyaItemId))
+                                                            if (definesService.Defines.TryGetValue("II_GOLD_SEED1", out int penyaItemId))
                                                                 dwItemId = penyaItemId;
                                                             else
                                                                 throw new InvalidDataException($"PENYA item ID (II_GOLD_SEED1) not found in defines");

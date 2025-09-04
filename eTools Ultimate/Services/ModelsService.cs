@@ -1,21 +1,19 @@
-﻿using eTools_Ultimate.Models;
+﻿using eTools_Ultimate.Exceptions;
+using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using eTools_Ultimate.Exceptions;
-using System.Collections.ObjectModel;
-using eTools_Ultimate.Helpers;
 
 namespace eTools_Ultimate.Services
 {
-    internal class ModelsService
+    public class ModelsService
     {
-        private static readonly Lazy<ModelsService> _instance = new(() => new ModelsService());
-        public static ModelsService Instance => _instance.Value;
-
         private readonly ObservableCollection<MainModelBrace> _models = [];
         public ObservableCollection<MainModelBrace> Models => _models;
         private void ClearBraceRecursively(ModelBrace brace)
@@ -38,10 +36,12 @@ namespace eTools_Ultimate.Services
 
         public void Load()
         {
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
             this.ClearModels();
 
             // Maybe make it a settings property
-            string filePath = $"{Settings.Instance.ResourcesFolderPath}mdlDyna.inc";
+            string filePath = $"{settings.ResourcesFolderPath}mdlDyna.inc";
 
             using (Script script = new()) 
             {

@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using SixLabors.ImageSharp.ColorSpaces;
 using System;
 using System.Collections.Generic;
@@ -37,8 +38,9 @@ namespace eTools_Ultimate.Models
             {
                 if (SzName != value)
                 {
+                    StringsService stringsService = App.Services.GetRequiredService<StringsService>();
+
                     string oldValue = this._szName;
-                    StringsService stringsService = StringsService.Instance;
                     if (!stringsService.Strings.ContainsKey(value))
                         stringsService.GenerateNewString(value);
                     _szName = value;
@@ -76,7 +78,7 @@ namespace eTools_Ultimate.Models
 
         public string Identifier
         {
-            get => Script.NumberToString(Prop.DwId, DefinesService.Instance.ReversedTextDefines);
+            get => Script.NumberToString(Prop.DwId, App.Services.GetRequiredService<DefinesService>().ReversedTextDefines);
             set 
             {
                 if (Script.TryGetNumberFromString(value, out int result))
@@ -86,8 +88,8 @@ namespace eTools_Ultimate.Models
 
         public string Name
         {
-            get => StringsService.Instance.GetString(Prop.SzName);
-            set => StringsService.Instance.ChangeStringValue(Prop.SzName, value);
+            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName);
+            set => App.Services.GetRequiredService<StringsService>().ChangeStringValue(Prop.SzName, value);
         }
 
         public Color Color
@@ -121,13 +123,13 @@ namespace eTools_Ultimate.Models
             _prop = prop;
 
             Prop.PropertyChanged += Prop_PropertyChanged;
-            StringsService.Instance.Strings.CollectionChanged += ProjectStrings_CollectionChanged;
+            App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged += ProjectStrings_CollectionChanged;
         }
 
         public void Dispose()
         {
             Prop.PropertyChanged -= Prop_PropertyChanged;
-            StringsService.Instance.Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
+            App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
         }
 
         private void Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)

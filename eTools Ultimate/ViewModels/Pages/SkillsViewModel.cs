@@ -8,14 +8,14 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class SkillsViewModel : ObservableObject, INavigationAware
+    public partial class SkillsViewModel(SkillsService skillsService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
         private string _searchText = string.Empty;
 
         [ObservableProperty]
-        private ICollectionView _skillsView = CollectionViewSource.GetDefaultView(SkillsService.Instance.Skills);
+        private ICollectionView _skillsView = CollectionViewSource.GetDefaultView(skillsService.Skills);
 
         public string SearchText
         {

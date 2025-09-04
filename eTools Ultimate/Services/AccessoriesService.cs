@@ -1,6 +1,7 @@
 ﻿using eTools_Ultimate.Exceptions;
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,8 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Services
 {
-    internal class AccessoriesService
+    public class AccessoriesService
     {
-        private static readonly Lazy<AccessoriesService> _instance = new(() => new());
-        public static AccessoriesService Instance => _instance.Value;
-
         private readonly List<int> _probabilities = [];
         private readonly List<Accessory> _accessories = [];
 
@@ -32,9 +30,11 @@ namespace eTools_Ultimate.Services
 
         public void Load()
         {
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
             this.ClearAccessories();
 
-            string filePath = $"{Settings.Instance.ResourcesFolderPath}accessory.inc"; // TODO: add settings value
+            string filePath = $"{settings.ResourcesFolderPath}accessory.inc"; // TODO: add settings value
             using (Script script = new())
             {
                 script.Load(filePath);
@@ -118,7 +118,9 @@ namespace eTools_Ultimate.Services
 
         public void Save()
         {
-            string filePath = $"{Settings.Instance.ResourcesFolderPath}accessory.inc"; // TODO: Use a proper path from Settings
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
+            string filePath = $"{settings.ResourcesFolderPath}accessory.inc"; // TODO: Use a proper path from Settings
 
             using StreamWriter writer = new(filePath, false, new UTF8Encoding(false));
             writer.WriteLine("// ========================================");

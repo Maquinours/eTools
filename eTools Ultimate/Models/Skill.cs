@@ -1,17 +1,18 @@
 ﻿using DDSImageParser;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Data.Common;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 using System.Windows.Media;
-using System.Collections.Specialized;
-using System.Data.Common;
+using System.Windows.Media.Imaging;
 
 namespace eTools_Ultimate.Models
 {
@@ -290,7 +291,7 @@ namespace eTools_Ultimate.Models
         public int BCanUseActionSlot { get => _bCanUseActionSlot; set { if (value != BCanUseActionSlot) { _bCanUseActionSlot = value; NotifyPropertyChanged(); } } }
     }
 
-    internal class Skill : INotifyPropertyChanged
+    public class Skill : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -329,7 +330,7 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public string Identifier => DefinesService.Instance.ReversedSkillDefines.TryGetValue(this.Prop.DwId, out string? identifier) ? identifier : this.Prop.DwId.ToString();
+        public string Identifier => App.Services.GetRequiredService<DefinesService>().ReversedSkillDefines.TryGetValue(this.Prop.DwId, out string? identifier) ? identifier : this.Prop.DwId.ToString();
 
         private SkillProp _prop;
         public SkillProp Prop
@@ -351,14 +352,15 @@ namespace eTools_Ultimate.Models
 
         public string Name
         {
-            get => StringsService.Instance.GetString(Prop.SzName);
-            set { StringsService.Instance.ChangeStringValue(Prop.SzName, value); }
+            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName);
+            set => App.Services.GetRequiredService<StringsService>().ChangeStringValue(Prop.SzName, value);
         }
         public ImageSource? Icon
         {
             get
             {
-                Settings settings = Settings.Instance;
+                Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
                 string filePath = $@"{settings.SkillIconsFolderPath ?? settings.DefaultSkillIconsFolderPath}{this.Prop.SzIcon}";
                 if (!File.Exists(filePath))
                 {
@@ -389,12 +391,12 @@ namespace eTools_Ultimate.Models
 
         public Skill()
         {
-            StringsService.Instance.Strings.CollectionChanged += ProjectStrings_CollectionChanged;
+            App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged += ProjectStrings_CollectionChanged;
         }
 
         public void Dispose()
         {
-            StringsService.Instance.Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
+            App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
             if (this.Prop != null)
                 this.Prop.PropertyChanged -= Prop_PropertyChanged;
         }

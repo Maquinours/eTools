@@ -1,4 +1,5 @@
 ﻿using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Models
 {
-    internal class Honor(int nId, int nLGrouping, int nSGrouping, int nNeed, string strTitle) : IDisposable, INotifyPropertyChanged
+    public class Honor(int nId, int nLGrouping, int nSGrouping, int nNeed, string strTitle) : IDisposable, INotifyPropertyChanged
     {
         private int _nId = nId;
         private int _nLGrouping = nLGrouping;
@@ -91,8 +92,8 @@ namespace eTools_Ultimate.Models
 
         public string Title
         {
-            get => StringsService.Instance.GetString(this.StrTitle);
-            set => StringsService.Instance.ChangeStringValue(this.StrTitle, value);
+            get => App.Services.GetRequiredService<StringsService>().GetString(this.StrTitle);
+            set => App.Services.GetRequiredService<StringsService>().ChangeStringValue(this.StrTitle, value);
         }
 
         public void Dispose()

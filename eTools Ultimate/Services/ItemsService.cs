@@ -1,22 +1,20 @@
-﻿using System;
+﻿using eTools_Ultimate.Exceptions;
+using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models;
+using Microsoft.Extensions.DependencyInjection;
+using Scan;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using eTools_Ultimate.Models;
-using Scan;
 using Wpf.Ui;
-using eTools_Ultimate.Exceptions;
-using eTools_Ultimate.Helpers;
 
 namespace eTools_Ultimate.Services
 {
-    internal class ItemsService
+    public class ItemsService(SettingsService settingsService, StringsService stringsService, DefinesService definesService, ModelsService modelsService)
     {
-        private static readonly Lazy<ItemsService> _instance = new(() => new ItemsService());
-        public static ItemsService Instance => _instance.Value;
-
         private readonly ObservableCollection<Item> items = [];
         public ObservableCollection<Item> Items => this.items;
 
@@ -36,17 +34,14 @@ namespace eTools_Ultimate.Services
         {
             this.ClearItems();
 
-            Settings settings = Settings.Instance;
-            StringsService stringsService = StringsService.Instance;
-
-            int itemModelType = DefinesService.Instance.Defines["OT_ITEM"];
-            ModelElem[] itemModels = ModelsService.Instance.GetModelsByType(itemModelType);
+            int itemModelType = definesService.Defines["OT_ITEM"];
+            ModelElem[] itemModels = modelsService.GetModelsByType(itemModelType);
             Dictionary<int, ModelElem> itemModelsDictionary = itemModels.ToDictionary(x => x.DwIndex, x => x); // used to get better performance
 
 
             using (Script script = new())
             {
-                string filePath = settings.PropItemFilePath ?? settings.DefaultPropItemFilePath;
+                string filePath = settingsService.Settings.PropItemFilePath ?? settingsService.Settings.DefaultPropItemFilePath;
                 script.Load(filePath);
                 while (true)
                 {
@@ -113,7 +108,7 @@ namespace eTools_Ultimate.Services
                     int dwDestParam4 = default;
                     int dwDestParam5 = default;
                     int dwDestParam6 = default;
-                    if (settings.ResourcesVersion >= 19)
+                    if (settingsService.Settings.ResourcesVersion >= 19)
                     {
                         dwDestParam4 = script.GetNumber();
                         dwDestParam5 = script.GetNumber();
@@ -125,7 +120,7 @@ namespace eTools_Ultimate.Services
                     int nAdjParamVal4 = default;
                     int nAdjParamVal5 = default;
                     int nAdjParamVal6 = default;
-                    if (settings.ResourcesVersion >= 19)
+                    if (settingsService.Settings.ResourcesVersion >= 19)
                     {
                         nAdjParamVal4 = script.GetNumber();
                         nAdjParamVal5 = script.GetNumber();
@@ -138,7 +133,7 @@ namespace eTools_Ultimate.Services
                     int dwChgParamVal4 = default;
                     int dwChgParamVal5 = default;
                     int dwChgParamVal6 = default;
-                    if (settings.ResourcesVersion >= 19)
+                    if (settingsService.Settings.ResourcesVersion >= 19)
                     {
                         dwChgParamVal4 = script.GetNumber();
                         dwChgParamVal5 = script.GetNumber();
@@ -150,7 +145,7 @@ namespace eTools_Ultimate.Services
                     int nDestData14 = default;
                     int nDestData15 = default;
                     int nDestData16 = default;
-                    if (settings.ResourcesVersion >= 19)
+                    if (settingsService.Settings.ResourcesVersion >= 19)
                     {
                         nDestData14 = script.GetNumber();
                         nDestData15 = script.GetNumber();
@@ -254,7 +249,7 @@ namespace eTools_Ultimate.Services
                     int bCanSavePotion = default;
                     int bCanLooksChange = default;
                     int bIsLooksChangeMaterial = default;
-                    if (settings.ResourcesVersion >= 16)
+                    if (settingsService.Settings.ResourcesVersion >= 16)
                     {
                         nMinLimitLevel = script.GetNumber();
                         nMaxLimitLevel = script.GetNumber();
@@ -283,7 +278,7 @@ namespace eTools_Ultimate.Services
                         dwPierce = script.GetNumber();
                         dwUprouse = script.GetNumber();
                         bAbsoluteTime = script.GetNumber();
-                        if (settings.ResourcesVersion >= 18)
+                        if (settingsService.Settings.ResourcesVersion >= 18)
                         {
                             dwItemGrade = script.GetNumber(); // ITEM_GRADE_
                             bCanTrade = script.GetNumber();
@@ -291,7 +286,7 @@ namespace eTools_Ultimate.Services
                             dwSubCategory = script.GetNumber(); // TYPE2_
                             bCanHaveServerTransform = script.GetNumber();
                             bCanSavePotion = script.GetNumber();
-                            if (settings.ResourcesVersion >= 19)
+                            if (settingsService.Settings.ResourcesVersion >= 19)
                             {
                                 bCanLooksChange = script.GetNumber();
                                 bIsLooksChangeMaterial = script.GetNumber();
