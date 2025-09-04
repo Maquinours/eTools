@@ -1146,9 +1146,9 @@
     <value>Supprimer</value>
     <comment>Remove button tooltip</comment>
   </data>
-  <data name="AII_ Assignment - Mover Page" xml:space="preserve">
-    <value>AII_ Attribution - Page Mover</value>
-    <comment>AII_ Assignment - Mover Page section title</comment>
+  <data name="AII_ Assignment" xml:space="preserve">
+    <value>AII_ Attribution</value>
+    <comment>AII_ Assignment section title</comment>
   </data>
   <data name="Available Resources" xml:space="preserve">
     <value>Ressources disponibles</value>
