@@ -867,7 +867,6 @@
                     <Grid Margin="0,10,0,12">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
@@ -882,7 +881,7 @@
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="200" />
+                                    <RowDefinition Height="150" />
                                 </Grid.RowDefinitions>
                                 
                                 <!--  Header  -->
@@ -934,91 +933,98 @@
                             </Grid>
                         </Border>
 
-                        <!--  Center Buttons  -->
-                        <StackPanel
-                            Grid.Column="1"
-                            Margin="10,0"
-                            VerticalAlignment="Center"
-                            Orientation="Vertical">
-                            <Button
-                                Margin="0,0,0,10"
-                                Width="60"
-                                Height="40"
-                                Command="{Binding AddResourceCommand}"
-                                ToolTip="{i18n:StringLocalizer 'Add'}">
-                                <ui:SymbolIcon Symbol="Add24" />
-                            </Button>
-                            <Button
-                                Width="60"
-                                Height="40"
-                                Command="{Binding RemoveResourceCommand}"
-                                ToolTip="{i18n:StringLocalizer 'Delete'}">
-                                <ui:SymbolIcon Symbol="Delete24" />
-                            </Button>
-                        </StackPanel>
+                        <!--  Right ListView with Buttons  -->
+                        <Grid Grid.Column="1" Margin="10,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                        <!--  Right ListView  -->
-                        <Border
-                            Grid.Column="2"
-                            Margin="10,0,0,0"
-                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                            BorderThickness="1"
-                            CornerRadius="4">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="200" />
-                                </Grid.RowDefinitions>
-                                
-                                <!--  Header  -->
-                                <TextBlock
-                                    Grid.Row="0"
-                                    Margin="10,10,10,5"
-                                    FontWeight="SemiBold"
-                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                    Text="{i18n:StringLocalizer 'Assigned Resources'}" />
-                                
-                                <!--  ListView  -->
-                                <ListView
-                                    Grid.Row="1"
-                                    Margin="5,0,5,5"
-                                    Background="Transparent"
-                                    BorderThickness="0"
-                                    ItemsSource="{Binding AssignedResources}"
-                                    SelectionMode="Single">
-                                    <ListView.ItemContainerStyle>
-                                        <Style TargetType="ListViewItem">
-                                            <Setter Property="Background" Value="Transparent" />
-                                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                                            <Style.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
-                                                </Trigger>
-                                                <Trigger Property="IsSelected" Value="True">
-                                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
-                                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-                                                </Trigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </ListView.ItemContainerStyle>
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Margin="5">
-                                                <TextBlock
-                                                    FontWeight="SemiBold"
-                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                    Text="{Binding Name}" />
-                                                <TextBlock
-                                                    FontSize="12"
-                                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                                    Text="{Binding Type}" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </Grid>
-                        </Border>
+                            <!--  Right ListView  -->
+                            <Border
+                                Grid.Column="0"
+                                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                BorderThickness="1"
+                                CornerRadius="4">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="150" />
+                                    </Grid.RowDefinitions>
+                                    
+                                    <!--  Header  -->
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Margin="10,10,10,5"
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{i18n:StringLocalizer 'Assigned Resources'}" />
+                                    
+                                    <!--  ListView  -->
+                                    <ListView
+                                        Grid.Row="1"
+                                        Margin="5,0,5,5"
+                                        Background="Transparent"
+                                        BorderThickness="0"
+                                        ItemsSource="{Binding AssignedResources}"
+                                        SelectionMode="Single">
+                                        <ListView.ItemContainerStyle>
+                                            <Style TargetType="ListViewItem">
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsSelected" Value="True">
+                                                        <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                                                        <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ListView.ItemContainerStyle>
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Margin="5">
+                                                    <TextBlock
+                                                        FontWeight="SemiBold"
+                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                        Text="{Binding Name}" />
+                                                    <TextBlock
+                                                        FontSize="12"
+                                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                        Text="{Binding Type}" />
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </Grid>
+                            </Border>
+
+                            <!--  Buttons rechts neben der rechten ListView  -->
+                            <StackPanel
+                                Grid.Column="1"
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Top"
+                                Orientation="Vertical">
+                                <Button
+                                    Margin="0,0,0,10"
+                                    Width="60"
+                                    Height="40"
+                                    Command="{Binding AddResourceCommand}"
+                                    ToolTip="{i18n:StringLocalizer 'Add'}">
+                                    <ui:SymbolIcon Symbol="Add24" />
+                                </Button>
+                                <Button
+                                    Width="60"
+                                    Height="40"
+                                    Command="{Binding RemoveResourceCommand}"
+                                    ToolTip="{i18n:StringLocalizer 'Delete'}">
+                                    <ui:SymbolIcon Symbol="Delete24" />
+                                </Button>
+                            </StackPanel>
+                        </Grid>
                     </Grid>
                 </StackPanel>
             </StackPanel>
