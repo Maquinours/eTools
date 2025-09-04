@@ -1147,4 +1147,16 @@
     <value>Flächenziel</value>
     <comment>AOE Target option</comment>
   </data>
+  <data name="AII_ Assignment - Mover Page" xml:space="preserve">
+    <value>AII_ Zuordnung - Mover Seite</value>
+    <comment>AII_ Assignment - Mover Page section title</comment>
+  </data>
+  <data name="Available Resources" xml:space="preserve">
+    <value>Verfügbare Ressourcen</value>
+    <comment>Available Resources list header</comment>
+  </data>
+  <data name="Assigned Resources" xml:space="preserve">
+    <value>Zugewiesene Ressourcen</value>
+    <comment>Assigned Resources list header</comment>
+  </data>
 </root>
