@@ -1776,6 +1776,7 @@
                             </UniformGrid>
                         </StackPanel>
                     </StackPanel>
+
                 </StackPanel>
             </Grid>
         </ScrollViewer>
