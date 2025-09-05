@@ -201,6 +201,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         public List<KeyValuePair<int, string>> AiIdentifiers => definesService.ReversedAiDefines.ToList();
         public List<KeyValuePair<int, string>> MotionIdentifiers => definesService.ReversedMotionTypeDefines.ToList();
         public List<KeyValuePair<int, string>> SoundIdentifiers => definesService.ReversedSoundDefines.ToList();
+        public List<KeyValuePair<int, string>> RankIdentifiers => definesService.ReversedRankDefines.ToList();
         #endregion Fields
 
         public Task OnNavigatedToAsync()

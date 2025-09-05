@@ -3,6 +3,7 @@ using eTools_Ultimate.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
@@ -12,6 +13,14 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Models
 {
+    public enum MoverTypes
+    {
+        NPC,
+        CHARACTER,
+        MONSTER,
+        PET
+    }
+
     public class MoverProp(
         int dwId,
         string szName,
@@ -235,9 +244,9 @@ namespace eTools_Ultimate.Models
         public int NChaotic { get => _nChaotic; set => SetValue(ref this._nChaotic, value); }
         public int DwUseable { get => _dwUseable; set => SetValue(ref this._dwUseable, value); }
         public int DwActionRadius { get => _dwActionRadius; set => SetValue(ref this._dwActionRadius, value); }
-        public long DwAtkMin 
-        { 
-            get => _dwAtkMin; 
+        public long DwAtkMin
+        {
+            get => _dwAtkMin;
             set
             {
                 Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
@@ -249,10 +258,10 @@ namespace eTools_Ultimate.Models
                 SetValue(ref this._dwAtkMin, val);
             }
         }
-        public long DwAtkMax 
-        { 
+        public long DwAtkMax
+        {
             get => _dwAtkMax;
-            set 
+            set
             {
                 Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
                 // If mover is configured to use 64 bit attack, we can set it directly, otherwise we limit it between int.MaxValue and int.MinValue
@@ -260,7 +269,7 @@ namespace eTools_Ultimate.Models
                 if (!settings.Mover64BitAtk)
                     val = Math.Clamp(val, int.MinValue, int.MaxValue);
                 SetValue(ref this._dwAtkMax, val);
-            } 
+            }
         }
         public int DwAtk1 { get => _dwAtk1; set => SetValue(ref this._dwAtk1, value); }
         public int DwAtk2 { get => _dwAtk2; set => SetValue(ref this._dwAtk2, value); }
@@ -275,15 +284,15 @@ namespace eTools_Ultimate.Models
         public int DwLegRate { get => _dwLegRate; set => SetValue(ref this._dwLegRate, value); }
         public int DwAttackSpeed { get => _dwAttackSpeed; set => SetValue(ref this._dwAttackSpeed, value); }
         public int DwReAttackDelay { get => _dwReAttackDelay; set => SetValue(ref this._dwReAttackDelay, value); }
-        public long DwAddHp 
+        public long DwAddHp
         {
-            get => _dwAddHp; 
+            get => _dwAddHp;
             set
             {
                 Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
                 // If mover is configured to use 64 bit hp, we can set it directly, otherwise we limit it between int.MaxValue and int.MinValue
                 long val = value;
-                if(!settings.Mover64BitHp)
+                if (!settings.Mover64BitHp)
                     val = Math.Clamp(val, int.MinValue, int.MaxValue);
                 SetValue(ref this._dwAddHp, val);
             }
@@ -395,6 +404,9 @@ namespace eTools_Ultimate.Models
                     this.NotifyPropertyChanged(nameof(this.SndIdle1));
                     // TODO: Add trigger if sound is changed
                     break;
+                case nameof(MoverProp.BKillable):
+                    NotifyPropertyChanged(nameof(Killable));
+                    break;
                     // TODO: reimplement this
                     //case nameof(MoverProp.EElementType):
                     //    this.NotifyPropertyChanged(nameof(this.ElementType));
@@ -416,21 +428,21 @@ namespace eTools_Ultimate.Models
 
         public MoverProp Prop => this._prop;
 
-        public ModelElem? Model 
+        public ModelElem? Model
         {
             get => this._model;
-            set 
+            set
             {
                 if (value != this.Model)
                 {
                     ModelElem? oldValue = this.Model;
                     this._model = value;
-                    NotifyPropertyChanged(nameof(this.Model), oldValue, this.Model); 
-                } 
-            } 
+                    NotifyPropertyChanged(nameof(this.Model), oldValue, this.Model);
+                }
+            }
         }
 
-        public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; if(this.Model is not null) this.Model.DwIndex = value; } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
+        public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; if (this.Model is not null) this.Model.DwIndex = value; } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
 
         public string Identifier
         {
@@ -490,6 +502,75 @@ namespace eTools_Ultimate.Models
         public Sound? SndDmg2 => App.Services.GetRequiredService<SoundsService>().Sounds.FirstOrDefault(s => s.Prop.Id == this.Prop.DwSndDmg2);
 
         public Sound? SndIdle1 => App.Services.GetRequiredService<SoundsService>().Sounds.FirstOrDefault(s => s.Prop.Id == this.Prop.DwSndIdle1);
+
+        public MoverTypes? Type
+        {
+            get
+            {
+                string identifier = AiIdentifier;
+                return App.Services.GetRequiredService<SettingsService>().Settings.MoverTypesBindings.Cast<KeyValuePair<MoverTypes, ObservableCollection<string>>?>().FirstOrDefault(x => x?.Value.Contains(AiIdentifier) ?? false)?.Key;
+            }
+            set
+            {
+                if (value is MoverTypes type)
+                {
+                    DefinesService definesService = App.Services.GetRequiredService<DefinesService>();
+                    switch (type)
+                    {
+                        case MoverTypes.NPC:
+                        case MoverTypes.CHARACTER:
+                            {
+                                Prop.DwBelligerence = definesService.Defines.TryGetValue("BELLI_PEACEFUL", out int belliPeacefulId) ? belliPeacefulId : -1;
+                                Prop.DwClass = definesService.Defines.TryGetValue("RANK_CITIZEN", out int rankCitizenId) ? rankCitizenId : -1;
+                                Prop.BKillable = 0;
+                                Prop.DwAtk1 = -1;
+                                Prop.DwAtk2 = -1;
+                                Prop.DwAtk3 = -1;
+                                break;
+                            }
+                        case MoverTypes.PET:
+                            {
+                                Prop.DwBelligerence = definesService.Defines.TryGetValue("BELLI_PEACEFUL", out int belliPeacefulId) ? belliPeacefulId : -1;
+                                Prop.DwClass = definesService.Defines.TryGetValue("RANK_LOW", out int rankLowId) ? rankLowId : -1;
+                                Prop.BKillable = 0;
+                                Prop.DwAtk1 = -1;
+                                Prop.DwAtk2 = -1;
+                                Prop.DwAtk3 = -1;
+                                break;
+                            }
+                        case MoverTypes.MONSTER:
+                            {
+                                Prop.DwBelligerence = definesService.Defines.TryGetValue("BELLI_PEACEFUL", out int belliPeacefulId) ? belliPeacefulId : -1;
+                                Prop.DwClass = definesService.Defines.TryGetValue("RANK_CITIZEN", out int rankCitizenId) ? rankCitizenId : -1;
+                                Prop.BKillable = 1;
+                                Prop.DwAtk1 = definesService.Defines.TryGetValue("II_WEA_MOB_MONSTER2_ATK1", out int attackItem1) ? attackItem1 : -1;
+                                Prop.DwAtk2 = definesService.Defines.TryGetValue("II_WEA_MOB_MONSTER2_ATK2", out int attackItem2) ? attackItem2 : -1;
+                                Prop.DwAtk3 = definesService.Defines.TryGetValue("II_WEA_MOB_MONSTER2_ATK3", out int attackItem3) ? attackItem3 : -1;
+                            }
+                            break;
+                    }
+                    AiIdentifier = App.Services.GetRequiredService<SettingsService>().Settings.MoverTypesBindings[type].FirstOrDefault() ?? "-1";
+                }
+                else
+                    AiIdentifier = "-1";
+            }
+        }
+
+        public bool Killable
+        {
+            get => Prop.BKillable == 1;
+            set => Prop.BKillable = value ? 1 : 0;
+        }
+
+        public string ClassIdentifier
+        {
+            get => Script.NumberToString(Prop.DwClass, App.Services.GetRequiredService<DefinesService>().ReversedRankDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    Prop.DwClass = val;
+            }
+        }
 
         public Mover(MoverProp prop, ModelElem? model)
         {

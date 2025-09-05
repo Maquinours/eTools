@@ -35,7 +35,7 @@ namespace eTools_Ultimate.Services
             ObservableDictionary<string, string> strings = App.Services.GetRequiredService<StringsService>().Strings;
 
             int i = 0;
-            while(true)
+            while (true)
             {
                 string identifier = stringStarter + i.ToString("D6");
                 if (!strings.ContainsKey(identifier))
@@ -66,7 +66,7 @@ namespace eTools_Ultimate.Services
             {
                 string filePath = settings.PropMoverFilePath ?? settings.DefaultPropMoverFilePath;
                 script.Load(filePath);
-                
+
                 while (true)
                 {
                     int dwId = script.GetNumber();
@@ -506,7 +506,7 @@ namespace eTools_Ultimate.Services
                 writer.Write("\t");
                 writer.Write(string.IsNullOrWhiteSpace(moverProp.SzComment) ? @"""" : moverProp.SzComment);
 
-                if(settings.ResourcesVersion >= 19)
+                if (settings.ResourcesVersion >= 19)
                 {
                     writer.Write("\t");
                     writer.Write(Script.NumberToString(moverProp.DwAreaColor, definesService.ReversedAreaDefines));

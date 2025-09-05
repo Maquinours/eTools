@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using System.IO;
 
 namespace eTools_Ultimate.Models
 {
@@ -75,6 +77,14 @@ namespace eTools_Ultimate.Models
         // World texture
         private string? _worldTextureFilePath;
 
+        private readonly ReadOnlyDictionary<MoverTypes, ObservableCollection<string>> _moverTypesBindings = new(
+            new Dictionary<MoverTypes, ObservableCollection<string>>(){
+                { MoverTypes.NPC, new ObservableCollection<string> { "AII_NONE" } },
+                { MoverTypes.CHARACTER, new ObservableCollection<string> {  "AII_MOVER" } },
+                { MoverTypes.MONSTER, new ObservableCollection<string> { "AII_MONSTER", "AII_CLOCKWORKS", "AII_BIGMUSCLE", "AII_KRRR", "AII_BEAR", "AII_METEONYKER", "AII_AGGRO_NORMAL", "AII_PARTY_AGGRO_LEADER", "AII_PARTY_AGGRO_SUB", "AII_ARENA_REAPER" } },
+                { MoverTypes.PET,  new ObservableCollection<string> {"AII_PET", "AII_EGG"} }
+            });
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         // General settings
@@ -86,13 +96,13 @@ namespace eTools_Ultimate.Models
         public string ResourcesFolderPath
         {
             get => this._resourcesFolderPath;
-            set 
+            set
             {
                 string val = value;
                 if (!val.EndsWith(Path.DirectorySeparatorChar))
                     val += Path.DirectorySeparatorChar;
                 if (this.ResourcesFolderPath != val)
-                { 
+                {
                     this._resourcesFolderPath = val;
                     this.NotifyPropertyChanged();
                 }
@@ -101,7 +111,7 @@ namespace eTools_Ultimate.Models
         public string ClientFolderPath
         {
             get => this._clientFolderPath;
-            set 
+            set
             {
                 string val = value;
                 if (!val.EndsWith(Path.DirectorySeparatorChar))
@@ -110,14 +120,14 @@ namespace eTools_Ultimate.Models
                 {
                     this._clientFolderPath = val;
                     this.NotifyPropertyChanged();
-                } 
+                }
             }
         }
 
         public string? IconsFolderPath
         {
             get => this._iconsFolderPath;
-            set 
+            set
             {
                 string? val = value;
                 if (string.IsNullOrWhiteSpace(val))
@@ -126,11 +136,11 @@ namespace eTools_Ultimate.Models
                     val += Path.DirectorySeparatorChar;
                 if (val == this.DefaultIconsFolderPath)
                     val = null;
-                if (this.IconsFolderPath != val) 
-                { 
-                    this._iconsFolderPath = val; 
-                    this.NotifyPropertyChanged(); 
-                } 
+                if (this.IconsFolderPath != val)
+                {
+                    this._iconsFolderPath = val;
+                    this.NotifyPropertyChanged();
+                }
             }
         }
         public string DefaultIconsFolderPath => $"{this.ClientFolderPath}Icon{Path.DirectorySeparatorChar}";
@@ -138,7 +148,7 @@ namespace eTools_Ultimate.Models
         public string? TexturesFolderPath
         {
             get => this._texturesFolderPath;
-            set 
+            set
             {
                 string? val = value;
                 if (string.IsNullOrWhiteSpace(val))
@@ -147,11 +157,11 @@ namespace eTools_Ultimate.Models
                     val += Path.DirectorySeparatorChar;
                 if (val == this.DefaultTexturesFolderPath)
                     val = null;
-                if (this.TexturesFolderPath != val) 
+                if (this.TexturesFolderPath != val)
                 {
-                    this._texturesFolderPath = val; 
-                    this.NotifyPropertyChanged(); 
-                } 
+                    this._texturesFolderPath = val;
+                    this.NotifyPropertyChanged();
+                }
             }
         }
         public string DefaultTexturesFolderPath => $"{this.ResourcesFolderPath}Model{Path.DirectorySeparatorChar}Texture{Path.DirectorySeparatorChar}";
@@ -180,7 +190,7 @@ namespace eTools_Ultimate.Models
         public string? SoundsConfigFilePath
         {
             get => this._soundsConfigFilePath;
-            set 
+            set
             {
                 string? val = value;
                 if (string.IsNullOrWhiteSpace(val))
@@ -188,10 +198,10 @@ namespace eTools_Ultimate.Models
                 if (val == this.DefaultSoundsConfigFilePath)
                     val = null;
                 if (this.SoundsConfigFilePath != val)
-                { 
+                {
                     this._soundsConfigFilePath = val;
                     this.NotifyPropertyChanged();
-                } 
+                }
             }
         }
         public string DefaultSoundsConfigFilePath => $"{this.ClientFolderPath}Client{Path.DirectorySeparatorChar}sound.inc";
@@ -199,7 +209,7 @@ namespace eTools_Ultimate.Models
         public string? SoundsFolderPath
         {
             get => this._soundsFolderPath;
-            set 
+            set
             {
                 string? val = value;
                 if (string.IsNullOrWhiteSpace(val))
@@ -208,11 +218,11 @@ namespace eTools_Ultimate.Models
                     val += Path.DirectorySeparatorChar;
                 if (val == this.DefaultSoundsFolderPath)
                     val = null;
-                if (this.SoundsFolderPath != val) 
-                { 
-                    this._soundsFolderPath = val; 
-                    this.NotifyPropertyChanged(); 
-                } 
+                if (this.SoundsFolderPath != val)
+                {
+                    this._soundsFolderPath = val;
+                    this.NotifyPropertyChanged();
+                }
             }
         }
         public string DefaultSoundsFolderPath => $"{this.ClientFolderPath}Sound{Path.DirectorySeparatorChar}";
@@ -221,7 +231,7 @@ namespace eTools_Ultimate.Models
         public string? PropMoverFilePath
         {
             get => this._propMoverFilePath;
-            set 
+            set
             {
                 string? val = value;
                 if (string.IsNullOrWhiteSpace(val))
@@ -229,10 +239,10 @@ namespace eTools_Ultimate.Models
                 if (val == this.DefaultPropMoverFilePath)
                     val = null;
                 if (this.PropMoverFilePath != val)
-                { 
+                {
                     this._propMoverFilePath = val;
-                    this.NotifyPropertyChanged(); 
-                } 
+                    this.NotifyPropertyChanged();
+                }
             }
         }
         public string DefaultPropMoverFilePath => $"{this.ResourcesFolderPath}propMover.txt";
@@ -240,18 +250,18 @@ namespace eTools_Ultimate.Models
         public string? PropMoverTxtFilePath
         {
             get => this._propMoverTxtFilePath;
-            set 
+            set
             {
                 string? val = value;
                 if (string.IsNullOrWhiteSpace(val))
                     val = null;
                 if (val == this.DefaultPropMoverTxtFilePath)
                     val = null;
-                if (this.PropMoverTxtFilePath != val) 
-                { 
+                if (this.PropMoverTxtFilePath != val)
+                {
                     this._propMoverTxtFilePath = val;
-                    this.NotifyPropertyChanged(); 
-                } 
+                    this.NotifyPropertyChanged();
+                }
             }
         }
         public string DefaultPropMoverTxtFilePath => $"{this.ResourcesFolderPath}propMover.txt.txt";
@@ -259,18 +269,18 @@ namespace eTools_Ultimate.Models
         public string? PropMoverExFilePath
         {
             get => this._propMoverExFilePath;
-            set 
+            set
             {
                 string? val = value;
                 if (string.IsNullOrWhiteSpace(val))
                     val = null;
                 if (val == this.DefaultPropMoverExFilePath)
                     val = null;
-                if (this.PropMoverExFilePath != val) 
-                { 
-                    this._propMoverExFilePath = val; 
-                    this.NotifyPropertyChanged(); 
-                } 
+                if (this.PropMoverExFilePath != val)
+                {
+                    this._propMoverExFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
             }
         }
         public string DefaultPropMoverExFilePath => $"{this.ResourcesFolderPath}propMoverEx.inc";
@@ -290,14 +300,14 @@ namespace eTools_Ultimate.Models
         public string? PropItemFilePath
         {
             get => this._propItemFilePath;
-            set 
+            set
             {
                 string? val = value;
                 if (string.IsNullOrWhiteSpace(val))
                     val = null;
                 if (val == this.DefaultPropItemFilePath)
                     val = null;
-                if (this.PropItemFilePath != val) 
+                if (this.PropItemFilePath != val)
                 {
                     this._propItemFilePath = val;
                     this.NotifyPropertyChanged();
@@ -309,18 +319,18 @@ namespace eTools_Ultimate.Models
         public string? PropItemTxtFilePath
         {
             get => this._propItemTxtFilePath;
-            set 
+            set
             {
                 string? val = value;
                 if (string.IsNullOrWhiteSpace(val))
                     val = null;
                 if (val == this.DefaultPropItemTxtFilePath)
                     val = null;
-                if (this.PropItemTxtFilePath != val) 
+                if (this.PropItemTxtFilePath != val)
                 {
                     this._propItemTxtFilePath = val;
                     this.NotifyPropertyChanged();
-                } 
+                }
             }
         }
         public string DefaultPropItemTxtFilePath => $"{this.ResourcesFolderPath}propItem.txt.txt";
@@ -328,7 +338,7 @@ namespace eTools_Ultimate.Models
         public string? ItemIconsFolderPath
         {
             get => this._itemIconsFolderPath;
-            set 
+            set
             {
                 string? val = value;
                 if (string.IsNullOrWhiteSpace(val))
@@ -694,6 +704,8 @@ namespace eTools_Ultimate.Models
             }
         }
         public string DefaultWorldTextureFilePath => $"{this.ClientFolderPath}World{Path.DirectorySeparatorChar}Texture{Path.DirectorySeparatorChar}";
+
+        public ReadOnlyDictionary<MoverTypes, ObservableCollection<string>> MoverTypesBindings => this._moverTypesBindings;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {

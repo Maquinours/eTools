@@ -7,13 +7,13 @@
     xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:eTools_Ultimate.Models"
     xmlns:pageViewModels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     Title="MoverPage"
     d:DataContext="{d:DesignInstance pageViewModels:MoversViewModel,
                                      IsDesignTimeCreatable=False}"
@@ -111,86 +111,79 @@
         <!--  DataTemplate: Basic Info Section  -->
         <DataTemplate x:Key="BasicInfoSectionTemplate">
             <StackPanel>
-                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Basic Information'}" />
-                <UniformGrid Columns="2">
-                    <!--  Define ID  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Define ID'}" />
-                        <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                            <ui:SymbolIcon.ToolTip>
-                                <ToolTip Content="{i18n:StringLocalizer 'Define ID of the mover'}" />
-                            </ui:SymbolIcon.ToolTip>
-                        </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:AutoSuggestBox
-                            Grid.Row="1"
-                            DisplayMemberPath="Value"
-                            OriginalItemsSource="{Binding Path=ViewModel.MoverIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
-                            Text="{Binding Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                    </Grid>
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Basic Information'}" />
+                    <UniformGrid Columns="2">
+                        <!--  Define ID  -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Define ID'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="{i18n:StringLocalizer 'Define ID of the mover'}" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <ui:AutoSuggestBox
+                                Grid.Row="1"
+                                DisplayMemberPath="Value"
+                                OriginalItemsSource="{Binding Path=ViewModel.MoverIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                        </Grid>
 
-                    <!--  Name  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Name'}" />
-                        <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                            <ui:SymbolIcon.ToolTip>
-                                <ToolTip Content="{i18n:StringLocalizer 'Name of the mover'}" />
-                            </ui:SymbolIcon.ToolTip>
-                        </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox
-                            Grid.Row="1"
-                            Style="{StaticResource AppTextBoxStyle}"
-                            Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </Grid>
+                        <!--  Name  -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Name'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="{i18n:StringLocalizer 'Name of the mover'}" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <TextBox
+                                Grid.Row="1"
+                                Style="{StaticResource AppTextBoxStyle}"
+                                Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
 
-                    <!--  Killable  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Killable'}" />
-                        <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                            <ui:SymbolIcon.ToolTip>
-                                <ToolTip Content="{i18n:StringLocalizer 'Can the mover be killed'}" />
-                            </ui:SymbolIcon.ToolTip>
-                        </ui:SymbolIcon>
-                        </StackPanel>
-                        <ComboBox
-                            Grid.Row="1"
-                            SelectedValue="{Binding Prop.BKillable, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            SelectedValuePath="Tag"
-                            Style="{StaticResource AppComboBoxStyle}">
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Yes'}">
-                                <ComboBoxItem.Tag>
-                                    <sys:Int32>1</sys:Int32>
-                                </ComboBoxItem.Tag>
-                            </ComboBoxItem>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'No'}">
-                                <ComboBoxItem.Tag>
-                                    <sys:Int32>0</sys:Int32>
-                                </ComboBoxItem.Tag>
-                            </ComboBoxItem>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'YES'}" />
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'NO'}" />
-                        </ComboBox>
-                    </Grid>
+                        <!--  Type  -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Type'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="{i18n:StringLocalizer 'Type of mover'}" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <ComboBox
+                                Grid.Row="1"
+                                SelectedValue="{Binding Type, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedValuePath="Tag"
+                                Style="{StaticResource AppComboBoxStyle}">
+                                <ComboBoxItem Content="{i18n:StringLocalizer 'Monster'}" Tag="{x:Static models:MoverTypes.MONSTER}" />
+                                <ComboBoxItem Content="{i18n:StringLocalizer 'NPC'}" Tag="{x:Static models:MoverTypes.NPC}" />
+                                <ComboBoxItem Content="{i18n:StringLocalizer 'Pet'}" Tag="{x:Static models:MoverTypes.PET}" />
+                                <ComboBoxItem Content="{i18n:StringLocalizer 'Character'}" Tag="{x:Static models:MoverTypes.CHARACTER}" />
+                            </ComboBox>
+                        </Grid>
 
-                    <!--  Penya  -->
-                    <!--  Defined in items  -->
-                    <!--
+                        <!--  Penya  -->
+                        <!--  Defined in items  -->
+                        <!--
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -213,11 +206,11 @@
                                 Maximum="2147483647"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
-                    -->
+                        -->
 
-                    <!--  Duration  -->
-                    <!--  Defined in items  -->
-                    <!--
+                        <!--  Duration  -->
+                        <!--  Defined in items  -->
+                        <!--
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -240,36 +233,283 @@
                                 Maximum="999999"
                                 SpinButtonPlacementMode="Inline"/>
                     </Grid>
-                    -->
+                        -->
+                    </UniformGrid>
+                    <Separator Margin="0,10,0,5" />
+                </StackPanel>
 
-                    <!--  EXP Value  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'EXP Value'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Experience value gained'}" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox
-                            Grid.Row="1"
-                            SpinButtonPlacementMode="Inline"
-                            Value="{Binding Prop.NExpValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </Grid>
-                </UniformGrid>
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Configuration'}" />
+                    <UniformGrid Columns="2">
+                        <!--  Artificial Intelligence  -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Artificial Intelligence (AI)'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="{i18n:StringLocalizer 'AI behavior type'}" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <ui:AutoSuggestBox
+                                Grid.Row="1"
+                                DisplayMemberPath="Value"
+                                OriginalItemsSource="{Binding Path=ViewModel.AiIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding AiIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                        </Grid>
+
+                        <!--  Belligerence  -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Belligerence'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="{i18n:StringLocalizer 'Aggression level'}" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <ui:AutoSuggestBox
+                                Grid.Row="1"
+                                DisplayMemberPath="Value"
+                                OriginalItemsSource="{Binding Path=ViewModel.BelligerenceIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding BelligerenceIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                        </Grid>
+
+                        <!--  Artificial Intelligence  -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Rank'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="{i18n:StringLocalizer 'Rank of the mover'}" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <ui:AutoSuggestBox
+                                Grid.Row="1"
+                                DisplayMemberPath="Value"
+                                OriginalItemsSource="{Binding Path=ViewModel.RankIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding ClassIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                        </Grid>
+
+                        <!--  Killable  -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Killable'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="{i18n:StringLocalizer 'Can the mover be killed'}" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <ui:ToggleSwitch
+                                Grid.Row="1"
+                                IsChecked="{Binding Killable}"
+                                OffContent="{i18n:StringLocalizer 'No'}"
+                                OnContent="{i18n:StringLocalizer 'Yes'}" />
+                        </Grid>
+                        <!--  Level  -->
+                        <Grid>
+                            <Grid.Style>
+                                <Style BasedOn="{StaticResource FormFieldStyle}" TargetType="Grid">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Type}" Value="{x:Static models:MoverTypes.MONSTER}">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Level'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="{i18n:StringLocalizer 'Level of the mover'}" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <ui:NumberBox
+                                Grid.Row="1"
+                                SpinButtonPlacementMode="Inline"
+                                Value="{Binding Prop.DwLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                        </Grid>
+
+                        <!--  EXP Value  -->
+                        <Grid>
+                            <Grid.Style>
+                                <Style BasedOn="{StaticResource FormFieldStyle}" TargetType="Grid">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Type}" Value="{x:Static models:MoverTypes.MONSTER}">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'EXP Value'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="{i18n:StringLocalizer 'Experience value gained'}" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <ui:NumberBox
+                                Grid.Row="1"
+                                SpinButtonPlacementMode="Inline"
+                                Value="{Binding Prop.NExpValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </UniformGrid>
+                </StackPanel>
+                <Separator Margin="0,10,0,5" />
             </StackPanel>
         </DataTemplate>
 
         <!--  DataTemplate: Stats Section  -->
         <DataTemplate x:Key="StatsSectionTemplate">
             <StackPanel>
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Type}" Value="{x:Static models:MoverTypes.MONSTER}">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
                 <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Stats'}" />
                 <UniformGrid Columns="2">
+                    <!--  Health Points  -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Health Points'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Maximum health points'}" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox
+                            Grid.Row="1"
+                            SpinButtonPlacementMode="Inline"
+                            Value="{Binding Prop.DwAddHp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+
+                    <!--  Mana Points  -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Mana Points'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Maximum mana points'}" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox
+                            Grid.Row="1"
+                            SpinButtonPlacementMode="Inline"
+                            Value="{Binding Prop.DwAddMp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                    </Grid>
+
+                    <!--  Action Radius  -->
+                    <!--  Not used by FlyFF  -->
+                    <!--
+<Grid Style="{StaticResource FormFieldStyle}">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <StackPanel Grid.Row="0"
+            Orientation="Horizontal">
+        <TextBlock Text="{i18n:StringLocalizer 'Action Radius'}"
+                Style="{StaticResource FieldLabelStyle}"/>
+        <ui:SymbolIcon Symbol="Info20"
+                Style="{StaticResource InfoIconStyle}">
+            <ui:SymbolIcon.ToolTip>
+                <ToolTip Content="{i18n:StringLocalizer 'Movement and action range'}"/>
+            </ui:SymbolIcon.ToolTip>
+        </ui:SymbolIcon>
+    </StackPanel>
+    <ui:NumberBox Grid.Row="1"
+            Value="{Binding ActionRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+            Minimum="0"
+            Maximum="1000"
+            SpinButtonPlacementMode="Inline"/>
+</Grid>-->
+
+                    <!--  Attack min.  -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Attack min.'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Minimum attack damage'}" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox
+                            Grid.Row="1"
+                            SpinButtonPlacementMode="Inline"
+                            Value="{Binding Prop.DwAtkMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+
+                    <!--  Attack max.  -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Attack max.'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Maximum attack damage'}" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox
+                            Grid.Row="1"
+                            SpinButtonPlacementMode="Inline"
+                            Value="{Binding Prop.DwAtkMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+
                     <!--  STR  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -389,270 +629,6 @@
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.DwER, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
-                </UniformGrid>
-            </StackPanel>
-        </DataTemplate>
-
-        <!--  DataTemplate: Combat Settings Section  -->
-        <DataTemplate x:Key="CombatSettingsSectionTemplate">
-            <StackPanel>
-                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Combat / Battle'}" />
-                <UniformGrid Columns="2">
-                    <!--  Level  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Level'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Level of the mover'}" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox
-                            Grid.Row="1"
-                            SpinButtonPlacementMode="Inline"
-                            Value="{Binding Prop.DwLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
-                    </Grid>
-
-                    <!--  Health Points  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Health Points'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Maximum health points'}" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox
-                            Grid.Row="1"
-                            SpinButtonPlacementMode="Inline"
-                            Value="{Binding Prop.DwAddHp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </Grid>
-
-                    <!--  Mana Points  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Mana Points'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Maximum mana points'}" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox
-                            Grid.Row="1"
-                            SpinButtonPlacementMode="Inline"
-                            Value="{Binding Prop.DwAddMp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
-                    </Grid>
-
-                    <!--  Artificial Intelligence  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Artificial Intelligence (AI)'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'AI behavior type'}" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:AutoSuggestBox
-                            Grid.Row="1"
-                            DisplayMemberPath="Value"
-                            OriginalItemsSource="{Binding Path=ViewModel.AiIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
-                            Text="{Binding AiIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                    </Grid>
-
-                    <!--  Belligerence  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Belligerence'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Aggression level'}" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:AutoSuggestBox
-                            Grid.Row="1"
-                            DisplayMemberPath="Value"
-                            OriginalItemsSource="{Binding Path=ViewModel.BelligerenceIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
-                            Text="{Binding BelligerenceIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                    </Grid>
-
-                    <!--  Action Radius  -->
-                    <!--  Not used by FlyFF  -->
-                    <!--
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Action Radius'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Movement and action range'}"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                Value="{Binding ActionRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="1000"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    -->
-
-                    <!--  Attack min.  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Attack min.'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Minimum attack damage'}" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox
-                            Grid.Row="1"
-                            SpinButtonPlacementMode="Inline"
-                            Value="{Binding Prop.DwAtkMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </Grid>
-
-                    <!--  Attack max.  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Attack max.'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Maximum attack damage'}" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox
-                            Grid.Row="1"
-                            SpinButtonPlacementMode="Inline"
-                            Value="{Binding Prop.DwAtkMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </Grid>
-
-                    <!--  Attack Animation 1  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Attack Animation 1'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Primary attack animation'}" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox
-                            Grid.Row="1"
-                            Style="{StaticResource AppTextBoxStyle}"
-                            Text="{Binding AttackAnim1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </Grid>
-
-                    <!--  Attack Animation 2  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Attack Animation 2'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Secondary attack animation'}" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox
-                            Grid.Row="1"
-                            Style="{StaticResource AppTextBoxStyle}"
-                            Text="{Binding AttackAnim2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </Grid>
-
-                    <!--  Attack Animation 3  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Attack Animation 3'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Tertiary attack animation'}" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox
-                            Grid.Row="1"
-                            Style="{StaticResource AppTextBoxStyle}"
-                            Text="{Binding AttackAnim3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </Grid>
-
-                    <!--  Attack Speed  -->
-                    <!--  Not used by FlyFF  -->
-                    <!--
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Attack Speed'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Speed of attack execution'}"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                Value="{Binding AttackSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    -->
 
                     <!--  Attack Delay  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -673,15 +649,6 @@
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.DwReAttackDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
-                </UniformGrid>
-            </StackPanel>
-        </DataTemplate>
-
-        <!--  DataTemplate: Defensive Stats Section  -->
-        <DataTemplate x:Key="DefensiveStatsSectionTemplate">
-            <StackPanel>
-                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Defensive Stats &amp; Resistances'}" />
-                <UniformGrid Columns="2">
                     <!--  Armor  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
@@ -705,56 +672,54 @@
                     <!--  Abrasion  -->
                     <!--  Not used by FlyFF  -->
                     <!--
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Abrasion'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Abrasion resistance'}"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Abrasion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    -->
+<Grid Style="{StaticResource FormFieldStyle}">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <StackPanel Grid.Row="0"
+            Orientation="Horizontal">
+        <TextBlock Text="{i18n:StringLocalizer 'Abrasion'}"
+                Style="{StaticResource FieldLabelStyle}"/>
+        <ui:SymbolIcon Symbol="Info20"
+                Style="{StaticResource InfoIconStyle}">
+            <ui:SymbolIcon.ToolTip>
+                <ToolTip Content="{i18n:StringLocalizer 'Abrasion resistance'}"/>
+            </ui:SymbolIcon.ToolTip>
+        </ui:SymbolIcon>
+    </StackPanel>
+    <ui:NumberBox Grid.Row="1"
+            Value="{Binding Abrasion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+            Minimum="0"
+            Maximum="100"
+            SpinButtonPlacementMode="Inline"/>
+</Grid>-->
 
                     <!--  Hardness  -->
                     <!--  Not used by FlyFF  -->
                     <!--
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Hardness'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Physical damage resistance'}"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Hardness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    -->
+<Grid Style="{StaticResource FormFieldStyle}">
+    <Grid.RowDefinitions>
+        <RowDefinition Height="Auto"/>
+        <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+    <StackPanel Grid.Row="0"
+            Orientation="Horizontal">
+        <TextBlock Text="{i18n:StringLocalizer 'Hardness'}"
+                Style="{StaticResource FieldLabelStyle}"/>
+        <ui:SymbolIcon Symbol="Info20"
+                Style="{StaticResource InfoIconStyle}">
+            <ui:SymbolIcon.ToolTip>
+                <ToolTip Content="{i18n:StringLocalizer 'Physical damage resistance'}"/>
+            </ui:SymbolIcon.ToolTip>
+        </ui:SymbolIcon>
+    </StackPanel>
+    <ui:NumberBox Grid.Row="1"
+            Value="{Binding Hardness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+            Minimum="0"
+            Maximum="100"
+            SpinButtonPlacementMode="Inline"/>
+</Grid>-->
 
                     <!--  Magic Resistance  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -875,16 +840,6 @@
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.NResistEarth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
                     </Grid>
-                </UniformGrid>
-            </StackPanel>
-        </DataTemplate>
-
-        <!--  DataTemplate: Elemental Section  -->
-        <DataTemplate x:Key="ElementalSectionTemplate">
-            <StackPanel>
-                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Elementar &amp; Damage Types'}" />
-                <UniformGrid Columns="2">
-                    <!--  Element Type  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -956,203 +911,9 @@
                             SpinButtonPlacementMode="Inline"
                             Value="{Binding Prop.WElementAtk, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
-
-                    <!--  Correction Value  -->
-                    <!--  TODO: probably remove it as I don't know what bind it should be  -->
-                    <!--
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Correction Value'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Damage correction multiplier"/>
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                Value="{Binding CorrectionValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="100"
-                                SpinButtonPlacementMode="Inline"/>
-                    </Grid>
-                    -->
                 </UniformGrid>
+                <Separator Margin="0,10,0,5" />
             </StackPanel>
-        </DataTemplate>
-
-        <!--  DataTemplate für den Motions Dialog  -->
-        <DataTemplate x:Key="MotionsDialogTemplate">
-            <Grid Margin="20">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <!--  Linke Seite mit der Liste  -->
-                <Border
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Margin="0,0,10,0"
-                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                    BorderThickness="1">
-                    <ListView
-                        x:Name="MotionsListView"
-                        Width="150"
-                        Height="200"
-                        ItemsSource="{Binding MotionsList}"
-                        SelectedItem="{Binding SelectedMotion, Mode=TwoWay}"
-                        Style="{StaticResource AppListViewStyle}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Margin="5" Text="{Binding}" />
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Border>
-
-                <!--  Rechte Seite mit Details  -->
-                <StackPanel Grid.Row="0" Grid.Column="1">
-                    <!--  Add Button  -->
-                    <ui:Button
-                        x:Name="AddMotionButton"
-                        Margin="0,0,0,10"
-                        HorizontalAlignment="Stretch"
-                        Appearance="Secondary"
-                        Content="{i18n:StringLocalizer 'Add'}" />
-
-                    <!--  Generate Button  -->
-                    <ui:Button
-                        x:Name="GenerateMotionButton"
-                        Margin="0,0,0,20"
-                        HorizontalAlignment="Stretch"
-                        Appearance="Secondary"
-                        Content="{i18n:StringLocalizer 'Generate'}" />
-
-                    <!--  Identifier  -->
-                                            <TextBlock Margin="0,0,0,5" Text="{i18n:StringLocalizer 'Identifier:'}" />
-
-                    <Grid Margin="0,0,0,15">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <!--  Identifier Row  -->
-                        <Grid Grid.Row="0" Margin="0,0,0,10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-
-                            <!--  Label mit Info-Icon  -->
-                            <StackPanel
-                                Grid.Row="0"
-                                Margin="0,0,0,5"
-                                Orientation="Horizontal">
-                                <TextBlock
-                                    FontSize="12"
-                                    FontWeight="SemiBold"
-                                    Text="{i18n:StringLocalizer 'Identifier'}" />
-                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="{i18n:StringLocalizer 'Typ der Animation'}" />
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-
-                            <!--  Dropdown  -->
-                            <Border
-                                Grid.Row="1"
-                                Background="{DynamicResource ControlFillColorDefaultBrush}"
-                                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="4">
-                                <ComboBox
-                                    Background="Transparent"
-                                    BorderThickness="0"
-                                    SelectedIndex="0"
-                                    Style="{StaticResource AppComboBoxStyle}">
-                                    <ComboBoxItem Content="MTI_STAND" />
-                                    <ComboBoxItem Content="MTI_WALK" />
-                                    <ComboBoxItem Content="MTI_IDLE1" />
-                                    <ComboBoxItem Content="MTI_IDLE2" />
-                                    <ComboBoxItem Content="MTI_DMG1" />
-                                </ComboBox>
-                            </Border>
-                        </Grid>
-
-                        <!--  File Row  -->
-                        <Grid Grid.Row="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-
-                            <!--  Label mit Info-Icon  -->
-                            <StackPanel
-                                Grid.Row="0"
-                                Margin="0,0,0,5"
-                                Orientation="Horizontal">
-                                <TextBlock
-                                    FontSize="12"
-                                    FontWeight="SemiBold"
-                                    Text="{i18n:StringLocalizer 'File'}" />
-                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                    <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="{i18n:StringLocalizer 'Animationsdatei'}" />
-                                    </ui:SymbolIcon.ToolTip>
-                                </ui:SymbolIcon>
-                            </StackPanel>
-
-                            <!--  File Input mit Button  -->
-                            <Grid Grid.Row="1">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <TextBox
-                                    Grid.Column="0"
-                                    Style="{StaticResource AppTextBoxStyle}"
-                                    Text="{i18n:StringLocalizer 'stand'}" />
-                                <ui:Button
-                                    Grid.Column="1"
-                                    Width="30"
-                                    Margin="5,0,0,0"
-                                    Content="..." />
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </StackPanel>
-
-                <!--  Buttons unten  -->
-                <StackPanel
-                    Grid.Row="1"
-                    Grid.ColumnSpan="2"
-                    Margin="0,15,0,0"
-                    HorizontalAlignment="Right"
-                    Orientation="Horizontal">
-                    <ui:Button
-                        x:Name="OkButton"
-                        Margin="0,0,10,0"
-                        Appearance="Primary"
-                        Content="{i18n:StringLocalizer 'OK'}" />
-                    <ui:Button
-                        x:Name="CancelButton"
-                        Appearance="Secondary"
-                        Content="{i18n:StringLocalizer 'Cancel'}" />
-                </StackPanel>
-            </Grid>
         </DataTemplate>
 
         <!--  Mover Item Template  -->
@@ -1641,27 +1402,10 @@
                         Content="{Binding MoversView}"
                         ContentTemplate="{StaticResource BasicInfoSectionTemplate}"
                         Visibility="{Binding ShowBasicInformationSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
-                    <Separator Margin="0,10,0,5" Visibility="{Binding ShowBasicInformationSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
                     <ContentControl
                         Content="{Binding MoversView}"
                         ContentTemplate="{StaticResource StatsSectionTemplate}"
                         Visibility="{Binding ShowStatsSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
-                    <Separator Margin="0,10,0,5" Visibility="{Binding ShowStatsSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
-                    <ContentControl
-                        Content="{Binding MoversView}"
-                        ContentTemplate="{StaticResource CombatSettingsSectionTemplate}"
-                        Visibility="{Binding ShowBattleSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
-                    <Separator Margin="0,10,0,5" Visibility="{Binding ShowBattleSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
-                    <ContentControl
-                        Content="{Binding MoversView}"
-                        ContentTemplate="{StaticResource DefensiveStatsSectionTemplate}"
-                        Visibility="{Binding ShowDefensiveStatsSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
-                    <Separator Margin="0,10,0,5" Visibility="{Binding ShowDefensiveStatsSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
-                    <ContentControl
-                        Content="{Binding MoversView}"
-                        ContentTemplate="{StaticResource ElementalSectionTemplate}"
-                        Visibility="{Binding ShowElementalSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
-                    <Separator Margin="0,10,0,5" Visibility="{Binding ShowElementalSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
 
                     <!--  Sound Section  -->
                     <StackPanel Visibility="{Binding ShowSoundsSection, Mode=TwoWay, Converter={StaticResource BoolToVis}}">
