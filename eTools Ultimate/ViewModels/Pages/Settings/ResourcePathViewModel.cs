@@ -1,18 +1,23 @@
-using System;
-using System.IO;
-using System.Windows;
-using Microsoft.Win32;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using eTools_Ultimate.Models;
-using System.Collections.ObjectModel;
 using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
+using Microsoft.Win32;
+using System;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Windows;
+using Wpf.Ui;
+using Wpf.Ui.Abstractions.Controls;
+using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class ResourcePathViewModel(SettingsService settingsService) : ObservableObject
+    public partial class ResourcePathViewModel(SettingsService settingsService, IContentDialogService contentDialogService) : ObservableObject, INavigationAware
     {
+        private bool _hasChangedSettings = false;
+
         [ObservableProperty]
         private int[] _possibleResourceVersions = [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22];
 
@@ -20,6 +25,36 @@ namespace eTools_Ultimate.ViewModels.Pages
         private bool _isAdvancedSettingsVisible = false;
 
         public Settings Settings => settingsService.Settings;
+
+        public Task OnNavigatedToAsync()
+        {
+            _hasChangedSettings = false;
+            Settings.PropertyChanged += Settings_PropertyChanged;
+
+            return Task.CompletedTask;
+        }
+
+        public async Task OnNavigatedFromAsync()
+        {
+            if (_hasChangedSettings)
+            {
+                await contentDialogService.ShowSimpleDialogAsync(new SimpleContentDialogCreateOptions()
+                {
+                    Title = "Settings changed",
+                    Content = "Your settings have been updated. Please restart the application for the changes to take effect.",
+                    CloseButtonText = "Restart",
+                });
+                System.Diagnostics.Process.Start(System.Diagnostics.Process.GetCurrentProcess().ProcessName);
+                App.Current.Shutdown();
+            }
+            Settings.PropertyChanged -= Settings_PropertyChanged;
+        }
+
+        private void Settings_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            // TODO : maybe check which property changed
+            _hasChangedSettings = true;
+        }
 
         [RelayCommand]
         private void ToggleAdvancedSettings()
