@@ -1159,4 +1159,44 @@
     <value>Zugewiesene Ressourcen</value>
     <comment>Assigned Resources list header</comment>
   </data>
+  <data name="Datei nicht gefunden" xml:space="preserve">
+    <value>Datei nicht gefunden</value>
+    <comment>Error dialog title for missing file</comment>
+  </data>
+  <data name="Eine erforderliche Datei konnte nicht geladen werden" xml:space="preserve">
+    <value>Eine erforderliche Datei konnte nicht geladen werden</value>
+    <comment>Error dialog subtitle for missing file</comment>
+  </data>
+  <data name="Was ist passiert?" xml:space="preserve">
+    <value>Was ist passiert?</value>
+    <comment>Error dialog section header</comment>
+  </data>
+  <data name="Die Anwendung konnte eine wichtige Datei nicht finden. Dies kann passieren, wenn:" xml:space="preserve">
+    <value>Die Anwendung konnte eine wichtige Datei nicht finden. Dies kann passieren, wenn:</value>
+    <comment>Error dialog explanation text</comment>
+  </data>
+  <data name="• Die Datei wurde verschoben oder gelöscht" xml:space="preserve">
+    <value>• Die Datei wurde verschoben oder gelöscht</value>
+    <comment>Error dialog possible cause 1</comment>
+  </data>
+  <data name="• Der Pfad ist nicht korrekt" xml:space="preserve">
+    <value>• Der Pfad ist nicht korrekt</value>
+    <comment>Error dialog possible cause 2</comment>
+  </data>
+  <data name="• Die Datei ist beschädigt" xml:space="preserve">
+    <value>• Die Datei ist beschädigt</value>
+    <comment>Error dialog possible cause 3</comment>
+  </data>
+  <data name="Fehlende Datei:" xml:space="preserve">
+    <value>Fehlende Datei:</value>
+    <comment>Error dialog missing file label</comment>
+  </data>
+  <data name="Ordner öffnen" xml:space="preserve">
+    <value>Ordner öffnen</value>
+    <comment>Error dialog button to open folder</comment>
+  </data>
+  <data name="Anwendung beenden" xml:space="preserve">
+    <value>Anwendung beenden</value>
+    <comment>Error dialog button to close application</comment>
+  </data>
 </root>

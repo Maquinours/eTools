@@ -1158,4 +1158,44 @@
     <value>Ressources assignées</value>
     <comment>Assigned Resources list header</comment>
   </data>
+  <data name="Datei nicht gefunden" xml:space="preserve">
+    <value>Fichier introuvable</value>
+    <comment>Error dialog title for missing file</comment>
+  </data>
+  <data name="Eine erforderliche Datei konnte nicht geladen werden" xml:space="preserve">
+    <value>Un fichier requis n'a pas pu être chargé</value>
+    <comment>Error dialog subtitle for missing file</comment>
+  </data>
+  <data name="Was ist passiert?" xml:space="preserve">
+    <value>Que s'est-il passé ?</value>
+    <comment>Error dialog section header</comment>
+  </data>
+  <data name="Die Anwendung konnte eine wichtige Datei nicht finden. Dies kann passieren, wenn:" xml:space="preserve">
+    <value>L'application n'a pas pu trouver un fichier important. Cela peut arriver si :</value>
+    <comment>Error dialog explanation text</comment>
+  </data>
+  <data name="• Die Datei wurde verschoben oder gelöscht" xml:space="preserve">
+    <value>• Le fichier a été déplacé ou supprimé</value>
+    <comment>Error dialog possible cause 1</comment>
+  </data>
+  <data name="• Der Pfad ist nicht korrekt" xml:space="preserve">
+    <value>• Le chemin n'est pas correct</value>
+    <comment>Error dialog possible cause 2</comment>
+  </data>
+  <data name="• Die Datei ist beschädigt" xml:space="preserve">
+    <value>• Le fichier est corrompu</value>
+    <comment>Error dialog possible cause 3</comment>
+  </data>
+  <data name="Fehlende Datei:" xml:space="preserve">
+    <value>Fichier manquant :</value>
+    <comment>Error dialog missing file label</comment>
+  </data>
+  <data name="Ordner öffnen" xml:space="preserve">
+    <value>Ouvrir le dossier</value>
+    <comment>Error dialog button to open folder</comment>
+  </data>
+  <data name="Anwendung beenden" xml:space="preserve">
+    <value>Fermer l'application</value>
+    <comment>Error dialog button to close application</comment>
+  </data>
 </root>
