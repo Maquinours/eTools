@@ -60,20 +60,20 @@ namespace eTools_Ultimate.ViewModels.Windows
                 ("Loading models...", modelsService.Load),
                 ("Loading items...", itemsService.Load),
                 ("Loading movers...", moversService.Load),
-                ("Loading skills...", skillsService.Load),
-                ("Loading characters...", charactersService.Load),
+                //("Loading skills...", skillsService.Load),
+                //("Loading characters...", charactersService.Load),
                 ("Loading sounds config...", soundsService.Load),
                 ("Loading musics config...", musicsService.Load),
                 ("Loading texts...", textsService.Load),
                 ("Loading giftboxes...", giftBoxesService.Load),
-                ("Loading exchanges...", exchangesService.Load),
-                ("Loading honors...", honorsService.Load),
+                //("Loading exchanges...", exchangesService.Load),
+                //("Loading honors...", honorsService.Load),
                 ("Loading motions...", motionsService.Load),
                 ("Loading accessories...", accessoriesService.Load),
-                ("Loading couple configuration...", coupleService.Load),
-                ("Loading tickets...", ticketsService.Load),
-                ("Loading pack items...", packItemsService.Load),
-                ("Loading terrains...", terrainsService.Load)
+                //("Loading couple configuration...", coupleService.Load),
+                //("Loading tickets...", ticketsService.Load),
+                //("Loading pack items...", packItemsService.Load),
+                //("Loading terrains...", terrainsService.Load)
                 ];
 
             if (serviceProvider.GetService(typeof(INavigationWindow)) is not MainWindow mainWindow) throw new InvalidOperationException("SplashScreenViewModel::Load exception : Unable to find MainWindow");

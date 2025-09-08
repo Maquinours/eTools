@@ -24,10 +24,10 @@ namespace eTools_Ultimate.Services
                 [
                 settingsService.Settings.PropMoverTxtFilePath ?? settingsService.Settings.DefaultPropMoverTxtFilePath,
                 settingsService.Settings.PropItemTxtFilePath ?? settingsService.Settings.DefaultPropItemTxtFilePath,
-                settingsService.Settings.PropSkillTxtFilePath ?? settingsService.Settings.DefaultPropSkillTxtFilePath,
+                //settingsService.Settings.PropSkillTxtFilePath ?? settingsService.Settings.DefaultPropSkillTxtFilePath,
                 settingsService.Settings.TextsTxtFilePath ?? settingsService.Settings.DefaultTextsTxtFilePath,
-                settingsService.Settings.CharactersStringsFilePath ?? settingsService.Settings.DefaultCharactersStringsFilePath,
-                settingsService.Settings.HonorsTxtFilePath ?? settingsService.Settings.DefaultHonorsTxtFilePath,
+                //settingsService.Settings.CharactersStringsFilePath ?? settingsService.Settings.DefaultCharactersStringsFilePath,
+                //settingsService.Settings.HonorsTxtFilePath ?? settingsService.Settings.DefaultHonorsTxtFilePath,
                 settingsService.Settings.MotionsTxtFilePath ?? settingsService.Settings.DefaultMotionsTxtFilePath
                 ];
 
