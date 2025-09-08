@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
     xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -119,7 +120,11 @@
                 BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                 BorderThickness="1,0,1,1">
                 <ListView
-                    x:Name="TextFilesListView"
+                    x:Name="TextsListView"
+                    dd:DragDrop.DragDropContext="TextsListView"
+                    dd:DragDrop.IsDragSource="True"
+                    dd:DragDrop.IsDropTarget="True"
+                    dd:DragDrop.SelectDroppedItems="True"
                     Background="Transparent"
                     BorderThickness="0"
                     IsSynchronizedWithCurrentItem="True"
@@ -280,14 +285,14 @@
                             <TextBox
                                 Grid.Column="0"
                                 BorderThickness="1"
-                                Text="{Binding SelectedItem.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=TextFilesListView}" />
+                                Text="{Binding TextsView.CurrentItem.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <Button
                                 x:Name="OpenPickerButton"
                                 Grid.Column="1"
                                 Width="30"
                                 Height="30"
                                 Margin="10,0,0,0"
-                                Background="{Binding SelectedItem.SolidColorBrushColor, Mode=OneWay, ElementName=TextFilesListView}"
+                                Background="{Binding TextsView.CurrentItem.SolidColorBrushColor, Mode=OneWay}"
                                 BorderThickness="1"
                                 Command="{Binding OpenColorPickerCommand, Mode=OneWay}">
                                 <Button.ToolTip>
@@ -299,7 +304,7 @@
                                 IsOpen="{Binding IsColorPickerOpened, Mode=TwoWay}"
                                 PlacementTarget="{Binding ElementName=OpenPickerButton}"
                                 StaysOpen="False">
-                                <colorpicker:StandardColorPicker SelectedColor="{Binding SelectedItem.Color, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=TextFilesListView}" Style="{StaticResource DefaultColorPickerStyle}" />
+                                <colorpicker:StandardColorPicker SelectedColor="{Binding TextsView.CurrentItem.Color, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultColorPickerStyle}" />
                             </Popup>
                         </Grid>
                     </Grid>

@@ -33,7 +33,7 @@ namespace eTools_Ultimate.Views.Pages
             if (sender != DataContext)
                 throw new InvalidOperationException("TextClientPage::ViewModel_TextAdded exception : sender is not DataContext");
 
-            TextFilesListView.ScrollIntoView(e.Text);
+            TextsListView.ScrollIntoView(e.Text);
             //Dispatcher.InvokeAsync(() =>
             //{
             //    var scrollViewer = FindVisualChildHelper.FindVisualChildren<ScrollViewer>(TextFilesListView).FirstOrDefault();
