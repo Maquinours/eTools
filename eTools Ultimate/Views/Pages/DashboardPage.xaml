@@ -97,6 +97,7 @@
                         FontSize="14"
                         Foreground="#CCCCCC"
                         Text="{Binding Description}"
+                        TextAlignment="Center"
                         TextOptions.TextFormattingMode="Display"
                         TextOptions.TextRenderingMode="ClearType"
                         TextWrapping="Wrap" />
