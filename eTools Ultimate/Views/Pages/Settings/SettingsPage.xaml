@@ -4,11 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:helpers="clr-namespace:eTools_Ultimate.Helpers"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:vm="clr-namespace:eTools_Ultimate.ViewModels.Pages"
-    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     Title="SettingsPage"
     d:DataContext="{d:DesignInstance vm:SettingsViewModel,
                                      IsDesignTimeCreatable=False}"
@@ -48,7 +48,7 @@
                 <Border CornerRadius="8">
                     <Border.Background>
                         <ImageBrush
-                            ImageSource="pack://application:,,,/Views/Pages/Settings/SettingPageBanner.png"
+                            ImageSource="pack://application:,,,/Assets/Images/SettingsPageBanner.png"
                             RenderOptions.BitmapScalingMode="HighQuality"
                             Stretch="UniformToFill" />
                     </Border.Background>
@@ -103,9 +103,9 @@
                             Width="60"
                             Height="Auto"
                             Margin="24,0,0,0"
-                            Source="/Assets/Icons/FolderIcon.png">
+                            Source="pack://application:,,,/Assets/Icons/FolderIcon.png">
                             <Image.OpacityMask>
-                                <ImageBrush ImageSource="/Assets/Icons/FolderIcon.png" />
+                                <ImageBrush ImageSource="pack://application:,,,/Assets/Icons/FolderIcon.png" />
                             </Image.OpacityMask>
                         </Image>
 
@@ -145,9 +145,9 @@
                             Width="60"
                             Height="Auto"
                             Margin="24,0,0,0"
-                            Source="/Assets/Icons/PersonalizationIcon.png">
+                            Source="pack://application:,,,/Assets/Icons/PersonalizationIcon.png">
                             <Image.OpacityMask>
-                                <ImageBrush ImageSource="/Assets/Icons/PersonalizationIcon.png" />
+                                <ImageBrush ImageSource="pack://application:,,,/Assets/Icons/PersonalizationIcon.png" />
                             </Image.OpacityMask>
                         </Image>
 
@@ -187,10 +187,10 @@
                             Width="60"
                             Height="Auto"
                             Margin="24,0,0,0"
-                            Source="/Assets/Icons/AboutIcon.png">
+                            Source="pack://application:,,,/Assets/Icons/AboutIcon.png">
                             <Image.OpacityMask>
                                 <ImageBrush>
-                                    <ImageBrush.ImageSource>/Assets/Icons/AboutIcon.png</ImageBrush.ImageSource>
+                                    <ImageBrush.ImageSource>pack://application:,,,/Assets/Icons/AboutIcon.png</ImageBrush.ImageSource>
                                 </ImageBrush>
                             </Image.OpacityMask>
                         </Image>

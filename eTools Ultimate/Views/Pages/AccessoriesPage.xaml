@@ -1,0 +1,388 @@
+<Page
+    x:Class="eTools_Ultimate.Views.Pages.AccessoriesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
+    xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:viewmodels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
+    Title="Accessories"
+    d:DataContext="{d:DesignInstance viewmodels:AccessoriesViewModel,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="768"
+    d:DesignWidth="1024"
+    Cursor=""
+    ScrollViewer.CanContentScroll="False"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+        <!--  Custom Styles - Let WPF UI handle theming automatically  -->
+    </Page.Resources>
+
+    <Grid x:Name="RootGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  Left Side - ListView  -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  Search Bar  -->
+            <Border
+                Grid.Row="0"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,1,1,0">
+                <ui:TextBox
+                    Margin="10,10,10,10"
+                    BorderThickness="0"
+                    Icon="Search24"
+                    PlaceholderText="{i18n:StringLocalizer 'Suche...'}"
+                    Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Border>
+
+            <!--  Accessory List  -->
+            <Border
+                Grid.Row="1"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,0,1,1">
+                <ListView
+                    x:Name="AccessoriesListView"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    IsSynchronizedWithCurrentItem="True"
+                    ItemsSource="{Binding AccessoriesView}"
+                    SelectedIndex="0">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Width="32"
+                                    Height="32"
+                                    Margin="0,0,8,0"
+                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1">
+                                    <Image
+                                        Margin="2"
+                                        Source="{Binding Item.Icon}"
+                                        Stretch="Uniform" />
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{Binding Item.Name}" />
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding Item.Identifier}" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+        </Grid>
+
+        <!--  Separator  -->
+        <GridSplitter
+            Grid.Column="1"
+            Width="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Stretch"
+            Background="Transparent">
+            <GridSplitter.Template>
+                <ControlTemplate TargetType="{x:Type GridSplitter}">
+                    <Grid Background="Transparent">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </GridSplitter.Template>
+        </GridSplitter>
+
+        <!--  Right Side - Details  -->
+        <Border
+            Grid.Column="2"
+            Margin="5,5,5,5"
+            Padding="16"
+            BorderBrush="Transparent"
+            BorderThickness="0"
+            CornerRadius="8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+
+
+                <!--  Accessory Title  -->
+                <Grid Grid.Row="0" Margin="0,0,0,16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="0,0,16,0">
+                        <TextBlock
+                            FontSize="24"
+                            FontWeight="Bold"
+                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                            Text="{Binding SelectedItem.Item.Name, Mode=OneWay, ElementName=AccessoriesListView}" />
+                        <TextBlock
+                            FontSize="14"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                            TextWrapping="Wrap">
+                            <TextBlock.Text>
+                                <MultiBinding StringFormat="{}{0} - {1}">
+                                    <Binding ElementName="AccessoriesListView" Path="SelectedItem.Item.Identifier" />
+                                    <Binding ElementName="AccessoriesListView" Path="SelectedItem.Item.Description" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
+                    </StackPanel>
+
+                    <!--  Add and Delete Buttons top right  -->
+                    <StackPanel
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+                        <ui:Button ToolTip="{i18n:StringLocalizer 'Undo'}">
+                            <ui:SymbolIcon Symbol="ArrowUndo24" />
+                        </ui:Button>
+                        <ui:Button Margin="10,0,10,0" ToolTip="{i18n:StringLocalizer 'Redo'}">
+                            <ui:SymbolIcon Symbol="ArrowRedo24" />
+                        </ui:Button>
+                        <ui:Button
+                            x:Name="SaveButton"
+                            Margin="0,0,10,0"
+                            Command="{Binding SaveCommand}"
+                            Content="{i18n:StringLocalizer 'Save'}" />
+                        <ui:Button
+                            x:Name="ExpertButton"
+                            Margin="0,0,10,0"
+                            Appearance="Secondary"
+                            Content="{i18n:StringLocalizer 'Expert'}" />
+
+                        <ui:Button
+                            x:Name="AddButton"
+                            Margin="0,0,10,0"
+                            Background="#2F70AF"
+                            Content="{i18n:StringLocalizer 'Add'}" />
+                        <ui:Button
+                            x:Name="DeleteButton"
+                            Background="#FD292F"
+                            Content="{i18n:StringLocalizer 'Delete'}"
+                            Foreground="White" />
+                    </StackPanel>
+                </Grid>
+
+                <!--  Accessory Actions  -->
+                <StackPanel
+                    Grid.Row="1"
+                    Margin="0,0,0,16"
+                    Orientation="Horizontal">
+                    <ui:Button
+                        Margin="0,0,8,0"
+                        Appearance="Secondary"
+                        Command="{Binding DataContext.AddAbilityOptionDataCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                        Content="{i18n:StringLocalizer 'New Level'}"
+                        Icon="Add24" />
+                </StackPanel>
+
+                <!--  Accessory Stats - Card View  -->
+                <ScrollViewer
+                    x:Name="AccessoryScrollViewer"
+                    Grid.Row="2"
+                    VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding SelectedItem.AbilityOptionData, Mode=OneWay, ElementName=AccessoriesListView}">
+                        <!--  Single column layout  -->
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Margin="0,0,0,12"
+                                    Padding="16"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="6"
+                                    Tag="{Binding}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <!--  Level Header with Actions  -->
+                                        <Grid Grid.Row="0" Margin="0,0,0,8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <TextBlock
+                                                Grid.Column="0"
+                                                VerticalAlignment="Center"
+                                                FontSize="18"
+                                                FontWeight="SemiBold"
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                Text="{Binding NAbilityOption, StringFormat={i18n:StringLocalizer 'Level {0}'}}" />
+
+                                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                                <!--  Delete with Confirmation  -->
+                                                <ui:Button
+                                                    Width="32"
+                                                    Height="32"
+                                                    Padding="0"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    Appearance="Danger"
+                                                    Command="{Binding DataContext.DeleteAbilityOptionDataCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                                    CommandParameter="{Binding}"
+                                                    ToolTip="{i18n:StringLocalizer 'Delete Level'}">
+                                                    <ui:SymbolIcon Symbol="Delete24" />
+                                                </ui:Button>
+                                            </StackPanel>
+                                        </Grid>
+
+                                        <!--  Attributes  -->
+                                        <ItemsControl Grid.Row="1" ItemsSource="{Binding DstData}">
+                                            <ItemsControl.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid Margin="0,6">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="180" />
+                                                            <ColumnDefinition Width="Auto" />
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <!--  Attribute Dropdown  -->
+                                                        <ui:AutoSuggestBox
+                                                            Grid.Column="0"
+                                                            Margin="0,0,12,0"
+                                                            Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                                            FontSize="14"
+                                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                            OriginalItemsSource="{Binding DataContext.PossibleDstValues, RelativeSource={RelativeSource AncestorType=Page}}"
+                                                            Text="{Binding DestIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+
+                                                        <!--  Value Input mit manueller Eingabe und Pfeilen  -->
+                                                        <Grid Grid.Column="1" Margin="0,0,8,0">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*" />
+                                                                <ColumnDefinition Width="Auto" />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <!--  Editierbare Textbox  -->
+                                                            <ui:NumberBox
+                                                                Name="ValueTextBox"
+                                                                Grid.Column="0"
+                                                                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                                                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                                Value="{Binding NAdj, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                                        </Grid>
+
+                                                        <!--  Delete Attribute Button  -->
+                                                        <ui:Button
+                                                            Grid.Column="2"
+                                                            Width="28"
+                                                            Height="28"
+                                                            Padding="0"
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Center"
+                                                            Appearance="Secondary"
+                                                            Command="{Binding DataContext.DeleteDstDataCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                                            CommandParameter="{Binding}"
+                                                            ToolTip="{i18n:StringLocalizer 'Delete Attribute'}">
+                                                            <ui:SymbolIcon Symbol="Dismiss24" />
+                                                        </ui:Button>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </ItemsControl.ItemTemplate>
+                                        </ItemsControl>
+
+                                        <!--  Add Attribute Button  -->
+                                        <ui:Button
+                                            Grid.Row="2"
+                                            Margin="0,8,0,0"
+                                            HorizontalAlignment="Left"
+                                            Appearance="Secondary"
+                                            Command="{Binding DataContext.AddDstDataCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                            CommandParameter="{Binding}">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock
+                                                    Margin="0,0,4,0"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="12"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    Text="➕" />
+                                                <TextBlock
+                                                    VerticalAlignment="Center"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    Text="{i18n:StringLocalizer 'Add Attribute'}" />
+                                            </StackPanel>
+                                        </ui:Button>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+        </Border>
+    </Grid>
+</Page>

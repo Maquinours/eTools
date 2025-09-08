@@ -5,7 +5,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System;
 using eTools_Ultimate.Helpers;
-using eTools_Ultimate.Views.Pages.TerrainObject;
 
 namespace eTools_Ultimate.ViewModels.Windows
 {
@@ -18,149 +17,149 @@ namespace eTools_Ultimate.ViewModels.Windows
                 {
                     Content = "Dashboard",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/eTools.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.DashboardPage),
-                    MenuItemsSource = new object[]
-                    {
-                        new NavigationViewItem()
-                        {
-                            Content = "ChangeLog",
-                            Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/World.png", 25, 25),
-                            TargetPageType = typeof(eTools_Ultimate.Views.Pages.ChangeLog.ChangeLogView)
-                        }
-                    }
+                    TargetPageType = typeof(DashboardPage),
+                    //MenuItemsSource = new object[] // TODO: Add back changelog but not like this (contentdialog)
+                    //{
+                    //    new NavigationViewItem()
+                    //    {
+                    //        Content = "ChangeLog",
+                    //        Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/World.png", 25, 25),
+                    //        TargetPageType = typeof(eTools_Ultimate.Views.Pages.ChangeLog.ChangeLogView)
+                    //    }
+                    //}
                 },
                 new NavigationViewItemSeparator(),
                 new NavigationViewItem()
                 {
                     Content = "Items",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Items.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.ItemPage)
+                    TargetPageType = typeof(ItemsPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "Movers",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Movers.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.MoverPage)
+                    TargetPageType = typeof(MoversPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "Skills",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Skills.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.SkillPage)
+                    TargetPageType = typeof(SkillPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "Motions",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Motions.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.Motion.MotionPage)
+                    TargetPageType = typeof(MotionsPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "Quests",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Quests.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.QuestPage)
+                    TargetPageType = typeof(QuestsPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "NPCs",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Characters.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.NpcPage)
+                    TargetPageType = typeof(CharactersPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "Events",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Events.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.EventPage)
+                    TargetPageType = typeof(EventPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "Giftboxes",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Giftboxes.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.GiftboxPage)
+                    TargetPageType = typeof(GiftboxesPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "Collectors",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Collector.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.CollectorPage)
+                    TargetPageType = typeof(CollectorPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "Accessories",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Accessories.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.Accessory.AccessoryPage)
+                    TargetPageType = typeof(AccessoriesPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "Exchangers",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Exchangers.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.ExchangerPage)
+                    TargetPageType = typeof(ExchangerPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "HonorList",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Honors.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.Honor.HonorPage)
+                    TargetPageType = typeof(HonorsPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "TextClient",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Texts.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.TextClientPage)
+                    TargetPageType = typeof(TextsPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "Couple",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Accessories.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.CouplePage),
+                    TargetPageType = typeof(CouplePage),
                 },
                 new NavigationViewItem()
                 {
                     Content = "Terrain",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Terrain.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.TerrainObject.TerrainObjectPage)
+                    TargetPageType = typeof(TerrainsPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "World",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/World.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.World.WorldPage)
+                    TargetPageType = typeof(WorldsPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "Tickets",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/ticket.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.Ticket.TicketPage)
+                    TargetPageType = typeof(TicketsPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "Object",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Terrain.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.Object.ObjectPage)
+                    TargetPageType = typeof(ObjectsPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "Job",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/ticket.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.Job.JobPage)
+                    TargetPageType = typeof(JobsPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "Packitem",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/ticket.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.Packitem.PackitemPage)
+                    TargetPageType = typeof(PackitemsPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "Lord",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Lord.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.Lord.LordPage)
+                    TargetPageType = typeof(LordsPage)
                 },
                 new NavigationViewItem()
                 {
                     Content = "DropEvent",
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/ticket.png", 25, 25),
-                    TargetPageType = typeof(Views.Pages.DropEvent.DropEventPage)
+                    TargetPageType = typeof(DropEventsPage)
                 }
             ];
 

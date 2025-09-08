@@ -12,6 +12,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Pages\Skill\**" />
+    <EmbeddedResource Remove="Views\Pages\Skill\**" />
+    <None Remove="Views\Pages\Skill\**" />
+    <Page Remove="Views\Pages\Skill\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wpfui-icon.ico" />
     <Resource Include="Assets\Icons\discord.png" />
     <Resource Include="Assets\Icons\eTools.png" />
@@ -35,14 +42,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Assets\wpfui-icon-256.png" />
-    <None Remove="Assets\wpfui-icon-1024.png" />
-    <None Remove="Views\Pages\Home\HomePage.png" />
-    <None Remove="Views\Pages\Settings\AboutIcon.png" />
-    <None Remove="Views\Pages\Settings\PaintPaletteIcon.png" />
-    <None Remove="Views\Pages\Settings\SettingPageBanner.png" />
+    <None Remove="Assets\Images\Logo.png" />
     <None Remove="Views\Pages\Settings\Kiyo.jpg" />
-    <None Remove="Views\Pages\Settings\Logo.png" />
     <None Remove="Views\Windows\WarningIcon.png" />
   </ItemGroup>
 
@@ -66,9 +67,8 @@
 
   <ItemGroup>
     <Resource Include="Assets\Images\HomePage.png" />
+    <Resource Include="Assets\Images\Logo.png" />
     <Resource Include="Assets\Images\SplashScreen.png" />
-    <Resource Include="Assets\wpfui-icon-256.png" />
-    <Resource Include="Assets\wpfui-icon-1024.png" />
     <Resource Include="Assets\Icons\Collector.png" />
     <Resource Include="Assets\Icons\Movers.png" />
     <Resource Include="Assets\Icons\Exchangers.png" />
@@ -90,18 +90,10 @@
     <Resource Include="Assets\Icons\FolderIcon.png" />
     <Resource Include="Assets\Icons\AboutIcon.png" />
     <Resource Include="Assets\Icons\PersonalizationIcon.png" />
-    <Resource Include="Views\Pages\Settings\AboutIcon.png" />
-    <Resource Include="Views\Pages\Settings\FolderPathIcon.png" />
-    <Resource Include="Views\Pages\Settings\PaintPaletteIcon.png" />
-    <Resource Include="Views\Pages\Settings\SettingPageBanner.png" />
-    <Resource Include="Views\Pages\Settings\Kiyo.jpg" />
-    <Resource Include="Views\Pages\Settings\Maqui.jpg" />
-    <Resource Include="Views\Pages\Settings\Logo.png" />
+    <Resource Include="Assets\Images\SettingsPageBanner.png" />
+    <Resource Include="Assets\Images\Kiyo.jpg" />
+    <Resource Include="Assets\Images\Maqui.jpg" />
     <Resource Include="Views\Windows\WarningIcon.png" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Pages\Skill\" />
   </ItemGroup>
 
   <ItemGroup>

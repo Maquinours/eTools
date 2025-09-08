@@ -43,7 +43,7 @@
                 Width="500"
                 Height="150"
                 RenderOptions.BitmapScalingMode="HighQuality"
-                Source="/Assets/Images/SplashScreen.png"
+                Source="pack://application:,,,/Assets/Images/SplashScreen.png"
                 Stretch="Uniform" />
             <TextBlock
                 x:Name="LoadingText"
