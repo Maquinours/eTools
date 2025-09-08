@@ -145,7 +145,7 @@
                 <Border CornerRadius="8">
                     <Border.Background>
                         <ImageBrush
-                            ImageSource="/Assets/Images/HomePage.png"
+                            ImageSource="pack://application:,,,/Assets/Images/HomePage.png"
                             RenderOptions.BitmapScalingMode="HighQuality"
                             Stretch="UniformToFill" />
                     </Border.Background>
@@ -289,7 +289,7 @@
                     Width="36"
                     Height="36"
                     RenderOptions.BitmapScalingMode="HighQuality"
-                    Source="/eTools Ultimate;component/Assets/Icons/github.png"
+                    Source="pack://application:,,,/Assets/Icons/github.png"
                     Stretch="Uniform" />
             </ui:Anchor>
 
@@ -311,7 +311,7 @@
                     Width="36"
                     Height="36"
                     RenderOptions.BitmapScalingMode="HighQuality"
-                    Source="/eTools Ultimate;component/Assets/Icons/discord.png"
+                    Source="pack://application:,,,/Assets/Icons/discord.png"
                     Stretch="Uniform" />
             </ui:Anchor>
 
