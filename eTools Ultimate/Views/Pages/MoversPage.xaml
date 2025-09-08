@@ -1680,7 +1680,7 @@
                                             <ui:AutoSuggestBox
                                                 Grid.Column="0"
                                                 OriginalItemsSource="{Binding ModelMotionFilePossibilities, Mode=OneWay}"
-                                                Text="{Binding Path=SelectedItem.SzMotion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=MotionsListView}" />
+                                                Text="{Binding Path=SelectedItem.Prop.SzMotion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=MotionsListView}" />
                                             <ui:Button
                                                 Grid.Column="1"
                                                 Width="30"
@@ -1719,7 +1719,7 @@
                                         <ui:AutoSuggestBox
                                             Grid.Column="0"
                                             OriginalItemsSource="{Binding ModelFilePossibilities, Mode=OneWay}"
-                                            Text="{Binding MoversView.CurrentItem.Model.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                            Text="{Binding MoversView.CurrentItem.Model.Prop.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                         <ui:Button
                                             Grid.Column="1"
                                             Width="30"
@@ -1747,7 +1747,7 @@
                                     <ui:NumberBox
                                         Grid.Row="1"
                                         SpinButtonPlacementMode="Inline"
-                                        Value="{Binding MoversView.CurrentItem.Model.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        Value="{Binding MoversView.CurrentItem.Model.Prop.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </Grid>
                             </UniformGrid>
 
@@ -1770,7 +1770,7 @@
                                     <ComboBox
                                         Grid.Row="1"
                                         ItemsSource="{Binding ModelTexturesPossibilities}"
-                                        SelectedValue="{Binding MoversView.CurrentItem.Model.NTextureEx, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        SelectedValue="{Binding MoversView.CurrentItem.Model.Prop.NTextureEx, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                         Style="{StaticResource AppComboBoxStyle}" />
                                 </Grid>
                             </UniformGrid>
