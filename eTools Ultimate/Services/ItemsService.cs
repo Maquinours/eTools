@@ -35,8 +35,8 @@ namespace eTools_Ultimate.Services
             this.ClearItems();
 
             int itemModelType = definesService.Defines["OT_ITEM"];
-            ModelElem[] itemModels = modelsService.GetModelsByType(itemModelType);
-            Dictionary<int, ModelElem> itemModelsDictionary = itemModels.ToDictionary(x => x.DwIndex, x => x); // used to get better performance
+            Model[] itemModels = modelsService.GetModelsByType(itemModelType);
+            Dictionary<int, Model> itemModelsDictionary = itemModels.ToDictionary(x => x.Prop.DwIndex, x => x); // used to get better performance
 
 
             using (Script script = new())
@@ -480,7 +480,7 @@ namespace eTools_Ultimate.Services
                         bCanLooksChange: bCanLooksChange,
                         bIsLooksChangeMaterial: bIsLooksChangeMaterial
                         );
-                    ModelElem? model = itemModelsDictionary.GetValueOrDefault(dwId);
+                    Model? model = itemModelsDictionary.GetValueOrDefault(dwId);
                     Item item = new(itemProp, model);
 
                     this.Items.Add(item);

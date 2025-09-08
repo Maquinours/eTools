@@ -100,7 +100,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        public string ModelViewerError
+        public string? ModelViewerError
         {
             get => _modelViewerError;
             set
@@ -395,7 +395,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
 
 
-            int textureEx = mover.Model.NTextureEx;
+            int textureEx = mover.Model.Prop.NTextureEx;
             NativeMethods.SetTextureEx(D3dHost._native, textureEx);
             if (!Auto3DRendering)
                 D3dHost.Render();
@@ -407,7 +407,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (MoversView.CurrentItem is not Mover mover) return;
             if (mover.Model is null) return;
 
-            float scale = mover.Model.FScale;
+            float scale = mover.Model.Prop.FScale;
             NativeMethods.SetScale(D3dHost._native, scale);
             if (!Auto3DRendering)
                 D3dHost.Render();
@@ -486,7 +486,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             string folder = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
             string? prefix = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
             if (prefix is null) return;
-            string suffix = currentMotion.SzMotion;
+            string suffix = currentMotion.Prop.SzMotion;
             string filePath = $"{folder}{prefix}_{suffix}.ani";
 
             if (e.FullPath == filePath || (e is RenamedEventArgs renamedEvent && renamedEvent.OldFullPath == filePath))
@@ -533,13 +533,13 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (e.PropertyName == nameof(Mover.Model))
             {
                 if (e is not PropertyChangedExtendedEventArgs extendedArgs) throw new InvalidOperationException("Model property changed args is not PropertyChangedExtendedEventArgs");
-                if (extendedArgs.OldValue is ModelElem oldModel)
+                if (extendedArgs.OldValue is Model oldModel)
                 {
                     oldModel.PropertyChanged -= CurrentMoverModel_PropertyChanged;
                     if (oldModel.MotionsView.CurrentItem is ModelMotion currentMotion)
                         currentMotion.PropertyChanged -= CurrentMotion_PropertyChanged;
                 }
-                if (extendedArgs.NewValue is ModelElem newModel)
+                if (extendedArgs.NewValue is Model newModel)
                 {
                     newModel.PropertyChanged += CurrentMoverModel_PropertyChanged;
                     if (newModel.MotionsView.CurrentItem is ModelMotion currentMotion)
@@ -589,11 +589,11 @@ namespace eTools_Ultimate.ViewModels.Pages
                 InitializeMotionsDirectoryWatcherPath();
                 LoadModel();
             }
-            else if(e.PropertyName == nameof(Mover.Model.NTextureEx))
+            else if(e.PropertyName == nameof(Mover.Model.Prop.NTextureEx))
             {
                 SetModelTexture();
             }
-            else if(e.PropertyName == nameof(Mover.Model.FScale))
+            else if(e.PropertyName == nameof(Mover.Model.Prop.FScale))
             {
                 SetScale();
             }
@@ -645,7 +645,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: mover.Model is null");
             if (modelMotion != mover.Model.MotionsView.CurrentItem)
                 throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: sender is not selected motion");
-            if (e.PropertyName == nameof(ModelMotion.SzMotion))
+            if (e.PropertyName == nameof(ModelMotion.Prop.SzMotion))
                 StopMotion();
         }
         #endregion Event handlers
@@ -675,7 +675,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 )
                 return;
 
-            mover.Model.SzName = fileName.Substring(4);
+            mover.Model.Prop.SzName = fileName.Substring(4);
         }
 
         [RelayCommand]
@@ -692,7 +692,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
                 //if (contentDialogViewModel.MoversView.CurrentItem is null) // TODO: remove reference model
                 if (contentDialogViewModel.MoversView.CurrentItem is not Mover referenceMover) return;
-                if(referenceMover.Model is not ModelElem referenceModel) return;
+                if(referenceMover.Model is not Model referenceModel) return;
 
                 if (referenceMover.Identifier == "MI_MALE" || referenceMover.Identifier == "MI_FEMALE")
                 {
@@ -742,8 +742,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                     }
                     NativeMethods.SetReferenceModel(D3dHost._native, referenceModel.Model3DFilePath);
                 }
-                NativeMethods.SetReferenceScale(D3dHost._native, referenceModel.FScale);
-                NativeMethods.SetReferenceTextureEx(D3dHost._native, referenceModel.NTextureEx);
+                NativeMethods.SetReferenceScale(D3dHost._native, referenceModel.Prop.FScale);
+                NativeMethods.SetReferenceTextureEx(D3dHost._native, referenceModel.Prop.NTextureEx);
                 if (!Auto3DRendering)
                     D3dHost.Render();
             }
@@ -844,7 +844,8 @@ namespace eTools_Ultimate.ViewModels.Pages
             );
             if (result == ContentDialogResult.Primary)
             {
-                ModelMotion motion = new(-1, "");
+                ModelMotionProp motionProp = new(-1, "");
+                ModelMotion motion = new(motionProp);
                 mover.Model.Motions.Add(motion);
                 mover.Model.MotionsView.MoveCurrentTo(motion);
                 mover.Model.MotionsView.Refresh();
@@ -881,7 +882,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (mover.Model is null) return;
 
             string folderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath; // Models folder path
-            string filterPrefix = $"{Constants.ModelFilenameRoot[mover.Model.DwType]}_{mover.Model.SzName}_"; // Filter prefix for motion files
+            string filterPrefix = $"{Constants.ModelFilenameRoot[mover.Model.Prop.DwType]}_{mover.Model.Prop.SzName}_"; // Filter prefix for motion files
             string filter = $"{filterPrefix}*.ani"; // Entire filter
             string[] filePossibilities = [..Directory.GetFiles(folderPath, filter).Select(x => Path.GetFileNameWithoutExtension(x)[filterPrefix.Length..])]; // All .ani files for this model
             string[] motionTypeDefines = [.. definesService.ReversedMotionTypeDefines.Select(x => x.Value)]; // All motion type identifiers
@@ -896,9 +897,10 @@ namespace eTools_Ultimate.ViewModels.Pages
 
                 int typeId = definesService.Defines[typeIdentifier]; // type ID from type identifier
 
-                if (mover.Model.Motions.Any(x => x.IMotion == typeId)) continue; // Motion with this type already exists
+                if (mover.Model.Motions.Any(x => x.Prop.IMotion == typeId)) continue; // Motion with this type already exists
 
-                ModelMotion modelMotion = new(typeId, filePossibility);
+                ModelMotionProp modelMotionProp = new(typeId, filePossibility);
+                ModelMotion modelMotion = new(modelMotionProp);
                 mover.Model.Motions.Add(modelMotion);
                 generatedCount++;
             }
@@ -922,7 +924,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
             string root = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
-            string lowerMotionKey = motion.SzMotion;
+            string lowerMotionKey = motion.Prop.SzMotion;
 
             string motionFile = $@"{modelsFolderPath}{root}_{lowerMotionKey}.ani";
 

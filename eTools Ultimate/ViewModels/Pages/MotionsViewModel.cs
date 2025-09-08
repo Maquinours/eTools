@@ -58,15 +58,15 @@ namespace eTools_Ultimate.ViewModels.Pages
                 int moverModelType = definesService.Defines["OT_MOVER"];
                 int maleMoverId = definesService.Defines["MI_MALE"];
                 int femaleMoverId = definesService.Defines["MI_FEMALE"];
-                ModelElem? maleMoverModel = modelsService.GetModelByTypeAndId(moverModelType, maleMoverId);
-                ModelElem? femaleMoverModel = modelsService.GetModelByTypeAndId(moverModelType, maleMoverId);
+                Model? maleMoverModel = modelsService.GetModelByTypeAndId(moverModelType, maleMoverId);
+                Model? femaleMoverModel = modelsService.GetModelByTypeAndId(moverModelType, maleMoverId);
                 if (maleMoverModel is null || femaleMoverModel is null) return [];
                 ModelMotion[] maleMotions = [.. maleMoverModel.Motions];
                 ModelMotion[] femaleMotions = [.. femaleMoverModel.Motions];
 
-                ModelMotion[] common = [.. maleMotions.Where(m => femaleMotions.Any(f => f.IMotion == m.IMotion))];
+                ModelMotion[] common = [.. maleMotions.Where(m => femaleMotions.Any(f => f.Prop.IMotion == m.Prop.IMotion))];
 
-                string[] commonIdentifiers = [.. common.Select(x => definesService.ReversedMotionTypeDefines[x.IMotion])];
+                string[] commonIdentifiers = [.. common.Select(x => definesService.ReversedMotionTypeDefines[x.Prop.IMotion])];
 
                 return commonIdentifiers;
             }
@@ -216,14 +216,14 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             int moverModelType = definesService.Defines["OT_MOVER"];
             int moverId = definesService.Defines[moverIdentifier];
-            ModelElem? moverModel = modelsService.GetModelByTypeAndId(moverModelType, moverId);
+            Model? moverModel = modelsService.GetModelByTypeAndId(moverModelType, moverId);
             if (moverModel is null) return;
-            ModelMotion? modelMotion = moverModel.Motions.FirstOrDefault(m => m.IMotion == motionType);
+            ModelMotion? modelMotion = moverModel.Motions.FirstOrDefault(m => m.Prop.IMotion == motionType);
             if (modelMotion is null) return;
 
             string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
-            string root = $"mvr_{moverModel.SzName}";
-            string lowerMotionKey = modelMotion.SzMotion;
+            string root = $"mvr_{moverModel.Prop.SzName}";
+            string lowerMotionKey = modelMotion.Prop.SzMotion;
 
             string motionFile = $@"{modelsFolderPath}{root}_{lowerMotionKey}.ani";
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Helpers
 {
-    internal class Script : Scanner
+    public class Script : Scanner
     {
 		static private string[] CommandTable = [
 			" ",

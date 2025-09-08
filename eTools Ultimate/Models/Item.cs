@@ -784,14 +784,14 @@ namespace eTools_Ultimate.Models
         }
 
         private readonly ItemProp _prop;
-        private ModelElem? _model;
+        private Model? _model;
         //private BindingList<Dest> _dests;
 
         public ItemProp Prop => _prop;
 
-        public ModelElem? Model { get => _model; set { _model = value; NotifyPropertyChanged(); } }
+        public Model? Model { get => _model; set { _model = value; NotifyPropertyChanged(); } }
 
-        public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; if (this.Model is not null) this.Model.DwIndex = value; } } }
+        public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; if (this.Model is not null) this.Model.Prop.DwIndex = value; } } }
 
         public string Identifier
         {
@@ -1011,7 +1011,7 @@ namespace eTools_Ultimate.Models
         //    get => this.Dests.Where(x => x.Param == "DST_HP" || x.Param == "DST_FP" || x.Param == "DST_MP").Any();
         //}
 
-        public Item(ItemProp prop, ModelElem? model)
+        public Item(ItemProp prop, Model? model)
         {
             _prop = prop;
             _model = model;

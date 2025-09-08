@@ -424,25 +424,25 @@ namespace eTools_Ultimate.Models
         }
 
         private readonly MoverProp _prop;
-        private ModelElem? _model;
+        private Model? _model; // TODO: the model should be a calculated property
 
         public MoverProp Prop => this._prop;
 
-        public ModelElem? Model
+        public Model? Model
         {
             get => this._model;
             set
             {
                 if (value != this.Model)
                 {
-                    ModelElem? oldValue = this.Model;
+                    Model? oldValue = this.Model;
                     this._model = value;
                     NotifyPropertyChanged(nameof(this.Model), oldValue, this.Model);
                 }
             }
         }
 
-        public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; if (this.Model is not null) this.Model.DwIndex = value; } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
+        public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; if (this.Model is not null) this.Model.Prop.DwIndex = value; } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
 
         public string Identifier
         {
@@ -572,7 +572,7 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public Mover(MoverProp prop, ModelElem? model)
+        public Mover(MoverProp prop, Model? model)
         {
             _prop = prop;
             _model = model;

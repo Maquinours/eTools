@@ -59,8 +59,8 @@ namespace eTools_Ultimate.Services
             ObservableDictionary<string, string> strings = App.Services.GetRequiredService<StringsService>().Strings;
 
             int moverModelType = definesService.Defines["OT_MOVER"];
-            ModelElem[] moverModels = modelsService.GetModelsByType(moverModelType);
-            Dictionary<int, ModelElem> moverModelsDictionary = moverModels.ToDictionary(x => x.DwIndex, x => x); // used to get better performance
+            Model[] moverModels = modelsService.GetModelsByType(moverModelType);
+            Dictionary<int, Model> moverModelsDictionary = moverModels.ToDictionary(x => x.Prop.DwIndex, x => x); // used to get better performance
 
             using (Script script = new())
             {
@@ -317,7 +317,7 @@ namespace eTools_Ultimate.Services
                         szNpcMark: szNpcMark,
                         dwMadrigalGiftPoint: dwMadrigalGiftPoint
                         );
-                    ModelElem? model = moverModelsDictionary.GetValueOrDefault(dwId);
+                    Model? model = moverModelsDictionary.GetValueOrDefault(dwId);
                     Mover mover = new(moverProp, model);
 
                     Movers.Add(mover);
@@ -704,6 +704,8 @@ namespace eTools_Ultimate.Services
                         szNpcMark: szNpcMark,
                         dwMadrigalGiftPoint: dwMadrigalGiftPoint
                         );
+
+            //ModelElem model = new() // TODO: add a model with the mover
             Mover mover = new(moverProp, null);
 
             Movers.Add(mover);

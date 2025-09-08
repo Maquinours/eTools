@@ -13,117 +13,190 @@ using System.Windows.Data;
 
 namespace eTools_Ultimate.Models
 {
-    public class ModelMotion(int iMotion, string szMotion) : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
+    public interface IModelItem { }
 
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            switch(propertyName)
-            {
-                case nameof(this.IMotion):
-                    this.NotifyPropertyChanged(nameof(this.MotionTypeIdentifier));
-                    break;
-            }
-        }
+    public class ModelMotionProp(int iMotion, string szMotion)
+    {
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private int _iMotion = iMotion;
         private string _szMotion = szMotion;
 
-        public int IMotion { get => this._iMotion; set { this._iMotion = value; this.NotifyPropertyChanged(); } }
-        public string SzMotion { get => this._szMotion; set { this._szMotion = value; this.NotifyPropertyChanged(); } }
+        public int IMotion { get => this._iMotion; set => SetValue(ref _iMotion, value); }
+        public string SzMotion { get => this._szMotion; set => SetValue(ref _szMotion, value); }
+
+        private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+                return false;
+            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new Exception($"Motion SetValue with not safe to assign directly property {propertyName}");
+            T old = field;
+            field = value;
+            this.NotifyPropertyChanged(propertyName, old, value);
+            return true;
+        }
+        private void NotifyPropertyChanged<T>(string propertyName, T oldValue, T newValue)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedExtendedEventArgs(propertyName, oldValue, newValue));
+        }
+    }
+
+    public class ModelMotion : INotifyPropertyChanged
+    {
+        private readonly ModelMotionProp _prop;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public ModelMotionProp Prop => _prop;
+
         public string MotionTypeIdentifier
         {
-            get => Script.NumberToString(IMotion, App.Services.GetRequiredService<DefinesService>().ReversedMotionTypeDefines);
+            get => Script.NumberToString(Prop.IMotion, App.Services.GetRequiredService<DefinesService>().ReversedMotionTypeDefines);
             set
             {
                 if (Script.TryGetNumberFromString(value, out int val))
-                    IMotion = val;
+                    Prop.IMotion = val;
             }
         }
-    }
 
-    public class ModelBrace : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        public ModelMotion(ModelMotionProp prop)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            _prop = prop;
+
+            Prop.PropertyChanged += Prop_PropertyChanged;
         }
 
-        private string _szName;
-        private List<ModelBrace> _braces;
-        private List<ModelElem> _models;
-
-        public string SzName { get => this._szName; set { if (this.SzName != value) { this._szName = value; this.NotifyPropertyChanged(); } } }
-        public List<ModelBrace> Braces { get => this._braces; set { if (this.Braces != value) { this._braces = value; this.NotifyPropertyChanged(); } } }
-        public List<ModelElem> Models { get => this._models; set { if (this.Models != value) { this._models = value; this.NotifyPropertyChanged(); } } }
-
-        public ModelBrace()
+        private void Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            this.SzName = string.Empty;
-            this.Braces = new List<ModelBrace>();
-            this.Models = new List<ModelElem>();
-        }
-    }
-    public class MainModelBrace : ModelBrace
-    {
-        private int _iType;
+            if(sender != Prop) 
+                throw new InvalidOperationException("ModelMotion::Prop_PropertyChanged exception : sender is not Prop");
 
-        public int IType { get => this._iType; set { if (this.IType != value) { this._iType = value; this.NotifyPropertyChanged(); } } }
-    }
-
-    public class ModelElem : INotifyPropertyChanged, IDisposable
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
-            switch(propertyName)
+            switch (e.PropertyName)
             {
-                case nameof(this.DwType):
-                case nameof(this.DwModelType):
-                case nameof(this.SzName):
-                    NotifyPropertyChanged(nameof(this.Model3DFilePath));
-                    // Add handles to settings path
+                case nameof(Prop.IMotion):
+                    this.NotifyPropertyChanged(nameof(MotionTypeIdentifier));
                     break;
             }
         }
 
-        private int _dwType;
-        private int _dwIndex;
-        private string _szName;
-        private int _dwModelType;
-        private string _szPart;
-        private int _bFly;
-        private int _dwDistant;
-        private int _bPick;
-        private float _fScale;
-        private int _bTrans;
-        private int _bShadow;
-        private int _nTextureEx;
-        private int _bRenderFlag;
-        private ObservableCollection<ModelMotion> _motions;
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            
+        }
+    }
 
-        public int DwType { get => this._dwType; set { if (this.DwType != value) { this._dwType = value; this.NotifyPropertyChanged(); } } }
-        public int DwIndex { get => this._dwIndex; set { if (this.DwIndex != value) { this._dwIndex = value; this.NotifyPropertyChanged(); } } }
-        public string SzName { get => this._szName; set { if (this.SzName != value) { this._szName = value; this.NotifyPropertyChanged(); } } }
-        public int DwModelType { get => this._dwModelType; set { if (this.DwModelType != value) { this._dwModelType = value; this.NotifyPropertyChanged(); } } }
-        public string SzPart { get => this._szPart; set { if (this.SzPart != value) { this._szPart = value; this.NotifyPropertyChanged(); } } }
-        public int BFly { get => this._bFly; set { if (this.BFly != value) { this._bFly = value; this.NotifyPropertyChanged(); } } }
-        public int DwDistant { get => this._dwDistant; set { if (this.DwDistant != value) { this._dwDistant = value; this.NotifyPropertyChanged(); } } }
-        public int BPick { get => this._bPick; set { if (this.BPick != value) { this._bPick = value; this.NotifyPropertyChanged(); } } }
-        public float FScale { get => this._fScale; set { if (this.FScale != value) { this._fScale = value; this.NotifyPropertyChanged(); } } }
-        public int BTrans { get => this._bTrans; set { if (this.BTrans != value) { this._bTrans = value; this.NotifyPropertyChanged(); } } }
-        public int BShadow { get => this._bShadow; set { if (this.BShadow != value) { this._bShadow = value; this.NotifyPropertyChanged(); } } }
-        public int NTextureEx { get => this._nTextureEx; set { if (this.NTextureEx != value) { this._nTextureEx = value; this.NotifyPropertyChanged(); } } }
-        public int BRenderFlag { get => this._bRenderFlag; set { if (this.BRenderFlag != value) { this._bRenderFlag = value; this.NotifyPropertyChanged(); } } }
+    public class ModelBraceProp(string szName)
+    {
+        private string _szName = szName;
 
-        public ObservableCollection<ModelMotion> Motions { get => this._motions; private set { if (this.Motions != value) { this._motions = value; this.NotifyPropertyChanged(); } } }
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public string SzName { get => _szName; set => SetValue(ref _szName, value); }
+
+        protected bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+                return false;
+            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new Exception($"ModelBraceProp::SetValue exception : field is not safe to assign directly property {propertyName}");
+            T old = field;
+            field = value;
+            this.NotifyPropertyChanged(propertyName, old, value);
+            return true;
+        }
+        private void NotifyPropertyChanged<T>(string propertyName, T oldValue, T newValue)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedExtendedEventArgs(propertyName, oldValue, newValue));
+        }
+    }
+
+    public class ModelBrace(ModelBraceProp prop, IEnumerable<IModelItem> children) : IModelItem, INotifyPropertyChanged, IDisposable
+    {
+        protected readonly ModelBraceProp _prop = prop;
+        private readonly ObservableCollection<IModelItem> _children = [..children];
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public ModelBraceProp Prop => _prop;
+        public ObservableCollection<IModelItem> Children => _children;
+
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
+    }
+
+    public class MainModelBraceProp(string szName, int iType) : ModelBraceProp(szName)
+    {
+        private int _iType = iType;
+
+        public int IType { get => this._iType; set => SetValue(ref _iType, value); }
+    }
+
+    public class MainModelBrace(MainModelBraceProp prop, IEnumerable<IModelItem> children) : ModelBrace(prop, children)
+    {
+        private readonly new MainModelBraceProp _prop = prop;
+
+        public new MainModelBraceProp Prop => _prop;
+    }
+
+    public class ModelProp(int dwType, int dwIndex, string szName, int dwModelType, string szPart, int bFly, int dwDistant, int bPick, float fScale, int bTrans, int bShadow, int nTextureEx, int bRenderFlag) : INotifyPropertyChanged
+    {
+        private int _dwType = dwType;
+        private int _dwIndex = dwIndex;
+        private string _szName = szName;
+        private int _dwModelType = dwModelType;
+        private string _szPart = szPart;
+        private int _bFly = bFly;
+        private int _dwDistant = dwDistant;
+        private int _bPick = bPick;
+        private float _fScale = fScale;
+        private int _bTrans = bTrans;
+        private int _bShadow = bShadow;
+        private int _nTextureEx = nTextureEx;
+        private int _bRenderFlag = bRenderFlag;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public int DwType { get => this._dwType; set => SetValue(ref _dwType, value); }
+        public int DwIndex { get => this._dwIndex; set => SetValue(ref _dwIndex, value); }
+        public string SzName { get => this._szName; set => SetValue(ref _szName, value); }
+        public int DwModelType { get => this._dwModelType; set => SetValue(ref _dwModelType, value); }
+        public string SzPart { get => this._szPart; set => SetValue(ref _szPart, value); }
+        public int BFly { get => this._bFly; set => SetValue(ref _bFly, value); }
+        public int DwDistant { get => this._dwDistant; set => SetValue(ref _dwDistant, value); }
+        public int BPick { get => this._bPick; set => SetValue(ref _bPick, value); }
+        public float FScale { get => this._fScale; set => SetValue(ref _fScale, value); }
+        public int BTrans { get => this._bTrans; set => SetValue(ref _bTrans, value); }
+        public int BShadow { get => this._bShadow; set => SetValue(ref _bShadow, value); }
+        public int NTextureEx { get => this._nTextureEx; set => SetValue(ref _nTextureEx, value); }
+        public int BRenderFlag { get => this._bRenderFlag; set => SetValue(ref _bRenderFlag, value); }
+
+        private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+                return false;
+            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new Exception($"Motion SetValue with not safe to assign directly property {propertyName}");
+            T old = field;
+            field = value;
+            this.NotifyPropertyChanged(propertyName, old, value);
+            return true;
+        }
+        private void NotifyPropertyChanged<T>(string propertyName, T oldValue, T newValue)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedExtendedEventArgs(propertyName, oldValue, newValue));
+        }
+    }
+
+    public class Model : IModelItem, INotifyPropertyChanged, IDisposable
+    {
+        private readonly ModelProp _prop;
+        private readonly ObservableCollection<ModelMotion> _motions;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public ModelProp Prop => _prop;
+        public ObservableCollection<ModelMotion> Motions => _motions;
 
         public ModelBrace Brace // Maybe we should watch for braces changes to handle refresh problems, but I'm not sure if it's necessary for now.
         {
@@ -142,23 +215,23 @@ namespace eTools_Ultimate.Models
 
                 string result = modelsFolderPath;
 
-                if (defines.TryGetValue("MODELTYPE_BILLBOARD", out int billboardModelTypeValue) && this.DwModelType == billboardModelTypeValue)
+                if (defines.TryGetValue("MODELTYPE_BILLBOARD", out int billboardModelTypeValue) && Prop.DwModelType == billboardModelTypeValue)
                 {
-                    result += this.SzName;
+                    result += Prop.SzName;
                     return result;
                 }
 
 
-                if (defines.TryGetValue("OT_SFX", out int sfxObjectTypeValue) && this.DwType == sfxObjectTypeValue && this.SzName.Contains('_'))
-                    result += this.SzName;
+                if (defines.TryGetValue("OT_SFX", out int sfxObjectTypeValue) && Prop.DwType == sfxObjectTypeValue && Prop.SzName.Contains('_'))
+                    result += Prop.SzName;
 
                 else
                 {
-                    string root = Constants.ModelFilenameRoot[this.DwType];
-                    result += $"{root}_{this.SzName}";
+                    string root = Constants.ModelFilenameRoot[Prop.DwType];
+                    result += $"{root}_{Prop.SzName}";
                 }
 
-                if (defines.TryGetValue("MODELTYPE_SFX", out int sfxModelTypeValue) && this.DwModelType != sfxModelTypeValue)
+                if (defines.TryGetValue("MODELTYPE_SFX", out int sfxModelTypeValue) && Prop.DwModelType != sfxModelTypeValue)
                     result += ".o3d";
                 return result;
             }
@@ -166,11 +239,14 @@ namespace eTools_Ultimate.Models
 
         public ICollectionView MotionsView => CollectionViewSource.GetDefaultView(Motions);
 
-        public ModelElem()
+        public Model(ModelProp prop, IEnumerable<ModelMotion> motions)
         {
+            _prop = prop;
+            _motions = [..motions];
+
             Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
 
-            this.Motions = [];
+            Prop.PropertyChanged += Prop_PropertyChanged;
             settings.PropertyChanged += this.Settings_PropertyChanged;
         }
 
@@ -178,17 +254,118 @@ namespace eTools_Ultimate.Models
         {
             Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
 
+            Prop.PropertyChanged -= Prop_PropertyChanged;
             settings.PropertyChanged -= this.Settings_PropertyChanged;
+
+            GC.SuppressFinalize(this);
+        }
+
+        private void Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if(sender != Prop) throw new InvalidOperationException("Model::Prop_PropertyChanged exception : sender is not Prop");
+
+            switch (e.PropertyName)
+            {
+                case nameof(Prop.DwType):
+                case nameof(Prop.DwModelType):
+                case nameof(Prop.SzName):
+                    NotifyPropertyChanged(nameof(Model3DFilePath));
+                    // Add handles to settings path
+                    break;
+            }
         }
 
         private void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 case nameof(Settings.ModelsFolderPath):
-                    NotifyPropertyChanged(nameof(this.Model3DFilePath));
+                    NotifyPropertyChanged(nameof(Model3DFilePath));
                     break;
             }
         }
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
+
+    //public class ModelElem : INotifyPropertyChanged, IDisposable
+    //{
+    //    public event PropertyChangedEventHandler? PropertyChanged;
+
+    //    private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+    //    {
+    //        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+    //        switch(propertyName)
+    //        {
+    //            case nameof(this.DwType):
+    //            case nameof(this.DwModelType):
+    //            case nameof(this.SzName):
+    //                NotifyPropertyChanged(nameof(this.Model3DFilePath));
+    //                // Add handles to settings path
+    //                break;
+    //        }
+    //    }
+
+    //    private int _dwType;
+    //    private int _dwIndex;
+    //    private string _szName;
+    //    private int _dwModelType;
+    //    private string _szPart;
+    //    private int _bFly;
+    //    private int _dwDistant;
+    //    private int _bPick;
+    //    private float _fScale;
+    //    private int _bTrans;
+    //    private int _bShadow;
+    //    private int _nTextureEx;
+    //    private int _bRenderFlag;
+    //    private ObservableCollection<ModelMotion> _motions;
+
+    //    public int DwType { get => this._dwType; set { if (this.DwType != value) { this._dwType = value; this.NotifyPropertyChanged(); } } }
+    //    public int DwIndex { get => this._dwIndex; set { if (this.DwIndex != value) { this._dwIndex = value; this.NotifyPropertyChanged(); } } }
+    //    public string SzName { get => this._szName; set { if (this.SzName != value) { this._szName = value; this.NotifyPropertyChanged(); } } }
+    //    public int DwModelType { get => this._dwModelType; set { if (this.DwModelType != value) { this._dwModelType = value; this.NotifyPropertyChanged(); } } }
+    //    public string SzPart { get => this._szPart; set { if (this.SzPart != value) { this._szPart = value; this.NotifyPropertyChanged(); } } }
+    //    public int BFly { get => this._bFly; set { if (this.BFly != value) { this._bFly = value; this.NotifyPropertyChanged(); } } }
+    //    public int DwDistant { get => this._dwDistant; set { if (this.DwDistant != value) { this._dwDistant = value; this.NotifyPropertyChanged(); } } }
+    //    public int BPick { get => this._bPick; set { if (this.BPick != value) { this._bPick = value; this.NotifyPropertyChanged(); } } }
+    //    public float FScale { get => this._fScale; set { if (this.FScale != value) { this._fScale = value; this.NotifyPropertyChanged(); } } }
+    //    public int BTrans { get => this._bTrans; set { if (this.BTrans != value) { this._bTrans = value; this.NotifyPropertyChanged(); } } }
+    //    public int BShadow { get => this._bShadow; set { if (this.BShadow != value) { this._bShadow = value; this.NotifyPropertyChanged(); } } }
+    //    public int NTextureEx { get => this._nTextureEx; set { if (this.NTextureEx != value) { this._nTextureEx = value; this.NotifyPropertyChanged(); } } }
+    //    public int BRenderFlag { get => this._bRenderFlag; set { if (this.BRenderFlag != value) { this._bRenderFlag = value; this.NotifyPropertyChanged(); } } }
+
+    //    public ObservableCollection<ModelMotion> Motions { get => this._motions; private set { if (this.Motions != value) { this._motions = value; this.NotifyPropertyChanged(); } } }
+
+    //    public ICollectionView MotionsView => CollectionViewSource.GetDefaultView(Motions);
+
+    //    public ModelElem()
+    //    {
+    //        Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
+    //        this.Motions = [];
+    //        settings.PropertyChanged += this.Settings_PropertyChanged;
+    //    }
+
+    //    public void Dispose()
+    //    {
+    //        Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
+    //        settings.PropertyChanged -= this.Settings_PropertyChanged;
+    //    }
+
+    //    private void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    //    {
+    //        switch(e.PropertyName)
+    //        {
+    //            case nameof(Settings.ModelsFolderPath):
+    //                NotifyPropertyChanged(nameof(this.Model3DFilePath));
+    //                break;
+    //        }
+    //    }
+    //}
 }
