@@ -6,7 +6,7 @@ namespace eTools_Ultimate.Views.Pages
 {
     public partial class QuestsPage : Page
     {
-        public QuestsPage(DataViewModel viewModel)
+        public QuestsPage()
         {
             DataContext = this;
 

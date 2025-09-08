@@ -9,7 +9,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class DataViewModel(ItemsService itemsService, DefinesService definesService) : ObservableObject, INavigationAware
+    public partial class ItemsViewModel(ItemsService itemsService, DefinesService definesService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 

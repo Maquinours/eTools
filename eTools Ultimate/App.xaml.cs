@@ -87,7 +87,7 @@ namespace eTools_Ultimate
                 services.AddSingleton<DashboardPage>();
                 services.AddSingleton<DashboardViewModel>();
                 services.AddSingleton<ItemsPage>();
-                services.AddSingleton<DataViewModel>();
+                services.AddSingleton<ItemsViewModel>();
                 services.AddSingleton<SkillPage>();
                 services.AddSingleton<SkillsViewModel>();
                 services.AddSingleton<QuestsPage>();

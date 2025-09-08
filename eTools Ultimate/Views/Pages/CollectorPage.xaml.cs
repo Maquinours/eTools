@@ -4,13 +4,10 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.Views.Pages
 {
-    public partial class CollectorPage : Page, INavigableView<DataViewModel>
+    public partial class CollectorPage : Page
     {
-        public DataViewModel ViewModel { get; }
-
-        public CollectorPage(DataViewModel viewModel)
+        public CollectorPage()
         {
-            ViewModel = viewModel;
             DataContext = this;
 
             InitializeComponent();
