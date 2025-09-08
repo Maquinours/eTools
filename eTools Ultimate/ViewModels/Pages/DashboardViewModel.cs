@@ -6,14 +6,18 @@ using Microsoft.Extensions.Localization;
 using System.Resources;
 using System.Windows.Navigation;
 using Wpf.Ui;
+using Wpf.Ui.Abstractions.Controls;
 using Wpf.Ui.Controls;
+using System.Linq;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class DashboardViewModel(IContentDialogService contentDialogService, INavigationService navigationService, IStringLocalizer<Translations> localizer) : ObservableObject
+    public partial class DashboardViewModel(IContentDialogService contentDialogService, INavigationService navigationService, IStringLocalizer<Translations> localizer) : ObservableObject, INavigationAware
     {
+        private bool _isInitialized = false;
+
         public NavigationCard[] NavigationCards { get; } =
-        [
+            [
             //new(localizer["Items"], localizer["Navigate to the items page."], "/eTools Ultimate;component/Assets/Icons/Items.png", typeof(ItemsPage)),
             new(localizer["Movers"], localizer["Navigate to the movers page."], "/eTools Ultimate;component/Assets/Icons/Movers.png", typeof(MoversPage)),
             //new(localizer["Skills"], localizer["Navigate to the skills page."], "/eTools Ultimate;component/Assets/Icons/Skills.png", typeof(SkillPage)),
@@ -37,7 +41,22 @@ namespace eTools_Ultimate.ViewModels.Pages
             //new(localizer["Lord"], localizer["Navigate to the lord editor."], "/eTools Ultimate;component/Assets/Icons/Lord.png", typeof(LordsPage)),
             //new(localizer["Drop Event"], localizer["Navigate to the drop event editor."], "/eTools Ultimate;component/Assets/Icons/ticket.png", typeof(DropEventsPage)),
             new(localizer["Settings"], localizer["Navigate to the settings page."], "/eTools Ultimate;component/Assets/Icons/Settings.png", typeof(SettingsPage))
-        ];
+            ];
+
+        private void InitializeViewModel()
+        {
+            _isInitialized = true;
+        }
+        public Task OnNavigatedToAsync()
+        {
+            if (!_isInitialized)
+                InitializeViewModel();
+
+            return Task.CompletedTask;
+        }
+
+        public Task OnNavigatedFromAsync() => Task.CompletedTask;
+
 
         [RelayCommand]
         private void OpenCardPage(NavigationCard navigationCard)
