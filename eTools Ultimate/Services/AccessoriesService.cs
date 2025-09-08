@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -15,11 +16,11 @@ namespace eTools_Ultimate.Services
 {
     public class AccessoriesService
     {
-        private readonly List<int> _probabilities = [];
-        private readonly List<Accessory> _accessories = [];
+        private readonly ObservableCollection<int> _probabilities = [];
+        private readonly ObservableCollection<Accessory> _accessories = [];
 
-        public List<int> Probabilities => this._probabilities;
-        public List<Accessory> Accessories => this._accessories;
+        public ObservableCollection<int> Probabilities => this._probabilities;
+        public ObservableCollection<Accessory> Accessories => this._accessories;
 
         private void ClearAccessories()
         {
