@@ -1198,4 +1198,68 @@
     <value>Fermer l'application</value>
     <comment>Error dialog button to close application</comment>
   </data>
+  <data name="eTools Ultimate - Update Checker" xml:space="preserve">
+    <value>eTools Ultimate - Vérificateur de mise à jour</value>
+    <comment>Update window title</comment>
+  </data>
+  <data name="Software Update Checker" xml:space="preserve">
+    <value>Vérificateur de mise à jour logicielle</value>
+    <comment>Update window main title</comment>
+  </data>
+  <data name="Check for available updates for eTools Ultimate" xml:space="preserve">
+    <value>Vérifiez les mises à jour disponibles pour eTools Ultimate</value>
+    <comment>Update window subtitle</comment>
+  </data>
+  <data name="Current Version" xml:space="preserve">
+    <value>Version actuelle</value>
+    <comment>Current version label</comment>
+  </data>
+  <data name="Click the button below to check for updates. The application will automatically download and install the latest version from GitHub." xml:space="preserve">
+    <value>Cliquez sur le bouton ci-dessous pour vérifier les mises à jour. L'application téléchargera et installera automatiquement la dernière version depuis GitHub.</value>
+    <comment>Update check description</comment>
+  </data>
+  <data name="Check for Updates" xml:space="preserve">
+    <value>Vérifier les mises à jour</value>
+    <comment>Check for updates button text</comment>
+  </data>
+  <data name="Checking for updates..." xml:space="preserve">
+    <value>Vérification des mises à jour...</value>
+    <comment>Loading state text</comment>
+  </data>
+  <data name="🎉 New Update Available!" xml:space="preserve">
+    <value>🎉 Nouvelle mise à jour disponible !</value>
+    <comment>Update available title</comment>
+  </data>
+  <data name="Version {0} available" xml:space="preserve">
+    <value>Version {0} disponible</value>
+    <comment>New version available text</comment>
+  </data>
+  <data name="This update contains new features and improvements." xml:space="preserve">
+    <value>Cette mise à jour contient de nouvelles fonctionnalités et améliorations.</value>
+    <comment>Default update description</comment>
+  </data>
+  <data name="Install Update Now" xml:space="preserve">
+    <value>Installer la mise à jour maintenant</value>
+    <comment>Install update button text</comment>
+  </data>
+  <data name="You already have the latest version!" xml:space="preserve">
+    <value>Vous avez déjà la dernière version !</value>
+    <comment>No update available message</comment>
+  </data>
+  <data name="Error checking for updates" xml:space="preserve">
+    <value>Erreur lors de la vérification des mises à jour</value>
+    <comment>Error message title</comment>
+  </data>
+  <data name="eTools Ultimate is automatically updated via GitHub" xml:space="preserve">
+    <value>eTools Ultimate est automatiquement mis à jour via GitHub</value>
+    <comment>Footer info text</comment>
+  </data>
+  <data name="© 2025 eTools Ultimate. All rights reserved." xml:space="preserve">
+    <value>© 2025 eTools Ultimate. Tous droits réservés.</value>
+    <comment>Copyright text</comment>
+  </data>
+  <data name="Error displaying update information: {0}" xml:space="preserve">
+    <value>Erreur lors de l'affichage des informations de mise à jour : {0}</value>
+    <comment>Error message for update display</comment>
+  </data>
 </root>
