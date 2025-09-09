@@ -1541,4 +1541,48 @@
     <value>Journal des modifications</value>
     <comment>Change Log menu item</comment>
   </data>
+  <data name="eTools Ultimate - Update Available" xml:space="preserve">
+    <value>eTools Ultimate - Mise à jour disponible</value>
+    <comment>AvailableUpdateWindow title</comment>
+  </data>
+  <data name="New Version Available!" xml:space="preserve">
+    <value>Nouvelle version disponible !</value>
+    <comment>AvailableUpdateWindow main heading</comment>
+  </data>
+  <data name="A new version of eTools Ultimate is ready to install" xml:space="preserve">
+    <value>Une nouvelle version d'eTools Ultimate est prête à être installée</value>
+    <comment>AvailableUpdateWindow subtitle</comment>
+  </data>
+  <data name="Version Information" xml:space="preserve">
+    <value>Informations de version</value>
+    <comment>AvailableUpdateWindow version section title</comment>
+  </data>
+  <data name="Current:" xml:space="preserve">
+    <value>Actuel :</value>
+    <comment>AvailableUpdateWindow current version label</comment>
+  </data>
+  <data name="New:" xml:space="preserve">
+    <value>Nouveau :</value>
+    <comment>AvailableUpdateWindow new version label</comment>
+  </data>
+  <data name="This update contains new features, improvements, and bug fixes." xml:space="preserve">
+    <value>Cette mise à jour contient de nouvelles fonctionnalités, des améliorations et des corrections de bugs.</value>
+    <comment>AvailableUpdateWindow update description</comment>
+  </data>
+  <data name="🎉 Ready to Update!" xml:space="preserve">
+    <value>🎉 Prêt à mettre à jour !</value>
+    <comment>AvailableUpdateWindow update action section title</comment>
+  </data>
+  <data name="Update Later" xml:space="preserve">
+    <value>Mettre à jour plus tard</value>
+    <comment>AvailableUpdateWindow later button text</comment>
+  </data>
+  <data name="Installing update..." xml:space="preserve">
+    <value>Installation de la mise à jour...</value>
+    <comment>AvailableUpdateWindow loading text</comment>
+  </data>
+  <data name="Error installing update" xml:space="preserve">
+    <value>Erreur lors de l'installation de la mise à jour</value>
+    <comment>AvailableUpdateWindow error text</comment>
+  </data>
 </root>

@@ -7,9 +7,11 @@
                  xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
         xmlns:local="clr-namespace:eTools_Ultimate.Views.Windows"
         mc:Ignorable="d"
-                 Title="{i18n:StringLocalizer 'eTools Ultimate - Update Checker'}"
-                 Height="500" Width="700"
+                 Title="{i18n:StringLocalizer 'eTools Ultimate - Update Available'}"
+                 Height="550" Width="750"
                  WindowStartupLocation="CenterScreen"
+                 WindowState="Normal"
+                 ResizeMode="CanResize"
                  WindowCornerPreference="Round"
                  WindowBackdropType="Mica"
                  ExtendsContentIntoTitleBar="True"
@@ -27,7 +29,7 @@
             <Setter Property="Margin" Value="16" />
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect Color="{DynamicResource SystemAccentColor}" 
+                    <DropShadowEffect Color="Gray" 
                                       BlurRadius="8" 
                                       ShadowDepth="2" 
                                       Opacity="0.1" />
@@ -87,7 +89,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}">
                             <Border.Effect>
-                                <DropShadowEffect Color="{DynamicResource SystemAccentColor}" 
+                                <DropShadowEffect Color="Gray" 
                                                   BlurRadius="4" 
                                                   ShadowDepth="1" 
                                                   Opacity="0.2" />
@@ -119,18 +121,18 @@
 
         <!-- Panel Styles with Theme Support -->
         <Style x:Key="UpdateAvailablePanelStyle" TargetType="Border">
-            <Setter Property="Background" Value="{DynamicResource SystemFillColorSuccessBackgroundBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorSuccessBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
-            <Setter Property="Padding" Value="16,12" />
+            <Setter Property="Background" Value="#E8F4FD" />
+            <Setter Property="BorderBrush" Value="#B8D4F0" />
+            <Setter Property="BorderThickness" Value="2" />
+            <Setter Property="CornerRadius" Value="12" />
+            <Setter Property="Padding" Value="20,16" />
             <Setter Property="Margin" Value="0,0,0,16" />
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect Color="{DynamicResource SystemFillColorSuccessBrush}" 
-                                      BlurRadius="6" 
-                                      ShadowDepth="1" 
-                                      Opacity="0.15" />
+                    <DropShadowEffect Color="#B8D4F0" 
+                                      BlurRadius="8" 
+                                      ShadowDepth="2" 
+                                      Opacity="0.3" />
                 </Setter.Value>
             </Setter>
         </Style>
@@ -153,7 +155,7 @@
             <Setter Property="Margin" Value="0,0,0,16" />
             <Setter Property="Effect">
                 <Setter.Value>
-                    <DropShadowEffect Color="{DynamicResource SystemFillColorCriticalBrush}" 
+                    <DropShadowEffect Color="Red" 
                                       BlurRadius="6" 
                                       ShadowDepth="1" 
                                       Opacity="0.15" />
@@ -217,154 +219,151 @@
         <!-- Title Bar -->
         <ui:TitleBar Grid.Row="0" 
                      x:Name="TitleBar"
-                     Title="{i18n:StringLocalizer 'eTools Ultimate - Update Checker'}"
+                     Title="{i18n:StringLocalizer 'eTools Ultimate - Update Available'}"
                      Icon="Assets/Icons/eTools.png" />
 
         <!-- Main Content -->
         <ScrollViewer Grid.Row="1" 
                       VerticalScrollBarVisibility="Auto"
                       HorizontalScrollBarVisibility="Disabled"
-                      Padding="0,16,0,16">
+                      Padding="0,16,0,16" Margin="0,0,0,-217">
             
             <ui:Card Style="{StaticResource UpdateCardStyle}">
                 <StackPanel>
                     <!-- Header Section -->
                     <StackPanel Margin="0,0,0,20">
                         <!-- App Icon -->
-                        <ui:SymbolIcon Symbol="Fluent24" 
-                                       FontSize="56" 
-                                       Foreground="{DynamicResource AccentFillColorDefaultBrush}"
-                                       HorizontalAlignment="Center"
-                                       Margin="0,0,0,16" />
+                        <Image Source="/Assets/Icons/eTools.png"
+                               Width="56"
+                               Height="56"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,16" />
 
                         <!-- Title -->
-                        <TextBlock Text="{i18n:StringLocalizer 'Software Update Checker'}" 
+                        <TextBlock Text="{i18n:StringLocalizer 'New Version Available!'}" 
                                    Style="{StaticResource HeaderTextStyle}" />
 
                         <!-- Subtitle -->
-                        <TextBlock Text="{i18n:StringLocalizer 'Check for available updates for eTools Ultimate'}" 
+                        <TextBlock Text="{i18n:StringLocalizer 'A new version of eTools Ultimate is ready to install'}" 
                                    Style="{StaticResource SubHeaderTextStyle}" />
                     </StackPanel>
 
-                    <!-- Current Version Info -->
+                    <!-- Version Comparison Info -->
                     <Border Style="{StaticResource VersionInfoPanelStyle}">
                         <StackPanel>
-                            <TextBlock Text="{i18n:StringLocalizer 'Current Version'}" 
+                            <TextBlock Text="{i18n:StringLocalizer 'Version Information'}" 
                                        FontSize="12" 
                                        FontWeight="Medium"
                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                        HorizontalAlignment="Center"
-                                       Margin="0,0,0,3" />
-                            <TextBlock x:Name="CurrentVersionText"
-                                       Text="Version 1.0.0" 
-                                       Style="{StaticResource VersionTextStyle}" />
+                                       Margin="0,0,0,12" />
+                            
+                            <!-- Current Version -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,8">
+                                <TextBlock Text="{i18n:StringLocalizer 'Current:'}" 
+                                           FontSize="14" 
+                                           FontWeight="Medium"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,8,0" />
+                                <TextBlock x:Name="CurrentVersionText"
+                                           Text="1.0.0" 
+                                           FontSize="16"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+                            
+                            <!-- Arrow -->
+                            <ui:SymbolIcon Symbol="ArrowDown24" 
+                                           FontSize="16" 
+                                           Foreground="{DynamicResource AccentFillColorDefaultBrush}"
+                                           HorizontalAlignment="Center"
+                                           Margin="0,0,0,8" />
+                            
+                            <!-- New Version -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="{i18n:StringLocalizer 'New:'}" 
+                                           FontSize="14" 
+                                           FontWeight="Medium"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                           VerticalAlignment="Center"
+                                           Margin="0,0,8,0" />
+                                <TextBlock x:Name="NewVersionText"
+                                           Text="1.1.0" 
+                                           FontSize="16"
+                                           FontWeight="SemiBold"
+                                           Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
                         </StackPanel>
                     </Border>
 
-                    <!-- Update Check Section -->
-                    <StackPanel Margin="0,0,0,16">
-                        <TextBlock Text="{i18n:StringLocalizer 'Click the button below to check for updates. The application will automatically download and install the latest version from GitHub.'}"
+                    <!-- Update Description -->
+                    <StackPanel Margin="0,0,0,20">
+                        <TextBlock x:Name="UpdateDescriptionText"
+                                   Text="{i18n:StringLocalizer 'This update contains new features, improvements, and bug fixes.'}"
                                    Style="{StaticResource InfoTextStyle}" />
-
-                        <!-- Check for Updates Button -->
-                        <ui:Button x:Name="CheckForUpdatesButton"
-                                   Style="{StaticResource CheckButtonStyle}"
-                                   Click="CheckForUpdatesButton_Click"
-                                   RenderTransformOrigin="0.5,0.5">
-                            <ui:Button.RenderTransform>
-                                <ScaleTransform />
-                            </ui:Button.RenderTransform>
-                            <ui:Button.Content>
-                                <StackPanel Orientation="Horizontal">
-                                    <ui:SymbolIcon Symbol="ArrowClockwise24" 
-                                                   FontSize="16" 
-                                                   Margin="0,0,8,0" />
-                                    <TextBlock Text="{i18n:StringLocalizer 'Check for Updates'}" />
-                                </StackPanel>
-                            </ui:Button.Content>
-                        </ui:Button>
-
-                        <!-- Loading Spinner (initially hidden) -->
-                        <StackPanel x:Name="LoadingPanel" 
-                                    Orientation="Horizontal" 
-                                    HorizontalAlignment="Center"
-                                    Visibility="Collapsed">
-                            <ui:SymbolIcon x:Name="LoadingSpinner"
-                                           Symbol="ArrowClockwise24"
-                                           FontSize="20"
-                                           Foreground="{DynamicResource AccentFillColorDefaultBrush}"
-                                           Margin="0,0,8,0">
-                                <ui:SymbolIcon.RenderTransform>
-                                    <RotateTransform />
-                                </ui:SymbolIcon.RenderTransform>
-                            </ui:SymbolIcon>
-                            <TextBlock Text="{i18n:StringLocalizer 'Checking for updates...'}" 
-                                       FontSize="12"
-                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                       VerticalAlignment="Center" />
-                        </StackPanel>
-
-                        <!-- Status Messages -->
-                        <TextBlock x:Name="StatusText"
-                                   Style="{StaticResource StatusTextStyle}"
-                                   Visibility="Collapsed" />
                     </StackPanel>
 
-                    <!-- Update Available Section (initially hidden) -->
-                    <Border x:Name="UpdateAvailablePanel"
-                            Style="{StaticResource UpdateAvailablePanelStyle}"
-                            Visibility="Collapsed"
+                    <!-- Update Action Section -->
+                    <Border Style="{StaticResource UpdateAvailablePanelStyle}"
                             RenderTransformOrigin="0.5,0.5">
                         <Border.RenderTransform>
                             <TranslateTransform />
                         </Border.RenderTransform>
                         <StackPanel>
-                            <TextBlock Text="{i18n:StringLocalizer '🎉 New Update Available!'}" 
-                                       FontSize="16" 
+                            <TextBlock Text="{i18n:StringLocalizer '🎉 Ready to Update!'}" 
+                                       FontSize="18" 
                                        FontWeight="Bold"
-                                       Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
-                                       HorizontalAlignment="Center"
-                                       Margin="0,0,0,6" />
-                            <TextBlock x:Name="NewVersionText"
-                                       Text="Version 1.1.0 verfügbar" 
-                                       FontSize="14"
-                                       FontWeight="SemiBold"
-                                       Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
-                                       HorizontalAlignment="Center"
-                                       Margin="0,0,0,8" />
-                            <TextBlock x:Name="UpdateDescriptionText"
-                                       Text="{i18n:StringLocalizer 'This update contains new features and improvements.'}"
-                                       FontSize="12"
-                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                       TextWrapping="Wrap"
+                                       Foreground="#2C5F8B"
                                        HorizontalAlignment="Center"
                                        Margin="0,0,0,12" />
-                            <ui:Button Background="{DynamicResource AccentFillColorDefaultBrush}"
+                            
+                            <!-- Update Button -->
+                            <ui:Button x:Name="InstallUpdateButton"
+                                       Background="{DynamicResource AccentFillColorDefaultBrush}"
                                        Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
                                        HorizontalAlignment="Center"
-                                       Padding="20,10"
+                                       Padding="24,12"
                                        CornerRadius="8"
-                                       FontSize="14"
+                                       FontSize="15"
                                        FontWeight="SemiBold"
                                        Click="InstallUpdateButton_Click"
-                                       RenderTransformOrigin="0.5,0.5">
+                                       RenderTransformOrigin="0.5,0.5"
+                                       Margin="0,0,0,8">
                                 <ui:Button.RenderTransform>
                                     <ScaleTransform />
                                 </ui:Button.RenderTransform>
                                 <ui:Button.Content>
                                     <StackPanel Orientation="Horizontal">
                                         <ui:SymbolIcon Symbol="ArrowDownload24" 
-                                                       FontSize="14" 
-                                                       Margin="0,0,6,0" />
+                                                       FontSize="16" 
+                                                       Margin="0,0,8,0" />
                                         <TextBlock Text="{i18n:StringLocalizer 'Install Update Now'}" />
                                     </StackPanel>
+                                </ui:Button.Content>
+                            </ui:Button>
+                            
+                            <!-- Later Button -->
+                            <ui:Button x:Name="LaterButton"
+                                       Background="#F0F0F0"
+                                       Foreground="#666666"
+                                       HorizontalAlignment="Center"
+                                       Padding="16,8"
+                                       CornerRadius="6"
+                                       FontSize="13"
+                                       Click="LaterButton_Click"
+                                       Margin="0,0,0,8">
+                                <ui:Button.Content>
+                                    <TextBlock Text="{i18n:StringLocalizer 'Update Later'}" />
                                 </ui:Button.Content>
                             </ui:Button>
                         </StackPanel>
                     </Border>
 
-                    <!-- No Update Available Section (initially hidden) -->
-                    <Border x:Name="NoUpdatePanel"
+                    <!-- Loading Section (initially hidden) -->
+                    <Border x:Name="LoadingPanel"
                             Style="{StaticResource NoUpdatePanelStyle}"
                             Visibility="Collapsed"
                             RenderTransformOrigin="0.5,0.5">
@@ -372,12 +371,18 @@
                             <TranslateTransform />
                         </Border.RenderTransform>
                         <StackPanel>
-                            <ui:SymbolIcon Symbol="CheckmarkCircle24" 
-                                           FontSize="32" 
-                                           Foreground="{DynamicResource SystemFillColorSuccessBrush}"
+                            <ui:SymbolIcon x:Name="LoadingSpinner"
+                                           Symbol="ArrowClockwise24"
+                                           FontSize="32"
+                                           Foreground="{DynamicResource AccentFillColorDefaultBrush}"
                                            HorizontalAlignment="Center"
-                                           Margin="0,0,0,8" />
-                            <TextBlock Text="{i18n:StringLocalizer 'You already have the latest version!'}" 
+                                           Margin="0,0,0,8">
+                                <ui:SymbolIcon.RenderTransform>
+                                    <RotateTransform />
+                                </ui:SymbolIcon.RenderTransform>
+                            </ui:SymbolIcon>
+                            <TextBlock x:Name="LoadingText"
+                                       Text="{i18n:StringLocalizer 'Installing update...'}" 
                                        FontSize="14" 
                                        FontWeight="SemiBold"
                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
@@ -400,7 +405,7 @@
                                            HorizontalAlignment="Center"
                                            Margin="0,0,0,8" />
                             <TextBlock x:Name="ErrorText"
-                                       Text="{i18n:StringLocalizer 'Error checking for updates'}" 
+                                       Text="{i18n:StringLocalizer 'Error installing update'}" 
                                        FontSize="14" 
                                        FontWeight="SemiBold"
                                        Foreground="{DynamicResource SystemFillColorCriticalBrush}"

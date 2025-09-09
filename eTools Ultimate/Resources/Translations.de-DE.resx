@@ -1296,4 +1296,48 @@
     <value>Navigiere zum Welt-Editor.</value>
     <comment>World navigation card description</comment>
   </data>
+  <data name="eTools Ultimate - Update Available" xml:space="preserve">
+    <value>eTools Ultimate - Update verfügbar</value>
+    <comment>AvailableUpdateWindow title</comment>
+  </data>
+  <data name="New Version Available!" xml:space="preserve">
+    <value>Neue Version verfügbar!</value>
+    <comment>AvailableUpdateWindow main heading</comment>
+  </data>
+  <data name="A new version of eTools Ultimate is ready to install" xml:space="preserve">
+    <value>Eine neue Version von eTools Ultimate ist bereit zur Installation</value>
+    <comment>AvailableUpdateWindow subtitle</comment>
+  </data>
+  <data name="Version Information" xml:space="preserve">
+    <value>Versionsinformationen</value>
+    <comment>AvailableUpdateWindow version section title</comment>
+  </data>
+  <data name="Current:" xml:space="preserve">
+    <value>Aktuell:</value>
+    <comment>AvailableUpdateWindow current version label</comment>
+  </data>
+  <data name="New:" xml:space="preserve">
+    <value>Neu:</value>
+    <comment>AvailableUpdateWindow new version label</comment>
+  </data>
+  <data name="This update contains new features, improvements, and bug fixes." xml:space="preserve">
+    <value>Dieses Update enthält neue Funktionen, Verbesserungen und Fehlerbehebungen.</value>
+    <comment>AvailableUpdateWindow update description</comment>
+  </data>
+  <data name="🎉 Ready to Update!" xml:space="preserve">
+    <value>🎉 Bereit zum Aktualisieren!</value>
+    <comment>AvailableUpdateWindow update action section title</comment>
+  </data>
+  <data name="Update Later" xml:space="preserve">
+    <value>Später aktualisieren</value>
+    <comment>AvailableUpdateWindow later button text</comment>
+  </data>
+  <data name="Installing update..." xml:space="preserve">
+    <value>Update wird installiert...</value>
+    <comment>AvailableUpdateWindow loading text</comment>
+  </data>
+  <data name="Error installing update" xml:space="preserve">
+    <value>Fehler beim Installieren des Updates</value>
+    <comment>AvailableUpdateWindow error text</comment>
+  </data>
 </root>

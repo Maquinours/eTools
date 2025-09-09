@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using eTools_Ultimate.Views.Windows;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
@@ -37,16 +38,25 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
-        private void CheckForUpdates()
+        private async Task CheckForUpdates()
         {
-            // Demo-Nachricht anzeigen
-            var messageBox = new Wpf.Ui.Controls.MessageBox
+            try
             {
-                Title = "Software Updates",
-                Content = "You already have the latest version of the software."
-            };
-            
-            messageBox.ShowDialogAsync();
+                // Create and show the AvailableUpdateWindow
+                var updateWindow = new Views.Windows.AvailableUpdateWindow();
+                updateWindow.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                // Show error message if something goes wrong
+                var messageBox = new Wpf.Ui.Controls.MessageBox
+                {
+                    Title = "Error",
+                    Content = $"Error checking for updates: {ex.Message}"
+                };
+                
+                await messageBox.ShowDialogAsync();
+            }
         }
     }
 } 

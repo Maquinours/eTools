@@ -22,7 +22,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace eTools_Ultimate.Views.Windows
 {
     /// <summary>
-    /// Interaction logic for AvailableUpdateWindow.xaml
+    /// Information window that shows available update to the user
     /// </summary>
     public partial class AvailableUpdateWindow : FluentWindow
     {
@@ -30,12 +30,14 @@ namespace eTools_Ultimate.Views.Windows
         private object? _availableUpdate;
         private readonly IStringLocalizer _stringLocalizer;
 
-        public AvailableUpdateWindow()
+        public AvailableUpdateWindow(object? availableUpdate = null)
         {
             InitializeComponent();
             _stringLocalizer = App.Services.GetRequiredService<IStringLocalizer>();
+            _availableUpdate = availableUpdate;
             InitializeUpdateManager();
             LoadCurrentVersion();
+            ShowUpdateInformation();
         }
 
         private void InitializeUpdateManager()
@@ -58,16 +60,53 @@ namespace eTools_Ultimate.Views.Windows
             try
             {
                 var version = Assembly.GetExecutingAssembly().GetName().Version;
-                CurrentVersionText.Text = $"Version {version?.ToString() ?? "1.0.0"}";
+                CurrentVersionText.Text = version?.ToString() ?? "1.0.0";
             }
             catch (Exception ex)
             {
-                CurrentVersionText.Text = "Version unknown";
+                CurrentVersionText.Text = "Unknown";
                 ShowError($"Error loading current version: {ex.Message}");
             }
         }
 
-        private async void CheckForUpdatesButton_Click(object sender, RoutedEventArgs e)
+        private void ShowUpdateInformation()
+        {
+            if (_availableUpdate != null)
+            {
+                try
+                {
+                    // Use reflection to access properties
+                    var versionProperty = _availableUpdate.GetType().GetProperty("Version");
+                    var releaseNotesProperty = _availableUpdate.GetType().GetProperty("ReleaseNotes");
+                    
+                    var version = versionProperty?.GetValue(_availableUpdate)?.ToString() ?? "Unknown";
+                    var releaseNotes = releaseNotesProperty?.GetValue(_availableUpdate)?.ToString();
+                    
+                    NewVersionText.Text = version;
+                    UpdateDescriptionText.Text = string.IsNullOrEmpty(releaseNotes) 
+                        ? GetLocalizedString("This update contains new features, improvements, and bug fixes.")
+                        : releaseNotes;
+                }
+                catch (Exception ex)
+                {
+                    ShowError(string.Format(GetLocalizedString("Error displaying update information: {0}"), ex.Message));
+                }
+            }
+            else
+            {
+                // Fallback if no update info is provided
+                NewVersionText.Text = "1.1.0";
+                UpdateDescriptionText.Text = GetLocalizedString("This update contains new features, improvements, and bug fixes.");
+            }
+        }
+
+        private void LaterButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Close the window without updating
+            this.Close();
+        }
+
+        private async void InstallUpdateButton_Click(object sender, RoutedEventArgs e)
         {
             if (_updateManager == null)
             {
@@ -81,57 +120,31 @@ namespace eTools_Ultimate.Views.Windows
                 return;
             }
 
-            // Set UI to loading state
-            SetLoadingState(true);
-            HideAllPanels();
-
             try
             {
-                // Check for updates
-                _availableUpdate = await _updateManager.CheckForUpdatesAsync();
+                // Show loading state
+                SetLoadingState(true);
 
-                if (_availableUpdate == null)
+                if (_availableUpdate != null)
                 {
-                    // No update available
-                    ShowNoUpdateAvailable();
+                    // Download and install update
+                    await _updateManager.DownloadUpdatesAsync((dynamic)_availableUpdate);
+                    _updateManager.ApplyUpdatesAndRestart((dynamic)_availableUpdate);
                 }
                 else
                 {
-                    // Update available
-                    ShowUpdateAvailable(_availableUpdate);
+                    // Check for updates first if not provided
+                    var update = await _updateManager.CheckForUpdatesAsync();
+                    if (update != null)
+                    {
+                        await _updateManager.DownloadUpdatesAsync((dynamic)update);
+                        _updateManager.ApplyUpdatesAndRestart((dynamic)update);
+                    }
+                    else
+                    {
+                        ShowError("No update available for installation.");
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                ShowError($"Error checking for updates: {ex.Message}");
-            }
-            finally
-            {
-                SetLoadingState(false);
-            }
-        }
-
-        private async void InstallUpdateButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (_updateManager == null || _availableUpdate == null)
-            {
-                ShowError("No update available for installation.");
-                return;
-            }
-
-            try
-            {
-                // Download update
-                SetLoadingState(true);
-                StatusText.Text = "Downloading update...";
-                StatusText.Visibility = Visibility.Visible;
-
-                await _updateManager.DownloadUpdatesAsync((dynamic)_availableUpdate);
-
-                StatusText.Text = "Installing update...";
-
-                // Install update and restart application
-                _updateManager.ApplyUpdatesAndRestart((dynamic)_availableUpdate);
             }
             catch (Exception ex)
             {
@@ -142,53 +155,30 @@ namespace eTools_Ultimate.Views.Windows
 
         private void SetLoadingState(bool isLoading)
         {
-            CheckForUpdatesButton.IsEnabled = !isLoading;
+            // Check if buttons exist before accessing them
+            if (InstallUpdateButton != null)
+                InstallUpdateButton.IsEnabled = !isLoading;
+            if (LaterButton != null)
+                LaterButton.IsEnabled = !isLoading;
             
             if (isLoading)
             {
-                LoadingPanel.Visibility = Visibility.Visible;
+                if (LoadingPanel != null)
+                    LoadingPanel.Visibility = Visibility.Visible;
                 // Start animation
                 var storyboard = (Storyboard)FindResource("LoadingAnimation");
                 storyboard?.Begin();
             }
             else
             {
-                LoadingPanel.Visibility = Visibility.Collapsed;
-                StatusText.Visibility = Visibility.Collapsed;
+                if (LoadingPanel != null)
+                    LoadingPanel.Visibility = Visibility.Collapsed;
                 // Stop animation
                 var storyboard = (Storyboard)FindResource("LoadingAnimation");
                 storyboard?.Stop();
             }
         }
 
-        private void ShowUpdateAvailable(object update)
-        {
-            try
-            {
-                // Use reflection to access properties
-                var versionProperty = update.GetType().GetProperty("Version");
-                var releaseNotesProperty = update.GetType().GetProperty("ReleaseNotes");
-                
-                var version = versionProperty?.GetValue(update)?.ToString() ?? "Unknown";
-                var releaseNotes = releaseNotesProperty?.GetValue(update)?.ToString();
-                
-                    NewVersionText.Text = string.Format(GetLocalizedString("Version {0} available"), version);
-                    UpdateDescriptionText.Text = string.IsNullOrEmpty(releaseNotes) 
-                        ? GetLocalizedString("This update contains new features and improvements.")
-                        : releaseNotes;
-                
-                UpdateAvailablePanel.Visibility = Visibility.Visible;
-            }
-            catch (Exception ex)
-            {
-                ShowError(string.Format(GetLocalizedString("Error displaying update information: {0}"), ex.Message));
-            }
-        }
-
-        private void ShowNoUpdateAvailable()
-        {
-            NoUpdatePanel.Visibility = Visibility.Visible;
-        }
 
         private void ShowError(string errorMessage)
         {
@@ -201,12 +191,5 @@ namespace eTools_Ultimate.Views.Windows
             return _stringLocalizer[key];
         }
 
-        private void HideAllPanels()
-        {
-            UpdateAvailablePanel.Visibility = Visibility.Collapsed;
-            NoUpdatePanel.Visibility = Visibility.Collapsed;
-            ErrorPanel.Visibility = Visibility.Collapsed;
-            StatusText.Visibility = Visibility.Collapsed;
-        }
     }
 }
