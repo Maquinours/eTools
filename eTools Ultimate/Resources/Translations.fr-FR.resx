@@ -1158,43 +1158,44 @@
     <value>Ressources assignées</value>
     <comment>Assigned Resources list header</comment>
   </data>
-  <data name="Datei nicht gefunden" xml:space="preserve">
+  <!-- Loading Error Window -->
+  <data name="File Not Found" xml:space="preserve">
     <value>Fichier introuvable</value>
     <comment>Error dialog title for missing file</comment>
   </data>
-  <data name="Eine erforderliche Datei konnte nicht geladen werden" xml:space="preserve">
+  <data name="A required file could not be loaded" xml:space="preserve">
     <value>Un fichier requis n'a pas pu être chargé</value>
     <comment>Error dialog subtitle for missing file</comment>
   </data>
-  <data name="Was ist passiert?" xml:space="preserve">
+  <data name="What happened?" xml:space="preserve">
     <value>Que s'est-il passé ?</value>
     <comment>Error dialog section header</comment>
   </data>
-  <data name="Die Anwendung konnte eine wichtige Datei nicht finden. Dies kann passieren, wenn:" xml:space="preserve">
+  <data name="The application could not find an important file. This can happen when:" xml:space="preserve">
     <value>L'application n'a pas pu trouver un fichier important. Cela peut arriver si :</value>
     <comment>Error dialog explanation text</comment>
   </data>
-  <data name="• Die Datei wurde verschoben oder gelöscht" xml:space="preserve">
+  <data name="• The file was moved or deleted" xml:space="preserve">
     <value>• Le fichier a été déplacé ou supprimé</value>
     <comment>Error dialog possible cause 1</comment>
   </data>
-  <data name="• Der Pfad ist nicht korrekt" xml:space="preserve">
+  <data name="• The path is incorrect" xml:space="preserve">
     <value>• Le chemin n'est pas correct</value>
     <comment>Error dialog possible cause 2</comment>
   </data>
-  <data name="• Die Datei ist beschädigt" xml:space="preserve">
+  <data name="• The file is corrupted" xml:space="preserve">
     <value>• Le fichier est corrompu</value>
     <comment>Error dialog possible cause 3</comment>
   </data>
-  <data name="Fehlende Datei:" xml:space="preserve">
+  <data name="Missing file:" xml:space="preserve">
     <value>Fichier manquant :</value>
     <comment>Error dialog missing file label</comment>
   </data>
-  <data name="Ordner öffnen" xml:space="preserve">
+  <data name="Open Folder" xml:space="preserve">
     <value>Ouvrir le dossier</value>
     <comment>Error dialog button to open folder</comment>
   </data>
-  <data name="Anwendung beenden" xml:space="preserve">
+  <data name="Exit Application" xml:space="preserve">
     <value>Fermer l'application</value>
     <comment>Error dialog button to close application</comment>
   </data>
@@ -1261,5 +1262,283 @@
   <data name="Error displaying update information: {0}" xml:space="preserve">
     <value>Erreur lors de l'affichage des informations de mise à jour : {0}</value>
     <comment>Error message for update display</comment>
+  </data>
+  
+  <!-- Common UI Elements -->
+  <data name="Welcome" xml:space="preserve">
+    <value>Bienvenue</value>
+    <comment>Welcome text on dashboard</comment>
+  </data>
+  <data name="Created by eTools Ultimate" xml:space="preserve">
+    <value>Créé par eTools Ultimate</value>
+    <comment>Created by text on dashboard</comment>
+  </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Tableau de bord</value>
+    <comment>Dashboard menu item</comment>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Paramètres</value>
+    <comment>Settings navigation card title</comment>
+  </data>
+  <data name="Navigate to the settings page." xml:space="preserve">
+    <value>Naviguer vers la page des paramètres.</value>
+    <comment>Settings navigation card description</comment>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Rechercher...</value>
+    <comment>Search placeholder text</comment>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Fermer</value>
+    <comment>Close button text</comment>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Enregistrer</value>
+    <comment>Save button text</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+    <comment>Cancel button text</comment>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+    <comment>OK button text</comment>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Oui</value>
+    <comment>Yes button text</comment>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Non</value>
+    <comment>No button text</comment>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Ajouter</value>
+    <comment>Add button text</comment>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Modifier</value>
+    <comment>Edit button tooltip</comment>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Supprimer</value>
+    <comment>Delete button tooltip</comment>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Supprimer</value>
+    <comment>Remove button tooltip</comment>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Annuler</value>
+    <comment>Undo button tooltip</comment>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Rétablir</value>
+    <comment>Redo button tooltip</comment>
+  </data>
+  
+  <!-- Navigation Items -->
+  <data name="Items" xml:space="preserve">
+    <value>Objets</value>
+    <comment>Items navigation card title</comment>
+  </data>
+  <data name="Navigate to the items page." xml:space="preserve">
+    <value>Naviguer vers la page des objets.</value>
+    <comment>Items navigation card description</comment>
+  </data>
+  <data name="Skills" xml:space="preserve">
+    <value>Compétences</value>
+    <comment>Skills navigation card title</comment>
+  </data>
+  <data name="Navigate to the skills page." xml:space="preserve">
+    <value>Naviguer vers la page des compétences.</value>
+    <comment>Skills navigation card description</comment>
+  </data>
+  <data name="Quests" xml:space="preserve">
+    <value>Quêtes</value>
+    <comment>Quests navigation card title</comment>
+  </data>
+  <data name="Navigate to the quests page." xml:space="preserve">
+    <value>Naviguer vers la page des quêtes.</value>
+    <comment>Quests navigation card description</comment>
+  </data>
+  <data name="Characters" xml:space="preserve">
+    <value>Personnages</value>
+    <comment>Characters navigation card title</comment>
+  </data>
+  <data name="Navigate to the characters page." xml:space="preserve">
+    <value>Naviguer vers la page des personnages.</value>
+    <comment>Characters navigation card description</comment>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Événements</value>
+    <comment>Events navigation card title</comment>
+  </data>
+  <data name="Navigate to the events page." xml:space="preserve">
+    <value>Naviguer vers la page des événements.</value>
+    <comment>Events navigation card description</comment>
+  </data>
+  <data name="Giftboxes" xml:space="preserve">
+    <value>Boîtes-cadeaux</value>
+    <comment>Giftboxes navigation card title</comment>
+  </data>
+  <data name="Navigate to the giftboxes page." xml:space="preserve">
+    <value>Naviguer vers la page des boîtes-cadeaux.</value>
+    <comment>Giftboxes navigation card description</comment>
+  </data>
+  <data name="Accessories" xml:space="preserve">
+    <value>Accessoires</value>
+    <comment>Accessories navigation card title</comment>
+  </data>
+  <data name="Navigate to the accessories page." xml:space="preserve">
+    <value>Naviguer vers la page des accessoires.</value>
+    <comment>Accessories navigation card description</comment>
+  </data>
+  <data name="Exchangers" xml:space="preserve">
+    <value>Échangeurs</value>
+    <comment>Exchangers navigation card title</comment>
+  </data>
+  <data name="Navigate to the exchanger page." xml:space="preserve">
+    <value>Naviguer vers la page des échangeurs.</value>
+    <comment>Exchangers navigation card description</comment>
+  </data>
+  <data name="Honor List" xml:space="preserve">
+    <value>Liste d'honneur</value>
+    <comment>Honor List navigation card title</comment>
+  </data>
+  <data name="Navigate to the honor list page." xml:space="preserve">
+    <value>Naviguer vers la page de la liste d'honneur.</value>
+    <comment>Honor List navigation card description</comment>
+  </data>
+  <data name="Couple" xml:space="preserve">
+    <value>Couple</value>
+    <comment>Couple navigation card title</comment>
+  </data>
+  <data name="Navigate to the couple page." xml:space="preserve">
+    <value>Naviguer vers la page des couples.</value>
+    <comment>Couple navigation card description</comment>
+  </data>
+  <data name="Motions" xml:space="preserve">
+    <value>Mouvements</value>
+    <comment>Motions navigation card title</comment>
+  </data>
+  <data name="Navigate to the motions page." xml:space="preserve">
+    <value>Naviguer vers la page des mouvements.</value>
+    <comment>Motions navigation card description</comment>
+  </data>
+  <data name="Text Client" xml:space="preserve">
+    <value>Client texte</value>
+    <comment>Text Client navigation card title</comment>
+  </data>
+  <data name="Navigate to the text client." xml:space="preserve">
+    <value>Naviguer vers le client texte.</value>
+    <comment>Text Client navigation card description</comment>
+  </data>
+  <data name="World" xml:space="preserve">
+    <value>Monde</value>
+    <comment>World navigation card title</comment>
+  </data>
+  <data name="Navigate to the world editor." xml:space="preserve">
+    <value>Naviguer vers l'éditeur de monde.</value>
+    <comment>World navigation card description</comment>
+  </data>
+  <data name="Tickets" xml:space="preserve">
+    <value>Tickets</value>
+    <comment>Tickets navigation card title</comment>
+  </data>
+  <data name="Navigate to the ticket editor." xml:space="preserve">
+    <value>Naviguer vers l'éditeur de tickets.</value>
+    <comment>Tickets navigation card description</comment>
+  </data>
+  <data name="Object" xml:space="preserve">
+    <value>Objet</value>
+    <comment>Object navigation card title</comment>
+  </data>
+  <data name="Navigate to the object editor." xml:space="preserve">
+    <value>Naviguer vers l'éditeur d'objets.</value>
+    <comment>Object navigation card description</comment>
+  </data>
+  <data name="Terrain" xml:space="preserve">
+    <value>Terrain</value>
+    <comment>Terrain navigation card title</comment>
+  </data>
+  <data name="Navigate to the terrain editor." xml:space="preserve">
+    <value>Naviguer vers l'éditeur de terrain.</value>
+    <comment>Terrain navigation card description</comment>
+  </data>
+  <data name="Job" xml:space="preserve">
+    <value>Métier</value>
+    <comment>Job navigation card title</comment>
+  </data>
+  <data name="Navigate to the job editor." xml:space="preserve">
+    <value>Naviguer vers l'éditeur de métiers.</value>
+    <comment>Job navigation card description</comment>
+  </data>
+  <data name="Packitem" xml:space="preserve">
+    <value>Objet de pack</value>
+    <comment>Packitem navigation card title</comment>
+  </data>
+  <data name="Navigate to the packitem editor." xml:space="preserve">
+    <value>Naviguer vers l'éditeur d'objets de pack.</value>
+    <comment>Packitem navigation card description</comment>
+  </data>
+  <data name="Lord" xml:space="preserve">
+    <value>Souverain</value>
+    <comment>Lord navigation card title</comment>
+  </data>
+  <data name="Navigate to the lord editor." xml:space="preserve">
+    <value>Naviguer vers l'éditeur de seigneurs.</value>
+    <comment>Lord navigation card description</comment>
+  </data>
+  <data name="Drop Event" xml:space="preserve">
+    <value>Événement de drop</value>
+    <comment>Drop Event navigation card title</comment>
+  </data>
+  <data name="Navigate to the drop event editor." xml:space="preserve">
+    <value>Naviguer vers l'éditeur d'événements de drop.</value>
+    <comment>Drop Event navigation card description</comment>
+  </data>
+  <data name="Collectors" xml:space="preserve">
+    <value>Collectionneurs</value>
+    <comment>Collectors navigation card title</comment>
+  </data>
+  <data name="Navigate to the collectors page." xml:space="preserve">
+    <value>Naviguer vers la page des collectionneurs.</value>
+    <comment>Collectors navigation card description</comment>
+  </data>
+  <data name="Movers" xml:space="preserve">
+    <value>Mobiles</value>
+    <comment>Movers navigation card title</comment>
+  </data>
+  <data name="Navigate to the movers page." xml:space="preserve">
+    <value>Naviguer vers la page des mobiles.</value>
+    <comment>Movers navigation card description</comment>
+  </data>
+  <data name="NPCs" xml:space="preserve">
+    <value>PNJs</value>
+    <comment>NPCs navigation card title</comment>
+  </data>
+  <data name="Navigate to the NPCs page." xml:space="preserve">
+    <value>Naviguer vers la page des PNJs.</value>
+    <comment>NPCs navigation card description</comment>
+  </data>
+  
+  <!-- External Links -->
+  <data name="View on GitHub" xml:space="preserve">
+    <value>Voir sur GitHub</value>
+    <comment>GitHub button tooltip</comment>
+  </data>
+  <data name="Join our Discord server" xml:space="preserve">
+    <value>Rejoindre notre serveur Discord</value>
+    <comment>Discord button tooltip</comment>
+  </data>
+  <data name="Patchlogs" xml:space="preserve">
+    <value>Notes de patch</value>
+    <comment>Patchlogs button text</comment>
+  </data>
+  <data name="Changelog" xml:space="preserve">
+    <value>Journal des modifications</value>
+    <comment>Change Log menu item</comment>
   </data>
 </root>

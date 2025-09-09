@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="{i18n:StringLocalizer 'Datei nicht gefunden'}"
+    Title="{i18n:StringLocalizer 'File Not Found'}"
     Width="650"
     Height="450"
     d:DataContext="{d:DesignInstance local:LoadingErrorWindow,
@@ -46,11 +46,11 @@
                     FontSize="24"
                     FontWeight="SemiBold"
                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                    Text="{i18n:StringLocalizer 'Datei nicht gefunden'}" />
+                    Text="{i18n:StringLocalizer 'File Not Found'}" />
                 <TextBlock
                     FontSize="14"
                     Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                    Text="{i18n:StringLocalizer 'Eine erforderliche Datei konnte nicht geladen werden'}" />
+                    Text="{i18n:StringLocalizer 'A required file could not be loaded'}" />
             </StackPanel>
         </StackPanel>
 
@@ -69,13 +69,13 @@
                     FontSize="16"
                     FontWeight="SemiBold"
                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                    Text="{i18n:StringLocalizer 'Was ist passiert?'}" />
+                    Text="{i18n:StringLocalizer 'What happened?'}" />
                 
                 <TextBlock
                     Margin="0,0,0,10"
                     FontSize="14"
                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                    Text="{i18n:StringLocalizer 'Die Anwendung konnte eine wichtige Datei nicht finden. Dies kann passieren, wenn:'}"
+                    Text="{i18n:StringLocalizer 'The application could not find an important file. This can happen when:'}"
                     TextWrapping="Wrap" />
                 
                 <StackPanel Margin="20,0,0,15">
@@ -83,19 +83,19 @@
                         Margin="0,0,0,5"
                         FontSize="13"
                         Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                        Text="• Die Datei wurde verschoben oder gelöscht"
+                        Text="• The file was moved or deleted"
                         TextWrapping="Wrap" />
                     <TextBlock
                         Margin="0,0,0,5"
                         FontSize="13"
                         Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                        Text="• Der Pfad ist nicht korrekt"
+                        Text="• The path is incorrect"
                         TextWrapping="Wrap" />
                     <TextBlock
                         Margin="0,0,0,5"
                         FontSize="13"
                         Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                        Text="• Die Datei ist beschädigt"
+                        Text="• The file is corrupted"
                         TextWrapping="Wrap" />
                 </StackPanel>
 
@@ -111,7 +111,7 @@
                             FontSize="13"
                             FontWeight="SemiBold"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                            Text="{i18n:StringLocalizer 'Fehlende Datei:'}" />
+                            Text="{i18n:StringLocalizer 'Missing file:'}" />
                         <TextBlock
                             x:Name="ErrorMessageTextBox"
                             Margin="0,5,0,0"
@@ -135,7 +135,7 @@
                 Margin="0,0,10,0"
                 Padding="15,0"
                 Appearance="Primary"
-                Content="{i18n:StringLocalizer 'Ordner öffnen'}"
+                Content="{i18n:StringLocalizer 'Open Folder'}"
                 Icon="Folder24"
                 Click="Button_Click" />
             <ui:Button
@@ -144,7 +144,7 @@
                 Margin="10,0,0,0"
                 Padding="15,0"
                 Appearance="Secondary"
-                Content="{i18n:StringLocalizer 'Anwendung beenden'}"
+                Content="{i18n:StringLocalizer 'Exit Application'}"
                 Icon="Dismiss24"
                 Click="Button_Click_1" />
         </StackPanel>
