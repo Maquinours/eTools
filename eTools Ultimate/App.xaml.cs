@@ -1,27 +1,29 @@
-﻿using eTools_Ultimate.Services;
+﻿using eTools_Ultimate.Resources;
+using eTools_Ultimate.Services;
+using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using eTools_Ultimate.ViewModels.Pages;
 using eTools_Ultimate.ViewModels.Windows;
+using eTools_Ultimate.Views.Dialogs;
 using eTools_Ultimate.Views.Pages;
 using eTools_Ultimate.Views.Windows;
+using Lepo.i18n.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
+using Velopack;
+using Velopack.Sources;
 using Wpf.Ui;
 using Wpf.Ui.DependencyInjection;
-using eTools_Ultimate.Views.Dialogs;
-using eTools_Ultimate.ViewModels.Controls.Dialogs;
-using Lepo.i18n.DependencyInjection;
-using eTools_Ultimate.Resources;
 
 namespace eTools_Ultimate
 {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App
+    public partial class App : Application
     {
         // The.NET Generic Host provides dependency injection, configuration, logging, and other services.
         // https://docs.microsoft.com/dotnet/core/extensions/generic-host
@@ -153,6 +155,19 @@ namespace eTools_Ultimate
         public static IServiceProvider Services
         {
             get { return _host.Services; }
+        }
+
+        /// <summary>
+        /// Entry point
+        /// </summary>
+        /// <param name="args">Args to run the app</param>
+        [STAThread]
+        private static void Main(string[] args)
+        {
+            VelopackApp.Build().Run();
+            App app = new();
+            app.InitializeComponent();
+            app.Run();
         }
 
         /// <summary>

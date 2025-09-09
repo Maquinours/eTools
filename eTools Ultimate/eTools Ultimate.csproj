@@ -9,6 +9,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<StartupObject>eTools_Ultimate.App</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +17,11 @@
     <EmbeddedResource Remove="Views\Pages\Skill\**" />
     <None Remove="Views\Pages\Skill\**" />
     <Page Remove="Views\Pages\Skill\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Remove="App.xaml" />
+	<Page Include="App.xaml"/>
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +41,7 @@
     <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.2" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" />
     <PackageReference Include="System.Drawing.Common" Version="9.0.8" />
+    <PackageReference Include="Velopack" Version="0.0.1298" />
     <PackageReference Include="WPF-UI" Version="4.0.3" />
     <PackageReference Include="WPF-UI.DependencyInjection" Version="4.0.3" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.8" />

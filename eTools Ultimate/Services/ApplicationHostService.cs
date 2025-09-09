@@ -1,5 +1,7 @@
 ﻿using eTools_Ultimate.Views.Windows;
 using Microsoft.Extensions.Hosting;
+using Velopack;
+using Velopack.Sources;
 using Wpf.Ui;
 
 namespace eTools_Ultimate.Services
@@ -30,10 +32,40 @@ namespace eTools_Ultimate.Services
         }
 
         /// <summary>
+        /// Check 
+        /// </summary>
+        /// <returns></returns>
+        private async Task CheckForUpdatesAsync()
+        {
+            var mgr = new UpdateManager(new GithubSource(repoUrl: "https://github.com/Maquinours/eTools", accessToken: null, prerelease: false));
+
+            if (!mgr.IsInstalled)
+                return; // app is not installed (probably launched via source code)
+
+            // check for new version
+            var newVersion = await mgr.CheckForUpdatesAsync();
+
+            if (newVersion == null)
+                return; // no update available
+
+            if (new AvailableUpdateWindow().ShowDialog() == true)
+            {
+                // the user agrees to download the latest version
+
+                // download new version
+                await mgr.DownloadUpdatesAsync(newVersion);
+
+                // install new version and restart app
+                mgr.ApplyUpdatesAndRestart(newVersion);
+            }
+        }
+
+        /// <summary>
         /// Creates main window during activation.
         /// </summary>
         private async Task HandleActivationAsync()
         {
+            await CheckForUpdatesAsync();
             if (!Application.Current.Windows.OfType<MainWindow>().Any())
             {
                 _navigationWindow = (serviceProvider.GetService(typeof(INavigationWindow)) as INavigationWindow)!;
