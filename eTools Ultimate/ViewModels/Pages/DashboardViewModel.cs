@@ -70,17 +70,8 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private async Task OpenPatchNotesDialog()
         {
-            try
-            {
-                var patchNotesDialog = new PatchNotesDialog(contentDialogService.GetDialogHost());
-                await patchNotesDialog.ShowAsync();
-            }
-            catch (Exception ex)
-            {
-                // Fallback: Öffne den Dialog direkt ohne Dialog-Host
-                var patchNotesDialog = new PatchNotesDialog(null);
-                await patchNotesDialog.ShowAsync();
-            }
+            var patchNotesDialog = new PatchNotesDialog(contentDialogService.GetDialogHost());
+            await patchNotesDialog.ShowAsync();
         }
     }
 }

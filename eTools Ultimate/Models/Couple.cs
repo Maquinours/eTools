@@ -161,12 +161,12 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    class Couple
-    {
-        private readonly List<CoupleLevel> _levels;
-        private readonly List<string> _skillKinds;
+    //class Couple
+    //{
+    //    private readonly List<CoupleLevel> _levels;
+    //    private readonly List<string> _skillKinds;
 
-        public List<CoupleLevel> Levels => this._levels;
-        public List<string> SkillKinds => this._skillKinds;
-    }
+    //    public List<CoupleLevel> Levels => this._levels;
+    //    public List<string> SkillKinds => this._skillKinds;
+    //}
 }

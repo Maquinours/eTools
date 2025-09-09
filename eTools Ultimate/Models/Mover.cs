@@ -419,7 +419,7 @@ namespace eTools_Ultimate.Models
 
         private void ProjectStrings_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            if (this.Prop != null && e.Action == NotifyCollectionChangedAction.Reset || (e.OldItems != null && e.OldItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)) || (e.NewItems != null && e.NewItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)))
+            if (e.Action == NotifyCollectionChangedAction.Reset || (e.OldItems != null && e.OldItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)) || (e.NewItems != null && e.NewItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.Prop.SzName)))
                 NotifyPropertyChanged(nameof(this.Name));
         }
 

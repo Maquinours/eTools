@@ -82,7 +82,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (dialog.ShowDialog() == true)
             {
                 // Wir verwenden den Verzeichnispfad statt der ausgewählten Datei
-                string selectedPath = Path.GetDirectoryName(dialog.FileName);
+                string? selectedPath = Path.GetDirectoryName(dialog.FileName);
                 if (!string.IsNullOrEmpty(selectedPath))
                 {
                     settingsService.Settings.ResourcesFolderPath = settingsService.Settings.ResourcesFolderPath;

@@ -110,12 +110,10 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    public class ModelBrace(ModelBraceProp prop, IEnumerable<IModelItem> children) : IModelItem, INotifyPropertyChanged, IDisposable
+    public class ModelBrace(ModelBraceProp prop, IEnumerable<IModelItem> children) : IModelItem, IDisposable
     {
         protected readonly ModelBraceProp _prop = prop;
         private readonly ObservableCollection<IModelItem> _children = [..children];
-
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         public ModelBraceProp Prop => _prop;
         public ObservableCollection<IModelItem> Children => _children;

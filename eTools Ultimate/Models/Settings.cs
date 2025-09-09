@@ -540,11 +540,11 @@ namespace eTools_Ultimate.Models
                     val = null;
                 else if (!val.EndsWith(Path.DirectorySeparatorChar))
                     val += Path.DirectorySeparatorChar;
-                if (val == this.DefaultTextsConfigFilePath)
+                if (val == this.DefaultCharactersIconsFolderPath)
                     val = null;
-                if (this.TextsConfigFilePath != val)
+                if (this.CharactersIconsFolderFolderPath != val)
                 {
-                    this._textsConfigFilePath = val;
+                    this._charactersIconsFolderPath = val;
                     this.NotifyPropertyChanged();
                 }
             }

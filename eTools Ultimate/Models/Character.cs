@@ -57,13 +57,13 @@ namespace eTools_Ultimate.Models
     {
         private string _id;
         private string _name; // IDS_
-        private List<CharacterEquip> _equips;
-        private int? _dwMusicId;
-        private int? _nStructure;
-        private string _szChar;
-        private string _szDialog;
-        private string _szDlgQuest;
-        private List<string> _menus;
+        //private List<CharacterEquip> _equips;
+        //private int? _dwMusicId;
+        //private int? _nStructure;
+        private string? _szChar;
+        //private string _szDialog;
+        //private string _szDlgQuest;
+        //private List<string> _menus;
 
         public string Id
         {
@@ -135,7 +135,7 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        internal Character(string id, string name, string szChar)
+        internal Character(string id, string name, string? szChar)
         {
             this._id = id;
             this._name = name;

@@ -179,10 +179,7 @@ namespace eTools_Ultimate.Services
                         }
                     }
 
-                    Skill skill = new Skill()
-                    {
-                        Prop = prop
-                    };
+                    Skill skill = new(prop);
                     this.Skills.Add(skill);
                 }
             }

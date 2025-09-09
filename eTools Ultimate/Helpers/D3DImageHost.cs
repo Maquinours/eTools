@@ -11,7 +11,7 @@ namespace eTools_Ultimate.Helpers
     {
         public IntPtr _surfacePointer;
         public IntPtr _native;
-        private bool _canRender = false;
+        //private bool _canRender = false;
 
         public D3DImageHost(IntPtr hwnd)
         {

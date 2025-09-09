@@ -27,7 +27,7 @@ namespace eTools_Ultimate.Models
 
         private int _nVer;
         private int _dwId;
-        private string _szName;
+        private string? _szName;
         private int _dwNum;
         private int _dwPackMax;
         private int _dwItemKind1;
@@ -149,10 +149,10 @@ namespace eTools_Ultimate.Models
         private int _nReflect;
         private int _dwSndAttack1;
         private int _dwSndAttack2;
-        private string _szIcon;
+        private string? _szIcon;
         private int _dwQuestId;
-        private string _szTextFileName;
-        private string _szCommand;
+        private string? _szTextFileName;
+        private string? _szCommand;
         private int _dwBuffTickType;
         private int _dwMonsterGrade;
         private int _dwEquipItemKeepSkill;
@@ -160,7 +160,7 @@ namespace eTools_Ultimate.Models
 
         public int NVer { get => _nVer; set { if (value != NVer) { _nVer = value; NotifyPropertyChanged(); } } }
         public int DwId { get => _dwId; set { if (value != DwId) { _dwId = value; NotifyPropertyChanged(); } } }
-        public string SzName { get => _szName; set { if (value != SzName) { _szName = value; NotifyPropertyChanged(); } } }
+        public string? SzName { get => _szName; set { if (value != SzName) { _szName = value; NotifyPropertyChanged(); } } }
         public int DwNum { get => _dwNum; set { if (value != DwNum) { _dwNum = value; NotifyPropertyChanged(); } } }
         public int DwPackMax { get => _dwPackMax; set { if (value != DwPackMax) { _dwPackMax = value; NotifyPropertyChanged(); } } }
         public int DwItemKind1 { get => _dwItemKind1; set { if (value != DwItemKind1) { _dwItemKind1 = value; NotifyPropertyChanged(); } } }
@@ -214,7 +214,7 @@ namespace eTools_Ultimate.Models
         public int DwDestParam1 { get => _dwDestParam1; set { if (value != DwDestParam1) { _dwDestParam1 = value; NotifyPropertyChanged(); } } }
         public int DwDestParam2 { get => _dwDestParam2; set { if (value != DwDestParam2) { _dwDestParam2 = value; NotifyPropertyChanged(); } } }
         public int DwDestParam3 { get => _dwDestParam3; set { if (value != DwDestParam3) { _dwDestParam3 = value; NotifyPropertyChanged(); } } }
-         public int NAdjParamVal1 { get => _nAdjParamVal1; set { if (value != NAdjParamVal1) { _nAdjParamVal1 = value; NotifyPropertyChanged(); } } }
+        public int NAdjParamVal1 { get => _nAdjParamVal1; set { if (value != NAdjParamVal1) { _nAdjParamVal1 = value; NotifyPropertyChanged(); } } }
         public int NAdjParamVal2 { get => _nAdjParamVal2; set { if (value != NAdjParamVal2) { _nAdjParamVal2 = value; NotifyPropertyChanged(); } } }
         public int NAdjParamVal3 { get => _nAdjParamVal3; set { if (value != NAdjParamVal3) { _nAdjParamVal3 = value; NotifyPropertyChanged(); } } }
         public int DwChgParamVal1 { get => _dwChgParamVal1; set { if (value != DwChgParamVal1) { _dwChgParamVal1 = value; NotifyPropertyChanged(); } } }
@@ -281,10 +281,10 @@ namespace eTools_Ultimate.Models
         public int NReflect { get => _nReflect; set { if (value != NReflect) { _nReflect = value; NotifyPropertyChanged(); } } }
         public int DwSndAttack1 { get => _dwSndAttack1; set { if (value != DwSndAttack1) { _dwSndAttack1 = value; NotifyPropertyChanged(); } } }
         public int DwSndAttack2 { get => _dwSndAttack2; set { if (value != DwSndAttack2) { _dwSndAttack2 = value; NotifyPropertyChanged(); } } }
-        public string SzIcon { get => _szIcon; set { if (value != SzIcon) { _szIcon = value; NotifyPropertyChanged(); } } }
+        public string? SzIcon { get => _szIcon; set { if (value != SzIcon) { _szIcon = value; NotifyPropertyChanged(); } } }
         public int DwQuestId { get => _dwQuestId; set { if (value != DwQuestId) { _dwQuestId = value; NotifyPropertyChanged(); } } }
-        public string SzTextFileName { get => _szTextFileName; set { if (value != SzTextFileName) { _szTextFileName = value; NotifyPropertyChanged(); } } }
-        public string SzCommand { get => _szCommand; set { if (value != SzCommand) { _szCommand = value; NotifyPropertyChanged(); } } }
+        public string? SzTextFileName { get => _szTextFileName; set { if (value != SzTextFileName) { _szTextFileName = value; NotifyPropertyChanged(); } } }
+        public string? SzCommand { get => _szCommand; set { if (value != SzCommand) { _szCommand = value; NotifyPropertyChanged(); } } }
         public int DwBuffTickType { get => _dwBuffTickType; set { if (value != DwBuffTickType) { _dwBuffTickType = value; NotifyPropertyChanged(); } } }
         public int DwMonsterGrade { get => _dwMonsterGrade; set { if (value != DwMonsterGrade) { _dwMonsterGrade = value; NotifyPropertyChanged(); } } }
         public int DwEquipItemKeepSkill { get => _dwEquipItemKeepSkill; set { if (value != DwEquipItemKeepSkill) { _dwEquipItemKeepSkill = value; NotifyPropertyChanged(); } } }
@@ -293,14 +293,14 @@ namespace eTools_Ultimate.Models
 
     public class Skill : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void Prop_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
@@ -316,7 +316,7 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        private void ProjectStrings_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void ProjectStrings_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             if (this.Prop == null) return;
             if (e.Action == NotifyCollectionChangedAction.Reset)
@@ -340,8 +340,7 @@ namespace eTools_Ultimate.Models
             {
                 if (value != this.Prop)
                 {
-                    if (this.Prop != null)
-                        this.Prop.PropertyChanged -= Prop_PropertyChanged;
+                    this.Prop.PropertyChanged -= Prop_PropertyChanged;
 
                     this._prop = value;
                     this.Prop.PropertyChanged += Prop_PropertyChanged;
@@ -352,8 +351,8 @@ namespace eTools_Ultimate.Models
 
         public string Name
         {
-            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName);
-            set => App.Services.GetRequiredService<StringsService>().ChangeStringValue(Prop.SzName, value);
+            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName ?? ""); // TODO: fix this. Prop.SzName should be non nullable
+            set => App.Services.GetRequiredService<StringsService>().ChangeStringValue(Prop.SzName ?? "", value);
         }
         public ImageSource? Icon
         {
@@ -389,8 +388,10 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public Skill()
+        public Skill(SkillProp prop)
         {
+            _prop = prop;
+
             App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged += ProjectStrings_CollectionChanged;
         }
 
