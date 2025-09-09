@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
     xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:helpers="clr-namespace:eTools_Ultimate.Helpers"
     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
     xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
@@ -108,6 +109,14 @@
             </Style.Triggers>
         </Style>
 
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <StackPanel MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}">
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <AdornedElementPlaceholder />
+                </Border>
+            </StackPanel>
+        </ControlTemplate>
+
         <!--  DataTemplate: Basic Info Section  -->
         <DataTemplate x:Key="BasicInfoSectionTemplate">
             <StackPanel>
@@ -129,10 +138,34 @@
                                 </ui:SymbolIcon>
                             </StackPanel>
                             <ui:AutoSuggestBox
+                                x:Name="MoverIdentifierAutoSuggestBox"
                                 Grid.Row="1"
                                 DisplayMemberPath="Value"
                                 OriginalItemsSource="{Binding Path=ViewModel.MoverIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
-                                Text="{Binding Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                                <ui:AutoSuggestBox.Text>
+                                    <Binding
+                                        Mode="TwoWay"
+                                        Path="Identifier"
+                                        UpdateSourceTrigger="LostFocus">
+                                        <Binding.ValidationRules>
+                                            <helpers:MoverIdentifierValidationRule />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </ui:AutoSuggestBox.Text>
+                            </ui:AutoSuggestBox>
+                            <Popup
+                                IsOpen="{Binding Path=(Validation.HasError), Mode=OneWay, ElementName=MoverIdentifierAutoSuggestBox}"
+                                Placement="Bottom"
+                                PlacementTarget="{Binding ElementName=MoverIdentifierAutoSuggestBox}"
+                                StaysOpen="True">
+                                <TextBlock
+                                    HorizontalAlignment="Stretch"
+                                    DockPanel.Dock="Bottom"
+                                    Foreground="Red"
+                                    Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=MoverIdentifierAutoSuggestBox}"
+                                    TextWrapping="Wrap" />
+                            </Popup>
                         </Grid>
 
                         <!--  Name  -->

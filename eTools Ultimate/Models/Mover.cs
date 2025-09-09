@@ -393,6 +393,7 @@ namespace eTools_Ultimate.Models
                     break;
                 case nameof(MoverProp.DwAi):
                     this.NotifyPropertyChanged(nameof(this.AiIdentifier));
+                    NotifyPropertyChanged(nameof(Type));
                     break;
                 case nameof(MoverProp.DwSndDmg2):
                     this.NotifyPropertyChanged(nameof(this.SndDmg2Identifier));
