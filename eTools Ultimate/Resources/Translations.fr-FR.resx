@@ -1597,4 +1597,284 @@
     <value>Erreur lors de l'installation de la mise à jour</value>
     <comment>AvailableUpdateWindow error text</comment>
   </data>
+  
+  <!-- Settings Page Translations -->
+  <data name="Resource Path" xml:space="preserve">
+    <value>Chemin des ressources</value>
+    <comment>Resource Path navigation card title</comment>
+  </data>
+  <data name="Loading all Paths." xml:space="preserve">
+    <value>Chargement de tous les chemins.</value>
+    <comment>Resource Path navigation card description</comment>
+  </data>
+  <data name="Personalization" xml:space="preserve">
+    <value>Personnalisation</value>
+    <comment>Personalization navigation card title</comment>
+  </data>
+  <data name="Change Design and other parts" xml:space="preserve">
+    <value>Modifier le design et autres parties</value>
+    <comment>Personalization navigation card description</comment>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>À propos</value>
+    <comment>About navigation card title</comment>
+  </data>
+  <data name="Learn more about eTools Ultimate" xml:space="preserve">
+    <value>En savoir plus sur eTools Ultimate</value>
+    <comment>About navigation card description</comment>
+  </data>
+  
+  <!-- Resource Path Page Translations -->
+  <data name="Main Settings" xml:space="preserve">
+    <value>Paramètres principaux</value>
+    <comment>Main Settings section header</comment>
+  </data>
+  <data name="Resource folder" xml:space="preserve">
+    <value>Dossier de ressources</value>
+    <comment>Resource folder field label</comment>
+  </data>
+  <data name="Client folder" xml:space="preserve">
+    <value>Dossier client</value>
+    <comment>Client folder field label</comment>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+    <comment>Version field label</comment>
+  </data>
+  <data name="Advanced settings" xml:space="preserve">
+    <value>Paramètres avancés</value>
+    <comment>Advanced settings button text</comment>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Personnalisé</value>
+    <comment>Custom section header</comment>
+  </data>
+  <data name="Texture folder" xml:space="preserve">
+    <value>Dossier de textures</value>
+    <comment>Texture folder field label</comment>
+  </data>
+  <data name="Icons folder" xml:space="preserve">
+    <value>Dossier d'icônes</value>
+    <comment>Icons folder field label</comment>
+  </data>
+  <data name="Sounds folder" xml:space="preserve">
+    <value>Dossier de sons</value>
+    <comment>Sounds folder field label</comment>
+  </data>
+  <data name="Sounds config file" xml:space="preserve">
+    <value>Fichier de configuration des sons</value>
+    <comment>Sounds config file field label</comment>
+  </data>
+  <data name="Item" xml:space="preserve">
+    <value>Objet</value>
+    <comment>Item section header</comment>
+  </data>
+  <data name="Spec_Item file" xml:space="preserve">
+    <value>Fichier Spec_Item</value>
+    <comment>Spec_Item file field label</comment>
+  </data>
+  <data name="PropItem.txt file" xml:space="preserve">
+    <value>Fichier PropItem.txt</value>
+    <comment>PropItem.txt file field label</comment>
+  </data>
+  <data name="Item folder" xml:space="preserve">
+    <value>Dossier d'objets</value>
+    <comment>Item folder field label</comment>
+  </data>
+  <data name="Mover" xml:space="preserve">
+    <value>Mobile</value>
+    <comment>Mover section header</comment>
+  </data>
+  <data name="PropMover file" xml:space="preserve">
+    <value>Fichier PropMover</value>
+    <comment>PropMover file field label</comment>
+  </data>
+  <data name="PropMover.txt file" xml:space="preserve">
+    <value>Fichier PropMover.txt</value>
+    <comment>PropMover.txt file field label</comment>
+  </data>
+  <data name="PropMoverEx file" xml:space="preserve">
+    <value>Fichier PropMoverEx</value>
+    <comment>PropMoverEx file field label</comment>
+  </data>
+  <data name="Mover types configuration" xml:space="preserve">
+    <value>Configuration des types de mobiles</value>
+    <comment>Mover types configuration section header</comment>
+  </data>
+  <data name="Mover types" xml:space="preserve">
+    <value>Types de mobiles</value>
+    <comment>Mover types list header</comment>
+  </data>
+  <data name="Assigned AI" xml:space="preserve">
+    <value>IA assignée</value>
+    <comment>Assigned AI list header</comment>
+  </data>
+  <data name="Skill" xml:space="preserve">
+    <value>Compétence</value>
+    <comment>Skill section header</comment>
+  </data>
+  <data name="PropSkill file" xml:space="preserve">
+    <value>Fichier PropSkill</value>
+    <comment>PropSkill file field label</comment>
+  </data>
+  <data name="PropSkill.txt file" xml:space="preserve">
+    <value>Fichier PropSkill.txt</value>
+    <comment>PropSkill.txt file field label</comment>
+  </data>
+  <data name="Icon folder" xml:space="preserve">
+    <value>Dossier d'icônes</value>
+    <comment>Icon folder field label</comment>
+  </data>
+  
+  <!-- Personalization Page Translations -->
+  <data name="App theme" xml:space="preserve">
+    <value>Thème de l'application</value>
+    <comment>App theme section header</comment>
+  </data>
+  <data name="Select which app theme to display" xml:space="preserve">
+    <value>Sélectionner le thème d'application à afficher</value>
+    <comment>App theme description</comment>
+  </data>
+  <data name="Application language" xml:space="preserve">
+    <value>Langue de l'application</value>
+    <comment>Application language section header</comment>
+  </data>
+  <data name="Choose your preferred language" xml:space="preserve">
+    <value>Choisissez votre langue préférée</value>
+    <comment>Application language description</comment>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Clair</value>
+    <comment>Light theme option</comment>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Sombre</value>
+    <comment>Dark theme option</comment>
+  </data>
+  <data name="High Contrast" xml:space="preserve">
+    <value>Contraste élevé</value>
+    <comment>High Contrast theme option</comment>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Anglais</value>
+    <comment>English language option</comment>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>Allemand</value>
+    <comment>German language option</comment>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>Français</value>
+    <comment>French language option</comment>
+  </data>
+  <data name="Auto-save interval" xml:space="preserve">
+    <value>Intervalle de sauvegarde automatique</value>
+    <comment>Auto-save interval section header</comment>
+  </data>
+  <data name="Set the time interval for automatic saving" xml:space="preserve">
+    <value>Définir l'intervalle de temps pour la sauvegarde automatique</value>
+    <comment>Auto-save interval description</comment>
+  </data>
+  <data name="5 minutes" xml:space="preserve">
+    <value>5 minutes</value>
+    <comment>5 minutes option</comment>
+  </data>
+  <data name="15 minutes" xml:space="preserve">
+    <value>15 minutes</value>
+    <comment>15 minutes option</comment>
+  </data>
+  <data name="30 minutes" xml:space="preserve">
+    <value>30 minutes</value>
+    <comment>30 minutes option</comment>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Personnalisé</value>
+    <comment>Custom option</comment>
+  </data>
+  <data name="min" xml:space="preserve">
+    <value>min</value>
+    <comment>Minutes abbreviation</comment>
+  </data>
+  
+  <!-- About Page Translations -->
+  <data name="About eTools Ultimate" xml:space="preserve">
+    <value>À propos d'eTools Ultimate</value>
+    <comment>About eTools Ultimate section header</comment>
+  </data>
+  <data name="Our tool simplifies the editing process for developers." xml:space="preserve">
+    <value>Notre outil simplifie le processus d'édition pour les développeurs.</value>
+    <comment>About description</comment>
+  </data>
+  <data name="Main Features" xml:space="preserve">
+    <value>Fonctionnalités principales</value>
+    <comment>Main Features section header</comment>
+  </data>
+  <data name="Editing of .txt, .h and .inc files with structured interfaces" xml:space="preserve">
+    <value>Édition de fichiers .txt, .h et .inc avec des interfaces structurées</value>
+    <comment>Main feature 1</comment>
+  </data>
+  <data name="Advanced categorization by element types" xml:space="preserve">
+    <value>Catégorisation avancée par types d'éléments</value>
+    <comment>Main feature 2</comment>
+  </data>
+  <data name="Optimized for performance and user-friendliness" xml:space="preserve">
+    <value>Optimisé pour les performances et la convivialité</value>
+    <comment>Main feature 3</comment>
+  </data>
+  <data name="Development Team" xml:space="preserve">
+    <value>Équipe de développement</value>
+    <comment>Development Team section header</comment>
+  </data>
+  <data name="System Requirements" xml:space="preserve">
+    <value>Exigences système</value>
+    <comment>System Requirements section header</comment>
+  </data>
+  <data name="Operating System:" xml:space="preserve">
+    <value>Système d'exploitation :</value>
+    <comment>Operating System field label</comment>
+  </data>
+  <data name="Windows 10/11" xml:space="preserve">
+    <value>Windows 10/11</value>
+    <comment>Windows 10/11 option</comment>
+  </data>
+  <data name="Memory:" xml:space="preserve">
+    <value>Mémoire :</value>
+    <comment>Memory field label</comment>
+  </data>
+  <data name="4 GB RAM minimum, 8 GB recommended" xml:space="preserve">
+    <value>4 Go de RAM minimum, 8 Go recommandés</value>
+    <comment>Memory requirement</comment>
+  </data>
+  <data name="Disk Space:" xml:space="preserve">
+    <value>Espace disque :</value>
+    <comment>Disk Space field label</comment>
+  </data>
+  <data name="200 MB available space" xml:space="preserve">
+    <value>200 Mo d'espace disponible</value>
+    <comment>Disk space requirement</comment>
+  </data>
+  <data name="Visit Website" xml:space="preserve">
+    <value>Visiter le site web</value>
+    <comment>Visit Website button text</comment>
+  </data>
+  <data name="Check for Updates" xml:space="preserve">
+    <value>Vérifier les mises à jour</value>
+    <comment>Check for Updates button text</comment>
+  </data>
+  
+  <!-- Developer Names -->
+  <data name="Maqui" xml:space="preserve">
+    <value>Maqui</value>
+    <comment>Developer name</comment>
+  </data>
+  <data name="Kiyo" xml:space="preserve">
+    <value>Kiyo</value>
+    <comment>Developer name</comment>
+  </data>
+  
+  <!-- Technical Terms -->
+  <data name="64 Bit" xml:space="preserve">
+    <value>64 bits</value>
+    <comment>64 Bit option</comment>
+  </data>
 </root>
