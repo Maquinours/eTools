@@ -1632,4 +1632,30 @@
     <value>64 Bit</value>
     <comment>64 Bit option</comment>
   </data>
+  
+  <!-- Update Window Translations -->
+  <data name="Update Available" xml:space="preserve">
+    <value>Update verfügbar</value>
+  </data>
+  <data name="A new version of eTools Ultimate is ready to install" xml:space="preserve">
+    <value>Eine neue Version von eTools Ultimate ist bereit zur Installation</value>
+  </data>
+  <data name="Install Now" xml:space="preserve">
+    <value>Jetzt installieren</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>Später</value>
+  </data>
+  <data name="Installing update..." xml:space="preserve">
+    <value>Update wird installiert...</value>
+  </data>
+  <data name="Error installing update" xml:space="preserve">
+    <value>Fehler beim Installieren des Updates</value>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Wiederholen</value>
+  </data>
+  <data name="eTools Ultimate - Update Available" xml:space="preserve">
+    <value>eTools Ultimate - Update verfügbar</value>
+  </data>
 </root>

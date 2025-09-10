@@ -2,12 +2,6 @@ namespace eTools_Ultimate.Resources;
 
 public partial class Translations
 {
-    // Update Window Translations
-    public static string UpdateAvailable => "Update Available";
-    public static string ANewVersionOfEToolsUltimateIsReadyToInstall => "A new version of eTools Ultimate is ready to install";
-    public static string InstallNow => "Install Now";
-    public static string Later => "Later";
-    
     // Settings Page Translations
     public static string ResourcePath => "Resource Path";
     public static string LoadingAllPaths => "Loading all Paths.";
@@ -86,4 +80,22 @@ public partial class Translations
     
     // Technical Terms
     public static string SixtyFourBit => "64 Bit";
+    
+    // Update Window Translations
+    public static string UpdateAvailable => "Update Available";
+    public static string ANewVersionOfEToolsUltimateIsReadyToInstall => "A new version of eTools Ultimate is ready to install";
+    public static string InstallNow => "Install Now";
+    public static string Later => "Later";
+    public static string InstallingUpdate => "Installing update...";
+    public static string ErrorInstallingUpdate => "Error installing update";
+    public static string Retry => "Retry";
+    public static string PreparingUpdate => "Preparing update...";
+    public static string DownloadingUpdate => "Downloading update...";
+    public static string CheckingForUpdates => "Checking for updates...";
+    public static string NoUpdateAvailableForInstallation => "No update available for installation";
+    public static string UpdateManagerIsNotAvailable => "Update manager is not available";
+    public static string ApplicationIsNotInstalled => "Application is not installed (probably started from source code)";
+    public static string ErrorInitializingUpdateManager => "Error initializing update manager";
+    public static string ErrorLoadingCurrentVersion => "Error loading current version";
+    public static string ErrorDisplayingUpdateInformation => "Error displaying update information";
 }

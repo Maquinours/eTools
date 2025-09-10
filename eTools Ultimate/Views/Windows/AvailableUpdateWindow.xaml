@@ -131,20 +131,20 @@
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                           To="1.05" Duration="0:0:0.2" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                           To="1.05" Duration="0:0:0.2" />
-                                        </Storyboard>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                           To="1.05" Duration="0:0:0.2" />
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                           To="1.05" Duration="0:0:0.2" />
+        </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.EnterActions>
                                 <Trigger.ExitActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                           To="1.0" Duration="0:0:0.2" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                           To="1.0" Duration="0:0:0.2" />
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                           To="1.0" Duration="0:0:0.2" />
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                           To="1.0" Duration="0:0:0.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.ExitActions>
@@ -191,100 +191,130 @@
 
         <!-- Main Content -->
         <Grid Grid.Row="1" Margin="16">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <!-- App Icon -->
-                <Image Source="/Assets/Icons/eTools.png"
+            <!-- Normal Update Available State -->
+            <StackPanel x:Name="NormalPanel" HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <!-- App Icon -->
+                        <Image Source="/Assets/Icons/eTools.png"
                        Width="40"
                        Height="40"
-                       HorizontalAlignment="Center"
+                               HorizontalAlignment="Center"
                        Margin="0,0,0,12" />
-                
-                <!-- Title -->
+
+                        <!-- Title -->
                 <TextBlock Text="{i18n:StringLocalizer 'Update Available'}" 
                            FontSize="18" 
                            FontWeight="Bold"
                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                            HorizontalAlignment="Center"
                            Margin="0,0,0,4" />
-                
-                <!-- Subtitle -->
-                <TextBlock Text="{i18n:StringLocalizer 'A new version of eTools Ultimate is ready to install'}" 
+
+                        <!-- Subtitle -->
+                        <TextBlock Text="{i18n:StringLocalizer 'A new version of eTools Ultimate is ready to install'}" 
                            FontSize="11" 
                            FontWeight="Normal"
-                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                           HorizontalAlignment="Center"
+                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                       HorizontalAlignment="Center"
                            TextWrapping="Wrap"
                            TextAlignment="Center"
                            Margin="0,0,0,16" />
                 
                 <!-- Buttons -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <ui:Button x:Name="InstallUpdateButton"
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,12">
+                            <ui:Button x:Name="InstallUpdateButton"
                                Style="{StaticResource PrimaryButtonStyle}"
-                               Click="InstallUpdateButton_Click"
+                                       Click="InstallUpdateButton_Click"
                                Margin="0,0,8,0">
-                        <ui:Button.Content>
-                            <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon Symbol="ArrowDownload24" 
+                                <ui:Button.Content>
+                                    <StackPanel Orientation="Horizontal">
+                                        <ui:SymbolIcon Symbol="ArrowDownload24" 
                                                FontSize="12" 
                                                Margin="0,0,4,0"
                                                Foreground="White" />
                                 <TextBlock Text="{i18n:StringLocalizer 'Install Now'}" 
                                            Foreground="White" />
-                            </StackPanel>
-                        </ui:Button.Content>
-                    </ui:Button>
-                    
-                    <ui:Button x:Name="LaterButton"
+                                    </StackPanel>
+                                </ui:Button.Content>
+                            </ui:Button>
+                            
+                            <ui:Button x:Name="LaterButton"
                                Style="{StaticResource SecondaryButtonStyle}"
                                Click="LaterButton_Click">
-                        <ui:Button.Content>
+                                <ui:Button.Content>
                             <TextBlock Text="{i18n:StringLocalizer 'Later'}" />
-                        </ui:Button.Content>
-                    </ui:Button>
+                                </ui:Button.Content>
+                            </ui:Button>
+                        </StackPanel>
+
+                <!-- Progress Bar (initially hidden) -->
+                <StackPanel x:Name="ProgressPanel" Visibility="Collapsed" HorizontalAlignment="Center">
+                    <TextBlock x:Name="ProgressText"
+                               Text="{i18n:StringLocalizer 'Installing update...'}" 
+                               FontSize="12" 
+                               FontWeight="Medium"
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,8" />
+                    <ProgressBar x:Name="UpdateProgressBar"
+                                 Width="200"
+                                 Height="6"
+                                 Value="0"
+                                 Maximum="100"
+                                 Foreground="{DynamicResource AccentFillColorDefaultBrush}"
+                                 Background="{DynamicResource ControlFillColorSecondaryBrush}" />
                 </StackPanel>
             </StackPanel>
 
-            <!-- Loading Section (initially hidden) -->
+                    <!-- Loading Section (initially hidden) -->
             <StackPanel x:Name="LoadingPanel"
                         HorizontalAlignment="Center" 
                         VerticalAlignment="Center"
                         Visibility="Collapsed">
-                <ui:SymbolIcon x:Name="LoadingSpinner"
-                               Symbol="ArrowClockwise24"
+                            <ui:SymbolIcon x:Name="LoadingSpinner"
+                                           Symbol="ArrowClockwise24"
                                FontSize="28"
-                               Foreground="{DynamicResource AccentFillColorDefaultBrush}"
-                               HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource AccentFillColorDefaultBrush}"
+                                           HorizontalAlignment="Center"
                                Margin="0,0,0,12">
-                    <ui:SymbolIcon.RenderTransform>
-                        <RotateTransform />
-                    </ui:SymbolIcon.RenderTransform>
-                </ui:SymbolIcon>
-                <TextBlock x:Name="LoadingText"
-                           Text="{i18n:StringLocalizer 'Installing update...'}" 
-                           FontSize="14" 
-                           FontWeight="SemiBold"
-                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                           HorizontalAlignment="Center" />
-            </StackPanel>
+                                <ui:SymbolIcon.RenderTransform>
+                                    <RotateTransform />
+                                </ui:SymbolIcon.RenderTransform>
+                            </ui:SymbolIcon>
+                            <TextBlock x:Name="LoadingText"
+                                       Text="{i18n:StringLocalizer 'Installing update...'}" 
+                                       FontSize="14" 
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                       HorizontalAlignment="Center" />
+                        </StackPanel>
 
-            <!-- Error Section (initially hidden) -->
+                    <!-- Error Section (initially hidden) -->
             <StackPanel x:Name="ErrorPanel"
                         HorizontalAlignment="Center" 
                         VerticalAlignment="Center"
                         Visibility="Collapsed">
-                <ui:SymbolIcon Symbol="ErrorCircle24" 
+                            <ui:SymbolIcon Symbol="ErrorCircle24" 
                                FontSize="28" 
-                               Foreground="{DynamicResource SystemFillColorCriticalBrush}"
-                               HorizontalAlignment="Center"
+                                           Foreground="{DynamicResource SystemFillColorCriticalBrush}"
+                                           HorizontalAlignment="Center"
                                Margin="0,0,0,12" />
-                <TextBlock x:Name="ErrorText"
-                           Text="{i18n:StringLocalizer 'Error installing update'}" 
-                           FontSize="14" 
-                           FontWeight="SemiBold"
-                           Foreground="{DynamicResource SystemFillColorCriticalBrush}"
-                           HorizontalAlignment="Center" />
-            </StackPanel>
+                            <TextBlock x:Name="ErrorText"
+                                       Text="{i18n:StringLocalizer 'Error installing update'}" 
+                                       FontSize="14" 
+                                       FontWeight="SemiBold"
+                                       Foreground="{DynamicResource SystemFillColorCriticalBrush}"
+                                   HorizontalAlignment="Center"
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           Margin="0,0,0,16" />
+                <ui:Button x:Name="RetryButton"
+                           Style="{StaticResource SecondaryButtonStyle}"
+                           Click="RetryButton_Click"
+                           HorizontalAlignment="Center">
+                    <ui:Button.Content>
+                        <TextBlock Text="{i18n:StringLocalizer 'Retry'}" />
+                    </ui:Button.Content>
+                </ui:Button>
+                    </StackPanel>
         </Grid>
     </Grid>
 </ui:FluentWindow>
