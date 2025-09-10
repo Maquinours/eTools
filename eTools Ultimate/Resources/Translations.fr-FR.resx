@@ -1545,6 +1545,18 @@
     <value>eTools Ultimate - Mise à jour disponible</value>
     <comment>AvailableUpdateWindow title</comment>
   </data>
+  <data name="Update Available" xml:space="preserve">
+    <value>Mise à jour disponible</value>
+  </data>
+  <data name="A new version of eTools Ultimate is ready to install" xml:space="preserve">
+    <value>Une nouvelle version d'eTools Ultimate est prête à être installée</value>
+  </data>
+  <data name="Install Now" xml:space="preserve">
+    <value>Installer maintenant</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>Plus tard</value>
+  </data>
   <data name="New Version Available!" xml:space="preserve">
     <value>Nouvelle version disponible !</value>
     <comment>AvailableUpdateWindow main heading</comment>

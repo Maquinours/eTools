@@ -60,11 +60,9 @@ namespace eTools_Ultimate.Views.Windows
             try
             {
                 var version = Assembly.GetExecutingAssembly().GetName().Version;
-                CurrentVersionText.Text = version?.ToString() ?? "1.0.0";
             }
             catch (Exception ex)
             {
-                CurrentVersionText.Text = "Unknown";
                 ShowError($"Error loading current version: {ex.Message}");
             }
         }
@@ -75,34 +73,21 @@ namespace eTools_Ultimate.Views.Windows
             {
                 try
                 {
-                    // Use reflection to access properties
                     var versionProperty = _availableUpdate.GetType().GetProperty("Version");
                     var releaseNotesProperty = _availableUpdate.GetType().GetProperty("ReleaseNotes");
                     
                     var version = versionProperty?.GetValue(_availableUpdate)?.ToString() ?? "Unknown";
                     var releaseNotes = releaseNotesProperty?.GetValue(_availableUpdate)?.ToString();
-                    
-                    NewVersionText.Text = version;
-                    UpdateDescriptionText.Text = string.IsNullOrEmpty(releaseNotes) 
-                        ? GetLocalizedString("This update contains new features, improvements, and bug fixes.")
-                        : releaseNotes;
                 }
                 catch (Exception ex)
                 {
                     ShowError(string.Format(GetLocalizedString("Error displaying update information: {0}"), ex.Message));
                 }
             }
-            else
-            {
-                // Fallback if no update info is provided
-                NewVersionText.Text = "1.1.0";
-                UpdateDescriptionText.Text = GetLocalizedString("This update contains new features, improvements, and bug fixes.");
-            }
         }
 
         private void LaterButton_Click(object sender, RoutedEventArgs e)
         {
-            // Close the window without updating
             this.Close();
         }
 
@@ -122,18 +107,15 @@ namespace eTools_Ultimate.Views.Windows
 
             try
             {
-                // Show loading state
                 SetLoadingState(true);
 
                 if (_availableUpdate != null)
                 {
-                    // Download and install update
                     await _updateManager.DownloadUpdatesAsync((dynamic)_availableUpdate);
                     _updateManager.ApplyUpdatesAndRestart((dynamic)_availableUpdate);
                 }
                 else
                 {
-                    // Check for updates first if not provided
                     var update = await _updateManager.CheckForUpdatesAsync();
                     if (update != null)
                     {
@@ -155,7 +137,6 @@ namespace eTools_Ultimate.Views.Windows
 
         private void SetLoadingState(bool isLoading)
         {
-            // Check if buttons exist before accessing them
             if (InstallUpdateButton != null)
                 InstallUpdateButton.IsEnabled = !isLoading;
             if (LaterButton != null)
@@ -165,16 +146,14 @@ namespace eTools_Ultimate.Views.Windows
             {
                 if (LoadingPanel != null)
                     LoadingPanel.Visibility = Visibility.Visible;
-                // Start animation
-                var storyboard = (Storyboard)FindResource("LoadingAnimation");
+                var storyboard = (Storyboard)FindResource("LoadingSpinnerAnimation");
                 storyboard?.Begin();
             }
             else
             {
                 if (LoadingPanel != null)
                     LoadingPanel.Visibility = Visibility.Collapsed;
-                // Stop animation
-                var storyboard = (Storyboard)FindResource("LoadingAnimation");
+                var storyboard = (Storyboard)FindResource("LoadingSpinnerAnimation");
                 storyboard?.Stop();
             }
         }
@@ -182,8 +161,10 @@ namespace eTools_Ultimate.Views.Windows
 
         private void ShowError(string errorMessage)
         {
-            ErrorText.Text = errorMessage;
-            ErrorPanel.Visibility = Visibility.Visible;
+            if (ErrorText != null)
+                ErrorText.Text = errorMessage;
+            if (ErrorPanel != null)
+                ErrorPanel.Visibility = Visibility.Visible;
         }
 
         private string GetLocalizedString(string key)
