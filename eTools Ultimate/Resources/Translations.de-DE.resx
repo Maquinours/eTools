@@ -174,7 +174,7 @@
     <comment>NPCs navigation card title</comment>
   </data>
   <data name="Navigate to the NPCs page." xml:space="preserve">
-    <value>Navigiere zur NSC-Seite.</value>
+    <value>Navigiere zur NPCs-Seite.</value>
     <comment>NPCs navigation card description</comment>
   </data>
   <data name="Events" xml:space="preserve">
@@ -239,7 +239,7 @@
   </data>
   <data name="World" xml:space="preserve">
     <value>Welt</value>
-    <comment>World field label</comment>
+    <comment>World navigation card title</comment>
   </data>
   <data name="WorldDescription" xml:space="preserve">
     <value>Welt Editor öffnen.</value>
@@ -254,7 +254,7 @@
     <comment>Object navigation card title</comment>
   </data>
   <data name="Navigate to the object editor." xml:space="preserve">
-    <value>Objekt Editor öffnen.</value>
+    <value>Navigiere zum Objekt-Editor.</value>
     <comment>Object navigation card description</comment>
   </data>
   <data name="Terrain" xml:space="preserve">
@@ -262,7 +262,7 @@
     <comment>Terrain navigation card title</comment>
   </data>
   <data name="Navigate to the terrain editor." xml:space="preserve">
-    <value>Terrain Editor öffnen.</value>
+    <value>Navigiere zum Terrain-Editor.</value>
     <comment>Terrain navigation card description</comment>
   </data>
   <data name="Job" xml:space="preserve">
@@ -274,7 +274,7 @@
     <comment>Packitem navigation card title</comment>
   </data>
   <data name="Navigate to the packitem editor." xml:space="preserve">
-    <value>Packgegenstand Editor öffnen.</value>
+    <value>Navigiere zum Packgegenstand-Editor.</value>
     <comment>Packitem navigation card description</comment>
   </data>
   <data name="Lord" xml:space="preserve">
@@ -366,11 +366,11 @@
     <comment>Collectors navigation card description</comment>
   </data>
   <data name="Navigate to the drop event editor." xml:space="preserve">
-    <value>Drop Event Editor öffnen.</value>
+    <value>Navigiere zum Drop Event-Editor.</value>
     <comment>Drop Event navigation card description</comment>
   </data>
   <data name="Navigate to the job editor." xml:space="preserve">
-    <value>Beruf Editor öffnen.</value>
+    <value>Navigiere zum Beruf-Editor.</value>
     <comment>Job navigation card description</comment>
   </data>
   <data name="Navigate to the motions page." xml:space="preserve">
@@ -378,11 +378,11 @@
     <comment>Motions navigation card description</comment>
   </data>
   <data name="Navigate to the lord editor." xml:space="preserve">
-    <value>Lord Editor öffnen.</value>
+    <value>Navigiere zum Lord-Editor.</value>
     <comment>Lord navigation card description</comment>
   </data>
   <data name="Navigate to the ticket editor." xml:space="preserve">
-    <value>Ticket Editor öffnen.</value>
+    <value>Navigiere zum Ticket-Editor.</value>
     <comment>Tickets navigation card description</comment>
   </data>
   <data name="Navigate to the text client." xml:space="preserve">
@@ -979,9 +979,11 @@
   </data>
   <data name="Close" xml:space="preserve">
     <value>Schließen</value>
+    <comment>Close button text</comment>
   </data>
   <data name="Add" xml:space="preserve">
     <value>Hinzufügen</value>
+    <comment>Add button text</comment>
   </data>
   <data name="Item that should be added in the giftbox" xml:space="preserve">
     <value>Gegenstand, der in der Geschenkbox hinzugefügt werden soll</value>
@@ -1159,44 +1161,183 @@
     <value>Zugewiesene Ressourcen</value>
     <comment>Assigned Resources list header</comment>
   </data>
-  <data name="Datei nicht gefunden" xml:space="preserve">
+  <data name="eTools Ultimate - Update Checker" xml:space="preserve">
+    <value>eTools Ultimate - Update Checker</value>
+    <comment>Update window title</comment>
+  </data>
+  <data name="Software Update Checker" xml:space="preserve">
+    <value>Software Update Checker</value>
+    <comment>Update window main title</comment>
+  </data>
+  <data name="Check for available updates for eTools Ultimate" xml:space="preserve">
+    <value>Überprüfen Sie auf verfügbare Updates für eTools Ultimate</value>
+    <comment>Update window subtitle</comment>
+  </data>
+  <data name="Current Version" xml:space="preserve">
+    <value>Aktuelle Version</value>
+    <comment>Current version label</comment>
+  </data>
+  <data name="Click the button below to check for updates. The application will automatically download and install the latest version from GitHub." xml:space="preserve">
+    <value>Klicken Sie auf den Button unten, um nach Updates zu suchen. Die Anwendung wird automatisch die neueste Version von GitHub herunterladen und installieren.</value>
+    <comment>Update check description</comment>
+  </data>
+  <data name="Check for Updates" xml:space="preserve">
+    <value>Nach Updates suchen</value>
+    <comment>Check for updates button text</comment>
+  </data>
+  <data name="Checking for updates..." xml:space="preserve">
+    <value>Suche nach Updates...</value>
+    <comment>Loading state text</comment>
+  </data>
+  <data name="🎉 New Update Available!" xml:space="preserve">
+    <value>🎉 Neues Update verfügbar!</value>
+    <comment>Update available title</comment>
+  </data>
+  <data name="Version {0} available" xml:space="preserve">
+    <value>Version {0} verfügbar</value>
+    <comment>New version available text</comment>
+  </data>
+  <data name="This update contains new features and improvements." xml:space="preserve">
+    <value>Dieses Update enthält neue Features und Verbesserungen.</value>
+    <comment>Default update description</comment>
+  </data>
+  <data name="Install Update Now" xml:space="preserve">
+    <value>Update jetzt installieren</value>
+    <comment>Install update button text</comment>
+  </data>
+  <data name="You already have the latest version!" xml:space="preserve">
+    <value>Sie haben bereits die neueste Version!</value>
+    <comment>No update available message</comment>
+  </data>
+  <data name="Error checking for updates" xml:space="preserve">
+    <value>Fehler beim Überprüfen der Updates</value>
+    <comment>Error message title</comment>
+  </data>
+  <data name="eTools Ultimate is automatically updated via GitHub" xml:space="preserve">
+    <value>eTools Ultimate wird automatisch über GitHub aktualisiert</value>
+    <comment>Footer info text</comment>
+  </data>
+  <data name="© 2025 eTools Ultimate. All rights reserved." xml:space="preserve">
+    <value>© 2025 eTools Ultimate. Alle Rechte vorbehalten.</value>
+    <comment>Copyright text</comment>
+  </data>
+  <data name="Error displaying update information: {0}" xml:space="preserve">
+    <value>Fehler beim Anzeigen der Update-Informationen: {0}</value>
+    <comment>Error message for update display</comment>
+  </data>
+  <data name="Navigate to the drop event page." xml:space="preserve">
+    <value>Navigieren Sie zur Drop Event Seite.</value>
+  </data>
+  <data name="File Not Found" xml:space="preserve">
     <value>Datei nicht gefunden</value>
     <comment>Error dialog title for missing file</comment>
   </data>
-  <data name="Eine erforderliche Datei konnte nicht geladen werden" xml:space="preserve">
+  <data name="A required file could not be loaded" xml:space="preserve">
     <value>Eine erforderliche Datei konnte nicht geladen werden</value>
     <comment>Error dialog subtitle for missing file</comment>
   </data>
-  <data name="Was ist passiert?" xml:space="preserve">
+  <data name="What happened?" xml:space="preserve">
     <value>Was ist passiert?</value>
     <comment>Error dialog section header</comment>
   </data>
-  <data name="Die Anwendung konnte eine wichtige Datei nicht finden. Dies kann passieren, wenn:" xml:space="preserve">
+  <data name="The application could not find an important file. This can happen when:" xml:space="preserve">
     <value>Die Anwendung konnte eine wichtige Datei nicht finden. Dies kann passieren, wenn:</value>
     <comment>Error dialog explanation text</comment>
   </data>
-  <data name="• Die Datei wurde verschoben oder gelöscht" xml:space="preserve">
+  <data name="• The file was moved or deleted" xml:space="preserve">
     <value>• Die Datei wurde verschoben oder gelöscht</value>
     <comment>Error dialog possible cause 1</comment>
   </data>
-  <data name="• Der Pfad ist nicht korrekt" xml:space="preserve">
+  <data name="• The path is incorrect" xml:space="preserve">
     <value>• Der Pfad ist nicht korrekt</value>
     <comment>Error dialog possible cause 2</comment>
   </data>
-  <data name="• Die Datei ist beschädigt" xml:space="preserve">
+  <data name="• The file is corrupted" xml:space="preserve">
     <value>• Die Datei ist beschädigt</value>
     <comment>Error dialog possible cause 3</comment>
   </data>
-  <data name="Fehlende Datei:" xml:space="preserve">
+  <data name="Missing file:" xml:space="preserve">
     <value>Fehlende Datei:</value>
     <comment>Error dialog missing file label</comment>
   </data>
-  <data name="Ordner öffnen" xml:space="preserve">
+  <data name="Open Folder" xml:space="preserve">
     <value>Ordner öffnen</value>
     <comment>Error dialog button to open folder</comment>
   </data>
-  <data name="Anwendung beenden" xml:space="preserve">
+  <data name="Exit Application" xml:space="preserve">
     <value>Anwendung beenden</value>
     <comment>Error dialog button to close application</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+    <comment>Cancel button text</comment>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+    <comment>OK button text</comment>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
+    <comment>Yes button text</comment>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nein</value>
+    <comment>No button text</comment>
+  </data>
+  <data name="Characters" xml:space="preserve">
+    <value>Charaktere</value>
+    <comment>Characters navigation card title</comment>
+  </data>
+  <data name="Navigate to the characters page." xml:space="preserve">
+    <value>Navigiere zur Charaktere-Seite.</value>
+    <comment>Characters navigation card description</comment>
+  </data>
+  <data name="Navigate to the world editor." xml:space="preserve">
+    <value>Navigiere zum Welt-Editor.</value>
+    <comment>World navigation card description</comment>
+  </data>
+  <data name="eTools Ultimate - Update Available" xml:space="preserve">
+    <value>eTools Ultimate - Update verfügbar</value>
+    <comment>AvailableUpdateWindow title</comment>
+  </data>
+  <data name="New Version Available!" xml:space="preserve">
+    <value>Neue Version verfügbar!</value>
+    <comment>AvailableUpdateWindow main heading</comment>
+  </data>
+  <data name="A new version of eTools Ultimate is ready to install" xml:space="preserve">
+    <value>Eine neue Version von eTools Ultimate ist bereit zur Installation</value>
+    <comment>AvailableUpdateWindow subtitle</comment>
+  </data>
+  <data name="Version Information" xml:space="preserve">
+    <value>Versionsinformationen</value>
+    <comment>AvailableUpdateWindow version section title</comment>
+  </data>
+  <data name="Current:" xml:space="preserve">
+    <value>Aktuell:</value>
+    <comment>AvailableUpdateWindow current version label</comment>
+  </data>
+  <data name="New:" xml:space="preserve">
+    <value>Neu:</value>
+    <comment>AvailableUpdateWindow new version label</comment>
+  </data>
+  <data name="This update contains new features, improvements, and bug fixes." xml:space="preserve">
+    <value>Dieses Update enthält neue Funktionen, Verbesserungen und Fehlerbehebungen.</value>
+    <comment>AvailableUpdateWindow update description</comment>
+  </data>
+  <data name="🎉 Ready to Update!" xml:space="preserve">
+    <value>🎉 Bereit zum Aktualisieren!</value>
+    <comment>AvailableUpdateWindow update action section title</comment>
+  </data>
+  <data name="Update Later" xml:space="preserve">
+    <value>Später aktualisieren</value>
+    <comment>AvailableUpdateWindow later button text</comment>
+  </data>
+  <data name="Installing update..." xml:space="preserve">
+    <value>Update wird installiert...</value>
+    <comment>AvailableUpdateWindow loading text</comment>
+  </data>
+  <data name="Error installing update" xml:space="preserve">
+    <value>Fehler beim Installieren des Updates</value>
+    <comment>AvailableUpdateWindow error text</comment>
   </data>
 </root>

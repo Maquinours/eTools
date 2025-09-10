@@ -11,9 +11,7 @@
     Title="AboutPage"
     d:DataContext="{d:DesignInstance vm:AboutViewModel,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="450"
     d:DesignWidth="800"
-    ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -21,7 +19,11 @@
     </Page.Resources>
 
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <ScrollViewer VerticalScrollBarVisibility="Auto" 
+                      HorizontalScrollBarVisibility="Disabled"
+                      CanContentScroll="False"
+                      PanningMode="VerticalOnly"
+                      IsManipulationEnabled="True">
             <StackPanel Margin="20">
                 <!--  App Logo und Titel  -->
                 <StackPanel Margin="0,20,0,40" HorizontalAlignment="Center">
