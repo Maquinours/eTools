@@ -1903,4 +1903,385 @@
   <data name="eTools Ultimate - Update Available" xml:space="preserve">
     <value>eTools Ultimate - Mise à jour disponible</value>
   </data>
+  
+  <!-- MoversPage ToolTip Translations -->
+  <data name="Define ID of the mover" xml:space="preserve">
+    <value>Définir l'ID du mover</value>
+  </data>
+  <data name="Name of the mover" xml:space="preserve">
+    <value>Nom du mover</value>
+  </data>
+  <data name="Type of mover" xml:space="preserve">
+    <value>Type de mover</value>
+  </data>
+  <data name="Penya value" xml:space="preserve">
+    <value>Valeur Penya</value>
+  </data>
+  <data name="Duration value" xml:space="preserve">
+    <value>Valeur de durée</value>
+  </data>
+  <data name="AI behavior type" xml:space="preserve">
+    <value>Type de comportement IA</value>
+  </data>
+  <data name="Aggression level" xml:space="preserve">
+    <value>Niveau d'agression</value>
+  </data>
+  <data name="Rank of the mover" xml:space="preserve">
+    <value>Rang du mover</value>
+  </data>
+  <data name="Can the mover be killed" xml:space="preserve">
+    <value>Le mover peut-il être tué</value>
+  </data>
+  <data name="Level of the mover" xml:space="preserve">
+    <value>Niveau du mover</value>
+  </data>
+  <data name="Experience value gained" xml:space="preserve">
+    <value>Points d'expérience gagnés</value>
+  </data>
+  <data name="Maximum health points" xml:space="preserve">
+    <value>Points de vie maximum</value>
+  </data>
+  <data name="Maximum mana points" xml:space="preserve">
+    <value>Points de mana maximum</value>
+  </data>
+  <data name="Movement and action range" xml:space="preserve">
+    <value>Portée de mouvement et d'action</value>
+  </data>
+  <data name="Minimum attack damage" xml:space="preserve">
+    <value>Dégâts d'attaque minimum</value>
+  </data>
+  <data name="Maximum attack damage" xml:space="preserve">
+    <value>Dégâts d'attaque maximum</value>
+  </data>
+  <data name="Strength stat" xml:space="preserve">
+    <value>Statistique de force</value>
+  </data>
+  <data name="Stamina stat" xml:space="preserve">
+    <value>Statistique d'endurance</value>
+  </data>
+  <data name="Dexterity stat" xml:space="preserve">
+    <value>Statistique de dextérité</value>
+  </data>
+  <data name="Intelligence stat" xml:space="preserve">
+    <value>Statistique d'intelligence</value>
+  </data>
+  <data name="Chance to hit target" xml:space="preserve">
+    <value>Chance de toucher la cible</value>
+  </data>
+  <data name="Chance to evade attacks" xml:space="preserve">
+    <value>Chance d'esquiver les attaques</value>
+  </data>
+  <data name="Delay between attacks" xml:space="preserve">
+    <value>Délai entre les attaques</value>
+  </data>
+  <data name="Base armor value" xml:space="preserve">
+    <value>Valeur d'armure de base</value>
+  </data>
+  <data name="Abrasion resistance" xml:space="preserve">
+    <value>Résistance à l'abrasion</value>
+  </data>
+  <data name="Physical damage resistance" xml:space="preserve">
+    <value>Résistance aux dégâts physiques</value>
+  </data>
+  <data name="General magic resistance" xml:space="preserve">
+    <value>Résistance magique générale</value>
+  </data>
+  <data name="Resistance to electricity damage" xml:space="preserve">
+    <value>Résistance aux dégâts d'électricité</value>
+  </data>
+  <data name="Resistance to fire damage" xml:space="preserve">
+    <value>Résistance aux dégâts de feu</value>
+  </data>
+  <data name="Resistance to wind damage" xml:space="preserve">
+    <value>Résistance aux dégâts de vent</value>
+  </data>
+  <data name="Resistance to water damage" xml:space="preserve">
+    <value>Résistance aux dégâts d'eau</value>
+  </data>
+  <data name="Resistance to earth damage" xml:space="preserve">
+    <value>Résistance aux dégâts de terre</value>
+  </data>
+  <data name="Type of elemental damage" xml:space="preserve">
+    <value>Type de dégâts élémentaires</value>
+  </data>
+  <data name="Elemental attack value" xml:space="preserve">
+    <value>Valeur d'attaque élémentaire</value>
+  </data>
+  <data name="Sound played when an SFX hit the mover" xml:space="preserve">
+    <value>Son joué quand un SFX touche le mover</value>
+  </data>
+  <data name="Sound played when the mover is clicked" xml:space="preserve">
+    <value>Son joué quand le mover est cliqué</value>
+  </data>
+  <data name="Key identifier for the motion" xml:space="preserve">
+    <value>Identifiant de clé pour le mouvement</value>
+  </data>
+  <data name="File path for the motion" xml:space="preserve">
+    <value>Chemin de fichier pour le mouvement</value>
+  </data>
+  <data name="Model file path" xml:space="preserve">
+    <value>Chemin de fichier du modèle</value>
+  </data>
+  <data name="Model scale factor" xml:space="preserve">
+    <value>Facteur d'échelle du modèle</value>
+  </data>
+  <data name="Texture" xml:space="preserve">
+    <value>Texture</value>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Refaire</value>
+  </data>
+  <data name="Play selected motion" xml:space="preserve">
+    <value>Jouer le mouvement sélectionné</value>
+  </data>
+  <data name="Stop current motion" xml:space="preserve">
+    <value>Arrêter le mouvement actuel</value>
+  </data>
+  <data name="Reference Model" xml:space="preserve">
+    <value>Modèle de référence</value>
+  </data>
+  <data name="Add Motion" xml:space="preserve">
+    <value>Ajouter un mouvement</value>
+  </data>
+  <data name="Delete Motion" xml:space="preserve">
+    <value>Supprimer le mouvement</value>
+  </data>
+  <data name="Generate Motions" xml:space="preserve">
+    <value>Générer des mouvements</value>
+  </data>
+  
+  <!-- Navigation Menu Translations -->
+  <data name="Dashboard" xml:space="preserve">
+    <value>Tableau de bord</value>
+  </data>
+  <data name="Movers" xml:space="preserve">
+    <value>Movers</value>
+  </data>
+  <data name="Giftboxes" xml:space="preserve">
+    <value>Boîtes-cadeaux</value>
+  </data>
+  <data name="Accessories" xml:space="preserve">
+    <value>Accessoires</value>
+  </data>
+  <data name="TextClient" xml:space="preserve">
+    <value>Client de texte</value>
+  </data>
+  <data name="Motions" xml:space="preserve">
+    <value>Mouvements</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  
+  <!-- Model Section Translations -->
+  <data name="Model" xml:space="preserve">
+    <value>Modèle</value>
+  </data>
+  <data name="No Model Available" xml:space="preserve">
+    <value>Aucun modèle disponible</value>
+  </data>
+  <data name="No model associated with the selected mover." xml:space="preserve">
+    <value>Aucun modèle associé au mover sélectionné.</value>
+  </data>
+  
+  <!-- Reference Model Dialog Translations -->
+  <data name="Select Reference Model" xml:space="preserve">
+    <value>Sélectionner le modèle de référence</value>
+  </data>
+  <data name="Please select a reference model:" xml:space="preserve">
+    <value>Veuillez sélectionner un modèle de référence :</value>
+  </data>
+  <data name="Search models..." xml:space="preserve">
+    <value>Rechercher des modèles...</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Accepter</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  
+  <!-- MoversPage Content Translations -->
+  <data name="Save" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="Expert" xml:space="preserve">
+    <value>Expert</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtrer</value>
+  </data>
+  <data name="Filter Sections" xml:space="preserve">
+    <value>Filtrer les sections</value>
+  </data>
+  <data name="Basic Information" xml:space="preserve">
+    <value>Informations de base</value>
+  </data>
+  <data name="Stats" xml:space="preserve">
+    <value>Statistiques</value>
+  </data>
+  <data name="Combat / Battle" xml:space="preserve">
+    <value>Combat / Bataille</value>
+  </data>
+  <data name="Defensive Stats &amp; Resistances" xml:space="preserve">
+    <value>Statistiques défensives &amp; Résistances</value>
+  </data>
+  <data name="Elementar &amp; Damage Types" xml:space="preserve">
+    <value>Élémentaire &amp; Types de dégâts</value>
+  </data>
+  <data name="Sound" xml:space="preserve">
+    <value>Son</value>
+  </data>
+  <data name="Model / Mobility / Movement" xml:space="preserve">
+    <value>Modèle / Mobilité / Mouvement</value>
+  </data>
+  <data name="Filter Fields" xml:space="preserve">
+    <value>Filtrer les champs</value>
+  </data>
+  <data name="ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="ID Key" xml:space="preserve">
+    <value>Clé ID</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Killable" xml:space="preserve">
+    <value>Tuable</value>
+  </data>
+  <data name="Penya" xml:space="preserve">
+    <value>Penya</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Durée</value>
+  </data>
+  <data name="EXP" xml:space="preserve">
+    <value>EXP</value>
+  </data>
+  <data name="STR" xml:space="preserve">
+    <value>FOR</value>
+  </data>
+  <data name="STA" xml:space="preserve">
+    <value>END</value>
+  </data>
+  <data name="DEX" xml:space="preserve">
+    <value>DEX</value>
+  </data>
+  <data name="INT" xml:space="preserve">
+    <value>INT</value>
+  </data>
+  <data name="Hit Rate" xml:space="preserve">
+    <value>Taux de toucher</value>
+  </data>
+  <data name="Evasion Rate" xml:space="preserve">
+    <value>Taux d'esquive</value>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Niveau</value>
+  </data>
+  <data name="Health Points" xml:space="preserve">
+    <value>Points de vie</value>
+  </data>
+  <data name="Mana Points" xml:space="preserve">
+    <value>Points de mana</value>
+  </data>
+  <data name="Artificial Intelligence (AI)" xml:space="preserve">
+    <value>Intelligence artificielle (IA)</value>
+  </data>
+  <data name="Belligerence" xml:space="preserve">
+    <value>Belligérance</value>
+  </data>
+  <data name="Attack min." xml:space="preserve">
+    <value>Attaque min.</value>
+  </data>
+  <data name="Attack max." xml:space="preserve">
+    <value>Attaque max.</value>
+  </data>
+  <data name="Attack Animation 1" xml:space="preserve">
+    <value>Animation d'attaque 1</value>
+  </data>
+  <data name="Attack Animation 2" xml:space="preserve">
+    <value>Animation d'attaque 2</value>
+  </data>
+  <data name="Attack Animation 3" xml:space="preserve">
+    <value>Animation d'attaque 3</value>
+  </data>
+  <data name="Attack Delay" xml:space="preserve">
+    <value>Délai d'attaque</value>
+  </data>
+  <data name="Armor" xml:space="preserve">
+    <value>Armure</value>
+  </data>
+  <data name="Magic Resistance" xml:space="preserve">
+    <value>Résistance magique</value>
+  </data>
+  <data name="Resistance Electricity" xml:space="preserve">
+    <value>Résistance Électricité</value>
+  </data>
+  <data name="Resistance Fire" xml:space="preserve">
+    <value>Résistance Feu</value>
+  </data>
+  <data name="Resistance Wind" xml:space="preserve">
+    <value>Résistance Vent</value>
+  </data>
+  <data name="Resistance Water" xml:space="preserve">
+    <value>Résistance Eau</value>
+  </data>
+  <data name="Resistance Earth" xml:space="preserve">
+    <value>Résistance Terre</value>
+  </data>
+  <data name="Element Type" xml:space="preserve">
+    <value>Type d'élément</value>
+  </data>
+  <data name="Element Attack" xml:space="preserve">
+    <value>Attaque élémentaire</value>
+  </data>
+  <data name="Correction Value" xml:space="preserve">
+    <value>Valeur de correction</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  
+  <!-- Navigation Menu Translations -->
+  <data name="Dashboard" xml:space="preserve">
+    <value>Tableau de bord</value>
+  </data>
+  <data name="Movers" xml:space="preserve">
+    <value>Mouveurs</value>
+  </data>
+  <data name="Giftboxes" xml:space="preserve">
+    <value>Boîtes-cadeaux</value>
+  </data>
+  <data name="Accessories" xml:space="preserve">
+    <value>Accessoires</value>
+  </data>
+  <data name="TextClient" xml:space="preserve">
+    <value>Client de texte</value>
+  </data>
+  <data name="Motions" xml:space="preserve">
+    <value>Mouvements</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  <data name="Resource Path" xml:space="preserve">
+    <value>Chemin des ressources</value>
+  </data>
+  <data name="Personalization" xml:space="preserve">
+    <value>Personnalisation</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>À propos</value>
+  </data>
 </root>

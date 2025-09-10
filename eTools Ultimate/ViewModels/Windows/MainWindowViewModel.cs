@@ -5,6 +5,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Media;
 using System;
 using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Resources;
+using System.Windows;
+using System.Resources;
 
 namespace eTools_Ultimate.ViewModels.Windows
 {
@@ -12,10 +15,24 @@ namespace eTools_Ultimate.ViewModels.Windows
     {
         private readonly string _applicationTitle = "eTools Ultimate";
 
+        private static string GetLocalizedString(string key)
+        {
+            try
+            {
+                var culture = System.Globalization.CultureInfo.CurrentUICulture;
+                var resourceManager = new System.Resources.ResourceManager("eTools_Ultimate.Resources.Translations", typeof(Translations).Assembly);
+                return resourceManager.GetString(key, culture) ?? key;
+            }
+            catch
+            {
+                return key;
+            }
+        }
+
         private readonly object[] _menuItems = [
             new NavigationViewItem()
                 {
-                    Content = "Dashboard",
+                    Content = GetLocalizedString("Dashboard"),
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/eTools.png", 25, 25),
                     TargetPageType = typeof(DashboardPage),
                     //MenuItemsSource = new object[] // TODO: Add back changelog but not like this (contentdialog)
@@ -37,7 +54,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 //},
                 new NavigationViewItem()
                 {
-                    Content = "Movers",
+                    Content = GetLocalizedString("Movers"),
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Movers.png", 25, 25),
                     TargetPageType = typeof(MoversPage)
                 },
@@ -49,7 +66,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 //},
                 new NavigationViewItem()
                 {
-                    Content = "Motions",
+                    Content = GetLocalizedString("Motions"),
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Motions.png", 25, 25),
                     TargetPageType = typeof(MotionsPage)
                 },
@@ -73,7 +90,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 //},
                 new NavigationViewItem()
                 {
-                    Content = "Giftboxes",
+                    Content = GetLocalizedString("Giftboxes"),
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Giftboxes.png", 25, 25),
                     TargetPageType = typeof(GiftboxesPage)
                 },
@@ -85,7 +102,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 //},
                 new NavigationViewItem()
                 {
-                    Content = "Accessories",
+                    Content = GetLocalizedString("Accessories"),
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Accessories.png", 25, 25),
                     TargetPageType = typeof(AccessoriesPage)
                 },
@@ -103,7 +120,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 //},
                 new NavigationViewItem()
                 {
-                    Content = "TextClient",
+                    Content = GetLocalizedString("TextClient"),
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Texts.png", 25, 25),
                     TargetPageType = typeof(TextsPage)
                 },
@@ -166,14 +183,14 @@ namespace eTools_Ultimate.ViewModels.Windows
         private readonly object[] _footerMenuItems = [
             new NavigationViewItem
                 {
-                    Content = "Settings",
+                    Content = GetLocalizedString("Settings"),
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Settings.png", 25, 25),
                     TargetPageType = typeof(SettingsPage),
                     MenuItemsSource = new object[]
                     {
-                        new NavigationViewItem("Resource Path", typeof(ResourcePathPage)),
-                        new NavigationViewItem("Personalization", typeof(PersonalizationPage)),
-                        new NavigationViewItem("About", typeof(AboutPage))
+                        new NavigationViewItem(GetLocalizedString("Resource Path"), typeof(ResourcePathPage)),
+                        new NavigationViewItem(GetLocalizedString("Personalization"), typeof(PersonalizationPage)),
+                        new NavigationViewItem(GetLocalizedString("About"), typeof(AboutPage))
                     }
                 }
             ];
