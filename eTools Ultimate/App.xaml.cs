@@ -1,4 +1,5 @@
-﻿using eTools_Ultimate.Resources;
+﻿using eTools_Ultimate.Models;
+using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using eTools_Ultimate.ViewModels.Pages;
@@ -39,6 +40,8 @@ namespace eTools_Ultimate
 
                 services.AddHostedService<ApplicationHostService>();
 
+                services.AddSingleton<AppConfig>();
+
                 // Theme manipulation
                 services.AddSingleton<IThemeService, ThemeService>();
 
@@ -53,8 +56,6 @@ namespace eTools_Ultimate
 
                 // Service for handling snackbar notifications
                 services.AddSingleton<ISnackbarService, SnackbarService>();
-
-                services.AddSingleton<AppConfigService>();
 
                 services.AddSingleton<SettingsService>();
                 services.AddSingleton<DefinesService>();

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eTools_Ultimate.Services
+namespace eTools_Ultimate.Models
 {
-    public class AppConfigService : ObservableObject
+    public class AppConfig : ObservableObject
     {
         public string Language
         {

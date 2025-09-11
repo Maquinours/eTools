@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using eTools_Ultimate.Models;
 using eTools_Ultimate.Properties;
 using eTools_Ultimate.Services;
 using Lepo.i18n;
@@ -21,12 +22,12 @@ namespace eTools_Ultimate.ViewModels.Pages
         private readonly IStringLocalizer _stringLocalizer;
         private readonly ILocalizationCultureManager _cultureManager;
         private readonly IContentDialogService _contentDialogService;
-        private readonly AppConfigService _appConfigService;
+        private readonly AppConfig _appConfig;
 
         [ObservableProperty]
         private ApplicationTheme _currentApplicationTheme = ApplicationTheme.Unknown;
 
-        public AppConfigService AppConfigService => _appConfigService;
+        public AppConfig AppConfig => _appConfig;
 
         public string DefaultCultureOptionLabel
         {
@@ -47,21 +48,21 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        public PersonalizationViewModel(AppConfigService appConfigService, IStringLocalizer stringLocalizer, ILocalizationCultureManager cultureManager, IContentDialogService contentDialogService)
+        public PersonalizationViewModel(AppConfig appConfig, IStringLocalizer stringLocalizer, ILocalizationCultureManager cultureManager, IContentDialogService contentDialogService)
         {
-            _appConfigService = appConfigService;
+            _appConfig = appConfig;
             _stringLocalizer = stringLocalizer;
             _cultureManager = cultureManager;
             _contentDialogService = contentDialogService;
 
-            _appConfigService.PropertyChanged += AppConfigService_PropertyChanged;
+            AppConfig.PropertyChanged += AppConfigService_PropertyChanged;
         }
 
         private async void AppConfigService_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
             {
-                case nameof(AppConfigService.Language):
+                case nameof(AppConfig.Language):
                     ContentDialogResult result = await _contentDialogService.ShowSimpleDialogAsync(
                         new SimpleContentDialogCreateOptions()
                         {
