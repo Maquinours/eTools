@@ -12,6 +12,7 @@
     d:DataContext="{d:DesignInstance vm:AboutViewModel,
                                      IsDesignTimeCreatable=False}"
     d:DesignWidth="800"
+    ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d">
 
     <Page.Resources>
@@ -47,14 +48,14 @@
                             Margin="0,0,0,10"
                             FontSize="16"
                             FontWeight="SemiBold"
-                            Text="Über eTools Ultimate" />
+                            Text="{i18n:Translate 'About eTools Ultimate'}" />
 
                         <TextBlock
                             Margin="0,0,0,15"
                             Text="{Binding AppDescription}"
                             TextWrapping="Wrap" />
 
-                        <TextBlock Text="Unser Tool vereinfacht den Bearbeitungsprozess für Entwickler." TextWrapping="Wrap" />
+                        <TextBlock Text="{i18n:Translate 'Our tool simplifies the editing process for developers.'}" TextWrapping="Wrap" />
                     </StackPanel>
                 </ui:Card>
 
@@ -65,7 +66,7 @@
                             Margin="0,0,0,10"
                             FontSize="16"
                             FontWeight="SemiBold"
-                            Text="Hauptfunktionen" />
+                            Text="{i18n:Translate 'Main Features'}" />
 
                         <StackPanel Margin="10,0,0,0">
                             <Grid Margin="0,0,0,8">
@@ -82,7 +83,7 @@
 
                                 <TextBlock
                                     Grid.Column="1"
-                                    Text="Bearbeitung von .txt, .h und .inc Dateien mit strukturierten Benutzeroberflächen"
+                                    Text="{i18n:Translate 'Editing of .txt, .h and .inc files with structured interfaces'}"
                                     TextWrapping="Wrap" />
                             </Grid>
 
@@ -100,7 +101,7 @@
 
                                 <TextBlock
                                     Grid.Column="1"
-                                    Text="Erweiterte Kategorisierung nach Elementtypen"
+                                    Text="{i18n:Translate 'Advanced categorization by element types'}"
                                     TextWrapping="Wrap" />
                             </Grid>
 
@@ -118,7 +119,7 @@
 
                                 <TextBlock
                                     Grid.Column="1"
-                                    Text="Optimiert für Leistung und Benutzerfreundlichkeit"
+                                    Text="{i18n:Translate 'Optimized for performance and user-friendliness'}"
                                     TextWrapping="Wrap" />
                             </Grid>
                         </StackPanel>
@@ -132,7 +133,7 @@
                             Margin="0,0,0,10"
                             FontSize="16"
                             FontWeight="SemiBold"
-                            Text="Entwicklungsteam" />
+                            Text="{i18n:Translate 'Development Team'}" />
 
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -206,7 +207,7 @@
                             Margin="0,0,0,10"
                             FontSize="16"
                             FontWeight="SemiBold"
-                            Text="Systemanforderungen" />
+                            Text="{i18n:Translate 'System Requirements'}" />
 
                         <Grid Margin="0,0,0,5">
                             <Grid.ColumnDefinitions>
@@ -214,8 +215,8 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock FontWeight="SemiBold" Text="Betriebssystem:" />
-                            <TextBlock Grid.Column="1" Text="Windows 10/11" />
+                            <TextBlock FontWeight="SemiBold" Text="{i18n:Translate 'Operating System:'}" />
+                            <TextBlock Grid.Column="1" Text="{i18n:Translate 'Windows 10 or 11'}" />
                         </Grid>
 
                         <Grid Margin="0,0,0,5">
@@ -224,8 +225,8 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock FontWeight="SemiBold" Text="Arbeitsspeicher:" />
-                            <TextBlock Grid.Column="1" Text="4 GB RAM mindestens, 8 GB empfohlen" />
+                            <TextBlock FontWeight="SemiBold" Text="{i18n:Translate 'RAM:'}" />
+                            <TextBlock Grid.Column="1" Text="{i18n:Translate '4 GB minimum, 8 GB recommended'}" />
                         </Grid>
 
                         <Grid Margin="0,0,0,5">
@@ -234,8 +235,8 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock FontWeight="SemiBold" Text="Festplattenspeicher:" />
-                            <TextBlock Grid.Column="1" Text="200 MB verfügbarer Speicherplatz" />
+                            <TextBlock FontWeight="SemiBold" Text="{i18n:Translate 'Storage:'}" />
+                            <TextBlock Grid.Column="1" Text="{i18n:Translate '200 MB available space'}" />
                         </Grid>
                     </StackPanel>
                 </ui:Card>
@@ -248,9 +249,9 @@
                     <Button
                         Margin="0,0,15,0"
                         Command="{Binding OpenWebsiteCommand}"
-                        Content="Website besuchen" />
+                        Content="{i18n:Translate 'Visit Website'}" />
 
-                    <Button Command="{Binding CheckForUpdatesCommand}" Content="Nach Updates suchen" />
+                    <Button Command="{Binding CheckForUpdatesCommand}" Content="{i18n:Translate 'Check for Updates'}" />
                 </StackPanel>
 
                 <!--  Copyright  -->
