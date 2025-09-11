@@ -8,7 +8,7 @@
         xmlns:local="clr-namespace:eTools_Ultimate.Views.Windows"
         mc:Ignorable="d"
                  Title="{i18n:StringLocalizer 'eTools Ultimate - Update Available'}"
-                 Height="550" Width="750"
+                 Height="280" Width="400"
                  WindowStartupLocation="CenterScreen"
                  WindowState="Normal"
                  ResizeMode="CanResize"
@@ -20,67 +20,23 @@
                  Foreground="{DynamicResource TextFillColorPrimaryBrush}">
 
     <Window.Resources>
-        <!-- Custom Styles with Theme Support -->
-        <Style x:Key="UpdateCardStyle" TargetType="ui:Card">
-            <Setter Property="Background" Value="{DynamicResource CardBackgroundFillColorDefaultBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource CardStrokeColorDefaultBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="Padding" Value="20" />
-            <Setter Property="Margin" Value="16" />
-            <Setter Property="Effect">
+        <!-- Modern Styles with Animations -->
+        <Style x:Key="PrimaryButtonStyle" TargetType="ui:Button">
+            <Setter Property="Background" Value="#0078D4" />
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="16,8" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+            <Setter Property="RenderTransform">
                 <Setter.Value>
-                    <DropShadowEffect Color="Gray" 
-                                      BlurRadius="8" 
-                                      ShadowDepth="2" 
-                                      Opacity="0.1" />
+                    <ScaleTransform ScaleX="1" ScaleY="1" />
                 </Setter.Value>
             </Setter>
-        </Style>
-
-        <Style x:Key="HeaderTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="24" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,0,0,8" />
-        </Style>
-
-        <Style x:Key="SubHeaderTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="FontWeight" Value="Medium" />
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,0,0,20" />
-        </Style>
-
-        <Style x:Key="InfoTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="13" />
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
-            <Setter Property="TextWrapping" Value="Wrap" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,0,0,20" />
-            <Setter Property="LineHeight" Value="18" />
-        </Style>
-
-        <Style x:Key="VersionTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="18" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Foreground" Value="{DynamicResource AccentTextFillColorPrimaryBrush}" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,0,0,16" />
-        </Style>
-
-        <Style x:Key="CheckButtonStyle" TargetType="ui:Button">
-            <Setter Property="Background" Value="{DynamicResource AccentFillColorDefaultBrush}" />
-            <Setter Property="Foreground" Value="{DynamicResource AccentTextFillColorPrimaryBrush}" />
-            <Setter Property="BorderThickness" Value="0" />
-            <Setter Property="CornerRadius" Value="8" />
-            <Setter Property="Padding" Value="24,12" />
-            <Setter Property="FontSize" Value="15" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,0,0,16" />
-            <Setter Property="Cursor" Value="Hand" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ui:Button">
@@ -89,10 +45,10 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}">
                             <Border.Effect>
-                                <DropShadowEffect Color="Gray" 
-                                                  BlurRadius="4" 
-                                                  ShadowDepth="1" 
-                                                  Opacity="0.2" />
+                                <DropShadowEffect Color="#0078D4" 
+                                                  BlurRadius="8" 
+                                                  ShadowDepth="2" 
+                                                  Opacity="0.3" />
                             </Border.Effect>
                             <ContentPresenter HorizontalAlignment="Center" 
                                             VerticalAlignment="Center"
@@ -100,10 +56,40 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{DynamicResource AccentFillColorSecondaryBrush}" />
+                                <Setter Property="Background" Value="#106EBE" />
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                           To="1.05" Duration="0:0:0.2" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                           To="1.05" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                           To="1.0" Duration="0:0:0.2" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                           To="1.0" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="{DynamicResource AccentFillColorTertiaryBrush}" />
+                                <Setter Property="Background" Value="#005A9E" />
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                           To="0.95" Duration="0:0:0.1" />
+                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                           To="0.95" Duration="0:0:0.1" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -111,102 +97,83 @@
             </Setter>
         </Style>
 
-        <Style x:Key="StatusTextStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="13" />
+        <Style x:Key="SecondaryButtonStyle" TargetType="ui:Button">
+            <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+            <Setter Property="CornerRadius" Value="6" />
+            <Setter Property="Padding" Value="12,6" />
+            <Setter Property="FontSize" Value="11" />
             <Setter Property="FontWeight" Value="Medium" />
             <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,8,0,0" />
-            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
-        </Style>
-
-        <!-- Panel Styles with Theme Support -->
-        <Style x:Key="UpdateAvailablePanelStyle" TargetType="Border">
-            <Setter Property="Background" Value="#E8F4FD" />
-            <Setter Property="BorderBrush" Value="#B8D4F0" />
-            <Setter Property="BorderThickness" Value="2" />
-            <Setter Property="CornerRadius" Value="12" />
-            <Setter Property="Padding" Value="20,16" />
-            <Setter Property="Margin" Value="0,0,0,16" />
-            <Setter Property="Effect">
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+            <Setter Property="RenderTransform">
                 <Setter.Value>
-                    <DropShadowEffect Color="#B8D4F0" 
-                                      BlurRadius="8" 
-                                      ShadowDepth="2" 
-                                      Opacity="0.3" />
+                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ui:Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                            VerticalAlignment="Center"
+                                            Margin="{TemplateBinding Padding}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource ControlFillColorTertiaryBrush}" />
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                           To="1.05" Duration="0:0:0.2" />
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                           To="1.05" Duration="0:0:0.2" />
+        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                           To="1.0" Duration="0:0:0.2" />
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                           To="1.0" Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
 
-        <Style x:Key="NoUpdatePanelStyle" TargetType="Border">
-            <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
-            <Setter Property="Padding" Value="16,12" />
-            <Setter Property="Margin" Value="0,0,0,16" />
-        </Style>
+        <!-- Fade In Animation -->
+        <Storyboard x:Key="FadeInAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                           From="0" To="1" Duration="0:0:0.5" />
+        </Storyboard>
 
-        <Style x:Key="ErrorPanelStyle" TargetType="Border">
-            <Setter Property="Background" Value="{DynamicResource SystemFillColorCriticalBackgroundBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource SystemFillColorCriticalBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
-            <Setter Property="Padding" Value="16,12" />
-            <Setter Property="Margin" Value="0,0,0,16" />
-            <Setter Property="Effect">
-                <Setter.Value>
-                    <DropShadowEffect Color="Red" 
-                                      BlurRadius="6" 
-                                      ShadowDepth="1" 
-                                      Opacity="0.15" />
-                </Setter.Value>
-            </Setter>
-        </Style>
+        <!-- Slide Up Animation -->
+        <Storyboard x:Key="SlideUpAnimation">
+            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                           From="30" To="0" Duration="0:0:0.4" />
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                           From="0" To="1" Duration="0:0:0.4" />
+        </Storyboard>
 
-        <Style x:Key="VersionInfoPanelStyle" TargetType="Border">
-            <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
-            <Setter Property="CornerRadius" Value="8" />
-            <Setter Property="Padding" Value="16,12" />
-            <Setter Property="Margin" Value="0,0,0,20" />
-        </Style>
-
-        <!-- Animations and Transitions -->
-        <Storyboard x:Key="LoadingAnimation" RepeatBehavior="Forever">
+        <!-- Loading Spinner Animation -->
+        <Storyboard x:Key="LoadingSpinnerAnimation" RepeatBehavior="Forever">
             <DoubleAnimation Storyboard.TargetName="LoadingSpinner"
                            Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
                            From="0" To="360" Duration="0:0:1" />
-        </Storyboard>
-
-        <!-- Fade In Animation for Panels -->
-        <Storyboard x:Key="FadeInAnimation">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                           From="0" To="1" Duration="0:0:0.3" />
-        </Storyboard>
-
-        <!-- Slide In Animation for Panels -->
-        <Storyboard x:Key="SlideInAnimation">
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-                           From="20" To="0" Duration="0:0:0.3" />
-            <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                           From="0" To="1" Duration="0:0:0.3" />
-        </Storyboard>
-
-        <!-- Button Hover Animation -->
-        <Storyboard x:Key="ButtonHoverAnimation">
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                           To="1.05" Duration="0:0:0.2" />
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                           To="1.05" Duration="0:0:0.2" />
-        </Storyboard>
-
-        <!-- Button Leave Animation -->
-        <Storyboard x:Key="ButtonLeaveAnimation">
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                           To="1.0" Duration="0:0:0.2" />
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                           To="1.0" Duration="0:0:0.2" />
         </Storyboard>
     </Window.Resources>
 
@@ -223,160 +190,91 @@
                      Icon="Assets/Icons/eTools.png" />
 
         <!-- Main Content -->
-        <ScrollViewer Grid.Row="1" 
-                      VerticalScrollBarVisibility="Auto"
-                      HorizontalScrollBarVisibility="Disabled"
-                      Padding="0,16,0,16" Margin="0,0,0,-217">
-            
-            <ui:Card Style="{StaticResource UpdateCardStyle}">
-                <StackPanel>
-                    <!-- Header Section -->
-                    <StackPanel Margin="0,0,0,20">
+        <Grid Grid.Row="1" Margin="16">
+            <!-- Normal Update Available State -->
+            <StackPanel x:Name="NormalPanel" HorizontalAlignment="Center" VerticalAlignment="Center">
                         <!-- App Icon -->
                         <Image Source="/Assets/Icons/eTools.png"
-                               Width="56"
-                               Height="56"
+                       Width="40"
+                       Height="40"
                                HorizontalAlignment="Center"
-                               Margin="0,0,0,16" />
+                       Margin="0,0,0,12" />
 
                         <!-- Title -->
-                        <TextBlock Text="{i18n:StringLocalizer 'New Version Available!'}" 
-                                   Style="{StaticResource HeaderTextStyle}" />
+                <TextBlock Text="{i18n:StringLocalizer 'Update Available'}" 
+                           FontSize="18" 
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,4" />
 
                         <!-- Subtitle -->
                         <TextBlock Text="{i18n:StringLocalizer 'A new version of eTools Ultimate is ready to install'}" 
-                                   Style="{StaticResource SubHeaderTextStyle}" />
-                    </StackPanel>
-
-                    <!-- Version Comparison Info -->
-                    <Border Style="{StaticResource VersionInfoPanelStyle}">
-                        <StackPanel>
-                            <TextBlock Text="{i18n:StringLocalizer 'Version Information'}" 
-                                       FontSize="12" 
-                                       FontWeight="Medium"
+                           FontSize="11" 
+                           FontWeight="Normal"
                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
                                        HorizontalAlignment="Center"
-                                       Margin="0,0,0,12" />
-                            
-                            <!-- Current Version -->
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,8">
-                                <TextBlock Text="{i18n:StringLocalizer 'Current:'}" 
-                                           FontSize="14" 
-                                           FontWeight="Medium"
-                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                           VerticalAlignment="Center"
-                                           Margin="0,0,8,0" />
-                                <TextBlock x:Name="CurrentVersionText"
-                                           Text="1.0.0" 
-                                           FontSize="16"
-                                           FontWeight="SemiBold"
-                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                           VerticalAlignment="Center" />
-                            </StackPanel>
-                            
-                            <!-- Arrow -->
-                            <ui:SymbolIcon Symbol="ArrowDown24" 
-                                           FontSize="16" 
-                                           Foreground="{DynamicResource AccentFillColorDefaultBrush}"
-                                           HorizontalAlignment="Center"
-                                           Margin="0,0,0,8" />
-                            
-                            <!-- New Version -->
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <TextBlock Text="{i18n:StringLocalizer 'New:'}" 
-                                           FontSize="14" 
-                                           FontWeight="Medium"
-                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                           VerticalAlignment="Center"
-                                           Margin="0,0,8,0" />
-                                <TextBlock x:Name="NewVersionText"
-                                           Text="1.1.0" 
-                                           FontSize="16"
-                                           FontWeight="SemiBold"
-                                           Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
-                                           VerticalAlignment="Center" />
-                            </StackPanel>
-                        </StackPanel>
-                    </Border>
-
-                    <!-- Update Description -->
-                    <StackPanel Margin="0,0,0,20">
-                        <TextBlock x:Name="UpdateDescriptionText"
-                                   Text="{i18n:StringLocalizer 'This update contains new features, improvements, and bug fixes.'}"
-                                   Style="{StaticResource InfoTextStyle}" />
-                    </StackPanel>
-
-                    <!-- Update Action Section -->
-                    <Border Style="{StaticResource UpdateAvailablePanelStyle}"
-                            RenderTransformOrigin="0.5,0.5">
-                        <Border.RenderTransform>
-                            <TranslateTransform />
-                        </Border.RenderTransform>
-                        <StackPanel>
-                            <TextBlock Text="{i18n:StringLocalizer '🎉 Ready to Update!'}" 
-                                       FontSize="18" 
-                                       FontWeight="Bold"
-                                       Foreground="#2C5F8B"
-                                       HorizontalAlignment="Center"
-                                       Margin="0,0,0,12" />
-                            
-                            <!-- Update Button -->
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           Margin="0,0,0,16" />
+                
+                <!-- Buttons -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,12">
                             <ui:Button x:Name="InstallUpdateButton"
-                                       Background="{DynamicResource AccentFillColorDefaultBrush}"
-                                       Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
-                                       HorizontalAlignment="Center"
-                                       Padding="24,12"
-                                       CornerRadius="8"
-                                       FontSize="15"
-                                       FontWeight="SemiBold"
+                               Style="{StaticResource PrimaryButtonStyle}"
                                        Click="InstallUpdateButton_Click"
-                                       RenderTransformOrigin="0.5,0.5"
-                                       Margin="0,0,0,8">
-                                <ui:Button.RenderTransform>
-                                    <ScaleTransform />
-                                </ui:Button.RenderTransform>
+                               Margin="0,0,8,0">
                                 <ui:Button.Content>
                                     <StackPanel Orientation="Horizontal">
                                         <ui:SymbolIcon Symbol="ArrowDownload24" 
-                                                       FontSize="16" 
-                                                       Margin="0,0,8,0" />
-                                        <TextBlock Text="{i18n:StringLocalizer 'Install Update Now'}" />
+                                               FontSize="12" 
+                                               Margin="0,0,4,0"
+                                               Foreground="White" />
+                                <TextBlock Text="{i18n:StringLocalizer 'Install Now'}" 
+                                           Foreground="White" />
                                     </StackPanel>
                                 </ui:Button.Content>
                             </ui:Button>
                             
-                            <!-- Later Button -->
                             <ui:Button x:Name="LaterButton"
-                                       Background="#F0F0F0"
-                                       Foreground="#666666"
-                                       HorizontalAlignment="Center"
-                                       Padding="16,8"
-                                       CornerRadius="6"
-                                       FontSize="13"
-                                       Click="LaterButton_Click"
-                                       Margin="0,0,0,8">
+                               Style="{StaticResource SecondaryButtonStyle}"
+                               Click="LaterButton_Click">
                                 <ui:Button.Content>
-                                    <TextBlock Text="{i18n:StringLocalizer 'Update Later'}" />
+                            <TextBlock Text="{i18n:StringLocalizer 'Later'}" />
                                 </ui:Button.Content>
                             </ui:Button>
                         </StackPanel>
-                    </Border>
+
+                <!-- Progress Bar (initially hidden) -->
+                <StackPanel x:Name="ProgressPanel" Visibility="Collapsed" HorizontalAlignment="Center">
+                    <TextBlock x:Name="ProgressText"
+                               Text="{i18n:StringLocalizer 'Installing update...'}" 
+                               FontSize="12" 
+                               FontWeight="Medium"
+                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                               HorizontalAlignment="Center"
+                               Margin="0,0,0,8" />
+                    <ProgressBar x:Name="UpdateProgressBar"
+                                 Width="200"
+                                 Height="6"
+                                 Value="0"
+                                 Maximum="100"
+                                 Foreground="{DynamicResource AccentFillColorDefaultBrush}"
+                                 Background="{DynamicResource ControlFillColorSecondaryBrush}" />
+                </StackPanel>
+            </StackPanel>
 
                     <!-- Loading Section (initially hidden) -->
-                    <Border x:Name="LoadingPanel"
-                            Style="{StaticResource NoUpdatePanelStyle}"
-                            Visibility="Collapsed"
-                            RenderTransformOrigin="0.5,0.5">
-                        <Border.RenderTransform>
-                            <TranslateTransform />
-                        </Border.RenderTransform>
-                        <StackPanel>
+            <StackPanel x:Name="LoadingPanel"
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        Visibility="Collapsed">
                             <ui:SymbolIcon x:Name="LoadingSpinner"
                                            Symbol="ArrowClockwise24"
-                                           FontSize="32"
+                               FontSize="28"
                                            Foreground="{DynamicResource AccentFillColorDefaultBrush}"
                                            HorizontalAlignment="Center"
-                                           Margin="0,0,0,8">
+                               Margin="0,0,0,12">
                                 <ui:SymbolIcon.RenderTransform>
                                     <RotateTransform />
                                 </ui:SymbolIcon.RenderTransform>
@@ -388,45 +286,35 @@
                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                        HorizontalAlignment="Center" />
                         </StackPanel>
-                    </Border>
 
                     <!-- Error Section (initially hidden) -->
-                    <Border x:Name="ErrorPanel"
-                            Style="{StaticResource ErrorPanelStyle}"
-                            Visibility="Collapsed"
-                            RenderTransformOrigin="0.5,0.5">
-                        <Border.RenderTransform>
-                            <TranslateTransform />
-                        </Border.RenderTransform>
-                        <StackPanel>
+            <StackPanel x:Name="ErrorPanel"
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                        Visibility="Collapsed">
                             <ui:SymbolIcon Symbol="ErrorCircle24" 
-                                           FontSize="32" 
+                               FontSize="28" 
                                            Foreground="{DynamicResource SystemFillColorCriticalBrush}"
                                            HorizontalAlignment="Center"
-                                           Margin="0,0,0,8" />
+                               Margin="0,0,0,12" />
                             <TextBlock x:Name="ErrorText"
                                        Text="{i18n:StringLocalizer 'Error installing update'}" 
                                        FontSize="14" 
                                        FontWeight="SemiBold"
                                        Foreground="{DynamicResource SystemFillColorCriticalBrush}"
-                                       HorizontalAlignment="Center" />
-                        </StackPanel>
-                    </Border>
-
-                    <!-- Footer Info -->
-                    <StackPanel Margin="0,16,0,0">
-                        <TextBlock Text="{i18n:StringLocalizer 'eTools Ultimate is automatically updated via GitHub'}" 
-                                   FontSize="10"
-                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}"
                                    HorizontalAlignment="Center"
-                                   Margin="0,0,0,4" />
-                        <TextBlock Text="{i18n:StringLocalizer '© 2025 eTools Ultimate. All rights reserved.'}" 
-                                   FontSize="10"
-                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}"
-                                   HorizontalAlignment="Center" />
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           Margin="0,0,0,16" />
+                <ui:Button x:Name="RetryButton"
+                           Style="{StaticResource SecondaryButtonStyle}"
+                           Click="RetryButton_Click"
+                           HorizontalAlignment="Center">
+                    <ui:Button.Content>
+                        <TextBlock Text="{i18n:StringLocalizer 'Retry'}" />
+                    </ui:Button.Content>
+                </ui:Button>
                     </StackPanel>
-                </StackPanel>
-            </ui:Card>
-        </ScrollViewer>
+        </Grid>
     </Grid>
 </ui:FluentWindow>

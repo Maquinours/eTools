@@ -27,7 +27,7 @@
             Padding="0,0,18,0"
             HorizontalScrollBarVisibility="Disabled"
             VerticalScrollBarVisibility="Auto">
-            <StackPanel Margin="45,8,45,20">
+            <StackPanel Margin="60,8,60,20">
                 <!--  Info for main settings  -->
                 <ui:InfoBar Title="{i18n:StringLocalizer 'Settings'}" Message="{i18n:StringLocalizer 'Main Settings'}" />
 
@@ -684,7 +684,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,10,0"
                                 VerticalAlignment="Center"
-                                Text="64 Bit" />
+                                Text="{i18n:StringLocalizer '64 Bit'}" />
                             <CheckBox
                                 Grid.Column="1"
                                 Width="55"

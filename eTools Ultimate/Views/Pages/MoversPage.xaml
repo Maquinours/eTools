@@ -1107,27 +1107,27 @@
                     VerticalAlignment="Top"
                     Orientation="Horizontal"
                     ZIndex="1">
-                    <ui:Button ToolTip="Undo">
+                    <ui:Button ToolTip="{i18n:StringLocalizer 'Undo'}">
                         <ui:SymbolIcon Symbol="ArrowUndo24" />
                     </ui:Button>
-                    <ui:Button Margin="10,0,10,0" ToolTip="Redo">
+                    <ui:Button Margin="10,0,10,0" ToolTip="{i18n:StringLocalizer 'Redo'}">
                         <ui:SymbolIcon Symbol="ArrowRedo24" />
                     </ui:Button>
                     <ui:Button
                         x:Name="SaveButton"
                         Margin="0,0,10,0"
                         Click="SaveButton_Click"
-                        Content="Save" />
+                        Content="{i18n:StringLocalizer 'Save'}" />
                     <ui:Button
                         x:Name="ExpertButton"
                         Margin="0,0,10,0"
                         Appearance="Secondary"
-                        Content="Expert" />
+                        Content="{i18n:StringLocalizer 'Expert'}" />
                     <ui:DropDownButton
                         x:Name="FilterButton"
                         Margin="0,0,10,0"
                         Appearance="Secondary"
-                        Content="Filter">
+                        Content="{i18n:StringLocalizer 'Filter'}">
                         <ui:DropDownButton.Flyout>
                             <ContextMenu Background="{DynamicResource ApplicationBackgroundBrush}">
                                 <ScrollViewer
@@ -1145,37 +1145,37 @@
                                             <StackPanel>
                                                 <CheckBox
                                                     Margin="0,2"
-                                                    Content="Basic Information"
+                                                    Content="{i18n:StringLocalizer 'Basic Information'}"
                                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                     IsChecked="{Binding ShowBasicInformationSection, Mode=TwoWay}" />
                                                 <CheckBox
                                                     Margin="0,2"
-                                                    Content="Stats"
+                                                    Content="{i18n:StringLocalizer 'Stats'}"
                                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                     IsChecked="{Binding ShowStatsSection, Mode=TwoWay}" />
                                                 <CheckBox
                                                     Margin="0,2"
-                                                    Content="Combat / Battle"
+                                                    Content="{i18n:StringLocalizer 'Combat / Battle'}"
                                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                     IsChecked="{Binding ShowBattleSection, Mode=TwoWay}" />
                                                 <CheckBox
                                                     Margin="0,2"
-                                                    Content="Defensive Stats &amp; Resistances"
+                                                    Content="{i18n:StringLocalizer 'Defensive Stats &amp; Resistances'}"
                                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                     IsChecked="{Binding ShowDefensiveStatsSection, Mode=TwoWay}" />
                                                 <CheckBox
                                                     Margin="0,2"
-                                                    Content="Elementar &amp; Damage Types"
+                                                    Content="{i18n:StringLocalizer 'Elementar &amp; Damage Types'}"
                                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                     IsChecked="{Binding ShowElementalSection, Mode=TwoWay}" />
                                                 <CheckBox
                                                     Margin="0,2"
-                                                    Content="Sound"
+                                                    Content="{i18n:StringLocalizer 'Sound'}"
                                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                     IsChecked="{Binding ShowSoundsSection, Mode=TwoWay}" />
                                                 <CheckBox
                                                     Margin="0,2"
-                                                    Content="Model / Mobility / Movement"
+                                                    Content="{i18n:StringLocalizer 'Model / Mobility / Movement'}"
                                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                     IsChecked="{Binding ShowModelSection, Mode=TwoWay}" />
                                             </StackPanel>
@@ -1195,42 +1195,42 @@
                                                 <StackPanel Margin="20,5,5,5">
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="ID"
+                                                        Content="{i18n:StringLocalizer 'ID'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="ID Key"
+                                                        Content="{i18n:StringLocalizer 'ID Key'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Name"
+                                                        Content="{i18n:StringLocalizer 'Name'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Description"
+                                                        Content="{i18n:StringLocalizer 'Description'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Killable"
+                                                        Content="{i18n:StringLocalizer 'Killable'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Penya"
+                                                        Content="{i18n:StringLocalizer 'Penya'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Duration"
+                                                        Content="{i18n:StringLocalizer 'Duration'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="EXP"
+                                                        Content="{i18n:StringLocalizer 'EXP'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                 </StackPanel>
@@ -1245,32 +1245,32 @@
                                                 <StackPanel Margin="20,5,5,5">
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="STR"
+                                                        Content="{i18n:StringLocalizer 'STR'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="STA"
+                                                        Content="{i18n:StringLocalizer 'STA'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="DEX"
+                                                        Content="{i18n:StringLocalizer 'DEX'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="INT"
+                                                        Content="{i18n:StringLocalizer 'INT'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Hit Rate"
+                                                        Content="{i18n:StringLocalizer 'Hit Rate'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Evasion Rate"
+                                                        Content="{i18n:StringLocalizer 'Evasion Rate'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                 </StackPanel>
@@ -1285,57 +1285,57 @@
                                                 <StackPanel Margin="20,5,5,5">
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Level"
+                                                        Content="{i18n:StringLocalizer 'Level'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Health Points"
+                                                        Content="{i18n:StringLocalizer 'Health Points'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Mana Points"
+                                                        Content="{i18n:StringLocalizer 'Mana Points'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Artificial Intelligence (AI)"
+                                                        Content="{i18n:StringLocalizer 'Artificial Intelligence (AI)'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Belligerence"
+                                                        Content="{i18n:StringLocalizer 'Belligerence'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Attack min."
+                                                        Content="{i18n:StringLocalizer 'Attack min.'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Attack max."
+                                                        Content="{i18n:StringLocalizer 'Attack max.'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Attack Animation 1"
+                                                        Content="{i18n:StringLocalizer 'Attack Animation 1'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Attack Animation 2"
+                                                        Content="{i18n:StringLocalizer 'Attack Animation 2'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Attack Animation 3"
+                                                        Content="{i18n:StringLocalizer 'Attack Animation 3'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Attack Delay"
+                                                        Content="{i18n:StringLocalizer 'Attack Delay'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                 </StackPanel>
@@ -1350,37 +1350,37 @@
                                                 <StackPanel Margin="20,5,5,5">
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Armor"
+                                                        Content="{i18n:StringLocalizer 'Armor'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Magic Resistance"
+                                                        Content="{i18n:StringLocalizer 'Magic Resistance'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Resistance Electricity"
+                                                        Content="{i18n:StringLocalizer 'Resistance Electricity'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Resistance Fire"
+                                                        Content="{i18n:StringLocalizer 'Resistance Fire'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Resistance Wind"
+                                                        Content="{i18n:StringLocalizer 'Resistance Wind'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Resistance Water"
+                                                        Content="{i18n:StringLocalizer 'Resistance Water'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Resistance Earth"
+                                                        Content="{i18n:StringLocalizer 'Resistance Earth'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                 </StackPanel>
@@ -1395,17 +1395,17 @@
                                                 <StackPanel Margin="20,5,5,5">
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Element Type"
+                                                        Content="{i18n:StringLocalizer 'Element Type'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Element Attack"
+                                                        Content="{i18n:StringLocalizer 'Element Attack'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                     <CheckBox
                                                         Margin="0,2"
-                                                        Content="Correction Value"
+                                                        Content="{i18n:StringLocalizer 'Correction Value'}"
                                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                                                         IsChecked="True" />
                                                 </StackPanel>
@@ -1421,12 +1421,12 @@
                         Margin="0,0,10,0"
                         Background="#2F70AF"
                         Command="{Binding AddMoverCommand}"
-                        Content="Add" />
+                        Content="{i18n:StringLocalizer 'Add'}" />
                     <ui:Button
                         x:Name="DeleteButton"
                         Background="#FD292F"
                         Command="{Binding RemoveMoverCommand}"
-                        Content="Delete" />
+                        Content="{i18n:StringLocalizer 'Delete'}" />
                 </StackPanel>
 
                 <!--  Formulare  -->

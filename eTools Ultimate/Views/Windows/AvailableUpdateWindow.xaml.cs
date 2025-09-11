@@ -60,11 +60,9 @@ namespace eTools_Ultimate.Views.Windows
             try
             {
                 var version = Assembly.GetExecutingAssembly().GetName().Version;
-                CurrentVersionText.Text = version?.ToString() ?? "1.0.0";
             }
             catch (Exception ex)
             {
-                CurrentVersionText.Text = "Unknown";
                 ShowError($"Error loading current version: {ex.Message}");
             }
         }
@@ -75,34 +73,21 @@ namespace eTools_Ultimate.Views.Windows
             {
                 try
                 {
-                    // Use reflection to access properties
                     var versionProperty = _availableUpdate.GetType().GetProperty("Version");
                     var releaseNotesProperty = _availableUpdate.GetType().GetProperty("ReleaseNotes");
                     
                     var version = versionProperty?.GetValue(_availableUpdate)?.ToString() ?? "Unknown";
                     var releaseNotes = releaseNotesProperty?.GetValue(_availableUpdate)?.ToString();
-                    
-                    NewVersionText.Text = version;
-                    UpdateDescriptionText.Text = string.IsNullOrEmpty(releaseNotes) 
-                        ? GetLocalizedString("This update contains new features, improvements, and bug fixes.")
-                        : releaseNotes;
                 }
                 catch (Exception ex)
                 {
                     ShowError(string.Format(GetLocalizedString("Error displaying update information: {0}"), ex.Message));
                 }
             }
-            else
-            {
-                // Fallback if no update info is provided
-                NewVersionText.Text = "1.1.0";
-                UpdateDescriptionText.Text = GetLocalizedString("This update contains new features, improvements, and bug fixes.");
-            }
         }
 
         private void LaterButton_Click(object sender, RoutedEventArgs e)
         {
-            // Close the window without updating
             this.Close();
         }
 
@@ -122,26 +107,33 @@ namespace eTools_Ultimate.Views.Windows
 
             try
             {
-                // Show loading state
                 SetLoadingState(true);
+                UpdateProgress(0, "Preparing update...");
 
                 if (_availableUpdate != null)
                 {
-                    // Download and install update
+                    UpdateProgress(25, "Downloading update...");
                     await _updateManager.DownloadUpdatesAsync((dynamic)_availableUpdate);
+                    
+                    UpdateProgress(75, "Installing update...");
                     _updateManager.ApplyUpdatesAndRestart((dynamic)_availableUpdate);
                 }
                 else
                 {
-                    // Check for updates first if not provided
+                    UpdateProgress(10, "Checking for updates...");
                     var update = await _updateManager.CheckForUpdatesAsync();
+                    
                     if (update != null)
                     {
+                        UpdateProgress(25, "Downloading update...");
                         await _updateManager.DownloadUpdatesAsync((dynamic)update);
+                        
+                        UpdateProgress(75, "Installing update...");
                         _updateManager.ApplyUpdatesAndRestart((dynamic)update);
                     }
                     else
                     {
+                        SetLoadingState(false);
                         ShowError("No update available for installation.");
                     }
                 }
@@ -155,35 +147,86 @@ namespace eTools_Ultimate.Views.Windows
 
         private void SetLoadingState(bool isLoading)
         {
-            // Check if buttons exist before accessing them
-            if (InstallUpdateButton != null)
-                InstallUpdateButton.IsEnabled = !isLoading;
-            if (LaterButton != null)
-                LaterButton.IsEnabled = !isLoading;
-            
             if (isLoading)
             {
-                if (LoadingPanel != null)
-                    LoadingPanel.Visibility = Visibility.Visible;
-                // Start animation
-                var storyboard = (Storyboard)FindResource("LoadingAnimation");
+                ShowNormalState(false);
+                ShowErrorState(false);
+                ShowLoadingState(true);
+                ShowProgressState(true);
+            }
+            else
+            {
+                ShowLoadingState(false);
+                ShowProgressState(false);
+                ShowNormalState(true);
+            }
+        }
+
+        private void ShowNormalState(bool show)
+        {
+            if (NormalPanel != null)
+                NormalPanel.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
+            
+            if (InstallUpdateButton != null)
+                InstallUpdateButton.IsEnabled = show;
+            if (LaterButton != null)
+                LaterButton.IsEnabled = show;
+        }
+
+        private void ShowLoadingState(bool show)
+        {
+            if (LoadingPanel != null)
+                LoadingPanel.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
+            
+            if (show)
+            {
+                var storyboard = (Storyboard)FindResource("LoadingSpinnerAnimation");
                 storyboard?.Begin();
             }
             else
             {
-                if (LoadingPanel != null)
-                    LoadingPanel.Visibility = Visibility.Collapsed;
-                // Stop animation
-                var storyboard = (Storyboard)FindResource("LoadingAnimation");
+                var storyboard = (Storyboard)FindResource("LoadingSpinnerAnimation");
                 storyboard?.Stop();
             }
+        }
+
+        private void ShowProgressState(bool show)
+        {
+            if (ProgressPanel != null)
+                ProgressPanel.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void ShowErrorState(bool show)
+        {
+            if (ErrorPanel != null)
+                ErrorPanel.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void UpdateProgress(int percentage, string status = "")
+        {
+            if (UpdateProgressBar != null)
+                UpdateProgressBar.Value = percentage;
+            
+            if (!string.IsNullOrEmpty(status) && ProgressText != null)
+                ProgressText.Text = status;
         }
 
 
         private void ShowError(string errorMessage)
         {
-            ErrorText.Text = errorMessage;
-            ErrorPanel.Visibility = Visibility.Visible;
+            ShowNormalState(false);
+            ShowLoadingState(false);
+            ShowProgressState(false);
+            ShowErrorState(true);
+            
+            if (ErrorText != null)
+                ErrorText.Text = errorMessage;
+        }
+
+        private void RetryButton_Click(object sender, RoutedEventArgs e)
+        {
+            ShowErrorState(false);
+            ShowNormalState(true);
         }
 
         private string GetLocalizedString(string key)

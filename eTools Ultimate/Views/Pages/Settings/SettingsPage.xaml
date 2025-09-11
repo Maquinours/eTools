@@ -62,7 +62,7 @@
                                 FontTypography="Title"
                                 FontWeight="Bold"
                                 Foreground="#FFFFFF"
-                                Text="{i18n:StringLocalizer 'Settings'}" />
+                                Text="Einstellungen" />
                         </StackPanel>
                         <ui:TextBlock
                             Margin="12"
@@ -70,12 +70,12 @@
                             VerticalAlignment="Bottom"
                             FontTypography="Caption"
                             Foreground="#57FFFFFF"
-                            Text="{i18n:StringLocalizer 'Created by eTools Ultimate'}" />
+                            Text="Erstellt von eTools Ultimate" />
                     </Grid>
                 </Border>
             </Border>
 
-            <Grid Grid.Row="1" Margin="0,24,0,0">
+            <Grid Grid.Row="1" Margin="24,24,24,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -116,12 +116,12 @@
                             <ui:TextBlock
                                 Margin="0"
                                 FontTypography="BodyStrong"
-                                Text="{i18n:StringLocalizer 'Resource Path'}"
+                                Text="Ressourcen-Pfad"
                                 TextWrapping="WrapWithOverflow" />
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="{i18n:StringLocalizer 'Loading all Paths.'}"
+                                Text="Lade alle Pfade."
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>
@@ -158,12 +158,12 @@
                             <ui:TextBlock
                                 Margin="0"
                                 FontTypography="BodyStrong"
-                                Text="{i18n:StringLocalizer 'Personalization'}"
+                                Text="Personalisierung"
                                 TextWrapping="WrapWithOverflow" />
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="{i18n:StringLocalizer 'Change Design and other parts'}"
+                                Text="Design und andere Teile ändern"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>
@@ -202,12 +202,12 @@
                             <ui:TextBlock
                                 Margin="0"
                                 FontTypography="BodyStrong"
-                                Text="{i18n:StringLocalizer 'About'}"
+                                Text="Über"
                                 TextWrapping="WrapWithOverflow" />
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="{i18n:StringLocalizer 'Learn more about eTools Ultimate'}"
+                                Text="Mehr über eTools Ultimate erfahren"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>
