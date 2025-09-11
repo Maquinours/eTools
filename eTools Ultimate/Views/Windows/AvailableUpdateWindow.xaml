@@ -303,21 +303,6 @@
                         </ui:Button.Content>
                     </ui:Button>
                 </StackPanel>
-
-                <!--  Progress Bar (initially hidden)  -->
-                <StackPanel
-                    x:Name="ProgressPanel"
-                    HorizontalAlignment="Center"
-                    Visibility="Collapsed">
-                    <TextBlock
-                        x:Name="ProgressText"
-                        Margin="0,0,0,8"
-                        HorizontalAlignment="Center"
-                        FontSize="12"
-                        FontWeight="Medium"
-                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                        Text="{i18n:StringLocalizer 'Installing update...'}" />
-                </StackPanel>
             </StackPanel>
 
             <!--  Loading Section (initially hidden)  -->
