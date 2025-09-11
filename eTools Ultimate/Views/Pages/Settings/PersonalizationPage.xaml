@@ -37,8 +37,9 @@
                 </ui:CardControl.Header>
                 <ComboBox
                     MinWidth="200"
-                    SelectedValue="{Binding CurrentApplicationTheme, Mode=TwoWay}"
+                    SelectedValue="{Binding AppConfig.Theme, Mode=TwoWay}"
                     SelectedValuePath="Tag">
+                    <ComboBoxItem Content="{i18n:StringLocalizer 'System default'}" Tag="{x:Null}" />
                     <ComboBoxItem Content="{i18n:StringLocalizer 'Light'}" Tag="{x:Static appearance:ApplicationTheme.Light}" />
                     <ComboBoxItem Content="{i18n:StringLocalizer 'Dark'}" Tag="{x:Static appearance:ApplicationTheme.Dark}" />
                     <ComboBoxItem Content="{i18n:StringLocalizer 'High Contrast'}" Tag="{x:Static appearance:ApplicationTheme.HighContrast}" />
@@ -62,7 +63,7 @@
                 </ui:CardControl.Header>
                 <ComboBox
                     MinWidth="200"
-                    SelectedValue="{Binding AppConfigService.Language, Mode=TwoWay}"
+                    SelectedValue="{Binding AppConfig.Language, Mode=TwoWay}"
                     SelectedValuePath="Tag">
                     <ComboBoxItem Content="{Binding DefaultCultureOptionLabel}" Tag="Default" />
                     <ComboBoxItem Content="{i18n:StringLocalizer 'English'}" Tag="en-EN" />

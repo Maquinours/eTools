@@ -24,9 +24,6 @@ namespace eTools_Ultimate.ViewModels.Pages
         private readonly IContentDialogService _contentDialogService;
         private readonly AppConfig _appConfig;
 
-        [ObservableProperty]
-        private ApplicationTheme _currentApplicationTheme = ApplicationTheme.Unknown;
-
         public AppConfig AppConfig => _appConfig;
 
         public string DefaultCultureOptionLabel
@@ -91,27 +88,9 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         public Task OnNavigatedFromAsync() => Task.CompletedTask;
 
-        partial void OnCurrentApplicationThemeChanged(ApplicationTheme oldValue, ApplicationTheme newValue)
-        {
-            ApplicationThemeManager.Apply(newValue);
-        }
-
         private void InitializeViewModel()
         {
-            CurrentApplicationTheme = ApplicationThemeManager.GetAppTheme();
-
-            ApplicationThemeManager.Changed += OnThemeChanged;
-
             _isInitialized = true;
-        }
-
-        private void OnThemeChanged(ApplicationTheme currentApplicationTheme, Color systemAccent)
-        {
-            // Update the theme if it has been changed elsewhere than in the settings.
-            if (CurrentApplicationTheme != currentApplicationTheme)
-            {
-                CurrentApplicationTheme = currentApplicationTheme;
-            }
         }
     }
 }
