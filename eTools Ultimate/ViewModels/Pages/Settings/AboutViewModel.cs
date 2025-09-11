@@ -1,6 +1,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using eTools_Ultimate.Views.Windows;
+using Velopack;
+using Velopack.Sources;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
@@ -42,12 +44,24 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             try
             {
+                var mgr = new UpdateManager(new GithubSource(repoUrl: "https://github.com/Maquinours/eTools", accessToken: null, prerelease: false));
+
+                //if (!mgr.IsInstalled)
+                //    return; // app is not installed (probably launched via source code)
+
+                // check for new version
+                //var newVersion = await mgr.CheckForUpdatesAsync();
+
+                //if (newVersion == null) // TODO: add snackbar to tell there is not new version
+                //    return; // no update available
+
                 // Create and show the AvailableUpdateWindow
-                var updateWindow = new Views.Windows.AvailableUpdateWindow();
+                var updateWindow = new AvailableUpdateWindow(null);
                 updateWindow.ShowDialog();
             }
             catch (Exception ex)
             {
+                // TODO: use snackbar instead
                 // Show error message if something goes wrong
                 var messageBox = new Wpf.Ui.Controls.MessageBox
                 {
