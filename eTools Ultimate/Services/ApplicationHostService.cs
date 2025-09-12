@@ -48,7 +48,7 @@ namespace eTools_Ultimate.Services
             if (newVersion == null)
                 return; // no update available
 
-            if (new AvailableUpdateWindow().ShowDialog() == true)
+            if (new AvailableUpdateWindow(newVersion).ShowDialog() == true)
             {
                 // the user agrees to download the latest version
 

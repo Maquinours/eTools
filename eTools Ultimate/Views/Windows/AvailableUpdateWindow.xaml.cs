@@ -18,6 +18,7 @@ using Velopack.Sources;
 using Wpf.Ui.Controls;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.DependencyInjection;
+using eTools_Ultimate.ViewModels.Windows;
 
 namespace eTools_Ultimate.Views.Windows
 {
@@ -26,213 +27,16 @@ namespace eTools_Ultimate.Views.Windows
     /// </summary>
     public partial class AvailableUpdateWindow : FluentWindow
     {
-        private UpdateManager? _updateManager;
-        private object? _availableUpdate;
-        private readonly IStringLocalizer _stringLocalizer;
 
-        public AvailableUpdateWindow(object? availableUpdate = null)
+        public AvailableUpdateWindow(UpdateInfo? update)
         {
             InitializeComponent();
-            _stringLocalizer = App.Services.GetRequiredService<IStringLocalizer>();
-            _availableUpdate = availableUpdate;
-            InitializeUpdateManager();
-            LoadCurrentVersion();
-            ShowUpdateInformation();
-        }
-
-        private void InitializeUpdateManager()
-        {
-            try
-            {
-                _updateManager = new UpdateManager(new GithubSource(
-                    repoUrl: "https://github.com/Maquinours/eTools", 
-                    accessToken: null, 
-                    prerelease: false));
-            }
-            catch (Exception ex)
-            {
-                ShowError($"Error initializing update manager: {ex.Message}");
-            }
-        }
-
-        private void LoadCurrentVersion()
-        {
-            try
-            {
-                var version = Assembly.GetExecutingAssembly().GetName().Version;
-            }
-            catch (Exception ex)
-            {
-                ShowError($"Error loading current version: {ex.Message}");
-            }
-        }
-
-        private void ShowUpdateInformation()
-        {
-            if (_availableUpdate != null)
-            {
-                try
-                {
-                    var versionProperty = _availableUpdate.GetType().GetProperty("Version");
-                    var releaseNotesProperty = _availableUpdate.GetType().GetProperty("ReleaseNotes");
-                    
-                    var version = versionProperty?.GetValue(_availableUpdate)?.ToString() ?? "Unknown";
-                    var releaseNotes = releaseNotesProperty?.GetValue(_availableUpdate)?.ToString();
-                }
-                catch (Exception ex)
-                {
-                    ShowError(string.Format(GetLocalizedString("Error displaying update information: {0}"), ex.Message));
-                }
-            }
+            DataContext = new AvailableUpdateWindowViewModel(update);
         }
 
         private void LaterButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-
-        private async void InstallUpdateButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (_updateManager == null)
-            {
-                ShowError("Update manager is not available.");
-                return;
-            }
-
-            if (!_updateManager.IsInstalled)
-            {
-                ShowError("Application is not installed (probably started from source code).");
-                return;
-            }
-
-            try
-            {
-                SetLoadingState(true);
-                UpdateProgress(0, "Preparing update...");
-
-                if (_availableUpdate != null)
-                {
-                    UpdateProgress(25, "Downloading update...");
-                    await _updateManager.DownloadUpdatesAsync((dynamic)_availableUpdate);
-                    
-                    UpdateProgress(75, "Installing update...");
-                    _updateManager.ApplyUpdatesAndRestart((dynamic)_availableUpdate);
-                }
-                else
-                {
-                    UpdateProgress(10, "Checking for updates...");
-                    var update = await _updateManager.CheckForUpdatesAsync();
-                    
-                    if (update != null)
-                    {
-                        UpdateProgress(25, "Downloading update...");
-                        await _updateManager.DownloadUpdatesAsync((dynamic)update);
-                        
-                        UpdateProgress(75, "Installing update...");
-                        _updateManager.ApplyUpdatesAndRestart((dynamic)update);
-                    }
-                    else
-                    {
-                        SetLoadingState(false);
-                        ShowError("No update available for installation.");
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                SetLoadingState(false);
-                ShowError($"Error installing update: {ex.Message}");
-            }
-        }
-
-        private void SetLoadingState(bool isLoading)
-        {
-            if (isLoading)
-            {
-                ShowNormalState(false);
-                ShowErrorState(false);
-                ShowLoadingState(true);
-                ShowProgressState(true);
-            }
-            else
-            {
-                ShowLoadingState(false);
-                ShowProgressState(false);
-                ShowNormalState(true);
-            }
-        }
-
-        private void ShowNormalState(bool show)
-        {
-            if (NormalPanel != null)
-                NormalPanel.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
-            
-            if (InstallUpdateButton != null)
-                InstallUpdateButton.IsEnabled = show;
-            if (LaterButton != null)
-                LaterButton.IsEnabled = show;
-        }
-
-        private void ShowLoadingState(bool show)
-        {
-            if (LoadingPanel != null)
-                LoadingPanel.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
-            
-            if (show)
-            {
-                var storyboard = (Storyboard)FindResource("LoadingSpinnerAnimation");
-                storyboard?.Begin();
-            }
-            else
-            {
-                var storyboard = (Storyboard)FindResource("LoadingSpinnerAnimation");
-                storyboard?.Stop();
-            }
-        }
-
-        private void ShowProgressState(bool show)
-        {
-            if (ProgressPanel != null)
-                ProgressPanel.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        private void ShowErrorState(bool show)
-        {
-            if (ErrorPanel != null)
-                ErrorPanel.Visibility = show ? Visibility.Visible : Visibility.Collapsed;
-        }
-
-        private void UpdateProgress(int percentage, string status = "")
-        {
-            if (UpdateProgressBar != null)
-                UpdateProgressBar.Value = percentage;
-            
-            if (!string.IsNullOrEmpty(status) && ProgressText != null)
-                ProgressText.Text = status;
-        }
-
-
-        private void ShowError(string errorMessage)
-        {
-            ShowNormalState(false);
-            ShowLoadingState(false);
-            ShowProgressState(false);
-            ShowErrorState(true);
-            
-            if (ErrorText != null)
-                ErrorText.Text = errorMessage;
-        }
-
-        private void RetryButton_Click(object sender, RoutedEventArgs e)
-        {
-            ShowErrorState(false);
-            ShowNormalState(true);
-        }
-
-        private string GetLocalizedString(string key)
-        {
-            return _stringLocalizer[key];
-        }
-
     }
 }

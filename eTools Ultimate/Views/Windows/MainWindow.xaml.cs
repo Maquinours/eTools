@@ -1,6 +1,8 @@
-﻿using eTools_Ultimate.Services;
+﻿using eTools_Ultimate.Models;
+using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Windows;
 using eTools_Ultimate.Views.Pages;
+using Microsoft.Extensions.DependencyInjection;
 using Wpf.Ui;
 using Wpf.Ui.Abstractions;
 using Wpf.Ui.Appearance;
@@ -17,13 +19,15 @@ namespace eTools_Ultimate.Views.Windows
             INavigationViewPageProvider navigationViewPageProvider,
             INavigationService navigationService,
             ISnackbarService snackbarService,
-            IContentDialogService contentDialogService
+            IContentDialogService contentDialogService,
+            AppConfig appConfig
         )
         {
             ViewModel = viewModel;
             DataContext = this;
 
-            SystemThemeWatcher.Watch(this);
+            SetTheme();
+            appConfig.PropertyChanged += AppConfig_PropertyChanged;
 
             this.Visibility = Visibility.Hidden;
             InitializeComponent();
@@ -74,6 +78,28 @@ namespace eTools_Ultimate.Views.Windows
                 BreadcrumbBar.Visibility = Visibility.Visible;
             else
                 BreadcrumbBar.Visibility = Visibility.Collapsed;
+        }
+
+        private void SetTheme()
+        {
+            AppConfig appConfig = App.Services.GetRequiredService<AppConfig>();
+
+            if(IsLoaded)
+                SystemThemeWatcher.UnWatch(this);
+
+            if (appConfig.Theme.HasValue)
+                ApplicationThemeManager.Apply(appConfig.Theme.Value);
+            else
+            {
+                ApplicationThemeManager.ApplySystemTheme();
+                SystemThemeWatcher.Watch(this);
+            }
+        }
+
+        private void AppConfig_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == nameof(AppConfig.Theme))
+                SetTheme();
         }
     }
 }

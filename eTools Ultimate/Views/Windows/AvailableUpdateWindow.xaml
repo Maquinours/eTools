@@ -1,26 +1,32 @@
-<ui:FluentWindow x:Class="eTools_Ultimate.Views.Windows.AvailableUpdateWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-                 xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
-        xmlns:local="clr-namespace:eTools_Ultimate.Views.Windows"
-        mc:Ignorable="d"
-                 Title="{i18n:StringLocalizer 'eTools Ultimate - Update Available'}"
-                 Height="280" Width="400"
-                 WindowStartupLocation="CenterScreen"
-                 WindowState="Normal"
-                 ResizeMode="CanResize"
-                 WindowCornerPreference="Round"
-                 WindowBackdropType="Mica"
-                 ExtendsContentIntoTitleBar="True"
-                 ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-                 ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                 Foreground="{DynamicResource TextFillColorPrimaryBrush}">
+<ui:FluentWindow
+    x:Class="eTools_Ultimate.Views.Windows.AvailableUpdateWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
+    xmlns:local="clr-namespace:eTools_Ultimate.Views.Windows"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:viewmodels="clr-namespace:eTools_Ultimate.ViewModels.Windows"
+    Title="{i18n:StringLocalizer 'eTools Ultimate - Update Available'}"
+    Width="400"
+    Height="280"
+    d:DataContext="{d:DesignInstance viewmodels:AvailableUpdateWindowViewModel,
+                                     IsDesignTimeCreatable=False}"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    ExtendsContentIntoTitleBar="True"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    ResizeMode="CanResize"
+    WindowBackdropType="Mica"
+    WindowCornerPreference="Round"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Normal"
+    mc:Ignorable="d">
 
     <Window.Resources>
-        <!-- Modern Styles with Animations -->
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <!--  Modern Styles with Animations  -->
         <Style x:Key="PrimaryButtonStyle" TargetType="ui:Button">
             <Setter Property="Background" Value="#0078D4" />
             <Setter Property="Foreground" Value="White" />
@@ -40,19 +46,22 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ui:Button">
-                        <Border Background="{TemplateBinding Background}"
-                                CornerRadius="{TemplateBinding CornerRadius}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
                             <Border.Effect>
-                                <DropShadowEffect Color="#0078D4" 
-                                                  BlurRadius="8" 
-                                                  ShadowDepth="2" 
-                                                  Opacity="0.3" />
+                                <DropShadowEffect
+                                    BlurRadius="8"
+                                    Opacity="0.3"
+                                    ShadowDepth="2"
+                                    Color="#0078D4" />
                             </Border.Effect>
-                            <ContentPresenter HorizontalAlignment="Center" 
-                                            VerticalAlignment="Center"
-                                            Margin="{TemplateBinding Padding}" />
+                            <ContentPresenter
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -60,20 +69,28 @@
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                           To="1.05" Duration="0:0:0.2" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                           To="1.05" Duration="0:0:0.2" />
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                To="1.05"
+                                                Duration="0:0:0.2" />
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                To="1.05"
+                                                Duration="0:0:0.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.EnterActions>
                                 <Trigger.ExitActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                           To="1.0" Duration="0:0:0.2" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                           To="1.0" Duration="0:0:0.2" />
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                To="1.0"
+                                                Duration="0:0:0.2" />
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                To="1.0"
+                                                Duration="0:0:0.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.ExitActions>
@@ -83,10 +100,14 @@
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                                                           To="0.95" Duration="0:0:0.1" />
-                                            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                                                           To="0.95" Duration="0:0:0.1" />
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                To="0.95"
+                                                Duration="0:0:0.1" />
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                To="0.95"
+                                                Duration="0:0:0.1" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.EnterActions>
@@ -117,13 +138,15 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ui:Button">
-                        <Border Background="{TemplateBinding Background}"
-                                CornerRadius="{TemplateBinding CornerRadius}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter HorizontalAlignment="Center" 
-                                            VerticalAlignment="Center"
-                                            Margin="{TemplateBinding Padding}" />
+                        <Border
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                            <ContentPresenter
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -131,20 +154,28 @@
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                           To="1.05" Duration="0:0:0.2" />
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                           To="1.05" Duration="0:0:0.2" />
-        </Storyboard>
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                To="1.05"
+                                                Duration="0:0:0.2" />
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                To="1.05"
+                                                Duration="0:0:0.2" />
+                                        </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.EnterActions>
                                 <Trigger.ExitActions>
                                     <BeginStoryboard>
                                         <Storyboard>
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
-                           To="1.0" Duration="0:0:0.2" />
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
-                           To="1.0" Duration="0:0:0.2" />
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleX)"
+                                                To="1.0"
+                                                Duration="0:0:0.2" />
+                                            <DoubleAnimation
+                                                Storyboard.TargetProperty="(UIElement.RenderTransform).(ScaleTransform.ScaleY)"
+                                                To="1.0"
+                                                Duration="0:0:0.2" />
                                         </Storyboard>
                                     </BeginStoryboard>
                                 </Trigger.ExitActions>
@@ -155,25 +186,27 @@
             </Setter>
         </Style>
 
-        <!-- Fade In Animation -->
+        <!--  Fade In Animation  -->
         <Storyboard x:Key="FadeInAnimation">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                           From="0" To="1" Duration="0:0:0.5" />
+            <DoubleAnimation
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.5" />
         </Storyboard>
 
-        <!-- Slide Up Animation -->
+        <!--  Slide Up Animation  -->
         <Storyboard x:Key="SlideUpAnimation">
-            <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
-                           From="30" To="0" Duration="0:0:0.4" />
-            <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                           From="0" To="1" Duration="0:0:0.4" />
-        </Storyboard>
-
-        <!-- Loading Spinner Animation -->
-        <Storyboard x:Key="LoadingSpinnerAnimation" RepeatBehavior="Forever">
-            <DoubleAnimation Storyboard.TargetName="LoadingSpinner"
-                           Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
-                           From="0" To="360" Duration="0:0:1" />
+            <DoubleAnimation
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                From="30"
+                To="0"
+                Duration="0:0:0.4" />
+            <DoubleAnimation
+                Storyboard.TargetProperty="Opacity"
+                From="0"
+                To="1"
+                Duration="0:0:0.4" />
         </Storyboard>
     </Window.Resources>
 
@@ -183,138 +216,183 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Title Bar -->
-        <ui:TitleBar Grid.Row="0" 
-                     x:Name="TitleBar"
-                     Title="{i18n:StringLocalizer 'eTools Ultimate - Update Available'}"
-                     Icon="Assets/Icons/eTools.png" />
+        <!--  Title Bar  -->
+        <ui:TitleBar
+            x:Name="TitleBar"
+            Title="{i18n:StringLocalizer 'eTools Ultimate - Update Available'}"
+            Grid.Row="0"
+            Icon="Assets/Icons/eTools.png" />
 
-        <!-- Main Content -->
+        <!--  Main Content  -->
         <Grid Grid.Row="1" Margin="16">
-            <!-- Normal Update Available State -->
-            <StackPanel x:Name="NormalPanel" HorizontalAlignment="Center" VerticalAlignment="Center">
-                        <!-- App Icon -->
-                        <Image Source="/Assets/Icons/eTools.png"
-                       Width="40"
-                       Height="40"
-                               HorizontalAlignment="Center"
-                       Margin="0,0,0,12" />
+            <!--  Normal Update Available State  -->
+            <StackPanel
+                x:Name="NormalPanel"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Visibility, ElementName=ErrorPanel}" Value="Collapsed" />
+                                    <Condition Binding="{Binding Visibility, ElementName=LoadingPanel}" Value="Collapsed" />
+                                </MultiDataTrigger.Conditions>
+                                <Setter Property="Visibility" Value="Visible" />
+                            </MultiDataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <!--  App Icon  -->
+                <Image
+                    Width="40"
+                    Height="40"
+                    Margin="0,0,0,12"
+                    HorizontalAlignment="Center"
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                    Source="/Assets/Icons/eTools.png" />
 
-                        <!-- Title -->
-                <TextBlock Text="{i18n:StringLocalizer 'Update Available'}" 
-                           FontSize="18" 
-                           FontWeight="Bold"
-                           Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,4" />
+                <!--  Title  -->
+                <TextBlock
+                    Margin="0,0,0,4"
+                    HorizontalAlignment="Center"
+                    FontSize="18"
+                    FontWeight="Bold"
+                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                    Text="{i18n:StringLocalizer 'Update Available'}" />
 
-                        <!-- Subtitle -->
-                        <TextBlock Text="{i18n:StringLocalizer 'A new version of eTools Ultimate is ready to install'}" 
-                           FontSize="11" 
-                           FontWeight="Normal"
-                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                       HorizontalAlignment="Center"
-                           TextWrapping="Wrap"
-                           TextAlignment="Center"
-                           Margin="0,0,0,16" />
-                
-                <!-- Buttons -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,12">
-                            <ui:Button x:Name="InstallUpdateButton"
-                               Style="{StaticResource PrimaryButtonStyle}"
-                                       Click="InstallUpdateButton_Click"
-                               Margin="0,0,8,0">
-                                <ui:Button.Content>
-                                    <StackPanel Orientation="Horizontal">
-                                        <ui:SymbolIcon Symbol="ArrowDownload24" 
-                                               FontSize="12" 
-                                               Margin="0,0,4,0"
-                                               Foreground="White" />
-                                <TextBlock Text="{i18n:StringLocalizer 'Install Now'}" 
-                                           Foreground="White" />
-                                    </StackPanel>
-                                </ui:Button.Content>
-                            </ui:Button>
-                            
-                            <ui:Button x:Name="LaterButton"
-                               Style="{StaticResource SecondaryButtonStyle}"
-                               Click="LaterButton_Click">
-                                <ui:Button.Content>
+                <!--  Subtitle  -->
+                <TextBlock
+                    Margin="0,0,0,16"
+                    HorizontalAlignment="Center"
+                    FontSize="11"
+                    FontWeight="Normal"
+                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                    Text="{i18n:StringLocalizer 'A new version of eTools Ultimate is ready to install'}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+
+                <!--  Buttons  -->
+                <StackPanel
+                    Margin="0,0,0,12"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <ui:Button
+                        x:Name="InstallUpdateButton"
+                        Margin="0,0,8,0"
+                        Command="{Binding UpdateApplicationCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}">
+                        <ui:Button.Content>
+                            <StackPanel Orientation="Horizontal">
+                                <ui:SymbolIcon
+                                    Margin="0,0,4,0"
+                                    FontSize="12"
+                                    Foreground="White"
+                                    Symbol="ArrowDownload24" />
+                                <TextBlock Foreground="White" Text="{i18n:StringLocalizer 'Install Now'}" />
+                            </StackPanel>
+                        </ui:Button.Content>
+                    </ui:Button>
+
+                    <ui:Button
+                        x:Name="LaterButton"
+                        Click="LaterButton_Click"
+                        Style="{StaticResource SecondaryButtonStyle}">
+                        <ui:Button.Content>
                             <TextBlock Text="{i18n:StringLocalizer 'Later'}" />
-                                </ui:Button.Content>
-                            </ui:Button>
-                        </StackPanel>
-
-                <!-- Progress Bar (initially hidden) -->
-                <StackPanel x:Name="ProgressPanel" Visibility="Collapsed" HorizontalAlignment="Center">
-                    <TextBlock x:Name="ProgressText"
-                               Text="{i18n:StringLocalizer 'Installing update...'}" 
-                               FontSize="12" 
-                               FontWeight="Medium"
-                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                               HorizontalAlignment="Center"
-                               Margin="0,0,0,8" />
-                    <ProgressBar x:Name="UpdateProgressBar"
-                                 Width="200"
-                                 Height="6"
-                                 Value="0"
-                                 Maximum="100"
-                                 Foreground="{DynamicResource AccentFillColorDefaultBrush}"
-                                 Background="{DynamicResource ControlFillColorSecondaryBrush}" />
+                        </ui:Button.Content>
+                    </ui:Button>
                 </StackPanel>
             </StackPanel>
 
-                    <!-- Loading Section (initially hidden) -->
-            <StackPanel x:Name="LoadingPanel"
-                        HorizontalAlignment="Center" 
-                        VerticalAlignment="Center"
-                        Visibility="Collapsed">
-                            <ui:SymbolIcon x:Name="LoadingSpinner"
-                                           Symbol="ArrowClockwise24"
-                               FontSize="28"
-                                           Foreground="{DynamicResource AccentFillColorDefaultBrush}"
-                                           HorizontalAlignment="Center"
-                               Margin="0,0,0,12">
-                                <ui:SymbolIcon.RenderTransform>
-                                    <RotateTransform />
-                                </ui:SymbolIcon.RenderTransform>
-                            </ui:SymbolIcon>
-                            <TextBlock x:Name="LoadingText"
-                                       Text="{i18n:StringLocalizer 'Installing update...'}" 
-                                       FontSize="14" 
-                                       FontWeight="SemiBold"
-                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                       HorizontalAlignment="Center" />
-                        </StackPanel>
+            <!--  Loading Section (initially hidden)  -->
+            <StackPanel
+                x:Name="LoadingPanel"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="{Binding IsLoading, Mode=OneWay, Converter={StaticResource BoolToVis}}">
+                <ui:SymbolIcon
+                    x:Name="LoadingSpinner"
+                    Margin="0,0,0,12"
+                    HorizontalAlignment="Center"
+                    FontSize="28"
+                    Foreground="{DynamicResource AccentFillColorDefaultBrush}"
+                    RenderTransformOrigin="0.5,0.5"
+                    Symbol="ArrowClockwise24">
+                    <ui:SymbolIcon.Style>
+                        <Style TargetType="ui:SymbolIcon">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsLoading}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard>
+                                            <Storyboard RepeatBehavior="Forever">
+                                                <DoubleAnimation
+                                                    Storyboard.TargetProperty="(UIElement.RenderTransform).(RotateTransform.Angle)"
+                                                    From="0"
+                                                    To="360"
+                                                    Duration="0:0:1" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ui:SymbolIcon.Style>
+                    <ui:SymbolIcon.RenderTransform>
+                        <RotateTransform Angle="0" />
+                    </ui:SymbolIcon.RenderTransform>
+                </ui:SymbolIcon>
+                <TextBlock
+                    x:Name="LoadingText"
+                    HorizontalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                    Text="{i18n:StringLocalizer 'Installing update...'}" />
+                <ProgressBar
+                    x:Name="UpdateProgressBar"
+                    Width="200"
+                    Height="6"
+                    Margin="0,10,0,0"
+                    Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                    Foreground="{DynamicResource AccentFillColorDefaultBrush}"
+                    Maximum="100"
+                    Value="{Binding LoadingProgress, Mode=OneWay}" />
+            </StackPanel>
 
-                    <!-- Error Section (initially hidden) -->
-            <StackPanel x:Name="ErrorPanel"
-                        HorizontalAlignment="Center" 
-                        VerticalAlignment="Center"
-                        Visibility="Collapsed">
-                            <ui:SymbolIcon Symbol="ErrorCircle24" 
-                               FontSize="28" 
-                                           Foreground="{DynamicResource SystemFillColorCriticalBrush}"
-                                           HorizontalAlignment="Center"
-                               Margin="0,0,0,12" />
-                            <TextBlock x:Name="ErrorText"
-                                       Text="{i18n:StringLocalizer 'Error installing update'}" 
-                                       FontSize="14" 
-                                       FontWeight="SemiBold"
-                                       Foreground="{DynamicResource SystemFillColorCriticalBrush}"
-                                   HorizontalAlignment="Center"
-                           TextWrapping="Wrap"
-                           TextAlignment="Center"
-                           Margin="0,0,0,16" />
-                <ui:Button x:Name="RetryButton"
-                           Style="{StaticResource SecondaryButtonStyle}"
-                           Click="RetryButton_Click"
-                           HorizontalAlignment="Center">
+            <!--  Error Section (initially hidden)  -->
+            <StackPanel
+                x:Name="ErrorPanel"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="{Binding ShowError, Mode=OneWay, Converter={StaticResource BoolToVis}}">
+                <ui:SymbolIcon
+                    Margin="0,0,0,12"
+                    HorizontalAlignment="Center"
+                    FontSize="28"
+                    Foreground="{DynamicResource SystemFillColorCriticalBrush}"
+                    Symbol="ErrorCircle24" />
+                <TextBlock
+                    x:Name="ErrorText"
+                    Margin="0,0,0,16"
+                    HorizontalAlignment="Center"
+                    FontSize="14"
+                    FontWeight="SemiBold"
+                    Foreground="{DynamicResource SystemFillColorCriticalBrush}"
+                    Text="{Binding ErrorMessage, Mode=OneWay}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+                <ui:Button
+                    x:Name="RetryButton"
+                    HorizontalAlignment="Center"
+                    Command="{Binding UpdateApplicationCommand}"
+                    Style="{StaticResource SecondaryButtonStyle}">
                     <ui:Button.Content>
                         <TextBlock Text="{i18n:StringLocalizer 'Retry'}" />
                     </ui:Button.Content>
                 </ui:Button>
-                    </StackPanel>
+            </StackPanel>
         </Grid>
     </Grid>
 </ui:FluentWindow>
