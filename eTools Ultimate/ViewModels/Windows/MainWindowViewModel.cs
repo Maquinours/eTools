@@ -8,31 +8,18 @@ using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Resources;
 using System.Windows;
 using System.Resources;
+using Microsoft.Extensions.Localization;
 
 namespace eTools_Ultimate.ViewModels.Windows
 {
-    public partial class MainWindowViewModel : ObservableObject
+    public partial class MainWindowViewModel(IStringLocalizer localizer) : ObservableObject
     {
         private readonly string _applicationTitle = "eTools Ultimate";
-
-        private static string GetLocalizedString(string key)
-        {
-            try
-            {
-                var culture = System.Globalization.CultureInfo.CurrentUICulture;
-                var resourceManager = new System.Resources.ResourceManager("eTools_Ultimate.Resources.Translations", typeof(Translations).Assembly);
-                return resourceManager.GetString(key, culture) ?? key;
-            }
-            catch
-            {
-                return key;
-            }
-        }
 
         private readonly object[] _menuItems = [
             new NavigationViewItem()
                 {
-                    Content = GetLocalizedString("Dashboard"),
+                    Content = localizer["Dashboard"],
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/eTools.png", 25, 25),
                     TargetPageType = typeof(DashboardPage),
                     //MenuItemsSource = new object[] // TODO: Add back changelog but not like this (contentdialog)
@@ -54,7 +41,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 //},
                 new NavigationViewItem()
                 {
-                    Content = GetLocalizedString("Movers"),
+                    Content = localizer["Movers"],
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Movers.png", 25, 25),
                     TargetPageType = typeof(MoversPage)
                 },
@@ -66,7 +53,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 //},
                 new NavigationViewItem()
                 {
-                    Content = GetLocalizedString("Motions"),
+                    Content = localizer["Motions"],
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Motions.png", 25, 25),
                     TargetPageType = typeof(MotionsPage)
                 },
@@ -90,7 +77,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 //},
                 new NavigationViewItem()
                 {
-                    Content = GetLocalizedString("Giftboxes"),
+                    Content = localizer["Giftboxes"],
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Giftboxes.png", 25, 25),
                     TargetPageType = typeof(GiftboxesPage)
                 },
@@ -102,7 +89,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 //},
                 new NavigationViewItem()
                 {
-                    Content = GetLocalizedString("Accessories"),
+                    Content = localizer["Accessories"],
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Accessories.png", 25, 25),
                     TargetPageType = typeof(AccessoriesPage)
                 },
@@ -120,7 +107,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 //},
                 new NavigationViewItem()
                 {
-                    Content = GetLocalizedString("TextClient"),
+                    Content = localizer["TextClient"],
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Texts.png", 25, 25),
                     TargetPageType = typeof(TextsPage)
                 },
@@ -183,14 +170,14 @@ namespace eTools_Ultimate.ViewModels.Windows
         private readonly object[] _footerMenuItems = [
             new NavigationViewItem
                 {
-                    Content = GetLocalizedString("Settings"),
+                    Content = localizer["Settings"],
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Settings.png", 25, 25),
                     TargetPageType = typeof(SettingsPage),
                     MenuItemsSource = new object[]
                     {
-                        new NavigationViewItem(GetLocalizedString("Resource Path"), typeof(ResourcePathPage)),
-                        new NavigationViewItem(GetLocalizedString("Personalization"), typeof(PersonalizationPage)),
-                        new NavigationViewItem(GetLocalizedString("About"), typeof(AboutPage))
+                        new NavigationViewItem(localizer["Resource Path"], typeof(ResourcePathPage)),
+                        new NavigationViewItem(localizer["Personalization"], typeof(PersonalizationPage)),
+                        new NavigationViewItem(localizer["About"], typeof(AboutPage))
                     }
                 }
             ];
