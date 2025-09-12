@@ -121,7 +121,7 @@
     <value>Tableau de bord</value>
   </data>
   <data name="Movers" xml:space="preserve">
-    <value>Mouveurs</value>
+    <value>Movers</value>
   </data>
   <data name="Giftboxes" xml:space="preserve">
     <value>Boîtes-cadeaux</value>
@@ -130,7 +130,7 @@
     <value>Accessoires</value>
   </data>
   <data name="Motions" xml:space="preserve">
-    <value>Mouvements</value>
+    <value>Animations</value>
   </data>
   <data name="TextClient" xml:space="preserve">
     <value>Client de texte</value>
@@ -227,6 +227,21 @@
     <value>Kiyo</value>
     <comment>Developer name</comment>
   </data>
+  <data name="System default" xml:space="preserve">
+    <value>Valeur par défaut du système</value>
+  </data>
+  <data name="Application language changed" xml:space="preserve">
+    <value>Langue de l’application modifiée</value>
+  </data>
+  <data name="The application needs to be restarted for the language change to take effect." xml:space="preserve">
+    <value>L’application doit être redémarrée pour que le changement de langue prenne effet.</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Redémarrer</value>
+  </data>
+  <data name="Restart later" xml:space="preserve">
+    <value>Redémarrer plus tard</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Bienvenue</value>
     <comment>Welcome text on dashboard</comment>
@@ -252,7 +267,7 @@
     <comment>Items navigation card description</comment>
   </data>
   <data name="Navigate to the movers page." xml:space="preserve">
-    <value>Naviguer vers la page des mobiles.</value>
+    <value>Naviguer vers la page des movers.</value>
     <comment>Movers navigation card description</comment>
   </data>
   <data name="Skills" xml:space="preserve">
@@ -451,7 +466,7 @@
     <comment>Job navigation card description</comment>
   </data>
   <data name="Navigate to the motions page." xml:space="preserve">
-    <value>Naviguer vers la page des mouvements.</value>
+    <value>Naviguer vers la page des animations.</value>
     <comment>Motions navigation card description</comment>
   </data>
   <data name="Navigate to the lord editor." xml:space="preserve">
@@ -1457,7 +1472,7 @@
     <comment>Item folder field label</comment>
   </data>
   <data name="Mover" xml:space="preserve">
-    <value>Mobile</value>
+    <value>Mover</value>
     <comment>Mover section header</comment>
   </data>
   <data name="PropMover file" xml:space="preserve">
@@ -1473,11 +1488,11 @@
     <comment>PropMoverEx file field label</comment>
   </data>
   <data name="Mover types configuration" xml:space="preserve">
-    <value>Configuration des types de mobiles</value>
+    <value>Configuration des types de mover</value>
     <comment>Mover types configuration section header</comment>
   </data>
   <data name="Mover types" xml:space="preserve">
-    <value>Types de mobiles</value>
+    <value>Types de mover</value>
     <comment>Mover types list header</comment>
   </data>
   <data name="Assigned AI" xml:space="preserve">
@@ -1640,10 +1655,10 @@
     <value>Son joué quand le mover est cliqué</value>
   </data>
   <data name="Key identifier for the motion" xml:space="preserve">
-    <value>Identifiant de clé pour le mouvement</value>
+    <value>Identifiant pour l'animation</value>
   </data>
   <data name="File path for the motion" xml:space="preserve">
-    <value>Chemin de fichier pour le mouvement</value>
+    <value>Chemin de fichier pour l'animation</value>
   </data>
   <data name="Model file path" xml:space="preserve">
     <value>Chemin de fichier du modèle</value>
@@ -1655,22 +1670,22 @@
     <value>Texture</value>
   </data>
   <data name="Play selected motion" xml:space="preserve">
-    <value>Jouer le mouvement sélectionné</value>
+    <value>Jouer l'animation sélectionnée</value>
   </data>
   <data name="Stop current motion" xml:space="preserve">
-    <value>Arrêter le mouvement actuel</value>
+    <value>Arrêter l'animation actuelle</value>
   </data>
   <data name="Reference Model" xml:space="preserve">
     <value>Modèle de référence</value>
   </data>
   <data name="Add Motion" xml:space="preserve">
-    <value>Ajouter un mouvement</value>
+    <value>Ajouter une animation</value>
   </data>
   <data name="Delete Motion" xml:space="preserve">
-    <value>Supprimer le mouvement</value>
+    <value>Supprimer l'animation</value>
   </data>
   <data name="Generate Motions" xml:space="preserve">
-    <value>Générer des mouvements</value>
+    <value>Générer les animations</value>
   </data>
   <data name="Model" xml:space="preserve">
     <value>Modèle</value>
@@ -1803,20 +1818,5 @@
   </data>
   <data name="Correction Value" xml:space="preserve">
     <value>Valeur de correction</value>
-  </data>
-  <data name="System default" xml:space="preserve">
-    <value>Valeur par défaut du système</value>
-  </data>
-  <data name="Application language changed" xml:space="preserve">
-    <value>Langue de l’application modifiée</value>
-  </data>
-  <data name="The application needs to be restarted for the language change to take effect." xml:space="preserve">
-    <value>L’application doit être redémarrée pour que le changement de langue prenne effet.</value>
-  </data>
-  <data name="Restart" xml:space="preserve">
-    <value>Redémarrer</value>
-  </data>
-  <data name="Restart later" xml:space="preserve">
-    <value>Redémarrer plus tard</value>
   </data>
 </root>
