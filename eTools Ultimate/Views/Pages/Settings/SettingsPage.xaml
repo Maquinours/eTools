@@ -62,7 +62,7 @@
                                 FontTypography="Title"
                                 FontWeight="Bold"
                                 Foreground="#FFFFFF"
-                                Text="{i18n:Translate 'Settings'}" />
+                                Text="{i18n:StringLocalizer 'Settings'}" />
                         </StackPanel>
                         <ui:TextBlock
                             Margin="12"
@@ -70,7 +70,7 @@
                             VerticalAlignment="Bottom"
                             FontTypography="Caption"
                             Foreground="#57FFFFFF"
-                            Text="{i18n:Translate 'Created by eTools Ultimate'}" />
+                            Text="{i18n:StringLocalizer 'Created by eTools Ultimate'}" />
                     </Grid>
                 </Border>
             </Border>
@@ -91,7 +91,7 @@
                     Margin="0,0,4,0"
                     Padding="0"
                     VerticalAlignment="Stretch"
-                    Command="{Binding ViewModel.NavigateToResourcePathCommand, Mode=OneWay}"
+                    Command="{Binding NavigateToResourcePathCommand, Mode=OneWay}"
                     IsChevronVisible="False">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -116,12 +116,12 @@
                             <ui:TextBlock
                                 Margin="0"
                                 FontTypography="BodyStrong"
-                                Text="{i18n:Translate 'Resource Path'}"
+                                Text="{i18n:StringLocalizer 'Resource Path'}"
                                 TextWrapping="WrapWithOverflow" />
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="{i18n:Translate 'Loading all Paths.'}"
+                                Text="{i18n:StringLocalizer 'Loading all Paths.'}"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>
@@ -133,7 +133,7 @@
                     Margin="4,0,4,0"
                     Padding="0"
                     VerticalAlignment="Stretch"
-                    Command="{Binding ViewModel.NavigateToPersonalizationCommand, Mode=OneWay}"
+                    Command="{Binding NavigateToPersonalizationCommand, Mode=OneWay}"
                     IsChevronVisible="False">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -158,12 +158,12 @@
                             <ui:TextBlock
                                 Margin="0"
                                 FontTypography="BodyStrong"
-                                Text="{i18n:Translate 'Personalization'}"
+                                Text="{i18n:StringLocalizer 'Personalization'}"
                                 TextWrapping="WrapWithOverflow" />
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="{i18n:Translate 'Change Design and other parts'}"
+                                Text="{i18n:StringLocalizer 'Change Design and other parts'}"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>
@@ -202,12 +202,12 @@
                             <ui:TextBlock
                                 Margin="0"
                                 FontTypography="BodyStrong"
-                                Text="{i18n:Translate 'About'}"
+                                Text="{i18n:StringLocalizer 'About'}"
                                 TextWrapping="WrapWithOverflow" />
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="{i18n:Translate 'Learn more about eTools Ultimate'}"
+                                Text="{i18n:StringLocalizer 'Learn more about eTools Ultimate'}"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>
