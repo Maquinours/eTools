@@ -110,10 +110,17 @@
         </Style>
 
         <ControlTemplate x:Key="ValidationErrorTemplate">
-            <StackPanel MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}">
+            <StackPanel>
                 <Border BorderBrush="Red" BorderThickness="1">
-                    <AdornedElementPlaceholder />
+                    <AdornedElementPlaceholder x:Name="AdornedElement" />
                 </Border>
+                <TextBlock
+                    MaxWidth="{Binding ActualWidth, ElementName=AdornedElement}"
+                    HorizontalAlignment="Stretch"
+                    DockPanel.Dock="Bottom"
+                    Foreground="Red"
+                    Text="{Binding ErrorContent}"
+                    TextWrapping="Wrap" />
             </StackPanel>
         </ControlTemplate>
 
@@ -154,18 +161,6 @@
                                     </Binding>
                                 </ui:AutoSuggestBox.Text>
                             </ui:AutoSuggestBox>
-                            <Popup
-                                IsOpen="{Binding Path=(Validation.HasError), Mode=OneWay, ElementName=MoverIdentifierAutoSuggestBox}"
-                                Placement="Bottom"
-                                PlacementTarget="{Binding ElementName=MoverIdentifierAutoSuggestBox}"
-                                StaysOpen="True">
-                                <TextBlock
-                                    HorizontalAlignment="Stretch"
-                                    DockPanel.Dock="Bottom"
-                                    Foreground="Red"
-                                    Text="{Binding (Validation.Errors)[0].ErrorContent, ElementName=MoverIdentifierAutoSuggestBox}"
-                                    TextWrapping="Wrap" />
-                            </Popup>
                         </Grid>
 
                         <!--  Name  -->
