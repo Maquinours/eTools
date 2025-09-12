@@ -8,10 +8,8 @@ using Velopack.Sources;
 
 namespace eTools_Ultimate.ViewModels.Windows
 {
-    public partial class AvailableUpdateWindowViewModel : ObservableObject
+    public partial class AvailableUpdateWindowViewModel(UpdateInfo update) : ObservableObject
     {
-        [ObservableProperty]
-        private UpdateInfo? _update;
         [ObservableProperty]
         private bool _isLoading = false;
         [ObservableProperty]
@@ -21,11 +19,6 @@ namespace eTools_Ultimate.ViewModels.Windows
         [ObservableProperty]
         private bool _showError = false;
 
-        public AvailableUpdateWindowViewModel(UpdateInfo? update)
-        {
-            _update = update;
-        }
-
         [RelayCommand]
         private async Task UpdateApplication()
         {
@@ -34,22 +27,11 @@ namespace eTools_Ultimate.ViewModels.Windows
 
             try
             {
-                LoadingProgress = 0;
-                await Task.Delay(1000);
-                LoadingProgress = 25;
-                await Task.Delay(1000);
-                LoadingProgress = 50;
-                await Task.Delay(1000);
-                LoadingProgress = 75;
-                await Task.Delay(1000);
-                LoadingProgress = 100;
-                await Task.Delay(1000);
-
                 var mgr = new UpdateManager(new GithubSource(repoUrl: "https://github.com/Maquinours/eTools", accessToken: null, prerelease: false));
 
                 // download new version
                 await mgr.DownloadUpdatesAsync(
-                    Update,
+                    update,
                     progress =>
                     {
                         LoadingProgress = progress;
@@ -57,7 +39,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                     );
 
                 // install new version and restart app
-                mgr.ApplyUpdatesAndRestart(Update);
+                mgr.ApplyUpdatesAndRestart(update);
             }
             catch (Exception ex)
             {

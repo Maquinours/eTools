@@ -28,7 +28,7 @@ namespace eTools_Ultimate.Views.Windows
     public partial class AvailableUpdateWindow : FluentWindow
     {
 
-        public AvailableUpdateWindow(UpdateInfo? update)
+        public AvailableUpdateWindow(UpdateInfo update)
         {
             InitializeComponent();
             DataContext = new AvailableUpdateWindowViewModel(update);

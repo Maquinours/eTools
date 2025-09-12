@@ -37,26 +37,18 @@ namespace eTools_Ultimate.Services
         /// <returns></returns>
         private async Task CheckForUpdatesAsync()
         {
-            var mgr = new UpdateManager(new GithubSource(repoUrl: "https://github.com/Maquinours/eTools", accessToken: null, prerelease: false));
-
-            if (!mgr.IsInstalled)
-                return; // app is not installed (probably launched via source code)
-
-            // check for new version
-            var newVersion = await mgr.CheckForUpdatesAsync();
-
-            if (newVersion == null)
-                return; // no update available
-
-            if (new AvailableUpdateWindow(newVersion).ShowDialog() == true)
+            try
             {
-                // the user agrees to download the latest version
+                var mgr = new UpdateManager(new GithubSource(repoUrl: "https://github.com/Maquinours/eTools", accessToken: null, prerelease: false));
 
-                // download new version
-                await mgr.DownloadUpdatesAsync(newVersion);
+                // check for new version
+                var newVersion = await mgr.CheckForUpdatesAsync();
 
-                // install new version and restart app
-                mgr.ApplyUpdatesAndRestart(newVersion);
+                if(newVersion is not null)
+                    new AvailableUpdateWindow(newVersion).ShowDialog();
+            } catch (Exception)
+            {
+
             }
         }
 
@@ -66,6 +58,7 @@ namespace eTools_Ultimate.Services
         private async Task HandleActivationAsync()
         {
             await CheckForUpdatesAsync();
+
             if (!Application.Current.Windows.OfType<MainWindow>().Any())
             {
                 _navigationWindow = (serviceProvider.GetService(typeof(INavigationWindow)) as INavigationWindow)!;
