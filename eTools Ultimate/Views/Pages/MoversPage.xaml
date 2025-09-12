@@ -78,9 +78,9 @@
 
         <!--  Button Style  -->
         <Style x:Key="AppButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="#2D2D2D" />
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="BorderBrush" Value="#3F3F3F" />
+            <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
             <Setter Property="Padding" Value="8,5" />
         </Style>
 
@@ -152,7 +152,7 @@
                                         <TextBlock
                                             Margin="0,5"
                                             HorizontalAlignment="Stretch"
-                                            Foreground="Red"
+                                            Foreground="{DynamicResource SystemFillColorCriticalBrush}"
                                             Text="{Binding ErrorContent}"
                                             TextWrapping="Wrap" />
                                     </DataTemplate>
@@ -1417,8 +1417,9 @@
                         x:Name="AddButton"
                         Margin="0,0,10,0"
                         Background="#2F70AF"
-                        Command="{Binding AddMoverCommand}"
-                        Content="{i18n:StringLocalizer 'Add'}" />
+                        Command="{Binding AddMoverCommand}">
+                        <TextBlock Foreground="White" Text="{i18n:StringLocalizer 'Add'}" />
+                    </ui:Button>
                     <ui:Button
                         x:Name="DeleteButton"
                         Background="#FD292F"
