@@ -117,13 +117,119 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Welcome" xml:space="preserve">
-    <value>Willkommen</value>
-    <comment>Welcome text on dashboard</comment>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="Movers" xml:space="preserve">
+    <value>Beweger</value>
+  </data>
+  <data name="Giftboxes" xml:space="preserve">
+    <value>Geschenkkisten</value>
+  </data>
+  <data name="Accessories" xml:space="preserve">
+    <value>Zubehör</value>
+  </data>
+  <data name="Motions" xml:space="preserve">
+    <value>Bewegungen</value>
+  </data>
+  <data name="TextClient" xml:space="preserve">
+    <value>Text Client</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Über</value>
+  </data>
+  <data name="Resource Path" xml:space="preserve">
+    <value>Ressourcen Pfad</value>
+  </data>
+  <data name="Loading all Paths." xml:space="preserve">
+    <value>Lade alle Pfade.</value>
+    <comment>Resource Path navigation card description</comment>
+  </data>
+  <data name="Personalization" xml:space="preserve">
+    <value>Personalisierung</value>
+  </data>
+  <data name="Change Design and other parts" xml:space="preserve">
+    <value>Design und andere Teile ändern</value>
+    <comment>Personalization navigation card description</comment>
+  </data>
+  <data name="Learn more about eTools Ultimate" xml:space="preserve">
+    <value>Erfahren Sie mehr über eTools Ultimate</value>
+    <comment>About navigation card description</comment>
   </data>
   <data name="Created by eTools Ultimate" xml:space="preserve">
     <value>Erstellt von eTools Ultimate</value>
     <comment>Created by text on dashboard</comment>
+  </data>
+  <data name="About eTools Ultimate" xml:space="preserve">
+    <value>Über eTools Ultimate</value>
+    <comment>About eTools Ultimate section header</comment>
+  </data>
+  <data name="Our tool simplifies the editing process for developers." xml:space="preserve">
+    <value>Unser Tool vereinfacht den Bearbeitungsprozess für Entwickler.</value>
+    <comment>About description</comment>
+  </data>
+  <data name="Main Features" xml:space="preserve">
+    <value>Hauptfunktionen</value>
+    <comment>Main Features section header</comment>
+  </data>
+  <data name="Editing of .txt, .h and .inc files with structured interfaces" xml:space="preserve">
+    <value>Bearbeitung von .txt, .h und .inc Dateien mit strukturierten Benutzeroberflächen</value>
+    <comment>Main feature 1</comment>
+  </data>
+  <data name="Advanced categorization by element types" xml:space="preserve">
+    <value>Erweiterte Kategorisierung nach Elementtypen</value>
+    <comment>Main feature 2</comment>
+  </data>
+  <data name="Optimized for performance and user-friendliness" xml:space="preserve">
+    <value>Optimiert für Leistung und Benutzerfreundlichkeit</value>
+    <comment>Main feature 3</comment>
+  </data>
+  <data name="Development Team" xml:space="preserve">
+    <value>Entwicklungsteam</value>
+    <comment>Development Team section header</comment>
+  </data>
+  <data name="System Requirements" xml:space="preserve">
+    <value>Systemanforderungen</value>
+    <comment>System Requirements section header</comment>
+  </data>
+  <data name="Operating System:" xml:space="preserve">
+    <value>Betriebssystem:</value>
+    <comment>Operating System field label</comment>
+  </data>
+  <data name="RAM:" xml:space="preserve">
+    <value>Arbeitsspeicher:</value>
+    <comment>RAM requirement</comment>
+  </data>
+  <data name="200 MB available space" xml:space="preserve">
+    <value>200 MB verfügbarer Speicherplatz</value>
+    <comment>Storage space requirement</comment>
+  </data>
+  <data name="4 GB minimum, 8 GB recommended" xml:space="preserve">
+    <value>4 GB mindestens, 8 GB empfohlen</value>
+    <comment>RAM requirement with recommendation</comment>
+  </data>
+  <data name="Check for Updates" xml:space="preserve">
+    <value>Nach Updates suchen</value>
+    <comment>Check for Updates button text</comment>
+  </data>
+  <data name="Visit Website" xml:space="preserve">
+    <value>Website besuchen</value>
+    <comment>Visit Website button text</comment>
+  </data>
+  <data name="Maqui" xml:space="preserve">
+    <value>Maqui</value>
+    <comment>Developer name</comment>
+  </data>
+  <data name="Kiyo" xml:space="preserve">
+    <value>Kiyo</value>
+    <comment>Developer name</comment>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Willkommen</value>
+    <comment>Welcome text on dashboard</comment>
   </data>
   <data name="Patchlogs" xml:space="preserve">
     <value>Patchlogs</value>
@@ -144,10 +250,6 @@
   <data name="Navigate to the items page." xml:space="preserve">
     <value>Navigiere zur Gegenstände-Seite.</value>
     <comment>Items navigation card description</comment>
-  </data>
-  <data name="Movers" xml:space="preserve">
-    <value>Beweger</value>
-    <comment>Movers navigation card title</comment>
   </data>
   <data name="Navigate to the movers page." xml:space="preserve">
     <value>Navigiere zur Beweger-Seite.</value>
@@ -185,10 +287,6 @@
     <value>Navigiere zur Ereignisse-Seite.</value>
     <comment>Events navigation card description</comment>
   </data>
-  <data name="Giftboxes" xml:space="preserve">
-    <value>Geschenkkisten</value>
-    <comment>Giftboxes navigation card title</comment>
-  </data>
   <data name="Navigate to the giftboxes page." xml:space="preserve">
     <value>Navigiere zur Geschenkkisten-Seite.</value>
     <comment>Giftboxes navigation card description</comment>
@@ -196,10 +294,6 @@
   <data name="Collectors" xml:space="preserve">
     <value>Sammler</value>
     <comment>Collectors navigation card title</comment>
-  </data>
-  <data name="Accessories" xml:space="preserve">
-    <value>Zubehör</value>
-    <comment>Accessories navigation card title</comment>
   </data>
   <data name="Navigate to the accessories page." xml:space="preserve">
     <value>Navigiere zum Zubehör.</value>
@@ -228,10 +322,6 @@
   <data name="Navigate to the couple page." xml:space="preserve">
     <value>Navigiere zur Paar-Seite.</value>
     <comment>Couple navigation card description</comment>
-  </data>
-  <data name="Motions" xml:space="preserve">
-    <value>Bewegungen</value>
-    <comment>Motions navigation card title</comment>
   </data>
   <data name="Text Client" xml:space="preserve">
     <value>Text Client</value>
@@ -285,17 +375,9 @@
     <value>Drop Event</value>
     <comment>Drop Event navigation card title</comment>
   </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Einstellungen</value>
-    <comment>Settings navigation card title</comment>
-  </data>
   <data name="Navigate to the settings page." xml:space="preserve">
     <value>Navigiere zur Einstellungen-Seite.</value>
     <comment>Settings navigation card description</comment>
-  </data>
-  <data name="Dashboard" xml:space="preserve">
-    <value>Dashboard</value>
-    <comment>Dashboard menu item</comment>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Suche...</value>
@@ -307,19 +389,15 @@
   </data>
   <data name="Undo" xml:space="preserve">
     <value>Rückgängig</value>
-    <comment>Undo button tooltip</comment>
   </data>
   <data name="Redo" xml:space="preserve">
     <value>Wiederholen</value>
-    <comment>Redo button tooltip</comment>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Speichern</value>
-    <comment>Save button text</comment>
   </data>
   <data name="Expert" xml:space="preserve">
     <value>Experte</value>
-    <comment>Expert button text</comment>
   </data>
   <data name="Items in box:" xml:space="preserve">
     <value>Gegenstände in Box:</value>
@@ -331,7 +409,7 @@
   </data>
   <data name="Item" xml:space="preserve">
     <value>Gegenstand</value>
-    <comment>Item column header</comment>
+    <comment>Item section header</comment>
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>Menge</value>
@@ -351,7 +429,6 @@
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Löschen</value>
-    <comment>Delete button tooltip</comment>
   </data>
   <data name="Changelog" xml:space="preserve">
     <value>Änderungsprotokoll</value>
@@ -391,7 +468,6 @@
   </data>
   <data name="ID" xml:space="preserve">
     <value>ID</value>
-    <comment>ID field label</comment>
   </data>
   <data name="Door of Dark" xml:space="preserve">
     <value>Tür der Dunkelheit</value>
@@ -435,7 +511,6 @@
   </data>
   <data name="Level" xml:space="preserve">
     <value>Level</value>
-    <comment>Level field label</comment>
   </data>
   <data name="Sex" xml:space="preserve">
     <value>Geschlecht</value>
@@ -495,7 +570,6 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
-    <comment>Name field label</comment>
   </data>
   <data name="Range" xml:space="preserve">
     <value>Reichweite</value>
@@ -575,7 +649,6 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Beschreibung</value>
-    <comment>Description field label</comment>
   </data>
   <data name="File Name" xml:space="preserve">
     <value>Dateiname</value>
@@ -887,7 +960,6 @@
   </data>
   <data name="Sound" xml:space="preserve">
     <value>Sound</value>
-    <comment>Sound section header</comment>
   </data>
   <data name="Attack Sound" xml:space="preserve">
     <value>Angriffs-Sound</value>
@@ -902,12 +974,10 @@
     <comment>Search placeholder text</comment>
   </data>
   <data name="Filter Sections" xml:space="preserve">
-    <value>Abschnitte filtern</value>
-    <comment>Filter Sections label</comment>
+    <value>Bereiche filtern</value>
   </data>
   <data name="Filter Fields" xml:space="preserve">
     <value>Felder filtern</value>
-    <comment>Filter Fields label</comment>
   </data>
   <data name="Item ID" xml:space="preserve">
     <value>Gegenstands-ID</value>
@@ -919,7 +989,7 @@
   </data>
   <data name="App theme" xml:space="preserve">
     <value>App-Design</value>
-    <comment>App theme label</comment>
+    <comment>App theme section header</comment>
   </data>
   <data name="Select which app theme to display" xml:space="preserve">
     <value>Wählen Sie das anzuzeigende App-Design</value>
@@ -927,7 +997,7 @@
   </data>
   <data name="Application language" xml:space="preserve">
     <value>Anwendungs-Sprache</value>
-    <comment>Application language label</comment>
+    <comment>Application language section header</comment>
   </data>
   <data name="Choose your preferred language" xml:space="preserve">
     <value>Wählen Sie Ihre bevorzugte Sprache</value>
@@ -935,7 +1005,7 @@
   </data>
   <data name="Auto-save interval" xml:space="preserve">
     <value>Auto-Speicher-Intervall</value>
-    <comment>Auto-save interval label</comment>
+    <comment>Auto-save interval section header</comment>
   </data>
   <data name="Set the time interval for automatic saving" xml:space="preserve">
     <value>Legen Sie das Zeitintervall für automatisches Speichern fest</value>
@@ -979,11 +1049,9 @@
   </data>
   <data name="Close" xml:space="preserve">
     <value>Schließen</value>
-    <comment>Close button text</comment>
   </data>
   <data name="Add" xml:space="preserve">
     <value>Hinzufügen</value>
-    <comment>Add button text</comment>
   </data>
   <data name="Item that should be added in the giftbox" xml:space="preserve">
     <value>Gegenstand, der in der Geschenkbox hinzugefügt werden soll</value>
@@ -1007,7 +1075,6 @@
   </data>
   <data name="Basic Information" xml:space="preserve">
     <value>Grundinformationen</value>
-    <comment>Basic Information section header</comment>
   </data>
   <data name="Grade (Class Stage)" xml:space="preserve">
     <value>Grad (Klassenstufe)</value>
@@ -1181,10 +1248,6 @@
     <value>Klicken Sie auf den Button unten, um nach Updates zu suchen. Die Anwendung wird automatisch die neueste Version von GitHub herunterladen und installieren.</value>
     <comment>Update check description</comment>
   </data>
-  <data name="Check for Updates" xml:space="preserve">
-    <value>Nach Updates suchen</value>
-    <comment>Check for updates button text</comment>
-  </data>
   <data name="Checking for updates..." xml:space="preserve">
     <value>Suche nach Updates...</value>
     <comment>Loading state text</comment>
@@ -1298,7 +1361,6 @@
   </data>
   <data name="eTools Ultimate - Update Available" xml:space="preserve">
     <value>eTools Ultimate - Update verfügbar</value>
-    <comment>AvailableUpdateWindow title</comment>
   </data>
   <data name="Update Available" xml:space="preserve">
     <value>Update verfügbar</value>
@@ -1315,10 +1377,6 @@
   <data name="New Version Available!" xml:space="preserve">
     <value>Neue Version verfügbar!</value>
     <comment>AvailableUpdateWindow main heading</comment>
-  </data>
-  <data name="A new version of eTools Ultimate is ready to install" xml:space="preserve">
-    <value>Eine neue Version von eTools Ultimate ist bereit zur Installation</value>
-    <comment>AvailableUpdateWindow subtitle</comment>
   </data>
   <data name="Version Information" xml:space="preserve">
     <value>Versionsinformationen</value>
@@ -1346,40 +1404,10 @@
   </data>
   <data name="Installing update..." xml:space="preserve">
     <value>Update wird installiert...</value>
-    <comment>AvailableUpdateWindow loading text</comment>
   </data>
   <data name="Error installing update" xml:space="preserve">
     <value>Fehler beim Installieren des Updates</value>
-    <comment>AvailableUpdateWindow error text</comment>
   </data>
-  
-  <!-- Settings Page Translations -->
-  <data name="Resource Path" xml:space="preserve">
-    <value>Ressourcen-Pfad</value>
-    <comment>Resource Path navigation card title</comment>
-  </data>
-  <data name="Loading all Paths." xml:space="preserve">
-    <value>Lade alle Pfade.</value>
-    <comment>Resource Path navigation card description</comment>
-  </data>
-  <data name="Personalization" xml:space="preserve">
-    <value>Personalisierung</value>
-    <comment>Personalization navigation card title</comment>
-  </data>
-  <data name="Change Design and other parts" xml:space="preserve">
-    <value>Design und andere Teile ändern</value>
-    <comment>Personalization navigation card description</comment>
-  </data>
-  <data name="About" xml:space="preserve">
-    <value>Über</value>
-    <comment>About navigation card title</comment>
-  </data>
-  <data name="Learn more about eTools Ultimate" xml:space="preserve">
-    <value>Erfahren Sie mehr über eTools Ultimate</value>
-    <comment>About navigation card description</comment>
-  </data>
-  
-  <!-- Resource Path Page Translations -->
   <data name="Main Settings" xml:space="preserve">
     <value>Haupteinstellungen</value>
     <comment>Main Settings section header</comment>
@@ -1400,10 +1428,6 @@
     <value>Erweiterte Einstellungen</value>
     <comment>Advanced settings button text</comment>
   </data>
-  <data name="Custom" xml:space="preserve">
-    <value>Benutzerdefiniert</value>
-    <comment>Custom section header</comment>
-  </data>
   <data name="Texture folder" xml:space="preserve">
     <value>Textur-Ordner</value>
     <comment>Texture folder field label</comment>
@@ -1419,10 +1443,6 @@
   <data name="Sounds config file" xml:space="preserve">
     <value>Sound-Konfigurationsdatei</value>
     <comment>Sounds config file field label</comment>
-  </data>
-  <data name="Item" xml:space="preserve">
-    <value>Gegenstand</value>
-    <comment>Item section header</comment>
   </data>
   <data name="Spec_Item file" xml:space="preserve">
     <value>Spec_Item-Datei</value>
@@ -1480,32 +1500,6 @@
     <value>Icon-Ordner</value>
     <comment>Icon folder field label</comment>
   </data>
-  
-  <!-- Personalization Page Translations -->
-  <data name="App theme" xml:space="preserve">
-    <value>App-Design</value>
-    <comment>App theme section header</comment>
-  </data>
-  <data name="Select which app theme to display" xml:space="preserve">
-    <value>Wählen Sie das anzuzeigende App-Design</value>
-    <comment>App theme description</comment>
-  </data>
-  <data name="Application language" xml:space="preserve">
-    <value>Anwendungs-Sprache</value>
-    <comment>Application language section header</comment>
-  </data>
-  <data name="Choose your preferred language" xml:space="preserve">
-    <value>Wählen Sie Ihre bevorzugte Sprache</value>
-    <comment>Application language description</comment>
-  </data>
-  <data name="Light" xml:space="preserve">
-    <value>Hell</value>
-    <comment>Light theme option</comment>
-  </data>
-  <data name="Dark" xml:space="preserve">
-    <value>Dunkel</value>
-    <comment>Dark theme option</comment>
-  </data>
   <data name="High Contrast" xml:space="preserve">
     <value>Hoher Kontrast</value>
     <comment>High Contrast theme option</comment>
@@ -1513,80 +1507,6 @@
   <data name="English" xml:space="preserve">
     <value>Englisch</value>
     <comment>English language option</comment>
-  </data>
-  <data name="German" xml:space="preserve">
-    <value>Deutsch</value>
-    <comment>German language option</comment>
-  </data>
-  <data name="French" xml:space="preserve">
-    <value>Französisch</value>
-    <comment>French language option</comment>
-  </data>
-  <data name="Auto-save interval" xml:space="preserve">
-    <value>Auto-Speicher-Intervall</value>
-    <comment>Auto-save interval section header</comment>
-  </data>
-  <data name="Set the time interval for automatic saving" xml:space="preserve">
-    <value>Legen Sie das Zeitintervall für automatisches Speichern fest</value>
-    <comment>Auto-save interval description</comment>
-  </data>
-  <data name="5 minutes" xml:space="preserve">
-    <value>5 Minuten</value>
-    <comment>5 minutes option</comment>
-  </data>
-  <data name="15 minutes" xml:space="preserve">
-    <value>15 Minuten</value>
-    <comment>15 minutes option</comment>
-  </data>
-  <data name="30 minutes" xml:space="preserve">
-    <value>30 Minuten</value>
-    <comment>30 minutes option</comment>
-  </data>
-  <data name="Custom" xml:space="preserve">
-    <value>Benutzerdefiniert</value>
-    <comment>Custom option</comment>
-  </data>
-  <data name="min" xml:space="preserve">
-    <value>min</value>
-    <comment>Minutes abbreviation</comment>
-  </data>
-  
-  <!-- About Page Translations -->
-  <data name="About eTools Ultimate" xml:space="preserve">
-    <value>Über eTools Ultimate</value>
-    <comment>About eTools Ultimate section header</comment>
-  </data>
-  <data name="Our tool simplifies the editing process for developers." xml:space="preserve">
-    <value>Unser Tool vereinfacht den Bearbeitungsprozess für Entwickler.</value>
-    <comment>About description</comment>
-  </data>
-  <data name="Main Features" xml:space="preserve">
-    <value>Hauptfunktionen</value>
-    <comment>Main Features section header</comment>
-  </data>
-  <data name="Editing of .txt, .h and .inc files with structured interfaces" xml:space="preserve">
-    <value>Bearbeitung von .txt, .h und .inc Dateien mit strukturierten Benutzeroberflächen</value>
-    <comment>Main feature 1</comment>
-  </data>
-  <data name="Advanced categorization by element types" xml:space="preserve">
-    <value>Erweiterte Kategorisierung nach Elementtypen</value>
-    <comment>Main feature 2</comment>
-  </data>
-  <data name="Optimized for performance and user-friendliness" xml:space="preserve">
-    <value>Optimiert für Leistung und Benutzerfreundlichkeit</value>
-    <comment>Main feature 3</comment>
-  </data>
-  <data name="Development Team" xml:space="preserve">
-    <value>Entwicklungsteam</value>
-    <comment>Development Team section header</comment>
-  </data>
-  <data name="System Requirements" xml:space="preserve">
-    <value>Systemanforderungen</value>
-    <comment>System Requirements section header</comment>
-  </data>
-  <data name="Operating System:" xml:space="preserve">
-    <value>Betriebssystem:</value>
-    <comment>Operating System field label</comment>
   </data>
   <data name="Windows 10/11" xml:space="preserve">
     <value>Windows 10/11</value>
@@ -1604,62 +1524,13 @@
     <value>Festplattenspeicher:</value>
     <comment>Disk Space field label</comment>
   </data>
-  <data name="200 MB available space" xml:space="preserve">
-    <value>200 MB verfügbarer Speicherplatz</value>
-    <comment>Disk space requirement</comment>
-  </data>
-  <data name="Visit Website" xml:space="preserve">
-    <value>Website besuchen</value>
-    <comment>Visit Website button text</comment>
-  </data>
-  <data name="Check for Updates" xml:space="preserve">
-    <value>Nach Updates suchen</value>
-    <comment>Check for Updates button text</comment>
-  </data>
-  
-  <!-- Developer Names -->
-  <data name="Maqui" xml:space="preserve">
-    <value>Maqui</value>
-    <comment>Developer name</comment>
-  </data>
-  <data name="Kiyo" xml:space="preserve">
-    <value>Kiyo</value>
-    <comment>Developer name</comment>
-  </data>
-  
-  <!-- Technical Terms -->
   <data name="64 Bit" xml:space="preserve">
     <value>64 Bit</value>
     <comment>64 Bit option</comment>
   </data>
-  
-  <!-- Update Window Translations -->
-  <data name="Update Available" xml:space="preserve">
-    <value>Update verfügbar</value>
-  </data>
-  <data name="A new version of eTools Ultimate is ready to install" xml:space="preserve">
-    <value>Eine neue Version von eTools Ultimate ist bereit zur Installation</value>
-  </data>
-  <data name="Install Now" xml:space="preserve">
-    <value>Jetzt installieren</value>
-  </data>
-  <data name="Later" xml:space="preserve">
-    <value>Später</value>
-  </data>
-  <data name="Installing update..." xml:space="preserve">
-    <value>Update wird installiert...</value>
-  </data>
-  <data name="Error installing update" xml:space="preserve">
-    <value>Fehler beim Installieren des Updates</value>
-  </data>
   <data name="Retry" xml:space="preserve">
     <value>Wiederholen</value>
   </data>
-  <data name="eTools Ultimate - Update Available" xml:space="preserve">
-    <value>eTools Ultimate - Update verfügbar</value>
-  </data>
-  
-  <!-- MoversPage ToolTip Translations -->
   <data name="Define ID of the mover" xml:space="preserve">
     <value>ID des Movers definieren</value>
   </data>
@@ -1783,12 +1654,6 @@
   <data name="Texture" xml:space="preserve">
     <value>Textur</value>
   </data>
-  <data name="Undo" xml:space="preserve">
-    <value>Rückgängig</value>
-  </data>
-  <data name="Redo" xml:space="preserve">
-    <value>Wiederholen</value>
-  </data>
   <data name="Play selected motion" xml:space="preserve">
     <value>Ausgewählte Bewegung abspielen</value>
   </data>
@@ -1807,31 +1672,6 @@
   <data name="Generate Motions" xml:space="preserve">
     <value>Bewegungen generieren</value>
   </data>
-  
-  <!-- Navigation Menu Translations -->
-  <data name="Dashboard" xml:space="preserve">
-    <value>Dashboard</value>
-  </data>
-  <data name="Movers" xml:space="preserve">
-    <value>Mover</value>
-  </data>
-  <data name="Giftboxes" xml:space="preserve">
-    <value>Geschenkkisten</value>
-  </data>
-  <data name="Accessories" xml:space="preserve">
-    <value>Zubehör</value>
-  </data>
-  <data name="TextClient" xml:space="preserve">
-    <value>Text-Client</value>
-  </data>
-  <data name="Motions" xml:space="preserve">
-    <value>Bewegungen</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Einstellungen</value>
-  </data>
-  
-  <!-- Model Section Translations -->
   <data name="Model" xml:space="preserve">
     <value>Modell</value>
   </data>
@@ -1841,8 +1681,6 @@
   <data name="No model associated with the selected mover." xml:space="preserve">
     <value>Kein Modell mit dem ausgewählten Mover verknüpft.</value>
   </data>
-  
-  <!-- Reference Model Dialog Translations -->
   <data name="Select Reference Model" xml:space="preserve">
     <value>Referenzmodell auswählen</value>
   </data>
@@ -1855,25 +1693,8 @@
   <data name="Accept" xml:space="preserve">
     <value>Akzeptieren</value>
   </data>
-  <data name="Close" xml:space="preserve">
-    <value>Schließen</value>
-  </data>
-  
-  <!-- MoversPage Content Translations -->
-  <data name="Save" xml:space="preserve">
-    <value>Speichern</value>
-  </data>
-  <data name="Expert" xml:space="preserve">
-    <value>Experte</value>
-  </data>
   <data name="Filter" xml:space="preserve">
     <value>Filter</value>
-  </data>
-  <data name="Filter Sections" xml:space="preserve">
-    <value>Bereiche filtern</value>
-  </data>
-  <data name="Basic Information" xml:space="preserve">
-    <value>Grundinformationen</value>
   </data>
   <data name="Stats" xml:space="preserve">
     <value>Statistiken</value>
@@ -1887,26 +1708,11 @@
   <data name="Elementar &amp; Damage Types" xml:space="preserve">
     <value>Elementar &amp; Schadenstypen</value>
   </data>
-  <data name="Sound" xml:space="preserve">
-    <value>Sound</value>
-  </data>
   <data name="Model / Mobility / Movement" xml:space="preserve">
     <value>Modell / Mobilität / Bewegung</value>
   </data>
-  <data name="Filter Fields" xml:space="preserve">
-    <value>Felder filtern</value>
-  </data>
-  <data name="ID" xml:space="preserve">
-    <value>ID</value>
-  </data>
   <data name="ID Key" xml:space="preserve">
     <value>ID-Schlüssel</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>Beschreibung</value>
   </data>
   <data name="Killable" xml:space="preserve">
     <value>Tötbar</value>
@@ -1937,9 +1743,6 @@
   </data>
   <data name="Evasion Rate" xml:space="preserve">
     <value>Ausweichrate</value>
-  </data>
-  <data name="Level" xml:space="preserve">
-    <value>Level</value>
   </data>
   <data name="Health Points" xml:space="preserve">
     <value>Lebenspunkte</value>
@@ -2001,58 +1804,20 @@
   <data name="Correction Value" xml:space="preserve">
     <value>Korrekturwert</value>
   </data>
-  <data name="Add" xml:space="preserve">
-    <value>Hinzufügen</value>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="System default" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Löschen</value>
+  <data name="Application language changed" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  
-  <!-- Navigation Menu Translations -->
-  <data name="Dashboard" xml:space="preserve">
-    <value>Startseite</value>
+  <data name="The application needs to be restarted for the language change to take effect." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="Movers" xml:space="preserve">
-    <value>Beweger</value>
+  <data name="Restart" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="Giftboxes" xml:space="preserve">
-    <value>Geschenkkisten</value>
-  </data>
-  <data name="Accessories" xml:space="preserve">
-    <value>Zubehör</value>
-  </data>
-  <data name="TextClient" xml:space="preserve">
-    <value>Text Client</value>
-  </data>
-  <data name="Motions" xml:space="preserve">
-    <value>Bewegungen</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Einstellungen</value>
-  </data>
-  <data name="Resource Path" xml:space="preserve">
-    <value>Ressourcen Pfad</value>
-  </data>
-  <data name="Personalization" xml:space="preserve">
-    <value>Personalisierung</value>
-  </data>
-  <data name="About" xml:space="preserve">
-    <value>Über</value>
-  </data>
-  <data name="RAM:" xml:space="preserve">
-    <value>Arbeitsspeicher:</value>
-    <comment>RAM requirement</comment>
-  </data>
-  <data name="4 GB minimum, 8 GB recommended" xml:space="preserve">
-    <value>4 GB mindestens, 8 GB empfohlen</value>
-    <comment>RAM requirement with recommendation</comment>
-  </data>
-  <data name="200 MB available space" xml:space="preserve">
-    <value>200 MB verfügbarer Speicherplatz</value>
-    <comment>Storage space requirement</comment>
-  </data>
-  <data name="System language" xml:space="preserve">
-    <value>Systemsprache</value>
-    <comment>System language option</comment>
+  <data name="Restart later" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
 </root>

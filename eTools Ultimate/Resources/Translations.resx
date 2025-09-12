@@ -87,7 +87,7 @@
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
               <xsd:attribute ref="xml:space" />
@@ -98,7 +98,7 @@
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -117,8 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  
-  <!-- Navigation Menu Translations -->
   <data name="Dashboard" xml:space="preserve">
     <value>Dashboard</value>
     <comment>Dashboard menu item</comment>
@@ -151,8 +149,6 @@
     <value>About</value>
     <comment>About navigation card title</comment>
   </data>
-  
-  <!-- Settings Page Translations -->
   <data name="Resource Path" xml:space="preserve">
     <value>Resource Path</value>
     <comment>Resource Path navigation card title</comment>
@@ -177,8 +173,6 @@
     <value>Created by eTools Ultimate</value>
     <comment>Created by text on dashboard</comment>
   </data>
-  
-  <!-- About Page Translations -->
   <data name="About eTools Ultimate" xml:space="preserve">
     <value>About eTools Ultimate</value>
     <comment>About eTools Ultimate section header</comment>
@@ -267,8 +261,19 @@
     <value>Kiyo</value>
     <comment>Developer name</comment>
   </data>
-  <data name="System language" xml:space="preserve">
-    <value>System language</value>
-    <comment>System language option</comment>
+  <data name="System default" xml:space="preserve">
+    <value>System default</value>
+  </data>
+  <data name="Application language changed" xml:space="preserve">
+    <value>Application language changed</value>
+  </data>
+  <data name="The application needs to be restarted for the language change to take effect." xml:space="preserve">
+    <value>The application needs to be restarted for the language change to take effect.</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Restart</value>
+  </data>
+  <data name="Restart later" xml:space="preserve">
+    <value>Restart later</value>
   </data>
 </root>

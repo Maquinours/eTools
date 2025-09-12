@@ -117,13 +117,119 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Welcome" xml:space="preserve">
-    <value>Bienvenue</value>
-    <comment>Welcome text on dashboard</comment>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Tableau de bord</value>
+  </data>
+  <data name="Movers" xml:space="preserve">
+    <value>Mouveurs</value>
+  </data>
+  <data name="Giftboxes" xml:space="preserve">
+    <value>Boîtes-cadeaux</value>
+  </data>
+  <data name="Accessories" xml:space="preserve">
+    <value>Accessoires</value>
+  </data>
+  <data name="Motions" xml:space="preserve">
+    <value>Mouvements</value>
+  </data>
+  <data name="TextClient" xml:space="preserve">
+    <value>Client de texte</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>À propos</value>
+  </data>
+  <data name="Resource Path" xml:space="preserve">
+    <value>Chemin des ressources</value>
+  </data>
+  <data name="Loading all Paths." xml:space="preserve">
+    <value>Chargement de tous les chemins.</value>
+    <comment>Resource Path navigation card description</comment>
+  </data>
+  <data name="Personalization" xml:space="preserve">
+    <value>Personnalisation</value>
+  </data>
+  <data name="Change Design and other parts" xml:space="preserve">
+    <value>Modifier le design et autres parties</value>
+    <comment>Personalization navigation card description</comment>
+  </data>
+  <data name="Learn more about eTools Ultimate" xml:space="preserve">
+    <value>En savoir plus sur eTools Ultimate</value>
+    <comment>About navigation card description</comment>
   </data>
   <data name="Created by eTools Ultimate" xml:space="preserve">
     <value>Créé par eTools Ultimate</value>
     <comment>Created by text on dashboard</comment>
+  </data>
+  <data name="About eTools Ultimate" xml:space="preserve">
+    <value>À propos d'eTools Ultimate</value>
+    <comment>About eTools Ultimate section header</comment>
+  </data>
+  <data name="Our tool simplifies the editing process for developers." xml:space="preserve">
+    <value>Notre outil simplifie le processus d'édition pour les développeurs.</value>
+    <comment>About description</comment>
+  </data>
+  <data name="Main Features" xml:space="preserve">
+    <value>Fonctionnalités principales</value>
+    <comment>Main Features section header</comment>
+  </data>
+  <data name="Editing of .txt, .h and .inc files with structured interfaces" xml:space="preserve">
+    <value>Édition de fichiers .txt, .h et .inc avec des interfaces structurées</value>
+    <comment>Main feature 1</comment>
+  </data>
+  <data name="Advanced categorization by element types" xml:space="preserve">
+    <value>Catégorisation avancée par types d'éléments</value>
+    <comment>Main feature 2</comment>
+  </data>
+  <data name="Optimized for performance and user-friendliness" xml:space="preserve">
+    <value>Optimisé pour les performances et la convivialité</value>
+    <comment>Main feature 3</comment>
+  </data>
+  <data name="Development Team" xml:space="preserve">
+    <value>Équipe de développement</value>
+    <comment>Development Team section header</comment>
+  </data>
+  <data name="System Requirements" xml:space="preserve">
+    <value>Exigences système</value>
+    <comment>System Requirements section header</comment>
+  </data>
+  <data name="Operating System:" xml:space="preserve">
+    <value>Système d'exploitation :</value>
+    <comment>Operating System field label</comment>
+  </data>
+  <data name="RAM:" xml:space="preserve">
+    <value>RAM :</value>
+    <comment>RAM requirement</comment>
+  </data>
+  <data name="200 MB available space" xml:space="preserve">
+    <value>200 MB d'espace disponible</value>
+    <comment>Storage space requirement</comment>
+  </data>
+  <data name="4 GB minimum, 8 GB recommended" xml:space="preserve">
+    <value>4 GB minimum, 8 GB recommandé</value>
+    <comment>RAM requirement with recommendation</comment>
+  </data>
+  <data name="Check for Updates" xml:space="preserve">
+    <value>Vérifier les mises à jour</value>
+    <comment>Check for Updates button text</comment>
+  </data>
+  <data name="Visit Website" xml:space="preserve">
+    <value>Visiter le site web</value>
+    <comment>Visit Website button text</comment>
+  </data>
+  <data name="Maqui" xml:space="preserve">
+    <value>Maqui</value>
+    <comment>Developer name</comment>
+  </data>
+  <data name="Kiyo" xml:space="preserve">
+    <value>Kiyo</value>
+    <comment>Developer name</comment>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Bienvenue</value>
+    <comment>Welcome text on dashboard</comment>
   </data>
   <data name="Patchlogs" xml:space="preserve">
     <value>Notes de patch</value>
@@ -144,10 +250,6 @@
   <data name="Navigate to the items page." xml:space="preserve">
     <value>Naviguer vers la page des objets.</value>
     <comment>Items navigation card description</comment>
-  </data>
-  <data name="Movers" xml:space="preserve">
-    <value>Mobiles</value>
-    <comment>Movers navigation card title</comment>
   </data>
   <data name="Navigate to the movers page." xml:space="preserve">
     <value>Naviguer vers la page des mobiles.</value>
@@ -170,11 +272,11 @@
     <comment>Quests navigation card description</comment>
   </data>
   <data name="NPCs" xml:space="preserve">
-    <value>NPCs</value>
+    <value>PNJs</value>
     <comment>NPCs navigation card title</comment>
   </data>
   <data name="Navigate to the NPCs page." xml:space="preserve">
-    <value>Naviguer vers la page des PNJ.</value>
+    <value>Naviguer vers la page des PNJs.</value>
     <comment>NPCs navigation card description</comment>
   </data>
   <data name="Events" xml:space="preserve">
@@ -185,10 +287,6 @@
     <value>Naviguer vers la page des événements.</value>
     <comment>Events navigation card description</comment>
   </data>
-  <data name="Giftboxes" xml:space="preserve">
-    <value>Boîtes-cadeaux</value>
-    <comment>Giftboxes navigation card title</comment>
-  </data>
   <data name="Navigate to the giftboxes page." xml:space="preserve">
     <value>Naviguer vers la page des boîtes-cadeaux.</value>
     <comment>Giftboxes navigation card description</comment>
@@ -196,10 +294,6 @@
   <data name="Collectors" xml:space="preserve">
     <value>Collectionneurs</value>
     <comment>Collectors navigation card title</comment>
-  </data>
-  <data name="Accessories" xml:space="preserve">
-    <value>Accessoires</value>
-    <comment>Accessories navigation card title</comment>
   </data>
   <data name="Navigate to the accessories page." xml:space="preserve">
     <value>Naviguer vers la page des accessoires.</value>
@@ -229,10 +323,6 @@
     <value>Naviguer vers la page des couples.</value>
     <comment>Couple navigation card description</comment>
   </data>
-  <data name="Motions" xml:space="preserve">
-    <value>Mouvements</value>
-    <comment>Motions navigation card title</comment>
-  </data>
   <data name="Text Client" xml:space="preserve">
     <value>Client texte</value>
     <comment>Text Client navigation card title</comment>
@@ -254,7 +344,7 @@
     <comment>Object navigation card title</comment>
   </data>
   <data name="Navigate to the object editor." xml:space="preserve">
-    <value>Ouvrir l'éditeur d'objets.</value>
+    <value>Naviguer vers l'éditeur d'objets.</value>
     <comment>Object navigation card description</comment>
   </data>
   <data name="Terrain" xml:space="preserve">
@@ -262,7 +352,7 @@
     <comment>Terrain navigation card title</comment>
   </data>
   <data name="Navigate to the terrain editor." xml:space="preserve">
-    <value>Ouvrir l'éditeur de terrain.</value>
+    <value>Naviguer vers l'éditeur de terrain.</value>
     <comment>Terrain navigation card description</comment>
   </data>
   <data name="Job" xml:space="preserve">
@@ -274,7 +364,7 @@
     <comment>Packitem navigation card title</comment>
   </data>
   <data name="Navigate to the packitem editor." xml:space="preserve">
-    <value>Ouvrir l'éditeur d'objets de pack.</value>
+    <value>Naviguer vers l'éditeur d'objets de pack.</value>
     <comment>Packitem navigation card description</comment>
   </data>
   <data name="Lord" xml:space="preserve">
@@ -285,17 +375,9 @@
     <value>Événement de drop</value>
     <comment>Drop Event navigation card title</comment>
   </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Paramètres</value>
-    <comment>Settings navigation card title</comment>
-  </data>
   <data name="Navigate to the settings page." xml:space="preserve">
     <value>Naviguer vers la page des paramètres.</value>
     <comment>Settings navigation card description</comment>
-  </data>
-  <data name="Dashboard" xml:space="preserve">
-    <value>Tableau de bord</value>
-    <comment>Dashboard menu item</comment>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Rechercher...</value>
@@ -307,19 +389,15 @@
   </data>
   <data name="Undo" xml:space="preserve">
     <value>Annuler</value>
-    <comment>Undo button tooltip</comment>
   </data>
   <data name="Redo" xml:space="preserve">
-    <value>Rétablir</value>
-    <comment>Redo button tooltip</comment>
+    <value>Refaire</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Enregistrer</value>
-    <comment>Save button text</comment>
   </data>
   <data name="Expert" xml:space="preserve">
     <value>Expert</value>
-    <comment>Expert button text</comment>
   </data>
   <data name="Items in box:" xml:space="preserve">
     <value>Objets dans la boîte:</value>
@@ -331,7 +409,7 @@
   </data>
   <data name="Item" xml:space="preserve">
     <value>Objet</value>
-    <comment>Item column header</comment>
+    <comment>Item section header</comment>
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantité</value>
@@ -351,7 +429,6 @@
   </data>
   <data name="Delete" xml:space="preserve">
     <value>Supprimer</value>
-    <comment>Delete button tooltip</comment>
   </data>
   <data name="Changelog" xml:space="preserve">
     <value>Journal des modifications</value>
@@ -365,8 +442,12 @@
     <value>Naviguer vers la page des collectionneurs.</value>
     <comment>Collectors navigation card description</comment>
   </data>
+  <data name="Navigate to the drop event editor." xml:space="preserve">
+    <value>Naviguer vers l'éditeur d'événements de drop.</value>
+    <comment>Drop Event navigation card description</comment>
+  </data>
   <data name="Navigate to the job editor." xml:space="preserve">
-    <value>Ouvrir l'éditeur de métiers.</value>
+    <value>Naviguer vers l'éditeur de métiers.</value>
     <comment>Job navigation card description</comment>
   </data>
   <data name="Navigate to the motions page." xml:space="preserve">
@@ -374,11 +455,11 @@
     <comment>Motions navigation card description</comment>
   </data>
   <data name="Navigate to the lord editor." xml:space="preserve">
-    <value>Ouvrir l'éditeur de seigneurs.</value>
+    <value>Naviguer vers l'éditeur de seigneurs.</value>
     <comment>Lord navigation card description</comment>
   </data>
   <data name="Navigate to the ticket editor." xml:space="preserve">
-    <value>Ouvrir l'éditeur de tickets.</value>
+    <value>Naviguer vers l'éditeur de tickets.</value>
     <comment>Tickets navigation card description</comment>
   </data>
   <data name="Navigate to the text client." xml:space="preserve">
@@ -387,7 +468,6 @@
   </data>
   <data name="ID" xml:space="preserve">
     <value>ID</value>
-    <comment>ID field label</comment>
   </data>
   <data name="Door of Dark" xml:space="preserve">
     <value>Porte des Ténèbres</value>
@@ -431,7 +511,6 @@
   </data>
   <data name="Level" xml:space="preserve">
     <value>Niveau</value>
-    <comment>Level field label</comment>
   </data>
   <data name="Sex" xml:space="preserve">
     <value>Sexe</value>
@@ -570,7 +649,6 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
-    <comment>Description field label</comment>
   </data>
   <data name="File Name" xml:space="preserve">
     <value>Nom de fichier</value>
@@ -882,7 +960,6 @@
   </data>
   <data name="Sound" xml:space="preserve">
     <value>Son</value>
-    <comment>Sound section header</comment>
   </data>
   <data name="Attack Sound" xml:space="preserve">
     <value>Son d'attaque</value>
@@ -898,11 +975,9 @@
   </data>
   <data name="Filter Sections" xml:space="preserve">
     <value>Filtrer les sections</value>
-    <comment>Filter Sections label</comment>
   </data>
   <data name="Filter Fields" xml:space="preserve">
     <value>Filtrer les champs</value>
-    <comment>Filter Fields label</comment>
   </data>
   <data name="Item ID" xml:space="preserve">
     <value>ID d'objet</value>
@@ -914,7 +989,7 @@
   </data>
   <data name="App theme" xml:space="preserve">
     <value>Thème de l'application</value>
-    <comment>App theme label</comment>
+    <comment>App theme section header</comment>
   </data>
   <data name="Select which app theme to display" xml:space="preserve">
     <value>Sélectionner le thème d'application à afficher</value>
@@ -922,7 +997,7 @@
   </data>
   <data name="Application language" xml:space="preserve">
     <value>Langue de l'application</value>
-    <comment>Application language label</comment>
+    <comment>Application language section header</comment>
   </data>
   <data name="Choose your preferred language" xml:space="preserve">
     <value>Choisissez votre langue préférée</value>
@@ -930,7 +1005,7 @@
   </data>
   <data name="Auto-save interval" xml:space="preserve">
     <value>Intervalle de sauvegarde automatique</value>
-    <comment>Auto-save interval label</comment>
+    <comment>Auto-save interval section header</comment>
   </data>
   <data name="Set the time interval for automatic saving" xml:space="preserve">
     <value>Définir l'intervalle de temps pour la sauvegarde automatique</value>
@@ -972,13 +1047,33 @@
     <value>Personnalisé</value>
     <comment>Custom option</comment>
   </data>
-  <data name="Navigate to the drop event page." xml:space="preserve">
-    <value>Ouvrir l'éditeur d'événements de drop.</value>
-    <comment>Drop Event navigation card description</comment>
+  <data name="Close" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="Item that should be added in the giftbox" xml:space="preserve">
+    <value>Objet qui doit être ajouté dans la boîte cadeau</value>
+    <comment>Tooltip for item info icon in giftbox dialog</comment>
+  </data>
+  <data name="Quantity of the item" xml:space="preserve">
+    <value>Quantité de l'objet</value>
+    <comment>Tooltip for quantity info icon in giftbox dialog</comment>
+  </data>
+  <data name="Probability percentage" xml:space="preserve">
+    <value>Pourcentage de probabilité</value>
+    <comment>Tooltip for probability info icon in giftbox dialog</comment>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Supprimer</value>
+    <comment>Remove button tooltip</comment>
+  </data>
+  <data name="Search items..." xml:space="preserve">
+    <value>Rechercher des objets...</value>
   </data>
   <data name="Basic Information" xml:space="preserve">
     <value>Informations de base</value>
-    <comment>Basic Information section header</comment>
   </data>
   <data name="Grade (Class Stage)" xml:space="preserve">
     <value>Grade (Étape de classe)</value>
@@ -1120,32 +1215,6 @@
     <value>Cible de zone</value>
     <comment>AOE Target option</comment>
   </data>
-  <data name="Add" xml:space="preserve">
-    <value>Ajouter</value>
-    <comment>Add button text</comment>
-  </data>
-  <data name="Close" xml:space="preserve">
-    <value>Fermer</value>
-  </data>
-  <data name="Search items..." xml:space="preserve">
-    <value>Rechercher des objets...</value>
-  </data>
-  <data name="Item that should be added in the giftbox" xml:space="preserve">
-    <value>Objet qui doit être ajouté dans la boîte cadeau</value>
-    <comment>Tooltip for item info icon in giftbox dialog</comment>
-  </data>
-  <data name="Quantity of the item" xml:space="preserve">
-    <value>Quantité de l'objet</value>
-    <comment>Tooltip for quantity info icon in giftbox dialog</comment>
-  </data>
-  <data name="Probability percentage" xml:space="preserve">
-    <value>Pourcentage de probabilité</value>
-    <comment>Tooltip for probability info icon in giftbox dialog</comment>
-  </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Supprimer</value>
-    <comment>Remove button tooltip</comment>
-  </data>
   <data name="AII_ Assignment" xml:space="preserve">
     <value>AII_ Attribution</value>
     <comment>AII_ Assignment section title</comment>
@@ -1157,47 +1226,6 @@
   <data name="Assigned Resources" xml:space="preserve">
     <value>Ressources assignées</value>
     <comment>Assigned Resources list header</comment>
-  </data>
-  <!-- Loading Error Window -->
-  <data name="File Not Found" xml:space="preserve">
-    <value>Fichier introuvable</value>
-    <comment>Error dialog title for missing file</comment>
-  </data>
-  <data name="A required file could not be loaded" xml:space="preserve">
-    <value>Un fichier requis n'a pas pu être chargé</value>
-    <comment>Error dialog subtitle for missing file</comment>
-  </data>
-  <data name="What happened?" xml:space="preserve">
-    <value>Que s'est-il passé ?</value>
-    <comment>Error dialog section header</comment>
-  </data>
-  <data name="The application could not find an important file. This can happen when:" xml:space="preserve">
-    <value>L'application n'a pas pu trouver un fichier important. Cela peut arriver si :</value>
-    <comment>Error dialog explanation text</comment>
-  </data>
-  <data name="• The file was moved or deleted" xml:space="preserve">
-    <value>• Le fichier a été déplacé ou supprimé</value>
-    <comment>Error dialog possible cause 1</comment>
-  </data>
-  <data name="• The path is incorrect" xml:space="preserve">
-    <value>• Le chemin n'est pas correct</value>
-    <comment>Error dialog possible cause 2</comment>
-  </data>
-  <data name="• The file is corrupted" xml:space="preserve">
-    <value>• Le fichier est corrompu</value>
-    <comment>Error dialog possible cause 3</comment>
-  </data>
-  <data name="Missing file:" xml:space="preserve">
-    <value>Fichier manquant :</value>
-    <comment>Error dialog missing file label</comment>
-  </data>
-  <data name="Open Folder" xml:space="preserve">
-    <value>Ouvrir le dossier</value>
-    <comment>Error dialog button to open folder</comment>
-  </data>
-  <data name="Exit Application" xml:space="preserve">
-    <value>Fermer l'application</value>
-    <comment>Error dialog button to close application</comment>
   </data>
   <data name="eTools Ultimate - Update Checker" xml:space="preserve">
     <value>eTools Ultimate - Vérificateur de mise à jour</value>
@@ -1218,10 +1246,6 @@
   <data name="Click the button below to check for updates. The application will automatically download and install the latest version from GitHub." xml:space="preserve">
     <value>Cliquez sur le bouton ci-dessous pour vérifier les mises à jour. L'application téléchargera et installera automatiquement la dernière version depuis GitHub.</value>
     <comment>Update check description</comment>
-  </data>
-  <data name="Check for Updates" xml:space="preserve">
-    <value>Vérifier les mises à jour</value>
-    <comment>Check for updates button text</comment>
   </data>
   <data name="Checking for updates..." xml:space="preserve">
     <value>Vérification des mises à jour...</value>
@@ -1263,39 +1287,49 @@
     <value>Erreur lors de l'affichage des informations de mise à jour : {0}</value>
     <comment>Error message for update display</comment>
   </data>
-  
-  <!-- Common UI Elements -->
-  <data name="Welcome" xml:space="preserve">
-    <value>Bienvenue</value>
-    <comment>Welcome text on dashboard</comment>
+  <data name="Navigate to the drop event page." xml:space="preserve">
+    <value>Ouvrir l'éditeur d'événements de drop.</value>
+    <comment>Drop Event navigation card description</comment>
   </data>
-  <data name="Created by eTools Ultimate" xml:space="preserve">
-    <value>Créé par eTools Ultimate</value>
-    <comment>Created by text on dashboard</comment>
+  <data name="File Not Found" xml:space="preserve">
+    <value>Fichier introuvable</value>
+    <comment>Error dialog title for missing file</comment>
   </data>
-  <data name="Dashboard" xml:space="preserve">
-    <value>Tableau de bord</value>
-    <comment>Dashboard menu item</comment>
+  <data name="A required file could not be loaded" xml:space="preserve">
+    <value>Un fichier requis n'a pas pu être chargé</value>
+    <comment>Error dialog subtitle for missing file</comment>
   </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Paramètres</value>
-    <comment>Settings navigation card title</comment>
+  <data name="What happened?" xml:space="preserve">
+    <value>Que s'est-il passé ?</value>
+    <comment>Error dialog section header</comment>
   </data>
-  <data name="Navigate to the settings page." xml:space="preserve">
-    <value>Naviguer vers la page des paramètres.</value>
-    <comment>Settings navigation card description</comment>
+  <data name="The application could not find an important file. This can happen when:" xml:space="preserve">
+    <value>L'application n'a pas pu trouver un fichier important. Cela peut arriver si :</value>
+    <comment>Error dialog explanation text</comment>
   </data>
-  <data name="Search" xml:space="preserve">
-    <value>Rechercher...</value>
-    <comment>Search placeholder text</comment>
+  <data name="• The file was moved or deleted" xml:space="preserve">
+    <value>• Le fichier a été déplacé ou supprimé</value>
+    <comment>Error dialog possible cause 1</comment>
   </data>
-  <data name="Close" xml:space="preserve">
-    <value>Fermer</value>
-    <comment>Close button text</comment>
+  <data name="• The path is incorrect" xml:space="preserve">
+    <value>• Le chemin n'est pas correct</value>
+    <comment>Error dialog possible cause 2</comment>
   </data>
-  <data name="Save" xml:space="preserve">
-    <value>Enregistrer</value>
-    <comment>Save button text</comment>
+  <data name="• The file is corrupted" xml:space="preserve">
+    <value>• Le fichier est corrompu</value>
+    <comment>Error dialog possible cause 3</comment>
+  </data>
+  <data name="Missing file:" xml:space="preserve">
+    <value>Fichier manquant :</value>
+    <comment>Error dialog missing file label</comment>
+  </data>
+  <data name="Open Folder" xml:space="preserve">
+    <value>Ouvrir le dossier</value>
+    <comment>Error dialog button to open folder</comment>
+  </data>
+  <data name="Exit Application" xml:space="preserve">
+    <value>Fermer l'application</value>
+    <comment>Error dialog button to close application</comment>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Annuler</value>
@@ -1313,56 +1347,6 @@
     <value>Non</value>
     <comment>No button text</comment>
   </data>
-  <data name="Add" xml:space="preserve">
-    <value>Ajouter</value>
-    <comment>Add button text</comment>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Modifier</value>
-    <comment>Edit button tooltip</comment>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Supprimer</value>
-    <comment>Delete button tooltip</comment>
-  </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Supprimer</value>
-    <comment>Remove button tooltip</comment>
-  </data>
-  <data name="Undo" xml:space="preserve">
-    <value>Annuler</value>
-    <comment>Undo button tooltip</comment>
-  </data>
-  <data name="Redo" xml:space="preserve">
-    <value>Rétablir</value>
-    <comment>Redo button tooltip</comment>
-  </data>
-  
-  <!-- Navigation Items -->
-  <data name="Items" xml:space="preserve">
-    <value>Objets</value>
-    <comment>Items navigation card title</comment>
-  </data>
-  <data name="Navigate to the items page." xml:space="preserve">
-    <value>Naviguer vers la page des objets.</value>
-    <comment>Items navigation card description</comment>
-  </data>
-  <data name="Skills" xml:space="preserve">
-    <value>Compétences</value>
-    <comment>Skills navigation card title</comment>
-  </data>
-  <data name="Navigate to the skills page." xml:space="preserve">
-    <value>Naviguer vers la page des compétences.</value>
-    <comment>Skills navigation card description</comment>
-  </data>
-  <data name="Quests" xml:space="preserve">
-    <value>Quêtes</value>
-    <comment>Quests navigation card title</comment>
-  </data>
-  <data name="Navigate to the quests page." xml:space="preserve">
-    <value>Naviguer vers la page des quêtes.</value>
-    <comment>Quests navigation card description</comment>
-  </data>
   <data name="Characters" xml:space="preserve">
     <value>Personnages</value>
     <comment>Characters navigation card title</comment>
@@ -1371,179 +1355,12 @@
     <value>Naviguer vers la page des personnages.</value>
     <comment>Characters navigation card description</comment>
   </data>
-  <data name="Events" xml:space="preserve">
-    <value>Événements</value>
-    <comment>Events navigation card title</comment>
-  </data>
-  <data name="Navigate to the events page." xml:space="preserve">
-    <value>Naviguer vers la page des événements.</value>
-    <comment>Events navigation card description</comment>
-  </data>
-  <data name="Giftboxes" xml:space="preserve">
-    <value>Boîtes-cadeaux</value>
-    <comment>Giftboxes navigation card title</comment>
-  </data>
-  <data name="Navigate to the giftboxes page." xml:space="preserve">
-    <value>Naviguer vers la page des boîtes-cadeaux.</value>
-    <comment>Giftboxes navigation card description</comment>
-  </data>
-  <data name="Accessories" xml:space="preserve">
-    <value>Accessoires</value>
-    <comment>Accessories navigation card title</comment>
-  </data>
-  <data name="Navigate to the accessories page." xml:space="preserve">
-    <value>Naviguer vers la page des accessoires.</value>
-    <comment>Accessories navigation card description</comment>
-  </data>
-  <data name="Exchangers" xml:space="preserve">
-    <value>Échangeurs</value>
-    <comment>Exchangers navigation card title</comment>
-  </data>
-  <data name="Navigate to the exchanger page." xml:space="preserve">
-    <value>Naviguer vers la page des échangeurs.</value>
-    <comment>Exchangers navigation card description</comment>
-  </data>
-  <data name="Honor List" xml:space="preserve">
-    <value>Liste d'honneur</value>
-    <comment>Honor List navigation card title</comment>
-  </data>
-  <data name="Navigate to the honor list page." xml:space="preserve">
-    <value>Naviguer vers la page de la liste d'honneur.</value>
-    <comment>Honor List navigation card description</comment>
-  </data>
-  <data name="Couple" xml:space="preserve">
-    <value>Couple</value>
-    <comment>Couple navigation card title</comment>
-  </data>
-  <data name="Navigate to the couple page." xml:space="preserve">
-    <value>Naviguer vers la page des couples.</value>
-    <comment>Couple navigation card description</comment>
-  </data>
-  <data name="Motions" xml:space="preserve">
-    <value>Mouvements</value>
-    <comment>Motions navigation card title</comment>
-  </data>
-  <data name="Navigate to the motions page." xml:space="preserve">
-    <value>Naviguer vers la page des mouvements.</value>
-    <comment>Motions navigation card description</comment>
-  </data>
-  <data name="Text Client" xml:space="preserve">
-    <value>Client texte</value>
-    <comment>Text Client navigation card title</comment>
-  </data>
-  <data name="Navigate to the text client." xml:space="preserve">
-    <value>Naviguer vers le client texte.</value>
-    <comment>Text Client navigation card description</comment>
-  </data>
-  <data name="World" xml:space="preserve">
-    <value>Monde</value>
-    <comment>World navigation card title</comment>
-  </data>
   <data name="Navigate to the world editor." xml:space="preserve">
     <value>Naviguer vers l'éditeur de monde.</value>
     <comment>World navigation card description</comment>
   </data>
-  <data name="Tickets" xml:space="preserve">
-    <value>Tickets</value>
-    <comment>Tickets navigation card title</comment>
-  </data>
-  <data name="Navigate to the ticket editor." xml:space="preserve">
-    <value>Naviguer vers l'éditeur de tickets.</value>
-    <comment>Tickets navigation card description</comment>
-  </data>
-  <data name="Object" xml:space="preserve">
-    <value>Objet</value>
-    <comment>Object navigation card title</comment>
-  </data>
-  <data name="Navigate to the object editor." xml:space="preserve">
-    <value>Naviguer vers l'éditeur d'objets.</value>
-    <comment>Object navigation card description</comment>
-  </data>
-  <data name="Terrain" xml:space="preserve">
-    <value>Terrain</value>
-    <comment>Terrain navigation card title</comment>
-  </data>
-  <data name="Navigate to the terrain editor." xml:space="preserve">
-    <value>Naviguer vers l'éditeur de terrain.</value>
-    <comment>Terrain navigation card description</comment>
-  </data>
-  <data name="Job" xml:space="preserve">
-    <value>Métier</value>
-    <comment>Job navigation card title</comment>
-  </data>
-  <data name="Navigate to the job editor." xml:space="preserve">
-    <value>Naviguer vers l'éditeur de métiers.</value>
-    <comment>Job navigation card description</comment>
-  </data>
-  <data name="Packitem" xml:space="preserve">
-    <value>Objet de pack</value>
-    <comment>Packitem navigation card title</comment>
-  </data>
-  <data name="Navigate to the packitem editor." xml:space="preserve">
-    <value>Naviguer vers l'éditeur d'objets de pack.</value>
-    <comment>Packitem navigation card description</comment>
-  </data>
-  <data name="Lord" xml:space="preserve">
-    <value>Souverain</value>
-    <comment>Lord navigation card title</comment>
-  </data>
-  <data name="Navigate to the lord editor." xml:space="preserve">
-    <value>Naviguer vers l'éditeur de seigneurs.</value>
-    <comment>Lord navigation card description</comment>
-  </data>
-  <data name="Drop Event" xml:space="preserve">
-    <value>Événement de drop</value>
-    <comment>Drop Event navigation card title</comment>
-  </data>
-  <data name="Navigate to the drop event editor." xml:space="preserve">
-    <value>Naviguer vers l'éditeur d'événements de drop.</value>
-    <comment>Drop Event navigation card description</comment>
-  </data>
-  <data name="Collectors" xml:space="preserve">
-    <value>Collectionneurs</value>
-    <comment>Collectors navigation card title</comment>
-  </data>
-  <data name="Navigate to the collectors page." xml:space="preserve">
-    <value>Naviguer vers la page des collectionneurs.</value>
-    <comment>Collectors navigation card description</comment>
-  </data>
-  <data name="Movers" xml:space="preserve">
-    <value>Mobiles</value>
-    <comment>Movers navigation card title</comment>
-  </data>
-  <data name="Navigate to the movers page." xml:space="preserve">
-    <value>Naviguer vers la page des mobiles.</value>
-    <comment>Movers navigation card description</comment>
-  </data>
-  <data name="NPCs" xml:space="preserve">
-    <value>PNJs</value>
-    <comment>NPCs navigation card title</comment>
-  </data>
-  <data name="Navigate to the NPCs page." xml:space="preserve">
-    <value>Naviguer vers la page des PNJs.</value>
-    <comment>NPCs navigation card description</comment>
-  </data>
-  
-  <!-- External Links -->
-  <data name="View on GitHub" xml:space="preserve">
-    <value>Voir sur GitHub</value>
-    <comment>GitHub button tooltip</comment>
-  </data>
-  <data name="Join our Discord server" xml:space="preserve">
-    <value>Rejoindre notre serveur Discord</value>
-    <comment>Discord button tooltip</comment>
-  </data>
-  <data name="Patchlogs" xml:space="preserve">
-    <value>Notes de patch</value>
-    <comment>Patchlogs button text</comment>
-  </data>
-  <data name="Changelog" xml:space="preserve">
-    <value>Journal des modifications</value>
-    <comment>Change Log menu item</comment>
-  </data>
   <data name="eTools Ultimate - Update Available" xml:space="preserve">
     <value>eTools Ultimate - Mise à jour disponible</value>
-    <comment>AvailableUpdateWindow title</comment>
   </data>
   <data name="Update Available" xml:space="preserve">
     <value>Mise à jour disponible</value>
@@ -1560,10 +1377,6 @@
   <data name="New Version Available!" xml:space="preserve">
     <value>Nouvelle version disponible !</value>
     <comment>AvailableUpdateWindow main heading</comment>
-  </data>
-  <data name="A new version of eTools Ultimate is ready to install" xml:space="preserve">
-    <value>Une nouvelle version d'eTools Ultimate est prête à être installée</value>
-    <comment>AvailableUpdateWindow subtitle</comment>
   </data>
   <data name="Version Information" xml:space="preserve">
     <value>Informations de version</value>
@@ -1591,40 +1404,10 @@
   </data>
   <data name="Installing update..." xml:space="preserve">
     <value>Installation de la mise à jour...</value>
-    <comment>AvailableUpdateWindow loading text</comment>
   </data>
   <data name="Error installing update" xml:space="preserve">
     <value>Erreur lors de l'installation de la mise à jour</value>
-    <comment>AvailableUpdateWindow error text</comment>
   </data>
-  
-  <!-- Settings Page Translations -->
-  <data name="Resource Path" xml:space="preserve">
-    <value>Chemin des ressources</value>
-    <comment>Resource Path navigation card title</comment>
-  </data>
-  <data name="Loading all Paths." xml:space="preserve">
-    <value>Chargement de tous les chemins.</value>
-    <comment>Resource Path navigation card description</comment>
-  </data>
-  <data name="Personalization" xml:space="preserve">
-    <value>Personnalisation</value>
-    <comment>Personalization navigation card title</comment>
-  </data>
-  <data name="Change Design and other parts" xml:space="preserve">
-    <value>Modifier le design et autres parties</value>
-    <comment>Personalization navigation card description</comment>
-  </data>
-  <data name="About" xml:space="preserve">
-    <value>À propos</value>
-    <comment>About navigation card title</comment>
-  </data>
-  <data name="Learn more about eTools Ultimate" xml:space="preserve">
-    <value>En savoir plus sur eTools Ultimate</value>
-    <comment>About navigation card description</comment>
-  </data>
-  
-  <!-- Resource Path Page Translations -->
   <data name="Main Settings" xml:space="preserve">
     <value>Paramètres principaux</value>
     <comment>Main Settings section header</comment>
@@ -1645,10 +1428,6 @@
     <value>Paramètres avancés</value>
     <comment>Advanced settings button text</comment>
   </data>
-  <data name="Custom" xml:space="preserve">
-    <value>Personnalisé</value>
-    <comment>Custom section header</comment>
-  </data>
   <data name="Texture folder" xml:space="preserve">
     <value>Dossier de textures</value>
     <comment>Texture folder field label</comment>
@@ -1664,10 +1443,6 @@
   <data name="Sounds config file" xml:space="preserve">
     <value>Fichier de configuration des sons</value>
     <comment>Sounds config file field label</comment>
-  </data>
-  <data name="Item" xml:space="preserve">
-    <value>Objet</value>
-    <comment>Item section header</comment>
   </data>
   <data name="Spec_Item file" xml:space="preserve">
     <value>Fichier Spec_Item</value>
@@ -1725,32 +1500,6 @@
     <value>Dossier d'icônes</value>
     <comment>Icon folder field label</comment>
   </data>
-  
-  <!-- Personalization Page Translations -->
-  <data name="App theme" xml:space="preserve">
-    <value>Thème de l'application</value>
-    <comment>App theme section header</comment>
-  </data>
-  <data name="Select which app theme to display" xml:space="preserve">
-    <value>Sélectionner le thème d'application à afficher</value>
-    <comment>App theme description</comment>
-  </data>
-  <data name="Application language" xml:space="preserve">
-    <value>Langue de l'application</value>
-    <comment>Application language section header</comment>
-  </data>
-  <data name="Choose your preferred language" xml:space="preserve">
-    <value>Choisissez votre langue préférée</value>
-    <comment>Application language description</comment>
-  </data>
-  <data name="Light" xml:space="preserve">
-    <value>Clair</value>
-    <comment>Light theme option</comment>
-  </data>
-  <data name="Dark" xml:space="preserve">
-    <value>Sombre</value>
-    <comment>Dark theme option</comment>
-  </data>
   <data name="High Contrast" xml:space="preserve">
     <value>Contraste élevé</value>
     <comment>High Contrast theme option</comment>
@@ -1758,80 +1507,6 @@
   <data name="English" xml:space="preserve">
     <value>Anglais</value>
     <comment>English language option</comment>
-  </data>
-  <data name="German" xml:space="preserve">
-    <value>Allemand</value>
-    <comment>German language option</comment>
-  </data>
-  <data name="French" xml:space="preserve">
-    <value>Français</value>
-    <comment>French language option</comment>
-  </data>
-  <data name="Auto-save interval" xml:space="preserve">
-    <value>Intervalle de sauvegarde automatique</value>
-    <comment>Auto-save interval section header</comment>
-  </data>
-  <data name="Set the time interval for automatic saving" xml:space="preserve">
-    <value>Définir l'intervalle de temps pour la sauvegarde automatique</value>
-    <comment>Auto-save interval description</comment>
-  </data>
-  <data name="5 minutes" xml:space="preserve">
-    <value>5 minutes</value>
-    <comment>5 minutes option</comment>
-  </data>
-  <data name="15 minutes" xml:space="preserve">
-    <value>15 minutes</value>
-    <comment>15 minutes option</comment>
-  </data>
-  <data name="30 minutes" xml:space="preserve">
-    <value>30 minutes</value>
-    <comment>30 minutes option</comment>
-  </data>
-  <data name="Custom" xml:space="preserve">
-    <value>Personnalisé</value>
-    <comment>Custom option</comment>
-  </data>
-  <data name="min" xml:space="preserve">
-    <value>min</value>
-    <comment>Minutes abbreviation</comment>
-  </data>
-  
-  <!-- About Page Translations -->
-  <data name="About eTools Ultimate" xml:space="preserve">
-    <value>À propos d'eTools Ultimate</value>
-    <comment>About eTools Ultimate section header</comment>
-  </data>
-  <data name="Our tool simplifies the editing process for developers." xml:space="preserve">
-    <value>Notre outil simplifie le processus d'édition pour les développeurs.</value>
-    <comment>About description</comment>
-  </data>
-  <data name="Main Features" xml:space="preserve">
-    <value>Fonctionnalités principales</value>
-    <comment>Main Features section header</comment>
-  </data>
-  <data name="Editing of .txt, .h and .inc files with structured interfaces" xml:space="preserve">
-    <value>Édition de fichiers .txt, .h et .inc avec des interfaces structurées</value>
-    <comment>Main feature 1</comment>
-  </data>
-  <data name="Advanced categorization by element types" xml:space="preserve">
-    <value>Catégorisation avancée par types d'éléments</value>
-    <comment>Main feature 2</comment>
-  </data>
-  <data name="Optimized for performance and user-friendliness" xml:space="preserve">
-    <value>Optimisé pour les performances et la convivialité</value>
-    <comment>Main feature 3</comment>
-  </data>
-  <data name="Development Team" xml:space="preserve">
-    <value>Équipe de développement</value>
-    <comment>Development Team section header</comment>
-  </data>
-  <data name="System Requirements" xml:space="preserve">
-    <value>Exigences système</value>
-    <comment>System Requirements section header</comment>
-  </data>
-  <data name="Operating System:" xml:space="preserve">
-    <value>Système d'exploitation :</value>
-    <comment>Operating System field label</comment>
   </data>
   <data name="Windows 10/11" xml:space="preserve">
     <value>Windows 10/11</value>
@@ -1849,62 +1524,13 @@
     <value>Espace disque :</value>
     <comment>Disk Space field label</comment>
   </data>
-  <data name="200 MB available space" xml:space="preserve">
-    <value>200 Mo d'espace disponible</value>
-    <comment>Disk space requirement</comment>
-  </data>
-  <data name="Visit Website" xml:space="preserve">
-    <value>Visiter le site web</value>
-    <comment>Visit Website button text</comment>
-  </data>
-  <data name="Check for Updates" xml:space="preserve">
-    <value>Vérifier les mises à jour</value>
-    <comment>Check for Updates button text</comment>
-  </data>
-  
-  <!-- Developer Names -->
-  <data name="Maqui" xml:space="preserve">
-    <value>Maqui</value>
-    <comment>Developer name</comment>
-  </data>
-  <data name="Kiyo" xml:space="preserve">
-    <value>Kiyo</value>
-    <comment>Developer name</comment>
-  </data>
-  
-  <!-- Technical Terms -->
   <data name="64 Bit" xml:space="preserve">
     <value>64 bits</value>
     <comment>64 Bit option</comment>
   </data>
-  
-  <!-- Update Window Translations -->
-  <data name="Update Available" xml:space="preserve">
-    <value>Mise à jour disponible</value>
-  </data>
-  <data name="A new version of eTools Ultimate is ready to install" xml:space="preserve">
-    <value>Une nouvelle version d'eTools Ultimate est prête à être installée</value>
-  </data>
-  <data name="Install Now" xml:space="preserve">
-    <value>Installer maintenant</value>
-  </data>
-  <data name="Later" xml:space="preserve">
-    <value>Plus tard</value>
-  </data>
-  <data name="Installing update..." xml:space="preserve">
-    <value>Installation de la mise à jour...</value>
-  </data>
-  <data name="Error installing update" xml:space="preserve">
-    <value>Erreur lors de l'installation de la mise à jour</value>
-  </data>
   <data name="Retry" xml:space="preserve">
     <value>Réessayer</value>
   </data>
-  <data name="eTools Ultimate - Update Available" xml:space="preserve">
-    <value>eTools Ultimate - Mise à jour disponible</value>
-  </data>
-  
-  <!-- MoversPage ToolTip Translations -->
   <data name="Define ID of the mover" xml:space="preserve">
     <value>Définir l'ID du mover</value>
   </data>
@@ -2028,12 +1654,6 @@
   <data name="Texture" xml:space="preserve">
     <value>Texture</value>
   </data>
-  <data name="Undo" xml:space="preserve">
-    <value>Annuler</value>
-  </data>
-  <data name="Redo" xml:space="preserve">
-    <value>Refaire</value>
-  </data>
   <data name="Play selected motion" xml:space="preserve">
     <value>Jouer le mouvement sélectionné</value>
   </data>
@@ -2052,31 +1672,6 @@
   <data name="Generate Motions" xml:space="preserve">
     <value>Générer des mouvements</value>
   </data>
-  
-  <!-- Navigation Menu Translations -->
-  <data name="Dashboard" xml:space="preserve">
-    <value>Tableau de bord</value>
-  </data>
-  <data name="Movers" xml:space="preserve">
-    <value>Movers</value>
-  </data>
-  <data name="Giftboxes" xml:space="preserve">
-    <value>Boîtes-cadeaux</value>
-  </data>
-  <data name="Accessories" xml:space="preserve">
-    <value>Accessoires</value>
-  </data>
-  <data name="TextClient" xml:space="preserve">
-    <value>Client de texte</value>
-  </data>
-  <data name="Motions" xml:space="preserve">
-    <value>Mouvements</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Paramètres</value>
-  </data>
-  
-  <!-- Model Section Translations -->
   <data name="Model" xml:space="preserve">
     <value>Modèle</value>
   </data>
@@ -2086,8 +1681,6 @@
   <data name="No model associated with the selected mover." xml:space="preserve">
     <value>Aucun modèle associé au mover sélectionné.</value>
   </data>
-  
-  <!-- Reference Model Dialog Translations -->
   <data name="Select Reference Model" xml:space="preserve">
     <value>Sélectionner le modèle de référence</value>
   </data>
@@ -2100,25 +1693,8 @@
   <data name="Accept" xml:space="preserve">
     <value>Accepter</value>
   </data>
-  <data name="Close" xml:space="preserve">
-    <value>Fermer</value>
-  </data>
-  
-  <!-- MoversPage Content Translations -->
-  <data name="Save" xml:space="preserve">
-    <value>Enregistrer</value>
-  </data>
-  <data name="Expert" xml:space="preserve">
-    <value>Expert</value>
-  </data>
   <data name="Filter" xml:space="preserve">
     <value>Filtrer</value>
-  </data>
-  <data name="Filter Sections" xml:space="preserve">
-    <value>Filtrer les sections</value>
-  </data>
-  <data name="Basic Information" xml:space="preserve">
-    <value>Informations de base</value>
   </data>
   <data name="Stats" xml:space="preserve">
     <value>Statistiques</value>
@@ -2132,26 +1708,11 @@
   <data name="Elementar &amp; Damage Types" xml:space="preserve">
     <value>Élémentaire &amp; Types de dégâts</value>
   </data>
-  <data name="Sound" xml:space="preserve">
-    <value>Son</value>
-  </data>
   <data name="Model / Mobility / Movement" xml:space="preserve">
     <value>Modèle / Mobilité / Mouvement</value>
   </data>
-  <data name="Filter Fields" xml:space="preserve">
-    <value>Filtrer les champs</value>
-  </data>
-  <data name="ID" xml:space="preserve">
-    <value>ID</value>
-  </data>
   <data name="ID Key" xml:space="preserve">
     <value>Clé ID</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Nom</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>Description</value>
   </data>
   <data name="Killable" xml:space="preserve">
     <value>Tuable</value>
@@ -2182,9 +1743,6 @@
   </data>
   <data name="Evasion Rate" xml:space="preserve">
     <value>Taux d'esquive</value>
-  </data>
-  <data name="Level" xml:space="preserve">
-    <value>Niveau</value>
   </data>
   <data name="Health Points" xml:space="preserve">
     <value>Points de vie</value>
@@ -2246,58 +1804,19 @@
   <data name="Correction Value" xml:space="preserve">
     <value>Valeur de correction</value>
   </data>
-  <data name="Add" xml:space="preserve">
-    <value>Ajouter</value>
+  <data name="System default" xml:space="preserve">
+    <value>Valeur par défaut du système</value>
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Supprimer</value>
+  <data name="Application language changed" xml:space="preserve">
+    <value>Langue de l’application modifiée</value>
   </data>
-  
-  <!-- Navigation Menu Translations -->
-  <data name="Dashboard" xml:space="preserve">
-    <value>Tableau de bord</value>
+  <data name="The application needs to be restarted for the language change to take effect." xml:space="preserve">
+    <value>L’application doit être redémarrée pour que le changement de langue prenne effet.</value>
   </data>
-  <data name="Movers" xml:space="preserve">
-    <value>Mouveurs</value>
+  <data name="Restart" xml:space="preserve">
+    <value>Redémarrer</value>
   </data>
-  <data name="Giftboxes" xml:space="preserve">
-    <value>Boîtes-cadeaux</value>
-  </data>
-  <data name="Accessories" xml:space="preserve">
-    <value>Accessoires</value>
-  </data>
-  <data name="TextClient" xml:space="preserve">
-    <value>Client de texte</value>
-  </data>
-  <data name="Motions" xml:space="preserve">
-    <value>Mouvements</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Paramètres</value>
-  </data>
-  <data name="Resource Path" xml:space="preserve">
-    <value>Chemin des ressources</value>
-  </data>
-  <data name="Personalization" xml:space="preserve">
-    <value>Personnalisation</value>
-  </data>
-  <data name="About" xml:space="preserve">
-    <value>À propos</value>
-  </data>
-  <data name="RAM:" xml:space="preserve">
-    <value>RAM :</value>
-    <comment>RAM requirement</comment>
-  </data>
-  <data name="4 GB minimum, 8 GB recommended" xml:space="preserve">
-    <value>4 GB minimum, 8 GB recommandé</value>
-    <comment>RAM requirement with recommendation</comment>
-  </data>
-  <data name="200 MB available space" xml:space="preserve">
-    <value>200 MB d'espace disponible</value>
-    <comment>Storage space requirement</comment>
-  </data>
-  <data name="System language" xml:space="preserve">
-    <value>Langue du système</value>
-    <comment>System language option</comment>
+  <data name="Restart later" xml:space="preserve">
+    <value>Redémarrer plus tard</value>
   </data>
 </root>
