@@ -12,7 +12,13 @@ namespace eTools_Ultimate.Views.Windows
 {
     public partial class MainWindow : INavigationWindow
     {
-        public MainWindowViewModel ViewModel { get; }
+        public MainWindowViewModel ViewModel { get; set; } = null!;
+
+        public MainWindow()
+        {
+            // Design-time constructor
+            InitializeComponent();
+        }
 
         public MainWindow(
             MainWindowViewModel viewModel,
@@ -21,7 +27,7 @@ namespace eTools_Ultimate.Views.Windows
             ISnackbarService snackbarService,
             IContentDialogService contentDialogService,
             AppConfig appConfig
-        )
+        ) : this()
         {
             ViewModel = viewModel;
             DataContext = this;

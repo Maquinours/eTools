@@ -15,7 +15,7 @@
     xmlns:pageViewModels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="MoverPage"
+    Title="{i18n:StringLocalizer 'MoverPage'}"
     d:DataContext="{d:DesignInstance pageViewModels:MoversViewModel,
                                      IsDesignTimeCreatable=False}"
     d:DesignHeight="4122"
@@ -1188,7 +1188,7 @@
                                             <Expander
                                                 Background="Transparent"
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Header="Basic Information Fields">
+                                                Header="{i18n:StringLocalizer 'Basic Information Fields'}">
                                                 <StackPanel Margin="20,5,5,5">
                                                     <CheckBox
                                                         Margin="0,2"
@@ -1238,7 +1238,7 @@
                                             <Expander
                                                 Background="Transparent"
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Header="Stats Fields">
+                                                Header="{i18n:StringLocalizer 'Stats Fields'}">
                                                 <StackPanel Margin="20,5,5,5">
                                                     <CheckBox
                                                         Margin="0,2"
@@ -1278,7 +1278,7 @@
                                             <Expander
                                                 Background="Transparent"
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Header="Combat/Battle Fields">
+                                                Header="{i18n:StringLocalizer 'Combat/Battle Fields'}">
                                                 <StackPanel Margin="20,5,5,5">
                                                     <CheckBox
                                                         Margin="0,2"
@@ -1343,7 +1343,7 @@
                                             <Expander
                                                 Background="Transparent"
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Header="Defensive Stats Fields">
+                                                Header="{i18n:StringLocalizer 'Defensive Stats Fields'}">
                                                 <StackPanel Margin="20,5,5,5">
                                                     <CheckBox
                                                         Margin="0,2"
@@ -1388,7 +1388,7 @@
                                             <Expander
                                                 Background="Transparent"
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Header="Elemental Fields">
+                                                Header="{i18n:StringLocalizer 'Elemental Fields'}">
                                                 <StackPanel Margin="20,5,5,5">
                                                     <CheckBox
                                                         Margin="0,2"
@@ -1475,7 +1475,7 @@
                                         Height="32"
                                         Margin="5,0,5,0"
                                         Command="{Binding SelectSndDmg2FileCommand, Mode=OneWay}"
-                                        Content="..." />
+                                        Content="{i18n:StringLocalizer '...'}" />
                                     <ui:Button
                                         Grid.Column="2"
                                         Width="40"
@@ -1518,7 +1518,7 @@
                                         Height="32"
                                         Margin="5,0,5,0"
                                         Command="{Binding SelectSndIdle1FileCommand, Mode=OneWay}"
-                                        Content="..." />
+                                        Content="{i18n:StringLocalizer '...'}" />
                                     <ui:Button
                                         Grid.Column="2"
                                         Width="40"
@@ -1719,7 +1719,7 @@
                                                 Width="30"
                                                 Height="32"
                                                 Margin="5,0,0,0"
-                                                Content="..." />
+                                                Content="{i18n:StringLocalizer '...'}" />
                                         </Grid>
                                     </Grid>
                                 </UniformGrid>
@@ -1759,7 +1759,7 @@
                                             Height="32"
                                             Margin="5,0,0,0"
                                             Command="{Binding DataContext.SelectModelFileCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                            Content="..." />
+                                            Content="{i18n:StringLocalizer '...'}" />
                                     </Grid>
                                 </Grid>
 

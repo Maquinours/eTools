@@ -259,7 +259,6 @@
                     VerticalScrollBarVisibility="Auto"
                     CanContentScroll="True"
                     PanningMode="VerticalOnly"
-                    ZoomMode="Disabled"
                     Focusable="True"
                     IsTabStop="True">
                     <ItemsControl 
