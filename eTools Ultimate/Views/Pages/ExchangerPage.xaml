@@ -220,15 +220,20 @@
         </GridSplitter>
 
         <!--  Right Side - Form  -->
-        <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
-            <Grid>
-                <!--  Add und Delete Buttons oben rechts  -->
-                <StackPanel
-                    Margin="0,10,20,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Orientation="Horizontal"
-                    ZIndex="1">
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <!--  Static Header mit Buttons  -->
+            <StackPanel
+                Grid.Row="0"
+                Margin="0,10,20,10"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Orientation="Horizontal"
+                ZIndex="1">
                     <ui:Button ToolTip="{i18n:StringLocalizer 'Undo'}">
                         <ui:SymbolIcon Symbol="ArrowUndo24" />
                     </ui:Button>
@@ -256,10 +261,13 @@
                         Background="#FD292F"
                         Content="{i18n:StringLocalizer 'Delete'}"
                         Icon="Delete24" />
-                </StackPanel>
-
-                <!--  Formulare  -->
-                <StackPanel Margin="20">
+            </StackPanel>
+            
+            <!--  Scrollable Content  -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <!--  Formulare  -->
+                    <StackPanel Margin="20">
                     <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Basic Information'}" />
                     <UniformGrid Columns="2">
                         <!--  MMI_Key  -->
@@ -621,8 +629,9 @@
 
                     <!--  DataGrid für Description  -->
                     <Grid Margin="0,5,0,10" />
-                </StackPanel>
-            </Grid>
-        </ScrollViewer>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Page> 

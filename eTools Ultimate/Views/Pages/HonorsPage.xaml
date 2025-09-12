@@ -177,15 +177,20 @@
         </GridSplitter>
 
         <!--  Right Side - Form  -->
-        <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
-            <Grid>
-                <!--  Action Buttons oben rechts  -->
-                <StackPanel
-                    Margin="0,10,30,0"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Orientation="Horizontal"
-                    ZIndex="1">
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <!--  Static Header mit Action Buttons  -->
+            <StackPanel
+                Grid.Row="0"
+                Margin="0,10,30,10"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Orientation="Horizontal"
+                ZIndex="1">
                     <ui:Button ToolTip="{i18n:StringLocalizer 'Undo'}">
                         <ui:SymbolIcon Symbol="ArrowUndo24" />
                     </ui:Button>
@@ -214,10 +219,13 @@
                         Background="#FD292F"
                         Command="{Binding ViewModel.DeleteHonorItemCommand}"
                         Content="{i18n:StringLocalizer 'Delete'}" />
-                </StackPanel>
-
-                <!--  Formulare  -->
-                <StackPanel Margin="20">
+            </StackPanel>
+            
+            <!--  Scrollable Content  -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <!--  Formulare  -->
+                    <StackPanel Margin="20">
                     <!--  Honor Details Section  -->
                     <StackPanel>
                         <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Honor Details'}" />
@@ -353,8 +361,9 @@
                             </Grid>
                         </UniformGrid>
                     </StackPanel>
-                </StackPanel>
-            </Grid>
-        </ScrollViewer>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Page> 
