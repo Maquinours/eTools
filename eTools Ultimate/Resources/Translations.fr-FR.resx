@@ -2284,4 +2284,20 @@
   <data name="About" xml:space="preserve">
     <value>À propos</value>
   </data>
+  <data name="RAM:" xml:space="preserve">
+    <value>RAM :</value>
+    <comment>RAM requirement</comment>
+  </data>
+  <data name="4 GB minimum, 8 GB recommended" xml:space="preserve">
+    <value>4 GB minimum, 8 GB recommandé</value>
+    <comment>RAM requirement with recommendation</comment>
+  </data>
+  <data name="200 MB available space" xml:space="preserve">
+    <value>200 MB d'espace disponible</value>
+    <comment>Storage space requirement</comment>
+  </data>
+  <data name="System language" xml:space="preserve">
+    <value>Langue du système</value>
+    <comment>System language option</comment>
+  </data>
 </root>

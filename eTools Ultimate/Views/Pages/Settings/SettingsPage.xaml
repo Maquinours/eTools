@@ -62,7 +62,7 @@
                                 FontTypography="Title"
                                 FontWeight="Bold"
                                 Foreground="#FFFFFF"
-                                Text="Einstellungen" />
+                                Text="{i18n:Translate 'Settings'}" />
                         </StackPanel>
                         <ui:TextBlock
                             Margin="12"
@@ -70,7 +70,7 @@
                             VerticalAlignment="Bottom"
                             FontTypography="Caption"
                             Foreground="#57FFFFFF"
-                            Text="Erstellt von eTools Ultimate" />
+                            Text="{i18n:Translate 'Created by eTools Ultimate'}" />
                     </Grid>
                 </Border>
             </Border>
@@ -116,12 +116,12 @@
                             <ui:TextBlock
                                 Margin="0"
                                 FontTypography="BodyStrong"
-                                Text="Ressourcen-Pfad"
+                                Text="{i18n:Translate 'Resource Path'}"
                                 TextWrapping="WrapWithOverflow" />
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="Lade alle Pfade."
+                                Text="{i18n:Translate 'Loading all Paths.'}"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>
@@ -158,12 +158,12 @@
                             <ui:TextBlock
                                 Margin="0"
                                 FontTypography="BodyStrong"
-                                Text="Personalisierung"
+                                Text="{i18n:Translate 'Personalization'}"
                                 TextWrapping="WrapWithOverflow" />
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="Design und andere Teile ändern"
+                                Text="{i18n:Translate 'Change Design and other parts'}"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>
@@ -202,12 +202,12 @@
                             <ui:TextBlock
                                 Margin="0"
                                 FontTypography="BodyStrong"
-                                Text="Über"
+                                Text="{i18n:Translate 'About'}"
                                 TextWrapping="WrapWithOverflow" />
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="Mehr über eTools Ultimate erfahren"
+                                Text="{i18n:Translate 'Learn more about eTools Ultimate'}"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>
