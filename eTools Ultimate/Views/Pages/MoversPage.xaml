@@ -109,21 +109,6 @@
             </Style.Triggers>
         </Style>
 
-        <ControlTemplate x:Key="ValidationErrorTemplate">
-            <StackPanel>
-                <Border BorderBrush="Red" BorderThickness="1">
-                    <AdornedElementPlaceholder x:Name="AdornedElement" />
-                </Border>
-                <TextBlock
-                    MaxWidth="{Binding ActualWidth, ElementName=AdornedElement}"
-                    HorizontalAlignment="Stretch"
-                    DockPanel.Dock="Bottom"
-                    Foreground="Red"
-                    Text="{Binding ErrorContent}"
-                    TextWrapping="Wrap" />
-            </StackPanel>
-        </ControlTemplate>
-
         <!--  DataTemplate: Basic Info Section  -->
         <DataTemplate x:Key="BasicInfoSectionTemplate">
             <StackPanel>
@@ -133,6 +118,7 @@
                         <!--  Define ID  -->
                         <Grid Style="{StaticResource FormFieldStyle}">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
@@ -148,8 +134,7 @@
                                 x:Name="MoverIdentifierAutoSuggestBox"
                                 Grid.Row="1"
                                 DisplayMemberPath="Value"
-                                OriginalItemsSource="{Binding Path=ViewModel.MoverIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
-                                Validation.ErrorTemplate="{StaticResource ValidationErrorTemplate}">
+                                OriginalItemsSource="{Binding Path=ViewModel.MoverIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}">
                                 <ui:AutoSuggestBox.Text>
                                     <Binding
                                         Mode="TwoWay"
@@ -161,6 +146,18 @@
                                     </Binding>
                                 </ui:AutoSuggestBox.Text>
                             </ui:AutoSuggestBox>
+                            <ItemsControl Grid.Row="2" ItemsSource="{Binding (Validation.Errors), ElementName=MoverIdentifierAutoSuggestBox}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock
+                                            Margin="0,5"
+                                            HorizontalAlignment="Stretch"
+                                            Foreground="Red"
+                                            Text="{Binding ErrorContent}"
+                                            TextWrapping="Wrap" />
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
                         </Grid>
 
                         <!--  Name  -->
