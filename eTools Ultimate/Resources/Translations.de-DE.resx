@@ -1808,16 +1808,43 @@
   <data name="System default" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Application language changed" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="Application language changed" xml:space="preserve">
+    <value>Anwendungssprache geändert</value>
   </data>
-  <data name="The application needs to be restarted for the language change to take effect." type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="The application needs to be restarted for the language change to take effect." xml:space="preserve">
+    <value>Die Anwendung muss neu gestartet werden, damit die Sprachänderung wirksam wird.</value>
   </data>
-  <data name="Restart" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="Restart" xml:space="preserve">
+    <value>Neu starten</value>
   </data>
-  <data name="Restart later" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="Restart later" xml:space="preserve">
+    <value>Später neu starten</value>
+  </data>
+  <data name="Settings changed" xml:space="preserve">
+    <value>Einstellungen geändert</value>
+  </data>
+  <data name="Your settings have been updated. Please restart the application for the changes to take effect." xml:space="preserve">
+    <value>Ihre Einstellungen wurden aktualisiert. Bitte starten Sie die Anwendung neu, damit die Änderungen wirksam werden.</value>
+  </data>
+  <data name="eTools Ultimate is a powerful editor for editing Flyff resource files." xml:space="preserve">
+    <value>eTools Ultimate ist ein leistungsstarker Editor zum Bearbeiten von Flyff-Ressourcendateien.</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>Hinzugefügt</value>
+  </data>
+  <data name="Removed" xml:space="preserve">
+    <value>Entfernt</value>
+  </data>
+  <data name="Changed" xml:space="preserve">
+    <value>Geändert</value>
+  </data>
+  <data name="Fixed" xml:space="preserve">
+    <value>Behoben</value>
+  </data>
+  <data name="Improved" xml:space="preserve">
+    <value>Verbessert</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>Aktualisiert</value>
   </data>
 </root>

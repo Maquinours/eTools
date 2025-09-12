@@ -70,7 +70,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private async Task OpenPatchNotesDialog()
         {
-            var patchNotesDialog = new PatchNotesDialog(contentDialogService.GetDialogHost());
+            var patchNotesDialog = new PatchNotesDialog(contentDialogService.GetDialogHost(), localizer);
             await patchNotesDialog.ShowAsync();
         }
     }

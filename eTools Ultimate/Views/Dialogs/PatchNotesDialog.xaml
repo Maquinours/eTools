@@ -18,7 +18,7 @@
         <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:PatchNotesDialog}" />
         <!--  Iconstyles für die verschiedenen Änderungstypen  -->
         <Style x:Key="IconBase" TargetType="ui:SymbolIcon">
-            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontSize" Value="20" />
             <Setter Property="Margin" Value="0,0,8,0" />
             <Setter Property="VerticalAlignment" Value="Top" />
         </Style>
@@ -283,7 +283,7 @@
                                     <!-- Categories -->
                                     <StackPanel Grid.Row="3" Margin="16,8,0,0" Visibility="{Binding Categories, Converter={StaticResource ObjectToVisibilityConverter}}">
                                         <!-- Added -->
-                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Added.Count, Converter={StaticResource IntToVisibilityConverter}}">
+                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Added, Converter={StaticResource ObjectToVisibilityConverter}}">
                                             <TextBlock 
                                                 FontSize="16" 
                                                 FontWeight="SemiBold" 
@@ -319,7 +319,7 @@
                                         </StackPanel>
                                         
                                         <!-- Changed -->
-                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Changed.Count, Converter={StaticResource IntToVisibilityConverter}}">
+                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Changed, Converter={StaticResource ObjectToVisibilityConverter}}">
                                             <TextBlock 
                                                 FontSize="16" 
                                                 FontWeight="SemiBold" 
@@ -355,7 +355,7 @@
                                         </StackPanel>
                                         
                                         <!-- Fixed -->
-                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Fixed.Count, Converter={StaticResource IntToVisibilityConverter}}">
+                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Fixed, Converter={StaticResource ObjectToVisibilityConverter}}">
                                             <TextBlock 
                                                 FontSize="16" 
                                                 FontWeight="SemiBold" 
@@ -391,7 +391,7 @@
                                         </StackPanel>
                                         
                                         <!-- Improved -->
-                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Improved.Count, Converter={StaticResource IntToVisibilityConverter}}">
+                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Improved, Converter={StaticResource ObjectToVisibilityConverter}}">
                                             <TextBlock 
                                                 FontSize="16" 
                                                 FontWeight="SemiBold" 
@@ -399,6 +399,78 @@
                                                 Text="{i18n:StringLocalizer 'Improved'}"
                                                 Margin="0,0,0,8" />
                                             <ItemsControl ItemsSource="{Binding Categories.Improved, Mode=OneWay}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid Margin="0,4,0,4">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition Width="*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <ui:SymbolIcon
+                                                                Grid.Column="0"
+                                                                Margin="0,0,8,0"
+                                                                VerticalAlignment="Top"
+                                                                FontSize="16"
+                                                                Foreground="{Binding Type, Mode=OneWay, Converter={StaticResource PatchModificationTypeToForegroundConverter}}"
+                                                                Symbol="{Binding Type, Mode=OneWay, Converter={StaticResource PatchModificationTypeToSymbolConverter}}" />
+                                                            <TextBlock
+                                                                Grid.Column="1"
+                                                                VerticalAlignment="Center"
+                                                                FontSize="13"
+                                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                                Text="{Binding Text, Mode=OneWay}"
+                                                                TextWrapping="Wrap" />
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                        
+                                        <!-- Removed -->
+                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Removed, Converter={StaticResource ObjectToVisibilityConverter}}">
+                                            <TextBlock 
+                                                FontSize="16" 
+                                                FontWeight="SemiBold" 
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                Text="{i18n:StringLocalizer 'Removed'}"
+                                                Margin="0,0,0,8" />
+                                            <ItemsControl ItemsSource="{Binding Categories.Removed, Mode=OneWay}">
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid Margin="0,4,0,4">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition Width="*" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <ui:SymbolIcon
+                                                                Grid.Column="0"
+                                                                Margin="0,0,8,0"
+                                                                VerticalAlignment="Top"
+                                                                FontSize="16"
+                                                                Foreground="{Binding Type, Mode=OneWay, Converter={StaticResource PatchModificationTypeToForegroundConverter}}"
+                                                                Symbol="{Binding Type, Mode=OneWay, Converter={StaticResource PatchModificationTypeToSymbolConverter}}" />
+                                                            <TextBlock
+                                                                Grid.Column="1"
+                                                                VerticalAlignment="Center"
+                                                                FontSize="13"
+                                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                                Text="{Binding Text, Mode=OneWay}"
+                                                                TextWrapping="Wrap" />
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </StackPanel>
+                                        
+                                        <!-- Updated -->
+                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Updated, Converter={StaticResource ObjectToVisibilityConverter}}">
+                                            <TextBlock 
+                                                FontSize="16" 
+                                                FontWeight="SemiBold" 
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                Text="{i18n:StringLocalizer 'Updated'}"
+                                                Margin="0,0,0,8" />
+                                            <ItemsControl ItemsSource="{Binding Categories.Updated, Mode=OneWay}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
                                                         <Grid Margin="0,4,0,4">

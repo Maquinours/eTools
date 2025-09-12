@@ -242,6 +242,33 @@
   <data name="Restart later" xml:space="preserve">
     <value>Redémarrer plus tard</value>
   </data>
+  <data name="Settings changed" xml:space="preserve">
+    <value>Paramètres modifiés</value>
+  </data>
+  <data name="Your settings have been updated. Please restart the application for the changes to take effect." xml:space="preserve">
+    <value>Vos paramètres ont été mis à jour. Veuillez redémarrer l'application pour que les modifications prennent effet.</value>
+  </data>
+  <data name="eTools Ultimate is a powerful editor for editing Flyff resource files." xml:space="preserve">
+    <value>eTools Ultimate est un éditeur puissant pour l'édition de fichiers de ressources Flyff.</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>Ajouté</value>
+  </data>
+  <data name="Removed" xml:space="preserve">
+    <value>Supprimé</value>
+  </data>
+  <data name="Changed" xml:space="preserve">
+    <value>Modifié</value>
+  </data>
+  <data name="Fixed" xml:space="preserve">
+    <value>Corrigé</value>
+  </data>
+  <data name="Improved" xml:space="preserve">
+    <value>Amélioré</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>Mis à jour</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Bienvenue</value>
     <comment>Welcome text on dashboard</comment>

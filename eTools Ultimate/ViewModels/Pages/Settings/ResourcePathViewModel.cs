@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
+using Lepo.i18n;
+using Microsoft.Extensions.Localization;
 using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
@@ -14,7 +16,7 @@ using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class ResourcePathViewModel(SettingsService settingsService, IContentDialogService contentDialogService) : ObservableObject, INavigationAware
+    public partial class ResourcePathViewModel(SettingsService settingsService, IContentDialogService contentDialogService, IStringLocalizer stringLocalizer) : ObservableObject, INavigationAware
     {
         private bool _hasChangedSettings = false;
 
@@ -40,9 +42,9 @@ namespace eTools_Ultimate.ViewModels.Pages
             {
                 await contentDialogService.ShowSimpleDialogAsync(new SimpleContentDialogCreateOptions()
                 {
-                    Title = "Settings changed",
-                    Content = "Your settings have been updated. Please restart the application for the changes to take effect.",
-                    CloseButtonText = "Restart",
+                    Title = stringLocalizer["Settings changed"] ?? "Settings changed",
+                    Content = stringLocalizer["Your settings have been updated. Please restart the application for the changes to take effect."] ?? "Your settings have been updated. Please restart the application for the changes to take effect.",
+                    CloseButtonText = stringLocalizer["Restart"] ?? "Restart",
                 });
                 System.Diagnostics.Process.Start(System.Diagnostics.Process.GetCurrentProcess().ProcessName);
                 App.Current.Shutdown();
