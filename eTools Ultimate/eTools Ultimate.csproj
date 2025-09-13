@@ -135,6 +135,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>PatchNotes.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PatchNotes.de-DE.resx">
+      <DependentUpon>PatchNotes.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PatchNotes.fr-FR.resx">
+      <DependentUpon>PatchNotes.resx</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Update="Resources\Texts.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Texts.Designer.cs</LastGenOutput>

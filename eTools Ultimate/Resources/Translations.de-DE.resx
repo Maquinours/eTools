@@ -1808,16 +1808,139 @@
   <data name="System default" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Application language changed" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="Application language changed" xml:space="preserve">
+    <value>Anwendungssprache geändert</value>
   </data>
-  <data name="The application needs to be restarted for the language change to take effect." type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="The application needs to be restarted for the language change to take effect." xml:space="preserve">
+    <value>Die Anwendung muss neu gestartet werden, damit die Sprachänderung wirksam wird.</value>
   </data>
-  <data name="Restart" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="Restart" xml:space="preserve">
+    <value>Neu starten</value>
   </data>
-  <data name="Restart later" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="Restart later" xml:space="preserve">
+    <value>Später neu starten</value>
+  </data>
+  <data name="Settings changed" xml:space="preserve">
+    <value>Einstellungen geändert</value>
+  </data>
+  <data name="Your settings have been updated. Please restart the application for the changes to take effect." xml:space="preserve">
+    <value>Ihre Einstellungen wurden aktualisiert. Bitte starten Sie die Anwendung neu, damit die Änderungen wirksam werden.</value>
+  </data>
+  <data name="eTools Ultimate is a powerful editor for editing Flyff resource files." xml:space="preserve">
+    <value>eTools Ultimate ist ein leistungsstarker Editor zum Bearbeiten von Flyff-Ressourcendateien.</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>Hinzugefügt</value>
+  </data>
+  <data name="Removed" xml:space="preserve">
+    <value>Entfernt</value>
+  </data>
+  <data name="Changed" xml:space="preserve">
+    <value>Geändert</value>
+  </data>
+  <data name="Fixed" xml:space="preserve">
+    <value>Behoben</value>
+  </data>
+  <data name="Improved" xml:space="preserve">
+    <value>Verbessert</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>Aktualisiert</value>
+  </data>
+  <data name="Basic Information Fields" xml:space="preserve">
+    <value>Grundinformations-Felder</value>
+    <comment>Basic Information Fields expander header</comment>
+  </data>
+  <data name="Stats Fields" xml:space="preserve">
+    <value>Statistik-Felder</value>
+    <comment>Stats Fields expander header</comment>
+  </data>
+  <data name="Combat/Battle Fields" xml:space="preserve">
+    <value>Kampf-/Schlachtfelder</value>
+    <comment>Combat/Battle Fields expander header</comment>
+  </data>
+  <data name="Defensive Stats Fields" xml:space="preserve">
+    <value>Verteidigungsstatistik-Felder</value>
+    <comment>Defensive Stats Fields expander header</comment>
+  </data>
+  <data name="Elemental Fields" xml:space="preserve">
+    <value>Elementar-Felder</value>
+    <comment>Elemental Fields expander header</comment>
+  </data>
+  <data name="MoverPage" xml:space="preserve">
+    <value>Beweger-Seite</value>
+    <comment>MoverPage title</comment>
+  </data>
+  <data name="..." xml:space="preserve">
+    <value>...</value>
+    <comment>Ellipsis for file selection buttons</comment>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Konfiguration</value>
+    <comment>Configuration section header</comment>
+  </data>
+  <data name="Sound" xml:space="preserve">
+    <value>Sound</value>
+    <comment>Sound section header</comment>
+  </data>
+  <data name="Define ID" xml:space="preserve">
+    <value>ID definieren</value>
+    <comment>Define ID field label</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+    <comment>Name field label</comment>
+  </data>
+  <data name="Rank" xml:space="preserve">
+    <value>Rang</value>
+    <comment>Rank field label</comment>
+  </data>
+  <data name="SFX hit sound" xml:space="preserve">
+    <value>SFX Treffer-Sound</value>
+    <comment>SFX hit sound field label</comment>
+  </data>
+  <data name="Click sound" xml:space="preserve">
+    <value>Klick-Sound</value>
+    <comment>Click sound field label</comment>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Standard</value>
+    <comment>Default option value</comment>
+  </data>
+  <data name="Character" xml:space="preserve">
+    <value>Charakter</value>
+    <comment>Character option value</comment>
+  </data>
+  <data name="Modell" xml:space="preserve">
+    <value>Modell</value>
+    <comment>Model section header</comment>
+  </data>
+  <data name="Motion Key" xml:space="preserve">
+    <value>Bewegungs-Schlüssel</value>
+    <comment>Motion Key field label</comment>
+  </data>
+  <data name="Motion File" xml:space="preserve">
+    <value>Bewegungs-Datei</value>
+    <comment>Motion File field label</comment>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Datei</value>
+    <comment>File field label</comment>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Skalierung</value>
+    <comment>Scale field label</comment>
+  </data>
+  <data name="Textur" xml:space="preserve">
+    <value>Textur</value>
+    <comment>Texture field label</comment>
+  </data>
+  <data name="Kein Modell verfügbar" xml:space="preserve">
+    <value>Kein Modell verfügbar</value>
+    <comment>No model available message</comment>
+  </data>
+  <data name="No model associated with the selected mover." xml:space="preserve">
+    <value>Kein Modell mit dem ausgewählten Mover verknüpft.</value>
+    <comment>No model associated message</comment>
   </data>
 </root>

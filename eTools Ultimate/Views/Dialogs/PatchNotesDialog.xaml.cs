@@ -1,4 +1,5 @@
 ﻿using eTools_Ultimate.ViewModels.Controls.Dialogs;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,10 @@ namespace eTools_Ultimate.Views.Dialogs
     /// </summary>
     public partial class PatchNotesDialog : ContentDialog
     {
-        public PatchNotesDialog(ContentPresenter? contentPresenter)
+        public PatchNotesDialog(ContentPresenter? contentPresenter, IStringLocalizer stringLocalizer)
             : base(contentPresenter)
         {
-            DataContext = new PatchNotesViewModel();
+            DataContext = new PatchNotesViewModel(stringLocalizer);
             InitializeComponent();
         }
     }

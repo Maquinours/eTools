@@ -1,5 +1,7 @@
 ﻿using eTools_Ultimate.Models;
 using eTools_Ultimate.Resources;
+using eTools_Ultimate.Converters;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,11 +22,45 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
 
         public PatchModificationType[] ModificationTypes => [.. Enum.GetValues(typeof(PatchModificationType)).Cast<PatchModificationType>()];
 
-        public PatchNotesViewModel()
+        public PatchNotesViewModel(IStringLocalizer stringLocalizer)
         {
-            ResourceSet? resourceSet = PatchNotes.ResourceManager.GetResourceSet(CultureInfo.CurrentCulture, true, true);
+            // Setze den Localizer für den Converter
+            PatchModificationTypeToTextConverter.SetLocalizer(stringLocalizer);
+            
+            // Verwende die in der Anwendung eingestellte Sprache, oder Systemsprache wenn auf "Default"
+            CultureInfo culture;
+            if (eTools_Ultimate.Properties.Settings.Default.Language == "Default")
+            {
+                // Prüfe ob die Systemsprache unterstützt wird
+                var systemCulture = CultureInfo.CurrentUICulture;
+                if (systemCulture.Name == "de-DE" || systemCulture.Name == "fr-FR")
+                {
+                    culture = systemCulture;
+                }
+                else
+                {
+                    // Fallback auf Englisch für nicht unterstützte Sprachen
+                    culture = CultureInfo.InvariantCulture;
+                }
+            }
+            else
+            {
+                culture = new CultureInfo(eTools_Ultimate.Properties.Settings.Default.Language);
+            }
+            
+            // Setze die Culture für den ResourceManager
+            PatchNotes.Culture = culture;
+            
+            // Versuche zuerst die spezifische Kultur zu laden, dann fallback auf InvariantCulture
+            ResourceSet? resourceSet = PatchNotes.ResourceManager.GetResourceSet(culture, true, true);
+            
+            // Falls keine spezifische Kultur gefunden wird, versuche InvariantCulture
+            if (resourceSet is null && culture != CultureInfo.InvariantCulture)
+            {
+                resourceSet = PatchNotes.ResourceManager.GetResourceSet(CultureInfo.InvariantCulture, true, true);
+            }
 
-            if (resourceSet is null) throw new InvalidOperationException("Patch notes resource set is null");
+            if (resourceSet is null) throw new InvalidOperationException($"Patch notes resource set is null for culture: {culture.Name}");
 
             List<Patch> patches = [];
 

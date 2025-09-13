@@ -264,16 +264,118 @@
   <data name="System default" xml:space="preserve">
     <value>System default</value>
   </data>
-  <data name="Application language changed" xml:space="preserve">
-    <value>Application language changed</value>
+  <data name="Added" xml:space="preserve">
+    <value>Added</value>
   </data>
-  <data name="The application needs to be restarted for the language change to take effect." xml:space="preserve">
-    <value>The application needs to be restarted for the language change to take effect.</value>
+  <data name="Removed" xml:space="preserve">
+    <value>Removed</value>
   </data>
-  <data name="Restart" xml:space="preserve">
-    <value>Restart</value>
+  <data name="Changed" xml:space="preserve">
+    <value>Changed</value>
   </data>
-  <data name="Restart later" xml:space="preserve">
-    <value>Restart later</value>
+  <data name="Fixed" xml:space="preserve">
+    <value>Fixed</value>
+  </data>
+  <data name="Improved" xml:space="preserve">
+    <value>Improved</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>Updated</value>
+  </data>
+  <data name="Basic Information Fields" xml:space="preserve">
+    <value>Basic Information Fields</value>
+    <comment>Basic Information Fields expander header</comment>
+  </data>
+  <data name="Stats Fields" xml:space="preserve">
+    <value>Stats Fields</value>
+    <comment>Stats Fields expander header</comment>
+  </data>
+  <data name="Combat/Battle Fields" xml:space="preserve">
+    <value>Combat/Battle Fields</value>
+    <comment>Combat/Battle Fields expander header</comment>
+  </data>
+  <data name="Defensive Stats Fields" xml:space="preserve">
+    <value>Defensive Stats Fields</value>
+    <comment>Defensive Stats Fields expander header</comment>
+  </data>
+  <data name="Elemental Fields" xml:space="preserve">
+    <value>Elemental Fields</value>
+    <comment>Elemental Fields expander header</comment>
+  </data>
+  <data name="MoverPage" xml:space="preserve">
+    <value>MoverPage</value>
+    <comment>MoverPage title</comment>
+  </data>
+  <data name="..." xml:space="preserve">
+    <value>...</value>
+    <comment>Ellipsis for file selection buttons</comment>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Configuration</value>
+    <comment>Configuration section header</comment>
+  </data>
+  <data name="Sound" xml:space="preserve">
+    <value>Sound</value>
+    <comment>Sound section header</comment>
+  </data>
+  <data name="Define ID" xml:space="preserve">
+    <value>Define ID</value>
+    <comment>Define ID field label</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+    <comment>Name field label</comment>
+  </data>
+  <data name="Rank" xml:space="preserve">
+    <value>Rank</value>
+    <comment>Rank field label</comment>
+  </data>
+  <data name="SFX hit sound" xml:space="preserve">
+    <value>SFX hit sound</value>
+    <comment>SFX hit sound field label</comment>
+  </data>
+  <data name="Click sound" xml:space="preserve">
+    <value>Click sound</value>
+    <comment>Click sound field label</comment>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Default</value>
+    <comment>Default option value</comment>
+  </data>
+  <data name="Character" xml:space="preserve">
+    <value>Character</value>
+    <comment>Character option value</comment>
+  </data>
+  <data name="Modell" xml:space="preserve">
+    <value>Model</value>
+    <comment>Model section header</comment>
+  </data>
+  <data name="Motion Key" xml:space="preserve">
+    <value>Motion Key</value>
+    <comment>Motion Key field label</comment>
+  </data>
+  <data name="Motion File" xml:space="preserve">
+    <value>Motion File</value>
+    <comment>Motion File field label</comment>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
+    <comment>File field label</comment>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Scale</value>
+    <comment>Scale field label</comment>
+  </data>
+  <data name="Textur" xml:space="preserve">
+    <value>Texture</value>
+    <comment>Texture field label</comment>
+  </data>
+  <data name="Kein Modell verfügbar" xml:space="preserve">
+    <value>No Model Available</value>
+    <comment>No model available message</comment>
+  </data>
+  <data name="No model associated with the selected mover." xml:space="preserve">
+    <value>No model associated with the selected mover.</value>
+    <comment>No model associated message</comment>
   </data>
 </root>

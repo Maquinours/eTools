@@ -65,10 +65,10 @@ namespace eTools_Ultimate.ViewModels.Pages
                     ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
                         new SimpleContentDialogCreateOptions()
                         {
-                            Title = stringLocalizer["Application language changed"],
-                            Content = stringLocalizer["The application needs to be restarted for the language change to take effect."],
-                            PrimaryButtonText = stringLocalizer["Restart"],
-                            CloseButtonText = stringLocalizer["Restart later"],
+                            Title = stringLocalizer["Application language changed"] ?? "Application language changed",
+                            Content = stringLocalizer["The application needs to be restarted for the language change to take effect."] ?? "The application needs to be restarted for the language change to take effect.",
+                            PrimaryButtonText = stringLocalizer["Restart"] ?? "Restart",
+                            CloseButtonText = stringLocalizer["Restart later"] ?? "Restart later",
                         }
                 );
                     if (result == ContentDialogResult.Primary)
