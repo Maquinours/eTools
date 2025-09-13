@@ -177,7 +177,7 @@ namespace eTools_Ultimate.Services
                 writer.Write(mainBrace.Prop.SzName);
                 writer.Write('"');
                 writer.Write('\t');
-                writer.Write(mainBrace.Prop.IType.ToString(CultureInfo.InvariantCulture));
+                writer.Write(Script.NumberToString(mainBrace.Prop.IType));
                 writer.WriteLine();
                 writer.WriteLine('{');
 
@@ -223,22 +223,22 @@ namespace eTools_Ultimate.Services
                 writer.Write(model.Prop.SzPart);
                 writer.Write('"');
                 writer.Write('\t');
-                writer.Write(model.Prop.BFly.ToString(CultureInfo.InvariantCulture));
+                writer.Write(Script.NumberToString(model.Prop.BFly));
                 writer.Write('\t');
                 writer.Write(model.DistantIdentifier);
                 writer.Write('\t');
-                writer.Write(model.Prop.BPick.ToString(CultureInfo.InvariantCulture));
+                writer.Write(Script.NumberToString(model.Prop.BPick));
                 writer.Write('\t');
-                writer.Write(model.Prop.FScale.ToString(CultureInfo.InvariantCulture));
+                writer.Write(Script.FloatToString(model.Prop.FScale));
                 writer.Write('f');
                 writer.Write('\t');
-                writer.Write(model.Prop.BTrans.ToString(CultureInfo.InvariantCulture));
+                writer.Write(Script.NumberToString(model.Prop.BTrans));
                 writer.Write('\t');
-                writer.Write(model.Prop.BShadow.ToString(CultureInfo.InvariantCulture));
+                writer.Write(Script.NumberToString(model.Prop.BShadow));
                 writer.Write('\t');
                 writer.Write(model.TextureExIdentifier);
                 writer.Write('\t');
-                writer.Write(model.Prop.BRenderFlag.ToString(CultureInfo.InvariantCulture));
+                writer.Write(Script.NumberToString(model.Prop.BRenderFlag));
                 writer.WriteLine();
 
                 if(model.Motions.Count > 0)
