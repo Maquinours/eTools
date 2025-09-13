@@ -31,6 +31,13 @@ namespace eTools_Ultimate.Services
         private readonly Dictionary<int, string> _reversedAreaDefines = [];
         private readonly Dictionary<int, string> _reversedMusicDefines = [];
         private readonly Dictionary<int, string> _reversedDestDefines = [];
+        private readonly Dictionary<int, string> _reversedObjectTypeDefines = [];
+        private readonly Dictionary<int, string> _reversedControlDefines = [];
+        private readonly Dictionary<int, string> _reversedSfxDefines = [];
+        private readonly Dictionary<int, string> _reversedRegionDefines = [];
+        private readonly Dictionary<int, string> _reversedModelTypeDefines = [];
+        private readonly Dictionary<int, string> _reversedModelDistantDefines = [];
+        private readonly Dictionary<int, string> _reversedAdditionalTextureDefines = [];
 
         public ObservableDictionary<string, int> Defines => this._defines;
 
@@ -49,6 +56,13 @@ namespace eTools_Ultimate.Services
         public Dictionary<int, string> ReversedAreaDefines => this._reversedAreaDefines;
         public Dictionary<int, string> ReversedMusicDefines => this._reversedMusicDefines;
         public Dictionary<int, string> ReversedDestDefines => this._reversedDestDefines;
+        public Dictionary<int, string> ReversedObjectTypeDefines => this._reversedObjectTypeDefines;
+        public Dictionary<int, string> ReversedControlDefines => this._reversedControlDefines;
+        public Dictionary<int, string> ReversedSfxDefines => this._reversedSfxDefines;
+        public Dictionary<int, string> ReversedRegionDefines => this._reversedRegionDefines;
+        public Dictionary<int, string> ReversedModelTypeDefines => this._reversedModelTypeDefines;
+        public Dictionary<int, string> ReversedModelDistantDefines => this._reversedModelDistantDefines;
+        public Dictionary<int, string> ReversedAdditionalTextureDefines => this._reversedAdditionalTextureDefines;
 
         public void Load()
         {
@@ -108,6 +122,20 @@ namespace eTools_Ultimate.Services
                                 this.ReversedMusicDefines[value] = key;
                             else if (key.StartsWith("DST_"))
                                 this.ReversedDestDefines[value] = key;
+                            else if (key.StartsWith("OT_"))
+                                ReversedObjectTypeDefines[value] = key;
+                            else if (key.StartsWith("CI_"))
+                                ReversedControlDefines[value] = key;
+                            else if (key.StartsWith("XI_"))
+                                ReversedSfxDefines[value] = key;
+                            else if (key.StartsWith("RI_"))
+                                ReversedRegionDefines[value] = key;
+                            else if (key.StartsWith("MODELTYPE_"))
+                                ReversedModelTypeDefines[value] = key;
+                            else if (key.StartsWith("MD_"))
+                                ReversedModelDistantDefines[value] = key;
+                            else if(key.StartsWith("ATEX_"))
+                                ReversedAdditionalTextureDefines[value] = key;
                         }
                         scanner.GetToken();
                     }

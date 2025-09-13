@@ -6,6 +6,7 @@ using Scan;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -176,7 +177,7 @@ namespace eTools_Ultimate.Services
                 writer.Write(mainBrace.Prop.SzName);
                 writer.Write('"');
                 writer.Write('\t');
-                writer.Write(mainBrace.Prop.IType);
+                writer.Write(mainBrace.Prop.IType.ToString(CultureInfo.InvariantCulture));
                 writer.WriteLine();
                 writer.WriteLine('{');
 
@@ -209,23 +210,58 @@ namespace eTools_Ultimate.Services
             }
             else if(item is Model model)
             {
-                //int dwModelType = script.GetNumber();
-                //string szPart = script.GetToken();
-                //int bFly = script.GetNumber();
-                //int dwDistant = script.GetNumber();
-                //int bPick = script.GetNumber();
-                //float fScale = script.GetFloat();
-                //int bTrans = script.GetNumber();
-                //int bShadow = script.GetNumber();
-                //int nTextureEx = script.GetNumber();
-                //int bRenderFlag = script.GetNumber();
-
                 writer.Write(new string('\t', indentLevel));
                 writer.Write('"');
                 writer.Write(model.Prop.SzName);
                 writer.Write('"');
                 writer.Write('\t');
-                // TODO: continue
+                writer.Write(model.Identifier);
+                writer.Write('\t');
+                writer.Write(model.ModelTypeIdentifier);
+                writer.Write('\t');
+                writer.Write('"');
+                writer.Write(model.Prop.SzPart);
+                writer.Write('"');
+                writer.Write('\t');
+                writer.Write(model.Prop.BFly.ToString(CultureInfo.InvariantCulture));
+                writer.Write('\t');
+                writer.Write(model.DistantIdentifier);
+                writer.Write('\t');
+                writer.Write(model.Prop.BPick.ToString(CultureInfo.InvariantCulture));
+                writer.Write('\t');
+                writer.Write(model.Prop.FScale.ToString(CultureInfo.InvariantCulture));
+                writer.Write('f');
+                writer.Write('\t');
+                writer.Write(model.Prop.BTrans.ToString(CultureInfo.InvariantCulture));
+                writer.Write('\t');
+                writer.Write(model.Prop.BShadow.ToString(CultureInfo.InvariantCulture));
+                writer.Write('\t');
+                writer.Write(model.TextureExIdentifier);
+                writer.Write('\t');
+                writer.Write(model.Prop.BRenderFlag.ToString(CultureInfo.InvariantCulture));
+                writer.WriteLine();
+
+                if(model.Motions.Count > 0)
+                {
+                    writer.Write(new string('\t', indentLevel));
+                    writer.Write('{');
+                    writer.WriteLine();
+
+                    foreach(ModelMotion motion in model.Motions)
+                    {
+                        writer.Write(new string('\t', indentLevel + 1));
+                        writer.Write('"');
+                        writer.Write(motion.Prop.SzMotion);
+                        writer.Write('"');
+                        writer.Write('\t');
+                        writer.Write(motion.MotionTypeIdentifier);
+                        writer.WriteLine();
+                    }
+
+                    writer.Write(new string('\t', indentLevel));
+                    writer.Write('}');
+                    writer.WriteLine();
+                }
             }
         }
 

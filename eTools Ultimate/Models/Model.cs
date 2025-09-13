@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -234,6 +235,38 @@ namespace eTools_Ultimate.Models
                 return result;
             }
         }
+
+        public string TypeIdentifier => Script.NumberToString(Prop.DwType, App.Services.GetRequiredService<DefinesService>().ReversedObjectTypeDefines);
+
+        public string Identifier
+        {
+            get
+            {
+                DefinesService definesService = App.Services.GetRequiredService<DefinesService>();
+
+                Dictionary<int, string>? reversedDefines = TypeIdentifier switch
+                {
+                    "OT_CTRL" => definesService.ReversedControlDefines,
+                    "OT_SFX" => definesService.ReversedSfxDefines,
+                    "OT_ITEM" => definesService.ReversedItemDefines,
+                    "OT_MOVER" => definesService.ReversedMoverDefines,
+                    "OT_REGION" => definesService.ReversedRegionDefines,
+                    "OT_SHIP" => null,
+                    "OT_PATH" => definesService.ReversedRegionDefines,
+                    _ => null,
+                };
+
+                if (reversedDefines is not null)
+                    return Script.NumberToString(Prop.DwIndex, reversedDefines);
+
+                return Prop.DwIndex.ToString(CultureInfo.InvariantCulture);
+            }
+        }
+
+        public string ModelTypeIdentifier => Script.NumberToString(Prop.DwModelType, App.Services.GetRequiredService<DefinesService>().ReversedModelTypeDefines);
+
+        public string DistantIdentifier => Script.NumberToString(Prop.DwDistant, App.Services.GetRequiredService<DefinesService>().ReversedModelDistantDefines);
+        public string TextureExIdentifier => Script.NumberToString(Prop.NTextureEx, App.Services.GetRequiredService<DefinesService>().ReversedAdditionalTextureDefines);
 
         public ICollectionView MotionsView => CollectionViewSource.GetDefaultView(Motions);
 
