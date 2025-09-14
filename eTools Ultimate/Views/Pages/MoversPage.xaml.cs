@@ -34,21 +34,6 @@ namespace eTools_Ultimate.Views.Pages
             MoversListView.ScrollIntoView(MoversListView.SelectedItem);
         }
 
-        private void AddButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            // Logik zum Hinzufügen eines neuen Mover-Elements
-            // ViewModel.AddNewItem();
-        }
-
-        private void DeleteButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            // Logik zum Löschen des ausgewählten Mover-Elements
-            if (MoversListView.SelectedItem != null)
-            {
-                // ViewModel.DeleteSelectedItem(MoversListView.SelectedItem);
-            }
-        }
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             var hwnd = new WindowInteropHelper(Window.GetWindow(this)).Handle;
@@ -78,12 +63,6 @@ namespace eTools_Ultimate.Views.Pages
             Point mousePosition = e.GetPosition(null);
             Vector deltaPosition = _lastMousePosition - mousePosition;
 
-            int w = NativeMethods.GetSurfaceWidth(ViewModel.D3dHost._native);
-            int h = NativeMethods.GetSurfaceHeight(ViewModel.D3dHost._native);
-
-            //double transformX = w / DxImage.ActualWidth;
-            //double transformY = h / DxImage.ActualHeight;
-
             NativeMethods.RotateCamera(ViewModel.D3dHost._native, (int)(deltaPosition.X), (int)(deltaPosition.Y));
 
             _lastMousePosition = mousePosition;
@@ -110,88 +89,5 @@ namespace eTools_Ultimate.Views.Pages
         {
             MotionsListView.ScrollIntoView(MotionsListView.SelectedItem);
         }
-
-        // TODO: readd binding to play motion command
-        //[RelayCommand]
-        //private void PlayMotion(ModelMotion motion)
-        //{
-        //    if (_d3dHost is null) return;
-        //    if(MoversListView.SelectedItem is not Mover mover) return;
-
-        //    CompositionTarget.Rendering -= CompositionTarget_Rendering;
-
-        //    string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
-        //    string root = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
-        //    string lowerMotionKey = motion.SzMotion;
-
-        //    string fileMotion = $@"{modelsFolderPath}\{root}_{lowerMotionKey}.ani";
-
-        //    NativeMethods.PlayMotion(_d3dHost._native, fileMotion);
-
-        //    CompositionTarget.Rendering += CompositionTarget_Rendering;
-
-        //    //int numMotions = NativeMethods.GetNumMotions(_d3dHost._native);
-        //    //for(int i = 0; i < numMotions; i++)
-        //    //{
-        //    //    IntPtr motionNamePtr = NativeMethods.GetMotionName(_d3dHost._native, i);
-        //    //    string? motionName = Marshal.PtrToStringAnsi(motionNamePtr);
-        //    //    if(motionName?.ToLower() == lowerMotionKey)
-        //    //    {
-        //    //        NativeMethods.PlayMotion(_d3dHost._native, i);
-        //    //        break;
-        //    //    }
-        //    //}
-        //}
-
-        // TODO: readd this in ViewModel
-        //private void MoverIdentifierTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        //{
-        //    if(_d3dHost is null) return;
-        //    if (ViewModel.MoversView.CurrentItem is not Mover mover) return;
-
-        //    switch (mover.Identifier)
-        //    {
-        //        case "MI_MALE":
-        //            {
-        //                string[] parts = [
-        //                    "Part_maleHair06.o3d",
-        //                    "Part_maleHead01.o3d",
-        //                    "Part_maleHand.o3d",
-        //                    "Part_maleLower.o3d",
-        //                    "Part_maleUpper.o3d",
-        //                    "Part_maleFoot.o3d",
-        //                ];
-
-        //                string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
-        //                string[] partsPath = [.. parts.Select(part => $"{modelsFolderPath}{part}")];
-
-        //                foreach(string partPath in partsPath)
-        //                {
-        //                    NativeMethods.SetParts(_d3dHost._native, partPath);
-        //                }
-        //                _d3dHost.Render();
-        //                break;
-        //            }
-        //        case "MI_FEMALE":
-        //            {
-        //                string[] parts = [
-        //                    "Part_femaleHair06.o3d",
-        //                    "Part_femaleHead01.o3d",
-        //                    "Part_femaleHand.o3d",
-        //                    "Part_femaleLower.o3d",
-        //                    "Part_femaleUpper.o3d",
-        //                    "Part_femaleFoot.o3d",
-        //                ];
-        //                string modelsFolderPath = Settings.Instance.ModelsFolderPath ?? Settings.Instance.DefaultModelsFolderPath;
-        //                string[] partsPath = [.. parts.Select(part => $"{modelsFolderPath}{part}")];
-        //                foreach (string partPath in partsPath)
-        //                {
-        //                    NativeMethods.SetParts(_d3dHost._native, partPath);
-        //                }
-        //                _d3dHost.Render();
-        //                break;
-        //            }
-        //    }
-        //}
     }
 } 
