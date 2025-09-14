@@ -104,6 +104,27 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
+        private async Task Delete()
+        {
+            if (AccessoriesView.CurrentItem is not Accessory accessory) return;
+
+            ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
+                new SimpleContentDialogCreateOptions()
+                {
+                    Title = "Remove an accessory",
+                    Content = $"Are you sure you want to remove {accessory.Item?.Name ?? ""} ?",
+                    PrimaryButtonText = "Remove",
+                    CloseButtonText = "Cancel",
+                }
+            );
+            if (result == ContentDialogResult.Primary)
+            {
+                accessoriesService.Accessories.Remove(accessory);
+                AccessoriesView.Refresh();
+            }
+        }
+
+        [RelayCommand]
         private async Task DeleteAbilityOptionData(AccessoryAbilityOptionData abilityOptionData)
         {
             if (AccessoriesView.CurrentItem is not Accessory accessory) return;

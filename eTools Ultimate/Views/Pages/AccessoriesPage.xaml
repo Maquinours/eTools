@@ -76,7 +76,8 @@
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     ScrollViewer.PanningMode="VerticalOnly"
                     ScrollViewer.VerticalScrollBarVisibility="Auto"
-                    SelectedIndex="0" SelectionChanged="AccessoriesListView_SelectionChanged">
+                    SelectedIndex="0"
+                    SelectionChanged="AccessoriesListView_SelectionChanged">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Background" Value="Transparent" />
@@ -235,6 +236,7 @@
                         <ui:Button
                             x:Name="DeleteButton"
                             Background="#FD292F"
+                            Command="{Binding DeleteCommand}"
                             Content="{i18n:StringLocalizer 'Delete'}"
                             Foreground="White" />
                     </StackPanel>
