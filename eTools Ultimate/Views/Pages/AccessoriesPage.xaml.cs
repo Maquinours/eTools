@@ -181,6 +181,11 @@ namespace eTools_Ultimate.Views.Pages
             }, DispatcherPriority.Render);
         }
 
+        private void AccessoriesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            AccessoriesListView.ScrollIntoView(AccessoriesListView.SelectedItem);
+        }
+
         //private void InitializeSampleData()
         //{
         //    // Clear any existing items

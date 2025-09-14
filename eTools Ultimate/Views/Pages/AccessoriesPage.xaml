@@ -63,6 +63,7 @@
                 BorderThickness="1,0,1,1">
                 <ListView
                     x:Name="AccessoriesListView"
+                    MinHeight="200"
                     dd:DragDrop.DragDropContext="AccessoriesListView"
                     dd:DragDrop.IsDragSource="True"
                     dd:DragDrop.IsDropTarget="True"
@@ -71,12 +72,11 @@
                     BorderThickness="0"
                     IsSynchronizedWithCurrentItem="True"
                     ItemsSource="{Binding AccessoriesView}"
-                    SelectedIndex="0"
                     ScrollViewer.CanContentScroll="False"
-                    ScrollViewer.VerticalScrollBarVisibility="Auto"
                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                     ScrollViewer.PanningMode="VerticalOnly"
-                    MinHeight="200">
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    SelectedIndex="0" SelectionChanged="AccessoriesListView_SelectionChanged">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Background" Value="Transparent" />
@@ -230,6 +230,7 @@
                             x:Name="AddButton"
                             Margin="0,0,10,0"
                             Background="#2F70AF"
+                            Command="{Binding AddCommand}"
                             Content="{i18n:StringLocalizer 'Add'}" />
                         <ui:Button
                             x:Name="DeleteButton"
@@ -256,15 +257,14 @@
                 <ScrollViewer
                     x:Name="AccessoryScrollViewer"
                     Grid.Row="2"
-                    VerticalScrollBarVisibility="Auto"
                     CanContentScroll="True"
-                    PanningMode="VerticalOnly"
                     Focusable="True"
-                    IsTabStop="True">
-                    <ItemsControl 
-                        ItemsSource="{Binding SelectedItem.AbilityOptionData, Mode=OneWay, ElementName=AccessoriesListView}">
-                            <!--  Single column layout  -->
-                            <ItemsControl.ItemTemplate>
+                    IsTabStop="True"
+                    PanningMode="VerticalOnly"
+                    VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding SelectedItem.AbilityOptionData, Mode=OneWay, ElementName=AccessoriesListView}">
+                        <!--  Single column layout  -->
+                        <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border
                                     Margin="0,0,0,12"

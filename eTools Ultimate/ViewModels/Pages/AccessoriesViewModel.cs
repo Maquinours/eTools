@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
+using eTools_Ultimate.ViewModels.Controls.Dialogs;
+using eTools_Ultimate.Views.Dialogs;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -79,6 +81,26 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             if (accessory.Item is not Item item) return false;
             return item.Name.Contains(this.SearchText, StringComparison.OrdinalIgnoreCase);
+        }
+
+        [RelayCommand]
+        private async Task Add()
+        {
+            var contentDialog = new AddAccessoryDialog(contentDialogService.GetDialogHost());
+            if (await contentDialog.ShowAsync() == ContentDialogResult.Primary)
+            {
+                if (contentDialog.DataContext is not AddAccessoryDialogViewModel contentDialogViewModel) return;
+
+                if (contentDialogViewModel.ItemsView.CurrentItem is not Item item) return;
+
+                if (accessoriesService.Accessories.Any(x => x.Item == item)) return;
+
+                Accessory accessory = new(item.Id, []);
+                accessoriesService.Accessories.Add(accessory);
+
+                AccessoriesView.Refresh();
+                AccessoriesView.MoveCurrentTo(accessory);
+            }
         }
 
         [RelayCommand]
