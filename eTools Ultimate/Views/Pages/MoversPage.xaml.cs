@@ -31,15 +31,7 @@ namespace eTools_Ultimate.Views.Pages
 
         private void MoversListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(MoversListView.SelectedItem == null && MoversListView.Items.Count > 0)
-                MoversListView.SelectedIndex = 0;
-
-            //// Diese Methode wird aufgerufen, wenn die Auswahl in der ListView geändert wird
-            //if (e.AddedItems.Count > 0)
-            //{
-            //    var selectedItem = e.AddedItems[0];
-            //    // Hier kann die Logik implementiert werden, um die Details des ausgewählten Items anzuzeigen
-            //}
+            MoversListView.ScrollIntoView(MoversListView.SelectedItem);
         }
 
         private void AddButton_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -140,6 +132,11 @@ namespace eTools_Ultimate.Views.Pages
 
             if (!ViewModel.Auto3DRendering)
                 ViewModel.D3dHost.Render();
+        }
+
+        private void MotionsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MotionsListView.ScrollIntoView(MotionsListView.SelectedItem);
         }
 
         // TODO: readd binding to play motion command

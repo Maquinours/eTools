@@ -1095,7 +1095,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            
+
             <!--  Static Header mit Buttons  -->
             <StackPanel
                 Grid.Row="0"
@@ -1104,605 +1104,645 @@
                 VerticalAlignment="Top"
                 Orientation="Horizontal"
                 ZIndex="1">
-                    <ui:Button ToolTip="{i18n:StringLocalizer 'Undo'}">
-                        <ui:SymbolIcon Symbol="ArrowUndo24" />
-                    </ui:Button>
-                    <ui:Button Margin="10,0,10,0" ToolTip="{i18n:StringLocalizer 'Redo'}">
-                        <ui:SymbolIcon Symbol="ArrowRedo24" />
-                    </ui:Button>
-                    <ui:Button
-                        x:Name="SaveButton"
-                        Margin="0,0,10,0"
-                        Click="SaveButton_Click"
-                        Content="{i18n:StringLocalizer 'Save'}" />
-                    <ui:Button
-                        x:Name="ExpertButton"
-                        Margin="0,0,10,0"
-                        Appearance="Secondary"
-                        Content="{i18n:StringLocalizer 'Expert'}" />
-                    <ui:DropDownButton
-                        x:Name="FilterButton"
-                        Margin="0,0,10,0"
-                        Appearance="Secondary"
-                        Content="{i18n:StringLocalizer 'Filter'}">
-                        <ui:DropDownButton.Flyout>
-                            <ContextMenu Background="{DynamicResource ApplicationBackgroundBrush}">
-                                <ScrollViewer
-                                    MaxHeight="600"
-                                    Padding="0,0,15,0"
-                                    VerticalScrollBarVisibility="Auto">
-                                    <StackPanel MinWidth="250">
-                                        <TextBlock
-                                            Margin="10,5,0,5"
-                                            FontWeight="SemiBold"
-                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                            Text="{i18n:StringLocalizer 'Filter Sections'}" />
+                <ui:Button ToolTip="{i18n:StringLocalizer 'Undo'}">
+                    <ui:SymbolIcon Symbol="ArrowUndo24" />
+                </ui:Button>
+                <ui:Button Margin="10,0,10,0" ToolTip="{i18n:StringLocalizer 'Redo'}">
+                    <ui:SymbolIcon Symbol="ArrowRedo24" />
+                </ui:Button>
+                <ui:Button
+                    x:Name="SaveButton"
+                    Margin="0,0,10,0"
+                    Click="SaveButton_Click"
+                    Content="{i18n:StringLocalizer 'Save'}" />
+                <ui:Button
+                    x:Name="ExpertButton"
+                    Margin="0,0,10,0"
+                    Appearance="Secondary"
+                    Content="{i18n:StringLocalizer 'Expert'}" />
+                <ui:DropDownButton
+                    x:Name="FilterButton"
+                    Margin="0,0,10,0"
+                    Appearance="Secondary"
+                    Content="{i18n:StringLocalizer 'Filter'}">
+                    <ui:DropDownButton.Flyout>
+                        <ContextMenu Background="{DynamicResource ApplicationBackgroundBrush}">
+                            <ScrollViewer
+                                MaxHeight="600"
+                                Padding="0,0,15,0"
+                                VerticalScrollBarVisibility="Auto">
+                                <StackPanel MinWidth="250">
+                                    <TextBlock
+                                        Margin="10,5,0,5"
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{i18n:StringLocalizer 'Filter Sections'}" />
 
-                                        <Border Padding="10,5" Background="{DynamicResource ControlFillColorDefaultBrush}">
-                                            <StackPanel>
+                                    <Border Padding="10,5" Background="{DynamicResource ControlFillColorDefaultBrush}">
+                                        <StackPanel>
+                                            <CheckBox
+                                                Margin="0,2"
+                                                Content="{i18n:StringLocalizer 'Basic Information'}"
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                IsChecked="{Binding ShowBasicInformationSection, Mode=TwoWay}" />
+                                            <CheckBox
+                                                Margin="0,2"
+                                                Content="{i18n:StringLocalizer 'Stats'}"
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                IsChecked="{Binding ShowStatsSection, Mode=TwoWay}" />
+                                            <CheckBox
+                                                Margin="0,2"
+                                                Content="{i18n:StringLocalizer 'Combat / Battle'}"
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                IsChecked="{Binding ShowBattleSection, Mode=TwoWay}" />
+                                            <CheckBox
+                                                Margin="0,2"
+                                                Content="{i18n:StringLocalizer 'Defensive Stats &amp; Resistances'}"
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                IsChecked="{Binding ShowDefensiveStatsSection, Mode=TwoWay}" />
+                                            <CheckBox
+                                                Margin="0,2"
+                                                Content="{i18n:StringLocalizer 'Elementar &amp; Damage Types'}"
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                IsChecked="{Binding ShowElementalSection, Mode=TwoWay}" />
+                                            <CheckBox
+                                                Margin="0,2"
+                                                Content="{i18n:StringLocalizer 'Sound'}"
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                IsChecked="{Binding ShowSoundsSection, Mode=TwoWay}" />
+                                            <CheckBox
+                                                Margin="0,2"
+                                                Content="{i18n:StringLocalizer 'Model / Mobility / Movement'}"
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                IsChecked="{Binding ShowModelSection, Mode=TwoWay}" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <TextBlock
+                                        Margin="10,10,0,5"
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{i18n:StringLocalizer 'Filter Fields'}" />
+
+                                    <Border Margin="0,0,0,5" Background="{DynamicResource ControlFillColorDefaultBrush}">
+                                        <Expander
+                                            Background="Transparent"
+                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                            Header="{i18n:StringLocalizer 'Basic Information Fields'}">
+                                            <StackPanel Margin="20,5,5,5">
                                                 <CheckBox
                                                     Margin="0,2"
-                                                    Content="{i18n:StringLocalizer 'Basic Information'}"
+                                                    Content="{i18n:StringLocalizer 'ID'}"
                                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                    IsChecked="{Binding ShowBasicInformationSection, Mode=TwoWay}" />
+                                                    IsChecked="True" />
                                                 <CheckBox
                                                     Margin="0,2"
-                                                    Content="{i18n:StringLocalizer 'Stats'}"
+                                                    Content="{i18n:StringLocalizer 'ID Key'}"
                                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                    IsChecked="{Binding ShowStatsSection, Mode=TwoWay}" />
+                                                    IsChecked="True" />
                                                 <CheckBox
                                                     Margin="0,2"
-                                                    Content="{i18n:StringLocalizer 'Combat / Battle'}"
+                                                    Content="{i18n:StringLocalizer 'Name'}"
                                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                    IsChecked="{Binding ShowBattleSection, Mode=TwoWay}" />
+                                                    IsChecked="True" />
                                                 <CheckBox
                                                     Margin="0,2"
-                                                    Content="{i18n:StringLocalizer 'Defensive Stats &amp; Resistances'}"
+                                                    Content="{i18n:StringLocalizer 'Description'}"
                                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                    IsChecked="{Binding ShowDefensiveStatsSection, Mode=TwoWay}" />
+                                                    IsChecked="True" />
                                                 <CheckBox
                                                     Margin="0,2"
-                                                    Content="{i18n:StringLocalizer 'Elementar &amp; Damage Types'}"
+                                                    Content="{i18n:StringLocalizer 'Killable'}"
                                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                    IsChecked="{Binding ShowElementalSection, Mode=TwoWay}" />
+                                                    IsChecked="True" />
                                                 <CheckBox
                                                     Margin="0,2"
-                                                    Content="{i18n:StringLocalizer 'Sound'}"
+                                                    Content="{i18n:StringLocalizer 'Penya'}"
                                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                    IsChecked="{Binding ShowSoundsSection, Mode=TwoWay}" />
+                                                    IsChecked="True" />
                                                 <CheckBox
                                                     Margin="0,2"
-                                                    Content="{i18n:StringLocalizer 'Model / Mobility / Movement'}"
+                                                    Content="{i18n:StringLocalizer 'Duration'}"
                                                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                    IsChecked="{Binding ShowModelSection, Mode=TwoWay}" />
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'EXP'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
                                             </StackPanel>
-                                        </Border>
+                                        </Expander>
+                                    </Border>
 
-                                        <TextBlock
-                                            Margin="10,10,0,5"
-                                            FontWeight="SemiBold"
+                                    <Border Margin="0,0,0,5" Background="{DynamicResource ControlFillColorDefaultBrush}">
+                                        <Expander
+                                            Background="Transparent"
                                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                            Text="{i18n:StringLocalizer 'Filter Fields'}" />
+                                            Header="{i18n:StringLocalizer 'Stats Fields'}">
+                                            <StackPanel Margin="20,5,5,5">
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'STR'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'STA'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'DEX'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'INT'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Hit Rate'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Evasion Rate'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                            </StackPanel>
+                                        </Expander>
+                                    </Border>
 
-                                        <Border Margin="0,0,0,5" Background="{DynamicResource ControlFillColorDefaultBrush}">
-                                            <Expander
-                                                Background="Transparent"
-                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Header="{i18n:StringLocalizer 'Basic Information Fields'}">
-                                                <StackPanel Margin="20,5,5,5">
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'ID'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'ID Key'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Name'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Description'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Killable'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Penya'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Duration'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'EXP'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                </StackPanel>
-                                            </Expander>
-                                        </Border>
+                                    <Border Margin="0,0,0,5" Background="{DynamicResource ControlFillColorDefaultBrush}">
+                                        <Expander
+                                            Background="Transparent"
+                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                            Header="{i18n:StringLocalizer 'Combat/Battle Fields'}">
+                                            <StackPanel Margin="20,5,5,5">
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Level'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Health Points'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Mana Points'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Artificial Intelligence (AI)'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Belligerence'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Attack min.'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Attack max.'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Attack Animation 1'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Attack Animation 2'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Attack Animation 3'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Attack Delay'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                            </StackPanel>
+                                        </Expander>
+                                    </Border>
 
-                                        <Border Margin="0,0,0,5" Background="{DynamicResource ControlFillColorDefaultBrush}">
-                                            <Expander
-                                                Background="Transparent"
-                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Header="{i18n:StringLocalizer 'Stats Fields'}">
-                                                <StackPanel Margin="20,5,5,5">
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'STR'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'STA'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'DEX'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'INT'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Hit Rate'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Evasion Rate'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                </StackPanel>
-                                            </Expander>
-                                        </Border>
+                                    <Border Margin="0,0,0,5" Background="{DynamicResource ControlFillColorDefaultBrush}">
+                                        <Expander
+                                            Background="Transparent"
+                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                            Header="{i18n:StringLocalizer 'Defensive Stats Fields'}">
+                                            <StackPanel Margin="20,5,5,5">
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Armor'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Magic Resistance'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Resistance Electricity'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Resistance Fire'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Resistance Wind'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Resistance Water'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Resistance Earth'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                            </StackPanel>
+                                        </Expander>
+                                    </Border>
 
-                                        <Border Margin="0,0,0,5" Background="{DynamicResource ControlFillColorDefaultBrush}">
-                                            <Expander
-                                                Background="Transparent"
-                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Header="{i18n:StringLocalizer 'Combat/Battle Fields'}">
-                                                <StackPanel Margin="20,5,5,5">
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Level'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Health Points'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Mana Points'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Artificial Intelligence (AI)'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Belligerence'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Attack min.'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Attack max.'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Attack Animation 1'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Attack Animation 2'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Attack Animation 3'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Attack Delay'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                </StackPanel>
-                                            </Expander>
-                                        </Border>
-
-                                        <Border Margin="0,0,0,5" Background="{DynamicResource ControlFillColorDefaultBrush}">
-                                            <Expander
-                                                Background="Transparent"
-                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Header="{i18n:StringLocalizer 'Defensive Stats Fields'}">
-                                                <StackPanel Margin="20,5,5,5">
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Armor'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Magic Resistance'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Resistance Electricity'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Resistance Fire'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Resistance Wind'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Resistance Water'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Resistance Earth'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                </StackPanel>
-                                            </Expander>
-                                        </Border>
-
-                                        <Border Margin="0,0,0,5" Background="{DynamicResource ControlFillColorDefaultBrush}">
-                                            <Expander
-                                                Background="Transparent"
-                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Header="{i18n:StringLocalizer 'Elemental Fields'}">
-                                                <StackPanel Margin="20,5,5,5">
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Element Type'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Element Attack'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                    <CheckBox
-                                                        Margin="0,2"
-                                                        Content="{i18n:StringLocalizer 'Correction Value'}"
-                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                        IsChecked="True" />
-                                                </StackPanel>
-                                            </Expander>
-                                        </Border>
-                                    </StackPanel>
-                                </ScrollViewer>
-                            </ContextMenu>
-                        </ui:DropDownButton.Flyout>
-                    </ui:DropDownButton>
-                    <ui:Button
-                        x:Name="AddButton"
-                        Margin="0,0,10,0"
-                        Background="#2F70AF"
-                        Command="{Binding AddMoverCommand}">
-                        <TextBlock Foreground="White" Text="{i18n:StringLocalizer 'Add'}" />
-                    </ui:Button>
-                    <ui:Button
-                        x:Name="DeleteButton"
-                        Background="#FD292F"
-                        Command="{Binding RemoveMoverCommand}"
-                        Content="{i18n:StringLocalizer 'Delete'}" />
+                                    <Border Margin="0,0,0,5" Background="{DynamicResource ControlFillColorDefaultBrush}">
+                                        <Expander
+                                            Background="Transparent"
+                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                            Header="{i18n:StringLocalizer 'Elemental Fields'}">
+                                            <StackPanel Margin="20,5,5,5">
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Element Type'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Element Attack'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                                <CheckBox
+                                                    Margin="0,2"
+                                                    Content="{i18n:StringLocalizer 'Correction Value'}"
+                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                    IsChecked="True" />
+                                            </StackPanel>
+                                        </Expander>
+                                    </Border>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </ContextMenu>
+                    </ui:DropDownButton.Flyout>
+                </ui:DropDownButton>
+                <ui:Button
+                    x:Name="AddButton"
+                    Margin="0,0,10,0"
+                    Background="#2F70AF"
+                    Command="{Binding AddMoverCommand}">
+                    <TextBlock Foreground="White" Text="{i18n:StringLocalizer 'Add'}" />
+                </ui:Button>
+                <ui:Button
+                    x:Name="DeleteButton"
+                    Background="#FD292F"
+                    Command="{Binding RemoveMoverCommand}"
+                    Content="{i18n:StringLocalizer 'Delete'}" />
             </StackPanel>
-            
+
             <!--  Scrollable Content  -->
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                 <Grid>
                     <!--  Formulare  -->
                     <StackPanel Margin="20">
-                    <ContentControl
-                        Content="{Binding MoversView}"
-                        ContentTemplate="{StaticResource BasicInfoSectionTemplate}"
-                        Visibility="{Binding ShowBasicInformationSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
-                    <ContentControl
-                        Content="{Binding MoversView}"
-                        ContentTemplate="{StaticResource StatsSectionTemplate}"
-                        Visibility="{Binding ShowStatsSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
+                        <ContentControl
+                            Content="{Binding MoversView}"
+                            ContentTemplate="{StaticResource BasicInfoSectionTemplate}"
+                            Visibility="{Binding ShowBasicInformationSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
+                        <ContentControl
+                            Content="{Binding MoversView}"
+                            ContentTemplate="{StaticResource StatsSectionTemplate}"
+                            Visibility="{Binding ShowStatsSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
 
-                    <!--  Sound Section  -->
-                    <StackPanel Visibility="{Binding ShowSoundsSection, Mode=TwoWay, Converter={StaticResource BoolToVis}}">
-                        <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Sound'}" />
-                        <UniformGrid Columns="2">
-                            <!--  SFX hit sound  -->
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'SFX hit sound'}" />
-                                    <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="{i18n:StringLocalizer 'Sound played when an SFX hit the mover'}" />
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <Grid Grid.Row="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <ui:AutoSuggestBox
-                                        Grid.Column="0"
-                                        DisplayMemberPath="Value"
-                                        OriginalItemsSource="{Binding SoundIdentifiers}"
-                                        Text="{Binding MoversView.CurrentItem.SndDmg2Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                                    <ui:Button
-                                        Grid.Column="1"
-                                        Width="30"
-                                        Height="32"
-                                        Margin="5,0,5,0"
-                                        Command="{Binding SelectSndDmg2FileCommand, Mode=OneWay}"
-                                        Content="{i18n:StringLocalizer '...'}" />
-                                    <ui:Button
-                                        Grid.Column="2"
-                                        Width="40"
-                                        Height="32"
-                                        Command="{Binding PlaySoundCommand, Mode=OneWay}"
-                                        CommandParameter="{Binding MoversView.CurrentItem.SndDmg2, Mode=OneWay}">
-                                        <ui:SymbolIcon Symbol="Play24" />
-                                    </ui:Button>
+                        <!--  Sound Section  -->
+                        <StackPanel Visibility="{Binding ShowSoundsSection, Mode=TwoWay, Converter={StaticResource BoolToVis}}">
+                            <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Sound'}" />
+                            <UniformGrid Columns="2">
+                                <!--  SFX hit sound  -->
+                                <Grid Style="{StaticResource FormFieldStyle}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'SFX hit sound'}" />
+                                        <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="{i18n:StringLocalizer 'Sound played when an SFX hit the mover'}" />
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <ui:AutoSuggestBox
+                                            Grid.Column="0"
+                                            DisplayMemberPath="Value"
+                                            OriginalItemsSource="{Binding SoundIdentifiers}"
+                                            Text="{Binding MoversView.CurrentItem.SndDmg2Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                        <ui:Button
+                                            Grid.Column="1"
+                                            Width="30"
+                                            Height="32"
+                                            Margin="5,0,5,0"
+                                            Command="{Binding SelectSndDmg2FileCommand, Mode=OneWay}"
+                                            Content="{i18n:StringLocalizer '...'}" />
+                                        <ui:Button
+                                            Grid.Column="2"
+                                            Width="40"
+                                            Height="32"
+                                            Command="{Binding PlaySoundCommand, Mode=OneWay}"
+                                            CommandParameter="{Binding MoversView.CurrentItem.SndDmg2, Mode=OneWay}">
+                                            <ui:SymbolIcon Symbol="Play24" />
+                                        </ui:Button>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
 
-                            <!--  Click sound  -->
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Click sound'}" />
-                                    <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="{i18n:StringLocalizer 'Sound played when the mover is clicked'}" />
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <Grid Grid.Row="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <ui:AutoSuggestBox
-                                        Grid.Column="0"
-                                        DisplayMemberPath="Value"
-                                        OriginalItemsSource="{Binding SoundIdentifiers}"
-                                        Text="{Binding MoversView.CurrentItem.SndIdle1Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                                    <ui:Button
-                                        Grid.Column="1"
-                                        Width="30"
-                                        Height="32"
-                                        Margin="5,0,5,0"
-                                        Command="{Binding SelectSndIdle1FileCommand, Mode=OneWay}"
-                                        Content="{i18n:StringLocalizer '...'}" />
-                                    <ui:Button
-                                        Grid.Column="2"
-                                        Width="40"
-                                        Height="32"
-                                        Command="{Binding PlaySoundCommand, Mode=OneWay}"
-                                        CommandParameter="{Binding MoversView.CurrentItem.SndIdle1, Mode=OneWay}">
-                                        <ui:SymbolIcon Symbol="Play24" />
-                                    </ui:Button>
+                                <!--  Click sound  -->
+                                <Grid Style="{StaticResource FormFieldStyle}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Click sound'}" />
+                                        <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="{i18n:StringLocalizer 'Sound played when the mover is clicked'}" />
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <ui:AutoSuggestBox
+                                            Grid.Column="0"
+                                            DisplayMemberPath="Value"
+                                            OriginalItemsSource="{Binding SoundIdentifiers}"
+                                            Text="{Binding MoversView.CurrentItem.SndIdle1Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                        <ui:Button
+                                            Grid.Column="1"
+                                            Width="30"
+                                            Height="32"
+                                            Margin="5,0,5,0"
+                                            Command="{Binding SelectSndIdle1FileCommand, Mode=OneWay}"
+                                            Content="{i18n:StringLocalizer '...'}" />
+                                        <ui:Button
+                                            Grid.Column="2"
+                                            Width="40"
+                                            Height="32"
+                                            Command="{Binding PlaySoundCommand, Mode=OneWay}"
+                                            CommandParameter="{Binding MoversView.CurrentItem.SndIdle1, Mode=OneWay}">
+                                            <ui:SymbolIcon Symbol="Play24" />
+                                        </ui:Button>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </UniformGrid>
-                    </StackPanel>
-                    <Separator Margin="0,10,0,5" Visibility="{Binding ShowSoundsSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
+                            </UniformGrid>
+                        </StackPanel>
+                        <Separator Margin="0,10,0,5" Visibility="{Binding ShowSoundsSection, Mode=OneWay, Converter={StaticResource BoolToVis}}" />
 
-                    <!--  Model & Motions Section  -->
-                    <StackPanel Visibility="{Binding ShowModelSection, Mode=OneWay, Converter={StaticResource BoolToVis}}">
-                        <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Model'}" />
+                        <!--  Model & Motions Section  -->
+                        <StackPanel Visibility="{Binding ShowModelSection, Mode=OneWay, Converter={StaticResource BoolToVis}}">
+                            <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Model'}" />
 
-                        <!--  Preview and Motions Container  -->
-                        <Grid Margin="0,0,0,15">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                            <!--  Preview and Motions Container  -->
+                            <Grid Margin="0,0,0,15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
 
-                            <!--  3D Model Preview  -->
-                            <Grid Grid.Column="0" Margin="0,0,10,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="250" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Border
-                                    Grid.Row="0"
-                                    Background="{DynamicResource ControlFillColorDefaultBrush}"
-                                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                    BorderThickness="1"
-                                    CornerRadius="4">
-                                    <Grid>
-                                        <Image
-                                            x:Name="DxImage"
-                                            HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            MouseRightButtonDown="DxImage_MouseRightButtonDown"
-                                            MouseWheel="DxImage_MouseWheel"
-                                            Stretch="UniformToFill" />
-                                        <ContentControl
-                                            Content="{Binding}"
-                                            ContentTemplate="{StaticResource ModelWarningTemplate}"
-                                            Visibility="{Binding HasModelViewerError, Converter={StaticResource BoolToVis}}" />
-                                        <StackPanel
-                                            Margin="0,5,5,0"
-                                            HorizontalAlignment="Right"
-                                            VerticalAlignment="Top"
-                                            Panel.ZIndex="1"
-                                            Orientation="Horizontal">
-                                            <ui:Button Margin="0,0,5,0">
-                                                <ui:Button.Style>
-                                                    <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="False">
-                                                                <Setter Property="ToolTip" Value="{i18n:StringLocalizer 'Play selected motion'}" />
-                                                                <Setter Property="Command" Value="{Binding PlayMotionCommand, Mode=OneWay}" />
-                                                            </DataTrigger>
-                                                            <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="True">
-                                                                <Setter Property="ToolTip" Value="{i18n:StringLocalizer 'Stop current motion'}" />
-                                                                <Setter Property="Command" Value="{Binding StopMotionCommand, Mode=OneWay}" />
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </ui:Button.Style>
-                                                <ui:SymbolIcon>
-                                                    <ui:SymbolIcon.Style>
-                                                        <Style TargetType="ui:SymbolIcon">
+                                <!--  3D Model Preview  -->
+                                <Grid Grid.Column="0" Margin="0,0,10,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="250" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Border
+                                        Grid.Row="0"
+                                        Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                        BorderThickness="1"
+                                        CornerRadius="4">
+                                        <Grid>
+                                            <Image
+                                                x:Name="DxImage"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                MouseRightButtonDown="DxImage_MouseRightButtonDown"
+                                                MouseWheel="DxImage_MouseWheel"
+                                                Stretch="UniformToFill" />
+                                            <ContentControl
+                                                Content="{Binding}"
+                                                ContentTemplate="{StaticResource ModelWarningTemplate}"
+                                                Visibility="{Binding HasModelViewerError, Converter={StaticResource BoolToVis}}" />
+                                            <StackPanel
+                                                Margin="0,5,5,0"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Top"
+                                                Panel.ZIndex="1"
+                                                Orientation="Horizontal">
+                                                <ui:Button Margin="0,0,5,0">
+                                                    <ui:Button.Style>
+                                                        <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
                                                             <Style.Triggers>
                                                                 <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="False">
-                                                                    <Setter Property="Symbol" Value="Play24" />
+                                                                    <Setter Property="ToolTip" Value="{i18n:StringLocalizer 'Play selected motion'}" />
+                                                                    <Setter Property="Command" Value="{Binding PlayMotionCommand, Mode=OneWay}" />
                                                                 </DataTrigger>
                                                                 <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="True">
-                                                                    <Setter Property="Symbol" Value="Stop24" />
+                                                                    <Setter Property="ToolTip" Value="{i18n:StringLocalizer 'Stop current motion'}" />
+                                                                    <Setter Property="Command" Value="{Binding StopMotionCommand, Mode=OneWay}" />
                                                                 </DataTrigger>
                                                             </Style.Triggers>
                                                         </Style>
-                                                    </ui:SymbolIcon.Style>
+                                                    </ui:Button.Style>
+                                                    <ui:SymbolIcon>
+                                                        <ui:SymbolIcon.Style>
+                                                            <Style TargetType="ui:SymbolIcon">
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="False">
+                                                                        <Setter Property="Symbol" Value="Play24" />
+                                                                    </DataTrigger>
+                                                                    <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="True">
+                                                                        <Setter Property="Symbol" Value="Stop24" />
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </ui:SymbolIcon.Style>
+                                                    </ui:SymbolIcon>
+                                                </ui:Button>
+                                                <ui:Button Command="{Binding ShowReferenceModelContentDialogCommand}" ToolTip="{i18n:StringLocalizer 'Reference Model'}">
+                                                    <ui:SymbolIcon Symbol="ImageReflection24" />
+                                                </ui:Button>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+
+                                <!--  Motions Container  -->
+                                <Grid Grid.Column="1" Margin="10,0,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="185" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--  Motion List  -->
+                                    <Border
+                                        Grid.Column="0"
+                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                        BorderThickness="1">
+                                        <ListView
+                                            x:Name="MotionsListView"
+                                            dd:DragDrop.DragDropContext="MoverMotionsListView"
+                                            dd:DragDrop.IsDragSource="True"
+                                            dd:DragDrop.IsDropTarget="True"
+                                            dd:DragDrop.SelectDroppedItems="True"
+                                            DisplayMemberPath="MotionTypeIdentifier"
+                                            IsSynchronizedWithCurrentItem="True"
+                                            ItemContainerStyle="{StaticResource AppListViewItemStyle}"
+                                            ItemsSource="{Binding MoversView.CurrentItem.Model.MotionsView}"
+                                            SelectionChanged="MotionsListView_SelectionChanged"
+                                            SelectionMode="Single"
+                                            Style="{StaticResource AppListViewStyle}" />
+                                    </Border>
+
+                                    <!--  Buttons neben der Liste  -->
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        Margin="10,0,0,0"
+                                        VerticalAlignment="Top">
+                                        <ui:Button
+                                            Margin="0,0,0,10"
+                                            Command="{Binding AddMoverMotionCommand, Mode=OneWay}"
+                                            ToolTip="{i18n:StringLocalizer 'Add Motion'}">
+                                            <ui:SymbolIcon Symbol="Add24" />
+                                        </ui:Button>
+                                        <ui:Button
+                                            Margin="0,0,0,10"
+                                            Command="{Binding RemoveMoverMotionCommand, Mode=OneWay}"
+                                            ToolTip="{i18n:StringLocalizer 'Delete Motion'}">
+                                            <ui:SymbolIcon Symbol="Delete24" />
+                                        </ui:Button>
+                                        <ui:Button Command="{Binding GenerateMoverMotionsCommand, Mode=OneWay}" ToolTip="{i18n:StringLocalizer 'Generate Motions'}">
+                                            <ui:SymbolIcon Symbol="ArrowSync24" />
+                                        </ui:Button>
+                                    </StackPanel>
+
+                                    <!--  Motion Fields  -->
+                                    <UniformGrid
+                                        Grid.Row="1"
+                                        Grid.ColumnSpan="2"
+                                        Margin="0,10,0,0"
+                                        Columns="2">
+                                        <!--  Motion Key  -->
+                                        <Grid Style="{StaticResource FormFieldStyle}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Motion Key'}" />
+                                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                                    <ui:SymbolIcon.ToolTip>
+                                                        <ToolTip Content="{i18n:StringLocalizer 'Key identifier for the motion'}" />
+                                                    </ui:SymbolIcon.ToolTip>
                                                 </ui:SymbolIcon>
-                                            </ui:Button>
-                                            <ui:Button Command="{Binding ShowReferenceModelContentDialogCommand}" ToolTip="{i18n:StringLocalizer 'Reference Model'}">
-                                                <ui:SymbolIcon Symbol="ImageReflection24" />
-                                            </ui:Button>
-                                        </StackPanel>
-                                    </Grid>
-                                </Border>
+                                            </StackPanel>
+                                            <ui:AutoSuggestBox
+                                                Grid.Row="1"
+                                                DisplayMemberPath="Value"
+                                                OriginalItemsSource="{Binding MotionIdentifiers, Mode=OneWay}"
+                                                Text="{Binding Path=SelectedItem.MotionTypeIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ElementName=MotionsListView}" />
+                                        </Grid>
+
+                                        <!--  Motion File  -->
+                                        <Grid Style="{StaticResource FormFieldStyle}">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Motion File'}" />
+                                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                                    <ui:SymbolIcon.ToolTip>
+                                                        <ToolTip Content="{i18n:StringLocalizer 'File path for the motion'}" />
+                                                    </ui:SymbolIcon.ToolTip>
+                                                </ui:SymbolIcon>
+                                            </StackPanel>
+                                            <Grid Grid.Row="1">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <ui:AutoSuggestBox
+                                                    Grid.Column="0"
+                                                    OriginalItemsSource="{Binding ModelMotionFilePossibilities, Mode=OneWay}"
+                                                    Text="{Binding Path=SelectedItem.Prop.SzMotion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=MotionsListView}" />
+                                                <ui:Button
+                                                    Grid.Column="1"
+                                                    Width="30"
+                                                    Height="32"
+                                                    Margin="5,0,0,0"
+                                                    Content="{i18n:StringLocalizer '...'}" />
+                                            </Grid>
+                                        </Grid>
+                                    </UniformGrid>
+                                </Grid>
                             </Grid>
 
-                            <!--  Motions Container  -->
-                            <Grid Grid.Column="1" Margin="10,0,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="185" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
-                                <!--  Motion List  -->
-                                <Border
-                                    Grid.Column="0"
-                                    BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                    BorderThickness="1">
-                                    <ListView
-                                        x:Name="MotionsListView"
-                                        dd:DragDrop.DragDropContext="MoverMotionsListView"
-                                        dd:DragDrop.IsDragSource="True"
-                                        dd:DragDrop.IsDropTarget="True"
-                                        dd:DragDrop.SelectDroppedItems="True"
-                                        DisplayMemberPath="MotionTypeIdentifier"
-                                        IsSynchronizedWithCurrentItem="True"
-                                        ItemContainerStyle="{StaticResource AppListViewItemStyle}"
-                                        ItemsSource="{Binding MoversView.CurrentItem.Model.MotionsView}"
-                                        SelectionMode="Single"
-                                        Style="{StaticResource AppListViewStyle}" />
-                                </Border>
-
-                                <!--  Buttons neben der Liste  -->
-                                <StackPanel
-                                    Grid.Column="1"
-                                    Margin="10,0,0,0"
-                                    VerticalAlignment="Top">
-                                    <ui:Button
-                                        Margin="0,0,0,10"
-                                        Command="{Binding AddMoverMotionCommand, Mode=OneWay}"
-                                        ToolTip="{i18n:StringLocalizer 'Add Motion'}">
-                                        <ui:SymbolIcon Symbol="Add24" />
-                                    </ui:Button>
-                                    <ui:Button
-                                        Margin="0,0,0,10"
-                                        Command="{Binding RemoveMoverMotionCommand, Mode=OneWay}"
-                                        ToolTip="{i18n:StringLocalizer 'Delete Motion'}">
-                                        <ui:SymbolIcon Symbol="Delete24" />
-                                    </ui:Button>
-                                    <ui:Button Command="{Binding GenerateMoverMotionsCommand, Mode=OneWay}" ToolTip="{i18n:StringLocalizer 'Generate Motions'}">
-                                        <ui:SymbolIcon Symbol="ArrowSync24" />
-                                    </ui:Button>
-                                </StackPanel>
-
-                                <!--  Motion Fields  -->
-                                <UniformGrid
-                                    Grid.Row="1"
-                                    Grid.ColumnSpan="2"
-                                    Margin="0,10,0,0"
-                                    Columns="2">
-                                    <!--  Motion Key  -->
+                            <!--  Model Settings  -->
+                            <StackPanel>
+                                <!--  First Row  -->
+                                <UniformGrid Columns="2">
+                                    <!--  File  -->
                                     <Grid Style="{StaticResource FormFieldStyle}">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="*" />
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
                                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Motion Key'}" />
+                                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'File'}" />
                                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                                 <ui:SymbolIcon.ToolTip>
-                                                    <ToolTip Content="{i18n:StringLocalizer 'Key identifier for the motion'}" />
-                                                </ui:SymbolIcon.ToolTip>
-                                            </ui:SymbolIcon>
-                                        </StackPanel>
-                                        <ui:AutoSuggestBox
-                                            Grid.Row="1"
-                                            DisplayMemberPath="Value"
-                                            OriginalItemsSource="{Binding MotionIdentifiers, Mode=OneWay}"
-                                            Text="{Binding Path=SelectedItem.MotionTypeIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ElementName=MotionsListView}" />
-                                    </Grid>
-
-                                    <!--  Motion File  -->
-                                    <Grid Style="{StaticResource FormFieldStyle}">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="*" />
-                                        </Grid.RowDefinitions>
-                                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Motion File'}" />
-                                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                                <ui:SymbolIcon.ToolTip>
-                                                    <ToolTip Content="{i18n:StringLocalizer 'File path for the motion'}" />
+                                                    <ToolTip Content="{i18n:StringLocalizer 'Model file path'}" />
                                                 </ui:SymbolIcon.ToolTip>
                                             </ui:SymbolIcon>
                                         </StackPanel>
@@ -1713,103 +1753,64 @@
                                             </Grid.ColumnDefinitions>
                                             <ui:AutoSuggestBox
                                                 Grid.Column="0"
-                                                OriginalItemsSource="{Binding ModelMotionFilePossibilities, Mode=OneWay}"
-                                                Text="{Binding Path=SelectedItem.Prop.SzMotion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=MotionsListView}" />
+                                                OriginalItemsSource="{Binding ModelFilePossibilities, Mode=OneWay}"
+                                                Text="{Binding MoversView.CurrentItem.Model.Prop.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                             <ui:Button
                                                 Grid.Column="1"
                                                 Width="30"
                                                 Height="32"
                                                 Margin="5,0,0,0"
+                                                Command="{Binding DataContext.SelectModelFileCommand, RelativeSource={RelativeSource AncestorType=Page}}"
                                                 Content="{i18n:StringLocalizer '...'}" />
                                         </Grid>
                                     </Grid>
-                                </UniformGrid>
-                            </Grid>
-                        </Grid>
 
-                        <!--  Model Settings  -->
-                        <StackPanel>
-                            <!--  First Row  -->
-                            <UniformGrid Columns="2">
-                                <!--  File  -->
-                                <Grid Style="{StaticResource FormFieldStyle}">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                        <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'File'}" />
-                                        <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                            <ui:SymbolIcon.ToolTip>
-                                                <ToolTip Content="{i18n:StringLocalizer 'Model file path'}" />
-                                            </ui:SymbolIcon.ToolTip>
-                                        </ui:SymbolIcon>
-                                    </StackPanel>
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <ui:AutoSuggestBox
-                                            Grid.Column="0"
-                                            OriginalItemsSource="{Binding ModelFilePossibilities, Mode=OneWay}"
-                                            Text="{Binding MoversView.CurrentItem.Model.Prop.SzName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                        <ui:Button
-                                            Grid.Column="1"
-                                            Width="30"
-                                            Height="32"
-                                            Margin="5,0,0,0"
-                                            Command="{Binding DataContext.SelectModelFileCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                            Content="{i18n:StringLocalizer '...'}" />
+                                    <!--  Scale  -->
+                                    <Grid Style="{StaticResource FormFieldStyle}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="32" />
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Scale'}" />
+                                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                                <ui:SymbolIcon.ToolTip>
+                                                    <ToolTip Content="{i18n:StringLocalizer 'Model scale factor'}" />
+                                                </ui:SymbolIcon.ToolTip>
+                                            </ui:SymbolIcon>
+                                        </StackPanel>
+                                        <ui:NumberBox
+                                            Grid.Row="1"
+                                            SpinButtonPlacementMode="Inline"
+                                            Value="{Binding MoversView.CurrentItem.Model.Prop.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     </Grid>
-                                </Grid>
+                                </UniformGrid>
 
-                                <!--  Scale  -->
-                                <Grid Style="{StaticResource FormFieldStyle}">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="32" />
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                        <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Scale'}" />
-                                        <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                            <ui:SymbolIcon.ToolTip>
-                                                <ToolTip Content="{i18n:StringLocalizer 'Model scale factor'}" />
-                                            </ui:SymbolIcon.ToolTip>
-                                        </ui:SymbolIcon>
-                                    </StackPanel>
-                                    <ui:NumberBox
-                                        Grid.Row="1"
-                                        SpinButtonPlacementMode="Inline"
-                                        Value="{Binding MoversView.CurrentItem.Model.Prop.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                                </Grid>
-                            </UniformGrid>
-
-                            <!--  Second Row  -->
-                            <UniformGrid Columns="2">
-                                <!--  Texture  -->
-                                <Grid Style="{StaticResource FormFieldStyle}">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                        <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Texture'}" />
-                                        <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                            <ui:SymbolIcon.ToolTip>
-                                                <ToolTip Content="{i18n:StringLocalizer 'Texture'}" />
-                                            </ui:SymbolIcon.ToolTip>
-                                        </ui:SymbolIcon>
-                                    </StackPanel>
-                                    <ComboBox
-                                        Grid.Row="1"
-                                        ItemsSource="{Binding ModelTexturesPossibilities}"
-                                        SelectedValue="{Binding MoversView.CurrentItem.Model.Prop.NTextureEx, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                        Style="{StaticResource AppComboBoxStyle}" />
-                                </Grid>
-                            </UniformGrid>
+                                <!--  Second Row  -->
+                                <UniformGrid Columns="2">
+                                    <!--  Texture  -->
+                                    <Grid Style="{StaticResource FormFieldStyle}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Texture'}" />
+                                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                                <ui:SymbolIcon.ToolTip>
+                                                    <ToolTip Content="{i18n:StringLocalizer 'Texture'}" />
+                                                </ui:SymbolIcon.ToolTip>
+                                            </ui:SymbolIcon>
+                                        </StackPanel>
+                                        <ComboBox
+                                            Grid.Row="1"
+                                            ItemsSource="{Binding ModelTexturesPossibilities}"
+                                            SelectedValue="{Binding MoversView.CurrentItem.Model.Prop.NTextureEx, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            Style="{StaticResource AppComboBoxStyle}" />
+                                    </Grid>
+                                </UniformGrid>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
 
                     </StackPanel>
                 </Grid>

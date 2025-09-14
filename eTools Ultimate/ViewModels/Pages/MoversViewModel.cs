@@ -127,7 +127,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        public string[] Object3DMaterialTextures 
+        public string[] Object3DMaterialTextures
         {
             get => _object3DMaterialTextures;
             set
@@ -358,7 +358,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                     NativeMethods.SetParts(D3dHost._native, partPath);
                 }
             }
-            else 
+            else
             {
                 if (!File.Exists(mover.Model.Model3DFilePath))
                 {
@@ -391,7 +391,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (D3dHost is null) return;
             if (MoversView.CurrentItem is not Mover mover) return;
-            if(mover.Model is null) return;
+            if (mover.Model is null) return;
 
 
 
@@ -417,7 +417,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         #region Event handlers
         private void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 case nameof(Settings.ModelsFolderPath):
                 case nameof(Settings.DefaultModelsFolderPath):
@@ -479,7 +479,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             if (MoversView.CurrentItem is not Mover mover)
                 throw new InvalidOperationException("MoversViewModel::ModelMotionFile_Changed exception : MoversView.CurrentItem is not Mover");
-            if(mover.Model is null)
+            if (mover.Model is null)
                 throw new InvalidOperationException("MoversViewModel::ModelMotionFile_Changed exception : mover.Model is null");
             if (mover.Model.MotionsView.CurrentItem is not ModelMotion currentMotion) return;
 
@@ -517,7 +517,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                     mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
                     mover.Model.MotionsView.CurrentChanging += MotionsView_CurrentChanging;
                     mover.Model.MotionsView.CurrentChanged += MotionsView_CurrentChanged;
-                    if(mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
+                    if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
                         currentMotion.PropertyChanged += CurrentMotion_PropertyChanged;
                 }
             }
@@ -555,18 +555,18 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private void CurrentMoverProp_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (sender is not MoverProp moverProp) 
+            if (sender is not MoverProp moverProp)
                 throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called with non MoverProp sender");
-            if(MoversView.CurrentItem is not Mover mover) 
+            if (MoversView.CurrentItem is not Mover mover)
                 throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called when MoversView currentItem is not a mover");
             if (moverProp != mover.Prop)
                 throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called with non current mover prop sender.");
 
             if (e.PropertyName == nameof(Mover.Prop.DwId))
             {
-                if(e is not PropertyChangedExtendedEventArgs extendedArgs) 
+                if (e is not PropertyChangedExtendedEventArgs extendedArgs)
                     throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called with non PropertyChangedExtendedEventArgs.");
-                if(extendedArgs.OldValue is not int oldId)
+                if (extendedArgs.OldValue is not int oldId)
                     throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called with non int old DwId value.");
                 if (extendedArgs.NewValue is not int newId)
                     throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called with non int new DwId value.");
@@ -589,11 +589,11 @@ namespace eTools_Ultimate.ViewModels.Pages
                 InitializeMotionsDirectoryWatcherPath();
                 LoadModel();
             }
-            else if(e.PropertyName == nameof(Mover.Model.Prop.NTextureEx))
+            else if (e.PropertyName == nameof(Mover.Model.Prop.NTextureEx))
             {
                 SetModelTexture();
             }
-            else if(e.PropertyName == nameof(Mover.Model.Prop.FScale))
+            else if (e.PropertyName == nameof(Mover.Model.Prop.FScale))
             {
                 SetScale();
             }
@@ -681,18 +681,18 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private async Task ShowReferenceModelContentDialog()
         {
-            if(D3dHost is null) return;
+            if (D3dHost is null) return;
 
             var contentDialog = new MoverReferenceModelDialog(contentDialogService.GetDialogHost());
 
-            if(await contentDialog.ShowAsync() == Wpf.Ui.Controls.ContentDialogResult.Primary)
+            if (await contentDialog.ShowAsync() == Wpf.Ui.Controls.ContentDialogResult.Primary)
             {
                 NativeMethods.DeleteReferenceModel(D3dHost._native);
                 if (contentDialog.DataContext is not MoverReferenceModelViewModel contentDialogViewModel) return;
 
                 //if (contentDialogViewModel.MoversView.CurrentItem is null) // TODO: remove reference model
                 if (contentDialogViewModel.MoversView.CurrentItem is not Mover referenceMover) return;
-                if(referenceMover.Model is not Model referenceModel) return;
+                if (referenceMover.Model is not Model referenceModel) return;
 
                 if (referenceMover.Identifier == "MI_MALE" || referenceMover.Identifier == "MI_FEMALE")
                 {
@@ -752,7 +752,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private void PlaySound(Sound? sound)
         {
-            if(sound is not null)
+            if (sound is not null)
                 soundsService.PlaySound(sound);
         }
 
@@ -787,23 +787,11 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
-        private async Task AddMover()
+        private void AddMover()
         {
-            ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
-                new SimpleContentDialogCreateOptions()
-                {
-                    Title = "Add a new mover",
-                    Content = "Are you sure you want to add a new mover ?",
-                    PrimaryButtonText = "Add",
-                    CloseButtonText = "Cancel",
-                }
-            );
-            if(result == ContentDialogResult.Primary)
-            {
-                Mover newMover = moversService.CreateMover();
-                MoversView.MoveCurrentTo(newMover);
-                MoversView.Refresh();
-            }
+            Mover newMover = moversService.CreateMover();
+            MoversView.Refresh();
+            MoversView.MoveCurrentTo(newMover);
         }
 
         [RelayCommand]
@@ -815,7 +803,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 new SimpleContentDialogCreateOptions()
                 {
                     Title = "Remove a mover",
-                    Content = $"Are you sure you want to remove the mover {mover.Identifier} ?",
+                    Content = $"Are you sure you want to remove {mover.Name} ?",
                     PrimaryButtonText = "Remove",
                     CloseButtonText = "Cancel",
                 }
@@ -828,28 +816,16 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
-        private async Task AddMoverMotion()
+        private void AddMoverMotion()
         {
             if (MoversView.CurrentItem is not Mover mover) return;
             if (mover.Model is null) return;
 
-            ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
-                new SimpleContentDialogCreateOptions()
-                {
-                    Title = "Add a motion",
-                    Content = $"Are you sure you want to add a motion to the mover {mover.Identifier} ?",
-                    PrimaryButtonText = "Add",
-                    CloseButtonText = "Cancel",
-                }
-            );
-            if (result == ContentDialogResult.Primary)
-            {
-                ModelMotionProp motionProp = new(-1, "");
-                ModelMotion motion = new(motionProp);
-                mover.Model.Motions.Add(motion);
-                mover.Model.MotionsView.MoveCurrentTo(motion);
-                mover.Model.MotionsView.Refresh();
-            }
+            ModelMotionProp motionProp = new(-1, "");
+            ModelMotion motion = new(motionProp);
+            mover.Model.Motions.Add(motion);
+            mover.Model.MotionsView.Refresh();
+            mover.Model.MotionsView.MoveCurrentTo(motion);
         }
 
         [RelayCommand]
@@ -884,7 +860,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             string folderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath; // Models folder path
             string filterPrefix = $"{Constants.ModelFilenameRoot[mover.Model.Prop.DwType]}_{mover.Model.Prop.SzName}_"; // Filter prefix for motion files
             string filter = $"{filterPrefix}*.ani"; // Entire filter
-            string[] filePossibilities = [..Directory.GetFiles(folderPath, filter).Select(x => Path.GetFileNameWithoutExtension(x)[filterPrefix.Length..])]; // All .ani files for this model
+            string[] filePossibilities = [.. Directory.GetFiles(folderPath, filter).Select(x => Path.GetFileNameWithoutExtension(x)[filterPrefix.Length..])]; // All .ani files for this model
             string[] motionTypeDefines = [.. definesService.ReversedMotionTypeDefines.Select(x => x.Value)]; // All motion type identifiers
 
             int generatedCount = 0;
@@ -928,7 +904,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             string motionFile = $@"{modelsFolderPath}{root}_{lowerMotionKey}.ani";
 
-            if(!File.Exists(motionFile))
+            if (!File.Exists(motionFile))
             {
                 snackbarService.Show(
                 title: "Unable to play motion",
