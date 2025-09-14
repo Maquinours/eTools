@@ -196,6 +196,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             {
                 NativeMethods.SetParts(D3dHost._native, partPath);
             }
+            NativeMethods.ZoomCamera(D3dHost._native, 720); // zoom in
         }
 
         private void PlayMotion()
