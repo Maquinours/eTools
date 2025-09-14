@@ -23,7 +23,7 @@ using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class MoversViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, MoversService moversService, SettingsService settingsService, DefinesService definesService, SoundsService soundsService) : ObservableObject, INavigationAware
+    public partial class MoversViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, MoversService moversService, ModelsService modelsService, StringsService stringsService, SettingsService settingsService, DefinesService definesService, SoundsService soundsService) : ObservableObject, INavigationAware
     {
         #region Properties
         private bool _isInitialized = false;
@@ -929,6 +929,46 @@ namespace eTools_Ultimate.ViewModels.Pages
             NativeMethods.StopMotion(D3dHost._native);
             Auto3DRendering = false;
             D3dHost.Render();
+        }
+
+        [RelayCommand]
+        private async Task Save()
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    HashSet<string> stringIdentifiers = [];
+                    foreach (MoverProp moverProp in moversService.Movers.Select(mover => mover.Prop))
+                    {
+                        stringIdentifiers.Add(moverProp.SzName);
+                        stringIdentifiers.Add(moverProp.SzComment);
+                    }
+
+                    moversService.Save();
+                    modelsService.Save();
+                    stringsService.Save(settingsService.Settings.PropMoverTxtFilePath ?? settingsService.Settings.DefaultPropMoverTxtFilePath, [.. stringIdentifiers]);
+
+                });
+
+                snackbarService.Show(
+                    title: "Movers and motions saved",
+                    message: "Movers and motions have been successfully saved.",
+                    appearance: ControlAppearance.Success,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+            catch (Exception ex)
+            {
+                snackbarService.Show(
+                    title: "An error has occured while saving movers and motions",
+                    message: ex.Message,
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
         }
         #endregion
     }

@@ -49,34 +49,6 @@ namespace eTools_Ultimate.Views.Pages
             }
         }
 
-        private void SaveButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            try
-            {
-                var result = System.Windows.MessageBox.Show(
-                    "Do you want to save the changes?",
-                    "Save",
-                    System.Windows.MessageBoxButton.YesNo,
-                    System.Windows.MessageBoxImage.Question);
-                
-                if (result == System.Windows.MessageBoxResult.Yes)
-                {
-                    // Here the logic for saving could be implemented
-                    System.Console.WriteLine("Mover is being saved");
-                }
-            }
-            catch(System.Exception ex)
-            {
-                System.Windows.MessageBox.Show(
-                    $"Error saving: {ex.Message}",
-                    "Error",
-                    System.Windows.MessageBoxButton.OK,
-                    System.Windows.MessageBoxImage.Error);
-                
-                System.Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
-            }
-        }
-
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             var hwnd = new WindowInteropHelper(Window.GetWindow(this)).Handle;

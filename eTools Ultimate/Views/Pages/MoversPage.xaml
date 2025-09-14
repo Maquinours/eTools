@@ -1113,7 +1113,7 @@
                 <ui:Button
                     x:Name="SaveButton"
                     Margin="0,0,10,0"
-                    Click="SaveButton_Click"
+                    Command="{Binding SaveCommand}"
                     Content="{i18n:StringLocalizer 'Save'}" />
                 <ui:Button
                     x:Name="ExpertButton"
