@@ -22,7 +22,8 @@ namespace eTools_Ultimate.Helpers
                 folderDialog.Title = title;
             if (folderDialog.ShowDialog() == true)
                 return folderDialog.FolderName;
-            return path;
+
+            return null;
         }
         public static string? SelectFile(string? path, string? title = null, string? filter = null)
         {
@@ -50,7 +51,8 @@ namespace eTools_Ultimate.Helpers
 
             if (fileDialog.ShowDialog() == true)
                 return fileDialog.FileName;
-            return path;
+
+            return null;
         }
     }
 }
