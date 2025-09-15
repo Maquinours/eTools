@@ -257,7 +257,13 @@ namespace eTools_Ultimate.ViewModels.Pages
             {
                 mover.PropertyChanged += CurrentMover_PropertyChanged;
                 if (mover.Model is not null)
-                    mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
+                {
+                    mover.Model.Prop.PropertyChanged += CurrentMoverModelProp_PropertyChanged;
+                    mover.Model.MotionsView.CurrentChanging += MotionsView_CurrentChanging;
+                    mover.Model.MotionsView.CurrentChanged += MotionsView_CurrentChanged;
+                    if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
+                        currentMotion.Prop.PropertyChanged += CurrentMotionProp_PropertyChanged;
+                }
             }
 
             CompositionTarget.Rendering += CompositionTarget_Rendering;
@@ -500,9 +506,9 @@ namespace eTools_Ultimate.ViewModels.Pages
             mover.Prop.PropertyChanged -= CurrentMoverProp_PropertyChanged;
             if (mover.Model is not null)
             {
-                mover.Model.PropertyChanged -= CurrentMoverModel_PropertyChanged;
+                mover.Model.Prop.PropertyChanged -= CurrentMoverModelProp_PropertyChanged;
                 if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
-                    currentMotion.PropertyChanged -= CurrentMotion_PropertyChanged;
+                    currentMotion.Prop.PropertyChanged -= CurrentMotionProp_PropertyChanged;
             }
         }
 
@@ -514,11 +520,11 @@ namespace eTools_Ultimate.ViewModels.Pages
                 mover.Prop.PropertyChanged += CurrentMoverProp_PropertyChanged;
                 if (mover.Model is not null)
                 {
-                    mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
+                    mover.Model.Prop.PropertyChanged += CurrentMoverModelProp_PropertyChanged;
                     mover.Model.MotionsView.CurrentChanging += MotionsView_CurrentChanging;
                     mover.Model.MotionsView.CurrentChanged += MotionsView_CurrentChanged;
                     if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
-                        currentMotion.PropertyChanged += CurrentMotion_PropertyChanged;
+                        currentMotion.Prop.PropertyChanged += CurrentMotionProp_PropertyChanged;
                 }
             }
 
@@ -535,15 +541,15 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (e is not PropertyChangedExtendedEventArgs extendedArgs) throw new InvalidOperationException("Model property changed args is not PropertyChangedExtendedEventArgs");
                 if (extendedArgs.OldValue is Model oldModel)
                 {
-                    oldModel.PropertyChanged -= CurrentMoverModel_PropertyChanged;
+                    oldModel.Prop.PropertyChanged -= CurrentMoverModelProp_PropertyChanged;
                     if (oldModel.MotionsView.CurrentItem is ModelMotion currentMotion)
-                        currentMotion.PropertyChanged -= CurrentMotion_PropertyChanged;
+                        currentMotion.Prop.PropertyChanged -= CurrentMotionProp_PropertyChanged;
                 }
                 if (extendedArgs.NewValue is Model newModel)
                 {
-                    newModel.PropertyChanged += CurrentMoverModel_PropertyChanged;
+                    newModel.Prop.PropertyChanged += CurrentMoverModelProp_PropertyChanged;
                     if (newModel.MotionsView.CurrentItem is ModelMotion currentMotion)
-                        currentMotion.PropertyChanged += CurrentMotion_PropertyChanged;
+                        currentMotion.Prop.PropertyChanged += CurrentMotionProp_PropertyChanged;
                 }
 
                 OnPropertyChanged(nameof(ModelTexturesPossibilities));
@@ -580,8 +586,11 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        private void CurrentMoverModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        private void CurrentMoverModelProp_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
+            if(sender is not ModelProp)
+                throw new InvalidOperationException("MoversViewModel::CurrentMoverModelProp_PropertyChanged exception: sender is not ModelProp");
+
             if (e.PropertyName == nameof(Mover.Model.Model3DFilePath))
             {
                 OnPropertyChanged(nameof(ModelTexturesPossibilities));
@@ -610,7 +619,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanging exception: sender is not equal to mover model motions view");
 
             if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
-                currentMotion.PropertyChanged -= CurrentMotion_PropertyChanged;
+                currentMotion.Prop.PropertyChanged -= CurrentMotionProp_PropertyChanged;
             else if (mover.Model.MotionsView.CurrentItem != null)
                 throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanging exception: selected motion is neither ModelMotion nor null");
 
@@ -628,24 +637,27 @@ namespace eTools_Ultimate.ViewModels.Pages
                 throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanged exception: sender is not equal to mover model motions view");
 
             if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
-                currentMotion.PropertyChanged += CurrentMotion_PropertyChanged;
+                currentMotion.Prop.PropertyChanged += CurrentMotionProp_PropertyChanged;
             else if (mover.Model.MotionsView.CurrentItem != null)
                 throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanged exception: selected motion is neither ModelMotion nor null");
 
             StopMotion();
         }
 
-        private void CurrentMotion_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        private void CurrentMotionProp_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (sender is not ModelMotion modelMotion)
+            if (sender is not ModelMotionProp motionProp)
                 throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: sender is not ModelMotion");
             if (MoversView.CurrentItem is not Mover mover)
                 throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: MoversView.CurrentItem is not Mover");
             if (mover.Model is null)
                 throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: mover.Model is null");
-            if (modelMotion != mover.Model.MotionsView.CurrentItem)
-                throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: sender is not selected motion");
-            if (e.PropertyName == nameof(ModelMotion.Prop.SzMotion))
+            if(mover.Model.MotionsView.CurrentItem is not ModelMotion motion)
+                throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: MotionsView.CurrentItem is not Motion");
+            if (motionProp != motion.Prop)
+                throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: sender is not selected motion prop");
+
+            if (e.PropertyName == nameof(ModelMotionProp.SzMotion))
                 StopMotion();
         }
         #endregion Event handlers
