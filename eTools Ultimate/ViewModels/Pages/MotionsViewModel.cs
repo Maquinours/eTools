@@ -249,8 +249,10 @@ namespace eTools_Ultimate.ViewModels.Pages
         private bool FilterItem(object obj)
         {
             if (obj is not Motion motion) return false;
-            if (string.IsNullOrEmpty(this.SearchText)) return true;
-            return motion.Name.ToLower().Contains(this.SearchText.ToLower());
+            if (string.IsNullOrEmpty(SearchText)) return true;
+
+            return motion.Name.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase) ||
+                motion.Identifier.Contains(SearchText, StringComparison.InvariantCultureIgnoreCase);
         }
 
         [RelayCommand]
