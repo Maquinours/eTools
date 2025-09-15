@@ -340,7 +340,8 @@
                         IsSynchronizedWithCurrentItem="True"
                         ItemTemplate="{StaticResource MotionListTemplate}"
                         ItemsSource="{Binding MotionsView}"
-                        SelectionChanged="MotionsListView_SelectionChanged">
+                        SelectionChanged="MotionsListView_SelectionChanged"
+                        SelectionMode="Single">
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="Background" Value="Transparent" />
