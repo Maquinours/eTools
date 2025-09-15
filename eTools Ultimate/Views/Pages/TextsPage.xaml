@@ -5,6 +5,7 @@
     xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+    xmlns:helpers="clr-namespace:eTools_Ultimate.Helpers"
     xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -238,13 +239,14 @@
 
             <!--  Form Section with General Fields  -->
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                <StackPanel>
+                <StackPanel Margin="20">
                     <!--  General Section  -->
                     <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'General'}" />
 
                     <!--  Text ID  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
@@ -257,11 +259,34 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:AutoSuggestBox
+                            x:Name="TextIdentifierAutoSuggestBox"
                             Grid.Row="1"
                             BorderThickness="1"
                             DisplayMemberPath="Value"
-                            OriginalItemsSource="{Binding TextIdentifiers, Mode=OneWay}"
-                            Text="{Binding TextsView.CurrentItem.Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            OriginalItemsSource="{Binding TextIdentifiers, Mode=OneWay}">
+                            <ui:AutoSuggestBox.Text>
+                                <Binding
+                                    Mode="TwoWay"
+                                    Path="TextsView.CurrentItem.Identifier"
+                                    UpdateSourceTrigger="LostFocus">
+                                    <Binding.ValidationRules>
+                                        <helpers:TextIdentifierValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </ui:AutoSuggestBox.Text>
+                        </ui:AutoSuggestBox>
+                        <ItemsControl Grid.Row="2" ItemsSource="{Binding (Validation.Errors), ElementName=TextIdentifierAutoSuggestBox}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        Margin="0,5"
+                                        HorizontalAlignment="Stretch"
+                                        Foreground="{DynamicResource SystemFillColorCriticalBrush}"
+                                        Text="{Binding ErrorContent}"
+                                        TextWrapping="Wrap" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Grid>
 
                     <!--  InGame Text + Color  -->
