@@ -77,7 +77,8 @@
                     ScrollViewer.PanningMode="VerticalOnly"
                     ScrollViewer.VerticalScrollBarVisibility="Auto"
                     SelectedIndex="0"
-                    SelectionChanged="AccessoriesListView_SelectionChanged">
+                    SelectionChanged="AccessoriesListView_SelectionChanged"
+                    SelectionMode="Single">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Background" Value="Transparent" />
