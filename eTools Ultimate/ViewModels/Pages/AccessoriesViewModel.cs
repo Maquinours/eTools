@@ -36,9 +36,6 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         private ICollectionView _accessoriesView = CollectionViewSource.GetDefaultView(accessoriesService.Accessories);
 
-        [ObservableProperty]
-        private AccessoryAbilityOptionData? _lastAddedLevel = null;
-
         public string[] PossibleDstValues => [.. definesService.ReversedDestDefines.Values];
 
         public string SearchText
