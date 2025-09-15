@@ -129,7 +129,8 @@
                     BorderThickness="0"
                     IsSynchronizedWithCurrentItem="True"
                     ItemTemplate="{StaticResource TextClientItemTemplate}"
-                    ItemsSource="{Binding TextsView}">
+                    ItemsSource="{Binding TextsView}"
+                    SelectionMode="Single">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Background" Value="Transparent" />
