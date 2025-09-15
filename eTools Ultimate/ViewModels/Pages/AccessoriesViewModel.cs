@@ -25,7 +25,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         public AccessoryAbilityOptionData Level { get; } = level;
     }
 
-    public partial class AccessoriesViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, AccessoriesService accessoriesService) : ObservableObject, INavigationAware
+    public partial class AccessoriesViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, AccessoriesService accessoriesService, DefinesService definesService) : ObservableObject, INavigationAware
     {
         public event EventHandler<LevelAddedEventArgs>? LevelAdded;
 
@@ -39,7 +39,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         private AccessoryAbilityOptionData? _lastAddedLevel = null;
 
-        public string[] _PossibleDstValues = [.. App.Services.GetRequiredService<DefinesService>().Defines.Where(x => x.Key.StartsWith("DST_")).Select(x => x.Key)];
+        public string[] PossibleDstValues => [.. definesService.ReversedDestDefines.Values];
 
         public string SearchText
         {
