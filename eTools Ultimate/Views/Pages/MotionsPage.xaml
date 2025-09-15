@@ -5,6 +5,7 @@
     xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
+    xmlns:helpers="clr-namespace:eTools_Ultimate.Helpers"
     xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -59,6 +60,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
                             <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'ID'}" />
@@ -69,11 +71,33 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:AutoSuggestBox
-                            x:Name="MotionIdTextBox"
+                            x:Name="MotionIdentifierAutoSuggestBox"
                             Grid.Row="1"
                             DisplayMemberPath="Value"
-                            OriginalItemsSource="{Binding DataContext.MotionIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
-                            Text="{Binding Path=Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            OriginalItemsSource="{Binding DataContext.MotionIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}">
+                            <ui:AutoSuggestBox.Text>
+                                <Binding
+                                    Mode="TwoWay"
+                                    Path="Identifier"
+                                    UpdateSourceTrigger="LostFocus">
+                                    <Binding.ValidationRules>
+                                        <helpers:MotionIdentifierValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </ui:AutoSuggestBox.Text>
+                        </ui:AutoSuggestBox>
+                        <ItemsControl Grid.Row="2" ItemsSource="{Binding (Validation.Errors), ElementName=MotionIdentifierAutoSuggestBox}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        Margin="0,5"
+                                        HorizontalAlignment="Stretch"
+                                        Foreground="{DynamicResource SystemFillColorCriticalBrush}"
+                                        Text="{Binding ErrorContent}"
+                                        TextWrapping="Wrap" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
                     </Grid>
 
                     <!--  Animation ID  -->
@@ -374,7 +398,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                
+
                 <!--  Static Header mit Buttons  -->
                 <StackPanel
                     Grid.Row="0"
@@ -383,103 +407,103 @@
                     VerticalAlignment="Top"
                     Orientation="Horizontal"
                     ZIndex="1">
-                        <ui:Button Command="{Binding UndoCommand}" ToolTip="{i18n:StringLocalizer 'Undo'}">
-                            <ui:SymbolIcon Symbol="ArrowUndo24" />
-                        </ui:Button>
-                        <ui:Button
-                            Margin="10,0,10,0"
-                            Command="{Binding RedoCommand}"
-                            ToolTip="{i18n:StringLocalizer 'Redo'}">
-                            <ui:SymbolIcon Symbol="ArrowRedo24" />
-                        </ui:Button>
-                        <ui:Button
-                            x:Name="SaveButton"
-                            Margin="0,0,10,0"
-                            Command="{Binding SaveCommand}"
-                            Content="{i18n:StringLocalizer 'Save'}" />
-                        <ui:Button
-                            x:Name="ExpertButton"
-                            Margin="0,0,10,0"
-                            Appearance="Secondary"
-                            Content="{i18n:StringLocalizer 'Expert'}" />
-                        <ui:Button
-                            x:Name="AddButton"
-                            Margin="0,0,10,0"
-                            HorizontalAlignment="Left"
-                            Appearance="Primary"
-                            Background="#2F70AF"
-                            Command="{Binding AddCommand}">
-                            <TextBlock Foreground="White" Text="{i18n:StringLocalizer 'Add'}" />
-                        </ui:Button>
-                        <ui:Button
-                            x:Name="DeleteButton"
-                            Background="#FD292F"
-                            Command="{Binding DeleteCommand}"
-                            Content="{i18n:StringLocalizer 'Delete'}" />
+                    <ui:Button Command="{Binding UndoCommand}" ToolTip="{i18n:StringLocalizer 'Undo'}">
+                        <ui:SymbolIcon Symbol="ArrowUndo24" />
+                    </ui:Button>
+                    <ui:Button
+                        Margin="10,0,10,0"
+                        Command="{Binding RedoCommand}"
+                        ToolTip="{i18n:StringLocalizer 'Redo'}">
+                        <ui:SymbolIcon Symbol="ArrowRedo24" />
+                    </ui:Button>
+                    <ui:Button
+                        x:Name="SaveButton"
+                        Margin="0,0,10,0"
+                        Command="{Binding SaveCommand}"
+                        Content="{i18n:StringLocalizer 'Save'}" />
+                    <ui:Button
+                        x:Name="ExpertButton"
+                        Margin="0,0,10,0"
+                        Appearance="Secondary"
+                        Content="{i18n:StringLocalizer 'Expert'}" />
+                    <ui:Button
+                        x:Name="AddButton"
+                        Margin="0,0,10,0"
+                        HorizontalAlignment="Left"
+                        Appearance="Primary"
+                        Background="#2F70AF"
+                        Command="{Binding AddCommand}">
+                        <TextBlock Foreground="White" Text="{i18n:StringLocalizer 'Add'}" />
+                    </ui:Button>
+                    <ui:Button
+                        x:Name="DeleteButton"
+                        Background="#FD292F"
+                        Command="{Binding DeleteCommand}"
+                        Content="{i18n:StringLocalizer 'Delete'}" />
                 </StackPanel>
-                
+
                 <!--  Scrollable Content  -->
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                     <Grid>
                         <!--  Form  -->
                         <StackPanel Margin="20">
-                        <ContentControl Content="{Binding MotionsView}" ContentTemplate="{StaticResource MotionDetailsSectionTemplate}" />
+                            <ContentControl Content="{Binding MotionsView}" ContentTemplate="{StaticResource MotionDetailsSectionTemplate}" />
 
-                        <!--  3D Model Preview Section  -->
-                        <StackPanel Margin="0,20,0,0">
-                            <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Model Preview'}" />
+                            <!--  3D Model Preview Section  -->
+                            <StackPanel Margin="0,20,0,0">
+                                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Model Preview'}" />
 
-                            <!--  Preview Container  -->
-                            <Grid Margin="0,0,0,15" HorizontalAlignment="Left">
-                                <!--  3D Model Preview  -->
-                                <Grid Width="330">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="350" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Border
-                                        Grid.Row="0"
-                                        Background="{DynamicResource ControlFillColorDefaultBrush}"
-                                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-                                        BorderThickness="1"
-                                        CornerRadius="4">
-                                        <Grid>
-                                            <Image
-                                                x:Name="DxImage"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                MouseRightButtonDown="DxImage_MouseRightButtonDown"
-                                                MouseWheel="DxImage_MouseWheel"
-                                                Stretch="UniformToFill" />
+                                <!--  Preview Container  -->
+                                <Grid Margin="0,0,0,15" HorizontalAlignment="Left">
+                                    <!--  3D Model Preview  -->
+                                    <Grid Width="330">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="350" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Border
+                                            Grid.Row="0"
+                                            Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="4">
+                                            <Grid>
+                                                <Image
+                                                    x:Name="DxImage"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    MouseRightButtonDown="DxImage_MouseRightButtonDown"
+                                                    MouseWheel="DxImage_MouseWheel"
+                                                    Stretch="UniformToFill" />
 
-                                            <!--  Control Buttons Overlay  -->
-                                            <StackPanel
-                                                Margin="0,5,5,0"
-                                                HorizontalAlignment="Right"
-                                                VerticalAlignment="Top"
-                                                Panel.ZIndex="1"
-                                                Orientation="Vertical">
-                                                <ui:Button
-                                                    Margin="0,0,0,5"
-                                                    Appearance="Secondary"
-                                                    Command="{Binding PlayModelPreviewMotionCommand}"
-                                                    ToolTip="{i18n:StringLocalizer 'Play the animation'}">
-                                                    <ui:SymbolIcon Symbol="Play24" />
-                                                </ui:Button>
-                                                <ui:Button
-                                                    x:Name="GenderChangeButton"
-                                                    Appearance="Secondary"
-                                                    Command="{Binding ChangeModelPreviewGenderCommand}"
-                                                    ToolTip="{i18n:StringLocalizer 'Change model gender'}">
-                                                    <ui:SymbolIcon Symbol="Person24" />
-                                                </ui:Button>
-                                            </StackPanel>
-                                        </Grid>
-                                    </Border>
+                                                <!--  Control Buttons Overlay  -->
+                                                <StackPanel
+                                                    Margin="0,5,5,0"
+                                                    HorizontalAlignment="Right"
+                                                    VerticalAlignment="Top"
+                                                    Panel.ZIndex="1"
+                                                    Orientation="Vertical">
+                                                    <ui:Button
+                                                        Margin="0,0,0,5"
+                                                        Appearance="Secondary"
+                                                        Command="{Binding PlayModelPreviewMotionCommand}"
+                                                        ToolTip="{i18n:StringLocalizer 'Play the animation'}">
+                                                        <ui:SymbolIcon Symbol="Play24" />
+                                                    </ui:Button>
+                                                    <ui:Button
+                                                        x:Name="GenderChangeButton"
+                                                        Appearance="Secondary"
+                                                        Command="{Binding ChangeModelPreviewGenderCommand}"
+                                                        ToolTip="{i18n:StringLocalizer 'Change model gender'}">
+                                                        <ui:SymbolIcon Symbol="Person24" />
+                                                    </ui:Button>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </StackPanel>
+                            </StackPanel>
                         </StackPanel>
                     </Grid>
                 </ScrollViewer>
