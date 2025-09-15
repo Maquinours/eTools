@@ -153,7 +153,8 @@
                     IsSynchronizedWithCurrentItem="True"
                     ItemTemplate="{StaticResource GiftboxListTemplate}"
                     ItemsSource="{Binding GiftboxesView}"
-                    SelectionChanged="GiftboxListView_SelectionChanged">
+                    SelectionChanged="GiftboxListView_SelectionChanged"
+                    SelectionMode="Single">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Background" Value="Transparent" />
