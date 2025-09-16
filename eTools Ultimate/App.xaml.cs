@@ -145,7 +145,7 @@ namespace eTools_Ultimate
                 {
                     b.FromResource<Translations>(new("fr-FR"));
                     b.FromResource<Translations>(new("de-DE"));
-                    if(eTools_Ultimate.Properties.Settings.Default.Language != "Default")
+                    if (eTools_Ultimate.Properties.Settings.Default.Language != "Default")
                         b.SetCulture(new(eTools_Ultimate.Properties.Settings.Default.Language));
                 });
             }).Build();
@@ -156,6 +156,31 @@ namespace eTools_Ultimate
         public static IServiceProvider Services
         {
             get { return _host.Services; }
+        }
+
+        public App()
+        {
+            DispatcherUnhandledException += App_DispatcherUnhandledException;
+
+            SentrySdk.Init(options =>
+            {
+                // Tells which project in Sentry to send events to:
+                options.Dsn = "https://277eaccab2ab24d44b8e761e7cfabeaf@o4510028470812672.ingest.de.sentry.io/4510028473499728";
+                // When configuring for the first time, to see what the SDK is doing:
+                options.Debug = false;
+                options.Release = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "unknown";
+
+                // Enable Global Mode since this is a client app
+                options.IsGlobalModeEnabled = true;
+            });
+        }
+
+        void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+        {
+            SentrySdk.CaptureException(e.Exception);
+
+            // If you want to avoid the application from crashing:
+            e.Handled = true;
         }
 
         /// <summary>

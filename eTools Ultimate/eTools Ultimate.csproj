@@ -21,7 +21,7 @@
 
   <ItemGroup>
     <ApplicationDefinition Remove="App.xaml" />
-	<Page Include="App.xaml"/>
+	<Page Include="App.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +39,7 @@
     <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="NAudio.Vorbis" Version="1.5.0" />
     <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.2" />
+    <PackageReference Include="Sentry" Version="5.15.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" />
     <PackageReference Include="System.Drawing.Common" Version="9.0.8" />
     <PackageReference Include="Velopack" Version="0.0.1298" />
