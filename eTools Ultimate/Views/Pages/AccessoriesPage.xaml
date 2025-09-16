@@ -231,12 +231,12 @@
                         <ui:Button
                             x:Name="AddButton"
                             Margin="0,0,10,0"
-                            Background="#2F70AF"
+                            Appearance="Primary"
                             Command="{Binding AddCommand}"
                             Content="{i18n:StringLocalizer 'Add'}" />
                         <ui:Button
                             x:Name="DeleteButton"
-                            Background="#FD292F"
+                            Appearance="Danger"
                             Command="{Binding DeleteCommand}"
                             Content="{i18n:StringLocalizer 'Delete'}"
                             Foreground="White" />

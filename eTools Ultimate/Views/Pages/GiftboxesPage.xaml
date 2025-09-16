@@ -242,7 +242,7 @@
                         Icon="Settings24" />
                     <ui:Button
                         Margin="0,0,10,0"
-                        Background="#2F70AF"
+                        Appearance="Primary"
                         Command="{Binding AddGiftboxItemCommand}"
                         Content="{i18n:StringLocalizer 'Add item'}"
                         Icon="Add24" />

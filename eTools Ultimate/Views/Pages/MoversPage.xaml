@@ -1416,13 +1416,12 @@
                 <ui:Button
                     x:Name="AddButton"
                     Margin="0,0,10,0"
-                    Background="#2F70AF"
-                    Command="{Binding AddMoverCommand}">
-                    <TextBlock Foreground="White" Text="{i18n:StringLocalizer 'Add'}" />
-                </ui:Button>
+                    Appearance="Primary"
+                    Command="{Binding AddMoverCommand}"
+                    Content="{i18n:StringLocalizer 'Add'}" />
                 <ui:Button
                     x:Name="DeleteButton"
-                    Background="#FD292F"
+                    Appearance="Danger"
                     Command="{Binding RemoveMoverCommand}"
                     Content="{i18n:StringLocalizer 'Delete'}">
                     <ui:Button.Style>

@@ -432,13 +432,11 @@
                         Margin="0,0,10,0"
                         HorizontalAlignment="Left"
                         Appearance="Primary"
-                        Background="#2F70AF"
-                        Command="{Binding AddCommand}">
-                        <TextBlock Foreground="White" Text="{i18n:StringLocalizer 'Add'}" />
-                    </ui:Button>
+                        Command="{Binding AddCommand}"
+                        Content="{i18n:StringLocalizer 'Add'}" />
                     <ui:Button
                         x:Name="DeleteButton"
-                        Background="#FD292F"
+                        Appearance="Danger"
                         Command="{Binding DeleteCommand}"
                         Content="{i18n:StringLocalizer 'Delete'}">
                         <ui:Button.Style>

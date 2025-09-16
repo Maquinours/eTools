@@ -224,13 +224,13 @@
                         Icon="Settings24" />
                     <ui:Button
                         Margin="0,0,10,0"
-                        Background="#2F70AF"
+                        Appearance="Primary"
                         Command="{Binding AddTextCommand}"
                         Content="{i18n:StringLocalizer 'Add'}"
                         Icon="Add24" />
                     <ui:Button
                         Margin="0,0,0,0"
-                        Background="#FD292F"
+                        Appearance="Danger"
                         Command="{Binding DeleteTextCommand}"
                         Content="{i18n:StringLocalizer 'Delete'}"
                         Icon="Delete24" />
