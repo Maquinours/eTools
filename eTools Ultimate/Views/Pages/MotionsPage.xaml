@@ -395,15 +395,6 @@
 
             <!--  Right Side - Form  -->
             <Grid Grid.Column="2">
-                <Grid.Style>
-                    <Style TargetType="Grid">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding MotionsView.CurrentItem}" Value="{x:Null}">
-                                <Setter Property="Visibility" Value="Collapsed" />
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Grid.Style>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
@@ -449,12 +440,31 @@
                         x:Name="DeleteButton"
                         Background="#FD292F"
                         Command="{Binding DeleteCommand}"
-                        Content="{i18n:StringLocalizer 'Delete'}" />
+                        Content="{i18n:StringLocalizer 'Delete'}">
+                        <ui:Button.Style>
+                            <Style BasedOn="{StaticResource {x:Type ui:Button}}" TargetType="ui:Button">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding MotionsView.CurrentItem}" Value="{x:Null}">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ui:Button.Style>
+                    </ui:Button>
                 </StackPanel>
 
                 <!--  Scrollable Content  -->
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                     <Grid>
+                        <Grid.Style>
+                            <Style TargetType="Grid">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding MotionsView.CurrentItem}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Grid.Style>
                         <!--  Form  -->
                         <StackPanel Margin="20">
                             <ContentControl Content="{Binding MotionsView}" ContentTemplate="{StaticResource MotionDetailsSectionTemplate}" />
