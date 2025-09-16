@@ -1596,7 +1596,7 @@
                                                 Orientation="Horizontal">
                                                 <ui:Button Margin="0,0,5,0">
                                                     <ui:Button.Style>
-                                                        <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
+                                                        <Style BasedOn="{StaticResource {x:Type ui:Button}}" TargetType="ui:Button">
                                                             <Style.Triggers>
                                                                 <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="False">
                                                                     <Setter Property="ToolTip" Value="{i18n:StringLocalizer 'Play selected motion'}" />
@@ -1605,6 +1605,9 @@
                                                                 <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="True">
                                                                     <Setter Property="ToolTip" Value="{i18n:StringLocalizer 'Stop current motion'}" />
                                                                     <Setter Property="Command" Value="{Binding StopMotionCommand, Mode=OneWay}" />
+                                                                </DataTrigger>
+                                                                <DataTrigger Binding="{Binding MoversView.CurrentItem.Model.MotionsView.CurrentItem}" Value="{x:Null}">
+                                                                    <Setter Property="IsEnabled" Value="False" />
                                                                 </DataTrigger>
                                                             </Style.Triggers>
                                                         </Style>
@@ -1709,7 +1712,17 @@
                                                 Grid.Row="1"
                                                 DisplayMemberPath="Value"
                                                 OriginalItemsSource="{Binding MotionIdentifiers, Mode=OneWay}"
-                                                Text="{Binding Path=SelectedItem.MotionTypeIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ElementName=MotionsListView}" />
+                                                Text="{Binding Path=SelectedItem.MotionTypeIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ElementName=MotionsListView}">
+                                                <ui:AutoSuggestBox.Style>
+                                                    <Style BasedOn="{StaticResource {x:Type ui:AutoSuggestBox}}" TargetType="ui:AutoSuggestBox">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding MoversView.CurrentItem.Model.MotionsView.CurrentItem}" Value="{x:Null}">
+                                                                <Setter Property="IsEnabled" Value="False" />
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </ui:AutoSuggestBox.Style>
+                                            </ui:AutoSuggestBox>
                                         </Grid>
 
                                         <!--  Motion File  -->
@@ -1734,13 +1747,33 @@
                                                 <ui:AutoSuggestBox
                                                     Grid.Column="0"
                                                     OriginalItemsSource="{Binding ModelMotionFilePossibilities, Mode=OneWay}"
-                                                    Text="{Binding Path=SelectedItem.Prop.SzMotion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=MotionsListView}" />
+                                                    Text="{Binding Path=SelectedItem.Prop.SzMotion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=MotionsListView}">
+                                                    <ui:AutoSuggestBox.Style>
+                                                        <Style BasedOn="{StaticResource {x:Type ui:AutoSuggestBox}}" TargetType="ui:AutoSuggestBox">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding MoversView.CurrentItem.Model.MotionsView.CurrentItem}" Value="{x:Null}">
+                                                                    <Setter Property="IsEnabled" Value="False" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </ui:AutoSuggestBox.Style>
+                                                </ui:AutoSuggestBox>
                                                 <ui:Button
                                                     Grid.Column="1"
                                                     Width="30"
                                                     Height="32"
                                                     Margin="5,0,0,0"
-                                                    Content="{i18n:StringLocalizer '...'}" />
+                                                    Content="{i18n:StringLocalizer '...'}">
+                                                    <ui:Button.Style>
+                                                        <Style BasedOn="{StaticResource {x:Type ui:Button}}" TargetType="ui:Button">
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding MoversView.CurrentItem.Model.MotionsView.CurrentItem}" Value="{x:Null}">
+                                                                    <Setter Property="IsEnabled" Value="False" />
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </ui:Button.Style>
+                                                </ui:Button>
                                             </Grid>
                                         </Grid>
                                     </UniformGrid>
