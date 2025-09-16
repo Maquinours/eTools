@@ -1424,12 +1424,31 @@
                     x:Name="DeleteButton"
                     Background="#FD292F"
                     Command="{Binding RemoveMoverCommand}"
-                    Content="{i18n:StringLocalizer 'Delete'}" />
+                    Content="{i18n:StringLocalizer 'Delete'}">
+                    <ui:Button.Style>
+                        <Style BasedOn="{StaticResource {x:Type ui:Button}}" TargetType="ui:Button">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding MoversView.CurrentItem}" Value="{x:Null}">
+                                    <Setter Property="IsEnabled" Value="False" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ui:Button.Style>
+                </ui:Button>
             </StackPanel>
 
             <!--  Scrollable Content  -->
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                 <Grid>
+                    <Grid.Style>
+                        <Style TargetType="Grid">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding MoversView.CurrentItem}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Grid.Style>
                     <!--  Formulare  -->
                     <StackPanel Margin="20">
                         <ContentControl
