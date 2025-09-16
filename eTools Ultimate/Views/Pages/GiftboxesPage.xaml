@@ -251,6 +251,15 @@
 
             <!--  Title and Info  -->
             <StackPanel Grid.Row="1" Margin="0,0,0,10">
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding GiftboxesView.CurrentItem}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
                 <ui:TextBlock
                     Margin="0,0,0,10"
                     FontSize="24"
@@ -295,6 +304,15 @@
                 Margin="0,0,0,0"
                 Padding="10"
                 VerticalAlignment="Top">
+                <ui:Card.Style>
+                    <Style BasedOn="{StaticResource {x:Type ui:Card}}" TargetType="ui:Card">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding GiftboxesView.CurrentItem}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ui:Card.Style>
                 <DataGrid
                     VerticalAlignment="Top"
                     VerticalContentAlignment="Center"
