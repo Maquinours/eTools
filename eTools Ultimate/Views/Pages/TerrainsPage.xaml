@@ -136,17 +136,18 @@
                         VirtualizingStackPanel.IsVirtualizing="True"
                         VirtualizingStackPanel.IsVirtualizingWhenGrouping="True"
                         VirtualizingStackPanel.VirtualizationMode="Recycling">
+
                         <TreeView.Resources>
                             <!--  Template for braces  -->
-                            <HierarchicalDataTemplate DataType="{x:Type models:TerrainBrace}" ItemsSource="{Binding Children}">
+                            <!-- <HierarchicalDataTemplate DataType="{x:Type models:TerrainBrace}" ItemsSource="{Binding Children}">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="📁 " />
                                     <TextBlock Text="{Binding Prop.Name}" />
                                 </StackPanel>
-                            </HierarchicalDataTemplate>
+                            </HierarchicalDataTemplate>-->
 
                             <!--  Template for terrains  -->
-                            <DataTemplate DataType="{x:Type models:Terrain}">
+                            <!-- <DataTemplate DataType="{x:Type models:Terrain}">
                                 <StackPanel Orientation="Horizontal">
                                     <Border
                                         Width="32"
@@ -165,7 +166,7 @@
                                         <TextBlock Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{Binding Prop.DwId}" />
                                     </StackPanel>
                                 </StackPanel>
-                            </DataTemplate>
+                            </DataTemplate>-->
                         </TreeView.Resources>
                     </TreeView>
                 </ScrollViewer>
@@ -248,11 +249,10 @@
                 VerticalAlignment="Top">
                 <ContentControl Content="{Binding SelectedItem, ElementName=TerrainsTreeView}">
                     <ContentControl.Resources>
-                        <DataTemplate DataType="{x:Type models:TerrainBrace}">
+                        <!-- <DataTemplate DataType="{x:Type models:TerrainBrace}">
                             <StackPanel>
                                 <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Terrains folder'}" />
                                 <UniformGrid Columns="2">
-                                    <!--  Folder Name  -->
                                     <Grid Style="{StaticResource FormFieldStyle}">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
@@ -267,7 +267,6 @@
                                             Text="{Binding Prop.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     </Grid>
 
-                                    <!--  Frame Count  -->
                                     <Grid Style="{StaticResource FormFieldStyle}">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
@@ -283,13 +282,13 @@
                                     </Grid>
                                 </UniformGrid>
                             </StackPanel>
-                        </DataTemplate>
+                        </DataTemplate>-->
 
+                        <!--
                         <DataTemplate DataType="{x:Type models:Terrain}">
                             <StackPanel>
                                 <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Terrain'}" />
                                 <UniformGrid Columns="2">
-                                    <!--  Terrain ID  -->
                                     <Grid Style="{StaticResource FormFieldStyle}">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
@@ -304,7 +303,6 @@
                                             Text="{Binding Prop.DwId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                     </Grid>
 
-                                    <!--  Terrain Texture  -->
                                     <Grid Style="{StaticResource FormFieldStyle}">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
@@ -342,7 +340,6 @@
                                     </Grid>
                                 </UniformGrid>
 
-                                <!--  Texture Preview Section  -->
                                 <StackPanel Margin="0,20,0,0">
                                     <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Texture Preview'}" />
                                     <Border
@@ -361,7 +358,7 @@
                                     </Border>
                                 </StackPanel>
                             </StackPanel>
-                        </DataTemplate>
+                        </DataTemplate>-->
                     </ContentControl.Resources>
                 </ContentControl>
             </Grid>

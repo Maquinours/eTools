@@ -167,30 +167,6 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             settingsService.Settings.PropMoverTxtFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropMoverTxtFilePath ?? settingsService.Settings.DefaultPropMoverTxtFilePath, title: Resources.Texts.SelectMoverTextFile);
         }
-
-        [RelayCommand]
-        private void SelectPropMoverExFile()
-        {
-            settingsService.Settings.PropMoverExFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropMoverExFilePath ?? settingsService.Settings.DefaultPropMoverExFilePath, title: Resources.Texts.SelectMoverPropExFile);
-        }
-
-        [RelayCommand]
-        private void SelectPropSkillFile()
-        {
-            settingsService.Settings.PropSkillFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropSkillFilePath ?? settingsService.Settings.DefaultPropSkillFilePath, title: Resources.Texts.SelectSkillPropFile);
-        }
-
-        [RelayCommand]
-        private void SelectPropSkillTextFile()
-        {
-            settingsService.Settings.PropSkillTxtFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropSkillTxtFilePath ?? settingsService.Settings.DefaultPropSkillTxtFilePath, title: Resources.Texts.SelectSkillTextFile);
-        }
-
-        [RelayCommand]
-        private void SelectSkillIconsFolder()
-        {
-            settingsService.Settings.SkillIconsFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.SkillIconsFolderPath ?? settingsService.Settings.DefaultSkillIconsFolderPath, title: Resources.Texts.SelectSkillIconsFolder);
-        }
         #endregion
     }
 } 

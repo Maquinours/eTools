@@ -8,14 +8,16 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class SkillsViewModel(SkillsService skillsService) : ObservableObject, INavigationAware
+    public partial class SkillsViewModel(
+        //SkillsService skillsService
+        ) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
         private string _searchText = string.Empty;
 
-        [ObservableProperty]
-        private ICollectionView _skillsView = CollectionViewSource.GetDefaultView(skillsService.Skills);
+        //[ObservableProperty]
+        //private ICollectionView _skillsView = CollectionViewSource.GetDefaultView(skillsService.Skills);
 
         public string SearchText
         {
@@ -26,7 +28,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     _searchText = value;
                     OnPropertyChanged(nameof(this.SearchText));
-                    SkillsView.Refresh();
+                    //SkillsView.Refresh();
                 }
             }
         }
@@ -43,16 +45,16 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private void InitializeViewModel()
         {
-            SkillsView.Filter = new Predicate<object>(FilterItem);
+            //SkillsView.Filter = new Predicate<object>(FilterItem);
 
             _isInitialized = true;
         }
 
-        private bool FilterItem(object obj)
-        {
-            if (obj is not Skill skill) return false;
-            if (string.IsNullOrEmpty(this.SearchText)) return true;
-            return skill.Name.ToLower().Contains(this.SearchText.ToLower());
-        }
+        //private bool FilterItem(object obj)
+        //{
+        //    if (obj is not Skill skill) return false;
+        //    if (string.IsNullOrEmpty(this.SearchText)) return true;
+        //    return skill.Name.ToLower().Contains(this.SearchText.ToLower());
+        //}
     }
 }

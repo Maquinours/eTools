@@ -14,14 +14,16 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class HonorsViewModel(HonorsService honorsService) : ObservableObject, INavigationAware
+    public partial class HonorsViewModel(
+        //HonorsService honorsService
+        ) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
         private string _searchText = string.Empty;
 
-        [ObservableProperty]
-        private ICollectionView _honorsView = CollectionViewSource.GetDefaultView(honorsService.Honors);
+        //[ObservableProperty]
+        //private ICollectionView _honorsView = CollectionViewSource.GetDefaultView(honorsService.Honors);
 
         public string SearchText
         {
@@ -32,7 +34,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     _searchText = value;
                     OnPropertyChanged(nameof(this.SearchText));
-                    HonorsView.Refresh();
+                    //HonorsView.Refresh();
                 }
             }
         }
@@ -49,17 +51,17 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private void InitializeViewModel()
         {
-            HonorsView.Filter = new Predicate<object>(FilterItem);
+            //HonorsView.Filter = new Predicate<object>(FilterItem);
 
             _isInitialized = true;
         }
 
-        private bool FilterItem(object obj)
-        {
-            if (obj is not Honor honor) return false;
-            if (string.IsNullOrEmpty(this.SearchText)) return true;
-            return honor.NId.ToString().Contains(this.SearchText.ToLower(), StringComparison.OrdinalIgnoreCase);
-        }
+        //private bool FilterItem(object obj)
+        //{
+        //    if (obj is not Honor honor) return false;
+        //    if (string.IsNullOrEmpty(this.SearchText)) return true;
+        //    return honor.NId.ToString().Contains(this.SearchText.ToLower(), StringComparison.OrdinalIgnoreCase);
+        //}
 
         [RelayCommand]
         private void AddHonorItem()

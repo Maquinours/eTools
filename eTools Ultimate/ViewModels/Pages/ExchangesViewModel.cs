@@ -12,14 +12,17 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class ExchangesViewModel(ExchangesService exchangesService, DefinesService definesService) : ObservableObject, INavigationAware
+    public partial class ExchangesViewModel
+        (
+        //ExchangesService exchangesService, 
+        DefinesService definesService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
         private string _searchText = string.Empty;
 
-        [ObservableProperty]
-        private ICollectionView _exchangesView = CollectionViewSource.GetDefaultView(exchangesService.Exchanges);
+        //[ObservableProperty]
+        //private ICollectionView _exchangesView = CollectionViewSource.GetDefaultView(exchangesService.Exchanges);
 
         public string SearchText
         {
@@ -30,7 +33,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     _searchText = value;
                     OnPropertyChanged(nameof(this.SearchText));
-                    ExchangesView.Refresh();
+                    //ExchangesView.Refresh();
                 }
             }
         }
@@ -47,16 +50,16 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private void InitializeViewModel()
         {
-            ExchangesView.Filter = new Predicate<object>(FilterItem);
+            //ExchangesView.Filter = new Predicate<object>(FilterItem);
 
             _isInitialized = true;
         }
 
-        private bool FilterItem(object obj)
-        {
-            if (obj is not Exchange exchange) return false;
-            if (string.IsNullOrEmpty(this.SearchText)) return true;
-            return definesService.Defines.FirstOrDefault(x => x.Key.StartsWith("MMI_") && x.Value == exchange.MmiId).Key.Contains(this.SearchText, StringComparison.OrdinalIgnoreCase);
-        }
+        //private bool FilterItem(object obj)
+        //{
+        //    if (obj is not Exchange exchange) return false;
+        //    if (string.IsNullOrEmpty(this.SearchText)) return true;
+        //    return definesService.Defines.FirstOrDefault(x => x.Key.StartsWith("MMI_") && x.Value == exchange.MmiId).Key.Contains(this.SearchText, StringComparison.OrdinalIgnoreCase);
+        //}
     }
 }

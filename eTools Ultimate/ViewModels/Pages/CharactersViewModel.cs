@@ -12,15 +12,17 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class CharactersViewModel(CharactersService charactersService) : ObservableObject, INavigationAware
+    public partial class CharactersViewModel(
+        //CharactersService charactersService
+        ) : ObservableObject, INavigationAware
     {
 
         private bool _isInitialized = false;
 
         private string _searchText = string.Empty;
 
-        [ObservableProperty]
-        private ICollectionView _charactersView = CollectionViewSource.GetDefaultView(charactersService.Characters);
+        //[ObservableProperty]
+        //private ICollectionView _charactersView = CollectionViewSource.GetDefaultView(charactersService.Characters);
 
         public string SearchText
         {
@@ -31,7 +33,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     _searchText = value;
                     OnPropertyChanged(nameof(this.SearchText));
-                    CharactersView.Refresh();
+                    //CharactersView.Refresh();
                 }
             }
         }
@@ -48,16 +50,16 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private void InitializeViewModel()
         {
-            CharactersView.Filter = new Predicate<object>(FilterItem);
+            //CharactersView.Filter = new Predicate<object>(FilterItem);
 
             _isInitialized = true;
         }
 
-        private bool FilterItem(object obj)
-        {
-            if (obj is not Character character) return false;
-            if (string.IsNullOrEmpty(this.SearchText)) return true;
-            return character.Name.ToLower().Contains(this.SearchText.ToLower());
-        }
+        //private bool FilterItem(object obj)
+        //{
+        //    if (obj is not Character character) return false;
+        //    if (string.IsNullOrEmpty(this.SearchText)) return true;
+        //    return character.Name.ToLower().Contains(this.SearchText.ToLower());
+        //}
     }
 }
