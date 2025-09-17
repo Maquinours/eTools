@@ -33,29 +33,24 @@ namespace eTools_Ultimate.Services
 
             foreach (string filePath in filesList)
             {
-                if (!File.Exists(filePath))
-                    throw new FileNotFoundException($"File not found: {filePath}");
+                using Scanner scanner = new();
 
-                using (Scanner scanner = new Scanner())
+                scanner.Load(filePath);
+
+                while (true)
                 {
+                    string index = scanner.GetToken();
 
-                    scanner.Load(filePath);
+                    if (scanner.EndOfStream) break;
 
-                    while (true)
-                    {
-                        string index = scanner.GetToken();
+                    /* The index must start with "IDS_" to be a valid string. If the file find token starting with
+                     * something different, then the file is incorrectly formatted.
+                     * */
+                    if (!index.StartsWith("IDS_"))
+                        throw new IncorrectlyFormattedFileException(filePath);
 
-                        if (scanner.EndOfStream) break;
-
-                        /* The index must start with "IDS_" to be a valid string. If the file find token starting with
-                         * something different, then the file is incorrectly formatted.
-                         * */
-                        if (!index.StartsWith("IDS_"))
-                            throw new IncorrectlyFormattedFileException(filePath);
-
-                        string value = scanner.GetLine();
-                        this.Strings.Add(index, value);
-                    }
+                    string value = scanner.GetLine();
+                    this.Strings.Add(index, value);
                 }
             }
         }
