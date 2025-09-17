@@ -14,13 +14,13 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Services
 {
-    public class TerrainsService
+    public class TerrainsService(SettingsService settingsService)
     {
         public ObservableCollection<ITerrainItem> TerrainItems { get; set; } = [];
 
         public void Load()
         {
-            string filePath = $"{App.Services.GetRequiredService<SettingsService>().Settings.ResourcesFolderPath}{Path.DirectorySeparatorChar}Terrain.inc"; // TODO: Use a proper path from Settings
+            string filePath = settingsService.Settings.TerrainsConfigFilePath ?? settingsService.Settings.DefaultTerrainsConfigFilePath;
 
             using Scanner scanner = new();
 
@@ -186,7 +186,7 @@ namespace eTools_Ultimate.Services
 
         public void Save()
         {
-            string filePath = $"{App.Services.GetRequiredService<SettingsService>().Settings.ResourcesFolderPath}{Path.DirectorySeparatorChar}Terrain.inc"; // TODO: Use a proper path from Settings
+            string filePath = settingsService.Settings.TerrainsConfigFilePath ?? settingsService.Settings.DefaultTerrainsConfigFilePath;
 
             using StreamWriter writer = new(filePath, false, new UTF8Encoding(false));
             writer.WriteLine("// ========================================");

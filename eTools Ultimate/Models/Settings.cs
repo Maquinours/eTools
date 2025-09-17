@@ -77,6 +77,9 @@ namespace eTools_Ultimate.Models
         // World texture
         private string? _worldTextureFilePath;
 
+        // Terrains
+        private string? _terrainsConfigFilePath;
+
         private readonly ReadOnlyDictionary<MoverTypes, ObservableCollection<string>> _moverTypesBindings = new(
             new Dictionary<MoverTypes, ObservableCollection<string>>(){
                 { MoverTypes.NPC, new ObservableCollection<string> { "AII_NONE" } },
@@ -692,8 +695,6 @@ namespace eTools_Ultimate.Models
                 string? val = value;
                 if (string.IsNullOrWhiteSpace(val))
                     val = null;
-                else if (!val.EndsWith(Path.DirectorySeparatorChar))
-                    val += Path.DirectorySeparatorChar;
                 if (val == this.DefaultWorldTextureFilePath)
                     val = null;
                 if (this.WorldTextureFilePath != val)
@@ -704,6 +705,26 @@ namespace eTools_Ultimate.Models
             }
         }
         public string DefaultWorldTextureFilePath => $"{this.ClientFolderPath}World{Path.DirectorySeparatorChar}Texture{Path.DirectorySeparatorChar}";
+
+        public string? TerrainsConfigFilePath
+        {
+            get => this._terrainsConfigFilePath;
+            set
+            {
+                string? val = value;
+                if (string.IsNullOrWhiteSpace(val))
+                    val = null;
+                if (val == this.DefaultTerrainsConfigFilePath)
+                    val = null;
+                if (this.TerrainsConfigFilePath != val)
+                {
+                    this._terrainsConfigFilePath = val;
+                    this.NotifyPropertyChanged();
+                }
+            }
+        }
+
+        public string DefaultTerrainsConfigFilePath => $"{this.ResourcesFolderPath}Terrain.inc";
 
         public ReadOnlyDictionary<MoverTypes, ObservableCollection<string>> MoverTypesBindings => this._moverTypesBindings;
 
