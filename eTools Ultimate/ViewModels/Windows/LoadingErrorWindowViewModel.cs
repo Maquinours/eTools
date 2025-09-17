@@ -1,0 +1,56 @@
+﻿using eTools_Ultimate.Resources;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace eTools_Ultimate.ViewModels.Windows
+{
+    public class LoadingErrorWindowViewModel : ObservableObject
+    {
+        private readonly string _title;
+        private readonly string _description;
+        private readonly string _explaination;
+        private readonly string[] _explainationCauses;
+        private readonly string? filePath;
+
+        public string Title => _title;
+        public string Description => _description;
+        public string Explaination => _explaination;
+        public string[] ExplainationCauses => _explainationCauses;
+        public string? FilePath => filePath;
+
+        public LoadingErrorWindowViewModel(Exception exception)
+        {
+            IStringLocalizer localizer = App.Services.GetRequiredService<IStringLocalizer<Translations>>();
+
+            if (exception is FileNotFoundException fileNotFoundException)
+            {
+                _title = localizer["File not found"];
+                _description = localizer["A required file was not found."];
+                _explaination = localizer["The application could not find an important file. This can happen when:"];
+                _explainationCauses =
+                [
+                    localizer["- The file path configured in the application settings is invalid."],
+                    localizer["- The file has been moved, renamed or deleted."],
+                    localizer["- There are insufficient permissions to access the file."]
+                ];
+                filePath = fileNotFoundException.FileName;
+            }
+            else
+            {
+                _title = localizer["Unknown error"];
+                _description = localizer["An unexpected error occurred while loading the application."];
+                _explaination = localizer["This can happen when:"];
+                _explainationCauses =
+                [
+                    localizer["- There is a bug in the application."],
+                ];
+            }
+        }
+    }
+}

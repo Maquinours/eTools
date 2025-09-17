@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eTools_Ultimate.ViewModels.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +20,12 @@ namespace eTools_Ultimate.Views.Windows
     /// </summary>
     public partial class LoadingErrorWindow : Wpf.Ui.Controls.FluentWindow
     {
-        public LoadingErrorWindow(string errorMessage)
+        public LoadingErrorWindow(Exception error)
         {
+            DataContext = new LoadingErrorWindowViewModel(error);
+
             InitializeComponent();
-            ErrorMessageTextBox.Text = errorMessage;
+            //ErrorMessageTextBox.Text = errorMessage;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
-    Title="{i18n:StringLocalizer 'File Not Found'}"
+    Title="{Binding Title, Mode=OneWay}"
     Width="650"
     Height="450"
     d:DataContext="{d:DesignInstance local:LoadingErrorWindow,
@@ -28,7 +28,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!-- Header mit Icon und Titel -->
+        <!--  Header mit Icon und Titel  -->
         <StackPanel
             Grid.Row="0"
             Margin="0,0,0,20"
@@ -46,15 +46,15 @@
                     FontSize="24"
                     FontWeight="SemiBold"
                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                    Text="{i18n:StringLocalizer 'File Not Found'}" />
+                    Text="{Binding Title, Mode=OneWay}" />
                 <TextBlock
                     FontSize="14"
                     Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                    Text="{i18n:StringLocalizer 'A required file could not be loaded'}" />
+                    Text="{Binding Description, Mode=OneWay}" />
             </StackPanel>
         </StackPanel>
 
-        <!-- Fehlermeldung und Details -->
+        <!--  Fehlermeldung und Details  -->
         <Border
             Grid.Row="1"
             Margin="0,0,0,20"
@@ -70,33 +70,27 @@
                     FontWeight="SemiBold"
                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
                     Text="{i18n:StringLocalizer 'What happened?'}" />
-                
+
                 <TextBlock
                     Margin="0,0,0,10"
                     FontSize="14"
                     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                    Text="{i18n:StringLocalizer 'The application could not find an important file. This can happen when:'}"
+                    Text="{Binding Explaination, Mode=OneWay}"
                     TextWrapping="Wrap" />
-                
+
                 <StackPanel Margin="20,0,0,15">
-                    <TextBlock
-                        Margin="0,0,0,5"
-                        FontSize="13"
-                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                        Text="• The file was moved or deleted"
-                        TextWrapping="Wrap" />
-                    <TextBlock
-                        Margin="0,0,0,5"
-                        FontSize="13"
-                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                        Text="• The path is incorrect"
-                        TextWrapping="Wrap" />
-                    <TextBlock
-                        Margin="0,0,0,5"
-                        FontSize="13"
-                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                        Text="• The file is corrupted"
-                        TextWrapping="Wrap" />
+                    <ItemsControl ItemsSource="{Binding ExplainationCauses, Mode=OneWay}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock
+                                    Margin="0,0,0,5"
+                                    FontSize="13"
+                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                    Text="{Binding Mode=OneWay}"
+                                    TextWrapping="Wrap" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </StackPanel>
 
                 <Border
@@ -106,6 +100,15 @@
                     BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
                     BorderThickness="1"
                     CornerRadius="6">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding FilePath}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
                     <StackPanel>
                         <TextBlock
                             FontSize="13"
@@ -115,38 +118,39 @@
                         <TextBlock
                             x:Name="ErrorMessageTextBox"
                             Margin="0,5,0,0"
-                            FontSize="12"
                             FontFamily="Consolas"
+                            FontSize="12"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                            Text="{Binding FilePath}"
                             TextWrapping="Wrap" />
                     </StackPanel>
                 </Border>
             </StackPanel>
         </Border>
 
-        <!-- Aktionsbuttons -->
+        <!--  Aktionsbuttons  -->
         <StackPanel
             Grid.Row="2"
             HorizontalAlignment="Center"
             Orientation="Horizontal">
             <ui:Button
-                MinWidth="140"
                 Height="36"
+                MinWidth="140"
                 Margin="0,0,10,0"
                 Padding="15,0"
                 Appearance="Primary"
+                Click="Button_Click"
                 Content="{i18n:StringLocalizer 'Open Folder'}"
-                Icon="Folder24"
-                Click="Button_Click" />
+                Icon="Folder24" />
             <ui:Button
-                MinWidth="160"
                 Height="36"
+                MinWidth="160"
                 Margin="10,0,0,0"
                 Padding="15,0"
                 Appearance="Secondary"
+                Click="Button_Click_1"
                 Content="{i18n:StringLocalizer 'Exit Application'}"
-                Icon="Dismiss24"
-                Click="Button_Click_1" />
+                Icon="Dismiss24" />
         </StackPanel>
     </Grid>
 </ui:FluentWindow>

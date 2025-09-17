@@ -107,7 +107,7 @@ namespace eTools_Ultimate.ViewModels.Windows
             }
             catch (Exception ex)
             {
-                LoadingErrorWindow errorWindow = new(ex.Message);
+                LoadingErrorWindow errorWindow = new(ex);
                 if (errorWindow.ShowDialog() == true)
                 {
                     Loaded?.Invoke(this, EventArgs.Empty);
