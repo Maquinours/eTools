@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Exceptions
 {
-    public class SoundConfigNotFoundException : Exception
+    public class SoundConfigNotFoundException(int id) : Exception
     {
-        public SoundConfigNotFoundException(int id)
-            :
-            base(string.Format(Resources.ExceptionMessages.SoundConfigNotFound, id))
-        { }
+        public int Id { get; } = id;
     }
 }
