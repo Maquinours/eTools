@@ -16,7 +16,7 @@ namespace eTools_Ultimate.ViewModels.Windows
     public class CloseSplashScreenMessage { }
 
     public partial class SplashScreenViewModel(
-        IServiceProvider serviceProvider,
+        INavigationWindow mainWindow,
         SettingsService settingsService,
         DefinesService definesService,
         StringsService stringsService,
@@ -76,8 +76,6 @@ namespace eTools_Ultimate.ViewModels.Windows
                 //("Loading terrains...", terrainsService.Load)
                 ];
 
-            if (serviceProvider.GetService(typeof(INavigationWindow)) is not MainWindow mainWindow) throw new InvalidOperationException("SplashScreenViewModel::Load exception : Unable to find MainWindow");
-
             try
             {
                 await Task.Run(() =>
@@ -107,10 +105,10 @@ namespace eTools_Ultimate.ViewModels.Windows
             }
             catch (Exception ex)
             {
+                Loaded?.Invoke(this, EventArgs.Empty);
                 LoadingErrorWindow errorWindow = new(ex);
                 if (errorWindow.ShowDialog() == true)
                 {
-                    Loaded?.Invoke(this, EventArgs.Empty);
                     mainWindow.ShowWindow();
                     mainWindow.Navigate(typeof(ResourcePathPage));
 
