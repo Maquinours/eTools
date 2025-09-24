@@ -103,11 +103,8 @@
                             Width="60"
                             Height="Auto"
                             Margin="24,0,0,0"
-                            Source="pack://application:,,,/Assets/Icons/FolderIcon.png">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="pack://application:,,,/Assets/Icons/FolderIcon.png" />
-                            </Image.OpacityMask>
-                        </Image>
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Source="pack://application:,,,/Assets/Icons/FolderIcon.png" />
 
                         <StackPanel
                             Grid.Column="1"
@@ -145,11 +142,8 @@
                             Width="60"
                             Height="Auto"
                             Margin="24,0,0,0"
-                            Source="pack://application:,,,/Assets/Icons/PersonalizationIcon.png">
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="pack://application:,,,/Assets/Icons/PersonalizationIcon.png" />
-                            </Image.OpacityMask>
-                        </Image>
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Source="pack://application:,,,/Assets/Icons/PersonalizationIcon.png" />
 
                         <StackPanel
                             Grid.Column="1"
@@ -187,13 +181,8 @@
                             Width="60"
                             Height="Auto"
                             Margin="24,0,0,0"
-                            Source="pack://application:,,,/Assets/Icons/AboutIcon.png">
-                            <Image.OpacityMask>
-                                <ImageBrush>
-                                    <ImageBrush.ImageSource>pack://application:,,,/Assets/Icons/AboutIcon.png</ImageBrush.ImageSource>
-                                </ImageBrush>
-                            </Image.OpacityMask>
-                        </Image>
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Source="pack://application:,,,/Assets/Icons/AboutIcon.png" />
 
                         <StackPanel
                             Grid.Column="1"

@@ -20,9 +20,9 @@
 
 
     <Page.Resources>
-        <!-- Converters -->
+        <!--  Converters  -->
         <converters:MaxTextWidthConverter x:Key="MaxTextWidthConverter" />
-        
+
         <!--  Template for navigation cards  -->
         <DataTemplate x:Key="NavigationCardTemplate">
             <Border
@@ -32,9 +32,10 @@
                 Cursor="Hand"
                 Tag="{Binding}">
                 <Border.Width>
-                    <Binding Path="DataContext.NavigationCards" 
-                             RelativeSource="{RelativeSource AncestorType=ItemsControl}" 
-                             Converter="{StaticResource MaxTextWidthConverter}" />
+                    <Binding
+                        Converter="{StaticResource MaxTextWidthConverter}"
+                        Path="DataContext.NavigationCards"
+                        RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
                 </Border.Width>
                 <Border.Style>
                     <Style TargetType="Border">
@@ -80,12 +81,7 @@
                         HorizontalAlignment="Center"
                         VerticalAlignment="Top"
                         RenderOptions.BitmapScalingMode="HighQuality"
-                        RenderOptions.EdgeMode="Aliased"
-                        Source="{Binding Icon}">
-                        <Image.CacheMode>
-                            <BitmapCache RenderAtScale="2" />
-                        </Image.CacheMode>
-                    </Image>
+                        Source="{Binding Icon}" />
 
                     <!--  Title below icon  -->
                     <TextBlock
@@ -206,9 +202,9 @@
                                     </Style>
                                 </Button.Style>
                                 <Border
+                                    Height="36"
                                     MinWidth="120"
                                     MaxWidth="180"
-                                    Height="36"
                                     Margin="12"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Bottom"
