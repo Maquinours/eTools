@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Exceptions
 {
-    public class IncorrectlyFormattedFileException(string filePath) : Exception(string.Format(Resources.ExceptionMessages.IncorrectlyFormattedFile, filePath))
+    public class IncorrectlyFormattedFileException(string filePath) : Exception
     {
         public string FilePath { get; } = filePath;
     }
