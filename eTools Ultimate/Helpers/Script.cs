@@ -1,4 +1,5 @@
-﻿using eTools_Ultimate.Services;
+﻿using eTools_Ultimate.Exceptions;
+using eTools_Ultimate.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
@@ -93,8 +94,8 @@ namespace eTools_Ultimate.Helpers
 						{
 							char firstChar = Token.ElementAtOrDefault(0);
 							if (firstChar != '\0' && firstChar != '=' && firstChar != '-' && firstChar != '+')
-								throw new Exception("Invalid token. Should be a number.");
-						}
+								throw new IncorrectlyFormattedFileException(base.FilePath); // Invalid token. Should be a number.
+                        }
 					}
 				}
 			}
