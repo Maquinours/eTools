@@ -3,6 +3,8 @@ using CommunityToolkit.Mvvm.Input;
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
+using eTools_Ultimate.ViewModels.Controls.Dialogs;
+using eTools_Ultimate.Views.Dialogs;
 using Lepo.i18n;
 using Microsoft.Extensions.Localization;
 using Microsoft.Win32;
@@ -12,6 +14,7 @@ using System.IO;
 using System.Windows;
 using Wpf.Ui;
 using Wpf.Ui.Abstractions.Controls;
+using Wpf.Ui.Controls;
 using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
@@ -92,12 +95,32 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
+        //[RelayCommand]
+        //private void Save()
+        //{
+        //    // Speichern der Einstellungen
+        //    MessageBox.Show("Ressourcenpfad erfolgreich gespeichert.", "Gespeichert", 
+        //        MessageBoxButton.OK, MessageBoxImage.Information);
+        //}
+
         [RelayCommand]
-        private void Save()
+        private async Task AddMoverAiBinding()
         {
-            // Speichern der Einstellungen
-            MessageBox.Show("Ressourcenpfad erfolgreich gespeichert.", "Gespeichert", 
-                MessageBoxButton.OK, MessageBoxImage.Information);
+            if (settingsService.Settings.MoverTypesBindingsView.CurrentItem is not KeyValuePair<MoverTypes, ObservableCollection<string>> currentType)
+                return;
+            if (!settingsService.Settings.MoverTypesBindings.Contains(currentType))
+                return;
+
+            var contentDialog = new AddMoverAiBindingDialog(contentDialogService.GetDialogHost());
+            if (await contentDialog.ShowAsync() == ContentDialogResult.Primary)
+            {
+                if (contentDialog.DataContext is not AddMoverAiBindingDialogViewModel contentDialogViewModel)
+                    throw new InvalidOperationException("ResourcePathViewModel::AddMoverAiBinding command exception : contentDialog.DataContext is not AddMoverAiBindingDialogViewModel");
+
+                if (settingsService.Settings.MoverTypesBindings.Any(x => x.Value.Contains(contentDialogViewModel.Item))) return;
+
+                currentType.Value.Add(contentDialogViewModel.Item);
+            }
         }
 
         #region Folder and File Selection Commands

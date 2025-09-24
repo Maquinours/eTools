@@ -791,7 +791,7 @@
                                     Width="60"
                                     Height="40"
                                     Margin="0,0,0,10"
-                                    Command="{Binding AddResourceCommand}"
+                                    Command="{Binding AddMoverAiBindingCommand}"
                                     ToolTip="{i18n:StringLocalizer 'Add'}">
                                     <ui:SymbolIcon Symbol="Add24" />
                                 </Button>

@@ -9,6 +9,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Data;
 
 namespace eTools_Ultimate.Models
 {
@@ -150,6 +151,7 @@ namespace eTools_Ultimate.Models
         }
 
         public ReadOnlyDictionary<MoverTypes, ObservableCollection<string>> MoverTypesBindings => _moverTypesBindings;
+        public ICollectionView MoverTypesBindingsView => CollectionViewSource.GetDefaultView(MoverTypesBindings);
         #endregion
 
         #region Items settings
