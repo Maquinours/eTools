@@ -1,4 +1,5 @@
-﻿using eTools_Ultimate.Resources;
+﻿using eTools_Ultimate.Exceptions;
+using eTools_Ultimate.Resources;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using System;
@@ -40,6 +41,20 @@ namespace eTools_Ultimate.ViewModels.Windows
                     localizer["- There are insufficient permissions to access the file."]
                 ];
                 filePath = fileNotFoundException.FileName;
+            }
+            else if(exception is IncorrectlyFormattedFileException incorrectlyFormattedFileException)
+            {
+                _title = localizer["Incorrectly formatted file"];
+                _description = localizer["A required file is incorrectly formatted."];
+                _explaination = localizer["The application found a file, but it is not correctly formatted. This can happen when:"];
+                _explainationCauses =
+                [
+                    localizer["- The file has been manually edited and contains errors."],
+                    localizer["- The file is corrupted."],
+                    localizer["- The file path does not point to the correct file."],
+                    localizer["- The configured resource version does not match your files' version."]
+                ];
+                filePath = incorrectlyFormattedFileException.FilePath;
             }
             else
             {
