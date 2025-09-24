@@ -128,21 +128,22 @@
 
                 <!--  Advanced settingsn Button  -->
                 <Grid Margin="0,5,0,5">
-                    <Button
+                    <ui:Button
                         Padding="15,5"
                         HorizontalAlignment="Left"
                         Command="{Binding ToggleAdvancedSettingsCommand}"
                         Content="Advanced settings">
-                        <Button.Style>
-                            <Style BasedOn="{StaticResource {x:Type Button}}" TargetType="Button">
+                        <ui:Button.Style>
+                            <Style BasedOn="{StaticResource {x:Type ui:Button}}" TargetType="ui:Button">
+                                <Setter Property="Appearance" Value="Secondary" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding IsAdvancedSettingsVisible}" Value="True">
-                                        <Setter Property="Background" Value="#FF0078D7" />
+                                        <Setter Property="Appearance" Value="Primary" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
-                        </Button.Style>
-                    </Button>
+                        </ui:Button.Style>
+                    </ui:Button>
                 </Grid>
 
                 <!--  Advanced Settings Sections  -->
