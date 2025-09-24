@@ -7,10 +7,11 @@
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Windows"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:vm="clr-namespace:eTools_Ultimate.ViewModels.Windows"
     Title="{Binding Title, Mode=OneWay}"
     Width="650"
     Height="450"
-    d:DataContext="{d:DesignInstance local:LoadingErrorWindow,
+    d:DataContext="{d:DesignInstance vm:LoadingErrorWindowViewModel,
                                      IsDesignTimeCreatable=True}"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
