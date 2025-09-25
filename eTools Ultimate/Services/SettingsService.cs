@@ -2,6 +2,7 @@
 using Scan;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,7 @@ namespace eTools_Ultimate.Services
         internal const string PropMoverTxtPath = "PropMoverTxtPath";
         internal const string Mover64BitHp = "Mover64BitHp";
         internal const string Mover64BitAtk = "Mover64BitAtk";
+        internal const string MoverTypeAiBindings = "MoverTypeAiBindings";
 
         // Items settings
         internal const string PropItemPath = "PropItemPath";
@@ -57,6 +59,8 @@ namespace eTools_Ultimate.Services
         public void Load()
         {
             Settings.PropertyChanged -= SettingsChanged;
+            foreach (ObservableCollection<string> aiCollection in Settings.MoverTypesBindings.Select(x => x.Value))
+                aiCollection.CollectionChanged -= AiCollection_CollectionChanged;
 
             if (File.Exists(SettingsFilePath))
             {
@@ -111,6 +115,36 @@ namespace eTools_Ultimate.Services
                         case SettingsKeywords.Mover64BitAtk:
                             Settings.Mover64BitAtk = true;
                             break;
+                        case SettingsKeywords.MoverTypeAiBindings:
+                            {
+                                scanner.GetToken(); // [
+                                while (true)
+                                {
+                                    scanner.GetToken();
+
+                                    if (scanner.Token == "]") break;
+                                    if (scanner.EndOfStream)
+                                        throw new InvalidOperationException("SettingsService::Load exception : Mover type AI bindings settings is incorrectly formated. (first infinite loop security)");
+
+                                    if (!Enum.TryParse(scanner.Token, out MoverTypes type))
+                                        throw new InvalidOperationException("SettingsService::Load exception : Mover type AI bindings settings is incorrectly formated. (token is not MoverTypes)");
+
+                                        Settings.MoverTypesBindings[type].Clear();
+
+                                        scanner.GetToken(); // [
+                                        while (true)
+                                        {
+                                            scanner.GetToken();
+
+                                            if (scanner.Token == "]") break;
+                                            if (scanner.EndOfStream)
+                                                throw new InvalidOperationException("SettingsService::Load exception : Mover type AI bindings settings is incorrectly formated. (first infinite loop security)");
+
+                                            Settings.MoverTypesBindings[type].Add(scanner.Token);
+                                        }
+                                }
+                                break;
+                            }
 
                         // Items settings
                         case SettingsKeywords.PropItemPath:
@@ -146,7 +180,10 @@ namespace eTools_Ultimate.Services
                     }
                 }
             }
+
             Settings.PropertyChanged += SettingsChanged;
+            foreach (ObservableCollection<string> aiCollection in Settings.MoverTypesBindings.Select(x => x.Value))
+                aiCollection.CollectionChanged += AiCollection_CollectionChanged;
         }
 
         public void Save()
@@ -184,6 +221,17 @@ namespace eTools_Ultimate.Services
                 writer.WriteLine(SettingsKeywords.Mover64BitAtk);
             if (Settings.Mover64BitHp)
                 writer.WriteLine(SettingsKeywords.Mover64BitHp);
+            writer.WriteLine(SettingsKeywords.MoverTypeAiBindings);
+            writer.WriteLine('[');
+            foreach (KeyValuePair<MoverTypes, ObservableCollection<string>> bind in Settings.MoverTypesBindings)
+            {
+                writer.WriteLine($"\t{bind.Key}");
+                writer.WriteLine($"\t[");
+                foreach (string ai in bind.Value)
+                    writer.WriteLine($"\t\t{ai}");
+                writer.WriteLine($"\t]");
+            }
+            writer.WriteLine(']');
 
             // Items settings
             if (Settings.PropItemFilePath != null)
@@ -254,6 +302,14 @@ namespace eTools_Ultimate.Services
                     break;
 
             }
+        }
+
+        private void AiCollection_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (!Settings.MoverTypesBindings.Any(x => x.Value == sender))
+                throw new InvalidOperationException("SettingsService::AiCollection_CollectionChanged exception : sender is not part of Settings.MoverTypesBindings");
+
+            Save();
         }
     }
 }

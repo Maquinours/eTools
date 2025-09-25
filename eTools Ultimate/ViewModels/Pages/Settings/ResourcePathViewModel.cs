@@ -10,8 +10,10 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Win32;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
+using System.Windows.Data;
 using Wpf.Ui;
 using Wpf.Ui.Abstractions.Controls;
 using Wpf.Ui.Controls;
@@ -30,6 +32,8 @@ namespace eTools_Ultimate.ViewModels.Pages
         private bool _isAdvancedSettingsVisible = false;
 
         public Settings Settings => settingsService.Settings;
+
+        public ICollectionView MoverTypesBindingsView => CollectionViewSource.GetDefaultView(Settings.MoverTypesBindings);
 
         public Task OnNavigatedToAsync()
         {
@@ -104,22 +108,50 @@ namespace eTools_Ultimate.ViewModels.Pages
         //}
 
         [RelayCommand]
-        private async Task AddMoverAiBinding()
+        private async Task AddMoverAiBinding(KeyValuePair<MoverTypes, ObservableCollection<string>>? type)
         {
-            if (settingsService.Settings.MoverTypesBindingsView.CurrentItem is not KeyValuePair<MoverTypes, ObservableCollection<string>> currentType)
-                return;
-            if (!settingsService.Settings.MoverTypesBindings.Contains(currentType))
+            if (type is not KeyValuePair<MoverTypes, ObservableCollection<string>> currentType)
                 return;
 
-            var contentDialog = new AddMoverAiBindingDialog(contentDialogService.GetDialogHost());
+            if (!Settings.MoverTypesBindings.Contains(currentType))
+                return;
+
+            var contentDialog = new AddMoverAiBindingDialog(contentDialogService.GetDialogHost(), currentType.Key);
             if (await contentDialog.ShowAsync() == ContentDialogResult.Primary)
             {
                 if (contentDialog.DataContext is not AddMoverAiBindingDialogViewModel contentDialogViewModel)
                     throw new InvalidOperationException("ResourcePathViewModel::AddMoverAiBinding command exception : contentDialog.DataContext is not AddMoverAiBindingDialogViewModel");
 
-                if (settingsService.Settings.MoverTypesBindings.Any(x => x.Value.Contains(contentDialogViewModel.Item))) return;
+                if (Settings.MoverTypesBindings.Any(x => x.Value.Contains(contentDialogViewModel.Item))) return;
 
                 currentType.Value.Add(contentDialogViewModel.Item);
+            }
+        }
+
+        [RelayCommand]
+        private async Task RemoveMoverAiBinding(string? ai)
+        {
+            if (ai is not string currentAi)
+                return;
+
+            KeyValuePair<MoverTypes, ObservableCollection<string>>? type = Settings.MoverTypesBindings.Cast<KeyValuePair<MoverTypes, ObservableCollection<string>>?>().FirstOrDefault(x => x.HasValue && x.Value.Value.Contains(currentAi));
+
+            if (type is not KeyValuePair<MoverTypes, ObservableCollection<string>> currentType)
+                return;
+
+            ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
+                new SimpleContentDialogCreateOptions()
+                {
+                    Title = stringLocalizer["Remove an AI binding"],
+                    Content = String.Format(stringLocalizer["Are you sure you want to remove AI {0} from the {1} mover type ?"], currentAi, currentType.Key),
+                    PrimaryButtonText = stringLocalizer["Remove"],
+                    CloseButtonText = stringLocalizer["Cancel"],
+                }
+            );
+
+            if(result == ContentDialogResult.Primary)
+            {
+                currentType.Value.Remove(currentAi);
             }
         }
 

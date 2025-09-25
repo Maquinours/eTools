@@ -8,13 +8,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:vm="clr-namespace:eTools_Ultimate.ViewModels.Controls.Dialogs"
-    Title="AddMoverAiBindingDialog"
+    Title="{Binding Title, Mode=OneWay}"
     d:DataContext="{d:DesignInstance vm:AddMoverAiBindingDialogViewModel,
                                      IsDesignTimeCreatable=False}"
     CloseButtonText="{i18n:StringLocalizer 'Close'}"
     IsPrimaryButtonEnabled="True"
     PrimaryButtonText="{i18n:StringLocalizer 'Add'}"
     mc:Ignorable="d">
+    <ui:ContentDialog.Resources>
+        <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:AddMoverAiBindingDialog}" />
+    </ui:ContentDialog.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />

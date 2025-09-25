@@ -151,7 +151,6 @@ namespace eTools_Ultimate.Models
         }
 
         public ReadOnlyDictionary<MoverTypes, ObservableCollection<string>> MoverTypesBindings => _moverTypesBindings;
-        public ICollectionView MoverTypesBindingsView => CollectionViewSource.GetDefaultView(MoverTypesBindings);
         #endregion
 
         #region Items settings

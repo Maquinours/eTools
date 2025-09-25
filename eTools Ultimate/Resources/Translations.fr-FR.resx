@@ -230,27 +230,6 @@
   <data name="System default" xml:space="preserve">
     <value>Valeur par défaut du système</value>
   </data>
-  <data name="Application language changed" xml:space="preserve">
-    <value>Langue de l’application modifiée</value>
-  </data>
-  <data name="The application needs to be restarted for the language change to take effect." xml:space="preserve">
-    <value>L’application doit être redémarrée pour que le changement de langue prenne effet.</value>
-  </data>
-  <data name="Restart" xml:space="preserve">
-    <value>Redémarrer</value>
-  </data>
-  <data name="Restart later" xml:space="preserve">
-    <value>Redémarrer plus tard</value>
-  </data>
-  <data name="Settings changed" xml:space="preserve">
-    <value>Paramètres modifiés</value>
-  </data>
-  <data name="Your settings have been updated. Please restart the application for the changes to take effect." xml:space="preserve">
-    <value>Vos paramètres ont été mis à jour. Veuillez redémarrer l'application pour que les modifications prennent effet.</value>
-  </data>
-  <data name="eTools Ultimate is a powerful editor for editing Flyff resource files." xml:space="preserve">
-    <value>eTools Ultimate est un éditeur puissant pour l'édition de fichiers de ressources Flyff.</value>
-  </data>
   <data name="Added" xml:space="preserve">
     <value>Ajouté</value>
   </data>
@@ -268,6 +247,102 @@
   </data>
   <data name="Updated" xml:space="preserve">
     <value>Mis à jour</value>
+  </data>
+  <data name="Basic Information Fields" xml:space="preserve">
+    <value>Champs d'informations de base</value>
+    <comment>Basic Information Fields expander header</comment>
+  </data>
+  <data name="Stats Fields" xml:space="preserve">
+    <value>Champs de statistiques</value>
+    <comment>Stats Fields expander header</comment>
+  </data>
+  <data name="Combat/Battle Fields" xml:space="preserve">
+    <value>Champs de combat/bataille</value>
+    <comment>Combat/Battle Fields expander header</comment>
+  </data>
+  <data name="Defensive Stats Fields" xml:space="preserve">
+    <value>Champs de statistiques défensives</value>
+    <comment>Defensive Stats Fields expander header</comment>
+  </data>
+  <data name="Elemental Fields" xml:space="preserve">
+    <value>Champs élémentaires</value>
+    <comment>Elemental Fields expander header</comment>
+  </data>
+  <data name="MoverPage" xml:space="preserve">
+    <value>Page Mover</value>
+    <comment>MoverPage title</comment>
+  </data>
+  <data name="..." xml:space="preserve">
+    <value>...</value>
+    <comment>Ellipsis for file selection buttons</comment>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Configuration</value>
+    <comment>Configuration section header</comment>
+  </data>
+  <data name="Sound" xml:space="preserve">
+    <value>Son</value>
+    <comment>Sound section header</comment>
+  </data>
+  <data name="Define ID" xml:space="preserve">
+    <value>Définir ID</value>
+    <comment>Define ID field label</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nom</value>
+    <comment>Name field label</comment>
+  </data>
+  <data name="Rank" xml:space="preserve">
+    <value>Rang</value>
+    <comment>Rank field label</comment>
+  </data>
+  <data name="SFX hit sound" xml:space="preserve">
+    <value>Son de coup SFX</value>
+    <comment>SFX hit sound field label</comment>
+  </data>
+  <data name="Click sound" xml:space="preserve">
+    <value>Son de clic</value>
+    <comment>Click sound field label</comment>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Par défaut</value>
+    <comment>Default option value</comment>
+  </data>
+  <data name="Character" xml:space="preserve">
+    <value>Personnage</value>
+    <comment>Character option value</comment>
+  </data>
+  <data name="Modell" xml:space="preserve">
+    <value>Modèle</value>
+    <comment>Model section header</comment>
+  </data>
+  <data name="Motion Key" xml:space="preserve">
+    <value>Clé de mouvement</value>
+    <comment>Motion Key field label</comment>
+  </data>
+  <data name="Motion File" xml:space="preserve">
+    <value>Fichier de mouvement</value>
+    <comment>Motion File field label</comment>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Fichier</value>
+    <comment>File field label</comment>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Échelle</value>
+    <comment>Scale field label</comment>
+  </data>
+  <data name="Textur" xml:space="preserve">
+    <value>Texture</value>
+    <comment>Texture field label</comment>
+  </data>
+  <data name="Kein Modell verfügbar" xml:space="preserve">
+    <value>Aucun modèle disponible</value>
+    <comment>No model available message</comment>
+  </data>
+  <data name="No model associated with the selected mover." xml:space="preserve">
+    <value>Aucun modèle associé au mover sélectionné.</value>
+    <comment>No model associated message</comment>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Bienvenue</value>
@@ -609,9 +684,6 @@
   <data name="Required Job Class" xml:space="preserve">
     <value>Classe de métier requise</value>
     <comment>Required Job Class field label</comment>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Nom</value>
   </data>
   <data name="Range" xml:space="preserve">
     <value>Portée</value>
@@ -999,9 +1071,6 @@
   <data name="SFX" xml:space="preserve">
     <value>SFX</value>
     <comment>SFX field label</comment>
-  </data>
-  <data name="Sound" xml:space="preserve">
-    <value>Son</value>
   </data>
   <data name="Attack Sound" xml:space="preserve">
     <value>Son d'attaque</value>
@@ -1720,9 +1789,6 @@
   <data name="No Model Available" xml:space="preserve">
     <value>Aucun modèle disponible</value>
   </data>
-  <data name="No model associated with the selected mover." xml:space="preserve">
-    <value>Aucun modèle associé au mover sélectionné.</value>
-  </data>
   <data name="Select Reference Model" xml:space="preserve">
     <value>Sélectionner le modèle de référence</value>
   </data>
@@ -1846,100 +1912,28 @@
   <data name="Correction Value" xml:space="preserve">
     <value>Valeur de correction</value>
   </data>
-  <data name="Basic Information Fields" xml:space="preserve">
-    <value>Champs d'informations de base</value>
-    <comment>Basic Information Fields expander header</comment>
+  <data name="Application language changed" xml:space="preserve">
+    <value>Langue de l’application modifiée</value>
   </data>
-  <data name="Stats Fields" xml:space="preserve">
-    <value>Champs de statistiques</value>
-    <comment>Stats Fields expander header</comment>
+  <data name="The application needs to be restarted for the language change to take effect." xml:space="preserve">
+    <value>L’application doit être redémarrée pour que le changement de langue prenne effet.</value>
   </data>
-  <data name="Combat/Battle Fields" xml:space="preserve">
-    <value>Champs de combat/bataille</value>
-    <comment>Combat/Battle Fields expander header</comment>
+  <data name="Restart" xml:space="preserve">
+    <value>Redémarrer</value>
   </data>
-  <data name="Defensive Stats Fields" xml:space="preserve">
-    <value>Champs de statistiques défensives</value>
-    <comment>Defensive Stats Fields expander header</comment>
+  <data name="Restart later" xml:space="preserve">
+    <value>Redémarrer plus tard</value>
   </data>
-  <data name="Elemental Fields" xml:space="preserve">
-    <value>Champs élémentaires</value>
-    <comment>Elemental Fields expander header</comment>
+  <data name="Settings changed" xml:space="preserve">
+    <value>Paramètres modifiés</value>
   </data>
-  <data name="MoverPage" xml:space="preserve">
-    <value>Page Mover</value>
-    <comment>MoverPage title</comment>
+  <data name="Your settings have been updated. Please restart the application for the changes to take effect." xml:space="preserve">
+    <value>Vos paramètres ont été mis à jour. Veuillez redémarrer l'application pour que les modifications prennent effet.</value>
   </data>
-  <data name="..." xml:space="preserve">
-    <value>...</value>
-    <comment>Ellipsis for file selection buttons</comment>
+  <data name="eTools Ultimate is a powerful editor for editing Flyff resource files." xml:space="preserve">
+    <value>eTools Ultimate est un éditeur puissant pour l'édition de fichiers de ressources Flyff.</value>
   </data>
-  <data name="Configuration" xml:space="preserve">
-    <value>Configuration</value>
-    <comment>Configuration section header</comment>
-  </data>
-  <data name="Sound" xml:space="preserve">
-    <value>Son</value>
-    <comment>Sound section header</comment>
-  </data>
-  <data name="Define ID" xml:space="preserve">
-    <value>Définir ID</value>
-    <comment>Define ID field label</comment>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Nom</value>
-    <comment>Name field label</comment>
-  </data>
-  <data name="Rank" xml:space="preserve">
-    <value>Rang</value>
-    <comment>Rank field label</comment>
-  </data>
-  <data name="SFX hit sound" xml:space="preserve">
-    <value>Son de coup SFX</value>
-    <comment>SFX hit sound field label</comment>
-  </data>
-  <data name="Click sound" xml:space="preserve">
-    <value>Son de clic</value>
-    <comment>Click sound field label</comment>
-  </data>
-  <data name="Default" xml:space="preserve">
-    <value>Par défaut</value>
-    <comment>Default option value</comment>
-  </data>
-  <data name="Character" xml:space="preserve">
-    <value>Personnage</value>
-    <comment>Character option value</comment>
-  </data>
-  <data name="Modell" xml:space="preserve">
-    <value>Modèle</value>
-    <comment>Model section header</comment>
-  </data>
-  <data name="Motion Key" xml:space="preserve">
-    <value>Clé de mouvement</value>
-    <comment>Motion Key field label</comment>
-  </data>
-  <data name="Motion File" xml:space="preserve">
-    <value>Fichier de mouvement</value>
-    <comment>Motion File field label</comment>
-  </data>
-  <data name="File" xml:space="preserve">
-    <value>Fichier</value>
-    <comment>File field label</comment>
-  </data>
-  <data name="Scale" xml:space="preserve">
-    <value>Échelle</value>
-    <comment>Scale field label</comment>
-  </data>
-  <data name="Textur" xml:space="preserve">
-    <value>Texture</value>
-    <comment>Texture field label</comment>
-  </data>
-  <data name="Kein Modell verfügbar" xml:space="preserve">
-    <value>Aucun modèle disponible</value>
-    <comment>No model available message</comment>
-  </data>
-  <data name="No model associated with the selected mover." xml:space="preserve">
-    <value>Aucun modèle associé au mover sélectionné.</value>
-    <comment>No model associated message</comment>
+  <data name="AIs assigned to {0}" xml:space="preserve">
+    <value>AI assignées à {0}</value>
   </data>
 </root>
