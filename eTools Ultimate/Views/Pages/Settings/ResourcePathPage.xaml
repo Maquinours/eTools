@@ -263,7 +263,7 @@
                                 Width="60"
                                 Height="35"
                                 HorizontalAlignment="Center"
-                                Command="{Binding SelectItemIconsCommand}">
+                                Command="{Binding SelectIconsFolderCommand}">
                                 <ui:SymbolIcon Symbol="FolderOpen20" />
                             </Button>
                         </Grid>
@@ -419,7 +419,7 @@
                                 Width="60"
                                 Height="35"
                                 HorizontalAlignment="Center"
-                                Command="{Binding SelectPropFileCommand}">
+                                Command="{Binding SelectPropItemFileCommand}">
                                 <ui:SymbolIcon Symbol="FolderOpen20" />
                             </Button>
                         </Grid>
@@ -468,7 +468,7 @@
                                 Width="60"
                                 Height="35"
                                 HorizontalAlignment="Center"
-                                Command="{Binding SelectTextFileCommand}">
+                                Command="{Binding SelectPropItemTxtFileCommand}">
                                 <ui:SymbolIcon Symbol="FolderOpen20" />
                             </Button>
                         </Grid>

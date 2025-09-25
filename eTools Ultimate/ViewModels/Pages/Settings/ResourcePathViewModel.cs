@@ -71,42 +71,6 @@ namespace eTools_Ultimate.ViewModels.Pages
             IsAdvancedSettingsVisible = !IsAdvancedSettingsVisible;
         }
 
-        [RelayCommand] // TODO : Check this function
-        private void Browse()
-        {
-            var dialog = new OpenFileDialog
-            {
-                Title = "Ressourcenpfad auswählen",
-                CheckFileExists = false,
-                CheckPathExists = true,
-                FileName = "Ordner auswählen",
-                ValidateNames = false
-            };
-
-            if (!string.IsNullOrEmpty(settingsService.Settings.ResourcesFolderPath) && Directory.Exists(settingsService.Settings.ResourcesFolderPath))
-            {
-                dialog.InitialDirectory = settingsService.Settings.ResourcesFolderPath;
-            }
-
-            if (dialog.ShowDialog() == true)
-            {
-                // Wir verwenden den Verzeichnispfad statt der ausgewählten Datei
-                string? selectedPath = Path.GetDirectoryName(dialog.FileName);
-                if (!string.IsNullOrEmpty(selectedPath))
-                {
-                    settingsService.Settings.ResourcesFolderPath = settingsService.Settings.ResourcesFolderPath;
-                }
-            }
-        }
-
-        //[RelayCommand]
-        //private void Save()
-        //{
-        //    // Speichern der Einstellungen
-        //    MessageBox.Show("Ressourcenpfad erfolgreich gespeichert.", "Gespeichert", 
-        //        MessageBoxButton.OK, MessageBoxImage.Information);
-        //}
-
         [RelayCommand]
         private async Task AddMoverAiBinding(KeyValuePair<MoverTypes, ObservableCollection<string>>? type)
         {
