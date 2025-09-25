@@ -129,8 +129,8 @@ namespace eTools_Ultimate
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
 
-                services.AddSingleton<ResourcePathPage>();
-                services.AddSingleton<ResourcePathViewModel>();
+                services.AddSingleton<ConfigurationPage>();
+                services.AddSingleton<ConfigurationViewModel>();
                 services.AddSingleton<PersonalizationPage>();
                 services.AddSingleton<PersonalizationViewModel>();
                 services.AddSingleton<AboutPage>();

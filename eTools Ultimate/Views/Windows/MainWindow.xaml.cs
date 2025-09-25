@@ -80,7 +80,7 @@ namespace eTools_Ultimate.Views.Windows
         }
         private void RootNavigation_Navigated(NavigationView sender, NavigatedEventArgs args)
         {
-            if (args.Page is ResourcePathPage or PersonalizationPage) // show ony on this pages the title
+            if (args.Page is ConfigurationPage or PersonalizationPage) // show ony on this pages the title
                 BreadcrumbBar.Visibility = Visibility.Visible;
             else
                 BreadcrumbBar.Visibility = Visibility.Collapsed;

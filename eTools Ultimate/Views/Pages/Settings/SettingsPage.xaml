@@ -113,12 +113,12 @@
                             <ui:TextBlock
                                 Margin="0"
                                 FontTypography="BodyStrong"
-                                Text="{i18n:StringLocalizer 'Resource Path'}"
+                                Text="{i18n:StringLocalizer 'Configuration'}"
                                 TextWrapping="WrapWithOverflow" />
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="{i18n:StringLocalizer 'Loading all Paths.'}"
+                                Text="{i18n:StringLocalizer 'Change technical settings'}"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>
@@ -157,7 +157,7 @@
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="{i18n:StringLocalizer 'Change Design and other parts'}"
+                                Text="{i18n:StringLocalizer 'Change theme and language'}"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>

@@ -6,11 +6,11 @@ namespace eTools_Ultimate.Views.Pages
     /// <summary>
     /// Interaktionslogik für ResourcePathPage.xaml
     /// </summary>
-    public partial class ResourcePathPage : INavigableView<ResourcePathViewModel>
+    public partial class ConfigurationPage : INavigableView<ConfigurationViewModel>
     {
-        public ResourcePathViewModel ViewModel { get; }
+        public ConfigurationViewModel ViewModel { get; }
 
-        public ResourcePathPage(ResourcePathViewModel viewModel)
+        public ConfigurationPage(ConfigurationViewModel viewModel)
         {
             ViewModel = viewModel;
             DataContext = ViewModel;

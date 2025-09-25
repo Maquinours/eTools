@@ -110,7 +110,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 if (errorWindow.ShowDialog() == true)
                 {
                     mainWindow.ShowWindow();
-                    mainWindow.Navigate(typeof(ResourcePathPage));
+                    mainWindow.Navigate(typeof(ConfigurationPage));
 
                 }
                 else

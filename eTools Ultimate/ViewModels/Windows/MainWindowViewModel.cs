@@ -175,7 +175,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                     TargetPageType = typeof(SettingsPage),
                     MenuItemsSource = new object[]
                     {
-                        new NavigationViewItem(localizer["Resource Path"], typeof(ResourcePathPage)),
+                        new NavigationViewItem(localizer["Configuration"], typeof(ConfigurationPage)),
                         new NavigationViewItem(localizer["Personalization"], typeof(PersonalizationPage)),
                         new NavigationViewItem(localizer["About"], typeof(AboutPage))
                     }

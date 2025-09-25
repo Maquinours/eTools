@@ -86,7 +86,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         private void NavigateToResourcePath()
         {
             var navigationService = App.Services.GetService(typeof(INavigationService)) as INavigationService;
-            navigationService?.Navigate(typeof(ResourcePathPage));
+            navigationService?.Navigate(typeof(ConfigurationPage));
         }
 
         [RelayCommand]

@@ -21,7 +21,7 @@ using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class ResourcePathViewModel(SettingsService settingsService, IContentDialogService contentDialogService, IStringLocalizer stringLocalizer) : ObservableObject, INavigationAware
+    public partial class ConfigurationViewModel(SettingsService settingsService, IContentDialogService contentDialogService, IStringLocalizer stringLocalizer) : ObservableObject, INavigationAware
     {
         private bool _hasChangedSettings = false;
 
