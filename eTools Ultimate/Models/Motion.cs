@@ -131,7 +131,7 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public ImageSource? Icon // TODO: maybe refresh this property when file changes
+        public ImageSource? Icon
         {
             get
             {
