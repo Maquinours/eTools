@@ -192,6 +192,18 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             settingsService.Settings.AccessoriesConfigFilePath = FileFolderSelector.SelectFile(settingsService.Settings.AccessoriesConfigFilePath ?? settingsService.Settings.DefaultAccessoriesConfigFilePath, title: stringLocalizer["Select accessories configuration file"]) ?? settingsService.Settings.AccessoriesConfigFilePath;
         }
+
+        [RelayCommand]
+        private void SelectMotionsPropFile()
+        {
+            settingsService.Settings.MotionsPropFilePath = FileFolderSelector.SelectFile(settingsService.Settings.MotionsPropFilePath ?? settingsService.Settings.DefaultMotionsPropFilePath, title: stringLocalizer["Select motions prop file"]) ?? settingsService.Settings.MotionsPropFilePath;
+        }
+
+        [RelayCommand]
+        private void SelectMotionsTextFile()
+        {
+            settingsService.Settings.MotionsTxtFilePath = FileFolderSelector.SelectFile(settingsService.Settings.MotionsTxtFilePath ?? settingsService.Settings.DefaultMotionsTxtFilePath, title: stringLocalizer["Select motions text file"]) ?? settingsService.Settings.MotionsTxtFilePath;
+        }
         #endregion
     }
 } 

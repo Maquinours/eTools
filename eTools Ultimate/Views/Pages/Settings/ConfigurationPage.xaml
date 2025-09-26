@@ -848,6 +848,116 @@
                         </Grid>
                     </Grid>
 
+                    <!--  Motions Section  -->
+                    <TextBlock
+                        Margin="0,10,0,0"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Text="{i18n:StringLocalizer 'Motions'}" />
+
+                    <Grid Margin="0,10,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!--  Prop file  -->
+                        <Grid
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,10,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="{i18n:StringLocalizer 'Prop file'}" />
+                            <Grid Grid.Column="1" Margin="0,0,8,0">
+                                <TextBox x:Name="MotionsPropFilePathTextBox" Text="{Binding Settings.MotionsPropFilePath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultMotionsPropFilePath, Mode=OneWay}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=MotionsPropFilePathTextBox}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectMotionsPropFileCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
+                            </Button>
+                        </Grid>
+
+                        <!--  Text file  -->
+                        <Grid
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="0,0,10,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="{i18n:StringLocalizer 'Text file'}" />
+                            <Grid Grid.Column="1" Margin="0,0,8,0">
+                                <TextBox x:Name="MotionsTextFilePathTextBox" Text="{Binding Settings.MotionsTxtFilePath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultMotionsTxtFilePath, Mode=OneWay}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=MotionsTextFilePathTextBox}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectMotionsTextFileCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
+                            </Button>
+                        </Grid>
+                    </Grid>
+
                     <!--  Accessories Section  -->
                     <TextBlock
                         Margin="0,10,0,0"
