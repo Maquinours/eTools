@@ -204,6 +204,12 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             settingsService.Settings.MotionsTxtFilePath = FileFolderSelector.SelectFile(settingsService.Settings.MotionsTxtFilePath ?? settingsService.Settings.DefaultMotionsTxtFilePath, title: stringLocalizer["Select motions text file"]) ?? settingsService.Settings.MotionsTxtFilePath;
         }
+
+        [RelayCommand]
+        private void SelectGiftboxesConfigFile()
+        {
+            settingsService.Settings.GiftBoxesConfigFilePath = FileFolderSelector.SelectFile(settingsService.Settings.GiftBoxesConfigFilePath ?? settingsService.Settings.DefaultGiftBoxesConfigFilePath, title: stringLocalizer["Select giftboxes configuration file"]) ?? settingsService.Settings.GiftBoxesConfigFilePath;
+        }
         #endregion
     }
 } 
