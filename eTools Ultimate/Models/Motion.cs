@@ -1,15 +1,17 @@
 using DDSImageParser;
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileSystemGlobbing;
 using System;
+using System.Collections;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Linq;
-using System.Collections;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace eTools_Ultimate.Models
 {
@@ -85,6 +87,8 @@ namespace eTools_Ultimate.Models
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public MotionProp Prop => _prop;
+
+        private FileSystemWatcher _iconFileWatcher;
 
         public string Identifier
         {
@@ -163,6 +167,26 @@ namespace eTools_Ultimate.Models
 
             settings.PropertyChanged += Settings_PropertyChanged;
             App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged += Strings_CollectionChanged;
+            SetupIconFileWatcher();
+        }
+
+        [MemberNotNull(nameof(_iconFileWatcher))]
+        private void SetupIconFileWatcher()
+        {
+            _iconFileWatcher?.Dispose();
+
+            string iconFilePath = IconFilePath;
+            _iconFileWatcher = new()
+            {
+                Path = Path.GetDirectoryName(iconFilePath) ?? throw new InvalidOperationException("Motion::SetupIconFileWatcher exception : Path.GetDirectoryName(iconFilePath) is null"),
+                Filter = Path.GetFileName(iconFilePath) ?? throw new InvalidOperationException("Motion::SetupIconFileWatcher exception : Path.GetFileName(iconFilePath) is null"),
+                NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName
+            };
+            _iconFileWatcher.Changed += (_, __) => NotifyPropertyChanged(nameof(Icon));
+            _iconFileWatcher.Deleted += (_, __) => NotifyPropertyChanged(nameof(Icon));
+            _iconFileWatcher.Renamed += (_, __) => NotifyPropertyChanged(nameof(Icon));
+
+            _iconFileWatcher.EnableRaisingEvents = true;
         }
 
         private void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -173,6 +197,7 @@ namespace eTools_Ultimate.Models
                 case nameof(Settings.DefaultIconsFolderPath):
                     NotifyPropertyChanged(nameof(IconFilePath));
                     NotifyPropertyChanged(nameof(Icon));
+                    SetupIconFileWatcher();
                     break;
             }
         }
@@ -193,6 +218,7 @@ namespace eTools_Ultimate.Models
                 case nameof(Prop.SzIconName):
                     NotifyPropertyChanged(nameof(IconFilePath));
                     NotifyPropertyChanged(nameof(Icon));
+                    SetupIconFileWatcher();
                     break;
 
             }
