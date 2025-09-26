@@ -210,6 +210,18 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             settingsService.Settings.GiftBoxesConfigFilePath = FileFolderSelector.SelectFile(settingsService.Settings.GiftBoxesConfigFilePath ?? settingsService.Settings.DefaultGiftBoxesConfigFilePath, title: stringLocalizer["Select giftboxes configuration file"]) ?? settingsService.Settings.GiftBoxesConfigFilePath;
         }
+
+        [RelayCommand]
+        private void SelectTextsPropFile()
+        {
+            settingsService.Settings.TextsConfigFilePath = FileFolderSelector.SelectFile(settingsService.Settings.TextsConfigFilePath ?? settingsService.Settings.DefaultTextsConfigFilePath, title: stringLocalizer["Select texts prop file"]) ?? settingsService.Settings.TextsConfigFilePath;
+        }
+
+        [RelayCommand]
+        private void SelectTextsTextFile()
+        {
+            settingsService.Settings.TextsTxtFilePath = FileFolderSelector.SelectFile(settingsService.Settings.TextsTxtFilePath ?? settingsService.Settings.DefaultTextsTxtFilePath, title: stringLocalizer["Select texts text file"]) ?? settingsService.Settings.TextsTxtFilePath;
+        }
         #endregion
     }
 } 
