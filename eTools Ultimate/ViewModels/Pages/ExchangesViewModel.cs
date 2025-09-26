@@ -13,9 +13,10 @@ using Wpf.Ui.Abstractions.Controls;
 namespace eTools_Ultimate.ViewModels.Pages
 {
     public partial class ExchangesViewModel
-        (
+        //(
         //ExchangesService exchangesService, 
-        DefinesService definesService) : ObservableObject, INavigationAware
+        //DefinesService definesService) 
+    : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
