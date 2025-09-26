@@ -186,6 +186,12 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             settingsService.Settings.PropMoverTxtFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropMoverTxtFilePath ?? settingsService.Settings.DefaultPropMoverTxtFilePath, title: Resources.Texts.SelectMoverTextFile);
         }
+
+        [RelayCommand]
+        private void SelectAccessoriesConfigFile()
+        {
+            settingsService.Settings.AccessoriesConfigFilePath = FileFolderSelector.SelectFile(settingsService.Settings.AccessoriesConfigFilePath ?? settingsService.Settings.DefaultAccessoriesConfigFilePath, title: stringLocalizer["Select accessories configuration file"]) ?? settingsService.Settings.AccessoriesConfigFilePath;
+        }
         #endregion
     }
 } 

@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Services
 {
-    public class AccessoriesService
+    public class AccessoriesService(SettingsService settingsService)
     {
         private readonly ObservableCollection<int> _probabilities = [];
         private readonly ObservableCollection<Accessory> _accessories = [];
@@ -31,11 +31,11 @@ namespace eTools_Ultimate.Services
 
         public void Load()
         {
-            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+            Settings settings = settingsService.Settings;
 
             this.ClearAccessories();
 
-            string filePath = $"{settings.ResourcesFolderPath}accessory.inc"; // TODO: add settings value
+            string filePath = settings.AccessoriesConfigFilePath ?? settings.DefaultAccessoriesConfigFilePath;
             using (Script script = new())
             {
                 script.Load(filePath);
@@ -119,9 +119,9 @@ namespace eTools_Ultimate.Services
 
         public void Save()
         {
-            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+            Settings settings = settingsService.Settings;
 
-            string filePath = $"{settings.ResourcesFolderPath}accessory.inc"; // TODO: Use a proper path from Settings
+            string filePath = settings.AccessoriesConfigFilePath ?? settings.DefaultAccessoriesConfigFilePath;
 
             using StreamWriter writer = new(filePath, false, new UTF8Encoding(false));
             writer.WriteLine("// ========================================");

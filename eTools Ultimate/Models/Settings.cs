@@ -63,6 +63,10 @@ namespace eTools_Ultimate.Models
         private string? _motionsPropFilePath;
         private string? _motionsTxtFilePath;
         #endregion
+
+        #region Accessories settings
+        private string? _accessoriesConfigFilePath;
+        #endregion
         #endregion
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -216,6 +220,15 @@ namespace eTools_Ultimate.Models
         }
         public string DefaultMotionsTxtFilePath => $"{ResourcesFolderPath}propMotion.txt.txt";
         #endregion
+
+        #region Accessories settings
+        public string? AccessoriesConfigFilePath
+        {
+            get => _accessoriesConfigFilePath;
+            set => SetFilePathPropertyWithDefault(ref _accessoriesConfigFilePath, value, DefaultAccessoriesConfigFilePath);
+        }
+        public string DefaultAccessoriesConfigFilePath => $"{ResourcesFolderPath}accessory.inc";
+        #endregion
         #endregion
 
         #region private methods
@@ -236,6 +249,7 @@ namespace eTools_Ultimate.Models
                     NotifyPropertyChanged(nameof(DefaultGiftBoxesConfigFilePath));
                     NotifyPropertyChanged(nameof(DefaultMotionsPropFilePath));
                     NotifyPropertyChanged(nameof(DefaultMotionsTxtFilePath));
+                    NotifyPropertyChanged(nameof(DefaultAccessoriesConfigFilePath));
                     break;
                 case nameof(ClientFolderPath):
                     NotifyPropertyChanged(nameof(DefaultIconsFolderPath));

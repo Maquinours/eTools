@@ -128,19 +128,19 @@ namespace eTools_Ultimate.Services
                                     if (!Enum.TryParse(scanner.Token, out MoverTypes type))
                                         throw new InvalidOperationException("SettingsService::Load exception : Mover type AI bindings settings is incorrectly formated. (token is not MoverTypes)");
 
-                                        Settings.MoverTypesBindings[type].Clear();
+                                    Settings.MoverTypesBindings[type].Clear();
 
-                                        scanner.GetToken(); // [
-                                        while (true)
-                                        {
-                                            scanner.GetToken();
+                                    scanner.GetToken(); // [
+                                    while (true)
+                                    {
+                                        scanner.GetToken();
 
-                                            if (scanner.Token == "]") break;
-                                            if (scanner.EndOfStream)
-                                                throw new InvalidOperationException("SettingsService::Load exception : Mover type AI bindings settings is incorrectly formated. (first infinite loop security)");
+                                        if (scanner.Token == "]") break;
+                                        if (scanner.EndOfStream)
+                                            throw new InvalidOperationException("SettingsService::Load exception : Mover type AI bindings settings is incorrectly formated. (first infinite loop security)");
 
-                                            Settings.MoverTypesBindings[type].Add(scanner.Token);
-                                        }
+                                        Settings.MoverTypesBindings[type].Add(scanner.Token);
+                                    }
                                 }
                                 break;
                             }
@@ -297,6 +297,9 @@ namespace eTools_Ultimate.Services
                 // Motions settings
                 case nameof(Settings.MotionsPropFilePath):
                 case nameof(Settings.MotionsTxtFilePath):
+
+                // Accessories settings
+                case nameof(Settings.AccessoriesConfigFilePath):
                     Save();
                     break;
 
