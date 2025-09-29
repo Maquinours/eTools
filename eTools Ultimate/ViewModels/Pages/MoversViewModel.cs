@@ -258,6 +258,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 mover.PropertyChanged += CurrentMover_PropertyChanged;
                 if (mover.Model is not null)
                 {
+                    mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
                     mover.Model.Prop.PropertyChanged += CurrentMoverModelProp_PropertyChanged;
                     mover.Model.MotionsView.CurrentChanging += MotionsView_CurrentChanging;
                     mover.Model.MotionsView.CurrentChanged += MotionsView_CurrentChanged;
@@ -506,7 +507,10 @@ namespace eTools_Ultimate.ViewModels.Pages
             mover.Prop.PropertyChanged -= CurrentMoverProp_PropertyChanged;
             if (mover.Model is not null)
             {
+                mover.Model.PropertyChanged -= CurrentMoverModel_PropertyChanged;
                 mover.Model.Prop.PropertyChanged -= CurrentMoverModelProp_PropertyChanged;
+                mover.Model.MotionsView.CurrentChanging -= MotionsView_CurrentChanging;
+                mover.Model.MotionsView.CurrentChanged -= MotionsView_CurrentChanged;
                 if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
                     currentMotion.Prop.PropertyChanged -= CurrentMotionProp_PropertyChanged;
             }
@@ -520,6 +524,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 mover.Prop.PropertyChanged += CurrentMoverProp_PropertyChanged;
                 if (mover.Model is not null)
                 {
+                    mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
                     mover.Model.Prop.PropertyChanged += CurrentMoverModelProp_PropertyChanged;
                     mover.Model.MotionsView.CurrentChanging += MotionsView_CurrentChanging;
                     mover.Model.MotionsView.CurrentChanged += MotionsView_CurrentChanged;
@@ -536,18 +541,31 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private void CurrentMover_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
+            if (sender is not Mover)
+                throw new InvalidOperationException("MoversViewModel::CurrentMover_PropertyChanged exception: called with non Mover sender");
+            if (MoversView.CurrentItem is not Mover mover)
+                throw new InvalidOperationException("MoversViewModel::CurrentMover_PropertyChanged exception: called when MoversView currentItem is not a mover");
+            if (sender != mover)
+                throw new InvalidOperationException("MoversViewModel::CurrentMover_PropertyChanged exception: called with non current mover sender.");
+
             if (e.PropertyName == nameof(Mover.Model))
             {
                 if (e is not PropertyChangedExtendedEventArgs extendedArgs) throw new InvalidOperationException("Model property changed args is not PropertyChangedExtendedEventArgs");
                 if (extendedArgs.OldValue is Model oldModel)
                 {
+                    oldModel.PropertyChanged -= CurrentMoverModel_PropertyChanged;
                     oldModel.Prop.PropertyChanged -= CurrentMoverModelProp_PropertyChanged;
+                    oldModel.MotionsView.CurrentChanging -= MotionsView_CurrentChanging;
+                    oldModel.MotionsView.CurrentChanged -= MotionsView_CurrentChanged;
                     if (oldModel.MotionsView.CurrentItem is ModelMotion currentMotion)
                         currentMotion.Prop.PropertyChanged -= CurrentMotionProp_PropertyChanged;
                 }
                 if (extendedArgs.NewValue is Model newModel)
                 {
+                    newModel.PropertyChanged += CurrentMoverModel_PropertyChanged;
                     newModel.Prop.PropertyChanged += CurrentMoverModelProp_PropertyChanged;
+                    newModel.MotionsView.CurrentChanging += MotionsView_CurrentChanging;
+                    newModel.MotionsView.CurrentChanged += MotionsView_CurrentChanged;
                     if (newModel.MotionsView.CurrentItem is ModelMotion currentMotion)
                         currentMotion.Prop.PropertyChanged += CurrentMotionProp_PropertyChanged;
                 }
@@ -562,20 +580,20 @@ namespace eTools_Ultimate.ViewModels.Pages
         private void CurrentMoverProp_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (sender is not MoverProp moverProp)
-                throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called with non MoverProp sender");
+                throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non MoverProp sender");
             if (MoversView.CurrentItem is not Mover mover)
-                throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called when MoversView currentItem is not a mover");
+                throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called when MoversView currentItem is not a mover");
             if (moverProp != mover.Prop)
-                throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called with non current mover prop sender.");
+                throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non current mover prop sender.");
 
             if (e.PropertyName == nameof(Mover.Prop.DwId))
             {
                 if (e is not PropertyChangedExtendedEventArgs extendedArgs)
-                    throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called with non PropertyChangedExtendedEventArgs.");
+                    throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non PropertyChangedExtendedEventArgs.");
                 if (extendedArgs.OldValue is not int oldId)
-                    throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called with non int old DwId value.");
+                    throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non int old DwId value.");
                 if (extendedArgs.NewValue is not int newId)
-                    throw new InvalidOperationException("CurrentMoverProp_PropertyChanged called with non int new DwId value.");
+                    throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non int new DwId value.");
 
                 string oldIdentifier = Script.NumberToString(oldId, definesService.ReversedMoverDefines);
                 string newIdentifier = Script.NumberToString(newId, definesService.ReversedMoverDefines);
@@ -586,10 +604,14 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        private void CurrentMoverModelProp_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        private void CurrentMoverModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if(sender is not ModelProp)
-                throw new InvalidOperationException("MoversViewModel::CurrentMoverModelProp_PropertyChanged exception: sender is not ModelProp");
+            if (sender is not Model model)
+                throw new InvalidOperationException("MoversViewModel::CurrentMoverModel_PropertyChanged exception: sender is not Model");
+            if (MoversView.CurrentItem is not Mover mover)
+                throw new InvalidOperationException("MoversViewModel::CurrentMoverModel_PropertyChanged exception: called when MoversView currentItem is not a mover");
+            if (model != mover.Model)
+                throw new InvalidOperationException("MoversViewModel::CurrentMoverModel_PropertyChanged exception: called with non current mover model sender.");
 
             if (e.PropertyName == nameof(Mover.Model.Model3DFilePath))
             {
@@ -598,7 +620,18 @@ namespace eTools_Ultimate.ViewModels.Pages
                 InitializeMotionsDirectoryWatcherPath();
                 LoadModel();
             }
-            else if (e.PropertyName == nameof(Mover.Model.Prop.NTextureEx))
+        }
+
+        private void CurrentMoverModelProp_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (sender is not ModelProp modelProp)
+                throw new InvalidOperationException("MoversViewModel::CurrentMoverModelProp_PropertyChanged exception: sender is not ModelProp");
+            if (MoversView.CurrentItem is not Mover mover)
+                throw new InvalidOperationException("MoversViewModel::CurrentMoverModelProp_PropertyChanged exception: called when MoversView currentItem is not a mover");
+            if (modelProp != mover.Model?.Prop)
+                throw new InvalidOperationException("MoversViewModel::CurrentMoverModelProp_PropertyChanged exception: called with non current mover model prop sender.");
+
+            if (e.PropertyName == nameof(Mover.Model.Prop.NTextureEx))
             {
                 SetModelTexture();
             }
@@ -652,7 +685,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: MoversView.CurrentItem is not Mover");
             if (mover.Model is null)
                 throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: mover.Model is null");
-            if(mover.Model.MotionsView.CurrentItem is not ModelMotion motion)
+            if (mover.Model.MotionsView.CurrentItem is not ModelMotion motion)
                 throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: MotionsView.CurrentItem is not Motion");
             if (motionProp != motion.Prop)
                 throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: sender is not selected motion prop");
