@@ -1098,16 +1098,11 @@
             </Grid.RowDefinitions>
 
             <!--  Add und Delete Buttons oben rechts  -->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <StackPanel
-                    Grid.Column="1"
-                    Margin="0,10,0,0"
-                    Orientation="Horizontal">
+            <StackPanel
+                Grid.Row="0"
+                Margin="0,10,0,0"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
                 <ui:Button ToolTip="{i18n:StringLocalizer 'Undo'}">
                     <ui:SymbolIcon Symbol="ArrowUndo24" />
                 </ui:Button>
@@ -1439,7 +1434,6 @@
                     </ui:Button.Style>
                 </ui:Button>
             </StackPanel>
-            </Grid>
 
             <!--  Separator  -->
             <Separator

@@ -400,20 +400,13 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
 
                 <!--  Static Header mit Buttons  -->
                 <StackPanel
                     Grid.Row="0"
-                    Margin="0,10,30,10"
+                    Margin="0,10,0,0"
                     HorizontalAlignment="Right"
-                    VerticalAlignment="Top"
-                    Orientation="Horizontal"
-                    ZIndex="1">
+                    Orientation="Horizontal">
                     <ui:Button Command="{Binding UndoCommand}" ToolTip="{i18n:StringLocalizer 'Undo'}">
                         <ui:SymbolIcon Symbol="ArrowUndo24" />
                     </ui:Button>
@@ -461,7 +454,6 @@
                     Grid.Row="1"
                     Margin="0,5,0,5"
                     Background="{DynamicResource ControlStrokeColorDefaultBrush}" />
-                    </Grid>
 
                 <!--  Scrollable Content  -->
                 <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
@@ -477,7 +469,7 @@
                         </Grid.Style>
                         <!--  Form  -->
                         <StackPanel Margin="10,5,10,20">
-                        <ContentControl Content="{Binding MotionsView}" ContentTemplate="{StaticResource MotionDetailsSectionTemplate}" />
+                            <ContentControl Content="{Binding MotionsView}" ContentTemplate="{StaticResource MotionDetailsSectionTemplate}" />
 
                             <!--  3D Model Preview Section  -->
                             <StackPanel Margin="0,20,0,0">
