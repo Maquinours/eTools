@@ -211,6 +211,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -244,13 +245,25 @@
                         Margin="0,0,10,0"
                         Appearance="Primary"
                         Command="{Binding AddGiftboxItemCommand}"
-                        Content="{i18n:StringLocalizer 'Add item'}"
+                        Content="{i18n:StringLocalizer 'New Box'}"
                         Icon="Add24" />
+                    <ui:Button
+                        Margin="0,0,10,0"
+                        Appearance="Danger"
+                        Command="{Binding DeleteGiftboxCommand}"
+                        Content="{i18n:StringLocalizer 'Delete Box'}"
+                        Icon="Delete24" />
                 </StackPanel>
             </Grid>
 
+            <!--  Separator  -->
+            <Separator
+                Grid.Row="1"
+                Margin="0,5,0,5"
+                Background="{DynamicResource ControlStrokeColorDefaultBrush}" />
+
             <!--  Title and Info  -->
-            <StackPanel Grid.Row="1" Margin="0,0,0,10">
+            <StackPanel Grid.Row="2" Margin="0,0,0,10">
                 <StackPanel.Style>
                     <Style TargetType="StackPanel">
                         <Style.Triggers>
@@ -300,7 +313,7 @@
 
             <!--  Data Grid  -->
             <ui:Card
-                Grid.Row="2"
+                Grid.Row="3"
                 Margin="0,0,0,0"
                 Padding="10"
                 VerticalAlignment="Top">
@@ -313,7 +326,17 @@
                         </Style.Triggers>
                     </Style>
                 </ui:Card.Style>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    
+                    <!--  DataGrid Header  -->
+                    <Grid Grid.Row="0" Margin="0,0,0,15"/>
+
                 <DataGrid
+                Grid.Row="1"
                     VerticalAlignment="Top"
                     VerticalContentAlignment="Center"
                     AutoGenerateColumns="False"
@@ -329,8 +352,31 @@
                     <DataGrid.Columns>
                         <DataGridTemplateColumn
                             Width="*"
-                            Header="{i18n:StringLocalizer 'Item'}"
                             SortMemberPath="Item.Name">
+                            <DataGridTemplateColumn.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Grid.Column="0"
+                                            Text="{i18n:StringLocalizer 'Item'}"
+                                            VerticalAlignment="Center" />
+                                        <ui:Button
+                                            Grid.Column="1"
+                                            Background="#2F70AF"
+                                            Command="{Binding DataContext.AddGiftboxItemCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                            Content="{i18n:StringLocalizer 'Add item'}"
+                                            FontSize="10"
+                                            Icon="Add16"
+                                            Padding="8,2"
+                                            MinWidth="65"
+                                            Margin="10,0,0,0" />
+                                    </Grid>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.HeaderTemplate>
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Grid Margin="4">
@@ -406,7 +452,8 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
-                </DataGrid>
+                    </DataGrid>
+                </Grid>
             </ui:Card>
         </Grid>
     </Grid>

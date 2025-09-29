@@ -138,7 +138,7 @@
     <comment>Motions navigation card title</comment>
   </data>
   <data name="TextClient" xml:space="preserve">
-    <value>TextClient</value>
+    <value>Text Client</value>
     <comment>Text Client navigation card title</comment>
   </data>
   <data name="Settings" xml:space="preserve">
