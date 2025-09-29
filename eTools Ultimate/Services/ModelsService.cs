@@ -2,15 +2,9 @@
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
 using Microsoft.Extensions.DependencyInjection;
-using Scan;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Services
 {
@@ -171,7 +165,7 @@ namespace eTools_Ultimate.Services
             writer.WriteLine("// ========================================");
             writer.WriteLine();
 
-            foreach(MainModelBrace mainBrace in Models)
+            foreach (MainModelBrace mainBrace in Models)
             {
                 writer.Write('"');
                 writer.Write(mainBrace.Prop.SzName);
@@ -190,7 +184,7 @@ namespace eTools_Ultimate.Services
 
         public void SaveItem(StreamWriter writer, IModelItem item, int indentLevel)
         {
-            if(item is ModelBrace brace)
+            if (item is ModelBrace brace)
             {
                 writer.Write(new string('\t', indentLevel));
                 writer.Write('"');
@@ -208,7 +202,7 @@ namespace eTools_Ultimate.Services
                 writer.Write('}');
                 writer.WriteLine();
             }
-            else if(item is Model model)
+            else if (item is Model model)
             {
                 writer.Write(new string('\t', indentLevel));
                 writer.Write('"');
@@ -241,13 +235,13 @@ namespace eTools_Ultimate.Services
                 writer.Write(Script.NumberToString(model.Prop.BRenderFlag));
                 writer.WriteLine();
 
-                if(model.Motions.Count > 0)
+                if (model.Motions.Count > 0)
                 {
                     writer.Write(new string('\t', indentLevel));
                     writer.Write('{');
                     writer.WriteLine();
 
-                    foreach(ModelMotion motion in model.Motions)
+                    foreach (ModelMotion motion in model.Motions)
                     {
                         writer.Write(new string('\t', indentLevel + 1));
                         writer.Write('"');
@@ -270,7 +264,7 @@ namespace eTools_Ultimate.Services
             braces.Add(brace);
             foreach (IModelItem child in brace.Children)
             {
-                if(child is ModelBrace childBrace)
+                if (child is ModelBrace childBrace)
                     GetBracesRecursively(braces, childBrace);
             }
         }
@@ -346,12 +340,47 @@ namespace eTools_Ultimate.Services
                     throw new InvalidOperationException("ModelsService::GetModelByObject Exception : obj has an invalid type");
             }
 
-            if (!modelType.HasValue) 
+            if (!modelType.HasValue)
                 throw new InvalidOperationException("ModelsService::GetModelByObject Exception : modelType has no value");
-            if(!objId.HasValue)
+            if (!objId.HasValue)
                 throw new InvalidOperationException("ModelsService::GetModelByObject Exception : objId has no value");
 
             return GetModelByTypeAndId(modelType.Value, objId.Value);
+        }
+
+        public Model CreateModelByObject(object obj)
+        {
+            switch (obj)
+            {
+                case Mover mover:
+                    int dwType = definesService.Defines["OT_MOVER"];
+                    int dwIndex = mover.Id;
+                    int dwModelType = definesService.Defines["MODELTYPE_ANIMATED_MESH"];
+                    int dwDistant = definesService.Defines["MD_MID"];
+
+                    ModelProp modelProp = new(
+                        dwType: dwType,
+                        dwIndex: dwIndex,
+                        szName: "",
+                        dwModelType: dwModelType,
+                        szPart: "",
+                        bFly: 0,
+                        dwDistant: dwDistant,
+                        bPick: 0,
+                        fScale: 1f,
+                        bTrans: 0,
+                        bShadow: 1,
+                        nTextureEx: 0,
+                        bRenderFlag: 1
+                        );
+                    Model model = new(modelProp, []);
+
+                    Models.First(x => x.Prop.IType == dwType).Children.Add(model);
+
+                    return model;
+                default:
+                    throw new InvalidOperationException("ModelsService::CreateModelByObject Exception : obj has an invalid type");
+            }
         }
 
         public void SetBraceToModel(Model model, ModelBrace brace)

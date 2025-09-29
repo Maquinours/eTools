@@ -522,7 +522,7 @@ namespace eTools_Ultimate.Services
         {
             DefinesService definesService = App.Services.GetRequiredService<DefinesService>();
 
-            int dwId = -1;
+            int dwId = (Movers.MaxBy(x => x.Id)?.Id ?? -1) + 1;
             string szName = MoversService.GetNextStringIdentifier();
             App.Services.GetRequiredService<StringsService>().AddString(szName, "");
             if (!definesService.Defines.TryGetValue("AII_NONE", out int dwAi))
@@ -704,8 +704,10 @@ namespace eTools_Ultimate.Services
                         dwMadrigalGiftPoint: dwMadrigalGiftPoint
                         );
 
-            //ModelElem model = new() // TODO: add a model with the mover
             Mover mover = new(moverProp);
+
+            if(mover.Model is null)
+                modelsService.CreateModelByObject(mover);
 
             Movers.Add(mover);
 
