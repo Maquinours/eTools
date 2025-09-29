@@ -425,23 +425,10 @@ namespace eTools_Ultimate.Models
         }
 
         private readonly MoverProp _prop;
-        private Model? _model; // TODO: the model should be a calculated property
 
         public MoverProp Prop => this._prop;
 
-        public Model? Model
-        {
-            get => this._model;
-            set
-            {
-                if (value != this.Model)
-                {
-                    Model? oldValue = this.Model;
-                    this._model = value;
-                    NotifyPropertyChanged(nameof(this.Model), oldValue, this.Model);
-                }
-            }
-        }
+        public Model? Model => App.Services.GetRequiredService<ModelsService>().GetModelByObject(this);
 
         public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; if (this.Model is not null) this.Model.Prop.DwIndex = value; } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
 
@@ -573,10 +560,9 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public Mover(MoverProp prop, Model? model)
+        public Mover(MoverProp prop)
         {
             _prop = prop;
-            _model = model;
 
             Prop.PropertyChanged += Prop_PropertyChanged;
             App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged += ProjectStrings_CollectionChanged;

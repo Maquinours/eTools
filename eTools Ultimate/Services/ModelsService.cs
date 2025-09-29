@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Services
 {
-    public class ModelsService
+    public class ModelsService(DefinesService definesService)
     {
         private readonly ObservableCollection<MainModelBrace> _models = [];
         public ObservableCollection<MainModelBrace> Models => _models;
@@ -325,6 +325,33 @@ namespace eTools_Ultimate.Services
         public Model? GetModelByTypeAndId(int type, int id)
         {
             return GetModelsByType(type).FirstOrDefault(model => model.Prop.DwIndex == id);
+        }
+
+        public Model? GetModelByObject(object obj)
+        {
+            int? modelType;
+            int? objId;
+
+            switch (obj)
+            {
+                case Mover mover:
+                    modelType = definesService.Defines["OT_MOVER"];
+                    objId = mover.Id;
+                    break;
+                case Item item:
+                    modelType = definesService.Defines["OT_ITEM"];
+                    objId = item.Id;
+                    break;
+                default:
+                    throw new InvalidOperationException("ModelsService::GetModelByObject Exception : obj has an invalid type");
+            }
+
+            if (!modelType.HasValue) 
+                throw new InvalidOperationException("ModelsService::GetModelByObject Exception : modelType has no value");
+            if(!objId.HasValue)
+                throw new InvalidOperationException("ModelsService::GetModelByObject Exception : objId has no value");
+
+            return GetModelByTypeAndId(modelType.Value, objId.Value);
         }
 
         public void SetBraceToModel(Model model, ModelBrace brace)

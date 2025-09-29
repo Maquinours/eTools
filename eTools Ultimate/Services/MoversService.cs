@@ -60,7 +60,6 @@ namespace eTools_Ultimate.Services
 
             int moverModelType = definesService.Defines["OT_MOVER"];
             Model[] moverModels = modelsService.GetModelsByType(moverModelType);
-            Dictionary<int, Model> moverModelsDictionary = moverModels.ToDictionary(x => x.Prop.DwIndex, x => x); // used to get better performance
 
             using (Script script = new())
             {
@@ -317,8 +316,8 @@ namespace eTools_Ultimate.Services
                         szNpcMark: szNpcMark,
                         dwMadrigalGiftPoint: dwMadrigalGiftPoint
                         );
-                    Model? model = moverModelsDictionary.GetValueOrDefault(dwId);
-                    Mover mover = new(moverProp, model);
+
+                    Mover mover = new(moverProp);
 
                     Movers.Add(mover);
                 }
@@ -706,7 +705,7 @@ namespace eTools_Ultimate.Services
                         );
 
             //ModelElem model = new() // TODO: add a model with the mover
-            Mover mover = new(moverProp, null);
+            Mover mover = new(moverProp);
 
             Movers.Add(mover);
 
