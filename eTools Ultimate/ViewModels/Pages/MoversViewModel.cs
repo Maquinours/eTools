@@ -1,8 +1,10 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using eTools_Ultimate.Views.Dialogs;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,7 +25,7 @@ using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class MoversViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, MoversService moversService, ModelsService modelsService, StringsService stringsService, SettingsService settingsService, DefinesService definesService, SoundsService soundsService) : ObservableObject, INavigationAware
+    public partial class MoversViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, IStringLocalizer<Translations> localizer, MoversService moversService, ModelsService modelsService, StringsService stringsService, SettingsService settingsService, DefinesService definesService, SoundsService soundsService) : ObservableObject, INavigationAware
     {
         #region Properties
         private bool _isInitialized = false;
@@ -314,14 +316,11 @@ namespace eTools_Ultimate.ViewModels.Pages
             NativeMethods.DeleteModel(D3dHost._native); // Clear the previous model if any
             NativeMethods.DeleteReferenceModel(D3dHost._native); // Clear the reference model if any
             D3dHost.Render();
-            if (MoversView.CurrentItem is not Mover mover)
-            {
-                ModelViewerError = "No mover selected.";
-                return;
-            }
+            if (MoversView.CurrentItem is not Mover mover) return;
+
             if (mover.Model is null)
             {
-                ModelViewerError = "No model associated with the selected mover.";
+                ModelViewerError = localizer["No model associated with the selected mover."];
                 return;
             }
 
@@ -355,7 +354,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     if (!File.Exists(partPath))
                     {
-                        ModelViewerError = $"Part model file not found: {partPath}";
+                        ModelViewerError = String.Format(localizer["Unable to find file: {0}"], partPath);
                         return;
                     }
                 }
@@ -369,7 +368,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             {
                 if (!File.Exists(mover.Model.Model3DFilePath))
                 {
-                    ModelViewerError = $"Model file not found: {mover.Model.Model3DFilePath}";
+                    ModelViewerError = String.Format(localizer["Unable to find file: {0}"], mover.Model.Model3DFilePath);
                     return;
                 }
                 //CompositionTarget.Rendering -= CompositionTarget_Rendering;
@@ -847,10 +846,10 @@ namespace eTools_Ultimate.ViewModels.Pages
             ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
                 new SimpleContentDialogCreateOptions()
                 {
-                    Title = "Remove a mover",
-                    Content = $"Are you sure you want to remove {mover.Name} ?",
-                    PrimaryButtonText = "Remove",
-                    CloseButtonText = "Cancel",
+                    Title = localizer["Remove a mover"],
+                    Content = String.Format(localizer["Are you sure you want to remove the mover {0} ?"], mover.Name),
+                    PrimaryButtonText = localizer["Remove"],
+                    CloseButtonText = localizer["Cancel"],
                 }
             );
             if (result == ContentDialogResult.Primary)
@@ -883,10 +882,10 @@ namespace eTools_Ultimate.ViewModels.Pages
             ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
                 new SimpleContentDialogCreateOptions()
                 {
-                    Title = "Remove a motion",
-                    Content = $"Are you sure you want to remove the motion {motion.MotionTypeIdentifier} from the mover {mover.Identifier} ?",
-                    PrimaryButtonText = "Remove",
-                    CloseButtonText = "Cancel",
+                    Title = localizer["Remove a motion"],
+                    Content = String.Format(localizer["Are you sure you want to remove the motion {0} from the mover {1} ?"], motion.MotionTypeIdentifier, mover.Identifier),
+                    PrimaryButtonText = localizer["Remove"],
+                    CloseButtonText = localizer["Cancel"],
                 }
             );
             if (result == ContentDialogResult.Primary)
@@ -926,13 +925,22 @@ namespace eTools_Ultimate.ViewModels.Pages
                 generatedCount++;
             }
 
-            snackbarService.Show(
-                title: "Motions generated",
-                message: generatedCount > 1 ? $"{generatedCount} motions have been bound automatically." : $"{generatedCount} motion has been bound automatically",
-                appearance: ControlAppearance.Success,
-                icon: null,
-                timeout: TimeSpan.FromSeconds(2)
-                );
+            if (generatedCount == 0)
+                snackbarService.Show(
+                    title: localizer["No motions generated"],
+                    message: localizer["No motions could be bound automatically."],
+                    appearance: ControlAppearance.Caution,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(2)
+                    );
+            else
+                snackbarService.Show(
+                    title: localizer["Motions generated"],
+                    message: String.Format(localizer[generatedCount > 1 ? "{0} motions have been bound automatically." : "{0} motion has been bound automatically."], generatedCount),
+                    appearance: ControlAppearance.Success,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(2)
+                    );
         }
 
         [RelayCommand]
@@ -952,13 +960,12 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (!File.Exists(motionFile))
             {
                 snackbarService.Show(
-                title: "Unable to play motion",
-                message: $"Motion file not found : {motionFile}",
+                title: localizer["Unable to play motion"],
+                message: String.Format(localizer["Unable to find file: {0}"], motionFile),
                 appearance: ControlAppearance.Danger,
                 icon: null,
                 timeout: TimeSpan.FromSeconds(3)
                 );
-                //ModelViewerError = $"Motion file not found: {motionFile}";
                 return;
             }
 
@@ -997,8 +1004,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                 });
 
                 snackbarService.Show(
-                    title: "Movers and motions saved",
-                    message: "Movers and motions have been successfully saved.",
+                    title: localizer["Movers and motions saved"],
+                    message: localizer["Movers and motions have been successfully saved."],
                     appearance: ControlAppearance.Success,
                     icon: null,
                     timeout: TimeSpan.FromSeconds(3)
@@ -1007,7 +1014,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             catch (Exception ex)
             {
                 snackbarService.Show(
-                    title: "An error has occured while saving movers and motions",
+                    title: localizer["Error saving movers and motions"],
                     message: ex.Message,
                     appearance: ControlAppearance.Danger,
                     icon: null,

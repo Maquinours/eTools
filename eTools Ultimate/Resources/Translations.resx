@@ -381,4 +381,46 @@
   <data name="AIs assigned to {0}" xml:space="preserve">
     <value />
   </data>
+  <data name="No motions generated" xml:space="preserve">
+    <value />
+  </data>
+  <data name="No motions could be bound automatically." xml:space="preserve">
+    <value />
+  </data>
+  <data name="{0} motions have been bound automatically." xml:space="preserve">
+    <value />
+  </data>
+  <data name="{0} motion has been bound automatically." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Motions generated" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Unable to play motion" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Unable to find file: {0}" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Movers and motions saved" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Movers and motions have been successfully saved." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Error saving movers and motions" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Remove a motion" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the motion {0} from the mover {1} ?" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Remove a mover" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the mover {0} ?" xml:space="preserve">
+    <value />
+  </data>
 </root>
