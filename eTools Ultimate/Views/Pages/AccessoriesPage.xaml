@@ -50,7 +50,7 @@
                     Margin="10,10,10,10"
                     BorderThickness="0"
                     Icon="Search24"
-                    PlaceholderText="{i18n:StringLocalizer 'Suche...'}"
+                    PlaceholderText="{i18n:StringLocalizer 'Search...'}"
                     Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Border>
 

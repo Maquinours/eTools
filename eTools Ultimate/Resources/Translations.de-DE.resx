@@ -531,8 +531,8 @@
     <value>Navigiere zur Einstellungen-Seite.</value>
     <comment>Settings navigation card description</comment>
   </data>
-  <data name="Search" xml:space="preserve">
-    <value>Suche...</value>
+  <data name="S" xml:space="preserve">
+    <value>Suche</value>
     <comment>Search placeholder text</comment>
   </data>
   <data name="Items in:" xml:space="preserve">
@@ -1114,10 +1114,6 @@
   <data name="Critical Attack Sound" xml:space="preserve">
     <value>Kritischer Angriffs-Sound</value>
     <comment>Critical Attack Sound field label</comment>
-  </data>
-  <data name="Suche..." xml:space="preserve">
-    <value>Suche...</value>
-    <comment>Search placeholder text</comment>
   </data>
   <data name="Filter Sections" xml:space="preserve">
     <value>Bereiche filtern</value>
@@ -2005,5 +2001,8 @@
   </data>
   <data name="Update check failed" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
+  </data>
+  <data name="Search..." xml:space="preserve">
+    <value>Suche...</value>
   </data>
 </root>

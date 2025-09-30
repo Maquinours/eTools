@@ -530,8 +530,8 @@
     <value>Naviguer vers la page des paramètres.</value>
     <comment>Settings navigation card description</comment>
   </data>
-  <data name="Search" xml:space="preserve">
-    <value>Rechercher...</value>
+  <data name="S" xml:space="preserve">
+    <value>Rechercher</value>
     <comment>Search placeholder text</comment>
   </data>
   <data name="Items in:" xml:space="preserve">
@@ -1113,10 +1113,6 @@
   <data name="Critical Attack Sound" xml:space="preserve">
     <value>Son d'attaque critique</value>
     <comment>Critical Attack Sound field label</comment>
-  </data>
-  <data name="Suche..." xml:space="preserve">
-    <value>Rechercher...</value>
-    <comment>Search placeholder text</comment>
   </data>
   <data name="Filter Sections" xml:space="preserve">
     <value>Filtrer les sections</value>
@@ -2004,5 +2000,8 @@
   </data>
   <data name="Update check failed" xml:space="preserve">
     <value>Échec de la vérification des mises à jour</value>
+  </data>
+  <data name="Search..." xml:space="preserve">
+    <value>Rechercher...</value>
   </data>
 </root>
