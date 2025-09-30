@@ -281,10 +281,6 @@
     <value>Son</value>
     <comment>Sound section header</comment>
   </data>
-  <data name="Define ID" xml:space="preserve">
-    <value>Définir ID</value>
-    <comment>Define ID field label</comment>
-  </data>
   <data name="Name" xml:space="preserve">
     <value>Nom</value>
     <comment>Name field label</comment>
@@ -622,7 +618,7 @@
     <comment>Text Client navigation card description</comment>
   </data>
   <data name="ID" xml:space="preserve">
-    <value>ID</value>
+    <value>Identifiant</value>
   </data>
   <data name="Door of Dark" xml:space="preserve">
     <value>Porte des Ténèbres</value>
@@ -1680,9 +1676,6 @@
   <data name="Retry" xml:space="preserve">
     <value>Réessayer</value>
   </data>
-  <data name="Define ID of the mover" xml:space="preserve">
-    <value>Définir l'ID du mover</value>
-  </data>
   <data name="Name of the mover" xml:space="preserve">
     <value>Nom du mover</value>
   </data>
@@ -1994,5 +1987,17 @@
   </data>
   <data name="Texts" xml:space="preserve">
     <value>Textes</value>
+  </data>
+  <data name="ID of the mover" xml:space="preserve">
+    <value>Identifiant du mover</value>
+  </data>
+  <data name="Motion" xml:space="preserve">
+    <value>Animation</value>
+  </data>
+  <data name="Motion of the character mover that should be played." xml:space="preserve">
+    <value>Animation du mover du personnage qui doit être joué.</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Texte</value>
   </data>
 </root>

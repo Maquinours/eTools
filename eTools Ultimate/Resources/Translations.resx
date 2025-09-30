@@ -314,10 +314,6 @@
     <value>Sound</value>
     <comment>Sound section header</comment>
   </data>
-  <data name="Define ID" xml:space="preserve">
-    <value>Define ID</value>
-    <comment>Define ID field label</comment>
-  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
     <comment>Name field label</comment>
@@ -441,6 +437,18 @@
     <value />
   </data>
   <data name="Texts" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ID of the mover" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Motion" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Motion of the character mover that should be played." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Text" xml:space="preserve">
     <value />
   </data>
 </root>

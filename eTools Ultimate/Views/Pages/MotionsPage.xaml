@@ -107,10 +107,10 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Animation ID'}" />
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Motion'}" />
                             <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'ID of the animation that should be played with the motion'}" />
+                                    <ToolTip Content="{i18n:StringLocalizer 'Motion of the character mover that should be played.'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>

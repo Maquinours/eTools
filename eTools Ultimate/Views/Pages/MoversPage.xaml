@@ -123,10 +123,10 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Define ID'}" />
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'ID'}" />
                                 <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                     <ui:SymbolIcon.ToolTip>
-                                        <ToolTip Content="{i18n:StringLocalizer 'Define ID of the mover'}" />
+                                        <ToolTip Content="{i18n:StringLocalizer 'ID of the mover'}" />
                                     </ui:SymbolIcon.ToolTip>
                                 </ui:SymbolIcon>
                             </StackPanel>
