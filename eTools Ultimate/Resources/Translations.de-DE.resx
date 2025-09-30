@@ -618,7 +618,7 @@
     <value>Navigiere zum Ticket-Editor.</value>
     <comment>Tickets navigation card description</comment>
   </data>
-  <data name="Navigate to the text client." xml:space="preserve">
+  <data name="Navigate to the texts page." xml:space="preserve">
     <value>Navigiere zum Text Client.</value>
     <comment>Text Client navigation card description</comment>
   </data>
