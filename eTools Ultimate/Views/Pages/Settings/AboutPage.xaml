@@ -20,11 +20,12 @@
     </Page.Resources>
 
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Auto" 
-                      HorizontalScrollBarVisibility="Disabled"
-                      CanContentScroll="False"
-                      PanningMode="VerticalOnly"
-                      IsManipulationEnabled="True">
+        <ScrollViewer
+            CanContentScroll="False"
+            HorizontalScrollBarVisibility="Disabled"
+            IsManipulationEnabled="True"
+            PanningMode="VerticalOnly"
+            VerticalScrollBarVisibility="Auto">
             <StackPanel Margin="40">
                 <!--  App Logo und Titel  -->
                 <StackPanel Margin="0,20,0,40" HorizontalAlignment="Center">
@@ -246,10 +247,12 @@
                     Margin="0,15,0,10"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
+                    <!--
                     <Button
                         Margin="0,0,15,0"
                         Command="{Binding OpenWebsiteCommand}"
                         Content="{i18n:StringLocalizer 'Visit Website'}" />
+                    -->
 
                     <Button Command="{Binding CheckForUpdatesCommand}" Content="{i18n:StringLocalizer 'Check for Updates'}" />
                 </StackPanel>

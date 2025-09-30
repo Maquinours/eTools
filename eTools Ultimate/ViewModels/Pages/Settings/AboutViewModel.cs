@@ -31,17 +31,6 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
-        private void OpenWebsite()
-        {
-            // Öffnet die Website in einem Browser
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
-            {
-                FileName = "https://example.com",
-                UseShellExecute = true
-            });
-        }
-
-        [RelayCommand]
         private async Task CheckForUpdates()
         {
             try
