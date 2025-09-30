@@ -1,6 +1,8 @@
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -24,7 +26,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         FEMALE
     }
 
-    public partial class MotionsViewModel(ISnackbarService snackbarService, IContentDialogService contentDialogService, MotionsService motionsService, DefinesService definesService, SettingsService settingsService, StringsService stringsService, ModelsService modelsService) : ObservableObject, INavigationAware
+    public partial class MotionsViewModel(ISnackbarService snackbarService, IContentDialogService contentDialogService, IStringLocalizer<Translations> localizer, MotionsService motionsService, DefinesService definesService, SettingsService settingsService, StringsService stringsService, ModelsService modelsService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -274,8 +276,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                 });
 
                 snackbarService.Show(
-                    title: "Motions saved",
-                    message: "Motions have been successfully saved.",
+                    title: localizer["Motions saved"],
+                    message: localizer["Motions have been successfully saved."],
                     appearance: ControlAppearance.Success,
                     icon: null,
                     timeout: TimeSpan.FromSeconds(3)
@@ -284,7 +286,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             catch (Exception ex)
             {
                 snackbarService.Show(
-                    title: "An error has occured while saving motions.",
+                    title: localizer["Error saving motions"],
                     message: ex.Message,
                     appearance: ControlAppearance.Danger,
                     icon: null,
@@ -333,10 +335,10 @@ namespace eTools_Ultimate.ViewModels.Pages
             ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
                 new SimpleContentDialogCreateOptions()
                 {
-                    Title = "Delete a motion",
-                    Content = $"Are you sure you want to delete the motion {motion.Identifier} ?",
-                    PrimaryButtonText = "Delete",
-                    CloseButtonText = "Cancel",
+                    Title = localizer["Remove a motion"],
+                    Content = String.Format(localizer["Are you sure you want to remove the motion {0} ?"], motion.Identifier),
+                    PrimaryButtonText = localizer["Remove"],
+                    CloseButtonText = localizer["Cancel"],
                 }
             );
             if (result == ContentDialogResult.Primary)

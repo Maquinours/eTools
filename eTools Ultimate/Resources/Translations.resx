@@ -423,4 +423,16 @@
   <data name="Are you sure you want to remove the mover {0} ?" xml:space="preserve">
     <value />
   </data>
+  <data name="Motions saved" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Motions have been successfully saved." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Error saving motions" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the motion {0} ?" xml:space="preserve">
+    <value />
+  </data>
 </root>

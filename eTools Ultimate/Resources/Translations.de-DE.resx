@@ -348,6 +348,48 @@
   <data name="AIs assigned to {0}" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
+  <data name="No motions generated" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="No motions could be bound automatically." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="{0} motions have been bound automatically." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="{0} motion has been bound automatically." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Motions generated" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Unable to play motion" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Unable to find file: {0}" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Movers and motions saved" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Movers and motions have been successfully saved." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Error saving movers and motions" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Remove a motion" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the motion {0} from the mover {1} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Remove a mover" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the mover {0} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Willkommen</value>
     <comment>Welcome text on dashboard</comment>
@@ -1937,46 +1979,16 @@
   <data name="eTools Ultimate is a powerful editor for editing Flyff resource files." xml:space="preserve">
     <value>eTools Ultimate ist ein leistungsstarker Editor zum Bearbeiten von Flyff-Ressourcendateien.</value>
   </data>
-  <data name="No motions generated" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Motions saved" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="No motions could be bound automatically." type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Motions have been successfully saved." type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="{0} motions have been bound automatically." type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Error saving motions" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="{0} motion has been bound automatically." type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="Motions generated" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="Unable to play motion" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="Unable to find file: {0}" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="Movers and motions saved" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="Movers and motions have been successfully saved." type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="Error saving movers and motions" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="Remove a motion" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="Are you sure you want to remove the motion {0} from the mover {1} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="Remove a mover" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="Are you sure you want to remove the mover {0} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Are you sure you want to remove the motion {0} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
 </root>

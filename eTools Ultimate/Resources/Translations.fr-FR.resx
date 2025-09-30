@@ -347,6 +347,48 @@
   <data name="AIs assigned to {0}" xml:space="preserve">
     <value>AI assignées à {0}</value>
   </data>
+  <data name="No motions generated" xml:space="preserve">
+    <value>Aucune animation n'a été générée</value>
+  </data>
+  <data name="No motions could be bound automatically." xml:space="preserve">
+    <value>Aucune animation n’a pu être associée automatiquement.</value>
+  </data>
+  <data name="{0} motions have been bound automatically." xml:space="preserve">
+    <value>{0} animations ont été associées automatiquement</value>
+  </data>
+  <data name="{0} motion has been bound automatically." xml:space="preserve">
+    <value>{0} animation a été associée automatiquement</value>
+  </data>
+  <data name="Motions generated" xml:space="preserve">
+    <value>Animations générées</value>
+  </data>
+  <data name="Unable to play motion" xml:space="preserve">
+    <value>Impossible de jouer l’animation</value>
+  </data>
+  <data name="Unable to find file: {0}" xml:space="preserve">
+    <value>Impossible de trouver le fichier : {0}</value>
+  </data>
+  <data name="Movers and motions saved" xml:space="preserve">
+    <value>Movers et animations sauvegardées</value>
+  </data>
+  <data name="Movers and motions have been successfully saved." xml:space="preserve">
+    <value>Les movers et les animations ont été sauvegardées avec succès.</value>
+  </data>
+  <data name="Error saving movers and motions" xml:space="preserve">
+    <value>Erreur de sauvegarde des movers et animations</value>
+  </data>
+  <data name="Remove a motion" xml:space="preserve">
+    <value>Supprimer une animation</value>
+  </data>
+  <data name="Are you sure you want to remove the motion {0} from the mover {1} ?" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer l'animation {0} du mover {1} ?</value>
+  </data>
+  <data name="Remove a mover" xml:space="preserve">
+    <value>Supprimer un mover</value>
+  </data>
+  <data name="Are you sure you want to remove the mover {0} ?" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer le mover {0} ?</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Bienvenue</value>
     <comment>Welcome text on dashboard</comment>
@@ -1936,46 +1978,16 @@
   <data name="eTools Ultimate is a powerful editor for editing Flyff resource files." xml:space="preserve">
     <value>eTools Ultimate est un éditeur puissant pour l'édition de fichiers de ressources Flyff.</value>
   </data>
-  <data name="No motions generated" xml:space="preserve">
-    <value>Aucune animation n'a été générée</value>
+  <data name="Motions saved" xml:space="preserve">
+    <value>Animations sauvegardées</value>
   </data>
-  <data name="No motions could be bound automatically." xml:space="preserve">
-    <value>Aucune animation n’a pu être associée automatiquement.</value>
+  <data name="Motions have been successfully saved." xml:space="preserve">
+    <value>Les animations ont été sauvegardées avec succès.</value>
   </data>
-  <data name="{0} motions have been bound automatically." xml:space="preserve">
-    <value>{0} animations ont été associées automatiquement</value>
+  <data name="Error saving motions" xml:space="preserve">
+    <value>Erreur de sauvegarde des animations</value>
   </data>
-  <data name="{0} motion has been bound automatically." xml:space="preserve">
-    <value>{0} animation a été associée automatiquement</value>
-  </data>
-  <data name="Motions generated" xml:space="preserve">
-    <value>Animations générées</value>
-  </data>
-  <data name="Unable to play motion" xml:space="preserve">
-    <value>Impossible de jouer l’animation</value>
-  </data>
-  <data name="Unable to find file: {0}" xml:space="preserve">
-    <value>Impossible de trouver le fichier : {0}</value>
-  </data>
-  <data name="Movers and motions saved" xml:space="preserve">
-    <value>Movers et animations sauvegardées</value>
-  </data>
-  <data name="Movers and motions have been successfully saved." xml:space="preserve">
-    <value>Les movers et les animations ont été sauvegardées avec succès.</value>
-  </data>
-  <data name="Error saving movers and motions" xml:space="preserve">
-    <value>Erreur de sauvegarde des movers et animations</value>
-  </data>
-  <data name="Remove a motion" xml:space="preserve">
-    <value>Supprimer une animation</value>
-  </data>
-  <data name="Are you sure you want to remove the motion {0} from the mover {1} ?" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir supprimer l'animation {0} du mover {1} ?</value>
-  </data>
-  <data name="Remove a mover" xml:space="preserve">
-    <value>Supprimer un mover</value>
-  </data>
-  <data name="Are you sure you want to remove the mover {0} ?" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir supprimer le mover {0} ?</value>
+  <data name="Are you sure you want to remove the motion {0} ?" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer l'animation {0} ?</value>
   </data>
 </root>
