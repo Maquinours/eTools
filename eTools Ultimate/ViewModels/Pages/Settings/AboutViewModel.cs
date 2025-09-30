@@ -9,26 +9,9 @@ using Wpf.Ui.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class AboutViewModel : ObservableObject
+    public partial class AboutViewModel(ISnackbarService snackbarService, IStringLocalizer localizer) : ObservableObject
     {
-        private readonly ISnackbarService _snackbarService;
-        private readonly IStringLocalizer _localizer;
-
-        [ObservableProperty]
-        private string _appVersion = $"Version: {System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()}";
-
-        [ObservableProperty]
-        private string _appDescription;
-
-        [ObservableProperty]
-        private string _copyright = "© 2025 eTools Ultimate. All rights reserved.";
-
-        public AboutViewModel(ISnackbarService snackbarService, IStringLocalizer localizer)
-        {
-            _snackbarService = snackbarService;
-            _localizer = localizer;
-            _appDescription = localizer["eTools Ultimate is a powerful editor for editing Flyff resource files."] ?? "eTools Ultimate is a powerful editor for editing Flyff resource files.";
-        }
+        public string AppVersion => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? throw new InvalidOperationException("AboutViewModel::AppVersion exception : result is null");
 
         [RelayCommand]
         private async Task CheckForUpdates()
@@ -42,9 +25,9 @@ namespace eTools_Ultimate.ViewModels.Pages
 
                 if (update is null)
                 {
-                    _snackbarService.Show(
-                    title: _localizer["No update available"],
-                    message: _localizer["You already have the latest version."],
+                    snackbarService.Show(
+                    title: localizer["No update available"],
+                    message: localizer["You already have the latest version."],
                     appearance: ControlAppearance.Info,
                     icon: null,
                     timeout: TimeSpan.FromSeconds(3)
@@ -59,8 +42,8 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
             catch (Exception ex)
             {
-                _snackbarService.Show(
-                    title: _localizer["Update check failed"],
+                snackbarService.Show(
+                    title: localizer["Update check failed"],
                     message: ex.Message,
                     appearance: ControlAppearance.Danger,
                     icon: null,

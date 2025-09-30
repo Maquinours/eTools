@@ -38,8 +38,10 @@
                         Margin="0,5,0,0"
                         HorizontalAlignment="Center"
                         FontSize="14"
-                        Foreground="Gray"
-                        Text="{Binding AppVersion}" />
+                        Foreground="Gray">
+                        <Run Text="{i18n:StringLocalizer 'Version'}" />
+                        <Run Text="{Binding AppVersion, Mode=OneWay}" />
+                    </TextBlock>
                 </StackPanel>
 
                 <!--  Beschreibung  -->
@@ -53,7 +55,7 @@
 
                         <TextBlock
                             Margin="0,0,0,15"
-                            Text="{Binding AppDescription}"
+                            Text="{i18n:StringLocalizer 'eTools Ultimate is a powerful editor for editing Flyff resource files.'}"
                             TextWrapping="Wrap" />
 
                         <TextBlock Text="{i18n:StringLocalizer 'Our tool simplifies the editing process for developers.'}" TextWrapping="Wrap" />
@@ -262,7 +264,7 @@
                     Margin="0,25,0,0"
                     HorizontalAlignment="Center"
                     Foreground="Gray"
-                    Text="{Binding Copyright}" />
+                    Text="© 2025 eTools Ultimate. All rights reserved." />
             </StackPanel>
         </ScrollViewer>
     </Grid>
