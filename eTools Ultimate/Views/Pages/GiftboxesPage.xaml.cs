@@ -26,10 +26,5 @@ namespace eTools_Ultimate.Views.Pages
 
             }
         }
-
-        private void EditItemButton_Click(object sender, RoutedEventArgs e)
-        {
-            // This method is no longer used - we now use the Command in the ViewModel
-        }
     }
 } 

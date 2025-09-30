@@ -114,64 +114,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        [RelayCommand]
-        private async Task EditGiftboxItem(GiftBoxItem item)
-        {
-            try
-            {
-                // Debug: Log that the command was called
-                System.Diagnostics.Debug.WriteLine($"EditGiftboxItem command called for item: {item.Item?.Name}");
-
-                // First, try a simple message box to test if the command is working
-                var testResult = await contentDialogService.ShowSimpleDialogAsync(
-                    new SimpleContentDialogCreateOptions()
-                    {
-                        Title = "Test",
-                        Content = $"Edit command called for item: {item.Item?.Name}",
-                        CloseButtonText = "OK",
-                    }
-                );
-
-                System.Diagnostics.Debug.WriteLine("Test dialog shown successfully");
-
-                // Now try the actual edit dialog using ContentDialog instead of Window
-                System.Diagnostics.Debug.WriteLine("Creating EditGiftboxItemDialog as ContentDialog...");
-
-                // Create a simple content dialog for editing
-                var editResult = await contentDialogService.ShowSimpleDialogAsync(
-                    new SimpleContentDialogCreateOptions()
-                    {
-                        Title = $"Edit {item.Item?.Name}",
-                        Content = $"Editing item: {item.Item?.Name}\nQuantity: {item.Prop.NNum}\nProbability: {item.Prop.DwProbability}",
-                        PrimaryButtonText = "Save",
-                        CloseButtonText = "Cancel",
-                    }
-                );
-
-                System.Diagnostics.Debug.WriteLine($"Edit dialog result: {editResult}");
-
-                if (editResult == ContentDialogResult.Primary)
-                {
-                    // Dialog was saved, refresh the view
-                    GiftboxesView.Refresh();
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"Error in EditGiftboxItem: {ex.Message}");
-                System.Diagnostics.Debug.WriteLine($"Stack trace: {ex.StackTrace}");
-
-                // Show error dialog to user
-                await contentDialogService.ShowSimpleDialogAsync(
-                    new SimpleContentDialogCreateOptions()
-                    {
-                        Title = "Error",
-                        Content = $"An error occurred while opening the edit dialog: {ex.Message}",
-                        CloseButtonText = "OK",
-                    }
-                );
-            }
-        }
+        // TODO: add & remove giftbox
 
         [RelayCommand]
         private async Task Save()
