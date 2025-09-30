@@ -22,12 +22,15 @@ namespace eTools_Ultimate.Helpers
             if (value is not string identifier)
                 throw new InvalidOperationException("MoverIdentifierValidationRule::Validate exception : value is not a string");
 
+            if (!Script.TryGetNumberFromString(identifier, out int id))
+                return new ValidationResult(true, null);
+
             MoversService moversService = App.Services.GetRequiredService<MoversService>();
             IStringLocalizer<Translations> localizer = App.Services.GetRequiredService<IStringLocalizer<Translations>>();
             
             ICollectionView moversView = CollectionViewSource.GetDefaultView(moversService.Movers);
 
-            Mover? duplicate = moversService.Movers.FirstOrDefault(x => x.Identifier == identifier && x != moversView.CurrentItem);
+            Mover? duplicate = moversService.Movers.FirstOrDefault(x => x.Prop.DwId == id && x != moversView.CurrentItem);
 
             if (duplicate is not null)
                 return new ValidationResult(false, $"This identifier is already taken by {duplicate.Name}");
