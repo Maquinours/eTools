@@ -30,7 +30,7 @@ namespace eTools_Ultimate.Helpers
             ICollectionView textsView = CollectionViewSource.GetDefaultView(textsService.Texts);
 
             if (textsService.Texts.Any(x => x.Prop.DwId == id && x != textsView.CurrentItem))
-                return new ValidationResult(false, $"This identifier is already taken by another text.");
+                return new ValidationResult(false, localizer["This identifier is already taken by another text."]);
 
             return new ValidationResult(true, null);
         }

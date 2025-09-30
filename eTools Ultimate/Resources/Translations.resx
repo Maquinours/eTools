@@ -435,4 +435,13 @@
   <data name="Are you sure you want to remove the motion {0} ?" xml:space="preserve">
     <value />
   </data>
+  <data name="This identifier is already taken by another mover." xml:space="preserve">
+    <value />
+  </data>
+  <data name="This identifier is already taken by another text." xml:space="preserve">
+    <value />
+  </data>
+  <data name="This identifier is already taken by another motion." xml:space="preserve">
+    <value />
+  </data>
 </root>

@@ -1990,4 +1990,13 @@
   <data name="Are you sure you want to remove the motion {0} ?" xml:space="preserve">
     <value>Êtes-vous sûr de vouloir supprimer l'animation {0} ?</value>
   </data>
+  <data name="This identifier is already taken by another mover." xml:space="preserve">
+    <value>Cet identifiant est déjà pris par un autre mover.</value>
+  </data>
+  <data name="This identifier is already taken by another text." xml:space="preserve">
+    <value>Cet identifiant est déjà pris par un autre texte.</value>
+  </data>
+  <data name="This identifier is already taken by another motion." xml:space="preserve">
+    <value>Cet identifiant est déjà pris par une autre animation.</value>
+  </data>
 </root>

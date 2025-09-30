@@ -1991,4 +1991,13 @@
   <data name="Are you sure you want to remove the motion {0} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
+  <data name="This identifier is already taken by another mover." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="This identifier is already taken by another text." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="This identifier is already taken by another motion." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
 </root>
