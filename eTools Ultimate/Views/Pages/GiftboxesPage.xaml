@@ -240,13 +240,13 @@
                     Margin="0,0,10,0"
                     Appearance="Primary"
                     Command="{Binding AddGiftboxItemCommand}"
-                    Content="{i18n:StringLocalizer 'New Box'}"
+                    Content="{i18n:StringLocalizer 'Add'}"
                     Icon="Add24" />
                 <ui:Button
                     Margin="0,0,10,0"
                     Appearance="Danger"
                     Command="{Binding DeleteGiftboxCommand}"
-                    Content="{i18n:StringLocalizer 'Delete Box'}"
+                    Content="{i18n:StringLocalizer 'Remove'}"
                     Icon="Delete24" />
             </StackPanel>
 
