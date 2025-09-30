@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Services
 {
-    public class TextsService
+    public class TextsService(SettingsService settingsService, StringsService stringsService)
     {
         private const string STRING_ID_PREFIX = "IDS_TEXTCLIENT_INC_";
 
@@ -29,9 +29,6 @@ namespace eTools_Ultimate.Services
         public void Load()
         {
             this.Clear();
-
-            SettingsService settingsService = App.Services.GetRequiredService<SettingsService>();
-            StringsService stringsService = App.Services.GetRequiredService<StringsService>();
 
             string filePath = settingsService.Settings.TextsConfigFilePath ?? settingsService.Settings.DefaultTextsConfigFilePath;
 
@@ -68,9 +65,6 @@ namespace eTools_Ultimate.Services
 
         public void Save()
         {
-            SettingsService settingsService = App.Services.GetRequiredService<SettingsService>();
-            StringsService stringsService = App.Services.GetRequiredService<StringsService>();
-
             string filePath = settingsService.Settings.TextsConfigFilePath ?? settingsService.Settings.DefaultTextsConfigFilePath;
 
             using StreamWriter writer = new(filePath, false, new UTF8Encoding(false));
@@ -99,7 +93,6 @@ namespace eTools_Ultimate.Services
 
         public Text AddText()
         {
-            StringsService stringsService = App.Services.GetRequiredService<StringsService>();
             string szName = stringsService.GetNextStringIdentifier(STRING_ID_PREFIX);
             stringsService.GenerateNewString(szName);
 
