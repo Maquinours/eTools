@@ -352,7 +352,7 @@
                                             MinWidth="65"
                                             Margin="10,0,0,0"
                                             Padding="8,2"
-                                            Background="#2F70AF"
+                                            Appearance="Primary"
                                             Command="{Binding DataContext.AddGiftboxItemCommand, RelativeSource={RelativeSource AncestorType=Page}}"
                                             Content="{i18n:StringLocalizer 'Add item'}"
                                             FontSize="10"
