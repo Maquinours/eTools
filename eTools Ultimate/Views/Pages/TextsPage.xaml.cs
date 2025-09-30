@@ -29,9 +29,9 @@ namespace eTools_Ultimate.Views.Pages
         private void ViewModel_TextAdded(object? sender, TextAddedEventArgs e)
         {
             if (sender is not TextsViewModel)
-                throw new InvalidOperationException("TextClientPage::ViewModel_TextAdded exception : sender is not TextClientViewModel");
+                throw new InvalidOperationException("TextsPage::ViewModel_TextAdded exception : sender is not TextsViewModel");
             if (sender != DataContext)
-                throw new InvalidOperationException("TextClientPage::ViewModel_TextAdded exception : sender is not DataContext");
+                throw new InvalidOperationException("TextsPage::ViewModel_TextAdded exception : sender is not DataContext");
 
             TextsListView.ScrollIntoView(e.Text);
             //Dispatcher.InvokeAsync(() =>

@@ -137,10 +137,6 @@
     <value>Motions</value>
     <comment>Motions navigation card title</comment>
   </data>
-  <data name="TextClient" xml:space="preserve">
-    <value>Text Client</value>
-    <comment>Text Client navigation card title</comment>
-  </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
     <comment>Settings navigation card title</comment>
@@ -442,6 +438,9 @@
     <value />
   </data>
   <data name="This identifier is already taken by another motion." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Texts" xml:space="preserve">
     <value />
   </data>
 </root>

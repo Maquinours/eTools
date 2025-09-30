@@ -28,7 +28,7 @@
                 <ResourceDictionary Source="pack://application:,,,/ColorPicker;component/Styles/DefaultColorPickerStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <!--  DataTemplate for ListView Text Client  -->
-            <DataTemplate x:Key="TextClientItemTemplate">
+            <DataTemplate x:Key="TextItemTemplate">
                 <Grid Margin="4" Tag="{Binding}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -129,7 +129,7 @@
                     Background="Transparent"
                     BorderThickness="0"
                     IsSynchronizedWithCurrentItem="True"
-                    ItemTemplate="{StaticResource TextClientItemTemplate}"
+                    ItemTemplate="{StaticResource TextItemTemplate}"
                     ItemsSource="{Binding TextsView}"
                     SelectionMode="Single">
                     <ListView.ItemContainerStyle>

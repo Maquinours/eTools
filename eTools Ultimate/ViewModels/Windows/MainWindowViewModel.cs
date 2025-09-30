@@ -107,7 +107,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 //},
                 new NavigationViewItem()
                 {
-                    Content = localizer["TextClient"],
+                    Content = localizer["Texts"],
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Texts.png", 25, 25),
                     TargetPageType = typeof(TextsPage)
                 },

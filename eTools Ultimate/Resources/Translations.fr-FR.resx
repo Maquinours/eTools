@@ -132,9 +132,6 @@
   <data name="Motions" xml:space="preserve">
     <value>Animations</value>
   </data>
-  <data name="TextClient" xml:space="preserve">
-    <value>Client de texte</value>
-  </data>
   <data name="Settings" xml:space="preserve">
     <value>Paramètres</value>
   </data>
@@ -484,10 +481,6 @@
   <data name="Navigate to the couple page." xml:space="preserve">
     <value>Naviguer vers la page des couples.</value>
     <comment>Couple navigation card description</comment>
-  </data>
-  <data name="Text Client" xml:space="preserve">
-    <value>Client texte</value>
-    <comment>Text Client navigation card title</comment>
   </data>
   <data name="World" xml:space="preserve">
     <value>Monde</value>
@@ -1998,5 +1991,8 @@
   </data>
   <data name="This identifier is already taken by another motion." xml:space="preserve">
     <value>Cet identifiant est déjà pris par une autre animation.</value>
+  </data>
+  <data name="Texts" xml:space="preserve">
+    <value>Textes</value>
   </data>
 </root>

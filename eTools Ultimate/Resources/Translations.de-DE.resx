@@ -132,9 +132,6 @@
   <data name="Motions" xml:space="preserve">
     <value>Bewegungen</value>
   </data>
-  <data name="TextClient" xml:space="preserve">
-    <value>Text Client</value>
-  </data>
   <data name="Settings" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
@@ -485,10 +482,6 @@
   <data name="Navigate to the couple page." xml:space="preserve">
     <value>Navigiere zur Paar-Seite.</value>
     <comment>Couple navigation card description</comment>
-  </data>
-  <data name="Text Client" xml:space="preserve">
-    <value>Text Client</value>
-    <comment>Text Client navigation card title</comment>
   </data>
   <data name="World" xml:space="preserve">
     <value>Welt</value>
@@ -1998,6 +1991,9 @@
     <value />
   </data>
   <data name="This identifier is already taken by another motion." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Texts" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
 </root>
