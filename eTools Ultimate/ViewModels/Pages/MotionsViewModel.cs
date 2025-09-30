@@ -315,14 +315,8 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private void Add()
         {
-            string szName = stringsService.GetNextStringIdentifier("IDS_PROPMOTION_TXT_");
-            stringsService.AddString(szName, "");
-            string szDesc = stringsService.GetNextStringIdentifier("IDS_PROPMOTION_TXT_");
-            stringsService.AddString(szDesc, "");
+            Motion motion = motionsService.CreateMotion();
 
-            MotionProp prop = new(nVer: settingsService.Settings.ResourcesVersion, dwId: -1, dwMotion: 0, szIconName: "", dwPlay: 0, szName: szName, szDesc: szDesc);
-            Motion motion = new(prop);
-            motionsService.Motions.Add(motion);
             MotionsView.Refresh();
             MotionsView.MoveCurrentTo(motion);
         }

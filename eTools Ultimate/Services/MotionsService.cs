@@ -13,10 +13,15 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Services
 {
-    public class MotionsService(SettingsService settingsService)
+    public class MotionsService(SettingsService settingsService, StringsService stringsService)
     {
         private readonly ObservableCollection<Motion> _motions = [];
         public ObservableCollection<Motion> Motions => this._motions;
+
+        public string GetNextStringIdentifier()
+        {
+           return stringsService.GetNextStringIdentifier("IDS_PROPMOTION_TXT_");
+        }
 
         private void ClearMotions()
         {
@@ -89,6 +94,23 @@ namespace eTools_Ultimate.Services
                 writer.Write(prop.SzDesc);
                 writer.WriteLine();
             }
+        }
+
+        public Motion CreateMotion()
+        {
+            int dwId = (Motions.MaxBy(x => x.Prop.DwId)?.Prop.DwId ?? -1) + 1;
+
+            string szName = GetNextStringIdentifier();
+            stringsService.AddString(szName, "");
+            string szDesc = GetNextStringIdentifier();
+            stringsService.AddString(szDesc, "");
+
+            MotionProp prop = new(nVer: settingsService.Settings.ResourcesVersion, dwId: dwId, dwMotion: 0, szIconName: "", dwPlay: 0, szName: szName, szDesc: szDesc);
+            Motion motion = new(prop);
+
+            Motions.Add(motion);
+
+            return motion;
         }
     }
 }
