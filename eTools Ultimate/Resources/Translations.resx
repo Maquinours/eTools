@@ -451,4 +451,13 @@
   <data name="Text" xml:space="preserve">
     <value />
   </data>
+  <data name="No update available" xml:space="preserve">
+    <value />
+  </data>
+  <data name="You already have the latest version." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Update check failed" xml:space="preserve">
+    <value />
+  </data>
 </root>

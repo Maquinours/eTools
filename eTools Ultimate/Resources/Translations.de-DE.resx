@@ -1414,10 +1414,6 @@
     <value>Update jetzt installieren</value>
     <comment>Install update button text</comment>
   </data>
-  <data name="You already have the latest version!" xml:space="preserve">
-    <value>Sie haben bereits die neueste Version!</value>
-    <comment>No update available message</comment>
-  </data>
   <data name="Error checking for updates" xml:space="preserve">
     <value>Fehler beim Überprüfen der Updates</value>
     <comment>Error message title</comment>
@@ -1999,6 +1995,15 @@
     <value />
   </data>
   <data name="Text" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="No update available" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="You already have the latest version." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Update check failed" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
 </root>

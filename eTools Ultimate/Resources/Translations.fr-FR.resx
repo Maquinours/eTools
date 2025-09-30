@@ -1412,10 +1412,6 @@
     <value>Installer la mise à jour maintenant</value>
     <comment>Install update button text</comment>
   </data>
-  <data name="You already have the latest version!" xml:space="preserve">
-    <value>Vous avez déjà la dernière version !</value>
-    <comment>No update available message</comment>
-  </data>
   <data name="Error checking for updates" xml:space="preserve">
     <value>Erreur lors de la vérification des mises à jour</value>
     <comment>Error message title</comment>
@@ -1999,5 +1995,14 @@
   </data>
   <data name="Text" xml:space="preserve">
     <value>Texte</value>
+  </data>
+  <data name="No update available" xml:space="preserve">
+    <value>Aucune mise à jour disponible</value>
+  </data>
+  <data name="You already have the latest version." xml:space="preserve">
+    <value>Vous avez déjà la dernière version</value>
+  </data>
+  <data name="Update check failed" xml:space="preserve">
+    <value>Échec de la vérification des mises à jour</value>
   </data>
 </root>
