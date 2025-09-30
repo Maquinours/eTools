@@ -93,10 +93,12 @@ namespace eTools_Ultimate.Services
 
         public Text AddText()
         {
+            int dwId = (Texts.MaxBy(x => x.Prop.DwId)?.Prop.DwId ?? -1) + 1;
+
             string szName = stringsService.GetNextStringIdentifier(STRING_ID_PREFIX);
             stringsService.GenerateNewString(szName);
 
-            TextProp textProp = new(-1, unchecked((int)0xFFFFFFFF), szName);
+            TextProp textProp = new(dwId: dwId, dwColor: unchecked((int)0xFFFFFFFF), szName: szName);
             Text text = new(textProp);
 
             this.Texts.Add(text);
