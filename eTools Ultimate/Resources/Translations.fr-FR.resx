@@ -382,6 +382,54 @@
   <data name="Are you sure you want to remove the mover {0} ?" xml:space="preserve">
     <value>Êtes-vous sûr de vouloir supprimer le mover {0} ?</value>
   </data>
+  <data name="Motions saved" xml:space="preserve">
+    <value>Animations sauvegardées</value>
+  </data>
+  <data name="Motions have been successfully saved." xml:space="preserve">
+    <value>Les animations ont été sauvegardées avec succès.</value>
+  </data>
+  <data name="Error saving motions" xml:space="preserve">
+    <value>Erreur de sauvegarde des animations</value>
+  </data>
+  <data name="Are you sure you want to remove the motion {0} ?" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer l'animation {0} ?</value>
+  </data>
+  <data name="This identifier is already taken by another mover." xml:space="preserve">
+    <value>Cet identifiant est déjà pris par un autre mover.</value>
+  </data>
+  <data name="This identifier is already taken by another text." xml:space="preserve">
+    <value>Cet identifiant est déjà pris par un autre texte.</value>
+  </data>
+  <data name="This identifier is already taken by another motion." xml:space="preserve">
+    <value>Cet identifiant est déjà pris par une autre animation.</value>
+  </data>
+  <data name="Texts" xml:space="preserve">
+    <value>Textes</value>
+  </data>
+  <data name="ID of the mover" xml:space="preserve">
+    <value>Identifiant du mover</value>
+  </data>
+  <data name="Motion" xml:space="preserve">
+    <value>Animation</value>
+  </data>
+  <data name="Motion of the character mover that should be played." xml:space="preserve">
+    <value>Animation du mover du personnage qui doit être joué.</value>
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value>Texte</value>
+  </data>
+  <data name="No update available" xml:space="preserve">
+    <value>Aucune mise à jour disponible</value>
+  </data>
+  <data name="You already have the latest version." xml:space="preserve">
+    <value>Vous avez déjà la dernière version</value>
+  </data>
+  <data name="Update check failed" xml:space="preserve">
+    <value>Échec de la vérification des mises à jour</value>
+  </data>
+  <data name="Search..." xml:space="preserve">
+    <value>Rechercher...</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Bienvenue</value>
     <comment>Welcome text on dashboard</comment>
@@ -1956,52 +2004,19 @@
   <data name="eTools Ultimate is a powerful editor for editing Flyff resource files." xml:space="preserve">
     <value>eTools Ultimate est un éditeur puissant pour l'édition de fichiers de ressources Flyff.</value>
   </data>
-  <data name="Motions saved" xml:space="preserve">
-    <value>Animations sauvegardées</value>
+  <data name="Remove giftbox item" xml:space="preserve">
+    <value>Supprimer l'objet d'une boîte-cadeau</value>
   </data>
-  <data name="Motions have been successfully saved." xml:space="preserve">
-    <value>Les animations ont été sauvegardées avec succès.</value>
+  <data name="Are you sure you want to remove the item {0} from the giftbox {1} ?" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer l'objet {0} de la boîte-cadeau {1} ?</value>
   </data>
-  <data name="Error saving motions" xml:space="preserve">
-    <value>Erreur de sauvegarde des animations</value>
+  <data name="Giftboxes saved" xml:space="preserve">
+    <value>Boîtes-cadeaux sauvegardées</value>
   </data>
-  <data name="Are you sure you want to remove the motion {0} ?" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir supprimer l'animation {0} ?</value>
+  <data name="Giftboxes have been successfully saved." xml:space="preserve">
+    <value>Les boîtes-cadeaux ont été sauvegardées avec succès.</value>
   </data>
-  <data name="This identifier is already taken by another mover." xml:space="preserve">
-    <value>Cet identifiant est déjà pris par un autre mover.</value>
-  </data>
-  <data name="This identifier is already taken by another text." xml:space="preserve">
-    <value>Cet identifiant est déjà pris par un autre texte.</value>
-  </data>
-  <data name="This identifier is already taken by another motion." xml:space="preserve">
-    <value>Cet identifiant est déjà pris par une autre animation.</value>
-  </data>
-  <data name="Texts" xml:space="preserve">
-    <value>Textes</value>
-  </data>
-  <data name="ID of the mover" xml:space="preserve">
-    <value>Identifiant du mover</value>
-  </data>
-  <data name="Motion" xml:space="preserve">
-    <value>Animation</value>
-  </data>
-  <data name="Motion of the character mover that should be played." xml:space="preserve">
-    <value>Animation du mover du personnage qui doit être joué.</value>
-  </data>
-  <data name="Text" xml:space="preserve">
-    <value>Texte</value>
-  </data>
-  <data name="No update available" xml:space="preserve">
-    <value>Aucune mise à jour disponible</value>
-  </data>
-  <data name="You already have the latest version." xml:space="preserve">
-    <value>Vous avez déjà la dernière version</value>
-  </data>
-  <data name="Update check failed" xml:space="preserve">
-    <value>Échec de la vérification des mises à jour</value>
-  </data>
-  <data name="Search..." xml:space="preserve">
-    <value>Rechercher...</value>
+  <data name="Error saving giftboxes" xml:space="preserve">
+    <value>Erreur de sauvegarde des boîtes-cadeaux</value>
   </data>
 </root>

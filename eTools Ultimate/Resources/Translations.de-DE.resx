@@ -383,6 +383,54 @@
   <data name="Are you sure you want to remove the mover {0} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
+  <data name="Motions saved" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Motions have been successfully saved." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Error saving motions" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the motion {0} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="This identifier is already taken by another mover." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="This identifier is already taken by another text." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="This identifier is already taken by another motion." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Texts" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="ID of the mover" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Motion" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Motion of the character mover that should be played." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Text" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="No update available" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="You already have the latest version." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Update check failed" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Search..." xml:space="preserve">
+    <value>Suche...</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Willkommen</value>
     <comment>Welcome text on dashboard</comment>
@@ -1957,52 +2005,19 @@
   <data name="eTools Ultimate is a powerful editor for editing Flyff resource files." xml:space="preserve">
     <value>eTools Ultimate ist ein leistungsstarker Editor zum Bearbeiten von Flyff-Ressourcendateien.</value>
   </data>
-  <data name="Motions saved" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Remove giftbox item" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Motions have been successfully saved." type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Are you sure you want to remove the item {0} from the giftbox {1} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Error saving motions" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Giftboxes saved" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Are you sure you want to remove the motion {0} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Giftboxes have been successfully saved." type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="This identifier is already taken by another mover." type="System.Resources.ResXNullRef, System.Windows.Forms">
+  <data name="Error saving giftboxes" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
-  </data>
-  <data name="This identifier is already taken by another text." type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="This identifier is already taken by another motion." type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="Texts" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="ID of the mover" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="Motion" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="Motion of the character mover that should be played." type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="Text" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="No update available" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="You already have the latest version." type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="Update check failed" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
-  <data name="Search..." xml:space="preserve">
-    <value>Suche...</value>
   </data>
 </root>

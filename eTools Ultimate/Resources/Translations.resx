@@ -463,4 +463,19 @@
   <data name="Search..." xml:space="preserve">
     <value />
   </data>
+  <data name="Remove giftbox item" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the item {0} from the giftbox {1} ?" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Giftboxes saved" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Giftboxes have been successfully saved." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Error saving giftboxes" xml:space="preserve">
+    <value />
+  </data>
 </root>

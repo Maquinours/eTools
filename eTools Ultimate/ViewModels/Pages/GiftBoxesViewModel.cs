@@ -1,10 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using eTools_Ultimate.Views.Dialogs;
 using eTools_Ultimate.Views.Pages;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +22,7 @@ using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class GiftBoxesViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, GiftBoxesService giftBoxesService) : ObservableObject, INavigationAware
+    public partial class GiftBoxesViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, IStringLocalizer<Translations> localizer, GiftBoxesService giftBoxesService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -100,10 +102,10 @@ namespace eTools_Ultimate.ViewModels.Pages
             ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
                  new SimpleContentDialogCreateOptions()
                  {
-                     Title = "Remove giftbox item",
-                     Content = $"Are you sure you want to remove {item.Item?.Name} from the giftbox {giftbox.Item?.Name} ?",
-                     PrimaryButtonText = "Remove",
-                     CloseButtonText = "Cancel",
+                     Title = localizer["Remove giftbox item"],
+                     Content = String.Format(localizer["Are you sure you want to remove the item {0} from the giftbox {1} ?"], item.Item?.Name, giftbox.Item?.Name),
+                     PrimaryButtonText = localizer["Remove"],
+                     CloseButtonText = localizer["Cancel"],
                  }
                 );
 
@@ -124,8 +126,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                 await Task.Run(giftBoxesService.Save);
 
                 snackbarService.Show(
-                    title: "GiftBoxes saved",
-                    message: "GiftBoxes have been successfully saved.",
+                    title: localizer["Giftboxes saved"],
+                    message: localizer["Giftboxes have been successfully saved."],
                     appearance: ControlAppearance.Success,
                     icon: null,
                     timeout: TimeSpan.FromSeconds(3)
@@ -134,7 +136,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             catch (Exception ex)
             {
                 snackbarService.Show(
-                    title: "An error has occured while saving GiftBoxes",
+                    title: localizer["Error saving giftboxes"],
                     message: ex.Message,
                     appearance: ControlAppearance.Danger,
                     icon: null,
