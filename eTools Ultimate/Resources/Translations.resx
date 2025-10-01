@@ -478,4 +478,31 @@
   <data name="Error saving giftboxes" xml:space="preserve">
     <value />
   </data>
+  <data name="Remove an accessory" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the accessory {0} ?" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Remove an accessory's level" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the level {0} from the accessory {1} ?" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Remove an attribute from an accessory’s level" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the attribute {0} from the level {1} of the accessory {2}?" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Accessories saved" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Accessories have been successfully saved." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Error saving accessories" xml:space="preserve">
+    <value />
+  </data>
 </root>

@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using eTools_Ultimate.Views.Dialogs;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,7 +27,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         public AccessoryAbilityOptionData Level { get; } = level;
     }
 
-    public partial class AccessoriesViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, AccessoriesService accessoriesService, DefinesService definesService) : ObservableObject, INavigationAware
+    public partial class AccessoriesViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, IStringLocalizer<Translations> localizer, AccessoriesService accessoriesService, DefinesService definesService) : ObservableObject, INavigationAware
     {
         public event EventHandler<LevelAddedEventArgs>? LevelAdded;
 
@@ -108,10 +110,10 @@ namespace eTools_Ultimate.ViewModels.Pages
             ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
                 new SimpleContentDialogCreateOptions()
                 {
-                    Title = "Remove an accessory",
-                    Content = $"Are you sure you want to remove {accessory.Item?.Name ?? ""} ?",
-                    PrimaryButtonText = "Remove",
-                    CloseButtonText = "Cancel",
+                    Title = localizer["Remove an accessory"],
+                    Content = String.Format(localizer["Are you sure you want to remove the accessory {0} ?"], accessory.Item?.Name),
+                    PrimaryButtonText = localizer["Remove"],
+                    CloseButtonText = localizer["Cancel"],
                 }
             );
             if (result == ContentDialogResult.Primary)
@@ -129,10 +131,10 @@ namespace eTools_Ultimate.ViewModels.Pages
             ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
                  new SimpleContentDialogCreateOptions()
                  {
-                     Title = "Delete Level",
-                     Content = "Are you sure you want to delete this level?",
-                     PrimaryButtonText = "Delete",
-                     CloseButtonText = "Cancel",
+                     Title = localizer["Remove an accessory's level"],
+                     Content = String.Format(localizer["Are you sure you want to remove the level {0} from the accessory {1} ?"], abilityOptionData.NAbilityOption, accessory.Item?.Name),
+                     PrimaryButtonText = localizer["Remove"],
+                     CloseButtonText = localizer["Cancel"],
                  }
                 );
 
@@ -149,19 +151,20 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (AccessoriesView.CurrentItem is not Accessory accessory) return;
 
+            AccessoryAbilityOptionData abilityOptionData = accessory.AbilityOptionData.First(x => x.DstData.Contains(dstData));
+
             ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
                  new SimpleContentDialogCreateOptions()
                  {
-                     Title = "Delete Attribute",
-                     Content = "Are you sure you want to delete this attribute?",
-                     PrimaryButtonText = "Delete",
-                     CloseButtonText = "Cancel",
+                     Title = localizer["Remove an attribute from an accessory’s level"],
+                     Content = String.Format(localizer["Are you sure you want to remove the attribute {0} from the level {1} of the accessory {2}?"], dstData.DestIdentifier, abilityOptionData.NAbilityOption, accessory.Item?.Name),
+                     PrimaryButtonText = localizer["Remove"],
+                     CloseButtonText = localizer["Cancel"],
                  }
                 );
 
             if (result == ContentDialogResult.Primary)
             {
-                AccessoryAbilityOptionData abilityOptionData = accessory.AbilityOptionData.First(x => x.DstData.Contains(dstData));
                 abilityOptionData.DstData.Remove(dstData);
             }
         }
@@ -218,8 +221,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                 await Task.Run(accessoriesService.Save);
 
                 snackbarService.Show(
-                    title: "Accessories saved",
-                    message: "Accessories have been successfully saved.",
+                    title: localizer["Accessories saved"],
+                    message: localizer["Accessories have been successfully saved."],
                     appearance: ControlAppearance.Success,
                     icon: null,
                     timeout: TimeSpan.FromSeconds(3)
@@ -228,7 +231,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             catch (Exception ex)
             {
                 snackbarService.Show(
-                    title: "An error has occured while saving accessories.",
+                    title: localizer["Error saving accessories"],
                     message: ex.Message,
                     appearance: ControlAppearance.Danger,
                     icon: null,

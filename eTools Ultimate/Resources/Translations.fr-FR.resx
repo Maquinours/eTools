@@ -2019,4 +2019,31 @@
   <data name="Error saving giftboxes" xml:space="preserve">
     <value>Erreur de sauvegarde des boîtes-cadeaux</value>
   </data>
+  <data name="Remove an accessory" xml:space="preserve">
+    <value>Supprimer un accessoire</value>
+  </data>
+  <data name="Are you sure you want to remove the accessory {0} ?" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer l'accessoire {0} ?</value>
+  </data>
+  <data name="Remove an accessory's level" xml:space="preserve">
+    <value>Supprimer le niveau d'un accessoire</value>
+  </data>
+  <data name="Are you sure you want to remove the level {0} from the accessory {1} ?" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer le niveau {0} de l'accessoire {1} ?</value>
+  </data>
+  <data name="Remove an attribute from an accessory’s level" xml:space="preserve">
+    <value>Supprimer l'attribut du niveau d'un accessoire</value>
+  </data>
+  <data name="Are you sure you want to remove the attribute {0} from the level {1} of the accessory {2}?" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer l'attribut {0} du niveau {1} de l'accessoire {2} ?</value>
+  </data>
+  <data name="Accessories saved" xml:space="preserve">
+    <value>Accessoires sauvegardés</value>
+  </data>
+  <data name="Accessories have been successfully saved." xml:space="preserve">
+    <value>Les accessoires ont été sauvegardés avec succès.</value>
+  </data>
+  <data name="Error saving accessories" xml:space="preserve">
+    <value>Erreur de sauvegarde des accessoires</value>
+  </data>
 </root>
