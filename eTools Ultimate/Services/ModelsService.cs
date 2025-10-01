@@ -383,6 +383,14 @@ namespace eTools_Ultimate.Services
             }
         }
 
+        public void RemoveModel(Model model)
+        {
+            ModelBrace brace = GetBraceByModel(model);
+
+            model.Dispose();
+            brace.Children.Remove(model);
+        }
+
         public void SetBraceToModel(Model model, ModelBrace brace)
         {
             ModelBrace oldBrace = GetBraceByModel(model);

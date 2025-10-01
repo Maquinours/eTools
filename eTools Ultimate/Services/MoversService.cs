@@ -718,6 +718,9 @@ namespace eTools_Ultimate.Services
         {
             mover.Dispose();
             Movers.Remove(mover);
+
+            if (mover.Model is not null)
+                modelsService.RemoveModel(mover.Model);
         }
     }
 }
