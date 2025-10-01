@@ -2046,4 +2046,19 @@
   <data name="Error saving accessories" xml:space="preserve">
     <value>Erreur de sauvegarde des accessoires</value>
   </data>
+  <data name="Remove a text" xml:space="preserve">
+    <value>Supprimer un texte</value>
+  </data>
+  <data name="Are you sure you want to remove the text {0} ?" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer le texte {0} ?</value>
+  </data>
+  <data name="Texts saved" xml:space="preserve">
+    <value>Textes sauvegardés</value>
+  </data>
+  <data name="Texts have been successfully saved." xml:space="preserve">
+    <value>Les textes ont été sauvegardés avec succès.</value>
+  </data>
+  <data name="Error saving texts" xml:space="preserve">
+    <value>Erreur de sauvegarde des textes</value>
+  </data>
 </root>

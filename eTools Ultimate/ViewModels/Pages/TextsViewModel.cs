@@ -1,5 +1,7 @@
 ﻿using eTools_Ultimate.Models;
+using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +22,7 @@ public class TextAddedEventArgs(Text text)
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class TextsViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, TextsService textsService, DefinesService definesService, StringsService stringsService, SettingsService settingsService) : ObservableObject, INavigationAware
+    public partial class TextsViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, IStringLocalizer<Translations> localizer, TextsService textsService, DefinesService definesService, StringsService stringsService, SettingsService settingsService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -92,10 +94,10 @@ namespace eTools_Ultimate.ViewModels.Pages
             ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
                 new SimpleContentDialogCreateOptions()
                 {
-                    Title = "Delete text",
-                    Content = $"Are you sure you want to delete the text {text.Identifier} ?",
-                    PrimaryButtonText = "Delete",
-                    CloseButtonText = "Cancel",
+                    Title = localizer["Remove a text"],
+                    Content = String.Format(localizer["Are you sure you want to remove the text {0} ?"], text.Identifier),
+                    PrimaryButtonText = localizer["Remove"],
+                    CloseButtonText = localizer["Cancel"],
                 }
                 );
 
@@ -125,8 +127,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                 });
 
                 snackbarService.Show(
-                    title: "Texts saved",
-                    message: "Texts have been successfully saved.",
+                    title: localizer["Texts saved"],
+                    message: localizer["Texts have been successfully saved."],
                     appearance: ControlAppearance.Success,
                     icon: null,
                     timeout: TimeSpan.FromSeconds(3)
@@ -135,7 +137,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             catch (Exception ex)
             {
                 snackbarService.Show(
-                    title: "An error has occured while saving texts.",
+                    title: localizer["Error saving texts"],
                     message: ex.Message,
                     appearance: ControlAppearance.Danger,
                     icon: null,
