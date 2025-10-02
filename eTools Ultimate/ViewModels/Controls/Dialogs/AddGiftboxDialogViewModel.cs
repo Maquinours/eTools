@@ -11,18 +11,14 @@ using System.Windows.Data;
 
 namespace eTools_Ultimate.ViewModels.Controls.Dialogs
 {
-    public partial class AddGiftBoxItemDialogViewModel : ObservableObject
+    public partial class AddGiftboxDialogViewModel : ObservableObject
     {
         private string _searchText = string.Empty;
 
+        private GiftBoxesService _giftBoxesService = App.Services.GetRequiredService<GiftBoxesService>();
+
         [ObservableProperty]
         private ICollectionView _itemsView = new ListCollectionView(App.Services.GetRequiredService<ItemsService>().Items);
-
-        [ObservableProperty]
-        private int _quantity = 1;
-
-        [ObservableProperty]
-        private float _probability = 0;
 
         public string SearchText
         {
@@ -38,7 +34,7 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
             }
         }
 
-        public AddGiftBoxItemDialogViewModel()
+        public AddGiftboxDialogViewModel()
         {
             InitializeViewModel();
         }
@@ -51,6 +47,7 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
         private bool FilterItem(object obj)
         {
             if (obj is not Item item) return false;
+            if (_giftBoxesService.GiftBoxes.Any(gb => gb.Prop.DwItem == item.Prop.DwId)) return false;
             if (string.IsNullOrEmpty(this.SearchText)) return true;
             return item.Name.Contains(this.SearchText, StringComparison.CurrentCultureIgnoreCase) || item.Identifier.Contains(this.SearchText, StringComparison.CurrentCultureIgnoreCase);
         }

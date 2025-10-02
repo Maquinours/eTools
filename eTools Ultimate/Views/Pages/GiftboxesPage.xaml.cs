@@ -19,12 +19,7 @@ namespace eTools_Ultimate.Views.Pages
 
         private void GiftboxListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
-            var listView = sender as ListView;
-            if (listView != null && listView.SelectedItem != null)
-            {
-
-            }
+            GiftboxListView.ScrollIntoView(GiftboxListView.SelectedItem);
         }
     }
 } 

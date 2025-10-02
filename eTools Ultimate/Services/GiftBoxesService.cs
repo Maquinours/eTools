@@ -209,7 +209,7 @@ namespace eTools_Ultimate.Services
                             }
                             break;
                         }
-                        case GiftBoxType.GiftBox3:
+                    case GiftBoxType.GiftBox3:
                         {
                             foreach (GiftBoxItem item in items)
                             {
@@ -225,8 +225,8 @@ namespace eTools_Ultimate.Services
                             }
                             break;
                         }
-                        case GiftBoxType.GiftBox4:
-                        case GiftBoxType.GiftBox5:
+                    case GiftBoxType.GiftBox4:
+                    case GiftBoxType.GiftBox5:
                         {
                             ushort precision = (ushort)(type == GiftBoxType.GiftBox4 ? 100 : 10);
                             foreach (GiftBoxItem item in items)
@@ -245,7 +245,7 @@ namespace eTools_Ultimate.Services
                             }
                             break;
                         }
-                        case GiftBoxType.GiftBox6:
+                    case GiftBoxType.GiftBox6:
                         {
                             foreach (GiftBoxItem item in items)
                             {
@@ -268,6 +268,23 @@ namespace eTools_Ultimate.Services
                 }
                 writer.WriteLine('}');
             }
+        }
+
+        public GiftBox NewGiftbox(Item item)
+        {
+            GiftBoxProp prop = new(item.Prop.DwId);
+            GiftBox giftbox = new(prop, []);
+
+            GiftBoxes.Add(giftbox);
+
+            return giftbox;
+        }
+
+        public void RemoveGiftbox(GiftBox giftbox)
+        {
+            giftbox.Dispose();
+
+            GiftBoxes.Remove(giftbox);
         }
     }
 }

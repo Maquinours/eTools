@@ -71,6 +71,42 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
+        private async Task AddGiftbox()
+        {
+            AddGiftboxDialog contentDialog = new(contentDialogService.GetDialogHost());
+
+            if (await contentDialog.ShowAsync() == ContentDialogResult.Primary)
+            {
+                if (contentDialog.DataContext is not AddGiftboxDialogViewModel contentDialogViewModel) throw new InvalidOperationException("GiftboxesViewModel::AddGiftbox exception : contentDialog.DataContext is not AddGiftboxDialogViewModel");
+                if (contentDialogViewModel.ItemsView.CurrentItem is not Item item) return;
+                if (giftBoxesService.GiftBoxes.Any(gb => gb.Prop.DwItem == item.Prop.DwId)) return;
+
+                GiftBox giftbox = giftBoxesService.NewGiftbox(item);
+
+                GiftboxesView.Refresh();
+                GiftboxesView.MoveCurrentTo(giftbox);
+            }
+        }
+
+        [RelayCommand]
+        private async Task RemoveGiftbox()
+        {
+            if (GiftboxesView.CurrentItem is not GiftBox giftbox) return;
+
+            ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
+                 new SimpleContentDialogCreateOptions()
+                 {
+                     Title = localizer["Remove giftbox"],
+                     Content = String.Format(localizer["Are you sure you want to remove the giftbox {0} ?"], giftbox.Item?.Name),
+                     PrimaryButtonText = localizer["Remove"],
+                     CloseButtonText = localizer["Cancel"],
+                 }
+                );
+            if (result == ContentDialogResult.Primary)
+                giftBoxesService.RemoveGiftbox(giftbox);
+        }
+
+        [RelayCommand]
         private async Task AddGiftboxItem()
         {
             if (GiftboxesView.CurrentItem is not GiftBox giftbox) return;
