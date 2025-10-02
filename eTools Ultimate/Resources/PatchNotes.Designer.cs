@@ -61,74 +61,11 @@ namespace eTools_Ultimate.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die {&quot;version&quot;:&quot;Test Scroll Version&quot;,&quot;date&quot;:&quot;2024-07-20&quot;,&quot;modifications&quot;:[{&quot;text&quot;:&quot;TEST: This entry is for testing the scroll function&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;TEST: Another test entry to verify the scroll function&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;TEST: Long text to test the text wrapping function in the scroll view. This text should be long enough to demonstrate and test the text wrapping function.&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;TEST: Another long text entry to test the scroll function and the general user interface of the changelog dialo [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
+        ///   Sucht eine lokalisierte Zeichenfolge, die {&quot;version&quot;:&quot;0.1.0 (Alpha)&quot;,&quot;date&quot;:&quot;2025-10-02&quot;,&quot;developerText&quot;:&quot;Welcome to the public Alpha of eTools Ultimate! This early version focuses on core editors and a modern UI foundation. Expect rapid changes and frequent improvements while we gather your feedback.&quot;,&quot;imagePath&quot;:&quot;/Assets/Icons/PersonalizationIcon.png&quot;,&quot;categories&quot;:{&quot;added&quot;:[{&quot;text&quot;:&quot;Dashboard with quick navigation and localized UI&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;Editors: Movers, Motions, Giftboxes, Accessories, Texts&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;Search, filtering and [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
         /// </summary>
-        internal static string TestScrollVersion {
+        internal static string Version_0_1_0 {
             get {
-                return ResourceManager.GetString("TestScrollVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die {&quot;version&quot;:&quot;Version 1.0.0&quot;,&quot;date&quot;:&quot;2023-09-15&quot;,&quot;modifications&quot;:[{&quot;text&quot;:&quot;Initial release of eTools Ultimate&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;Basic functionality for editing items&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;Support for loading and saving Spec_Item.txt files&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;Dark mode UI implemented&quot;,&quot;type&quot;:0}]} ähnelt.
-        /// </summary>
-        internal static string Version_1_0_0 {
-            get {
-                return ResourceManager.GetString("Version_1_0_0", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die {&quot;version&quot;:&quot;Version 1.2.0&quot;,&quot;date&quot;:&quot;2023-11-15&quot;,&quot;modifications&quot;:[{&quot;text&quot;:&quot;Added support for analyzing defineItem.h to extract item IDs&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;Added support for analyzing mdlDyna.inc to obtain model filenames&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;Reorganization of the General area with new field order&quot;,&quot;type&quot;:1},{&quot;text&quot;:&quot;Moved icon display from Visual Properties to the General area&quot;,&quot;type&quot;:1},{&quot;text&quot;:&quot;Improved image loading with support for DDS files&quot;,&quot;type&quot;:4},{&quot;text&quot;:&quot;Changed tradeable control to a modern toggle [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
-        /// </summary>
-        internal static string Version_1_2_0 {
-            get {
-                return ResourceManager.GetString("Version_1_2_0", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die {&quot;version&quot;:&quot;Version 1.2.3&quot;,&quot;date&quot;:&quot;2024-06-20&quot;,&quot;modifications&quot;:[{&quot;text&quot;:&quot;Extended DDS texture preview with zoom controls&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;Added detailed tooltips explaining DDS format options&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;Improved transparency handling for DDS textures with pink backgrounds&quot;,&quot;type&quot;:4},{&quot;text&quot;:&quot;Implemented intelligent format detection for better DDS rendering&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;Added pixel-perfect rendering for clearer icon display&quot;,&quot;type&quot;:4},{&quot;text&quot;:&quot;Consistent dark mode formatting across all dia [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
-        /// </summary>
-        internal static string Version_1_2_3 {
-            get {
-                return ResourceManager.GetString("Version_1_2_3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die {&quot;version&quot;:&quot;Version 1.2.4&quot;,&quot;date&quot;:&quot;2024-06-25&quot;,&quot;modifications&quot;:[{&quot;text&quot;:&quot;Completely redesigned DDS texture preview with extended zoom options (1x-10x)&quot;,&quot;type&quot;:4},{&quot;text&quot;:&quot;Optimized display of DDS textures with pixel-perfect scaling&quot;,&quot;type&quot;:4},{&quot;text&quot;:&quot;Dynamic size adjustment of the preview window based on zoom level and image content&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;Improved dialog user interface with clearer arrangement and better accessibility&quot;,&quot;type&quot;:4},{&quot;text&quot;:&quot;Removed duplicate close buttons in the preview window&quot;, [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
-        /// </summary>
-        internal static string Version_1_2_4 {
-            get {
-                return ResourceManager.GetString("Version_1_2_4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die {&quot;version&quot;:&quot;Version 1.2.5&quot;,&quot;date&quot;:&quot;2024-07-02&quot;,&quot;modifications&quot;:[{&quot;text&quot;:&quot;Converted table layout to a compact grid layout in the &apos;Collect&apos; tab&quot;,&quot;type&quot;:1},{&quot;text&quot;:&quot;Implemented SortableGridItem component for drag-and-drop functionality in grid format&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;Optimized item display with two-column layout for better space efficiency&quot;,&quot;type&quot;:4},{&quot;text&quot;:&quot;Redesigned probability fields to display inline with element names&quot;,&quot;type&quot;:1},{&quot;text&quot;:&quot;Fixed data loading issues by passing availableItems directly th [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
-        /// </summary>
-        internal static string Version_1_2_5 {
-            get {
-                return ResourceManager.GetString("Version_1_2_5", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die {&quot;version&quot;:&quot;Version 1.3.0&quot;,&quot;date&quot;:&quot;2026-08-19&quot;,&quot;developerText&quot;:&quot;This major update represents a complete overhaul of the eTools Ultimate interface. We&apos;ve modernized the entire application with the WPF UI library, bringing a consistent and professional look across all editor pages. The new design improves usability while maintaining all existing functionality.&quot;,&quot;imagePath&quot;:&quot;/Assets/Icons/PersonalizationIcon.png&quot;,&quot;categories&quot;:{&quot;added&quot;:[{&quot;text&quot;:&quot;Complete UI redesign with modern WPF UI library integration&quot;,&quot;type [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
-        /// </summary>
-        internal static string Version_1_3_0 {
-            get {
-                return ResourceManager.GetString("Version_1_3_0", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die {&quot;version&quot;:&quot;Version 1.3.1&quot;,&quot;date&quot;:&quot;2026-08-19&quot;,&quot;developerText&quot;:&quot;This update focuses on UI consistency and bug fixes. We&apos;ve streamlined the interface by removing unnecessary filter buttons and ensuring all pages follow the same design patterns. The header improvements make it much easier to identify items at a glance.&quot;,&quot;imagePath&quot;:&quot;/Assets/Icons/AboutIcon.png&quot;,&quot;categories&quot;:{&quot;added&quot;:[],&quot;changed&quot;:[{&quot;text&quot;:&quot;Removed Filter buttons from AccessoryPage, HonorPage, TerrainObjectPage, and WorldPage&quot;,&quot;type&quot;:1},{&quot;text&quot; [Rest der Zeichenfolge wurde abgeschnitten]&quot;; ähnelt.
-        /// </summary>
-        internal static string Version_1_3_1 {
-            get {
-                return ResourceManager.GetString("Version_1_3_1", resourceCulture);
+                return ResourceManager.GetString("Version_0_1_0", resourceCulture);
             }
         }
     }

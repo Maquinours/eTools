@@ -2071,4 +2071,83 @@
   <data name="Are you sure you want to remove the giftbox {0} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
+  <data name="Create giftbox" xml:space="preserve">
+    <value>Giftbox erstellen</value>
+    <comment>Button text for creating a new giftbox</comment>
+  </data>
+  <data name="Motion Editor" xml:space="preserve">
+    <value>Bewegungs-Editor</value>
+  </data>
+  <data name="Motion Details" xml:space="preserve">
+    <value>Bewegungsdetails</value>
+  </data>
+  <data name="Unique identifier for the motion" xml:space="preserve">
+    <value>Eindeutiger Bezeichner der Bewegung</value>
+  </data>
+  <data name="Motion" xml:space="preserve">
+    <value>Bewegung</value>
+  </data>
+  <data name="Motion of the character mover that should be played." xml:space="preserve">
+    <value>Bewegung des Charakter-Movers, die abgespielt werden soll.</value>
+  </data>
+  <data name="Description of the motion" xml:space="preserve">
+    <value>Beschreibung der Bewegung</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>Symbol</value>
+  </data>
+  <data name="Icon image displayed for the motion" xml:space="preserve">
+    <value>Symbolbild, das für die Bewegung angezeigt wird</value>
+  </data>
+  <data name="Play type" xml:space="preserve">
+    <value>Wiedergabetyp</value>
+  </data>
+  <data name="Behavior of the animation when it ends." xml:space="preserve">
+    <value>Verhalten der Animation, wenn sie endet.</value>
+  </data>
+  <data name="One Time" xml:space="preserve">
+    <value>Einmal</value>
+  </data>
+  <data name="One Time Keep" xml:space="preserve">
+    <value>Einmal beibehalten</value>
+  </data>
+  <data name="Loop" xml:space="preserve">
+    <value>Schleife</value>
+  </data>
+  <data name="Model Preview" xml:space="preserve">
+    <value>Modellvorschau</value>
+  </data>
+  <data name="Play the animation" xml:space="preserve">
+    <value>Animation abspielen</value>
+  </data>
+  <data name="Change model gender" xml:space="preserve">
+    <value>Modellgeschlecht ändern</value>
+  </data>
+  <data name="Accessory:" xml:space="preserve">
+    <value>Zubehör:</value>
+  </data>
+  <data name="New Level" xml:space="preserve">
+    <value>Neues Level</value>
+  </data>
+  <data name="Add Attribute" xml:space="preserve">
+    <value>Attribut hinzufügen</value>
+  </data>
+  <data name="Delete Attribute" xml:space="preserve">
+    <value>Attribut löschen</value>
+  </data>
+  <data name="Delete Level" xml:space="preserve">
+    <value>Level löschen</value>
+  </data>
+  <data name="Level {0}" xml:space="preserve">
+    <value>Level {0}</value>
+  </data>
+  <data name="Click to change color" xml:space="preserve">
+    <value>Klicken, um die Farbe zu ändern</value>
+  </data>
+  <data name="Unique identifier for the text entry" xml:space="preserve">
+    <value>Eindeutiger Bezeichner des Texteintrags</value>
+  </data>
+  <data name="Text displayed in game" xml:space="preserve">
+    <value>Im Spiel angezeigter Text</value>
+  </data>
 </root>

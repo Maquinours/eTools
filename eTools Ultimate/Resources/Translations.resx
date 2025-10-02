@@ -529,4 +529,8 @@
   <data name="Are you sure you want to remove the giftbox {0} ?" xml:space="preserve">
     <value />
   </data>
+  <data name="Create giftbox" xml:space="preserve">
+    <value>Create giftbox</value>
+    <comment>Button text for creating a new giftbox</comment>
+  </data>
 </root>
