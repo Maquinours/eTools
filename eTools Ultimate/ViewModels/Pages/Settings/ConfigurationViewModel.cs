@@ -123,68 +123,68 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private void SelectResourcesFolder()
         {
-            settingsService.Settings.ResourcesFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.ResourcesFolderPath, title: Resources.Texts.SelectResourcesFolder) ?? "";
+            settingsService.Settings.ResourcesFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.ResourcesFolderPath, title: Resources.Texts.SelectResourcesFolder) ?? settingsService.Settings.ResourcesFolderPath;
         }
 
         [RelayCommand]
         private void SelectClientFolder()
         {
-            settingsService.Settings.ClientFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.ClientFolderPath, title: Resources.Texts.SelectClientFolder) ?? "";
+            settingsService.Settings.ClientFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.ClientFolderPath, title: Resources.Texts.SelectClientFolder) ?? settingsService.Settings.ClientFolderPath;
         }
 
         // Not used for now, should be used for skills and other resources
         [RelayCommand]
         private void SelectIconsFolder()
         {
-            settingsService.Settings.IconsFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.IconsFolderPath, title: Resources.Texts.SelectIconsFolder);
+            settingsService.Settings.IconsFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.IconsFolderPath, title: Resources.Texts.SelectIconsFolder) ?? settingsService.Settings.IconsFolderPath;
         }
 
         [RelayCommand]
         private void SelectTexturesFolder()
         {
-            settingsService.Settings.TexturesFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.TexturesFolderPath ?? settingsService.Settings.DefaultTexturesFolderPath, title: Resources.Texts.SelectTexturesFolder);
+            settingsService.Settings.TexturesFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.TexturesFolderPath ?? settingsService.Settings.DefaultTexturesFolderPath, title: Resources.Texts.SelectTexturesFolder) ?? settingsService.Settings.TexturesFolderPath;
         }
 
         [RelayCommand]
         private void SelectSoundsFolder()
         {
-            settingsService.Settings.SoundsFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.SoundsFolderPath ?? settingsService.Settings.DefaultSoundsFolderPath, title: Resources.Texts.SelectSoundsFolder);
+            settingsService.Settings.SoundsFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.SoundsFolderPath ?? settingsService.Settings.DefaultSoundsFolderPath, title: Resources.Texts.SelectSoundsFolder) ?? settingsService.Settings.SoundsFolderPath;
         }
 
         [RelayCommand]
         private void SelectItemIconsFolder()
         {
-            settingsService.Settings.ItemIconsFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.ItemIconsFolderPath ?? settingsService.Settings.DefaultItemIconsFolderPath, title: Resources.Texts.SelectItemIconsFolder);
+            settingsService.Settings.ItemIconsFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.ItemIconsFolderPath ?? settingsService.Settings.DefaultItemIconsFolderPath, title: Resources.Texts.SelectItemIconsFolder) ?? settingsService.Settings.ItemIconsFolderPath;
         }
 
         [RelayCommand]
         private void SelectPropItemFile()
         {
-            settingsService.Settings.PropItemFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropItemFilePath ?? settingsService.Settings.DefaultPropItemFilePath, title: Resources.Texts.SelectItemPropFile);
+            settingsService.Settings.PropItemFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropItemFilePath ?? settingsService.Settings.DefaultPropItemFilePath, title: Resources.Texts.SelectItemPropFile) ?? settingsService.Settings.PropItemFilePath;
         }
 
         [RelayCommand]
         private void SelectPropItemTxtFile()
         {
-            settingsService.Settings.PropItemTxtFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropItemTxtFilePath ?? settingsService.Settings.DefaultPropItemTxtFilePath, title: Resources.Texts.SelectItemTextFile);
+            settingsService.Settings.PropItemTxtFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropItemTxtFilePath ?? settingsService.Settings.DefaultPropItemTxtFilePath, title: Resources.Texts.SelectItemTextFile) ?? settingsService.Settings.PropItemTxtFilePath;
         }
 
         [RelayCommand]
         private void SelectSoundsConfig()
         {
-            settingsService.Settings.SoundsConfigFilePath = FileFolderSelector.SelectFile(settingsService.Settings.SoundsConfigFilePath ?? settingsService.Settings.DefaultSoundsConfigFilePath, title: Resources.Texts.SelectSoundConfigFile);
+            settingsService.Settings.SoundsConfigFilePath = FileFolderSelector.SelectFile(settingsService.Settings.SoundsConfigFilePath ?? settingsService.Settings.DefaultSoundsConfigFilePath, title: Resources.Texts.SelectSoundConfigFile) ?? settingsService.Settings.SoundsConfigFilePath;
         }
 
         [RelayCommand]
         private void SelectPropMoverFile()
         {
-            settingsService.Settings.PropMoverFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropMoverFilePath ?? settingsService.Settings.DefaultPropMoverFilePath, title: Resources.Texts.SelectMoverPropFile);
+            settingsService.Settings.PropMoverFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropMoverFilePath ?? settingsService.Settings.DefaultPropMoverFilePath, title: Resources.Texts.SelectMoverPropFile) ?? settingsService.Settings.PropMoverFilePath;
         }
 
         [RelayCommand]
         private void SelectPropMoverTextFile()
         {
-            settingsService.Settings.PropMoverTxtFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropMoverTxtFilePath ?? settingsService.Settings.DefaultPropMoverTxtFilePath, title: Resources.Texts.SelectMoverTextFile);
+            settingsService.Settings.PropMoverTxtFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropMoverTxtFilePath ?? settingsService.Settings.DefaultPropMoverTxtFilePath, title: Resources.Texts.SelectMoverTextFile) ?? settingsService.Settings.PropMoverTxtFilePath;
         }
 
         [RelayCommand]
