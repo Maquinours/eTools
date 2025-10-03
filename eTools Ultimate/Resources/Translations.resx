@@ -533,4 +533,7 @@
     <value>Create giftbox</value>
     <comment>Button text for creating a new giftbox</comment>
   </data>
+  <data name="Latest updates and improvements" xml:space="preserve">
+    <value />
+  </data>
 </root>

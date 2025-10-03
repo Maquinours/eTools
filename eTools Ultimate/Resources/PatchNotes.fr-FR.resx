@@ -1,5 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -59,6 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Version_0_1_0" xml:space="preserve">
-    <value>{"version":"0.1.0 (Alpha)","date":"2025-10-02","developerText":"Bienvenue dans l’Alpha publique d’eTools Ultimate ! Cette première version se concentre sur les éditeurs principaux et une base d’interface moderne. Attendez‑vous à des changements rapides et des améliorations fréquentes pendant que nous recueillons vos retours.","imagePath":"/Assets/Icons/PersonalizationIcon.png","categories":{"added":[{"text":"Tableau de bord avec navigation rapide et interface localisée","type":0},{"text":"Éditeurs : Movers, Animations, Boîtes‑cadeaux, Accessoires, Textes","type":0},{"text":"Recherche, filtres et mises en page en deux volets dans les éditeurs","type":0},{"text":"Internationalisation (Anglais, Allemand, Français)","type":0},{"text":"Pages Paramètres : Configuration, Personnalisation, À propos","type":0},{"text":"Vérificateur de mise à jour avec intégration GitHub","type":0}],"changed":[{"text":"Style d’interface unifié (clair/sombre/fort contraste)","type":1},{"text":"Boutons cohérents (Annuler, Rétablir, Enregistrer, Ajouter, Supprimer, Expert)","type":1}],"improved":[{"text":"Chargements plus rapides et listes plus fluides via virtualisation","type":4},{"text":"Formulaires plus clairs avec sections groupées et info‑bulles","type":4}],"fixed":[{"text":"Corrections générales de stabilité pour le chargement et les liaisons","type":3}]} }</value>
+    <value>{"version":"0.1.0 (Alpha)","date":"2025-10-02","developerText":"Bienvenue dans l’Alpha publique d’eTools Ultimate ! Cette première version se concentre sur les éditeurs principaux et une base d’interface moderne. Attendez‑vous à des changements rapides et des améliorations fréquentes pendant que nous recueillons vos retours.","imagePath":"/Assets/Icons/PersonalizationIcon.png","categories":{"added":[{"text":"Tableau de bord avec navigation rapide et interface localisée","type":0},{"text":"Éditeurs : Movers, Animations, Boîtes‑cadeaux, Accessoires, Textes","type":0},{"text":"Recherche, ajout, suppression, sauvegarde","type":0},{"text":"Internationalisation (Anglais, Allemand, Français)","type":0}, {"text":"Thèmes (clair, sombre, haut contraste)"},{"text":"Pages Paramètres : Configuration, Personnalisation, À propos","type":0},{"text":"Vérificateur de mise à jour avec intégration GitHub","type":0}]} }</value>
   </data>
 </root>

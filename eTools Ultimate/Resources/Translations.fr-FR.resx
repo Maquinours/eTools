@@ -487,6 +487,15 @@
   <data name="Error saving texts" xml:space="preserve">
     <value>Erreur de sauvegarde des textes</value>
   </data>
+  <data name="Add giftbox" xml:space="preserve">
+    <value>Ajouter une boîte-cadeau</value>
+  </data>
+  <data name="Remove giftbox" xml:space="preserve">
+    <value>Supprimer une boîte-cadeau</value>
+  </data>
+  <data name="Are you sure you want to remove the giftbox {0} ?" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer la boîte-cadeau {0} ?</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Bienvenue</value>
     <comment>Welcome text on dashboard</comment>
@@ -2061,13 +2070,7 @@
   <data name="eTools Ultimate is a powerful editor for editing Flyff resource files." xml:space="preserve">
     <value>eTools Ultimate est un éditeur puissant pour l'édition de fichiers de ressources Flyff.</value>
   </data>
-  <data name="Add giftbox" xml:space="preserve">
-    <value>Ajouter une boîte-cadeau</value>
-  </data>
-  <data name="Remove giftbox" xml:space="preserve">
-    <value>Supprimer une boîte-cadeau</value>
-  </data>
-  <data name="Are you sure you want to remove the giftbox {0} ?" xml:space="preserve">
-    <value>Êtes-vous sûr de vouloir supprimer la boîte-cadeau {0} ?</value>
+  <data name="Latest updates and improvements" xml:space="preserve">
+    <value>Dernières mises à jour et améliorations</value>
   </data>
 </root>

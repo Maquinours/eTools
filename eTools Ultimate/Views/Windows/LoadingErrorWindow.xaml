@@ -141,7 +141,7 @@
                 Padding="15,0"
                 Appearance="Primary"
                 Click="Button_Click"
-                Content="{i18n:StringLocalizer 'Open Folder'}"
+                Content="{i18n:StringLocalizer 'Open configuration'}"
                 Icon="Folder24" />
             <ui:Button
                 Height="36"

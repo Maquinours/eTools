@@ -13,6 +13,7 @@
                                      IsDesignTimeCreatable=False}"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    CloseButtonText="{i18n:StringLocalizer 'Close'}"
     mc:Ignorable="d">
     <ui:ContentDialog.Resources>
         <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:PatchNotesDialog}" />
@@ -112,13 +113,14 @@
         <converters:PatchModificationTypeToSymbolConverter x:Key="PatchModificationTypeToSymbolConverter" />
         <converters:PatchModificationTypeToForegroundConverter x:Key="PatchModificationTypeToForegroundConverter" />
         <converters:PatchModificationTypeToTextConverter x:Key="PatchModificationTypeToTextConverter" />
-        
-        <!-- Visibility Converters -->
+
+        <!--  Visibility Converters  -->
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter" />
         <converters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter" />
         <converters:InverseObjectToVisibilityConverter x:Key="InverseObjectToVisibilityConverter" />
         <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
+        <converters:ArrayToVisibilityConverter x:Key="ArrayToVisibilityConverter" />
     </ui:ContentDialog.Resources>
 
     <Grid>
@@ -134,28 +136,28 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <!-- Banner -->
-            <Border 
+            <!--  Banner  -->
+            <Border
                 Grid.Row="0"
                 Margin="0,0,0,20"
+                Padding="20,16"
                 Background="{DynamicResource AccentFillColorDefaultBrush}"
-                CornerRadius="8"
-                Padding="20,16">
+                CornerRadius="8">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    
-                    <!-- Icon -->
+
+                    <!--  Icon  -->
                     <ui:SymbolIcon
                         Grid.Column="0"
                         Margin="0,0,16,0"
                         FontSize="32"
                         Foreground="{DynamicResource TextOnAccentFillColorPrimaryBrush}"
                         Symbol="DocumentText24" />
-                    
-                    <!-- Title and Subtitle -->
+
+                    <!--  Title and Subtitle  -->
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
                         <TextBlock
                             FontSize="24"
@@ -167,7 +169,7 @@
                             Margin="0,4,0,0"
                             FontSize="14"
                             Foreground="{DynamicResource TextOnAccentFillColorSecondaryBrush}"
-                            Text="{i18n:StringLocalizer 'Neueste Updates und Verbesserungen'}"
+                            Text="{i18n:StringLocalizer 'Latest updates and improvements'}"
                             TextWrapping="Wrap" />
                     </StackPanel>
                 </Grid>
@@ -216,31 +218,31 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <!-- Version Banner -->
-                                    <Border 
+                                    <!--  Version Banner  -->
+                                    <Border
                                         Grid.Row="0"
                                         Margin="0,0,0,12"
+                                        Padding="12,8"
                                         Background="{DynamicResource ControlFillColorDefaultBrush}"
                                         BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                                         BorderThickness="1"
-                                        CornerRadius="6"
-                                        Padding="12,8">
+                                        CornerRadius="6">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto" />
                                                 <ColumnDefinition Width="*" />
                                                 <ColumnDefinition Width="Auto" />
                                             </Grid.ColumnDefinitions>
-                                            
-                                            <!-- Version Icon -->
+
+                                            <!--  Version Icon  -->
                                             <ui:SymbolIcon
                                                 Grid.Column="0"
                                                 Margin="0,0,12,0"
                                                 FontSize="20"
                                                 Foreground="{DynamicResource AccentFillColorDefaultBrush}"
                                                 Symbol="Tag24" />
-                                            
-                                            <!-- Version Info -->
+
+                                            <!--  Version Info  -->
                                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                                 <TextBlock
                                                     FontSize="16"
@@ -249,8 +251,8 @@
                                                     Text="{Binding Version, Mode=OneWay}"
                                                     TextWrapping="Wrap" />
                                             </StackPanel>
-                                            
-                                            <!-- Date -->
+
+                                            <!--  Date  -->
                                             <TextBlock
                                                 Grid.Column="2"
                                                 VerticalAlignment="Center"
@@ -259,9 +261,9 @@
                                                 Text="{Binding Date, Mode=OneWay, StringFormat='dd.MM.yyyy'}" />
                                         </Grid>
                                     </Border>
-                                    <!-- Developer Text -->
-                                    <TextBlock 
-                                        Grid.Row="1" 
+                                    <!--  Developer Text  -->
+                                    <TextBlock
+                                        Grid.Row="1"
                                         Margin="16,8,16,8"
                                         FontSize="14"
                                         FontStyle="Italic"
@@ -269,27 +271,27 @@
                                         Text="{Binding DeveloperText, Mode=OneWay}"
                                         TextWrapping="Wrap"
                                         Visibility="{Binding DeveloperText, Converter={StaticResource StringToVisibilityConverter}}" />
-                                    
-                                    <!-- Image -->
-                                    <Image 
-                                        Grid.Row="2" 
-                                        Margin="16,8,16,8"
+
+                                    <!--  Image  -->
+                                    <Image
+                                        Grid.Row="2"
                                         Height="60"
+                                        Margin="16,8,16,8"
+                                        HorizontalAlignment="Left"
                                         Source="{Binding ImagePath, Mode=OneWay}"
                                         Stretch="Uniform"
-                                        HorizontalAlignment="Left"
                                         Visibility="{Binding ImagePath, Converter={StaticResource StringToVisibilityConverter}}" />
-                                    
-                                    <!-- Categories -->
-                                    <StackPanel Grid.Row="3" Margin="16,8,0,0" Visibility="{Binding Categories, Converter={StaticResource ObjectToVisibilityConverter}}">
-                                        <!-- Added -->
-                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Added, Converter={StaticResource ObjectToVisibilityConverter}}">
-                                            <TextBlock 
-                                                FontSize="16" 
-                                                FontWeight="SemiBold" 
+
+                                    <!--  Categories  -->
+                                    <StackPanel Grid.Row="3" Margin="16,8,0,0">
+                                        <!--  Added  -->
+                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Added, Converter={StaticResource ArrayToVisibilityConverter}}">
+                                            <TextBlock
+                                                Margin="0,0,0,8"
+                                                FontSize="16"
+                                                FontWeight="SemiBold"
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Text="{i18n:StringLocalizer 'Added'}"
-                                                Margin="0,0,0,8" />
+                                                Text="{i18n:StringLocalizer 'Added'}" />
                                             <ItemsControl ItemsSource="{Binding Categories.Added, Mode=OneWay}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
@@ -317,15 +319,15 @@
                                                 </ItemsControl.ItemTemplate>
                                             </ItemsControl>
                                         </StackPanel>
-                                        
-                                        <!-- Changed -->
-                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Changed, Converter={StaticResource ObjectToVisibilityConverter}}">
-                                            <TextBlock 
-                                                FontSize="16" 
-                                                FontWeight="SemiBold" 
+
+                                        <!--  Changed  -->
+                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Changed, Converter={StaticResource ArrayToVisibilityConverter}}">
+                                            <TextBlock
+                                                Margin="0,0,0,8"
+                                                FontSize="16"
+                                                FontWeight="SemiBold"
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Text="{i18n:StringLocalizer 'Changed'}"
-                                                Margin="0,0,0,8" />
+                                                Text="{i18n:StringLocalizer 'Changed'}" />
                                             <ItemsControl ItemsSource="{Binding Categories.Changed, Mode=OneWay}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
@@ -353,15 +355,15 @@
                                                 </ItemsControl.ItemTemplate>
                                             </ItemsControl>
                                         </StackPanel>
-                                        
-                                        <!-- Fixed -->
-                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Fixed, Converter={StaticResource ObjectToVisibilityConverter}}">
-                                            <TextBlock 
-                                                FontSize="16" 
-                                                FontWeight="SemiBold" 
+
+                                        <!--  Fixed  -->
+                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Fixed, Converter={StaticResource ArrayToVisibilityConverter}}">
+                                            <TextBlock
+                                                Margin="0,0,0,8"
+                                                FontSize="16"
+                                                FontWeight="SemiBold"
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Text="{i18n:StringLocalizer 'Fixed'}"
-                                                Margin="0,0,0,8" />
+                                                Text="{i18n:StringLocalizer 'Fixed'}" />
                                             <ItemsControl ItemsSource="{Binding Categories.Fixed, Mode=OneWay}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
@@ -389,15 +391,15 @@
                                                 </ItemsControl.ItemTemplate>
                                             </ItemsControl>
                                         </StackPanel>
-                                        
-                                        <!-- Improved -->
-                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Improved, Converter={StaticResource ObjectToVisibilityConverter}}">
-                                            <TextBlock 
-                                                FontSize="16" 
-                                                FontWeight="SemiBold" 
+
+                                        <!--  Improved  -->
+                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Improved, Converter={StaticResource ArrayToVisibilityConverter}}">
+                                            <TextBlock
+                                                Margin="0,0,0,8"
+                                                FontSize="16"
+                                                FontWeight="SemiBold"
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Text="{i18n:StringLocalizer 'Improved'}"
-                                                Margin="0,0,0,8" />
+                                                Text="{i18n:StringLocalizer 'Improved'}" />
                                             <ItemsControl ItemsSource="{Binding Categories.Improved, Mode=OneWay}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
@@ -425,15 +427,15 @@
                                                 </ItemsControl.ItemTemplate>
                                             </ItemsControl>
                                         </StackPanel>
-                                        
-                                        <!-- Removed -->
-                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Removed, Converter={StaticResource ObjectToVisibilityConverter}}">
-                                            <TextBlock 
-                                                FontSize="16" 
-                                                FontWeight="SemiBold" 
+
+                                        <!--  Removed  -->
+                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Removed, Converter={StaticResource ArrayToVisibilityConverter}}">
+                                            <TextBlock
+                                                Margin="0,0,0,8"
+                                                FontSize="16"
+                                                FontWeight="SemiBold"
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Text="{i18n:StringLocalizer 'Removed'}"
-                                                Margin="0,0,0,8" />
+                                                Text="{i18n:StringLocalizer 'Removed'}" />
                                             <ItemsControl ItemsSource="{Binding Categories.Removed, Mode=OneWay}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
@@ -461,15 +463,15 @@
                                                 </ItemsControl.ItemTemplate>
                                             </ItemsControl>
                                         </StackPanel>
-                                        
-                                        <!-- Updated -->
-                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Updated, Converter={StaticResource ObjectToVisibilityConverter}}">
-                                            <TextBlock 
-                                                FontSize="16" 
-                                                FontWeight="SemiBold" 
+
+                                        <!--  Updated  -->
+                                        <StackPanel Margin="0,0,0,12" Visibility="{Binding Categories.Updated, Converter={StaticResource ArrayToVisibilityConverter}}">
+                                            <TextBlock
+                                                Margin="0,0,0,8"
+                                                FontSize="16"
+                                                FontWeight="SemiBold"
                                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                                Text="{i18n:StringLocalizer 'Updated'}"
-                                                Margin="0,0,0,8" />
+                                                Text="{i18n:StringLocalizer 'Updated'}" />
                                             <ItemsControl ItemsSource="{Binding Categories.Updated, Mode=OneWay}">
                                                 <ItemsControl.ItemTemplate>
                                                     <DataTemplate>
@@ -498,9 +500,12 @@
                                             </ItemsControl>
                                         </StackPanel>
                                     </StackPanel>
-                                    
-                                    <!-- Fallback: Old Modifications List -->
-                                    <StackPanel Grid.Row="4" Margin="16,8,0,0" Visibility="{Binding Categories, Converter={StaticResource InverseObjectToVisibilityConverter}}">
+
+                                    <!--  Fallback: Old Modifications List  -->
+                                    <StackPanel
+                                        Grid.Row="4"
+                                        Margin="16,8,0,0"
+                                        Visibility="{Binding Categories, Converter={StaticResource InverseObjectToVisibilityConverter}}">
                                         <ItemsControl ItemsSource="{Binding Modifications, Mode=OneWay}">
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>

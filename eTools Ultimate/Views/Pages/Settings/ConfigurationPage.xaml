@@ -392,7 +392,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="{i18n:StringLocalizer 'Spec_Item file'}" />
+                                Text="{i18n:StringLocalizer 'Prop file'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox x:Name="PropItemFilePathTextbox" Text="{Binding Settings.PropItemFilePath, Mode=TwoWay}" />
                                 <TextBlock
@@ -438,7 +438,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="{i18n:StringLocalizer 'PropItem.txt file'}" />
+                                Text="{i18n:StringLocalizer 'Text file'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox
                                     x:Name="PropItemTxtFilePathTextbox"
@@ -487,7 +487,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="{i18n:StringLocalizer 'Item folder'}" />
+                                Text="{i18n:StringLocalizer 'Icons folder'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox x:Name="ItemIconsFolderPathTextbox" Text="{Binding Settings.ItemIconsFolderPath, Mode=TwoWay}" />
                                 <TextBlock
@@ -551,7 +551,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="{i18n:StringLocalizer 'PropMover file'}" />
+                                Text="{i18n:StringLocalizer 'Prop file'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox x:Name="PropMoverFilePathTextbox" Text="{Binding Settings.PropMoverFilePath, Mode=TwoWay}" />
                                 <TextBlock
@@ -597,7 +597,7 @@
                                 Grid.Column="0"
                                 Margin="0,0,8,0"
                                 VerticalAlignment="Center"
-                                Text="{i18n:StringLocalizer 'PropMover.txt file'}" />
+                                Text="{i18n:StringLocalizer 'Text file'}" />
                             <Grid Grid.Column="1" Margin="0,0,8,0">
                                 <TextBox x:Name="PropMoverTxtFilePathTextbox" Text="{Binding Settings.PropMoverTxtFilePath, Mode=TwoWay}" />
                                 <TextBlock
