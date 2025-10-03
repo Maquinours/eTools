@@ -12,12 +12,17 @@
     d:DataContext="{d:DesignInstance viewmodels:AddAccessoryDialogViewModel,
                                      IsDesignTimeCreatable=False}"
     CloseButtonText="{i18n:StringLocalizer 'Close'}"
-    IsPrimaryButtonEnabled="True"
     PrimaryButtonText="{i18n:StringLocalizer 'Add'}"
     mc:Ignorable="d">
-
     <ui:ContentDialog.Resources>
-        <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:AddAccessoryDialog}" />
+        <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:AddAccessoryDialog}">
+            <Setter Property="IsPrimaryButtonEnabled" Value="True" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ItemsView.CurrentItem}" Value="{x:Null}">
+                    <Setter Property="IsPrimaryButtonEnabled" Value="False" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
 
         <Style x:Key="LabelStyle" TargetType="TextBlock">
             <Setter Property="FontWeight" Value="Medium" />
@@ -78,7 +83,8 @@
                         Background="Transparent"
                         BorderThickness="0"
                         IsSynchronizedWithCurrentItem="True"
-                        ItemsSource="{Binding ItemsView, Mode=OneWay}">
+                        ItemsSource="{Binding ItemsView, Mode=OneWay}"
+                        SelectionMode="Single">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="4">

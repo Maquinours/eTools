@@ -727,14 +727,15 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (D3dHost is null) return;
 
-            var contentDialog = new MoverReferenceModelDialog(contentDialogService.GetDialogHost());
+            MoverReferenceModelDialog contentDialog = new(contentDialogService.GetDialogHost());
 
-            if (await contentDialog.ShowAsync() == Wpf.Ui.Controls.ContentDialogResult.Primary)
+            if (await contentDialog.ShowAsync() == ContentDialogResult.Primary)
             {
                 NativeMethods.DeleteReferenceModel(D3dHost._native);
-                if (contentDialog.DataContext is not MoverReferenceModelViewModel contentDialogViewModel) return;
+                if (!Auto3DRendering)
+                    D3dHost.Render();
 
-                //if (contentDialogViewModel.MoversView.CurrentItem is null) // TODO: remove reference model
+                if (contentDialog.DataContext is not MoverReferenceModelViewModel contentDialogViewModel) return;
                 if (contentDialogViewModel.MoversView.CurrentItem is not Mover referenceMover) return;
                 if (referenceMover.Model is not Model referenceModel) return;
 

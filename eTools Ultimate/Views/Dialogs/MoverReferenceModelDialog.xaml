@@ -56,6 +56,7 @@
                     IsSynchronizedWithCurrentItem="True"
                     ItemsSource="{Binding MoversView, Mode=OneWay}"
                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                    SelectionMode="Single"
                     Style="{StaticResource AppListViewStyle}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
