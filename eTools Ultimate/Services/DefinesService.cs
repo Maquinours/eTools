@@ -71,74 +71,73 @@ namespace eTools_Ultimate.Services
             this.Defines.Clear();
             this.ReversedItemDefines.Clear();
 
-            string[] paths = Directory.EnumerateFiles(settings.ResourcesFolderPath, "define*.h", SearchOption.TopDirectoryOnly).ToArray();
+            string[] paths = [.. Directory.EnumerateFiles(settings.ResourcesFolderPath, "define*.h", SearchOption.TopDirectoryOnly)];
 
             foreach (string filePath in paths)
             {
-                using (Scanner scanner = new Scanner()) 
+                using Scanner scanner = new();
+
+                scanner.Load(filePath);
+                scanner.GetToken();
+                while (!scanner.EndOfStream)
                 {
-                    scanner.Load(filePath);
-                    scanner.GetToken();
-                    while (!scanner.EndOfStream)
+                    if (scanner.Token != "#define")
                     {
-                        if (scanner.Token != "#define")
-                        {
-                            scanner.GetToken();
-                            continue;
-                        }
-                        string key = scanner.GetToken();
-                        int value = scanner.GetNumber();
-                        if (scanner.Token.StartsWith('#')) continue;
-                        if (!this.Defines.ContainsKey(key))
-                        {
-                            this.Defines[key] = value;
-                            if (key.StartsWith("II_"))
-                                this.ReversedItemDefines[value] = key;
-                            else if (key.StartsWith("MI_"))
-                                this.ReversedMoverDefines[value] = key;
-                            else if (key.StartsWith("SI_"))
-                                this.ReversedSkillDefines[value] = key;
-                            else if (key.StartsWith("MOT_"))
-                                this.ReversedMotionDefines[value] = key;
-                            else if (key.StartsWith("MMI_"))
-                                this.ReversedMenuItemDefines[value] = key;
-                            else if (key.StartsWith("TID_"))
-                                this.ReversedTextDefines[value] = key;
-                            else if (key.StartsWith("MTI_"))
-                                this.ReversedMotionTypeDefines[value] = key;
-                            else if (key.StartsWith("BELLI_"))
-                                this.ReversedBelligerenceDefines[value] = key;
-                            else if (key.StartsWith("AII_"))
-                                this.ReversedAiDefines[value] = key;
-                            else if (key.StartsWith("RANK_"))
-                                this.ReversedRankDefines[value] = key;
-                            else if (key.StartsWith("VT_"))
-                                this.ReversedVirtualTypeDefines[value] = key;
-                            else if (key.StartsWith("SND_"))
-                                this.ReversedSoundDefines[value] = key;
-                            else if (key.StartsWith("AREA_"))
-                                this.ReversedAreaDefines[value] = key;
-                            else if (key.StartsWith("BGM_"))
-                                this.ReversedMusicDefines[value] = key;
-                            else if (key.StartsWith("DST_"))
-                                this.ReversedDestDefines[value] = key;
-                            else if (key.StartsWith("OT_"))
-                                ReversedObjectTypeDefines[value] = key;
-                            else if (key.StartsWith("CI_"))
-                                ReversedControlDefines[value] = key;
-                            else if (key.StartsWith("XI_"))
-                                ReversedSfxDefines[value] = key;
-                            else if (key.StartsWith("RI_"))
-                                ReversedRegionDefines[value] = key;
-                            else if (key.StartsWith("MODELTYPE_"))
-                                ReversedModelTypeDefines[value] = key;
-                            else if (key.StartsWith("MD_"))
-                                ReversedModelDistantDefines[value] = key;
-                            else if(key.StartsWith("ATEX_"))
-                                ReversedAdditionalTextureDefines[value] = key;
-                        }
                         scanner.GetToken();
+                        continue;
                     }
+                    string key = scanner.GetToken();
+                    int value = scanner.GetNumber();
+                    if (scanner.Token.StartsWith('#')) continue;
+                    if (!this.Defines.ContainsKey(key))
+                    {
+                        this.Defines[key] = value;
+                        if (key.StartsWith("II_"))
+                            this.ReversedItemDefines[value] = key;
+                        else if (key.StartsWith("MI_"))
+                            this.ReversedMoverDefines[value] = key;
+                        else if (key.StartsWith("SI_"))
+                            this.ReversedSkillDefines[value] = key;
+                        else if (key.StartsWith("MOT_"))
+                            this.ReversedMotionDefines[value] = key;
+                        else if (key.StartsWith("MMI_"))
+                            this.ReversedMenuItemDefines[value] = key;
+                        else if (key.StartsWith("TID_"))
+                            this.ReversedTextDefines[value] = key;
+                        else if (key.StartsWith("MTI_"))
+                            this.ReversedMotionTypeDefines[value] = key;
+                        else if (key.StartsWith("BELLI_"))
+                            this.ReversedBelligerenceDefines[value] = key;
+                        else if (key.StartsWith("AII_"))
+                            this.ReversedAiDefines[value] = key;
+                        else if (key.StartsWith("RANK_"))
+                            this.ReversedRankDefines[value] = key;
+                        else if (key.StartsWith("VT_"))
+                            this.ReversedVirtualTypeDefines[value] = key;
+                        else if (key.StartsWith("SND_"))
+                            this.ReversedSoundDefines[value] = key;
+                        else if (key.StartsWith("AREA_"))
+                            this.ReversedAreaDefines[value] = key;
+                        else if (key.StartsWith("BGM_"))
+                            this.ReversedMusicDefines[value] = key;
+                        else if (key.StartsWith("DST_"))
+                            this.ReversedDestDefines[value] = key;
+                        else if (key.StartsWith("OT_"))
+                            ReversedObjectTypeDefines[value] = key;
+                        else if (key.StartsWith("CI_"))
+                            ReversedControlDefines[value] = key;
+                        else if (key.StartsWith("XI_"))
+                            ReversedSfxDefines[value] = key;
+                        else if (key.StartsWith("RI_"))
+                            ReversedRegionDefines[value] = key;
+                        else if (key.StartsWith("MODELTYPE_"))
+                            ReversedModelTypeDefines[value] = key;
+                        else if (key.StartsWith("MD_"))
+                            ReversedModelDistantDefines[value] = key;
+                        else if (key.StartsWith("ATEX_"))
+                            ReversedAdditionalTextureDefines[value] = key;
+                    }
+                    scanner.GetToken();
                 }
             }
         }
