@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,36 +12,59 @@ using Scan;
 
 namespace Common
 {
-    public class Settings
+    public class Settings : INotifyPropertyChanged // TODO: Make it observable to observe it on Item images getters (icons & textures)
     {
         private static Settings _instance;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private string _resourcePath;
+        private Dictionary<int, string> _elements;
+        private int _resourceVersion;
+        private List<string> _defineFilesPaths;
+        private string _stringsFilePath;
+        private string _propFileName;
+#if __ITEMS
+        private string _iconsFolderPath;
+        private string _texturesFolderPath;
+        private string _soundsConfigurationsFilePath;
+        public string _soundsFolderPath;
+#endif // __ITEMS
 
         /// <summary>
         /// The path of the resource folder where the process will read & save files
         /// </summary>
-        public string ResourcePath { get; set; }
+        public string ResourcePath { get => this._resourcePath; set { if (value != this.ResourcePath) { this._resourcePath = value; this.NotifyPropertyChanged(); } } }
         /// <summary>
         /// Elements id with name (should be same as SAI79::ePropType in game source)
         /// </summary>
-        public Dictionary<int, string> Elements { get; private set; }
+        public Dictionary<int, string> Elements { get => this._elements; private set { if (value != this.Elements) { this._elements = value; this.NotifyPropertyChanged(); } } }
         /// <summary>
         /// Version of the game
         /// </summary>
-        public int ResourceVersion { get;  set; }
+        public int ResourceVersion { get => this._resourceVersion;  set { if (value != this.ResourceVersion) { this._resourceVersion = value; this.NotifyPropertyChanged(); } } }
         /// <summary>
         /// .h files paths that process will read (files containing defines) (E.G defineObj.h)
         /// </summary>
-        public List<string> DefineFilesPaths { get; private set; }
+        public List<string> DefineFilesPaths { get => this._defineFilesPaths; private set { if (value != this.DefineFilesPaths) { this._defineFilesPaths = value; this.NotifyPropertyChanged(); } } }
         /// <summary>
         /// .txt file path that process will read and save (file containing names & descriptions) (E.G propMover.txt.txt)
         /// </summary>
-        public string StringsFilePath { get; set; }
+        public string StringsFilePath { get => this._stringsFilePath; set { if (value != this.StringsFilePath) { this._stringsFilePath = value; this.NotifyPropertyChanged(); } } }
         /// <summary>
         /// Main data file that process will read and save (E.G propMover.txt)
         /// </summary>
-        public string PropFileName { get; set; }
+        public string PropFileName { get => this._propFileName; set { if (value != this.PropFileName) { this._propFileName = value; this.NotifyPropertyChanged(); } } }
 #if __ITEMS
-        public string IconsFolderPath { get; private set; }
+        public string IconsFolderPath { get => this._iconsFolderPath; set { if (value != this.IconsFolderPath) { this._iconsFolderPath = value; this.NotifyPropertyChanged(); } } }
+        public string TexturesFolderPath { get => this._texturesFolderPath; set { if (value != this.TexturesFolderPath) { this._texturesFolderPath = value; this.NotifyPropertyChanged(); } } }
+        public string SoundsConfigurationsFilePath { get => this._soundsConfigurationsFilePath; set { if (value != this.SoundsConfigurationsFilePath) { this._soundsConfigurationsFilePath = value; this.NotifyPropertyChanged(); } } }
+        public string SoundsFolderPath { get => this._soundsFolderPath; set { if (value != this.SoundsFolderPath) { this._soundsFolderPath = value; this.NotifyPropertyChanged(); } } }
 #endif // __ITEMS
 #if __MOVERS
         public Dictionary<MoverTypes, MoverType> Types { get; set; }
@@ -185,6 +210,15 @@ namespace Common
                     case "ICONSPATH":
                         IconsFolderPath = scanner.GetToken();
                         break;
+                    case "TEXTURESPATH":
+                        TexturesFolderPath = scanner.GetToken();
+                        break;
+                    case "SOUNDSCONFIG":
+                        SoundsConfigurationsFilePath = scanner.GetToken();
+                        break;
+                    case "SOUNDSPATH":
+                        SoundsFolderPath = scanner.GetToken();
+                        break;
 #endif // __ITEMS
 #if __MOVERS
                     case "TYPES":
@@ -251,6 +285,9 @@ namespace Common
                 writer.WriteLine($"PROPFILE\t\"{Path.GetFileName(PropFileName)}\"");
 #if __ITEMS
                 writer.WriteLine($"ICONSPATH\t\"{IconsFolderPath}\"");
+                writer.WriteLine($"TEXTURESPATH\t\"{TexturesFolderPath}\"");
+                writer.WriteLine($"SOUNDSCONFIG\t\"{SoundsConfigurationsFilePath}\"");
+                writer.WriteLine($"SOUNDSPATH\t\"{SoundsFolderPath}\"");
 #endif // __ITEMS
                 writer.WriteLine($"STRINGS\t\"{Path.GetFileName(StringsFilePath)}\"");
                 writer.WriteLine("DEFINES");
@@ -320,8 +357,15 @@ namespace Common
                 ResourcePath + "defineItemKind.h",
                 ResourcePath + "defineJob.h",
                 ResourcePath + "defineAttribute.h",
+                ResourcePath + "defineNeuz.h",
+                ResourcePath + "defineWorld.h",
+                ResourcePath + "defineItem.h",
+                ResourcePath + "defineSound.h",
             };
             IconsFolderPath = ResourcePath + "Item\\";
+            TexturesFolderPath = ResourcePath + "Model\\Texture\\";
+            SoundsConfigurationsFilePath = ResourcePath + "Client\\sound.inc";
+            SoundsFolderPath = ResourcePath + "Sound\\";
 #endif // __ITEMS
         }
     }

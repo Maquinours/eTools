@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+    <comment>Dashboard menu item</comment>
+  </data>
+  <data name="Movers" xml:space="preserve">
+    <value>Movers</value>
+    <comment>Movers navigation card title</comment>
+  </data>
+  <data name="Giftboxes" xml:space="preserve">
+    <value>Giftboxes</value>
+    <comment>Giftboxes navigation card title</comment>
+  </data>
+  <data name="Accessories" xml:space="preserve">
+    <value>Accessories</value>
+    <comment>Accessories navigation card title</comment>
+  </data>
+  <data name="Motions" xml:space="preserve">
+    <value>Motions</value>
+    <comment>Motions navigation card title</comment>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+    <comment>Settings navigation card title</comment>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+    <comment>About navigation card title</comment>
+  </data>
+  <data name="Resource Path" xml:space="preserve">
+    <value>Resource Path</value>
+    <comment>Resource Path navigation card title</comment>
+  </data>
+  <data name="Loading all Paths." xml:space="preserve">
+    <value>Loading all Paths.</value>
+    <comment>Resource Path navigation card description</comment>
+  </data>
+  <data name="Personalization" xml:space="preserve">
+    <value>Personalization</value>
+    <comment>Personalization navigation card title</comment>
+  </data>
+  <data name="Change Design and other parts" xml:space="preserve">
+    <value>Change Design and other parts</value>
+    <comment>Personalization navigation card description</comment>
+  </data>
+  <data name="Learn more about eTools Ultimate" xml:space="preserve">
+    <value>Learn more about eTools Ultimate</value>
+    <comment>About navigation card description</comment>
+  </data>
+  <data name="Created by eTools Ultimate" xml:space="preserve">
+    <value>Created by eTools Ultimate</value>
+    <comment>Created by text on dashboard</comment>
+  </data>
+  <data name="About eTools Ultimate" xml:space="preserve">
+    <value>About eTools Ultimate</value>
+    <comment>About eTools Ultimate section header</comment>
+  </data>
+  <data name="Our tool simplifies the editing process for developers." xml:space="preserve">
+    <value>Our tool simplifies the editing process for developers.</value>
+    <comment>About description</comment>
+  </data>
+  <data name="Main Features" xml:space="preserve">
+    <value>Main Features</value>
+    <comment>Main Features section header</comment>
+  </data>
+  <data name="Editing of .txt, .h and .inc files with structured interfaces" xml:space="preserve">
+    <value>Editing of .txt, .h and .inc files with structured interfaces</value>
+    <comment>Main feature 1</comment>
+  </data>
+  <data name="Advanced categorization by element types" xml:space="preserve">
+    <value>Advanced categorization by element types</value>
+    <comment>Main feature 2</comment>
+  </data>
+  <data name="Optimized for performance and user-friendliness" xml:space="preserve">
+    <value>Optimized for performance and user-friendliness</value>
+    <comment>Main feature 3</comment>
+  </data>
+  <data name="Development Team" xml:space="preserve">
+    <value>Development Team</value>
+    <comment>Development Team section header</comment>
+  </data>
+  <data name="System Requirements" xml:space="preserve">
+    <value>System Requirements</value>
+    <comment>System Requirements section header</comment>
+  </data>
+  <data name="Operating System:" xml:space="preserve">
+    <value>Operating System:</value>
+    <comment>Operating System requirement</comment>
+  </data>
+  <data name="Windows 10 or 11" xml:space="preserve">
+    <value>Windows 10 or 11</value>
+    <comment>Windows version requirement</comment>
+  </data>
+  <data name="RAM:" xml:space="preserve">
+    <value>RAM:</value>
+    <comment>RAM requirement</comment>
+  </data>
+  <data name="4 GB minimum" xml:space="preserve">
+    <value>4 GB minimum</value>
+    <comment>RAM minimum requirement</comment>
+  </data>
+  <data name="Storage:" xml:space="preserve">
+    <value>Storage:</value>
+    <comment>Storage requirement</comment>
+  </data>
+  <data name="100 MB available space" xml:space="preserve">
+    <value>100 MB available space</value>
+    <comment>Storage space requirement</comment>
+  </data>
+  <data name="200 MB available space" xml:space="preserve">
+    <value>200 MB available space</value>
+    <comment>Storage space requirement</comment>
+  </data>
+  <data name="4 GB minimum, 8 GB recommended" xml:space="preserve">
+    <value>4 GB minimum, 8 GB recommended</value>
+    <comment>RAM requirement with recommendation</comment>
+  </data>
+  <data name="Graphics:" xml:space="preserve">
+    <value>Graphics:</value>
+    <comment>Graphics requirement</comment>
+  </data>
+  <data name="DirectX 11 compatible" xml:space="preserve">
+    <value>DirectX 11 compatible</value>
+    <comment>Graphics compatibility requirement</comment>
+  </data>
+  <data name="Check for Updates" xml:space="preserve">
+    <value>Check for Updates</value>
+    <comment>Check for updates button text</comment>
+  </data>
+  <data name="Visit Website" xml:space="preserve">
+    <value>Visit Website</value>
+    <comment>Visit website button text</comment>
+  </data>
+  <data name="Maqui" xml:space="preserve">
+    <value>Maqui</value>
+    <comment>Developer name</comment>
+  </data>
+  <data name="Kiyo" xml:space="preserve">
+    <value>Kiyo</value>
+    <comment>Developer name</comment>
+  </data>
+  <data name="System default" xml:space="preserve">
+    <value>System default</value>
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>Added</value>
+  </data>
+  <data name="Removed" xml:space="preserve">
+    <value>Removed</value>
+  </data>
+  <data name="Changed" xml:space="preserve">
+    <value>Changed</value>
+  </data>
+  <data name="Fixed" xml:space="preserve">
+    <value>Fixed</value>
+  </data>
+  <data name="Improved" xml:space="preserve">
+    <value>Improved</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>Updated</value>
+  </data>
+  <data name="Basic Information Fields" xml:space="preserve">
+    <value>Basic Information Fields</value>
+    <comment>Basic Information Fields expander header</comment>
+  </data>
+  <data name="Stats Fields" xml:space="preserve">
+    <value>Stats Fields</value>
+    <comment>Stats Fields expander header</comment>
+  </data>
+  <data name="Combat/Battle Fields" xml:space="preserve">
+    <value>Combat/Battle Fields</value>
+    <comment>Combat/Battle Fields expander header</comment>
+  </data>
+  <data name="Defensive Stats Fields" xml:space="preserve">
+    <value>Defensive Stats Fields</value>
+    <comment>Defensive Stats Fields expander header</comment>
+  </data>
+  <data name="Elemental Fields" xml:space="preserve">
+    <value>Elemental Fields</value>
+    <comment>Elemental Fields expander header</comment>
+  </data>
+  <data name="MoverPage" xml:space="preserve">
+    <value>MoverPage</value>
+    <comment>MoverPage title</comment>
+  </data>
+  <data name="..." xml:space="preserve">
+    <value>...</value>
+    <comment>Ellipsis for file selection buttons</comment>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Configuration</value>
+    <comment>Configuration section header</comment>
+  </data>
+  <data name="Sound" xml:space="preserve">
+    <value>Sound</value>
+    <comment>Sound section header</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+    <comment>Name field label</comment>
+  </data>
+  <data name="Rank" xml:space="preserve">
+    <value>Rank</value>
+    <comment>Rank field label</comment>
+  </data>
+  <data name="SFX hit sound" xml:space="preserve">
+    <value>SFX hit sound</value>
+    <comment>SFX hit sound field label</comment>
+  </data>
+  <data name="Click sound" xml:space="preserve">
+    <value>Click sound</value>
+    <comment>Click sound field label</comment>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Default</value>
+    <comment>Default option value</comment>
+  </data>
+  <data name="Character" xml:space="preserve">
+    <value>Character</value>
+    <comment>Character option value</comment>
+  </data>
+  <data name="Modell" xml:space="preserve">
+    <value>Model</value>
+    <comment>Model section header</comment>
+  </data>
+  <data name="Motion Key" xml:space="preserve">
+    <value>Motion Key</value>
+    <comment>Motion Key field label</comment>
+  </data>
+  <data name="Motion File" xml:space="preserve">
+    <value>Motion File</value>
+    <comment>Motion File field label</comment>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>File</value>
+    <comment>File field label</comment>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Scale</value>
+    <comment>Scale field label</comment>
+  </data>
+  <data name="Textur" xml:space="preserve">
+    <value>Texture</value>
+    <comment>Texture field label</comment>
+  </data>
+  <data name="Kein Modell verfügbar" xml:space="preserve">
+    <value>No Model Available</value>
+    <comment>No model available message</comment>
+  </data>
+  <data name="No model associated with the selected mover." xml:space="preserve">
+    <value>No model associated with the selected mover.</value>
+    <comment>No model associated message</comment>
+  </data>
+  <data name="AIs assigned to {0}" xml:space="preserve">
+    <value />
+  </data>
+  <data name="No motions generated" xml:space="preserve">
+    <value />
+  </data>
+  <data name="No motions could be bound automatically." xml:space="preserve">
+    <value />
+  </data>
+  <data name="{0} motions have been bound automatically." xml:space="preserve">
+    <value />
+  </data>
+  <data name="{0} motion has been bound automatically." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Motions generated" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Unable to play motion" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Unable to find file: {0}" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Movers and motions saved" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Movers and motions have been successfully saved." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Error saving movers and motions" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Remove a motion" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the motion {0} from the mover {1} ?" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Remove a mover" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the mover {0} ?" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Motions saved" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Motions have been successfully saved." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Error saving motions" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the motion {0} ?" xml:space="preserve">
+    <value />
+  </data>
+  <data name="This identifier is already taken by another mover." xml:space="preserve">
+    <value />
+  </data>
+  <data name="This identifier is already taken by another text." xml:space="preserve">
+    <value />
+  </data>
+  <data name="This identifier is already taken by another motion." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Texts" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ID of the mover" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Motion" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Motion of the character mover that should be played." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="No update available" xml:space="preserve">
+    <value />
+  </data>
+  <data name="You already have the latest version." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Update check failed" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Search..." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Remove giftbox item" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the item {0} from the giftbox {1} ?" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Giftboxes saved" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Giftboxes have been successfully saved." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Error saving giftboxes" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Remove an accessory" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the accessory {0} ?" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Remove an accessory's level" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the level {0} from the accessory {1} ?" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Remove an attribute from an accessory’s level" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the attribute {0} from the level {1} of the accessory {2}?" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Accessories saved" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Accessories have been successfully saved." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Error saving accessories" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Remove a text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the text {0} ?" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Texts saved" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Texts have been successfully saved." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Error saving texts" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Add giftbox" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Remove giftbox" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the giftbox {0} ?" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Create giftbox" xml:space="preserve">
+    <value>Create giftbox</value>
+    <comment>Button text for creating a new giftbox</comment>
+  </data>
+  <data name="Latest updates and improvements" xml:space="preserve">
+    <value />
+  </data>
+</root>

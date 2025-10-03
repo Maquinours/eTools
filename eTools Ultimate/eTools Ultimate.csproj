@@ -1,0 +1,159 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>wpfui-icon.ico</ApplicationIcon>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<StartupObject>eTools_Ultimate.App</StartupObject>
+	<AssemblyVersion>0.1.0.0</AssemblyVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Views\Pages\Skill\**" />
+    <EmbeddedResource Remove="Views\Pages\Skill\**" />
+    <None Remove="Views\Pages\Skill\**" />
+    <Page Remove="Views\Pages\Skill\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Remove="App.xaml" />
+	<Page Include="App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wpfui-icon.ico" />
+    <Resource Include="Assets\Icons\discord.png" />
+    <Resource Include="Assets\Icons\eTools.png" />
+    <Resource Include="Assets\Icons\github.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="gong-wpf-dragdrop" Version="4.0.0" />
+    <PackageReference Include="Lepo.i18n.DependencyInjection" Version="2.0.0" />
+    <PackageReference Include="Lepo.i18n.Wpf" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
+    <PackageReference Include="NAudio.Vorbis" Version="1.5.0" />
+    <PackageReference Include="PixiEditor.ColorPicker" Version="3.4.2" />
+    <PackageReference Include="Sentry" Version="5.15.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="3.1.11" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.8" />
+    <PackageReference Include="Velopack" Version="0.0.1298" />
+    <PackageReference Include="WPF-UI" Version="4.0.3" />
+    <PackageReference Include="WPF-UI.DependencyInjection" Version="4.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.8" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0 " />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Images\Logo.png" />
+    <None Remove="Views\Pages\Settings\Kiyo.jpg" />
+    <None Remove="Views\Windows\WarningIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\NativeLibs\3DModelRenderer.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\NativeLibs\assimp-vc140-mt.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DDSImageParser">
+      <HintPath>..\libs\net9.0\DDSImageParser.dll</HintPath>
+    </Reference>
+    <Reference Include="Scanner">
+      <HintPath>..\libs\net9.0\Scanner.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Images\HomePage.png" />
+    <Resource Include="Assets\Images\Logo.png" />
+    <Resource Include="Assets\Images\SplashScreen.png" />
+    <Resource Include="Assets\Icons\Collector.png" />
+    <Resource Include="Assets\Icons\Movers.png" />
+    <Resource Include="Assets\Icons\Exchangers.png" />
+    <Resource Include="Assets\Icons\Characters.png" />
+    <Resource Include="Assets\Icons\Giftboxes.png" />
+    <Resource Include="Assets\Icons\Items.png" />
+    <Resource Include="Assets\Icons\Texts.png" />
+    <Resource Include="Assets\Icons\Accessories.png" />
+    <Resource Include="Assets\Icons\Events.png" />
+    <Resource Include="Assets\Icons\Quests.png" />
+    <Resource Include="Assets\Icons\Settings.png" />
+    <Resource Include="Assets\Icons\Skills.png" />
+    <Resource Include="Assets\Icons\Motions.png" />
+    <Resource Include="Assets\Icons\Honors.png" />
+    <Resource Include="Assets\Icons\World.png" />
+    <Resource Include="Assets\Icons\Terrain.png" />
+    <Resource Include="Assets\Icons\ticket.png" />
+    <Resource Include="Assets\Icons\Lord.png" />
+    <Resource Include="Assets\Icons\FolderIcon.png" />
+    <Resource Include="Assets\Icons\AboutIcon.png" />
+    <Resource Include="Assets\Icons\PersonalizationIcon.png" />
+    <Resource Include="Assets\Images\SettingsPageBanner.png" />
+    <Resource Include="Assets\Images\Kiyo.jpg" />
+    <Resource Include="Assets\Images\Maqui.jpg" />
+    <Resource Include="Views\Windows\WarningIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\ExceptionMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ExceptionMessages.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\PatchNotes.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>PatchNotes.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Texts.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Texts.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\ExceptionMessages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExceptionMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PatchNotes.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>PatchNotes.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PatchNotes.de-DE.resx">
+      <DependentUpon>PatchNotes.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\PatchNotes.fr-FR.resx">
+      <DependentUpon>PatchNotes.resx</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\Texts.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Texts.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

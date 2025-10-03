@@ -1,0 +1,184 @@
+﻿using eTools_Ultimate.Exceptions;
+using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models;
+using Microsoft.Extensions.DependencyInjection;
+using Scan;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace eTools_Ultimate.Services
+{
+    public class AccessoriesService(SettingsService settingsService)
+    {
+        private readonly ObservableCollection<int> _probabilities = [];
+        private readonly ObservableCollection<Accessory> _accessories = [];
+
+        public ObservableCollection<int> Probabilities => this._probabilities;
+        public ObservableCollection<Accessory> Accessories => this._accessories;
+
+        private void ClearAccessories()
+        {
+            foreach (Accessory accessory in this.Accessories)
+                accessory.Dispose();
+            this.Accessories.Clear();
+        }
+
+        public void Load()
+        {
+            Settings settings = settingsService.Settings;
+
+            this.ClearAccessories();
+
+            string filePath = settings.AccessoriesConfigFilePath ?? settings.DefaultAccessoriesConfigFilePath;
+            using (Script script = new())
+            {
+                script.Load(filePath);
+
+                while(true)
+                {
+                    script.GetToken();
+
+                    if (script.EndOfStream) break;
+
+                    switch(script.Token)
+                    {
+                        case "Probability":
+                            {
+                                script.GetToken(); // "{"
+
+                                while(true)
+                                {
+                                    int probability = script.GetNumber();
+
+                                    if (script.Token == "}") break;
+                                    if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                    this.Probabilities.Add(probability);
+                                }
+
+                                break;
+                            }
+                        case "Accessory":
+                            {
+                                script.GetToken(); // "{"
+
+                                while(true)
+                                {
+                                    int dwItemId = script.GetNumber();
+
+                                    if (script.Token == "}") break;
+                                    if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                    script.GetToken(); // "{"
+
+                                    List<AccessoryAbilityOptionData> abilityOptionData = [];
+
+                                    while(true)
+                                    {
+                                        int nAbilityOption = script.GetNumber();
+
+                                        if (script.Token == "}") break;
+                                        if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                        script.GetToken(); // "{"
+
+                                        List<AccessoryAbilityOptionDstData> dstData = [];
+
+                                        while(true)
+                                        {
+                                            int nDst = script.GetNumber();
+
+                                            if (script.Token == "}") break;
+                                            if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+
+                                            int nAdj = script.GetNumber();
+
+                                            AccessoryAbilityOptionDstData dstDataItem = new(nDst, nAdj);
+                                            dstData.Add(dstDataItem);
+                                        }
+
+                                        AccessoryAbilityOptionData abilityOptionDataItem = new(nAbilityOption, dstData);
+                                        abilityOptionData.Add(abilityOptionDataItem);
+                                    }
+
+                                    Accessory accessory = new(dwItemId, abilityOptionData);
+                                    Accessories.Add(accessory);
+                                }
+                                break;
+                            }
+                    }
+                }
+            }
+        }
+
+        public void Save()
+        {
+            Settings settings = settingsService.Settings;
+
+            string filePath = settings.AccessoriesConfigFilePath ?? settings.DefaultAccessoriesConfigFilePath;
+
+            using StreamWriter writer = new(filePath, false, new UTF8Encoding(false));
+            writer.WriteLine("// ========================================");
+            writer.WriteLine("// Generated by eTools Ultimate");
+            writer.WriteLine("// https://github.com/Maquinours/eTools");
+            writer.WriteLine("// ========================================");
+
+            if(Probabilities.Count > 0)
+            {
+                writer.WriteLine();
+                writer.WriteLine("Probability");
+                writer.WriteLine("{");
+                foreach(int probability in Probabilities)
+                {
+                    writer.Write('\t');
+                    writer.Write(probability.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteLine();
+                }
+                writer.WriteLine('}');
+            }
+
+            if (Accessories.Count > 0)
+            {
+                writer.WriteLine();
+                writer.WriteLine("Accessory");
+                writer.WriteLine("{");
+                foreach (Accessory accessory in Accessories)
+                {
+                    writer.Write('\t');
+                    writer.Write(accessory.Item?.Identifier ?? accessory.DwItemId.ToString(CultureInfo.InvariantCulture));
+                    writer.WriteLine();
+                    writer.Write('\t');
+                    writer.Write('{');
+                    writer.WriteLine();
+                    foreach(AccessoryAbilityOptionData abilityOptionData in accessory.AbilityOptionData)
+                    {
+                        writer.Write("\t\t");
+                        writer.Write(abilityOptionData.NAbilityOption.ToString(CultureInfo.InvariantCulture));
+                        writer.Write('\t');
+                        writer.Write('{');
+                        foreach(AccessoryAbilityOptionDstData dstData in abilityOptionData.DstData)
+                        {
+                            writer.Write('\t');
+                            writer.Write(dstData.DestIdentifier);
+                            writer.Write('\t');
+                            writer.Write(dstData.NAdj.ToString(CultureInfo.InvariantCulture));
+                        }
+                        writer.Write('\t');
+                        writer.Write('}');
+                        writer.WriteLine();
+                    }
+                    writer.Write('\t');
+                    writer.Write('}');
+                    writer.WriteLine();
+                }
+                writer.WriteLine('}');
+            }
+        }
+    }
+}

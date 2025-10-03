@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DDSImageParser;
 using System.IO;
+using System.Media;
 
 namespace ItemsEditor
 {
@@ -18,182 +19,377 @@ namespace ItemsEditor
         public MainForm()
         {
             InitializeComponent();
+
+            // We remove all tab pages except the general page
+            foreach(TabPage tab in this.tcMain.TabPages)
+                if(tab != tpMainGeneral)
+                    this.tcMain.TabPages.Remove(tab);
+
+            this.SetSearchTextBoxPlaceHolder();
+        }
+
+        private void MainForm_Shown(object sender, EventArgs e)
+        {
+            this.LoadFormData();
+        }
+
+        private async void LoadFormData()
+        {
             try
             {
+                this.Enabled = false;
+                pbFileSaveReload.Visible = true;
+
                 Project prj = Project.GetInstance();
-                prj.Load();
-                cbTypeItemKind1.DataSource = prj.GetAllItemKinds1();
-                cbTypeItemKind2.DataSource = prj.GetAllItemKinds2();
-                cbTypeItemKind3.DataSource = prj.GetAllItemKinds3();
-                cb_job.DataSource = new string[] { "=" }.Concat(prj.GetJobIdentifiers()).ToArray();
-                cb_sex.DataSource = new string[] { "=" }.Concat(prj.GetSexIdentifiers()).ToArray();
-                cb_DstParamIdentifier.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
-                cb_ElementType.DataSource = prj.GetElementsIdentifiers();
-                SetListBoxDataSource();
+                await Task.Run(() => prj.Load((progress) => pbFileSaveReload.Invoke(new Action(() => pbFileSaveReload.Value = progress)))).ConfigureAwait(true);
+
+                // General
+                AutoCompleteStringCollection identifiersSource = new AutoCompleteStringCollection();
+                identifiersSource.AddRange(prj.GetItemIdentifiers());
+                tbGeneralId.AutoCompleteCustomSource = identifiersSource;
+                cbTypeItemKind3.DataSource = prj.GetAllowedItemKinds3();
+                cbTypeItemKind2.DataSource = prj.GetAllowedItemKinds2();
+                cbTypeItemKind1.DataSource = prj.GetAllowedItemKinds1();
+
+                // Equipment
+                cbEquipmentJob.DataSource = new string[] { "=" }.Concat(prj.GetJobIdentifiers()).ToArray();
+                cbEquipmentSex.DataSource = new string[] { "=" }.Concat(prj.GetSexIdentifiers()).ToArray();
+                cbEquipmentDstParam.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
+                cbEquipmentParts.DataSource = prj.GetPartsIdentifiers();
+
+                // Weapon
+                cbWeaponType.DataSource = prj.GetWeaponTypeIdentifiers();
+                cbWeaponAttackRange.DataSource = prj.GetAttackRangeIdentifiers();
+                cbWeaponAttackSound.DataSource = prj.GetSoundIdentifiers();
+                cbWeaponCriticalAttackSound.DataSource = prj.GetSoundIdentifiers();
+                cbWeaponAttackSfx.DataSource = new string[] {"="}.Concat(prj.GetSfxIdentifiers()).ToArray();
+
+                // Consumable
+                cbConsumableStatType.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
+                cbConsumableSfx.DataSource = new string[] {"="}.Concat(prj.GetSfxIdentifiers()).ToArray();
+                cbConsumableSound.DataSource = new string[] { "=" }.Concat(prj.GetSoundIdentifiers()).ToArray();
+
+                // Blinkwings
+                cbBlinkwingWorld.DataSource = prj.GetWorldIdentifiers();
+                cbBlinkwingSfx.DataSource = prj.GetSfxIdentifiers();
+
+                // Furniture
+                cbFurnitureControl.DataSource = prj.GetControlIdentifiers();
+
+                // Guild house furniture
+                cbGuildHouseFurnitureControl.DataSource = prj.GetControlIdentifiers();
+
+                // Pet
+                cbPetMoverIdentifier.DataSource = prj.GetPetMoverIdentifiers();
+
+                // Guild house NPC
+                cbGuildHouseNpcMover.DataSource = prj.GetNpcMoverIdentifiers();
+
+                // Buff beads
+                cbBuffBeadStatType.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
+
+                // Buffs
+                cbBuffStatType.DataSource = new string[] { "=" }.Concat(prj.GetDstIdentifiers()).ToArray();
+                cbBuffSound.DataSource = new string[] { "=" }.Concat(prj.GetSoundIdentifiers()).ToArray();
+                cbBuffSfx.DataSource = new string[] { "=" }.Concat(prj.GetSfxIdentifiers()).ToArray();
+
+                // Items listbox
+                lbItems.DisplayMember = nameof(Item.Name);
+                lbItems.DataSource = Project.GetInstance().Items;
             }
             catch (Exception e)
             {
                 MessageBox.Show(e.Message);
                 Environment.Exit(3);
             }
+            finally
+            {
+                await Task.Delay(300).ConfigureAwait(true);
+                pbFileSaveReload.Visible = false;
+                pbFileSaveReload.Value = 0;
+                this.Enabled = true;
+            }
         }
 
-        private void SetListBoxDataSource()
+        private void ReloadFormData()
         {
-            lb_items.DataSource = new BindingSource(Project.GetInstance().GetItems(), "");
-            lb_items.DisplayMember = "Name";
+            cbTypeItemKind1.DataSource = null;
+            cbTypeItemKind2.DataSource = null;
+            cbTypeItemKind3.DataSource = null;
+            cbEquipmentJob.DataSource = null;
+            cbEquipmentSex.DataSource = null;
+            cbEquipmentDstParam.DataSource = null;
+            lbConsumableStats.DataSource = null;
+            if (lbItems.DataSource is BindingSource listboxBinding)
+                listboxBinding.Dispose();
+
+            LoadFormData();
         }
 
         private void lb_items_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // General
             cbTypeItemKind1.DataBindings.Clear();
+            cbTypeItemKind1.SelectedItem = null;
             cbTypeItemKind2.DataBindings.Clear();
+            cbTypeItemKind2.SelectedItem = null;
             cbTypeItemKind3.DataBindings.Clear();
+            cbTypeItemKind3.SelectedItem = null;
             tbGeneralId.DataBindings.Clear();
             tbGeneralName.DataBindings.Clear();
             nudMiscPackMax.DataBindings.Clear();
             nudMiscCost.DataBindings.Clear();
-            cb_job.DataBindings.Clear();
-            cb_sex.DataBindings.Clear();
             pbMiscIcon.DataBindings.Clear();
             tbMiscIcon.DataBindings.Clear();
             tbGeneralDescription.DataBindings.Clear();
-            lb_DstParams.SelectedIndex = -1;
-            lb_DstParams.Items.Clear();
-            tb_AtkMin.DataBindings.Clear();
-            tb_AtkMax.DataBindings.Clear();
-            tb_Level.DataBindings.Clear();
-            tb_ModelName.DataBindings.Clear();
 
-            Item currentItem = ((Item)lb_items.SelectedItem);
+            // Equipment
+            cbEquipmentJob.DataBindings.Clear();
+            cbEquipmentJob.SelectedItem = null;
+            cbEquipmentSex.DataBindings.Clear();
+            cbEquipmentSex.SelectedItem = null;
+            tbAtkMin.DataBindings.Clear();
+            tbAtkMax.DataBindings.Clear();
+            cbEquipmentParts.DataBindings.Clear();
+            cbEquipmentParts.SelectedItem = null;
+            tbEquipmentLevel.DataBindings.Clear();
+            lbEquipmentDstStats.DataSource = null;
+
+            // Weapon
+            cbWeaponType.DataBindings.Clear();
+            cbWeaponType.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+            cbWeaponAttackRange.DataBindings.Clear();
+            cbWeaponAttackRange.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+            cbWeaponAttackSound.DataBindings.Clear();
+            cbWeaponAttackSound.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+            cbWeaponCriticalAttackSound.DataBindings.Clear();
+            cbWeaponCriticalAttackSound.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+            cbWeaponAttackSfx.DataBindings.Clear();
+            cbWeaponAttackSfx.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+
+            // Blinkwing
+            chckbBlinkwingNearestTown.DataBindings.Clear();
+            cbBlinkwingWorld.DataBindings.Clear();
+            cbBlinkwingWorld.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+            nudBlinkwingPositionX.DataBindings.Clear();
+            nudBlinkwingPositionY.DataBindings.Clear();
+            nudBlinkwingPositionZ.DataBindings.Clear();
+            nudBlinkwingAngle.DataBindings.Clear();
+            nudBlinkwingCastingTimeMinutes.DataBindings.Clear();
+            nudBlinkwingCastingTimeSeconds.DataBindings.Clear();
+            nudBlinkwingCastingTimeMs.DataBindings.Clear();
+            cbBlinkwingSfx.DataBindings.Clear();
+            cbBlinkwingSfx.SelectedItem = null;
+            tbBlinkwingChaoticSpawnKey.DataBindings.Clear();
+
+            // Special buff
+            nudSpecialBuffDurationDays.DataBindings.Clear(); 
+            nudSpecialBuffDurationHours.DataBindings.Clear(); 
+            nudSpecialBuffDurationMinutes.DataBindings.Clear();
+
+            // Furniture
+            nudFurnitureDurationDays.DataBindings.Clear();
+            nudFurnitureDurationHours.DataBindings.Clear();
+            nudFurnitureDurationMinutes.DataBindings.Clear();
+            cbFurnitureControl.DataBindings.Clear();
+            cbFurnitureControl.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+
+            // Papering
+            nudPaperingDurationDays.DataBindings.Clear();
+            nudPaperingDurationHours.DataBindings.Clear();
+            nudPaperingDurationMinutes.DataBindings.Clear();
+            tbPaperingTexture.DataBindings.Clear();
+            picboxPaperingTexture.DataBindings.Clear();
+
+            // Guild house furniture
+            nudGuildHouseFurnitureDurationDays.DataBindings.Clear();
+            nudGuildHouseFurnitureDurationHours.DataBindings.Clear();
+            nudGuildHouseFurnitureDurationMinutes.DataBindings.Clear();
+            nudGuildHouseFurnitureRank.DataBindings.Clear();
+            cbGuildHouseFurnitureControl.DataBindings.Clear();
+            cbGuildHouseFurnitureControl.SelectedItem = null;
+
+            // Guild house papering
+            nudGuildHousePaperingDurationDays.DataBindings.Clear();
+            nudGuildHousePaperingDurationHours.DataBindings.Clear();
+            nudGuildHousePaperingDurationMinutes.DataBindings.Clear();
+            nudGuildHousePaperingRank.DataBindings.Clear();
+            tbGuildHousePaperingTexture.DataBindings.Clear();
+            picboxGuildHousePaperingTexture.DataBindings.Clear();
+            nudGuildHousePaperingRank.DataBindings.Clear();
+
+            // Guild house NPC
+            nudGuildHouseNpcDurationDays.DataBindings.Clear();
+            nudGuildHouseNpcDurationHours.DataBindings.Clear();
+            nudGuildHouseNpcDurationMinutes.DataBindings.Clear();
+            nudGuildHouseNpcRank.DataBindings.Clear();
+            cbGuildHouseNpcMover.DataBindings.Clear();
+            cbGuildHouseNpcMover.SelectedItem = null;
+            tbGuildHouseNpcCharacterKey.DataBindings.Clear();
+            nudGuildHouseNpcRank.DataBindings.Clear();
+
+            // Pet
+            cbPetMoverIdentifier.DataBindings.Clear();
+            cbPetMoverIdentifier.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+
+            // Buff bead
+            nudBuffBeadDurationDays.DataBindings.Clear();
+            nudBuffBeadDurationHours.DataBindings.Clear();
+            nudBuffBeadDurationMinutes.DataBindings.Clear();
+            nudBuffBeadGrade.DataBindings.Clear();
+            cbBuffBeadStatType.DataBindings.Clear();
+            cbBuffBeadStatType.SelectedItem = null;
+            nudBuffBeadStatValue.DataBindings.Clear();
+            lbBuffBeadStats.DataSource = null;
+
+            // Consumable
+            nudConsumableStatMax.DataBindings.Clear();
+            cbConsumableSfx.DataBindings.Clear();
+            cbConsumableSfx.SelectedItem = null;
+            cbConsumableSound.DataBindings.Clear();
+            cbConsumableSound.SelectedItem = null;
+            lbConsumableStats.DataSource = null;
+
+            // Buff
+            nudBuffDurationMinutes.DataBindings.Clear();
+            nudBuffDurationSeconds.DataBindings.Clear();
+            nudBuffDurationMs.DataBindings.Clear();
+            cbBuffStatType.DataBindings.Clear();
+            cbBuffStatType.SelectedItem = null;
+            nudBuffStatValue.DataBindings.Clear();
+            lbBuffStats.DataSource = null;
+            cbBuffSound.DataBindings.Clear();
+            cbBuffSound.SelectedItem = null;
+            cbBuffSfx.DataBindings.Clear();
+            cbBuffSound.SelectedItem = null;
+
+            Item currentItem = ((Item)lbItems.SelectedItem);
             if (currentItem == null) return;
 
-            cbTypeItemKind1.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwItemKind1", false, DataSourceUpdateMode.OnPropertyChanged));
-            cbTypeItemKind2.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwItemKind2", false, DataSourceUpdateMode.OnPropertyChanged));
-            cbTypeItemKind3.DataBindings.Add(new Binding("SelectedItem", currentItem.Prop, "DwItemKind3", false, DataSourceUpdateMode.OnPropertyChanged));
+            // General
+            cbTypeItemKind1.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemKind1", false, DataSourceUpdateMode.OnPropertyChanged));
+            cbTypeItemKind2.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemKind2", false, DataSourceUpdateMode.OnPropertyChanged));
+            cbTypeItemKind3.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemKind3", false, DataSourceUpdateMode.OnPropertyChanged));
             tbGeneralId.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwID", false, DataSourceUpdateMode.OnPropertyChanged));
             tbGeneralName.DataBindings.Add(new Binding("Text", currentItem, "Name", false, DataSourceUpdateMode.OnPropertyChanged));
             nudMiscPackMax.DataBindings.Add(new Binding("Value", currentItem.Prop, "DwPackMax", false, DataSourceUpdateMode.OnPropertyChanged));
             nudMiscCost.DataBindings.Add(new Binding("Value", currentItem.Prop, "DwCost", false, DataSourceUpdateMode.OnPropertyChanged));
-            cb_job.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemJob", false, DataSourceUpdateMode.OnPropertyChanged));
-            cb_sex.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemSex", false, DataSourceUpdateMode.OnPropertyChanged));
             tbMiscIcon.DataBindings.Add(new Binding("Text", currentItem.Prop, "SzIcon", false, DataSourceUpdateMode.OnPropertyChanged));
+            pbMiscIcon.DataBindings.Add(new Binding(nameof(PictureBox.Image), currentItem, nameof(Item.Icon), false, DataSourceUpdateMode.OnPropertyChanged));
             tbGeneralDescription.DataBindings.Add(new Binding("Text", currentItem, "Description", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_AtkMin.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMin", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_AtkMax.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMax", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_Level.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwLimitLevel1", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_ModelName.DataBindings.Add(new Binding("Text", currentItem.Model, "SzName", false, DataSourceUpdateMode.OnPropertyChanged));
 
-            for (int i = 0; i < currentItem.Prop.DwDestParam.Length; i++)
-            {
-                if (currentItem.Prop.DwDestParam[i] != "=")
-                    lb_DstParams.Items.Add($"Stat {i} ({currentItem.Prop.DwDestParam[i]} + {currentItem.Prop.NAdjParamVal[i]})");
-                else
-                    lb_DstParams.Items.Add($"Stat {i}");
-            }
+            // Equipment
+            cbEquipmentJob.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemJob", false, DataSourceUpdateMode.OnPropertyChanged));
+            cbEquipmentSex.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwItemSex", false, DataSourceUpdateMode.OnPropertyChanged));
+            tbAtkMin.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMin", false, DataSourceUpdateMode.OnPropertyChanged));
+            tbAtkMax.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwAbilityMax", false, DataSourceUpdateMode.OnPropertyChanged));
+            tbEquipmentLevel.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwLimitLevel1", false, DataSourceUpdateMode.OnPropertyChanged));
+            cbEquipmentParts.DataBindings.Add(new Binding("Text", currentItem.Prop, "DwParts", false, DataSourceUpdateMode.OnPropertyChanged));
+            lbEquipmentDstStats.DisplayMember = nameof(Dest.Label);
+            lbEquipmentDstStats.DataSource = currentItem.Dests;
 
-            string iconPath = $"{Settings.GetInstance().IconsFolderPath}{currentItem.Prop.SzIcon}";
-            if (!File.Exists(iconPath))
-            {
-                pbMiscIcon.Image = pbMiscIcon.ErrorImage;
-            }
-            else
-                pbMiscIcon.Image = new DDSImage(File.OpenRead(iconPath)).BitmapImage;
-        }
+            // Weapon
+            cbWeaponType.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwWeaponType), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbWeaponAttackRange.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwAttackRange), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbWeaponAttackSound.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwSndAttack1), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbWeaponCriticalAttackSound.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwSndAttack2), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbWeaponAttackSfx.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwSfxObj3), false, DataSourceUpdateMode.OnPropertyChanged));
 
-        private void FormatIntTextbox(object sender, EventArgs e)
-        {
-            TextBox tb = (TextBox)sender;
-            string tempStr = "";
-            string finalStr = "";
-            for (int i = 0; i < tb.Text.Length; i++)
-            {
-                if (char.IsDigit(tb.Text[i]) || (i == 0 && tb.Text[i] == '-'))
-                {
-                    tempStr += tb.Text[i];
-                }
-            }
+            // Blinkwing
+            chckbBlinkwingNearestTown.DataBindings.Add(new Binding("Checked", currentItem, nameof(Item.IsTownBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbBlinkwingWorld.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwWeaponType), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingPositionX.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingPositionX), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingPositionY.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingPositionY), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingPositionZ.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingPositionZ), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingAngle.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.BlinkwingAngle), false, DataSourceUpdateMode.OnPropertyChanged));
+            tbBlinkwingChaoticSpawnKey.DataBindings.Add(new Binding(nameof(TextBox.Text), currentItem.Prop, nameof(ItemProp.SzTextFileName), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingCastingTimeMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.SkillReadyMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingCastingTimeSeconds.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.SkillReadySeconds), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingCastingTimeMs.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.SkillReadyMilliseconds), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbBlinkwingSfx.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwSfxObj), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbBlinkwingWorld.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingPositionX.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingPositionY.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingPositionZ.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBlinkwingAngle.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
+            tbBlinkwingChaoticSpawnKey.DataBindings.Add(new Binding(nameof(TextBox.Enabled), currentItem, nameof(Item.IsNormalBlinkwing), false, DataSourceUpdateMode.OnPropertyChanged));
 
-            // Remove last character while value is greater than int32
-            while (tempStr.Length > 0 && Int64.Parse(tempStr) > int.MaxValue)
-            {
-                tempStr = tempStr.Remove(tempStr.Length - 1);
-            }
+            // Special buff
+            nudSpecialBuffDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudSpecialBuffDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudSpecialBuffDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
 
-            int value = tempStr.Length > 0 ? int.Parse(tempStr) : 0;
-            tempStr = value.ToString();
-            for (int i = 0; i < tempStr.Length; i++)
-            {
-                finalStr += tempStr[i];
-                if ((tempStr.Length - i) % 3 == 1 && i != tempStr.Length - 1)
-                    finalStr += " ";
-            }
-            if (finalStr != tb.Text)
-            {
-                tb.Text = finalStr;
-                tb.Select(tb.Text.Length, 0);
-            }
-        }
+            // Furniture
+            nudFurnitureDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudFurnitureDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudFurnitureDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbFurnitureControl.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwLinkKind), false, DataSourceUpdateMode.OnPropertyChanged));
 
-        private void tb_icon_TextChanged(object sender, EventArgs e)
-        {
-            string filePath = $"{Settings.GetInstance().IconsFolderPath}{((TextBox)sender).Text}";
-            if (!File.Exists(filePath))
-            {
-                pbMiscIcon.Image = pbMiscIcon.ErrorImage;
-                return;
-            }
-            pbMiscIcon.Image = new DDSImage(File.OpenRead(filePath)).BitmapImage;
-        }
+            // Papering
+            nudPaperingDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudPaperingDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudPaperingDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
+            tbPaperingTexture.DataBindings.Add(new Binding(nameof(TextBox.Text), currentItem.Prop, nameof(ItemProp.SzTextFileName), false, DataSourceUpdateMode.OnPropertyChanged));
+            picboxPaperingTexture.DataBindings.Add(new Binding(nameof(PictureBox.Image), currentItem, nameof(Item.PaperingTexture), true, DataSourceUpdateMode.OnPropertyChanged));
 
-        private void lb_DstParams_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            cb_DstParamIdentifier.DataBindings.Clear();
-            tb_DstParamValue.DataBindings.Clear();
-            if (lb_items.SelectedIndex == -1 || lb_DstParams.SelectedIndex == -1)
-            {
-                cb_DstParamIdentifier.ResetText();
-                cb_DstParamIdentifier.Enabled = false;
-                tb_DstParamValue.ResetText();
-                tb_DstParamValue.Enabled = false;
-                return;
-            }
-            Item item = (Item)lb_items.SelectedItem;
-            //BindingSource bs = new BindingSource();
-            cb_DstParamIdentifier.DataBindings.Add(new Binding("SelectedItem", item.Prop.DwDestParam, "", false, DataSourceUpdateMode.OnPropertyChanged));
-            cb_DstParamIdentifier.BindingContext[item.Prop.DwDestParam].Position = lb_DstParams.SelectedIndex;
-            tb_DstParamValue.DataBindings.Add(new Binding("Text", item.Prop.NAdjParamVal, "", false, DataSourceUpdateMode.OnPropertyChanged));
-            tb_DstParamValue.BindingContext[item.Prop.NAdjParamVal].Position = lb_DstParams.SelectedIndex;
-            cb_DstParamIdentifier.Enabled = true;
-            tb_DstParamValue.Enabled = true;
-            //bs.DataSource = item.Prop.DwDestParam;
-            //bs.Position = lb_DstParams.SelectedIndex;
-            //cb_DstParamIdentifier.DataSource = bs;
-            // TODO: ADD PARAM VALUE
-        }
+            // Guild house furniture
+            nudGuildHouseFurnitureDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHouseFurnitureDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHouseFurnitureDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbGuildHouseFurnitureControl.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwLinkKind), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHouseFurnitureRank.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMax), false, DataSourceUpdateMode.OnPropertyChanged));
 
-        private void cb_DstParamIdentifier_SelectedValueChanged(object sender, EventArgs e)
-        {
-            //if (lb_DstParams.SelectedIndex == -1) return;
-            //string text = $"Stat {lb_DstParams.SelectedIndex}";
-            //if (cb_DstParamIdentifier.SelectedText != "=" && int.TryParse(tb_DstParamValue.Text, out int intParamValue))
-            //{
-            //    string symbol = intParamValue >= 0 ? "+" : "";
-            //    text += $"({cb_DstParamIdentifier.Text} {symbol}{tb_DstParamValue.Text})";
-            //}
-            //lb_DstParams.Items[lb_DstParams.SelectedIndex] = text;
+            // Guild house papering
+            nudGuildHousePaperingDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHousePaperingDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHousePaperingDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
+            tbGuildHousePaperingTexture.DataBindings.Add(new Binding(nameof(TextBox.Text), currentItem.Prop, nameof(ItemProp.SzTextFileName), false, DataSourceUpdateMode.OnPropertyChanged));
+            picboxGuildHousePaperingTexture.DataBindings.Add(new Binding(nameof(PictureBox.Image), currentItem, nameof(Item.PaperingTexture), true, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHousePaperingRank.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMax), false, DataSourceUpdateMode.OnPropertyChanged));
+
+            // Guild house NPC
+            nudGuildHouseNpcDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHouseNpcDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHouseNpcDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbGuildHouseNpcMover.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwLinkKind), false, DataSourceUpdateMode.OnPropertyChanged));
+            tbGuildHouseNpcCharacterKey.DataBindings.Add(new Binding(nameof(tbGuildHouseNpcCharacterKey.Text), currentItem.Prop, nameof(ItemProp.SzTextFileName), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudGuildHouseNpcRank.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMax), false, DataSourceUpdateMode.OnPropertyChanged));
+
+            // Pet
+            cbPetMoverIdentifier.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwLinkKind), true, DataSourceUpdateMode.OnPropertyChanged));
+
+            // Buff beads
+            nudBuffBeadDurationDays.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationDays), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBuffBeadDurationHours.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationHours), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBuffBeadDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.AbilityMinDurationMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBuffBeadGrade.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMax), false, DataSourceUpdateMode.OnPropertyChanged));
+            lbBuffBeadStats.DisplayMember = nameof(Dest.Label);
+            lbBuffBeadStats.DataSource = currentItem.Dests;
+
+            // Consumable
+            nudConsumableStatMax.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem.Prop, nameof(ItemProp.DwAbilityMin), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudConsumableStatMax.DataBindings.Add(new Binding(nameof(NumericUpDown.Enabled), currentItem, nameof(Item.HasRegenerableDestParam), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbConsumableSfx.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwSfxObj3), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbConsumableSound.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwSndAttack1), false, DataSourceUpdateMode.OnPropertyChanged));
+            lbConsumableStats.DisplayMember = nameof(Dest.Label);
+            lbConsumableStats.DataSource = currentItem.Dests;
+
+            // Buffs
+            nudBuffDurationMinutes.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.SkillTimeMinutes), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBuffDurationSeconds.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.SkillTimeSeconds), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBuffDurationMs.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), currentItem, nameof(Item.SkillTimeMilliseconds), false, DataSourceUpdateMode.OnPropertyChanged));
+            lbBuffStats.DisplayMember = nameof(Dest.Label);
+            lbBuffStats.DataSource = currentItem.Dests;
+            cbBuffSound.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwSndAttack1), false, DataSourceUpdateMode.OnPropertyChanged));
+            cbBuffSfx.DataBindings.Add(new Binding(nameof(ComboBox.Text), currentItem.Prop, nameof(ItemProp.DwSfxObj3), false, DataSourceUpdateMode.OnPropertyChanged));
+
+            string[] items = Project.GetInstance().Items.Where(x => x.Prop.DwItemKind2 == "IK2_ONCE").Select(x => x.Name).ToArray();
+            RefreshTabsState();
         }
 
         private void TsmiItemsSearch_Click(object sender, EventArgs e)
         {
-            SearchForm searchForm = new SearchForm();
-
-            if (searchForm.ShowDialog() == DialogResult.OK)
-            {
-                Item selectedItem = lb_items.Items.Cast<Item>().ToArray().FirstOrDefault(x => x.Name.ToLower().Contains(searchForm.Value.ToLower()));
-                if (selectedItem != null)
-                    lb_items.SelectedItem = selectedItem;
-            }
+            tbSearch.Focus();
         }
 
         private void Lb_items_KeyDown(object sender, KeyEventArgs e)
@@ -206,23 +402,42 @@ namespace ItemsEditor
 
         private void DeleteCurrentItem()
         {
-            if (!(lb_items.SelectedItem is Item item)) return;
+            if (!(lbItems.SelectedItem is Item item)) return;
             Project.GetInstance().DeleteItem(item);
-            int indexSave = lb_items.SelectedIndex;
-            SetListBoxDataSource();
-            lb_items.SelectedIndex = indexSave < lb_items.Items.Count ? indexSave : lb_items.Items.Count - 1;
+            // Trigger SelectedIndexChanged to bind data to the new selected item
+            int indexSave = lbItems.SelectedIndex;
+            lbItems.SelectedIndex = -1;
+            lbItems.SelectedIndex = indexSave;
         }
 
-        private void Cb_ik1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (!(cbTypeItemKind1.SelectedItem is string itemKind1)) return;
-            cbTypeItemKind2.DataSource = Project.GetInstance().GetPossibleItemKinds2ByItemKind1(itemKind1);
-        }
-
-        private void Cb_ik2_SelectedIndexChanged(object sender, EventArgs e)
+        private void CbTypeItemKind2_SelectedValueChanged(object sender, EventArgs e)
         {
             if (!(cbTypeItemKind2.SelectedItem is string itemKind2)) return;
-            cbTypeItemKind3.DataSource = Project.GetInstance().GetPossibleItemKinds3ByItemKind2(itemKind2);
+            if(itemKind2 == "IK2_WEAPON_DIRECT" || itemKind2 == "IK2_WEAPON_MAGIC")
+            {
+                lblEquipmentAtkMin.Text = "Min Atk :";
+                lblEquipmentAtkMax.Text = "Max Atk :";
+            }
+            else
+            {
+                lblEquipmentAtkMin.Text = "Min Def :";
+                lblEquipmentAtkMax.Text = "Max Def :";
+            }
+        }
+
+        private void CbTypeItemKind3_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if(!(cbTypeItemKind3.SelectedItem is string itemKind3)) return;
+            string[] possibleParts = Project.GetInstance().GetPossiblePartsByItemKind3(itemKind3);
+            cbEquipmentParts.DataSource = possibleParts;
+            if(lbItems.SelectedItem is Item item)
+            {
+                if(possibleParts.Length == 0)
+                    item.Prop.DwParts = "=";
+                else if (!possibleParts.Contains(item.Prop.DwParts))
+                    item.Prop.DwParts = possibleParts[0];
+                RefreshTabsState();
+            }
         }
 
         private void BtnMiscSelectIcon_Click(object sender, EventArgs e)
@@ -241,6 +456,369 @@ namespace ItemsEditor
                     || !File.Exists(ofd.FileName))
                     return;
                 tbMiscIcon.Text = Path.GetFileName(ofd.FileName);
+            }
+        }
+
+        private void SetSearchTextBoxPlaceHolder()
+        {
+            if (String.IsNullOrWhiteSpace(this.tbSearch.Text))
+            {
+                tbSearch.Text = "Search...";
+                tbSearch.ForeColor = Color.Gray;
+            }
+            else
+            {
+                tbSearch.ForeColor = Color.Black;
+            }
+            tbSearch.GotFocus += (s, e) =>
+            {
+                if (tbSearch.ForeColor == Color.Gray) // Placeholder
+                {
+                    tbSearch.Text = "";
+                    tbSearch.ForeColor = Color.Black;
+                }
+            };
+            tbSearch.LostFocus += (s, e) =>
+            {
+                if (String.IsNullOrWhiteSpace(tbSearch.Text))
+                {
+                    tbSearch.ForeColor = Color.Gray;
+                    tbSearch.Text = "Search...";
+                }
+            };
+        }
+
+        private void tbSearch_TextChanged(object sender, EventArgs e)
+        {
+            Item item = this.lbItems.SelectedItem as Item;
+            if (this.tbSearch.ForeColor == Color.Gray || String.IsNullOrWhiteSpace(this.tbSearch.Text)) // If placeholder or search text is blank
+                this.lbItems.DataSource = Project.GetInstance().Items;
+            else
+                this.lbItems.DataSource = new BindingList<Item>(Project.GetInstance().Items.Where(x => x.Name.ToLower().Contains(this.tbSearch.Text.Trim().ToLower())).ToList());
+            if (item is Item && this.lbItems.Items.Contains(item)) // If the selected item is still in the list, then we select it again
+                this.lbItems.SelectedItem = item;
+        }
+
+        private void tsmiSettings_Click(object sender, EventArgs e)
+        {
+            SettingsForm settingsForm = new SettingsForm();
+            if (settingsForm.ShowDialog() == DialogResult.OK && settingsForm.ContainsChanges)
+            {
+                // TODO: re implement this
+                //if (MessageBox.Show("Some settings have changed. Would you like to reload the data with the new settings?", "Settings changed", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                //    ReloadFormData();
+                //else
+                //    this.SetNumericUpDownLimits();
+            }
+        }
+
+        private void tsmiFileReload_Click(object sender, EventArgs e)
+        {
+            this.ReloadFormData();
+        }
+
+        private void TsmiViewExpertEditor_Click(object sender, EventArgs e)
+        {
+            if (!(lbItems.SelectedItem is Item mover)) return;
+            new ExpertEditorForm(mover).ShowDialog();
+            RefreshTabsState();
+        }
+
+        private void CbEquipmentDstParam_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!(this.cbEquipmentDstParam.SelectedItem is string selectedItem) || selectedItem == "=" || selectedItem == "DST_NONE")
+            {
+                nudEquipmentDstValue.Value = -1;
+                nudEquipmentDstValue.Enabled = false;
+            }
+            else
+                nudEquipmentDstValue.Enabled = true;
+        }
+
+        private void RefreshTabsState()
+        {
+            if(!(lbItems.SelectedItem is Item currentItem)) return;
+            List<TabPage> tabs = new List<TabPage> { tpMainGeneral };
+            if (currentItem.Prop.DwParts != "=")
+                tabs.Add(tpMainEquipment);
+            else
+            {
+                switch(currentItem.Prop.DwItemKind2)
+                {
+                    case "IK2_FURNITURE":
+                        tabs.Add(tpMainFurniture);
+                        break;
+                    case "IK2_PAPERING":
+                        tabs.Add(tpMainPapering);
+                        break;
+                    case "IK2_GUILDHOUSE_FURNITURE":
+                        tabs.Add(tpMainGuildHouseFurniture);
+                        break;
+                    case "IK2_GUILDHOUSE_PAPERING":
+                        tabs.Add(tpMainGuildHousePapering);
+                        break;
+                    case "IK2_GUILDHOUSE_NPC":
+                        tabs.Add(tpMainGuildHouseNPC);
+                        break;
+                    case "IK2_REFRESHER":
+                    case "IK2_POTION":
+                    case "IK2_FOOD":
+                        tabs.Add(tpMainConsumable);
+                        break;
+                    case "IK2_BLINKWING":
+                        tabs.Add(tpMainBlinkwing);
+                        break;
+                    case "IK2_BUFF2":
+                        tabs.Add(tpMainSpecialBuff);
+                        break;
+                    case "IK2_BUFF":
+                    case "IK2_BUFF_TOGIFT":
+                        tabs.Add(tpMainBuff);
+                        break;
+                }
+                switch(currentItem.Prop.DwItemKind3)
+                {
+                    case "IK3_PET":
+                    case "IK3_SUMMON_NPC":
+                        tabs.Add(tpMainPet);
+                        break;
+                    case "IK3_VIS":
+                        tabs.Add(tpMainBuffBead);
+                        break;
+                }
+            }
+            switch(currentItem.Prop.DwItemKind1)
+            {
+                case "IK1_WEAPON":
+                    tabs.Add(tpMainWeapon);
+                    break;
+            }
+
+            foreach (TabPage tab in tcMain.TabPages)
+                if(!tabs.Contains(tab))
+                    tcMain.TabPages.Remove(tab);
+            foreach(TabPage tab in tabs)
+                if(!tcMain.TabPages.Contains(tab))
+                    tcMain.TabPages.Add(tab);
+        }
+
+        private void BtnPaperingSelectTexture_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog()
+            {
+                InitialDirectory = Settings.GetInstance().TexturesFolderPath,
+                Filter = ".dds files | *.dds",
+                CheckFileExists = true,
+                FileName = tbPaperingTexture.Text,
+            };
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                if (!ofd.SafeFileName.ToLower().EndsWith(".dds")
+                    || !File.Exists(ofd.FileName))
+                    return;
+                tbPaperingTexture.Text = Path.GetFileName(ofd.FileName);
+            }
+        }
+
+        private void LbEquipmentDstStats_SelectedValueChanged(object sender, EventArgs e)
+        {
+            cbEquipmentDstParam.DataBindings.Clear();
+            nudEquipmentDstValue.DataBindings.Clear();
+            if (!(lbEquipmentDstStats.SelectedItem is Dest dst)) return;
+            cbEquipmentDstParam.DataBindings.Add(new Binding(nameof(ComboBox.Text), dst, nameof(Dest.Param), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudEquipmentDstValue.DataBindings.Add(new Binding("Value", dst, nameof(Dest.Value), false, DataSourceUpdateMode.OnPropertyChanged));
+        }
+
+        private void LbItems_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                lbItems.SelectedIndex = lbItems.IndexFromPoint(e.Location);
+                if (lbItems.SelectedIndex != -1)
+                    cmsLbItems.Show(Cursor.Position);
+            }
+        }
+
+        private void TsmiItemDuplicate_Click(object sender, EventArgs e)
+        {
+            if (!(lbItems.SelectedItem is Item item)) return;
+            Project.GetInstance().DuplicateItem(item);
+            this.lbItems.SelectedIndex = this.lbItems.Items.Count - 1;
+        }
+
+        private void TsmiItemDelete_Click(object sender, EventArgs e)
+        {
+            this.DeleteCurrentItem();
+        }
+
+        private void PlaySound(string soundId)
+        {
+            try
+            {
+                Project.GetInstance().PlaySound(soundId);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Resources.ExceptionMessages.LoadingError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BtnWeaponPlayAttackSound_Click(object sender, EventArgs e)
+        {
+            this.PlaySound(cbWeaponAttackSound.Text);
+        }
+
+        private void BtnWeaponPlayCriticalAttackSound_Click(object sender, EventArgs e)
+        {
+            this.PlaySound(cbWeaponCriticalAttackSound.Text);
+        }
+
+        private async void Save()
+        {
+            try
+            {
+                this.Enabled = false;
+                pbFileSaveReload.Visible = true;
+                await Task.Run(() => Project.GetInstance().Save((progress) => pbFileSaveReload.Invoke(new Action(() => pbFileSaveReload.Value = progress)))).ConfigureAwait(true);
+            } catch(Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                await Task.Delay(300).ConfigureAwait(true);
+                pbFileSaveReload.Visible = false;
+                pbFileSaveReload.Value = 0;
+                this.Enabled = true;
+            }
+        }
+
+        private void TsmiFileSave_Click(object sender, EventArgs e)
+        {
+            this.Save();
+        }
+
+        private void OpenModelById(string id)
+        {
+            try
+            {
+                Project project = Project.GetInstance();
+                Project.GetInstance().OpenModelById(id);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Resources.ExceptionMessages.LoadingError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void BtnWeaponOpenAttackSfx_Click(object sender, EventArgs e)
+        {
+            this.OpenModelById(this.cbWeaponAttackSfx.Text);
+        }
+
+        private void LbConsumableStats_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbConsumableStatType.DataBindings.Clear();
+            cbConsumableStatType.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+            nudConsumableStatValue.DataBindings.Clear();
+            if (!(lbConsumableStats.SelectedItem is Dest dst)) return;
+            cbConsumableStatType.DataBindings.Add(new Binding(nameof(ComboBox.Text), dst, nameof(Dest.Param), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudConsumableStatValue.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), dst, nameof(Dest.Value), false, DataSourceUpdateMode.OnPropertyChanged));
+        }
+
+        private void BtnConsumablePlaySound_Click(object sender, EventArgs e)
+        {
+            this.PlaySound(this.cbConsumableSound.Text);
+        }
+
+        private void BtnConsumableOpenSfx_Click(object sender, EventArgs e)
+        {
+            this.OpenModelById(this.cbConsumableSfx.Text);
+        }
+
+        private void BtnBuffPlaySound_Click(object sender, EventArgs e)
+        {
+            this.PlaySound(this.cbBuffSound.Text);
+        }
+
+        private void BtnBuffOpenSfx_Click(object sender, EventArgs e)
+        {
+            this.OpenModelById(this.cbBuffSfx.Text);
+        }
+
+        private void LbBuffStats_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbBuffStatType.DataBindings.Clear();
+            cbBuffStatType.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+            nudBuffStatValue.DataBindings.Clear();
+            if (!(lbBuffStats.SelectedItem is Dest dst)) return;
+            cbBuffStatType.DataBindings.Add(new Binding(nameof(ComboBox.Text), dst, nameof(Dest.Param), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBuffStatValue.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), dst, nameof(Dest.Value), false, DataSourceUpdateMode.OnPropertyChanged));
+        }
+
+        private void LbBuffBeadStats_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cbBuffBeadStatType.DataBindings.Clear();
+            cbBuffBeadStatType.SelectedItem = null; // Reset the selected item to reset what's shown in case of an invalid value.
+            nudBuffBeadStatValue.DataBindings.Clear();
+            if (!(lbBuffBeadStats.SelectedItem is Dest dst)) return;
+            cbBuffBeadStatType.DataBindings.Add(new Binding(nameof(ComboBox.Text), dst, nameof(Dest.Param), false, DataSourceUpdateMode.OnPropertyChanged));
+            nudBuffBeadStatValue.DataBindings.Add(new Binding(nameof(NumericUpDown.Value), dst, nameof(Dest.Value), false, DataSourceUpdateMode.OnPropertyChanged));
+        }
+
+        private void tsmiWorldEditor_Click(object sender, EventArgs e)
+        {
+            using (var form = new WorldForm())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void tsmiTicketEditor_Click(object sender, EventArgs e)
+        {
+            using (var form = new TicketForm())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void tsmiTerrainObjectEditor_Click(object sender, EventArgs e)
+        {
+            using (var form = new TerrainObjectForm())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void tsmiJobEditor_Click(object sender, EventArgs e)
+        {
+            using (var form = new JobForm())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void tsmiPackitemEditor_Click(object sender, EventArgs e)
+        {
+            using (var form = new PackitemForm())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void tsmiLordEditor_Click(object sender, EventArgs e)
+        {
+            using (var form = new LordForm())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void tsmiDropEventEditor_Click(object sender, EventArgs e)
+        {
+            using (var form = new DropEventForm())
+            {
+                form.ShowDialog();
             }
         }
     }

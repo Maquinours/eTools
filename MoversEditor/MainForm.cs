@@ -46,7 +46,7 @@ namespace MoversEditor
                 Project prj = Project.GetInstance();
                 await Task.Run(() => prj.Load((progress) => pbFileSaveReload.Invoke(new Action(() => pbFileSaveReload.Value = progress)))).ConfigureAwait(true);
                 AutoCompleteStringCollection identifiersSource = new AutoCompleteStringCollection();
-                identifiersSource.AddRange(prj.GetAllMoversDefines());
+                identifiersSource.AddRange(prj.GetItemIdentifiers());
                 tbIdentifier.AutoCompleteCustomSource = identifiersSource;
                 cbAi.DataSource = prj.GetAiIdentifiers();
                 cbBelligerence.DataSource = prj.GetBelligerenceIdentifiers();
@@ -79,7 +79,7 @@ namespace MoversEditor
             catch (Exception e)
             {
                 //UseWaitCursor = false;
-                switch (MessageBox.Show(e.Message, ErrorMessages.GetMessage("LoadingError"), MessageBoxButtons.RetryCancel, MessageBoxIcon.Error))
+                switch (MessageBox.Show(e.Message, Resources.ExceptionMessages.LoadingError, MessageBoxButtons.RetryCancel, MessageBoxIcon.Error))
                 {
                     case DialogResult.Retry:
                         LoadFormData();

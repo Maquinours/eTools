@@ -1,0 +1,324 @@
+﻿<Page
+    x:Class="eTools_Ultimate.Views.Pages.DashboardPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
+    xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pageViewModels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="DashboardPage"
+    d:DataContext="{d:DesignInstance pageViewModels:DashboardViewModel,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="900"
+    d:DesignWidth="1400"
+    ScrollViewer.CanContentScroll="False"
+    mc:Ignorable="d">
+
+
+    <Page.Resources>
+        <!--  Converters  -->
+        <converters:MaxTextWidthConverter x:Key="MaxTextWidthConverter" />
+
+        <!--  Template for navigation cards  -->
+        <DataTemplate x:Key="NavigationCardTemplate">
+            <Border
+                Height="160"
+                Margin="8"
+                CornerRadius="12"
+                Cursor="Hand"
+                Tag="{Binding}">
+                <Border.Width>
+                    <Binding
+                        Converter="{StaticResource MaxTextWidthConverter}"
+                        Path="DataContext.NavigationCards"
+                        RelativeSource="{RelativeSource AncestorType=ItemsControl}" />
+                </Border.Width>
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                        <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+                        <Setter Property="BorderThickness" Value="1" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                <Setter Property="BorderBrush">
+                                    <Setter.Value>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                            <GradientStop Offset="0" Color="#0065DC" />
+                                            <GradientStop Offset="1" Color="#00C2FF" />
+                                        </LinearGradientBrush>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="BorderThickness" Value="2" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
+                <behaviors:Interaction.Triggers>
+                    <behaviors:EventTrigger EventName="MouseLeftButtonUp">
+                        <behaviors:InvokeCommandAction Command="{Binding DataContext.OpenCardPageCommand, RelativeSource={RelativeSource AncestorType=Page}}" CommandParameter="{Binding}" />
+                    </behaviors:EventTrigger>
+                </behaviors:Interaction.Triggers>
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!--  Icon top left  -->
+                    <Image
+                        Grid.Row="0"
+                        Width="42"
+                        Height="42"
+                        Margin="0,0,0,5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Source="{Binding Icon}" />
+
+                    <!--  Title below icon  -->
+                    <TextBlock
+                        Grid.Row="1"
+                        Margin="0,0,0,5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        FontSize="18"
+                        FontWeight="SemiBold"
+                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                        Text="{Binding Title}" />
+
+                    <!--  Description below title  -->
+                    <TextBlock
+                        Grid.Row="2"
+                        Margin="0,0,0,20"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top"
+                        FontSize="14"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                        Text="{Binding Description}"
+                        TextAlignment="Center"
+                        TextOptions.TextFormattingMode="Display"
+                        TextOptions.TextRenderingMode="ClearType"
+                        TextWrapping="Wrap" />
+
+
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
+
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  Banner  -->
+            <Border
+                x:Name="BannerBorder"
+                Grid.Row="1"
+                Height="300"
+                Margin="0,0,0,0"
+                CornerRadius="8"
+                Cursor="Arrow">
+
+
+                <!--  Opacity mask for fade effect  -->
+                <Border.OpacityMask>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                        <GradientStop Offset="0" Color="White" />
+                        <GradientStop Offset="0.7" Color="White" />
+                        <GradientStop Offset="1" Color="Transparent" />
+                    </LinearGradientBrush>
+                </Border.OpacityMask>
+
+                <Border CornerRadius="8">
+                    <Border.Background>
+                        <ImageBrush
+                            ImageSource="pack://application:,,,/Assets/Images/HomePage.png"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Stretch="UniformToFill" />
+                    </Border.Background>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!--  Content overlay  -->
+                        <StackPanel
+                            Grid.Row="0"
+                            Margin="48,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="Transparent">
+                            <ui:TextBlock
+                                FontSize="32"
+                                FontTypography="Title"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                Text="{i18n:StringLocalizer 'Welcome'}" />
+                        </StackPanel>
+
+                        <Grid Grid.Row="1">
+                            <ui:TextBlock
+                                Margin="12"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                FontTypography="Caption"
+                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                Text="{i18n:StringLocalizer 'Created by eTools Ultimate'}" />
+
+                            <Button
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                Command="{Binding OpenPatchNotesDialogCommand}">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Setter Property="BorderBrush" Value="Transparent" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <ContentPresenter />
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Setter Property="BorderBrush" Value="Transparent" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Border
+                                    Height="36"
+                                    MinWidth="120"
+                                    MaxWidth="180"
+                                    Margin="12"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    Background="{DynamicResource ControlFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="8"
+                                    Cursor="Hand">
+                                    <Border.Effect>
+                                        <DropShadowEffect
+                                            BlurRadius="8"
+                                            Direction="270"
+                                            Opacity="0.2"
+                                            ShadowDepth="1" />
+                                    </Border.Effect>
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                                    <Setter Property="BorderBrush">
+                                                        <Setter.Value>
+                                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                                                <GradientStop Offset="0" Color="#0065DC" />
+                                                                <GradientStop Offset="1" Color="#00C2FF" />
+                                                            </LinearGradientBrush>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Setter Property="BorderThickness" Value="2" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                    <TextBlock
+                                        Margin="12,8"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{i18n:StringLocalizer 'Patchlogs'}" />
+                                </Border>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Border>
+
+            <!--  Navigation Cards without inner ScrollViewer  -->
+            <Grid
+                Grid.Row="2"
+                Margin="0,24,0,0"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Top">
+                <ItemsControl
+                    Margin="0,0,0,50"
+                    ItemTemplate="{StaticResource NavigationCardTemplate}"
+                    ItemsSource="{Binding NavigationCards}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel HorizontalAlignment="Center" Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </Grid>
+
+            <!--  GitHub Button  -->
+            <ui:Anchor
+                Grid.Row="2"
+                Margin="0,0,60,20"
+                Padding="0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Cursor="Hand"
+                MouseOverBackground="Transparent"
+                MouseOverBorderBrush="Transparent"
+                NavigateUri="https://github.com/Maquinours/eTools"
+                ToolTip="{i18n:StringLocalizer 'View on GitHub'}">
+                <Image
+                    Width="36"
+                    Height="36"
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                    Source="pack://application:,,,/Assets/Icons/github.png"
+                    Stretch="Uniform" />
+            </ui:Anchor>
+
+            <!--  Discord Button  -->
+            <ui:Anchor
+                Grid.Row="2"
+                Margin="0,0,20,20"
+                Padding="0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Background="Transparent"
+                BorderBrush="Transparent"
+                Cursor="Hand"
+                MouseOverBackground="Transparent"
+                MouseOverBorderBrush="Transparent"
+                NavigateUri="https://discord.gg/aGZYxkjWxh"
+                ToolTip="{i18n:StringLocalizer 'Join our Discord server'}">
+                <Image
+                    Width="36"
+                    Height="36"
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                    Source="pack://application:,,,/Assets/Icons/discord.png"
+                    Stretch="Uniform" />
+            </ui:Anchor>
+
+            <!--  Changelog-Dialog (hidden)  -->
+            <Frame
+                x:Name="ChangelogFrame"
+                Grid.RowSpan="3"
+                Visibility="Collapsed" />
+        </Grid>
+    </ScrollViewer>
+</Page>
