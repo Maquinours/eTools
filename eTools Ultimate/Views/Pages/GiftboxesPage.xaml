@@ -240,7 +240,7 @@
                     Margin="0,0,10,0"
                     Appearance="Primary"
                     Command="{Binding AddGiftboxCommand}"
-                    Content="{i18n:StringLocalizer 'Create giftbox'}"
+                    Content="{i18n:StringLocalizer 'Add'}"
                     Icon="Add24" />
                 <ui:Button
                     Margin="0,0,10,0"
