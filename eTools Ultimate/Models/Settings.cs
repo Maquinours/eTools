@@ -13,6 +13,12 @@ using System.Windows.Data;
 
 namespace eTools_Ultimate.Models
 {
+    public enum FilesFormats
+    {
+        Original,
+        Florist
+    }
+
     public class Settings : INotifyPropertyChanged
     {
         #region Fields
@@ -28,6 +34,7 @@ namespace eTools_Ultimate.Models
         private string? _texturesFolderPath;
         private string? _soundsConfigFilePath;
         private string? _soundsFolderPath;
+        private FilesFormats _filesFormat = FilesFormats.Original;
         #endregion
 
         #region Movers settings
@@ -125,6 +132,12 @@ namespace eTools_Ultimate.Models
             set => SetFolderPathPropertyWithDefault(ref _soundsFolderPath, value, DefaultSoundsFolderPath);
         }
         public string DefaultSoundsFolderPath => $"{ClientFolderPath}Sound{Path.DirectorySeparatorChar}";
+
+        public FilesFormats FilesFormat
+        {
+            get => _filesFormat;
+            set => SetValue(ref _filesFormat, value);
+        }
         #endregion
 
         #region Movers settings

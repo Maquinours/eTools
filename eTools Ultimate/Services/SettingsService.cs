@@ -12,15 +12,18 @@ namespace eTools_Ultimate.Services
 {
     internal static class SettingsKeywords
     {
-        // General settings
+        // Main settings
         internal const string ResourcesVersion = "ResourcesVersion";
         internal const string ResourcesPath = "ResourcesPath";
         internal const string ClientPath = "ClientPath";
+
+        // General settings
         internal const string IconsPath = "IconsPath";
         internal const string TexturesPath = "TexturesPath";
         internal const string ModelsPath = "ModelsPath";
         internal const string SoundsConfigPath = "SoundsConfigPath";
         internal const string SoundsPath = "SoundsPath";
+        internal const string FilesFormat = "FilesFormat";
 
         // Movers settings
         internal const string PropMoverPath = "PropMoverPath";
@@ -100,6 +103,13 @@ namespace eTools_Ultimate.Services
                         case SettingsKeywords.SoundsPath:
                             Settings.SoundsFolderPath = scanner.GetToken();
                             break;
+                        case SettingsKeywords.FilesFormat:
+                            {
+                                if (!Enum.TryParse(scanner.GetToken(), out FilesFormats filesFormat))
+                                    throw new InvalidOperationException("SettingsService::Load exception : files format settings is incorrectly formated. (token is not MoverTypes)");
+                                Settings.FilesFormat = filesFormat;
+                                break;
+                            }
 
                         // Movers settings
                         case SettingsKeywords.PropMoverPath:
@@ -210,6 +220,7 @@ namespace eTools_Ultimate.Services
                 writer.WriteLine($"{SettingsKeywords.SoundsConfigPath}\t\"{Settings.SoundsConfigFilePath}\"");
             if (Settings.SoundsFolderPath != null)
                 writer.WriteLine($"{SettingsKeywords.SoundsPath}\t\"{Settings.SoundsFolderPath}\"");
+            writer.WriteLine($"{SettingsKeywords.FilesFormat}\t{Settings.FilesFormat}");
 
             // Movers settings
             if (Settings.PropMoverFilePath != null)
@@ -275,6 +286,7 @@ namespace eTools_Ultimate.Services
                 case nameof(Settings.ModelsFolderPath):
                 case nameof(Settings.SoundsConfigFilePath):
                 case nameof(Settings.SoundsFolderPath):
+                case nameof(Settings.FilesFormat):
 
                 // Movers settings
                 case nameof(Settings.PropMoverFilePath):
