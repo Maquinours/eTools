@@ -88,8 +88,15 @@ namespace eTools_Ultimate.Models
 
         public string Name
         {
-            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName);
-            set => App.Services.GetRequiredService<StringsService>().ChangeStringValue(Prop.SzName, value);
+            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName) ?? Prop.SzName;
+            set
+            {
+                StringsService stringsService = App.Services.GetRequiredService<StringsService>();
+                if (stringsService.HasString(Prop.SzName))
+                    stringsService.ChangeStringValue(Prop.SzName, value);
+                else
+                    Prop.SzName = value;
+            }
         }
 
         public Color Color

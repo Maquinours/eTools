@@ -20,7 +20,7 @@ namespace eTools_Ultimate.Services
 
         public string GetNextStringIdentifier()
         {
-           return stringsService.GetNextStringIdentifier("IDS_PROPMOTION_TXT_");
+            return stringsService.GetNextStringIdentifier("IDS_PROPMOTION_TXT_");
         }
 
         private void ClearMotions()
@@ -89,9 +89,9 @@ namespace eTools_Ultimate.Services
                 writer.Write('\t');
                 writer.Write(prop.DwPlay.ToString(CultureInfo.InvariantCulture));
                 writer.Write('\t');
-                writer.Write(prop.SzName);
-                writer.Write('\t');
-                writer.Write(prop.SzDesc);
+                writer.Write(!stringsService.HasString(prop.SzName) ? $"\"{prop.SzName}\"" : prop.SzName);
+                writer.Write('\t'); 
+                writer.Write(!stringsService.HasString(prop.SzDesc) ? $"\"{prop.SzDesc}\"" : prop.SzDesc);
                 writer.WriteLine();
             }
         }

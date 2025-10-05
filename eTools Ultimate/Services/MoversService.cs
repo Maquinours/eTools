@@ -18,7 +18,7 @@ using System.Xml.Linq;
 
 namespace eTools_Ultimate.Services
 {
-    public class MoversService(ModelsService modelsService)
+    public class MoversService(ModelsService modelsService, StringsService stringsService)
     {
         private readonly ObservableCollection<Mover> _movers = [];
         public ObservableCollection<Mover> Movers => this._movers;
@@ -77,12 +77,6 @@ namespace eTools_Ultimate.Services
                         continue;
 
                     string szName = script.GetToken();
-                    if (!szName.StartsWith("IDS_"))
-                    {
-                        string txtKey = MoversService.GetNextStringIdentifier();
-                        strings.Add(txtKey, szName);
-                        szName = txtKey;
-                    }
                     int dwAi = script.GetNumber();
                     int dwStr = script.GetNumber();
                     int dwSta = script.GetNumber();
@@ -198,13 +192,6 @@ namespace eTools_Ultimate.Services
 
                     string szComment = script.GetToken(); // Comment (useless)
 
-                    if (!szComment.StartsWith("IDS_"))
-                    {
-                        string txtKey = MoversService.GetNextStringIdentifier();
-                        strings.Add(txtKey, szComment);
-                        szComment = txtKey;
-                    }
-
                     int dwAreaColor = default;
                     string szNpcMark = string.Empty;
                     int dwMadrigalGiftPoint = default;
@@ -222,11 +209,6 @@ namespace eTools_Ultimate.Services
                      * */
                     if (script.Token == "" && script.EndOfStream && script.TokenType != TokenType.STRING)
                         throw new IncorrectlyFormattedFileException(filePath);
-
-                    if (!strings.ContainsKey(szName))
-                        strings.Add(szName, "");          // If IDS is not defined, we add it to be defined.
-                    if (!strings.ContainsKey(szComment))
-                        strings.Add(szComment, "");          // If IDS is not defined, we add it to be defined.
 
                     MoverProp moverProp = new(
                         dwId: dwId,
@@ -341,7 +323,7 @@ namespace eTools_Ultimate.Services
             {
                 writer.Write(Script.NumberToString(moverProp.DwId, definesService.ReversedMoverDefines));
                 writer.Write("\t");
-                writer.Write(string.IsNullOrWhiteSpace(moverProp.SzName) ? @"""" : moverProp.SzName);
+                writer.Write(!stringsService.HasString(moverProp.SzName) ? $"\"{moverProp.SzName}\"" : moverProp.SzName);
                 writer.Write("\t");
                 writer.Write(Script.NumberToString(moverProp.DwAi, definesService.ReversedAiDefines));
                 writer.Write("\t");
@@ -503,7 +485,7 @@ namespace eTools_Ultimate.Services
                 writer.Write("\t");
                 writer.Write(Script.NumberToString(moverProp.DwSndIdle2, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(string.IsNullOrWhiteSpace(moverProp.SzComment) ? @"""" : moverProp.SzComment);
+                writer.Write(!stringsService.HasString(moverProp.SzComment) ? $"\"{moverProp.SzComment}\"" : moverProp.SzComment);
 
                 if (settings.ResourcesVersion >= 19)
                 {

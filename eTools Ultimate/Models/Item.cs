@@ -805,13 +805,27 @@ namespace eTools_Ultimate.Models
 
         public string Name
         {
-            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName);
-            set => App.Services.GetRequiredService<StringsService>().ChangeStringValue(Prop.SzName, value);
+            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName) ?? Prop.SzName;
+            set
+            {
+                StringsService stringsService = App.Services.GetRequiredService<StringsService>();
+                if (stringsService.HasString(Prop.SzName))
+                    stringsService.ChangeStringValue(Prop.SzName, value);
+                else
+                    Prop.SzName = value;
+            }
         }
         public string Description
         {
-            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzCommand);
-            set => App.Services.GetRequiredService<StringsService>().ChangeStringValue(Prop.SzCommand, value);
+            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzCommand) ?? Prop.SzCommand;
+            set 
+            {
+                StringsService stringsService = App.Services.GetRequiredService<StringsService>();
+                if (stringsService.HasString(Prop.SzCommand))
+                    stringsService.ChangeStringValue(Prop.SzCommand, value);
+                else
+                    Prop.SzCommand = value;
+            }
         }
 
         public ImageSource? Icon

@@ -70,9 +70,14 @@ namespace eTools_Ultimate.Services
             }
         }
 
-        public string GetString(string ids)
+        public string? GetString(string ids)
         {
-            return this.Strings[ids];
+            return Strings.GetValueOrDefault(ids);
+        }
+
+        public bool HasString(string ids)
+        {
+            return Strings.ContainsKey(ids);
         }
 
         public void ChangeStringValue(string ids, string newValue)

@@ -314,11 +314,6 @@ namespace eTools_Ultimate.Services
                     if (script.Token == "" && script.EndOfStream && script.TokenType != TokenType.STRING)
                         throw new IncorrectlyFormattedFileException(filePath);
 
-                    if (!stringsService.Strings.ContainsKey(szName))
-                        stringsService.Strings.Add(szName, "");          // If IDS is not defined, we add it to be defined.
-                    if (!stringsService.Strings.ContainsKey(szCommand))
-                        stringsService.Strings.Add(szCommand, "");
-
                     ItemProp itemProp = new(
                         nVer: NVer,
                         dwId: dwId,

@@ -85,7 +85,7 @@ namespace eTools_Ultimate.Services
                 writer.WriteLine();
                 writer.WriteLine('{');
                 writer.Write('\t');
-                writer.Write(text.Prop.SzName);
+                writer.Write(!stringsService.HasString(text.Prop.SzName) ? $"\"{text.Prop.SzName}\"" : text.Prop.SzName);
                 writer.WriteLine();
                 writer.WriteLine('}');
             }

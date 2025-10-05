@@ -112,14 +112,28 @@ namespace eTools_Ultimate.Models
 
         public string Name
         {
-            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName);
-            set => App.Services.GetRequiredService<StringsService>().ChangeStringValue(Prop.SzName, value);
+            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName) ?? Prop.SzName;
+            set
+            {
+                StringsService stringsService = App.Services.GetRequiredService<StringsService>();
+                if (stringsService.HasString(Prop.SzName))
+                    stringsService.ChangeStringValue(Prop.SzName, value);
+                else
+                    Prop.SzName = value;
+            }
         }
 
         public string Description
         {
-            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzDesc);
-            set => App.Services.GetRequiredService<StringsService>().ChangeStringValue(Prop.SzDesc, value);
+            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzDesc) ?? Prop.SzDesc;
+            set
+            {
+                StringsService stringsService = App.Services.GetRequiredService<StringsService>();
+                if (stringsService.HasString(Prop.SzDesc))
+                    stringsService.ChangeStringValue(Prop.SzDesc, value);
+                else
+                    Prop.SzDesc = value;
+            }
         }
 
         public string IconFilePath

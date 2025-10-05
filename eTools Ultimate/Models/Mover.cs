@@ -442,7 +442,18 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public string Name { get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName); set { if (value != this.Name) { App.Services.GetRequiredService<StringsService>().ChangeStringValue(Prop.SzName, value); } } } // We don't notify changes cause ProjectStrings_CollectionChanged is already doing it
+        public string Name
+        {
+            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName) ?? Prop.SzName;
+            set
+            {
+                StringsService stringsService = App.Services.GetRequiredService<StringsService>();
+                if (stringsService.HasString(Prop.SzName))
+                    stringsService.ChangeStringValue(Prop.SzName, value);
+                else
+                    Prop.SzName = value;
+            }
+        } // We don't notify changes cause ProjectStrings_CollectionChanged is already doing it
 
         //public string ElementType { get => Project.GetInstance().GetElementNameById(Prop.EElementType); set { if (value != this.ElementType) { Prop.EElementType = Project.GetInstance().GetElementIdByName(value); } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
         //public MoverTypes Type { get => Project.GetInstance().GetMoverType(this); set { if (value != this.Type) { Project.GetInstance().SetMoverType(this, value); } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
