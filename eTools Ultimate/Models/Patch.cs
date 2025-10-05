@@ -22,5 +22,5 @@
         public PatchModification[] Updated { get; init; } = [];
     }
     
-    public record class Patch(string Version, DateTime Date, PatchModification[] Modifications, string? DeveloperText = null, string? ImagePath = null, PatchCategory? Categories = null);
+    public record class Patch(string Version, DateTime Date, PatchModification[] Modifications, string? DeveloperText = null, PatchCategory? Categories = null);
 }

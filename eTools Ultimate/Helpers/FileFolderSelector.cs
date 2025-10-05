@@ -39,7 +39,7 @@ namespace eTools_Ultimate.Helpers
                 fileDialog.InitialDirectory = initialDirectoryPath;
                 fileDialog.FileName = Path.GetFileName(path);
             }
-            else if(Directory.Exists(path))
+            else if(Directory.Exists(initialDirectoryPath))
             {
                 fileDialog.InitialDirectory = initialDirectoryPath;
             }

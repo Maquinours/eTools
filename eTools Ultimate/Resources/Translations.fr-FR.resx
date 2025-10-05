@@ -496,6 +496,9 @@
   <data name="Are you sure you want to remove the giftbox {0} ?" xml:space="preserve">
     <value>Êtes-vous sûr de vouloir supprimer la boîte-cadeau {0} ?</value>
   </data>
+  <data name="Latest updates and improvements" xml:space="preserve">
+    <value>Dernières mises à jour et améliorations</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Bienvenue</value>
     <comment>Welcome text on dashboard</comment>
@@ -2070,7 +2073,7 @@
   <data name="eTools Ultimate is a powerful editor for editing Flyff resource files." xml:space="preserve">
     <value>eTools Ultimate est un éditeur puissant pour l'édition de fichiers de ressources Flyff.</value>
   </data>
-  <data name="Latest updates and improvements" xml:space="preserve">
-    <value>Dernières mises à jour et améliorations</value>
+  <data name="Files format" xml:space="preserve">
+    <value>Format des fichiers</value>
   </data>
 </root>

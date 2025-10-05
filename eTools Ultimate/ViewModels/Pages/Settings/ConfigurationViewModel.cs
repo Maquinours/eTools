@@ -31,6 +31,8 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         private bool _isAdvancedSettingsVisible = false;
 
+        public FilesFormats[] FilesFormats => Enum.GetValues<FilesFormats>();
+
         public Settings Settings => settingsService.Settings;
 
         public ICollectionView MoverTypesBindingsView => CollectionViewSource.GetDefaultView(Settings.MoverTypesBindings);

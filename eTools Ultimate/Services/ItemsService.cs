@@ -108,7 +108,7 @@ namespace eTools_Ultimate.Services
                     int dwDestParam4 = default;
                     int dwDestParam5 = default;
                     int dwDestParam6 = default;
-                    if (settingsService.Settings.ResourcesVersion >= 19)
+                    if (settingsService.Settings.ResourcesVersion >= 19 || settingsService.Settings.FilesFormat == FilesFormats.Florist)
                     {
                         dwDestParam4 = script.GetNumber();
                         dwDestParam5 = script.GetNumber();
@@ -120,7 +120,7 @@ namespace eTools_Ultimate.Services
                     int nAdjParamVal4 = default;
                     int nAdjParamVal5 = default;
                     int nAdjParamVal6 = default;
-                    if (settingsService.Settings.ResourcesVersion >= 19)
+                    if (settingsService.Settings.ResourcesVersion >= 19 || settingsService.Settings.FilesFormat == FilesFormats.Florist)
                     {
                         nAdjParamVal4 = script.GetNumber();
                         nAdjParamVal5 = script.GetNumber();
@@ -133,7 +133,7 @@ namespace eTools_Ultimate.Services
                     int dwChgParamVal4 = default;
                     int dwChgParamVal5 = default;
                     int dwChgParamVal6 = default;
-                    if (settingsService.Settings.ResourcesVersion >= 19)
+                    if (settingsService.Settings.ResourcesVersion >= 19 || settingsService.Settings.FilesFormat == FilesFormats.Florist)
                     {
                         dwChgParamVal4 = script.GetNumber();
                         dwChgParamVal5 = script.GetNumber();
@@ -145,7 +145,7 @@ namespace eTools_Ultimate.Services
                     int nDestData14 = default;
                     int nDestData15 = default;
                     int nDestData16 = default;
-                    if (settingsService.Settings.ResourcesVersion >= 19)
+                    if (settingsService.Settings.ResourcesVersion >= 19 || settingsService.Settings.FilesFormat == FilesFormats.Florist)
                     {
                         nDestData14 = script.GetNumber();
                         nDestData15 = script.GetNumber();
@@ -184,11 +184,22 @@ namespace eTools_Ultimate.Services
                     int dwReferValue1 = script.GetNumber();
                     int dwReferValue2 = script.GetNumber(); // Unused
                     int dwSkillType = script.GetNumber(); // Unused
-                    int nItemResistElecricity = (int)(script.GetFloat() * 100.0f);
-                    int nItemResistFire = (int)(script.GetFloat() * 100.0f);
-                    int nItemResistWind = (int)(script.GetFloat() * 100.0f);
-                    int nItemResistWater = (int)(script.GetFloat() * 100.0f);
-                    int nItemResistEarth = (int)(script.GetFloat() * 100.0f);
+
+                    int nItemResistElecricity = default;
+                    int nItemResistFire = default;
+                    int nItemResistWind = default;
+                    int nItemResistWater = default;
+                    int nItemResistEarth = default;
+
+                    if (settingsService.Settings.FilesFormat != FilesFormats.Florist)
+                    {
+                        nItemResistElecricity = (int)(script.GetFloat() * 100.0f);
+                        nItemResistFire = (int)(script.GetFloat() * 100.0f);
+                        nItemResistWind = (int)(script.GetFloat() * 100.0f);
+                        nItemResistWater = (int)(script.GetFloat() * 100.0f);
+                        nItemResistEarth = (int)(script.GetFloat() * 100.0f);
+                    }
+
                     int nEvildoing = script.GetNumber();
                     int dwExpertLV = script.GetNumber(); // Unused
                     int dwExpertMax = script.GetNumber(); // Unused
@@ -249,7 +260,8 @@ namespace eTools_Ultimate.Services
                     int bCanSavePotion = default;
                     int bCanLooksChange = default;
                     int bIsLooksChangeMaterial = default;
-                    if (settingsService.Settings.ResourcesVersion >= 16)
+
+                    if (settingsService.Settings.ResourcesVersion >= 16 && settingsService.Settings.FilesFormat != FilesFormats.Florist)
                     {
                         nMinLimitLevel = script.GetNumber();
                         nMaxLimitLevel = script.GetNumber();
@@ -299,7 +311,7 @@ namespace eTools_Ultimate.Services
                      * of the stream (excluding blanks) before trying to get the latest value. So the file is
                      * incorrecty formatted.
                      * */
-                    if (script.Token == "" && script.EndOfStream)
+                    if (script.Token == "" && script.EndOfStream && script.TokenType != TokenType.STRING)
                         throw new IncorrectlyFormattedFileException(filePath);
 
                     if (!stringsService.Strings.ContainsKey(szName))

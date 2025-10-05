@@ -118,6 +118,75 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Version_0_1_0" xml:space="preserve">
-    <value>{"version":"0.1.0 (Alpha)","date":"2025-10-02","developerText":"Welcome to the public Alpha of eTools Ultimate! This early version focuses on core editors and a modern UI foundation. Expect rapid changes and frequent improvements while we gather your feedback.","imagePath":"/Assets/Icons/PersonalizationIcon.png","categories":{"added":[{"text":"Dashboard with quick navigation and localized UI","type":0},{"text":"Editors: Movers, Motions, Giftboxes, Accessories, Texts","type":0},{"text":"Search, add, remove and save","type":0},{"text":"Internationalization (English, German, French)","type":0},{"text":"Themes (light, dark, high contrast","type":0},{"text":"Settings pages: Configuration, Personalization, About","type":0},{"text":"Update checker with GitHub integration","type":0}],"changed":[{"text":"Unified UI styling (light/dark/high contrast)","type":1},{"text":"Consistent buttons (Undo, Redo, Save, Add, Delete, Expert)","type":1}],"improved":[{"text":"Faster loading and smoother lists with virtualization","type":4},{"text":"Clearer forms with grouped sections and tooltips","type":4}],"fixed":[{"text":"General stability fixes in data loading and bindings","type":3}]} }</value>
+    <value>{
+  "version": "0.1.0 (Alpha)",
+  "date": "2025-10-02",
+  "developerText": "Welcome to the public Alpha of eTools Ultimate! This first version focuses on the main editors and a modern UI foundation. Expect rapid changes and frequent improvements as we collect your feedback.",
+  "categories": {
+    "added": [
+      {
+        "text": "Dashboard with quick navigation and localized interface",
+        "type": 0
+      },
+      {
+        "text": "Editors: Movers, Motions, Giftboxes, Accessories, Texts",
+        "type": 0
+      },
+      {
+        "text": "Search, add, remove, save",
+        "type": 0
+      },
+      {
+        "text": "Internationalization (English, German, French)",
+        "type": 0
+      },
+      {
+        "text": "Themes (light, dark, high contrast)",
+        "type": 0
+      },
+      {
+        "text": "Settings pages: Configuration, Personalization, About",
+        "type": 0
+      },
+      {
+        "text": "Update checker with GitHub integration",
+        "type": 0
+      }
+    ]
+  }
+}
+</value>
+  </data>
+  <data name="Version_0_1_1" xml:space="preserve">
+    <value>{
+  "version": "0.1.1 (Alpha)",
+  "date": "2025-10-04",
+  "developerText": "This update introduces a new setting for custom file formats and includes a few bug fixes for smoother user experience. Florist files are now officially supported!",
+  "categories": {
+    "added": [
+      {
+        "text": "New setting: Files Format – allows specifying custom Flyff file structures (first supported: Florist files)",
+        "type": 0
+      }
+    ],
+    "changed": [],
+    "improved": [],
+    "fixed": [
+      {
+        "text": "Fixed an issue where the default folder was not remembered when selecting a file",
+        "type": 3
+      },
+      {
+        "text": "Fixed a bug where some valid files were incorrectly flagged as 'incorrectly formatted'",
+        "type": 3
+      },
+      {
+        "text": "Minor fixes and adjustments in the patchnotes display",
+        "type": 3
+      }
+    ]
+  }
+}
+</value>
   </data>
 </root>

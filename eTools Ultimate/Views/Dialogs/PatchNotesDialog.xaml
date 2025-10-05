@@ -272,16 +272,6 @@
                                         TextWrapping="Wrap"
                                         Visibility="{Binding DeveloperText, Converter={StaticResource StringToVisibilityConverter}}" />
 
-                                    <!--  Image  -->
-                                    <Image
-                                        Grid.Row="2"
-                                        Height="60"
-                                        Margin="16,8,16,8"
-                                        HorizontalAlignment="Left"
-                                        Source="{Binding ImagePath, Mode=OneWay}"
-                                        Stretch="Uniform"
-                                        Visibility="{Binding ImagePath, Converter={StaticResource StringToVisibilityConverter}}" />
-
                                     <!--  Categories  -->
                                     <StackPanel Grid.Row="3" Margin="16,8,0,0">
                                         <!--  Added  -->

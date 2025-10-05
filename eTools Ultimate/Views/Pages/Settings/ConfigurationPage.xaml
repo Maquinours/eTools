@@ -123,10 +123,30 @@
                             Text="{i18n:StringLocalizer 'Version'}" />
                         <ComboBox
                             Grid.Column="1"
-                            Width="100"
-                            HorizontalAlignment="Left"
+                            HorizontalAlignment="Stretch"
                             ItemsSource="{Binding PossibleResourceVersions}"
                             SelectedValue="{Binding Settings.ResourcesVersion, Mode=TwoWay}" />
+                    </Grid>
+
+                    <!--  Files format  -->
+                    <Grid
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="10,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.Column="0"
+                            Margin="0,0,8,0"
+                            VerticalAlignment="Center"
+                            Text="{i18n:StringLocalizer 'Files format'}" />
+                        <ComboBox
+                            Grid.Column="1"
+                            HorizontalAlignment="Stretch"
+                            ItemsSource="{Binding FilesFormats}"
+                            SelectedValue="{Binding Settings.FilesFormat, Mode=TwoWay}" />
                     </Grid>
                 </Grid>
 
