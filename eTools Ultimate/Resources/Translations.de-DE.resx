@@ -501,6 +501,9 @@
     <value>Giftbox erstellen</value>
     <comment>Button text for creating a new giftbox</comment>
   </data>
+  <data name="Latest updates and improvements" xml:space="preserve">
+    <value>Neueste Updates und Verbesserungen</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Willkommen</value>
     <comment>Welcome text on dashboard</comment>
@@ -2144,7 +2147,7 @@
   <data name="Text displayed in game" xml:space="preserve">
     <value>Im Spiel angezeigter Text</value>
   </data>
-  <data name="Latest updates and improvements" xml:space="preserve">
-    <value>Neueste Updates und Verbesserungen</value>
+  <data name="Files format" xml:space="preserve">
+    <value>Dateiformat</value>
   </data>
 </root>
