@@ -61,11 +61,45 @@ namespace eTools_Ultimate.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à {&quot;version&quot;:&quot;0.1.0 (Alpha)&quot;,&quot;date&quot;:&quot;2025-10-02&quot;,&quot;developerText&quot;:&quot;Welcome to the public Alpha of eTools Ultimate! This early version focuses on core editors and a modern UI foundation. Expect rapid changes and frequent improvements while we gather your feedback.&quot;,&quot;imagePath&quot;:&quot;/Assets/Icons/PersonalizationIcon.png&quot;,&quot;categories&quot;:{&quot;added&quot;:[{&quot;text&quot;:&quot;Dashboard with quick navigation and localized UI&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;Editors: Movers, Motions, Giftboxes, Accessories, Texts&quot;,&quot;type&quot;:0},{&quot;text&quot;:&quot;Search, add, remove a [le reste de la chaîne a été tronqué]&quot;;.
+        ///   Recherche une chaîne localisée semblable à {
+        ///  &quot;version&quot;: &quot;0.1.0 (Alpha)&quot;,
+        ///  &quot;date&quot;: &quot;2025-10-02&quot;,
+        ///  &quot;developerText&quot;: &quot;Welcome to the public Alpha of eTools Ultimate! This first version focuses on the main editors and a modern UI foundation. Expect rapid changes and frequent improvements as we collect your feedback.&quot;,
+        ///  &quot;categories&quot;: {
+        ///    &quot;added&quot;: [
+        ///      {
+        ///        &quot;text&quot;: &quot;Dashboard with quick navigation and localized interface&quot;,
+        ///        &quot;type&quot;: 0
+        ///      },
+        ///      {
+        ///        &quot;text&quot;: &quot;Editors: Movers, Motions, Giftboxes, Accessories, Texts&quot; [le reste de la chaîne a été tronqué]&quot;;.
         /// </summary>
         internal static string Version_0_1_0 {
             get {
                 return ResourceManager.GetString("Version_0_1_0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à {
+        ///  &quot;version&quot;: &quot;0.1.1 (Alpha)&quot;,
+        ///  &quot;date&quot;: &quot;2025-10-04&quot;,
+        ///  &quot;developerText&quot;: &quot;This update introduces a new setting for custom file formats and includes a few bug fixes for smoother user experience. Florist files are now officially supported!&quot;,
+        ///  &quot;categories&quot;: {
+        ///    &quot;added&quot;: [
+        ///      {
+        ///        &quot;text&quot;: &quot;New setting: Files Format – allows specifying custom Flyff file structures (first supported: Florist files)&quot;,
+        ///        &quot;type&quot;: 0
+        ///      }
+        ///    ],
+        ///    &quot;changed&quot;: [],
+        ///    &quot;improved&quot;: [],
+        ///    &quot;fixed&quot;: [
+        ///  [le reste de la chaîne a été tronqué]&quot;;.
+        /// </summary>
+        internal static string Version_0_1_1 {
+            get {
+                return ResourceManager.GetString("Version_0_1_1", resourceCulture);
             }
         }
     }
