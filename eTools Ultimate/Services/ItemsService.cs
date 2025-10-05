@@ -311,7 +311,7 @@ namespace eTools_Ultimate.Services
                      * of the stream (excluding blanks) before trying to get the latest value. So the file is
                      * incorrecty formatted.
                      * */
-                    if (script.Token == "" && script.EndOfStream)
+                    if (script.Token == "" && script.EndOfStream && script.TokenType != TokenType.STRING)
                         throw new IncorrectlyFormattedFileException(filePath);
 
                     if (!stringsService.Strings.ContainsKey(szName))
