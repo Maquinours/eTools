@@ -57,11 +57,11 @@ namespace eTools_Ultimate.Services
         /// </summary>
         private async Task HandleActivationAsync()
         {
-            await CheckForUpdatesAsync();
-
             if (!Application.Current.Windows.OfType<MainWindow>().Any())
             {
                 _navigationWindow = (serviceProvider.GetService(typeof(INavigationWindow)) as INavigationWindow)!;
+
+                await CheckForUpdatesAsync();
 
                 Views.Windows.SplashScreen splashScreen = serviceProvider.GetService(typeof(Views.Windows.SplashScreen)) as Views.Windows.SplashScreen ?? throw new InvalidOperationException("SplashScreen service not found");
                 splashScreen.Show();
