@@ -208,7 +208,7 @@ namespace eTools_Ultimate.Models
             get
             {
                 Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
-                Dictionary<string, int> defines = App.Services.GetRequiredService<DefinesService>().Defines;
+                IDictionary<string, int> defines = App.Services.GetRequiredService<DefinesService>().Defines;
 
                 string modelsFolderPath = settings.ModelsFolderPath ?? settings.DefaultModelsFolderPath;
 
@@ -244,7 +244,7 @@ namespace eTools_Ultimate.Models
             {
                 DefinesService definesService = App.Services.GetRequiredService<DefinesService>();
 
-                Dictionary<int, string>? reversedDefines = TypeIdentifier switch
+                IDictionary<int, string>? reversedDefines = TypeIdentifier switch
                 {
                     "OT_CTRL" => definesService.ReversedControlDefines,
                     "OT_SFX" => definesService.ReversedSfxDefines,

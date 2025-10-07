@@ -109,7 +109,7 @@ namespace eTools_Ultimate.Helpers
 				return "=";
 			return number.ToString(CultureInfo.InvariantCulture);
 		}
-        public static string NumberToString(int number, Dictionary<int, string> reverseDefines)
+        public static string NumberToString(int number, IDictionary<int, string> reverseDefines)
         {
 			if (reverseDefines.TryGetValue(number, out string? result))
 				return result;

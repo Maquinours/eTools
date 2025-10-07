@@ -875,7 +875,7 @@ namespace eTools_Ultimate.Models
             get => App.Services.GetRequiredService<DefinesService>().Defines.TryGetValue("IK3_TOWNBLINKWING", out int kind) && this.Prop.DwItemKind3 == kind;
             set
             {
-                Dictionary<string, int> defines = App.Services.GetRequiredService<DefinesService>().Defines;
+                IDictionary<string, int> defines = App.Services.GetRequiredService<DefinesService>().Defines;
 
                 if (this.IsTownBlinkwing != value)
                 {
