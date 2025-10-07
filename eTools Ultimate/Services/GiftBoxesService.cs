@@ -81,8 +81,8 @@ namespace eTools_Ultimate.Services
                                 while (true)
                                 {
                                     int item = script.GetNumber();
-                                    if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
                                     if (script.Token == "}") break;
+                                    if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
                                     int probability = script.GetNumber();
                                     int num = script.GetNumber();
 
@@ -99,8 +99,8 @@ namespace eTools_Ultimate.Services
                                 while (true)
                                 {
                                     int item = script.GetNumber();
-                                    if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
                                     if (script.Token == "}") break;
+                                    if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
                                     int probability = script.GetNumber() * 100;
                                     int num = script.GetNumber();
                                     int flag = script.GetNumber();
@@ -120,8 +120,8 @@ namespace eTools_Ultimate.Services
                                 while (true)
                                 {
                                     int item = script.GetNumber();
-                                    if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
                                     if (script.Token == "}") break;
+                                    if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
                                     int probability = script.GetNumber() * precision;
                                     int num = script.GetNumber();
                                     int flag = script.GetNumber();
@@ -140,8 +140,8 @@ namespace eTools_Ultimate.Services
                                 while (true)
                                 {
                                     int item = script.GetNumber();
-                                    if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
                                     if (script.Token == "}") break;
+                                    if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
                                     int probability = script.GetNumber() * 10;
                                     int num = script.GetNumber();
                                     int flag = script.GetNumber();
