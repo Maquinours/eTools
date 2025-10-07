@@ -8,18 +8,17 @@ using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Exceptions;
 using Scan;
 using System.IO;
+using System.Collections.Concurrent;
 
 namespace eTools_Ultimate.Services
 {
     public class StringsService(SettingsService settingsService)
     {
-        private readonly ObservableDictionary<string, string> _strings = [];
+        private ObservableDictionary<string, string> _strings = [];
         public ObservableDictionary<string, string> Strings => _strings;
 
         public void Load()
         {
-            this.Strings.Clear();
-
             string[] filesList = 
                 [
                 settingsService.Settings.PropMoverTxtFilePath ?? settingsService.Settings.DefaultPropMoverTxtFilePath,
@@ -31,7 +30,9 @@ namespace eTools_Ultimate.Services
                 settingsService.Settings.MotionsTxtFilePath ?? settingsService.Settings.DefaultMotionsTxtFilePath
                 ];
 
-            foreach (string filePath in filesList)
+            ConcurrentDictionary<string, string> tempStrings = [];
+
+            Parallel.ForEach(filesList, filePath =>
             {
                 using Scanner scanner = new();
 
@@ -50,9 +51,11 @@ namespace eTools_Ultimate.Services
                         throw new IncorrectlyFormattedFileException(filePath);
 
                     string value = scanner.GetLine();
-                    this.Strings.Add(index, value);
+                    tempStrings[index] = value;
                 }
-            }
+            });
+
+            _strings = new(tempStrings);
         }
 
         public void Save(string filePath, string[] stringIdentifiers)
