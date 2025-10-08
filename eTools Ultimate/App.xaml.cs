@@ -11,6 +11,7 @@ using Lepo.i18n.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
@@ -173,6 +174,11 @@ namespace eTools_Ultimate
                 // Enable Global Mode since this is a client app
                 options.IsGlobalModeEnabled = true;
             });
+
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.File($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}eTools{Path.DirectorySeparatorChar}Logs{Path.DirectorySeparatorChar}log-",
+                rollingInterval: RollingInterval.Day)
+                .CreateLogger();
         }
 
         void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
