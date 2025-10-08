@@ -499,6 +499,9 @@
   <data name="Latest updates and improvements" xml:space="preserve">
     <value>Dernières mises à jour et améliorations</value>
   </data>
+  <data name="Files format" xml:space="preserve">
+    <value>Format des fichiers</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Bienvenue</value>
     <comment>Welcome text on dashboard</comment>
@@ -2073,7 +2076,7 @@
   <data name="eTools Ultimate is a powerful editor for editing Flyff resource files." xml:space="preserve">
     <value>eTools Ultimate est un éditeur puissant pour l'édition de fichiers de ressources Flyff.</value>
   </data>
-  <data name="Files format" xml:space="preserve">
-    <value>Format des fichiers</value>
+  <data name="Path concerned:" xml:space="preserve">
+    <value>Chemin concerné :</value>
   </data>
 </root>
