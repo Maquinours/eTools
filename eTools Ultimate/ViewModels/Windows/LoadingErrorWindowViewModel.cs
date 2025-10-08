@@ -42,7 +42,20 @@ namespace eTools_Ultimate.ViewModels.Windows
                 ];
                 filePath = fileNotFoundException.FileName;
             }
-            else if(exception is IncorrectlyFormattedFileException incorrectlyFormattedFileException)
+            else if (exception is DirectoryNotFoundException directoryNotFoundException)
+            {
+                _title = localizer["Directory not found"];
+                _description = localizer["A required directory was not found."];
+                _explaination = localizer["The application could not find an important directory. This can happen when:"];
+                _explainationCauses =
+                [
+                    $"- {localizer["The directory path configured in the application settings is invalid."]}",
+                    $"- {localizer["The directory has been moved or deleted."]}",
+                    $"- {localizer["There are insufficient permissions to access the directory."]}"
+                ];
+                filePath = directoryNotFoundException.Message.Split("'", StringSplitOptions.RemoveEmptyEntries)[1];
+            }
+            else if (exception is IncorrectlyFormattedFileException incorrectlyFormattedFileException)
             {
                 _title = localizer["Incorrectly formatted file"];
                 _description = localizer["A required file is incorrectly formatted."];

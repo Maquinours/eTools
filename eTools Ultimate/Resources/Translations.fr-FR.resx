@@ -200,6 +200,10 @@
     <value>RAM :</value>
     <comment>RAM requirement</comment>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="100 MB available space" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="200 MB available space" xml:space="preserve">
     <value>200 MB d'espace disponible</value>
     <comment>Storage space requirement</comment>
@@ -501,6 +505,12 @@
   </data>
   <data name="Files format" xml:space="preserve">
     <value>Format des fichiers</value>
+  </data>
+  <data name="Path concerned:" xml:space="preserve">
+    <value>Chemin concerné :</value>
+  </data>
+  <data name="The application could not find an important directory. This can happen when:" xml:space="preserve">
+    <value>L’application n’a pas pu trouver un dossier important. Cela peut se produire lorsque :</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Bienvenue</value>
@@ -2076,7 +2086,22 @@
   <data name="eTools Ultimate is a powerful editor for editing Flyff resource files." xml:space="preserve">
     <value>eTools Ultimate est un éditeur puissant pour l'édition de fichiers de ressources Flyff.</value>
   </data>
-  <data name="Path concerned:" xml:space="preserve">
-    <value>Chemin concerné :</value>
+  <data name="Add Attribute" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="The directory path configured in the application settings is invalid." xml:space="preserve">
+    <value>Le chemin du dossier configuré dans les paramètres de l’application est invalide.</value>
+  </data>
+  <data name="The directory has been moved or deleted." xml:space="preserve">
+    <value>Le dossier a été déplacé ou supprimé.</value>
+  </data>
+  <data name="There are insufficient permissions to access the directory." xml:space="preserve">
+    <value>Les autorisations sont insuffisantes pour accéder au dossier.</value>
+  </data>
+  <data name="A required directory was not found." xml:space="preserve">
+    <value>Un dossier requis est introuvable.</value>
+  </data>
+  <data name="Directory not found" xml:space="preserve">
+    <value>Dossier introuvable</value>
   </data>
 </root>
