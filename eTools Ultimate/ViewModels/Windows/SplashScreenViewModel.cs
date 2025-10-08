@@ -2,6 +2,7 @@
 using eTools_Ultimate.Services;
 using eTools_Ultimate.Views.Pages;
 using eTools_Ultimate.Views.Windows;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -106,6 +107,9 @@ namespace eTools_Ultimate.ViewModels.Windows
             catch (Exception ex)
             {
                 Loaded?.Invoke(this, EventArgs.Empty);
+
+                Log.Error(ex, "An error occured while loading resources");
+
                 LoadingErrorWindow errorWindow = new(ex);
                 if (errorWindow.ShowDialog() == true)
                 {
