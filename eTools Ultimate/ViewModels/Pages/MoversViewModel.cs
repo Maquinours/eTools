@@ -5,6 +5,7 @@ using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using eTools_Ultimate.Views.Dialogs;
 using Microsoft.Extensions.Localization;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -240,17 +241,37 @@ namespace eTools_Ultimate.ViewModels.Pages
             this._modelsDirectoryWatcher.Renamed += ModelFile_Changed;
             this._modelsDirectoryWatcher.Created += ModelFile_Changed;
             this._modelsDirectoryWatcher.Deleted += ModelFile_Changed;
-            InitializeModelsDirectoryWatcherPath();
+            try
+            {
+                InitializeModelsDirectoryWatcherPath();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error during MoversViewModel models directory watcher initialization.");
+            }
 
             this._motionDirectoryWatcher.Renamed += ModelMotionFile_Changed;
             this._motionDirectoryWatcher.Created += ModelMotionFile_Changed;
             this._motionDirectoryWatcher.Deleted += ModelMotionFile_Changed;
-            InitializeMotionsDirectoryWatcherPath();
+            try
+            {
+                InitializeMotionsDirectoryWatcherPath();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error during MoversViewModel motions directory watcher initialization.");
+            }
 
             this._texturesDirectoryWatcher.Renamed += ModelTextureFile_Changed;
             this._texturesDirectoryWatcher.Created += ModelTextureFile_Changed;
             this._texturesDirectoryWatcher.Deleted += ModelTextureFile_Changed;
-            InitializeTexturesDirectoryWatcherPath();
+            try
+            {
+                InitializeTexturesDirectoryWatcherPath();
+            } catch(Exception ex)
+            {
+                Log.Error(ex, "Error during MoversViewModel textures directory watcher initialization.");
+            }
 
             MoversView.CurrentChanging += CurrentMover_Changing;
             MoversView.CurrentChanged += CurrentMover_Changed;
@@ -430,14 +451,32 @@ namespace eTools_Ultimate.ViewModels.Pages
                     {
                         OnPropertyChanged(nameof(ModelFilePossibilities));
                         OnPropertyChanged(nameof(ModelMotionFilePossibilities));
-                        InitializeModelsDirectoryWatcherPath();
-                        InitializeMotionsDirectoryWatcherPath();
+                        try
+                        {
+                            InitializeModelsDirectoryWatcherPath();
+                        } catch(Exception ex)
+                        {
+                            Log.Error(ex, "Error during MoversViewModel models directory watcher re-initialization.");
+                        }
+                        try
+                        {
+                            InitializeMotionsDirectoryWatcherPath();
+                        } catch(Exception ex)
+                        {
+                            Log.Error(ex, "Error during MoversViewModel motions directory watcher re-initialization.");
+                        }
                         break;
                     }
                 case nameof(Settings.TexturesFolderPath):
                 case nameof(Settings.DefaultTexturesFolderPath):
                     {
-                        InitializeTexturesDirectoryWatcherPath();
+                        try
+                        {
+                            InitializeTexturesDirectoryWatcherPath();
+                        } catch(Exception ex)
+                        {
+                            Log.Error(ex, "Error during MoversViewModel textures directory watcher re-initialization.");
+                        }
                         OnPropertyChanged(nameof(ModelTexturesPossibilities));
                         break;
                     }
@@ -534,7 +573,13 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             OnPropertyChanged(nameof(ModelTexturesPossibilities));
             OnPropertyChanged(nameof(ModelMotionFilePossibilities));
-            InitializeMotionsDirectoryWatcherPath();
+            try
+            {
+                InitializeMotionsDirectoryWatcherPath();
+            } catch(Exception ex)
+            {
+                Log.Error(ex, "Error during MoversViewModel motions directory watcher re-initialization.");
+            }
             LoadModel();
         }
 
@@ -571,7 +616,13 @@ namespace eTools_Ultimate.ViewModels.Pages
 
                 OnPropertyChanged(nameof(ModelTexturesPossibilities));
                 OnPropertyChanged(nameof(ModelMotionFilePossibilities));
-                InitializeMotionsDirectoryWatcherPath();
+                try
+                {
+                    InitializeMotionsDirectoryWatcherPath();
+                } catch(Exception ex)
+                {
+                    Log.Error(ex, "Error during MoversViewModel motions directory watcher re-initialization.");
+                }
                 LoadModel();
             }
         }
@@ -616,7 +667,13 @@ namespace eTools_Ultimate.ViewModels.Pages
             {
                 OnPropertyChanged(nameof(ModelTexturesPossibilities));
                 OnPropertyChanged(nameof(ModelMotionFilePossibilities));
-                InitializeMotionsDirectoryWatcherPath();
+                try
+                {
+                    InitializeMotionsDirectoryWatcherPath();
+                } catch(Exception ex)
+                {
+                    Log.Error(ex, "Error during MoversViewModel motions directory watcher re-initialization.");
+                }
                 LoadModel();
             }
         }
