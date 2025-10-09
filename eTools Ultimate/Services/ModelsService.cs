@@ -5,10 +5,11 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
+using static System.Windows.Forms.DataFormats;
 
 namespace eTools_Ultimate.Services
 {
-    public class ModelsService(DefinesService definesService)
+    public class ModelsService(DefinesService definesService, SettingsService settingsService)
     {
         private readonly ObservableCollection<MainModelBrace> _models = [];
         public ObservableCollection<MainModelBrace> Models => _models;
@@ -43,31 +44,39 @@ namespace eTools_Ultimate.Services
             this.ClearModels();
 
             // Maybe make it a settings property
-            string filePath = $"{settings.ResourcesFolderPath}mdlDyna.inc";
+            string[] filePaths = [
+                Path.Combine(settings.ResourcesFolderPath, "mdlDyna.inc"),
+                Path.Combine(settings.ResourcesFolderPath, "mdlObj.inc")
+            ];
 
-            using Script script = new();
-
-            script.Load(filePath);
-
-            while (true)
+            Parallel.ForEach(filePaths, filePath =>
             {
-                string szName = script.GetToken();
+                using Script script = new();
 
-                if (script.EndOfStream) break;
+                script.Load(filePath);
 
-                int iType = script.GetNumber();
+                while (true)
+                {
+                    string szName = script.GetToken();
 
-                script.GetToken(); // "{"
+                    if (script.EndOfStream) break;
 
-                script.GetToken(); // Load the next token for the LoadChildren function to work correctly
+                    int iType = script.GetNumber();
 
-                IModelItem[] children = LoadChildren(script, filePath, iType);
+                    script.GetToken(); // "{"
 
-                MainModelBraceProp prop = new(szName, iType);
-                MainModelBrace brace = new(prop, children);
+                    script.GetToken(); // Load the next token for the LoadChildren function to work correctly
 
-                Models.Add(brace);
-            }
+                    IModelItem[] children = LoadChildren(script, filePath, iType);
+
+                    MainModelBraceProp prop = new(szName, iType);
+                    MainModelBrace brace = new(prop, children);
+
+                    Models.Add(brace);
+                }
+            });
+
+            GetUnusedModelFiles();
         }
 
         private IModelItem[] LoadChildren(Script script, string filePath, int dwType)
@@ -167,6 +176,8 @@ namespace eTools_Ultimate.Services
 
             foreach (MainModelBrace mainBrace in Models)
             {
+                if (mainBrace.Prop.IType == 0) continue; // TODO: add a saving for mdlObj.inc (IType == 0)
+
                 writer.Write('"');
                 writer.Write(mainBrace.Prop.SzName);
                 writer.Write('"');
@@ -257,6 +268,85 @@ namespace eTools_Ultimate.Services
                     writer.WriteLine();
                 }
             }
+        }
+
+        public Model[] GetModels(ModelBrace? brace = null)
+        {
+            IEnumerable<IModelItem> items;
+
+            if (brace != null)
+                items = brace.Children;
+            else
+                items = Models;
+
+            List<Model> models = [];
+            foreach (IModelItem item in items)
+            {
+                if (item is Model model)
+                    models.Add(model);
+                else if (item is ModelBrace childBrace)
+                    models.AddRange(GetModelsRecursively(childBrace));
+            }
+            return [.. models];
+        }
+
+        private void GetUnusedModelFiles()
+        {
+            HashSet<string> usedModelFiles = new(StringComparer.OrdinalIgnoreCase);
+
+            string modelsDirectoryPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
+
+            usedModelFiles.UnionWith(new List<string>([
+                ..Enumerable.Range(0, 100).Select(i => string.Format("Part_maleHair{0:00}.o3d", i)), ..Enumerable.Range(0, 100).Select(i => string.Format("Part_femaleHair{0:00}.o3d", i)),
+                ..Enumerable.Range(0, 100).Select(i => string.Format("Part_maleHead{0:00}.o3d", i)), ..Enumerable.Range(0, 100).Select(i => string.Format("Part_femaleHead{0:00}.o3d", i)),
+                "Part_maleUpper.o3d", "Part_femaleUpper.o3d",
+                "Part_maleLower.o3d", "Part_femaleLower.o3d",
+                "Part_maleHand.o3d", "Part_femaleHand.o3d",
+                "Part_maleFoot.o3d", "Part_femaleFoot.o3d",
+                "arrow.o3d", "etc_arrow.o3d",
+                "Mvr_Guidepang.o3d", "Mvr_Guidepang.chr",
+                "Mvr_McGuidepang.o3d", "Mvr_McGuidepang.chr",
+                "Mvr_AsGuidepang.o3d", "Mvr_AsGuidepang.chr",
+                "Mvr_MgGuidepang.o3d", "Mvr_MgGuidepang.chr",
+                "Mvr_AcrGuidepang.o3d", "Mvr_AcrGuidepang.chr",
+                "Shadow.o3d"])
+                .Select(fileName => Path.Combine(modelsDirectoryPath, fileName)));
+
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+            string modelsFolderPath = settings.ModelsFolderPath ?? settings.DefaultModelsFolderPath;
+
+            foreach (Model model in GetModels())
+            {
+                usedModelFiles.Add(model.Model3DFilePath);
+                string? directoryPath = Path.GetDirectoryName(model.Model3DFilePath);
+                string? prefix = Path.GetFileNameWithoutExtension(model.Model3DFilePath);
+                if (model.ModelTypeIdentifier == "MODELTYPE_ANIMATED_MESH")
+                    usedModelFiles.Add(Path.ChangeExtension(model.Model3DFilePath, ".chr"));
+
+                if (directoryPath is not null)
+                {
+                    string partsPath = $"{Path.Combine(directoryPath, $"part_{model.Prop.SzPart}.o3d")}";
+                    usedModelFiles.Add(partsPath);
+                    string[] parts = model.Prop.SzPart.Split('/');
+                    if (parts.Length > 1)
+                    {
+                        usedModelFiles.Add($"{Path.Combine(directoryPath, $"part_{parts[0]}.o3d")}");
+                        usedModelFiles.Add($"{Path.Combine(directoryPath, $"part_{parts[1]}.o3d")}");
+                    }
+                }
+                if (directoryPath is not null && prefix is not null)
+                {
+                    foreach (ModelMotion motion in model.Motions)
+                    {
+                        string filePath = $"{Path.Combine(directoryPath, $"{prefix}_{motion.Prop.SzMotion}.ani")}";
+                        usedModelFiles.Add(filePath);
+                    }
+                }
+            }
+
+            List<string> allModelFiles = [.. Directory.EnumerateFiles(modelsFolderPath, "*", SearchOption.TopDirectoryOnly)];
+
+            List<string> unusedModelFiles = allModelFiles.FindAll(file => !usedModelFiles.Contains(file));
         }
 
         private void GetBracesRecursively(List<ModelBrace> braces, ModelBrace brace)
