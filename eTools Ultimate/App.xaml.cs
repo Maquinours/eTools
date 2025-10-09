@@ -176,8 +176,11 @@ namespace eTools_Ultimate
             });
 
             Log.Logger = new LoggerConfiguration()
-                .WriteTo.File($"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}eTools{Path.DirectorySeparatorChar}Logs{Path.DirectorySeparatorChar}.log",
-                rollingInterval: RollingInterval.Day)
+                .WriteTo.File(
+                    $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}eTools{Path.DirectorySeparatorChar}Logs{Path.DirectorySeparatorChar}.log",
+                    rollingInterval: RollingInterval.Day
+                )
+                .WriteTo.Sentry()
                 .CreateLogger();
         }
 
