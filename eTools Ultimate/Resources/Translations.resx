@@ -539,4 +539,204 @@
   <data name="Files format" xml:space="preserve">
     <value />
   </data>
+  <data name="Misc" xml:space="preserve">
+    <value>Misc</value>
+    <comment>Misc navigation card title</comment>
+  </data>
+  <data name="Navigate to the misc tools page." xml:space="preserve">
+    <value>Navigate to the misc tools page.</value>
+    <comment>Misc navigation card description</comment>
+  </data>
+  <data name="Misc Tools" xml:space="preserve">
+    <value>Misc Tools</value>
+    <comment>Misc page title</comment>
+  </data>
+  <data name="Find and manage unused assets" xml:space="preserve">
+    <value>Find and manage unused assets</value>
+    <comment>Misc page subtitle</comment>
+  </data>
+  <data name="Find Unused Models &amp; Textures" xml:space="preserve">
+    <value>Find Unused Models &amp; Textures</value>
+    <comment>Tool title</comment>
+  </data>
+  <data name="Scan dependencies and list assets not referenced anywhere" xml:space="preserve">
+    <value>Scan dependencies and list assets not referenced anywhere</value>
+    <comment>Tool description</comment>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+    <comment>Status label</comment>
+  </data>
+  <data name="Scanning for unused assets..." xml:space="preserve">
+    <value>Scanning for unused assets...</value>
+    <comment>Scan progress message</comment>
+  </data>
+  <data name="Scanning models..." xml:space="preserve">
+    <value>Scanning models...</value>
+    <comment>Models scan progress</comment>
+  </data>
+  <data name="Scanning textures..." xml:space="preserve">
+    <value>Scanning textures...</value>
+    <comment>Textures scan progress</comment>
+  </data>
+  <data name="Scanning sounds..." xml:space="preserve">
+    <value>Scanning sounds...</value>
+    <comment>Sounds scan progress</comment>
+  </data>
+  <data name="Scan completed. Found {0} unused assets." xml:space="preserve">
+    <value>Scan completed. Found {0} unused assets.</value>
+    <comment>Scan completion message</comment>
+  </data>
+  <data name="Total Size Before" xml:space="preserve">
+    <value>Total Size Before</value>
+    <comment>Size before label</comment>
+  </data>
+  <data name="After" xml:space="preserve">
+    <value>After</value>
+    <comment>Size after label</comment>
+  </data>
+  <data name="Scan Assets" xml:space="preserve">
+    <value>Scan Assets</value>
+    <comment>Scan button text</comment>
+  </data>
+  <data name="Select All" xml:space="preserve">
+    <value>Select All</value>
+    <comment>Select all button text</comment>
+  </data>
+  <data name="Clear Selection" xml:space="preserve">
+    <value>Clear Selection</value>
+    <comment>Clear selection button text</comment>
+  </data>
+  <data name="Delete Selected" xml:space="preserve">
+    <value>Delete Selected</value>
+    <comment>Delete selected button text</comment>
+  </data>
+  <data name="Search by name, path, or type..." xml:space="preserve">
+    <value>Search by name, path, or type...</value>
+    <comment>Search placeholder text</comment>
+  </data>
+  <data name="{0} assets found" xml:space="preserve">
+    <value>{0} assets found</value>
+    <comment>Assets count message</comment>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+    <comment>Asset type column header</comment>
+  </data>
+  <data name="File Name" xml:space="preserve">
+    <value>File Name</value>
+    <comment>File name column header</comment>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>Path</value>
+    <comment>Path column header</comment>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Size</value>
+    <comment>Size column header</comment>
+  </data>
+  <data name="Last Modified" xml:space="preserve">
+    <value>Last Modified</value>
+    <comment>Last modified column header</comment>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+    <comment>Actions column header</comment>
+  </data>
+  <data name="Scan completed" xml:space="preserve">
+    <value>Scan completed</value>
+    <comment>Scan completion notification title</comment>
+  </data>
+  <data name="Found {0} unused assets totaling {1}." xml:space="preserve">
+    <value>Found {0} unused assets totaling {1}.</value>
+    <comment>Scan completion notification message</comment>
+  </data>
+  <data name="Scan failed" xml:space="preserve">
+    <value>Scan failed</value>
+    <comment>Scan failure notification title</comment>
+  </data>
+  <data name="No selection" xml:space="preserve">
+    <value>No selection</value>
+    <comment>No selection notification title</comment>
+  </data>
+  <data name="Please select assets to delete." xml:space="preserve">
+    <value>Please select assets to delete.</value>
+    <comment>No selection notification message</comment>
+  </data>
+  <data name="Delete selected assets" xml:space="preserve">
+    <value>Delete selected assets</value>
+    <comment>Delete confirmation dialog title</comment>
+  </data>
+  <data name="Are you sure you want to delete {0} selected assets? This action cannot be undone." xml:space="preserve">
+    <value>Are you sure you want to delete {0} selected assets? This action may possibly not be undone.</value>
+    <comment>Delete confirmation dialog message</comment>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+    <comment>Delete button text</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>Cancel button text</comment>
+  </data>
+  <data name="Assets deleted" xml:space="preserve">
+    <value>Assets deleted</value>
+    <comment>Assets deleted notification title</comment>
+  </data>
+  <data name="Successfully deleted {0} assets, freeing {1}." xml:space="preserve">
+    <value>Successfully deleted {0} assets, freeing {1}.</value>
+    <comment>Assets deleted notification message</comment>
+  </data>
+  <data name="Deletion failed" xml:space="preserve">
+    <value>Deletion failed</value>
+    <comment>Deletion failure notification title</comment>
+  </data>
+  <data name="Delete asset" xml:space="preserve">
+    <value>Delete asset</value>
+    <comment>Single asset delete confirmation dialog title</comment>
+  </data>
+  <data name="Are you sure you want to delete '{0}'? This action cannot be undone." xml:space="preserve">
+    <value>Are you sure you want to delete '{0}'? This action may possibly not be undone.</value>
+    <comment>Single asset delete confirmation dialog message</comment>
+  </data>
+  <data name="Asset deleted" xml:space="preserve">
+    <value>Asset deleted</value>
+    <comment>Single asset deleted notification title</comment>
+  </data>
+  <data name="Successfully deleted '{0}'." xml:space="preserve">
+    <value>Successfully deleted '{0}'.</value>
+    <comment>Single asset deleted notification message</comment>
+  </data>
+  <data name="Deletion Log" xml:space="preserve">
+    <value>Deletion Log</value>
+    <comment>Deletion log window title</comment>
+  </data>
+  <data name="View and restore deleted assets" xml:space="preserve">
+    <value>View and restore deleted assets</value>
+    <comment>Deletion log window subtitle</comment>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+    <comment>Date column header</comment>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+    <comment>Action column header</comment>
+  </data>
+  <data name="File Path" xml:space="preserve">
+    <value>File Path</value>
+    <comment>File path column header</comment>
+  </data>
+  <data name="Target Path" xml:space="preserve">
+    <value>Target Path</value>
+    <comment>Target path column header</comment>
+  </data>
+  <data name="Deleted By" xml:space="preserve">
+    <value>Deleted By</value>
+    <comment>Deleted by column header</comment>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+    <comment>Refresh button text</comment>
+  </data>
 </root>
