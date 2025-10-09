@@ -212,6 +212,9 @@
     <value>4 GB minimum, 8 GB recommandé</value>
     <comment>RAM requirement with recommendation</comment>
   </data>
+  <data name="DirectX 11 compatible" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="Check for Updates" xml:space="preserve">
     <value>Vérifier les mises à jour</value>
     <comment>Check for Updates button text</comment>
@@ -1558,7 +1561,7 @@
     <value>Ouvrir l'éditeur d'événements de drop.</value>
     <comment>Drop Event navigation card description</comment>
   </data>
-  <data name="File Not Found" xml:space="preserve">
+  <data name="File not found" xml:space="preserve">
     <value>Fichier introuvable</value>
     <comment>Error dialog title for missing file</comment>
   </data>
@@ -1571,7 +1574,7 @@
     <comment>Error dialog section header</comment>
   </data>
   <data name="The application could not find an important file. This can happen when:" xml:space="preserve">
-    <value>L'application n'a pas pu trouver un fichier important. Cela peut arriver si :</value>
+    <value>L'application n'a pas pu trouver un fichier important. Cela peut se produire lorsque :</value>
     <comment>Error dialog explanation text</comment>
   </data>
   <data name="• The file was moved or deleted" xml:space="preserve">
@@ -1581,10 +1584,6 @@
   <data name="• The path is incorrect" xml:space="preserve">
     <value>• Le chemin n'est pas correct</value>
     <comment>Error dialog possible cause 2</comment>
-  </data>
-  <data name="• The file is corrupted" xml:space="preserve">
-    <value>• Le fichier est corrompu</value>
-    <comment>Error dialog possible cause 3</comment>
   </data>
   <data name="Missing file:" xml:space="preserve">
     <value>Fichier manquant :</value>
@@ -2103,5 +2102,50 @@
   </data>
   <data name="Directory not found" xml:space="preserve">
     <value>Dossier introuvable</value>
+  </data>
+  <data name="A required file was not found." xml:space="preserve">
+    <value>Un fichier requis est introuvable.</value>
+  </data>
+  <data name="The file path configured in the application settings is invalid." xml:space="preserve">
+    <value>Le chemin du fichier configuré dans les paramètres de l’application est invalide.</value>
+  </data>
+  <data name="The file has been moved, renamed or deleted." xml:space="preserve">
+    <value>Le fichier a été déplacé, renommé ou supprimé.</value>
+  </data>
+  <data name="There are insufficient permissions to access the file." xml:space="preserve">
+    <value>Les autorisations sont insuffisantes pour accéder au fichier.</value>
+  </data>
+  <data name="Incorrectly formatted file" xml:space="preserve">
+    <value>Fichier mal formaté</value>
+  </data>
+  <data name="A required file is incorrectly formatted." xml:space="preserve">
+    <value>Un fichier requis est mal formaté.</value>
+  </data>
+  <data name="The application found a file, but it is not correctly formatted. This can happen when:" xml:space="preserve">
+    <value>L’application a trouvé un fichier, mais il n’est pas correctement formaté. Cela peut se produire lorsque :</value>
+  </data>
+  <data name="The file has been manually edited and contains errors." xml:space="preserve">
+    <value>Le fichier a été modifié manuellement et contient des erreurs.</value>
+  </data>
+  <data name="The file path does not point to the correct file." xml:space="preserve">
+    <value>Le chemin du fichier ne pointe pas vers le fichier correct.</value>
+  </data>
+  <data name="The configured resource version does not match your files' version." xml:space="preserve">
+    <value>La version de la ressource configurée ne correspond pas à celle de vos fichiers.</value>
+  </data>
+  <data name="Unknown error" xml:space="preserve">
+    <value>Erreur inconnue</value>
+  </data>
+  <data name="An unexpected error occurred." xml:space="preserve">
+    <value>Une erreur inattendue est survenue.</value>
+  </data>
+  <data name="An unexpected error occurred while loading. This can happen when:" xml:space="preserve">
+    <value>Une erreur inattendue est survenue lors du chargement. Cela peut se produire lorsque :</value>
+  </data>
+  <data name="There is a bug in the application." xml:space="preserve">
+    <value>Il y a un bug dans l’application.</value>
+  </data>
+  <data name="Open configuration" xml:space="preserve">
+    <value>Ouvrir la configuration</value>
   </data>
 </root>

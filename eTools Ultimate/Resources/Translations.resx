@@ -560,4 +560,49 @@
   <data name="Directory not found" xml:space="preserve">
     <value />
   </data>
+  <data name="A required file was not found." xml:space="preserve">
+    <value />
+  </data>
+  <data name="The file path configured in the application settings is invalid." xml:space="preserve">
+    <value />
+  </data>
+  <data name="The file has been moved, renamed or deleted." xml:space="preserve">
+    <value />
+  </data>
+  <data name="There are insufficient permissions to access the file." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Incorrectly formatted file" xml:space="preserve">
+    <value />
+  </data>
+  <data name="A required file is incorrectly formatted." xml:space="preserve">
+    <value />
+  </data>
+  <data name="The application found a file, but it is not correctly formatted. This can happen when:" xml:space="preserve">
+    <value />
+  </data>
+  <data name="The file has been manually edited and contains errors." xml:space="preserve">
+    <value />
+  </data>
+  <data name="The file path does not point to the correct file." xml:space="preserve">
+    <value />
+  </data>
+  <data name="The configured resource version does not match your files' version." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Unknown error" xml:space="preserve">
+    <value />
+  </data>
+  <data name="An unexpected error occurred." xml:space="preserve">
+    <value />
+  </data>
+  <data name="An unexpected error occurred while loading. This can happen when:" xml:space="preserve">
+    <value />
+  </data>
+  <data name="There is a bug in the application." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Open configuration" xml:space="preserve">
+    <value />
+  </data>
 </root>

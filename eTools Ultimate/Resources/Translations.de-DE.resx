@@ -208,6 +208,10 @@
     <value>4 GB mindestens, 8 GB empfohlen</value>
     <comment>RAM requirement with recommendation</comment>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DirectX 11 compatible" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="Check for Updates" xml:space="preserve">
     <value>Nach Updates suchen</value>
     <comment>Check for Updates button text</comment>
@@ -224,7 +228,6 @@
     <value>Kiyo</value>
     <comment>Developer name</comment>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="System default" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
@@ -1559,7 +1562,7 @@
   <data name="Navigate to the drop event page." xml:space="preserve">
     <value>Navigieren Sie zur Drop Event Seite.</value>
   </data>
-  <data name="File Not Found" xml:space="preserve">
+  <data name="File not found" xml:space="preserve">
     <value>Datei nicht gefunden</value>
     <comment>Error dialog title for missing file</comment>
   </data>
@@ -1582,10 +1585,6 @@
   <data name="• The path is incorrect" xml:space="preserve">
     <value>• Der Pfad ist nicht korrekt</value>
     <comment>Error dialog possible cause 2</comment>
-  </data>
-  <data name="• The file is corrupted" xml:space="preserve">
-    <value>• Die Datei ist beschädigt</value>
-    <comment>Error dialog possible cause 3</comment>
   </data>
   <data name="Missing file:" xml:space="preserve">
     <value>Fehlende Datei:</value>
@@ -2170,5 +2169,50 @@
   </data>
   <data name="Directory not found" xml:space="preserve">
     <value>Verzeichnis nicht gefunden</value>
+  </data>
+  <data name="A required file was not found." xml:space="preserve">
+    <value>Eine erforderliche Datei wurde nicht gefunden.</value>
+  </data>
+  <data name="The file path configured in the application settings is invalid." xml:space="preserve">
+    <value>Der in den Anwendungseinstellungen konfigurierte Dateipfad ist ungültig.</value>
+  </data>
+  <data name="The file has been moved, renamed or deleted." xml:space="preserve">
+    <value>Die Datei wurde verschoben, umbenannt oder gelöscht.</value>
+  </data>
+  <data name="There are insufficient permissions to access the file." xml:space="preserve">
+    <value>Es sind nicht genügend Berechtigungen vorhanden, um auf die Datei zuzugreifen.</value>
+  </data>
+  <data name="Incorrectly formatted file" xml:space="preserve">
+    <value>Falsch formatiert Datei</value>
+  </data>
+  <data name="A required file is incorrectly formatted." xml:space="preserve">
+    <value>Eine erforderliche Datei ist falsch formatiert.</value>
+  </data>
+  <data name="The application found a file, but it is not correctly formatted. This can happen when:" xml:space="preserve">
+    <value>Die Anwendung hat eine Datei gefunden, aber sie ist nicht korrekt formatiert. Dies kann passieren, wenn :</value>
+  </data>
+  <data name="The file has been manually edited and contains errors." xml:space="preserve">
+    <value>Die Datei wurde manuell bearbeitet und enthält Fehler.</value>
+  </data>
+  <data name="The file path does not point to the correct file." xml:space="preserve">
+    <value>Der Dateipfad zeigt nicht auf die richtige Datei.</value>
+  </data>
+  <data name="The configured resource version does not match your files' version." xml:space="preserve">
+    <value>Die konfigurierte Ressourcenversion stimmt nicht mit der Version Ihrer Dateien überein.</value>
+  </data>
+  <data name="Unknown error" xml:space="preserve">
+    <value>Unbekannter Fehler</value>
+  </data>
+  <data name="An unexpected error occurred." xml:space="preserve">
+    <value>Ein unerwarteter Fehler ist aufgetreten.</value>
+  </data>
+  <data name="An unexpected error occurred while loading. This can happen when:" xml:space="preserve">
+    <value>Beim Laden ist ein unerwarteter Fehler aufgetreten. Dies kann passieren, wenn :</value>
+  </data>
+  <data name="There is a bug in the application." xml:space="preserve">
+    <value>In der Anwendung gibt es einen Fehler.</value>
+  </data>
+  <data name="Open configuration" xml:space="preserve">
+    <value>Konfiguration öffnen</value>
   </data>
 </root>
