@@ -739,4 +739,12 @@
     <value>Refresh</value>
     <comment>Refresh button text</comment>
   </data>
+  <data name="Filter by type..." xml:space="preserve">
+    <value>Filter by type...</value>
+    <comment>Filter ComboBox placeholder</comment>
+  </data>
+  <data name="Total: {0}" xml:space="preserve">
+    <value>Total: {0}</value>
+    <comment>Total assets count</comment>
+  </data>
 </root>

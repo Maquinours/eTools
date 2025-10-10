@@ -2308,4 +2308,12 @@
     <value>Aktualisieren</value>
     <comment>Refresh button text</comment>
   </data>
+  <data name="Filter by type..." xml:space="preserve">
+    <value>Nach Typ filtern...</value>
+    <comment>Filter ComboBox placeholder</comment>
+  </data>
+  <data name="Total: {0}" xml:space="preserve">
+    <value>Gesamt: {0}</value>
+    <comment>Total assets count</comment>
+  </data>
 </root>

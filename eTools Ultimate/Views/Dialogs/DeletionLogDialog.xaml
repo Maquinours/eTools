@@ -1,0 +1,141 @@
+<ui:ContentDialog
+    x:Class="eTools_Ultimate.Views.Dialogs.DeletionLogDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
+    xmlns:local="clr-namespace:eTools_Ultimate.Views.Dialogs"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:viewmodels="clr-namespace:eTools_Ultimate.ViewModels.Windows"
+    Title="{i18n:StringLocalizer 'Deletion Log'}"
+    d:DataContext="{d:DesignInstance viewmodels:DeletionLogViewModel,
+                                     IsDesignTimeCreatable=False}"
+    CloseButtonText="{i18n:StringLocalizer 'Close'}"
+    PrimaryButtonText="{i18n:StringLocalizer 'Refresh'}"
+    mc:Ignorable="d">
+    <ui:ContentDialog.Resources>
+        <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:DeletionLogDialog}">
+            <Setter Property="IsPrimaryButtonEnabled" Value="True" />
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Margin" Value="0,8,0,4" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+        </Style>
+
+        <Style x:Key="InfoIconStyle" TargetType="ui:SymbolIcon">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="5,0,0,0" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+        </Style>
+    </ui:ContentDialog.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!--  Content Area  -->
+        <Grid
+            Grid.Row="0"
+            Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  Log Entries Header  -->
+            <StackPanel Grid.Row="0" Margin="20,20,20,8" Orientation="Horizontal">
+                <TextBlock Style="{StaticResource LabelStyle}" Text="{i18n:StringLocalizer 'Deletion Log Entries'}" />
+                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                    <ui:SymbolIcon.ToolTip>
+                        <ToolTip Content="{i18n:StringLocalizer 'View and restore deleted assets from the log'}" />
+                    </ui:SymbolIcon.ToolTip>
+                </ui:SymbolIcon>
+            </StackPanel>
+            
+            <!--  DataGrid  -->
+            <DataGrid
+                Grid.Row="1"
+                Margin="0"
+                Background="Transparent"
+                BorderThickness="0"
+                AutoGenerateColumns="False"
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                CanUserReorderColumns="True"
+                CanUserResizeColumns="True"
+                CanUserSortColumns="True"
+                GridLinesVisibility="Horizontal"
+                HeadersVisibility="Column"
+                ItemsSource="{Binding LogEntries}"
+                SelectionMode="Single">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn
+                                Width="120"
+                                Binding="{Binding Date}"
+                                Header="{i18n:StringLocalizer 'Date'}" />
+                            <DataGridTextColumn
+                                Width="80"
+                                Binding="{Binding Action}"
+                                Header="{i18n:StringLocalizer 'Action'}" />
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding FilePath}"
+                                Header="{i18n:StringLocalizer 'File Path'}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                        <Setter Property="FontFamily" Value="Consolas" />
+                                        <Setter Property="FontSize" Value="11" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn
+                                Width="*"
+                                Binding="{Binding TargetPath}"
+                                Header="{i18n:StringLocalizer 'Target Path'}">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap" />
+                                        <Setter Property="FontFamily" Value="Consolas" />
+                                        <Setter Property="FontSize" Value="11" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn
+                                Width="100"
+                                Binding="{Binding DeletedBy}"
+                                Header="{i18n:StringLocalizer 'Deleted By'}" />
+                            <DataGridTemplateColumn Width="80" Header="{i18n:StringLocalizer 'Actions'}">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <ui:Button
+                                            Command="{Binding DataContext.UndoEntryCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CommandParameter="{Binding}"
+                                            Background="#FF6B35"
+                                            Foreground="White"
+                                            BorderThickness="0"
+                                            CornerRadius="4"
+                                            Padding="6,2"
+                                            FontSize="11">
+                                            <StackPanel Orientation="Horizontal">
+                                                <ui:SymbolIcon
+                                                    Margin="0,0,2,0"
+                                                    FontSize="10"
+                                                    Symbol="ArrowUndo24" />
+                                                <TextBlock Text="{i18n:StringLocalizer 'Undo'}" />
+                                            </StackPanel>
+                                        </ui:Button>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+        </Grid>
+    </Grid>
+</ui:ContentDialog>

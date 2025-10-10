@@ -63,7 +63,7 @@
                             FontTypography="Title"
                             FontWeight="Bold"
                             Foreground="White"
-                            Text="{i18n:StringLocalizer 'Find Unused Models &amp; Textures'}" />
+                            Text="{i18n:StringLocalizer 'Find Unused assets'}" />
                         <ui:TextBlock
                             Margin="0,8,0,0"
                             FontSize="16"
@@ -119,7 +119,7 @@
                                     Margin="8,0,16,0"
                                     FontSize="14"
                                     Foreground="Gray"
-                                    Text="{Binding TotalSizeBefore, StringFormat='{}{0:N0} bytes'}" />
+                                    Text="{Binding TotalSizeBeforeFormatted}" />
                                 <ui:TextBlock
                                     FontSize="14"
                                     FontWeight="Medium"
@@ -128,7 +128,7 @@
                                     Margin="8,0,16,0"
                                     FontSize="14"
                                     Foreground="Gray"
-                                    Text="{Binding SelectedSize, StringFormat='{}{0:N0} bytes'}" />
+                                    Text="{Binding SelectedSizeFormatted}" />
                                 <ui:TextBlock
                                     FontSize="14"
                                     FontWeight="Medium"
@@ -137,7 +137,7 @@
                                     Margin="8,0,0,0"
                                     FontSize="14"
                                     Foreground="Gray"
-                                    Text="{Binding TotalSizeAfter, StringFormat='{}{0:N0} bytes'}" />
+                                    Text="{Binding TotalSizeAfterFormatted}" />
                             </StackPanel>
                         </StackPanel>
                     </ui:CardControl.Header>
@@ -157,31 +157,6 @@
                                     </StackPanel>
                                 </ui:Button>
 
-                                <ui:Button
-                                    Margin="0,0,8,0"
-                                    Command="{Binding SelectAllAssetsCommand}"
-                                    IsEnabled="{Binding UnusedAssets.Count, Converter={StaticResource IntToBoolConverter}}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <ui:SymbolIcon
-                                            Margin="0,0,8,0"
-                                            Symbol="Checkbox224"
-                                            FontSize="16" />
-                                        <ui:TextBlock Text="{i18n:StringLocalizer 'Select All'}" />
-                                    </StackPanel>
-                                </ui:Button>
-
-                                <ui:Button
-                                    Margin="0,0,8,0"
-                                    Command="{Binding ClearSelectionCommand}"
-                                    IsEnabled="{Binding HasSelectedAssets}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <ui:SymbolIcon
-                                            Margin="0,0,8,0"
-                                            Symbol="Dismiss24"
-                                            FontSize="16" />
-                                        <ui:TextBlock Text="{i18n:StringLocalizer 'Clear Selection'}" />
-                                    </StackPanel>
-                                </ui:Button>
 
                                 <ui:Button
                                     Margin="0,0,8,0"
@@ -214,8 +189,10 @@
                 </ui:CardControl>
 
                 <!--  Search and Filter  -->
-                <Grid Grid.Row="1" Margin="0,0,0,16" HorizontalAlignment="Right">
+                <Grid Grid.Row="1" Margin="0,0,0,16">
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="265" />
                     </Grid.ColumnDefinitions>
@@ -225,10 +202,24 @@
                         VerticalAlignment="Center"
                         FontSize="14"
                         Foreground="Gray"
-                        Text="{Binding UnusedAssets.Count, StringFormat='{}{0} assets found'}" />
+                        Text="{Binding FilteredAssets.Count, StringFormat='{}{0} assets found'}" />
+
+                    <ComboBox
+                        Grid.Column="1"
+                        Margin="12,0"
+                        HorizontalAlignment="Left"
+                        ItemsSource="{Binding AssetTypes}"
+                        SelectedItem="{Binding SelectedAssetType, UpdateSourceTrigger=PropertyChanged}" />
+
+                    <ui:TextBlock
+                        Grid.Column="2"
+                        VerticalAlignment="Center"
+                        FontSize="14"
+                        Foreground="Gray"
+                        Text="{Binding UnusedAssets.Count, StringFormat='Total: {0}'}" />
 
                     <ui:TextBox
-                        Grid.Column="1"
+                        Grid.Column="3"
                         Margin="0"
                         HorizontalAlignment="Right"
                         PlaceholderText="{i18n:StringLocalizer 'Search by name, path, or type...'}"
@@ -252,6 +243,7 @@
             <!--  DataGrid  -->
             <Grid Grid.Row="2" Margin="24,0,24,24">
                 <DataGrid
+                    HorizontalAlignment="Stretch"
                     AutoGenerateColumns="False"
                     CanUserAddRows="False"
                     CanUserDeleteRows="False"
