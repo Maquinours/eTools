@@ -32,6 +32,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             //new(localizer["Couple"], localizer["Navigate to the couple page."], "/eTools Ultimate;component/Assets/Icons/Accessories.png", typeof(CouplePage)),
             new(localizer["Motions"], localizer["Navigate to the motions page."], "/eTools Ultimate;component/Assets/Icons/Motions.png", typeof(MotionsPage)),
             new(localizer["Texts"], localizer["Navigate to the texts page."], "/eTools Ultimate;component/Assets/Icons/Texts.png", typeof(TextsPage)),
+            new(localizer["Misc"], localizer["Navigate to the misc tools page."], "/eTools Ultimate;component/Assets/Icons/Settings.png", typeof(MiscPage)),
             //new(localizer["World"], localizer["WorldDescription"], "/eTools Ultimate;component/Assets/Icons/World.png", typeof(WorldsPage)),
             //new(localizer["Tickets"], localizer["Navigate to the ticket editor."], "/eTools Ultimate;component/Assets/Icons/ticket.png", typeof(TicketsPage)),
             //new(localizer["Object"], localizer["Navigate to the object editor."], "/eTools Ultimate;component/Assets/Icons/Terrain.png", typeof(ObjectsPage)),

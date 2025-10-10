@@ -111,6 +111,12 @@ namespace eTools_Ultimate.ViewModels.Windows
                     Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Texts.png", 25, 25),
                     TargetPageType = typeof(TextsPage)
                 },
+                new NavigationViewItem()
+                {
+                    Content = localizer["Misc"],
+                    Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Settings.png", 25, 25),
+                    TargetPageType = typeof(MiscPage)
+                },
                 //new NavigationViewItem()
                 //{
                 //    Content = "Couple",
