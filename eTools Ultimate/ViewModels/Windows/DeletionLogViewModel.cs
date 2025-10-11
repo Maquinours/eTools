@@ -20,6 +20,9 @@ namespace eTools_Ultimate.ViewModels.Windows
         [ObservableProperty]
         private ObservableCollection<LogEntry> _logEntries = new();
 
+        [ObservableProperty]
+        private bool _selectAll = false;
+
         public DeletionLogViewModel(ISnackbarService snackbarService, string logPath)
         {
             _snackbarService = snackbarService;
@@ -121,8 +124,19 @@ namespace eTools_Ultimate.ViewModels.Windows
         [RelayCommand]
         private void Close()
         {
-            Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w is Views.Windows.DeletionLogWindow)?.Close();
+            Application.Current.Windows.OfType<Window>().FirstOrDefault(w => w is Views.Dialogs.DeletionLogDialog)?.Close();
         }
+
+        [RelayCommand]
+        private void ToggleSelectAll()
+        {
+            SelectAll = !SelectAll;
+            foreach (var entry in LogEntries)
+            {
+                entry.IsSelected = SelectAll;
+            }
+        }
+
 
         private void UpdateLogFile()
         {
@@ -147,5 +161,8 @@ namespace eTools_Ultimate.ViewModels.Windows
 
         [ObservableProperty]
         private string _deletedBy = string.Empty;
+
+        [ObservableProperty]
+        private bool _isSelected = false;
     }
 }

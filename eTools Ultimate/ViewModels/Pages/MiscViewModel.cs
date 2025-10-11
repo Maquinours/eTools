@@ -50,11 +50,25 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         private bool _selectAllChecked = false;
 
+        public string TotalSizeBeforeFormatted => FormatFileSize(TotalSizeBefore);
+
+        public string TotalSizeAfterFormatted => FormatFileSize(TotalSizeAfter);
+
+        public string SelectedSizeFormatted => FormatFileSize(SelectedSize);
+
         [ObservableProperty]
         private bool _hasSelectedAssets = false;
 
         [ObservableProperty]
         private string _statusIcon = "Search24";
+
+        [ObservableProperty]
+        private ObservableCollection<string> _assetTypes = new() { "All", "Model", "Texture", "Sound" };
+
+        [ObservableProperty]
+        private string _selectedAssetType = "All";
+
+        public ICollectionView FilteredAssets => UnusedAssetsView;
 
         [ObservableProperty]
         private string _statusColor = "Gray";
@@ -78,6 +92,11 @@ namespace eTools_Ultimate.ViewModels.Pages
                 }
             }
         }
+
+        partial void OnSelectedAssetTypeChanged(string value)
+        {
+            UnusedAssetsView?.Refresh();
+        }
         #endregion Properties
 
         public Task OnNavigatedToAsync()
@@ -100,11 +119,16 @@ namespace eTools_Ultimate.ViewModels.Pages
         private bool FilterAsset(object obj)
         {
             if (obj is not UnusedAsset asset) return false;
+
+            // Type filter
+            if (SelectedAssetType != "All" && asset.AssetType != SelectedAssetType) return false;
+
+            // Search filter
             if (string.IsNullOrEmpty(SearchText)) return true;
-            
+
             return asset.FileName.ToLower().Contains(SearchText.ToLower()) ||
-                   asset.FilePath.ToLower().Contains(SearchText.ToLower()) ||
-                   asset.AssetType.ToLower().Contains(SearchText.ToLower());
+                    asset.FilePath.ToLower().Contains(SearchText.ToLower()) ||
+                    asset.AssetType.ToLower().Contains(SearchText.ToLower());
         }
 
         #region Commands
@@ -141,12 +165,14 @@ namespace eTools_Ultimate.ViewModels.Pages
                     // Update UI on main thread
                     App.Current.Dispatcher.Invoke(() =>
                     {
-                        foreach (var asset in unusedAssets.Take(10)) // Limit to 10 files for testing
+                        foreach (var asset in unusedAssets.Take(50)) // Limit to 50 files for testing
                         {
                             UnusedAssets.Add(asset);
                             TotalSizeBefore += asset.FileSize;
                         }
                         TotalSizeAfter = TotalSizeBefore;
+                        OnPropertyChanged(nameof(TotalSizeBeforeFormatted));
+                        OnPropertyChanged(nameof(TotalSizeAfterFormatted));
                     });
                 });
 
@@ -243,6 +269,8 @@ namespace eTools_Ultimate.ViewModels.Pages
 
                     TotalSizeAfter -= deletedSize;
                     SelectedSize = 0; // Since selected are deleted
+                    OnPropertyChanged(nameof(TotalSizeAfterFormatted));
+                    OnPropertyChanged(nameof(SelectedSizeFormatted));
                     UnusedAssetsView?.Refresh();
 
                     snackbarService.Show(
@@ -280,8 +308,10 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
 
             SelectedSize = UnusedAssets.Where(a => a.IsSelected).Sum(a => a.FileSize);
+            OnPropertyChanged(nameof(SelectedSizeFormatted));
             HasSelectedAssets = UnusedAssets.Any(a => a.IsSelected);
         }
+
 
         [RelayCommand]
         private void ClearSelection()
@@ -292,6 +322,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 asset.IsSelected = false;
             }
             SelectedSize = 0;
+            OnPropertyChanged(nameof(SelectedSizeFormatted));
             HasSelectedAssets = false;
         }
 
@@ -302,7 +333,11 @@ namespace eTools_Ultimate.ViewModels.Pages
             {
                 asset.IsSelected = !asset.IsSelected;
                 SelectedSize = UnusedAssets.Where(a => a.IsSelected).Sum(a => a.FileSize);
+                OnPropertyChanged(nameof(SelectedSizeFormatted));
                 HasSelectedAssets = UnusedAssets.Any(a => a.IsSelected);
+                
+                // Update SelectAllChecked based on current selection
+                SelectAllChecked = UnusedAssets.All(a => a.IsSelected);
             }
         }
 
@@ -336,6 +371,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                         File.Move(asset.FilePath, destPath);
                         File.AppendAllText(LogPath, $"{DateTime.Now}: Moved {asset.FilePath} to {destPath}\n");
                         TotalSizeAfter -= asset.FileSize;
+                        OnPropertyChanged(nameof(TotalSizeAfterFormatted));
                         UnusedAssets.Remove(asset);
                         UnusedAssetsView?.Refresh();
 
@@ -372,14 +408,13 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
-        private void ViewLog()
+        private async Task ViewLog()
         {
             if (File.Exists(LogPath))
             {
                 var viewModel = new DeletionLogViewModel(snackbarService, LogPath);
-                var window = new DeletionLogWindow(viewModel);
-                window.Owner = Application.Current.MainWindow;
-                window.ShowDialog();
+                var dialog = new Views.Dialogs.DeletionLogDialog(contentDialogService.GetDialogHost(), viewModel);
+                await dialog.ShowAsync();
             }
             else
             {
@@ -502,15 +537,26 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private string FormatFileSize(long bytes)
         {
-            string[] sizes = { "B", "KB", "MB", "GB", "TB" };
             double len = bytes;
-            int order = 0;
-            while (len >= 1024 && order < sizes.Length - 1)
+            if (len >= 1000000000)
             {
-                order++;
-                len = len / 1024;
+                len /= 1000000000;
+                return $"{len:0.##} Gb";
             }
-            return $"{len:0.##} {sizes[order]}";
+            else if (len >= 1000000)
+            {
+                len /= 1000000;
+                return $"{len:0.##} Mb";
+            }
+            else if (len >= 1000)
+            {
+                len /= 1000;
+                return $"{len:0.##} Kb";
+            }
+            else
+            {
+                return $"{len:0.##} B";
+            }
         }
         #endregion Private Methods
     }
@@ -539,15 +585,26 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             get
             {
-                string[] sizes = { "B", "KB", "MB", "GB", "TB" };
                 double len = FileSize;
-                int order = 0;
-                while (len >= 1024 && order < sizes.Length - 1)
+                if (len >= 1000000000)
                 {
-                    order++;
-                    len = len / 1024;
+                    len /= 1000000000;
+                    return $"{len:0.##} Gb";
                 }
-                return $"{len:0.##} {sizes[order]}";
+                else if (len >= 1000000)
+                {
+                    len /= 1000000;
+                    return $"{len:0.##} Mb";
+                }
+                else if (len >= 1000)
+                {
+                    len /= 1000;
+                    return $"{len:0.##} Kb";
+                }
+                else
+                {
+                    return $"{len:0.##} B";
+                }
             }
         }
     }
