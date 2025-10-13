@@ -604,6 +604,7 @@
   </data>
   <data name="Open configuration" xml:space="preserve">
     <value />
+  </data>
   <data name="Misc" xml:space="preserve">
     <value>Misc</value>
     <comment>Misc navigation card title</comment>
