@@ -3,9 +3,12 @@ using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Windows;
 using eTools_Ultimate.Views.Windows;
+using FlyffModelParser;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Serilog;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -21,13 +24,13 @@ using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class MiscViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, IStringLocalizer<Translations> localizer, SettingsService settingsService) : ObservableObject, INavigationAware
+    public partial class MiscViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, IStringLocalizer<Translations> localizer, SettingsService settingsService, ModelsService modelsService) : ObservableObject, INavigationAware
     {
         #region Properties
         private bool _isInitialized = false;
 
         [ObservableProperty]
-        private ObservableCollection<UnusedAsset> _unusedAssets = new();
+        private ObservableCollection<UnusedAsset> _unusedAssets = [];
 
         [ObservableProperty]
         private ICollectionView? _unusedAssetsView;
@@ -149,23 +152,24 @@ namespace eTools_Ultimate.ViewModels.Pages
                 await Task.Run(() =>
                 {
                     var unusedAssets = new List<UnusedAsset>();
-                    
+                    List<string> usedModelFiles = [];
+
                     // Scan models
                     ScanProgress = localizer["Scanning models..."];
-                    ScanModels(unusedAssets);
-                    
+                    unusedAssets.AddRange(ScanModels(ref usedModelFiles));
+
                     // Scan textures
                     ScanProgress = localizer["Scanning textures..."];
-                    ScanTextures(unusedAssets);
-                    
+                    unusedAssets.AddRange(ScanTextures(usedModelFiles));
+
                     // Scan sounds
-                    ScanProgress = localizer["Scanning sounds..."];
-                    ScanSounds(unusedAssets);
+                    //ScanProgress = localizer["Scanning sounds..."];
+                    //ScanSounds(unusedAssets);
 
                     // Update UI on main thread
                     App.Current.Dispatcher.Invoke(() =>
                     {
-                        foreach (var asset in unusedAssets.Take(50)) // Limit to 50 files for testing
+                        foreach (var asset in unusedAssets) // Limit to 10 files for testing
                         {
                             UnusedAssets.Add(asset);
                             TotalSizeBefore += asset.FileSize;
@@ -182,8 +186,8 @@ namespace eTools_Ultimate.ViewModels.Pages
 
                 snackbarService.Show(
                     title: localizer["Scan completed"],
-                    message: string.Format(localizer["Found {0} unused assets totaling {1}."], 
-                        UnusedAssets.Count, 
+                    message: string.Format(localizer["Found {0} unused assets totaling {1}."],
+                        UnusedAssets.Count,
                         FormatFileSize(TotalSizeBefore)),
                     appearance: ControlAppearance.Success,
                     icon: null,
@@ -211,7 +215,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         private async Task DeleteSelectedAssets()
         {
             var selectedAssets = UnusedAssets.Where(a => a.IsSelected).ToList();
-            
+
             if (!selectedAssets.Any())
             {
                 snackbarService.Show(
@@ -275,8 +279,8 @@ namespace eTools_Ultimate.ViewModels.Pages
 
                     snackbarService.Show(
                         title: localizer["Assets deleted"],
-                        message: string.Format(localizer["Successfully deleted {0} assets, freeing {1}."], 
-                            deletedCount, 
+                        message: string.Format(localizer["Successfully deleted {0} assets, freeing {1}."],
+                            deletedCount,
                             FormatFileSize(deletedSize)),
                         appearance: ControlAppearance.Success,
                         icon: null,
@@ -335,7 +339,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 SelectedSize = UnusedAssets.Where(a => a.IsSelected).Sum(a => a.FileSize);
                 OnPropertyChanged(nameof(SelectedSizeFormatted));
                 HasSelectedAssets = UnusedAssets.Any(a => a.IsSelected);
-                
+
                 // Update SelectAllChecked based on current selection
                 SelectAllChecked = UnusedAssets.All(a => a.IsSelected);
             }
@@ -410,80 +414,151 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private async Task ViewLog()
         {
-            if (File.Exists(LogPath))
-            {
-                var viewModel = new DeletionLogViewModel(snackbarService, LogPath);
-                var dialog = new Views.Dialogs.DeletionLogDialog(contentDialogService.GetDialogHost(), viewModel);
-                await dialog.ShowAsync();
-            }
-            else
-            {
-                snackbarService.Show(
-                    title: localizer["No log found"],
-                    message: localizer["No deletion log exists yet."],
-                    appearance: ControlAppearance.Info,
-                    icon: null,
-                    timeout: TimeSpan.FromSeconds(2)
-                );
-            }
+            //if (File.Exists(LogPath))
+            //{
+            var viewModel = new DeletionLogViewModel(snackbarService, LogPath);
+            var dialog = new Views.Dialogs.DeletionLogDialog(contentDialogService.GetDialogHost(), viewModel);
+            await dialog.ShowAsync();
+            //}
+            //else
+            //{
+            //    snackbarService.Show(
+            //        title: localizer["No log found"],
+            //        message: localizer["No deletion log exists yet."],
+            //        appearance: ControlAppearance.Info,
+            //        icon: null,
+            //        timeout: TimeSpan.FromSeconds(2)
+            //    );
+            //}
         }
         #endregion Commands
 
         #region Private Methods
-        private void ScanModels(List<UnusedAsset> unusedAssets)
+        private UnusedAsset[] ScanModels(ref List<string> usedModels)
         {
-            var modelsPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
-            if (string.IsNullOrEmpty(modelsPath) || !Directory.Exists(modelsPath))
-                return;
+            HashSet<string> usedModelFiles = new(StringComparer.OrdinalIgnoreCase);
 
-            var modelFiles = Directory.GetFiles(modelsPath, "*.o3d", SearchOption.TopDirectoryOnly);
-            
-            foreach (var modelFile in modelFiles)
+            string modelsDirectoryPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
+
+            usedModelFiles.UnionWith(new List<string>([
+                ..Enumerable.Range(0, 100).Select(i => string.Format("Part_maleHair{0:00}.o3d", i)), ..Enumerable.Range(0, 100).Select(i => string.Format("Part_femaleHair{0:00}.o3d", i)),
+                ..Enumerable.Range(0, 100).Select(i => string.Format("Part_maleHead{0:00}.o3d", i)), ..Enumerable.Range(0, 100).Select(i => string.Format("Part_femaleHead{0:00}.o3d", i)),
+                "Part_maleUpper.o3d", "Part_femaleUpper.o3d",
+                "Part_maleLower.o3d", "Part_femaleLower.o3d",
+                "Part_maleHand.o3d", "Part_femaleHand.o3d",
+                "Part_maleFoot.o3d", "Part_femaleFoot.o3d",
+                "arrow.o3d", "etc_arrow.o3d",
+                "Mvr_Guidepang.o3d", "Mvr_Guidepang.chr",
+                "Mvr_McGuidepang.o3d", "Mvr_McGuidepang.chr",
+                "Mvr_AsGuidepang.o3d", "Mvr_AsGuidepang.chr",
+                "Mvr_MgGuidepang.o3d", "Mvr_MgGuidepang.chr",
+                "Mvr_AcrGuidepang.o3d", "Mvr_AcrGuidepang.chr",
+                "Shadow.o3d"])
+                .Select(fileName => Path.Combine(modelsDirectoryPath, fileName)));
+
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+            string modelsFolderPath = settings.ModelsFolderPath ?? settings.DefaultModelsFolderPath;
+
+            foreach (Model model in modelsService.GetModels())
             {
-                var fileName = Path.GetFileName(modelFile);
-                var fileInfo = new FileInfo(modelFile);
-                
-                // Check if model is referenced in any mover
-                if (!IsModelReferenced(fileName))
+                usedModelFiles.Add(model.Model3DFilePath);
+                string? directoryPath = Path.GetDirectoryName(model.Model3DFilePath);
+                string? prefix = Path.GetFileNameWithoutExtension(model.Model3DFilePath);
+                if (model.ModelTypeIdentifier == "MODELTYPE_ANIMATED_MESH")
+                    usedModelFiles.Add(Path.ChangeExtension(model.Model3DFilePath, ".chr"));
+
+                if (directoryPath is not null)
                 {
-                    unusedAssets.Add(new UnusedAsset
+                    string partsPath = $"{Path.Combine(directoryPath, $"part_{model.Prop.SzPart}.o3d")}";
+                    usedModelFiles.Add(partsPath);
+                    string[] parts = model.Prop.SzPart.Split('/');
+                    if (parts.Length > 1)
                     {
-                        FileName = fileName,
-                        FilePath = modelFile,
-                        AssetType = "Model",
-                        FileSize = fileInfo.Length,
-                        LastModified = fileInfo.LastWriteTime
-                    });
+                        usedModelFiles.Add($"{Path.Combine(directoryPath, $"part_{parts[0]}.o3d")}");
+                        usedModelFiles.Add($"{Path.Combine(directoryPath, $"part_{parts[1]}.o3d")}");
+                    }
+                }
+                if (directoryPath is not null && prefix is not null)
+                {
+                    foreach (ModelMotion motion in model.Motions)
+                    {
+                        string filePath = $"{Path.Combine(directoryPath, $"{prefix}_{motion.Prop.SzMotion}.ani")}";
+                        usedModelFiles.Add(filePath);
+                    }
                 }
             }
+
+            List<string> allModelFiles = [.. Directory.EnumerateFiles(modelsFolderPath, "*", SearchOption.TopDirectoryOnly)];
+
+            string[] unusedModelFiles = [.. allModelFiles.FindAll(file => !usedModelFiles.Contains(file))];
+
+            usedModels.AddRange(usedModelFiles);
+
+            return [..unusedModelFiles.Select(file =>
+            {
+                FileInfo fileInfo = new(file);
+                return new UnusedAsset()
+                {
+                    FileName = fileInfo.Name,
+                    FilePath = fileInfo.FullName,
+                    AssetType = fileInfo.Extension == ".o3d" ? "Model" : "Unknown",
+                    FileSize = fileInfo.Length,
+                    LastModified = fileInfo.LastWriteTime
+                };
+            })];
         }
 
-        private void ScanTextures(List<UnusedAsset> unusedAssets)
+        private UnusedAsset[] ScanTextures(List<string> usedModelFiles)
         {
-            var texturesPath = settingsService.Settings.TexturesFolderPath ?? settingsService.Settings.DefaultTexturesFolderPath;
-            if (string.IsNullOrEmpty(texturesPath) || !Directory.Exists(texturesPath))
-                return;
 
-            var textureFiles = Directory.GetFiles(texturesPath, "*.dds", SearchOption.TopDirectoryOnly);
-            
-            foreach (var textureFile in textureFiles)
+            string texturesFolderPath = settingsService.Settings.TexturesFolderPath ?? settingsService.Settings.DefaultTexturesFolderPath;
+
+            List<string> tempUsedTextureFiles = [];
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            foreach (string modelFile in usedModelFiles)
             {
-                var fileName = Path.GetFileName(textureFile);
-                var fileInfo = new FileInfo(textureFile);
-                
-                // Check if texture is referenced in any model or mover
-                if (!IsTextureReferenced(fileName))
+                if (Path.GetExtension(modelFile) == ".o3d" && File.Exists(modelFile))
                 {
-                    unusedAssets.Add(new UnusedAsset
-                    {
-                        FileName = fileName,
-                        FilePath = textureFile,
-                        AssetType = "Texture",
-                        FileSize = fileInfo.Length,
-                        LastModified = fileInfo.LastWriteTime
-                    });
+                    ModelParser modelParser = new();
+                    modelParser.Load(modelFile);
+                    string[] texturePaths = [.. modelParser.GetTextureNames().Select(textureName => Path.Combine(texturesFolderPath, textureName.TrimEnd('\0')))];
+                    tempUsedTextureFiles.AddRange(texturePaths);
                 }
             }
+
+            //Parallel.ForEach(usedModelFiles, modelFile =>
+            //{
+            //    if (Path.GetExtension(modelFile) == ".o3d" && File.Exists(modelFile))
+            //    {
+            //        ModelParser modelParser = new();
+            //        modelParser.Load(modelFile);
+            //        string[] texturePaths = [.. modelParser.GetTextureNames().Select(textureName => Path.Combine(texturesFolderPath, textureName))];
+            //        foreach (string texturePath in texturePaths)
+            //            tempUsedTextureFiles.Add(texturePath);
+            //    }
+            //});
+            stopwatch.Stop();
+            System.Diagnostics.Debug.WriteLine($"Unused textures loading took {stopwatch.ElapsedMilliseconds}ms to run");
+
+            HashSet<string> usedTextureFiles = new(tempUsedTextureFiles, StringComparer.OrdinalIgnoreCase);
+
+            List<string> allTextureFiles = [.. Directory.EnumerateFiles(texturesFolderPath, "*", SearchOption.TopDirectoryOnly)];
+
+            string[] unusedTextureFiles = [.. allTextureFiles.FindAll(file => !usedTextureFiles.Contains(file))];
+
+            return [..unusedTextureFiles.Select(file =>
+            {
+                FileInfo fileInfo = new(file);
+                return new UnusedAsset()
+                {
+                    FileName = fileInfo.Name,
+                    FilePath = fileInfo.FullName,
+                    AssetType = "Texture",
+                    FileSize = fileInfo.Length,
+                    LastModified = fileInfo.LastWriteTime
+                };
+            })];
         }
 
         private void ScanSounds(List<UnusedAsset> unusedAssets)
@@ -493,12 +568,12 @@ namespace eTools_Ultimate.ViewModels.Pages
                 return;
 
             var soundFiles = Directory.GetFiles(soundsPath, "*.wav", SearchOption.TopDirectoryOnly);
-            
+
             foreach (var soundFile in soundFiles)
             {
                 var fileName = Path.GetFileName(soundFile);
                 var fileInfo = new FileInfo(soundFile);
-                
+
                 // Check if sound is referenced in any mover
                 if (!IsSoundReferenced(fileName))
                 {
