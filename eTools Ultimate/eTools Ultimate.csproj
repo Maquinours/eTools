@@ -72,6 +72,9 @@
     <Reference Include="DDSImageParser">
       <HintPath>..\libs\net9.0\DDSImageParser.dll</HintPath>
     </Reference>
+    <Reference Include="FlyffModelParser">
+      <HintPath>..\libs\net9.0\FlyffModelParser.dll</HintPath>
+    </Reference>
     <Reference Include="Scanner">
       <HintPath>..\libs\net9.0\Scanner.dll</HintPath>
     </Reference>
