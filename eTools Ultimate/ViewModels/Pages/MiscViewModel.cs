@@ -65,11 +65,15 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         private string _statusIcon = "Search24";
 
-        [ObservableProperty]
-        private ObservableCollection<string> _assetTypes = new() { "All", "Model", "Texture", "Sound" };
+        public List<KeyValuePair<AssetType?, string>> AssetTypes => new() {
+           new KeyValuePair<AssetType?, string>(null, "All"),
+           new KeyValuePair<AssetType?, string>(AssetType.Model, "Model"),
+    new KeyValuePair<AssetType?, string>(AssetType.Texture, "Texture"),
+    new KeyValuePair<AssetType?, string>(AssetType.Animation, "Animation"),
+    new KeyValuePair<AssetType?, string>(AssetType.Bones, "Bones"),
+        };
 
-        [ObservableProperty]
-        private string _selectedAssetType = "All";
+        private AssetType? _selectedAssetType = null;
 
         public ICollectionView FilteredAssets => UnusedAssetsView;
 
@@ -95,10 +99,18 @@ namespace eTools_Ultimate.ViewModels.Pages
                 }
             }
         }
-
-        partial void OnSelectedAssetTypeChanged(string value)
+        public AssetType? SelectedAssetType
         {
-            UnusedAssetsView?.Refresh();
+            get => _selectedAssetType;
+            set
+            {
+                if (SelectedAssetType != value)
+                {
+                    _selectedAssetType = value;
+                    OnPropertyChanged();
+                    UnusedAssetsView?.Refresh();
+                }
+            }
         }
         #endregion Properties
 
@@ -124,14 +136,14 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (obj is not UnusedAsset asset) return false;
 
             // Type filter
-            if (SelectedAssetType != "All" && asset.AssetType != SelectedAssetType) return false;
+            if (SelectedAssetType != null && asset.AssetType != SelectedAssetType) return false;
 
             // Search filter
             if (string.IsNullOrEmpty(SearchText)) return true;
 
-            return asset.FileName.ToLower().Contains(SearchText.ToLower()) ||
-                    asset.FilePath.ToLower().Contains(SearchText.ToLower()) ||
-                    asset.AssetType.ToLower().Contains(SearchText.ToLower());
+            return asset.FileName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                    asset.FilePath.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
+                    asset.AssetType.ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase);
         }
 
         #region Commands
@@ -152,15 +164,14 @@ namespace eTools_Ultimate.ViewModels.Pages
                 await Task.Run(() =>
                 {
                     var unusedAssets = new List<UnusedAsset>();
-                    List<string> usedModelFiles = [];
 
                     // Scan models
                     ScanProgress = localizer["Scanning models..."];
-                    unusedAssets.AddRange(ScanModels(ref usedModelFiles));
+                    unusedAssets.AddRange(ScanModels());
 
                     // Scan textures
                     ScanProgress = localizer["Scanning textures..."];
-                    unusedAssets.AddRange(ScanTextures(usedModelFiles));
+                    unusedAssets.AddRange(ScanTextures());
 
                     // Scan sounds
                     //ScanProgress = localizer["Scanning sounds..."];
@@ -434,7 +445,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         #endregion Commands
 
         #region Private Methods
-        private UnusedAsset[] ScanModels(ref List<string> usedModels)
+        private UnusedAsset[] ScanModels()
         {
             HashSet<string> usedModelFiles = new(StringComparer.OrdinalIgnoreCase);
 
@@ -459,8 +470,12 @@ namespace eTools_Ultimate.ViewModels.Pages
             Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
             string modelsFolderPath = settings.ModelsFolderPath ?? settings.DefaultModelsFolderPath;
 
-            foreach (Model model in modelsService.GetModels())
+            Model[] models = modelsService.GetModels();
+
+            for (int i = 0; i < models.Length; i++)
             {
+                Model model = models[i];
+
                 usedModelFiles.Add(model.Model3DFilePath);
                 string? directoryPath = Path.GetDirectoryName(model.Model3DFilePath);
                 string? prefix = Path.GetFileNameWithoutExtension(model.Model3DFilePath);
@@ -486,107 +501,107 @@ namespace eTools_Ultimate.ViewModels.Pages
                         usedModelFiles.Add(filePath);
                     }
                 }
+
+                ScanProgress = $"{localizer[$"Scanning models..."]} ({Math.Floor((i + 1d) / models.Length * 100)}%)";
             }
 
             List<string> allModelFiles = [.. Directory.EnumerateFiles(modelsFolderPath, "*", SearchOption.TopDirectoryOnly)];
 
             string[] unusedModelFiles = [.. allModelFiles.FindAll(file => !usedModelFiles.Contains(file))];
-
-            usedModels.AddRange(usedModelFiles);
-
+            string[] usedMod = [.. new List<string>(usedModelFiles).FindAll(x => Path.GetExtension(x) == ".o3d")];
             return [..unusedModelFiles.Select(file =>
             {
                 FileInfo fileInfo = new(file);
-                return new UnusedAsset()
-                {
-                    FileName = fileInfo.Name,
-                    FilePath = fileInfo.FullName,
-                    AssetType = fileInfo.Extension == ".o3d" ? "Model" : "Unknown",
-                    FileSize = fileInfo.Length,
-                    LastModified = fileInfo.LastWriteTime
-                };
+                return new UnusedAsset(fileInfo);
             })];
         }
 
-        private UnusedAsset[] ScanTextures(List<string> usedModelFiles)
+        private UnusedAsset[] ScanTextures()
         {
-
+            string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
             string texturesFolderPath = settingsService.Settings.TexturesFolderPath ?? settingsService.Settings.DefaultTexturesFolderPath;
 
-            List<string> tempUsedTextureFiles = [];
+            string[] predefinedModelsList =
+            [
+                ..Enumerable.Range(0, 100).Select(i => string.Format("Part_maleHair{0:00}.o3d", i)), ..Enumerable.Range(0, 100).Select(i => string.Format("Part_femaleHair{0:00}.o3d", i)),
+                ..Enumerable.Range(0, 100).Select(i => string.Format("Part_maleHead{0:00}.o3d", i)), ..Enumerable.Range(0, 100).Select(i => string.Format("Part_femaleHead{0:00}.o3d", i)),
+                "Part_maleUpper.o3d", "Part_femaleUpper.o3d",
+                "Part_maleLower.o3d", "Part_femaleLower.o3d",
+                "Part_maleHand.o3d", "Part_femaleHand.o3d",
+                "Part_maleFoot.o3d", "Part_femaleFoot.o3d",
+                "arrow.o3d", "etc_arrow.o3d",
+                "Shadow.o3d"
+            ];
 
-            Stopwatch stopwatch = Stopwatch.StartNew();
-            foreach (string modelFile in usedModelFiles)
+            Dictionary<string, HashSet<int>> modelsTexturesList = predefinedModelsList.ToDictionary(x => Path.Combine(modelsFolderPath, x), x => new HashSet<int>(Enumerable.Range(0, 10)));
+
+            foreach (Model model in modelsService.GetModels())
             {
-                if (Path.GetExtension(modelFile) == ".o3d" && File.Exists(modelFile))
+                List<string> modelFilePaths = [model.Model3DFilePath, Path.Combine(modelsFolderPath, $"part_{model.Prop.SzPart}.o3d")];
+
+                string[] partsPaths = model.Prop.SzPart.Split('/');
+                if (partsPaths.Length > 1)
                 {
-                    ModelParser modelParser = new();
-                    modelParser.Load(modelFile);
-                    string[] texturePaths = [.. modelParser.GetTextureNames().Select(textureName => Path.Combine(texturesFolderPath, textureName.TrimEnd('\0')))];
-                    tempUsedTextureFiles.AddRange(texturePaths);
+                    modelFilePaths.Add(Path.Combine(modelsFolderPath, $"part_{partsPaths[0]}.o3d"));
+                    modelFilePaths.Add(Path.Combine(modelsFolderPath, $"part_{partsPaths[1]}.o3d"));
+                }
+
+                foreach (string modelFilePath in modelFilePaths)
+                {
+                    if (!modelsTexturesList.ContainsKey(modelFilePath))
+                        modelsTexturesList.Add(modelFilePath, []);
+                    HashSet<int> textures = modelsTexturesList[modelFilePath];
+                    textures.Add(model.Prop.NTextureEx);
                 }
             }
 
-            //Parallel.ForEach(usedModelFiles, modelFile =>
-            //{
-            //    if (Path.GetExtension(modelFile) == ".o3d" && File.Exists(modelFile))
-            //    {
-            //        ModelParser modelParser = new();
-            //        modelParser.Load(modelFile);
-            //        string[] texturePaths = [.. modelParser.GetTextureNames().Select(textureName => Path.Combine(texturesFolderPath, textureName))];
-            //        foreach (string texturePath in texturePaths)
-            //            tempUsedTextureFiles.Add(texturePath);
-            //    }
-            //});
+            List<string> predefinedTexturesList =
+            [
+                "Env.dds",
+                "red.tga",
+                "Obj_MiniWall01.dds",
+                "Obj_MiniWall02.dds",
+                "Miniroom_floor01.dds",
+                "Miniroom_floor02.dds"
+            ];
+
+            HashSet<string> usedTextures = new(predefinedTexturesList, StringComparer.OrdinalIgnoreCase);
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+            for (int i = 0; i < modelsTexturesList.Count; i++)
+            {
+                KeyValuePair<string, HashSet<int>> modelTextures = modelsTexturesList.ElementAt(i);
+                string modelFile = modelTextures.Key;
+
+                if (File.Exists(modelFile))
+                {
+                    ModelParser modelParser = new();
+                    modelParser.Load(modelFile);
+                    string[] textureNames = modelParser.GetTextureNames();
+                    foreach (string textureName in textureNames)
+                    {
+                        string textureFileName = textureName.TrimEnd('\0');
+                        string textureFileExtension = Path.GetExtension(textureFileName);
+                        string textureFileNameWithoutExtension = Path.GetFileNameWithoutExtension(textureFileName);
+
+                        foreach (int textureEx in modelTextures.Value)
+                            usedTextures.Add(Path.Combine(texturesFolderPath, textureEx == 0 ? textureFileName : $"{textureFileNameWithoutExtension}-et{textureEx:00}{textureFileExtension}"));
+                    }
+                }
+                ScanProgress = $"{localizer[$"Scanning textures..."]} ({Math.Floor((i + 1d) / modelsTexturesList.Count * 100)}%)";
+            }
             stopwatch.Stop();
             System.Diagnostics.Debug.WriteLine($"Unused textures loading took {stopwatch.ElapsedMilliseconds}ms to run");
 
-            HashSet<string> usedTextureFiles = new(tempUsedTextureFiles, StringComparer.OrdinalIgnoreCase);
-
             List<string> allTextureFiles = [.. Directory.EnumerateFiles(texturesFolderPath, "*", SearchOption.TopDirectoryOnly)];
 
-            string[] unusedTextureFiles = [.. allTextureFiles.FindAll(file => !usedTextureFiles.Contains(file))];
+            string[] unusedTextureFiles = [.. allTextureFiles.FindAll(file => !usedTextures.Contains(file))];
 
             return [..unusedTextureFiles.Select(file =>
             {
                 FileInfo fileInfo = new(file);
-                return new UnusedAsset()
-                {
-                    FileName = fileInfo.Name,
-                    FilePath = fileInfo.FullName,
-                    AssetType = "Texture",
-                    FileSize = fileInfo.Length,
-                    LastModified = fileInfo.LastWriteTime
-                };
+                return new UnusedAsset(fileInfo);
             })];
-        }
-
-        private void ScanSounds(List<UnusedAsset> unusedAssets)
-        {
-            var soundsPath = settingsService.Settings.SoundsFolderPath ?? settingsService.Settings.DefaultSoundsFolderPath;
-            if (string.IsNullOrEmpty(soundsPath) || !Directory.Exists(soundsPath))
-                return;
-
-            var soundFiles = Directory.GetFiles(soundsPath, "*.wav", SearchOption.TopDirectoryOnly);
-
-            foreach (var soundFile in soundFiles)
-            {
-                var fileName = Path.GetFileName(soundFile);
-                var fileInfo = new FileInfo(soundFile);
-
-                // Check if sound is referenced in any mover
-                if (!IsSoundReferenced(fileName))
-                {
-                    unusedAssets.Add(new UnusedAsset
-                    {
-                        FileName = fileName,
-                        FilePath = soundFile,
-                        AssetType = "Sound",
-                        FileSize = fileInfo.Length,
-                        LastModified = fileInfo.LastWriteTime
-                    });
-                }
-            }
         }
 
         private bool IsModelReferenced(string fileName)
@@ -636,25 +651,36 @@ namespace eTools_Ultimate.ViewModels.Pages
         #endregion Private Methods
     }
 
-    public partial class UnusedAsset : ObservableObject
+    public enum AssetType
     {
-        [ObservableProperty]
-        private string _fileName = string.Empty;
+        Model,
+        Animation,
+        Bones,
+        Texture,
+        Unknown
+    };
 
-        [ObservableProperty]
-        private string _filePath = string.Empty;
-
-        [ObservableProperty]
-        private string _assetType = string.Empty;
-
-        [ObservableProperty]
-        private long _fileSize = 0;
-
-        [ObservableProperty]
-        private DateTime _lastModified = DateTime.MinValue;
+    public partial class UnusedAsset(FileInfo info) : ObservableObject
+    {
+        private FileInfo _info = info;
 
         [ObservableProperty]
         private bool _isSelected = false;
+
+
+        public string FileName => _info.Name;
+        public string FilePath => _info.FullName;
+        public long FileSize => _info.Length;
+        public DateTime LastModified => _info.LastWriteTime;
+
+        public AssetType AssetType => _info.Extension switch
+        {
+            ".o3d" => AssetType.Model,
+            ".ani" => AssetType.Animation,
+            ".chr" => AssetType.Bones,
+            ".dds" => AssetType.Texture,
+            _ => AssetType.Unknown
+        };
 
         public string FormattedFileSize
         {

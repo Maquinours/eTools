@@ -202,8 +202,10 @@
                     Grid.Column="1"
                     Margin="12,0"
                     HorizontalAlignment="Left"
+                    DisplayMemberPath="Value"
                     ItemsSource="{Binding AssetTypes}"
-                    SelectedItem="{Binding SelectedAssetType, UpdateSourceTrigger=PropertyChanged}" />
+                    SelectedItem="{Binding SelectedAssetType, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedValuePath="Key" />
 
                 <ui:TextBlock
                     Grid.Column="2"
@@ -294,13 +296,15 @@
                     <DataGridTextColumn
                         Width="120"
                         Binding="{Binding FormattedFileSize}"
-                        Header="{i18n:StringLocalizer 'Size'}" />
+                        Header="{i18n:StringLocalizer 'Size'}"
+                        SortMemberPath="FileSize" />
 
                     <!--  Last Modified  -->
                     <DataGridTextColumn
                         Width="150"
                         Binding="{Binding LastModified, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}"
-                        Header="{i18n:StringLocalizer 'Last Modified'}" />
+                        Header="{i18n:StringLocalizer 'Last Modified'}"
+                        SortMemberPath="LastModified" />
 
                     <!--  Actions  -->
                     <DataGridTemplateColumn Width="120" CanUserSort="False">
