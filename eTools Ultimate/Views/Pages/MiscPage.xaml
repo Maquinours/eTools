@@ -202,10 +202,15 @@
                     Grid.Column="1"
                     Margin="12,0"
                     HorizontalAlignment="Left"
-                    DisplayMemberPath="Value"
-                    ItemsSource="{Binding AssetTypes}"
-                    SelectedItem="{Binding SelectedAssetType, UpdateSourceTrigger=PropertyChanged}"
-                    SelectedValuePath="Key" />
+                    SelectedValue="{Binding SelectedAssetType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    SelectedValuePath="Tag">
+                    <ComboBoxItem Content="{i18n:StringLocalizer 'All'}" Tag="{x:Null}" />
+                    <ComboBoxItem Content="{i18n:StringLocalizer 'Models'}" Tag="{x:Static pageViewModels:AssetType.Model}" />
+                    <ComboBoxItem Content="{i18n:StringLocalizer 'Animations'}" Tag="{x:Static pageViewModels:AssetType.Animation}" />
+                    <ComboBoxItem Content="{i18n:StringLocalizer 'Model bones'}" Tag="{x:Static pageViewModels:AssetType.Bones}" />
+                    <ComboBoxItem Content="{i18n:StringLocalizer 'Textures'}" Tag="{x:Static pageViewModels:AssetType.Texture}" />
+                    <ComboBoxItem Content="{i18n:StringLocalizer 'Unknown'}" Tag="{x:Static pageViewModels:AssetType.Unknown}" />
+                </ComboBox>
 
                 <ui:TextBlock
                     Grid.Column="2"

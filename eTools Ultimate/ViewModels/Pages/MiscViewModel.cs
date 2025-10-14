@@ -65,14 +65,6 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         private string _statusIcon = "Search24";
 
-        public List<KeyValuePair<AssetType?, string>> AssetTypes => new() {
-           new KeyValuePair<AssetType?, string>(null, "All"),
-           new KeyValuePair<AssetType?, string>(AssetType.Model, "Model"),
-    new KeyValuePair<AssetType?, string>(AssetType.Texture, "Texture"),
-    new KeyValuePair<AssetType?, string>(AssetType.Animation, "Animation"),
-    new KeyValuePair<AssetType?, string>(AssetType.Bones, "Bones"),
-        };
-
         private AssetType? _selectedAssetType = null;
 
         public ICollectionView FilteredAssets => UnusedAssetsView;
@@ -459,11 +451,12 @@ namespace eTools_Ultimate.ViewModels.Pages
                 "Part_maleHand.o3d", "Part_femaleHand.o3d",
                 "Part_maleFoot.o3d", "Part_femaleFoot.o3d",
                 "arrow.o3d", "etc_arrow.o3d",
-                "Mvr_Guidepang.o3d", "Mvr_Guidepang.chr",
-                "Mvr_McGuidepang.o3d", "Mvr_McGuidepang.chr",
-                "Mvr_AsGuidepang.o3d", "Mvr_AsGuidepang.chr",
-                "Mvr_MgGuidepang.o3d", "Mvr_MgGuidepang.chr",
-                "Mvr_AcrGuidepang.o3d", "Mvr_AcrGuidepang.chr",
+                "Mvr_Guidepang.o3d", "Mvr_Guidepang.chr", "Mvr_Guidepang_Appear.ani", "Mvr_Guidepang_Default.ani", "Mvr_Guidepang_Disappear.ani",
+                "Mvr_McGuidepang.o3d", "Mvr_McGuidepang.chr", "Mvr_McGuidepang_appear.ani", "Mvr_McGuidepang_default.ani", "Mvr_McGuidepang_Disappear.ani",
+                "Mvr_AsGuidepang.o3d", "Mvr_AsGuidepang.chr", "Mvr_AsGuidepang_Appear.ani", "Mvr_AsGuidepang_Default.ani", "Mvr_AsGuidepang_Disappear.ani",
+                "Mvr_MgGuidepang.o3d", "Mvr_MgGuidepang.chr", "Mvr_MgGuidepang_Appear.ani", "Mvr_MgGuidepang_Dafault.ani", "Mvr_MgGuidepang_DisAppear.ani",
+                "Mvr_AcrGuidepang.o3d", "Mvr_AcrGuidepang.chr", "Mvr_AcrGuidepang_Appear.ani", "Mvr_AcrGuidepang_Default.ani", "Mvr_AcrGuidepang_DisAppear.ani",
+                "mvr_Ladolf.o3d", "mvr_Ladolf.chr", "mvr_Ladolf_stand.ani",
                 "Shadow.o3d"])
                 .Select(fileName => Path.Combine(modelsDirectoryPath, fileName)));
 
@@ -508,7 +501,6 @@ namespace eTools_Ultimate.ViewModels.Pages
             List<string> allModelFiles = [.. Directory.EnumerateFiles(modelsFolderPath, "*", SearchOption.TopDirectoryOnly)];
 
             string[] unusedModelFiles = [.. allModelFiles.FindAll(file => !usedModelFiles.Contains(file))];
-            string[] usedMod = [.. new List<string>(usedModelFiles).FindAll(x => Path.GetExtension(x) == ".o3d")];
             return [..unusedModelFiles.Select(file =>
             {
                 FileInfo fileInfo = new(file);
@@ -530,6 +522,12 @@ namespace eTools_Ultimate.ViewModels.Pages
                 "Part_maleHand.o3d", "Part_femaleHand.o3d",
                 "Part_maleFoot.o3d", "Part_femaleFoot.o3d",
                 "arrow.o3d", "etc_arrow.o3d",
+                "Mvr_Guidepang.o3d",
+                "Mvr_McGuidepang.o3d",
+                "Mvr_AsGuidepang.o3d",
+                "Mvr_MgGuidepang.o3d",
+                "Mvr_AcrGuidepang.o3d",
+                "mvr_Ladolf.o3d",
                 "Shadow.o3d"
             ];
 
@@ -562,10 +560,21 @@ namespace eTools_Ultimate.ViewModels.Pages
                 "Obj_MiniWall01.dds",
                 "Obj_MiniWall02.dds",
                 "Miniroom_floor01.dds",
-                "Miniroom_floor02.dds"
+                "Miniroom_floor02.dds",
+                ..Enumerable.Range(1, 99).Select(x => $"etc_elec{x:00}.tga"),
+                "etc_Laser01.tga",
+                "etc_Particle2.bmp",
+                "etc_Particle11.bmp",
+                "etc_Particle12.bmp",
+                "etc_Particle13.bmp",
+                "etc_Particle14.bmp",
+                "etc_Tail2.bmp",
+                "etc_Tail1.bmp",
+                "etc_reflect.tga",
+                "etc_ParticleCloud01.bmp"
             ];
 
-            HashSet<string> usedTextures = new(predefinedTexturesList, StringComparer.OrdinalIgnoreCase);
+            HashSet<string> usedTextures = new(predefinedTexturesList.Select(x => Path.Combine(texturesFolderPath, x)), StringComparer.OrdinalIgnoreCase);
 
             Stopwatch stopwatch = Stopwatch.StartNew();
             for (int i = 0; i < modelsTexturesList.Count; i++)
@@ -673,7 +682,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         public long FileSize => _info.Length;
         public DateTime LastModified => _info.LastWriteTime;
 
-        public AssetType AssetType => _info.Extension switch
+        public AssetType AssetType => _info.Extension.ToLowerInvariant() switch
         {
             ".o3d" => AssetType.Model,
             ".ani" => AssetType.Animation,
