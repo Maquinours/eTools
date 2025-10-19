@@ -48,8 +48,9 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!--  Log Entries Header  -->
-            <StackPanel Grid.Row="0" Margin="20,20,20,8" Orientation="Horizontal">
+            <!--  Summary  -->
+            <StackPanel Grid.Row="0" Margin="20,20,20,8" Orientation="Vertical">
+                <TextBlock Style="{StaticResource LabelStyle}" Text="{Binding SummaryText}" />
                 <TextBlock Style="{StaticResource LabelStyle}" Text="{i18n:StringLocalizer 'Deletion Log Entries'}" />
                 <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                     <ui:SymbolIcon.ToolTip>

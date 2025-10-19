@@ -23,6 +23,9 @@ namespace eTools_Ultimate.ViewModels.Windows
         [ObservableProperty]
         private bool _selectAll = false;
 
+        [ObservableProperty]
+        private string _summaryText = string.Empty;
+
         public DeletionLogViewModel(ISnackbarService snackbarService, string logPath)
         {
             _snackbarService = snackbarService;
@@ -35,7 +38,13 @@ namespace eTools_Ultimate.ViewModels.Windows
             LogEntries.Clear();
             if (File.Exists(_logPath))
             {
+                // Temporarily remove read-only attribute to read the file
+                var attributes = File.GetAttributes(_logPath);
+                File.SetAttributes(_logPath, attributes & ~FileAttributes.ReadOnly);
                 var lines = File.ReadAllLines(_logPath);
+                // Restore read-only attribute
+                File.SetAttributes(_logPath, attributes);
+
                 foreach (var line in lines)
                 {
                     if (TryParseLogEntry(line, out var entry))
@@ -44,6 +53,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                     }
                 }
             }
+            UpdateSummary();
         }
 
         private bool TryParseLogEntry(string line, out LogEntry entry)
@@ -83,6 +93,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                     File.Move(entry.TargetPath, entry.FilePath);
                     LogEntries.Remove(entry);
                     UpdateLogFile();
+                    UpdateSummary();
                     _snackbarService.Show(
                         title: "File restored",
                         message: $"Restored {Path.GetFileName(entry.FilePath)}",
@@ -142,6 +153,73 @@ namespace eTools_Ultimate.ViewModels.Windows
         {
             var lines = LogEntries.Select(e => $"{e.Date}: Moved {e.FilePath} to {e.TargetPath} by {e.DeletedBy}").ToArray();
             File.WriteAllLines(_logPath, lines);
+            File.SetAttributes(_logPath, FileAttributes.ReadOnly);
+        }
+
+        private void UpdateSummary()
+        {
+            var movedEntries = LogEntries.Where(e => e.Action == "Moved").ToList();
+            var totalFiles = movedEntries.Count;
+            var totalSize = movedEntries.Sum(e => GetFileSize(e.TargetPath));
+            SummaryText = $"{totalFiles} files moved/deleted, total size: {FormatSize(totalSize)}";
+        }
+
+        private long GetFileSize(string filePath)
+        {
+            try
+            {
+                if (File.Exists(filePath))
+                {
+                    return new FileInfo(filePath).Length;
+                }
+                else if (Directory.Exists(filePath))
+                {
+                    return GetDirectorySize(filePath);
+                }
+            }
+            catch
+            {
+                // Ignore errors
+            }
+            return 0;
+        }
+
+        private long GetDirectorySize(string directoryPath)
+        {
+            long size = 0;
+            try
+            {
+                var files = Directory.GetFiles(directoryPath, "*", SearchOption.AllDirectories);
+                foreach (var file in files)
+                {
+                    try
+                    {
+                        size += new FileInfo(file).Length;
+                    }
+                    catch
+                    {
+                        // Ignore errors
+                    }
+                }
+            }
+            catch
+            {
+                // Ignore errors
+            }
+            return size;
+        }
+
+        private string FormatSize(long bytes)
+        {
+            string[] sizes = { "B", "KB", "MB", "GB", "TB" };
+            int order = 0;
+            double size = bytes;
+            while (size >= 1024 && order < sizes.Length - 1)
+            {
+                order++;
+                size /= 1024;
+            }
+            return $"{size:0.##} {sizes[order]}";
         }
     }
 

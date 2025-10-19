@@ -113,7 +113,7 @@
                             <ui:TextBlock
                                 FontSize="14"
                                 FontWeight="Medium"
-                                Text="{i18n:StringLocalizer 'Total Size Before'}" />
+                                Text="{i18n:StringLocalizer 'Total size'}" />
                             <ui:TextBlock
                                 Margin="8,0,16,0"
                                 FontSize="14"
@@ -128,15 +128,6 @@
                                 FontSize="14"
                                 Foreground="Gray"
                                 Text="{Binding SelectedSizeFormatted}" />
-                            <ui:TextBlock
-                                FontSize="14"
-                                FontWeight="Medium"
-                                Text="{i18n:StringLocalizer 'After'}" />
-                            <ui:TextBlock
-                                Margin="8,0,0,0"
-                                FontSize="14"
-                                Foreground="Gray"
-                                Text="{Binding TotalSizeAfterFormatted}" />
                         </StackPanel>
                     </StackPanel>
                 </ui:CardControl.Header>
@@ -187,7 +178,6 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="265" />
                 </Grid.ColumnDefinitions>
 
@@ -212,15 +202,10 @@
                     <ComboBoxItem Content="{i18n:StringLocalizer 'Unknown'}" Tag="{x:Static pageViewModels:AssetType.Unknown}" />
                 </ComboBox>
 
-                <ui:TextBlock
-                    Grid.Column="2"
-                    VerticalAlignment="Center"
-                    FontSize="14"
-                    Foreground="Gray"
-                    Text="{Binding UnusedAssets.Count, StringFormat='Total: {0}'}" />
 
                 <ui:TextBox
-                    Grid.Column="3"
+                    Grid.Column="2"
+                    Width="265"
                     Margin="0"
                     HorizontalAlignment="Right"
                     PlaceholderText="{i18n:StringLocalizer 'Search by name, path, or type...'}"

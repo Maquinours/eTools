@@ -376,7 +376,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                             destPath = Path.Combine(BinPath, $"{Path.GetFileNameWithoutExtension(asset.FilePath)}_{DateTime.Now.Ticks}{Path.GetExtension(asset.FilePath)}");
                         }
                         File.Move(asset.FilePath, destPath);
-                        File.AppendAllText(LogPath, $"{DateTime.Now}: Moved {asset.FilePath} to {destPath}\n");
+                        File.AppendAllText(LogPath, $"{DateTime.Now}: Moved {asset.FilePath} to {destPath} by {Environment.MachineName}\n");
                         TotalSizeAfter -= asset.FileSize;
                         OnPropertyChanged(nameof(TotalSizeAfterFormatted));
                         UnusedAssets.Remove(asset);
