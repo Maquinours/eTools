@@ -17,6 +17,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Threading;
 using Wpf.Ui;
 using Wpf.Ui.Abstractions.Controls;
 using Wpf.Ui.Controls;
@@ -29,11 +30,11 @@ namespace eTools_Ultimate.ViewModels.Pages
         #region Properties
         private bool _isInitialized = false;
 
-        [ObservableProperty]
-        private ObservableCollection<UnusedAsset> _unusedAssets = [];
+        private readonly WpfObservableRangeCollection<UnusedAsset> _unusedAssets = [];
 
-        [ObservableProperty]
-        private ICollectionView? _unusedAssetsView;
+        private AssetType? _selectedAssetType = null;
+
+        private string _searchText = string.Empty;
 
         [ObservableProperty]
         private bool _isScanning = false;
@@ -42,41 +43,41 @@ namespace eTools_Ultimate.ViewModels.Pages
         private string _scanProgress = string.Empty;
 
         [ObservableProperty]
-        private long _totalSizeBefore = 0;
-
-        [ObservableProperty]
-        private long _totalSizeAfter = 0;
-
-        [ObservableProperty]
-        private long _selectedSize = 0;
-
-        [ObservableProperty]
-        private bool _selectAllChecked = false;
-
-        public string TotalSizeBeforeFormatted => FormatFileSize(TotalSizeBefore);
-
-        public string TotalSizeAfterFormatted => FormatFileSize(TotalSizeAfter);
-
-        public string SelectedSizeFormatted => FormatFileSize(SelectedSize);
-
-        [ObservableProperty]
-        private bool _hasSelectedAssets = false;
-
-        [ObservableProperty]
         private string _statusIcon = "Search24";
-
-        private AssetType? _selectedAssetType = null;
-
-        public ICollectionView FilteredAssets => UnusedAssetsView;
 
         [ObservableProperty]
         private string _statusColor = "Gray";
+        #endregion Fields
 
-        private string BinPath => Path.Combine(Path.GetDirectoryName(settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath) ?? "", "bin_models");
+        #region Fields
+        public WpfObservableRangeCollection<UnusedAsset> UnusedAssets => _unusedAssets;
 
-        private string LogPath => Path.Combine(BinPath, "deletion_log.txt");
+        public ICollectionView UnusedAssetsView => CollectionViewSource.GetDefaultView(UnusedAssets);
 
-        private string _searchText = string.Empty;
+        private long TotalSize => UnusedAssets.Aggregate((long)0, (acc, asset) => acc + asset.FileSize);
+
+        private long SelectedSize => UnusedAssets.Where(asset => asset.IsSelected).Aggregate((long)0, (acc, asset) => acc + asset.FileSize);
+
+        public bool IsEveryFileSelected
+        {
+            get => UnusedAssets.All(x => x.IsSelected);
+            set
+            {
+                foreach(UnusedAsset asset in UnusedAssets)
+                {
+                    asset.PropertyChanged -= UnusedAsset_PropertyChanged;
+                    asset.IsSelected = value;
+                    asset.PropertyChanged += UnusedAsset_PropertyChanged;
+                }
+                OnPropertyChanged(nameof(IsEveryFileSelected));
+                OnPropertyChanged(nameof(SelectedSize));
+                OnPropertyChanged(nameof(SelectedSizeFormatted));
+            }
+        }
+
+        public string TotalSizeFormatted => FormatFileSize(TotalSize);
+
+        public string SelectedSizeFormatted => FormatFileSize(SelectedSize);
 
         public string SearchText
         {
@@ -87,7 +88,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     _searchText = value;
                     OnPropertyChanged(nameof(SearchText));
-                    UnusedAssetsView?.Refresh();
+                    UnusedAssetsView.Refresh();
                 }
             }
         }
@@ -100,11 +101,11 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     _selectedAssetType = value;
                     OnPropertyChanged();
-                    UnusedAssetsView?.Refresh();
+                    UnusedAssetsView.Refresh();
                 }
             }
         }
-        #endregion Properties
+        #endregion Fields
 
         public Task OnNavigatedToAsync()
         {
@@ -118,9 +119,59 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private void InitializeViewModel()
         {
-            UnusedAssetsView = CollectionViewSource.GetDefaultView(UnusedAssets);
             UnusedAssetsView.Filter = new Predicate<object>(FilterAsset);
+
+            UnusedAssets.CollectionChanged += UnusedAssets_CollectionChanged;
+            foreach (UnusedAsset asset in UnusedAssets)
+            {
+                asset.PropertyChanged += UnusedAsset_PropertyChanged;
+            }
+
             _isInitialized = true;
+        }
+
+        private void UnusedAssets_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (sender != UnusedAssets)
+                throw new InvalidOperationException("sender is not UnusedAssets");
+
+            if (e.OldItems is not null)
+            {
+                foreach (object? oldItem in e.OldItems)
+                {
+                    if (oldItem is UnusedAsset asset)
+                        asset.PropertyChanged -= UnusedAsset_PropertyChanged;
+                }
+            }
+            if (e.NewItems is not null)
+            {
+                foreach (object? newItem in e.NewItems)
+                {
+                    if (newItem is UnusedAsset asset)
+                        asset.PropertyChanged += UnusedAsset_PropertyChanged;
+                }
+            }
+
+            OnPropertyChanged(nameof(IsEveryFileSelected));
+            OnPropertyChanged(nameof(TotalSize));
+            OnPropertyChanged(nameof(TotalSizeFormatted));
+            OnPropertyChanged(nameof(SelectedSize));
+            OnPropertyChanged(nameof(SelectedSizeFormatted));
+        }
+
+        private void UnusedAsset_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (sender is not UnusedAsset unusedAsset)
+                throw new InvalidOperationException("sender is not UnusedAsset");
+
+            switch (e.PropertyName)
+            {
+                case nameof(UnusedAsset.IsSelected):
+                    OnPropertyChanged(nameof(IsEveryFileSelected));
+                    OnPropertyChanged(nameof(SelectedSize));
+                    OnPropertyChanged(nameof(SelectedSizeFormatted));
+                    break;
+            }
         }
 
         private bool FilterAsset(object obj)
@@ -147,16 +198,13 @@ namespace eTools_Ultimate.ViewModels.Pages
             StatusColor = "Orange";
             ScanProgress = localizer["Scanning for unused assets..."];
             UnusedAssets.Clear();
-            TotalSizeBefore = 0;
-            TotalSizeAfter = 0;
-            SelectedSize = 0;
 
             try
             {
+                List<UnusedAsset> unusedAssets = [];
+
                 await Task.Run(() =>
                 {
-                    var unusedAssets = new List<UnusedAsset>();
-
                     // Scan models
                     ScanProgress = localizer["Scanning models..."];
                     unusedAssets.AddRange(ScanModels());
@@ -169,19 +217,9 @@ namespace eTools_Ultimate.ViewModels.Pages
                     //ScanProgress = localizer["Scanning sounds..."];
                     //ScanSounds(unusedAssets);
 
-                    // Update UI on main thread
-                    App.Current.Dispatcher.Invoke(() =>
-                    {
-                        foreach (var asset in unusedAssets) // Limit to 10 files for testing
-                        {
-                            UnusedAssets.Add(asset);
-                            TotalSizeBefore += asset.FileSize;
-                        }
-                        TotalSizeAfter = TotalSizeBefore;
-                        OnPropertyChanged(nameof(TotalSizeBeforeFormatted));
-                        OnPropertyChanged(nameof(TotalSizeAfterFormatted));
-                    });
-                });
+                }); 
+                
+                UnusedAssets.AddRange(unusedAssets);
 
                 ScanProgress = string.Format(localizer["Scan completed. Found {0} unused assets."], UnusedAssets.Count);
                 StatusIcon = "Checkmark24";
@@ -191,7 +229,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                     title: localizer["Scan completed"],
                     message: string.Format(localizer["Found {0} unused assets totaling {1}."],
                         UnusedAssets.Count,
-                        FormatFileSize(TotalSizeBefore)),
+                        TotalSizeFormatted),
                     appearance: ControlAppearance.Success,
                     icon: null,
                     timeout: TimeSpan.FromSeconds(3)
@@ -199,6 +237,10 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
             catch (Exception ex)
             {
+                ScanProgress = string.Empty;
+                StatusIcon = "Search24";
+                StatusColor = "Gray";
+
                 Log.Error(ex, "Error during asset scanning");
                 snackbarService.Show(
                     title: localizer["Scan failed"],
@@ -217,7 +259,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private async Task DeleteSelectedAssets()
         {
-            var selectedAssets = UnusedAssets.Where(a => a.IsSelected).ToList();
+            UnusedAsset[] selectedAssets = [.. UnusedAssets.Where(a => a.IsSelected)];
 
             if (!selectedAssets.Any())
             {
@@ -235,7 +277,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 new SimpleContentDialogCreateOptions()
                 {
                     Title = localizer["Delete selected assets"],
-                    Content = string.Format(localizer["Are you sure you want to delete {0} selected assets? This action cannot be undone."], selectedAssets.Count),
+                    Content = string.Format(localizer["Are you sure you want to delete {0} selected assets? This action cannot be undone."], selectedAssets.LongLength),
                     PrimaryButtonText = localizer["Delete"],
                     CloseButtonText = localizer["Cancel"],
                 }
@@ -243,42 +285,31 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             if (result == ContentDialogResult.Primary)
             {
+                StatusIcon = "Delete24";
+                StatusColor = "Orange";
                 try
                 {
                     long deletedSize = 0;
                     int deletedCount = 0;
 
-                    Directory.CreateDirectory(BinPath);
-
-                    foreach (var asset in selectedAssets)
+                    await Task.Run(() =>
                     {
-                        try
+                        for (int i = 0; i < selectedAssets.LongLength; i++)
                         {
-                            if (File.Exists(asset.FilePath))
-                            {
-                                string destPath = Path.Combine(BinPath, Path.GetFileName(asset.FilePath));
-                                if (File.Exists(destPath))
-                                {
-                                    destPath = Path.Combine(BinPath, $"{Path.GetFileNameWithoutExtension(asset.FilePath)}_{DateTime.Now.Ticks}{Path.GetExtension(asset.FilePath)}");
-                                }
-                                File.Move(asset.FilePath, destPath);
-                                File.AppendAllText(LogPath, $"{DateTime.Now}: Moved {asset.FilePath} to {destPath} by {Environment.MachineName}\n");
-                                deletedSize += asset.FileSize;
-                                deletedCount++;
-                                UnusedAssets.Remove(asset);
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Warning(ex, "Failed to move asset: {FilePath}", asset.FilePath);
-                        }
-                    }
+                            UnusedAsset asset = selectedAssets[i];
 
-                    TotalSizeAfter -= deletedSize;
-                    SelectedSize = 0; // Since selected are deleted
-                    OnPropertyChanged(nameof(TotalSizeAfterFormatted));
-                    OnPropertyChanged(nameof(SelectedSizeFormatted));
-                    UnusedAssetsView?.Refresh();
+                            Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(asset.FilePath, Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
+
+                            Application.Current.Dispatcher.InvokeAsync(() =>
+                            {
+                                UnusedAssets.Remove(asset);
+                            });
+                            ScanProgress = string.Format(localizer["Deleting assets... ({0}%)"], Math.Floor((i + 1d) / selectedAssets.LongLength * 100));
+
+                            deletedSize += asset.FileSize;
+                            deletedCount++;
+                        }
+                    });
 
                     snackbarService.Show(
                         title: localizer["Assets deleted"],
@@ -305,50 +336,6 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
-        private void SelectAllAssets()
-        {
-            SelectAllChecked = !SelectAllChecked;
-
-            foreach (var asset in UnusedAssets)
-            {
-                asset.IsSelected = SelectAllChecked;
-            }
-
-            SelectedSize = UnusedAssets.Where(a => a.IsSelected).Sum(a => a.FileSize);
-            OnPropertyChanged(nameof(SelectedSizeFormatted));
-            HasSelectedAssets = UnusedAssets.Any(a => a.IsSelected);
-        }
-
-
-        [RelayCommand]
-        private void ClearSelection()
-        {
-            SelectAllChecked = false;
-            foreach (var asset in UnusedAssets)
-            {
-                asset.IsSelected = false;
-            }
-            SelectedSize = 0;
-            OnPropertyChanged(nameof(SelectedSizeFormatted));
-            HasSelectedAssets = false;
-        }
-
-        [RelayCommand]
-        private void SelectAsset(UnusedAsset asset)
-        {
-            if (asset != null)
-            {
-                asset.IsSelected = !asset.IsSelected;
-                SelectedSize = UnusedAssets.Where(a => a.IsSelected).Sum(a => a.FileSize);
-                OnPropertyChanged(nameof(SelectedSizeFormatted));
-                HasSelectedAssets = UnusedAssets.Any(a => a.IsSelected);
-
-                // Update SelectAllChecked based on current selection
-                SelectAllChecked = UnusedAssets.All(a => a.IsSelected);
-            }
-        }
-
-        [RelayCommand]
         private async Task DeleteSingleAsset(UnusedAsset asset)
         {
             if (asset == null) return;
@@ -365,43 +352,42 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             if (result == ContentDialogResult.Primary)
             {
-                try
-                {
-                    if (File.Exists(asset.FilePath))
-                    {
-                        Directory.CreateDirectory(BinPath);
-                        string destPath = Path.Combine(BinPath, Path.GetFileName(asset.FilePath));
-                        if (File.Exists(destPath))
-                        {
-                            destPath = Path.Combine(BinPath, $"{Path.GetFileNameWithoutExtension(asset.FilePath)}_{DateTime.Now.Ticks}{Path.GetExtension(asset.FilePath)}");
-                        }
-                        File.Move(asset.FilePath, destPath);
-                        File.AppendAllText(LogPath, $"{DateTime.Now}: Moved {asset.FilePath} to {destPath} by {Environment.MachineName}\n");
-                        TotalSizeAfter -= asset.FileSize;
-                        OnPropertyChanged(nameof(TotalSizeAfterFormatted));
-                        UnusedAssets.Remove(asset);
-                        UnusedAssetsView?.Refresh();
+                // TODO: reimplement this
+                //try
+                //{
+                //    if (File.Exists(asset.FilePath))
+                //    {
+                //        if (File.Exists(destPath))
+                //        {
+                //            destPath = Path.Combine(BinPath, $"{Path.GetFileNameWithoutExtension(asset.FilePath)}_{DateTime.Now.Ticks}{Path.GetExtension(asset.FilePath)}");
+                //        }
+                //        File.Move(asset.FilePath, destPath);
+                //        File.AppendAllText(LogPath, $"{DateTime.Now}: Moved {asset.FilePath} to {destPath} by {Environment.MachineName}\n");
+                //        TotalSizeAfter -= asset.FileSize;
+                //        OnPropertyChanged(nameof(TotalSizeAfterFormatted));
+                //        UnusedAssets.Remove(asset);
+                //        UnusedAssetsView?.Refresh();
 
-                        snackbarService.Show(
-                            title: localizer["Asset moved"],
-                            message: string.Format(localizer["Successfully moved '{0}' to bin."], asset.FileName),
-                            appearance: ControlAppearance.Success,
-                            icon: null,
-                            timeout: TimeSpan.FromSeconds(2)
-                        );
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(ex, "Error deleting asset: {FilePath}", asset.FilePath);
-                    snackbarService.Show(
-                        title: localizer["Deletion failed"],
-                        message: ex.Message,
-                        appearance: ControlAppearance.Danger,
-                        icon: null,
-                        timeout: TimeSpan.FromSeconds(3)
-                    );
-                }
+                //        snackbarService.Show(
+                //            title: localizer["Asset moved"],
+                //            message: string.Format(localizer["Successfully moved '{0}' to bin."], asset.FileName),
+                //            appearance: ControlAppearance.Success,
+                //            icon: null,
+                //            timeout: TimeSpan.FromSeconds(2)
+                //        );
+                //    }
+                //}
+                //catch (Exception ex)
+                //{
+                //    Log.Error(ex, "Error deleting asset: {FilePath}", asset.FilePath);
+                //    snackbarService.Show(
+                //        title: localizer["Deletion failed"],
+                //        message: ex.Message,
+                //        appearance: ControlAppearance.Danger,
+                //        icon: null,
+                //        timeout: TimeSpan.FromSeconds(3)
+                //    );
+                //}
             }
         }
 
@@ -409,19 +395,17 @@ namespace eTools_Ultimate.ViewModels.Pages
         private void OpenInExplorer(UnusedAsset asset)
         {
             if (asset != null && File.Exists(asset.FilePath))
-            {
                 Process.Start("explorer.exe", $"/select,\"{asset.FilePath}\"");
-            }
         }
 
         [RelayCommand]
         private async Task ViewLog()
-        {
+        { // TODO: readd this
             //if (File.Exists(LogPath))
             //{
-            var viewModel = new DeletionLogViewModel(snackbarService, LogPath);
-            var dialog = new Views.Dialogs.DeletionLogDialog(contentDialogService.GetDialogHost(), viewModel);
-            await dialog.ShowAsync();
+            //var viewModel = new DeletionLogViewModel(snackbarService, LogPath);
+            //var dialog = new Views.Dialogs.DeletionLogDialog(contentDialogService.GetDialogHost(), viewModel);
+            //await dialog.ShowAsync();
             //}
             //else
             //{
@@ -498,14 +482,20 @@ namespace eTools_Ultimate.ViewModels.Pages
                 ScanProgress = $"{localizer[$"Scanning models..."]} ({Math.Floor((i + 1d) / models.Length * 100)}%)";
             }
 
-            List<string> allModelFiles = [.. Directory.EnumerateFiles(modelsFolderPath, "*", SearchOption.TopDirectoryOnly)];
+            string[] allFiles = [.. Directory.EnumerateFiles(modelsFolderPath, "*", SearchOption.TopDirectoryOnly)];
 
-            string[] unusedModelFiles = [.. allModelFiles.FindAll(file => !usedModelFiles.Contains(file))];
-            return [..unusedModelFiles.Select(file =>
+            List<UnusedAsset> unusedAssets = [];
+            foreach (string file in allFiles)
             {
-                FileInfo fileInfo = new(file);
-                return new UnusedAsset(fileInfo);
-            })];
+                if (!usedModelFiles.Contains(file))
+                {
+                    FileInfo fileInfo = new(file);
+                    UnusedAsset asset = new(fileInfo);
+                    unusedAssets.Add(asset);
+                }
+            }
+
+            return [..unusedAssets];
         }
 
         private UnusedAsset[] ScanTextures()
@@ -584,17 +574,24 @@ namespace eTools_Ultimate.ViewModels.Pages
 
                 if (File.Exists(modelFile))
                 {
-                    ModelParser modelParser = new();
-                    modelParser.Load(modelFile);
-                    string[] textureNames = modelParser.GetTextureNames();
-                    foreach (string textureName in textureNames)
+                    try
                     {
-                        string textureFileName = textureName.TrimEnd('\0');
-                        string textureFileExtension = Path.GetExtension(textureFileName);
-                        string textureFileNameWithoutExtension = Path.GetFileNameWithoutExtension(textureFileName);
+                        ModelParser modelParser = new();
+                        modelParser.Load(modelFile);
+                        string[] textureNames = modelParser.GetTextureNames();
+                        foreach (string textureName in textureNames)
+                        {
+                            string textureFileName = textureName.TrimEnd('\0');
+                            string textureFileExtension = Path.GetExtension(textureFileName);
+                            string textureFileNameWithoutExtension = Path.GetFileNameWithoutExtension(textureFileName);
 
-                        foreach (int textureEx in modelTextures.Value)
-                            usedTextures.Add(Path.Combine(texturesFolderPath, textureEx == 0 ? textureFileName : $"{textureFileNameWithoutExtension}-et{textureEx:00}{textureFileExtension}"));
+                            foreach (int textureEx in modelTextures.Value)
+                                usedTextures.Add(Path.Combine(texturesFolderPath, textureEx == 0 ? textureFileName : $"{textureFileNameWithoutExtension}-et{textureEx:00}{textureFileExtension}"));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex, $"Error while reading textures of model file {modelFile}");
                     }
                 }
                 ScanProgress = $"{localizer[$"Scanning textures..."]} ({Math.Floor((i + 1d) / modelsTexturesList.Count * 100)}%)";
@@ -611,27 +608,6 @@ namespace eTools_Ultimate.ViewModels.Pages
                 FileInfo fileInfo = new(file);
                 return new UnusedAsset(fileInfo);
             })];
-        }
-
-        private bool IsModelReferenced(string fileName)
-        {
-            // This would need to be implemented based on your data structure
-            // For now, return false to show all models as unused (for demonstration)
-            return false;
-        }
-
-        private bool IsTextureReferenced(string fileName)
-        {
-            // This would need to be implemented based on your data structure
-            // For now, return false to show all textures as unused (for demonstration)
-            return false;
-        }
-
-        private bool IsSoundReferenced(string fileName)
-        {
-            // This would need to be implemented based on your data structure
-            // For now, return false to show all sounds as unused (for demonstration)
-            return false;
         }
 
         private string FormatFileSize(long bytes)

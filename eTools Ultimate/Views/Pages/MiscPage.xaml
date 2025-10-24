@@ -118,7 +118,7 @@
                                 Margin="8,0,16,0"
                                 FontSize="14"
                                 Foreground="Gray"
-                                Text="{Binding TotalSizeBeforeFormatted}" />
+                                Text="{Binding TotalSizeFormatted}" />
                             <ui:TextBlock
                                 FontSize="14"
                                 FontWeight="Medium"
@@ -186,7 +186,7 @@
                     VerticalAlignment="Center"
                     FontSize="14"
                     Foreground="Gray"
-                    Text="{Binding FilteredAssets.Count, StringFormat='{}{0} assets found'}" />
+                    Text="{Binding UnusedAssets.Count, StringFormat='{}{0} assets found'}" />
 
                 <ComboBox
                     Grid.Column="1"
@@ -215,15 +215,6 @@
                     </ui:TextBox.Icon>
                 </ui:TextBox>
             </Grid>
-
-            <!--  Loading Indicator  -->
-            <ui:ProgressRing
-                Grid.Row="2"
-                Width="32"
-                Height="32"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Visibility="{Binding IsScanning, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
 
         <!--  DataGrid  -->
@@ -245,19 +236,12 @@
                     <DataGridTemplateColumn Width="60" CanUserSort="False">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <CheckBox
-                                    HorizontalAlignment="Center"
-                                    Command="{Binding DataContext.SelectAllAssetsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    IsChecked="{Binding DataContext.SelectAllChecked, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                <CheckBox HorizontalAlignment="Center" IsChecked="{Binding DataContext.IsEveryFileSelected, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=Page}}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox
-                                    HorizontalAlignment="Center"
-                                    Command="{Binding DataContext.SelectAssetCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                    CommandParameter="{Binding}"
-                                    IsChecked="{Binding IsSelected, Mode=OneWay}" />
+                                <CheckBox HorizontalAlignment="Center" IsChecked="{Binding IsSelected, Mode=TwoWay}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
