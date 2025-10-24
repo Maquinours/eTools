@@ -194,13 +194,60 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <!--  Zeile 0, Spalte 0: Texture folder  -->
+                        <!--  Zeile 0, Spalte 0: Models folder  -->
                         <Grid
                             Grid.Row="0"
                             Grid.Column="0"
                             Margin="0,0,10,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="{i18n:StringLocalizer 'Models folder'}" />
+                            <Grid Grid.Column="1" Margin="0,0,8,0">
+                                <TextBox x:Name="ModelsFolderPathTextBox" Text="{Binding Settings.ModelsFolderPath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultModelsFolderPath, Mode=OneWay}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=ModelsFolderPathTextBox}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectModelsFolderCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
+                            </Button>
+                        </Grid>
+
+                        <!--  Zeile 0, Spalte 0: Texture folder  -->
+                        <Grid
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Margin="10,0,0,10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="120" />
                                 <ColumnDefinition Width="*" />
@@ -244,9 +291,9 @@
 
                         <!--  Zeile 0, Spalte 1: Icons folder  -->
                         <Grid
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Margin="10,0,0,10">
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,10,10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="120" />
                                 <ColumnDefinition Width="*" />
@@ -291,8 +338,8 @@
                         <!--  Zeile 1, Spalte 0: Sounds folder  -->
                         <Grid
                             Grid.Row="1"
-                            Grid.Column="0"
-                            Margin="0,0,10,10">
+                            Grid.Column="1"
+                            Margin="10,0,0,10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="120" />
                                 <ColumnDefinition Width="*" />
@@ -336,9 +383,9 @@
 
                         <!--  Zeile 1, Spalte 1: Sounds config file  -->
                         <Grid
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            Margin="10,0,0,10">
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="0,0,10,10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="120" />
                                 <ColumnDefinition Width="*" />

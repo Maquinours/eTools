@@ -142,6 +142,12 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
+        private void SelectModelsFolder()
+        {
+            settingsService.Settings.ModelsFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath, title: "Select models folder") ?? settingsService.Settings.ModelsFolderPath;
+        }
+
+        [RelayCommand]
         private void SelectTexturesFolder()
         {
             settingsService.Settings.TexturesFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.TexturesFolderPath ?? settingsService.Settings.DefaultTexturesFolderPath, title: Resources.Texts.SelectTexturesFolder) ?? settingsService.Settings.TexturesFolderPath;
