@@ -58,5 +58,7 @@ namespace eTools_Ultimate.Models
             ];
 
         public static string[] ModelFilenameRoot => _modelFilenameRoot;
+        public static string[] PredefinedUsedModelsFolderFiles => _predefinedUsedModelsFolderFiles;
+        public static string[] PredefinedUsedTexturesFolderFiles => _predefinedUsedTexturesFolderFiles;
     }
 }

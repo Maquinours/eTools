@@ -94,19 +94,37 @@
                 <ui:CardControl.Header>
                     <StackPanel Margin="0,0,16,0">
                         <StackPanel Orientation="Horizontal">
-                            <ui:SymbolIcon
-                                Margin="0,0,8,0"
-                                Foreground="{Binding StatusColor}"
-                                Symbol="{Binding StatusIcon}" />
+                            <ui:SymbolIcon Margin="0,0,8,0">
+                                <ui:SymbolIcon.Style>
+                                    <Style TargetType="ui:SymbolIcon">
+                                        <Setter Property="Foreground" Value="Gray" />
+                                        <Setter Property="Symbol" Value="Search24" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ScanForUnusedAssetsCommand.IsRunning}" Value="True">
+                                                <Setter Property="Foreground" Value="Orange" />
+                                                <Setter Property="Symbol" Value="ArrowClockwise24" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ui:SymbolIcon.Style>
+                            </ui:SymbolIcon>
                             <ui:TextBlock
                                 FontSize="14"
                                 FontWeight="Medium"
                                 Text="{i18n:StringLocalizer 'Status'}" />
                         </StackPanel>
-                        <ui:TextBlock
-                            Margin="0,4,0,0"
-                            Foreground="{Binding StatusColor}"
-                            Text="{Binding ScanProgress}" />
+                        <ui:TextBlock Margin="0,4,0,0" Text="{Binding ScanProgress}">
+                            <ui:TextBlock.Style>
+                                <Style TargetType="ui:TextBlock">
+                                    <Setter Property="Foreground" Value="Gray" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ScanForUnusedAssetsCommand.IsRunning}" Value="True">
+                                            <Setter Property="Foreground" Value="Orange" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ui:TextBlock.Style>
+                        </ui:TextBlock>
 
                         <!--  Size Summary  -->
                         <StackPanel Margin="0,12,0,0" Orientation="Horizontal">
@@ -133,16 +151,34 @@
                 </ui:CardControl.Header>
                 <ui:CardControl.Content>
                     <StackPanel Orientation="Horizontal">
-                        <ui:Button
-                            Margin="0,0,8,0"
-                            Command="{Binding ScanForUnusedAssetsCommand}"
-                            IsEnabled="{Binding IsScanning, Converter={StaticResource InverseBooleanConverter}}">
+                        <ui:Button Margin="0,0,8,0">
+                            <ui:Button.Style>
+                                <Style BasedOn="{StaticResource {x:Type ui:Button}}" TargetType="ui:Button">
+                                    <Setter Property="Command" Value="{Binding ScanForUnusedAssetsCommand}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ScanForUnusedAssetsCommand.IsRunning}" Value="True">
+                                            <Setter Property="Command" Value="{Binding ScanForUnusedAssetsCancelCommand}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ui:Button.Style>
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon
                                     Margin="0,0,8,0"
                                     FontSize="16"
                                     Symbol="Search24" />
-                                <ui:TextBlock Text="{i18n:StringLocalizer 'Scan Assets'}" />
+                                <ui:TextBlock>
+                                    <ui:TextBlock.Style>
+                                        <Style TargetType="ui:TextBlock">
+                                            <Setter Property="Text" Value="{i18n:StringLocalizer 'Scan assets'}" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding ScanForUnusedAssetsCommand.IsRunning}" Value="True">
+                                                    <Setter Property="Text" Value="{i18n:StringLocalizer 'Cancel scan'}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ui:TextBlock.Style>
+                                </ui:TextBlock>
                             </StackPanel>
                         </ui:Button>
 
@@ -233,15 +269,15 @@
                 SelectionMode="Extended">
                 <DataGrid.Columns>
                     <!--  Selection Checkbox  -->
-                    <DataGridTemplateColumn Width="60" CanUserSort="False">
+                    <DataGridTemplateColumn CanUserSort="False">
                         <DataGridTemplateColumn.HeaderTemplate>
                             <DataTemplate>
-                                <CheckBox HorizontalAlignment="Center" IsChecked="{Binding DataContext.IsEveryFileSelected, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=Page}}" />
+                                <CheckBox IsChecked="{Binding DataContext.IsEveryFileSelected, Mode=TwoWay, RelativeSource={RelativeSource AncestorType=Page}}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.HeaderTemplate>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <CheckBox HorizontalAlignment="Center" IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                                <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

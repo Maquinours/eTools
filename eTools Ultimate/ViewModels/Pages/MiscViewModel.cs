@@ -60,10 +60,10 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         public bool IsEveryFileSelected
         {
-            get => UnusedAssets.All(x => x.IsSelected);
+            get => !UnusedAssetsView.IsEmpty && UnusedAssetsView.Cast<UnusedAsset>().All(x => x.IsSelected);
             set
             {
-                foreach(UnusedAsset asset in UnusedAssets)
+                foreach (UnusedAsset asset in UnusedAssetsView)
                 {
                     asset.PropertyChanged -= UnusedAsset_PropertyChanged;
                     asset.IsSelected = value;
@@ -87,8 +87,11 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (_searchText != value)
                 {
                     _searchText = value;
-                    OnPropertyChanged(nameof(SearchText));
+                    OnPropertyChanged();
                     UnusedAssetsView.Refresh();
+                    OnPropertyChanged(nameof(IsEveryFileSelected));
+                    OnPropertyChanged(nameof(SelectedSize));
+                    OnPropertyChanged(nameof(SelectedSizeFormatted));
                 }
             }
         }
@@ -102,6 +105,9 @@ namespace eTools_Ultimate.ViewModels.Pages
                     _selectedAssetType = value;
                     OnPropertyChanged();
                     UnusedAssetsView.Refresh();
+                    OnPropertyChanged(nameof(IsEveryFileSelected));
+                    OnPropertyChanged(nameof(SelectedSize));
+                    OnPropertyChanged(nameof(SelectedSizeFormatted));
                 }
             }
         }
@@ -176,26 +182,23 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private bool FilterAsset(object obj)
         {
-            if (obj is not UnusedAsset asset) return false;
+            if (obj is not UnusedAsset asset)
+                throw new InvalidOperationException("obj is not UnusedAsset");
 
-            // Type filter
-            if (SelectedAssetType != null && asset.AssetType != SelectedAssetType) return false;
+            if ((SelectedAssetType is null || asset.AssetType == SelectedAssetType) &&
+                asset.FileName.Contains(SearchText, StringComparison.OrdinalIgnoreCase))
+                return true;
 
-            // Search filter
-            if (string.IsNullOrEmpty(SearchText)) return true;
-
-            return asset.FileName.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                    asset.FilePath.Contains(SearchText, StringComparison.OrdinalIgnoreCase) ||
-                    asset.AssetType.ToString().Contains(SearchText, StringComparison.OrdinalIgnoreCase);
+            asset.PropertyChanged -= UnusedAsset_PropertyChanged;
+            asset.IsSelected = false;
+            asset.PropertyChanged += UnusedAsset_PropertyChanged;
+            return false;
         }
 
         #region Commands
-        [RelayCommand]
-        private async Task ScanForUnusedAssets()
+        [RelayCommand(IncludeCancelCommand = true)]
+        private async Task ScanForUnusedAssets(CancellationToken cancellationToken)
         {
-            IsScanning = true;
-            StatusIcon = "ArrowClockwise24";
-            StatusColor = "Orange";
             ScanProgress = localizer["Scanning for unused assets..."];
             UnusedAssets.Clear();
 
@@ -207,18 +210,18 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     // Scan models
                     ScanProgress = localizer["Scanning models..."];
-                    unusedAssets.AddRange(ScanModels());
+                    unusedAssets.AddRange(ScanModels(cancellationToken));
 
                     // Scan textures
                     ScanProgress = localizer["Scanning textures..."];
-                    unusedAssets.AddRange(ScanTextures());
+                    unusedAssets.AddRange(ScanTextures(cancellationToken));
 
                     // Scan sounds
                     //ScanProgress = localizer["Scanning sounds..."];
                     //ScanSounds(unusedAssets);
 
-                }); 
-                
+                }, cancellationToken);
+
                 UnusedAssets.AddRange(unusedAssets);
 
                 ScanProgress = string.Format(localizer["Scan completed. Found {0} unused assets."], UnusedAssets.Count);
@@ -238,17 +241,30 @@ namespace eTools_Ultimate.ViewModels.Pages
             catch (Exception ex)
             {
                 ScanProgress = string.Empty;
-                StatusIcon = "Search24";
-                StatusColor = "Gray";
+                if (ex is OperationCanceledException)
+                {
+                    snackbarService.Show(
+                        title: localizer["Scan cancelled"],
+                        message: localizer["The scan has been cancelled successfully."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+                }
+                else
+                {
+                    StatusIcon = "Search24";
+                    StatusColor = "Gray";
 
-                Log.Error(ex, "Error during asset scanning");
-                snackbarService.Show(
-                    title: localizer["Scan failed"],
-                    message: ex.Message,
-                    appearance: ControlAppearance.Danger,
-                    icon: null,
-                    timeout: TimeSpan.FromSeconds(5)
-                );
+                    Log.Error(ex, "Error during asset scanning");
+                    snackbarService.Show(
+                        title: localizer["Scan failed"],
+                        message: ex.Message,
+                        appearance: ControlAppearance.Danger,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(5)
+                    );
+                }
             }
             finally
             {
@@ -421,28 +437,13 @@ namespace eTools_Ultimate.ViewModels.Pages
         #endregion Commands
 
         #region Private Methods
-        private UnusedAsset[] ScanModels()
+        private UnusedAsset[] ScanModels(CancellationToken cancellationToken)
         {
             HashSet<string> usedModelFiles = new(StringComparer.OrdinalIgnoreCase);
 
             string modelsDirectoryPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
 
-            usedModelFiles.UnionWith(new List<string>([
-                ..Enumerable.Range(0, 100).Select(i => string.Format("Part_maleHair{0:00}.o3d", i)), ..Enumerable.Range(0, 100).Select(i => string.Format("Part_femaleHair{0:00}.o3d", i)),
-                ..Enumerable.Range(0, 100).Select(i => string.Format("Part_maleHead{0:00}.o3d", i)), ..Enumerable.Range(0, 100).Select(i => string.Format("Part_femaleHead{0:00}.o3d", i)),
-                "Part_maleUpper.o3d", "Part_femaleUpper.o3d",
-                "Part_maleLower.o3d", "Part_femaleLower.o3d",
-                "Part_maleHand.o3d", "Part_femaleHand.o3d",
-                "Part_maleFoot.o3d", "Part_femaleFoot.o3d",
-                "arrow.o3d", "etc_arrow.o3d",
-                "Mvr_Guidepang.o3d", "Mvr_Guidepang.chr", "Mvr_Guidepang_Appear.ani", "Mvr_Guidepang_Default.ani", "Mvr_Guidepang_Disappear.ani",
-                "Mvr_McGuidepang.o3d", "Mvr_McGuidepang.chr", "Mvr_McGuidepang_appear.ani", "Mvr_McGuidepang_default.ani", "Mvr_McGuidepang_Disappear.ani",
-                "Mvr_AsGuidepang.o3d", "Mvr_AsGuidepang.chr", "Mvr_AsGuidepang_Appear.ani", "Mvr_AsGuidepang_Default.ani", "Mvr_AsGuidepang_Disappear.ani",
-                "Mvr_MgGuidepang.o3d", "Mvr_MgGuidepang.chr", "Mvr_MgGuidepang_Appear.ani", "Mvr_MgGuidepang_Dafault.ani", "Mvr_MgGuidepang_DisAppear.ani",
-                "Mvr_AcrGuidepang.o3d", "Mvr_AcrGuidepang.chr", "Mvr_AcrGuidepang_Appear.ani", "Mvr_AcrGuidepang_Default.ani", "Mvr_AcrGuidepang_DisAppear.ani",
-                "mvr_Ladolf.o3d", "mvr_Ladolf.chr", "mvr_Ladolf_stand.ani",
-                "Shadow.o3d"])
-                .Select(fileName => Path.Combine(modelsDirectoryPath, fileName)));
+            usedModelFiles.UnionWith(Constants.PredefinedUsedModelsFolderFiles.Select(fileName => Path.Combine(modelsDirectoryPath, fileName)));
 
             Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
             string modelsFolderPath = settings.ModelsFolderPath ?? settings.DefaultModelsFolderPath;
@@ -451,32 +452,28 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             for (int i = 0; i < models.Length; i++)
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
                 Model model = models[i];
 
                 usedModelFiles.Add(model.Model3DFilePath);
-                string? directoryPath = Path.GetDirectoryName(model.Model3DFilePath);
-                string? prefix = Path.GetFileNameWithoutExtension(model.Model3DFilePath);
+                string prefix = Path.GetFileNameWithoutExtension(model.Model3DFilePath) ?? throw new InvalidOperationException("Model3DFilePath does not contain a valid file name.");
+
                 if (model.ModelTypeIdentifier == "MODELTYPE_ANIMATED_MESH")
                     usedModelFiles.Add(Path.ChangeExtension(model.Model3DFilePath, ".chr"));
 
-                if (directoryPath is not null)
+                string partsPath = $"{Path.Combine(modelsDirectoryPath, $"part_{model.Prop.SzPart}.o3d")}";
+                usedModelFiles.Add(partsPath);
+                string[] parts = model.Prop.SzPart.Split('/');
+                if (parts.Length > 1)
                 {
-                    string partsPath = $"{Path.Combine(directoryPath, $"part_{model.Prop.SzPart}.o3d")}";
-                    usedModelFiles.Add(partsPath);
-                    string[] parts = model.Prop.SzPart.Split('/');
-                    if (parts.Length > 1)
-                    {
-                        usedModelFiles.Add($"{Path.Combine(directoryPath, $"part_{parts[0]}.o3d")}");
-                        usedModelFiles.Add($"{Path.Combine(directoryPath, $"part_{parts[1]}.o3d")}");
-                    }
+                    usedModelFiles.Add($"{Path.Combine(modelsDirectoryPath, $"part_{parts[0]}.o3d")}");
+                    usedModelFiles.Add($"{Path.Combine(modelsDirectoryPath, $"part_{parts[1]}.o3d")}");
                 }
-                if (directoryPath is not null && prefix is not null)
+                foreach (ModelMotion motion in model.Motions)
                 {
-                    foreach (ModelMotion motion in model.Motions)
-                    {
-                        string filePath = $"{Path.Combine(directoryPath, $"{prefix}_{motion.Prop.SzMotion}.ani")}";
-                        usedModelFiles.Add(filePath);
-                    }
+                    string filePath = $"{Path.Combine(modelsDirectoryPath, $"{prefix}_{motion.Prop.SzMotion}.ani")}";
+                    usedModelFiles.Add(filePath);
                 }
 
                 ScanProgress = $"{localizer[$"Scanning models..."]} ({Math.Floor((i + 1d) / models.Length * 100)}%)";
@@ -495,33 +492,15 @@ namespace eTools_Ultimate.ViewModels.Pages
                 }
             }
 
-            return [..unusedAssets];
+            return [.. unusedAssets];
         }
 
-        private UnusedAsset[] ScanTextures()
+        private UnusedAsset[] ScanTextures(CancellationToken cancellationToken)
         {
             string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
             string texturesFolderPath = settingsService.Settings.TexturesFolderPath ?? settingsService.Settings.DefaultTexturesFolderPath;
 
-            string[] predefinedModelsList =
-            [
-                ..Enumerable.Range(0, 100).Select(i => string.Format("Part_maleHair{0:00}.o3d", i)), ..Enumerable.Range(0, 100).Select(i => string.Format("Part_femaleHair{0:00}.o3d", i)),
-                ..Enumerable.Range(0, 100).Select(i => string.Format("Part_maleHead{0:00}.o3d", i)), ..Enumerable.Range(0, 100).Select(i => string.Format("Part_femaleHead{0:00}.o3d", i)),
-                "Part_maleUpper.o3d", "Part_femaleUpper.o3d",
-                "Part_maleLower.o3d", "Part_femaleLower.o3d",
-                "Part_maleHand.o3d", "Part_femaleHand.o3d",
-                "Part_maleFoot.o3d", "Part_femaleFoot.o3d",
-                "arrow.o3d", "etc_arrow.o3d",
-                "Mvr_Guidepang.o3d",
-                "Mvr_McGuidepang.o3d",
-                "Mvr_AsGuidepang.o3d",
-                "Mvr_MgGuidepang.o3d",
-                "Mvr_AcrGuidepang.o3d",
-                "mvr_Ladolf.o3d",
-                "Shadow.o3d"
-            ];
-
-            Dictionary<string, HashSet<int>> modelsTexturesList = predefinedModelsList.ToDictionary(x => Path.Combine(modelsFolderPath, x), x => new HashSet<int>(Enumerable.Range(0, 10)));
+            Dictionary<string, HashSet<int>> modelsTexturesList = Constants.PredefinedUsedModelsFolderFiles.Where(x => x.EndsWith(".o3d")).ToDictionary(x => Path.Combine(modelsFolderPath, x), x => new HashSet<int>(Enumerable.Range(0, 10)));
 
             foreach (Model model in modelsService.GetModels())
             {
@@ -543,32 +522,13 @@ namespace eTools_Ultimate.ViewModels.Pages
                 }
             }
 
-            List<string> predefinedTexturesList =
-            [
-                "Env.dds",
-                "red.tga",
-                "Obj_MiniWall01.dds",
-                "Obj_MiniWall02.dds",
-                "Miniroom_floor01.dds",
-                "Miniroom_floor02.dds",
-                ..Enumerable.Range(1, 99).Select(x => $"etc_elec{x:00}.tga"),
-                "etc_Laser01.tga",
-                "etc_Particle2.bmp",
-                "etc_Particle11.bmp",
-                "etc_Particle12.bmp",
-                "etc_Particle13.bmp",
-                "etc_Particle14.bmp",
-                "etc_Tail2.bmp",
-                "etc_Tail1.bmp",
-                "etc_reflect.tga",
-                "etc_ParticleCloud01.bmp"
-            ];
-
-            HashSet<string> usedTextures = new(predefinedTexturesList.Select(x => Path.Combine(texturesFolderPath, x)), StringComparer.OrdinalIgnoreCase);
+            HashSet<string> usedTextures = new(Constants.PredefinedUsedTexturesFolderFiles.Select(x => Path.Combine(texturesFolderPath, x)), StringComparer.OrdinalIgnoreCase);
 
             Stopwatch stopwatch = Stopwatch.StartNew();
             for (int i = 0; i < modelsTexturesList.Count; i++)
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
                 KeyValuePair<string, HashSet<int>> modelTextures = modelsTexturesList.ElementAt(i);
                 string modelFile = modelTextures.Key;
 
@@ -648,15 +608,25 @@ namespace eTools_Ultimate.ViewModels.Pages
     public partial class UnusedAsset(FileInfo info) : ObservableObject
     {
         private FileInfo _info = info;
-
-        [ObservableProperty]
         private bool _isSelected = false;
-
 
         public string FileName => _info.Name;
         public string FilePath => _info.FullName;
         public long FileSize => _info.Length;
         public DateTime LastModified => _info.LastWriteTime;
+
+        public bool IsSelected
+        {
+            get => _isSelected;
+            set
+            {
+                if (_isSelected != value)
+                {
+                    _isSelected = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public AssetType AssetType => _info.Extension.ToLowerInvariant() switch
         {
