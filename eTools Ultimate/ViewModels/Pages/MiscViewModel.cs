@@ -25,7 +25,7 @@ using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class MiscViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, IStringLocalizer<Translations> localizer, SettingsService settingsService, ModelsService modelsService) : ObservableObject, INavigationAware
+    public partial class MiscViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, IStringLocalizer<Translations> localizer, SettingsService settingsService, ModelsService modelsService, ItemsService itemsService, DefinesService definesService) : ObservableObject, INavigationAware
     {
         #region Properties
         private bool _isInitialized = false;
@@ -210,11 +210,12 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     // Scan models
                     ScanProgress = localizer["Scanning models..."];
-                    unusedAssets.AddRange(ScanModels(cancellationToken));
+
+                    unusedAssets.AddRange(ScanModels(cancellationToken, out Dictionary<string, int[]> usedModelFilesWithTextures));
 
                     // Scan textures
                     ScanProgress = localizer["Scanning textures..."];
-                    unusedAssets.AddRange(ScanTextures(cancellationToken));
+                    unusedAssets.AddRange(ScanTextures(usedModelFilesWithTextures, cancellationToken));
 
                     // Scan sounds
                     //ScanProgress = localizer["Scanning sounds..."];
@@ -437,18 +438,42 @@ namespace eTools_Ultimate.ViewModels.Pages
         #endregion Commands
 
         #region Private Methods
-        private UnusedAsset[] ScanModels(CancellationToken cancellationToken)
+        private UnusedAsset[] ScanModels(CancellationToken cancellationToken, out Dictionary<string, int[]> usedModelFilesWithTextures)
         {
-            HashSet<string> usedModelFiles = new(StringComparer.OrdinalIgnoreCase);
-
-            string modelsDirectoryPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
-
-            usedModelFiles.UnionWith(Constants.PredefinedUsedModelsFolderFiles.Select(fileName => Path.Combine(modelsDirectoryPath, fileName)));
-
-            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
-            string modelsFolderPath = settings.ModelsFolderPath ?? settings.DefaultModelsFolderPath;
+            Dictionary<string, HashSet<int>> usedFilesWithTextures = new(Constants.PredefinedUsedModelsFolderFiles.ToDictionary(x => x, x => new HashSet<int>(Enumerable.Range(0, 10))), StringComparer.OrdinalIgnoreCase);
 
             Model[] models = modelsService.GetModels();
+
+            // Check for item models
+            {
+                int angelBuffIkValue = definesService.Defines["IK3_ANGEL_BUFF"];
+                int partsRideValue = definesService.Defines["PARTS_RIDE"];
+                foreach (Item item in itemsService.Items)
+                {
+                    if (item.Prop.DwItemKind3 == angelBuffIkValue)
+                    {
+                        foreach (string fileFormat in Constants.AngelModelFilesFormats)
+                        {
+                            string formatedFileName = string.Format(fileFormat, item.Prop.SzTextFileName);
+                            if (usedFilesWithTextures.TryGetValue(formatedFileName, out HashSet<int>? textureIndices))
+                                textureIndices.Add(0);
+                            else
+                                usedFilesWithTextures.Add(formatedFileName, [0]);
+                        }
+                    }
+                    if (item.Prop.DwParts == partsRideValue)
+                    {
+                        foreach (string fileFormat in Constants.RideAnimationFilesFormats)
+                        {
+                            if (item.Model is null) continue;
+
+                            string formatedFileName = string.Format(fileFormat, Path.ChangeExtension(item.Model.Model3DFileName, null));
+                            if (!usedFilesWithTextures.TryGetValue(formatedFileName, out HashSet<int>? textureIndices))
+                                usedFilesWithTextures.Add(formatedFileName, []);
+                        }
+                    }
+                }
+            }
 
             for (int i = 0; i < models.Length; i++)
             {
@@ -456,88 +481,80 @@ namespace eTools_Ultimate.ViewModels.Pages
 
                 Model model = models[i];
 
-                usedModelFiles.Add(model.Model3DFilePath);
-                string prefix = Path.GetFileNameWithoutExtension(model.Model3DFilePath) ?? throw new InvalidOperationException("Model3DFilePath does not contain a valid file name.");
+                List<string> paths = [model.Model3DFileName];
+
+                string prefix = Path.GetFileNameWithoutExtension(model.Model3DFileName) ?? throw new InvalidOperationException("Model3DFilePath does not contain a valid file name.");
 
                 if (model.ModelTypeIdentifier == "MODELTYPE_ANIMATED_MESH")
-                    usedModelFiles.Add(Path.ChangeExtension(model.Model3DFilePath, ".chr"));
+                    paths.Add(Path.ChangeExtension(model.Model3DFileName, ".chr"));
 
-                string partsPath = $"{Path.Combine(modelsDirectoryPath, $"part_{model.Prop.SzPart}.o3d")}";
-                usedModelFiles.Add(partsPath);
+                string partsPath = $"part_{model.Prop.SzPart}.o3d";
+                paths.Add(partsPath);
                 string[] parts = model.Prop.SzPart.Split('/');
                 if (parts.Length > 1)
                 {
-                    usedModelFiles.Add($"{Path.Combine(modelsDirectoryPath, $"part_{parts[0]}.o3d")}");
-                    usedModelFiles.Add($"{Path.Combine(modelsDirectoryPath, $"part_{parts[1]}.o3d")}");
+                    paths.Add($"part_{parts[0]}.o3d");
+                    paths.Add($"part_{parts[1]}.o3d");
                 }
                 foreach (ModelMotion motion in model.Motions)
                 {
-                    string filePath = $"{Path.Combine(modelsDirectoryPath, $"{prefix}_{motion.Prop.SzMotion}.ani")}";
-                    usedModelFiles.Add(filePath);
+                    string filePath = $"{prefix}_{motion.Prop.SzMotion}.ani";
+                    paths.Add(filePath);
+                }
+
+                foreach (string path in paths)
+                {
+                    if (usedFilesWithTextures.TryGetValue(path, out HashSet<int>? textureIndices))
+                        textureIndices.Add(model.Prop.NTextureEx);
+                    else
+                        usedFilesWithTextures.Add(path, [model.Prop.NTextureEx]);
                 }
 
                 ScanProgress = $"{localizer[$"Scanning models..."]} ({Math.Floor((i + 1d) / models.Length * 100)}%)";
             }
 
+            string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
+
             string[] allFiles = [.. Directory.EnumerateFiles(modelsFolderPath, "*", SearchOption.TopDirectoryOnly)];
+            usedFilesWithTextures = usedFilesWithTextures.ToDictionary(x => Path.Combine(modelsFolderPath, x.Key), x => x.Value, StringComparer.OrdinalIgnoreCase);
 
             List<UnusedAsset> unusedAssets = [];
             foreach (string file in allFiles)
             {
-                if (!usedModelFiles.Contains(file))
-                {
-                    FileInfo fileInfo = new(file);
-                    UnusedAsset asset = new(fileInfo);
-                    unusedAssets.Add(asset);
-                }
+                if (usedFilesWithTextures.ContainsKey(file))
+                    continue;
+
+                FileInfo fileInfo = new(file);
+                UnusedAsset asset = new(fileInfo);
+                unusedAssets.Add(asset);
             }
+
+            usedModelFilesWithTextures = usedFilesWithTextures.Where(x => x.Key.EndsWith(".o3d", StringComparison.OrdinalIgnoreCase) && File.Exists(x.Key)).ToDictionary(x => x.Key, x => x.Value.ToArray());
 
             return [.. unusedAssets];
         }
 
-        private UnusedAsset[] ScanTextures(CancellationToken cancellationToken)
+        private UnusedAsset[] ScanTextures(Dictionary<string, int[]> usedModelFilesWithTextures, CancellationToken cancellationToken)
         {
-            string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
             string texturesFolderPath = settingsService.Settings.TexturesFolderPath ?? settingsService.Settings.DefaultTexturesFolderPath;
-
-            Dictionary<string, HashSet<int>> modelsTexturesList = Constants.PredefinedUsedModelsFolderFiles.Where(x => x.EndsWith(".o3d")).ToDictionary(x => Path.Combine(modelsFolderPath, x), x => new HashSet<int>(Enumerable.Range(0, 10)));
-
-            foreach (Model model in modelsService.GetModels())
-            {
-                List<string> modelFilePaths = [model.Model3DFilePath, Path.Combine(modelsFolderPath, $"part_{model.Prop.SzPart}.o3d")];
-
-                string[] partsPaths = model.Prop.SzPart.Split('/');
-                if (partsPaths.Length > 1)
-                {
-                    modelFilePaths.Add(Path.Combine(modelsFolderPath, $"part_{partsPaths[0]}.o3d"));
-                    modelFilePaths.Add(Path.Combine(modelsFolderPath, $"part_{partsPaths[1]}.o3d"));
-                }
-
-                foreach (string modelFilePath in modelFilePaths)
-                {
-                    if (!modelsTexturesList.ContainsKey(modelFilePath))
-                        modelsTexturesList.Add(modelFilePath, []);
-                    HashSet<int> textures = modelsTexturesList[modelFilePath];
-                    textures.Add(model.Prop.NTextureEx);
-                }
-            }
 
             HashSet<string> usedTextures = new(Constants.PredefinedUsedTexturesFolderFiles.Select(x => Path.Combine(texturesFolderPath, x)), StringComparer.OrdinalIgnoreCase);
 
             Stopwatch stopwatch = Stopwatch.StartNew();
-            for (int i = 0; i < modelsTexturesList.Count; i++)
+            for (int i = 0; i < usedModelFilesWithTextures.Count; i++)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                KeyValuePair<string, HashSet<int>> modelTextures = modelsTexturesList.ElementAt(i);
-                string modelFile = modelTextures.Key;
+                KeyValuePair<string, int[]> usedModelFileWithTextures = usedModelFilesWithTextures.ElementAt(i);
+                string usedModelFilePath = usedModelFileWithTextures.Key;
+                int[] usedModelTextures = usedModelFileWithTextures.Value;
 
-                if (File.Exists(modelFile))
+                if (File.Exists(usedModelFilePath))
                 {
                     try
                     {
                         ModelParser modelParser = new();
-                        modelParser.Load(modelFile);
+                        modelParser.Load(usedModelFilePath);
                         string[] textureNames = modelParser.GetTextureNames();
                         foreach (string textureName in textureNames)
                         {
@@ -545,16 +562,16 @@ namespace eTools_Ultimate.ViewModels.Pages
                             string textureFileExtension = Path.GetExtension(textureFileName);
                             string textureFileNameWithoutExtension = Path.GetFileNameWithoutExtension(textureFileName);
 
-                            foreach (int textureEx in modelTextures.Value)
+                            foreach (int textureEx in usedModelTextures)
                                 usedTextures.Add(Path.Combine(texturesFolderPath, textureEx == 0 ? textureFileName : $"{textureFileNameWithoutExtension}-et{textureEx:00}{textureFileExtension}"));
                         }
                     }
                     catch (Exception ex)
                     {
-                        Log.Error(ex, $"Error while reading textures of model file {modelFile}");
+                        Log.Error(ex, $"Error while reading textures of model file {usedModelFilePath}");
                     }
                 }
-                ScanProgress = $"{localizer[$"Scanning textures..."]} ({Math.Floor((i + 1d) / modelsTexturesList.Count * 100)}%)";
+                ScanProgress = $"{localizer[$"Scanning textures..."]} ({Math.Floor((i + 1d) / usedModelFilesWithTextures.Count * 100)}%)";
             }
             stopwatch.Stop();
             System.Diagnostics.Debug.WriteLine($"Unused textures loading took {stopwatch.ElapsedMilliseconds}ms to run");

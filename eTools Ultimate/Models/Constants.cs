@@ -33,9 +33,12 @@ namespace eTools_Ultimate.Models
                 "Mvr_AsGuidepang.o3d", "Mvr_AsGuidepang.chr", "Mvr_AsGuidepang_Appear.ani", "Mvr_AsGuidepang_Default.ani", "Mvr_AsGuidepang_Disappear.ani",
                 "Mvr_MgGuidepang.o3d", "Mvr_MgGuidepang.chr", "Mvr_MgGuidepang_Appear.ani", "Mvr_MgGuidepang_Dafault.ani", "Mvr_MgGuidepang_DisAppear.ani",
                 "Mvr_AcrGuidepang.o3d", "Mvr_AcrGuidepang.chr", "Mvr_AcrGuidepang_Appear.ani", "Mvr_AcrGuidepang_Default.ani", "Mvr_AcrGuidepang_DisAppear.ani",
-                "mvr_Ladolf.o3d", "mvr_Ladolf.chr", "mvr_Ladolf_stand.ani",
+                "mvr_Ladolf.o3d", "mvr_Ladolf.chr", "mvr_Ladolf_stand.ani", "mvr_Ladolf_walk.ani",
                 "Shadow.o3d",
-                "MaCoPrTr16.o3d", "MapleTree01.o3d", "MaCoPrTr17.o3d", "MapleTree02.o3d"];
+                "MaCoPrTr16.o3d", "MapleTree01.o3d", "MaCoPrTr17.o3d", "MapleTree02.o3d",
+                "obj_miniwall01.o3d",
+                "obj_miniwall02.o3d"
+        ];
 
         private static string[] _predefinedUsedTexturesFolderFiles = [
             "Env.dds",
@@ -54,11 +57,30 @@ namespace eTools_Ultimate.Models
             "etc_Tail2.bmp",
             "etc_Tail1.bmp",
             "etc_reflect.tga",
-            "etc_ParticleCloud01.bmp"
+            "etc_ParticleCloud01.bmp",
+            "Sfx_ItemPatical01.dds",
+            "Sfx_ItemPatical06-01.dds",
+            "Sfx_ItemPatical06-02.dds",
+            "Sfx_ItemPatical06-03.dds",
+            "Sfx_ItemPatical06-04.dds",
+            "Sfx_ItemPatical06-05.dds"
+            ];
+
+        private static string[] _angelModelFilesFormats = [
+            "{0}.chr",
+            "{0}.o3d",
+            "{0}_stand01.ani"
+            ];
+
+        private static string[] _rideAnimationFilesFormats = [
+            "{0}_stand.ani",
+            "{0}_walk.ani"
             ];
 
         public static string[] ModelFilenameRoot => _modelFilenameRoot;
         public static string[] PredefinedUsedModelsFolderFiles => _predefinedUsedModelsFolderFiles;
         public static string[] PredefinedUsedTexturesFolderFiles => _predefinedUsedTexturesFolderFiles;
+        public static string[] AngelModelFilesFormats => _angelModelFilesFormats;
+        public static string[] RideAnimationFilesFormats => _rideAnimationFilesFormats;
     }
 }
