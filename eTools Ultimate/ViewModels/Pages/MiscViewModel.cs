@@ -246,8 +246,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     snackbarService.Show(
                         title: localizer["Scan cancelled"],
-                        message: localizer["The scan has been cancelled successfully."],
-                        appearance: ControlAppearance.Success,
+                        message: localizer["The scan has been cancelled."],
+                        appearance: ControlAppearance.Info,
                         icon: null,
                         timeout: TimeSpan.FromSeconds(3)
                         );
@@ -273,12 +273,12 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        [RelayCommand]
-        private async Task DeleteSelectedAssets()
+        [RelayCommand(IncludeCancelCommand = true)]
+        private async Task DeleteSelectedAssets(CancellationToken cancellationToken)
         {
             UnusedAsset[] selectedAssets = [.. UnusedAssets.Where(a => a.IsSelected)];
 
-            if (!selectedAssets.Any())
+            if (selectedAssets.Length == 0)
             {
                 snackbarService.Show(
                     title: localizer["No selection"],
@@ -304,20 +304,25 @@ namespace eTools_Ultimate.ViewModels.Pages
             {
                 StatusIcon = "Delete24";
                 StatusColor = "Orange";
+
+                long deletedSize = 0;
+                int deletedCount = 0;
                 try
                 {
-                    long deletedSize = 0;
-                    int deletedCount = 0;
 
-                    await Task.Run(() =>
+                    await Task.Run(async () =>
                     {
                         for (int i = 0; i < selectedAssets.LongLength; i++)
                         {
+                            cancellationToken.ThrowIfCancellationRequested();
+
                             UnusedAsset asset = selectedAssets[i];
 
-                            Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(asset.FilePath, Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
+                            //Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(asset.FilePath, Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
 
-                            Application.Current.Dispatcher.InvokeAsync(() =>
+                            await Task.Delay(50);
+
+                            Application.Current.Dispatcher.Invoke(() =>
                             {
                                 UnusedAssets.Remove(asset);
                             });
@@ -326,7 +331,9 @@ namespace eTools_Ultimate.ViewModels.Pages
                             deletedSize += asset.FileSize;
                             deletedCount++;
                         }
-                    });
+                    }, cancellationToken);
+
+                    ScanProgress = string.Format(localizer["Deletion completed. Deleted {0} unused assets totaling {1}."], deletedCount, FormatFileSize(deletedSize));
 
                     snackbarService.Show(
                         title: localizer["Assets deleted"],
@@ -340,14 +347,28 @@ namespace eTools_Ultimate.ViewModels.Pages
                 }
                 catch (Exception ex)
                 {
-                    Log.Error(ex, "Error during asset deletion");
-                    snackbarService.Show(
-                        title: localizer["Deletion failed"],
-                        message: ex.Message,
-                        appearance: ControlAppearance.Danger,
-                        icon: null,
-                        timeout: TimeSpan.FromSeconds(5)
-                    );
+                    ScanProgress = string.Empty;
+                    if (ex is OperationCanceledException)
+                    {
+                        snackbarService.Show(
+                            title: localizer["Files deletion cancelled"],
+                            message: String.Format(localizer["The deletion of files was canceled after deleting {0} files totaling {1}."], deletedCount, FormatFileSize(deletedSize)),
+                            appearance: ControlAppearance.Info,
+                            icon: null,
+                            timeout: TimeSpan.FromSeconds(3)
+                            );
+                    }
+                    else
+                    {
+                        Log.Error(ex, "Error during asset deletion");
+                        snackbarService.Show(
+                            title: localizer["Deletion failed"],
+                            message: ex.Message,
+                            appearance: ControlAppearance.Danger,
+                            icon: null,
+                            timeout: TimeSpan.FromSeconds(5)
+                        );
+                    }
                 }
             }
         }
@@ -415,26 +436,26 @@ namespace eTools_Ultimate.ViewModels.Pages
                 Process.Start("explorer.exe", $"/select,\"{asset.FilePath}\"");
         }
 
-        [RelayCommand]
-        private async Task ViewLog()
-        { // TODO: readd this
-            //if (File.Exists(LogPath))
-            //{
-            //var viewModel = new DeletionLogViewModel(snackbarService, LogPath);
-            //var dialog = new Views.Dialogs.DeletionLogDialog(contentDialogService.GetDialogHost(), viewModel);
-            //await dialog.ShowAsync();
-            //}
-            //else
-            //{
-            //    snackbarService.Show(
-            //        title: localizer["No log found"],
-            //        message: localizer["No deletion log exists yet."],
-            //        appearance: ControlAppearance.Info,
-            //        icon: null,
-            //        timeout: TimeSpan.FromSeconds(2)
-            //    );
-            //}
-        }
+        //[RelayCommand]
+        //private async Task ViewLog()
+        //{ 
+        //    //if (File.Exists(LogPath))
+        //    //{
+        //    //var viewModel = new DeletionLogViewModel(snackbarService, LogPath);
+        //    //var dialog = new Views.Dialogs.DeletionLogDialog(contentDialogService.GetDialogHost(), viewModel);
+        //    //await dialog.ShowAsync();
+        //    //}
+        //    //else
+        //    //{
+        //    //    snackbarService.Show(
+        //    //        title: localizer["No log found"],
+        //    //        message: localizer["No deletion log exists yet."],
+        //    //        appearance: ControlAppearance.Info,
+        //    //        icon: null,
+        //    //        timeout: TimeSpan.FromSeconds(2)
+        //    //    );
+        //    //}
+        //}
         #endregion Commands
 
         #region Private Methods

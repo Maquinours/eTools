@@ -97,12 +97,20 @@
                             <ui:SymbolIcon Margin="0,0,8,0">
                                 <ui:SymbolIcon.Style>
                                     <Style TargetType="ui:SymbolIcon">
-                                        <Setter Property="Foreground" Value="Gray" />
-                                        <Setter Property="Symbol" Value="Search24" />
+                                        <Setter Property="Foreground" Value="Green" />
+                                        <Setter Property="Symbol" Value="Checkmark24" />
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding ScanForUnusedAssetsCommand.IsRunning}" Value="True">
                                                 <Setter Property="Foreground" Value="Orange" />
                                                 <Setter Property="Symbol" Value="ArrowClockwise24" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding DeleteSelectedAssetsCommand.IsRunning}" Value="True">
+                                                <Setter Property="Foreground" Value="Orange" />
+                                                <Setter Property="Symbol" Value="ArrowClockwise24" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ScanProgress}" Value="">
+                                                <Setter Property="Foreground" Value="Gray" />
+                                                <Setter Property="Symbol" Value="Search24" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
@@ -116,9 +124,12 @@
                         <ui:TextBlock Margin="0,4,0,0" Text="{Binding ScanProgress}">
                             <ui:TextBlock.Style>
                                 <Style TargetType="ui:TextBlock">
-                                    <Setter Property="Foreground" Value="Gray" />
+                                    <Setter Property="Foreground" Value="Green" />
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding ScanForUnusedAssetsCommand.IsRunning}" Value="True">
+                                            <Setter Property="Foreground" Value="Orange" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding DeleteSelectedAssetsCommand.IsRunning}" Value="True">
                                             <Setter Property="Foreground" Value="Orange" />
                                         </DataTrigger>
                                     </Style.Triggers>
@@ -159,6 +170,9 @@
                                         <DataTrigger Binding="{Binding ScanForUnusedAssetsCommand.IsRunning}" Value="True">
                                             <Setter Property="Command" Value="{Binding ScanForUnusedAssetsCancelCommand}" />
                                         </DataTrigger>
+                                        <DataTrigger Binding="{Binding DeleteSelectedAssetsCommand.IsRunning}" Value="True">
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
                             </ui:Button.Style>
@@ -183,26 +197,37 @@
                         </ui:Button>
 
 
-                        <ui:Button
-                            Margin="0,0,8,0"
-                            Command="{Binding DeleteSelectedAssetsCommand}"
-                            IsEnabled="{Binding UnusedAssets.Count, Converter={StaticResource IntToBoolConverter}}">
+                        <ui:Button Margin="0,0,8,0">
+                            <ui:Button.Style>
+                                <Style BasedOn="{StaticResource {x:Type ui:Button}}" TargetType="ui:Button">
+                                    <Setter Property="Command" Value="{Binding DeleteSelectedAssetsCommand}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding DeleteSelectedAssetsCommand.IsRunning}" Value="True">
+                                            <Setter Property="Command" Value="{Binding DeleteSelectedAssetsCancelCommand}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ScanForUnusedAssetsCommand.IsRunning}" Value="True">
+                                            <Setter Property="IsEnabled" Value="False" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ui:Button.Style>
                             <StackPanel Orientation="Horizontal">
                                 <ui:SymbolIcon
                                     Margin="0,0,8,0"
                                     FontSize="16"
                                     Symbol="Delete24" />
-                                <ui:TextBlock Text="{i18n:StringLocalizer 'Delete Selected'}" />
-                            </StackPanel>
-                        </ui:Button>
-
-                        <ui:Button Margin="0,0,8,0" Command="{Binding ViewLogCommand}">
-                            <StackPanel Orientation="Horizontal">
-                                <ui:SymbolIcon
-                                    Margin="0,0,8,0"
-                                    FontSize="16"
-                                    Symbol="Document24" />
-                                <ui:TextBlock Text="{i18n:StringLocalizer 'View Log'}" />
+                                <ui:TextBlock>
+                                    <ui:TextBlock.Style>
+                                        <Style TargetType="ui:TextBlock">
+                                            <Setter Property="Text" Value="{i18n:StringLocalizer 'Delete selection'}" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding DeleteSelectedAssetsCommand.IsRunning}" Value="True">
+                                                    <Setter Property="Text" Value="{i18n:StringLocalizer 'Cancel deletion'}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ui:TextBlock.Style>
+                                </ui:TextBlock>
                             </StackPanel>
                         </ui:Button>
                     </StackPanel>
