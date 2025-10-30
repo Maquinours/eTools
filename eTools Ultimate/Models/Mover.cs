@@ -21,6 +21,78 @@ namespace eTools_Ultimate.Models
         PET
     }
 
+    public enum DropType
+    {
+        DROPTYPE_NORMAL,
+        DROPTYPE_SEED,
+    };
+
+    public class DropItem(DropType dtType, int dwIndex, int dwProbability, int dwLevel, int dwNumber, int dwNumber2)
+    {
+        private DropType _dtType = dtType;
+        private int _dwIndex = dwIndex;
+        private int _dwProbability = dwProbability;
+        private int _dwLevel = dwLevel;
+        private int _dwNumber = dwNumber;
+        private int _dwNumber2 = dwNumber2;
+
+        public DropType DtType => _dtType;
+        public int DwIndex
+        {
+            get => _dwIndex;
+        }
+
+        public Item? item => App.Services.GetRequiredService<ItemsService>().Items.FirstOrDefault(x => x.Id == DwIndex);
+    }
+
+    public class DropKind(int dwIk3, short nMinUniq, short nMaxUniq)
+    {
+        private int _dwIk3 = dwIk3;
+        private short _nMinUniq = nMinUniq; // Not sure it is used in any source
+        private short _nMaxUniq = nMaxUniq; // Not sure it is used in any source
+    }
+
+    public class DropKindGenerator
+    {
+        private List<DropKind> _dropKinds;
+    }
+
+    public class DropItemGenerator
+    {
+        private int _dwMax;
+        private List<DropItem> _dropItems;
+    }
+
+    public class MoverPropEx()
+    {
+        private int nAttackFirstRange;
+        //private int nEvasionHp;
+        //private int nEvasionSec;
+        //private Evasion? _evasion;
+        private int nRunawayHp;
+        private int nCallHp;
+        private int nCallHelperMax; // not sure we need this
+        private short[] nCallHelperIdx;
+        private short[] nCallHelperNum;
+        private short[] bCallHelperParty;
+        //private CallHelper _callHelper;
+        private short nAttackItemNear;
+        private short _nAttackItemFar;
+        private short _nAttackItem1;
+        private short _nAttackItem2;
+        private short _nAttackItem3;
+        private short _nAttackItem4;
+        private short _nAttackItemSec;
+        private short _nMagicReflection;
+        private short _nImmortality;
+        private int _bBlow;
+        private short _nChangeTargetRand;
+        private short _dwAttackMoveDelay;
+        private short _dwRunAwayDelay;
+        private DropItemGenerator _dropItemGenerator;
+        private DropKindGenerator _dropKindGenerator;
+    }
+
     public class MoverProp(
         int dwId,
         string szName,

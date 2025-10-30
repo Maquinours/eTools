@@ -4,6 +4,7 @@ using eTools_Ultimate.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using SixLabors.ImageSharp.Metadata.Profiles.Exif;
+using SixLabors.ImageSharp.PixelFormats;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -35,8 +36,8 @@ namespace eTools_Ultimate.Services
         RANDOMTARGET,
         LOOT
     }
-    
-    public class MoversService(ModelsService modelsService, StringsService stringsService)
+
+    public class MoversService(SettingsService settingsService, ModelsService modelsService, StringsService stringsService, DefinesService definesService)
     {
         private readonly ObservableCollection<Mover> _movers = [];
         public ObservableCollection<Mover> Movers => this._movers;
@@ -322,6 +323,7 @@ namespace eTools_Ultimate.Services
                     Movers.Add(mover);
                 }
             }
+            LoadEx();
         }
 
         public void Save()
@@ -520,485 +522,648 @@ namespace eTools_Ultimate.Services
 
         public void LoadEx()
         {
-            string filePath = $"{Settings.Instance.ResourcesFolderPath}propMoverEx.inc";
+            string filePath = Path.Combine(settingsService.Settings.ResourcesFolderPath, "propMoverEx.inc"); // TODO: add to settings and use it
 
-            using (Scanner scanner = new())
+            using Script script = new();
+            script.Load(filePath);
+
+            while(true)
             {
-                scanner.Load(filePath);
+                int dwId = script.GetNumber();
 
-                do
+                if (script.EndOfStream)
+                    break;
+
+                int bMeleeAttack = 0;
+                int nLvCond = 0;
+                int bRecvCond = 0;
+                int nScanJob = 0;
+                short nAttackFirstRange = 0;
+                int dwScanQuestId = 0;
+                int dwScanItemIdx = 0;
+                int nScanChao = 0;
+                int nRecvCondMe = 0;
+                int nRecvCondHow = 0;
+                int nRecvCondMp = 0;
+                byte bRecvCondWho = 0;
+                int tmUnitHelp = 0;
+                int nHelpRangeMul = 0;
+                byte bHelpWho = 0;
+                short nCallHelperMax = 0;
+                int nHpCond = 0;
+                byte[] bRangeAttack = [.. Enumerable.Repeat<byte>(0, definesService.Defines["MAX_JOB"])];
+                int nSummProb = 0;
+                int nSummNum = 0;
+                int nSummId = 0;
+                int nBerserkHp = 0;
+                float fBerserkDmgMul = 0;
+                int nLoot = 0;
+                int nLootProb = 0;
+
+                int nEvasionHp = 0;
+                int nEvasionSec = 0;
+                short nRunawayHp = 0;
+                int nCallHp = 0;
+                int nAttackItemNear = 0;
+                int nAttackItemFar = 0;
+                int nAttackItem1 = 0;
+                int nAttackItem2 = 0;
+                int nAttackItem3 = 0;
+                int nAttackItem4 = 0;
+                int nAttackItemSec = 0;
+                int nMagicReflexion = 0;
+                int nImmortality = 0;
+                int bBlow = 0;
+                int nChangeTargetRand = 0;
+                int dwAttackMoveDelay = 0;
+                int dwRunawayDelay = 0;
+                int dwDropItemGeneratorMax;
+                List<DropItem> dropItems = [];
+                List<DropKind> dropKinds = [];
+                float fMonsterTransformHpRate = 0;
+                int dwMonsterTransformMonsterId = -1;
+
+                script.GetToken(); // {
+
+                while (true)
                 {
-                    string id = scanner.GetToken();
+                    script.GetToken();
 
-                    scanner.GetToken(); // {
+                    if (script.Token == "}") break;
+                    if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
-                    int attackFirstRange;
-                    int evasionHp;
-                    int evasionSec;
-                    int runawayHp;
-                    int callHp;
-                    int attackItemNear;
-                    int attackItemFar;
-                    string attackItem1;
-                    string attackItem2;
-                    string attackItem3;
-                    string attackItem4;
-                    int attackItemSec;
-                    int magicReflexion;
-                    string immortality;
-                    string blow;
-                    string changeTargetRand;
-                    int attackMoveDelay;
-                    int runawayDelay;
-                    int dropItemGeneratorMax;
-
-                    while (true)
+                    switch (script.Token)
                     {
-                        scanner.GetToken();
-
-                        if (scanner.Token == "}") break;
-                        if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
-
-                        switch(scanner.Token)
-                        {
-                            case ";":
+                        case ";":
+                            {
+                                script.GetToken();
+                                break;
+                            }
+                        case "AI":
+                            {
+                                LoadExAi(
+                                    script,
+                                    ref bMeleeAttack, ref nLvCond, ref bRecvCond, ref nScanJob, ref nAttackFirstRange, ref dwScanQuestId, ref dwScanItemIdx, ref nScanChao, ref nRecvCondMe, ref nRecvCondHow, ref nRecvCondMp, ref bRecvCondWho,
+                                    ref tmUnitHelp, ref nHelpRangeMul, ref bHelpWho, ref nCallHelperMax, ref nHpCond, ref bRangeAttack, ref nSummProb, ref nSummNum, ref nSummId, ref nRunawayHp, ref nBerserkHp, ref fBerserkDmgMul, ref nLoot, ref nLootProb
+                                    );
+                                break;
+                            }
+                        case "m_nAttackFirstRange":
+                            {
+                                script.GetToken(); // =
+                                nAttackFirstRange = (short)script.GetNumber();
+                                break;
+                            }
+                        case "SetEvasion":
+                            {
+                                script.GetToken(); // (
+                                nEvasionHp = script.GetNumber();
+                                script.GetToken(); // ,
+                                nEvasionSec = script.GetNumber();
+                                script.GetToken();
+                                break;
+                            }
+                        case "SetRunAway":
+                            {
+                                script.GetToken(); // (
+                                nRunawayHp = (short)script.GetNumber();
+                                script.GetToken(); // , or )
+                                if (script.Token == ",")
                                 {
-                                    scanner.GetToken();
-                                    break;
+                                    script.GetToken(); // TODO: Check if this value is used in any source file
+                                    script.GetToken(); // ,
+                                    script.GetToken(); // TODO: Check if this value is used in any source file
+                                    script.GetToken(); // )
                                 }
-                            case "AI":
+                                break;
+                            }
+                        case "SetCallHelper":
+                            {
+                                script.GetToken(); // (
+                                nCallHp = script.GetNumber();
+                                script.GetToken(); // ,
+                                script.GetToken(); // Call helper IDX. TODO: get this value
+                                script.GetToken(); // ,
+                                script.GetNumber(); // Call helper Num. TODO: get this value
+                                script.GetToken(); // ,
+                                script.GetToken(); // Call helper party. TODO : get this value
+                                script.GetToken(); // )
+                                break;
+                            }
+                        case "m_nAttackItemNear":
+                            {
+                                script.GetToken(); // =
+                                nAttackItemNear = script.GetNumber();
+                                break;
+                            }
+                        case "m_nAttackItemFar":
+                            {
+                                script.GetToken(); // =
+                                nAttackItemFar = script.GetNumber();
+                                break;
+                            }
+                        case "m_nAttackItem1":
+                            {
+                                script.GetToken(); // =
+                                nAttackItem1 = script.GetNumber();
+                                break;
+                            }
+                        case "m_nAttackItem2":
+                            {
+                                script.GetToken(); // =
+                                nAttackItem2 = script.GetNumber();
+                                break;
+                            }
+                        case "m_nAttackItem3":
+                            {
+                                script.GetToken(); // =
+                                nAttackItem3 = script.GetNumber();
+                                break;
+                            }
+                        case "m_nAttackItem4":
+                            {
+                                script.GetToken(); // =
+                                nAttackItem4 = script.GetNumber();
+                                break;
+                            }
+                        case "m_nAttackItemSec":
+                            {
+                                script.GetToken(); // =
+                                nAttackItemSec = script.GetNumber();
+                                break;
+                            }
+                        case "m_nMagicReflection":
+                            {
+                                script.GetToken(); // =
+                                nMagicReflexion = script.GetNumber();
+                                break;
+                            }
+                        case "m_nImmortality":
+                            {
+                                script.GetToken(); // =
+                                nImmortality = script.GetNumber();
+                                break;
+                            }
+                        case "m_bBlow":
+                            {
+                                script.GetToken(); // =
+                                bBlow = script.GetNumber();
+                                break;
+                            }
+                        case "m_nChangeTargetRand":
+                            {
+                                script.GetToken(); // =
+                                nChangeTargetRand = script.GetNumber();
+                                break;
+                            }
+                        case "m_dwAttackMoveDelay":
+                            {
+                                script.GetToken(); // =
+                                dwAttackMoveDelay = script.GetNumber();
+                                break;
+                            }
+                        case "m_dwRunawayDelay":
+                            {
+                                script.GetToken(); // =
+                                dwRunawayDelay = script.GetNumber();
+                                break;
+                            }
+                        case "randomItem":
+                            {
+                                script.GetToken(); // {
+                                script.GetToken();
+                                while (script.Token != "}")
                                 {
-                                    // TODO : LoadPropMoverEx_AI
-                                    break;
-                                }
-                            case "m_nAttackFirstRange":
-                                {
-                                    scanner.GetToken(); // =
-                                    attackFirstRange = scanner.GetNumber();
-                                    break;
-                                }
-                            case "SetEvasion":
-                                {
-                                    scanner.GetToken(); // (
-                                    evasionHp = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    evasionSec = scanner.GetNumber();
-                                    scanner.GetToken();
-                                    break;
-                                }
-                            case "SetRunAway":
-                                {
-                                    scanner.GetToken(); // (
-                                    runawayHp = scanner.GetNumber();
-                                    scanner.GetToken(); // , or )
-                                    if(scanner.Token == ",")
+                                    if (script.Token == ";")
                                     {
-                                        scanner.GetToken(); // TODO: Check if this value is used in any source file
-                                        scanner.GetToken(); // ,
-                                        scanner.GetToken(); // TODO: Check if this value is used in any source file
-                                        scanner.GetToken(); // )
+                                        script.GetToken();
+                                        continue;
                                     }
-                                    break;
+                                    script.GetToken();
                                 }
-                            case "SetCallHelper":
-                                {
-                                    scanner.GetToken(); // (
-                                    callHp = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    scanner.GetToken(); // Call helper IDX. TODO: get this value
-                                    scanner.GetToken(); // ,
-                                    scanner.GetNumber(); // Call helper Num. TODO: get this value
-                                    scanner.GetToken(); // ,
-                                    scanner.GetToken(); // Call helper party. TODO : get this value
-                                    scanner.GetToken(); // )
-                                    break;
-                                }
-                            case "m_nAttackItemNear":
-                                {
-                                    scanner.GetToken(); // =
-                                    attackItemNear = scanner.GetNumber();
-                                    break;
-                                }
-                            case "m_nAttackItemFar":
-                                {
-                                    scanner.GetToken(); // =
-                                    attackItemFar = scanner.GetNumber();
-                                    break;
-                                }
-                            case "m_nAttackItem1":
-                                {
-                                    scanner.GetToken(); // =
-                                    attackItem1 = scanner.GetToken();
-                                    break;
-                                }
-                            case "m_nAttackItem2":
-                                {
-                                    scanner.GetToken(); // =
-                                    attackItem2 = scanner.GetToken();
-                                    break;
-                                }
-                            case "m_nAttackItem3":
-                                {
-                                    scanner.GetToken(); // =
-                                    attackItem3 = scanner.GetToken();
-                                    break;
-                                }
-                            case "m_nAttackItem4":
-                                {
-                                    scanner.GetToken(); // =
-                                    attackItem4 = scanner.GetToken();
-                                    break;
-                                }
-                            case "m_nAttackItemSec":
-                                {
-                                    scanner.GetToken(); // =
-                                    attackItemSec = scanner.GetNumber();
-                                    break;
-                                }
-                            case "m_nMagicReflection":
-                                {
-                                    scanner.GetToken(); // =
-                                    magicReflexion = scanner.GetNumber();
-                                    break;
-                                }
-                            case "m_nImmortality":
-                                {
-                                    scanner.GetToken(); // =
-                                    immortality = scanner.GetToken();
-                                    break;
-                                }
-                            case "m_bBlow":
-                                {
-                                    scanner.GetToken(); // =
-                                    blow = scanner.GetToken();
-                                    break;
-                                }
-                            case "m_nChangeTargetRand":
-                                {
-                                    scanner.GetToken(); // =
-                                    changeTargetRand = scanner.GetToken();
-                                    break;
-                                }
-                            case "m_dwAttackMoveDelay":
-                                {
-                                    scanner.GetToken(); // =
-                                    attackMoveDelay = scanner.GetNumber();
-                                    break;
-                                }
-                            case "m_dwRunawayDelay":
-                                {
-                                    scanner.GetToken(); // =
-                                    runawayDelay = scanner.GetNumber();
-                                    break;
-                                }
-                            case "randomItem":
-                                {
-                                    // TODO: InterpretRandomItem
-                                    break;
-                                }
-                            case "Maxitem":
-                                {
-                                    scanner.GetToken(); // =
-                                    dropItemGeneratorMax = scanner.GetNumber();
-                                    break;
-                                }
-                            case "DropItem":
-                                {
-                                    scanner.GetToken(); // (
-                                    string dwIndex = scanner.GetToken();
-                                    scanner.GetToken(); // ,
-                                    int dwProbability = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    int dwLevel = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    int dwNumber = scanner.GetNumber();
-                                    scanner.GetToken(); // )
-                                    // TODO: add drop item in a list
-                                    break;
-                                }
-                            case "DropKind":
-                                {
-                                    scanner.GetToken(); // (
-                                    string dwIk3 = scanner.GetToken();
-                                    scanner.GetToken(); // ,
-                                    scanner.GetNumber(); // Was used to set min uniq. TODO: Check if a source use it.
-                                    scanner.GetToken(); // ,
-                                    scanner.GetNumber(); //  Was used to set max uniq. TODO: Check if a source use it.
-                                    scanner.GetToken(); // )
-                                    // TODO: add drop kind in a list
-                                    break;
-                                }
-                            case "DropGold":
-                                {
-                                    scanner.GetToken(); // (
-                                    int minNumber = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    int maxNumber = scanner.GetNumber();
-                                    scanner.GetToken();
-                                    // TODO: add drop gold in a list
-                                    break;
-                                }
-                            case "Transform":
-                                {
-                                    scanner.GetToken(); // (
-                                    int hpRate = scanner.GetNumber();
-                                    scanner.GetToken(); // ,
-                                    string monsterId = scanner.GetToken();
-                                    scanner.GetToken(); // )
-                                    // TODO: add to mover
-                                    break;
-                                }
-                        }
+                                break;
+                            }
+                        case "Maxitem":
+                            {
+                                script.GetToken(); // =
+                                dwDropItemGeneratorMax = script.GetNumber();
+                                break;
+                            }
+                        case "DropItem":
+                            {
+                                script.GetToken(); // (
+                                int dwIndex = script.GetNumber();
+                                script.GetToken(); // ,
+                                int dwProbability = script.GetNumber();
+                                script.GetToken(); // ,
+                                int dwLevel = script.GetNumber();
+                                script.GetToken(); // ,
+                                int dwNumber = script.GetNumber();
+                                script.GetToken(); // )
+
+                                DropItem dropItem = new(DropType.DROPTYPE_NORMAL, dwIndex, dwProbability, dwLevel, dwNumber, 0);
+                                dropItems.Add(dropItem);
+                                break;
+                            }
+                        case "DropKind":
+                            {
+                                script.GetToken(); // (
+                                int dwIk3 = script.GetNumber();
+                                script.GetToken(); // ,
+                                short nMinUniq = (short)script.GetNumber(); // Was used to set min uniq. TODO: Check if a source use it.
+                                script.GetToken(); // ,
+                                short nMaxUniq = (short)script.GetNumber(); //  Was used to set max uniq. TODO: Check if a source use it.
+                                script.GetToken(); // )
+
+                                DropKind dropKind = new(dwIk3, nMinUniq, nMaxUniq);
+                                dropKinds.Add(dropKind);
+                                break;
+                            }
+                        case "DropGold":
+                            {
+                                script.GetToken(); // (
+                                int dwNumber = script.GetNumber();
+                                script.GetToken(); // ,
+                                int dwNumber2 = script.GetNumber();
+                                script.GetToken();
+
+                                DropItem dropItem = new(DropType.DROPTYPE_SEED, -1, unchecked((int)0xFFFFFFFF), -1, dwNumber, dwNumber2); // TODO: maybe should not use drop item for DropGold.
+                                dropItems.Add(dropItem);
+                                break;
+                            }
+                        case "Transform":
+                            {
+                                if (settingsService.Settings.ResourcesVersion < 14) throw new IncorrectlyFormattedFileException(filePath);
+                                script.GetToken(); // (
+                                fMonsterTransformHpRate = script.GetNumber();
+                                script.GetToken(); // ,
+                                dwMonsterTransformMonsterId = script.GetNumber();
+                                script.GetToken(); // )
+                                break;
+                            }
                     }
                 }
             }
         }
 
-        private void LoadExAi(Scanner scanner, string filePath)
+        private void LoadExAi(
+            Script script,
+            ref int bMeleeAttack, ref int nLvCond, ref int bRecvCond,
+            ref int nScanJob, ref short nAttackFirstRange, ref int dwScanQuestId, ref int dwScanItemIdx, ref int nScanChao,
+            ref int nRecvCondMe, ref int nRecvCondHow, ref int nRecvCondMp, ref byte bRecvCondWho, ref int tmUnitHelp,
+            ref int nHelpRangeMul, ref byte bHelpWho, ref short nCallHelperMax, ref int nHpCond,
+            ref byte[] bRangeAttack, ref int nSummProb, ref int nSummNum, ref int nSummId, ref short nRunawayHp,
+            ref int nBerserkHp, ref float fBerserkDmgMul,
+            ref int nLoot, ref int nLootProb
+            )
         {
-            scanner.GetToken(); // {
+            script.GetToken(); // {
 
-            if (scanner.Token != "{") throw new IncorrectlyFormattedFileException(filePath);
+            if (script.Token != "{") throw new IncorrectlyFormattedFileException(script.FilePath);
 
-            while(true)
+            while (true)
             {
-                scanner.GetToken();
+                script.GetToken();
 
-                if (scanner.Token == "}") break;
-                if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+                if (script.Token == "}") break;
+                if (script.EndOfStream) throw new IncorrectlyFormattedFileException(script.FilePath);
 
-                switch(scanner.Token)
+                switch (script.Token)
                 {
                     case "#SCAN":
-                        {
-                            // TODO: LoadExAiScan
+                            LoadPropExAiScan(script, ref nScanJob, ref nAttackFirstRange, ref dwScanQuestId, ref dwScanItemIdx, ref nScanChao);
                             break;
-                        }
                     case "#BATTLE":
-                        {
-                            // TODO: LoadExAiBattle
+                            LoadPropExAiBattle(
+                                script,
+                                ref bMeleeAttack, ref nLvCond, ref bRecvCond, ref nRecvCondMe, ref nRecvCondHow, ref nRecvCondMp, ref bRecvCondWho, ref tmUnitHelp, ref nHelpRangeMul, ref bHelpWho,
+                                ref nCallHelperMax, ref nHpCond, ref bRangeAttack, ref nSummProb, ref nSummNum, ref nSummId, ref nRunawayHp, ref nBerserkHp, ref fBerserkDmgMul
+                                );
                             break;
-                        }
                     case "#MOVE":
-                        {
-                            // TODO: LoadExAiMove
+                        LoadPropExAiMove(script, ref nLoot, ref nLootProb);
                             break;
-                        }
                     default:
                         {
-                            throw new IncorrectlyFormattedFileException(filePath);
+                            throw new IncorrectlyFormattedFileException(script.FilePath);
                         }
                 }
             }
         }
 
-        private void LoadPropExAiScan(Scanner scanner, string filePath)
+        private void LoadPropExAiScan(Script script, ref int nScanJob, ref short nAttackFirstRange, ref int dwScanQuestId, ref int dwScanItemIdx, ref int nScanChao)
         {
             AICMD nCommand = AICMD.NONE;
 
-            scanner.GetToken(); // {
+            script.GetToken(); // {
 
-            if (scanner.Token.ElementAtOrDefault(0) != '{') throw new IncorrectlyFormattedFileException(filePath);
+            if (script.Token.ElementAtOrDefault(0) != '{') throw new IncorrectlyFormattedFileException(script.FilePath);
 
-            string job;
-            int range;
-            string quest;
-            string item;
-            int chao;
-
-            while(true)
+            while (true)
             {
-                scanner.GetToken();
+                script.GetToken();
 
-                if (scanner.Token.ElementAtOrDefault(0) == '}') break;
-                if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+                if (script.Token.ElementAtOrDefault(0) == '}') break;
+                if (script.EndOfStream) throw new IncorrectlyFormattedFileException(script.FilePath);
 
-                if(nCommand == AICMD.SCAN)
+                if (nCommand == AICMD.SCAN)
                 {
-                    switch(scanner.Token)
+                    switch (script.Token)
                     {
                         case "job":
-                            job = scanner.GetToken();
+                            nScanJob = script.GetNumber();
                             break;
                         case "range":
-                            range = scanner.GetNumber();
+                            nAttackFirstRange = (short)script.GetNumber();
                             break;
                         case "quest":
-                            quest = scanner.GetToken();
+                            dwScanQuestId = script.GetNumber();
                             break;
                         case "item":
-                            quest = scanner.GetToken();
+                            dwScanItemIdx = script.GetNumber();
                             break;
                         case "chao":
-                            chao = scanner.GetNumber();
+                            nScanChao = script.GetNumber();
                             break;
                     }
                 }
-                if(scanner.Token == "scan")
+                if (script.Token == "scan")
                 {
-                    if (nCommand != 0) throw new IncorrectlyFormattedFileException(filePath);
+                    if (nCommand != 0) throw new IncorrectlyFormattedFileException(script.FilePath);
                     nCommand = AICMD.SCAN;
                 }
             }
         }
 
-        private void LoadPropExAiBattle(Scanner scanner, string filePath)
+        private void LoadPropExAiBattle(
+            Script script, ref int bMeleeAttack, ref int nLvCond, ref int bRecvCond,
+            ref int nRecvCondMe, ref int nRecvCondHow, ref int nRecvCondMp, ref byte bRecvCondWho, ref int tmUnitHelp,
+            ref int nHelpRangeMul, ref byte bHelpWho, ref short nCallHelperMax, ref int nHpCond,
+            ref byte[] bRangeAttack, ref int nSummProb, ref int nSummNum, ref int nSummId, ref short nRunawayHp,
+            ref int nBerserkHp, ref float fBerserkDmgMul
+            )
         {
             AICMD nCommand = AICMD.NONE; // 0 = NONE. 2 = ATTACK. 5 = RECOVERY
 
-            scanner.GetToken(); // {
+            script.GetToken(); // {
 
-            if (scanner.Token.ElementAtOrDefault(0) != '{') throw new IncorrectlyFormattedFileException(filePath);
+            if (script.Token.ElementAtOrDefault(0) != '{') throw new IncorrectlyFormattedFileException(script.FilePath);
 
-            int meleeAttack;
-            int lvCond;
-            int recoveryCond;
-            int recoveryCondMe;
-            int recoveryCondHow;
-            int recoveryCondMp;
-            int recoveryCondWho;
-            int tmUnitHelp;
-            int nHelpRangeMul;
-            int bHelpWho;
-            int nCallHelperMax;
-            int nHpCond;
-
-            while(true)
+            while (true)
             {
-                scanner.GetToken();
+                script.GetToken();
 
-                if (scanner.Token == "}") break;
-                if (scanner.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
+                if (script.Token == "}") break;
+                if (script.EndOfStream) throw new IncorrectlyFormattedFileException(script.FilePath);
 
-                switch(scanner.Token.ToLower())
+                if (script.TokenType == TokenType.IDENTIFIER)
                 {
-                    case "attack":
-                        nCommand = AICMD.ATTACK;
-                        meleeAttack = 1;
-                        break;
-                    case "cunning":
-                        {
-                            if (nCommand == 0) throw new IncorrectlyFormattedFileException(filePath);
-                            if (nCommand == AICMD.ATTACK)
+                    switch (script.Token.ToLower())
+                    {
+                        case "attack":
+                            nCommand = AICMD.ATTACK;
+                            bMeleeAttack = 1;
+                            break;
+                        case "cunning":
                             {
-                                scanner.GetToken();
-                                switch (scanner.Token.ToLower())
+                                if (nCommand == 0) throw new IncorrectlyFormattedFileException(script.FilePath);
+                                if (nCommand == AICMD.ATTACK)
                                 {
-                                    case "low":
-                                        lvCond = 1;
-                                        break;
-                                    case "sam":
-                                        lvCond = 2;
-                                        break;
-                                    case "hi":
-                                        lvCond = 3;
-                                        break;
-                                    default:
-                                        throw new IncorrectlyFormattedFileException(filePath);
-                                }
-                            }
-                            break;
-                        }
-                    case "recovery":
-                        {
-                            nCommand = AICMD.RECOVERY;
-                            recoveryCond = 1;
-                            recoveryCondMe = 0;
-                            recoveryCondHow = 100;
-                            recoveryCondMp = 0;
-                            break;
-                        }
-                    case "u":
-                    case "m":
-                    case "a":
-                        {
-                            if (nCommand == 0) throw new IncorrectlyFormattedFileException(filePath);
-
-                            if(nCommand == AICMD.RECOVERY)
-                            {
-                                switch(scanner.Token.ToLower())
-                                {
-                                    case "u":
-                                        recoveryCondWho = 1;
-                                        break;
-                                    case "m":
-                                        recoveryCondWho = 2;
-                                        break;
-                                    case "a":
-                                        recoveryCondWho = 3;
-                                        break;
-                                }
-                                recoveryCond = 2;
-                            }
-                            break;
-                        }
-                    case "rangeattack":
-                        nCommand = AICMD.RANGEATTACK;
-                        break;
-                    case "keeprangeattack":
-                        nCommand = AICMD.KEEP_RANGEATTACK;
-                        break;
-                    case "summon":
-                        nCommand = AICMD.SUMMON;
-                        break;
-                    case "evade":
-                        nCommand = AICMD.EVADE;
-                        break;
-                    case "helper":
-                        {
-                            nCommand = AICMD.HELPER;
-                            tmUnitHelp = 0;
-                            nHelpRangeMul = 2;
-                            bHelpWho = 1;
-                            nCallHelperMax = 5;
-                            break;
-                        }
-                    case "all":
-                    case "sam":
-                        {
-                            if (nCommand == 0) throw new IncorrectlyFormattedFileException(filePath);
-                            if(nCommand == AICMD.HELPER)
-                            {
-                                switch(scanner.Token.ToLower())
-                                {
-                                    case "all":
-                                        bHelpWho = 1;
-                                        break;
-                                    case "sam":
-                                        bHelpWho = 2;
-                                        break;
-                                }
-                            }
-                            break;
-                        }
-                    case "berserk":
-                        {
-                            nCommand = AICMD.BERSERK;
-                            break;
-                        }
-                    case "randomtarget": break; // It does not do anything
-                    default:
-                        {
-                            if (!Int32.TryParse(scanner.Token, out int nNum)) throw new IncorrectlyFormattedFileException(filePath);
-                            if (nCommand == 0) throw new IncorrectlyFormattedFileException(filePath);
-
-                            switch(nCommand)
-                            {
-                                case AICMD.ATTACK:
-                                    nHpCond = nNum;
-                                    break;
-                                case AICMD.RECOVERY:
+                                    script.GetToken();
+                                    switch (script.Token.ToLower())
                                     {
-                                        if (recoveryCondMe == 0)
-                                            recoveryCondMe = nNum;
-                                        else if (recoveryCondHow == 100)
-                                            recoveryCondHow = nNum;
-                                        else if (recoveryCondMp == 0)
-                                            recoveryCondMp = nNum;
-                                        break;
+                                        case "low":
+                                            nLvCond = 1;
+                                            break;
+                                        case "sam":
+                                            nLvCond = 2;
+                                            break;
+                                        case "hi":
+                                            nLvCond = 3;
+                                            break;
+                                        default:
+                                            throw new IncorrectlyFormattedFileException(script.FilePath);
                                     }
+                                }
+                                break;
                             }
+                        case "recovery":
+                            {
+                                nCommand = AICMD.RECOVERY;
+                                bRecvCond = 1;
+                                nRecvCondMe = 0;
+                                nRecvCondHow = 100;
+                                nRecvCondMp = 0;
+                                break;
+                            }
+                        case "u":
+                        case "m":
+                        case "a":
+                            {
+                                if (nCommand == 0) throw new IncorrectlyFormattedFileException(script.FilePath);
+
+                                if (nCommand == AICMD.RECOVERY)
+                                {
+                                    switch (script.Token.ToLower())
+                                    {
+                                        case "u":
+                                            bRecvCondWho = 1;
+                                            break;
+                                        case "m":
+                                            bRecvCondWho = 2;
+                                            break;
+                                        case "a":
+                                            bRecvCondWho = 3;
+                                            break;
+                                    }
+                                    bRecvCond = 2;
+                                }
+                                break;
+                            }
+                        case "rangeattack":
+                            nCommand = AICMD.RANGEATTACK;
+                            break;
+                        case "keeprangeattack":
+                            nCommand = AICMD.KEEP_RANGEATTACK;
+                            break;
+                        case "summon":
+                            nCommand = AICMD.SUMMON;
+                            break;
+                        case "evade":
+                            nCommand = AICMD.EVADE;
+                            break;
+                        case "helper":
+                            {
+                                nCommand = AICMD.HELPER;
+                                tmUnitHelp = 0;
+                                nHelpRangeMul = 2;
+                                bHelpWho = 1;
+                                nCallHelperMax = 5;
+                                break;
+                            }
+                        case "all":
+                        case "sam":
+                            {
+                                if (nCommand == 0) throw new IncorrectlyFormattedFileException(script.FilePath);
+                                if (nCommand == AICMD.HELPER)
+                                {
+                                    switch (script.Token.ToLower())
+                                    {
+                                        case "all":
+                                            bHelpWho = 1;
+                                            break;
+                                        case "sam":
+                                            bHelpWho = 2;
+                                            break;
+                                    }
+                                }
+                                break;
+                            }
+                        case "berserk":
+                            {
+                                nCommand = AICMD.BERSERK;
+                                break;
+                            }
+                        case "randomtarget": break; // It does not do anything
+                        default: throw new IncorrectlyFormattedFileException(script.FilePath);
+                    }
+                }
+                else if (script.TokenType == TokenType.NUMBER)
+                {
+                    switch (nCommand)
+                    {
+                        case 0: throw new IncorrectlyFormattedFileException(script.FilePath);
+                        case AICMD.ATTACK:
+                            nHpCond = int.Parse(script.Token);
+                            break;
+                        case AICMD.RECOVERY:
+                            {
+                                int nNum = int.Parse(script.Token);
+                                if (nRecvCondMe == 0)
+                                    nRecvCondMe = nNum;
+                                else if (nRecvCondHow == 100)
+                                    nRecvCondHow = nNum;
+                                else if (nRecvCondMp == 0)
+                                    nRecvCondMp = nNum;
+                                break;
+                            }
+                        case AICMD.RANGEATTACK:
+                        case AICMD.KEEP_RANGEATTACK:
+                            {
+                                int maxJob = definesService.Defines["MAX_JOB"];
+
+                                int nJob = maxJob;
+                                int nRange = int.Parse(script.Token);
+
+                                if (nCommand == AICMD.KEEP_RANGEATTACK)
+                                {
+                                    nRange |= 0x80;
+                                    if (nJob >= maxJob)
+                                    {
+                                        for (int i = 0; i < bRangeAttack.Length; i++)
+                                            bRangeAttack[i] = (byte)nRange;
+                                    }
+                                    else
+                                    {
+                                        if (nJob > 0 || nJob < maxJob)
+                                            bRangeAttack[nJob] = (byte)nRange;
+                                        else
+                                            throw new IncorrectlyFormattedFileException(script.FilePath);
+                                    }
+                                }
+                                else
+                                {
+                                    if (nJob >= maxJob)
+                                    {
+                                        for (int i = 0; i < bRangeAttack.Length; i++)
+                                            bRangeAttack[i] = (byte)nRange;
+                                    }
+                                    else
+                                    {
+                                        if (nJob > 0 || nJob < maxJob)
+                                            bRangeAttack[nJob] = (byte)nRange;
+                                        else
+                                            throw new IncorrectlyFormattedFileException(script.FilePath);
+                                    }
+                                }
+                                break;
+                            }
+                        case AICMD.SUMMON:
+                            {
+                                int maxSummon = definesService.Defines["MAX_SUMMON"];
+
+                                nSummProb = int.Parse(script.Token);
+                                nSummNum = script.GetNumber();
+                                if (nSummNum > maxSummon) // error
+                                    nSummNum = maxSummon;
+
+                                script.GetToken();
+                                if (script.TokenType != TokenType.NUMBER)
+                                    throw new IncorrectlyFormattedFileException(script.FilePath);
+                                nSummId = int.Parse(script.Token);
+                                //if(!Movers.Any(x => x.Id != nSummId))
+                                //    // error
+                                break;
+                            }
+                        case AICMD.EVADE:
+                            nRunawayHp = (short)int.Parse(script.Token);
+                            break;
+                        case AICMD.HELPER:
+                            {
+                                int nNum = int.Parse(script.Token);
+                                if (tmUnitHelp == 0)
+                                    tmUnitHelp = nNum;
+                                else if (nHelpRangeMul == 2)
+                                    nHelpRangeMul = nNum;
+                                break;
+                            }
+                        case AICMD.BERSERK:
+                            nBerserkHp = int.Parse(script.Token);
+                            fBerserkDmgMul = script.GetFloat();
+                            //if(fBerserkDmgMul <= 0 || fBerserkDmgMul >= 20)
+                            //    // error
+                            break;
+
+                    }
+                }
+            }
+        }
+
+        public void LoadPropExAiMove(Script script, ref int nLoot, ref int nLootProb)
+        {
+            AICMD nCommand = AICMD.NONE;
+
+            script.GetToken(); // {
+            if (script.Token[0] != '{') throw new IncorrectlyFormattedFileException(script.FilePath);
+
+            while (true)
+            {
+                script.GetToken();
+                if (script.Token[0] == '}')
+                    break;
+
+                switch (script.TokenType)
+                {
+                    case TokenType.IDENTIFIER:
+                        if (script.Token.Equals("Loot", StringComparison.OrdinalIgnoreCase))
+                        {
+                            nCommand = AICMD.LOOT;
+                            nLoot = 0;
                         }
+                        else if (script.Token.Equals("d", StringComparison.OrdinalIgnoreCase))
+                            nLoot = 0;
+                        else
+                            throw new IncorrectlyFormattedFileException(script.FilePath);
+                        break;
+                    case TokenType.NUMBER:
+                        switch (nCommand)
+                        {
+                            case 0: throw new IncorrectlyFormattedFileException(script.FilePath);
+                            case AICMD.LOOT:
+                                nLootProb = int.Parse(script.Token);
+                                break;
+                        }
+                        break;
                 }
             }
         }
@@ -1191,7 +1356,7 @@ namespace eTools_Ultimate.Services
 
             Mover mover = new(moverProp);
 
-            if(mover.Model is null)
+            if (mover.Model is null)
                 modelsService.CreateModelByObject(mover);
 
             Movers.Add(mover);
