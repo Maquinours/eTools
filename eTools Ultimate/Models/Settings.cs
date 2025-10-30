@@ -146,7 +146,18 @@ namespace eTools_Ultimate.Models
             get => _propMoverFilePath;
             set => SetFilePathPropertyWithDefault(ref _propMoverFilePath, value, DefaultPropMoverFilePath);
         }
-        public string DefaultPropMoverFilePath => $"{ResourcesFolderPath}propMover.txt";
+        public string DefaultPropMoverFilePath {
+            get
+            {
+                string fileName = FilesFormat switch
+                {
+                    FilesFormats.Florist => "propMover.csv",
+                    _ => "propMover.txt"
+                };
+                
+                return Path.Combine(ResourcesFolderPath, fileName);
+            }
+        }
 
         public string? PropMoverTxtFilePath
         {
@@ -176,7 +187,17 @@ namespace eTools_Ultimate.Models
             get => _propItemFilePath;
             set => SetFilePathPropertyWithDefault(ref _propItemFilePath, value, DefaultPropItemFilePath);
         }
-        public string DefaultPropItemFilePath => $"{ResourcesFolderPath}{(ResourcesVersion >= 16 ? "Spec_Item" : "propItem")}.txt";
+        public string DefaultPropItemFilePath {
+            get
+            {
+                string fileName = FilesFormat switch
+                {
+                    FilesFormats.Florist => "propItem.csv",
+                    _ => ResourcesVersion >= 16 ? "Spec_Item.txt" : "propItem.txt"
+                };
+                return Path.Combine(ResourcesFolderPath, fileName);
+            }
+        }
 
         public string? PropItemTxtFilePath
         {
@@ -271,6 +292,10 @@ namespace eTools_Ultimate.Models
                     NotifyPropertyChanged(nameof(DefaultItemIconsFolderPath));
                     break;
                 case nameof(ResourcesVersion):
+                    NotifyPropertyChanged(nameof(DefaultPropItemFilePath));
+                    break;
+                case nameof(FilesFormat):
+                    NotifyPropertyChanged(nameof(DefaultPropMoverFilePath));
                     NotifyPropertyChanged(nameof(DefaultPropItemFilePath));
                     break;
             }
