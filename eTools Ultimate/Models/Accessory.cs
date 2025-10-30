@@ -1,4 +1,6 @@
-﻿using eTools_Ultimate.Services;
+﻿using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,10 +12,10 @@ namespace eTools_Ultimate.Models
 {
     public class AccessoryAbilityOptionDstData
     {
-        private string _nDst;
+        private int _nDst;
         private int _nAdj;
 
-        public string NDst
+        public int NDst
         {
             get => this._nDst;
             set => this._nDst = value;
@@ -24,7 +26,17 @@ namespace eTools_Ultimate.Models
             set => this._nAdj = value;
         }
 
-        public AccessoryAbilityOptionDstData(string nDst, int nAdj)
+        public string DestIdentifier
+        {
+            get => Script.NumberToString(NDst, App.Services.GetRequiredService<DefinesService>().ReversedDestDefines);
+            set 
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    NDst = val;
+            }
+        }
+
+        public AccessoryAbilityOptionDstData(int nDst, int nAdj)
         {
             this._nDst = nDst;
             this._nAdj = nAdj;
@@ -53,12 +65,12 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    public class Accessory : IDisposable
+    public sealed class Accessory : IDisposable
     {
-        private string _dwItemId;
+        private int _dwItemId;
         private ObservableCollection<AccessoryAbilityOptionData> _abilityOptionData;
 
-        public string DwItemId
+        public int DwItemId
         {
             get => this._dwItemId;
             set => this._dwItemId = value;
@@ -69,9 +81,9 @@ namespace eTools_Ultimate.Models
             set => this._abilityOptionData = value;
         }
 
-        public Item? Item => ItemsService.Instance.Items.Where(x => x.Id == this.DwItemId).FirstOrDefault();
+        public Item? Item => App.Services.GetRequiredService<ItemsService>().Items.FirstOrDefault(x => x.Id == this.DwItemId);
 
-        public Accessory(string dwItemId, List<AccessoryAbilityOptionData> abilityOptionData)
+        public Accessory(int dwItemId, List<AccessoryAbilityOptionData> abilityOptionData)
         {
             this._dwItemId = dwItemId;
             this._abilityOptionData = [..abilityOptionData];

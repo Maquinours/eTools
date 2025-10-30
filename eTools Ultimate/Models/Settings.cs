@@ -1,621 +1,352 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using System.IO;
+using System.Windows.Data;
 
 namespace eTools_Ultimate.Models
 {
+    public enum FilesFormats
+    {
+        Original,
+        Florist
+    }
+
     public class Settings : INotifyPropertyChanged
     {
-        private static Settings _instance = new Settings();
-
-        // General settings
+        #region Fields
+        #region Main settings
         private int _resourcesVersion = 19;
         private string _resourcesFolderPath = System.AppDomain.CurrentDomain.BaseDirectory;
         private string _clientFolderPath = $@"{System.AppDomain.CurrentDomain.BaseDirectory}Client\";
+        #endregion
 
+        #region General settings
         private string? _iconsFolderPath;
+        private string? _modelsFolderPath;
         private string? _texturesFolderPath;
         private string? _soundsConfigFilePath;
         private string? _soundsFolderPath;
+        private FilesFormats _filesFormat = FilesFormats.Original;
+        #endregion
 
-        // Movers settings
+        #region Movers settings
         private string? _propMoverFilePath;
         private string? _propMoverTxtFilePath;
-        private string? _propMoverExFilePath;
         private bool _mover64BitHp = false;
         private bool _mover64BitAtk = false;
+        private readonly ReadOnlyDictionary<MoverTypes, ObservableCollection<string>> _moverTypesBindings = new(
+            new Dictionary<MoverTypes, ObservableCollection<string>>(){
+                { MoverTypes.NPC, new ObservableCollection<string> { "AII_NONE" } },
+                { MoverTypes.CHARACTER, new ObservableCollection<string> {  "AII_MOVER" } },
+                { MoverTypes.MONSTER, new ObservableCollection<string> { "AII_MONSTER", "AII_CLOCKWORKS", "AII_BIGMUSCLE", "AII_KRRR", "AII_BEAR", "AII_METEONYKER", "AII_AGGRO_NORMAL", "AII_PARTY_AGGRO_LEADER", "AII_PARTY_AGGRO_SUB", "AII_ARENA_REAPER" } },
+                { MoverTypes.PET,  new ObservableCollection<string> {"AII_PET", "AII_EGG"} }
+            });
+        #endregion
 
-        // Items settings
+        #region Items settings
         private string? _propItemFilePath;
         private string? _propItemTxtFilePath;
         private string? _itemIconsFolderPath;
+        #endregion
 
-        // Skills settings
-        private string? _propSkillFilePath;
-        private string? _propSkillTxtFilePath;
-        private string? _skillIconsFolderPath;
-
-        // Texts settings
+        #region Texts settings
         private string? _textsConfigFilePath;
         private string? _textsTxtFilePath;
+        #endregion
 
-        // GiftBoxes settings
+        #region Giftboxes settings
         private string? _giftboxesConfigFilePath;
+        #endregion
 
-        // Exchangers settings
-        private string? _exchangesConfigFilePath;
-
-        // Characters settings
-        private string? _charactersConfigFilePath;
-        private string? _charactersStringsFilePath;
-        private string? _charactersIconsFolderPath;
-
-        // Honors settings
-        private string? _honorsPropFilePath;
-        private string? _honorsTxtFilePath;
-
-        // Motions settings
+        #region Motions settings
         private string? _motionsPropFilePath;
         private string? _motionsTxtFilePath;
+        #endregion
+
+        #region Accessories settings
+        private string? _accessoriesConfigFilePath;
+        #endregion
+        #endregion
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            switch(propertyName)
-            {
-                case nameof(this.ResourcesFolderPath):
-                    NotifyPropertyChanged(nameof(this.DefaultTexturesFolderPath));
-                    NotifyPropertyChanged(nameof(this.DefaultPropMoverFilePath));
-                    NotifyPropertyChanged(nameof(this.DefaultPropMoverTxtFilePath));
-                    NotifyPropertyChanged(nameof(this.DefaultPropMoverExFilePath));
-                    NotifyPropertyChanged(nameof(this.DefaultPropItemFilePath));
-                    NotifyPropertyChanged(nameof(this.DefaultPropItemTxtFilePath));
-                    NotifyPropertyChanged(nameof(this.DefaultPropSkillFilePath));
-                    NotifyPropertyChanged(nameof(this.DefaultPropSkillTxtFilePath));
-                    break;
-                case nameof(this.ClientFolderPath):
-                    NotifyPropertyChanged(nameof(this.DefaultIconsFolderPath));
-                    NotifyPropertyChanged(nameof(this.DefaultSoundsConfigFilePath));
-                    NotifyPropertyChanged(nameof(this.DefaultSoundsFolderPath));
-                    NotifyPropertyChanged(nameof(this.DefaultItemIconsFolderPath));
-                    NotifyPropertyChanged(nameof(this.DefaultSkillIconsFolderPath));
-                    break;
-                case nameof(this.ResourcesVersion):
-                    NotifyPropertyChanged(nameof(this.DefaultPropItemFilePath));
-                    break;
-            }
-        }
-
-        public static Settings Instance
-        {
-            get => _instance;
-        }
-
-        // General settings
+        #region Properties
+        #region Main settings
         public int ResourcesVersion
         {
-            get => this._resourcesVersion;
-            set { if (this.ResourcesVersion != value) { this._resourcesVersion = value; this.NotifyPropertyChanged(); } }
+            get => _resourcesVersion;
+            set => SetValue(ref _resourcesVersion, value);
         }
         public string ResourcesFolderPath
         {
-            get => this._resourcesFolderPath;
-            set 
-            {
-                string val = value;
-                if (!val.EndsWith(Path.DirectorySeparatorChar))
-                    val += Path.DirectorySeparatorChar;
-                if (this.ResourcesFolderPath != val)
-                { 
-                    this._resourcesFolderPath = val;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            get => _resourcesFolderPath;
+            set => SetFolderPathProperty(ref _resourcesFolderPath, value);
         }
         public string ClientFolderPath
         {
-            get => this._clientFolderPath;
-            set 
-            {
-                string val = value;
-                if (!val.EndsWith(Path.DirectorySeparatorChar))
-                    val += Path.DirectorySeparatorChar;
-                if (this.ClientFolderPath != val)
-                {
-                    this._clientFolderPath = val;
-                    this.NotifyPropertyChanged();
-                } 
-            }
+            get => _clientFolderPath;
+            set => SetFolderPathProperty(ref _clientFolderPath, value);
         }
+        #endregion
 
+        #region General settings
         public string? IconsFolderPath
         {
-            get => this._iconsFolderPath;
-            set 
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                else if (!val.EndsWith(Path.DirectorySeparatorChar))
-                    val += Path.DirectorySeparatorChar;
-                if (val == this.DefaultIconsFolderPath)
-                    val = null;
-                if (this.IconsFolderPath != val) 
-                { 
-                    this._iconsFolderPath = val; 
-                    this.NotifyPropertyChanged(); 
-                } 
-            }
+            get => _iconsFolderPath;
+            set => SetFolderPathPropertyWithDefault(ref _iconsFolderPath, value, DefaultIconsFolderPath);
         }
-        public string DefaultIconsFolderPath => $"{this.ClientFolderPath}Icon{Path.DirectorySeparatorChar}";
+        public string DefaultIconsFolderPath => $"{ClientFolderPath}Icon{Path.DirectorySeparatorChar}";
 
         public string? TexturesFolderPath
         {
-            get => this._texturesFolderPath;
-            set 
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                else if (!val.EndsWith(Path.DirectorySeparatorChar))
-                    val += Path.DirectorySeparatorChar;
-                if (val == this.DefaultTexturesFolderPath)
-                    val = null;
-                if (this.TexturesFolderPath != val) 
-                {
-                    this._texturesFolderPath = val; 
-                    this.NotifyPropertyChanged(); 
-                } 
-            }
+            get => _texturesFolderPath;
+            set => SetFolderPathPropertyWithDefault(ref _texturesFolderPath, value, DefaultTexturesFolderPath);
         }
-        public string DefaultTexturesFolderPath => $"{this.ResourcesFolderPath}Model{Path.DirectorySeparatorChar}Texture{Path.DirectorySeparatorChar}";
+        public string DefaultTexturesFolderPath => $"{ResourcesFolderPath}Model{Path.DirectorySeparatorChar}Texture{Path.DirectorySeparatorChar}";
+
+        public string? ModelsFolderPath
+        {
+            get => _modelsFolderPath;
+            set => SetFolderPathPropertyWithDefault(ref _modelsFolderPath, value, DefaultModelsFolderPath);
+        }
+        public string DefaultModelsFolderPath => $"{ResourcesFolderPath}Model{Path.DirectorySeparatorChar}";
 
         public string? SoundsConfigFilePath
         {
-            get => this._soundsConfigFilePath;
-            set 
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultSoundsConfigFilePath)
-                    val = null;
-                if (this.SoundsConfigFilePath != val)
-                { 
-                    this._soundsConfigFilePath = val;
-                    this.NotifyPropertyChanged();
-                } 
-            }
+            get => _soundsConfigFilePath;
+            set => SetFilePathPropertyWithDefault(ref _soundsConfigFilePath, value, DefaultSoundsConfigFilePath);
         }
-        public string DefaultSoundsConfigFilePath => $"{this.ClientFolderPath}Client{Path.DirectorySeparatorChar}sound.inc";
+        public string DefaultSoundsConfigFilePath => $"{ClientFolderPath}Client{Path.DirectorySeparatorChar}sound.inc";
 
         public string? SoundsFolderPath
         {
-            get => this._soundsFolderPath;
-            set 
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                else if (!val.EndsWith(Path.DirectorySeparatorChar))
-                    val += Path.DirectorySeparatorChar;
-                if (val == this.DefaultSoundsFolderPath)
-                    val = null;
-                if (this.SoundsFolderPath != val) 
-                { 
-                    this._soundsFolderPath = val; 
-                    this.NotifyPropertyChanged(); 
-                } 
-            }
+            get => _soundsFolderPath;
+            set => SetFolderPathPropertyWithDefault(ref _soundsFolderPath, value, DefaultSoundsFolderPath);
         }
-        public string DefaultSoundsFolderPath => $"{this.ClientFolderPath}Sound{Path.DirectorySeparatorChar}";
+        public string DefaultSoundsFolderPath => $"{ClientFolderPath}Sound{Path.DirectorySeparatorChar}";
 
-        // Movers settings
+        public FilesFormats FilesFormat
+        {
+            get => _filesFormat;
+            set => SetValue(ref _filesFormat, value);
+        }
+        #endregion
+
+        #region Movers settings
         public string? PropMoverFilePath
         {
-            get => this._propMoverFilePath;
-            set 
+            get => _propMoverFilePath;
+            set => SetFilePathPropertyWithDefault(ref _propMoverFilePath, value, DefaultPropMoverFilePath);
+        }
+        public string DefaultPropMoverFilePath {
+            get
             {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultPropMoverFilePath)
-                    val = null;
-                if (this.PropMoverFilePath != val)
-                { 
-                    this._propMoverFilePath = val;
-                    this.NotifyPropertyChanged(); 
-                } 
+                string fileName = FilesFormat switch
+                {
+                    FilesFormats.Florist => "propMover.csv",
+                    _ => "propMover.txt"
+                };
+                
+                return Path.Combine(ResourcesFolderPath, fileName);
             }
         }
-        public string DefaultPropMoverFilePath => $"{this.ResourcesFolderPath}propMover.txt";
 
         public string? PropMoverTxtFilePath
         {
-            get => this._propMoverTxtFilePath;
-            set 
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultPropMoverTxtFilePath)
-                    val = null;
-                if (this.PropMoverTxtFilePath != val) 
-                { 
-                    this._propMoverTxtFilePath = val;
-                    this.NotifyPropertyChanged(); 
-                } 
-            }
+            get => _propMoverTxtFilePath;
+            set => SetFilePathPropertyWithDefault(ref _propMoverTxtFilePath, value, DefaultPropMoverTxtFilePath);
         }
-        public string DefaultPropMoverTxtFilePath => $"{this.ResourcesFolderPath}propMover.txt.txt";
-
-        public string? PropMoverExFilePath
-        {
-            get => this._propMoverExFilePath;
-            set 
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultPropMoverExFilePath)
-                    val = null;
-                if (this.PropMoverExFilePath != val) 
-                { 
-                    this._propMoverExFilePath = val; 
-                    this.NotifyPropertyChanged(); 
-                } 
-            }
-        }
-        public string DefaultPropMoverExFilePath => $"{this.ResourcesFolderPath}propMoverEx.inc";
+        public string DefaultPropMoverTxtFilePath => $"{ResourcesFolderPath}propMover.txt.txt";
 
         public bool Mover64BitHp
         {
-            get => this._mover64BitHp;
-            set { if (this.Mover64BitHp != value) { this._mover64BitHp = value; this.NotifyPropertyChanged(); } }
-        }
-        public bool Mover64BitAtk
-        {
-            get => this._mover64BitAtk;
-            set { if (this.Mover64BitAtk != value) { this._mover64BitAtk = value; this.NotifyPropertyChanged(); } }
+            get => _mover64BitHp;
+            set => SetValue(ref _mover64BitHp, value);
         }
 
-        // Items settings
+        public bool Mover64BitAtk
+        {
+            get => _mover64BitAtk;
+            set => SetValue(ref _mover64BitAtk, value);
+        }
+
+        public ReadOnlyDictionary<MoverTypes, ObservableCollection<string>> MoverTypesBindings => _moverTypesBindings;
+        #endregion
+
+        #region Items settings
         public string? PropItemFilePath
         {
-            get => this._propItemFilePath;
-            set 
+            get => _propItemFilePath;
+            set => SetFilePathPropertyWithDefault(ref _propItemFilePath, value, DefaultPropItemFilePath);
+        }
+        public string DefaultPropItemFilePath {
+            get
             {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultPropItemFilePath)
-                    val = null;
-                if (this.PropItemFilePath != val) 
+                string fileName = FilesFormat switch
                 {
-                    this._propItemFilePath = val;
-                    this.NotifyPropertyChanged();
-                }
+                    FilesFormats.Florist => "propItem.csv",
+                    _ => ResourcesVersion >= 16 ? "Spec_Item.txt" : "propItem.txt"
+                };
+                return Path.Combine(ResourcesFolderPath, fileName);
             }
         }
-        public string DefaultPropItemFilePath => $"{this.ResourcesFolderPath}{(this.ResourcesVersion >= 16 ? "Spec_Item" : "propItem")}.txt";
 
         public string? PropItemTxtFilePath
         {
-            get => this._propItemTxtFilePath;
-            set 
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultPropItemTxtFilePath)
-                    val = null;
-                if (this.PropItemTxtFilePath != val) 
-                {
-                    this._propItemTxtFilePath = val;
-                    this.NotifyPropertyChanged();
-                } 
-            }
+            get => _propItemTxtFilePath;
+            set => SetFilePathPropertyWithDefault(ref _propItemTxtFilePath, value, DefaultPropItemTxtFilePath);
         }
-        public string DefaultPropItemTxtFilePath => $"{this.ResourcesFolderPath}propItem.txt.txt";
+        public string DefaultPropItemTxtFilePath => $"{ResourcesFolderPath}propItem.txt.txt";
 
         public string? ItemIconsFolderPath
         {
-            get => this._itemIconsFolderPath;
-            set 
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                else if (!val.EndsWith(Path.DirectorySeparatorChar))
-                    val += Path.DirectorySeparatorChar;
-                if (val == this.DefaultItemIconsFolderPath)
-                    val = null;
-                if (this.ItemIconsFolderPath != val)
-                {
-                    this._itemIconsFolderPath = val;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            get => _itemIconsFolderPath;
+            set => SetFolderPathPropertyWithDefault(ref _itemIconsFolderPath, value, DefaultItemIconsFolderPath);
         }
-        public string? DefaultItemIconsFolderPath => $"{this.ClientFolderPath}Item{Path.DirectorySeparatorChar}";
+        public string DefaultItemIconsFolderPath => $"{ClientFolderPath}Item{Path.DirectorySeparatorChar}";
+        #endregion
 
-        public string? PropSkillFilePath
-        {
-            get => this._propSkillFilePath;
-            set
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultPropSkillFilePath)
-                    val = null;
-                if (this.PropSkillFilePath != val)
-                {
-                    this._propSkillFilePath = val;
-                    this.NotifyPropertyChanged();
-                }
-            }
-        }
-        public string DefaultPropSkillFilePath => $"{this.ResourcesFolderPath}propSkill.txt";
-
-        public string? PropSkillTxtFilePath
-        {
-            get => this._propSkillTxtFilePath;
-            set
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultPropSkillTxtFilePath)
-                    val = null;
-                if (this.PropSkillTxtFilePath != val)
-                {
-                    this._propSkillTxtFilePath = val;
-                    this.NotifyPropertyChanged();
-                }
-            }
-        }
-        public string DefaultPropSkillTxtFilePath => $"{this.ResourcesFolderPath}propSkill.txt.txt";
-
-        public string? SkillIconsFolderPath
-        {
-            get => this._skillIconsFolderPath;
-            set
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                else if (!val.EndsWith(Path.DirectorySeparatorChar))
-                    val += Path.DirectorySeparatorChar;
-                if (val == this.DefaultSkillIconsFolderPath)
-                    val = null;
-                if (this.SkillIconsFolderPath != val)
-                {
-                    this._skillIconsFolderPath = val;
-                    this.NotifyPropertyChanged();
-                }
-            }
-        }
-        public string? DefaultSkillIconsFolderPath => $"{this.ClientFolderPath}Icon{Path.DirectorySeparatorChar}";
-
-        // Texts settings
+        #region Texts settings
         public string? TextsConfigFilePath
         {
-            get => this._textsConfigFilePath;
-            set
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultTextsConfigFilePath)
-                    val = null;
-                if (this.TextsConfigFilePath != val)
-                {
-                    this._textsConfigFilePath = val;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            get => _textsConfigFilePath;
+            set => SetFilePathPropertyWithDefault(ref _textsConfigFilePath, value, DefaultTextsConfigFilePath);
         }
-        public string DefaultTextsConfigFilePath => $"{this.ResourcesFolderPath}textClient.inc";
+        public string DefaultTextsConfigFilePath => $"{ResourcesFolderPath}textClient.inc";
 
         public string? TextsTxtFilePath
         {
-            get => this._textsTxtFilePath;
-            set
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultTextsTxtFilePath)
-                    val = null;
-                if (this.TextsTxtFilePath != val)
-                {
-                    this._textsTxtFilePath = val;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            get => _textsTxtFilePath;
+            set => SetFilePathPropertyWithDefault(ref _textsTxtFilePath, value, DefaultTextsTxtFilePath);
         }
-        public string DefaultTextsTxtFilePath => $"{this.ResourcesFolderPath}textClient.txt.txt";
+        public string DefaultTextsTxtFilePath => $"{ResourcesFolderPath}textClient.txt.txt";
+        #endregion
 
+        #region Giftboxes settings
         public string? GiftBoxesConfigFilePath
         {
-            get => this._giftboxesConfigFilePath;
-            set
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultGiftBoxesConfigFilePath)
-                    val = null;
-                if (this.GiftBoxesConfigFilePath != val)
-                {
-                    this._giftboxesConfigFilePath = val;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            get => _giftboxesConfigFilePath;
+            set => SetFilePathPropertyWithDefault(ref _giftboxesConfigFilePath, value, DefaultGiftBoxesConfigFilePath);
         }
-        public string DefaultGiftBoxesConfigFilePath => $"{this.ResourcesFolderPath}propGiftbox.inc";
+        public string DefaultGiftBoxesConfigFilePath => $"{ResourcesFolderPath}propGiftbox.inc";
+        #endregion
 
-        public string? ExchangesConfigFilePath
-        {
-            get => this._exchangesConfigFilePath;
-            set
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultExchangesConfigFilePath)
-                    val = null;
-                if (this.ExchangesConfigFilePath != val)
-                {
-                    this._exchangesConfigFilePath = val;
-                    this.NotifyPropertyChanged();
-                }
-            }
-        }
-        public string DefaultExchangesConfigFilePath => $"{this.ResourcesFolderPath}Exchange_Script.txt";
-
-        public string? CharactersConfigFilePath
-        {
-            get => this._charactersConfigFilePath;
-            set
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultCharactersConfigFilePath)
-                    val = null;
-                if (this.CharactersConfigFilePath != val)
-                {
-                    this._charactersConfigFilePath = val;
-                    this.NotifyPropertyChanged();
-                }
-            }
-        }
-        public string DefaultCharactersConfigFilePath => $"{this.ResourcesFolderPath}character.inc";
-
-        public string? CharactersStringsFilePath
-        {
-            get => this._charactersStringsFilePath;
-            set
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultCharactersStringsFilePath)
-                    val = null;
-                if (this.CharactersStringsFilePath != val)
-                {
-                    this._charactersStringsFilePath = val;
-                    this.NotifyPropertyChanged();
-                }
-            }
-        }
-        public string DefaultCharactersStringsFilePath => $"{this.ResourcesFolderPath}character.txt.txt";
-
-        public string? CharactersIconsFolderFolderPath
-        {
-            get => this._charactersIconsFolderPath;
-            set
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                else if (!val.EndsWith(Path.DirectorySeparatorChar))
-                    val += Path.DirectorySeparatorChar;
-                if (val == this.DefaultTextsConfigFilePath)
-                    val = null;
-                if (this.TextsConfigFilePath != val)
-                {
-                    this._textsConfigFilePath = val;
-                    this.NotifyPropertyChanged();
-                }
-            }
-        }
-        public string DefaultCharactersIconsFolderPath => $"{this.ClientFolderPath}Char{Path.DirectorySeparatorChar}";
-
-        public string? HonorsPropFilePath
-        {
-            get => this._honorsPropFilePath;
-            set
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultHonorsPropFilePath)
-                    val = null;
-                if (this.HonorsPropFilePath != val)
-                {
-                    this._honorsPropFilePath = val;
-                    this.NotifyPropertyChanged();
-                }
-            }
-        }
-        public string DefaultHonorsPropFilePath => $"{this.ResourcesFolderPath}honorList.txt";
-
-        public string? HonorsTxtFilePath
-        {
-            get => this._honorsTxtFilePath;
-            set
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultHonorsTxtFilePath)
-                    val = null;
-                if (this.HonorsTxtFilePath != val)
-                {
-                    this._honorsTxtFilePath = val;
-                    this.NotifyPropertyChanged();
-                }
-            }
-        }
-        public string DefaultHonorsTxtFilePath => $"{this.ResourcesFolderPath}honorList.txt.txt";
-
+        #region Motions settings
         public string? MotionsPropFilePath
         {
-            get => this._motionsPropFilePath;
-            set
-            {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultMotionsPropFilePath)
-                    val = null;
-                if (this.MotionsPropFilePath != val)
-                {
-                    this._motionsPropFilePath = val;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            get => _motionsPropFilePath;
+            set => SetFilePathPropertyWithDefault(ref _motionsPropFilePath, value, DefaultMotionsPropFilePath);
         }
-        public string DefaultMotionsPropFilePath => $"{this.ResourcesFolderPath}propMotion.txt";
+        public string DefaultMotionsPropFilePath => $"{ResourcesFolderPath}propMotion.txt";
 
         public string? MotionsTxtFilePath
         {
-            get => this._motionsTxtFilePath;
-            set
+            get => _motionsTxtFilePath;
+            set => SetFilePathPropertyWithDefault(ref _motionsTxtFilePath, value, DefaultMotionsTxtFilePath);
+        }
+        public string DefaultMotionsTxtFilePath => $"{ResourcesFolderPath}propMotion.txt.txt";
+        #endregion
+
+        #region Accessories settings
+        public string? AccessoriesConfigFilePath
+        {
+            get => _accessoriesConfigFilePath;
+            set => SetFilePathPropertyWithDefault(ref _accessoriesConfigFilePath, value, DefaultAccessoriesConfigFilePath);
+        }
+        public string DefaultAccessoriesConfigFilePath => $"{ResourcesFolderPath}accessory.inc";
+        #endregion
+        #endregion
+
+        #region private methods
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            switch (propertyName)
             {
-                string? val = value;
-                if (string.IsNullOrWhiteSpace(val))
-                    val = null;
-                if (val == this.DefaultMotionsTxtFilePath)
-                    val = null;
-                if (this.MotionsTxtFilePath != val)
-                {
-                    this._motionsTxtFilePath = val;
-                    this.NotifyPropertyChanged();
-                }
+                case nameof(ResourcesFolderPath):
+                    NotifyPropertyChanged(nameof(DefaultTexturesFolderPath));
+                    NotifyPropertyChanged(nameof(DefaultModelsFolderPath));
+                    NotifyPropertyChanged(nameof(DefaultPropMoverFilePath));
+                    NotifyPropertyChanged(nameof(DefaultPropMoverTxtFilePath));
+                    NotifyPropertyChanged(nameof(DefaultPropItemFilePath));
+                    NotifyPropertyChanged(nameof(DefaultPropItemTxtFilePath));
+                    NotifyPropertyChanged(nameof(DefaultTextsConfigFilePath));
+                    NotifyPropertyChanged(nameof(DefaultTextsTxtFilePath));
+                    NotifyPropertyChanged(nameof(DefaultGiftBoxesConfigFilePath));
+                    NotifyPropertyChanged(nameof(DefaultMotionsPropFilePath));
+                    NotifyPropertyChanged(nameof(DefaultMotionsTxtFilePath));
+                    NotifyPropertyChanged(nameof(DefaultAccessoriesConfigFilePath));
+                    break;
+                case nameof(ClientFolderPath):
+                    NotifyPropertyChanged(nameof(DefaultIconsFolderPath));
+                    NotifyPropertyChanged(nameof(DefaultSoundsConfigFilePath));
+                    NotifyPropertyChanged(nameof(DefaultSoundsFolderPath));
+                    NotifyPropertyChanged(nameof(DefaultItemIconsFolderPath));
+                    break;
+                case nameof(ResourcesVersion):
+                    NotifyPropertyChanged(nameof(DefaultPropItemFilePath));
+                    break;
+                case nameof(FilesFormat):
+                    NotifyPropertyChanged(nameof(DefaultPropMoverFilePath));
+                    NotifyPropertyChanged(nameof(DefaultPropItemFilePath));
+                    break;
             }
         }
-        public string DefaultMotionsTxtFilePath => $"{this.ResourcesFolderPath}propMotion.txt.txt";
+
+        private void SetFolderPathProperty(ref string field, string value, [CallerMemberName] string propertyName = "")
+        {
+            string val = value;
+
+            if (!val.EndsWith(Path.DirectorySeparatorChar))
+                val += Path.DirectorySeparatorChar;
+
+            SetValue(ref field, val, propertyName);
+        }
+
+        private void SetFolderPathPropertyWithDefault(ref string? field, string? value, string defaultValue, [CallerMemberName] string propertyName = "")
+        {
+            string? val = value;
+
+            if (string.IsNullOrWhiteSpace(val))
+                val = null;
+            else if (!val.EndsWith(Path.DirectorySeparatorChar))
+                val += Path.DirectorySeparatorChar;
+            if (val == defaultValue)
+                val = null;
+
+            SetValue(ref field, val, propertyName);
+        }
+
+        private void SetFilePathPropertyWithDefault(ref string? field, string? value, string defaultValue, [CallerMemberName] string propertyName = "")
+        {
+            string? val = value;
+
+            if (string.IsNullOrWhiteSpace(val))
+                val = null;
+            if (val == defaultValue)
+                val = null;
+
+            SetValue(ref field, val, propertyName);
+        }
+
+        private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+                return false;
+            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new Exception($"Settings SetValue with not safe to assign directly property {propertyName}");
+
+            field = value;
+            this.NotifyPropertyChanged(propertyName);
+            return true;
+        }
+        #endregion
     }
 }

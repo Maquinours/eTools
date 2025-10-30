@@ -1,4 +1,7 @@
-﻿using eTools_Ultimate.Services;
+﻿using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Services;
+using Microsoft.Extensions.DependencyInjection;
+using SixLabors.ImageSharp.ColorSpaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -11,127 +14,167 @@ using System.Windows.Media;
 
 namespace eTools_Ultimate.Models
 {
-    public class Text : INotifyPropertyChanged, IDisposable
+    public sealed class TextProp(int dwId, int dwColor, string szName) : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        private int _dwId = dwId;
+        private int _dwColor = dwColor;
+        private string _szName = szName;
 
-            switch(propertyName)
-            {
-                case nameof(this.SzName):
-                    this.NotifyPropertyChanged(nameof(this.Name));
-                    break;
-                case nameof(this.DwColor):
-                    this.NotifyPropertyChanged(nameof(this.Color));
-                    this.NotifyPropertyChanged(nameof(this.SolidColorBrushColor));
-                    break;
-            }
-        }
-
-        private void ProjectStrings_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (e.Action == NotifyCollectionChangedAction.Reset)
-            {
-                NotifyPropertyChanged(nameof(this.Name));
-            }
-            else
-            {
-                if ((e.OldItems != null && e.OldItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.SzName)) || (e.NewItems != null && e.NewItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == this.SzName)))
-                    NotifyPropertyChanged(nameof(this.Name));
-            }
-        }
-
-        private string _dwId;
-        private string _dwColor;
-        private string _szName;
-
-        public string DwId
+        public int DwId
         {
             get => this._dwId;
-            set 
-            {
-                if (this.DwId != value)
-                {
-                    this._dwId = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set => SetValue(ref this._dwId, value);
         }
-        public string DwColor
+
+        public int DwColor
         {
             get => this._dwColor;
-            set
-            {
-                if (this.DwColor != value)
-                {
-                    this._dwColor = value;
-                    this.NotifyPropertyChanged();
-                }
-            }
+            set => SetValue(ref this._dwColor, value);
         }
         public string SzName
         {
             get => this._szName;
             set
             {
-                string lastSzName = this.SzName;
-                StringsService stringsService = StringsService.Instance;
-                if (!stringsService.Strings.ContainsKey(value))
-                    stringsService.GenerateNewString(value);
-                this._szName = value;
-                // If old string value is blank and nothing is using it, remove it from the strings service
-                if (String.IsNullOrWhiteSpace(StringsService.Instance.GetString(lastSzName)) && !TextsService.Instance.Texts.Where(x => x.SzName == lastSzName).Any()) 
-                    stringsService.RemoveString(lastSzName);
-                this.NotifyPropertyChanged();
+                if (SzName != value)
+                {
+                    StringsService stringsService = App.Services.GetRequiredService<StringsService>();
+
+                    string oldValue = this._szName;
+                    if (!stringsService.Strings.ContainsKey(value))
+                        stringsService.GenerateNewString(value);
+                    _szName = value;
+                    this.NotifyPropertyChanged(nameof(this.SzName), oldValue, this.SzName);
+                }
             }
         }
-        public string Name
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
         {
-            get => StringsService.Instance.GetString(this._szName);
-            set => StringsService.Instance.ChangeStringValue(this._szName, value);
+            if (EqualityComparer<T>.Default.Equals(field, value))
+                return false;
+
+            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new InvalidOperationException($"Mover SetValue with not safe to assign directly property {propertyName}");
+
+            T old = field;
+            field = value;
+            this.NotifyPropertyChanged(propertyName, old, value);
+            return true;
         }
 
-        public Color? Color
+        private void NotifyPropertyChanged<T>(string propertyName, T oldValue, T newValue)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedExtendedEventArgs(propertyName, oldValue, newValue));
+        }
+    }
+
+    public sealed class Text : INotifyPropertyChanged, IDisposable
+    {
+        private readonly TextProp _prop;
+
+        public TextProp Prop => _prop;
+
+        public string Identifier
+        {
+            get => Script.NumberToString(Prop.DwId, App.Services.GetRequiredService<DefinesService>().ReversedTextDefines);
+            set 
+            {
+                if (Script.TryGetNumberFromString(value, out int result))
+                    Prop.DwId = result;
+            }
+        }
+
+        public string Name
+        {
+            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName) ?? Prop.SzName;
+            set
+            {
+                StringsService stringsService = App.Services.GetRequiredService<StringsService>();
+                if (stringsService.HasString(Prop.SzName))
+                    stringsService.ChangeStringValue(Prop.SzName, value);
+                else
+                    Prop.SzName = value;
+            }
+        }
+
+        public Color Color
         {
             get
             {
-                if (this.DwColor == null || !this.DwColor.StartsWith("0x")) return null;
-                string hex = $"#{this.DwColor.Replace("0x", "").Substring(0, 8).ToUpper()}";
-                return (Color)ColorConverter.ConvertFromString(hex);
+                byte a = (byte)((Prop.DwColor >> 24) & 0xFF);
+                byte r = (byte)((Prop.DwColor >> 16) & 0xFF);
+                byte g = (byte)((Prop.DwColor >> 8) & 0xFF);
+                byte b = (byte)(Prop.DwColor & 0xFF);
+
+                Color color = Color.FromArgb(a, r, g, b);
+                return color;
             }
             set
             {
-                if(value != null)
-                    this.DwColor = $"0x{value?.A:X2}{value?.R:X2}{value?.G:X2}{value?.B:X2}".ToLower();
+                int colorValue = (value.A << 24) | (value.R << 16) | (value.G << 8) | value.B;
+                if(colorValue != Prop.DwColor)
+                {
+                    Prop.DwColor = colorValue;
+                }
             }
         }
 
-        public SolidColorBrush? SolidColorBrushColor
-        {
-            get
-            {
-                Color? color = this.Color;
-                if (color == null) return null;
-                return new SolidColorBrush((Color)color);
-            }
-        }
+        public SolidColorBrush? SolidColorBrushColor => new(Color);
 
-        public Text(string dwId, string dwColor, string szName)
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public Text(TextProp prop)
         {
-            this._dwId = dwId;
-            this._dwColor = dwColor;
-            this._szName = szName;
-            StringsService.Instance.Strings.CollectionChanged += ProjectStrings_CollectionChanged;
+            _prop = prop;
+
+            Prop.PropertyChanged += Prop_PropertyChanged;
+            App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged += ProjectStrings_CollectionChanged;
         }
 
         public void Dispose()
         {
-            StringsService stringsService = StringsService.Instance;
-            stringsService.Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
-            if (String.IsNullOrWhiteSpace(this.Name) && !TextsService.Instance.Texts.Where(x => x != this && x.SzName == this.SzName).Any())
-                stringsService.RemoveString(this.SzName);
+            Prop.PropertyChanged -= Prop_PropertyChanged;
+            App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged -= ProjectStrings_CollectionChanged;
+        }
+
+        private void Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if(sender != Prop)
+                throw new InvalidOperationException("PropertyChanged event sender is not the expected Prop instance.");
+
+            switch (e.PropertyName)
+            {
+                case nameof(Prop.DwId):
+                    NotifyPropertyChanged(nameof(Identifier));
+                    break;
+                case nameof(Prop.DwColor):
+                    NotifyPropertyChanged(nameof(Color));
+                    NotifyPropertyChanged(nameof(SolidColorBrushColor));
+                    break;
+                case nameof(Prop.SzName):
+                    NotifyPropertyChanged(nameof(Name));
+                    break;
+            }
+        }
+
+        private void ProjectStrings_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Reset)
+            {
+                NotifyPropertyChanged(nameof(Name));
+            }
+            else
+            {
+                if ((e.OldItems != null && e.OldItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == Prop.SzName)) || (e.NewItems != null && e.NewItems.OfType<KeyValuePair<string, string>>().Any(kvp => kvp.Key == Prop.SzName)))
+                    NotifyPropertyChanged(nameof(Name));
+            }
+        }
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

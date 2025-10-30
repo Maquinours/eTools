@@ -1,4 +1,6 @@
-﻿using eTools_Ultimate.Models;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
 using System;
 using System.Collections.Generic;
@@ -12,17 +14,16 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class HonorsViewModel : ObservableObject, INavigationAware
+    public partial class HonorsViewModel(
+        //HonorsService honorsService
+        ) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
-        
-        [ObservableProperty]
-        private IEnumerable<DataColor> _colors;
 
         private string _searchText = string.Empty;
 
-        [ObservableProperty]
-        private ICollectionView _honorsView = CollectionViewSource.GetDefaultView(HonorsService.Instance.Honors);
+        //[ObservableProperty]
+        //private ICollectionView _honorsView = CollectionViewSource.GetDefaultView(honorsService.Honors);
 
         public string SearchText
         {
@@ -33,7 +34,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     _searchText = value;
                     OnPropertyChanged(nameof(this.SearchText));
-                    HonorsView.Refresh();
+                    //HonorsView.Refresh();
                 }
             }
         }
@@ -50,36 +51,71 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private void InitializeViewModel()
         {
-            var random = new Random();
-            var colorCollection = new List<DataColor>();
-
-            for (int i = 0; i < 8192; i++)
-                colorCollection.Add(
-                    new DataColor
-                    {
-                        Color = new SolidColorBrush(
-                            Color.FromArgb(
-                                (byte)200,
-                                (byte)random.Next(0, 250),
-                                (byte)random.Next(0, 250),
-                                (byte)random.Next(0, 250)
-                                )
-                            )
-                    }
-                    );
-
-            Colors = colorCollection;
-
-            HonorsView.Filter = new Predicate<object>(FilterItem);
+            //HonorsView.Filter = new Predicate<object>(FilterItem);
 
             _isInitialized = true;
         }
 
-        private bool FilterItem(object obj)
+        //private bool FilterItem(object obj)
+        //{
+        //    if (obj is not Honor honor) return false;
+        //    if (string.IsNullOrEmpty(this.SearchText)) return true;
+        //    return honor.NId.ToString().Contains(this.SearchText.ToLower(), StringComparison.OrdinalIgnoreCase);
+        //}
+
+        [RelayCommand]
+        private void AddHonorItem()
         {
-            if (obj is not Honor honor) return false;
-            if (string.IsNullOrEmpty(this.SearchText)) return true;
-            return honor.Title.ToLower().Contains(this.SearchText.ToLower());
+            // TODO: implement adding a new HonorItem
+            //var newItem = new HonorItem
+            //{
+            //    Index = honorsService.Honors.Count > 0 
+            //        ? honorsService.Honors.Max(i => i.Index) + 1 
+            //        : 0,
+            //    Category = "HI_COUNT_CHECK",
+            //    SubCategory = "HS_NEW",
+            //    RequiredValue = 100,
+            //    TitleId = $"IDS_TITLE_TXT_{(honorsService.HonorItems.Count > 0 ? honorsService.HonorItems.Max(i => i.Index) + 1 : 0):D4}",
+            //    TitleName = "Neuer Titel"
+            //};
+
+            //honorsService.AddHonorItem(newItem);
+        }
+
+        [RelayCommand]
+        private void UpdateHonorItem()
+        {
+            // Save current changes - implementation depends on your selection mechanism
+        }
+
+        [RelayCommand]
+        private void DeleteHonorItem()
+        {
+            // Delete selected item - implementation depends on your selection mechanism
+        }
+
+        [RelayCommand]
+        private void UndoCommand()
+        {
+            // Undo last change
+        }
+
+        [RelayCommand]
+        private void RedoCommand()
+        {
+            // Redo last undone change
+        }
+
+        [RelayCommand]
+        private void SaveCommand()
+        {
+            // Save all changes
+        }
+
+        [RelayCommand]
+        private void ExpertCommand()
+        {
+            // Open expert mode
         }
     }
 }

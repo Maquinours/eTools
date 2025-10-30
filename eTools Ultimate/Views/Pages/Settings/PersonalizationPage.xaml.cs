@@ -19,25 +19,5 @@ namespace eTools_Ultimate.Views.Pages
 
             InitializeComponent();
         }
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (sender is ComboBox comboBox)
-            {
-                switch (comboBox.SelectedIndex)
-                {
-                    case 0: // Light
-                        ViewModel.IsLightTheme = true;
-                        ViewModel.IsDarkTheme = false;
-                        ApplicationThemeManager.Apply(ApplicationTheme.Light);
-                        break;
-                    case 1: // Dark
-                        ViewModel.IsLightTheme = false;
-                        ViewModel.IsDarkTheme = true;
-                        ApplicationThemeManager.Apply(ApplicationTheme.Dark);
-                        break;
-                }
-            }
-        }
     }
 } 

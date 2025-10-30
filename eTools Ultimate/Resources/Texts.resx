@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Mover3DFile" xml:space="preserve">
+    <value>Mover O3D file</value>
+  </data>
   <data name="SelectClientFolder" xml:space="preserve">
     <value>Select the client folder</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="SelectItemTextFile" xml:space="preserve">
     <value>Select the item text file</value>
+  </data>
+  <data name="SelectMoverModelFile" xml:space="preserve">
+    <value>Select the model file associated to the mover</value>
   </data>
   <data name="SelectMoverPropExFile" xml:space="preserve">
     <value>Select the mover prop ex file</value>
@@ -155,6 +161,9 @@
   </data>
   <data name="SelectSoundConfigFile" xml:space="preserve">
     <value>Select the sound configuration file</value>
+  </data>
+  <data name="SelectSoundFile" xml:space="preserve">
+    <value>Select a sound file</value>
   </data>
   <data name="SelectSoundsFolder" xml:space="preserve">
     <value>Select the sounds folder</value>

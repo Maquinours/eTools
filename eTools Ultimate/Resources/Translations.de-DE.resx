@@ -1,0 +1,2218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Startseite</value>
+  </data>
+  <data name="Movers" xml:space="preserve">
+    <value>Beweger</value>
+  </data>
+  <data name="Giftboxes" xml:space="preserve">
+    <value>Geschenkkisten</value>
+  </data>
+  <data name="Accessories" xml:space="preserve">
+    <value>Zubehör</value>
+  </data>
+  <data name="Motions" xml:space="preserve">
+    <value>Bewegungen</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Über</value>
+  </data>
+  <data name="Resource Path" xml:space="preserve">
+    <value>Ressourcen Pfad</value>
+  </data>
+  <data name="Loading all Paths." xml:space="preserve">
+    <value>Lade alle Pfade.</value>
+    <comment>Resource Path navigation card description</comment>
+  </data>
+  <data name="Personalization" xml:space="preserve">
+    <value>Personalisierung</value>
+  </data>
+  <data name="Change Design and other parts" xml:space="preserve">
+    <value>Design und andere Teile ändern</value>
+    <comment>Personalization navigation card description</comment>
+  </data>
+  <data name="Learn more about eTools Ultimate" xml:space="preserve">
+    <value>Erfahren Sie mehr über eTools Ultimate</value>
+    <comment>About navigation card description</comment>
+  </data>
+  <data name="Created by eTools Ultimate" xml:space="preserve">
+    <value>Erstellt von eTools Ultimate</value>
+    <comment>Created by text on dashboard</comment>
+  </data>
+  <data name="About eTools Ultimate" xml:space="preserve">
+    <value>Über eTools Ultimate</value>
+    <comment>About eTools Ultimate section header</comment>
+  </data>
+  <data name="Our tool simplifies the editing process for developers." xml:space="preserve">
+    <value>Unser Tool vereinfacht den Bearbeitungsprozess für Entwickler.</value>
+    <comment>About description</comment>
+  </data>
+  <data name="Main Features" xml:space="preserve">
+    <value>Hauptfunktionen</value>
+    <comment>Main Features section header</comment>
+  </data>
+  <data name="Editing of .txt, .h and .inc files with structured interfaces" xml:space="preserve">
+    <value>Bearbeitung von .txt, .h und .inc Dateien mit strukturierten Benutzeroberflächen</value>
+    <comment>Main feature 1</comment>
+  </data>
+  <data name="Advanced categorization by element types" xml:space="preserve">
+    <value>Erweiterte Kategorisierung nach Elementtypen</value>
+    <comment>Main feature 2</comment>
+  </data>
+  <data name="Optimized for performance and user-friendliness" xml:space="preserve">
+    <value>Optimiert für Leistung und Benutzerfreundlichkeit</value>
+    <comment>Main feature 3</comment>
+  </data>
+  <data name="Development Team" xml:space="preserve">
+    <value>Entwicklungsteam</value>
+    <comment>Development Team section header</comment>
+  </data>
+  <data name="System Requirements" xml:space="preserve">
+    <value>Systemanforderungen</value>
+    <comment>System Requirements section header</comment>
+  </data>
+  <data name="Operating System:" xml:space="preserve">
+    <value>Betriebssystem:</value>
+    <comment>Operating System field label</comment>
+  </data>
+  <data name="RAM:" xml:space="preserve">
+    <value>Arbeitsspeicher:</value>
+    <comment>RAM requirement</comment>
+  </data>
+  <data name="200 MB available space" xml:space="preserve">
+    <value>200 MB verfügbarer Speicherplatz</value>
+    <comment>Storage space requirement</comment>
+  </data>
+  <data name="4 GB minimum, 8 GB recommended" xml:space="preserve">
+    <value>4 GB mindestens, 8 GB empfohlen</value>
+    <comment>RAM requirement with recommendation</comment>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DirectX 11 compatible" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Check for Updates" xml:space="preserve">
+    <value>Nach Updates suchen</value>
+    <comment>Check for Updates button text</comment>
+  </data>
+  <data name="Visit Website" xml:space="preserve">
+    <value>Website besuchen</value>
+    <comment>Visit Website button text</comment>
+  </data>
+  <data name="Maqui" xml:space="preserve">
+    <value>Maqui</value>
+    <comment>Developer name</comment>
+  </data>
+  <data name="Kiyo" xml:space="preserve">
+    <value>Kiyo</value>
+    <comment>Developer name</comment>
+  </data>
+  <data name="System default" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Added" xml:space="preserve">
+    <value>Hinzugefügt</value>
+  </data>
+  <data name="Removed" xml:space="preserve">
+    <value>Entfernt</value>
+  </data>
+  <data name="Changed" xml:space="preserve">
+    <value>Geändert</value>
+  </data>
+  <data name="Fixed" xml:space="preserve">
+    <value>Behoben</value>
+  </data>
+  <data name="Improved" xml:space="preserve">
+    <value>Verbessert</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>Aktualisiert</value>
+  </data>
+  <data name="Basic Information Fields" xml:space="preserve">
+    <value>Grundinformations-Felder</value>
+    <comment>Basic Information Fields expander header</comment>
+  </data>
+  <data name="Stats Fields" xml:space="preserve">
+    <value>Statistik-Felder</value>
+    <comment>Stats Fields expander header</comment>
+  </data>
+  <data name="Combat/Battle Fields" xml:space="preserve">
+    <value>Kampf-/Schlachtfelder</value>
+    <comment>Combat/Battle Fields expander header</comment>
+  </data>
+  <data name="Defensive Stats Fields" xml:space="preserve">
+    <value>Verteidigungsstatistik-Felder</value>
+    <comment>Defensive Stats Fields expander header</comment>
+  </data>
+  <data name="Elemental Fields" xml:space="preserve">
+    <value>Elementar-Felder</value>
+    <comment>Elemental Fields expander header</comment>
+  </data>
+  <data name="MoverPage" xml:space="preserve">
+    <value>Beweger-Seite</value>
+    <comment>MoverPage title</comment>
+  </data>
+  <data name="..." xml:space="preserve">
+    <value>...</value>
+    <comment>Ellipsis for file selection buttons</comment>
+  </data>
+  <data name="Configuration" xml:space="preserve">
+    <value>Konfiguration</value>
+    <comment>Configuration section header</comment>
+  </data>
+  <data name="Sound" xml:space="preserve">
+    <value>Sound</value>
+    <comment>Sound section header</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+    <comment>Name field label</comment>
+  </data>
+  <data name="Rank" xml:space="preserve">
+    <value>Rang</value>
+    <comment>Rank field label</comment>
+  </data>
+  <data name="SFX hit sound" xml:space="preserve">
+    <value>SFX Treffer-Sound</value>
+    <comment>SFX hit sound field label</comment>
+  </data>
+  <data name="Click sound" xml:space="preserve">
+    <value>Klick-Sound</value>
+    <comment>Click sound field label</comment>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Standard</value>
+    <comment>Default option value</comment>
+  </data>
+  <data name="Character" xml:space="preserve">
+    <value>Charakter</value>
+    <comment>Character option value</comment>
+  </data>
+  <data name="Modell" xml:space="preserve">
+    <value>Modell</value>
+    <comment>Model section header</comment>
+  </data>
+  <data name="Motion Key" xml:space="preserve">
+    <value>Bewegungs-Schlüssel</value>
+    <comment>Motion Key field label</comment>
+  </data>
+  <data name="Motion File" xml:space="preserve">
+    <value>Bewegungs-Datei</value>
+    <comment>Motion File field label</comment>
+  </data>
+  <data name="File" xml:space="preserve">
+    <value>Datei</value>
+    <comment>File field label</comment>
+  </data>
+  <data name="Scale" xml:space="preserve">
+    <value>Skalierung</value>
+    <comment>Scale field label</comment>
+  </data>
+  <data name="Textur" xml:space="preserve">
+    <value>Textur</value>
+    <comment>Texture field label</comment>
+  </data>
+  <data name="Kein Modell verfügbar" xml:space="preserve">
+    <value>Kein Modell verfügbar</value>
+    <comment>No model available message</comment>
+  </data>
+  <data name="No model associated with the selected mover." xml:space="preserve">
+    <value>Kein Modell mit dem ausgewählten Mover verknüpft.</value>
+    <comment>No model associated message</comment>
+  </data>
+  <data name="AIs assigned to {0}" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="No motions generated" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="No motions could be bound automatically." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="{0} motions have been bound automatically." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="{0} motion has been bound automatically." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Motions generated" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Unable to play motion" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Unable to find file: {0}" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Movers and motions saved" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Movers and motions have been successfully saved." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Error saving movers and motions" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Remove a motion" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the motion {0} from the mover {1} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Remove a mover" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the mover {0} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Motions saved" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Motions have been successfully saved." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Error saving motions" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the motion {0} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="This identifier is already taken by another mover." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="This identifier is already taken by another text." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="This identifier is already taken by another motion." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Texts" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="ID of the mover" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Motion" xml:space="preserve">
+    <value>Bewegung</value>
+  </data>
+  <data name="Motion of the character mover that should be played." xml:space="preserve">
+    <value>Bewegung des Charakter-Movers, die abgespielt werden soll.</value>
+  </data>
+  <data name="Text" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="No update available" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="You already have the latest version." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Update check failed" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Search..." xml:space="preserve">
+    <value>Suche...</value>
+  </data>
+  <data name="Remove giftbox item" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the item {0} from the giftbox {1} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Giftboxes saved" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Giftboxes have been successfully saved." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Error saving giftboxes" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Remove an accessory" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the accessory {0} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Remove an accessory's level" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the level {0} from the accessory {1} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Remove an attribute from an accessory’s level" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the attribute {0} from the level {1} of the accessory {2}?" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Accessories saved" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Accessories have been successfully saved." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Error saving accessories" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Remove a text" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the text {0} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Texts saved" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Texts have been successfully saved." type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Error saving texts" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Add giftbox" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Remove giftbox" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Are you sure you want to remove the giftbox {0} ?" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Create giftbox" xml:space="preserve">
+    <value>Giftbox erstellen</value>
+    <comment>Button text for creating a new giftbox</comment>
+  </data>
+  <data name="Latest updates and improvements" xml:space="preserve">
+    <value>Neueste Updates und Verbesserungen</value>
+  </data>
+  <data name="Files format" xml:space="preserve">
+    <value>Dateiformat</value>
+  </data>
+  <data name="Path concerned:" xml:space="preserve">
+    <value>Betroffener Pfad :</value>
+  </data>
+  <data name="The application could not find an important directory. This can happen when:" xml:space="preserve">
+    <value>Die Anwendung konnte ein wichtiges Verzeichnis nicht finden. Dies kann passieren, wenn :</value>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>Willkommen</value>
+    <comment>Welcome text on dashboard</comment>
+  </data>
+  <data name="Patchlogs" xml:space="preserve">
+    <value>Patchlogs</value>
+    <comment>Patchlogs button text</comment>
+  </data>
+  <data name="View on GitHub" xml:space="preserve">
+    <value>Auf GitHub anzeigen</value>
+    <comment>GitHub button tooltip</comment>
+  </data>
+  <data name="Join our Discord server" xml:space="preserve">
+    <value>Unserem Discord-Server beitreten</value>
+    <comment>Discord button tooltip</comment>
+  </data>
+  <data name="Items" xml:space="preserve">
+    <value>Gegenstände</value>
+    <comment>Items navigation card title</comment>
+  </data>
+  <data name="Navigate to the items page." xml:space="preserve">
+    <value>Navigiere zur Gegenstände-Seite.</value>
+    <comment>Items navigation card description</comment>
+  </data>
+  <data name="Navigate to the movers page." xml:space="preserve">
+    <value>Navigiere zur Beweger-Seite.</value>
+    <comment>Movers navigation card description</comment>
+  </data>
+  <data name="Skills" xml:space="preserve">
+    <value>Fähigkeiten</value>
+    <comment>Skills navigation card title</comment>
+  </data>
+  <data name="Navigate to the skills page." xml:space="preserve">
+    <value>Navigiere zur Fähigkeiten-Seite.</value>
+    <comment>Skills navigation card description</comment>
+  </data>
+  <data name="Quests" xml:space="preserve">
+    <value>Aufgaben</value>
+    <comment>Quests navigation card title</comment>
+  </data>
+  <data name="Navigate to the quests page." xml:space="preserve">
+    <value>Navigiere zur Aufgaben-Seite.</value>
+    <comment>Quests navigation card description</comment>
+  </data>
+  <data name="NPCs" xml:space="preserve">
+    <value>NPCs</value>
+    <comment>NPCs navigation card title</comment>
+  </data>
+  <data name="Navigate to the NPCs page." xml:space="preserve">
+    <value>Navigiere zur NPCs-Seite.</value>
+    <comment>NPCs navigation card description</comment>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Ereignisse</value>
+    <comment>Events navigation card title</comment>
+  </data>
+  <data name="Navigate to the events page." xml:space="preserve">
+    <value>Navigiere zur Ereignisse-Seite.</value>
+    <comment>Events navigation card description</comment>
+  </data>
+  <data name="Navigate to the giftboxes page." xml:space="preserve">
+    <value>Navigiere zur Geschenkkisten-Seite.</value>
+    <comment>Giftboxes navigation card description</comment>
+  </data>
+  <data name="Collectors" xml:space="preserve">
+    <value>Sammler</value>
+    <comment>Collectors navigation card title</comment>
+  </data>
+  <data name="Navigate to the accessories page." xml:space="preserve">
+    <value>Navigiere zum Zubehör.</value>
+    <comment>Accessories navigation card description</comment>
+  </data>
+  <data name="Exchangers" xml:space="preserve">
+    <value>Tauscher</value>
+    <comment>Exchangers navigation card title</comment>
+  </data>
+  <data name="Navigate to the exchanger page." xml:space="preserve">
+    <value>Navigiere zur Tauscher-Seite.</value>
+    <comment>Exchangers navigation card description</comment>
+  </data>
+  <data name="Honor List" xml:space="preserve">
+    <value>Ehrenliste</value>
+    <comment>Honor List navigation card title</comment>
+  </data>
+  <data name="Navigate to the honor list page." xml:space="preserve">
+    <value>Navigiere zur Ehrenliste.</value>
+    <comment>Honor List navigation card description</comment>
+  </data>
+  <data name="Couple" xml:space="preserve">
+    <value>Paar</value>
+    <comment>Couple navigation card title</comment>
+  </data>
+  <data name="Navigate to the couple page." xml:space="preserve">
+    <value>Navigiere zur Paar-Seite.</value>
+    <comment>Couple navigation card description</comment>
+  </data>
+  <data name="World" xml:space="preserve">
+    <value>Welt</value>
+    <comment>World navigation card title</comment>
+  </data>
+  <data name="WorldDescription" xml:space="preserve">
+    <value>Welt Editor öffnen.</value>
+    <comment>World navigation card description</comment>
+  </data>
+  <data name="Tickets" xml:space="preserve">
+    <value>Tickets</value>
+    <comment>Tickets navigation card title</comment>
+  </data>
+  <data name="Object" xml:space="preserve">
+    <value>Objekt</value>
+    <comment>Object navigation card title</comment>
+  </data>
+  <data name="Navigate to the object editor." xml:space="preserve">
+    <value>Navigiere zum Objekt-Editor.</value>
+    <comment>Object navigation card description</comment>
+  </data>
+  <data name="Terrain" xml:space="preserve">
+    <value>Terrain</value>
+    <comment>Terrain navigation card title</comment>
+  </data>
+  <data name="Navigate to the terrain editor." xml:space="preserve">
+    <value>Navigiere zum Terrain-Editor.</value>
+    <comment>Terrain navigation card description</comment>
+  </data>
+  <data name="Job" xml:space="preserve">
+    <value>Beruf</value>
+    <comment>Job navigation card title</comment>
+  </data>
+  <data name="Packitem" xml:space="preserve">
+    <value>Packgegenstand</value>
+    <comment>Packitem navigation card title</comment>
+  </data>
+  <data name="Navigate to the packitem editor." xml:space="preserve">
+    <value>Navigiere zum Packgegenstand-Editor.</value>
+    <comment>Packitem navigation card description</comment>
+  </data>
+  <data name="Lord" xml:space="preserve">
+    <value>Lord</value>
+    <comment>Lord navigation card title</comment>
+  </data>
+  <data name="Drop Event" xml:space="preserve">
+    <value>Drop Event</value>
+    <comment>Drop Event navigation card title</comment>
+  </data>
+  <data name="Navigate to the settings page." xml:space="preserve">
+    <value>Navigiere zur Einstellungen-Seite.</value>
+    <comment>Settings navigation card description</comment>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value>Suche</value>
+    <comment>Search placeholder text</comment>
+  </data>
+  <data name="Items in:" xml:space="preserve">
+    <value>Gegenstände in:</value>
+    <comment>Items in text</comment>
+  </data>
+  <data name="Undo" xml:space="preserve">
+    <value>Rückgängig</value>
+  </data>
+  <data name="Redo" xml:space="preserve">
+    <value>Wiederholen</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
+  <data name="Expert" xml:space="preserve">
+    <value>Experte</value>
+  </data>
+  <data name="Items in box:" xml:space="preserve">
+    <value>Gegenstände in Box:</value>
+    <comment>Items in box text</comment>
+  </data>
+  <data name="Total probability:" xml:space="preserve">
+    <value>Gesamtwahrscheinlichkeit:</value>
+    <comment>Total probability text</comment>
+  </data>
+  <data name="Item" xml:space="preserve">
+    <value>Gegenstand</value>
+    <comment>Item section header</comment>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Menge</value>
+    <comment>Quantity field label</comment>
+  </data>
+  <data name="%" xml:space="preserve">
+    <value>%</value>
+    <comment>Percentage column header</comment>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Aktionen</value>
+    <comment>Actions column header</comment>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Bearbeiten</value>
+    <comment>Edit button tooltip</comment>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Changelog" xml:space="preserve">
+    <value>Änderungsprotokoll</value>
+    <comment>Change Log menu item</comment>
+  </data>
+  <data name="Add item" xml:space="preserve">
+    <value>Gegenstand hinzufügen</value>
+    <comment>Add Item button text</comment>
+  </data>
+  <data name="Navigate to the collectors page." xml:space="preserve">
+    <value>Navigiere zur Sammler-Seite.</value>
+    <comment>Collectors navigation card description</comment>
+  </data>
+  <data name="Navigate to the drop event editor." xml:space="preserve">
+    <value>Navigiere zum Drop Event-Editor.</value>
+    <comment>Drop Event navigation card description</comment>
+  </data>
+  <data name="Navigate to the job editor." xml:space="preserve">
+    <value>Navigiere zum Beruf-Editor.</value>
+    <comment>Job navigation card description</comment>
+  </data>
+  <data name="Navigate to the motions page." xml:space="preserve">
+    <value>Navigiere zur Bewegungen-Seite.</value>
+    <comment>Motions navigation card description</comment>
+  </data>
+  <data name="Navigate to the lord editor." xml:space="preserve">
+    <value>Navigiere zum Lord-Editor.</value>
+    <comment>Lord navigation card description</comment>
+  </data>
+  <data name="Navigate to the ticket editor." xml:space="preserve">
+    <value>Navigiere zum Ticket-Editor.</value>
+    <comment>Tickets navigation card description</comment>
+  </data>
+  <data name="Navigate to the texts page." xml:space="preserve">
+    <value>Navigiere zum Text Client.</value>
+    <comment>Text Client navigation card description</comment>
+  </data>
+  <data name="ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="Door of Dark" xml:space="preserve">
+    <value>Tür der Dunkelheit</value>
+    <comment>Door of Dark field label</comment>
+  </data>
+  <data name="Dialog" xml:space="preserve">
+    <value>Dialog</value>
+    <comment>Dialog field label</comment>
+  </data>
+  <data name="Thank you! Please, investigate the entrance of the temple for anything dan" xml:space="preserve">
+    <value>Danke! Bitte untersuchen Sie den Eingang des Tempels nach allem, was dan</value>
+    <comment>Thank you dialog text</comment>
+  </data>
+  <data name="Quest Deny Dialog" xml:space="preserve">
+    <value>Aufgabe-Ablehnungs-Dialog</value>
+    <comment>Quest Deny Dialog field label</comment>
+  </data>
+  <data name="I cannot force you to help me if you are busy. But maybe, when you have th" xml:space="preserve">
+    <value>Ich kann Sie nicht zwingen, mir zu helfen, wenn Sie beschäftigt sind. Aber vielleicht, wenn Sie th</value>
+    <comment>Quest deny dialog text</comment>
+  </data>
+  <data name="Quest Details (Active)" xml:space="preserve">
+    <value>Aufgaben-Details (Aktiv)</value>
+    <comment>Quest Details (Active) field label</comment>
+  </data>
+  <data name="Quest Detail" xml:space="preserve">
+    <value>Aufgaben-Detail</value>
+    <comment>Quest Detail field label</comment>
+  </data>
+  <data name="Quest Details (Finished)" xml:space="preserve">
+    <value>Aufgaben-Details (Beendet)</value>
+    <comment>Quest Details (Finished) field label</comment>
+  </data>
+  <data name="Begin Conditions" xml:space="preserve">
+    <value>Startbedingungen</value>
+    <comment>Begin Conditions field label</comment>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>Allgemein</value>
+    <comment>General field label</comment>
+  </data>
+  <data name="Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="Sex" xml:space="preserve">
+    <value>Geschlecht</value>
+    <comment>Sex field label</comment>
+  </data>
+  <data name="Any" xml:space="preserve">
+    <value>Beliebig</value>
+    <comment>Any option</comment>
+  </data>
+  <data name="Required Skill" xml:space="preserve">
+    <value>Benötigte Fähigkeit</value>
+    <comment>Required Skill field label</comment>
+  </data>
+  <data name="Skill Level" xml:space="preserve">
+    <value>Fähigkeits-Level</value>
+    <comment>Skill Level field label</comment>
+  </data>
+  <data name="Min. PK Value" xml:space="preserve">
+    <value>Min. PK-Wert</value>
+    <comment>Min. PK Value field label</comment>
+  </data>
+  <data name="Party Settings" xml:space="preserve">
+    <value>Gruppen-Einstellungen</value>
+    <comment>Party Settings section header</comment>
+  </data>
+  <data name="Ignore" xml:space="preserve">
+    <value>Ignorieren</value>
+    <comment>Ignore option</comment>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Typ</value>
+    <comment>Type field label</comment>
+  </data>
+  <data name="Exact Amount" xml:space="preserve">
+    <value>Genaue Menge</value>
+    <comment>Exact Amount option</comment>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Menge</value>
+    <comment>Amount field label</comment>
+  </data>
+  <data name="Guild Settings" xml:space="preserve">
+    <value>Gilden-Einstellungen</value>
+    <comment>Guild Settings section header</comment>
+  </data>
+  <data name="Job Settings" xml:space="preserve">
+    <value>Berufs-Einstellungen</value>
+    <comment>Job Settings section header</comment>
+  </data>
+  <data name="Job Class" xml:space="preserve">
+    <value>Berufsklasse</value>
+    <comment>Job Class field label</comment>
+  </data>
+  <data name="Required Job Class" xml:space="preserve">
+    <value>Erforderliche Berufsklasse</value>
+    <comment>Required Job Class field label</comment>
+  </data>
+  <data name="Range" xml:space="preserve">
+    <value>Reichweite</value>
+    <comment>Range field label</comment>
+  </data>
+  <data name="Weapon Type" xml:space="preserve">
+    <value>Waffentyp</value>
+    <comment>Weapon Type field label</comment>
+  </data>
+  <data name="Cooldown (Sec.)" xml:space="preserve">
+    <value>Abklingzeit (Sek.)</value>
+    <comment>Cooldown field label</comment>
+  </data>
+  <data name="Target" xml:space="preserve">
+    <value>Ziel</value>
+    <comment>Target field label</comment>
+  </data>
+  <data name="Target Requirement" xml:space="preserve">
+    <value>Zielanforderung</value>
+    <comment>Target Requirement field label</comment>
+  </data>
+  <data name="Spell Region" xml:space="preserve">
+    <value>Zauberbereich</value>
+    <comment>Spell Region field label</comment>
+  </data>
+  <data name="Edit Item" xml:space="preserve">
+    <value>Gegenstand bearbeiten</value>
+    <comment>Edit Item dialog title</comment>
+  </data>
+  <data name="Item Information" xml:space="preserve">
+    <value>Gegenstands-Information</value>
+    <comment>Item Information section header</comment>
+  </data>
+  <data name="Probability (%)" xml:space="preserve">
+    <value>Wahrscheinlichkeit (%)</value>
+    <comment>Probability field label</comment>
+  </data>
+  <data name="Preview" xml:space="preserve">
+    <value>Vorschau</value>
+    <comment>Preview section header</comment>
+  </data>
+  <data name="Item Summary:" xml:space="preserve">
+    <value>Gegenstands-Zusammenfassung:</value>
+    <comment>Item Summary label</comment>
+  </data>
+  <data name="Add New Item" xml:space="preserve">
+    <value>Neuen Gegenstand hinzufügen</value>
+    <comment>Add New Item dialog title</comment>
+  </data>
+  <data name="Search Item" xml:space="preserve">
+    <value>Gegenstand suchen</value>
+    <comment>Search Item section header</comment>
+  </data>
+  <data name="Select Item (Full Item List)" xml:space="preserve">
+    <value>Gegenstand auswählen (Vollständige Gegenstandsliste)</value>
+    <comment>Select Item label</comment>
+  </data>
+  <data name="Selected Item" xml:space="preserve">
+    <value>Ausgewählter Gegenstand</value>
+    <comment>Selected Item section header</comment>
+  </data>
+  <data name="Item Configuration" xml:space="preserve">
+    <value>Gegenstands-Konfiguration</value>
+    <comment>Item Configuration section header</comment>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>Zusammenfassung</value>
+    <comment>Summary section header</comment>
+  </data>
+  <data name="Item: " xml:space="preserve">
+    <value>Gegenstand: </value>
+    <comment>Item label</comment>
+  </data>
+  <data name="Quantity: " xml:space="preserve">
+    <value>Menge: </value>
+    <comment>Quantity label</comment>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="File Name" xml:space="preserve">
+    <value>Dateiname</value>
+    <comment>File Name field label</comment>
+  </data>
+  <data name="Item Icon" xml:space="preserve">
+    <value>Gegenstands-Icon</value>
+    <comment>Item Icon field label</comment>
+  </data>
+  <data name="Tradeable" xml:space="preserve">
+    <value>Handelbar</value>
+    <comment>Tradeable field label</comment>
+  </data>
+  <data name="Shop-able" xml:space="preserve">
+    <value>Laden-fähig</value>
+    <comment>Shop-able field label</comment>
+  </data>
+  <data name="Inventory &amp; Stack" xml:space="preserve">
+    <value>Inventar &amp; Stapel</value>
+    <comment>Inventory &amp; Stack section header</comment>
+  </data>
+  <data name="Maximum stack size" xml:space="preserve">
+    <value>Maximale Stapelgröße</value>
+    <comment>Maximum stack size field label</comment>
+  </data>
+  <data name="Penya Price" xml:space="preserve">
+    <value>Penya-Preis</value>
+    <comment>Penya Price field label</comment>
+  </data>
+  <data name="Item durability" xml:space="preserve">
+    <value>Gegenstands-Haltbarkeit</value>
+    <comment>Item durability field label</comment>
+  </data>
+  <data name="Character Requirements" xml:space="preserve">
+    <value>Charakter-Anforderungen</value>
+    <comment>Character Requirements section header</comment>
+  </data>
+  <data name="Gender restriction (0 = both)" xml:space="preserve">
+    <value>Geschlechtsbeschränkung (0 = beide)</value>
+    <comment>Gender restriction field label</comment>
+  </data>
+  <data name="Required item level" xml:space="preserve">
+    <value>Benötigtes Gegenstands-Level</value>
+    <comment>Required item level field label</comment>
+  </data>
+  <data name="Level limit" xml:space="preserve">
+    <value>Level-Limit</value>
+    <comment>Level limit field label</comment>
+  </data>
+  <data name="Usable flag (1 = yes)" xml:space="preserve">
+    <value>Verwendbar-Flag (1 = ja)</value>
+    <comment>Usable flag field label</comment>
+  </data>
+  <data name="Minimum level limit" xml:space="preserve">
+    <value>Minimales Level-Limit</value>
+    <comment>Minimum level limit field label</comment>
+  </data>
+  <data name="Maximum level limit" xml:space="preserve">
+    <value>Maximales Level-Limit</value>
+    <comment>Maximum level limit field label</comment>
+  </data>
+  <data name="Item Kind 1" xml:space="preserve">
+    <value>Gegenstands-Art 1</value>
+    <comment>Item Kind 1 field label</comment>
+  </data>
+  <data name="Item Kind 2" xml:space="preserve">
+    <value>Gegenstands-Art 2</value>
+    <comment>Item Kind 2 field label</comment>
+  </data>
+  <data name="Item Kind 3" xml:space="preserve">
+    <value>Gegenstands-Art 3</value>
+    <comment>Item Kind 3 field label</comment>
+  </data>
+  <data name="Combat Stats &amp; Attributes" xml:space="preserve">
+    <value>Kampf-Statistiken &amp; Attribute</value>
+    <comment>Combat Stats &amp; Attributes section header</comment>
+  </data>
+  <data name="Minimum attack" xml:space="preserve">
+    <value>Minimaler Angriff</value>
+    <comment>Minimum attack field label</comment>
+  </data>
+  <data name="Maximum attack" xml:space="preserve">
+    <value>Maximaler Angriff</value>
+    <comment>Maximum attack field label</comment>
+  </data>
+  <data name="Parry chance" xml:space="preserve">
+    <value>Parier-Chance</value>
+    <comment>Parry chance field label</comment>
+  </data>
+  <data name="Block rate" xml:space="preserve">
+    <value>Block-Rate</value>
+    <comment>Block rate field label</comment>
+  </data>
+  <data name="Attack speed" xml:space="preserve">
+    <value>Angriffs-Geschwindigkeit</value>
+    <comment>Attack speed field label</comment>
+  </data>
+  <data name="Attack range" xml:space="preserve">
+    <value>Angriffs-Reichweite</value>
+    <comment>Attack range field label</comment>
+  </data>
+  <data name="Parts" xml:space="preserve">
+    <value>Teile</value>
+    <comment>Parts field label</comment>
+  </data>
+  <data name="Effect 1" xml:space="preserve">
+    <value>Effekt 1</value>
+    <comment>Effect 1 field label</comment>
+  </data>
+  <data name="Effect 2" xml:space="preserve">
+    <value>Effekt 2</value>
+    <comment>Effect 2 field label</comment>
+  </data>
+  <data name="Effect 3" xml:space="preserve">
+    <value>Effekt 3</value>
+    <comment>Effect 3 field label</comment>
+  </data>
+  <data name="Effect 4" xml:space="preserve">
+    <value>Effekt 4</value>
+    <comment>Effect 4 field label</comment>
+  </data>
+  <data name="Effect 5" xml:space="preserve">
+    <value>Effekt 5</value>
+    <comment>Effect 5 field label</comment>
+  </data>
+  <data name="Effect 6" xml:space="preserve">
+    <value>Effekt 6</value>
+    <comment>Effect 6 field label</comment>
+  </data>
+  <data name="Skill Triggers &amp; Activation" xml:space="preserve">
+    <value>Fähigkeits-Trigger &amp; Aktivierung</value>
+    <comment>Skill Triggers &amp; Activation section header</comment>
+  </data>
+  <data name="Active skill ID" xml:space="preserve">
+    <value>Aktive Fähigkeits-ID</value>
+    <comment>Active skill ID field label</comment>
+  </data>
+  <data name="Active skill level" xml:space="preserve">
+    <value>Aktives Fähigkeits-Level</value>
+    <comment>Active skill level field label</comment>
+  </data>
+  <data name="Active skill activation rate (%)" xml:space="preserve">
+    <value>Aktive Fähigkeits-Aktivierungsrate (%)</value>
+    <comment>Active skill activation rate field label</comment>
+  </data>
+  <data name="MP required to use" xml:space="preserve">
+    <value>Benötigtes MP zum Verwenden</value>
+    <comment>MP required to use field label</comment>
+  </data>
+  <data name="Required skills" xml:space="preserve">
+    <value>Benötigte Fähigkeiten</value>
+    <comment>Required skills field label</comment>
+  </data>
+  <data name="Required skill levels" xml:space="preserve">
+    <value>Benötigte Fähigkeits-Level</value>
+    <comment>Required skill levels field label</comment>
+  </data>
+  <data name="Preparation type" xml:space="preserve">
+    <value>Vorbereitungs-Typ</value>
+    <comment>Preparation type field label</comment>
+  </data>
+  <data name="Preparation duration" xml:space="preserve">
+    <value>Vorbereitungs-Dauer</value>
+    <comment>Preparation duration field label</comment>
+  </data>
+  <data name="Skill range" xml:space="preserve">
+    <value>Fähigkeits-Reichweite</value>
+    <comment>Skill range field label</comment>
+  </data>
+  <data name="Animation motions when used" xml:space="preserve">
+    <value>Animations-Bewegungen bei Verwendung</value>
+    <comment>Animation motions when used field label</comment>
+  </data>
+  <data name="Visual elemental effect" xml:space="preserve">
+    <value>Visueller Elementar-Effekt</value>
+    <comment>Visual elemental effect field label</comment>
+  </data>
+  <data name="Resistance &amp; Alignment" xml:space="preserve">
+    <value>Widerstand &amp; Ausrichtung</value>
+    <comment>Resistance &amp; Alignment section header</comment>
+  </data>
+  <data name="Electric resistance" xml:space="preserve">
+    <value>Elektrischer Widerstand</value>
+    <comment>Electric resistance field label</comment>
+  </data>
+  <data name="Fire resistance" xml:space="preserve">
+    <value>Feuer-Widerstand</value>
+    <comment>Fire resistance field label</comment>
+  </data>
+  <data name="Wind resistance" xml:space="preserve">
+    <value>Wind-Widerstand</value>
+    <comment>Wind resistance field label</comment>
+  </data>
+  <data name="Water resistance" xml:space="preserve">
+    <value>Wasser-Widerstand</value>
+    <comment>Water resistance field label</comment>
+  </data>
+  <data name="Earth resistance" xml:space="preserve">
+    <value>Erd-Widerstand</value>
+    <comment>Earth resistance field label</comment>
+  </data>
+  <data name="Karma/alignment value" xml:space="preserve">
+    <value>Karma/Ausrichtungs-Wert</value>
+    <comment>Karma/alignment value field label</comment>
+  </data>
+  <data name="Crafting &amp; Enhancement" xml:space="preserve">
+    <value>Handwerk &amp; Verbesserung</value>
+    <comment>Crafting &amp; Enhancement section header</comment>
+  </data>
+  <data name="Smelting level" xml:space="preserve">
+    <value>Schmelz-Level</value>
+    <comment>Smelting level field label</comment>
+  </data>
+  <data name="Attribute smelting" xml:space="preserve">
+    <value>Attribut-Schmelzung</value>
+    <comment>Attribute smelting field label</comment>
+  </data>
+  <data name="Gem smelting" xml:space="preserve">
+    <value>Edelstein-Schmelzung</value>
+    <comment>Gem smelting field label</comment>
+  </data>
+  <data name="Number of piercing slots" xml:space="preserve">
+    <value>Anzahl der Durchbohrungs-Slots</value>
+    <comment>Number of piercing slots field label</comment>
+  </data>
+  <data name="Upgrade flag" xml:space="preserve">
+    <value>Upgrade-Flag</value>
+    <comment>Upgrade flag field label</comment>
+  </data>
+  <data name="Flags &amp; Conditions" xml:space="preserve">
+    <value>Flags &amp; Bedingungen</value>
+    <comment>Flags &amp; Conditions section header</comment>
+  </data>
+  <data name="Enable item logging" xml:space="preserve">
+    <value>Gegenstands-Protokollierung aktivieren</value>
+    <comment>Enable item logging field label</comment>
+  </data>
+  <data name="Charged item flag" xml:space="preserve">
+    <value>Geladener Gegenstands-Flag</value>
+    <comment>Charged item flag field label</comment>
+  </data>
+  <data name="Bind reset allowed" xml:space="preserve">
+    <value>Bind-Reset erlaubt</value>
+    <comment>Bind reset allowed field label</comment>
+  </data>
+  <data name="Time-limited item" xml:space="preserve">
+    <value>Zeitlich begrenzter Gegenstand</value>
+    <comment>Time-limited item field label</comment>
+  </data>
+  <data name="Blinkwing" xml:space="preserve">
+    <value>Blinkwing</value>
+    <comment>Blinkwing section header</comment>
+  </data>
+  <data name="Required Level" xml:space="preserve">
+    <value>Benötigtes Level</value>
+    <comment>Required Level field label</comment>
+  </data>
+  <data name="Teleport to the Nearest town" xml:space="preserve">
+    <value>Teleport zum nächsten Dorf</value>
+    <comment>Teleport to the Nearest town field label</comment>
+  </data>
+  <data name="Position (X, Y, Z)" xml:space="preserve">
+    <value>Position (X, Y, Z)</value>
+    <comment>Position field label</comment>
+  </data>
+  <data name="X" xml:space="preserve">
+    <value>X</value>
+    <comment>X coordinate label</comment>
+  </data>
+  <data name="Y" xml:space="preserve">
+    <value>Y</value>
+    <comment>Y coordinate label</comment>
+  </data>
+  <data name="Z" xml:space="preserve">
+    <value>Z</value>
+    <comment>Z coordinate label</comment>
+  </data>
+  <data name="Angle" xml:space="preserve">
+    <value>Winkel</value>
+    <comment>Angle field label</comment>
+  </data>
+  <data name="Chaotic spawn key" xml:space="preserve">
+    <value>Chaotischer Spawn-Schlüssel</value>
+    <comment>Chaotic spawn key field label</comment>
+  </data>
+  <data name="Misc" xml:space="preserve">
+    <value>Sonstiges</value>
+    <comment>Misc section header</comment>
+  </data>
+  <data name="Casting time" xml:space="preserve">
+    <value>Zauber-Zeit</value>
+    <comment>Casting time field label</comment>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Zeit</value>
+    <comment>Time field label</comment>
+  </data>
+  <data name="min" xml:space="preserve">
+    <value>min</value>
+    <comment>Minutes abbreviation</comment>
+  </data>
+  <data name="sec" xml:space="preserve">
+    <value>sek</value>
+    <comment>Seconds abbreviation</comment>
+  </data>
+  <data name="SFX" xml:space="preserve">
+    <value>SFX</value>
+    <comment>SFX field label</comment>
+  </data>
+  <data name="Attack Sound" xml:space="preserve">
+    <value>Angriffs-Sound</value>
+    <comment>Attack Sound field label</comment>
+  </data>
+  <data name="Critical Attack Sound" xml:space="preserve">
+    <value>Kritischer Angriffs-Sound</value>
+    <comment>Critical Attack Sound field label</comment>
+  </data>
+  <data name="Filter Sections" xml:space="preserve">
+    <value>Bereiche filtern</value>
+  </data>
+  <data name="Filter Fields" xml:space="preserve">
+    <value>Felder filtern</value>
+  </data>
+  <data name="Item ID" xml:space="preserve">
+    <value>Gegenstands-ID</value>
+    <comment>Item ID field label</comment>
+  </data>
+  <data name="T" xml:space="preserve">
+    <value>T</value>
+    <comment>T field label</comment>
+  </data>
+  <data name="App theme" xml:space="preserve">
+    <value>App-Design</value>
+    <comment>App theme section header</comment>
+  </data>
+  <data name="Select which app theme to display" xml:space="preserve">
+    <value>Wählen Sie das anzuzeigende App-Design</value>
+    <comment>App theme description</comment>
+  </data>
+  <data name="Application language" xml:space="preserve">
+    <value>Anwendungs-Sprache</value>
+    <comment>Application language section header</comment>
+  </data>
+  <data name="Choose your preferred language" xml:space="preserve">
+    <value>Wählen Sie Ihre bevorzugte Sprache</value>
+    <comment>Application language description</comment>
+  </data>
+  <data name="Auto-save interval" xml:space="preserve">
+    <value>Auto-Speicher-Intervall</value>
+    <comment>Auto-save interval section header</comment>
+  </data>
+  <data name="Set the time interval for automatic saving" xml:space="preserve">
+    <value>Legen Sie das Zeitintervall für automatisches Speichern fest</value>
+    <comment>Auto-save interval description</comment>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Hell</value>
+    <comment>Light theme option</comment>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Dunkel</value>
+    <comment>Dark theme option</comment>
+  </data>
+  <data name="English (Default)" xml:space="preserve">
+    <value>Englisch (Standard)</value>
+    <comment>English language option</comment>
+  </data>
+  <data name="German" xml:space="preserve">
+    <value>Deutsch</value>
+    <comment>German language option</comment>
+  </data>
+  <data name="French" xml:space="preserve">
+    <value>Französisch</value>
+    <comment>French language option</comment>
+  </data>
+  <data name="5 minutes" xml:space="preserve">
+    <value>5 Minuten</value>
+    <comment>5 minutes option</comment>
+  </data>
+  <data name="15 minutes" xml:space="preserve">
+    <value>15 Minuten</value>
+    <comment>15 minutes option</comment>
+  </data>
+  <data name="30 minutes" xml:space="preserve">
+    <value>30 Minuten</value>
+    <comment>30 minutes option</comment>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Benutzerdefiniert</value>
+    <comment>Custom option</comment>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Schließen</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
+  <data name="Item that should be added in the giftbox" xml:space="preserve">
+    <value>Gegenstand, der in der Geschenkbox hinzugefügt werden soll</value>
+    <comment>Tooltip for item info icon in giftbox dialog</comment>
+  </data>
+  <data name="Quantity of the item" xml:space="preserve">
+    <value>Menge des Gegenstands</value>
+    <comment>Tooltip for quantity info icon in giftbox dialog</comment>
+  </data>
+  <data name="Probability percentage" xml:space="preserve">
+    <value>Wahrscheinlichkeitsprozentsatz</value>
+    <comment>Tooltip for probability info icon in giftbox dialog</comment>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Entfernen</value>
+    <comment>Remove button tooltip</comment>
+  </data>
+  <data name="Search items..." xml:space="preserve">
+    <value>Gegenstände suchen...</value>
+    <comment>Search items placeholder text</comment>
+  </data>
+  <data name="Basic Information" xml:space="preserve">
+    <value>Grundinformationen</value>
+  </data>
+  <data name="Grade (Class Stage)" xml:space="preserve">
+    <value>Grad (Klassenstufe)</value>
+    <comment>Grade (Class Stage) field label</comment>
+  </data>
+  <data name="1st Grade" xml:space="preserve">
+    <value>1. Grad</value>
+    <comment>1st Grade option</comment>
+  </data>
+  <data name="2nd Grade" xml:space="preserve">
+    <value>2. Grad</value>
+    <comment>2nd Grade option</comment>
+  </data>
+  <data name="3rd Grade" xml:space="preserve">
+    <value>3. Grad</value>
+    <comment>3rd Grade option</comment>
+  </data>
+  <data name="Job (Required Class)" xml:space="preserve">
+    <value>Beruf (Erforderliche Klasse)</value>
+    <comment>Job (Required Class) field label</comment>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Alle</value>
+    <comment>All option</comment>
+  </data>
+  <data name="Warrior" xml:space="preserve">
+    <value>Krieger</value>
+    <comment>Warrior option</comment>
+  </data>
+  <data name="Magician" xml:space="preserve">
+    <value>Magier</value>
+    <comment>Magician option</comment>
+  </data>
+  <data name="Archer" xml:space="preserve">
+    <value>Bogenschütze</value>
+    <comment>Archer option</comment>
+  </data>
+  <data name="Acrobat" xml:space="preserve">
+    <value>Akrobat</value>
+    <comment>Acrobat option</comment>
+  </data>
+  <data name="Secondary Type" xml:space="preserve">
+    <value>Sekundärer Typ</value>
+    <comment>Secondary Type field label</comment>
+  </data>
+  <data name="Passive" xml:space="preserve">
+    <value>Passiv</value>
+    <comment>Passive option</comment>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Aktiv</value>
+    <comment>Active option</comment>
+  </data>
+  <data name="Buff" xml:space="preserve">
+    <value>Verstärkung</value>
+    <comment>Buff option</comment>
+  </data>
+  <data name="Debuff" xml:space="preserve">
+    <value>Schwächung</value>
+    <comment>Debuff option</comment>
+  </data>
+  <data name="Maximum Level" xml:space="preserve">
+    <value>Maximales Level</value>
+    <comment>Maximum Level field label</comment>
+  </data>
+  <data name="Combat Details" xml:space="preserve">
+    <value>Kampfdetails</value>
+    <comment>Combat Details section header</comment>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Keine</value>
+    <comment>None option</comment>
+  </data>
+  <data name="Sword" xml:space="preserve">
+    <value>Schwert</value>
+    <comment>Sword option</comment>
+  </data>
+  <data name="Axe" xml:space="preserve">
+    <value>Axt</value>
+    <comment>Axe option</comment>
+  </data>
+  <data name="Bow" xml:space="preserve">
+    <value>Bogen</value>
+    <comment>Bow option</comment>
+  </data>
+  <data name="Staff" xml:space="preserve">
+    <value>Stab</value>
+    <comment>Staff option</comment>
+  </data>
+  <data name="Normal" xml:space="preserve">
+    <value>Normal</value>
+    <comment>Normal option</comment>
+  </data>
+  <data name="AOE" xml:space="preserve">
+    <value>Fläche</value>
+    <comment>AOE option</comment>
+  </data>
+  <data name="Heal" xml:space="preserve">
+    <value>Heilung</value>
+    <comment>Heal option</comment>
+  </data>
+  <data name="Self" xml:space="preserve">
+    <value>Selbst</value>
+    <comment>Self option</comment>
+  </data>
+  <data name="Single Target" xml:space="preserve">
+    <value>Einzelziel</value>
+    <comment>Single Target option</comment>
+  </data>
+  <data name="Party" xml:space="preserve">
+    <value>Gruppe</value>
+    <comment>Party option</comment>
+  </data>
+  <data name="Enemy Party" xml:space="preserve">
+    <value>Feindliche Gruppe</value>
+    <comment>Enemy Party option</comment>
+  </data>
+  <data name="Anytime" xml:space="preserve">
+    <value>Jederzeit</value>
+    <comment>Anytime option</comment>
+  </data>
+  <data name="In Combat" xml:space="preserve">
+    <value>Im Kampf</value>
+    <comment>In Combat option</comment>
+  </data>
+  <data name="Out of Combat" xml:space="preserve">
+    <value>Außerhalb des Kampfes</value>
+    <comment>Out of Combat option</comment>
+  </data>
+  <data name="HP below 50%" xml:space="preserve">
+    <value>LP unter 50%</value>
+    <comment>HP below 50% option</comment>
+  </data>
+  <data name="HP below 30%" xml:space="preserve">
+    <value>LP unter 30%</value>
+    <comment>HP below 30% option</comment>
+  </data>
+  <data name="AOE Target" xml:space="preserve">
+    <value>Flächenziel</value>
+    <comment>AOE Target option</comment>
+  </data>
+  <data name="AII_ Assignment" xml:space="preserve">
+    <value>AII_ Zuordnung</value>
+    <comment>AII_ Assignment section title</comment>
+  </data>
+  <data name="Available Resources" xml:space="preserve">
+    <value>Verfügbare Ressourcen</value>
+    <comment>Available Resources list header</comment>
+  </data>
+  <data name="Assigned Resources" xml:space="preserve">
+    <value>Zugewiesene Ressourcen</value>
+    <comment>Assigned Resources list header</comment>
+  </data>
+  <data name="eTools Ultimate - Update Checker" xml:space="preserve">
+    <value>eTools Ultimate - Update Checker</value>
+    <comment>Update window title</comment>
+  </data>
+  <data name="Software Update Checker" xml:space="preserve">
+    <value>Software Update Checker</value>
+    <comment>Update window main title</comment>
+  </data>
+  <data name="Check for available updates for eTools Ultimate" xml:space="preserve">
+    <value>Überprüfen Sie auf verfügbare Updates für eTools Ultimate</value>
+    <comment>Update window subtitle</comment>
+  </data>
+  <data name="Current Version" xml:space="preserve">
+    <value>Aktuelle Version</value>
+    <comment>Current version label</comment>
+  </data>
+  <data name="Click the button below to check for updates. The application will automatically download and install the latest version from GitHub." xml:space="preserve">
+    <value>Klicken Sie auf den Button unten, um nach Updates zu suchen. Die Anwendung wird automatisch die neueste Version von GitHub herunterladen und installieren.</value>
+    <comment>Update check description</comment>
+  </data>
+  <data name="Checking for updates..." xml:space="preserve">
+    <value>Suche nach Updates...</value>
+    <comment>Loading state text</comment>
+  </data>
+  <data name="🎉 New Update Available!" xml:space="preserve">
+    <value>🎉 Neues Update verfügbar!</value>
+    <comment>Update available title</comment>
+  </data>
+  <data name="Version {0} available" xml:space="preserve">
+    <value>Version {0} verfügbar</value>
+    <comment>New version available text</comment>
+  </data>
+  <data name="This update contains new features and improvements." xml:space="preserve">
+    <value>Dieses Update enthält neue Features und Verbesserungen.</value>
+    <comment>Default update description</comment>
+  </data>
+  <data name="Install Update Now" xml:space="preserve">
+    <value>Update jetzt installieren</value>
+    <comment>Install update button text</comment>
+  </data>
+  <data name="Error checking for updates" xml:space="preserve">
+    <value>Fehler beim Überprüfen der Updates</value>
+    <comment>Error message title</comment>
+  </data>
+  <data name="eTools Ultimate is automatically updated via GitHub" xml:space="preserve">
+    <value>eTools Ultimate wird automatisch über GitHub aktualisiert</value>
+    <comment>Footer info text</comment>
+  </data>
+  <data name="© 2025 eTools Ultimate. All rights reserved." xml:space="preserve">
+    <value>© 2025 eTools Ultimate. Alle Rechte vorbehalten.</value>
+    <comment>Copyright text</comment>
+  </data>
+  <data name="Error displaying update information: {0}" xml:space="preserve">
+    <value>Fehler beim Anzeigen der Update-Informationen: {0}</value>
+    <comment>Error message for update display</comment>
+  </data>
+  <data name="Navigate to the drop event page." xml:space="preserve">
+    <value>Navigieren Sie zur Drop Event Seite.</value>
+  </data>
+  <data name="File not found" xml:space="preserve">
+    <value>Datei nicht gefunden</value>
+    <comment>Error dialog title for missing file</comment>
+  </data>
+  <data name="A required file could not be loaded" xml:space="preserve">
+    <value>Eine erforderliche Datei konnte nicht geladen werden</value>
+    <comment>Error dialog subtitle for missing file</comment>
+  </data>
+  <data name="What happened?" xml:space="preserve">
+    <value>Was ist passiert?</value>
+    <comment>Error dialog section header</comment>
+  </data>
+  <data name="The application could not find an important file. This can happen when:" xml:space="preserve">
+    <value>Die Anwendung konnte eine wichtige Datei nicht finden. Dies kann passieren, wenn:</value>
+    <comment>Error dialog explanation text</comment>
+  </data>
+  <data name="• The file was moved or deleted" xml:space="preserve">
+    <value>• Die Datei wurde verschoben oder gelöscht</value>
+    <comment>Error dialog possible cause 1</comment>
+  </data>
+  <data name="• The path is incorrect" xml:space="preserve">
+    <value>• Der Pfad ist nicht korrekt</value>
+    <comment>Error dialog possible cause 2</comment>
+  </data>
+  <data name="Missing file:" xml:space="preserve">
+    <value>Fehlende Datei:</value>
+    <comment>Error dialog missing file label</comment>
+  </data>
+  <data name="Open Folder" xml:space="preserve">
+    <value>Ordner öffnen</value>
+    <comment>Error dialog button to open folder</comment>
+  </data>
+  <data name="Exit Application" xml:space="preserve">
+    <value>Anwendung beenden</value>
+    <comment>Error dialog button to close application</comment>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+    <comment>Cancel button text</comment>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+    <comment>OK button text</comment>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
+    <comment>Yes button text</comment>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nein</value>
+    <comment>No button text</comment>
+  </data>
+  <data name="Characters" xml:space="preserve">
+    <value>Charaktere</value>
+    <comment>Characters navigation card title</comment>
+  </data>
+  <data name="Navigate to the characters page." xml:space="preserve">
+    <value>Navigiere zur Charaktere-Seite.</value>
+    <comment>Characters navigation card description</comment>
+  </data>
+  <data name="Navigate to the world editor." xml:space="preserve">
+    <value>Navigiere zum Welt-Editor.</value>
+    <comment>World navigation card description</comment>
+  </data>
+  <data name="eTools Ultimate - Update Available" xml:space="preserve">
+    <value>eTools Ultimate - Update verfügbar</value>
+  </data>
+  <data name="Update Available" xml:space="preserve">
+    <value>Update verfügbar</value>
+  </data>
+  <data name="A new version of eTools Ultimate is ready to install" xml:space="preserve">
+    <value>Eine neue Version von eTools Ultimate ist bereit zur Installation</value>
+  </data>
+  <data name="Install Now" xml:space="preserve">
+    <value>Jetzt installieren</value>
+  </data>
+  <data name="Later" xml:space="preserve">
+    <value>Später</value>
+  </data>
+  <data name="New Version Available!" xml:space="preserve">
+    <value>Neue Version verfügbar!</value>
+    <comment>AvailableUpdateWindow main heading</comment>
+  </data>
+  <data name="Version Information" xml:space="preserve">
+    <value>Versionsinformationen</value>
+    <comment>AvailableUpdateWindow version section title</comment>
+  </data>
+  <data name="Current:" xml:space="preserve">
+    <value>Aktuell:</value>
+    <comment>AvailableUpdateWindow current version label</comment>
+  </data>
+  <data name="New:" xml:space="preserve">
+    <value>Neu:</value>
+    <comment>AvailableUpdateWindow new version label</comment>
+  </data>
+  <data name="This update contains new features, improvements, and bug fixes." xml:space="preserve">
+    <value>Dieses Update enthält neue Funktionen, Verbesserungen und Fehlerbehebungen.</value>
+    <comment>AvailableUpdateWindow update description</comment>
+  </data>
+  <data name="🎉 Ready to Update!" xml:space="preserve">
+    <value>🎉 Bereit zum Aktualisieren!</value>
+    <comment>AvailableUpdateWindow update action section title</comment>
+  </data>
+  <data name="Update Later" xml:space="preserve">
+    <value>Später aktualisieren</value>
+    <comment>AvailableUpdateWindow later button text</comment>
+  </data>
+  <data name="Installing update..." xml:space="preserve">
+    <value>Update wird installiert...</value>
+  </data>
+  <data name="Error installing update" xml:space="preserve">
+    <value>Fehler beim Installieren des Updates</value>
+  </data>
+  <data name="Main Settings" xml:space="preserve">
+    <value>Haupteinstellungen</value>
+    <comment>Main Settings section header</comment>
+  </data>
+  <data name="Resource folder" xml:space="preserve">
+    <value>Ressourcen-Ordner</value>
+    <comment>Resource folder field label</comment>
+  </data>
+  <data name="Client folder" xml:space="preserve">
+    <value>Client-Ordner</value>
+    <comment>Client folder field label</comment>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+    <comment>Version field label</comment>
+  </data>
+  <data name="Advanced settings" xml:space="preserve">
+    <value>Erweiterte Einstellungen</value>
+    <comment>Advanced settings button text</comment>
+  </data>
+  <data name="Texture folder" xml:space="preserve">
+    <value>Textur-Ordner</value>
+    <comment>Texture folder field label</comment>
+  </data>
+  <data name="Icons folder" xml:space="preserve">
+    <value>Icon-Ordner</value>
+    <comment>Icons folder field label</comment>
+  </data>
+  <data name="Sounds folder" xml:space="preserve">
+    <value>Sound-Ordner</value>
+    <comment>Sounds folder field label</comment>
+  </data>
+  <data name="Sounds config file" xml:space="preserve">
+    <value>Sound-Konfigurationsdatei</value>
+    <comment>Sounds config file field label</comment>
+  </data>
+  <data name="Spec_Item file" xml:space="preserve">
+    <value>Spec_Item-Datei</value>
+    <comment>Spec_Item file field label</comment>
+  </data>
+  <data name="PropItem.txt file" xml:space="preserve">
+    <value>PropItem.txt-Datei</value>
+    <comment>PropItem.txt file field label</comment>
+  </data>
+  <data name="Item folder" xml:space="preserve">
+    <value>Gegenstands-Ordner</value>
+    <comment>Item folder field label</comment>
+  </data>
+  <data name="Mover" xml:space="preserve">
+    <value>Beweger</value>
+    <comment>Mover section header</comment>
+  </data>
+  <data name="PropMover file" xml:space="preserve">
+    <value>PropMover-Datei</value>
+    <comment>PropMover file field label</comment>
+  </data>
+  <data name="PropMover.txt file" xml:space="preserve">
+    <value>PropMover.txt-Datei</value>
+    <comment>PropMover.txt file field label</comment>
+  </data>
+  <data name="PropMoverEx file" xml:space="preserve">
+    <value>PropMoverEx-Datei</value>
+    <comment>PropMoverEx file field label</comment>
+  </data>
+  <data name="Mover types configuration" xml:space="preserve">
+    <value>Beweger-Typen-Konfiguration</value>
+    <comment>Mover types configuration section header</comment>
+  </data>
+  <data name="Mover types" xml:space="preserve">
+    <value>Beweger-Typen</value>
+    <comment>Mover types list header</comment>
+  </data>
+  <data name="Assigned AI" xml:space="preserve">
+    <value>Zugewiesene KI</value>
+    <comment>Assigned AI list header</comment>
+  </data>
+  <data name="Skill" xml:space="preserve">
+    <value>Fähigkeit</value>
+    <comment>Skill section header</comment>
+  </data>
+  <data name="PropSkill file" xml:space="preserve">
+    <value>PropSkill-Datei</value>
+    <comment>PropSkill file field label</comment>
+  </data>
+  <data name="PropSkill.txt file" xml:space="preserve">
+    <value>PropSkill.txt-Datei</value>
+    <comment>PropSkill.txt file field label</comment>
+  </data>
+  <data name="Icon folder" xml:space="preserve">
+    <value>Icon-Ordner</value>
+    <comment>Icon folder field label</comment>
+  </data>
+  <data name="High Contrast" xml:space="preserve">
+    <value>Hoher Kontrast</value>
+    <comment>High Contrast theme option</comment>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Englisch</value>
+    <comment>English language option</comment>
+  </data>
+  <data name="Windows 10/11" xml:space="preserve">
+    <value>Windows 10/11</value>
+    <comment>Windows 10/11 option</comment>
+  </data>
+  <data name="Memory:" xml:space="preserve">
+    <value>Arbeitsspeicher:</value>
+    <comment>Memory field label</comment>
+  </data>
+  <data name="4 GB RAM minimum, 8 GB recommended" xml:space="preserve">
+    <value>4 GB RAM mindestens, 8 GB empfohlen</value>
+    <comment>Memory requirement</comment>
+  </data>
+  <data name="Disk Space:" xml:space="preserve">
+    <value>Festplattenspeicher:</value>
+    <comment>Disk Space field label</comment>
+  </data>
+  <data name="64 Bit" xml:space="preserve">
+    <value>64 Bit</value>
+    <comment>64 Bit option</comment>
+  </data>
+  <data name="Retry" xml:space="preserve">
+    <value>Wiederholen</value>
+  </data>
+  <data name="Name of the mover" xml:space="preserve">
+    <value>Name des Movers</value>
+  </data>
+  <data name="Type of mover" xml:space="preserve">
+    <value>Typ des Movers</value>
+  </data>
+  <data name="Penya value" xml:space="preserve">
+    <value>Penya-Wert</value>
+  </data>
+  <data name="Duration value" xml:space="preserve">
+    <value>Dauer-Wert</value>
+  </data>
+  <data name="AI behavior type" xml:space="preserve">
+    <value>KI-Verhaltenstyp</value>
+  </data>
+  <data name="Aggression level" xml:space="preserve">
+    <value>Aggressionslevel</value>
+  </data>
+  <data name="Rank of the mover" xml:space="preserve">
+    <value>Rang des Movers</value>
+  </data>
+  <data name="Can the mover be killed" xml:space="preserve">
+    <value>Kann der Mover getötet werden</value>
+  </data>
+  <data name="Level of the mover" xml:space="preserve">
+    <value>Level des Movers</value>
+  </data>
+  <data name="Experience value gained" xml:space="preserve">
+    <value>Erhaltene Erfahrungspunkte</value>
+  </data>
+  <data name="Maximum health points" xml:space="preserve">
+    <value>Maximale Lebenspunkte</value>
+  </data>
+  <data name="Maximum mana points" xml:space="preserve">
+    <value>Maximale Manapunkte</value>
+  </data>
+  <data name="Movement and action range" xml:space="preserve">
+    <value>Bewegungs- und Aktionsradius</value>
+  </data>
+  <data name="Minimum attack damage" xml:space="preserve">
+    <value>Minimaler Angriffsschaden</value>
+  </data>
+  <data name="Maximum attack damage" xml:space="preserve">
+    <value>Maximaler Angriffsschaden</value>
+  </data>
+  <data name="Strength stat" xml:space="preserve">
+    <value>Stärke-Statistik</value>
+  </data>
+  <data name="Stamina stat" xml:space="preserve">
+    <value>Ausdauer-Statistik</value>
+  </data>
+  <data name="Dexterity stat" xml:space="preserve">
+    <value>Geschicklichkeits-Statistik</value>
+  </data>
+  <data name="Intelligence stat" xml:space="preserve">
+    <value>Intelligenz-Statistik</value>
+  </data>
+  <data name="Chance to hit target" xml:space="preserve">
+    <value>Trefferchance</value>
+  </data>
+  <data name="Chance to evade attacks" xml:space="preserve">
+    <value>Ausweichchance</value>
+  </data>
+  <data name="Delay between attacks" xml:space="preserve">
+    <value>Verzögerung zwischen Angriffen</value>
+  </data>
+  <data name="Base armor value" xml:space="preserve">
+    <value>Basis-Rüstungswert</value>
+  </data>
+  <data name="Abrasion resistance" xml:space="preserve">
+    <value>Abriebwiderstand</value>
+  </data>
+  <data name="Physical damage resistance" xml:space="preserve">
+    <value>Physischer Schadenswiderstand</value>
+  </data>
+  <data name="General magic resistance" xml:space="preserve">
+    <value>Allgemeiner Magiewiderstand</value>
+  </data>
+  <data name="Resistance to electricity damage" xml:space="preserve">
+    <value>Widerstand gegen Elektrizitätsschaden</value>
+  </data>
+  <data name="Resistance to fire damage" xml:space="preserve">
+    <value>Widerstand gegen Feuerschaden</value>
+  </data>
+  <data name="Resistance to wind damage" xml:space="preserve">
+    <value>Widerstand gegen Windschaden</value>
+  </data>
+  <data name="Resistance to water damage" xml:space="preserve">
+    <value>Widerstand gegen Wasserschaden</value>
+  </data>
+  <data name="Resistance to earth damage" xml:space="preserve">
+    <value>Widerstand gegen Erdschaden</value>
+  </data>
+  <data name="Type of elemental damage" xml:space="preserve">
+    <value>Art des Elementarschadens</value>
+  </data>
+  <data name="Elemental attack value" xml:space="preserve">
+    <value>Elementar-Angriffswert</value>
+  </data>
+  <data name="Sound played when an SFX hit the mover" xml:space="preserve">
+    <value>Sound der abgespielt wird wenn ein SFX den Mover trifft</value>
+  </data>
+  <data name="Sound played when the mover is clicked" xml:space="preserve">
+    <value>Sound der abgespielt wird wenn der Mover angeklickt wird</value>
+  </data>
+  <data name="Key identifier for the motion" xml:space="preserve">
+    <value>Schlüssel-Identifikator für die Bewegung</value>
+  </data>
+  <data name="File path for the motion" xml:space="preserve">
+    <value>Dateipfad für die Bewegung</value>
+  </data>
+  <data name="Model file path" xml:space="preserve">
+    <value>Modell-Dateipfad</value>
+  </data>
+  <data name="Model scale factor" xml:space="preserve">
+    <value>Modell-Skalierungsfaktor</value>
+  </data>
+  <data name="Texture" xml:space="preserve">
+    <value>Textur</value>
+  </data>
+  <data name="Play selected motion" xml:space="preserve">
+    <value>Ausgewählte Bewegung abspielen</value>
+  </data>
+  <data name="Stop current motion" xml:space="preserve">
+    <value>Aktuelle Bewegung stoppen</value>
+  </data>
+  <data name="Reference Model" xml:space="preserve">
+    <value>Referenzmodell</value>
+  </data>
+  <data name="Add Motion" xml:space="preserve">
+    <value>Bewegung hinzufügen</value>
+  </data>
+  <data name="Delete Motion" xml:space="preserve">
+    <value>Bewegung löschen</value>
+  </data>
+  <data name="Generate Motions" xml:space="preserve">
+    <value>Bewegungen generieren</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>Modell</value>
+  </data>
+  <data name="No Model Available" xml:space="preserve">
+    <value>Kein Modell verfügbar</value>
+  </data>
+  <data name="Select Reference Model" xml:space="preserve">
+    <value>Referenzmodell auswählen</value>
+  </data>
+  <data name="Please select a reference model:" xml:space="preserve">
+    <value>Bitte wählen Sie ein Referenzmodell aus:</value>
+  </data>
+  <data name="Search models..." xml:space="preserve">
+    <value>Modelle suchen...</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Akzeptieren</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Stats" xml:space="preserve">
+    <value>Statistiken</value>
+  </data>
+  <data name="Combat / Battle" xml:space="preserve">
+    <value>Kampf / Schlacht</value>
+  </data>
+  <data name="Defensive Stats &amp; Resistances" xml:space="preserve">
+    <value>Verteidigungsstatistiken &amp; Widerstände</value>
+  </data>
+  <data name="Elementar &amp; Damage Types" xml:space="preserve">
+    <value>Elementar &amp; Schadenstypen</value>
+  </data>
+  <data name="Model / Mobility / Movement" xml:space="preserve">
+    <value>Modell / Mobilität / Bewegung</value>
+  </data>
+  <data name="ID Key" xml:space="preserve">
+    <value>ID-Schlüssel</value>
+  </data>
+  <data name="Killable" xml:space="preserve">
+    <value>Tötbar</value>
+  </data>
+  <data name="Penya" xml:space="preserve">
+    <value>Penya</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Dauer</value>
+  </data>
+  <data name="EXP" xml:space="preserve">
+    <value>EXP</value>
+  </data>
+  <data name="STR" xml:space="preserve">
+    <value>STR</value>
+  </data>
+  <data name="STA" xml:space="preserve">
+    <value>STA</value>
+  </data>
+  <data name="DEX" xml:space="preserve">
+    <value>DEX</value>
+  </data>
+  <data name="INT" xml:space="preserve">
+    <value>INT</value>
+  </data>
+  <data name="Hit Rate" xml:space="preserve">
+    <value>Trefferrate</value>
+  </data>
+  <data name="Evasion Rate" xml:space="preserve">
+    <value>Ausweichrate</value>
+  </data>
+  <data name="Health Points" xml:space="preserve">
+    <value>Lebenspunkte</value>
+  </data>
+  <data name="Mana Points" xml:space="preserve">
+    <value>Manapunkte</value>
+  </data>
+  <data name="Artificial Intelligence (AI)" xml:space="preserve">
+    <value>Künstliche Intelligenz (KI)</value>
+  </data>
+  <data name="Belligerence" xml:space="preserve">
+    <value>Aggressivität</value>
+  </data>
+  <data name="Attack min." xml:space="preserve">
+    <value>Angriff min.</value>
+  </data>
+  <data name="Attack max." xml:space="preserve">
+    <value>Angriff max.</value>
+  </data>
+  <data name="Attack Animation 1" xml:space="preserve">
+    <value>Angriffsanimation 1</value>
+  </data>
+  <data name="Attack Animation 2" xml:space="preserve">
+    <value>Angriffsanimation 2</value>
+  </data>
+  <data name="Attack Animation 3" xml:space="preserve">
+    <value>Angriffsanimation 3</value>
+  </data>
+  <data name="Attack Delay" xml:space="preserve">
+    <value>Angriffsverzögerung</value>
+  </data>
+  <data name="Armor" xml:space="preserve">
+    <value>Rüstung</value>
+  </data>
+  <data name="Magic Resistance" xml:space="preserve">
+    <value>Magiewiderstand</value>
+  </data>
+  <data name="Resistance Electricity" xml:space="preserve">
+    <value>Widerstand Elektrizität</value>
+  </data>
+  <data name="Resistance Fire" xml:space="preserve">
+    <value>Widerstand Feuer</value>
+  </data>
+  <data name="Resistance Wind" xml:space="preserve">
+    <value>Widerstand Wind</value>
+  </data>
+  <data name="Resistance Water" xml:space="preserve">
+    <value>Widerstand Wasser</value>
+  </data>
+  <data name="Resistance Earth" xml:space="preserve">
+    <value>Widerstand Erde</value>
+  </data>
+  <data name="Element Type" xml:space="preserve">
+    <value>Elementtyp</value>
+  </data>
+  <data name="Element Attack" xml:space="preserve">
+    <value>Elementar-Angriff</value>
+  </data>
+  <data name="Correction Value" xml:space="preserve">
+    <value>Korrekturwert</value>
+  </data>
+  <data name="Application language changed" xml:space="preserve">
+    <value>Anwendungssprache geändert</value>
+  </data>
+  <data name="The application needs to be restarted for the language change to take effect." xml:space="preserve">
+    <value>Die Anwendung muss neu gestartet werden, damit die Sprachänderung wirksam wird.</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Neu starten</value>
+  </data>
+  <data name="Restart later" xml:space="preserve">
+    <value>Später neu starten</value>
+  </data>
+  <data name="Settings changed" xml:space="preserve">
+    <value>Einstellungen geändert</value>
+  </data>
+  <data name="Your settings have been updated. Please restart the application for the changes to take effect." xml:space="preserve">
+    <value>Ihre Einstellungen wurden aktualisiert. Bitte starten Sie die Anwendung neu, damit die Änderungen wirksam werden.</value>
+  </data>
+  <data name="eTools Ultimate is a powerful editor for editing Flyff resource files." xml:space="preserve">
+    <value>eTools Ultimate ist ein leistungsstarker Editor zum Bearbeiten von Flyff-Ressourcendateien.</value>
+  </data>
+  <data name="Motion Editor" xml:space="preserve">
+    <value>Bewegungs-Editor</value>
+  </data>
+  <data name="Motion Details" xml:space="preserve">
+    <value>Bewegungsdetails</value>
+  </data>
+  <data name="Unique identifier for the motion" xml:space="preserve">
+    <value>Eindeutiger Bezeichner der Bewegung</value>
+  </data>
+  <data name="Description of the motion" xml:space="preserve">
+    <value>Beschreibung der Bewegung</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>Symbol</value>
+  </data>
+  <data name="Icon image displayed for the motion" xml:space="preserve">
+    <value>Symbolbild, das für die Bewegung angezeigt wird</value>
+  </data>
+  <data name="Play type" xml:space="preserve">
+    <value>Wiedergabetyp</value>
+  </data>
+  <data name="Behavior of the animation when it ends." xml:space="preserve">
+    <value>Verhalten der Animation, wenn sie endet.</value>
+  </data>
+  <data name="One Time" xml:space="preserve">
+    <value>Einmal</value>
+  </data>
+  <data name="One Time Keep" xml:space="preserve">
+    <value>Einmal beibehalten</value>
+  </data>
+  <data name="Loop" xml:space="preserve">
+    <value>Schleife</value>
+  </data>
+  <data name="Model Preview" xml:space="preserve">
+    <value>Modellvorschau</value>
+  </data>
+  <data name="Play the animation" xml:space="preserve">
+    <value>Animation abspielen</value>
+  </data>
+  <data name="Change model gender" xml:space="preserve">
+    <value>Modellgeschlecht ändern</value>
+  </data>
+  <data name="Accessory:" xml:space="preserve">
+    <value>Zubehör:</value>
+  </data>
+  <data name="New Level" xml:space="preserve">
+    <value>Neues Level</value>
+  </data>
+  <data name="Add Attribute" xml:space="preserve">
+    <value>Attribut hinzufügen</value>
+  </data>
+  <data name="Delete Attribute" xml:space="preserve">
+    <value>Attribut löschen</value>
+  </data>
+  <data name="Delete Level" xml:space="preserve">
+    <value>Level löschen</value>
+  </data>
+  <data name="Level {0}" xml:space="preserve">
+    <value>Level {0}</value>
+  </data>
+  <data name="Click to change color" xml:space="preserve">
+    <value>Klicken, um die Farbe zu ändern</value>
+  </data>
+  <data name="Unique identifier for the text entry" xml:space="preserve">
+    <value>Eindeutiger Bezeichner des Texteintrags</value>
+  </data>
+  <data name="Text displayed in game" xml:space="preserve">
+    <value>Im Spiel angezeigter Text</value>
+  </data>
+  <data name="The directory path configured in the application settings is invalid." xml:space="preserve">
+    <value>Der in den Anwendungseinstellungen konfigurierte Verzeichnispfad ist ungültig.</value>
+  </data>
+  <data name="The directory has been moved or deleted." xml:space="preserve">
+    <value>Das Verzeichnis wurde verschoben oder gelöscht.</value>
+  </data>
+  <data name="There are insufficient permissions to access the directory." xml:space="preserve">
+    <value>Es sind nicht genügend Berechtigungen vorhanden, um auf das Verzeichnis zuzugreifen.</value>
+  </data>
+  <data name="A required directory was not found." xml:space="preserve">
+    <value>Ein erforderliches Verzeichnis wurde nicht gefunden.</value>
+  </data>
+  <data name="Directory not found" xml:space="preserve">
+    <value>Verzeichnis nicht gefunden</value>
+  </data>
+  <data name="A required file was not found." xml:space="preserve">
+    <value>Eine erforderliche Datei wurde nicht gefunden.</value>
+  </data>
+  <data name="The file path configured in the application settings is invalid." xml:space="preserve">
+    <value>Der in den Anwendungseinstellungen konfigurierte Dateipfad ist ungültig.</value>
+  </data>
+  <data name="The file has been moved, renamed or deleted." xml:space="preserve">
+    <value>Die Datei wurde verschoben, umbenannt oder gelöscht.</value>
+  </data>
+  <data name="There are insufficient permissions to access the file." xml:space="preserve">
+    <value>Es sind nicht genügend Berechtigungen vorhanden, um auf die Datei zuzugreifen.</value>
+  </data>
+  <data name="Incorrectly formatted file" xml:space="preserve">
+    <value>Falsch formatiert Datei</value>
+  </data>
+  <data name="A required file is incorrectly formatted." xml:space="preserve">
+    <value>Eine erforderliche Datei ist falsch formatiert.</value>
+  </data>
+  <data name="The application found a file, but it is not correctly formatted. This can happen when:" xml:space="preserve">
+    <value>Die Anwendung hat eine Datei gefunden, aber sie ist nicht korrekt formatiert. Dies kann passieren, wenn :</value>
+  </data>
+  <data name="The file has been manually edited and contains errors." xml:space="preserve">
+    <value>Die Datei wurde manuell bearbeitet und enthält Fehler.</value>
+  </data>
+  <data name="The file path does not point to the correct file." xml:space="preserve">
+    <value>Der Dateipfad zeigt nicht auf die richtige Datei.</value>
+  </data>
+  <data name="The configured resource version does not match your files' version." xml:space="preserve">
+    <value>Die konfigurierte Ressourcenversion stimmt nicht mit der Version Ihrer Dateien überein.</value>
+  </data>
+  <data name="Unknown error" xml:space="preserve">
+    <value>Unbekannter Fehler</value>
+  </data>
+  <data name="An unexpected error occurred." xml:space="preserve">
+    <value>Ein unerwarteter Fehler ist aufgetreten.</value>
+  </data>
+  <data name="An unexpected error occurred while loading. This can happen when:" xml:space="preserve">
+    <value>Beim Laden ist ein unerwarteter Fehler aufgetreten. Dies kann passieren, wenn :</value>
+  </data>
+  <data name="There is a bug in the application." xml:space="preserve">
+    <value>In der Anwendung gibt es einen Fehler.</value>
+  </data>
+  <data name="Open configuration" xml:space="preserve">
+    <value>Konfiguration öffnen</value>
+  </data>
+</root>

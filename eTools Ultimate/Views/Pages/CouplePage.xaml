@@ -1,0 +1,379 @@
+<Page
+    x:Class="eTools_Ultimate.Views.Pages.CouplePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
+    Title="CouplePage"
+    d:DataContext="{d:DesignInstance local:CouplePage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="768"
+    d:DesignWidth="1024"
+    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
+    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+    ScrollViewer.CanContentScroll="False"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <!--  Common Styles  -->
+        <Style x:Key="InfoIconStyle" TargetType="ui:SymbolIcon">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="5,0,0,0" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+        </Style>
+
+        <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="0,15,0,15" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+        </Style>
+
+        <!--  ListViewItem Style  -->
+        <Style x:Key="CoupleListViewItemStyle" TargetType="ListViewItem">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="Padding" Value="10,8" />
+            <Setter Property="Margin" Value="0,1" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                </Trigger>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!--  Left Side - Search and List  -->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  Search Box  -->
+            <Border
+                Grid.Row="0"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,1,1,0">
+                <ui:TextBox
+                    Margin="10,10,10,10"
+                    BorderThickness="0"
+                    Icon="Search24"
+                    PlaceholderText="{i18n:StringLocalizer 'Search...'}"
+                    Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
+                    <ui:TextBox.Resources>
+                        <Style TargetType="ui:SymbolIcon">
+                            <Setter Property="FontSize" Value="13" />
+                        </Style>
+                    </ui:TextBox.Resources>
+                </ui:TextBox>
+            </Border>
+
+            <!--  Items List  -->
+            <Border
+                Grid.Row="1"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,0,1,1">
+                <TabControl Background="Transparent" BorderThickness="0">
+                    <TabItem Header="{i18n:StringLocalizer 'General'}">
+                        <ListView
+                            x:Name="LevelListView"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            ItemsSource="{Binding ViewModel.LevelRequirements}"
+                            SelectedIndex="{Binding ViewModel.SelectedLevel, Mode=TwoWay}"
+                            SelectionChanged="LevelListView_SelectionChanged">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{i18n:StringLocalizer 'Level '}" />
+                                        <TextBlock Text="{Binding IndexOf}" />
+                                        <TextBlock Text="{i18n:StringLocalizer ' - '}" />
+                                        <TextBlock Text="{Binding}" />
+                                        <TextBlock Text="{i18n:StringLocalizer ' EP'}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.ItemContainerStyle>
+                                <Style BasedOn="{StaticResource CoupleListViewItemStyle}" TargetType="ListViewItem" />
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </TabItem>
+                    <TabItem Header="{i18n:StringLocalizer 'Items'}">
+                        <ListView
+                            x:Name="ItemsListView"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            ItemsSource="{Binding ViewModel.FilteredItems}">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding ItemName}" />
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                            <TextBlock Margin="10,0" Text="{Binding GenderText}" />
+                                            <TextBlock Foreground="{DynamicResource AccentButtonBackground}" Text="{Binding Probability}" />
+                                            <TextBlock Foreground="{DynamicResource AccentButtonBackground}" Text="%" />
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                            <ListView.ItemContainerStyle>
+                                <Style BasedOn="{StaticResource CoupleListViewItemStyle}" TargetType="ListViewItem" />
+                            </ListView.ItemContainerStyle>
+                        </ListView>
+                    </TabItem>
+                </TabControl>
+            </Border>
+        </Grid>
+
+        <!--  Separator  -->
+        <GridSplitter
+            Grid.Column="1"
+            Width="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Stretch"
+            Background="Transparent">
+            <GridSplitter.Template>
+                <ControlTemplate TargetType="{x:Type GridSplitter}">
+                    <Grid Background="Transparent">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                        </StackPanel>
+                    </Grid>
+                </ControlTemplate>
+            </GridSplitter.Template>
+        </GridSplitter>
+
+        <!--  Right Side - Level Information and Skills  -->
+        <Grid Grid.Column="2" Margin="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!--  Level Information  -->
+            <ui:TextBlock
+                Grid.Row="0"
+                Margin="0,0,0,15"
+                FontSize="24"
+                FontTypography="Title"
+                Text="{i18n:StringLocalizer 'Level Information'}" />
+
+            <!--  Level Information Chart  -->
+            <ui:Card
+                Grid.Row="1"
+                Margin="0,0,0,15"
+                Padding="15">
+                <StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Margin="0,0,10,5"
+                            FontWeight="SemiBold"
+                            Text="{i18n:StringLocalizer 'Level:'}" />
+                        <TextBlock
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Text="{Binding ViewModel.SelectedLevel}" />
+
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Margin="0,0,10,5"
+                            FontWeight="SemiBold"
+                            Text="{i18n:StringLocalizer 'Required EP:'}" />
+                        <TextBlock
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Text="{Binding ViewModel.LevelRequirements[ViewModel.SelectedLevel]}" />
+
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Margin="0,0,10,5"
+                            FontWeight="SemiBold"
+                            Text="{i18n:StringLocalizer 'Power Level:'}" />
+                        <TextBlock
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            Text="{Binding ViewModel.CurrentPowerLevel}" />
+
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="0,0,10,5"
+                            FontWeight="SemiBold"
+                            Text="{i18n:StringLocalizer 'Bless Level:'}" />
+                        <TextBlock
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Text="{Binding ViewModel.CurrentBlessLevel}" />
+
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="0"
+                            Margin="0,0,10,5"
+                            FontWeight="SemiBold"
+                            Text="{i18n:StringLocalizer 'Miracle Level:'}" />
+                        <TextBlock
+                            Grid.Row="4"
+                            Grid.Column="1"
+                            Text="{Binding ViewModel.CurrentMiracleLevel}" />
+                    </Grid>
+
+                    <TextBlock
+                        Margin="0,15,0,5"
+                        HorizontalAlignment="Center"
+                        Text="{i18n:StringLocalizer 'Experience Points Chart'}" />
+                    <Border
+                        Height="150"
+                        Background="{DynamicResource ControlFillColorSecondaryBrush}"
+                        CornerRadius="4">
+                        <!--  Hier könnte später ein Chart implementiert werden  -->
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                            Text="{i18n:StringLocalizer 'Visualization of experience points over levels'}" />
+                    </Border>
+                </StackPanel>
+            </ui:Card>
+
+            <!--  Skill Unlocks  -->
+            <ui:TextBlock
+                Grid.Row="2"
+                Margin="0,0,0,10"
+                FontSize="18"
+                FontTypography="Title"
+                Text="{i18n:StringLocalizer 'Skill Unlocks'}" />
+
+            <!--  Skill Tabs  -->
+            <ui:Card
+                Grid.Row="3"
+                Margin="0,0,0,0"
+                Padding="0">
+                <TabControl Background="Transparent" BorderThickness="0">
+                    <TabItem Header="{i18n:StringLocalizer 'Couple Level'}">
+                        <DataGrid
+                            Margin="10"
+                            AutoGenerateColumns="False"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            GridLinesVisibility="Horizontal"
+                            HorizontalGridLinesBrush="{DynamicResource ControlElevationBorderBrush}"
+                            IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="Auto" Header="Level" />
+                                <DataGridTextColumn Width="Auto" Header="{i18n:StringLocalizer 'Gender'}" />
+                                <DataGridTextColumn Width="Auto" Header="{i18n:StringLocalizer 'Duration (Hours)'}" />
+                                <DataGridTextColumn Width="Auto" Header="{i18n:StringLocalizer 'Amount'}" />
+                                <DataGridTextColumn Width="*" Header="{i18n:StringLocalizer 'Probability'}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="Power Level">
+                        <DataGrid
+                            Margin="10"
+                            AutoGenerateColumns="False"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            GridLinesVisibility="Horizontal"
+                            HorizontalGridLinesBrush="{DynamicResource ControlElevationBorderBrush}"
+                            IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="Auto" Header="Level" />
+                                <DataGridTextColumn Width="*" Header="{i18n:StringLocalizer 'Description'}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="Bless Level">
+                        <DataGrid
+                            Margin="10"
+                            AutoGenerateColumns="False"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            GridLinesVisibility="Horizontal"
+                            HorizontalGridLinesBrush="{DynamicResource ControlElevationBorderBrush}"
+                            IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="Auto" Header="Level" />
+                                <DataGridTextColumn Width="*" Header="{i18n:StringLocalizer 'Description'}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                    <TabItem Header="Miracle Level">
+                        <DataGrid
+                            Margin="10"
+                            AutoGenerateColumns="False"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            GridLinesVisibility="Horizontal"
+                            HorizontalGridLinesBrush="{DynamicResource ControlElevationBorderBrush}"
+                            IsReadOnly="True">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="Auto" Header="Level" />
+                                <DataGridTextColumn Width="*" Header="{i18n:StringLocalizer 'Description'}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </TabItem>
+                </TabControl>
+            </ui:Card>
+        </Grid>
+    </Grid>
+</Page> 

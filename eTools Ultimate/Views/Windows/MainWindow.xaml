@@ -10,38 +10,33 @@
     Width="1200"
     Height="850"
     d:DataContext="{d:DesignInstance local:MainWindow,
-                                     IsDesignTimeCreatable=True}"
+                                     IsDesignTimeCreatable=False}"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
-    ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     ExtendsContentIntoTitleBar="True"
-    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     WindowBackdropType="Mica"
     WindowCornerPreference="Round"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
 
-    <ui:FluentWindow.InputBindings>
-        <KeyBinding
-            Key="F"
-            Command="{Binding ElementName=AutoSuggestBox, Path=FocusCommand}"
-            Modifiers="Control" />
-    </ui:FluentWindow.InputBindings>
 
 
     <Grid>
+
         <ui:TitleBar
             x:Name="TitleBar"
             Title="{Binding ViewModel.ApplicationTitle}"
             Grid.Row="0"
-            CloseWindowByDoubleClickOnIcon="True" Margin="35,0,0,-5">
+            Margin="35,0,0,-5"
+            CloseWindowByDoubleClickOnIcon="True">
             <ui:TitleBar.Icon>
-                <ui:ImageIcon Source="pack://application:,,,/eTools Ultimate;component/Views/Windows/eToolsLogoIcon.png" 
-                              Width="18" Height="18" 
-                              Margin="0,0,0,0"
-                              RenderOptions.BitmapScalingMode="HighQuality" />
+                <ui:ImageIcon
+                    Width="18"
+                    Height="18"
+                    Margin="0,0,0,0"
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                    Source="pack://application:,,,/eTools Ultimate;component/Assets/Icons/eTools.png" />
             </ui:TitleBar.Icon>
         </ui:TitleBar>
 
@@ -54,22 +49,14 @@
             IsBackButtonVisible="Visible"
             IsPaneToggleVisible="True"
             MenuItemsSource="{Binding ViewModel.MenuItems, Mode=OneWay}"
+            Navigated="RootNavigation_Navigated"
             OpenPaneLength="220"
             PaneDisplayMode="Left"
-            TitleBar="{Binding ElementName=TitleBar, Mode=OneWay}"
-            Navigated="RootNavigation_Navigated">
+            TitleBar="{Binding ElementName=TitleBar, Mode=OneWay}">
             <ui:NavigationView.Header>
                 <ui:BreadcrumbBar x:Name="BreadcrumbBar" Margin="42,32,42,20" />
             </ui:NavigationView.Header>
-            <ui:NavigationView.AutoSuggestBox>
-                <ui:AutoSuggestBox x:Name="AutoSuggestBox" PlaceholderText="Search">
-                    <ui:AutoSuggestBox.Icon>
-                        <ui:IconSourceElement>
-                            <ui:SymbolIconSource Symbol="Search24" />
-                        </ui:IconSourceElement>
-                    </ui:AutoSuggestBox.Icon>
-                </ui:AutoSuggestBox>
-            </ui:NavigationView.AutoSuggestBox>
+
             <ui:NavigationView.ContentOverlay>
                 <Grid>
                     <ui:SnackbarPresenter x:Name="SnackbarPresenter" />

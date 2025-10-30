@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:helpers="clr-namespace:eTools_Ultimate.Helpers"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
@@ -20,13 +21,13 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <!-- WPF UI Design System Resources -->
-        <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#FFFFFF"/>
-        <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="#212121"/>
-        <SolidColorBrush x:Key="ApplicationForegroundBrush" Color="#212121"/>
+        <!--  WPF UI Design System Resources  -->
+        <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#FFFFFF" />
+        <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="#212121" />
+        <SolidColorBrush x:Key="ApplicationForegroundBrush" Color="#212121" />
     </Page.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -47,8 +48,9 @@
                 <Border CornerRadius="8">
                     <Border.Background>
                         <ImageBrush
-                        RenderOptions.BitmapScalingMode="HighQuality"
-                        Stretch="UniformToFill" ImageSource="pack://application:,,,/Views/Pages/Settings/SettingPageBanner.png"  />
+                            ImageSource="pack://application:,,,/Assets/Images/SettingsPageBanner.png"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Stretch="UniformToFill" />
                     </Border.Background>
                     <Grid>
                         <StackPanel
@@ -58,8 +60,9 @@
                             Background="Transparent">
                             <ui:TextBlock
                                 FontTypography="Title"
+                                FontWeight="Bold"
                                 Foreground="#FFFFFF"
-                                Text="Settings" FontWeight="Bold" />
+                                Text="{i18n:StringLocalizer 'Settings'}" />
                         </StackPanel>
                         <ui:TextBlock
                             Margin="12"
@@ -67,12 +70,12 @@
                             VerticalAlignment="Bottom"
                             FontTypography="Caption"
                             Foreground="#57FFFFFF"
-                            Text="Created by eTools Ultimate" />
+                            Text="{i18n:StringLocalizer 'Created by eTools Ultimate'}" />
                     </Grid>
                 </Border>
             </Border>
 
-            <Grid Grid.Row="1" Margin="0,24,0,0">
+            <Grid Grid.Row="1" Margin="24,24,24,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -88,7 +91,7 @@
                     Margin="0,0,4,0"
                     Padding="0"
                     VerticalAlignment="Stretch"
-                    Command="{Binding ViewModel.NavigateToResourcePathCommand, Mode=OneWay}"
+                    Command="{Binding NavigateToResourcePathCommand, Mode=OneWay}"
                     IsChevronVisible="False">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -99,11 +102,9 @@
                         <Image
                             Width="60"
                             Height="Auto"
-                            Margin="24,0,0,0" Source="/Views/Pages/Settings/FolderPathIcon.png" >
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/Views/Pages/Settings/FolderPathIcon.png"/>
-                            </Image.OpacityMask>
-                        </Image>
+                            Margin="24,0,0,0"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Source="pack://application:,,,/Assets/Icons/FolderIcon.png" />
 
                         <StackPanel
                             Grid.Column="1"
@@ -112,12 +113,12 @@
                             <ui:TextBlock
                                 Margin="0"
                                 FontTypography="BodyStrong"
-                                Text="Resource Path"
+                                Text="{i18n:StringLocalizer 'Configuration'}"
                                 TextWrapping="WrapWithOverflow" />
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="Loading all Paths."
+                                Text="{i18n:StringLocalizer 'Change technical settings'}"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>
@@ -129,7 +130,7 @@
                     Margin="4,0,4,0"
                     Padding="0"
                     VerticalAlignment="Stretch"
-                    Command="{Binding ViewModel.NavigateToPersonalizationCommand, Mode=OneWay}"
+                    Command="{Binding NavigateToPersonalizationCommand, Mode=OneWay}"
                     IsChevronVisible="False">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -140,11 +141,9 @@
                         <Image
                             Width="60"
                             Height="Auto"
-                            Margin="24,0,0,0" Source="/Views/Pages/Settings/PaintPaletteIcon.png" >
-                            <Image.OpacityMask>
-                                <ImageBrush ImageSource="/Views/Pages/Settings/PaintPaletteIcon.png"/>
-                            </Image.OpacityMask>
-                        </Image>
+                            Margin="24,0,0,0"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Source="pack://application:,,,/Assets/Icons/PersonalizationIcon.png" />
 
                         <StackPanel
                             Grid.Column="1"
@@ -153,12 +152,12 @@
                             <ui:TextBlock
                                 Margin="0"
                                 FontTypography="BodyStrong"
-                                Text="Personalization"
+                                Text="{i18n:StringLocalizer 'Personalization'}"
                                 TextWrapping="WrapWithOverflow" />
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="Change Design and other parts"
+                                Text="{i18n:StringLocalizer 'Change theme and language'}"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>
@@ -170,7 +169,7 @@
                     Margin="4,0,4,0"
                     Padding="0"
                     VerticalAlignment="Stretch"
-                    Command="{Binding ViewModel.NavigateToAboutCommand, Mode=OneWay}"
+                    Command="{Binding NavigateToAboutCommand, Mode=OneWay}"
                     IsChevronVisible="False">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -181,13 +180,9 @@
                         <Image
                             Width="60"
                             Height="Auto"
-                            Margin="24,0,0,0" Source="/Views/Pages/Settings/AboutIcon.png" >
-                            <Image.OpacityMask>
-                                <ImageBrush>
-                                    <ImageBrush.ImageSource>/Views/Pages/Settings/AboutIcon.png</ImageBrush.ImageSource>
-                                </ImageBrush>
-                            </Image.OpacityMask>
-                        </Image>
+                            Margin="24,0,0,0"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Source="pack://application:,,,/Assets/Icons/AboutIcon.png" />
 
                         <StackPanel
                             Grid.Column="1"
@@ -196,12 +191,12 @@
                             <ui:TextBlock
                                 Margin="0"
                                 FontTypography="BodyStrong"
-                                Text="About"
+                                Text="{i18n:StringLocalizer 'About'}"
                                 TextWrapping="WrapWithOverflow" />
                             <ui:TextBlock
                                 Appearance="Secondary"
                                 Foreground="Gray"
-                                Text="Learn more about eTools Ultimate"
+                                Text="{i18n:StringLocalizer 'Learn more about eTools Ultimate'}"
                                 TextWrapping="WrapWithOverflow" />
                         </StackPanel>
                     </Grid>

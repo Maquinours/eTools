@@ -8,65 +8,79 @@ using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Exceptions;
 using Scan;
 using System.IO;
+using System.Collections.Concurrent;
 
 namespace eTools_Ultimate.Services
 {
-    internal class StringsService
+    public class StringsService(SettingsService settingsService)
     {
-        private static readonly Lazy<StringsService> _instance = new(() => new StringsService());
-        public static StringsService Instance => _instance.Value;
-
-        private readonly ObservableDictionary<string, string> _strings = [];
+        private ObservableDictionary<string, string> _strings = [];
         public ObservableDictionary<string, string> Strings => _strings;
 
         public void Load()
         {
-            this.Strings.Clear();
-
-            Settings settings = Settings.Instance;
             string[] filesList = 
                 [
-                settings.PropMoverTxtFilePath ?? settings.DefaultPropMoverTxtFilePath,
-                settings.PropItemTxtFilePath ?? settings.DefaultPropItemTxtFilePath,
-                settings.PropSkillTxtFilePath ?? settings.DefaultPropSkillTxtFilePath,
-                settings.TextsTxtFilePath ?? settings.DefaultTextsTxtFilePath,
-                settings.CharactersStringsFilePath ?? settings.DefaultCharactersStringsFilePath,
-                settings.HonorsTxtFilePath ?? settings.DefaultHonorsTxtFilePath,
-                settings.MotionsTxtFilePath ?? settings.DefaultMotionsTxtFilePath
+                settingsService.Settings.PropMoverTxtFilePath ?? settingsService.Settings.DefaultPropMoverTxtFilePath,
+                settingsService.Settings.PropItemTxtFilePath ?? settingsService.Settings.DefaultPropItemTxtFilePath,
+                //settingsService.Settings.PropSkillTxtFilePath ?? settingsService.Settings.DefaultPropSkillTxtFilePath,
+                settingsService.Settings.TextsTxtFilePath ?? settingsService.Settings.DefaultTextsTxtFilePath,
+                //settingsService.Settings.CharactersStringsFilePath ?? settingsService.Settings.DefaultCharactersStringsFilePath,
+                //settingsService.Settings.HonorsTxtFilePath ?? settingsService.Settings.DefaultHonorsTxtFilePath,
+                settingsService.Settings.MotionsTxtFilePath ?? settingsService.Settings.DefaultMotionsTxtFilePath
                 ];
 
-            foreach (string filePath in filesList)
+            ConcurrentDictionary<string, string> tempStrings = [];
+
+            Parallel.ForEach(filesList, filePath =>
             {
-                if (!File.Exists(filePath))
-                    throw new FileNotFoundException($"File not found: {filePath}");
+                using Scanner scanner = new();
 
-                using (Scanner scanner = new Scanner())
+                scanner.Load(filePath);
+
+                while (true)
                 {
+                    string index = scanner.GetToken();
 
-                    scanner.Load(filePath);
+                    if (scanner.EndOfStream) break;
 
-                    while (true)
-                    {
-                        string index = scanner.GetToken();
+                    /* The index must start with "IDS_" to be a valid string. If the file find token starting with
+                     * something different, then the file is incorrectly formatted.
+                     * */
+                    if (!index.StartsWith("IDS_"))
+                        throw new IncorrectlyFormattedFileException(filePath);
 
-                        if (scanner.EndOfStream) break;
+                    string value = scanner.GetLine();
+                    tempStrings[index] = value;
+                }
+            });
 
-                        /* The index must start with "IDS_" to be a valid string. If the file find token starting with
-                         * something different, then the file is incorrectly formatted.
-                         * */
-                        if (!index.StartsWith("IDS_"))
-                            throw new IncorrectlyFormattedFileException(filePath);
+            _strings = new(tempStrings);
+        }
 
-                        string value = scanner.GetLine();
-                        this.Strings.Add(index, value);
-                    }
+        public void Save(string filePath, string[] stringIdentifiers)
+        {
+            using StreamWriter writer = new StreamWriter(filePath, false, Encoding.UTF8);
+            foreach (string identifier in stringIdentifiers)
+            {
+                if (Strings.TryGetValue(identifier, out string? value))
+                {
+                    writer.Write(identifier);
+                    writer.Write("\t");
+                    writer.Write(value);
+                    writer.WriteLine();
                 }
             }
         }
 
-        public string GetString(string ids)
+        public string? GetString(string ids)
         {
-            return this.Strings[ids];
+            return Strings.GetValueOrDefault(ids);
+        }
+
+        public bool HasString(string ids)
+        {
+            return Strings.ContainsKey(ids);
         }
 
         public void ChangeStringValue(string ids, string newValue)
@@ -93,11 +107,13 @@ namespace eTools_Ultimate.Services
 
         public string GetNextStringIdentifier(string stringIdPrefix)
         {
-            for (int i = 0; true; i++)
+            int i = 0;
+            while(true)
             {
                 string identifier = stringIdPrefix + i.ToString("D6");
                 if (!this.Strings.ContainsKey(identifier))
                     return identifier;
+                i++;
             }
         }
     }

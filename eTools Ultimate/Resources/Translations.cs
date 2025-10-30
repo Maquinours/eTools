@@ -1,6 +1,6 @@
-namespace eTools_Ultimate.Resources
+namespace eTools_Ultimate.Resources;
+
+public partial class Translations
 {
-    public partial class Translations
-    {
-    }
+    
 }

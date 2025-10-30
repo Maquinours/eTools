@@ -6,6 +6,21 @@
         /// Variable nécessaire au concepteur.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFile;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFileSave;
+        private System.Windows.Forms.ToolStripMenuItem tsmiFileReload;
+        private System.Windows.Forms.ToolStripMenuItem tsmiView;
+        private System.Windows.Forms.ToolStripMenuItem tsmiViewExpertEditor;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSettings;
+        private System.Windows.Forms.ToolStripMenuItem tsmiEditors;
+        private System.Windows.Forms.ToolStripMenuItem tsmiWorldEditor;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTicketEditor;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTerrainObjectEditor;
+        private System.Windows.Forms.ToolStripMenuItem tsmiJobEditor;
+        private System.Windows.Forms.ToolStripMenuItem tsmiPackitemEditor;
+        private System.Windows.Forms.ToolStripMenuItem tsmiLordEditor;
+        private System.Windows.Forms.ToolStripMenuItem tsmiDropEventEditor;
 
         /// <summary>
         /// Nettoyage des ressources utilisées.
@@ -29,6 +44,102 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.tsmiFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFileSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiFileReload = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiView = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiViewExpertEditor = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiEditors = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiWorldEditor = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTicketEditor = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTerrainObjectEditor = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiJobEditor = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiPackitemEditor = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiLordEditor = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiDropEventEditor = new System.Windows.Forms.ToolStripMenuItem();
+
+            // Configure menu items
+            this.tsmiFile.Text = "File";
+            this.tsmiFileSave.Text = "Save";
+            this.tsmiFileReload.Text = "Reload";
+            this.tsmiView.Text = "View";
+            this.tsmiViewExpertEditor.Text = "Expert Editor";
+            this.tsmiSettings.Text = "Settings";
+            this.tsmiEditors.Text = "Editors";
+            this.tsmiWorldEditor.Text = "World Editor";
+            this.tsmiTicketEditor.Text = "Ticket Editor";
+            this.tsmiTerrainObjectEditor.Text = "Terrain/Object Editor";
+            this.tsmiJobEditor.Text = "Job Editor";
+            this.tsmiPackitemEditor.Text = "Packitem Editor";
+            this.tsmiLordEditor.Text = "Lord Editor";
+            this.tsmiDropEventEditor.Text = "Drop Event Editor";
+
+            // Configure menu structure
+            this.tsmiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+                this.tsmiFileSave,
+                this.tsmiFileReload
+            });
+
+            this.tsmiView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+                this.tsmiViewExpertEditor
+            });
+
+            this.tsmiEditors.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+                this.tsmiWorldEditor,
+                this.tsmiTicketEditor,
+                this.tsmiTerrainObjectEditor,
+                this.tsmiJobEditor,
+                this.tsmiPackitemEditor,
+                this.tsmiLordEditor,
+                this.tsmiDropEventEditor
+            });
+
+            // Add click handlers
+            this.tsmiWorldEditor.Click += new System.EventHandler(this.tsmiWorldEditor_Click);
+            this.tsmiTicketEditor.Click += new System.EventHandler(this.tsmiTicketEditor_Click);
+            this.tsmiTerrainObjectEditor.Click += new System.EventHandler(this.tsmiTerrainObjectEditor_Click);
+            this.tsmiJobEditor.Click += new System.EventHandler(this.tsmiJobEditor_Click);
+            this.tsmiPackitemEditor.Click += new System.EventHandler(this.tsmiPackitemEditor_Click);
+            this.tsmiLordEditor.Click += new System.EventHandler(this.tsmiLordEditor_Click);
+            this.tsmiDropEventEditor.Click += new System.EventHandler(this.tsmiDropEventEditor_Click);
+
+            // Add menu strip
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+                this.tsmiFile,
+                this.tsmiView,
+                this.tsmiEditors,
+                this.tsmiSettings
+            });
+
+            // Configure form
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
+            this.Text = "Items Editor";
+            this.Size = new System.Drawing.Size(800, 600);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+        }
+
+        #endregion
+
+        private System.Windows.Forms.ListBox lbItems;
+        private System.Windows.Forms.Label lblTypeItemKind1;
+        private System.Windows.Forms.Label lblTypeItemKind2;
+        private System.Windows.Forms.Label lblTypeItemKind3;
+        private System.Windows.Forms.ComboBox cbTypeItemKind1;
+        private System.Windows.Forms.ComboBox cbTypeItemKind2;
+        private System.Windows.Forms.ComboBox cbTypeItemKind3;
+        private System.Windows.Forms.Label lblGeneralId;
+        private System.Windows.Forms.Label lblGeneralName;
+        private System.Windows.Forms.TextBox tbGeneralId;
+        private System.Windows.Forms.TextBox tbGeneralName;
+        private System.Windows.Forms.Label lblMiscPackMax;
+        private System.Windows.Forms.TabControl tcMain;
+        private System.Windows.Forms.TabPage tpMainGeneral;
+        private System.Windows.Forms.Label lblMiscCost;
+        private System.Windows.Forms.TabPage tpMainEquipment;
+        private System.Windows.Forms.ComboBox cbEquipmentJob;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.lbItems = new System.Windows.Forms.ListBox();
             this.lblTypeItemKind1 = new System.Windows.Forms.Label();

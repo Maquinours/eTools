@@ -81,7 +81,7 @@ namespace eTools_Ultimate.Helpers
 
         private static void OnVerticalOffsetChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
         {
-            ScrollViewer scrollViewer = target as ScrollViewer;
+            if (target is not ScrollViewer scrollViewer) return;
 
             if (scrollViewer != null)
             {
@@ -117,15 +117,13 @@ namespace eTools_Ultimate.Helpers
         {
             var target = sender;
 
-            if (target != null && target is ScrollViewer)
+            if (target != null && target is ScrollViewer scroller)
             {
-                ScrollViewer scroller = target as ScrollViewer;
                 scroller.Loaded += new RoutedEventHandler(scrollerLoaded);
             }
 
-            if (target != null && target is ListBox)
+            if (target != null && target is ListBox listbox)
             {
-                ListBox listbox = target as ListBox;
                 listbox.Loaded += new RoutedEventHandler(listboxLoaded);
             }
         }
@@ -181,7 +179,7 @@ namespace eTools_Ultimate.Helpers
 
         private static void UpdateScrollPosition(object sender)
         {
-            ListBox listbox = sender as ListBox;
+            if (sender is not ListBox listbox) return;
 
             if (listbox != null)
             {
@@ -189,7 +187,9 @@ namespace eTools_Ultimate.Helpers
 
                 for (int i = 0; i < (listbox.SelectedIndex); i++)
                 {
-                    ListBoxItem tempItem = listbox.ItemContainerGenerator.ContainerFromItem(listbox.Items[i]) as ListBoxItem;
+                    DependencyObject obj = listbox.ItemContainerGenerator.ContainerFromItem(listbox.Items[i]);
+
+                    if (obj is not ListBoxItem tempItem) return;
 
                     if (tempItem != null)
                     {
@@ -217,7 +217,7 @@ namespace eTools_Ultimate.Helpers
 
         private static void scrollerLoaded(object sender, RoutedEventArgs e)
         {
-            ScrollViewer scroller = sender as ScrollViewer;
+            if (sender is not ScrollViewer scroller) return;
 
             SetEventHandlersForScrollViewer(scroller);
         }
@@ -228,9 +228,10 @@ namespace eTools_Ultimate.Helpers
 
         private static void listboxLoaded(object sender, RoutedEventArgs e)
         {
-            ListBox listbox = sender as ListBox;
+            if (sender is not ListBox listbox) return;
 
-            _listBoxScroller = FindVisualChildHelper.GetFirstChildOfType<ScrollViewer>(listbox);
+            if (FindVisualChildHelper.GetFirstChildOfType<ScrollViewer>(listbox) is not ScrollViewer listBoxScroller) return;
+            _listBoxScroller = listBoxScroller;
             SetEventHandlersForScrollViewer(_listBoxScroller);
 
             SetTimeDuration(_listBoxScroller, new TimeSpan(0, 0, 0, 0, 200));
@@ -312,8 +313,10 @@ namespace eTools_Ultimate.Helpers
 
         #region ListBox Event Handlers
 
-        private static void ListBoxLayoutUpdated(object sender, EventArgs e)
+        private static void ListBoxLayoutUpdated(object? sender, EventArgs e)
         {
+            if (sender is null) return;
+
             UpdateScrollPosition(sender);
         }
 

@@ -43,7 +43,7 @@ namespace eTools_Ultimate.ViewModels.Pages.ChangeLog
         private ObservableCollection<ChangeTypeItem> _changeTypes = new ObservableCollection<ChangeTypeItem>();
         
         [ObservableProperty]
-        private ChangeTypeItem _selectedChangeType;
+        private ChangeTypeItem? _selectedChangeType;
         
         [ObservableProperty]
         private int _currentPage = 1;
@@ -89,7 +89,7 @@ namespace eTools_Ultimate.ViewModels.Pages.ChangeLog
 
         private void LoadDemoData()
         {
-            _logEntries.Add(new ChangeLogEntry 
+            LogEntries.Add(new ChangeLogEntry 
             { 
                 Timestamp = "5.5.2025, 20:59:31", 
                 Item = "File Load", 
@@ -98,7 +98,7 @@ namespace eTools_Ultimate.ViewModels.Pages.ChangeLog
                 ChangeType = "Info"
             });
 
-            _logEntries.Add(new ChangeLogEntry 
+            LogEntries.Add(new ChangeLogEntry 
             { 
                 Timestamp = "5.5.2025, 20:59:30", 
                 Item = "File Load", 
@@ -107,7 +107,7 @@ namespace eTools_Ultimate.ViewModels.Pages.ChangeLog
                 ChangeType = "Info"
             });
 
-            _logEntries.Add(new ChangeLogEntry 
+            LogEntries.Add(new ChangeLogEntry 
             { 
                 Timestamp = "27.4.2025, 00:25:09", 
                 Item = "IL_SYS_SYS_SCR_BAR_2", 
@@ -116,8 +116,8 @@ namespace eTools_Ultimate.ViewModels.Pages.ChangeLog
                 NewValue = "4 items (0 added, 0 removed, 1 changed)",
                 ChangeType = "Modify"
             });
-            
-            _logEntries.Add(new ChangeLogEntry 
+
+            LogEntries.Add(new ChangeLogEntry 
             { 
                 Timestamp = "27.4.2025, 00:24:15", 
                 Item = "HP Trank Ultimate", 
@@ -126,8 +126,8 @@ namespace eTools_Ultimate.ViewModels.Pages.ChangeLog
                 NewValue = "300",
                 ChangeType = "Modify"
             });
-            
-            _logEntries.Add(new ChangeLogEntry 
+
+            LogEntries.Add(new ChangeLogEntry 
             { 
                 Timestamp = "26.4.2025, 16:30:02", 
                 Item = "SKILL_FIREBALL", 
@@ -136,8 +136,8 @@ namespace eTools_Ultimate.ViewModels.Pages.ChangeLog
                 NewValue = "130-160",
                 ChangeType = "Modify"
             });
-            
-            _logEntries.Add(new ChangeLogEntry 
+
+            LogEntries.Add(new ChangeLogEntry 
             { 
                 Timestamp = "26.4.2025, 15:45:22", 
                 Item = "EVENT_SUMMER_2025", 
@@ -145,8 +145,8 @@ namespace eTools_Ultimate.ViewModels.Pages.ChangeLog
                 NewValue = "NPC_SUMMER_HOST",
                 ChangeType = "Add"
             });
-            
-            _logEntries.Add(new ChangeLogEntry 
+
+            LogEntries.Add(new ChangeLogEntry 
             { 
                 Timestamp = "25.4.2025, 09:12:47", 
                 Item = "MOVER_GUARD_01", 
@@ -155,8 +155,8 @@ namespace eTools_Ultimate.ViewModels.Pages.ChangeLog
                 ChangeType = "Delete"
             });
 
-            _entriesCount = _logEntries.Count;
-            StatusMessage = $"{_entriesCount} entries found";
+            EntriesCount = LogEntries.Count;
+            StatusMessage = $"{EntriesCount} entries found";
         }
         
         [RelayCommand]
@@ -227,7 +227,7 @@ namespace eTools_Ultimate.ViewModels.Pages.ChangeLog
         {
             CanGoToPreviousPage = CurrentPage > 1;
             CanGoToNextPage = CurrentPage < TotalPages;
-            StatusMessage = $"Page {CurrentPage} of {TotalPages} - {_entriesCount} entries";
+            StatusMessage = $"Page {CurrentPage} of {TotalPages} - {EntriesCount} entries";
         }
     }
 

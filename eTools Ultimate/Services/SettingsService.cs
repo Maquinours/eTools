@@ -1,208 +1,329 @@
-﻿using Scan;
+﻿using eTools_Ultimate.Models;
+using Scan;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using eTools_Ultimate.Models;
-using System.IO;
 
 namespace eTools_Ultimate.Services
 {
     internal static class SettingsKeywords
     {
-        // General settings
+        // Main settings
         internal const string ResourcesVersion = "ResourcesVersion";
         internal const string ResourcesPath = "ResourcesPath";
         internal const string ClientPath = "ClientPath";
+
+        // General settings
         internal const string IconsPath = "IconsPath";
         internal const string TexturesPath = "TexturesPath";
+        internal const string ModelsPath = "ModelsPath";
         internal const string SoundsConfigPath = "SoundsConfigPath";
         internal const string SoundsPath = "SoundsPath";
+        internal const string FilesFormat = "FilesFormat";
 
         // Movers settings
         internal const string PropMoverPath = "PropMoverPath";
         internal const string PropMoverTxtPath = "PropMoverTxtPath";
-        internal const string PropMoverExPath = "PropMoverExPath";
         internal const string Mover64BitHp = "Mover64BitHp";
         internal const string Mover64BitAtk = "Mover64BitAtk";
+        internal const string MoverTypeAiBindings = "MoverTypeAiBindings";
 
         // Items settings
         internal const string PropItemPath = "PropItemPath";
         internal const string PropItemTxtPath = "PropItemTxtPath";
         internal const string ItemIconsPath = "ItemIconsPath";
 
-        // Skills settings
-        internal const string PropSkillPath = "PropSkillPath";
-        internal const string PropSkillTxtPath = "PropSkillTxtPath";
-        internal const string SkillIconsPath = "SkillIconsPath";
+        // Texts settings
+        internal const string TextsConfigPath = "TextsConfigPath";
+        internal const string TextsTxtPath = "TextsTxtPath";
+
+        // Giftboxes settings
+        internal const string GiftBoxesConfigPath = "GiftBoxesConfigPath";
+
+        // Motions settings
+        internal const string MotionsPropPath = "MotionsPropPath";
+        internal const string MotionsTxtPath = "MotionsTxtPath";
     }
 
-    internal class SettingsService
+    public class SettingsService
     {
-        private static string SettingsFolderPath { get => $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}\eTools\"; }
-        private static string SettingsFilePath { get => $"{SettingsFolderPath}eTools.ini"; }
-        public static void Load()
+        private readonly Settings _settings = new();
+
+        private static string SettingsFolderPath => $@"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}eTools{Path.DirectorySeparatorChar}";
+        private static string SettingsFilePath => $"{SettingsFolderPath}settings.ini";
+
+        public Settings Settings => _settings;
+
+        public void Load()
         {
-            Settings.Instance.PropertyChanged -= SettingsChanged;
+            Settings.PropertyChanged -= SettingsChanged;
+            foreach (ObservableCollection<string> aiCollection in Settings.MoverTypesBindings.Select(x => x.Value))
+                aiCollection.CollectionChanged -= AiCollection_CollectionChanged;
 
-            string filePath = SettingsService.SettingsFilePath;
-
-            if (File.Exists(filePath))
+            if (File.Exists(SettingsFilePath))
             {
-                using (Scanner scanner = new Scanner())
+                using Scanner scanner = new();
+
+                scanner.Load(SettingsFilePath);
+                while (true)
                 {
-                    scanner.Load(filePath);
-                    while (true)
+                    scanner.GetToken();
+                    if (scanner.EndOfStream) break;
+
+                    switch (scanner.Token)
                     {
-                        scanner.GetToken();
-                        if (scanner.EndOfStream) break;
+                        // Main settings
+                        case SettingsKeywords.ResourcesVersion:
+                            Settings.ResourcesVersion = scanner.GetNumber();
+                            break;
+                        case SettingsKeywords.ResourcesPath:
+                            Settings.ResourcesFolderPath = scanner.GetToken();
+                            break;
+                        case SettingsKeywords.ClientPath:
+                            Settings.ClientFolderPath = scanner.GetToken();
+                            break;
 
-                        switch (scanner.Token)
-                        {
-                            // General settings
-                            case SettingsKeywords.ResourcesVersion:
-                                Settings.Instance.ResourcesVersion = scanner.GetNumber();
+                        // General settings
+                        case SettingsKeywords.IconsPath:
+                            Settings.IconsFolderPath = scanner.GetToken();
+                            break;
+                        case SettingsKeywords.TexturesPath:
+                            Settings.TexturesFolderPath = scanner.GetToken();
+                            break;
+                        case SettingsKeywords.ModelsPath:
+                            Settings.ModelsFolderPath = scanner.GetToken();
+                            break;
+                        case SettingsKeywords.SoundsConfigPath:
+                            Settings.SoundsConfigFilePath = scanner.GetToken();
+                            break;
+                        case SettingsKeywords.SoundsPath:
+                            Settings.SoundsFolderPath = scanner.GetToken();
+                            break;
+                        case SettingsKeywords.FilesFormat:
+                            {
+                                if (!Enum.TryParse(scanner.GetToken(), out FilesFormats filesFormat))
+                                    throw new InvalidOperationException("SettingsService::Load exception : files format settings is incorrectly formated. (token is not MoverTypes)");
+                                Settings.FilesFormat = filesFormat;
                                 break;
-                            case SettingsKeywords.ResourcesPath:
-                                Settings.Instance.ResourcesFolderPath = scanner.GetToken();
-                                break;
-                            case SettingsKeywords.ClientPath:
-                                Settings.Instance.ClientFolderPath = scanner.GetToken();
-                                break;
+                            }
 
-                            case SettingsKeywords.IconsPath:
-                                Settings.Instance.IconsFolderPath = scanner.GetToken();
-                                break;
-                            case SettingsKeywords.TexturesPath:
-                                Settings.Instance.TexturesFolderPath = scanner.GetToken();
-                                break;
-                            case SettingsKeywords.SoundsConfigPath:
-                                Settings.Instance.SoundsConfigFilePath = scanner.GetToken();
-                                break;
-                            case SettingsKeywords.SoundsPath:
-                                Settings.Instance.SoundsFolderPath = scanner.GetToken();
-                                break;
+                        // Movers settings
+                        case SettingsKeywords.PropMoverPath:
+                            Settings.PropMoverFilePath = scanner.GetToken();
+                            break;
+                        case SettingsKeywords.PropMoverTxtPath:
+                            Settings.PropMoverTxtFilePath = scanner.GetToken();
+                            break;
+                        case SettingsKeywords.Mover64BitHp:
+                            Settings.Mover64BitHp = true;
+                            break;
+                        case SettingsKeywords.Mover64BitAtk:
+                            Settings.Mover64BitAtk = true;
+                            break;
+                        case SettingsKeywords.MoverTypeAiBindings:
+                            {
+                                scanner.GetToken(); // [
+                                while (true)
+                                {
+                                    scanner.GetToken();
 
-                            // Movers settings
-                            case SettingsKeywords.PropMoverPath:
-                                Settings.Instance.PropMoverFilePath = scanner.GetToken();
-                                break;
-                            case SettingsKeywords.PropMoverTxtPath:
-                                Settings.Instance.PropMoverTxtFilePath = scanner.GetToken();
-                                break;
-                            case SettingsKeywords.PropMoverExPath:
-                                Settings.Instance.PropMoverExFilePath = scanner.GetToken();
-                                break;
-                            case SettingsKeywords.Mover64BitHp:
-                                Settings.Instance.Mover64BitHp = true;
-                                break;
-                            case SettingsKeywords.Mover64BitAtk:
-                                Settings.Instance.Mover64BitAtk = true;
-                                break;
+                                    if (scanner.Token == "]") break;
+                                    if (scanner.EndOfStream)
+                                        throw new InvalidOperationException("SettingsService::Load exception : Mover type AI bindings settings is incorrectly formated. (first infinite loop security)");
 
-                            // Items settings
-                            case SettingsKeywords.PropItemPath:
-                                Settings.Instance.PropItemFilePath = scanner.GetToken();
-                                break;
-                            case SettingsKeywords.PropItemTxtPath:
-                                Settings.Instance.PropItemTxtFilePath = scanner.GetToken();
-                                break;
-                            case SettingsKeywords.ItemIconsPath:
-                                Settings.Instance.ItemIconsFolderPath = scanner.GetToken();
-                                break;
+                                    if (!Enum.TryParse(scanner.Token, out MoverTypes type))
+                                        throw new InvalidOperationException("SettingsService::Load exception : Mover type AI bindings settings is incorrectly formated. (token is not MoverTypes)");
 
-                            // Skills settings
-                            case SettingsKeywords.PropSkillPath:
-                                Settings.Instance.PropSkillFilePath = scanner.GetToken();
+                                    Settings.MoverTypesBindings[type].Clear();
+
+                                    scanner.GetToken(); // [
+                                    while (true)
+                                    {
+                                        scanner.GetToken();
+
+                                        if (scanner.Token == "]") break;
+                                        if (scanner.EndOfStream)
+                                            throw new InvalidOperationException("SettingsService::Load exception : Mover type AI bindings settings is incorrectly formated. (first infinite loop security)");
+
+                                        Settings.MoverTypesBindings[type].Add(scanner.Token);
+                                    }
+                                }
                                 break;
-                            case SettingsKeywords.PropSkillTxtPath:
-                                Settings.Instance.PropSkillTxtFilePath = scanner.GetToken();
-                                break;
-                            case SettingsKeywords.SkillIconsPath:
-                                Settings.Instance.SkillIconsFolderPath = scanner.GetToken();
-                                break;
-                        }
+                            }
+
+                        // Items settings
+                        case SettingsKeywords.PropItemPath:
+                            Settings.PropItemFilePath = scanner.GetToken();
+                            break;
+                        case SettingsKeywords.PropItemTxtPath:
+                            Settings.PropItemTxtFilePath = scanner.GetToken();
+                            break;
+                        case SettingsKeywords.ItemIconsPath:
+                            Settings.ItemIconsFolderPath = scanner.GetToken();
+                            break;
+
+                        // Texts settings
+                        case SettingsKeywords.TextsConfigPath:
+                            Settings.TextsConfigFilePath = scanner.GetToken();
+                            break;
+                        case SettingsKeywords.TextsTxtPath:
+                            Settings.TextsTxtFilePath = scanner.GetToken();
+                            break;
+
+                        // Giftboxes settings
+                        case SettingsKeywords.GiftBoxesConfigPath:
+                            Settings.GiftBoxesConfigFilePath = scanner.GetToken();
+                            break;
+
+                        // Motions settings
+                        case SettingsKeywords.MotionsPropPath:
+                            Settings.MotionsPropFilePath = scanner.GetToken();
+                            break;
+                        case SettingsKeywords.MotionsTxtPath:
+                            Settings.MotionsTxtFilePath = scanner.GetToken();
+                            break;
                     }
                 }
             }
-            Settings.Instance.PropertyChanged += SettingsChanged;
+
+            Settings.PropertyChanged += SettingsChanged;
+            foreach (ObservableCollection<string> aiCollection in Settings.MoverTypesBindings.Select(x => x.Value))
+                aiCollection.CollectionChanged += AiCollection_CollectionChanged;
         }
 
-        public static void Save()
+        public void Save()
         {
-            using (StreamWriter writer = new StreamWriter(SettingsFilePath))
+            string? settingsDirectory = Path.GetDirectoryName(SettingsFilePath) ?? throw new InvalidOperationException("SettingsService::Save exception : Settings directory is an invalid path");
+
+            if (!Directory.Exists(settingsDirectory))
+                Directory.CreateDirectory(settingsDirectory);
+
+            using StreamWriter writer = new(SettingsFilePath);
+
+            // Main settings
+            writer.WriteLine($"{SettingsKeywords.ResourcesVersion}\t{Settings.ResourcesVersion}");
+            writer.WriteLine($"{SettingsKeywords.ResourcesPath}\t\"{Settings.ResourcesFolderPath}\"");
+            writer.WriteLine($"{SettingsKeywords.ClientPath}\t\"{Settings.ClientFolderPath}\"");
+
+            // General settings
+            if (Settings.IconsFolderPath != null)
+                writer.WriteLine($"{SettingsKeywords.IconsPath}\t\"{Settings.IconsFolderPath}\"");
+            if (Settings.TexturesFolderPath != null)
+                writer.WriteLine($"{SettingsKeywords.TexturesPath}\t\"{Settings.TexturesFolderPath}\"");
+            if (Settings.ModelsFolderPath != null)
+                writer.WriteLine($"{SettingsKeywords.ModelsPath}\t\"{Settings.ModelsFolderPath}\"");
+            if (Settings.SoundsConfigFilePath != null)
+                writer.WriteLine($"{SettingsKeywords.SoundsConfigPath}\t\"{Settings.SoundsConfigFilePath}\"");
+            if (Settings.SoundsFolderPath != null)
+                writer.WriteLine($"{SettingsKeywords.SoundsPath}\t\"{Settings.SoundsFolderPath}\"");
+            writer.WriteLine($"{SettingsKeywords.FilesFormat}\t{Settings.FilesFormat}");
+
+            // Movers settings
+            if (Settings.PropMoverFilePath != null)
+                writer.WriteLine($"{SettingsKeywords.PropMoverPath}\t\"{Settings.PropMoverFilePath}\"");
+            if (Settings.PropMoverTxtFilePath != null)
+                writer.WriteLine($"{SettingsKeywords.PropMoverTxtPath}\t\"{Settings.PropMoverTxtFilePath}\"");
+            if (Settings.Mover64BitAtk)
+                writer.WriteLine(SettingsKeywords.Mover64BitAtk);
+            if (Settings.Mover64BitHp)
+                writer.WriteLine(SettingsKeywords.Mover64BitHp);
+            writer.WriteLine(SettingsKeywords.MoverTypeAiBindings);
+            writer.WriteLine('[');
+            foreach (KeyValuePair<MoverTypes, ObservableCollection<string>> bind in Settings.MoverTypesBindings)
             {
-                // General settings
-                writer.WriteLine($"{SettingsKeywords.ResourcesVersion}\t{Settings.Instance.ResourcesVersion}");
-                writer.WriteLine($"{SettingsKeywords.ResourcesPath}\t\"{Settings.Instance.ResourcesFolderPath}\"");
-                writer.WriteLine($"{SettingsKeywords.ClientPath}\t\"{Settings.Instance.ClientFolderPath}\"");
-
-                if (Settings.Instance.IconsFolderPath != null)
-                    writer.WriteLine($"{SettingsKeywords.IconsPath}\t\"{Settings.Instance.IconsFolderPath}\"");
-                if (Settings.Instance.TexturesFolderPath != null)
-                    writer.WriteLine($"{SettingsKeywords.TexturesPath}\t\"{Settings.Instance.TexturesFolderPath}\"");
-                if (Settings.Instance.SoundsConfigFilePath != null)
-                    writer.WriteLine($"{SettingsKeywords.SoundsConfigPath}\t\"{Settings.Instance.SoundsConfigFilePath}\"");
-                if (Settings.Instance.SoundsFolderPath != null)
-                    writer.WriteLine($"{SettingsKeywords.SoundsPath}\t\"{Settings.Instance.SoundsFolderPath}\"");
-
-                // Movers settings
-                if (Settings.Instance.PropMoverFilePath != null)
-                    writer.WriteLine($"{SettingsKeywords.PropMoverPath}\t\"{Settings.Instance.PropMoverFilePath}\"");
-                if (Settings.Instance.PropMoverTxtFilePath != null)
-                    writer.WriteLine($"{SettingsKeywords.PropMoverTxtPath}\t\"{Settings.Instance.PropMoverTxtFilePath}\"");
-                if (Settings.Instance.PropMoverExFilePath != null)
-                    writer.WriteLine($"{SettingsKeywords.PropMoverExPath}\t\"{Settings.Instance.PropMoverExFilePath}\"");
-                if(Settings.Instance.Mover64BitAtk)
-                    writer.WriteLine(SettingsKeywords.Mover64BitAtk);
-                if (Settings.Instance.Mover64BitHp)
-                    writer.WriteLine(SettingsKeywords.Mover64BitHp);
-
-                // Items settings
-                if (Settings.Instance.PropItemFilePath != null)
-                    writer.WriteLine($"{SettingsKeywords.PropItemPath}\t\"{Settings.Instance.PropItemFilePath}\"");
-                if (Settings.Instance.PropItemTxtFilePath != null)
-                    writer.WriteLine($"{SettingsKeywords.PropItemTxtPath}\t\"{Settings.Instance.PropItemTxtFilePath}\"");
-                if(Settings.Instance.ItemIconsFolderPath != null)
-                    writer.WriteLine($"{SettingsKeywords.ItemIconsPath}\t\"{Settings.Instance.ItemIconsFolderPath}\"");
-
-                // Skills settings
-                if (Settings.Instance.PropSkillFilePath != null)
-                    writer.WriteLine($"{SettingsKeywords.PropSkillPath}\t\"{Settings.Instance.PropSkillFilePath}\"");
-                if (Settings.Instance.PropSkillTxtFilePath != null)
-                    writer.WriteLine($"{SettingsKeywords.PropSkillTxtPath}\t\"{Settings.Instance.PropSkillTxtFilePath}\"");
-                if (Settings.Instance.SkillIconsFolderPath != null)
-                    writer.WriteLine($"{SettingsKeywords.SkillIconsPath}\t\"{Settings.Instance.SkillIconsFolderPath}\"");
+                writer.WriteLine($"\t{bind.Key}");
+                writer.WriteLine($"\t[");
+                foreach (string ai in bind.Value)
+                    writer.WriteLine($"\t\t{ai}");
+                writer.WriteLine($"\t]");
             }
+            writer.WriteLine(']');
+
+            // Items settings
+            if (Settings.PropItemFilePath != null)
+                writer.WriteLine($"{SettingsKeywords.PropItemPath}\t\"{Settings.PropItemFilePath}\"");
+            if (Settings.PropItemTxtFilePath != null)
+                writer.WriteLine($"{SettingsKeywords.PropItemTxtPath}\t\"{Settings.PropItemTxtFilePath}\"");
+            if (Settings.ItemIconsFolderPath != null)
+                writer.WriteLine($"{SettingsKeywords.ItemIconsPath}\t\"{Settings.ItemIconsFolderPath}\"");
+
+            // Texts settings
+            if (Settings.TextsConfigFilePath != null)
+                writer.WriteLine($"{SettingsKeywords.TextsConfigPath}\t\"{Settings.TextsConfigFilePath}\"");
+            if (Settings.TextsTxtFilePath != null)
+                writer.WriteLine($"{SettingsKeywords.TextsTxtPath}\t\"{Settings.TextsTxtFilePath}\"");
+
+            // Giftboxes settings
+            if (Settings.GiftBoxesConfigFilePath != null)
+                writer.WriteLine($"{SettingsKeywords.GiftBoxesConfigPath}\t\"{Settings.GiftBoxesConfigFilePath}\"");
+
+            // Motions settings
+            if (Settings.MotionsPropFilePath != null)
+                writer.WriteLine($"{SettingsKeywords.MotionsPropPath}\t\"{Settings.MotionsPropFilePath}\"");
+            if (Settings.MotionsTxtFilePath != null)
+                writer.WriteLine($"{SettingsKeywords.MotionsTxtPath}\t\"{Settings.MotionsTxtFilePath}\"");
         }
 
-        private static void SettingsChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void SettingsChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            switch(e.PropertyName)
+            if (sender != Settings)
+                throw new InvalidOperationException("SettingsService::SettingsChanged exception : sender is not Settings");
+
+            switch (e.PropertyName)
             {
+                // Main settings
                 case nameof(Settings.ResourcesVersion):
                 case nameof(Settings.ResourcesFolderPath):
                 case nameof(Settings.ClientFolderPath):
 
+                // General settings
                 case nameof(Settings.IconsFolderPath):
                 case nameof(Settings.TexturesFolderPath):
+                case nameof(Settings.ModelsFolderPath):
                 case nameof(Settings.SoundsConfigFilePath):
                 case nameof(Settings.SoundsFolderPath):
+                case nameof(Settings.FilesFormat):
 
+                // Movers settings
                 case nameof(Settings.PropMoverFilePath):
                 case nameof(Settings.PropMoverTxtFilePath):
-                case nameof(Settings.PropMoverExFilePath):
                 case nameof(Settings.Mover64BitHp):
                 case nameof(Settings.Mover64BitAtk):
 
+                // Items settings
                 case nameof(Settings.PropItemFilePath):
                 case nameof(Settings.PropItemTxtFilePath):
                 case nameof(Settings.ItemIconsFolderPath):
+
+                // Texts settings
+                case nameof(Settings.TextsConfigFilePath):
+                case nameof(Settings.TextsTxtFilePath):
+
+                // Giftboxes settings
+                case nameof(Settings.GiftBoxesConfigFilePath):
+
+                // Motions settings
+                case nameof(Settings.MotionsPropFilePath):
+                case nameof(Settings.MotionsTxtFilePath):
+
+                // Accessories settings
+                case nameof(Settings.AccessoriesConfigFilePath):
                     Save();
                     break;
 
             }
+        }
+
+        private void AiCollection_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (!Settings.MoverTypesBindings.Any(x => x.Value == sender))
+                throw new InvalidOperationException("SettingsService::AiCollection_CollectionChanged exception : sender is not part of Settings.MoverTypesBindings");
+
+            Save();
         }
     }
 }

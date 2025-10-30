@@ -61,15 +61,6 @@ namespace eTools_Ultimate.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à The file &quot;{0}&quot; is incorrectly formatted..
-        /// </summary>
-        internal static string IncorrectlyFormattedFile {
-            get {
-                return ResourceManager.GetString("IncorrectlyFormattedFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à No file path configuration found for sound with ID {0}.
         /// </summary>
         internal static string SoundConfigNotFound {

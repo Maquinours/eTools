@@ -1,209 +1,401 @@
-﻿using eTools_Ultimate.Models;
-using Scan;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using eTools_Ultimate.Exceptions;
-using System.Collections.ObjectModel;
+﻿using eTools_Ultimate.Exceptions;
 using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models;
+using Microsoft.Extensions.DependencyInjection;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Text;
 
 namespace eTools_Ultimate.Services
 {
-    internal class ModelsService
+    public class ModelsService(DefinesService definesService)
     {
-        private static readonly Lazy<ModelsService> _instance = new(() => new ModelsService());
-        public static ModelsService Instance => _instance.Value;
-
-        private readonly ObservableCollection<MainModelBrace> models = [];
-        public ObservableCollection<MainModelBrace> Models => models;
+        private readonly ObservableCollection<MainModelBrace> _models = [];
+        public ObservableCollection<MainModelBrace> Models => _models;
         private void ClearBraceRecursively(ModelBrace brace)
         {
-            foreach (ModelBrace child in brace.Braces)
+            foreach (IModelItem child in brace.Children)
             {
-                ClearBraceRecursively(child);
+                if (child is ModelBrace childBrace)
+                    ClearBraceRecursively(childBrace);
+                else if (child is Model childModel)
+                    childModel.Dispose();
+                else
+                    throw new InvalidOperationException("ModelsService::ClearBraceRecursively : child is neither ModelBrace nor Model");
             }
-            brace.Braces.Clear();
-            brace.Models.Clear();
+            brace.Children.Clear();
+            brace.Dispose();
         }
 
         private void ClearModels()
         {
-            foreach (MainModelBrace brace in this.models) // Avoid memory leaks
+            foreach (MainModelBrace brace in this.Models) // Avoid memory leaks
                 ClearBraceRecursively(brace);
-            this.models.Clear();
+            this.Models.Clear();
         }
 
         public void Load()
         {
+            List<MainModelBrace> items = [];
+
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
             this.ClearModels();
 
-            ObservableDictionary<string, int> defines = DefinesService.Instance.Defines;
-            MoversService moversService = MoversService.Instance;
-            ItemsService itemsService = ItemsService.Instance;
-
             // Maybe make it a settings property
-            string filePath = $"{Settings.Instance.ResourcesFolderPath}mdlDyna.inc";
+            string filePath = $"{settings.ResourcesFolderPath}mdlDyna.inc";
 
-            using (Scanner scanner = new Scanner()) 
+            using Script script = new();
+
+            script.Load(filePath);
+
+            while (true)
             {
-                scanner.Load(filePath);
+                string szName = script.GetToken();
 
-                string szObject;
-                while (true)
-                {
-                    MainModelBrace mainBrace = new MainModelBrace
-                    {
-                        SzName = scanner.GetToken() // Name of the main brace
-                    };
-                    if (scanner.EndOfStream) break; // If there is no more brace
-                    mainBrace.IType = scanner.GetNumber(); // Type of the main brace
-                    scanner.GetToken(); // {
-                    scanner.GetToken(); // object name or }
-                    this.models.Add(mainBrace);
-                    List<ModelBrace> currBraces = new List<ModelBrace> // List containing current brace and its parents (last element is current brace)
-                {
-                    mainBrace
-                };
-                    ModelBrace currBrace = mainBrace;
-                    while (currBraces.Count > 0)
-                    {
-                        if (scanner.Token == "}") // End of current brace
-                        {
-                            currBraces.RemoveAt(currBraces.Count - 1);
-                            if (currBraces.Count != 0)
-                            {
-                                currBrace = currBraces[currBraces.Count - 1];
-                                scanner.GetToken();
-                            }
-                            continue;
-                        }
-                        if (scanner.EndOfStream)
-                            throw new IncorrectlyFormattedFileException(filePath);
-                        szObject = scanner.Token;
-                        scanner.GetToken();
-                        if (scanner.Token == "{") // Start of a new brace
-                        {
-                            ModelBrace tempBrace = new ModelBrace
-                            {
-                                SzName = szObject
-                            };
-                            currBrace.Braces.Add(tempBrace);
-                            currBrace = tempBrace;
-                            currBraces.Add(currBrace);
-                            scanner.GetToken();
-                            continue;
-                        }
-                        // Model element
-                        ModelElem modelElem = new ModelElem();
-                        string iObject = scanner.Token;
-                        modelElem.DwType = mainBrace.IType;
-                        modelElem.DwIndex = iObject;
-                        modelElem.SzName = szObject;
-                        modelElem.DwModelType = scanner.GetToken();
-                        modelElem.SzPart = scanner.GetToken();
-                        modelElem.BFly = scanner.GetNumber();
-                        modelElem.DwDistant = scanner.GetToken();
-                        modelElem.BPick = scanner.GetNumber();
-                        modelElem.FScale = scanner.GetFloat();
-                        modelElem.BTrans = scanner.GetNumber();
-                        modelElem.BShadow = scanner.GetNumber();
-                        modelElem.NTextureEx = scanner.GetToken();
-                        modelElem.BRenderFlag = scanner.GetNumber();
+                if (script.EndOfStream) break;
 
-                        scanner.GetToken();
-                        if (scanner.Token == "{")
+                int iType = script.GetNumber();
+
+                script.GetToken(); // "{"
+
+                script.GetToken(); // Load the next token for the LoadChildren function to work correctly
+
+                IModelItem[] children = LoadChildren(script, filePath, iType);
+
+                MainModelBraceProp prop = new(szName, iType);
+                MainModelBrace brace = new(prop, children);
+
+                Models.Add(brace);
+            }
+        }
+
+        private IModelItem[] LoadChildren(Script script, string filePath, int dwType)
+        {
+            List<IModelItem> children = [];
+
+            while (true)
+            {
+                if (script.Token == "}") // End of current brace
+                    return [.. children];
+
+                if (script.EndOfStream)
+                    throw new IncorrectlyFormattedFileException(filePath);
+
+                string szObject = script.Token;
+                int iObject = script.GetNumber();
+                if (script.Token == "{") // Start of a new brace
+                {
+                    script.GetToken();
+                    IModelItem[] childBraceChildren = LoadChildren(script, filePath, dwType);
+                    script.GetToken();
+
+                    ModelBraceProp childBraceProp = new(szObject);
+                    ModelBrace childBrace = new(childBraceProp, childBraceChildren);
+                    children.Add(childBrace);
+                }
+                else
+                {
+                    int dwModelType = script.GetNumber();
+                    string szPart = script.GetToken();
+                    int bFly = script.GetNumber();
+                    int dwDistant = script.GetNumber();
+                    int bPick = script.GetNumber();
+                    float fScale = script.GetFloat();
+                    int bTrans = script.GetNumber();
+                    int bShadow = script.GetNumber();
+                    int nTextureEx = script.GetNumber();
+                    int bRenderFlag = script.GetNumber();
+
+                    script.GetToken();
+
+                    List<ModelMotion> childModelMotions = [];
+                    if (script.Token == "{")
+                    {
+                        while (true)
                         {
-                            while (true)
-                            {
-                                ModelMotion motion = new ModelMotion();
-                                if (scanner.EndOfStream)
-                                    throw new IncorrectlyFormattedFileException(filePath);
-                                motion.SzMotion = scanner.GetToken(); // motion name or }
-                                if (motion.SzMotion == "}")
-                                    break;
-                                motion.IMotion = scanner.GetToken();
-                                modelElem.Motions.Add(motion);
-                            }
-                            scanner.GetToken();
+                            if (script.EndOfStream)
+                                throw new IncorrectlyFormattedFileException(filePath);
+                            string szMotion = script.GetToken(); // motion name or }
+                            if (script.Token == "}")
+                                break;
+                            int iMotion = script.GetNumber();
+
+                            ModelMotionProp motionProp = new(iMotion, szMotion);
+                            ModelMotion motion = new(motionProp);
+
+                            childModelMotions.Add(motion);
                         }
-                        currBrace.Models.Add(modelElem); // We add the current model to the current brace
-                        if (modelElem.DwType == defines["OT_MOVER"]) // If model corresponds to a mover
-                        {
-                            Mover? mover = moversService.GetMoverById(modelElem.DwIndex);
-                            if (mover != null)
-                                mover.Model = modelElem; // We get the mover that the model is for and we set its model to the current model
-                        }
-                        else if (modelElem.DwType == defines["OT_ITEM"]) // If model corresponds to an item
-                        {
-                            Item? item = itemsService.GetItemById(modelElem.DwIndex);
-                            if (item != null)
-                                item.Model = modelElem; // We get the item that the model is for and we set its model to the current model
-                        }
+                        script.GetToken();
                     }
+
+                    ModelProp childModelProp = new(
+                        dwType: dwType,
+                        dwIndex: iObject,
+                        szName: szObject,
+                        dwModelType: dwModelType,
+                        szPart: szPart,
+                        bFly: bFly,
+                        dwDistant: dwDistant,
+                        bPick: bPick,
+                        fScale: fScale,
+                        bTrans: bTrans,
+                        bShadow: bShadow,
+                        nTextureEx: nTextureEx,
+                        bRenderFlag: bRenderFlag
+                        );
+                    Model childModel = new(childModelProp, childModelMotions);
+
+                    children.Add(childModel);
                 }
             }
+        }
 
-            // TODO: maybe readd it
-            //foreach(Mover mover in moversService.Movers.Where(x => x.Model == null)) // We add a default model for each mover who doesn't have any
-            //{
-            //    mover.Model = new ModelElem
-            //    {
-            //        DwType = defines["OT_MOVER"],
-            //        SzName = "",
-            //        DwIndex = mover.Prop.DwId,
-            //        DwModelType = "MODELTYPE_ANIMATED_MESH",
-            //        SzPart = "",
-            //        BFly = 0,
-            //        DwDistant = "MD_MID",
-            //        BPick = 0,
-            //        FScale = 1f,
-            //        BTrans = 0,
-            //        BShadow = 1,
-            //        NTextureEx = "ATEX_NONE",
-            //        BRenderFlag = 1
-            //    };
-            //}
+        public void Save()
+        {
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
+            // TODO: make it a settings property
+            string filePath = $"{settings.ResourcesFolderPath}mdlDyna.inc";
+
+            using StreamWriter writer = new(filePath, false, new UTF8Encoding(false));
+            writer.WriteLine("// ========================================");
+            writer.WriteLine("// Generated by eTools Ultimate");
+            writer.WriteLine("// https://github.com/Maquinours/eTools");
+            writer.WriteLine("// ========================================");
+            writer.WriteLine();
+
+            foreach (MainModelBrace mainBrace in Models)
+            {
+                writer.Write('"');
+                writer.Write(mainBrace.Prop.SzName);
+                writer.Write('"');
+                writer.Write('\t');
+                writer.Write(Script.NumberToString(mainBrace.Prop.IType));
+                writer.WriteLine();
+                writer.WriteLine('{');
+
+                foreach (IModelItem item in mainBrace.Children)
+                    SaveItem(writer, item, 1);
+
+                writer.WriteLine('}');
+            }
+        }
+
+        public void SaveItem(StreamWriter writer, IModelItem item, int indentLevel)
+        {
+            if (item is ModelBrace brace)
+            {
+                writer.Write(new string('\t', indentLevel));
+                writer.Write('"');
+                writer.Write(brace.Prop.SzName);
+                writer.Write('"');
+                writer.WriteLine();
+                writer.Write(new string('\t', indentLevel));
+                writer.Write('{');
+                writer.WriteLine();
+
+                foreach (IModelItem child in brace.Children)
+                    SaveItem(writer, child, indentLevel + 1);
+
+                writer.Write(new string('\t', indentLevel));
+                writer.Write('}');
+                writer.WriteLine();
+            }
+            else if (item is Model model)
+            {
+                writer.Write(new string('\t', indentLevel));
+                writer.Write('"');
+                writer.Write(model.Prop.SzName);
+                writer.Write('"');
+                writer.Write('\t');
+                writer.Write(model.Identifier);
+                writer.Write('\t');
+                writer.Write(model.ModelTypeIdentifier);
+                writer.Write('\t');
+                writer.Write('"');
+                writer.Write(model.Prop.SzPart);
+                writer.Write('"');
+                writer.Write('\t');
+                writer.Write(Script.NumberToString(model.Prop.BFly));
+                writer.Write('\t');
+                writer.Write(model.DistantIdentifier);
+                writer.Write('\t');
+                writer.Write(Script.NumberToString(model.Prop.BPick));
+                writer.Write('\t');
+                writer.Write(Script.FloatToString(model.Prop.FScale));
+                writer.Write('f');
+                writer.Write('\t');
+                writer.Write(Script.NumberToString(model.Prop.BTrans));
+                writer.Write('\t');
+                writer.Write(Script.NumberToString(model.Prop.BShadow));
+                writer.Write('\t');
+                writer.Write(model.TextureExIdentifier);
+                writer.Write('\t');
+                writer.Write(Script.NumberToString(model.Prop.BRenderFlag));
+                writer.WriteLine();
+
+                if (model.Motions.Count > 0)
+                {
+                    writer.Write(new string('\t', indentLevel));
+                    writer.Write('{');
+                    writer.WriteLine();
+
+                    foreach (ModelMotion motion in model.Motions)
+                    {
+                        writer.Write(new string('\t', indentLevel + 1));
+                        writer.Write('"');
+                        writer.Write(motion.Prop.SzMotion);
+                        writer.Write('"');
+                        writer.Write('\t');
+                        writer.Write(motion.MotionTypeIdentifier);
+                        writer.WriteLine();
+                    }
+
+                    writer.Write(new string('\t', indentLevel));
+                    writer.Write('}');
+                    writer.WriteLine();
+                }
+            }
         }
 
         private void GetBracesRecursively(List<ModelBrace> braces, ModelBrace brace)
         {
             braces.Add(brace);
-            foreach (ModelBrace subBrace in brace.Braces)
+            foreach (IModelItem child in brace.Children)
             {
-                GetBracesRecursively(braces, subBrace);
+                if (child is ModelBrace childBrace)
+                    GetBracesRecursively(braces, childBrace);
             }
+        }
+
+        private Model[] GetModelsRecursively(ModelBrace brace)
+        {
+            List<Model> models = [];
+            foreach (IModelItem child in brace.Children)
+            {
+                if (child is Model childModel)
+                    models.Add(childModel);
+                else if (child is ModelBrace childBrace)
+                    models.AddRange(GetModelsRecursively(childBrace));
+            }
+            return [.. models];
         }
 
         private ModelBrace[] GetBracesByType(int type)
         {
             List<ModelBrace> braces = [];
-            foreach (MainModelBrace mainBrace in models)
+            foreach (MainModelBrace mainBrace in Models)
             {
-                if (mainBrace.IType != type) continue;
+                if (mainBrace.Prop.IType != type) continue;
                 GetBracesRecursively(braces, mainBrace);
             }
 
             return braces.ToArray();
         }
 
-        public ModelBrace GetBraceByModel(ModelElem model)
+        public Model[] GetModelsByType(int type)
         {
-            foreach (ModelBrace brace in GetBracesByType(model.DwType))
+            List<Model> models = [];
+            foreach (MainModelBrace mainBrace in Models)
             {
-                foreach (ModelElem tempModel in brace.Models)
+                if (mainBrace.Prop.IType != type) continue;
+                models.AddRange(GetModelsRecursively(mainBrace));
+            }
+            return [.. models];
+        }
+
+        public ModelBrace GetBraceByModel(Model model)
+        {
+            foreach (ModelBrace brace in GetBracesByType(model.Prop.DwType))
+            {
+                foreach (IModelItem tempModel in brace.Children)
                     if (tempModel == model)
                         return brace;
             }
-            throw new Exception("ModelsService::GetBraceByModel Exception : Model not found");
+            throw new InvalidOperationException("ModelsService::GetBraceByModel Exception : Model not found");
         }
 
-        public void SetBraceToModel(ModelElem model, ModelBrace brace)
+        public Model? GetModelByTypeAndId(int type, int id)
+        {
+            return GetModelsByType(type).FirstOrDefault(model => model.Prop.DwIndex == id);
+        }
+
+        public Model? GetModelByObject(object obj)
+        {
+            int? modelType;
+            int? objId;
+
+            switch (obj)
+            {
+                case Mover mover:
+                    modelType = definesService.Defines["OT_MOVER"];
+                    objId = mover.Id;
+                    break;
+                case Item item:
+                    modelType = definesService.Defines["OT_ITEM"];
+                    objId = item.Id;
+                    break;
+                default:
+                    throw new InvalidOperationException("ModelsService::GetModelByObject Exception : obj has an invalid type");
+            }
+
+            if (!modelType.HasValue)
+                throw new InvalidOperationException("ModelsService::GetModelByObject Exception : modelType has no value");
+            if (!objId.HasValue)
+                throw new InvalidOperationException("ModelsService::GetModelByObject Exception : objId has no value");
+
+            return GetModelByTypeAndId(modelType.Value, objId.Value);
+        }
+
+        public Model CreateModelByObject(object obj)
+        {
+            switch (obj)
+            {
+                case Mover mover:
+                    int dwType = definesService.Defines["OT_MOVER"];
+                    int dwIndex = mover.Id;
+                    int dwModelType = definesService.Defines["MODELTYPE_ANIMATED_MESH"];
+                    int dwDistant = definesService.Defines["MD_MID"];
+
+                    ModelProp modelProp = new(
+                        dwType: dwType,
+                        dwIndex: dwIndex,
+                        szName: "",
+                        dwModelType: dwModelType,
+                        szPart: "",
+                        bFly: 0,
+                        dwDistant: dwDistant,
+                        bPick: 0,
+                        fScale: 1f,
+                        bTrans: 0,
+                        bShadow: 1,
+                        nTextureEx: 0,
+                        bRenderFlag: 1
+                        );
+                    Model model = new(modelProp, []);
+
+                    Models.First(x => x.Prop.IType == dwType).Children.Add(model);
+
+                    return model;
+                default:
+                    throw new InvalidOperationException("ModelsService::CreateModelByObject Exception : obj has an invalid type");
+            }
+        }
+
+        public void RemoveModel(Model model)
+        {
+            ModelBrace brace = GetBraceByModel(model);
+
+            model.Dispose();
+            brace.Children.Remove(model);
+        }
+
+        public void SetBraceToModel(Model model, ModelBrace brace)
         {
             ModelBrace oldBrace = GetBraceByModel(model);
-            oldBrace?.Models.Remove(model); // Remove old
-            brace.Models.Add(model); // Add to new
+            oldBrace?.Children.Remove(model); // Remove old
+            brace.Children.Add(model); // Add to new
         }
     }
 }

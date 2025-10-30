@@ -1,8 +1,7 @@
-﻿using eTools_Ultimate.Views.Pages;
-using eTools_Ultimate.Views.Windows;
-using Microsoft.Extensions.DependencyInjection;
+﻿using eTools_Ultimate.Views.Windows;
 using Microsoft.Extensions.Hosting;
-using System.Windows;
+using Velopack;
+using Velopack.Sources;
 using Wpf.Ui;
 
 namespace eTools_Ultimate.Services
@@ -10,16 +9,9 @@ namespace eTools_Ultimate.Services
     /// <summary>
     /// Managed host of the application.
     /// </summary>
-    public class ApplicationHostService : IHostedService
+    public class ApplicationHostService(IServiceProvider serviceProvider) : IHostedService
     {
-        private readonly IServiceProvider _serviceProvider;
-
-        private INavigationWindow _navigationWindow;
-
-        public ApplicationHostService(IServiceProvider serviceProvider)
-        {
-            _serviceProvider = serviceProvider;
-        }
+        private INavigationWindow? _navigationWindow;
 
         /// <summary>
         /// Triggered when the application host is ready to start the service.
@@ -40,37 +32,39 @@ namespace eTools_Ultimate.Services
         }
 
         /// <summary>
+        /// Check 
+        /// </summary>
+        /// <returns></returns>
+        private async Task CheckForUpdatesAsync()
+        {
+            try
+            {
+                var mgr = new UpdateManager(new GithubSource(repoUrl: "https://github.com/Maquinours/eTools", accessToken: null, prerelease: false));
+
+                // check for new version
+                var newVersion = await mgr.CheckForUpdatesAsync();
+
+                if(newVersion is not null)
+                    new AvailableUpdateWindow(newVersion).ShowDialog();
+            } catch (Exception)
+            {
+
+            }
+        }
+
+        /// <summary>
         /// Creates main window during activation.
         /// </summary>
         private async Task HandleActivationAsync()
         {
             if (!Application.Current.Windows.OfType<MainWindow>().Any())
             {
-                _navigationWindow = (
-                    _serviceProvider.GetService(typeof(INavigationWindow)) as INavigationWindow
-                )!;
+                _navigationWindow = (serviceProvider.GetService(typeof(INavigationWindow)) as INavigationWindow)!;
 
-                bool loadingError = false;
-                eTools_Ultimate.Views.Windows.SplashScreen splashScreen = new eTools_Ultimate.Views.Windows.SplashScreen();
+                await CheckForUpdatesAsync();
+
+                Views.Windows.SplashScreen splashScreen = serviceProvider.GetService(typeof(Views.Windows.SplashScreen)) as Views.Windows.SplashScreen ?? throw new InvalidOperationException("SplashScreen service not found");
                 splashScreen.Show();
-                try
-                {
-                    await splashScreen.Load();
-                }
-                catch (Exception ex)
-                {
-                    loadingError = true;
-                    System.Windows.MessageBox.Show(ex.Message, "Error", System.Windows.MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                finally
-                {
-                    splashScreen.Close();
-                    _navigationWindow!.ShowWindow();
-                    if (loadingError)
-                        _navigationWindow!.Navigate(typeof(ResourcePathPage));
-                    else
-                        _navigationWindow!.Navigate(typeof(DashboardPage));
-                }
             }
 
             await Task.CompletedTask;

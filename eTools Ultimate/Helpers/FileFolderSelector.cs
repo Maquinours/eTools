@@ -22,25 +22,37 @@ namespace eTools_Ultimate.Helpers
                 folderDialog.Title = title;
             if (folderDialog.ShowDialog() == true)
                 return folderDialog.FolderName;
-            return path;
+
+            return null;
         }
-        public static string? SelectFile(string? path, string? title = null)
+        public static string? SelectFile(string? path, string? title = null, string? filter = null)
         {
             OpenFileDialog fileDialog = new OpenFileDialog()
             {
                 ValidateNames = true,
                 CheckFileExists = true
             };
+
+            string? initialDirectoryPath = Path.GetDirectoryName(path);
             if (File.Exists(path))
             {
-                fileDialog.InitialDirectory = Path.GetDirectoryName(path);
+                fileDialog.InitialDirectory = initialDirectoryPath;
                 fileDialog.FileName = Path.GetFileName(path);
             }
+            else if(Directory.Exists(initialDirectoryPath))
+            {
+                fileDialog.InitialDirectory = initialDirectoryPath;
+            }
+
             if (title != null)
                 fileDialog.Title = title;
+            if (filter != null)
+                fileDialog.Filter = filter;
+
             if (fileDialog.ShowDialog() == true)
                 return fileDialog.FileName;
-            return path;
+
+            return null;
         }
     }
 }

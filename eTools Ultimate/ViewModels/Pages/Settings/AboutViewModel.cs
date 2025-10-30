@@ -1,52 +1,55 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using eTools_Ultimate.Views.Windows;
+using Microsoft.Extensions.Localization;
+using Velopack;
+using Velopack.Sources;
+using Wpf.Ui;
+using Wpf.Ui.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class AboutViewModel : ObservableObject
+    public partial class AboutViewModel(ISnackbarService snackbarService, IStringLocalizer localizer) : ObservableObject
     {
-        [ObservableProperty]
-        private string _appVersion = "";
-
-        [ObservableProperty]
-        private string _appDescription = "eTools Ultimate is a powerful editor for editing Flyff resource files.";
-
-        [ObservableProperty]
-        private string _copyright = "© 2025 eTools Ultimate. All rights reserved.";
-
-        public AboutViewModel()
-        {
-            // Version aus der Assembly-Information abrufen
-            AppVersion = $"Version: {GetAssemblyVersion()}";
-        }
-
-        private string GetAssemblyVersion()
-        {
-            return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "1.0.0";
-        }
+        public string AppVersion => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? throw new InvalidOperationException("AboutViewModel::AppVersion exception : result is null");
 
         [RelayCommand]
-        private void OpenWebsite()
+        private async Task CheckForUpdates()
         {
-            // Öffnet die Website in einem Browser
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            try
             {
-                FileName = "https://example.com",
-                UseShellExecute = true
-            });
-        }
+                var mgr = new UpdateManager(new GithubSource(repoUrl: "https://github.com/Maquinours/eTools", accessToken: null, prerelease: false));
 
-        [RelayCommand]
-        private void CheckForUpdates()
-        {
-            // Demo-Nachricht anzeigen
-            var messageBox = new Wpf.Ui.Controls.MessageBox
+                // check for new version
+                var update = await mgr.CheckForUpdatesAsync();
+
+                if (update is null)
+                {
+                    snackbarService.Show(
+                    title: localizer["No update available"],
+                    message: localizer["You already have the latest version."],
+                    appearance: ControlAppearance.Info,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+                }
+                else
+                {
+                    // create and show the AvailableUpdateWindow
+                    var updateWindow = new AvailableUpdateWindow(update);
+                    updateWindow.ShowDialog();
+                }
+            }
+            catch (Exception ex)
             {
-                Title = "Software Updates",
-                Content = "You already have the latest version of the software."
-            };
-            
-            messageBox.ShowDialogAsync();
+                snackbarService.Show(
+                    title: localizer["Update check failed"],
+                    message: ex.Message,
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
         }
     }
 } 
