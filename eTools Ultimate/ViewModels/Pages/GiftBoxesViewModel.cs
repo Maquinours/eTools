@@ -7,6 +7,7 @@ using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using eTools_Ultimate.Views.Dialogs;
 using eTools_Ultimate.Views.Pages;
 using Microsoft.Extensions.Localization;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -174,6 +175,62 @@ namespace eTools_Ultimate.ViewModels.Pages
                 snackbarService.Show(
                     title: localizer["Error saving giftboxes"],
                     message: ex.Message,
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyItemIdentifier(GiftBox giftbox)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(giftbox.ItemIdentifier);
+
+                snackbarService.Show(
+                        title: localizer["Item identifier copied"],
+                        message: localizer["The item identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying giftbox item identifier", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The item identifier could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyItemId(GiftBox giftbox)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(giftbox.Prop.DwItem.ToString());
+
+                snackbarService.Show(
+                        title: localizer["Item ID copied"],
+                        message: localizer["The item ID has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying giftbox item ID", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The item ID could not be copied to the clipboard."],
                     appearance: ControlAppearance.Danger,
                     icon: null,
                     timeout: TimeSpan.FromSeconds(3)

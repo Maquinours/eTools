@@ -268,7 +268,8 @@ namespace eTools_Ultimate.ViewModels.Pages
             try
             {
                 InitializeTexturesDirectoryWatcherPath();
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Log.Error(ex, "Error during MoversViewModel textures directory watcher initialization.");
             }
@@ -454,14 +455,16 @@ namespace eTools_Ultimate.ViewModels.Pages
                         try
                         {
                             InitializeModelsDirectoryWatcherPath();
-                        } catch(Exception ex)
+                        }
+                        catch (Exception ex)
                         {
                             Log.Error(ex, "Error during MoversViewModel models directory watcher re-initialization.");
                         }
                         try
                         {
                             InitializeMotionsDirectoryWatcherPath();
-                        } catch(Exception ex)
+                        }
+                        catch (Exception ex)
                         {
                             Log.Error(ex, "Error during MoversViewModel motions directory watcher re-initialization.");
                         }
@@ -473,7 +476,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                         try
                         {
                             InitializeTexturesDirectoryWatcherPath();
-                        } catch(Exception ex)
+                        }
+                        catch (Exception ex)
                         {
                             Log.Error(ex, "Error during MoversViewModel textures directory watcher re-initialization.");
                         }
@@ -576,7 +580,8 @@ namespace eTools_Ultimate.ViewModels.Pages
             try
             {
                 InitializeMotionsDirectoryWatcherPath();
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Log.Error(ex, "Error during MoversViewModel motions directory watcher re-initialization.");
             }
@@ -619,7 +624,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                 try
                 {
                     InitializeMotionsDirectoryWatcherPath();
-                } catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     Log.Error(ex, "Error during MoversViewModel motions directory watcher re-initialization.");
                 }
@@ -670,7 +676,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                 try
                 {
                     InitializeMotionsDirectoryWatcherPath();
-                } catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     Log.Error(ex, "Error during MoversViewModel motions directory watcher re-initialization.");
                 }
@@ -1074,6 +1081,118 @@ namespace eTools_Ultimate.ViewModels.Pages
                 snackbarService.Show(
                     title: localizer["Error saving movers and motions"],
                     message: ex.Message,
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyIdentifier(Mover mover)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(mover.Identifier);
+
+                snackbarService.Show(
+                        title: localizer["Identifier copied"],
+                        message: localizer["The identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying mover identifier", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The identifier could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyId(Mover mover)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(mover.Prop.DwId.ToString());
+
+                snackbarService.Show(
+                        title: localizer["ID copied"],
+                        message: localizer["The ID has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying mover ID", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The ID could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyNameIdentifier(Mover mover)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(mover.Prop.SzName);
+
+                snackbarService.Show(
+                        title: localizer["Name identifier copied"],
+                        message: localizer["The name identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying mover name identifier", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The name identifier could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyName(Mover mover)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(mover.Name);
+
+                snackbarService.Show(
+                        title: localizer["Name copied"],
+                        message: localizer["The name has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying mover name", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The name could not be copied to the clipboard."],
                     appearance: ControlAppearance.Danger,
                     icon: null,
                     timeout: TimeSpan.FromSeconds(3)

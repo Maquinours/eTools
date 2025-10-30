@@ -3,6 +3,7 @@ using eTools_Ultimate.Models;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.Localization;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -364,6 +365,174 @@ namespace eTools_Ultimate.ViewModels.Pages
                 return;
 
             motion.Prop.SzIconName = fileName;
+        }
+
+        [RelayCommand]
+        private void CopyIdentifier(Motion motion)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(motion.Identifier);
+
+                snackbarService.Show(
+                        title: localizer["Identifier copied"],
+                        message: localizer["The identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying motion identifier", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The identifier could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyId(Motion mover)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(mover.Prop.DwId.ToString());
+
+                snackbarService.Show(
+                        title: localizer["ID copied"],
+                        message: localizer["The ID has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying motion ID", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The ID could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyNameIdentifier(Motion motion)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(motion.Prop.SzName);
+
+                snackbarService.Show(
+                        title: localizer["Name identifier copied"],
+                        message: localizer["The name identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying motion name identifier", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The name identifier could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyName(Motion motion)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(motion.Name);
+
+                snackbarService.Show(
+                        title: localizer["Name copied"],
+                        message: localizer["The name has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying motion name", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The name could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyDescriptionIdentifier(Motion motion)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(motion.Prop.SzDesc);
+
+                snackbarService.Show(
+                        title: localizer["Description identifier copied"],
+                        message: localizer["The description identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying motion description identifier", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The description identifier could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyDescription(Motion motion)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(motion.Description);
+
+                snackbarService.Show(
+                        title: localizer["Description copied"],
+                        message: localizer["The description has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying motion description", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The description could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
         }
     }
 }

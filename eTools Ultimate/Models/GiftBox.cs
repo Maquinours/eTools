@@ -169,6 +169,7 @@ namespace eTools_Ultimate.Models
         public Item? Item => App.Services.GetRequiredService<ItemsService>().Items.Where(x => x.Id == Prop.DwItem).FirstOrDefault();
         public int TotalProbability => this.Items.Sum(x => x.Prop.DwProbability);
         public double TotalProbabilityPercent => Math.Round(this.TotalProbability / 1_000_000d * 100, 2);
+        public string ItemIdentifier => Script.NumberToString(Prop.DwItem, App.Services.GetRequiredService<DefinesService>().ReversedItemDefines);
 
         public GiftBox(GiftBoxProp prop, IEnumerable<GiftBoxItem> items)
         {

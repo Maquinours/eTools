@@ -155,6 +155,20 @@
                     ItemsSource="{Binding GiftboxesView}"
                     SelectionChanged="GiftboxListView_SelectionChanged"
                     SelectionMode="Single">
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="{i18n:StringLocalizer 'Copy'}">
+                                <MenuItem
+                                    Command="{Binding CopyItemIdentifierCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
+                                    Header="{i18n:StringLocalizer 'Copy item identifier'}" />
+                                <MenuItem
+                                    Command="{Binding CopyItemIdCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
+                                    Header="{i18n:StringLocalizer 'Copy item ID'}" />
+                            </MenuItem>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Background" Value="Transparent" />

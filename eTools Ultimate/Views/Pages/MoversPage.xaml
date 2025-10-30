@@ -1038,6 +1038,28 @@
                     ItemsSource="{Binding MoversView}"
                     SelectionChanged="MoversListView_SelectionChanged"
                     SelectionMode="Single">
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="{i18n:StringLocalizer 'Copy'}">
+                                <MenuItem
+                                    Command="{Binding CopyIdentifierCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
+                                    Header="{i18n:StringLocalizer 'Copy identifier'}" />
+                                <MenuItem
+                                    Command="{Binding CopyIdCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
+                                    Header="{i18n:StringLocalizer 'Copy ID'}" />
+                                <MenuItem
+                                    Command="{Binding CopyNameIdentifierCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
+                                    Header="{i18n:StringLocalizer 'Copy name identifier'}" />
+                                <MenuItem
+                                    Command="{Binding CopyNameCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
+                                    Header="{i18n:StringLocalizer 'Copy name'}" />
+                            </MenuItem>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Background" Value="Transparent" />
