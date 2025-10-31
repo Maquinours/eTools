@@ -27,70 +27,109 @@ namespace eTools_Ultimate.Models
         DROPTYPE_SEED,
     };
 
-    public class DropItem(DropType dtType, int dwIndex, int dwProbability, int dwLevel, int dwNumber, int dwNumber2)
+    public class DropItem(DropType dtType, uint dwIndex, uint dwProbability, uint dwLevel, uint dwNumber, uint dwNumber2)
     {
         private DropType _dtType = dtType;
-        private int _dwIndex = dwIndex;
-        private int _dwProbability = dwProbability;
-        private int _dwLevel = dwLevel;
-        private int _dwNumber = dwNumber;
-        private int _dwNumber2 = dwNumber2;
+        private uint _dwIndex = dwIndex;
+        private uint _dwProbability = dwProbability;
+        private uint _dwLevel = dwLevel;
+        private uint _dwNumber = dwNumber;
+        private uint _dwNumber2 = dwNumber2;
 
         public DropType DtType => _dtType;
-        public int DwIndex
+        public uint DwIndex
         {
             get => _dwIndex;
         }
 
         public Item? item => App.Services.GetRequiredService<ItemsService>().Items.FirstOrDefault(x => x.Id == DwIndex);
+        public double ProbabilityPercent => _dwProbability / 3_000_000_000f * 100;
     }
 
-    public class DropKind(int dwIk3, short nMinUniq, short nMaxUniq)
+    public class DropKind(uint dwIk3, short nMinUniq, short nMaxUniq)
     {
-        private int _dwIk3 = dwIk3;
+        private uint _dwIk3 = dwIk3;
         private short _nMinUniq = nMinUniq; // Not sure it is used in any source
         private short _nMaxUniq = nMaxUniq; // Not sure it is used in any source
     }
 
-    public class DropKindGenerator
+    public class DropKindGenerator(IEnumerable<DropKind> dropKinds)
     {
-        private List<DropKind> _dropKinds;
+        private readonly List<DropKind> _dropKinds = [..dropKinds];
     }
 
-    public class DropItemGenerator
+    public class DropItemGenerator(uint dwMax, IEnumerable<DropItem> dropItems)
     {
-        private int _dwMax;
-        private List<DropItem> _dropItems;
+        private uint _dwMax = dwMax;
+        private readonly List<DropItem> _dropItems = [..dropItems];
+
+        public List<DropItem> DropItems => _dropItems;
     }
 
-    public class MoverPropEx()
+    public class MoverPropEx(
+        int dwId,  int bMeleeAttack, int nLvCond, int bRecvCond, int nScanJob, short nAttackFirstRange, uint dwScanQuestId, uint dwScanItemIdx, int nScanChao,
+        int nRecvCondMe, int nRecvCondHow, int nRecvCondMp, byte bRecvCondWho, uint tmUnitHelp, int nHelpRangeMul, byte bHelpWho, short nCallHelperMax, int nHpCond,
+        byte[] bRangeAttack, int nSummProb, int nSummNum, int nSummId, int nBerserkHp, float fBerserkDmgMul, int nLoot, int nLootProb,
+        int nEvasionHp, int nEvasionSec, int nRunawayHp, int nCallHp, short[] nCallHelperIdx, short[] nCallHelperNum, short[] bCallHelperParty,
+        short nAttackItemNear, short nAttackItemFar, short nAttackItem1, short nAttackItem2, short nAttackItem3, short nAttackItem4,
+        short nAttackItemSec, short nMagicReflection, short nImmortality, int bBlow, short nChangeTargetRand, short dwAttackMoveDelay, short dwRunawayDelay,
+        DropItemGenerator dropItemGenerator, DropKindGenerator dropKindGenerator, float fMonsterTransformHpRate, uint dwMonsterTransformMonsterId
+        )
     {
-        private int nAttackFirstRange;
-        //private int nEvasionHp;
-        //private int nEvasionSec;
-        //private Evasion? _evasion;
-        private int nRunawayHp;
-        private int nCallHp;
-        private int nCallHelperMax; // not sure we need this
-        private short[] nCallHelperIdx;
-        private short[] nCallHelperNum;
-        private short[] bCallHelperParty;
-        //private CallHelper _callHelper;
-        private short nAttackItemNear;
-        private short _nAttackItemFar;
-        private short _nAttackItem1;
-        private short _nAttackItem2;
-        private short _nAttackItem3;
-        private short _nAttackItem4;
-        private short _nAttackItemSec;
-        private short _nMagicReflection;
-        private short _nImmortality;
-        private int _bBlow;
-        private short _nChangeTargetRand;
-        private short _dwAttackMoveDelay;
-        private short _dwRunAwayDelay;
-        private DropItemGenerator _dropItemGenerator;
-        private DropKindGenerator _dropKindGenerator;
+        private int _dwId = dwId;
+        private int _bMeleeAttack = bMeleeAttack;
+        private int _nLvCond = nLvCond;
+        private int _bRecvCond = bRecvCond;
+        private int _nScanJob = nScanJob;
+        private short _nAttackFirstRange = nAttackFirstRange;
+        private int _dwScanQuestId = dwScanQuestId;
+        private int _dwScanItemIdx = dwScanItemIdx;
+        private int _nScanChao = nScanChao;
+        private int _nRecvCondMe = nRecvCondMe;
+        private int _nRecvCondHow = nRecvCondHow;
+        private int _nRecvCondMp = nRecvCondMp;
+        private byte _bRecvCondWho = bRecvCondWho;
+        private int _tmUnitHelp = tmUnitHelp;
+        private int _nHelpRangeMul = nHelpRangeMul;
+        private byte _bHelpWho = bHelpWho;
+        private short _nCallHelperMax = nCallHelperMax;
+        private int _nHpCond = nHpCond;
+        private byte[] _bRangeAttack = bRangeAttack;
+        private int _nSummProb = nSummProb;
+        private int _nSummNum = nSummNum;
+        private int _nSummId = nSummId;
+        private int _nBerserkHp = nBerserkHp;
+        private float _fBerserkDmgMul = fBerserkDmgMul;
+        private int _nLoot = nLoot;
+        private int _nLootProb = nLootProb;
+        private int _nEvasionHp = nEvasionHp;
+        private int _nEvasionSec = nEvasionSec;
+        private int _nRunawayHp = nRunawayHp;
+        private int _nCallHp = nCallHp;
+        private short[] _nCallHelperIdx = nCallHelperIdx;
+        private short[] _nCallHelperNum = nCallHelperNum;
+        private short[] _bCallHelperParty = bCallHelperParty;
+        private short _nAttackItemNear = nAttackItemNear;
+        private short _nAttackItemFar = nAttackItemFar;
+        private short _nAttackItem1 = nAttackItem1;
+        private short _nAttackItem2 = nAttackItem2;
+        private short _nAttackItem3 = nAttackItem3;
+        private short _nAttackItem4 = nAttackItem4;
+        private short _nAttackItemSec = nAttackItemSec;
+        private short _nMagicReflection = nMagicReflection;
+        private short _nImmortality = nImmortality;
+        private int _bBlow = bBlow;
+        private short _nChangeTargetRand = nChangeTargetRand;
+        private short _dwAttackMoveDelay = dwAttackMoveDelay;
+        private short _dwRunAwayDelay = dwRunawayDelay;
+        private readonly DropItemGenerator _dropItemGenerator = dropItemGenerator;
+        private readonly DropKindGenerator _dropKindGenerator = dropKindGenerator;
+        private float _fMonsterTransformHpRate = fMonsterTransformHpRate;
+        private int _dwMonsterTransformMonsterId = dwMonsterTransformMonsterId;
+
+        public int DwId => _dwId;
+
+        public DropItemGenerator DropItemGenerator => _dropItemGenerator;
     }
 
     public class MoverProp(
@@ -497,8 +536,10 @@ namespace eTools_Ultimate.Models
         }
 
         private readonly MoverProp _prop;
+        private readonly MoverPropEx? _propEx;
 
         public MoverProp Prop => this._prop;
+        public MoverPropEx? PropEx => this._propEx;
 
         public Model? Model => App.Services.GetRequiredService<ModelsService>().GetModelByObject(this);
 
@@ -643,9 +684,10 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public Mover(MoverProp prop)
+        public Mover(MoverProp prop, MoverPropEx? propEx)
         {
             _prop = prop;
+            _propEx = propEx;
 
             Prop.PropertyChanged += Prop_PropertyChanged;
             App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged += ProjectStrings_CollectionChanged;
