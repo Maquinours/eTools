@@ -13,10 +13,63 @@ using Wpf.Ui;
 
 namespace eTools_Ultimate.Services
 {
-    public class ItemsService(SettingsService settingsService, StringsService stringsService, DefinesService definesService, ModelsService modelsService)
+    public class ItemsService
     {
+        private readonly Settings _settings;
+        private readonly DefinesService _definesService;
+        private readonly ModelsService _modelsService;
+
         private readonly ObservableCollection<Item> items = [];
+
+        public event EventHandler<ItemPropertyChangedEventArgs>? ItemPropertyChanged;
+        public event EventHandler<ItemPropPropertyChangedEventArgs>? ItemPropPropertyChanged;
+
         public ObservableCollection<Item> Items => this.items;
+
+        public ItemsService(SettingsService settingsService, StringsService stringsService, DefinesService definesService, ModelsService modelsService)
+        {
+            _settings = settingsService.Settings;
+            _definesService = definesService;
+            _modelsService = modelsService;
+
+            Items.CollectionChanged += Items_CollectionChanged;
+        }
+
+        private void Items_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.NewItems != null)
+            {
+                foreach (Item newItem in e.NewItems)
+                {
+                    newItem.PropertyChanged += Item_PropertyChanged;
+                    newItem.Prop.PropertyChanged += ItemProp_PropertyChanged;
+                }
+            }
+            if (e.OldItems != null)
+            {
+                foreach (Item oldItem in e.OldItems)
+                {
+                    oldItem.PropertyChanged -= Item_PropertyChanged;
+                    oldItem.Prop.PropertyChanged -= ItemProp_PropertyChanged;
+                }
+            }
+        }
+
+        private void ItemProp_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(sender is not ItemProp itemProp) throw new InvalidOperationException("sender is not ItemProp");
+            if(e.PropertyName is null) throw new InvalidOperationException("e.PropertyName is null");
+
+            ItemPropPropertyChanged?.Invoke(this, new ItemPropPropertyChangedEventArgs(itemProp,  e.PropertyName));
+        }
+
+        private void Item_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (sender is not Item item) throw new InvalidOperationException("sender is not Item");
+            if(e.PropertyName is null) throw new InvalidOperationException("e.PropertyName is null");
+
+            ItemPropertyChanged?.Invoke(this, new ItemPropertyChangedEventArgs(item, e.PropertyName));
+        }
 
         private void ClearItems()
         {
@@ -34,14 +87,14 @@ namespace eTools_Ultimate.Services
         {
             this.ClearItems();
 
-            int itemModelType = definesService.Defines["OT_ITEM"];
-            Model[] itemModels = modelsService.GetModelsByType(itemModelType);
+            int itemModelType = _definesService.Defines["OT_ITEM"];
+            Model[] itemModels = _modelsService.GetModelsByType(itemModelType);
             Dictionary<int, Model> itemModelsDictionary = itemModels.ToDictionary(x => x.Prop.DwIndex, x => x); // used to get better performance
 
 
             using (Script script = new())
             {
-                string filePath = settingsService.Settings.PropItemFilePath ?? settingsService.Settings.DefaultPropItemFilePath;
+                string filePath = _settings.PropItemFilePath ?? _settings.DefaultPropItemFilePath;
                 script.Load(filePath);
                 while (true)
                 {
@@ -108,7 +161,7 @@ namespace eTools_Ultimate.Services
                     int dwDestParam4 = default;
                     int dwDestParam5 = default;
                     int dwDestParam6 = default;
-                    if (settingsService.Settings.ResourcesVersion >= 19 || settingsService.Settings.FilesFormat == FilesFormats.Florist)
+                    if (_settings.ResourcesVersion >= 19 || _settings.FilesFormat == FilesFormats.Florist)
                     {
                         dwDestParam4 = script.GetNumber();
                         dwDestParam5 = script.GetNumber();
@@ -120,7 +173,7 @@ namespace eTools_Ultimate.Services
                     int nAdjParamVal4 = default;
                     int nAdjParamVal5 = default;
                     int nAdjParamVal6 = default;
-                    if (settingsService.Settings.ResourcesVersion >= 19 || settingsService.Settings.FilesFormat == FilesFormats.Florist)
+                    if (_settings.ResourcesVersion >= 19 || _settings.FilesFormat == FilesFormats.Florist)
                     {
                         nAdjParamVal4 = script.GetNumber();
                         nAdjParamVal5 = script.GetNumber();
@@ -133,7 +186,7 @@ namespace eTools_Ultimate.Services
                     int dwChgParamVal4 = default;
                     int dwChgParamVal5 = default;
                     int dwChgParamVal6 = default;
-                    if (settingsService.Settings.ResourcesVersion >= 19 || settingsService.Settings.FilesFormat == FilesFormats.Florist)
+                    if (_settings.ResourcesVersion >= 19 || _settings.FilesFormat == FilesFormats.Florist)
                     {
                         dwChgParamVal4 = script.GetNumber();
                         dwChgParamVal5 = script.GetNumber();
@@ -145,7 +198,7 @@ namespace eTools_Ultimate.Services
                     int nDestData14 = default;
                     int nDestData15 = default;
                     int nDestData16 = default;
-                    if (settingsService.Settings.ResourcesVersion >= 19 || settingsService.Settings.FilesFormat == FilesFormats.Florist)
+                    if (_settings.ResourcesVersion >= 19 || _settings.FilesFormat == FilesFormats.Florist)
                     {
                         nDestData14 = script.GetNumber();
                         nDestData15 = script.GetNumber();
@@ -191,7 +244,7 @@ namespace eTools_Ultimate.Services
                     int nItemResistWater = default;
                     int nItemResistEarth = default;
 
-                    if (settingsService.Settings.FilesFormat != FilesFormats.Florist)
+                    if (_settings.FilesFormat != FilesFormats.Florist)
                     {
                         nItemResistElecricity = (int)(script.GetFloat() * 100.0f);
                         nItemResistFire = (int)(script.GetFloat() * 100.0f);
@@ -261,7 +314,7 @@ namespace eTools_Ultimate.Services
                     int bCanLooksChange = default;
                     int bIsLooksChangeMaterial = default;
 
-                    if (settingsService.Settings.ResourcesVersion >= 16 && settingsService.Settings.FilesFormat != FilesFormats.Florist)
+                    if (_settings.ResourcesVersion >= 16 && _settings.FilesFormat != FilesFormats.Florist)
                     {
                         nMinLimitLevel = script.GetNumber();
                         nMaxLimitLevel = script.GetNumber();
@@ -290,7 +343,7 @@ namespace eTools_Ultimate.Services
                         dwPierce = script.GetNumber();
                         dwUprouse = script.GetNumber();
                         bAbsoluteTime = script.GetNumber();
-                        if (settingsService.Settings.ResourcesVersion >= 18)
+                        if (_settings.ResourcesVersion >= 18)
                         {
                             dwItemGrade = script.GetNumber(); // ITEM_GRADE_
                             bCanTrade = script.GetNumber();
@@ -298,7 +351,7 @@ namespace eTools_Ultimate.Services
                             dwSubCategory = script.GetNumber(); // TYPE2_
                             bCanHaveServerTransform = script.GetNumber();
                             bCanSavePotion = script.GetNumber();
-                            if (settingsService.Settings.ResourcesVersion >= 19)
+                            if (_settings.ResourcesVersion >= 19)
                             {
                                 bCanLooksChange = script.GetNumber();
                                 bIsLooksChangeMaterial = script.GetNumber();
@@ -494,5 +547,17 @@ namespace eTools_Ultimate.Services
                 }
             }
         }
+    }
+
+    public class ItemPropertyChangedEventArgs(Item item, string propertyName) : EventArgs
+    {
+        public Item Item { get; } = item;
+        public string PropertyName { get; } = propertyName;
+    }
+
+    public class ItemPropPropertyChangedEventArgs(ItemProp itemProp, string propertyName) : EventArgs
+    {
+        public ItemProp ItemProp { get; } = itemProp;
+        public string PropertyName { get; } = propertyName;
     }
 }

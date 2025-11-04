@@ -89,11 +89,6 @@ namespace eTools_Ultimate.Services
                 if (propExDict.TryGetValue(prop.DwId, out MoverPropEx? value))
                     propEx = value;
 
-                if(prop.DwId == 1276)
-                {
-
-                }
-
                 Mover mover = new(prop, propEx);
                 this.Movers.Add(mover);
             }
@@ -416,8 +411,8 @@ namespace eTools_Ultimate.Services
                 short dwAttackMoveDelay = 0;
                 short dwRunawayDelay = 0;
                 uint dwDropItemGeneratorMax = 0;
-                List<DropItem> dropItems = [];
-                List<DropKind> dropKinds = [];
+                List<DropItemProp> dropItems = [];
+                List<DropKindProp> dropKinds = [];
                 float fMonsterTransformHpRate = 0;
                 uint dwMonsterTransformMonsterId = 0xffffffff;
 
@@ -597,7 +592,7 @@ namespace eTools_Ultimate.Services
                                 uint dwNumber = (uint)script.GetNumber();
                                 script.GetToken(); // )
 
-                                DropItem dropItem = new(DropType.DROPTYPE_NORMAL, dwIndex, dwProbability, dwLevel, dwNumber, 0);
+                                DropItemProp dropItem = new(DropType.DROPTYPE_NORMAL, dwIndex, dwProbability, dwLevel, dwNumber, 0);
                                 dropItems.Add(dropItem);
                                 break;
                             }
@@ -611,7 +606,7 @@ namespace eTools_Ultimate.Services
                                 short nMaxUniq = (short)script.GetNumber(); //  Was used to set max uniq. TODO: Check if a source use it.
                                 script.GetToken(); // )
 
-                                DropKind dropKind = new(dwIk3, nMinUniq, nMaxUniq);
+                                DropKindProp dropKind = new(dwIk3, nMinUniq, nMaxUniq);
                                 dropKinds.Add(dropKind);
                                 break;
                             }
@@ -623,7 +618,7 @@ namespace eTools_Ultimate.Services
                                 uint dwNumber2 = (uint)script.GetNumber();
                                 script.GetToken();
 
-                                DropItem dropItem = new(DropType.DROPTYPE_SEED, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, dwNumber, dwNumber2); // TODO: maybe should not use drop item for DropGold.
+                                DropItemProp dropItem = new(DropType.DROPTYPE_SEED, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, dwNumber, dwNumber2); // TODO: maybe should not use drop item for DropGold.
                                 dropItems.Add(dropItem);
                                 break;
                             }
@@ -650,9 +645,8 @@ namespace eTools_Ultimate.Services
                     nRunawayHp: nRunawayHp, nCallHp: nCallHp, nCallHelperIdx: nCallHelperIdx, nCallHelperNum: nCallHelperNum, bCallHelperParty: bCallHelperParty,
                     nAttackItemNear: nAttackItemNear, nAttackItemFar: nAttackItemFar, nAttackItem1: nAttackItem1, nAttackItem2: nAttackItem2,
                     nAttackItem3: nAttackItem3, nAttackItem4: nAttackItem4, nAttackItemSec: nAttackItemSec, nMagicReflection: nMagicReflexion,
-                    nImmortality: nImmortality, bBlow: bBlow, nChangeTargetRand: nChangeTargetRand, dwAttackMoveDelay: dwAttackMoveDelay,
-                    dwRunawayDelay: dwRunawayDelay, dropItemGenerator: new DropItemGenerator(dwDropItemGeneratorMax, dropItems),
-                    dropKindGenerator: new DropKindGenerator(dropKinds), fMonsterTransformHpRate: fMonsterTransformHpRate,
+                    nImmortality: nImmortality, bBlow: bBlow, nChangeTargetRand: nChangeTargetRand, dwAttackMoveDelay: dwAttackMoveDelay, dwRunawayDelay: dwRunawayDelay,
+                    dwDropItemGeneratorMax: dwDropItemGeneratorMax, dropItems: dropItems, dropKinds: dropKinds, fMonsterTransformHpRate: fMonsterTransformHpRate,
                     dwMonsterTransformMonsterId: dwMonsterTransformMonsterId
                     );
 

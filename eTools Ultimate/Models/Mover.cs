@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Wpf.Ui;
 
 namespace eTools_Ultimate.Models
 {
@@ -27,7 +28,7 @@ namespace eTools_Ultimate.Models
         DROPTYPE_SEED,
     };
 
-    public class DropItem(DropType dtType, uint dwIndex, uint dwProbability, uint dwLevel, uint dwNumber, uint dwNumber2)
+    public class DropItemProp(DropType dtType, uint dwIndex, uint dwProbability, uint dwLevel, uint dwNumber, uint dwNumber2) : INotifyPropertyChanged
     {
         private DropType _dtType = dtType;
         private uint _dwIndex = dwIndex;
@@ -36,26 +37,239 @@ namespace eTools_Ultimate.Models
         private uint _dwNumber = dwNumber;
         private uint _dwNumber2 = dwNumber2;
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         public DropType DtType => _dtType;
         public uint DwIndex
         {
             get => _dwIndex;
+            set => SetValue(ref _dwIndex, value);
+        }
+        public uint DwProbability
+        {
+            get => _dwProbability;
+            set => SetValue(ref _dwProbability, value);
         }
 
-        public Item? item => App.Services.GetRequiredService<ItemsService>().Items.FirstOrDefault(x => x.Id == DwIndex);
-        public double ProbabilityPercent => _dwProbability / 3_000_000_000f * 100;
+        private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+                return false;
+
+            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new InvalidOperationException($"SetValue with not safe to assign directly property {propertyName}");
+
+            field = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            return true;
+        }
     }
 
-    public class DropKind(uint dwIk3, short nMinUniq, short nMaxUniq)
+    public class DropItem : INotifyPropertyChanged, IDisposable
     {
-        private uint _dwIk3 = dwIk3;
-        private short _nMinUniq = nMinUniq; // Not sure it is used in any source
-        private short _nMaxUniq = nMaxUniq; // Not sure it is used in any source
+        private DropItemProp _prop;
+
+        public DropItemProp Prop => _prop;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public Item? Item => App.Services.GetRequiredService<ItemsService>().Items.FirstOrDefault(x => x.Id == Prop.DwIndex);
+        public double ProbabilityPercent => Prop.DwProbability / 3_000_000_000f * 100;
+
+        public DropItem(DropItemProp prop)
+        {
+            _prop = prop;
+
+            ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
+
+            prop.PropertyChanged += Prop_PropertyChanged;
+            itemsService.Items.CollectionChanged += ItemsService_Items_CollectionChanged;
+            itemsService.ItemPropPropertyChanged += ItemsService_ItemPropPropertyChanged;
+        }
+
+        public void Dispose()
+        {
+            ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
+
+            Prop.PropertyChanged -= Prop_PropertyChanged;
+            itemsService.Items.CollectionChanged -= ItemsService_Items_CollectionChanged;
+            itemsService.ItemPropPropertyChanged -= ItemsService_ItemPropPropertyChanged;
+
+            GC.SuppressFinalize(this);
+        }
+
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void ItemsService_ItemPropPropertyChanged(object? sender, ItemPropPropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == nameof(ItemProp.DwId))
+                NotifyPropertyChanged(nameof(Item));
+        }
+
+        private void ItemsService_Items_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            NotifyPropertyChanged(nameof(Item));
+        }
+
+        private void Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            switch(e.PropertyName)
+            {
+                case nameof(Prop.DwIndex):
+                    NotifyPropertyChanged(nameof(Item));
+                    break;
+                case nameof(Prop.DwProbability):
+                    NotifyPropertyChanged(nameof(ProbabilityPercent));
+                    break;
+            }
+        }
+    }
+
+    public class DropKindProp : INotifyPropertyChanged
+    {
+        private uint _dwIk3;
+        private short _nMinUniq; // Not sure it is used in any source
+        private short _nMaxUniq; // Not sure it is used in any source
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public uint DwIk3
+        {
+            get => _dwIk3;
+            set => SetValue(ref _dwIk3, value);
+        }
+
+        public DropKindProp(uint dwIk3, short nMinUniq, short nMaxUniq)
+        {
+            _dwIk3 = dwIk3;
+            _nMinUniq = nMinUniq;
+            _nMaxUniq = nMaxUniq;
+        }
+
+        private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+                return false;
+
+            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new InvalidOperationException($"SetValue with not safe to assign directly property {propertyName}");
+
+            field = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            return true;
+        }
+    }
+
+    public class DropKind : INotifyPropertyChanged, IDisposable
+    {
+        private readonly MoverPropEx _parent;
+        private readonly DropKindProp _prop;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public DropKindProp Prop => _prop;
+        public Item[] Items
+        {
+            get
+            {
+                Mover mover = App.Services.GetRequiredService<MoversService>().Movers.FirstOrDefault(x => x.PropEx == _parent) ?? throw new InvalidOperationException("Cannot find mover");
+
+                if(mover.PropEx is null) throw new InvalidOperationException("Mover has no MoverPropEx");
+                if (!mover.PropEx.DropKindGenerator.DropKinds.Any(x => x == this)) throw new InvalidOperationException("Cannot get items for DropKind from DropKindGenerator");
+
+                short nMinUniq = (short)Math.Max(mover.Prop.DwLevel - 5, 1);
+                short nMaxUniq = (short)Math.Max(mover.Prop.DwLevel - 2, 1);
+
+                return [..App.Services.GetRequiredService<ItemsService>().Items.Where(item => item.Prop.DwItemKind3 == Prop.DwIk3 && item.Prop.DwItemRare >= nMinUniq && item.Prop.DwItemRare <= nMaxUniq)];
+            }
+        }
+
+        public DropKind(MoverPropEx parent, DropKindProp prop)
+        {
+            _parent = parent;
+            _prop = prop;
+
+            MoversService moversService = App.Services.GetRequiredService<MoversService>();
+            ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
+            Mover? mover = moversService.Movers.FirstOrDefault(x => x.PropEx == _parent);
+
+            itemsService.Items.CollectionChanged += ItemsService_Items_CollectionChanged;
+            itemsService.ItemPropPropertyChanged += ItemsService_ItemPropPropertyChanged;
+            prop.PropertyChanged += Prop_PropertyChanged;
+
+            if (mover is null)
+                moversService.Movers.CollectionChanged += MoversService_Movers_CollectionChanged;
+            else
+                mover.Prop.PropertyChanged += Mover_Prop_PropertyChanged;
+        }
+
+        public void Dispose()
+        {
+            MoversService moversService = App.Services.GetRequiredService<MoversService>();
+            ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
+
+            itemsService.Items.CollectionChanged -= ItemsService_Items_CollectionChanged;
+            itemsService.ItemPropPropertyChanged -= ItemsService_ItemPropPropertyChanged;
+
+            Mover? mover = moversService.Movers.FirstOrDefault(x => x.PropEx == _parent);
+            moversService.Movers.CollectionChanged -= MoversService_Movers_CollectionChanged;
+            if (mover is not null)
+                mover.Prop.PropertyChanged -= Mover_Prop_PropertyChanged;
+
+            GC.SuppressFinalize(this);
+        }
+
+        private void Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Prop.DwIk3))
+                NotifyPropertyChanged(nameof(Items));
+        }
+
+        private void MoversService_Movers_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            if(e.NewItems is not null)
+                foreach(object? item in e.NewItems)
+                {
+                    if(item is not Mover mover) throw new InvalidOperationException("Cannot find mover in MoversService_Movers_CollectionChanged");
+                    if (mover.PropEx == _parent)
+                    {
+                        MoversService moversService = App.Services.GetRequiredService<MoversService>();
+
+                        moversService.Movers.CollectionChanged -= MoversService_Movers_CollectionChanged;
+                        mover.Prop.PropertyChanged += Mover_Prop_PropertyChanged;
+                    }
+                }
+        }
+
+        private void Mover_Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == nameof(MoverProp.DwLevel))
+                NotifyPropertyChanged(nameof(Items));
+        }
+
+        private void ItemsService_ItemPropPropertyChanged(object? sender, ItemPropPropertyChangedEventArgs e)
+        {
+            if(e.PropertyName == nameof(ItemProp.DwItemKind3))
+                NotifyPropertyChanged(nameof(Items));
+        }
+
+        private void ItemsService_Items_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            NotifyPropertyChanged(nameof(Items));
+        }
+
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 
     public class DropKindGenerator(IEnumerable<DropKind> dropKinds)
     {
         private readonly List<DropKind> _dropKinds = [..dropKinds];
+
+        public List<DropKind> DropKinds => _dropKinds;
     }
 
     public class DropItemGenerator(uint dwMax, IEnumerable<DropItem> dropItems)
@@ -66,70 +280,133 @@ namespace eTools_Ultimate.Models
         public List<DropItem> DropItems => _dropItems;
     }
 
-    public class MoverPropEx(
-        int dwId,  int bMeleeAttack, int nLvCond, int bRecvCond, int nScanJob, short nAttackFirstRange, uint dwScanQuestId, uint dwScanItemIdx, int nScanChao,
+    public class MoverPropEx
+    {
+        private int _dwId;
+        private int _bMeleeAttack;
+        private int _nLvCond;
+        private int _bRecvCond;
+        private int _nScanJob;
+        private short _nAttackFirstRange;
+        private uint _dwScanQuestId;
+        private uint _dwScanItemIdx;
+        private int _nScanChao;
+        private int _nRecvCondMe;
+        private int _nRecvCondHow;
+        private int _nRecvCondMp;
+        private byte _bRecvCondWho;
+        private uint _tmUnitHelp;
+        private int _nHelpRangeMul;
+        private byte _bHelpWho;
+        private short _nCallHelperMax;
+        private int _nHpCond;
+        private byte[] _bRangeAttack;
+        private int _nSummProb;
+        private int _nSummNum;
+        private int _nSummId;
+        private int _nBerserkHp;
+        private float _fBerserkDmgMul;
+        private int _nLoot;
+        private int _nLootProb;
+        private int _nEvasionHp;
+        private int _nEvasionSec;
+        private int _nRunawayHp;
+        private int _nCallHp;
+        private short[] _nCallHelperIdx;
+        private short[] _nCallHelperNum;
+        private short[] _bCallHelperParty;
+        private short _nAttackItemNear;
+        private short _nAttackItemFar;
+        private short _nAttackItem1;
+        private short _nAttackItem2;
+        private short _nAttackItem3;
+        private short _nAttackItem4;
+        private short _nAttackItemSec;
+        private short _nMagicReflection;
+        private short _nImmortality;
+        private int _bBlow;
+        private short _nChangeTargetRand;
+        private short _dwAttackMoveDelay;
+        private short _dwRunAwayDelay;
+        private readonly DropItemGenerator _dropItemGenerator;
+        private readonly DropKindGenerator _dropKindGenerator;
+        private float _fMonsterTransformHpRate;
+        private uint _dwMonsterTransformMonsterId;
+
+        public MoverPropEx(
+        int dwId, int bMeleeAttack, int nLvCond, int bRecvCond, int nScanJob, short nAttackFirstRange, uint dwScanQuestId, uint dwScanItemIdx, int nScanChao,
         int nRecvCondMe, int nRecvCondHow, int nRecvCondMp, byte bRecvCondWho, uint tmUnitHelp, int nHelpRangeMul, byte bHelpWho, short nCallHelperMax, int nHpCond,
         byte[] bRangeAttack, int nSummProb, int nSummNum, int nSummId, int nBerserkHp, float fBerserkDmgMul, int nLoot, int nLootProb,
         int nEvasionHp, int nEvasionSec, int nRunawayHp, int nCallHp, short[] nCallHelperIdx, short[] nCallHelperNum, short[] bCallHelperParty,
         short nAttackItemNear, short nAttackItemFar, short nAttackItem1, short nAttackItem2, short nAttackItem3, short nAttackItem4,
         short nAttackItemSec, short nMagicReflection, short nImmortality, int bBlow, short nChangeTargetRand, short dwAttackMoveDelay, short dwRunawayDelay,
-        DropItemGenerator dropItemGenerator, DropKindGenerator dropKindGenerator, float fMonsterTransformHpRate, uint dwMonsterTransformMonsterId
+        uint dwDropItemGeneratorMax, IEnumerable<DropItemProp> dropItems, IEnumerable<DropKindProp> dropKinds, float fMonsterTransformHpRate, uint dwMonsterTransformMonsterId
         )
-    {
-        private int _dwId = dwId;
-        private int _bMeleeAttack = bMeleeAttack;
-        private int _nLvCond = nLvCond;
-        private int _bRecvCond = bRecvCond;
-        private int _nScanJob = nScanJob;
-        private short _nAttackFirstRange = nAttackFirstRange;
-        private int _dwScanQuestId = dwScanQuestId;
-        private int _dwScanItemIdx = dwScanItemIdx;
-        private int _nScanChao = nScanChao;
-        private int _nRecvCondMe = nRecvCondMe;
-        private int _nRecvCondHow = nRecvCondHow;
-        private int _nRecvCondMp = nRecvCondMp;
-        private byte _bRecvCondWho = bRecvCondWho;
-        private int _tmUnitHelp = tmUnitHelp;
-        private int _nHelpRangeMul = nHelpRangeMul;
-        private byte _bHelpWho = bHelpWho;
-        private short _nCallHelperMax = nCallHelperMax;
-        private int _nHpCond = nHpCond;
-        private byte[] _bRangeAttack = bRangeAttack;
-        private int _nSummProb = nSummProb;
-        private int _nSummNum = nSummNum;
-        private int _nSummId = nSummId;
-        private int _nBerserkHp = nBerserkHp;
-        private float _fBerserkDmgMul = fBerserkDmgMul;
-        private int _nLoot = nLoot;
-        private int _nLootProb = nLootProb;
-        private int _nEvasionHp = nEvasionHp;
-        private int _nEvasionSec = nEvasionSec;
-        private int _nRunawayHp = nRunawayHp;
-        private int _nCallHp = nCallHp;
-        private short[] _nCallHelperIdx = nCallHelperIdx;
-        private short[] _nCallHelperNum = nCallHelperNum;
-        private short[] _bCallHelperParty = bCallHelperParty;
-        private short _nAttackItemNear = nAttackItemNear;
-        private short _nAttackItemFar = nAttackItemFar;
-        private short _nAttackItem1 = nAttackItem1;
-        private short _nAttackItem2 = nAttackItem2;
-        private short _nAttackItem3 = nAttackItem3;
-        private short _nAttackItem4 = nAttackItem4;
-        private short _nAttackItemSec = nAttackItemSec;
-        private short _nMagicReflection = nMagicReflection;
-        private short _nImmortality = nImmortality;
-        private int _bBlow = bBlow;
-        private short _nChangeTargetRand = nChangeTargetRand;
-        private short _dwAttackMoveDelay = dwAttackMoveDelay;
-        private short _dwRunAwayDelay = dwRunawayDelay;
-        private readonly DropItemGenerator _dropItemGenerator = dropItemGenerator;
-        private readonly DropKindGenerator _dropKindGenerator = dropKindGenerator;
-        private float _fMonsterTransformHpRate = fMonsterTransformHpRate;
-        private int _dwMonsterTransformMonsterId = dwMonsterTransformMonsterId;
+        {
+            _dwId = dwId;
+            _bMeleeAttack = bMeleeAttack;
+            _nLvCond = nLvCond;
+            _bRecvCond = bRecvCond;
+            _nScanJob = nScanJob;
+            _nAttackFirstRange = nAttackFirstRange;
+            _dwScanQuestId = dwScanQuestId;
+            _dwScanItemIdx = dwScanItemIdx;
+            _nScanChao = nScanChao;
+            _nRecvCondMe = nRecvCondMe;
+            _nRecvCondHow = nRecvCondHow;
+            _nRecvCondMp = nRecvCondMp;
+            _bRecvCondWho = bRecvCondWho;
+            _tmUnitHelp = tmUnitHelp;
+            _nHelpRangeMul = nHelpRangeMul;
+            _bHelpWho = bHelpWho;
+            _nCallHelperMax = nCallHelperMax;
+            _nHpCond = nHpCond;
+            _bRangeAttack = bRangeAttack;
+            _nSummProb = nSummProb;
+            _nSummNum = nSummNum;
+            _nSummId = nSummId;
+            _nBerserkHp = nBerserkHp;
+            _fBerserkDmgMul = fBerserkDmgMul;
+            _nLoot = nLoot;
+            _nLootProb = nLootProb;
+            _nEvasionHp = nEvasionHp;
+            _nEvasionSec = nEvasionSec;
+            _nRunawayHp = nRunawayHp;
+            _nCallHp = nCallHp;
+            _nCallHelperIdx = nCallHelperIdx;
+            _nCallHelperNum = nCallHelperNum;
+            _bCallHelperParty = bCallHelperParty;
+            _nAttackItemNear = nAttackItemNear;
+            _nAttackItemFar = nAttackItemFar;
+            _nAttackItem1 = nAttackItem1;
+            _nAttackItem2 = nAttackItem2;
+            _nAttackItem3 = nAttackItem3;
+            _nAttackItem4 = nAttackItem4;
+            _nAttackItemSec = nAttackItemSec;
+            _nMagicReflection = nMagicReflection;
+            _nImmortality = nImmortality;
+            _bBlow = bBlow;
+            _nChangeTargetRand = nChangeTargetRand;
+            _dwAttackMoveDelay = dwAttackMoveDelay;
+            _dwRunAwayDelay = dwRunawayDelay;
+
+            _dropItemGenerator = new DropItemGenerator(dwDropItemGeneratorMax, [
+                .. dropItems.Select(prop => new DropItem(prop))
+            ]);
+
+            _dropKindGenerator = new DropKindGenerator([
+                .. dropKinds.Select(prop => new DropKind(this, prop))
+            ]);
+
+            _fMonsterTransformHpRate = fMonsterTransformHpRate;
+            _dwMonsterTransformMonsterId = dwMonsterTransformMonsterId;
+        }
 
         public int DwId => _dwId;
 
         public DropItemGenerator DropItemGenerator => _dropItemGenerator;
+
+        public DropKindGenerator DropKindGenerator => _dropKindGenerator;
     }
 
     public class MoverProp(
