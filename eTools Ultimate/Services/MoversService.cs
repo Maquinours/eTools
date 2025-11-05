@@ -346,7 +346,7 @@ namespace eTools_Ultimate.Services
 
         public MoverPropEx[] LoadPropEx()
         {
-            string filePath = Path.Combine(settingsService.Settings.ResourcesFolderPath, "propMoverEx.inc"); // TODO: add to settings and use it
+            string filePath = settingsService.Settings.PropMoverExFilePath ?? settingsService.Settings.DefaultPropMoverExFilePath;
 
             using Script script = new();
             script.Load(filePath);
@@ -356,11 +356,6 @@ namespace eTools_Ultimate.Services
             while (true)
             {
                 int dwId = script.GetNumber();
-
-                if (dwId == 1276)
-                {
-
-                }
 
                 if (script.EndOfStream)
                     break;
