@@ -40,6 +40,7 @@ namespace eTools_Ultimate.Models
         #region Movers settings
         private string? _propMoverFilePath;
         private string? _propMoverTxtFilePath;
+        private string? _propMoverExFilePath;
         private bool _mover64BitHp = false;
         private bool _mover64BitAtk = false;
         private readonly ReadOnlyDictionary<MoverTypes, ObservableCollection<string>> _moverTypesBindings = new(
@@ -165,6 +166,13 @@ namespace eTools_Ultimate.Models
             set => SetFilePathPropertyWithDefault(ref _propMoverTxtFilePath, value, DefaultPropMoverTxtFilePath);
         }
         public string DefaultPropMoverTxtFilePath => $"{ResourcesFolderPath}propMover.txt.txt";
+
+        public string? PropMoverExFilePath
+        {
+            get => _propMoverExFilePath;
+            set => SetFilePathPropertyWithDefault(ref _propMoverExFilePath, value, DefaultPropMoverExFilePath);
+        }
+        public string DefaultPropMoverExFilePath => Path.Combine(ResourcesFolderPath, "propMoverEx.inc");
 
         public bool Mover64BitHp
         {

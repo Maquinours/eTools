@@ -28,6 +28,7 @@ namespace eTools_Ultimate.Services
         // Movers settings
         internal const string PropMoverPath = "PropMoverPath";
         internal const string PropMoverTxtPath = "PropMoverTxtPath";
+        internal const string PropMoverExPath = "PropMoverExPath";
         internal const string Mover64BitHp = "Mover64BitHp";
         internal const string Mover64BitAtk = "Mover64BitAtk";
         internal const string MoverTypeAiBindings = "MoverTypeAiBindings";
@@ -117,6 +118,9 @@ namespace eTools_Ultimate.Services
                             break;
                         case SettingsKeywords.PropMoverTxtPath:
                             Settings.PropMoverTxtFilePath = scanner.GetToken();
+                            break;
+                        case SettingsKeywords.PropMoverExPath:
+                            Settings.PropMoverExFilePath = scanner.GetToken();
                             break;
                         case SettingsKeywords.Mover64BitHp:
                             Settings.Mover64BitHp = true;
@@ -227,6 +231,8 @@ namespace eTools_Ultimate.Services
                 writer.WriteLine($"{SettingsKeywords.PropMoverPath}\t\"{Settings.PropMoverFilePath}\"");
             if (Settings.PropMoverTxtFilePath != null)
                 writer.WriteLine($"{SettingsKeywords.PropMoverTxtPath}\t\"{Settings.PropMoverTxtFilePath}\"");
+            if (Settings.PropMoverExFilePath != null)
+                writer.WriteLine($"{SettingsKeywords.PropMoverExPath}\t\"{Settings.PropMoverExFilePath}\"");
             if (Settings.Mover64BitAtk)
                 writer.WriteLine(SettingsKeywords.Mover64BitAtk);
             if (Settings.Mover64BitHp)
