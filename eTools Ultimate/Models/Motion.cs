@@ -15,13 +15,13 @@ using System.Windows.Media.Imaging;
 
 namespace eTools_Ultimate.Models
 {
-    public class MotionProp(int nVer, int dwId, int dwMotion, string szIconName, int dwPlay, string szName, string szDesc) : INotifyPropertyChanged
+    public class MotionProp(int nVer, uint dwId, uint dwMotion, string szIconName, uint dwPlay, string szName, string szDesc) : INotifyPropertyChanged
     {
         private int _nVer = nVer;
-        private int _dwId = dwId;
-        private int _dwMotion = dwMotion;
+        private uint _dwId = dwId;
+        private uint _dwMotion = dwMotion;
         private string _szIconName = szIconName;
-        private int _dwPlay = dwPlay;
+        private uint _dwPlay = dwPlay;
         private string _szName = szName;
         private string _szDesc = szDesc;
 
@@ -32,12 +32,12 @@ namespace eTools_Ultimate.Models
             get => this._nVer;
             set => SetValue(ref this._nVer, value);
         }
-        public int DwId
+        public uint DwId
         {
             get => this._dwId;
             set => SetValue(ref this._dwId, value);
         }
-        public int DwMotion
+        public uint DwMotion
         {
             get => this._dwMotion;
             set => SetValue(ref this._dwMotion, value);
@@ -47,7 +47,7 @@ namespace eTools_Ultimate.Models
             get => this._szIconName;
             set => SetValue(ref this._szIconName, value);
         }
-        public int DwPlay
+        public uint DwPlay
         {
             get => this._dwPlay;
             set => SetValue(ref this._dwPlay, value);
@@ -96,7 +96,7 @@ namespace eTools_Ultimate.Models
             set
             {
                 if (Script.TryGetNumberFromString(value, out int result))
-                    Prop.DwId = result;
+                    Prop.DwId = (uint)result;
             }
         }
 
@@ -106,7 +106,7 @@ namespace eTools_Ultimate.Models
             set
             {
                 if (Script.TryGetNumberFromString(value, out int result))
-                    Prop.DwMotion = result;
+                    Prop.DwMotion = (uint)result;
             }
         }
 

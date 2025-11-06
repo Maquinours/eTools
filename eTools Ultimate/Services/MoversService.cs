@@ -86,7 +86,7 @@ namespace eTools_Ultimate.Services
             {
                 MoverPropEx? propEx = null;
 
-                if (propExDict.TryGetValue(prop.DwId, out MoverPropEx? value))
+                if (propExDict.TryGetValue((int)prop.DwId, out MoverPropEx? value))
                     propEx = value;
 
                 Mover mover = new(prop, propEx);
@@ -107,7 +107,7 @@ namespace eTools_Ultimate.Services
 
                 while (true)
                 {
-                    int dwId = script.GetNumber();
+                    uint dwId = (uint)script.GetNumber();
 
                     if (script.EndOfStream)
                         break;
@@ -116,80 +116,80 @@ namespace eTools_Ultimate.Services
                         continue;
 
                     string szName = script.GetToken();
-                    int dwAi = script.GetNumber();
-                    int dwStr = script.GetNumber();
-                    int dwSta = script.GetNumber();
-                    int dwDex = script.GetNumber();
-                    int dwInt = script.GetNumber();
-                    int dwHR = script.GetNumber();
-                    int dwER = script.GetNumber();
-                    int dwRace = script.GetNumber();
-                    int dwBelligerence = script.GetNumber();
-                    int dwGender = script.GetNumber();
-                    int dwLevel = script.GetNumber();
-                    int dwFlightLevel = script.GetNumber();
-                    int dwSize = script.GetNumber();
-                    int dwClass = script.GetNumber();
+                    uint dwAi = (uint)script.GetNumber();
+                    uint dwStr = (uint)script.GetNumber();
+                    uint dwSta = (uint)script.GetNumber();
+                    uint dwDex = (uint)script.GetNumber();
+                    uint dwInt = (uint)script.GetNumber();
+                    uint dwHR = (uint)script.GetNumber();
+                    uint dwER = (uint)script.GetNumber();
+                    uint dwRace = (uint)script.GetNumber();
+                    uint dwBelligerence = (uint)script.GetNumber();
+                    uint dwGender = (uint)script.GetNumber();
+                    uint dwLevel = (uint)script.GetNumber();
+                    uint dwFlightLevel = (uint)script.GetNumber();
+                    uint dwSize = (uint)script.GetNumber();
+                    uint dwClass = (uint)script.GetNumber();
                     int bIfParts = script.GetNumber(); // If mover can equip parts
 
                     if (bIfParts == -1)
                         bIfParts = 0;
 
                     int nChaotic = script.GetNumber();
-                    int dwUseable = script.GetNumber();
-                    int dwActionRadius = script.GetNumber();
-                    long dwAtkMin;
-                    long dwAtkMax;
+                    uint dwUseable = (uint)script.GetNumber();
+                    uint dwActionRadius = (uint)script.GetNumber();
+                    ulong dwAtkMin;
+                    ulong dwAtkMax;
                     if (settings.Mover64BitAtk)
                     {
-                        dwAtkMin = script.GetInt64();
-                        dwAtkMax = script.GetInt64();
+                        dwAtkMin = (ulong)script.GetInt64();
+                        dwAtkMax = (ulong)script.GetInt64();
                     }
                     else
                     {
-                        dwAtkMin = script.GetNumber();
-                        dwAtkMax = script.GetNumber();
+                        dwAtkMin = (uint)script.GetNumber();
+                        dwAtkMax = (uint)script.GetNumber();
                     }
-                    int dwAtk1 = script.GetNumber();     // Need expert mode to change
-                    int dwAtk2 = script.GetNumber();     // Need expert mode to change
-                    int dwAtk3 = script.GetNumber();     // Need expert mode to change
-                    int dwAtk4 = script.GetNumber();     // Need expert mode to change
+                    uint dwAtk1 = (uint)script.GetNumber();     // Need expert mode to change
+                    uint dwAtk2 = (uint)script.GetNumber();     // Need expert mode to change
+                    uint dwAtk3 = (uint)script.GetNumber();     // Need expert mode to change
+                    uint dwAtk4 = (uint)script.GetNumber();     // Need expert mode to change
                     float fFrame = script.GetFloat();     // Need expert mode to change
 
-                    int dwOrthograde = script.GetNumber(); // Useless
-                    int dwThrustRate = script.GetNumber(); // Useless
-                    int dwChestRate = script.GetNumber(); // Useless
-                    int dwHeadRate = script.GetNumber(); // Useless
-                    int dwArmRate = script.GetNumber(); // Useless
-                    int dwLegRate = script.GetNumber(); // Useless
+                    uint dwOrthograde = (uint)script.GetNumber(); // Useless
+                    uint dwThrustRate = (uint)script.GetNumber(); // Useless
+                    uint dwChestRate = (uint)script.GetNumber(); // Useless
+                    uint dwHeadRate = (uint)script.GetNumber(); // Useless
+                    uint dwArmRate = (uint)script.GetNumber(); // Useless
+                    uint dwLegRate = (uint)script.GetNumber(); // Useless
 
-                    int dwAttackSpeed = script.GetNumber(); // Useless
-                    int dwReAttackDelay = script.GetNumber();
+                    uint dwAttackSpeed = (uint)script.GetNumber(); // Useless
+                    uint dwReAttackDelay = (uint)script.GetNumber();
 
-                    long dwAddHp;
+                    ulong dwAddHp;
                     if (settings.Mover64BitHp)
-                        dwAddHp = script.GetInt64();
+                        dwAddHp = (ulong)script.GetInt64();
                     else
-                        dwAddHp = script.GetNumber();
-                    int dwAddMp = script.GetNumber();
-                    int dwNaturalArmor = script.GetNumber();
+                        dwAddHp = (uint)script.GetNumber();
+                    uint dwAddMp = (uint)script.GetNumber();
+                    uint dwNaturalArmor = (uint)script.GetNumber();
                     int nAbrasion = script.GetNumber();
                     int nHardness = script.GetNumber();
-                    int dwAdjAtkDelay = script.GetNumber();
+                    uint dwAdjAtkDelay = (uint)script.GetNumber();
 
                     int eElementType = script.GetNumber();
                     int elementAtk = script.GetNumber();
                     if (elementAtk < short.MinValue || elementAtk > short.MaxValue) throw new InvalidDataException($"WElementAtk from mover {dwId} value is below or above max short value : {elementAtk}"); // ERROR
                     short wElementAtk = (short)elementAtk; // The atk and def value from element
 
-                    int dwHideLevel = script.GetNumber(); // Expert mode
+                    uint dwHideLevel = (uint)script.GetNumber(); // Expert mode
                     float fSpeed = script.GetFloat(); // Speed
-                    int dwShelter = script.GetNumber(); // Useless
-                    int dwFlying = script.GetNumber(); // Expert mode
-                    int dwJumpIng = script.GetNumber(); // Useless
-                    int dwAirJump = script.GetNumber(); // Useless
-                    int bTaming = script.GetNumber(); // Useless
-                    int dwResisMgic = script.GetNumber(); // Magic resist
+                    uint dwShelter = (uint)script.GetNumber(); // Useless
+                    uint dwFlying = (uint)script.GetNumber(); // Expert mode
+                    uint dwJumpIng = (uint)script.GetNumber(); // Useless
+                    uint dwAirJump = (uint)script.GetNumber(); // Useless
+                    uint bTaming = (uint)script.GetNumber(); // Useless
+                    uint dwResisMgic = (uint)script.GetNumber(); // Magic resist
 
                     int nResistElecricity = (int)(script.GetFloat() * 100);
                     int nResistFire = (int)(script.GetFloat() * 100);
@@ -197,48 +197,48 @@ namespace eTools_Ultimate.Services
                     int nResistWater = (int)(script.GetFloat() * 100);
                     int nResistEarth = (int)(script.GetFloat() * 100);
 
-                    int dwCash = script.GetNumber(); // Useless
-                    int dwSourceMaterial = script.GetNumber(); // Useless
-                    int dwMaterialAmount = script.GetNumber(); // Useless
-                    int dwCohesion = script.GetNumber(); // Useless
-                    int dwHoldingTime = script.GetNumber(); // Useless
-                    int dwCorrectionValue = script.GetNumber(); // Taux de loot (en %)
+                    uint dwCash = (uint)script.GetNumber(); // Useless
+                    uint dwSourceMaterial = (uint)script.GetNumber(); // Useless
+                    uint dwMaterialAmount = (uint)script.GetNumber(); // Useless
+                    uint dwCohesion = (uint)script.GetNumber(); // Useless
+                    uint dwHoldingTime = (uint)script.GetNumber(); // Useless
+                    uint dwCorrectionValue = (uint)script.GetNumber(); // Taux de loot (en %)
                     long nExpValue = script.GetInt64(); // Exp sent to killer
                     int nFxpValue = script.GetNumber(); // Flight exp sent to killer (expert mode)
-                    int nBodyState = script.GetNumber(); // Useless 
-                    int dwAddAbility = script.GetNumber(); // Useless
-                    int bKillable = script.GetNumber(); // If monster, always true, otherwise, false
+                    uint nBodyState = (uint)script.GetNumber(); // Useless 
+                    uint dwAddAbility = (uint)script.GetNumber(); // Useless
+                    uint bKillable = (uint)script.GetNumber(); // If monster, always true, otherwise, false
 
-                    int dwVirtItem1 = script.GetNumber();
-                    int dwVirtItem2 = script.GetNumber();
-                    int dwVirtItem3 = script.GetNumber();
-                    int bVirtType1 = script.GetNumber();
-                    int bVirtType2 = script.GetNumber();
-                    int bVirtType3 = script.GetNumber();
+                    uint dwVirtItem1 = (uint)script.GetNumber();
+                    uint dwVirtItem2 = (uint)script.GetNumber();
+                    uint dwVirtItem3 = (uint)script.GetNumber();
+                    uint bVirtType1 = (uint)script.GetNumber();
+                    uint bVirtType2 = (uint)script.GetNumber();
+                    uint bVirtType3 = (uint)script.GetNumber();
 
-                    int dwSndAtk1 = script.GetNumber(); // Useless
-                    int dwSndAtk2 = script.GetNumber(); // Useless
+                    uint dwSndAtk1 = (uint)script.GetNumber(); // Useless
+                    uint dwSndAtk2 = (uint)script.GetNumber(); // Useless
 
-                    int dwSndDie1 = script.GetNumber(); // Useless
-                    int dwSndDie2 = script.GetNumber(); // Useless
+                    uint dwSndDie1 = (uint)script.GetNumber(); // Useless
+                    uint dwSndDie2 = (uint)script.GetNumber(); // Useless
 
-                    int dwSndDmg1 = script.GetNumber(); // Useless
-                    int dwSndDmg2 = script.GetNumber(); // Sound used when mover take dmg (Expert mode)
-                    int dwSndDmg3 = script.GetNumber(); // Useless
+                    uint dwSndDmg1 = (uint)script.GetNumber(); // Useless
+                    uint dwSndDmg2 = (uint)script.GetNumber(); // Sound used when mover take dmg (Expert mode)
+                    uint dwSndDmg3 = (uint)script.GetNumber(); // Useless
 
-                    int dwSndIdle1 = script.GetNumber(); // Sound played when mover is clicked
-                    int dwSndIdle2 = script.GetNumber(); // Useless
+                    uint dwSndIdle1 = (uint)script.GetNumber(); // Sound played when mover is clicked
+                    uint dwSndIdle2 = (uint)script.GetNumber(); // Useless
 
                     string szComment = script.GetToken(); // Comment (useless)
 
-                    int dwAreaColor = default;
+                    uint dwAreaColor = default;
                     string szNpcMark = string.Empty;
-                    int dwMadrigalGiftPoint = default;
+                    uint dwMadrigalGiftPoint = default;
                     if (settings.ResourcesVersion >= 19)
                     {
-                        dwAreaColor = script.GetNumber(); // Useless
+                        dwAreaColor = (uint)script.GetNumber(); // Useless
                         szNpcMark = script.GetToken(); // Useless
-                        dwMadrigalGiftPoint = script.GetNumber(); // Useless
+                        dwMadrigalGiftPoint = (uint)script.GetNumber(); // Useless
                     }
 
                     /* It is possible to be at the end of stream there if there is no blank at the end of the
@@ -1082,13 +1082,13 @@ namespace eTools_Ultimate.Services
                 writer.Write("\t");
                 writer.Write(Script.FloatToString(moverProp.FFrame));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwOrthograde));
+                writer.Write(Script.NumberToString((int)moverProp.DwOrthograde));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwThrustRate));
+                writer.Write(Script.NumberToString((int)moverProp.DwThrustRate));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwChestRate));
+                writer.Write(Script.NumberToString((int)moverProp.DwChestRate));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwHeadRate));
+                writer.Write(Script.NumberToString((int)moverProp.DwHeadRate));
                 writer.Write("\t");
                 writer.Write(Script.NumberToString(moverProp.DwArmRate));
                 writer.Write("\t");
@@ -1211,103 +1211,103 @@ namespace eTools_Ultimate.Services
         {
             DefinesService definesService = App.Services.GetRequiredService<DefinesService>();
 
-            int dwId = (Movers.MaxBy(x => x.Id)?.Id ?? -1) + 1;
+            uint dwId = Movers.MaxBy(x => x.Id)?.Id + 1 ?? Constants.NullId;
             string szName = MoversService.GetNextStringIdentifier();
             App.Services.GetRequiredService<StringsService>().AddString(szName, "");
             if (!definesService.Defines.TryGetValue("AII_NONE", out int dwAi))
                 dwAi = -1;
-            int dwStr = -1;
-            int dwSta = -1;
-            int dwDex = -1;
-            int dwInt = -1;
-            int dwHR = -1;
-            int dwER = -1;
-            int dwRace = -1;
+            uint dwStr = Constants.NullId;
+            uint dwSta = Constants.NullId;
+            uint dwDex = Constants.NullId;
+            uint dwInt = Constants.NullId;
+            uint dwHR = Constants.NullId;
+            uint dwER = Constants.NullId;
+            uint dwRace = Constants.NullId;
             if (!definesService.Defines.TryGetValue("BELLI_PEACEFUL", out int dwBelligerence))
-                dwBelligerence = -1;
-            int dwGender = -1;
-            int dwLevel = -1;
-            int dwFlightLevel = -1;
-            int dwSize = -1;
+                dwBelligerence = unchecked((int)Constants.NullId);
+            uint dwGender = Constants.NullId;
+            uint dwLevel = Constants.NullId;
+            uint dwFlightLevel = Constants.NullId;
+            uint dwSize = Constants.NullId;
             if (!definesService.Defines.TryGetValue("RANK_CITIZEN", out int dwClass))
-                dwClass = -1;
+                dwClass = unchecked((int)Constants.NullId);
             int bIfParts = 0;
-            int nChaotic = -1;
-            int dwUseable = -1;
-            int dwActionRadius = -1;
-            int dwAtkMin = -1;
-            int dwAtkMax = -1;
-            int dwAtk1 = -1;
-            int dwAtk2 = -1;
-            int dwAtk3 = -1;
-            int dwAtk4 = -1;
-            int fFrame = -1;
-            int dwOrthograde = -1;
-            int dwThrustRate = -1;
-            int dwChestRate = -1;
-            int dwHeadRate = -1;
-            int dwArmRate = -1;
-            int dwLegRate = -1;
-            int dwAttackSpeed = -1;
-            int dwReAttackDelay = -1;
-            int dwAddHp = -1;
-            int dwAddMp = -1;
-            int dwNaturalArmor = -1;
-            int nAbrasion = -1;
-            int nHardness = -1;
-            int dwAdjAtkDelay = -1;
+            int nChaotic = unchecked((int)Constants.NullId);
+            uint dwUseable = Constants.NullId;
+            uint dwActionRadius = Constants.NullId;
+            uint dwAtkMin = Constants.NullId;
+            uint dwAtkMax = Constants.NullId;
+            uint dwAtk1 = Constants.NullId;
+            uint dwAtk2 = Constants.NullId;
+            uint dwAtk3 = Constants.NullId;
+            uint dwAtk4 = Constants.NullId;
+            float fFrame = -1;
+            uint dwOrthograde = Constants.NullId;
+            uint dwThrustRate = Constants.NullId;
+            uint dwChestRate = Constants.NullId;
+            uint dwHeadRate = Constants.NullId;
+            uint dwArmRate = Constants.NullId;
+            uint dwLegRate = Constants.NullId;
+            uint dwAttackSpeed = Constants.NullId;
+            uint dwReAttackDelay = Constants.NullId;
+            uint dwAddHp = Constants.NullId;
+            uint dwAddMp = Constants.NullId;
+            uint dwNaturalArmor = Constants.NullId;
+            int nAbrasion = unchecked((int)Constants.NullId);
+            int nHardness = unchecked((int)Constants.NullId);
+            uint dwAdjAtkDelay = Constants.NullId;
             short eElementType = 0;
             short wElementAtk = 0;
-            int dwHideLevel = 0;
+            uint dwHideLevel = 0;
             float fSpeed = 0.1f;
-            int dwShelter = -1;
-            int dwFlying = 0;
-            int dwJumpIng = -1;
-            int dwAirJump = -1;
-            int bTaming = -1;
-            int dwResisMgic = 0;
+            uint dwShelter = Constants.NullId;
+            uint dwFlying = 0;
+            uint dwJumpIng = Constants.NullId;
+            uint dwAirJump = Constants.NullId;
+            uint bTaming = Constants.NullId;
+            uint dwResisMgic = 0;
             int nResistElecricity = 0;
             int nResistFire = 0;
             int nResistWind = 0;
             int nResistWater = 0;
             int nResistEarth = 0;
-            int dwCash = -1;
-            int dwSourceMaterial = -1;
-            int dwMaterialAmount = -1;
-            int dwCohesion = -1;
-            int dwHoldingTime = -1;
-            int dwCorrectionValue = -1;
+            uint dwCash = Constants.NullId;
+            uint dwSourceMaterial = Constants.NullId;
+            uint dwMaterialAmount = Constants.NullId;
+            uint dwCohesion = Constants.NullId;
+            uint dwHoldingTime = Constants.NullId;
+            uint dwCorrectionValue = Constants.NullId;
             int nExpValue = 0;
             int nFxpValue = 0;
-            int nBodyState = -1;
-            int dwAddAbility = -1;
-            int bKillable = 0;
-            int dwVirtItem1 = -1;
-            int dwVirtItem2 = -1;
-            int dwVirtItem3 = -1;
-            int bVirtType1 = -1;
-            int bVirtType2 = -1;
-            int bVirtType3 = -1;
-            int dwSndAtk1 = -1;
-            int dwSndAtk2 = -1;
-            int dwSndDie1 = -1;
-            int dwSndDie2 = -1;
-            int dwSndDmg1 = -1;
-            int dwSndDmg2 = -1;
-            int dwSndDmg3 = -1;
-            int dwSndIdle1 = -1;
-            int dwSndIdle2 = -1;
-            string szComment = MoversService.GetNextStringIdentifier();
+            uint nBodyState = Constants.NullId;
+            uint dwAddAbility = Constants.NullId;
+            uint bKillable = 0;
+            uint dwVirtItem1 = Constants.NullId;
+            uint dwVirtItem2 = Constants.NullId;
+            uint dwVirtItem3 = Constants.NullId;
+            uint bVirtType1 = Constants.NullId;
+            uint bVirtType2 = Constants.NullId;
+            uint bVirtType3 = Constants.NullId;
+            uint dwSndAtk1 = Constants.NullId;
+            uint dwSndAtk2 = Constants.NullId;
+            uint dwSndDie1 = Constants.NullId;
+            uint dwSndDie2 = Constants.NullId;
+            uint dwSndDmg1 = Constants.NullId;
+            uint dwSndDmg2 = Constants.NullId;
+            uint dwSndDmg3 = Constants.NullId;
+            uint dwSndIdle1 = Constants.NullId;
+            uint dwSndIdle2 = Constants.NullId;
+            string szComment = GetNextStringIdentifier();
             App.Services.GetRequiredService<StringsService>().AddString(szComment, "");
             if (!definesService.Defines.TryGetValue("AREA_NORMAL", out int dwAreaColor))
-                dwAreaColor = -1;
+                dwAreaColor = unchecked((int)Constants.NullId);
             string szNpcMark = "=";
-            int dwMadrigalGiftPoint = 0;
+            uint dwMadrigalGiftPoint = 0;
 
             MoverProp moverProp = new(
                         dwId: dwId,
                         szName: szName,
-                        dwAi: dwAi,
+                        dwAi: (uint)dwAi,
                         dwStr: dwStr,
                         dwSta: dwSta,
                         dwDex: dwDex,
@@ -1315,12 +1315,12 @@ namespace eTools_Ultimate.Services
                         dwHR: dwHR,
                         dwER: dwER,
                         dwRace: dwRace,
-                        dwBelligerence: dwBelligerence,
+                        dwBelligerence: (uint)dwBelligerence,
                         dwGender: dwGender,
                         dwLevel: dwLevel,
                         dwFlightLevel: dwFlightLevel,
                         dwSize: dwSize,
-                        dwClass: dwClass,
+                        dwClass: (uint)dwClass,
                         bIfParts: bIfParts,
                         nChaotic: nChaotic,
                         dwUseable: dwUseable,
@@ -1388,7 +1388,7 @@ namespace eTools_Ultimate.Services
                         dwSndIdle1: dwSndIdle1,
                         dwSndIdle2: dwSndIdle2,
                         szComment: szComment,
-                        dwAreaColor: dwAreaColor,
+                        dwAreaColor: (uint)dwAreaColor,
                         szNpcMark: szNpcMark,
                         dwMadrigalGiftPoint: dwMadrigalGiftPoint
                         );

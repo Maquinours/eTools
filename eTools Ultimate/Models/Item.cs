@@ -173,139 +173,139 @@ namespace eTools_Ultimate.Models
 
     public class ItemProp(
         int nVer,
-        int dwId,
+        uint dwId,
         string szName,
-        int dwNum,
-        int dwPackMax,
-        int dwItemKind1,
-        int dwItemKind2,
-        int dwItemKind3,
-        int dwItemJob,
+        uint dwNum,
+        uint dwPackMax,
+        uint dwItemKind1,
+        uint dwItemKind2,
+        uint dwItemKind3,
+        uint dwItemJob,
         int bPermanence,
-        int dwUseable,
-        int dwItemSex,
-        int dwCost,
-        int dwEndurance,
+        uint dwUseable,
+        uint dwItemSex,
+        uint dwCost,
+        uint dwEndurance,
         int nAbrasion,
         int nMaxRepair,
-        int dwHanded,
-        int dwFlag,
-        int dwParts,
-        int dwPartsub,
-        int bPartsFile,
-        int dwExclusive,
-        int dwBasePartsIgnore,
-        int dwItemLV,
-        int dwItemRare,
-        int dwShopAble,
+        uint dwHanded,
+        uint dwFlag,
+        uint dwParts,
+        uint dwPartsub,
+        uint bPartsFile,
+        uint dwExclusive,
+        uint dwBasePartsIgnore,
+        uint dwItemLV,
+        uint dwItemRare,
+        uint dwShopAble,
         int nLog,
         int bCharged,
-        int dwLinkKindBullet,
-        int dwLinkKind,
-        int dwAbilityMin,
-        int dwAbilityMax,
+        uint dwLinkKindBullet,
+        uint dwLinkKind,
+        uint dwAbilityMin,
+        uint dwAbilityMax,
         short eItemType,
         short wItemEAtk,
-        int dwParry,
-        int dwBlockRating,
+        uint dwParry,
+        uint dwBlockRating,
         int nAddSkillMin,
         int nAddSkillMax,
-        int dwAtkStyle,
-        int dwWeaponType,
-        int dwItemAtkOrder1,
-        int dwItemAtkOrder2,
-        int dwItemAtkOrder3,
-        int dwItemAtkOrder4,
-        int tmContinuousPain,
+        uint dwAtkStyle,
+        uint dwWeaponType,
+        uint dwItemAtkOrder1,
+        uint dwItemAtkOrder2,
+        uint dwItemAtkOrder3,
+        uint dwItemAtkOrder4,
+        uint tmContinuousPain,
         int nShellQuantity,
-        int dwRecoil,
-        int dwLoadingTime,
+        uint dwRecoil,
+        uint dwLoadingTime,
         int nAdjHitRate,
         float fAttackSpeed,
-        int dwDmgShift,
-        int dwAttackRange,
+        uint dwDmgShift,
+        uint dwAttackRange,
         int nProbability,
-        int dwDestParam1,
-        int dwDestParam2,
-        int dwDestParam3,
-        int dwDestParam4,
-        int dwDestParam5,
-        int dwDestParam6,
+        uint dwDestParam1,
+        uint dwDestParam2,
+        uint dwDestParam3,
+        uint dwDestParam4,
+        uint dwDestParam5,
+        uint dwDestParam6,
         int nAdjParamVal1,
         int nAdjParamVal2,
         int nAdjParamVal3,
         int nAdjParamVal4,
         int nAdjParamVal5,
         int nAdjParamVal6,
-        int dwChgParamVal1,
-        int dwChgParamVal2,
-        int dwChgParamVal3,
-        int dwChgParamVal4,
-        int dwChgParamVal5,
-        int dwChgParamVal6,
+        uint dwChgParamVal1,
+        uint dwChgParamVal2,
+        uint dwChgParamVal3,
+        uint dwChgParamVal4,
+        uint dwChgParamVal5,
+        uint dwChgParamVal6,
         int nDestData11,
         int nDestData12,
         int nDestData13,
         int nDestData14,
         int nDestData15,
         int nDestData16,
-        int dwActiveSkill,
-        int dwActiveSkillLv,
-        int dwActiveSkillRate,
-        int dwReqMp,
-        int dwReqFp,
-        int dwReqDisLV,
-        int dwReSkill1,
-        int dwReSkillLevel1,
-        int dwReSkill2,
-        int dwReSkillLevel2,
-        int dwSkillReadyType,
-        int dwSkillReady,
-        int dwSkillRange,
-        int dwSfxElemental,
-        int dwSfxObj,
-        int dwSfxObj2,
-        int dwSfxObj3,
-        int dwSfxObj4,
-        int dwSfxObj5,
-        int dwUseMotion,
-        int dwCircleTime,
-        int dwSkillTime,
-        int dwExeTarget,
-        int dwUseChance,
-        int dwSpellRegion,
-        int dwSpellType,
-        int dwReferStat1,
-        int dwReferStat2,
-        int dwReferTarget1,
-        int dwReferTarget2,
-        int dwReferValue1,
-        int dwReferValue2,
-        int dwSkillType,
+        uint dwActiveSkill,
+        uint dwActiveSkillLv,
+        uint dwActiveSkillRate,
+        uint dwReqMp,
+        uint dwReqFp,
+        uint dwReqDisLV,
+        uint dwReSkill1,
+        uint dwReSkillLevel1,
+        uint dwReSkill2,
+        uint dwReSkillLevel2,
+        uint dwSkillReadyType,
+        uint dwSkillReady,
+        uint dwSkillRange,
+        uint dwSfxElemental,
+        uint dwSfxObj,
+        uint dwSfxObj2,
+        uint dwSfxObj3,
+        uint dwSfxObj4,
+        uint dwSfxObj5,
+        uint dwUseMotion,
+        uint dwCircleTime,
+        uint dwSkillTime,
+        uint dwExeTarget,
+        uint dwUseChance,
+        uint dwSpellRegion,
+        uint dwSpellType,
+        uint dwReferStat1,
+        uint dwReferStat2,
+        uint dwReferTarget1,
+        uint dwReferTarget2,
+        uint dwReferValue1,
+        uint dwReferValue2,
+        uint dwSkillType,
         int nItemResistElecricity,
         int nItemResistFire,
         int nItemResistWind,
         int nItemResistWater,
         int nItemResistEarth,
         int nEvildoing,
-        int dwExpertLV,
-        int dwExpertMax,
-        int dwSubDefine,
-        int dwExp,
-        int dwComboStyle,
+        uint dwExpertLV,
+        uint dwExpertMax,
+        uint dwSubDefine,
+        uint dwExp,
+        uint dwComboStyle,
         float fFlightSpeed,
         float fFlightLRAngle,
         float fFlightTBAngle,
-        int dwFlightLimit,
-        int dwFFuelReMax,
-        int dwAFuelReMax,
-        int dwFuelRe,
-        int dwLimitLevel1,
+        uint dwFlightLimit,
+        uint dwFFuelReMax,
+        uint dwAFuelReMax,
+        uint dwFuelRe,
+        uint dwLimitLevel1,
         int nReflect,
-        int dwSndAttack1,
-        int dwSndAttack2,
+        uint dwSndAttack1,
+        uint dwSndAttack2,
         string szIcon,
-        int dwQuestId,
+        uint dwQuestId,
         string szTextFileName,
         string szCommand,
         int nMinLimitLevel,
@@ -319,26 +319,26 @@ namespace eTools_Ultimate.Models
         int bResetBind,
         int nBindCondition,
         int nResetBindCondition,
-        int dwHitActiveSkillId,
-        int dwHitActiveSkillLv,
-        int dwHitActiveSkillProb,
-        int dwHitActiveSkillTarget,
-        int dwDamageActiveSkillId,
-        int dwDamageActiveSkillLv,
-        int dwDamageActiveSkillProb,
-        int dwDamageActiveSkillTarget,
-        int dwEquipActiveSkillId,
-        int dwEquipActiveSkillLv,
-        int dwSmelting,
-        int dwAttsmelting,
-        int dwGemsmelting,
-        int dwPierce,
-        int dwUprouse,
+        uint dwHitActiveSkillId,
+        uint dwHitActiveSkillLv,
+        uint dwHitActiveSkillProb,
+        uint dwHitActiveSkillTarget,
+        uint dwDamageActiveSkillId,
+        uint dwDamageActiveSkillLv,
+        uint dwDamageActiveSkillProb,
+        uint dwDamageActiveSkillTarget,
+        uint dwEquipActiveSkillId,
+        uint dwEquipActiveSkillLv,
+        uint dwSmelting,
+        uint dwAttsmelting,
+        uint dwGemsmelting,
+        uint dwPierce,
+        uint dwUprouse,
         int bAbsoluteTime,
-        int dwItemGrade,
+        uint dwItemGrade,
         int bCanTrade,
-        int dwMainCategory,
-        int dwSubCategory,
+        uint dwMainCategory,
+        uint dwSubCategory,
         int bCanHaveServerTransform,
         int bCanSavePotion,
         int bCanLooksChange,
@@ -353,139 +353,139 @@ namespace eTools_Ultimate.Models
         }
 
         private int _nVer = nVer;
-        private int _dwId = dwId;
+        private uint _dwId = dwId;
         private string _szName = szName;
-        private int _dwNum = dwNum;
-        private int _dwPackMax = dwPackMax;
-        private int _dwItemKind1 = dwItemKind1;
-        private int _dwItemKind2 = dwItemKind2;
-        private int _dwItemKind3 = dwItemKind3;
-        private int _dwItemJob = dwItemJob;
+        private uint _dwNum = dwNum;
+        private uint _dwPackMax = dwPackMax;
+        private uint _dwItemKind1 = dwItemKind1;
+        private uint _dwItemKind2 = dwItemKind2;
+        private uint _dwItemKind3 = dwItemKind3;
+        private uint _dwItemJob = dwItemJob;
         private int _bPermanence = bPermanence;
-        private int _dwUseable = dwUseable;
-        private int _dwItemSex = dwItemSex;
-        private int _dwCost = dwCost;
-        private int _dwEndurance = dwEndurance;
+        private uint _dwUseable = dwUseable;
+        private uint _dwItemSex = dwItemSex;
+        private uint _dwCost = dwCost;
+        private uint _dwEndurance = dwEndurance;
         private int _nAbrasion = nAbrasion;
         private int _nMaxRepair = nMaxRepair;
-        private int _dwHanded = dwHanded;
-        private int _dwFlag = dwFlag;
-        private int _dwParts = dwParts;
-        private int _dwPartsub = dwPartsub;
-        private int _bPartsFile = bPartsFile;
-        private int _dwExclusive = dwExclusive;
-        private int _dwBasePartsIgnore = dwBasePartsIgnore;
-        private int _dwItemLV = dwItemLV;
-        private int _dwItemRare = dwItemRare;
-        private int _dwShopAble = dwShopAble;
+        private uint _dwHanded = dwHanded;
+        private uint _dwFlag = dwFlag;
+        private uint _dwParts = dwParts;
+        private uint _dwPartsub = dwPartsub;
+        private uint _bPartsFile = bPartsFile;
+        private uint _dwExclusive = dwExclusive;
+        private uint _dwBasePartsIgnore = dwBasePartsIgnore;
+        private uint _dwItemLV = dwItemLV;
+        private uint _dwItemRare = dwItemRare;
+        private uint _dwShopAble = dwShopAble;
         private int _nLog = nLog;
         private int _bCharged = bCharged;
-        private int _dwLinkKindBullet = dwLinkKindBullet;
-        private int _dwLinkKind = dwLinkKind;
-        private int _dwAbilityMin = dwAbilityMin;
-        private int _dwAbilityMax = dwAbilityMax;
-        private short _eItemType = eItemType;
+        private uint _dwLinkKindBullet = dwLinkKindBullet;
+        private uint _dwLinkKind = dwLinkKind;
+        private uint _dwAbilityMin = dwAbilityMin;
+        private uint _dwAbilityMax = dwAbilityMax;
+        private int _eItemType = eItemType;
         private short _wItemEAtk = wItemEAtk;
-        private int _dwParry = dwParry;
-        private int _dwBlockRating = dwBlockRating;
+        private uint _dwParry = dwParry;
+        private uint _dwBlockRating = dwBlockRating;
         private int _nAddSkillMin = nAddSkillMin;
         private int _nAddSkillMax = nAddSkillMax;
-        private int _dwAtkStyle = dwAtkStyle;
-        private int _dwWeaponType = dwWeaponType;
-        private int _dwItemAtkOrder1 = dwItemAtkOrder1;
-        private int _dwItemAtkOrder2 = dwItemAtkOrder2;
-        private int _dwItemAtkOrder3 = dwItemAtkOrder3;
-        private int _dwItemAtkOrder4 = dwItemAtkOrder4;
-        private int _tmContinuousPain = tmContinuousPain;
+        private uint _dwAtkStyle = dwAtkStyle;
+        private uint _dwWeaponType = dwWeaponType;
+        private uint _dwItemAtkOrder1 = dwItemAtkOrder1;
+        private uint _dwItemAtkOrder2 = dwItemAtkOrder2;
+        private uint _dwItemAtkOrder3 = dwItemAtkOrder3;
+        private uint _dwItemAtkOrder4 = dwItemAtkOrder4;
+        private uint _tmContinuousPain = tmContinuousPain;
         private int _nShellQuantity = nShellQuantity;
-        private int _dwRecoil = dwRecoil;
-        private int _dwLoadingTime = dwLoadingTime;
+        private uint _dwRecoil = dwRecoil;
+        private uint _dwLoadingTime = dwLoadingTime;
         private int _nAdjHitRate = nAdjHitRate;
         private float _fAttackSpeed = fAttackSpeed;
-        private int _dwDmgShift = dwDmgShift;
-        private int _dwAttackRange = dwAttackRange;
+        private uint _dwDmgShift = dwDmgShift;
+        private uint _dwAttackRange = dwAttackRange;
         private int _nProbability = nProbability;
-        private int _dwDestParam1 = dwDestParam1;
-        private int _dwDestParam2 = dwDestParam2;
-        private int _dwDestParam3 = dwDestParam3;
-        private int _dwDestParam4 = dwDestParam4;
-        private int _dwDestParam5 = dwDestParam5;
-        private int _dwDestParam6 = dwDestParam6;
+        private uint _dwDestParam1 = dwDestParam1;
+        private uint _dwDestParam2 = dwDestParam2;
+        private uint _dwDestParam3 = dwDestParam3;
+        private uint _dwDestParam4 = dwDestParam4;
+        private uint _dwDestParam5 = dwDestParam5;
+        private uint _dwDestParam6 = dwDestParam6;
         private int _nAdjParamVal1 = nAdjParamVal1;
         private int _nAdjParamVal2 = nAdjParamVal2;
         private int _nAdjParamVal3 = nAdjParamVal3;
         private int _nAdjParamVal4 = nAdjParamVal4;
         private int _nAdjParamVal5 = nAdjParamVal5;
         private int _nAdjParamVal6 = nAdjParamVal6;
-        private int _dwChgParamVal1 = dwChgParamVal1;
-        private int _dwChgParamVal2 = dwChgParamVal2;
-        private int _dwChgParamVal3 = dwChgParamVal3;
-        private int _dwChgParamVal4 = dwChgParamVal4;
-        private int _dwChgParamVal5 = dwChgParamVal5;
-        private int _dwChgParamVal6 = dwChgParamVal6;
+        private uint _dwChgParamVal1 = dwChgParamVal1;
+        private uint _dwChgParamVal2 = dwChgParamVal2;
+        private uint _dwChgParamVal3 = dwChgParamVal3;
+        private uint _dwChgParamVal4 = dwChgParamVal4;
+        private uint _dwChgParamVal5 = dwChgParamVal5;
+        private uint _dwChgParamVal6 = dwChgParamVal6;
         private int _nDestData11 = nDestData11;
         private int _nDestData12 = nDestData12;
         private int _nDestData13 = nDestData13;
         private int _nDestData14 = nDestData14;
         private int _nDestData15 = nDestData15;
         private int _nDestData16 = nDestData16;
-        private int _dwActiveSkill = dwActiveSkill;
-        private int _dwActiveSkillLv = dwActiveSkillLv;
-        private int _dwActiveSkillRate = dwActiveSkillRate;
-        private int _dwReqMp = dwReqMp;
-        private int _dwReqFp = dwReqFp;
-        private int _dwReqDisLV = dwReqDisLV;
-        private int _dwReSkill1 = dwReSkill1;
-        private int _dwReSkillLevel1 = dwReSkillLevel1;
-        private int _dwReSkill2 = dwReSkill2;
-        private int _dwReSkillLevel2 = dwReSkillLevel2;
-        private int _dwSkillReadyType = dwSkillReadyType;
-        private int _dwSkillReady = dwSkillReady;
-        private int _dwSkillRange = dwSkillRange;
-        private int _dwSfxElemental = dwSfxElemental;
-        private int _dwSfxObj = dwSfxObj;
-        private int _dwSfxObj2 = dwSfxObj2;
-        private int _dwSfxObj3 = dwSfxObj3;
-        private int _dwSfxObj4 = dwSfxObj4;
-        private int _dwSfxObj5 = dwSfxObj5;
-        private int _dwUseMotion = dwUseMotion;
-        private int _dwCircleTime = dwCircleTime;
-        private int _dwSkillTime = dwSkillTime;
-        private int _dwExeTarget = dwExeTarget;
-        private int _dwUseChance = dwUseChance;
-        private int _dwSpellRegion = dwSpellRegion;
-        private int _dwSpellType = dwSpellType;
-        private int _dwReferStat1 = dwReferStat1;
-        private int _dwReferStat2 = dwReferStat2;
-        private int _dwReferTarget1 = dwReferTarget1;
-        private int _dwReferTarget2 = dwReferTarget2;
-        private int _dwReferValue1 = dwReferValue1;
-        private int _dwReferValue2 = dwReferValue2;
-        private int _dwSkillType = dwSkillType;
+        private uint _dwActiveSkill = dwActiveSkill;
+        private uint _dwActiveSkillLv = dwActiveSkillLv;
+        private uint _dwActiveSkillRate = dwActiveSkillRate;
+        private uint _dwReqMp = dwReqMp;
+        private uint _dwReqFp = dwReqFp;
+        private uint _dwReqDisLV = dwReqDisLV;
+        private uint _dwReSkill1 = dwReSkill1;
+        private uint _dwReSkillLevel1 = dwReSkillLevel1;
+        private uint _dwReSkill2 = dwReSkill2;
+        private uint _dwReSkillLevel2 = dwReSkillLevel2;
+        private uint _dwSkillReadyType = dwSkillReadyType;
+        private uint _dwSkillReady = dwSkillReady;
+        private uint _dwSkillRange = dwSkillRange;
+        private uint _dwSfxElemental = dwSfxElemental;
+        private uint _dwSfxObj = dwSfxObj;
+        private uint _dwSfxObj2 = dwSfxObj2;
+        private uint _dwSfxObj3 = dwSfxObj3;
+        private uint _dwSfxObj4 = dwSfxObj4;
+        private uint _dwSfxObj5 = dwSfxObj5;
+        private uint _dwUseMotion = dwUseMotion;
+        private uint _dwCircleTime = dwCircleTime;
+        private uint _dwSkillTime = dwSkillTime;
+        private uint _dwExeTarget = dwExeTarget;
+        private uint _dwUseChance = dwUseChance;
+        private uint _dwSpellRegion = dwSpellRegion;
+        private uint _dwSpellType = dwSpellType;
+        private uint _dwReferStat1 = dwReferStat1;
+        private uint _dwReferStat2 = dwReferStat2;
+        private uint _dwReferTarget1 = dwReferTarget1;
+        private uint _dwReferTarget2 = dwReferTarget2;
+        private uint _dwReferValue1 = dwReferValue1;
+        private uint _dwReferValue2 = dwReferValue2;
+        private uint _dwSkillType = dwSkillType;
         private int _nItemResistElecricity = nItemResistElecricity;
         private int _nItemResistFire = nItemResistFire;
         private int _nItemResistWind = nItemResistWind;
         private int _nItemResistWater = nItemResistWater;
         private int _nItemResistEarth = nItemResistEarth;
         private int _nEvildoing = nEvildoing;
-        private int _dwExpertLV = dwExpertLV;
-        private int _dwExpertMax = dwExpertMax;
-        private int _dwSubDefine = dwSubDefine;
-        private int _dwExp = dwExp;
-        private int _dwComboStyle = dwComboStyle;
+        private uint _dwExpertLV = dwExpertLV;
+        private uint _dwExpertMax = dwExpertMax;
+        private uint _dwSubDefine = dwSubDefine;
+        private uint _dwExp = dwExp;
+        private uint _dwComboStyle = dwComboStyle;
         private float _fFlightSpeed = fFlightSpeed;
         private float _fFlightLRAngle = fFlightLRAngle;
         private float _fFlightTBAngle = fFlightTBAngle;
-        private int _dwFlightLimit = dwFlightLimit;
-        private int _dwFFuelReMax = dwFFuelReMax;
-        private int _dwAFuelReMax = dwAFuelReMax;
-        private int _dwFuelRe = dwFuelRe;
-        private int _dwLimitLevel1 = dwLimitLevel1;
+        private uint _dwFlightLimit = dwFlightLimit;
+        private uint _dwFFuelReMax = dwFFuelReMax;
+        private uint _dwAFuelReMax = dwAFuelReMax;
+        private uint _dwFuelRe = dwFuelRe;
+        private uint _dwLimitLevel1 = dwLimitLevel1;
         private int _nReflect = nReflect;
-        private int _dwSndAttack1 = dwSndAttack1;
-        private int _dwSndAttack2 = dwSndAttack2;
+        private uint _dwSndAttack1 = dwSndAttack1;
+        private uint _dwSndAttack2 = dwSndAttack2;
         private string _szIcon = szIcon;
-        private int _dwQuestId = dwQuestId;
+        private uint _dwQuestId = dwQuestId;
         private string _szTextFileName = szTextFileName;
         private string _szCommand = szCommand;
         private int _nMinLimitLevel = nMinLimitLevel;
@@ -499,165 +499,165 @@ namespace eTools_Ultimate.Models
         private int _bResetBind = bResetBind;
         private int _nBindCondition = nBindCondition;
         private int _nResetBindCondition = nResetBindCondition;
-        private int _dwHitActiveSkillId = dwHitActiveSkillId;
-        private int _dwHitActiveSkillLv = dwHitActiveSkillLv;
-        private int _dwHitActiveSkillProb = dwHitActiveSkillProb;
-        private int _dwHitActiveSkillTarget = dwHitActiveSkillTarget;
-        private int _dwDamageActiveSkillId = dwDamageActiveSkillId;
-        private int _dwDamageActiveSkillLv = dwDamageActiveSkillLv;
-        private int _dwDamageActiveSkillProb = dwDamageActiveSkillProb;
-        private int _dwDamageActiveSkillTarget = dwDamageActiveSkillTarget;
-        private int _dwEquipActiveSkillId = dwEquipActiveSkillId;
-        private int _dwEquipActiveSkillLv = dwEquipActiveSkillLv;
-        private int _dwSmelting = dwSmelting;
-        private int _dwAttsmelting = dwAttsmelting;
-        private int _dwGemsmelting = dwGemsmelting;
-        private int _dwPierce = dwPierce;
-        private int _dwUprouse = dwUprouse;
+        private uint _dwHitActiveSkillId = dwHitActiveSkillId;
+        private uint _dwHitActiveSkillLv = dwHitActiveSkillLv;
+        private uint _dwHitActiveSkillProb = dwHitActiveSkillProb;
+        private uint _dwHitActiveSkillTarget = dwHitActiveSkillTarget;
+        private uint _dwDamageActiveSkillId = dwDamageActiveSkillId;
+        private uint _dwDamageActiveSkillLv = dwDamageActiveSkillLv;
+        private uint _dwDamageActiveSkillProb = dwDamageActiveSkillProb;
+        private uint _dwDamageActiveSkillTarget = dwDamageActiveSkillTarget;
+        private uint _dwEquipActiveSkillId = dwEquipActiveSkillId;
+        private uint _dwEquipActiveSkillLv = dwEquipActiveSkillLv;
+        private uint _dwSmelting = dwSmelting;
+        private uint _dwAttsmelting = dwAttsmelting;
+        private uint _dwGemsmelting = dwGemsmelting;
+        private uint _dwPierce = dwPierce;
+        private uint _dwUprouse = dwUprouse;
         private int _bAbsoluteTime = bAbsoluteTime;
-        private int _dwItemGrade = dwItemGrade;
+        private uint _dwItemGrade = dwItemGrade;
         private int _bCanTrade = bCanTrade;
-        private int _dwMainCategory = dwMainCategory;
-        private int _dwSubCategory = dwSubCategory;
+        private uint _dwMainCategory = dwMainCategory;
+        private uint _dwSubCategory = dwSubCategory;
         private int _bCanHaveServerTransform = bCanHaveServerTransform;
         private int _bCanSavePotion = bCanSavePotion;
         private int _bCanLooksChange = bCanLooksChange;
         private int _bIsLooksChangeMaterial = bIsLooksChangeMaterial;
 
         public int NVer { get => _nVer; set { if (value != NVer) { _nVer = value; NotifyPropertyChanged(); } } }
-        public int DwId { get => _dwId; set { if (value != DwId) { _dwId = value; NotifyPropertyChanged(); } } }
+        public uint DwId { get => _dwId; set { if (value != DwId) { _dwId = value; NotifyPropertyChanged(); } } }
         public string SzName { get => _szName; set { if (value != SzName) { _szName = value; NotifyPropertyChanged(); } } }
-        public int DwNum { get => _dwNum; set { if (value != DwNum) { _dwNum = value; NotifyPropertyChanged(); } } }
-        public int DwPackMax { get => _dwPackMax; set { if (value != DwPackMax) { _dwPackMax = value; NotifyPropertyChanged(); } } }
-        public int DwItemKind1 { get => _dwItemKind1; set { if (value != DwItemKind1) { _dwItemKind1 = value; NotifyPropertyChanged(); } } }
-        public int DwItemKind2 { get => _dwItemKind2; set { if (value != DwItemKind2) { _dwItemKind2 = value; NotifyPropertyChanged(); } } }
-        public int DwItemKind3 { get => _dwItemKind3; set { if (value != DwItemKind3) { _dwItemKind3 = value; NotifyPropertyChanged(); } } }
-        public int DwItemJob { get => _dwItemJob; set { if (value != DwItemJob) { _dwItemJob = value; NotifyPropertyChanged(); } } }
+        public uint DwNum { get => _dwNum; set { if (value != DwNum) { _dwNum = value; NotifyPropertyChanged(); } } }
+        public uint DwPackMax { get => _dwPackMax; set { if (value != DwPackMax) { _dwPackMax = value; NotifyPropertyChanged(); } } }
+        public uint DwItemKind1 { get => _dwItemKind1; set { if (value != DwItemKind1) { _dwItemKind1 = value; NotifyPropertyChanged(); } } }
+        public uint DwItemKind2 { get => _dwItemKind2; set { if (value != DwItemKind2) { _dwItemKind2 = value; NotifyPropertyChanged(); } } }
+        public uint DwItemKind3 { get => _dwItemKind3; set { if (value != DwItemKind3) { _dwItemKind3 = value; NotifyPropertyChanged(); } } }
+        public uint DwItemJob { get => _dwItemJob; set { if (value != DwItemJob) { _dwItemJob = value; NotifyPropertyChanged(); } } }
         public int BPermanence { get => _bPermanence; set { if (value != BPermanence) { _bPermanence = value; NotifyPropertyChanged(); } } }
-        public int DwUseable { get => _dwUseable; set { if (value != DwUseable) { _dwUseable = value; NotifyPropertyChanged(); } } }
-        public int DwItemSex { get => _dwItemSex; set { if (value != DwItemSex) { _dwItemSex = value; NotifyPropertyChanged(); } } }
-        public int DwCost { get => _dwCost; set { if (value != DwCost) { _dwCost = value; NotifyPropertyChanged(); } } }
-        public int DwEndurance { get => _dwEndurance; set { if (value != DwEndurance) { _dwEndurance = value; NotifyPropertyChanged(); } } }
+        public uint DwUseable { get => _dwUseable; set { if (value != DwUseable) { _dwUseable = value; NotifyPropertyChanged(); } } }
+        public uint DwItemSex { get => _dwItemSex; set { if (value != DwItemSex) { _dwItemSex = value; NotifyPropertyChanged(); } } }
+        public uint DwCost { get => _dwCost; set { if (value != DwCost) { _dwCost = value; NotifyPropertyChanged(); } } }
+        public uint DwEndurance { get => _dwEndurance; set { if (value != DwEndurance) { _dwEndurance = value; NotifyPropertyChanged(); } } }
         public int NAbrasion { get => _nAbrasion; set { if (value != NAbrasion) { _nAbrasion = value; NotifyPropertyChanged(); } } }
         public int NMaxRepair { get => _nMaxRepair; set { if (value != NMaxRepair) { _nMaxRepair = value; NotifyPropertyChanged(); } } }
-        public int DwHanded { get => _dwHanded; set { if (value != DwHanded) { _dwHanded = value; NotifyPropertyChanged(); } } }
-        public int DwFlag { get => _dwFlag; set { if (value != DwFlag) { _dwFlag = value; NotifyPropertyChanged(); } } }
-        public int DwParts { get => _dwParts; set { if (value != DwParts) { _dwParts = value; NotifyPropertyChanged(); } } }
-        public int DwPartsub { get => _dwPartsub; set { if (value != DwPartsub) { _dwPartsub = value; NotifyPropertyChanged(); } } }
-        public int BPartsFile { get => _bPartsFile; set { if (value != BPartsFile) { _bPartsFile = value; NotifyPropertyChanged(); } } }
-        public int DwExclusive { get => _dwExclusive; set { if (value != DwExclusive) { _dwExclusive = value; NotifyPropertyChanged(); } } }
-        public int DwBasePartsIgnore { get => _dwBasePartsIgnore; set { if (value != DwBasePartsIgnore) { _dwBasePartsIgnore = value; NotifyPropertyChanged(); } } }
-        public int DwItemLV { get => _dwItemLV; set { if (value != DwItemLV) { _dwItemLV = value; NotifyPropertyChanged(); } } }
-        public int DwItemRare { get => _dwItemRare; set { if (value != DwItemRare) { _dwItemRare = value; NotifyPropertyChanged(); } } }
-        public int DwShopAble { get => _dwShopAble; set { if (value != DwShopAble) { _dwShopAble = value; NotifyPropertyChanged(); } } }
+        public uint DwHanded { get => _dwHanded; set { if (value != DwHanded) { _dwHanded = value; NotifyPropertyChanged(); } } }
+        public uint DwFlag { get => _dwFlag; set { if (value != DwFlag) { _dwFlag = value; NotifyPropertyChanged(); } } }
+        public uint DwParts { get => _dwParts; set { if (value != DwParts) { _dwParts = value; NotifyPropertyChanged(); } } }
+        public uint DwPartsub { get => _dwPartsub; set { if (value != DwPartsub) { _dwPartsub = value; NotifyPropertyChanged(); } } }
+        public uint BPartsFile { get => _bPartsFile; set { if (value != BPartsFile) { _bPartsFile = value; NotifyPropertyChanged(); } } }
+        public uint DwExclusive { get => _dwExclusive; set { if (value != DwExclusive) { _dwExclusive = value; NotifyPropertyChanged(); } } }
+        public uint DwBasePartsIgnore { get => _dwBasePartsIgnore; set { if (value != DwBasePartsIgnore) { _dwBasePartsIgnore = value; NotifyPropertyChanged(); } } }
+        public uint DwItemLV { get => _dwItemLV; set { if (value != DwItemLV) { _dwItemLV = value; NotifyPropertyChanged(); } } }
+        public uint DwItemRare { get => _dwItemRare; set { if (value != DwItemRare) { _dwItemRare = value; NotifyPropertyChanged(); } } }
+        public uint DwShopAble { get => _dwShopAble; set { if (value != DwShopAble) { _dwShopAble = value; NotifyPropertyChanged(); } } }
         public int NLog { get => _nLog; set { if (value != NLog) { _nLog = value; NotifyPropertyChanged(); } } }
         public int BCharged { get => _bCharged; set { if (value != BCharged) { _bCharged = value; NotifyPropertyChanged(); } } }
-        public int DwLinkKindBullet { get => _dwLinkKindBullet; set { if (value != DwLinkKindBullet) { _dwLinkKindBullet = value; NotifyPropertyChanged(); } } }
-        public int DwLinkKind { get => _dwLinkKind; set { if (value != DwLinkKind) { _dwLinkKind = value; NotifyPropertyChanged(); } } }
-        public int DwAbilityMin { get => _dwAbilityMin; set { if (value != DwAbilityMin) { _dwAbilityMin = value; NotifyPropertyChanged(); } } }
-        public int DwAbilityMax { get => _dwAbilityMax; set { if (value != DwAbilityMax) { _dwAbilityMax = value; NotifyPropertyChanged(); } } }
-        public short EItemType { get => _eItemType; set { if (value != EItemType) { _eItemType = value; NotifyPropertyChanged(); } } }
+        public uint DwLinkKindBullet { get => _dwLinkKindBullet; set { if (value != DwLinkKindBullet) { _dwLinkKindBullet = value; NotifyPropertyChanged(); } } }
+        public uint DwLinkKind { get => _dwLinkKind; set { if (value != DwLinkKind) { _dwLinkKind = value; NotifyPropertyChanged(); } } }
+        public uint DwAbilityMin { get => _dwAbilityMin; set { if (value != DwAbilityMin) { _dwAbilityMin = value; NotifyPropertyChanged(); } } }
+        public uint DwAbilityMax { get => _dwAbilityMax; set { if (value != DwAbilityMax) { _dwAbilityMax = value; NotifyPropertyChanged(); } } }
+        public int EItemType { get => _eItemType; set { if (value != EItemType) { _eItemType = value; NotifyPropertyChanged(); } } }
         public short WItemEAtk { get => _wItemEAtk; set { if (value != WItemEAtk) { _wItemEAtk = value; NotifyPropertyChanged(); } } }
-        public int DwParry { get => _dwParry; set { if (value != DwParry) { _dwParry = value; NotifyPropertyChanged(); } } }
-        public int DwBlockRating { get => _dwBlockRating; set { if (value != DwBlockRating) { _dwBlockRating = value; NotifyPropertyChanged(); } } }
+        public uint DwParry { get => _dwParry; set { if (value != DwParry) { _dwParry = value; NotifyPropertyChanged(); } } }
+        public uint DwBlockRating { get => _dwBlockRating; set { if (value != DwBlockRating) { _dwBlockRating = value; NotifyPropertyChanged(); } } }
         public int NAddSkillMin { get => _nAddSkillMin; set { if (value != NAddSkillMin) { _nAddSkillMin = value; NotifyPropertyChanged(); } } }
         public int NAddSkillMax { get => _nAddSkillMax; set { if (value != NAddSkillMax) { _nAddSkillMax = value; NotifyPropertyChanged(); } } }
-        public int DwAtkStyle { get => _dwAtkStyle; set { if (value != DwAtkStyle) { _dwAtkStyle = value; NotifyPropertyChanged(); } } }
-        public int DwWeaponType { get => _dwWeaponType; set { if (value != DwWeaponType) { _dwWeaponType = value; NotifyPropertyChanged(); } } }
-        public int DwItemAtkOrder1 { get => _dwItemAtkOrder1; set { if (value != DwItemAtkOrder1) { _dwItemAtkOrder1 = value; NotifyPropertyChanged(); } } }
-        public int DwItemAtkOrder2 { get => _dwItemAtkOrder2; set { if (value != DwItemAtkOrder2) { _dwItemAtkOrder2 = value; NotifyPropertyChanged(); } } }
-        public int DwItemAtkOrder3 { get => _dwItemAtkOrder3; set { if (value != DwItemAtkOrder3) { _dwItemAtkOrder3 = value; NotifyPropertyChanged(); } } }
-        public int DwItemAtkOrder4 { get => _dwItemAtkOrder4; set { if (value != DwItemAtkOrder4) { _dwItemAtkOrder4 = value; NotifyPropertyChanged(); } } }
-        public int TmContinuousPain { get => _tmContinuousPain; set { if (value != TmContinuousPain) { _tmContinuousPain = value; NotifyPropertyChanged(); } } }
+        public uint DwAtkStyle { get => _dwAtkStyle; set { if (value != DwAtkStyle) { _dwAtkStyle = value; NotifyPropertyChanged(); } } }
+        public uint DwWeaponType { get => _dwWeaponType; set { if (value != DwWeaponType) { _dwWeaponType = value; NotifyPropertyChanged(); } } }
+        public uint DwItemAtkOrder1 { get => _dwItemAtkOrder1; set { if (value != DwItemAtkOrder1) { _dwItemAtkOrder1 = value; NotifyPropertyChanged(); } } }
+        public uint DwItemAtkOrder2 { get => _dwItemAtkOrder2; set { if (value != DwItemAtkOrder2) { _dwItemAtkOrder2 = value; NotifyPropertyChanged(); } } }
+        public uint DwItemAtkOrder3 { get => _dwItemAtkOrder3; set { if (value != DwItemAtkOrder3) { _dwItemAtkOrder3 = value; NotifyPropertyChanged(); } } }
+        public uint DwItemAtkOrder4 { get => _dwItemAtkOrder4; set { if (value != DwItemAtkOrder4) { _dwItemAtkOrder4 = value; NotifyPropertyChanged(); } } }
+        public uint TmContinuousPain { get => _tmContinuousPain; set { if (value != TmContinuousPain) { _tmContinuousPain = value; NotifyPropertyChanged(); } } }
         public int NShellQuantity { get => _nShellQuantity; set { if (value != NShellQuantity) { _nShellQuantity = value; NotifyPropertyChanged(); } } }
-        public int DwRecoil { get => _dwRecoil; set { if (value != DwRecoil) { _dwRecoil = value; NotifyPropertyChanged(); } } }
-        public int DwLoadingTime { get => _dwLoadingTime; set { if (value != DwLoadingTime) { _dwLoadingTime = value; NotifyPropertyChanged(); } } }
+        public uint DwRecoil { get => _dwRecoil; set { if (value != DwRecoil) { _dwRecoil = value; NotifyPropertyChanged(); } } }
+        public uint DwLoadingTime { get => _dwLoadingTime; set { if (value != DwLoadingTime) { _dwLoadingTime = value; NotifyPropertyChanged(); } } }
         public int NAdjHitRate { get => _nAdjHitRate; set { if (value != NAdjHitRate) { _nAdjHitRate = value; NotifyPropertyChanged(); } } }
         public float FAttackSpeed { get => _fAttackSpeed; set { if (value != FAttackSpeed) { _fAttackSpeed = value; NotifyPropertyChanged(); } } }
-        public int DwDmgShift { get => _dwDmgShift; set { if (value != DwDmgShift) { _dwDmgShift = value; NotifyPropertyChanged(); } } }
-        public int DwAttackRange { get => _dwAttackRange; set { if (value != DwAttackRange) { _dwAttackRange = value; NotifyPropertyChanged(); } } }
+        public uint DwDmgShift { get => _dwDmgShift; set { if (value != DwDmgShift) { _dwDmgShift = value; NotifyPropertyChanged(); } } }
+        public uint DwAttackRange { get => _dwAttackRange; set { if (value != DwAttackRange) { _dwAttackRange = value; NotifyPropertyChanged(); } } }
         public int NProbability { get => _nProbability; set { if (value != NProbability) { _nProbability = value; NotifyPropertyChanged(); } } }
-        public int DwDestParam1 { get => _dwDestParam1; set { if (value != DwDestParam1) { _dwDestParam1 = value; NotifyPropertyChanged(); } } }
-        public int DwDestParam2 { get => _dwDestParam2; set { if (value != DwDestParam2) { _dwDestParam2 = value; NotifyPropertyChanged(); } } }
-        public int DwDestParam3 { get => _dwDestParam3; set { if (value != DwDestParam3) { _dwDestParam3 = value; NotifyPropertyChanged(); } } }
-        public int DwDestParam4 { get => _dwDestParam4; set { if (value != DwDestParam4) { _dwDestParam4 = value; NotifyPropertyChanged(); } } }
-        public int DwDestParam5 { get => _dwDestParam5; set { if (value != DwDestParam5) { _dwDestParam5 = value; NotifyPropertyChanged(); } } }
-        public int DwDestParam6 { get => _dwDestParam6; set { if (value != DwDestParam6) { _dwDestParam6 = value; NotifyPropertyChanged(); } } }
+        public uint DwDestParam1 { get => _dwDestParam1; set { if (value != DwDestParam1) { _dwDestParam1 = value; NotifyPropertyChanged(); } } }
+        public uint DwDestParam2 { get => _dwDestParam2; set { if (value != DwDestParam2) { _dwDestParam2 = value; NotifyPropertyChanged(); } } }
+        public uint DwDestParam3 { get => _dwDestParam3; set { if (value != DwDestParam3) { _dwDestParam3 = value; NotifyPropertyChanged(); } } }
+        public uint DwDestParam4 { get => _dwDestParam4; set { if (value != DwDestParam4) { _dwDestParam4 = value; NotifyPropertyChanged(); } } }
+        public uint DwDestParam5 { get => _dwDestParam5; set { if (value != DwDestParam5) { _dwDestParam5 = value; NotifyPropertyChanged(); } } }
+        public uint DwDestParam6 { get => _dwDestParam6; set { if (value != DwDestParam6) { _dwDestParam6 = value; NotifyPropertyChanged(); } } }
         public int NAdjParamVal1 { get => _nAdjParamVal1; set { if (value != NAdjParamVal1) { _nAdjParamVal1 = value; NotifyPropertyChanged(); } } }
         public int NAdjParamVal2 { get => _nAdjParamVal2; set { if (value != NAdjParamVal2) { _nAdjParamVal2 = value; NotifyPropertyChanged(); } } }
         public int NAdjParamVal3 { get => _nAdjParamVal3; set { if (value != NAdjParamVal3) { _nAdjParamVal3 = value; NotifyPropertyChanged(); } } }
         public int NAdjParamVal4 { get => _nAdjParamVal4; set { if (value != NAdjParamVal4) { _nAdjParamVal4 = value; NotifyPropertyChanged(); } } }
         public int NAdjParamVal5 { get => _nAdjParamVal5; set { if (value != NAdjParamVal5) { _nAdjParamVal5 = value; NotifyPropertyChanged(); } } }
         public int NAdjParamVal6 { get => _nAdjParamVal6; set { if (value != NAdjParamVal6) { _nAdjParamVal6 = value; NotifyPropertyChanged(); } } }
-        public int DwChgParamVal1 { get => _dwChgParamVal1; set { if (value != DwChgParamVal1) { _dwChgParamVal1 = value; NotifyPropertyChanged(); } } }
-        public int DwChgParamVal2 { get => _dwChgParamVal2; set { if (value != DwChgParamVal2) { _dwChgParamVal2 = value; NotifyPropertyChanged(); } } }
-        public int DwChgParamVal3 { get => _dwChgParamVal3; set { if (value != DwChgParamVal3) { _dwChgParamVal3 = value; NotifyPropertyChanged(); } } }
-        public int DwChgParamVal4 { get => _dwChgParamVal4; set { if (value != DwChgParamVal4) { _dwChgParamVal4 = value; NotifyPropertyChanged(); } } }
-        public int DwChgParamVal5 { get => _dwChgParamVal5; set { if (value != DwChgParamVal5) { _dwChgParamVal5 = value; NotifyPropertyChanged(); } } }
-        public int DwChgParamVal6 { get => _dwChgParamVal6; set { if (value != DwChgParamVal6) { _dwChgParamVal6 = value; NotifyPropertyChanged(); } } }
+        public uint DwChgParamVal1 { get => _dwChgParamVal1; set { if (value != DwChgParamVal1) { _dwChgParamVal1 = value; NotifyPropertyChanged(); } } }
+        public uint DwChgParamVal2 { get => _dwChgParamVal2; set { if (value != DwChgParamVal2) { _dwChgParamVal2 = value; NotifyPropertyChanged(); } } }
+        public uint DwChgParamVal3 { get => _dwChgParamVal3; set { if (value != DwChgParamVal3) { _dwChgParamVal3 = value; NotifyPropertyChanged(); } } }
+        public uint DwChgParamVal4 { get => _dwChgParamVal4; set { if (value != DwChgParamVal4) { _dwChgParamVal4 = value; NotifyPropertyChanged(); } } }
+        public uint DwChgParamVal5 { get => _dwChgParamVal5; set { if (value != DwChgParamVal5) { _dwChgParamVal5 = value; NotifyPropertyChanged(); } } }
+        public uint DwChgParamVal6 { get => _dwChgParamVal6; set { if (value != DwChgParamVal6) { _dwChgParamVal6 = value; NotifyPropertyChanged(); } } }
         public int NDestData11 { get => _nDestData11; set { if (value != NDestData11) { _nDestData11 = value; NotifyPropertyChanged(); } } }
         public int NDestData12 { get => _nDestData12; set { if (value != NDestData12) { _nDestData12 = value; NotifyPropertyChanged(); } } }
         public int NDestData13 { get => _nDestData13; set { if (value != NDestData13) { _nDestData13 = value; NotifyPropertyChanged(); } } }
         public int NDestData14 { get => _nDestData14; set { if (value != NDestData14) { _nDestData14 = value; NotifyPropertyChanged(); } } }
         public int NDestData15 { get => _nDestData15; set { if (value != NDestData15) { _nDestData15 = value; NotifyPropertyChanged(); } } }
         public int NDestData16 { get => _nDestData16; set { if (value != NDestData16) { _nDestData16 = value; NotifyPropertyChanged(); } } }
-        public int DwActiveSkill { get => _dwActiveSkill; set { if (value != DwActiveSkill) { _dwActiveSkill = value; NotifyPropertyChanged(); } } }
-        public int DwActiveSkillLv { get => _dwActiveSkillLv; set { if (value != DwActiveSkillLv) { _dwActiveSkillLv = value; NotifyPropertyChanged(); } } }
-        public int DwActiveSkillRate { get => _dwActiveSkillRate; set { if (value != DwActiveSkillRate) { _dwActiveSkillRate = value; NotifyPropertyChanged(); } } }
-        public int DwReqMp { get => _dwReqMp; set { if (value != DwReqMp) { _dwReqMp = value; NotifyPropertyChanged(); } } }
-        public int DwReqFp { get => _dwReqFp; set { if (value != DwReqFp) { _dwReqFp = value; NotifyPropertyChanged(); } } }
-        public int DwReqDisLV { get => _dwReqDisLV; set { if (value != DwReqDisLV) { _dwReqDisLV = value; NotifyPropertyChanged(); } } }
-        public int DwReSkill1 { get => _dwReSkill1; set { if (value != DwReSkill1) { _dwReSkill1 = value; NotifyPropertyChanged(); } } }
-        public int DwReSkillLevel1 { get => _dwReSkillLevel1; set { if (value != DwReSkillLevel1) { _dwReSkillLevel1 = value; NotifyPropertyChanged(); } } }
-        public int DwReSkill2 { get => _dwReSkill2; set { if (value != DwReSkill2) { _dwReSkill2 = value; NotifyPropertyChanged(); } } }
-        public int DwReSkillLevel2 { get => _dwReSkillLevel2; set { if (value != DwReSkillLevel2) { _dwReSkillLevel2 = value; NotifyPropertyChanged(); } } }
-        public int DwSkillReadyType { get => _dwSkillReadyType; set { if (value != DwSkillReadyType) { _dwSkillReadyType = value; NotifyPropertyChanged(); } } }
-        public int DwSkillReady { get => _dwSkillReady; set { if (value != DwSkillReady) { _dwSkillReady = value; NotifyPropertyChanged(); } } }
-        public int DwSkillRange { get => _dwSkillRange; set { if (value != DwSkillRange) { _dwSkillRange = value; NotifyPropertyChanged(); } } }
-        public int DwSfxElemental { get => _dwSfxElemental; set { if (value != DwSfxElemental) { _dwSfxElemental = value; NotifyPropertyChanged(); } } }
-        public int DwSfxObj { get => _dwSfxObj; set { if (value != DwSfxObj) { _dwSfxObj = value; NotifyPropertyChanged(); } } }
-        public int DwSfxObj2 { get => _dwSfxObj2; set { if (value != DwSfxObj2) { _dwSfxObj2 = value; NotifyPropertyChanged(); } } }
-        public int DwSfxObj3 { get => _dwSfxObj3; set { if (value != DwSfxObj3) { _dwSfxObj3 = value; NotifyPropertyChanged(); } } }
-        public int DwSfxObj4 { get => _dwSfxObj4; set { if (value != DwSfxObj4) { _dwSfxObj4 = value; NotifyPropertyChanged(); } } }
-        public int DwSfxObj5 { get => _dwSfxObj5; set { if (value != DwSfxObj5) { _dwSfxObj5 = value; NotifyPropertyChanged(); } } }
-        public int DwUseMotion { get => _dwUseMotion; set { if (value != DwUseMotion) { _dwUseMotion = value; NotifyPropertyChanged(); } } }
-        public int DwCircleTime { get => _dwCircleTime; set { if (value != DwCircleTime) { _dwCircleTime = value; NotifyPropertyChanged(); } } }
-        public int DwSkillTime { get => _dwSkillTime; set { if (value != DwSkillTime) { _dwSkillTime = value; NotifyPropertyChanged(); } } }
-        public int DwExeTarget { get => _dwExeTarget; set { if (value != DwExeTarget) { _dwExeTarget = value; NotifyPropertyChanged(); } } }
-        public int DwUseChance { get => _dwUseChance; set { if (value != DwUseChance) { _dwUseChance = value; NotifyPropertyChanged(); } } }
-        public int DwSpellRegion { get => _dwSpellRegion; set { if (value != DwSpellRegion) { _dwSpellRegion = value; NotifyPropertyChanged(); } } }
-        public int DwSpellType { get => _dwSpellType; set { if (value != DwSpellType) { _dwSpellType = value; NotifyPropertyChanged(); } } }
-        public int DwReferStat1 { get => _dwReferStat1; set { if (value != DwReferStat1) { _dwReferStat1 = value; NotifyPropertyChanged(); } } }
-        public int DwReferStat2 { get => _dwReferStat2; set { if (value != DwReferStat2) { _dwReferStat2 = value; NotifyPropertyChanged(); } } }
-        public int DwReferTarget1 { get => _dwReferTarget1; set { if (value != DwReferTarget1) { _dwReferTarget1 = value; NotifyPropertyChanged(); } } }
-        public int DwReferTarget2 { get => _dwReferTarget2; set { if (value != DwReferTarget2) { _dwReferTarget2 = value; NotifyPropertyChanged(); } } }
-        public int DwReferValue1 { get => _dwReferValue1; set { if (value != DwReferValue1) { _dwReferValue1 = value; NotifyPropertyChanged(); } } }
-        public int DwReferValue2 { get => _dwReferValue2; set { if (value != DwReferValue2) { _dwReferValue2 = value; NotifyPropertyChanged(); } } }
-        public int DwSkillType { get => _dwSkillType; set { if (value != DwSkillType) { _dwSkillType = value; NotifyPropertyChanged(); } } }
+        public uint DwActiveSkill { get => _dwActiveSkill; set { if (value != DwActiveSkill) { _dwActiveSkill = value; NotifyPropertyChanged(); } } }
+        public uint DwActiveSkillLv { get => _dwActiveSkillLv; set { if (value != DwActiveSkillLv) { _dwActiveSkillLv = value; NotifyPropertyChanged(); } } }
+        public uint DwActiveSkillRate { get => _dwActiveSkillRate; set { if (value != DwActiveSkillRate) { _dwActiveSkillRate = value; NotifyPropertyChanged(); } } }
+        public uint DwReqMp { get => _dwReqMp; set { if (value != DwReqMp) { _dwReqMp = value; NotifyPropertyChanged(); } } }
+        public uint DwReqFp { get => _dwReqFp; set { if (value != DwReqFp) { _dwReqFp = value; NotifyPropertyChanged(); } } }
+        public uint DwReqDisLV { get => _dwReqDisLV; set { if (value != DwReqDisLV) { _dwReqDisLV = value; NotifyPropertyChanged(); } } }
+        public uint DwReSkill1 { get => _dwReSkill1; set { if (value != DwReSkill1) { _dwReSkill1 = value; NotifyPropertyChanged(); } } }
+        public uint DwReSkillLevel1 { get => _dwReSkillLevel1; set { if (value != DwReSkillLevel1) { _dwReSkillLevel1 = value; NotifyPropertyChanged(); } } }
+        public uint DwReSkill2 { get => _dwReSkill2; set { if (value != DwReSkill2) { _dwReSkill2 = value; NotifyPropertyChanged(); } } }
+        public uint DwReSkillLevel2 { get => _dwReSkillLevel2; set { if (value != DwReSkillLevel2) { _dwReSkillLevel2 = value; NotifyPropertyChanged(); } } }
+        public uint DwSkillReadyType { get => _dwSkillReadyType; set { if (value != DwSkillReadyType) { _dwSkillReadyType = value; NotifyPropertyChanged(); } } }
+        public uint DwSkillReady { get => _dwSkillReady; set { if (value != DwSkillReady) { _dwSkillReady = value; NotifyPropertyChanged(); } } }
+        public uint DwSkillRange { get => _dwSkillRange; set { if (value != DwSkillRange) { _dwSkillRange = value; NotifyPropertyChanged(); } } }
+        public uint DwSfxElemental { get => _dwSfxElemental; set { if (value != DwSfxElemental) { _dwSfxElemental = value; NotifyPropertyChanged(); } } }
+        public uint DwSfxObj { get => _dwSfxObj; set { if (value != DwSfxObj) { _dwSfxObj = value; NotifyPropertyChanged(); } } }
+        public uint DwSfxObj2 { get => _dwSfxObj2; set { if (value != DwSfxObj2) { _dwSfxObj2 = value; NotifyPropertyChanged(); } } }
+        public uint DwSfxObj3 { get => _dwSfxObj3; set { if (value != DwSfxObj3) { _dwSfxObj3 = value; NotifyPropertyChanged(); } } }
+        public uint DwSfxObj4 { get => _dwSfxObj4; set { if (value != DwSfxObj4) { _dwSfxObj4 = value; NotifyPropertyChanged(); } } }
+        public uint DwSfxObj5 { get => _dwSfxObj5; set { if (value != DwSfxObj5) { _dwSfxObj5 = value; NotifyPropertyChanged(); } } }
+        public uint DwUseMotion { get => _dwUseMotion; set { if (value != DwUseMotion) { _dwUseMotion = value; NotifyPropertyChanged(); } } }
+        public uint DwCircleTime { get => _dwCircleTime; set { if (value != DwCircleTime) { _dwCircleTime = value; NotifyPropertyChanged(); } } }
+        public uint DwSkillTime { get => _dwSkillTime; set { if (value != DwSkillTime) { _dwSkillTime = value; NotifyPropertyChanged(); } } }
+        public uint DwExeTarget { get => _dwExeTarget; set { if (value != DwExeTarget) { _dwExeTarget = value; NotifyPropertyChanged(); } } }
+        public uint DwUseChance { get => _dwUseChance; set { if (value != DwUseChance) { _dwUseChance = value; NotifyPropertyChanged(); } } }
+        public uint DwSpellRegion { get => _dwSpellRegion; set { if (value != DwSpellRegion) { _dwSpellRegion = value; NotifyPropertyChanged(); } } }
+        public uint DwSpellType { get => _dwSpellType; set { if (value != DwSpellType) { _dwSpellType = value; NotifyPropertyChanged(); } } }
+        public uint DwReferStat1 { get => _dwReferStat1; set { if (value != DwReferStat1) { _dwReferStat1 = value; NotifyPropertyChanged(); } } }
+        public uint DwReferStat2 { get => _dwReferStat2; set { if (value != DwReferStat2) { _dwReferStat2 = value; NotifyPropertyChanged(); } } }
+        public uint DwReferTarget1 { get => _dwReferTarget1; set { if (value != DwReferTarget1) { _dwReferTarget1 = value; NotifyPropertyChanged(); } } }
+        public uint DwReferTarget2 { get => _dwReferTarget2; set { if (value != DwReferTarget2) { _dwReferTarget2 = value; NotifyPropertyChanged(); } } }
+        public uint DwReferValue1 { get => _dwReferValue1; set { if (value != DwReferValue1) { _dwReferValue1 = value; NotifyPropertyChanged(); } } }
+        public uint DwReferValue2 { get => _dwReferValue2; set { if (value != DwReferValue2) { _dwReferValue2 = value; NotifyPropertyChanged(); } } }
+        public uint DwSkillType { get => _dwSkillType; set { if (value != DwSkillType) { _dwSkillType = value; NotifyPropertyChanged(); } } }
         public int NItemResistElecricity { get => _nItemResistElecricity; set { if (value != NItemResistElecricity) { _nItemResistElecricity = value; NotifyPropertyChanged(); } } }
         public int NItemResistFire { get => _nItemResistFire; set { if (value != NItemResistFire) { _nItemResistFire = value; NotifyPropertyChanged(); } } }
         public int NItemResistWind { get => _nItemResistWind; set { if (value != NItemResistWind) { _nItemResistWind = value; NotifyPropertyChanged(); } } }
         public int NItemResistWater { get => _nItemResistWater; set { if (value != NItemResistWater) { _nItemResistWater = value; NotifyPropertyChanged(); } } }
         public int NItemResistEarth { get => _nItemResistEarth; set { if (value != NItemResistEarth) { _nItemResistEarth = value; NotifyPropertyChanged(); } } }
         public int NEvildoing { get => _nEvildoing; set { if (value != NEvildoing) { _nEvildoing = value; NotifyPropertyChanged(); } } }
-        public int DwExpertLV { get => _dwExpertLV; set { if (value != DwExpertLV) { _dwExpertLV = value; NotifyPropertyChanged(); } } }
-        public int DwExpertMax { get => _dwExpertMax; set { if (value != DwExpertMax) { _dwExpertMax = value; NotifyPropertyChanged(); } } }
-        public int DwSubDefine { get => _dwSubDefine; set { if (value != DwSubDefine) { _dwSubDefine = value; NotifyPropertyChanged(); } } }
-        public int DwExp { get => _dwExp; set { if (value != DwExp) { _dwExp = value; NotifyPropertyChanged(); } } }
-        public int DwComboStyle { get => _dwComboStyle; set { if (value != DwComboStyle) { _dwComboStyle = value; NotifyPropertyChanged(); } } }
+        public uint DwExpertLV { get => _dwExpertLV; set { if (value != DwExpertLV) { _dwExpertLV = value; NotifyPropertyChanged(); } } }
+        public uint DwExpertMax { get => _dwExpertMax; set { if (value != DwExpertMax) { _dwExpertMax = value; NotifyPropertyChanged(); } } }
+        public uint DwSubDefine { get => _dwSubDefine; set { if (value != DwSubDefine) { _dwSubDefine = value; NotifyPropertyChanged(); } } }
+        public uint DwExp { get => _dwExp; set { if (value != DwExp) { _dwExp = value; NotifyPropertyChanged(); } } }
+        public uint DwComboStyle { get => _dwComboStyle; set { if (value != DwComboStyle) { _dwComboStyle = value; NotifyPropertyChanged(); } } }
         public float FFlightSpeed { get => _fFlightSpeed; set { if (value != FFlightSpeed) { _fFlightSpeed = value; NotifyPropertyChanged(); } } }
         public float FFlightLRAngle { get => _fFlightLRAngle; set { if (value != FFlightLRAngle) { _fFlightLRAngle = value; NotifyPropertyChanged(); } } }
         public float FFlightTBAngle { get => _fFlightTBAngle; set { if (value != FFlightTBAngle) { _fFlightTBAngle = value; NotifyPropertyChanged(); } } }
-        public int DwFlightLimit { get => _dwFlightLimit; set { if (value != DwFlightLimit) { _dwFlightLimit = value; NotifyPropertyChanged(); } } }
-        public int DwFFuelReMax { get => _dwFFuelReMax; set { if (value != DwFFuelReMax) { _dwFFuelReMax = value; NotifyPropertyChanged(); } } }
-        public int DwAFuelReMax { get => _dwAFuelReMax; set { if (value != DwAFuelReMax) { _dwAFuelReMax = value; NotifyPropertyChanged(); } } }
-        public int DwFuelRe { get => _dwFuelRe; set { if (value != DwFuelRe) { _dwFuelRe = value; NotifyPropertyChanged(); } } }
-        public int DwLimitLevel1 { get => _dwLimitLevel1; set { if (value != DwLimitLevel1) { _dwLimitLevel1 = value; NotifyPropertyChanged(); } } }
+        public uint DwFlightLimit { get => _dwFlightLimit; set { if (value != DwFlightLimit) { _dwFlightLimit = value; NotifyPropertyChanged(); } } }
+        public uint DwFFuelReMax { get => _dwFFuelReMax; set { if (value != DwFFuelReMax) { _dwFFuelReMax = value; NotifyPropertyChanged(); } } }
+        public uint DwAFuelReMax { get => _dwAFuelReMax; set { if (value != DwAFuelReMax) { _dwAFuelReMax = value; NotifyPropertyChanged(); } } }
+        public uint DwFuelRe { get => _dwFuelRe; set { if (value != DwFuelRe) { _dwFuelRe = value; NotifyPropertyChanged(); } } }
+        public uint DwLimitLevel1 { get => _dwLimitLevel1; set { if (value != DwLimitLevel1) { _dwLimitLevel1 = value; NotifyPropertyChanged(); } } }
         public int NReflect { get => _nReflect; set { if (value != NReflect) { _nReflect = value; NotifyPropertyChanged(); } } }
-        public int DwSndAttack1 { get => _dwSndAttack1; set { if (value != DwSndAttack1) { _dwSndAttack1 = value; NotifyPropertyChanged(); } } }
-        public int DwSndAttack2 { get => _dwSndAttack2; set { if (value != DwSndAttack2) { _dwSndAttack2 = value; NotifyPropertyChanged(); } } }
+        public uint DwSndAttack1 { get => _dwSndAttack1; set { if (value != DwSndAttack1) { _dwSndAttack1 = value; NotifyPropertyChanged(); } } }
+        public uint DwSndAttack2 { get => _dwSndAttack2; set { if (value != DwSndAttack2) { _dwSndAttack2 = value; NotifyPropertyChanged(); } } }
         public string SzIcon { get => _szIcon; set { if (value != SzIcon) { _szIcon = value; NotifyPropertyChanged(); } } }
-        public int DwQuestId { get => _dwQuestId; set { if (value != DwQuestId) { _dwQuestId = value; NotifyPropertyChanged(); } } }
+        public uint DwQuestId { get => _dwQuestId; set { if (value != DwQuestId) { _dwQuestId = value; NotifyPropertyChanged(); } } }
         public string SzTextFileName { get => _szTextFileName; set { if (value != SzTextFileName) { _szTextFileName = value; NotifyPropertyChanged(); } } }
         public string SzCommand { get => _szCommand; set { if (value != SzCommand) { _szCommand = value; NotifyPropertyChanged(); } } }
         public int NMinLimitLevel { get => _nMinLimitLevel; set { if (value != NMinLimitLevel) { _nMinLimitLevel = value; NotifyPropertyChanged(); } } }
@@ -671,26 +671,26 @@ namespace eTools_Ultimate.Models
         public int BResetBind { get => _bResetBind; set { if (value != BResetBind) { _bResetBind = value; NotifyPropertyChanged(); } } }
         public int NBindCondition { get => _nBindCondition; set { if (value != NBindCondition) { _nBindCondition = value; NotifyPropertyChanged(); } } }
         public int NResetBindCondition { get => _nResetBindCondition; set { if (value != NResetBindCondition) { _nResetBindCondition = value; NotifyPropertyChanged(); } } }
-        public int DwHitActiveSkillId { get => _dwHitActiveSkillId; set { if (value != DwHitActiveSkillId) { _dwHitActiveSkillId = value; NotifyPropertyChanged(); } } }
-        public int DwHitActiveSkillLv { get => _dwHitActiveSkillLv; set { if (value != DwHitActiveSkillLv) { _dwHitActiveSkillLv = value; NotifyPropertyChanged(); } } }
-        public int DwHitActiveSkillProb { get => _dwHitActiveSkillProb; set { if (value != DwHitActiveSkillProb) { _dwHitActiveSkillProb = value; NotifyPropertyChanged(); } } }
-        public int DwHitActiveSkillTarget { get => _dwHitActiveSkillTarget; set { if (value != DwHitActiveSkillTarget) { _dwHitActiveSkillTarget = value; NotifyPropertyChanged(); } } }
-        public int DwDamageActiveSkillId { get => _dwDamageActiveSkillId; set { if (value != DwDamageActiveSkillId) { _dwDamageActiveSkillId = value; NotifyPropertyChanged(); } } }
-        public int DwDamageActiveSkillLv { get => _dwDamageActiveSkillLv; set { if (value != DwDamageActiveSkillLv) { _dwDamageActiveSkillLv = value; NotifyPropertyChanged(); } } }
-        public int DwDamageActiveSkillProb { get => _dwDamageActiveSkillProb; set { if (value != DwDamageActiveSkillProb) { _dwDamageActiveSkillProb = value; NotifyPropertyChanged(); } } }
-        public int DwDamageActiveSkillTarget { get => _dwDamageActiveSkillTarget; set { if (value != DwDamageActiveSkillTarget) { _dwDamageActiveSkillTarget = value; NotifyPropertyChanged(); } } }
-        public int DwEquipActiveSkillId { get => _dwEquipActiveSkillId; set { if (value != DwEquipActiveSkillId) { _dwEquipActiveSkillId = value; NotifyPropertyChanged(); } } }
-        public int DwEquipActiveSkillLv { get => _dwEquipActiveSkillLv; set { if (value != DwEquipActiveSkillLv) { _dwEquipActiveSkillLv = value; NotifyPropertyChanged(); } } }
-        public int DwSmelting { get => _dwSmelting; set { if (value != DwSmelting) { _dwSmelting = value; NotifyPropertyChanged(); } } }
-        public int DwAttsmelting { get => _dwAttsmelting; set { if (value != DwAttsmelting) { _dwAttsmelting = value; NotifyPropertyChanged(); } } }
-        public int DwGemsmelting { get => _dwGemsmelting; set { if (value != DwGemsmelting) { _dwGemsmelting = value; NotifyPropertyChanged(); } } }
-        public int DwPierce { get => _dwPierce; set { if (value != DwPierce) { _dwPierce = value; NotifyPropertyChanged(); } } }
-        public int DwUprouse { get => _dwUprouse; set { if (value != DwUprouse) { _dwUprouse = value; NotifyPropertyChanged(); } } }
+        public uint DwHitActiveSkillId { get => _dwHitActiveSkillId; set { if (value != DwHitActiveSkillId) { _dwHitActiveSkillId = value; NotifyPropertyChanged(); } } }
+        public uint DwHitActiveSkillLv { get => _dwHitActiveSkillLv; set { if (value != DwHitActiveSkillLv) { _dwHitActiveSkillLv = value; NotifyPropertyChanged(); } } }
+        public uint DwHitActiveSkillProb { get => _dwHitActiveSkillProb; set { if (value != DwHitActiveSkillProb) { _dwHitActiveSkillProb = value; NotifyPropertyChanged(); } } }
+        public uint DwHitActiveSkillTarget { get => _dwHitActiveSkillTarget; set { if (value != DwHitActiveSkillTarget) { _dwHitActiveSkillTarget = value; NotifyPropertyChanged(); } } }
+        public uint DwDamageActiveSkillId { get => _dwDamageActiveSkillId; set { if (value != DwDamageActiveSkillId) { _dwDamageActiveSkillId = value; NotifyPropertyChanged(); } } }
+        public uint DwDamageActiveSkillLv { get => _dwDamageActiveSkillLv; set { if (value != DwDamageActiveSkillLv) { _dwDamageActiveSkillLv = value; NotifyPropertyChanged(); } } }
+        public uint DwDamageActiveSkillProb { get => _dwDamageActiveSkillProb; set { if (value != DwDamageActiveSkillProb) { _dwDamageActiveSkillProb = value; NotifyPropertyChanged(); } } }
+        public uint DwDamageActiveSkillTarget { get => _dwDamageActiveSkillTarget; set { if (value != DwDamageActiveSkillTarget) { _dwDamageActiveSkillTarget = value; NotifyPropertyChanged(); } } }
+        public uint DwEquipActiveSkillId { get => _dwEquipActiveSkillId; set { if (value != DwEquipActiveSkillId) { _dwEquipActiveSkillId = value; NotifyPropertyChanged(); } } }
+        public uint DwEquipActiveSkillLv { get => _dwEquipActiveSkillLv; set { if (value != DwEquipActiveSkillLv) { _dwEquipActiveSkillLv = value; NotifyPropertyChanged(); } } }
+        public uint DwSmelting { get => _dwSmelting; set { if (value != DwSmelting) { _dwSmelting = value; NotifyPropertyChanged(); } } }
+        public uint DwAttsmelting { get => _dwAttsmelting; set { if (value != DwAttsmelting) { _dwAttsmelting = value; NotifyPropertyChanged(); } } }
+        public uint DwGemsmelting { get => _dwGemsmelting; set { if (value != DwGemsmelting) { _dwGemsmelting = value; NotifyPropertyChanged(); } } }
+        public uint DwPierce { get => _dwPierce; set { if (value != DwPierce) { _dwPierce = value; NotifyPropertyChanged(); } } }
+        public uint DwUprouse { get => _dwUprouse; set { if (value != DwUprouse) { _dwUprouse = value; NotifyPropertyChanged(); } } }
         public int BAbsoluteTime { get => _bAbsoluteTime; set { if (value != BAbsoluteTime) { _bAbsoluteTime = value; NotifyPropertyChanged(); } } }
-        public int DwItemGrade { get => _dwItemGrade; set { if (value != DwItemGrade) { _dwItemGrade = value; NotifyPropertyChanged(); } } }
+        public uint DwItemGrade { get => _dwItemGrade; set { if (value != DwItemGrade) { _dwItemGrade = value; NotifyPropertyChanged(); } } }
         public int BCanTrade { get => _bCanTrade; set { if (value != BCanTrade) { _bCanTrade = value; NotifyPropertyChanged(); } } }
-        public int DwMainCategory { get => _dwMainCategory; set { if (value != DwMainCategory) { _dwMainCategory = value; NotifyPropertyChanged(); } } }
-        public int DwSubCategory { get => _dwSubCategory; set { if (value != DwSubCategory) { _dwSubCategory = value; NotifyPropertyChanged(); } } }
+        public uint DwMainCategory { get => _dwMainCategory; set { if (value != DwMainCategory) { _dwMainCategory = value; NotifyPropertyChanged(); } } }
+        public uint DwSubCategory { get => _dwSubCategory; set { if (value != DwSubCategory) { _dwSubCategory = value; NotifyPropertyChanged(); } } }
         public int BCanHaveServerTransform { get => _bCanHaveServerTransform; set { if (value != BCanHaveServerTransform) { _bCanHaveServerTransform = value; NotifyPropertyChanged(); } } }
         public int BCanSavePotion { get => _bCanSavePotion; set { if (value != BCanSavePotion) { _bCanSavePotion = value; NotifyPropertyChanged(); } } }
         public int BCanLooksChange { get => _bCanLooksChange; set { if (value != BCanLooksChange) { _bCanLooksChange = value; NotifyPropertyChanged(); } } }
@@ -791,7 +791,7 @@ namespace eTools_Ultimate.Models
 
         public Model? Model { get => _model; set { _model = value; NotifyPropertyChanged(); } }
 
-        public int Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; if (this.Model is not null) this.Model.Prop.DwIndex = value; } } }
+        public uint Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; if (this.Model is not null) this.Model.Prop.DwIndex = value; } } }
 
         public string Identifier
         {
@@ -799,7 +799,7 @@ namespace eTools_Ultimate.Models
             set
             {
                 if (Script.TryGetNumberFromString(value, out int val))
-                    this.Id = val;
+                    Id = (uint)val;
             }
         }
 
@@ -883,18 +883,18 @@ namespace eTools_Ultimate.Models
                     if (value)
                     {
                         if (!defines.TryGetValue("IK3_TOWNBLINKWING", out int townBlinkwingKind3)) throw new System.Exception("Cannot get define value for IK3_TOWNBLINKWING");
-                        this.Prop.DwItemKind3 = townBlinkwingKind3;
-                        this.Prop.DwWeaponType = -1;
-                        this.Prop.DwItemAtkOrder1 = -1;
-                        this.Prop.DwItemAtkOrder2 = -1;
-                        this.Prop.DwItemAtkOrder3 = -1;
-                        this.Prop.DwItemAtkOrder4 = -1;
+                        this.Prop.DwItemKind3 = (uint)townBlinkwingKind3;
+                        this.Prop.DwWeaponType = Constants.NullId;
+                        this.Prop.DwItemAtkOrder1 = Constants.NullId;
+                        this.Prop.DwItemAtkOrder2 = Constants.NullId;
+                        this.Prop.DwItemAtkOrder3 = Constants.NullId;
+                        this.Prop.DwItemAtkOrder4 = Constants.NullId;
                         this.Prop.SzTextFileName = "";
                     }
                     else
                     {
                         if (!defines.TryGetValue("IK3_BLINKWING", out int blinkwingKind3)) throw new System.Exception("Cannot get define value for IK3_BLINKWING");
-                        this.Prop.DwItemKind3 = blinkwingKind3;
+                        this.Prop.DwItemKind3 = (uint)blinkwingKind3;
                     }
                 }
             }
@@ -902,7 +902,7 @@ namespace eTools_Ultimate.Models
 
         public bool IsNormalBlinkwing => App.Services.GetRequiredService<DefinesService>().Defines.TryGetValue("IK3_BLINKWING", out int kind) && this.Prop.DwItemKind3 == kind;
 
-        public int BlinkwingPositionX
+        public uint BlinkwingPositionX
         {
             get => this.Prop.DwItemAtkOrder1;
             set
@@ -914,7 +914,7 @@ namespace eTools_Ultimate.Models
                 }
             }
         }
-        public int BlinkwingPositionY
+        public uint BlinkwingPositionY
         {
             get => this.Prop.DwItemAtkOrder2;
             set
@@ -926,7 +926,7 @@ namespace eTools_Ultimate.Models
                 }
             }
         }
-        public int BlinkwingPositionZ
+        public uint BlinkwingPositionZ
         {
             get => this.Prop.DwItemAtkOrder3;
             set
@@ -938,7 +938,7 @@ namespace eTools_Ultimate.Models
                 }
             }
         }
-        public int BlinkwingAngle
+        public uint BlinkwingAngle
         {
             get => this.Prop.DwItemAtkOrder4;
             set
@@ -951,53 +951,53 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public int AbilityMinDurationDays
+        public uint AbilityMinDurationDays
         {
             get => this.Prop.DwAbilityMin / 60 / 24;
             set => this.Prop.DwAbilityMin = value * 60 * 24 + AbilityMinDurationHours * 60 + AbilityMinDurationMinutes;
         }
-        public int AbilityMinDurationHours
+        public uint AbilityMinDurationHours
         {
             get => (this.Prop.DwAbilityMin % (60 * 24)) / 60;
             set => this.Prop.DwAbilityMin = AbilityMinDurationDays * 60 * 24 + value * 60 + AbilityMinDurationMinutes;
         }
-        public int AbilityMinDurationMinutes
+        public uint AbilityMinDurationMinutes
         {
             get => this.Prop.DwAbilityMin % 60;
             set => this.Prop.DwAbilityMin = AbilityMinDurationDays * 60 * 24 + AbilityMinDurationHours * 60 + value;
         }
 
-        public int SkillReadyMinutes
+        public uint SkillReadyMinutes
         {
             get => this.Prop.DwSkillReadyType / (1000 * 60);
             set => this.Prop.DwSkillReadyType = value * 60 * 1000 + SkillReadySeconds * 1000 + SkillReadyMilliseconds;
         }
 
-        public int SkillReadySeconds
+        public uint SkillReadySeconds
         {
             get => (this.Prop.DwSkillReadyType % (1000 * 60)) / 1000;
             set => this.Prop.DwSkillReadyType = SkillReadyMinutes * 60 * 1000 + value * 1000 + SkillReadyMilliseconds;
         }
 
-        public int SkillReadyMilliseconds
+        public uint SkillReadyMilliseconds
         {
             get => this.Prop.DwSkillReadyType % 1000;
             set => this.Prop.DwSkillReadyType = SkillReadyMinutes * 60 * 1000 + SkillReadySeconds * 1000 + value;
         }
 
-        public int SkillTimeMinutes
+        public uint SkillTimeMinutes
         {
             get => this.Prop.DwSkillTime / (1000 * 60);
             set => this.Prop.DwSkillTime = value * 60 * 1000 + SkillTimeSeconds * 1000 + SkillTimeMilliseconds;
         }
 
-        public int SkillTimeSeconds
+        public uint SkillTimeSeconds
         {
             get => (this.Prop.DwSkillTime % (1000 * 60)) / 1000;
             set => this.Prop.DwSkillTime = SkillTimeMinutes * 60 * 1000 + value * 1000 + SkillTimeMilliseconds;
         }
 
-        public int SkillTimeMilliseconds
+        public uint SkillTimeMilliseconds
         {
             get => this.Prop.DwSkillTime % 1000;
             set => this.Prop.DwSkillTime = SkillTimeMinutes * 60 * 1000 + SkillTimeSeconds * 1000 + value;

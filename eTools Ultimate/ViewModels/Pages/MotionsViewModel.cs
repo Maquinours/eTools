@@ -59,8 +59,8 @@ namespace eTools_Ultimate.ViewModels.Pages
             get
             {
                 int moverModelType = definesService.Defines["OT_MOVER"];
-                int maleMoverId = definesService.Defines["MI_MALE"];
-                int femaleMoverId = definesService.Defines["MI_FEMALE"];
+                uint maleMoverId = (uint)definesService.Defines["MI_MALE"];
+                uint femaleMoverId = (uint)definesService.Defines["MI_FEMALE"];
                 Model? maleMoverModel = modelsService.GetModelByTypeAndId(moverModelType, maleMoverId);
                 Model? femaleMoverModel = modelsService.GetModelByTypeAndId(moverModelType, maleMoverId);
                 if (maleMoverModel is null || femaleMoverModel is null) return [];
@@ -69,7 +69,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
                 ModelMotion[] common = [.. maleMotions.Where(m => femaleMotions.Any(f => f.Prop.IMotion == m.Prop.IMotion))];
 
-                string[] commonIdentifiers = [.. common.Select(x => definesService.ReversedMotionTypeDefines[x.Prop.IMotion])];
+                string[] commonIdentifiers = [.. common.Select(x => definesService.ReversedMotionTypeDefines[(int)x.Prop.IMotion])];
 
                 return commonIdentifiers;
             }
@@ -209,7 +209,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             NativeMethods.StopMotion(D3dHost._native);
 
-            int motionType = motion.Prop.DwMotion;
+            uint motionType = motion.Prop.DwMotion;
 
             string moverIdentifier = ModelPreviewGender switch
             {
@@ -219,7 +219,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             };
 
             int moverModelType = definesService.Defines["OT_MOVER"];
-            int moverId = definesService.Defines[moverIdentifier];
+            uint moverId = (uint)definesService.Defines[moverIdentifier];
             Model? moverModel = modelsService.GetModelByTypeAndId(moverModelType, moverId);
             if (moverModel is null) return;
             ModelMotion? modelMotion = moverModel.Motions.FirstOrDefault(m => m.Prop.IMotion == motionType);
@@ -244,7 +244,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             //    return;
             //}
 
-            NativeMethods.PlayMotion(D3dHost._native, motionFile, motion.Prop.DwPlay);
+            NativeMethods.PlayMotion(D3dHost._native, motionFile, (int)motion.Prop.DwPlay); // TODO: change this to allow uint values
 
             //Auto3DRendering = true;
         }

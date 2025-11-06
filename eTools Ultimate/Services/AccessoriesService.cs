@@ -16,10 +16,10 @@ namespace eTools_Ultimate.Services
 {
     public class AccessoriesService(SettingsService settingsService)
     {
-        private readonly ObservableCollection<int> _probabilities = [];
+        private readonly ObservableCollection<uint> _probabilities = [];
         private readonly ObservableCollection<Accessory> _accessories = [];
 
-        public ObservableCollection<int> Probabilities => this._probabilities;
+        public ObservableCollection<uint> Probabilities => this._probabilities;
         public ObservableCollection<Accessory> Accessories => this._accessories;
 
         private void ClearAccessories()
@@ -54,7 +54,7 @@ namespace eTools_Ultimate.Services
 
                                 while(true)
                                 {
-                                    int probability = script.GetNumber();
+                                    uint probability = (uint)script.GetNumber();
 
                                     if (script.Token == "}") break;
                                     if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
@@ -70,7 +70,7 @@ namespace eTools_Ultimate.Services
 
                                 while(true)
                                 {
-                                    int dwItemId = script.GetNumber();
+                                    uint dwItemId = (uint)script.GetNumber();
 
                                     if (script.Token == "}") break;
                                     if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);

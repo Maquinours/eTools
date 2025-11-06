@@ -16,14 +16,14 @@ namespace eTools_Ultimate.Models
 {
     public interface IModelItem { }
 
-    public class ModelMotionProp(int iMotion, string szMotion)
+    public class ModelMotionProp(uint iMotion, string szMotion)
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private int _iMotion = iMotion;
+        private uint _iMotion = iMotion;
         private string _szMotion = szMotion;
 
-        public int IMotion { get => this._iMotion; set => SetValue(ref _iMotion, value); }
+        public uint IMotion { get => this._iMotion; set => SetValue(ref _iMotion, value); }
         public string SzMotion { get => this._szMotion; set => SetValue(ref _szMotion, value); }
 
         private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
@@ -56,7 +56,7 @@ namespace eTools_Ultimate.Models
             set
             {
                 if (Script.TryGetNumberFromString(value, out int val))
-                    Prop.IMotion = val;
+                    Prop.IMotion = (uint)val;
             }
         }
 
@@ -125,11 +125,11 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    public class MainModelBraceProp(string szName, int iType) : ModelBraceProp(szName)
+    public class MainModelBraceProp(string szName, uint iType) : ModelBraceProp(szName)
     {
-        private int _iType = iType;
+        private uint _iType = iType;
 
-        public int IType { get => this._iType; set => SetValue(ref _iType, value); }
+        public uint IType { get => this._iType; set => SetValue(ref _iType, value); }
     }
 
     public class MainModelBrace(MainModelBraceProp prop, IEnumerable<IModelItem> children) : ModelBrace(prop, children)
@@ -139,37 +139,37 @@ namespace eTools_Ultimate.Models
         public new MainModelBraceProp Prop => _prop;
     }
 
-    public class ModelProp(int dwType, int dwIndex, string szName, int dwModelType, string szPart, int bFly, int dwDistant, int bPick, float fScale, int bTrans, int bShadow, int nTextureEx, int bRenderFlag) : INotifyPropertyChanged
+    public class ModelProp(uint dwType, uint dwIndex, string szName, uint dwModelType, string szPart, byte bFly, byte dwDistant, byte bPick, float fScale, byte bTrans, byte bShadow, int nTextureEx, byte bRenderFlag) : INotifyPropertyChanged
     {
-        private int _dwType = dwType;
-        private int _dwIndex = dwIndex;
+        private uint _dwType = dwType;
+        private uint _dwIndex = dwIndex;
         private string _szName = szName;
-        private int _dwModelType = dwModelType;
+        private uint _dwModelType = dwModelType;
         private string _szPart = szPart;
-        private int _bFly = bFly;
-        private int _dwDistant = dwDistant;
-        private int _bPick = bPick;
+        private byte _bFly = bFly;
+        private byte _dwDistant = dwDistant;
+        private byte _bPick = bPick;
         private float _fScale = fScale;
-        private int _bTrans = bTrans;
-        private int _bShadow = bShadow;
+        private byte _bTrans = bTrans;
+        private byte _bShadow = bShadow;
         private int _nTextureEx = nTextureEx;
-        private int _bRenderFlag = bRenderFlag;
+        private byte _bRenderFlag = bRenderFlag;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public int DwType { get => this._dwType; set => SetValue(ref _dwType, value); }
-        public int DwIndex { get => this._dwIndex; set => SetValue(ref _dwIndex, value); }
+        public uint DwType { get => this._dwType; set => SetValue(ref _dwType, value); }
+        public uint DwIndex { get => this._dwIndex; set => SetValue(ref _dwIndex, value); }
         public string SzName { get => this._szName; set => SetValue(ref _szName, value); }
-        public int DwModelType { get => this._dwModelType; set => SetValue(ref _dwModelType, value); }
+        public uint DwModelType { get => this._dwModelType; set => SetValue(ref _dwModelType, value); }
         public string SzPart { get => this._szPart; set => SetValue(ref _szPart, value); }
-        public int BFly { get => this._bFly; set => SetValue(ref _bFly, value); }
-        public int DwDistant { get => this._dwDistant; set => SetValue(ref _dwDistant, value); }
-        public int BPick { get => this._bPick; set => SetValue(ref _bPick, value); }
+        public byte BFly { get => this._bFly; set => SetValue(ref _bFly, value); }
+        public byte DwDistant { get => this._dwDistant; set => SetValue(ref _dwDistant, value); }
+        public byte BPick { get => this._bPick; set => SetValue(ref _bPick, value); }
         public float FScale { get => this._fScale; set => SetValue(ref _fScale, value); }
-        public int BTrans { get => this._bTrans; set => SetValue(ref _bTrans, value); }
-        public int BShadow { get => this._bShadow; set => SetValue(ref _bShadow, value); }
+        public byte BTrans { get => this._bTrans; set => SetValue(ref _bTrans, value); }
+        public byte BShadow { get => this._bShadow; set => SetValue(ref _bShadow, value); }
         public int NTextureEx { get => this._nTextureEx; set => SetValue(ref _nTextureEx, value); }
-        public int BRenderFlag { get => this._bRenderFlag; set => SetValue(ref _bRenderFlag, value); }
+        public byte BRenderFlag { get => this._bRenderFlag; set => SetValue(ref _bRenderFlag, value); }
 
         private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
         {

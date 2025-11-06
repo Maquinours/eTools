@@ -55,7 +55,7 @@ namespace eTools_Ultimate.Services
 
                 if (script.EndOfStream) break;
 
-                int iType = script.GetNumber();
+                uint iType = (uint)script.GetNumber();
 
                 script.GetToken(); // "{"
 
@@ -70,7 +70,7 @@ namespace eTools_Ultimate.Services
             }
         }
 
-        private IModelItem[] LoadChildren(Script script, string filePath, int dwType)
+        private IModelItem[] LoadChildren(Script script, string filePath, uint dwType)
         {
             List<IModelItem> children = [];
 
@@ -83,7 +83,7 @@ namespace eTools_Ultimate.Services
                     throw new IncorrectlyFormattedFileException(filePath);
 
                 string szObject = script.Token;
-                int iObject = script.GetNumber();
+                uint iObject = (uint)script.GetNumber();
                 if (script.Token == "{") // Start of a new brace
                 {
                     script.GetToken();
@@ -96,16 +96,16 @@ namespace eTools_Ultimate.Services
                 }
                 else
                 {
-                    int dwModelType = script.GetNumber();
+                    uint dwModelType = (uint)script.GetNumber();
                     string szPart = script.GetToken();
-                    int bFly = script.GetNumber();
-                    int dwDistant = script.GetNumber();
-                    int bPick = script.GetNumber();
+                    byte bFly = (byte)script.GetNumber();
+                    byte dwDistant = (byte)script.GetNumber();
+                    byte bPick = (byte)script.GetNumber();
                     float fScale = script.GetFloat();
-                    int bTrans = script.GetNumber();
-                    int bShadow = script.GetNumber();
+                    byte bTrans = (byte)script.GetNumber();
+                    byte bShadow = (byte)script.GetNumber();
                     int nTextureEx = script.GetNumber();
-                    int bRenderFlag = script.GetNumber();
+                    byte bRenderFlag = (byte)script.GetNumber();
 
                     script.GetToken();
 
@@ -119,7 +119,7 @@ namespace eTools_Ultimate.Services
                             string szMotion = script.GetToken(); // motion name or }
                             if (script.Token == "}")
                                 break;
-                            int iMotion = script.GetNumber();
+                            uint iMotion = (uint)script.GetNumber();
 
                             ModelMotionProp motionProp = new(iMotion, szMotion);
                             ModelMotion motion = new(motionProp);
@@ -282,7 +282,7 @@ namespace eTools_Ultimate.Services
             return [.. models];
         }
 
-        private ModelBrace[] GetBracesByType(int type)
+        private ModelBrace[] GetBracesByType(uint type)
         {
             List<ModelBrace> braces = [];
             foreach (MainModelBrace mainBrace in Models)
@@ -316,7 +316,7 @@ namespace eTools_Ultimate.Services
             throw new InvalidOperationException("ModelsService::GetBraceByModel Exception : Model not found");
         }
 
-        public Model? GetModelByTypeAndId(int type, int id)
+        public Model? GetModelByTypeAndId(int type, uint id)
         {
             return GetModelsByType(type).FirstOrDefault(model => model.Prop.DwIndex == id);
         }
@@ -324,7 +324,7 @@ namespace eTools_Ultimate.Services
         public Model? GetModelByObject(object obj)
         {
             int? modelType;
-            int? objId;
+            uint? objId;
 
             switch (obj)
             {
@@ -353,10 +353,10 @@ namespace eTools_Ultimate.Services
             switch (obj)
             {
                 case Mover mover:
-                    int dwType = definesService.Defines["OT_MOVER"];
-                    int dwIndex = mover.Id;
-                    int dwModelType = definesService.Defines["MODELTYPE_ANIMATED_MESH"];
-                    int dwDistant = definesService.Defines["MD_MID"];
+                    uint dwType = (uint)definesService.Defines["OT_MOVER"];
+                    uint dwIndex = mover.Id;
+                    uint dwModelType = (uint)definesService.Defines["MODELTYPE_ANIMATED_MESH"];
+                    byte dwDistant = (byte)definesService.Defines["MD_MID"];
 
                     ModelProp modelProp = new(
                         dwType: dwType,

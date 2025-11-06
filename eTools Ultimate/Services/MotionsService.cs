@@ -44,12 +44,12 @@ namespace eTools_Ultimate.Services
 
                     if (script.EndOfStream) break;
 
-                    int dwId = script.GetNumber();
-                    int dwMotion = script.GetNumber();
+                    uint dwId = (uint)script.GetNumber();
+                    uint dwMotion = (uint)script.GetNumber();
                     script.GetToken(); // ""
                     string szIconName = script.GetToken();
                     script.GetToken(); // ""
-                    int dwPlay = script.GetNumber();
+                    uint dwPlay = (uint)script.GetNumber();
                     string szName = script.GetToken();
                     string szDesc = script.GetToken();
 
@@ -98,7 +98,7 @@ namespace eTools_Ultimate.Services
 
         public Motion CreateMotion()
         {
-            int dwId = (Motions.MaxBy(x => x.Prop.DwId)?.Prop.DwId ?? -1) + 1;
+            uint dwId = Motions.MaxBy(x => x.Prop.DwId)?.Prop.DwId ?? 0 + 1;
 
             string szName = GetNextStringIdentifier();
             stringsService.AddString(szName, "");

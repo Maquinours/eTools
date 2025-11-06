@@ -236,17 +236,17 @@
                             SelectedValuePath="Tag">
                             <ComboBoxItem Content="{i18n:StringLocalizer 'One Time'}">
                                 <ComboBoxItem.Tag>
-                                    <sys:Int32>0</sys:Int32>
+                                    <sys:UInt32>0</sys:UInt32>
                                 </ComboBoxItem.Tag>
                             </ComboBoxItem>
                             <ComboBoxItem Content="{i18n:StringLocalizer 'One Time Keep'}">
                                 <ComboBoxItem.Tag>
-                                    <sys:Int32>1</sys:Int32>
+                                    <sys:UInt32>1</sys:UInt32>
                                 </ComboBoxItem.Tag>
                             </ComboBoxItem>
                             <ComboBoxItem Content="{i18n:StringLocalizer 'Loop'}">
                                 <ComboBoxItem.Tag>
-                                    <sys:Int32>2</sys:Int32>
+                                    <sys:UInt32>2</sys:UInt32>
                                 </ComboBoxItem.Tag>
                             </ComboBoxItem>
                         </ComboBox>

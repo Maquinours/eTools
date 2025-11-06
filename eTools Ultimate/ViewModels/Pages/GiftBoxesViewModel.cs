@@ -121,7 +121,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (contentDialogViewModel.ItemsView.CurrentItem is not Item item) return;
 
                 int quantity = contentDialogViewModel.Quantity;
-                int probability = (int)(contentDialogViewModel.Probability / 100d * 1_000_000);
+                uint probability = (uint)(contentDialogViewModel.Probability / 100d * 1_000_000);
 
                 GiftBoxItemProp giftBoxItemProp = new(dwItem: item.Prop.DwId, dwProbability: probability, nNum: quantity);
                 GiftBoxItem giftBoxItem = new(giftBoxItemProp);

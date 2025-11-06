@@ -930,7 +930,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (MoversView.CurrentItem is not Mover mover) return;
             if (mover.Model is null) return;
 
-            ModelMotionProp motionProp = new(-1, "");
+            ModelMotionProp motionProp = new(Constants.NullId, "");
             ModelMotion motion = new(motionProp);
             mover.Model.Motions.Add(motion);
             mover.Model.MotionsView.Refresh();
@@ -980,7 +980,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
                 if (typeIdentifier is null) continue; // No valid motion type identifier found
 
-                int typeId = definesService.Defines[typeIdentifier]; // type ID from type identifier
+                uint typeId = (uint)definesService.Defines[typeIdentifier]; // type ID from type identifier
 
                 if (mover.Model.Motions.Any(x => x.Prop.IMotion == typeId)) continue; // Motion with this type already exists
 

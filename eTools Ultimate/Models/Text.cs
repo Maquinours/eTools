@@ -14,19 +14,19 @@ using System.Windows.Media;
 
 namespace eTools_Ultimate.Models
 {
-    public sealed class TextProp(int dwId, int dwColor, string szName) : INotifyPropertyChanged
+    public sealed class TextProp(uint dwId, uint dwColor, string szName) : INotifyPropertyChanged
     {
-        private int _dwId = dwId;
-        private int _dwColor = dwColor;
+        private uint _dwId = dwId;
+        private uint _dwColor = dwColor;
         private string _szName = szName;
 
-        public int DwId
+        public uint DwId
         {
             get => this._dwId;
             set => SetValue(ref this._dwId, value);
         }
 
-        public int DwColor
+        public uint DwColor
         {
             get => this._dwColor;
             set => SetValue(ref this._dwColor, value);
@@ -82,7 +82,7 @@ namespace eTools_Ultimate.Models
             set 
             {
                 if (Script.TryGetNumberFromString(value, out int result))
-                    Prop.DwId = result;
+                    Prop.DwId = (uint)result;
             }
         }
 
@@ -116,7 +116,7 @@ namespace eTools_Ultimate.Models
                 int colorValue = (value.A << 24) | (value.R << 16) | (value.G << 8) | value.B;
                 if(colorValue != Prop.DwColor)
                 {
-                    Prop.DwColor = colorValue;
+                    Prop.DwColor = (uint)colorValue;
                 }
             }
         }

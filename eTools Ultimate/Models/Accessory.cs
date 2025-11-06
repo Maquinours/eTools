@@ -67,10 +67,10 @@ namespace eTools_Ultimate.Models
 
     public sealed class Accessory : IDisposable
     {
-        private int _dwItemId;
+        private uint _dwItemId;
         private ObservableCollection<AccessoryAbilityOptionData> _abilityOptionData;
 
-        public int DwItemId
+        public uint DwItemId
         {
             get => this._dwItemId;
             set => this._dwItemId = value;
@@ -83,10 +83,10 @@ namespace eTools_Ultimate.Models
 
         public Item? Item => App.Services.GetRequiredService<ItemsService>().Items.FirstOrDefault(x => x.Id == this.DwItemId);
 
-        public Accessory(int dwItemId, List<AccessoryAbilityOptionData> abilityOptionData)
+        public Accessory(uint dwItemId, List<AccessoryAbilityOptionData> abilityOptionData)
         {
-            this._dwItemId = dwItemId;
-            this._abilityOptionData = [..abilityOptionData];
+            _dwItemId = dwItemId;
+            _abilityOptionData = [..abilityOptionData];
         }
 
         public void Dispose()

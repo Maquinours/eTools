@@ -49,23 +49,23 @@ namespace eTools_Ultimate.Services
                     string type = script.GetToken();
                     if (script.EndOfStream) break;
 
-                    int dwGiftbox;
+                    uint dwGiftbox;
                     List<GiftBoxItem> items = new();
 
                     switch (script.Token)
                     {
                         case "GiftBox":
                             {
-                                dwGiftbox = script.GetNumber();
+                                dwGiftbox = (uint)script.GetNumber();
                                 script.GetToken(); // "{"
                                 while (true)
                                 {
-                                    int item = script.GetNumber();
+                                    uint item = (uint)script.GetNumber();
 
                                     if (script.Token == "}") break;
                                     if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
 
-                                    int probability = script.GetNumber() * 100;
+                                    uint probability = (uint)script.GetNumber() * 100;
                                     int num = script.GetNumber();
 
                                     GiftBoxItemProp giftBoxItemProp = new(item, probability, num);
@@ -76,14 +76,14 @@ namespace eTools_Ultimate.Services
                             }
                         case "GiftBox2":
                             {
-                                dwGiftbox = script.GetNumber();
+                                dwGiftbox = (uint)script.GetNumber();
                                 script.GetToken(); // "{"
                                 while (true)
                                 {
-                                    int item = script.GetNumber();
+                                    uint item = (uint)script.GetNumber();
                                     if (script.Token == "}") break;
                                     if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
-                                    int probability = script.GetNumber();
+                                    uint probability = (uint)script.GetNumber();
                                     int num = script.GetNumber();
 
                                     GiftBoxItemProp giftBoxItemProp = new(item, probability, num);
@@ -94,16 +94,16 @@ namespace eTools_Ultimate.Services
                             }
                         case "GiftBox3":
                             {
-                                dwGiftbox = script.GetNumber();
+                                dwGiftbox = (uint)script.GetNumber();
                                 script.GetToken(); // "{"
                                 while (true)
                                 {
-                                    int item = script.GetNumber();
+                                    uint item = (uint)script.GetNumber();
                                     if (script.Token == "}") break;
                                     if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
-                                    int probability = script.GetNumber() * 100;
+                                    uint probability = (uint)script.GetNumber() * 100;
                                     int num = script.GetNumber();
-                                    int flag = script.GetNumber();
+                                    byte flag = unchecked((byte)script.GetNumber());
 
                                     GiftBoxItemProp giftBoxItemProp = new(item, probability, num, flag);
                                     GiftBoxItem giftBoxItem = new(giftBoxItemProp);
@@ -115,16 +115,16 @@ namespace eTools_Ultimate.Services
                         case "GiftBox5":
                             {
                                 ushort precision = (ushort)(script.Token == "GiftBox4" ? 100 : 10);
-                                dwGiftbox = script.GetNumber();
+                                dwGiftbox = (uint)script.GetNumber();
                                 script.GetToken(); // "{"
                                 while (true)
                                 {
-                                    int item = script.GetNumber();
+                                    uint item = (uint)script.GetNumber();
                                     if (script.Token == "}") break;
                                     if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
-                                    int probability = script.GetNumber() * precision;
+                                    uint probability = (uint)script.GetNumber() * precision;
                                     int num = script.GetNumber();
-                                    int flag = script.GetNumber();
+                                    byte flag = unchecked((byte)script.GetNumber());
                                     int span = script.GetNumber();
 
                                     GiftBoxItemProp giftBoxItemProp = new(item, probability, num, flag, span);
@@ -135,16 +135,16 @@ namespace eTools_Ultimate.Services
                             }
                         case "GiftBox6":
                             {
-                                dwGiftbox = script.GetNumber();
+                                dwGiftbox = (uint)script.GetNumber();
                                 script.GetToken(); // "{"
                                 while (true)
                                 {
-                                    int item = script.GetNumber();
+                                    uint item = (uint)script.GetNumber();
                                     if (script.Token == "}") break;
                                     if (script.EndOfStream) throw new Exceptions.IncorrectlyFormattedFileException(filePath);
-                                    int probability = script.GetNumber() * 10;
+                                    uint probability = (uint)script.GetNumber() * 10;
                                     int num = script.GetNumber();
-                                    int flag = script.GetNumber();
+                                    byte flag = unchecked((byte)script.GetNumber());
                                     int span = script.GetNumber();
                                     int abilityOption = script.GetNumber();
 

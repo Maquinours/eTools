@@ -12,23 +12,23 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Models
 {
-    public class GiftBoxItemProp(int dwItem, int dwProbability, int nNum, int nFlag = 0, int nSpan = 0, int nAbilityOption = 0) : INotifyPropertyChanged
+    public class GiftBoxItemProp(uint dwItem, uint dwProbability, int nNum, byte nFlag = 0, int nSpan = 0, int nAbilityOption = 0) : INotifyPropertyChanged
     {
-        private int _dwItem = dwItem;
-        private int _dwProbability = dwProbability;
+        private uint _dwItem = dwItem;
+        private uint _dwProbability = dwProbability;
         private int _nNum = nNum;
-        private int _nFlag = nFlag;
+        private byte _nFlag = nFlag;
         private int _nSpan = nSpan;
         private int _nAbilityOption = nAbilityOption;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public int DwItem
+        public uint DwItem
         {
             get => this._dwItem;
             set => SetValue(ref this._dwItem, value);
         }
-        public int DwProbability
+        public uint DwProbability
         {
             get => this._dwProbability;
             set => SetValue(ref this._dwProbability, value);
@@ -38,7 +38,7 @@ namespace eTools_Ultimate.Models
             get => this._nNum;
             set => SetValue(ref this._nNum, value);
         }
-        public int NFlag
+        public byte NFlag
         {
             get => this._nFlag;
             set => SetValue(ref this._nFlag, value);
@@ -86,7 +86,7 @@ namespace eTools_Ultimate.Models
         public double ProbabilityPercent 
         {
             get => Prop.DwProbability / 1_000_000d * 100;
-            set => Prop.DwProbability = (int)(value / 100d * 1_000_000);
+            set => Prop.DwProbability = (uint)(value / 100d * 1_000_000);
         }
 
         public GiftBoxItem(GiftBoxItemProp prop)
@@ -125,16 +125,16 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    public class GiftBoxProp(int dwItem) : INotifyPropertyChanged
+    public class GiftBoxProp(uint dwItem) : INotifyPropertyChanged
     {
-        private int _dwItem = dwItem;
+        private uint _dwItem = dwItem;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public int DwItem
+        public uint DwItem
         {
-            get => this._dwItem;
-            set => SetValue(ref this._dwItem, value);
+            get => _dwItem;
+            set => SetValue(ref _dwItem, value);
         }
 
         private void NotifyPropertyChanged<T>(string propertyName, T oldValue, T newValue)
@@ -167,7 +167,7 @@ namespace eTools_Ultimate.Models
         public ObservableCollection<GiftBoxItem> Items => this._items;
 
         public Item? Item => App.Services.GetRequiredService<ItemsService>().Items.Where(x => x.Id == Prop.DwItem).FirstOrDefault();
-        public int TotalProbability => this.Items.Sum(x => x.Prop.DwProbability);
+        public ulong TotalProbability => (ulong)Items.Sum(x => x.Prop.DwProbability);
         public double TotalProbabilityPercent => Math.Round(this.TotalProbability / 1_000_000d * 100, 2);
         public string ItemIdentifier => Script.NumberToString(Prop.DwItem, App.Services.GetRequiredService<DefinesService>().ReversedItemDefines);
 

@@ -21,5 +21,7 @@ namespace eTools_Ultimate.Models
             ];
 
         public static string[] ModelFilenameRoot => _modelFilenameRoot;
+
+        public const uint NullId = 0xffffffff;
     }
 }

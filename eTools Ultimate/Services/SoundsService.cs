@@ -67,7 +67,7 @@ namespace eTools_Ultimate.Services
 
             while (true)
             {
-                int id = script.GetNumber();
+                uint id = (uint)script.GetNumber();
 
                 if (script.EndOfStream) break;
 
