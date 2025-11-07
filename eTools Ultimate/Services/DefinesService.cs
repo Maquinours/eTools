@@ -43,6 +43,8 @@ namespace eTools_Ultimate.Services
         public ReadOnlyDictionary<int, string> ReversedModelTypeDefines => ReversedDefines.GetValueOrDefault("MODELTYPE") ?? new(new Dictionary<int, string>());
         public ReadOnlyDictionary<int, string> ReversedModelDistantDefines => ReversedDefines.GetValueOrDefault("MD") ?? new(new Dictionary<int, string>());
         public ReadOnlyDictionary<int, string> ReversedAdditionalTextureDefines => ReversedDefines.GetValueOrDefault("ATEX") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedItemKind3Defines => ReversedDefines.GetValueOrDefault("IK3") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedBooleanDefines => new(Defines.Where(x => x.Key == "FALSE" || x.Key == "TRUE").ToDictionary(x => x.Value, x => x.Key));
 
         public void Load()
         {

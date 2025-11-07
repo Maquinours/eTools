@@ -50,6 +50,9 @@ namespace eTools_Ultimate.Models
             get => _dwProbability;
             set => SetValue(ref _dwProbability, value);
         }
+        public uint DwLevel => _dwLevel;
+        public uint DwNumber => _dwNumber;
+        public uint DwNumber2 => _dwNumber2;
 
         private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
         {
@@ -140,6 +143,8 @@ namespace eTools_Ultimate.Models
             get => _dwIk3;
             set => SetValue(ref _dwIk3, value);
         }
+        public short NMinUniq => _nMinUniq;
+        public short NMaxUniq => _nMaxUniq;
 
         public DropKindProp(uint dwIk3, short nMinUniq, short nMaxUniq)
         {
@@ -277,10 +282,11 @@ namespace eTools_Ultimate.Models
         private uint _dwMax = dwMax;
         private readonly List<DropItem> _dropItems = [.. dropItems];
 
+        public uint DwMax => _dwMax;
         public List<DropItem> DropItems => _dropItems;
     }
 
-    public class MoverPropEx
+    public class MoverPropEx : INotifyPropertyChanged
     {
         private int _dwId;
         private int _bMeleeAttack;
@@ -300,7 +306,7 @@ namespace eTools_Ultimate.Models
         private byte _bHelpWho;
         private short _nCallHelperMax;
         private int _nHpCond;
-        private byte[] _bRangeAttack;
+        private byte _bRangeAttack;
         private int _nSummProb;
         private int _nSummNum;
         private int _nSummId;
@@ -308,10 +314,10 @@ namespace eTools_Ultimate.Models
         private float _fBerserkDmgMul;
         private int _nLoot;
         private int _nLootProb;
-        private int _nEvasionHp;
-        private int _nEvasionSec;
-        private int _nRunawayHp;
-        private int _nCallHp;
+        private short _nEvasionHp;
+        private short _nEvasionSec;
+        private short _nRunawayHp;
+        private short _nCallHp;
         private short[] _nCallHelperIdx;
         private short[] _nCallHelperNum;
         private short[] _bCallHelperParty;
@@ -327,17 +333,70 @@ namespace eTools_Ultimate.Models
         private int _bBlow;
         private short _nChangeTargetRand;
         private short _dwAttackMoveDelay;
-        private short _dwRunAwayDelay;
+        private short _dwRunawayDelay;
         private readonly DropItemGenerator _dropItemGenerator;
         private readonly DropKindGenerator _dropKindGenerator;
         private float _fMonsterTransformHpRate;
         private uint _dwMonsterTransformMonsterId;
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public int DwId => _dwId;
+        public int BMeleeAttack => _bMeleeAttack;
+        public int NLvCond => _nLvCond;
+        public int BRecvCond => _bRecvCond;
+        public int NScanJob => _nScanJob;
+        public short NAttackFirstRange => _nAttackFirstRange;
+        public uint DwScanQuestId => _dwScanQuestId;
+        public uint DwScanItemIdx => _dwScanItemIdx;
+        public int NScanChao => _nScanChao;
+        public int NRecvCondMe => _nRecvCondMe;
+        public int NRecvCondHow => _nRecvCondHow;
+        public int NRecvCondMp => _nRecvCondMp;
+        public byte BRecvCondWho => _bRecvCondWho;
+        public uint TmUnitHelp => _tmUnitHelp;
+        public int NHelpRangeMul => _nHelpRangeMul;
+        public byte BHelpWho => _bHelpWho;
+        public short NCallHelperMax => _nCallHelperMax;
+        public int NHpCond => _nHpCond;
+        public byte BRangeAttack => _bRangeAttack;
+        public int NSummProb => _nSummProb;
+        public int NSummNum => _nSummNum;
+        public int NSummId => _nSummId;
+        public int NBerserkHp => _nBerserkHp;
+        public float FBerserkDmgMul => _fBerserkDmgMul;
+        public int NLoot => _nLoot;
+        public int NLootProb => _nLootProb;
+        public short NEvasionHp => _nEvasionHp;
+        public short NEvasionSec => _nEvasionSec;
+        public short NRunawayHp => _nRunawayHp;
+        public short NCallHp => _nCallHp;
+        public short[] NCallHelperIdx => _nCallHelperIdx;
+        public short[] NCallHelperNum => _nCallHelperNum;
+        public short[] BCallHelperParty => _bCallHelperParty;
+        public short NAttackItemNear => _nAttackItemNear;
+        public short NAttackItemFar => _nAttackItemFar;
+        public short NAttackItem1 => _nAttackItem1;
+        public short NAttackItem2 => _nAttackItem2;
+        public short NAttackItem3 => _nAttackItem3;
+        public short NAttackItem4 => _nAttackItem4;
+        public short NAttackItemSec => _nAttackItemSec;
+        public short NMagicReflection => _nMagicReflection;
+        public short NImmortality => _nImmortality;
+        public int BBlow => _bBlow;
+        public short NChangeTargetRand => _nChangeTargetRand;
+        public short DwAttackMoveDelay => _dwAttackMoveDelay;
+        public short DwRunawayDelay => _dwRunawayDelay;
+        public DropItemGenerator DropItemGenerator => _dropItemGenerator;
+        public DropKindGenerator DropKindGenerator => _dropKindGenerator; 
+        public float FMonsterTransformHpRate => _fMonsterTransformHpRate;
+        public uint DwMonsterTransformMonsterId => _dwMonsterTransformMonsterId;
+
         public MoverPropEx(
         int dwId, int bMeleeAttack, int nLvCond, int bRecvCond, int nScanJob, short nAttackFirstRange, uint dwScanQuestId, uint dwScanItemIdx, int nScanChao,
         int nRecvCondMe, int nRecvCondHow, int nRecvCondMp, byte bRecvCondWho, uint tmUnitHelp, int nHelpRangeMul, byte bHelpWho, short nCallHelperMax, int nHpCond,
-        byte[] bRangeAttack, int nSummProb, int nSummNum, int nSummId, int nBerserkHp, float fBerserkDmgMul, int nLoot, int nLootProb,
-        int nEvasionHp, int nEvasionSec, int nRunawayHp, int nCallHp, short[] nCallHelperIdx, short[] nCallHelperNum, short[] bCallHelperParty,
+        byte bRangeAttack, int nSummProb, int nSummNum, int nSummId, int nBerserkHp, float fBerserkDmgMul, int nLoot, int nLootProb,
+        short nEvasionHp, short nEvasionSec, short nRunawayHp, short nCallHp, short[] nCallHelperIdx, short[] nCallHelperNum, short[] bCallHelperParty,
         short nAttackItemNear, short nAttackItemFar, short nAttackItem1, short nAttackItem2, short nAttackItem3, short nAttackItem4,
         short nAttackItemSec, short nMagicReflection, short nImmortality, int bBlow, short nChangeTargetRand, short dwAttackMoveDelay, short dwRunawayDelay,
         uint dwDropItemGeneratorMax, IEnumerable<DropItemProp> dropItems, IEnumerable<DropKindProp> dropKinds, float fMonsterTransformHpRate, uint dwMonsterTransformMonsterId
@@ -388,7 +447,7 @@ namespace eTools_Ultimate.Models
             _bBlow = bBlow;
             _nChangeTargetRand = nChangeTargetRand;
             _dwAttackMoveDelay = dwAttackMoveDelay;
-            _dwRunAwayDelay = dwRunawayDelay;
+            _dwRunawayDelay = dwRunawayDelay;
 
             _dropItemGenerator = new DropItemGenerator(dwDropItemGeneratorMax, [
                 .. dropItems.Select(prop => new DropItem(prop))
@@ -402,11 +461,23 @@ namespace eTools_Ultimate.Models
             _dwMonsterTransformMonsterId = dwMonsterTransformMonsterId;
         }
 
-        public int DwId => _dwId;
+        //private void NotifyPropertyChanged<T>(string propertyName, T oldValue, T newValue)
+        //{
+        //    PropertyChanged?.Invoke(this, new PropertyChangedExtendedEventArgs(propertyName, oldValue, newValue));
+        //}
 
-        public DropItemGenerator DropItemGenerator => _dropItemGenerator;
+        //private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        //{
+        //    if (EqualityComparer<T>.Default.Equals(field, value))
+        //        return false;
 
-        public DropKindGenerator DropKindGenerator => _dropKindGenerator;
+        //    if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new InvalidOperationException($"Mover SetValue with not safe to assign directly property {propertyName}");
+
+        //    T old = field;
+        //    field = value;
+        //    this.NotifyPropertyChanged(propertyName, old, value);
+        //    return true;
+        //}
     }
 
     public class MoverProp(

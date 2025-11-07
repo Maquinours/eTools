@@ -94,7 +94,12 @@ namespace eTools_Ultimate.Services
             }
         }
 
-        public MoverProp[] LoadProp()
+        public void Save()
+        {
+            Task.WaitAll(Task.Run(SaveProp), Task.Run(SavePropEx));
+        }
+
+        private MoverProp[] LoadProp()
         {
             Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
 
@@ -344,7 +349,7 @@ namespace eTools_Ultimate.Services
             return [.. props];
         }
 
-        public MoverPropEx[] LoadPropEx()
+        private MoverPropEx[] LoadPropEx()
         {
             string filePath = settingsService.Settings.PropMoverExFilePath ?? settingsService.Settings.DefaultPropMoverExFilePath;
 
@@ -364,7 +369,7 @@ namespace eTools_Ultimate.Services
                 int nLvCond = 0;
                 byte bRecvCond = 0;
                 int nScanJob = 0;
-                short nAttackFirstRange = 0;
+                short nAttackFirstRange = 10;
                 uint dwScanQuestId = 0;
                 uint dwScanItemIdx = 0;
                 int nScanChao = 0;
@@ -377,7 +382,7 @@ namespace eTools_Ultimate.Services
                 byte bHelpWho = 0;
                 short nCallHelperMax = 0;
                 int nHpCond = 0;
-                byte[] bRangeAttack = [.. Enumerable.Repeat<byte>(0, definesService.Defines["MAX_JOB"])];
+                byte bRangeAttack = 0;
                 int nSummProb = 0;
                 int nSummNum = 0;
                 int nSummId = 0;
@@ -387,8 +392,8 @@ namespace eTools_Ultimate.Services
                 int nLootProb = 0;
                 short nEvasionHp = 0;
                 short nEvasionSec = 0;
-                short nRunawayHp = 0;
-                short nCallHp = 0;
+                short nRunawayHp = -1;
+                short nCallHp = -1;
                 short[] nCallHelperIdx = new short[5];
                 short[] nCallHelperNum = new short[5];
                 short[] bCallHelperParty = new short[5];
@@ -402,14 +407,14 @@ namespace eTools_Ultimate.Services
                 short nMagicReflexion = 0;
                 short nImmortality = 0;
                 int bBlow = 0;
-                short nChangeTargetRand = 0;
+                short nChangeTargetRand = 10;
                 short dwAttackMoveDelay = 0;
-                short dwRunawayDelay = 0;
+                short dwRunawayDelay = 1_000;
                 uint dwDropItemGeneratorMax = 0;
                 List<DropItemProp> dropItems = [];
                 List<DropKindProp> dropKinds = [];
-                float fMonsterTransformHpRate = 0;
-                uint dwMonsterTransformMonsterId = 0xffffffff;
+                float fMonsterTransformHpRate = 0.0f;
+                uint dwMonsterTransformMonsterId = Constants.NullId;
 
                 script.GetToken(); // {
 
@@ -657,7 +662,7 @@ namespace eTools_Ultimate.Services
             ref int nScanJob, ref short nAttackFirstRange, ref uint dwScanQuestId, ref uint dwScanItemIdx, ref int nScanChao,
             ref int nRecvCondMe, ref int nRecvCondHow, ref int nRecvCondMp, ref byte bRecvCondWho, ref uint tmUnitHelp,
             ref int nHelpRangeMul, ref byte bHelpWho, ref short nCallHelperMax, ref int nHpCond,
-            ref byte[] bRangeAttack, ref int nSummProb, ref int nSummNum, ref int nSummId, ref short nRunawayHp,
+            ref byte bRangeAttack, ref int nSummProb, ref int nSummNum, ref int nSummId, ref short nRunawayHp,
             ref int nBerserkHp, ref float fBerserkDmgMul,
             ref int nLoot, ref int nLootProb
             )
@@ -702,40 +707,43 @@ namespace eTools_Ultimate.Services
 
             script.GetToken(); // {
 
-            if (script.Token.ElementAtOrDefault(0) != '{') throw new IncorrectlyFormattedFileException(script.FilePath);
+            if (script.Token[0] != '{') throw new IncorrectlyFormattedFileException(script.FilePath);
 
             while (true)
             {
                 script.GetToken();
 
-                if (script.Token.ElementAtOrDefault(0) == '}') break;
+                if (script.Token[0] == '}') break;
                 if (script.EndOfStream) throw new IncorrectlyFormattedFileException(script.FilePath);
 
-                if (nCommand == AICMD.SCAN)
+                if (script.TokenType == TokenType.IDENTIFIER)
                 {
-                    switch (script.Token)
+                    if (nCommand == AICMD.SCAN)
                     {
-                        case "job":
-                            nScanJob = script.GetNumber();
-                            break;
-                        case "range":
-                            nAttackFirstRange = (short)script.GetNumber();
-                            break;
-                        case "quest":
-                            dwScanQuestId = (uint)script.GetNumber();
-                            break;
-                        case "item":
-                            dwScanItemIdx = (uint)script.GetNumber();
-                            break;
-                        case "chao":
-                            nScanChao = script.GetNumber();
-                            break;
+                        switch (script.Token)
+                        {
+                            case "job":
+                                nScanJob = script.GetNumber();
+                                break;
+                            case "range":
+                                nAttackFirstRange = (short)script.GetNumber();
+                                break;
+                            case "quest":
+                                dwScanQuestId = (uint)script.GetNumber();
+                                break;
+                            case "item":
+                                dwScanItemIdx = (uint)script.GetNumber();
+                                break;
+                            case "chao":
+                                nScanChao = script.GetNumber();
+                                break;
+                        }
                     }
-                }
-                if (script.Token == "scan")
-                {
-                    if (nCommand != 0) throw new IncorrectlyFormattedFileException(script.FilePath);
-                    nCommand = AICMD.SCAN;
+                    if (script.Token == "scan")
+                    {
+                        if (nCommand != 0) throw new IncorrectlyFormattedFileException(script.FilePath);
+                        nCommand = AICMD.SCAN;
+                    }
                 }
             }
         }
@@ -744,7 +752,7 @@ namespace eTools_Ultimate.Services
             Script script, ref byte bMeleeAttack, ref int nLvCond, ref byte bRecvCond,
             ref int nRecvCondMe, ref int nRecvCondHow, ref int nRecvCondMp, ref byte bRecvCondWho, ref uint tmUnitHelp,
             ref int nHelpRangeMul, ref byte bHelpWho, ref short nCallHelperMax, ref int nHpCond,
-            ref byte[] bRangeAttack, ref int nSummProb, ref int nSummNum, ref int nSummId, ref short nRunawayHp,
+            ref byte bRangeAttack, ref int nSummProb, ref int nSummNum, ref int nSummId, ref short nRunawayHp,
             ref int nBerserkHp, ref float fBerserkDmgMul
             )
         {
@@ -895,42 +903,12 @@ namespace eTools_Ultimate.Services
                         case AICMD.RANGEATTACK:
                         case AICMD.KEEP_RANGEATTACK:
                             {
-                                int maxJob = definesService.Defines["MAX_JOB"];
-
-                                int nJob = maxJob;
                                 int nRange = int.Parse(script.Token);
 
                                 if (nCommand == AICMD.KEEP_RANGEATTACK)
-                                {
                                     nRange |= 0x80;
-                                    if (nJob >= maxJob)
-                                    {
-                                        for (int i = 0; i < bRangeAttack.Length; i++)
-                                            bRangeAttack[i] = (byte)nRange;
-                                    }
-                                    else
-                                    {
-                                        if (nJob > 0 || nJob < maxJob)
-                                            bRangeAttack[nJob] = (byte)nRange;
-                                        else
-                                            throw new IncorrectlyFormattedFileException(script.FilePath);
-                                    }
-                                }
-                                else
-                                {
-                                    if (nJob >= maxJob)
-                                    {
-                                        for (int i = 0; i < bRangeAttack.Length; i++)
-                                            bRangeAttack[i] = (byte)nRange;
-                                    }
-                                    else
-                                    {
-                                        if (nJob > 0 || nJob < maxJob)
-                                            bRangeAttack[nJob] = (byte)nRange;
-                                        else
-                                            throw new IncorrectlyFormattedFileException(script.FilePath);
-                                    }
-                                }
+
+                                bRangeAttack = (byte)nRange;
                                 break;
                             }
                         case AICMD.SUMMON:
@@ -974,7 +952,7 @@ namespace eTools_Ultimate.Services
             }
         }
 
-        public void LoadPropExAiMove(Script script, ref int nLoot, ref int nLootProb)
+        private void LoadPropExAiMove(Script script, ref int nLoot, ref int nLootProb)
         {
             AICMD nCommand = AICMD.NONE;
 
@@ -1013,7 +991,7 @@ namespace eTools_Ultimate.Services
             }
         }
 
-        public void Save()
+        private void SaveProp()
         {
             Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
             DefinesService definesService = App.Services.GetRequiredService<DefinesService>();
@@ -1205,6 +1183,302 @@ namespace eTools_Ultimate.Services
                 }
                 writer.Write("\r\n");
             }
+        }
+
+        private void SavePropEx()
+        {
+            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+            DefinesService definesService = App.Services.GetRequiredService<DefinesService>();
+
+            string filePath = settings.PropMoverExFilePath ?? settings.DefaultPropMoverExFilePath;
+
+            using StreamWriter writer = new(filePath, false, new UTF8Encoding(false));
+
+            writer.WriteLine("// ========================================");
+            writer.WriteLine("// Generated by eTools Ultimate");
+            writer.WriteLine("// https://github.com/Maquinours/eTools");
+            writer.WriteLine("// ========================================");
+
+            foreach (Mover mover in Movers)
+            {
+                MoverPropEx? propEx = mover.PropEx;
+                if (propEx is null) continue;
+
+                writer.WriteLine();
+                writer.WriteLine(Script.NumberToString(mover.Prop.DwId, definesService.ReversedMoverDefines));
+                writer.WriteLine('{');
+
+                // Drop gold section
+                bool wroteDropGoldSection = false;
+                foreach (DropItem dropItem in propEx.DropItemGenerator.DropItems.Where(x => x.Prop.DtType == DropType.DROPTYPE_SEED))
+                {
+                    writer.WriteLine($"\tDropGold({Script.NumberToString(dropItem.Prop.DwNumber)}, {Script.NumberToString(dropItem.Prop.DwNumber2)});");
+                    wroteDropGoldSection = true;
+                }
+                if (wroteDropGoldSection)
+                    writer.WriteLine();
+
+                // Drop item section
+                bool wroteDropItemSection = false;
+                if (propEx.DropItemGenerator.DwMax != 0)
+                {
+                    writer.WriteLine($"\tMaxitem = {Script.NumberToString(propEx.DropItemGenerator.DwMax)};");
+                    wroteDropItemSection = true;
+                }
+                foreach (DropItem dropItem in propEx.DropItemGenerator.DropItems.Where(x => x.Prop.DtType == DropType.DROPTYPE_NORMAL))
+                {
+                    writer.WriteLine($"\tDropItem({Script.NumberToString(dropItem.Prop.DwIndex, definesService.ReversedItemDefines)}, {Script.NumberToString(dropItem.Prop.DwProbability)}, {Script.NumberToString(dropItem.Prop.DwLevel)}, {Script.NumberToString(dropItem.Prop.DwNumber)});");
+                    wroteDropItemSection = true;
+                }
+                if (wroteDropItemSection)
+                    writer.WriteLine();
+
+                // Drop kind section
+                bool wroteDropKindSection = false;
+                foreach (DropKind dropKind in propEx.DropKindGenerator.DropKinds)
+                {
+                    writer.WriteLine($"\tDropKind({Script.NumberToString(dropKind.Prop.DwIk3, definesService.ReversedItemKind3Defines)}, {Script.NumberToString(dropKind.Prop.NMinUniq)}, {Script.NumberToString(dropKind.Prop.NMaxUniq)});");
+                    wroteDropKindSection = true;
+                }
+                if (wroteDropKindSection)
+                    writer.WriteLine();
+
+                // Set section
+                bool wroteSetSection = false;
+                if (propEx.NEvasionHp != 0 || propEx.NEvasionSec != 0)
+                {
+                    writer.WriteLine($"\tSetEvasion({Script.NumberToString(propEx.NEvasionHp)}, {Script.NumberToString(propEx.NEvasionSec)});");
+                    wroteSetSection = true;
+                }
+                if (propEx.NRunawayHp != -1)
+                {
+                    writer.WriteLine($"\tSetRunAway({Script.NumberToString(propEx.NRunawayHp)});");
+                    wroteSetSection = true;
+                }
+                for (int i = 0; i < 5; i++)
+                {
+                    if (propEx.NCallHelperIdx[i] != 0 || propEx.NCallHelperNum[i] != 0 || propEx.BCallHelperParty[i] != 0)
+                    {
+                        writer.WriteLine($"\tSetCallHelper({Script.NumberToString(propEx.NCallHp)}, {Script.NumberToString(propEx.NCallHelperIdx[i], definesService.ReversedMoverDefines)}, {Script.NumberToString(propEx.NCallHelperNum[i])}, {Script.NumberToString(propEx.BCallHelperParty[i], definesService.ReversedBooleanDefines)});"); // last value should use TRUE and FALSE
+                        wroteSetSection = true;
+                    }
+                }
+                if (propEx.FMonsterTransformHpRate != 0.0f || propEx.DwMonsterTransformMonsterId != Constants.NullId)
+                {
+                    writer.WriteLine($"\tTransform({Script.FloatToString(propEx.FMonsterTransformHpRate)}, {Script.NumberToString(propEx.DwMonsterTransformMonsterId, definesService.ReversedMoverDefines)});");
+                    wroteSetSection = true;
+                }
+                if (wroteSetSection)
+                    writer.WriteLine();
+
+                // Value section
+                bool wroteValueSection = false;
+                if (propEx.NAttackFirstRange != 10)
+                {
+                    writer.WriteLine($"\tm_nAttackFirstRange = {Script.NumberToString(propEx.NAttackFirstRange)};");
+                    wroteValueSection = true;
+                }
+                if (propEx.NAttackItemNear != 0)
+                {
+                    writer.WriteLine($"\tm_nAttackItemNear = {Script.NumberToString(propEx.NAttackItemNear)};");
+                    wroteValueSection = true;
+                }
+                if (propEx.NAttackItemFar != 0)
+                {
+                    writer.WriteLine($"\tm_nAttackItemFar = {Script.NumberToString(propEx.NAttackItemFar)};");
+                    wroteValueSection = true;
+                }
+                if (propEx.NAttackItem1 != 0)
+                {
+                    writer.WriteLine($"\tm_nAttackItem1 = {Script.NumberToString(propEx.NAttackItem1)};");
+                    wroteValueSection = true;
+                }
+                if (propEx.NAttackItem2 != 0)
+                {
+                    writer.WriteLine($"\tm_nAttackItem2 = {Script.NumberToString(propEx.NAttackItem2)};");
+                    wroteValueSection = true;
+                }
+                if (propEx.NAttackItem3 != 0)
+                {
+                    writer.WriteLine($"\tm_nAttackItem3 = {Script.NumberToString(propEx.NAttackItem3)};");
+                    wroteValueSection = true;
+                }
+                if (propEx.NAttackItem4 != 0)
+                {
+                    writer.WriteLine($"\tm_nAttackItem4 = {Script.NumberToString(propEx.NAttackItem4)};");
+                    wroteValueSection = true;
+                }
+                if (propEx.NAttackItemSec != 0)
+                {
+                    writer.WriteLine($"\tm_nAttackItemSec = {Script.NumberToString(propEx.NAttackItemSec)};");
+                    wroteValueSection = true;
+                }
+                if (propEx.NMagicReflection != 0)
+                {
+                    writer.WriteLine($"\tm_nMagicReflection = {Script.NumberToString(propEx.NMagicReflection)};");
+                    wroteValueSection = true;
+                }
+                if (propEx.NImmortality != 0)
+                {
+                    writer.WriteLine($"\tm_nImmortality = {Script.NumberToString(propEx.NImmortality)};");
+                    wroteValueSection = true;
+                }
+                if (propEx.BBlow != 0)
+                {
+                    writer.WriteLine($"\tm_bBlow = {Script.NumberToString(propEx.BBlow)};");
+                    wroteValueSection = true;
+                }
+                if (propEx.NChangeTargetRand != 10)
+                {
+                    writer.WriteLine($"\tm_nChangeTargetRand = {Script.NumberToString(propEx.NChangeTargetRand)};");
+                    wroteValueSection = true;
+                }
+                if (propEx.DwAttackMoveDelay != 0)
+                {
+                    writer.WriteLine($"\tm_dwAttackMoveDelay = {Script.NumberToString(propEx.DwAttackMoveDelay)};");
+                    wroteValueSection = true;
+                }
+                if (propEx.DwRunawayDelay != 1_000)
+                {
+                    writer.WriteLine($"\tm_dwRunawayDelay = {Script.NumberToString(propEx.DwRunawayDelay)};");
+                    wroteValueSection = true;
+                }
+                if (wroteValueSection)
+                    writer.WriteLine();
+
+                SavePropExAi(writer, propEx);
+
+                writer.WriteLine('}');
+            }
+        }
+
+        private void SavePropExAi(StreamWriter writer, MoverPropEx propEx)
+        {
+            writer.WriteLine("\tAI");
+            writer.WriteLine("\t{");
+
+            SavePropExAiScan(writer, propEx);
+            SavePropExAiBattle(writer, propEx);
+            SavePropExAiMove(writer, propEx);
+
+            writer.WriteLine("\t}");
+        }
+
+        private void SavePropExAiScan(StreamWriter writer, MoverPropEx propEx)
+        {
+            writer.WriteLine("\t\t#SCAN");
+            writer.WriteLine("\t\t{");
+            writer.Write("\t\t\tscan");
+
+            if (propEx.NScanJob != 0)
+                writer.Write($" job {Script.NumberToString(propEx.NScanJob)}");
+            //if(propEx.NAttackFirstRange != 0) // Already written in main SavePropEx
+            //    writer.Write($" range {Script.NumberToString(propEx.NAttackFirstRange)}");
+            if (propEx.DwScanQuestId != 0)
+                writer.Write($" quest {Script.NumberToString(propEx.DwScanQuestId)}");
+            if (propEx.DwScanItemIdx != 0)
+                writer.Write($" item {Script.NumberToString(propEx.DwScanItemIdx)}");
+            if (propEx.NScanChao != 0)
+                writer.Write($" chao {Script.NumberToString(propEx.NScanChao)}");
+
+            writer.WriteLine();
+            writer.WriteLine("\t\t}");
+        }
+
+        private void SavePropExAiBattle(StreamWriter writer, MoverPropEx propEx)
+        {
+            writer.WriteLine("\t\t#BATTLE");
+            writer.WriteLine("\t\t{");
+
+            if (propEx.BMeleeAttack == 1)
+            {
+                writer.Write("\t\t\tAttack");
+
+                if (propEx.NHpCond != 0)
+                    writer.Write($" {Script.NumberToString(propEx.NHpCond)}");
+
+                string? strLvCond = propEx.NLvCond switch
+                {
+                    1 => "low",
+                    2 => "Sam",
+                    3 => "Hi",
+                    _ => null
+                };
+
+                if (strLvCond is not null)
+                    writer.Write($" cunning {strLvCond}");
+
+                writer.WriteLine();
+            }
+            if (propEx.BRecvCond != 0)
+            {
+                writer.Write("\t\t\tRecovery");
+                writer.Write($" {Script.NumberToString(propEx.NRecvCondMe)} {Script.NumberToString(propEx.NRecvCondHow)} {Script.NumberToString(propEx.NRecvCondMp)}");
+
+                char? condWhoStr = propEx.BRecvCondWho switch
+                {
+                    1 => 'u',
+                    2 => 'm',
+                    3 => 'a',
+                    _ => null
+                };
+
+                if (condWhoStr is not null)
+                    writer.Write($" {condWhoStr}");
+
+                writer.WriteLine();
+            }
+            if (propEx.BRangeAttack != 0)
+            {
+                AICMD cmd = (propEx.BRangeAttack & 0x80) switch
+                {
+                    0 => AICMD.RANGEATTACK,
+                    _ => AICMD.KEEP_RANGEATTACK,
+                };
+
+                int nRange = propEx.BRangeAttack;
+
+                if (cmd == AICMD.KEEP_RANGEATTACK)
+                    nRange &= ~0x80;
+
+                string cmdStr = cmd switch
+                {
+                    AICMD.KEEP_RANGEATTACK => "KeepRangeAttack",
+                    AICMD.RANGEATTACK => "RangeAttack",
+                    _ => throw new InvalidOperationException("cmd is neither KEEP_RANGEATTACK nor RANGEATTACK")
+                };
+
+                writer.WriteLine($"\t\t\t{cmdStr} {Script.NumberToString(nRange)}");
+            }
+            if (propEx.NSummProb != 0 || propEx.NSummNum != 0 || propEx.NSummId != 0)
+                writer.WriteLine($"\t\t\tSummon {Script.NumberToString(propEx.NSummProb)} {Script.NumberToString(propEx.NSummNum)} {Script.NumberToString(propEx.NSummId, definesService.ReversedMoverDefines)}");
+            //if(propEx.NRunawayHp != -1) // Don't need it, as it's already written in main SavePropEx
+            //    writer.WriteLine($"\t\t\tEvade {Script.NumberToString(propEx.NRunawayHp)}");
+            if (propEx.BHelpWho != 0)
+            {
+                string helpWhoStr = propEx.BHelpWho switch
+                {
+                    1 => "all",
+                    2 => "sam",
+                    _ => throw new InvalidOperationException("BHelpWho is neither 1 nor 2")
+                };
+                writer.WriteLine($"\t\t\tHelper {helpWhoStr} {Script.NumberToString(propEx.TmUnitHelp)} {Script.NumberToString(propEx.NHelpRangeMul)}");
+            }
+            if (propEx.NBerserkHp != 0 || propEx.FBerserkDmgMul != 0)
+                writer.WriteLine($"\t\t\tBerserk {Script.NumberToString(propEx.NBerserkHp)} {Script.FloatToString(propEx.FBerserkDmgMul)}");
+
+            writer.WriteLine("\t\t}");
+        }
+
+        private void SavePropExAiMove(StreamWriter writer, MoverPropEx propEx)
+        {
+            writer.WriteLine("\t\t#MOVE");
+            writer.WriteLine("\t\t{");
+
+            if (propEx.NLootProb != 0)
+                writer.WriteLine($"\t\t\tLoot d {propEx.NLootProb}");
+
+            writer.WriteLine("\t\t}");
         }
 
         public Mover CreateMover()

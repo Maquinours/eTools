@@ -1061,11 +1061,11 @@ namespace eTools_Ultimate.ViewModels.Pages
                         stringIdentifiers.Add(moverProp.SzName);
                         stringIdentifiers.Add(moverProp.SzComment);
                     }
-
-                    moversService.Save();
-                    modelsService.Save();
-                    stringsService.Save(settingsService.Settings.PropMoverTxtFilePath ?? settingsService.Settings.DefaultPropMoverTxtFilePath, [.. stringIdentifiers]);
-
+                    Task.WaitAll(
+                        Task.Run(moversService.Save),
+                        Task.Run(modelsService.Save),
+                        Task.Run(() => stringsService.Save(settingsService.Settings.PropMoverTxtFilePath ?? settingsService.Settings.DefaultPropMoverTxtFilePath, [.. stringIdentifiers]))
+                        );
                 });
 
                 snackbarService.Show(
