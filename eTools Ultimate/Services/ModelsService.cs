@@ -55,14 +55,13 @@ namespace eTools_Ultimate.Services
 
                 script.Load(filePath);
 
-                uint iType = (uint)script.GetNumber();
                 while (true)
                 {
                     string szName = script.GetToken();
 
                     if (script.EndOfStream) break;
 
-                    int iType = script.GetNumber();
+                    uint iType = (uint)script.GetNumber();
 
                     script.GetToken(); // "{"
 
