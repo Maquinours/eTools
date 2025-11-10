@@ -896,6 +896,15 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
+        private void OpenDropList()
+        {
+            if (MoversView.CurrentItem is not Mover mover) return;
+
+            MoverDropListDialog dropListDialog = new(contentDialogService.GetDialogHost(), mover);
+            dropListDialog.ShowAsync();
+        }
+
+        [RelayCommand]
         private void AddMover()
         {
             Mover newMover = moversService.CreateMover();

@@ -1,6 +1,7 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.DependencyInjection;
+using Scan;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,6 +28,8 @@ namespace eTools_Ultimate.Models
         DROPTYPE_NORMAL,
         DROPTYPE_SEED,
     };
+
+    public interface IMoverDrop { }
 
     public class DropItemProp(DropType dtType, uint dwIndex, uint dwProbability, uint dwLevel, uint dwNumber, uint dwNumber2) : INotifyPropertyChanged
     {
@@ -67,7 +70,7 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    public class DropItem : INotifyPropertyChanged, IDisposable
+    public class DropItem : INotifyPropertyChanged, IDisposable, IMoverDrop
     {
         private DropItemProp _prop;
 
@@ -75,7 +78,27 @@ namespace eTools_Ultimate.Models
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public Item? Item => App.Services.GetRequiredService<ItemsService>().Items.FirstOrDefault(x => x.Id == Prop.DwIndex);
+        public Item? Item
+        {
+            get
+            {
+                uint dwIndex = Constants.NullId;
+
+                switch (Prop.DtType)
+                {
+                    case DropType.DROPTYPE_NORMAL:
+                        dwIndex = Prop.DwIndex;
+                        break;
+                    case DropType.DROPTYPE_SEED:
+                        if (Script.TryGetNumberFromString("II_GOLD_SEED1", out int val))
+                            dwIndex = (uint)val;
+                        break;
+                }
+
+                return App.Services.GetRequiredService<ItemsService>().Items.FirstOrDefault(x => x.Id == dwIndex);
+            }
+        }
+
         public double ProbabilityPercent => Prop.DwProbability / 3_000_000_000f * 100;
 
         public DropItem(DropItemProp prop)
@@ -166,7 +189,7 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    public class DropKind : INotifyPropertyChanged, IDisposable
+    public class DropKind : INotifyPropertyChanged, IDisposable, IMoverDrop
     {
         private readonly MoverPropEx _parent;
         private readonly DropKindProp _prop;
@@ -174,6 +197,7 @@ namespace eTools_Ultimate.Models
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public DropKindProp Prop => _prop;
+
         public Item[] Items
         {
             get
@@ -189,6 +213,7 @@ namespace eTools_Ultimate.Models
                 return [.. App.Services.GetRequiredService<ItemsService>().Items.Where(item => item.Prop.DwItemKind3 == Prop.DwIk3 && item.Prop.DwItemRare >= nMinUniq && item.Prop.DwItemRare <= nMaxUniq)];
             }
         }
+        public string ItemKind3Identifier => Script.NumberToString(Prop.DwIk3, App.Services.GetRequiredService<DefinesService>().ReversedItemKind3Defines);
 
         public DropKind(MoverPropEx parent, DropKindProp prop)
         {
@@ -228,7 +253,10 @@ namespace eTools_Ultimate.Models
         private void Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(Prop.DwIk3))
+            {
                 NotifyPropertyChanged(nameof(Items));
+                NotifyPropertyChanged(nameof(ItemKind3Identifier));
+            }
         }
 
         private void MoversService_Movers_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -388,7 +416,7 @@ namespace eTools_Ultimate.Models
         public short DwAttackMoveDelay => _dwAttackMoveDelay;
         public short DwRunawayDelay => _dwRunawayDelay;
         public DropItemGenerator DropItemGenerator => _dropItemGenerator;
-        public DropKindGenerator DropKindGenerator => _dropKindGenerator; 
+        public DropKindGenerator DropKindGenerator => _dropKindGenerator;
         public float FMonsterTransformHpRate => _fMonsterTransformHpRate;
         public uint DwMonsterTransformMonsterId => _dwMonsterTransformMonsterId;
 
@@ -1004,17 +1032,17 @@ namespace eTools_Ultimate.Models
                             }
                         case MoverTypes.MONSTER:
                             {
-                                if(definesService.Defines.TryGetValue("BELLI_PEACEFUL", out int belliPeacefulId))
-                                Prop.DwBelligerence = (uint)belliPeacefulId;
-                                if(definesService.Defines.TryGetValue("RANK_CITIZEN", out int rankCitizenId))
-                                Prop.DwClass = (uint)rankCitizenId;
+                                if (definesService.Defines.TryGetValue("BELLI_PEACEFUL", out int belliPeacefulId))
+                                    Prop.DwBelligerence = (uint)belliPeacefulId;
+                                if (definesService.Defines.TryGetValue("RANK_CITIZEN", out int rankCitizenId))
+                                    Prop.DwClass = (uint)rankCitizenId;
                                 Prop.BKillable = 1;
-                                if(definesService.Defines.TryGetValue("II_WEA_MOB_MONSTER2_ATK1", out int attackItem1))
-                                Prop.DwAtk1 = (uint)attackItem1;
-                                if(definesService.Defines.TryGetValue("II_WEA_MOB_MONSTER2_ATK2", out int attackItem2))
-                                Prop.DwAtk2 = (uint)attackItem2;
-                                if(definesService.Defines.TryGetValue("II_WEA_MOB_MONSTER2_ATK3", out int attackItem3))
-                                Prop.DwAtk3 = (uint)attackItem3;
+                                if (definesService.Defines.TryGetValue("II_WEA_MOB_MONSTER2_ATK1", out int attackItem1))
+                                    Prop.DwAtk1 = (uint)attackItem1;
+                                if (definesService.Defines.TryGetValue("II_WEA_MOB_MONSTER2_ATK2", out int attackItem2))
+                                    Prop.DwAtk2 = (uint)attackItem2;
+                                if (definesService.Defines.TryGetValue("II_WEA_MOB_MONSTER2_ATK3", out int attackItem3))
+                                    Prop.DwAtk3 = (uint)attackItem3;
                             }
                             break;
                     }
@@ -1040,6 +1068,8 @@ namespace eTools_Ultimate.Models
                     Prop.DwClass = (uint)val;
             }
         }
+
+        public IMoverDrop[] Drops => [ .. PropEx?.DropKindGenerator.DropKinds ?? [], .. PropEx?.DropItemGenerator.DropItems ?? []];
 
         public Mover(MoverProp prop, MoverPropEx? propEx)
         {
