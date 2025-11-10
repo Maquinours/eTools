@@ -1440,6 +1440,34 @@
                     </ui:DropDownButton.Flyout>
                 </ui:DropDownButton>
                 -->
+                <ToggleButton
+                    x:Name="DropListToggleButton"
+                    Margin="0,0,10,0"
+                    Content="Drop List">
+                    <ToggleButton.Style>
+                        <Style TargetType="ToggleButton">
+                            <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ControlElevationBorderBrush}" />
+                            <Setter Property="BorderThickness" Value="1" />
+                            <Setter Property="Padding" Value="12,6" />
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="4"
+                                            Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ToggleButton.Style>
+                </ToggleButton>
                 <ui:Button
                     x:Name="AddButton"
                     Margin="0,0,10,0"
@@ -1899,6 +1927,187 @@
                     </StackPanel>
                 </Grid>
             </ScrollViewer>
+        </Grid>
+
+        <!-- Drop List Dialog Overlay -->
+        <Grid
+            x:Name="DropListDialogOverlay"
+            Grid.ColumnSpan="3"
+            Panel.ZIndex="1000"
+            Background="#80000000"
+            Visibility="{Binding IsChecked, ElementName=DropListToggleButton, Converter={StaticResource BoolToVis}}">
+            <!-- Background Click to Close -->
+            <ToggleButton
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Background="Transparent"
+                BorderThickness="0"
+                IsChecked="{Binding IsChecked, ElementName=DropListToggleButton, Mode=TwoWay}"
+                Opacity="0" />
+            <Border
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="{DynamicResource ApplicationBackgroundBrush}"
+                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="8"
+                Padding="0"
+                MinWidth="600"
+                MaxWidth="800"
+                MinHeight="400"
+                MaxHeight="600">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    <Border
+                        Grid.Row="0"
+                        Background="{DynamicResource ControlFillColorDefaultBrush}"
+                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                        BorderThickness="0,0,0,1"
+                        Padding="20,15">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                FontSize="20"
+                                FontWeight="SemiBold"
+                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                Text="Drop List" />
+                            <Button
+                                Grid.Column="1"
+                                Width="30"
+                                Height="30"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                ToolTip="Close">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border
+                                                        Background="{TemplateBinding Background}"
+                                                        CornerRadius="4">
+                                                        <TextBlock
+                                                            HorizontalAlignment="Center"
+                                                            VerticalAlignment="Center"
+                                                            FontSize="18"
+                                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                            Text="×" />
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <Button.Triggers>
+                                    <EventTrigger RoutedEvent="Button.Click">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DropListToggleButton" Storyboard.TargetProperty="IsChecked">
+                                                    <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="False" />
+                                                </BooleanAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                    <!-- Content Area -->
+                    <Grid Grid.Row="1">
+                        <!-- ListView -->
+                        <Border
+                            Margin="20,20,20,20"
+                            Background="{DynamicResource ControlFillColorDefaultBrush}"
+                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="4">
+                            <ListView
+                                x:Name="DropListListView"
+                                Style="{StaticResource AppListViewStyle}"
+                                BorderThickness="0">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem" BasedOn="{StaticResource AppListViewItemStyle}" />
+                                </ListView.ItemContainerStyle>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border
+                                            Padding="10,8"
+                                            Background="Transparent"
+                                            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                                            BorderThickness="0,0,0,1">
+                                            <TextBlock
+                                                FontSize="14"
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                Text="{Binding}" />
+                                        </Border>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                                <ListView.ItemsSource>
+                                    <x:Array Type="{x:Type sys:String}">
+                                        <sys:String>Item 1</sys:String>
+                                        <sys:String>Item 2</sys:String>
+                                        <sys:String>Item 3</sys:String>
+                                        <sys:String>Item 4</sys:String>
+                                        <sys:String>Item 5</sys:String>
+                                    </x:Array>
+                                </ListView.ItemsSource>
+                                <ListView.SelectionMode>Single</ListView.SelectionMode>
+                            </ListView>
+                        </Border>
+                    </Grid>
+
+                    <!-- Footer -->
+                    <Border
+                        Grid.Row="2"
+                        Background="{DynamicResource ControlFillColorDefaultBrush}"
+                        BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                        BorderThickness="0,1,0,0"
+                        Padding="20,15">
+                        <StackPanel
+                            HorizontalAlignment="Right"
+                            Orientation="Horizontal">
+                            <Button
+                                Content="Close"
+                                Padding="20,8"
+                                Margin="0,0,10,0">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource AppButtonStyle}">
+                                        <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                                    </Style>
+                                </Button.Style>
+                                <Button.Triggers>
+                                    <EventTrigger RoutedEvent="Button.Click">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <BooleanAnimationUsingKeyFrames Storyboard.TargetName="DropListToggleButton" Storyboard.TargetProperty="IsChecked">
+                                                    <DiscreteBooleanKeyFrame KeyTime="0:0:0" Value="False" />
+                                                </BooleanAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
         </Grid>
     </Grid>
 </Page> 
