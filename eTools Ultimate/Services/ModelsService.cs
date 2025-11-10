@@ -5,10 +5,11 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
+using static System.Windows.Forms.DataFormats;
 
 namespace eTools_Ultimate.Services
 {
-    public class ModelsService(DefinesService definesService)
+    public class ModelsService(DefinesService definesService, SettingsService settingsService)
     {
         private readonly ObservableCollection<MainModelBrace> _models = [];
         public ObservableCollection<MainModelBrace> Models => _models;
@@ -43,31 +44,38 @@ namespace eTools_Ultimate.Services
             this.ClearModels();
 
             // Maybe make it a settings property
-            string filePath = $"{settings.ResourcesFolderPath}mdlDyna.inc";
+            string[] filePaths = [
+                Path.Combine(settings.ResourcesFolderPath, "mdlDyna.inc"),
+                Path.Combine(settings.ResourcesFolderPath, "mdlObj.inc")
+            ];
 
-            using Script script = new();
-
-            script.Load(filePath);
-
-            while (true)
+            Parallel.ForEach(filePaths, filePath =>
             {
-                string szName = script.GetToken();
+                using Script script = new();
 
-                if (script.EndOfStream) break;
+                script.Load(filePath);
 
                 uint iType = (uint)script.GetNumber();
+                while (true)
+                {
+                    string szName = script.GetToken();
 
-                script.GetToken(); // "{"
+                    if (script.EndOfStream) break;
 
-                script.GetToken(); // Load the next token for the LoadChildren function to work correctly
+                    int iType = script.GetNumber();
 
-                IModelItem[] children = LoadChildren(script, filePath, iType);
+                    script.GetToken(); // "{"
 
-                MainModelBraceProp prop = new(szName, iType);
-                MainModelBrace brace = new(prop, children);
+                    script.GetToken(); // Load the next token for the LoadChildren function to work correctly
 
-                Models.Add(brace);
-            }
+                    IModelItem[] children = LoadChildren(script, filePath, iType);
+
+                    MainModelBraceProp prop = new(szName, iType);
+                    MainModelBrace brace = new(prop, children);
+
+                    Models.Add(brace);
+                }
+            });
         }
 
         private IModelItem[] LoadChildren(Script script, string filePath, uint dwType)
@@ -167,6 +175,8 @@ namespace eTools_Ultimate.Services
 
             foreach (MainModelBrace mainBrace in Models)
             {
+                if (mainBrace.Prop.IType == 0) continue; // TODO: add a saving for mdlObj.inc (IType == 0)
+
                 writer.Write('"');
                 writer.Write(mainBrace.Prop.SzName);
                 writer.Write('"');
@@ -257,6 +267,26 @@ namespace eTools_Ultimate.Services
                     writer.WriteLine();
                 }
             }
+        }
+
+        public Model[] GetModels(ModelBrace? brace = null)
+        {
+            IEnumerable<IModelItem> items;
+
+            if (brace != null)
+                items = brace.Children;
+            else
+                items = Models;
+
+            List<Model> models = [];
+            foreach (IModelItem item in items)
+            {
+                if (item is Model model)
+                    models.Add(model);
+                else if (item is ModelBrace childBrace)
+                    models.AddRange(GetModelsRecursively(childBrace));
+            }
+            return [.. models];
         }
 
         private void GetBracesRecursively(List<ModelBrace> braces, ModelBrace brace)

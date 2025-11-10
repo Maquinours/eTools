@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -203,23 +204,19 @@ namespace eTools_Ultimate.Models
             set { if (this.Brace != value) { App.Services.GetRequiredService<ModelsService>().SetBraceToModel(this, value); this.NotifyPropertyChanged(); } }
         }
 
-        public string Model3DFilePath
+        public string Model3DFileName
         {
             get
             {
-                Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
                 IDictionary<string, int> defines = App.Services.GetRequiredService<DefinesService>().Defines;
 
-                string modelsFolderPath = settings.ModelsFolderPath ?? settings.DefaultModelsFolderPath;
-
-                string result = modelsFolderPath;
+                string result = string.Empty;
 
                 if (defines.TryGetValue("MODELTYPE_BILLBOARD", out int billboardModelTypeValue) && Prop.DwModelType == billboardModelTypeValue)
                 {
                     result += Prop.SzName;
                     return result;
                 }
-
 
                 if (defines.TryGetValue("OT_SFX", out int sfxObjectTypeValue) && Prop.DwType == sfxObjectTypeValue && Prop.SzName.Contains('_'))
                     result += Prop.SzName;
@@ -233,6 +230,18 @@ namespace eTools_Ultimate.Models
                 if (defines.TryGetValue("MODELTYPE_SFX", out int sfxModelTypeValue) && Prop.DwModelType != sfxModelTypeValue)
                     result += ".o3d";
                 return result;
+            }
+        }
+
+        public string Model3DFilePath
+        {
+            get
+            {
+                Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
+                string modelsFolderPath = settings.ModelsFolderPath ?? settings.DefaultModelsFolderPath;
+
+                return Path.Combine(modelsFolderPath, Model3DFileName);
             }
         }
 
@@ -300,6 +309,7 @@ namespace eTools_Ultimate.Models
                 case nameof(Prop.DwType):
                 case nameof(Prop.DwModelType):
                 case nameof(Prop.SzName):
+                    NotifyPropertyChanged(nameof(Model3DFileName));
                     NotifyPropertyChanged(nameof(Model3DFilePath));
                     // Add handles to settings path
                     break;

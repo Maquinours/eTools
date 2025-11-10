@@ -2148,4 +2148,170 @@
   <data name="Open configuration" xml:space="preserve">
     <value>Ouvrir la configuration</value>
   </data>
+  <data name="Misc" xml:space="preserve">
+    <value>Divers</value>
+  </data>
+  <data name="Navigate to the misc tools page." xml:space="preserve">
+    <value>Naviguer vers la page d'outils divers.</value>
+  </data>
+  <data name="Misc Tools" xml:space="preserve">
+    <value>Outils Divers</value>
+  </data>
+  <data name="Find and manage unused assets" xml:space="preserve">
+    <value>Trouver et gérer les ressources inutilisées</value>
+  </data>
+  <data name="Find Unused Models &amp; Textures" xml:space="preserve">
+    <value>Trouver les Modèles &amp; Textures Inutilisés</value>
+  </data>
+  <data name="Scan dependencies and list assets not referenced anywhere" xml:space="preserve">
+    <value>Scanner les dépendances et lister les ressources non référencées</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="Scanning for unused assets..." xml:space="preserve">
+    <value>Recherche de ressources inutilisées...</value>
+  </data>
+  <data name="Scanning models..." xml:space="preserve">
+    <value>Scan des modèles...</value>
+  </data>
+  <data name="Scanning textures..." xml:space="preserve">
+    <value>Scan des textures...</value>
+  </data>
+  <data name="Scanning sounds..." xml:space="preserve">
+    <value>Scan des sons...</value>
+  </data>
+  <data name="Scan completed. Found {0} unused assets." xml:space="preserve">
+    <value>Scan terminé. {0} ressources inutilisées trouvées.</value>
+  </data>
+  <data name="Total Size Before" xml:space="preserve">
+    <value>Taille Totale Avant</value>
+  </data>
+  <data name="After" xml:space="preserve">
+    <value>Après</value>
+  </data>
+  <data name="Scan Assets" xml:space="preserve">
+    <value>Scanner les Ressources</value>
+  </data>
+  <data name="Select All" xml:space="preserve">
+    <value>Tout Sélectionner</value>
+  </data>
+  <data name="Clear Selection" xml:space="preserve">
+    <value>Effacer la Sélection</value>
+  </data>
+  <data name="Delete Selected" xml:space="preserve">
+    <value>Supprimer la Sélection</value>
+  </data>
+  <data name="Search by name, path, or type..." xml:space="preserve">
+    <value>Rechercher par nom, chemin ou type...</value>
+  </data>
+  <data name="{0} assets found" xml:space="preserve">
+    <value>{0} ressources trouvées</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="File Name" xml:space="preserve">
+    <value>Nom du Fichier</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>Chemin</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Taille</value>
+  </data>
+  <data name="Last Modified" xml:space="preserve">
+    <value>Dernière Modification</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Scan completed" xml:space="preserve">
+    <value>Scan terminé</value>
+  </data>
+  <data name="Found {0} unused assets totaling {1}." xml:space="preserve">
+    <value>{0} ressources inutilisées trouvées totalisant {1}.</value>
+  </data>
+  <data name="Scan failed" xml:space="preserve">
+    <value>Échec du scan</value>
+  </data>
+  <data name="No selection" xml:space="preserve">
+    <value>Aucune sélection</value>
+  </data>
+  <data name="Please select assets to delete." xml:space="preserve">
+    <value>Veuillez sélectionner les ressources à supprimer.</value>
+  </data>
+  <data name="Delete selected assets" xml:space="preserve">
+    <value>Supprimer les ressources sélectionnées</value>
+  </data>
+  <data name="Are you sure you want to delete {0} selected assets? This action cannot be undone." xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer {0} ressources sélectionnées ? Cette action peut éventuellement ne pas être annulée.</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Assets deleted" xml:space="preserve">
+    <value>Ressources supprimées</value>
+  </data>
+  <data name="Successfully deleted {0} assets, freeing {1}." xml:space="preserve">
+    <value>{0} ressources supprimées avec succès, libérant {1}.</value>
+  </data>
+  <data name="Deletion failed" xml:space="preserve">
+    <value>Échec de la suppression</value>
+  </data>
+  <data name="Delete asset" xml:space="preserve">
+    <value>Supprimer la ressource</value>
+  </data>
+  <data name="Are you sure you want to delete '{0}'? This action cannot be undone." xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer '{0}' ? Cette action peut éventuellement ne pas être annulée.</value>
+  </data>
+  <data name="Asset deleted" xml:space="preserve">
+    <value>Ressource supprimée</value>
+  </data>
+  <data name="Successfully deleted '{0}'." xml:space="preserve">
+    <value>'{0}' supprimé avec succès.</value>
+  </data>
+  <data name="Deletion Log" xml:space="preserve">
+    <value>Journal de suppression</value>
+    <comment>Deletion log window title</comment>
+  </data>
+  <data name="View and restore deleted assets" xml:space="preserve">
+    <value>Afficher et restaurer les ressources supprimées</value>
+    <comment>Deletion log window subtitle</comment>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+    <comment>Date column header</comment>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+    <comment>Action column header</comment>
+  </data>
+  <data name="File Path" xml:space="preserve">
+    <value>Chemin du fichier</value>
+    <comment>File path column header</comment>
+  </data>
+  <data name="Target Path" xml:space="preserve">
+    <value>Chemin cible</value>
+    <comment>Target path column header</comment>
+  </data>
+  <data name="Deleted By" xml:space="preserve">
+    <value>Supprimé par</value>
+    <comment>Deleted by column header</comment>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Actualiser</value>
+    <comment>Refresh button text</comment>
+  </data>
+  <data name="Filter by type..." xml:space="preserve">
+    <value>Filtrer par type...</value>
+    <comment>Filter ComboBox placeholder</comment>
+  </data>
+  <data name="Total: {0}" xml:space="preserve">
+    <value>Total : {0}</value>
+    <comment>Total assets count</comment>
+  </data>
 </root>

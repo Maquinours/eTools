@@ -111,14 +111,14 @@ namespace eTools_Ultimate.Models
             get => _texturesFolderPath;
             set => SetFolderPathPropertyWithDefault(ref _texturesFolderPath, value, DefaultTexturesFolderPath);
         }
-        public string DefaultTexturesFolderPath => $"{ResourcesFolderPath}Model{Path.DirectorySeparatorChar}Texture{Path.DirectorySeparatorChar}";
+        public string DefaultTexturesFolderPath => $"{ClientFolderPath}Model{Path.DirectorySeparatorChar}Texture{Path.DirectorySeparatorChar}";
 
         public string? ModelsFolderPath
         {
             get => _modelsFolderPath;
             set => SetFolderPathPropertyWithDefault(ref _modelsFolderPath, value, DefaultModelsFolderPath);
         }
-        public string DefaultModelsFolderPath => $"{ResourcesFolderPath}Model{Path.DirectorySeparatorChar}";
+        public string DefaultModelsFolderPath => $"{ClientFolderPath}Model{Path.DirectorySeparatorChar}";
 
         public string? SoundsConfigFilePath
         {
@@ -280,8 +280,6 @@ namespace eTools_Ultimate.Models
             switch (propertyName)
             {
                 case nameof(ResourcesFolderPath):
-                    NotifyPropertyChanged(nameof(DefaultTexturesFolderPath));
-                    NotifyPropertyChanged(nameof(DefaultModelsFolderPath));
                     NotifyPropertyChanged(nameof(DefaultPropMoverFilePath));
                     NotifyPropertyChanged(nameof(DefaultPropMoverTxtFilePath));
                     NotifyPropertyChanged(nameof(DefaultPropItemFilePath));
@@ -294,6 +292,8 @@ namespace eTools_Ultimate.Models
                     NotifyPropertyChanged(nameof(DefaultAccessoriesConfigFilePath));
                     break;
                 case nameof(ClientFolderPath):
+                    NotifyPropertyChanged(nameof(DefaultTexturesFolderPath));
+                    NotifyPropertyChanged(nameof(DefaultModelsFolderPath));
                     NotifyPropertyChanged(nameof(DefaultIconsFolderPath));
                     NotifyPropertyChanged(nameof(DefaultSoundsConfigFilePath));
                     NotifyPropertyChanged(nameof(DefaultSoundsFolderPath));

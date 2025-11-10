@@ -115,6 +115,8 @@ namespace eTools_Ultimate
                 //services.AddSingleton<HonorsViewModel>();
                 services.AddSingleton<MotionsPage>();
                 services.AddSingleton<MotionsViewModel>();
+                services.AddSingleton<MiscPage>();
+                services.AddSingleton<MiscViewModel>();
                 //services.AddSingleton<WorldsPage>();
                 //services.AddSingleton<TicketsPage>();
                 //services.AddSingleton<ObjectsPage>();
