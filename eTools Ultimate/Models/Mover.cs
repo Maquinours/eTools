@@ -33,7 +33,7 @@ namespace eTools_Ultimate.Models
 
     public class DropItemProp(DropType dtType, uint dwIndex, uint dwProbability, uint dwLevel, uint dwNumber, uint dwNumber2) : INotifyPropertyChanged
     {
-        private DropType _dtType = dtType;
+        private readonly DropType _dtType = dtType;
         private uint _dwIndex = dwIndex;
         private uint _dwProbability = dwProbability;
         private uint _dwLevel = dwLevel;
@@ -43,19 +43,48 @@ namespace eTools_Ultimate.Models
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public DropType DtType => _dtType;
-        public uint DwIndex
+        public uint DwIndex 
         {
             get => _dwIndex;
-            set => SetValue(ref _dwIndex, value);
+            set
+            {
+                if (DtType != DropType.DROPTYPE_NORMAL)
+                    throw new InvalidOperationException("Try to change DwIndex on a not normal drop item");
+                SetValue(ref _dwIndex, value);
+            }
         }
-        public uint DwProbability
-        {
+        public uint DwProbability 
+        { 
             get => _dwProbability;
-            set => SetValue(ref _dwProbability, value);
+            set
+            {
+                if (DtType != DropType.DROPTYPE_NORMAL)
+                    throw new InvalidOperationException("Try to change DwProbability on a not normal drop item");
+                SetValue(ref _dwProbability, value);
+            }
         }
-        public uint DwLevel => _dwLevel;
-        public uint DwNumber => _dwNumber;
-        public uint DwNumber2 => _dwNumber2;
+        public uint DwLevel 
+        {
+            get => _dwLevel;
+            set
+            {
+                if (DtType != DropType.DROPTYPE_NORMAL)
+                    throw new InvalidOperationException("Try to change DwLevel on a not normal drop item");
+                SetValue(ref _dwLevel, value);
+            }
+        }
+        public uint DwNumber { get => _dwNumber; set => SetValue(ref _dwNumber, value); }
+        public uint DwNumber2
+        {
+            get => _dwNumber2;
+            set
+            {
+                if (DtType != DropType.DROPTYPE_SEED) 
+                    throw new InvalidOperationException("Try to change DwNumber2 on a not seed drop item");
+                SetValue(ref _dwNumber2, value);
+            }
+
+        }
 
         private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
         {
@@ -99,7 +128,11 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public double ProbabilityPercent => Prop.DwProbability / 3_000_000_000f * 100;
+        public double ProbabilityPercent
+        {
+            get => Prop.DwProbability / 3_000_000_000f * 100;
+            set => Prop.DwProbability = (uint)(value * 3_000_000_000f / 100);
+        }
 
         public DropItem(DropItemProp prop)
         {
@@ -1069,7 +1102,7 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public IMoverDrop[] Drops => [ .. PropEx?.DropKindGenerator.DropKinds ?? [], .. PropEx?.DropItemGenerator.DropItems ?? []];
+        public IMoverDrop[] Drops => [.. PropEx?.DropKindGenerator.DropKinds ?? [], .. PropEx?.DropItemGenerator.DropItems ?? []];
 
         public Mover(MoverProp prop, MoverPropEx? propEx)
         {

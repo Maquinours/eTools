@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -15,8 +16,10 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
 {
     public partial class MoverDropListDialogViewModel(Mover mover)
     {
+        private DefinesService _definesService = App.Services.GetRequiredService<DefinesService>();
         public string Title => String.Format(App.Services.GetRequiredService<IStringLocalizer<Translations>>()["{0} drop list"], mover.Name);
 
         public ICollectionView DropListView => new ListCollectionView(mover.Drops);
+        public ReadOnlyDictionary<int, string> ItemIdentifiers => _definesService.ReversedItemDefines;
     }
 }

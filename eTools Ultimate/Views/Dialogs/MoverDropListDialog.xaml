@@ -18,15 +18,20 @@
         <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:MoverDropListDialog}" />
     </ui:ContentDialog.Resources>
 
-    <Grid Grid.Row="1">
+    <Grid Height="300" Margin="20,20,20,20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
         <Border
-            Margin="20,20,20,20"
+            Grid.Column="0"
+            Width="300"
             Background="{DynamicResource ControlFillColorDefaultBrush}"
             BorderBrush="{DynamicResource ControlElevationBorderBrush}"
             BorderThickness="1"
             CornerRadius="4">
             <TreeView
-                x:Name="DropListListView"
+                x:Name="DropListTreeView"
                 Background="Transparent"
                 BorderThickness="0"
                 ItemsSource="{Binding DropListView}">
@@ -100,5 +105,61 @@
                 </TreeView.Resources>
             </TreeView>
         </Border>
+        <UniformGrid
+            Grid.Column="1"
+            Width="400"
+            VerticalAlignment="Top"
+            Columns="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Item'}" />
+                <ui:AutoSuggestBox
+                    Grid.Row="1"
+                    Margin="0,5,0,0"
+                    DisplayMemberPath="Value"
+                    OriginalItemsSource="{Binding ItemIdentifiers, Mode=OneWay}"
+                    Text="{Binding SelectedItem.Item.Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus, ElementName=DropListTreeView}" />
+            </Grid>
+            <Grid Margin="15,0,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Quantity'}" />
+                <ui:NumberBox
+                    Grid.Row="1"
+                    Margin="0,5,0,0"
+                    ClearButtonEnabled="False"
+                    Value="{Binding SelectedItem.Prop.DwNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=DropListTreeView}" />
+            </Grid>
+            <Grid Margin="0,10,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Level'}" />
+                <ui:NumberBox
+                    Grid.Row="1"
+                    Margin="0,5,0,0"
+                    ClearButtonEnabled="False"
+                    Cursor="Arrow"
+                    Value="{Binding SelectedItem.Prop.DwLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=DropListTreeView}" />
+            </Grid>
+            <Grid Margin="15,10,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Probability'}" />
+                <ui:NumberBox
+                    Grid.Row="1"
+                    Margin="0,5,0,0"
+                    ClearButtonEnabled="False"
+                    Value="{Binding SelectedItem.ProbabilityPercent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=DropListTreeView}" />
+            </Grid>
+        </UniformGrid>
     </Grid>
 </ui:ContentDialog>
