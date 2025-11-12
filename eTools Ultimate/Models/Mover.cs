@@ -43,7 +43,7 @@ namespace eTools_Ultimate.Models
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public DropType DtType => _dtType;
-        public uint DwIndex 
+        public uint DwIndex
         {
             get => _dwIndex;
             set
@@ -53,8 +53,8 @@ namespace eTools_Ultimate.Models
                 SetValue(ref _dwIndex, value);
             }
         }
-        public uint DwProbability 
-        { 
+        public uint DwProbability
+        {
             get => _dwProbability;
             set
             {
@@ -63,7 +63,7 @@ namespace eTools_Ultimate.Models
                 SetValue(ref _dwProbability, value);
             }
         }
-        public uint DwLevel 
+        public uint DwLevel
         {
             get => _dwLevel;
             set
@@ -79,7 +79,7 @@ namespace eTools_Ultimate.Models
             get => _dwNumber2;
             set
             {
-                if (DtType != DropType.DROPTYPE_SEED) 
+                if (DtType != DropType.DROPTYPE_SEED)
                     throw new InvalidOperationException("Try to change DwNumber2 on a not seed drop item");
                 SetValue(ref _dwNumber2, value);
             }
@@ -99,32 +99,83 @@ namespace eTools_Ultimate.Models
         }
     }
 
-    public class DropItem : INotifyPropertyChanged, IDisposable, IMoverDrop
+    public class DropGold : INotifyPropertyChanged, IDisposable, IMoverDrop
     {
-        private DropItemProp _prop;
+        private readonly DropItemProp _prop;
 
         public DropItemProp Prop => _prop;
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public Item? Item
+        public static Item? Item
         {
             get
             {
-                uint dwIndex = Constants.NullId;
-
-                switch (Prop.DtType)
+                if (Script.TryGetNumberFromString("II_GOLD_SEED1", out int val))
                 {
-                    case DropType.DROPTYPE_NORMAL:
-                        dwIndex = Prop.DwIndex;
-                        break;
-                    case DropType.DROPTYPE_SEED:
-                        if (Script.TryGetNumberFromString("II_GOLD_SEED1", out int val))
-                            dwIndex = (uint)val;
-                        break;
+                    uint dwId = (uint)val;
+                    return App.Services.GetRequiredService<ItemsService>().Items.FirstOrDefault(x => x.Id == dwId);
                 }
+                return null;
+            }
+        }
 
-                return App.Services.GetRequiredService<ItemsService>().Items.FirstOrDefault(x => x.Id == dwIndex);
+        public DropGold(DropItemProp prop)
+        {
+            if (prop.DtType != DropType.DROPTYPE_SEED)
+                throw new InvalidOperationException("DropGold prop DropType is not DROPTYPE_SEED");
+
+            _prop = prop;
+
+            ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
+
+            itemsService.Items.CollectionChanged += ItemsService_Items_CollectionChanged;
+            itemsService.ItemPropPropertyChanged += ItemsService_ItemPropPropertyChanged;
+        }
+        public void Dispose()
+        {
+            ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
+
+            itemsService.Items.CollectionChanged -= ItemsService_Items_CollectionChanged;
+            itemsService.ItemPropPropertyChanged -= ItemsService_ItemPropPropertyChanged;
+
+            GC.SuppressFinalize(this);
+        }
+
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void ItemsService_ItemPropPropertyChanged(object? sender, ItemPropPropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(ItemProp.DwId))
+                NotifyPropertyChanged(nameof(Item));
+        }
+
+        private void ItemsService_Items_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            NotifyPropertyChanged(nameof(Item));
+        }
+    }
+
+    public class DropItem : INotifyPropertyChanged, IDisposable, IMoverDrop
+    {
+        private readonly DropItemProp _prop;
+
+        public DropItemProp Prop => _prop;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public Item? Item => App.Services.GetRequiredService<ItemsService>().Items.FirstOrDefault(x => x.Id == Prop.DwIndex);
+
+        public string ItemIdentifier
+        {
+            get => Script.NumberToString(Prop.DwIndex, App.Services.GetRequiredService<DefinesService>().ReversedItemDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    Prop.DwIndex = (uint)val;
             }
         }
 
@@ -136,6 +187,9 @@ namespace eTools_Ultimate.Models
 
         public DropItem(DropItemProp prop)
         {
+            if (prop.DtType != DropType.DROPTYPE_NORMAL)
+                throw new InvalidOperationException("DropGold prop DropType is not DROPTYPE_NORMAL");
+
             _prop = prop;
 
             ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
@@ -235,18 +289,35 @@ namespace eTools_Ultimate.Models
         {
             get
             {
-                Mover mover = App.Services.GetRequiredService<MoversService>().Movers.FirstOrDefault(x => x.PropEx == _parent) ?? throw new InvalidOperationException("Cannot find mover");
-
-                if (mover.PropEx is null) throw new InvalidOperationException("Mover has no MoverPropEx");
-                if (!mover.PropEx.DropKindGenerator.DropKinds.Any(x => x == this)) throw new InvalidOperationException("Cannot get items for DropKind from DropKindGenerator");
-
-                short nMinUniq = (short)Math.Max(mover.Prop.DwLevel - 5, 1);
-                short nMaxUniq = (short)Math.Max(mover.Prop.DwLevel - 2, 1);
+                short nMinUniq = MinUnique;
+                short nMaxUniq = MaxUnique;
 
                 return [.. App.Services.GetRequiredService<ItemsService>().Items.Where(item => item.Prop.DwItemKind3 == Prop.DwIk3 && item.Prop.DwItemRare >= nMinUniq && item.Prop.DwItemRare <= nMaxUniq)];
             }
         }
-        public string ItemKind3Identifier => Script.NumberToString(Prop.DwIk3, App.Services.GetRequiredService<DefinesService>().ReversedItemKind3Defines);
+        public string ItemKind3Identifier
+        {
+            get => Script.NumberToString(Prop.DwIk3, App.Services.GetRequiredService<DefinesService>().ReversedItemKind3Defines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    Prop.DwIk3 = (uint)val;
+            }
+        }
+        public Mover Mover
+        {
+            get
+            {
+                Mover mover = App.Services.GetRequiredService<MoversService>().Movers.FirstOrDefault(x => x.PropEx == _parent) ?? throw new InvalidOperationException("Cannot find mover");
+                
+                if (mover.PropEx is null) throw new InvalidOperationException("Mover has no MoverPropEx");
+                if (!mover.PropEx.DropKindGenerator.DropKinds.Any(x => x == this)) throw new InvalidOperationException("Cannot get items for DropKind from DropKindGenerator");
+
+                return mover;
+            }
+        }
+        public short MinUnique => (short)Math.Max(Mover.Prop.DwLevel - 5, 1);
+        public short MaxUnique => (short)Math.Max(Mover.Prop.DwLevel - 2, 1);
 
         public DropKind(MoverPropEx parent, DropKindProp prop)
         {
@@ -311,7 +382,11 @@ namespace eTools_Ultimate.Models
         private void Mover_Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(MoverProp.DwLevel))
+            {
                 NotifyPropertyChanged(nameof(Items));
+                NotifyPropertyChanged(nameof(MinUnique));
+                NotifyPropertyChanged(nameof(MaxUnique));
+            }
         }
 
         private void ItemsService_ItemPropPropertyChanged(object? sender, ItemPropPropertyChangedEventArgs e)
@@ -338,12 +413,14 @@ namespace eTools_Ultimate.Models
         public List<DropKind> DropKinds => _dropKinds;
     }
 
-    public class DropItemGenerator(uint dwMax, IEnumerable<DropItem> dropItems)
+    public class DropItemGenerator(uint dwMax, IEnumerable<DropGold> dropGolds, IEnumerable<DropItem> dropItems)
     {
         private uint _dwMax = dwMax;
+        private List<DropGold> _dropGolds = [..dropGolds];
         private readonly List<DropItem> _dropItems = [.. dropItems];
 
         public uint DwMax => _dwMax;
+        public List<DropGold> DropGolds => _dropGolds;
         public List<DropItem> DropItems => _dropItems;
     }
 
@@ -510,9 +587,10 @@ namespace eTools_Ultimate.Models
             _dwAttackMoveDelay = dwAttackMoveDelay;
             _dwRunawayDelay = dwRunawayDelay;
 
-            _dropItemGenerator = new DropItemGenerator(dwDropItemGeneratorMax, [
-                .. dropItems.Select(prop => new DropItem(prop))
-            ]);
+            _dropItemGenerator = new DropItemGenerator(dwDropItemGeneratorMax,
+                dropItems.Where(x => x.DtType == DropType.DROPTYPE_SEED).Select(prop => new DropGold(prop)),
+                dropItems.Where(x => x.DtType == DropType.DROPTYPE_NORMAL).Select(prop => new DropItem(prop))
+            );
 
             _dropKindGenerator = new DropKindGenerator([
                 .. dropKinds.Select(prop => new DropKind(this, prop))
@@ -1102,7 +1180,7 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        public IMoverDrop[] Drops => [.. PropEx?.DropKindGenerator.DropKinds ?? [], .. PropEx?.DropItemGenerator.DropItems ?? []];
+        public IMoverDrop[] Drops => [..PropEx?.DropItemGenerator.DropGolds ?? [], .. PropEx?.DropKindGenerator.DropKinds ?? [], .. PropEx?.DropItemGenerator.DropItems ?? []];
 
         public Mover(MoverProp prop, MoverPropEx? propEx)
         {

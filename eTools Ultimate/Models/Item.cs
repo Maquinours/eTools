@@ -1003,6 +1003,16 @@ namespace eTools_Ultimate.Models
             set => this.Prop.DwSkillTime = SkillTimeMinutes * 60 * 1000 + SkillTimeSeconds * 1000 + value;
         }
 
+        public string ItemKind3Identifier
+        {
+            get => Script.NumberToString(Prop.DwItemKind3, App.Services.GetRequiredService<DefinesService>().ReversedItemKind3Defines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    Prop.DwItemKind3 = (uint)val;
+            }
+        }
+
         // TODO: readd it
         //public Image PaperingTexture
         //{

@@ -20,6 +20,7 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
         public string Title => String.Format(App.Services.GetRequiredService<IStringLocalizer<Translations>>()["{0} drop list"], mover.Name);
 
         public ICollectionView DropListView => new ListCollectionView(mover.Drops);
-        public ReadOnlyDictionary<int, string> ItemIdentifiers => _definesService.ReversedItemDefines;
+        public List<KeyValuePair<int, string>> ItemIdentifiers => [.._definesService.ReversedItemDefines];
+        public List<KeyValuePair<int, string>> ItemKind3Identifiers => [.._definesService.ReversedItemKind3Defines];
     }
 }
