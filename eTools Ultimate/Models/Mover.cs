@@ -182,7 +182,7 @@ namespace eTools_Ultimate.Models
         public double ProbabilityPercent
         {
             get => Prop.DwProbability / 3_000_000_000f * 100;
-            set => Prop.DwProbability = (uint)(value * 3_000_000_000f / 100);
+            set => Prop.DwProbability = (uint)Math.Round(value * 3_000_000_000f / 100);
         }
 
         public DropItem(DropItemProp prop)
