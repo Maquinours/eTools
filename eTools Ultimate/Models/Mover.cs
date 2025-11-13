@@ -11,6 +11,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using Wpf.Ui;
 
 namespace eTools_Ultimate.Models
@@ -295,6 +296,9 @@ namespace eTools_Ultimate.Models
                 return [.. App.Services.GetRequiredService<ItemsService>().Items.Where(item => item.Prop.DwItemKind3 == Prop.DwIk3 && item.Prop.DwItemRare >= nMinUniq && item.Prop.DwItemRare <= nMaxUniq)];
             }
         }
+
+        public ICollectionView ItemsView => new ListCollectionView(Items);
+
         public string ItemKind3Identifier
         {
             get => Script.NumberToString(Prop.DwIk3, App.Services.GetRequiredService<DefinesService>().ReversedItemKind3Defines);
@@ -408,20 +412,38 @@ namespace eTools_Ultimate.Models
 
     public class DropKindGenerator(IEnumerable<DropKind> dropKinds)
     {
-        private readonly List<DropKind> _dropKinds = [.. dropKinds];
+        private readonly ObservableCollection<DropKind> _dropKinds = [.. dropKinds];
 
-        public List<DropKind> DropKinds => _dropKinds;
+        public ObservableCollection<DropKind> DropKinds => _dropKinds;
     }
 
-    public class DropItemGenerator(uint dwMax, IEnumerable<DropGold> dropGolds, IEnumerable<DropItem> dropItems)
+    public class DropItemGenerator(uint dwMax, IEnumerable<DropGold> dropGolds, IEnumerable<DropItem> dropItems) : INotifyPropertyChanged
     {
         private uint _dwMax = dwMax;
-        private List<DropGold> _dropGolds = [..dropGolds];
-        private readonly List<DropItem> _dropItems = [.. dropItems];
+        private ObservableCollection<DropGold> _dropGolds = [..dropGolds];
+        private readonly ObservableCollection<DropItem> _dropItems = [.. dropItems];
 
-        public uint DwMax => _dwMax;
-        public List<DropGold> DropGolds => _dropGolds;
-        public List<DropItem> DropItems => _dropItems;
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public uint DwMax
+        {
+            get => _dwMax;
+            set => SetValue(ref _dwMax, value);
+        }
+        public ObservableCollection<DropGold> DropGolds => _dropGolds;
+        public ObservableCollection<DropItem> DropItems => _dropItems;
+
+        private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+                return false;
+
+            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new InvalidOperationException($"SetValue with not safe to assign directly property {propertyName}");
+
+            field = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            return true;
+        }
     }
 
     public class MoverPropEx : INotifyPropertyChanged
@@ -1179,8 +1201,6 @@ namespace eTools_Ultimate.Models
                     Prop.DwClass = (uint)val;
             }
         }
-
-        public IMoverDrop[] Drops => [..PropEx?.DropItemGenerator.DropGolds ?? [], .. PropEx?.DropKindGenerator.DropKinds ?? [], .. PropEx?.DropItemGenerator.DropItems ?? []];
 
         public Mover(MoverProp prop, MoverPropEx? propEx)
         {

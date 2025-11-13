@@ -18,285 +18,352 @@
         <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:MoverDropListDialog}" />
     </ui:ContentDialog.Resources>
 
-    <Grid Height="300" Margin="20,20,20,20">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Border
-            Grid.Column="0"
-            Width="300"
-            Background="{DynamicResource ControlFillColorDefaultBrush}"
-            BorderBrush="{DynamicResource ControlElevationBorderBrush}"
-            BorderThickness="1"
-            CornerRadius="4">
-            <TreeView
-                x:Name="DropListTreeView"
-                Background="Transparent"
-                BorderThickness="0"
-                ItemsSource="{Binding DropListView}">
-                <TreeView.Resources>
-                    <HierarchicalDataTemplate DataType="{x:Type models:DropKind}" ItemsSource="{Binding Items}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="📁 " />
-                            <TextBlock Text="{Binding ItemKind3Identifier}" />
-                        </StackPanel>
-                    </HierarchicalDataTemplate>
-                    <DataTemplate DataType="{x:Type models:DropGold}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Border
-                                Width="32"
-                                Height="32"
-                                Margin="0,0,8,0"
-                                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                                BorderThickness="1">
-                                <Image
-                                    Margin="2"
-                                    Source="{Binding Item.Icon}"
-                                    Stretch="Uniform" />
-                            </Border>
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock
-                                    FontWeight="SemiBold"
-                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                    Text="{Binding Item.Name}" />
-                                <TextBlock
-                                    FontSize="12"
-                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                    Text="{Binding Item.Identifier}" />
+    <Grid Margin="20,0,20,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" VerticalAlignment="Bottom">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <ui:Button
+                    Grid.Column="0"
+                    Command="{Binding AddDropItemCommand}"
+                    FontSize="16"
+                    Icon="{ui:SymbolIcon Add24}"
+                    ToolTip="{i18n:StringLocalizer 'Add drop item'}" />
+                <ui:Button
+                    Grid.Column="1"
+                    Margin="10,0,0,0"
+                    Command="{Binding AddDropKindCommand}"
+                    FontSize="16"
+                    Icon="{ui:SymbolIcon FolderAdd24}"
+                    ToolTip="{i18n:StringLocalizer 'Add drop kind'}" />
+                <ui:Button
+                    Grid.Column="2"
+                    Margin="10,0,0,0"
+                    Command="{Binding AddDropGoldCommand}"
+                    FontSize="16"
+                    Icon="{ui:SymbolIcon Money24}"
+                    ToolTip="{i18n:StringLocalizer 'Add drop gold'}" />
+                <ui:Button
+                    Grid.Column="3"
+                    Margin="10,0,0,0"
+                    Appearance="Danger"
+                    Command="{Binding RemoveDropCommand}"
+                    CommandParameter="{Binding SelectedItem, ElementName=DropListTreeView}"
+                    FontSize="16"
+                    Icon="{ui:SymbolIcon Delete24}"
+                    ToolTip="{i18n:StringLocalizer 'Remove item'}" />
+            </Grid>
+            <Grid
+                Grid.Column="1"
+                MinWidth="100"
+                HorizontalAlignment="Right">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Max item'}" />
+                <ui:NumberBox
+                    Grid.Row="1"
+                    Margin="0,5,0,0"
+                    ClearButtonEnabled="False"
+                    Value="{Binding DropItemGenerator.DwMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+        </Grid>
+        <Grid
+            Grid.Row="1"
+            Height="300"
+            Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border
+                Grid.Column="0"
+                Width="300"
+                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="4">
+                <TreeView
+                    x:Name="DropListTreeView"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ItemsSource="{Binding DropListView}">
+                    <TreeView.Resources>
+                        <HierarchicalDataTemplate DataType="{x:Type models:DropKind}" ItemsSource="{Binding Items}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📁 " />
+                                <TextBlock Text="{Binding ItemKind3Identifier}" />
                             </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type models:DropItem}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Border
-                                Width="32"
-                                Height="32"
-                                Margin="0,0,8,0"
-                                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                                BorderThickness="1">
-                                <Image
-                                    Margin="2"
-                                    Source="{Binding Item.Icon}"
-                                    Stretch="Uniform" />
-                            </Border>
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock
-                                    FontWeight="SemiBold"
-                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                    Text="{Binding Item.Name}" />
-                                <TextBlock
-                                    FontSize="12"
-                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                    Text="{Binding Item.Identifier}" />
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type models:Item}">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Border
-                                Width="32"
-                                Height="32"
-                                Margin="0,0,8,0"
-                                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                                BorderThickness="1">
-                                <Image
-                                    Margin="2"
-                                    Source="{Binding Icon}"
-                                    Stretch="Uniform" />
-                            </Border>
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock
-                                    FontWeight="SemiBold"
-                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                    Text="{Binding Name}" />
-                                <TextBlock
-                                    FontSize="12"
-                                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                    Text="{Binding Identifier}" />
-                            </StackPanel>
-                        </Grid>
-                    </DataTemplate>
-                </TreeView.Resources>
-            </TreeView>
-        </Border>
-        <StackPanel Grid.Column="2" Width="200">
-            <ContentControl Content="{Binding SelectedItem, ElementName=DropListTreeView}">
-                <ContentControl.Resources>
-                    <DataTemplate DataType="{x:Type models:DropGold}">
-                        <UniformGrid VerticalAlignment="Top" Columns="1">
+                        </HierarchicalDataTemplate>
+                        <DataTemplate DataType="{x:Type models:DropGold}">
                             <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Minimum'}" />
-                                <ui:NumberBox
-                                    Grid.Row="1"
-                                    Margin="0,5,0,0"
-                                    ClearButtonEnabled="False"
-                                    Value="{Binding Prop.DwNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Width="32"
+                                    Height="32"
+                                    Margin="0,0,8,0"
+                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1">
+                                    <Image
+                                        Margin="2"
+                                        Source="{Binding Item.Icon}"
+                                        Stretch="Uniform" />
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{Binding Item.Name}" />
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding Item.Identifier}" />
+                                </StackPanel>
                             </Grid>
-                            <Grid Margin="0,10,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Maximum'}" />
-                                <ui:NumberBox
-                                    Grid.Row="1"
-                                    Margin="0,5,0,0"
-                                    ClearButtonEnabled="False"
-                                    Value="{Binding Prop.DwNumber2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            </Grid>
-                        </UniformGrid>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type models:DropItem}">
-                        <UniformGrid VerticalAlignment="Top" Columns="1">
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type models:DropItem}">
                             <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Item'}" />
-                                <ui:AutoSuggestBox
-                                    Grid.Row="1"
-                                    Margin="0,5,0,0"
-                                    DisplayMemberPath="Value"
-                                    OriginalItemsSource="{Binding DataContext.ItemIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ui:ContentDialog}}"
-                                    Text="{Binding ItemIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Width="32"
+                                    Height="32"
+                                    Margin="0,0,8,0"
+                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1">
+                                    <Image
+                                        Margin="2"
+                                        Source="{Binding Item.Icon}"
+                                        Stretch="Uniform" />
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{Binding Item.Name}" />
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding Item.Identifier}" />
+                                </StackPanel>
                             </Grid>
-                            <Grid Margin="0,10,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Quantity'}" />
-                                <ui:NumberBox
-                                    Grid.Row="1"
-                                    Margin="0,5,0,0"
-                                    ClearButtonEnabled="False"
-                                    Value="{Binding Prop.DwNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            </Grid>
-                            <Grid Margin="0,10,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Level'}" />
-                                <ui:NumberBox
-                                    Grid.Row="1"
-                                    Margin="0,5,0,0"
-                                    ClearButtonEnabled="False"
-                                    Cursor="Arrow"
-                                    Value="{Binding Prop.DwLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            </Grid>
-                            <Grid Margin="0,10,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0">
-                                    <Run Text="{i18n:StringLocalizer 'Probability'}" />
-                                    <Run Text="(%)" />
-                                </TextBlock>
-                                <ui:NumberBox
-                                    Grid.Row="1"
-                                    Margin="0,5,0,0"
-                                    ClearButtonEnabled="False"
-                                    MaxDecimalPlaces="8"
-                                    Value="{Binding ProbabilityPercent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            </Grid>
-                        </UniformGrid>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type models:DropKind}">
-                        <UniformGrid Columns="1">
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type models:Item}">
                             <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Category'}" />
-                                <ui:AutoSuggestBox
-                                    Grid.Row="1"
-                                    Margin="0,5,0,0"
-                                    DisplayMemberPath="Value"
-                                    OriginalItemsSource="{Binding DataContext.ItemKind3Identifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ui:ContentDialog}}"
-                                    Text="{Binding ItemKind3Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Width="32"
+                                    Height="32"
+                                    Margin="0,0,8,0"
+                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1">
+                                    <Image
+                                        Margin="2"
+                                        Source="{Binding Icon}"
+                                        Stretch="Uniform" />
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{Binding Name}" />
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding Identifier}" />
+                                </StackPanel>
                             </Grid>
-                            <Grid Margin="0,10,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Minimum rarity'}" />
-                                <ui:NumberBox
-                                    Grid.Row="1"
-                                    Margin="0,5,0,0"
-                                    IsEnabled="False"
-                                    Value="{Binding MinUnique, Mode=OneWay, UpdateSourceTrigger=LostFocus}" />
-                            </Grid>
-                            <Grid Margin="0,10,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Maximum rarity'}" />
-                                <ui:NumberBox
-                                    Grid.Row="1"
-                                    Margin="0,5,0,0"
-                                    IsEnabled="False"
-                                    Value="{Binding MaxUnique, Mode=OneWay, UpdateSourceTrigger=LostFocus}" />
-                            </Grid>
-                        </UniformGrid>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type models:Item}">
-                        <UniformGrid Columns="1">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Category'}" />
-                                <ui:AutoSuggestBox
-                                    Grid.Row="1"
-                                    Margin="0,5,0,0"
-                                    DisplayMemberPath="Value"
-                                    IsEnabled="False"
-                                    OriginalItemsSource="{Binding DataContext.ItemKind3Identifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ui:ContentDialog}}"
-                                    Text="{Binding ItemKind3Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                            </Grid>
-                            <Grid Margin="0,10,0,0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Rarity'}" />
-                                <ui:NumberBox
-                                    Grid.Row="1"
-                                    Margin="0,5,0,0"
-                                    IsEnabled="False"
-                                    Value="{Binding Prop.DwItemRare, Mode=OneWay, UpdateSourceTrigger=LostFocus}" />
-                            </Grid>
-                        </UniformGrid>
-                    </DataTemplate>
-                </ContentControl.Resources>
-            </ContentControl>
-        </StackPanel>
+                        </DataTemplate>
+                    </TreeView.Resources>
+                </TreeView>
+            </Border>
+            <StackPanel Grid.Column="2" Width="200">
+                <ContentControl Content="{Binding SelectedItem, ElementName=DropListTreeView}">
+                    <ContentControl.Resources>
+                        <DataTemplate DataType="{x:Type models:DropGold}">
+                            <UniformGrid VerticalAlignment="Top" Columns="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Minimum'}" />
+                                    <ui:NumberBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        ClearButtonEnabled="False"
+                                        Value="{Binding Prop.DwNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Maximum'}" />
+                                    <ui:NumberBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        ClearButtonEnabled="False"
+                                        Value="{Binding Prop.DwNumber2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                            </UniformGrid>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type models:DropItem}">
+                            <UniformGrid VerticalAlignment="Top" Columns="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Item'}" />
+                                    <ui:AutoSuggestBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        DisplayMemberPath="Value"
+                                        OriginalItemsSource="{Binding DataContext.ItemIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ui:ContentDialog}}"
+                                        Text="{Binding ItemIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                </Grid>
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Quantity'}" />
+                                    <ui:NumberBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        ClearButtonEnabled="False"
+                                        Value="{Binding Prop.DwNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Level'}" />
+                                    <ui:NumberBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        ClearButtonEnabled="False"
+                                        Cursor="Arrow"
+                                        Value="{Binding Prop.DwLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0">
+                                        <Run Text="{i18n:StringLocalizer 'Probability'}" />
+                                        <Run Text="(%)" />
+                                    </TextBlock>
+                                    <ui:NumberBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        ClearButtonEnabled="False"
+                                        MaxDecimalPlaces="8"
+                                        Value="{Binding ProbabilityPercent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                            </UniformGrid>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type models:DropKind}">
+                            <UniformGrid Columns="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Item kind'}" />
+                                    <ui:AutoSuggestBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        DisplayMemberPath="Value"
+                                        OriginalItemsSource="{Binding DataContext.ItemKind3Identifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ui:ContentDialog}}"
+                                        Text="{Binding ItemKind3Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                </Grid>
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Minimum rarity'}" />
+                                    <ui:NumberBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        IsEnabled="False"
+                                        Value="{Binding MinUnique, Mode=OneWay, UpdateSourceTrigger=LostFocus}" />
+                                </Grid>
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Maximum rarity'}" />
+                                    <ui:NumberBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        IsEnabled="False"
+                                        Value="{Binding MaxUnique, Mode=OneWay, UpdateSourceTrigger=LostFocus}" />
+                                </Grid>
+                            </UniformGrid>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type models:Item}">
+                            <UniformGrid Columns="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Item kind'}" />
+                                    <ui:AutoSuggestBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        DisplayMemberPath="Value"
+                                        IsEnabled="False"
+                                        OriginalItemsSource="{Binding DataContext.ItemKind3Identifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ui:ContentDialog}}"
+                                        Text="{Binding ItemKind3Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                </Grid>
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Rarity'}" />
+                                    <ui:NumberBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        IsEnabled="False"
+                                        Value="{Binding Prop.DwItemRare, Mode=OneWay, UpdateSourceTrigger=LostFocus}" />
+                                </Grid>
+                            </UniformGrid>
+                        </DataTemplate>
+                    </ContentControl.Resources>
+                </ContentControl>
+            </StackPanel>
+        </Grid>
     </Grid>
 </ui:ContentDialog>
