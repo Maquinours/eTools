@@ -18,6 +18,7 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
     public partial class MoverDropListDialogViewModel : ObservableObject
     {
         private readonly Mover _mover;
+        private WpfObservableRangeCollection<IMoverDrop> _dropList;
 
         private DefinesService _definesService = App.Services.GetRequiredService<DefinesService>();
 
@@ -26,14 +27,15 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
         public string Title => String.Format(App.Services.GetRequiredService<IStringLocalizer<Translations>>()["{0} drop list"], _mover.Name);
 
         public DropItemGenerator DropItemGenerator => _mover.PropEx?.DropItemGenerator ?? throw new InvalidOperationException("_mover.PropEx is null");
-        public IMoverDrop[] DropList => [.. _mover.PropEx?.DropItemGenerator.DropGolds ?? [], .. _mover.PropEx?.DropKindGenerator.DropKinds ?? [], .. _mover.PropEx?.DropItemGenerator.DropItems ?? []];
-        public ICollectionView DropListView => new ListCollectionView(DropList);
-        public List<KeyValuePair<int, string>> ItemIdentifiers => [.._definesService.ReversedItemDefines];
-        public List<KeyValuePair<int, string>> ItemKind3Identifiers => [.._definesService.ReversedItemKind3Defines];
+        public ICollectionView DropListView => new ListCollectionView(_dropList);
+        public List<KeyValuePair<int, string>> ItemIdentifiers => [.. _definesService.ReversedItemDefines];
+        public List<KeyValuePair<int, string>> ItemKind3Identifiers => [.. _definesService.ReversedItemKind3Defines];
+        public IEnumerable<IMoverDrop> ComputedDrops => [.. _mover.PropEx?.DropItemGenerator.DropGolds ?? [], .. _mover.PropEx?.DropKindGenerator.DropKinds ?? [], .. _mover.PropEx?.DropItemGenerator.DropItems ?? []];
 
         public MoverDropListDialogViewModel(Mover mover)
         {
             _mover = mover;
+            _dropList = new(ComputedDrops);
 
             if (_mover.PropEx is null)
                 throw new InvalidOperationException("mover.PropEx is null");
@@ -91,7 +93,7 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
             if (_mover.PropEx is null)
                 throw new InvalidOperationException("mover.PropEx is null");
 
-            switch(parameter)
+            switch (parameter)
             {
                 case DropItem dropItem:
                     _mover.PropEx.DropItemGenerator.DropItems.Remove(dropItem);
@@ -111,20 +113,41 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
 
         private void DropKinds_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            OnPropertyChanged(nameof(DropList));
-            OnPropertyChanged(nameof(DropListView));
+            if (e.NewItems is not null)
+                _dropList.InsertRange(
+                    (_dropList.Select((item, index) => new { item, index }).LastOrDefault(x => x.item is DropKind)?.index ?? -1) + 1,
+                    e.NewItems.Cast<DropKind>());
+            if (e.OldItems is not null)
+                _dropList.RemoveRange(e.OldItems.Cast<DropKind>());
+
+            if (!_dropList.SequenceEqual(ComputedDrops))
+                throw new InvalidOperationException("dropList is not sequence equal to ComputedDrops");
         }
 
         private void DropItems_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            OnPropertyChanged(nameof(DropList));
-            OnPropertyChanged(nameof(DropListView));
+            if (e.NewItems is not null)
+                _dropList.InsertRange(
+                    (_dropList.Select((item, index) => new { item, index }).LastOrDefault(x => x.item is DropItem)?.index ?? -1) + 1,
+                    e.NewItems.Cast<DropItem>());
+            if (e.OldItems is not null)
+                _dropList.RemoveRange(e.OldItems.Cast<DropItem>());
+
+            if (!_dropList.SequenceEqual(ComputedDrops))
+                throw new InvalidOperationException("dropList is not sequence equal to ComputedDrops");
         }
 
         private void DropGolds_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            OnPropertyChanged(nameof(DropList));
-            OnPropertyChanged(nameof(DropListView));
+            if (e.NewItems is not null)
+                _dropList.InsertRange(
+                    (_dropList.Select((item, index) => new { item, index }).LastOrDefault(x => x.item is DropGold)?.index ?? -1) + 1,
+                    e.NewItems.Cast<DropGold>());
+            if (e.OldItems is not null)
+                _dropList.RemoveRange(e.OldItems.Cast<DropGold>());
+
+            if (!_dropList.SequenceEqual(ComputedDrops))
+                throw new InvalidOperationException("dropList is not sequence equal to ComputedDrops");
         }
     }
 
