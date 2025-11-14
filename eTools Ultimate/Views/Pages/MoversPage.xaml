@@ -1443,8 +1443,9 @@
                 <ui:Button
                     x:Name="DropListButton"
                     Margin="0,0,10,0"
-                    Appearance="Primary"
+                    Appearance="Secondary"
                     Command="{Binding OpenDropListCommand}"
+                    CommandParameter="{Binding MoversView.CurrentItem, Mode=OneWay}"
                     Content="{i18n:StringLocalizer 'Drop list'}" />
                 <ui:Button
                     x:Name="AddButton"

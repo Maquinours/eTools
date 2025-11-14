@@ -895,14 +895,16 @@ namespace eTools_Ultimate.ViewModels.Pages
             mover.Prop.DwSndIdle1 = newSound.Prop.Id;
         }
 
-        [RelayCommand]
-        private void OpenDropList()
+        [RelayCommand(CanExecute = nameof(CanOpenDropList))]
+        private void OpenDropList(object? parameter)
         {
-            if (MoversView.CurrentItem is not Mover mover) return;
+            if (parameter is not Mover mover) throw new InvalidOperationException("parameter is not Mover");
 
             MoverDropListDialog dropListDialog = new(contentDialogService.GetDialogHost(), mover);
             dropListDialog.ShowAsync();
         }
+
+        private static bool CanOpenDropList(object? parameter) => parameter is Mover mover && mover.PropEx is not null && mover.Type == MoverTypes.MONSTER;
 
         [RelayCommand]
         private void AddMover()
