@@ -448,7 +448,7 @@ namespace eTools_Ultimate.Models
 
     public class MoverPropEx : INotifyPropertyChanged
     {
-        private int _dwId;
+        private uint _dwId;
         private int _bMeleeAttack;
         private int _nLvCond;
         private int _bRecvCond;
@@ -501,7 +501,7 @@ namespace eTools_Ultimate.Models
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public int DwId => _dwId;
+        public uint DwId => _dwId;
         public int BMeleeAttack => _bMeleeAttack;
         public int NLvCond => _nLvCond;
         public int BRecvCond => _bRecvCond;
@@ -553,7 +553,7 @@ namespace eTools_Ultimate.Models
         public uint DwMonsterTransformMonsterId => _dwMonsterTransformMonsterId;
 
         public MoverPropEx(
-        int dwId, int bMeleeAttack, int nLvCond, int bRecvCond, int nScanJob, short nAttackFirstRange, uint dwScanQuestId, uint dwScanItemIdx, int nScanChao,
+        uint dwId, int bMeleeAttack, int nLvCond, int bRecvCond, int nScanJob, short nAttackFirstRange, uint dwScanQuestId, uint dwScanItemIdx, int nScanChao,
         int nRecvCondMe, int nRecvCondHow, int nRecvCondMp, byte bRecvCondWho, uint tmUnitHelp, int nHelpRangeMul, byte bHelpWho, short nCallHelperMax, int nHpCond,
         byte bRangeAttack, int nSummProb, int nSummNum, int nSummId, int nBerserkHp, float fBerserkDmgMul, int nLoot, int nLootProb,
         short nEvasionHp, short nEvasionSec, short nRunawayHp, short nCallHp, short[] nCallHelperIdx, short[] nCallHelperNum, short[] bCallHelperParty,

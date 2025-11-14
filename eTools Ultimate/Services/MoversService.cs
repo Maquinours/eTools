@@ -80,13 +80,13 @@ namespace eTools_Ultimate.Services
             MoverProp[] props = loadPropTask.Result;
             MoverPropEx[] propExs = loadPropExTask.Result;
 
-            Dictionary<int, MoverPropEx> propExDict = propExs.ToDictionary(x => x.DwId, x => x);
+            Dictionary<uint, MoverPropEx> propExDict = propExs.ToDictionary(x => x.DwId, x => x);
 
             foreach (MoverProp prop in props)
             {
                 MoverPropEx? propEx = null;
 
-                if (propExDict.TryGetValue((int)prop.DwId, out MoverPropEx? value))
+                if (propExDict.TryGetValue(prop.DwId, out MoverPropEx? value))
                     propEx = value;
 
                 Mover mover = new(prop, propEx);
@@ -360,7 +360,7 @@ namespace eTools_Ultimate.Services
 
             while (true)
             {
-                int dwId = script.GetNumber();
+                uint dwId = (uint)script.GetNumber();
 
                 if (script.EndOfStream)
                     break;
@@ -1201,8 +1201,9 @@ namespace eTools_Ultimate.Services
 
             foreach (Mover mover in Movers)
             {
-                MoverPropEx? propEx = mover.PropEx;
-                if (propEx is null) continue;
+                if (mover.PropEx is null || mover.Type != MoverTypes.MONSTER) continue;
+
+                MoverPropEx propEx = mover.PropEx;
 
                 writer.WriteLine();
                 writer.WriteLine(Script.NumberToString(mover.Prop.DwId, definesService.ReversedMoverDefines));
@@ -1667,7 +1668,61 @@ namespace eTools_Ultimate.Services
                         dwMadrigalGiftPoint: dwMadrigalGiftPoint
                         );
 
-            Mover mover = new(moverProp, null);
+            MoverPropEx moverPropEx = new(
+                dwId: dwId,
+                bMeleeAttack: 0,
+                nLvCond: 0,
+                bRecvCond: 0,
+                nScanJob: 0,
+                nAttackFirstRange: 10,
+                dwScanQuestId: 0,
+                dwScanItemIdx: 0,
+                nScanChao: 0,
+                nRecvCondMe: 0,
+                nRecvCondHow: 0,
+                nRecvCondMp: 0,
+                bRecvCondWho: 0,
+                tmUnitHelp: 0,
+                nHelpRangeMul: 0,
+                bHelpWho: 0,
+                nCallHelperMax: 0,
+                nHpCond: 0,
+                bRangeAttack: 0,
+                nSummProb: 0,
+                nSummNum: 0,
+                nSummId: 0,
+                nBerserkHp: 0,
+                fBerserkDmgMul: 0,
+                nLoot: 0,
+                nLootProb: 0,
+                nEvasionHp: 0,
+                nEvasionSec: 0,
+                nRunawayHp: -1,
+                nCallHp: -1,
+                nCallHelperIdx: new short[5],
+                nCallHelperNum: new short[5],
+                bCallHelperParty: new short[5],
+                nAttackItemNear: 0,
+                nAttackItemFar: 0,
+                nAttackItem1: 0,
+                nAttackItem2: 0,
+                nAttackItem3: 0,
+                nAttackItem4: 0,
+                nAttackItemSec: 0,
+                nMagicReflection: 0,
+                nImmortality: 0,
+                bBlow: 0,
+                nChangeTargetRand: 10,
+                dwAttackMoveDelay: 0,
+                dwRunawayDelay: 1_000,
+                dwDropItemGeneratorMax: 0,
+                dropItems: [],
+                dropKinds: [],
+                fMonsterTransformHpRate: 0.0f,
+                dwMonsterTransformMonsterId: Constants.NullId
+                );
+
+            Mover mover = new(moverProp, moverPropEx);
 
             if (mover.Model is null)
                 modelsService.CreateModelByObject(mover);
