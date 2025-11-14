@@ -164,7 +164,7 @@
                                     <TextBlock
                                         FontSize="12"
                                         Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                        Text="{Binding Item.Identifier}" />
+                                        Text="{Binding ItemIdentifier}" />
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
