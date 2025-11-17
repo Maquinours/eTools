@@ -1,6 +1,7 @@
 ﻿using eTools_Ultimate.Exceptions;
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Movers;
 using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using SixLabors.ImageSharp.Metadata.Profiles.Exif;
@@ -44,9 +45,9 @@ namespace eTools_Ultimate.Services
 
         private void ClearMovers()
         {
-            foreach (Mover mover in this.Movers)
+            foreach (Mover mover in Movers)
                 mover.Dispose();
-            this.Movers.Clear();
+            Movers.Clear();
         }
         public static string GetNextStringIdentifier()
         {
@@ -65,31 +66,270 @@ namespace eTools_Ultimate.Services
 
         public Mover? GetMoverById(int dwId)
         {
-            return this.Movers.FirstOrDefault(x => x.Id == dwId);
+            return Movers.FirstOrDefault(x => x.Id == dwId);
         }
 
         public void Load()
         {
-            this.ClearMovers();
+            ClearMovers();
 
-            Task<MoverProp[]> loadPropTask = Task.Run(LoadProp);
-            Task<MoverPropEx[]> loadPropExTask = Task.Run(LoadPropEx);
+            Task<Dictionary<uint, MoverProp>> loadPropTask = Task.Run(LoadProp);
+            Task<Dictionary<uint, MoverPropEx>> loadPropExTask = Task.Run(LoadPropEx);
 
             Task.WaitAll(loadPropTask, loadPropExTask);
 
-            MoverProp[] props = loadPropTask.Result;
-            MoverPropEx[] propExs = loadPropExTask.Result;
+            Dictionary<uint, MoverProp> props = loadPropTask.Result;
+            Dictionary<uint, MoverPropEx> propExs = loadPropExTask.Result;
 
-            Dictionary<uint, MoverPropEx> propExDict = propExs.ToDictionary(x => x.DwId, x => x);
-
-            foreach (MoverProp prop in props)
+            foreach (KeyValuePair<uint, MoverProp> kvp in props)
             {
-                MoverPropEx? propEx = null;
+                uint dwId = kvp.Key;
+                MoverProp prop = kvp.Value;
 
-                if (propExDict.TryGetValue(prop.DwId, out MoverPropEx? value))
-                    propEx = value;
+                byte bMeleeAttack = 0;
+                int nLvCond = 0;
+                byte bRecvCond = 0;
+                int nScanJob = 0;
+                short nAttackFirstRange = 10;
+                uint dwScanQuestId = 0;
+                uint dwScanItemIdx = 0;
+                int nScanChao = 0;
+                int nRecvCondMe = 0;
+                int nRecvCondHow = 0;
+                int nRecvCondMp = 0;
+                byte bRecvCondWho = 0;
+                uint tmUnitHelp = 0;
+                int nHelpRangeMul = 0;
+                byte bHelpWho = 0;
+                short nCallHelperMax = 0;
+                int nHpCond = 0;
+                byte bRangeAttack = 0;
+                int nSummProb = 0;
+                int nSummNum = 0;
+                int nSummId = 0;
+                int nBerserkHp = 0;
+                float fBerserkDmgMul = 0;
+                int nLoot = 0;
+                int nLootProb = 0;
+                short nEvasionHp = 0;
+                short nEvasionSec = 0;
+                short nRunawayHp = -1;
+                short nCallHp = -1;
+                short[] nCallHelperIdx = new short[5];
+                short[] nCallHelperNum = new short[5];
+                short[] bCallHelperParty = new short[5];
+                short nAttackItemNear = 0;
+                short nAttackItemFar = 0;
+                short nAttackItem1 = 0;
+                short nAttackItem2 = 0;
+                short nAttackItem3 = 0;
+                short nAttackItem4 = 0;
+                short nAttackItemSec = 0;
+                short nMagicReflection = 0;
+                short nImmortality = 0;
+                int bBlow = 0;
+                short nChangeTargetRand = 10;
+                short dwAttackMoveDelay = 0;
+                short dwRunawayDelay = 1_000;
+                uint dwDropItemGeneratorMax = 0;
+                IEnumerable<DropItemProp> dropItems = [];
+                IEnumerable<DropKindProp> dropKinds = [];
+                float fMonsterTransformHpRate = 0.0f;
+                uint dwMonsterTransformMonsterId = Constants.NullId;
 
-                Mover mover = new(prop, propEx);
+                if (propExs.TryGetValue(dwId, out MoverPropEx? propEx))
+                {
+                    bMeleeAttack = propEx.BMeleeAttack;
+                    nLvCond = propEx.NLvCond;
+                    bRecvCond = propEx.BRecvCond;
+                    nScanJob = propEx.NScanJob;
+                    nAttackFirstRange = propEx.NAttackFirstRange;
+                    dwScanQuestId = propEx.DwScanQuestId;
+                    dwScanItemIdx = propEx.DwScanItemIdx;
+                    nScanChao = propEx.NScanChao;
+                    nRecvCondMe = propEx.NRecvCondMe;
+                    nRecvCondHow = propEx.NRecvCondHow;
+                    nRecvCondMp = propEx.NRecvCondMp;
+                    bRecvCondWho = propEx.BRecvCondWho;
+                    tmUnitHelp = propEx.TmUnitHelp;
+                    nHelpRangeMul = propEx.NHelpRangeMul;
+                    bHelpWho = propEx.BHelpWho;
+                    nCallHelperMax = propEx.NCallHelperMax;
+                    nHpCond = propEx.NHpCond;
+                    bRangeAttack = propEx.BRangeAttack;
+                    nSummProb = propEx.NSummProb;
+                    nSummNum = propEx.NSummNum;
+                    nSummId = propEx.NSummId;
+                    nBerserkHp = propEx.NBerserkHp;
+                    fBerserkDmgMul = propEx.FBerserkDmgMul;
+                    nLoot = propEx.NLoot;
+                    nLootProb = propEx.NLootProb;
+                    nEvasionHp = propEx.NEvasionHp;
+                    nEvasionSec = propEx.NEvasionSec;
+                    nRunawayHp = propEx.NRunawayHp;
+                    nCallHp = propEx.NCallHp;
+                    nCallHelperIdx = propEx.NCallHelperIdx;
+                    nCallHelperNum = propEx.NCallHelperNum;
+                    bCallHelperParty = propEx.BCallHelperParty;
+                    nAttackItemNear = propEx.NAttackItemNear;
+                    nAttackItemFar = propEx.NAttackItemFar;
+                    nAttackItem1 = propEx.NAttackItem1;
+                    nAttackItem2 = propEx.NAttackItem2;
+                    nAttackItem3 = propEx.NAttackItem3;
+                    nAttackItem4 = propEx.NAttackItem4;
+                    nAttackItemSec = propEx.NAttackItemSec;
+                    nMagicReflection = propEx.NMagicReflection;
+                    nImmortality = propEx.NImmortality;
+                    bBlow = propEx.BBlow;
+                    nChangeTargetRand = propEx.NChangeTargetRand;
+                    dwAttackMoveDelay = propEx.DwAttackMoveDelay;
+                    dwRunawayDelay = propEx.DwRunawayDelay;
+                    dwDropItemGeneratorMax = propEx.DwDropItemGeneratorMax;
+                    dropItems = propEx.DropItems;
+                    dropKinds = propEx.DropKinds;
+                    fMonsterTransformHpRate = propEx.FMonsterTransformHpRate;
+                    dwMonsterTransformMonsterId = propEx.DwMonsterTransformMonsterId;
+                }
+
+                Mover mover = new(
+                    dwId: dwId,
+                    szName: prop.SzName,
+                    dwAi: prop.DwAi,
+                    dwStr: prop.DwStr,
+                    dwSta: prop.DwSta,
+                    dwDex: prop.DwDex,
+                    dwInt: prop.DwInt,
+                    dwHR: prop.DwHR,
+                    dwER: prop.DwER,
+                    dwRace: prop.DwRace,
+                    dwBelligerence: prop.DwBelligerence,
+                    dwGender: prop.DwGender,
+                    dwLevel: prop.DwLevel,
+                    dwFlightLevel: prop.DwFlightLevel,
+                    dwSize: prop.DwSize,
+                    dwClass: prop.DwClass,
+                    bIfParts: prop.BIfParts,
+                    nChaotic: prop.NChaotic,
+                    dwUseable: prop.DwUseable,
+                    dwActionRadius: prop.DwActionRadius,
+                    dwAtkMin: prop.DwAtkMin,
+                    dwAtkMax: prop.DwAtkMax,
+                    dwAtk1: prop.DwAtk1,
+                    dwAtk2: prop.DwAtk2,
+                    dwAtk3: prop.DwAtk3,
+                    dwAtk4: prop.DwAtk4,
+                    fFrame: prop.FFrame,
+                    dwOrthograde: prop.DwOrthograde,
+                    dwThrustRate: prop.DwThrustRate,
+                    dwChestRate: prop.DwChestRate,
+                    dwHeadRate: prop.DwHeadRate,
+                    dwArmRate: prop.DwArmRate,
+                    dwLegRate: prop.DwLegRate,
+                    dwAttackSpeed: prop.DwAttackSpeed,
+                    dwReAttackDelay: prop.DwReAttackDelay,
+                    dwAddHp: prop.DwAddHp,
+                    dwAddMp: prop.DwAddMp,
+                    dwNaturalArmor: prop.DwNaturalArmor,
+                    nAbrasion: prop.NAbrasion,
+                    nHardness: prop.NHardness,
+                    dwAdjAtkDelay: prop.DwAdjAtkDelay,
+                    eElementType: prop.EElementType,
+                    wElementAtk: prop.WElementAtk,
+                    dwHideLevel: prop.DwHideLevel,
+                    fSpeed: prop.FSpeed,
+                    dwShelter: prop.DwShelter,
+                    dwFlying: prop.DwFlying,
+                    dwJumpIng: prop.DwJumpIng,
+                    dwAirJump: prop.DwAirJump,
+                    bTaming: prop.BTaming,
+                    dwResisMgic: prop.DwResisMgic,
+                    nResistElecricity: prop.NResistElecricity,
+                    nResistFire: prop.NResistFire,
+                    nResistWind: prop.NResistWind,
+                    nResistWater: prop.NResistWater,
+                    nResistEarth: prop.NResistEarth,
+                    dwCash: prop.DwCash,
+                    dwSourceMaterial: prop.DwSourceMaterial,
+                    dwMaterialAmount: prop.DwMaterialAmount,
+                    dwCohesion: prop.DwCohesion,
+                    dwHoldingTime: prop.DwHoldingTime,
+                    dwCorrectionValue: prop.DwCorrectionValue,
+                    nExpValue: prop.NExpValue,
+                    nFxpValue: prop.NFxpValue,
+                    nBodyState: prop.NBodyState,
+                    dwAddAbility: prop.DwAddAbility,
+                    bKillable: prop.BKillable,
+                    dwVirtItem1: prop.DwVirtItem1,
+                    dwVirtItem2: prop.DwVirtItem2,
+                    dwVirtItem3: prop.DwVirtItem3,
+                    bVirtType1: prop.BVirtType1,
+                    bVirtType2: prop.BVirtType2,
+                    bVirtType3: prop.BVirtType3,
+                    dwSndAtk1: prop.DwSndAtk1,
+                    dwSndAtk2: prop.DwSndAtk2,
+                    dwSndDie1: prop.DwSndDie1,
+                    dwSndDie2: prop.DwSndDie2,
+                    dwSndDmg1: prop.DwSndDmg1,
+                    dwSndDmg2: prop.DwSndDmg2,
+                    dwSndDmg3: prop.DwSndDmg3,
+                    dwSndIdle1: prop.DwSndIdle1,
+                    dwSndIdle2: prop.DwSndIdle2,
+                    szComment: prop.SzComment,
+                    dwAreaColor: prop.DwAreaColor,
+                    szNpcMark: prop.SzNpcMark,
+                    dwMadrigalGiftPoint: prop.DwMadrigalGiftPoint,
+                    bMeleeAttack: bMeleeAttack,
+                    nLvCond: nLvCond,
+                    bRecvCond: bRecvCond,
+                    nScanJob: nScanJob,
+                    nAttackFirstRange: nAttackFirstRange,
+                    dwScanQuestId: dwScanQuestId,
+                    dwScanItemIdx: dwScanItemIdx,
+                    nScanChao: nScanChao,
+                    nRecvCondMe: nRecvCondMe,
+                    nRecvCondHow: nRecvCondHow,
+                    nRecvCondMp: nRecvCondMp,
+                    bRecvCondWho: bRecvCondWho,
+                    tmUnitHelp: tmUnitHelp,
+                    nHelpRangeMul: nHelpRangeMul,
+                    bHelpWho: bHelpWho,
+                    nCallHelperMax: nCallHelperMax,
+                    nHpCond: nHpCond,
+                    bRangeAttack: bRangeAttack,
+                    nSummProb: nSummProb,
+                    nSummNum: nSummNum,
+                    nSummId: nSummId,
+                    nBerserkHp: nBerserkHp,
+                    fBerserkDmgMul: fBerserkDmgMul,
+                    nLoot: nLoot,
+                    nLootProb: nLootProb,
+                    nEvasionHp: nEvasionHp,
+                    nEvasionSec: nEvasionSec,
+                    nRunawayHp: nRunawayHp,
+                    nCallHp: nCallHp,
+                    nCallHelperIdx: nCallHelperIdx,
+                    nCallHelperNum: nCallHelperNum,
+                    bCallHelperParty: bCallHelperParty,
+                    nAttackItemNear: nAttackItemNear,
+                    nAttackItemFar: nAttackItemFar,
+                    nAttackItem1: nAttackItem1,
+                    nAttackItem2: nAttackItem2,
+                    nAttackItem3: nAttackItem3,
+                    nAttackItem4: nAttackItem4,
+                    nAttackItemSec: nAttackItemSec,
+                    nMagicReflection: nMagicReflection,
+                    nImmortality: nImmortality,
+                    bBlow: bBlow,
+                    nChangeTargetRand: nChangeTargetRand,
+                    dwAttackMoveDelay: dwAttackMoveDelay,
+                    dwRunawayDelay: dwRunawayDelay,
+                    dwDropItemGeneratorMax: dwDropItemGeneratorMax,
+                    dropItems: dropItems,
+                    dropKinds: dropKinds,
+                    fMonsterTransformHpRate: fMonsterTransformHpRate,
+                    dwMonsterTransformMonsterId: dwMonsterTransformMonsterId
+                    );
+
                 this.Movers.Add(mover);
             }
         }
@@ -99,11 +339,11 @@ namespace eTools_Ultimate.Services
             Task.WaitAll(Task.Run(SaveProp), Task.Run(SavePropEx));
         }
 
-        private MoverProp[] LoadProp()
+        private Dictionary<uint, MoverProp> LoadProp()
         {
             Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
 
-            List<MoverProp> props = [];
+            Dictionary<uint, MoverProp> props = [];
 
             using (Script script = new())
             {
@@ -255,108 +495,107 @@ namespace eTools_Ultimate.Services
                         throw new IncorrectlyFormattedFileException(filePath);
 
                     MoverProp moverProp = new(
-                        dwId: dwId,
-                        szName: szName,
-                        dwAi: dwAi,
-                        dwStr: dwStr,
-                        dwSta: dwSta,
-                        dwDex: dwDex,
-                        dwInt: dwInt,
-                        dwHR: dwHR,
-                        dwER: dwER,
-                        dwRace: dwRace,
-                        dwBelligerence: dwBelligerence,
-                        dwGender: dwGender,
-                        dwLevel: dwLevel,
-                        dwFlightLevel: dwFlightLevel,
-                        dwSize: dwSize,
-                        dwClass: dwClass,
-                        bIfParts: bIfParts,
-                        nChaotic: nChaotic,
-                        dwUseable: dwUseable,
-                        dwActionRadius: dwActionRadius,
-                        dwAtkMin: dwAtkMin,
-                        dwAtkMax: dwAtkMax,
-                        dwAtk1: dwAtk1,
-                        dwAtk2: dwAtk2,
-                        dwAtk3: dwAtk3,
-                        dwAtk4: dwAtk4,
-                        fFrame: fFrame,
-                        dwOrthograde: dwOrthograde,
-                        dwThrustRate: dwThrustRate,
-                        dwChestRate: dwChestRate,
-                        dwHeadRate: dwHeadRate,
-                        dwArmRate: dwArmRate,
-                        dwLegRate: dwLegRate,
-                        dwAttackSpeed: dwAttackSpeed,
-                        dwReAttackDelay: dwReAttackDelay,
-                        dwAddHp: dwAddHp,
-                        dwAddMp: dwAddMp,
-                        dwNaturalArmor: dwNaturalArmor,
-                        nAbrasion: nAbrasion,
-                        nHardness: nHardness,
-                        dwAdjAtkDelay: dwAdjAtkDelay,
-                        eElementType: eElementType,
-                        wElementAtk: wElementAtk,
-                        dwHideLevel: dwHideLevel,
-                        fSpeed: fSpeed,
-                        dwShelter: dwShelter,
-                        dwFlying: dwFlying,
-                        dwJumpIng: dwJumpIng,
-                        dwAirJump: dwAirJump,
-                        bTaming: bTaming,
-                        dwResisMgic: dwResisMgic,
-                        nResistElecricity: nResistElecricity,
-                        nResistFire: nResistFire,
-                        nResistWind: nResistWind,
-                        nResistWater: nResistWater,
-                        nResistEarth: nResistEarth,
-                        dwCash: dwCash,
-                        dwSourceMaterial: dwSourceMaterial,
-                        dwMaterialAmount: dwMaterialAmount,
-                        dwCohesion: dwCohesion,
-                        dwHoldingTime: dwHoldingTime,
-                        dwCorrectionValue: dwCorrectionValue,
-                        nExpValue: nExpValue,
-                        nFxpValue: nFxpValue,
-                        nBodyState: nBodyState,
-                        dwAddAbility: dwAddAbility,
-                        bKillable: bKillable,
-                        dwVirtItem1: dwVirtItem1,
-                        dwVirtItem2: dwVirtItem2,
-                        dwVirtItem3: dwVirtItem3,
-                        bVirtType1: bVirtType1,
-                        bVirtType2: bVirtType2,
-                        bVirtType3: bVirtType3,
-                        dwSndAtk1: dwSndAtk1,
-                        dwSndAtk2: dwSndAtk2,
-                        dwSndDie1: dwSndDie1,
-                        dwSndDie2: dwSndDie2,
-                        dwSndDmg1: dwSndDmg1,
-                        dwSndDmg2: dwSndDmg2,
-                        dwSndDmg3: dwSndDmg3,
-                        dwSndIdle1: dwSndIdle1,
-                        dwSndIdle2: dwSndIdle2,
-                        szComment: szComment,
-                        dwAreaColor: dwAreaColor,
-                        szNpcMark: szNpcMark,
-                        dwMadrigalGiftPoint: dwMadrigalGiftPoint
+                        SzName: szName,
+                        DwAi: dwAi,
+                        DwStr: dwStr,
+                        DwSta: dwSta,
+                        DwDex: dwDex,
+                        DwInt: dwInt,
+                        DwHR: dwHR,
+                        DwER: dwER,
+                        DwRace: dwRace,
+                        DwBelligerence: dwBelligerence,
+                        DwGender: dwGender,
+                        DwLevel: dwLevel,
+                        DwFlightLevel: dwFlightLevel,
+                        DwSize: dwSize,
+                        DwClass: dwClass,
+                        BIfParts: bIfParts,
+                        NChaotic: nChaotic,
+                        DwUseable: dwUseable,
+                        DwActionRadius: dwActionRadius,
+                        DwAtkMin: dwAtkMin,
+                        DwAtkMax: dwAtkMax,
+                        DwAtk1: dwAtk1,
+                        DwAtk2: dwAtk2,
+                        DwAtk3: dwAtk3,
+                        DwAtk4: dwAtk4,
+                        FFrame: fFrame,
+                        DwOrthograde: dwOrthograde,
+                        DwThrustRate: dwThrustRate,
+                        DwChestRate: dwChestRate,
+                        DwHeadRate: dwHeadRate,
+                        DwArmRate: dwArmRate,
+                        DwLegRate: dwLegRate,
+                        DwAttackSpeed: dwAttackSpeed,
+                        DwReAttackDelay: dwReAttackDelay,
+                        DwAddHp: dwAddHp,
+                        DwAddMp: dwAddMp,
+                        DwNaturalArmor: dwNaturalArmor,
+                        NAbrasion: nAbrasion,
+                        NHardness: nHardness,
+                        DwAdjAtkDelay: dwAdjAtkDelay,
+                        EElementType: eElementType,
+                        WElementAtk: wElementAtk,
+                        DwHideLevel: dwHideLevel,
+                        FSpeed: fSpeed,
+                        DwShelter: dwShelter,
+                        DwFlying: dwFlying,
+                        DwJumpIng: dwJumpIng,
+                        DwAirJump: dwAirJump,
+                        BTaming: bTaming,
+                        DwResisMgic: dwResisMgic,
+                        NResistElecricity: nResistElecricity,
+                        NResistFire: nResistFire,
+                        NResistWind: nResistWind,
+                        NResistWater: nResistWater,
+                        NResistEarth: nResistEarth,
+                        DwCash: dwCash,
+                        DwSourceMaterial: dwSourceMaterial,
+                        DwMaterialAmount: dwMaterialAmount,
+                        DwCohesion: dwCohesion,
+                        DwHoldingTime: dwHoldingTime,
+                        DwCorrectionValue: dwCorrectionValue,
+                        NExpValue: nExpValue,
+                        NFxpValue: nFxpValue,
+                        NBodyState: nBodyState,
+                        DwAddAbility: dwAddAbility,
+                        BKillable: bKillable,
+                        DwVirtItem1: dwVirtItem1,
+                        DwVirtItem2: dwVirtItem2,
+                        DwVirtItem3: dwVirtItem3,
+                        BVirtType1: bVirtType1,
+                        BVirtType2: bVirtType2,
+                        BVirtType3: bVirtType3,
+                        DwSndAtk1: dwSndAtk1,
+                        DwSndAtk2: dwSndAtk2,
+                        DwSndDie1: dwSndDie1,
+                        DwSndDie2: dwSndDie2,
+                        DwSndDmg1: dwSndDmg1,
+                        DwSndDmg2: dwSndDmg2,
+                        DwSndDmg3: dwSndDmg3,
+                        DwSndIdle1: dwSndIdle1,
+                        DwSndIdle2: dwSndIdle2,
+                        SzComment: szComment,
+                        DwAreaColor: dwAreaColor,
+                        SzNpcMark: szNpcMark,
+                        DwMadrigalGiftPoint: dwMadrigalGiftPoint
                         );
 
-                    props.Add(moverProp);
+                    props.Add(dwId, moverProp);
                 }
             }
-            return [.. props];
+            return props;
         }
 
-        private MoverPropEx[] LoadPropEx()
+        private Dictionary<uint, MoverPropEx> LoadPropEx()
         {
             string filePath = settingsService.Settings.PropMoverExFilePath ?? settingsService.Settings.DefaultPropMoverExFilePath;
 
             using Script script = new();
             script.Load(filePath);
 
-            List<MoverPropEx> propExs = [];
+            Dictionary<uint, MoverPropEx> propExs = [];
 
             while (true)
             {
@@ -404,7 +643,7 @@ namespace eTools_Ultimate.Services
                 short nAttackItem3 = 0;
                 short nAttackItem4 = 0;
                 short nAttackItemSec = 0;
-                short nMagicReflexion = 0;
+                short nMagicReflection = 0;
                 short nImmortality = 0;
                 int bBlow = 0;
                 short nChangeTargetRand = 10;
@@ -526,7 +765,7 @@ namespace eTools_Ultimate.Services
                         case "m_nMagicReflection":
                             {
                                 script.GetToken(); // =
-                                nMagicReflexion = (short)script.GetNumber();
+                                nMagicReflection = (short)script.GetNumber();
                                 break;
                             }
                         case "m_nImmortality":
@@ -592,7 +831,7 @@ namespace eTools_Ultimate.Services
                                 uint dwNumber = (uint)script.GetNumber();
                                 script.GetToken(); // )
 
-                                DropItemProp dropItem = new(DropType.DROPTYPE_NORMAL, dwIndex, dwProbability, dwLevel, dwNumber, 0);
+                                DropItemProp dropItem = new(DropType.NORMAL, dwIndex, dwProbability, dwLevel, dwNumber, 0);
                                 dropItems.Add(dropItem);
                                 break;
                             }
@@ -618,7 +857,7 @@ namespace eTools_Ultimate.Services
                                 uint dwNumber2 = (uint)script.GetNumber();
                                 script.GetToken();
 
-                                DropItemProp dropItem = new(DropType.DROPTYPE_SEED, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, dwNumber, dwNumber2); // TODO: maybe should not use drop item for DropGold.
+                                DropItemProp dropItem = new(DropType.SEED, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, dwNumber, dwNumber2); // TODO: maybe should not use drop item for DropGold.
                                 dropItems.Add(dropItem);
                                 break;
                             }
@@ -636,24 +875,24 @@ namespace eTools_Ultimate.Services
                 }
 
                 MoverPropEx propEx = new(
-                    dwId: dwId, bMeleeAttack: bMeleeAttack, nLvCond: nLvCond, bRecvCond: bRecvCond, nScanJob: nScanJob,
-                    nAttackFirstRange: nAttackFirstRange, dwScanQuestId: dwScanQuestId, dwScanItemIdx: dwScanItemIdx,
-                    nScanChao: nScanChao, nRecvCondMe: nRecvCondMe, nRecvCondHow: nRecvCondHow, nRecvCondMp: nRecvCondMp,
-                    bRecvCondWho: bRecvCondWho, tmUnitHelp: tmUnitHelp, nHelpRangeMul: nHelpRangeMul, bHelpWho: bHelpWho, nCallHelperMax: nCallHelperMax, nHpCond: nHpCond, bRangeAttack: bRangeAttack, nSummProb: nSummProb,
-                    nSummNum: nSummNum, nSummId: nSummId, nBerserkHp: nBerserkHp, fBerserkDmgMul: fBerserkDmgMul,
-                    nLoot: nLoot, nLootProb: nLootProb, nEvasionHp: nEvasionHp, nEvasionSec: nEvasionSec,
-                    nRunawayHp: nRunawayHp, nCallHp: nCallHp, nCallHelperIdx: nCallHelperIdx, nCallHelperNum: nCallHelperNum, bCallHelperParty: bCallHelperParty,
-                    nAttackItemNear: nAttackItemNear, nAttackItemFar: nAttackItemFar, nAttackItem1: nAttackItem1, nAttackItem2: nAttackItem2,
-                    nAttackItem3: nAttackItem3, nAttackItem4: nAttackItem4, nAttackItemSec: nAttackItemSec, nMagicReflection: nMagicReflexion,
-                    nImmortality: nImmortality, bBlow: bBlow, nChangeTargetRand: nChangeTargetRand, dwAttackMoveDelay: dwAttackMoveDelay, dwRunawayDelay: dwRunawayDelay,
-                    dwDropItemGeneratorMax: dwDropItemGeneratorMax, dropItems: dropItems, dropKinds: dropKinds, fMonsterTransformHpRate: fMonsterTransformHpRate,
-                    dwMonsterTransformMonsterId: dwMonsterTransformMonsterId
+                    BMeleeAttack: bMeleeAttack, NLvCond: nLvCond, BRecvCond: bRecvCond, NScanJob: nScanJob,
+                    NAttackFirstRange: nAttackFirstRange, DwScanQuestId: dwScanQuestId, DwScanItemIdx: dwScanItemIdx,
+                    NScanChao: nScanChao, NRecvCondMe: nRecvCondMe, NRecvCondHow: nRecvCondHow, NRecvCondMp: nRecvCondMp,
+                    BRecvCondWho: bRecvCondWho, TmUnitHelp: tmUnitHelp, NHelpRangeMul: nHelpRangeMul, BHelpWho: bHelpWho, NCallHelperMax: nCallHelperMax, NHpCond: nHpCond, BRangeAttack: bRangeAttack, NSummProb: nSummProb,
+                    NSummNum: nSummNum, NSummId: nSummId, NBerserkHp: nBerserkHp, FBerserkDmgMul: fBerserkDmgMul,
+                    NLoot: nLoot, NLootProb: nLootProb, NEvasionHp: nEvasionHp, NEvasionSec: nEvasionSec,
+                    NRunawayHp: nRunawayHp, NCallHp: nCallHp, NCallHelperIdx: nCallHelperIdx, NCallHelperNum: nCallHelperNum, BCallHelperParty: bCallHelperParty,
+                    NAttackItemNear: nAttackItemNear, NAttackItemFar: nAttackItemFar, NAttackItem1: nAttackItem1, NAttackItem2: nAttackItem2,
+                    NAttackItem3: nAttackItem3, NAttackItem4: nAttackItem4, NAttackItemSec: nAttackItemSec, NMagicReflection: nMagicReflection,
+                    NImmortality: nImmortality, BBlow: bBlow, NChangeTargetRand: nChangeTargetRand, DwAttackMoveDelay: dwAttackMoveDelay, DwRunawayDelay: dwRunawayDelay,
+                    DwDropItemGeneratorMax: dwDropItemGeneratorMax, DropItems: dropItems, DropKinds: dropKinds, FMonsterTransformHpRate: fMonsterTransformHpRate,
+                    DwMonsterTransformMonsterId: dwMonsterTransformMonsterId
                     );
 
-                propExs.Add(propEx);
+                propExs.Add(dwId, propEx);
             }
 
-            return [.. propExs];
+            return propExs;
         }
 
         private void LoadPropExAi(
@@ -1004,182 +1243,182 @@ namespace eTools_Ultimate.Services
             writer.WriteLine("// Generated by eTools Ultimate");
             writer.WriteLine("// https://github.com/Maquinours/eTools");
             writer.WriteLine("// ========================================");
-            foreach (MoverProp moverProp in Movers.Select(Mover => Mover.Prop))
+            foreach (Mover mover in Movers)
             {
-                writer.Write(Script.NumberToString(moverProp.DwId, definesService.ReversedMoverDefines));
+                writer.Write(Script.NumberToString(mover.DwId, definesService.ReversedMoverDefines));
                 writer.Write("\t");
-                writer.Write(!stringsService.HasString(moverProp.SzName) ? $"\"{moverProp.SzName}\"" : moverProp.SzName);
+                writer.Write(!stringsService.HasString(mover.SzName) ? $"\"{mover.SzName}\"" : mover.SzName);
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwAi, definesService.ReversedAiDefines));
+                writer.Write(Script.NumberToString(mover.DwAi, definesService.ReversedAiDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwStr));
+                writer.Write(Script.NumberToString(mover.DwStr));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSta));
+                writer.Write(Script.NumberToString(mover.DwSta));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwDex));
+                writer.Write(Script.NumberToString(mover.DwDex));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwInt));
+                writer.Write(Script.NumberToString(mover.DwInt));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwHR));
+                writer.Write(Script.NumberToString(mover.DwHR));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwER));
+                writer.Write(Script.NumberToString(mover.DwER));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwRace));
+                writer.Write(Script.NumberToString(mover.DwRace));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwBelligerence, definesService.ReversedBelligerenceDefines));
+                writer.Write(Script.NumberToString(mover.DwBelligerence, definesService.ReversedBelligerenceDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwGender));
+                writer.Write(Script.NumberToString(mover.DwGender));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwLevel));
+                writer.Write(Script.NumberToString(mover.DwLevel));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwFlightLevel));
+                writer.Write(Script.NumberToString(mover.DwFlightLevel));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSize));
+                writer.Write(Script.NumberToString(mover.DwSize));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwClass, definesService.ReversedRankDefines));
+                writer.Write(Script.NumberToString(mover.DwClass, definesService.ReversedRankDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.BIfParts));
+                writer.Write(Script.NumberToString(mover.BIfParts));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.NChaotic));
+                writer.Write(Script.NumberToString(mover.NChaotic));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwUseable));
+                writer.Write(Script.NumberToString(mover.DwUseable));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwActionRadius));
+                writer.Write(Script.NumberToString(mover.DwActionRadius));
                 writer.Write("\t");
-                writer.Write(Script.Int64ToString(moverProp.DwAtkMin));
+                writer.Write(Script.Int64ToString(mover.DwAtkMin));
                 writer.Write("\t");
-                writer.Write(Script.Int64ToString(moverProp.DwAtkMax));
+                writer.Write(Script.Int64ToString(mover.DwAtkMax));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwAtk1, definesService.ReversedItemDefines));
+                writer.Write(Script.NumberToString(mover.DwAtk1, definesService.ReversedItemDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwAtk2, definesService.ReversedItemDefines));
+                writer.Write(Script.NumberToString(mover.DwAtk2, definesService.ReversedItemDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwAtk3, definesService.ReversedItemDefines));
+                writer.Write(Script.NumberToString(mover.DwAtk3, definesService.ReversedItemDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwAtk4, definesService.ReversedItemDefines));
+                writer.Write(Script.NumberToString(mover.DwAtk4, definesService.ReversedItemDefines));
                 writer.Write("\t");
-                writer.Write(Script.FloatToString(moverProp.FFrame));
+                writer.Write(Script.FloatToString(mover.FFrame));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString((int)moverProp.DwOrthograde));
+                writer.Write(Script.NumberToString((int)mover.DwOrthograde));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString((int)moverProp.DwThrustRate));
+                writer.Write(Script.NumberToString((int)mover.DwThrustRate));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString((int)moverProp.DwChestRate));
+                writer.Write(Script.NumberToString((int)mover.DwChestRate));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString((int)moverProp.DwHeadRate));
+                writer.Write(Script.NumberToString((int)mover.DwHeadRate));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwArmRate));
+                writer.Write(Script.NumberToString(mover.DwArmRate));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwLegRate));
+                writer.Write(Script.NumberToString(mover.DwLegRate));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwAttackSpeed));
+                writer.Write(Script.NumberToString(mover.DwAttackSpeed));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwReAttackDelay));
+                writer.Write(Script.NumberToString(mover.DwReAttackDelay));
                 writer.Write("\t");
-                writer.Write(Script.Int64ToString(moverProp.DwAddHp));
+                writer.Write(Script.Int64ToString(mover.DwAddHp));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwAddMp));
+                writer.Write(Script.NumberToString(mover.DwAddMp));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwNaturalArmor));
+                writer.Write(Script.NumberToString(mover.DwNaturalArmor));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.NAbrasion));
+                writer.Write(Script.NumberToString(mover.NAbrasion));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.NHardness));
+                writer.Write(Script.NumberToString(mover.NHardness));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwAdjAtkDelay));
+                writer.Write(Script.NumberToString(mover.DwAdjAtkDelay));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.EElementType));
+                writer.Write(Script.NumberToString(mover.EElementType));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.WElementAtk));
+                writer.Write(Script.NumberToString(mover.WElementAtk));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwHideLevel));
+                writer.Write(Script.NumberToString(mover.DwHideLevel));
                 writer.Write("\t");
-                writer.Write(Script.FloatToString(moverProp.FSpeed));
+                writer.Write(Script.FloatToString(mover.FSpeed));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwShelter));
+                writer.Write(Script.NumberToString(mover.DwShelter));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwFlying));
+                writer.Write(Script.NumberToString(mover.DwFlying));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwJumpIng));
+                writer.Write(Script.NumberToString(mover.DwJumpIng));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwAirJump));
+                writer.Write(Script.NumberToString(mover.DwAirJump));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.BTaming));
+                writer.Write(Script.NumberToString(mover.BTaming));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwResisMgic));
+                writer.Write(Script.NumberToString(mover.DwResisMgic));
                 writer.Write("\t");
-                writer.Write(Script.FloatToString(moverProp.NResistElecricity / 100f));
+                writer.Write(Script.FloatToString(mover.NResistElecricity / 100f));
                 writer.Write("\t");
-                writer.Write(Script.FloatToString(moverProp.NResistFire / 100f));
+                writer.Write(Script.FloatToString(mover.NResistFire / 100f));
                 writer.Write("\t");
-                writer.Write(Script.FloatToString(moverProp.NResistWind / 100f));
+                writer.Write(Script.FloatToString(mover.NResistWind / 100f));
                 writer.Write("\t");
-                writer.Write(Script.FloatToString(moverProp.NResistWater / 100f));
+                writer.Write(Script.FloatToString(mover.NResistWater / 100f));
                 writer.Write("\t");
-                writer.Write(Script.FloatToString(moverProp.NResistEarth / 100f));
+                writer.Write(Script.FloatToString(mover.NResistEarth / 100f));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwCash));
+                writer.Write(Script.NumberToString(mover.DwCash));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSourceMaterial, definesService.ReversedItemDefines));
+                writer.Write(Script.NumberToString(mover.DwSourceMaterial, definesService.ReversedItemDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwMaterialAmount));
+                writer.Write(Script.NumberToString(mover.DwMaterialAmount));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwCohesion));
+                writer.Write(Script.NumberToString(mover.DwCohesion));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwHoldingTime));
+                writer.Write(Script.NumberToString(mover.DwHoldingTime));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwCorrectionValue));
+                writer.Write(Script.NumberToString(mover.DwCorrectionValue));
                 writer.Write("\t");
-                writer.Write(Script.Int64ToString(moverProp.NExpValue));
+                writer.Write(Script.Int64ToString(mover.NExpValue));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.NFxpValue));
+                writer.Write(Script.NumberToString(mover.NFxpValue));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.NBodyState));
+                writer.Write(Script.NumberToString(mover.NBodyState));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwAddAbility));
+                writer.Write(Script.NumberToString(mover.DwAddAbility));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.BKillable));
+                writer.Write(Script.NumberToString(mover.BKillable));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwVirtItem1, definesService.ReversedItemDefines));
+                writer.Write(Script.NumberToString(mover.DwVirtItem1, definesService.ReversedItemDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwVirtItem2, definesService.ReversedVirtualTypeDefines));
+                writer.Write(Script.NumberToString(mover.DwVirtItem2, definesService.ReversedVirtualTypeDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwVirtItem3));
+                writer.Write(Script.NumberToString(mover.DwVirtItem3));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.BVirtType1));
+                writer.Write(Script.NumberToString(mover.BVirtType1));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.BVirtType2));
+                writer.Write(Script.NumberToString(mover.BVirtType2));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.BVirtType3));
+                writer.Write(Script.NumberToString(mover.BVirtType3));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndAtk1, definesService.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(mover.DwSndAtk1, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndAtk2, definesService.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(mover.DwSndAtk2, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndDie1, definesService.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(mover.DwSndDie1, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndDie2, definesService.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(mover.DwSndDie2, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndDmg1, definesService.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(mover.DwSndDmg1, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndDmg2, definesService.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(mover.DwSndDmg2, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndDmg3, definesService.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(mover.DwSndDmg3, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndIdle1, definesService.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(mover.DwSndIdle1, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(Script.NumberToString(moverProp.DwSndIdle2, definesService.ReversedSoundDefines));
+                writer.Write(Script.NumberToString(mover.DwSndIdle2, definesService.ReversedSoundDefines));
                 writer.Write("\t");
-                writer.Write(!stringsService.HasString(moverProp.SzComment) ? $"\"{moverProp.SzComment}\"" : moverProp.SzComment);
+                writer.Write(!stringsService.HasString(mover.SzComment) ? $"\"{mover.SzComment}\"" : mover.SzComment);
 
                 if (settings.ResourcesVersion >= 19)
                 {
                     writer.Write("\t");
-                    writer.Write(Script.NumberToString(moverProp.DwAreaColor, definesService.ReversedAreaDefines));
+                    writer.Write(Script.NumberToString(mover.DwAreaColor, definesService.ReversedAreaDefines));
                     writer.Write("\t");
-                    writer.Write(string.IsNullOrWhiteSpace(moverProp.SzNpcMark) ? "=" : moverProp.SzNpcMark);
+                    writer.Write(string.IsNullOrWhiteSpace(mover.SzNpcMark) ? "=" : mover.SzNpcMark);
                     writer.Write("\t");
-                    writer.Write(Script.NumberToString(moverProp.DwMadrigalGiftPoint));
+                    writer.Write(Script.NumberToString(mover.DwMadrigalGiftPoint));
                 }
                 writer.Write("\r\n");
             }
@@ -1199,21 +1438,17 @@ namespace eTools_Ultimate.Services
             writer.WriteLine("// https://github.com/Maquinours/eTools");
             writer.WriteLine("// ========================================");
 
-            foreach (Mover mover in Movers)
+            foreach (Mover mover in Movers.Where(x => x.Type == MoverType.MONSTER))
             {
-                if (mover.PropEx is null || mover.Type != MoverTypes.MONSTER) continue;
-
-                MoverPropEx propEx = mover.PropEx;
-
                 writer.WriteLine();
-                writer.WriteLine(Script.NumberToString(mover.Prop.DwId, definesService.ReversedMoverDefines));
+                writer.WriteLine(Script.NumberToString(mover.DwId, definesService.ReversedMoverDefines));
                 writer.WriteLine('{');
 
                 // Drop gold section
                 bool wroteDropGoldSection = false;
-                foreach (DropItem dropItem in propEx.DropItemGenerator.DropItems.Where(x => x.Prop.DtType == DropType.DROPTYPE_SEED))
+                foreach (DropGold dropGold in mover.DropItemGenerator.DropGolds)
                 {
-                    writer.WriteLine($"\tDropGold({Script.NumberToString(dropItem.Prop.DwNumber)}, {Script.NumberToString(dropItem.Prop.DwNumber2)});");
+                    writer.WriteLine($"\tDropGold({Script.NumberToString(dropGold.DwNumber)}, {Script.NumberToString(dropGold.DwNumber2)});");
                     wroteDropGoldSection = true;
                 }
                 if (wroteDropGoldSection)
@@ -1221,14 +1456,14 @@ namespace eTools_Ultimate.Services
 
                 // Drop item section
                 bool wroteDropItemSection = false;
-                if (propEx.DropItemGenerator.DwMax != 0)
+                if (mover.DropItemGenerator.DwMax != 0)
                 {
-                    writer.WriteLine($"\tMaxitem = {Script.NumberToString(propEx.DropItemGenerator.DwMax)};");
+                    writer.WriteLine($"\tMaxitem = {Script.NumberToString(mover.DropItemGenerator.DwMax)};");
                     wroteDropItemSection = true;
                 }
-                foreach (DropItem dropItem in propEx.DropItemGenerator.DropItems.Where(x => x.Prop.DtType == DropType.DROPTYPE_NORMAL))
+                foreach (DropItem dropItem in mover.DropItemGenerator.DropItems)
                 {
-                    writer.WriteLine($"\tDropItem({Script.NumberToString(dropItem.Prop.DwIndex, definesService.ReversedItemDefines)}, {Script.NumberToString(dropItem.Prop.DwProbability)}, {Script.NumberToString(dropItem.Prop.DwLevel)}, {Script.NumberToString(dropItem.Prop.DwNumber)});");
+                    writer.WriteLine($"\tDropItem({Script.NumberToString(dropItem.DwIndex, definesService.ReversedItemDefines)}, {Script.NumberToString(dropItem.DwProbability)}, {Script.NumberToString(dropItem.DwLevel)}, {Script.NumberToString(dropItem.DwNumber)});");
                     wroteDropItemSection = true;
                 }
                 if (wroteDropItemSection)
@@ -1236,9 +1471,9 @@ namespace eTools_Ultimate.Services
 
                 // Drop kind section
                 bool wroteDropKindSection = false;
-                foreach (DropKind dropKind in propEx.DropKindGenerator.DropKinds)
+                foreach (DropKind dropKind in mover.DropKindGenerator.DropKinds)
                 {
-                    writer.WriteLine($"\tDropKind({Script.NumberToString(dropKind.Prop.DwIk3, definesService.ReversedItemKind3Defines)}, {Script.NumberToString(dropKind.Prop.NMinUniq)}, {Script.NumberToString(dropKind.Prop.NMaxUniq)});");
+                    writer.WriteLine($"\tDropKind({Script.NumberToString(dropKind.DwIk3, definesService.ReversedItemKind3Defines)}, {Script.NumberToString(dropKind.NMinUniq)}, {Script.NumberToString(dropKind.NMaxUniq)});");
                     wroteDropKindSection = true;
                 }
                 if (wroteDropKindSection)
@@ -1246,27 +1481,27 @@ namespace eTools_Ultimate.Services
 
                 // Set section
                 bool wroteSetSection = false;
-                if (propEx.NEvasionHp != 0 || propEx.NEvasionSec != 0)
+                if (mover.NEvasionHp != 0 || mover.NEvasionSec != 0)
                 {
-                    writer.WriteLine($"\tSetEvasion({Script.NumberToString(propEx.NEvasionHp)}, {Script.NumberToString(propEx.NEvasionSec)});");
+                    writer.WriteLine($"\tSetEvasion({Script.NumberToString(mover.NEvasionHp)}, {Script.NumberToString(mover.NEvasionSec)});");
                     wroteSetSection = true;
                 }
-                if (propEx.NRunawayHp != -1)
+                if (mover.NRunawayHp != -1)
                 {
-                    writer.WriteLine($"\tSetRunAway({Script.NumberToString(propEx.NRunawayHp)});");
+                    writer.WriteLine($"\tSetRunAway({Script.NumberToString(mover.NRunawayHp)});");
                     wroteSetSection = true;
                 }
                 for (int i = 0; i < 5; i++)
                 {
-                    if (propEx.NCallHelperIdx[i] != 0 || propEx.NCallHelperNum[i] != 0 || propEx.BCallHelperParty[i] != 0)
+                    if (mover.NCallHelperIdx[i] != 0 || mover.NCallHelperNum[i] != 0 || mover.BCallHelperParty[i] != 0)
                     {
-                        writer.WriteLine($"\tSetCallHelper({Script.NumberToString(propEx.NCallHp)}, {Script.NumberToString(propEx.NCallHelperIdx[i], definesService.ReversedMoverDefines)}, {Script.NumberToString(propEx.NCallHelperNum[i])}, {Script.NumberToString(propEx.BCallHelperParty[i], definesService.ReversedBooleanDefines)});"); // last value should use TRUE and FALSE
+                        writer.WriteLine($"\tSetCallHelper({Script.NumberToString(mover.NCallHp)}, {Script.NumberToString(mover.NCallHelperIdx[i], definesService.ReversedMoverDefines)}, {Script.NumberToString(mover.NCallHelperNum[i])}, {Script.NumberToString(mover.BCallHelperParty[i], definesService.ReversedBooleanDefines)});"); // last value should use TRUE and FALSE
                         wroteSetSection = true;
                     }
                 }
-                if (propEx.FMonsterTransformHpRate != 0.0f || propEx.DwMonsterTransformMonsterId != Constants.NullId)
+                if (mover.FMonsterTransformHpRate != 0.0f || mover.DwMonsterTransformMonsterId != Constants.NullId)
                 {
-                    writer.WriteLine($"\tTransform({Script.FloatToString(propEx.FMonsterTransformHpRate)}, {Script.NumberToString(propEx.DwMonsterTransformMonsterId, definesService.ReversedMoverDefines)});");
+                    writer.WriteLine($"\tTransform({Script.FloatToString(mover.FMonsterTransformHpRate)}, {Script.NumberToString(mover.DwMonsterTransformMonsterId, definesService.ReversedMoverDefines)});");
                     wroteSetSection = true;
                 }
                 if (wroteSetSection)
@@ -1274,131 +1509,131 @@ namespace eTools_Ultimate.Services
 
                 // Value section
                 bool wroteValueSection = false;
-                if (propEx.NAttackFirstRange != 10)
+                if (mover.NAttackFirstRange != 10)
                 {
-                    writer.WriteLine($"\tm_nAttackFirstRange = {Script.NumberToString(propEx.NAttackFirstRange)};");
+                    writer.WriteLine($"\tm_nAttackFirstRange = {Script.NumberToString(mover.NAttackFirstRange)};");
                     wroteValueSection = true;
                 }
-                if (propEx.NAttackItemNear != 0)
+                if (mover.NAttackItemNear != 0)
                 {
-                    writer.WriteLine($"\tm_nAttackItemNear = {Script.NumberToString(propEx.NAttackItemNear)};");
+                    writer.WriteLine($"\tm_nAttackItemNear = {Script.NumberToString(mover.NAttackItemNear)};");
                     wroteValueSection = true;
                 }
-                if (propEx.NAttackItemFar != 0)
+                if (mover.NAttackItemFar != 0)
                 {
-                    writer.WriteLine($"\tm_nAttackItemFar = {Script.NumberToString(propEx.NAttackItemFar)};");
+                    writer.WriteLine($"\tm_nAttackItemFar = {Script.NumberToString(mover.NAttackItemFar)};");
                     wroteValueSection = true;
                 }
-                if (propEx.NAttackItem1 != 0)
+                if (mover.NAttackItem1 != 0)
                 {
-                    writer.WriteLine($"\tm_nAttackItem1 = {Script.NumberToString(propEx.NAttackItem1)};");
+                    writer.WriteLine($"\tm_nAttackItem1 = {Script.NumberToString(mover.NAttackItem1)};");
                     wroteValueSection = true;
                 }
-                if (propEx.NAttackItem2 != 0)
+                if (mover.NAttackItem2 != 0)
                 {
-                    writer.WriteLine($"\tm_nAttackItem2 = {Script.NumberToString(propEx.NAttackItem2)};");
+                    writer.WriteLine($"\tm_nAttackItem2 = {Script.NumberToString(mover.NAttackItem2)};");
                     wroteValueSection = true;
                 }
-                if (propEx.NAttackItem3 != 0)
+                if (mover.NAttackItem3 != 0)
                 {
-                    writer.WriteLine($"\tm_nAttackItem3 = {Script.NumberToString(propEx.NAttackItem3)};");
+                    writer.WriteLine($"\tm_nAttackItem3 = {Script.NumberToString(mover.NAttackItem3)};");
                     wroteValueSection = true;
                 }
-                if (propEx.NAttackItem4 != 0)
+                if (mover.NAttackItem4 != 0)
                 {
-                    writer.WriteLine($"\tm_nAttackItem4 = {Script.NumberToString(propEx.NAttackItem4)};");
+                    writer.WriteLine($"\tm_nAttackItem4 = {Script.NumberToString(mover.NAttackItem4)};");
                     wroteValueSection = true;
                 }
-                if (propEx.NAttackItemSec != 0)
+                if (mover.NAttackItemSec != 0)
                 {
-                    writer.WriteLine($"\tm_nAttackItemSec = {Script.NumberToString(propEx.NAttackItemSec)};");
+                    writer.WriteLine($"\tm_nAttackItemSec = {Script.NumberToString(mover.NAttackItemSec)};");
                     wroteValueSection = true;
                 }
-                if (propEx.NMagicReflection != 0)
+                if (mover.NMagicReflection != 0)
                 {
-                    writer.WriteLine($"\tm_nMagicReflection = {Script.NumberToString(propEx.NMagicReflection)};");
+                    writer.WriteLine($"\tm_nMagicReflection = {Script.NumberToString(mover.NMagicReflection)};");
                     wroteValueSection = true;
                 }
-                if (propEx.NImmortality != 0)
+                if (mover.NImmortality != 0)
                 {
-                    writer.WriteLine($"\tm_nImmortality = {Script.NumberToString(propEx.NImmortality)};");
+                    writer.WriteLine($"\tm_nImmortality = {Script.NumberToString(mover.NImmortality)};");
                     wroteValueSection = true;
                 }
-                if (propEx.BBlow != 0)
+                if (mover.BBlow != 0)
                 {
-                    writer.WriteLine($"\tm_bBlow = {Script.NumberToString(propEx.BBlow)};");
+                    writer.WriteLine($"\tm_bBlow = {Script.NumberToString(mover.BBlow)};");
                     wroteValueSection = true;
                 }
-                if (propEx.NChangeTargetRand != 10)
+                if (mover.NChangeTargetRand != 10)
                 {
-                    writer.WriteLine($"\tm_nChangeTargetRand = {Script.NumberToString(propEx.NChangeTargetRand)};");
+                    writer.WriteLine($"\tm_nChangeTargetRand = {Script.NumberToString(mover.NChangeTargetRand)};");
                     wroteValueSection = true;
                 }
-                if (propEx.DwAttackMoveDelay != 0)
+                if (mover.DwAttackMoveDelay != 0)
                 {
-                    writer.WriteLine($"\tm_dwAttackMoveDelay = {Script.NumberToString(propEx.DwAttackMoveDelay)};");
+                    writer.WriteLine($"\tm_dwAttackMoveDelay = {Script.NumberToString(mover.DwAttackMoveDelay)};");
                     wroteValueSection = true;
                 }
-                if (propEx.DwRunawayDelay != 1_000)
+                if (mover.DwRunawayDelay != 1_000)
                 {
-                    writer.WriteLine($"\tm_dwRunawayDelay = {Script.NumberToString(propEx.DwRunawayDelay)};");
+                    writer.WriteLine($"\tm_dwRunawayDelay = {Script.NumberToString(mover.DwRunawayDelay)};");
                     wroteValueSection = true;
                 }
                 if (wroteValueSection)
                     writer.WriteLine();
 
-                SavePropExAi(writer, propEx);
+                SavePropExAi(writer, mover);
 
                 writer.WriteLine('}');
             }
         }
 
-        private void SavePropExAi(StreamWriter writer, MoverPropEx propEx)
+        private void SavePropExAi(StreamWriter writer, Mover mover)
         {
             writer.WriteLine("\tAI");
             writer.WriteLine("\t{");
 
-            SavePropExAiScan(writer, propEx);
-            SavePropExAiBattle(writer, propEx);
-            SavePropExAiMove(writer, propEx);
+            SavePropExAiScan(writer, mover);
+            SavePropExAiBattle(writer, mover);
+            SavePropExAiMove(writer, mover);
 
             writer.WriteLine("\t}");
         }
 
-        private void SavePropExAiScan(StreamWriter writer, MoverPropEx propEx)
+        private void SavePropExAiScan(StreamWriter writer, Mover mover)
         {
             writer.WriteLine("\t\t#SCAN");
             writer.WriteLine("\t\t{");
             writer.Write("\t\t\tscan");
 
-            if (propEx.NScanJob != 0)
-                writer.Write($" job {Script.NumberToString(propEx.NScanJob)}");
+            if (mover.NScanJob != 0)
+                writer.Write($" job {Script.NumberToString(mover.NScanJob)}");
             //if(propEx.NAttackFirstRange != 0) // Already written in main SavePropEx
             //    writer.Write($" range {Script.NumberToString(propEx.NAttackFirstRange)}");
-            if (propEx.DwScanQuestId != 0)
-                writer.Write($" quest {Script.NumberToString(propEx.DwScanQuestId)}");
-            if (propEx.DwScanItemIdx != 0)
-                writer.Write($" item {Script.NumberToString(propEx.DwScanItemIdx)}");
-            if (propEx.NScanChao != 0)
-                writer.Write($" chao {Script.NumberToString(propEx.NScanChao)}");
+            if (mover.DwScanQuestId != 0)
+                writer.Write($" quest {Script.NumberToString(mover.DwScanQuestId)}");
+            if (mover.DwScanItemIdx != 0)
+                writer.Write($" item {Script.NumberToString(mover.DwScanItemIdx)}");
+            if (mover.NScanChao != 0)
+                writer.Write($" chao {Script.NumberToString(mover.NScanChao)}");
 
             writer.WriteLine();
             writer.WriteLine("\t\t}");
         }
 
-        private void SavePropExAiBattle(StreamWriter writer, MoverPropEx propEx)
+        private void SavePropExAiBattle(StreamWriter writer, Mover mover)
         {
             writer.WriteLine("\t\t#BATTLE");
             writer.WriteLine("\t\t{");
 
-            if (propEx.BMeleeAttack == 1)
+            if (mover.BMeleeAttack == 1)
             {
                 writer.Write("\t\t\tAttack");
 
-                if (propEx.NHpCond != 0)
-                    writer.Write($" {Script.NumberToString(propEx.NHpCond)}");
+                if (mover.NHpCond != 0)
+                    writer.Write($" {Script.NumberToString(mover.NHpCond)}");
 
-                string? strLvCond = propEx.NLvCond switch
+                string? strLvCond = mover.NLvCond switch
                 {
                     1 => "low",
                     2 => "Sam",
@@ -1411,12 +1646,12 @@ namespace eTools_Ultimate.Services
 
                 writer.WriteLine();
             }
-            if (propEx.BRecvCond != 0)
+            if (mover.BRecvCond != 0)
             {
                 writer.Write("\t\t\tRecovery");
-                writer.Write($" {Script.NumberToString(propEx.NRecvCondMe)} {Script.NumberToString(propEx.NRecvCondHow)} {Script.NumberToString(propEx.NRecvCondMp)}");
+                writer.Write($" {Script.NumberToString(mover.NRecvCondMe)} {Script.NumberToString(mover.NRecvCondHow)} {Script.NumberToString(mover.NRecvCondMp)}");
 
-                char? condWhoStr = propEx.BRecvCondWho switch
+                char? condWhoStr = mover.BRecvCondWho switch
                 {
                     1 => 'u',
                     2 => 'm',
@@ -1429,15 +1664,15 @@ namespace eTools_Ultimate.Services
 
                 writer.WriteLine();
             }
-            if (propEx.BRangeAttack != 0)
+            if (mover.BRangeAttack != 0)
             {
-                AICMD cmd = (propEx.BRangeAttack & 0x80) switch
+                AICMD cmd = (mover.BRangeAttack & 0x80) switch
                 {
                     0 => AICMD.RANGEATTACK,
                     _ => AICMD.KEEP_RANGEATTACK,
                 };
 
-                int nRange = propEx.BRangeAttack;
+                int nRange = mover.BRangeAttack;
 
                 if (cmd == AICMD.KEEP_RANGEATTACK)
                     nRange &= ~0x80;
@@ -1451,33 +1686,33 @@ namespace eTools_Ultimate.Services
 
                 writer.WriteLine($"\t\t\t{cmdStr} {Script.NumberToString(nRange)}");
             }
-            if (propEx.NSummProb != 0 || propEx.NSummNum != 0 || propEx.NSummId != 0)
-                writer.WriteLine($"\t\t\tSummon {Script.NumberToString(propEx.NSummProb)} {Script.NumberToString(propEx.NSummNum)} {Script.NumberToString(propEx.NSummId, definesService.ReversedMoverDefines)}");
+            if (mover.NSummProb != 0 || mover.NSummNum != 0 || mover.NSummId != 0)
+                writer.WriteLine($"\t\t\tSummon {Script.NumberToString(mover.NSummProb)} {Script.NumberToString(mover.NSummNum)} {Script.NumberToString(mover.NSummId, definesService.ReversedMoverDefines)}");
             //if(propEx.NRunawayHp != -1) // Don't need it, as it's already written in main SavePropEx
             //    writer.WriteLine($"\t\t\tEvade {Script.NumberToString(propEx.NRunawayHp)}");
-            if (propEx.BHelpWho != 0)
+            if (mover.BHelpWho != 0)
             {
-                string helpWhoStr = propEx.BHelpWho switch
+                string helpWhoStr = mover.BHelpWho switch
                 {
                     1 => "all",
                     2 => "sam",
                     _ => throw new InvalidOperationException("BHelpWho is neither 1 nor 2")
                 };
-                writer.WriteLine($"\t\t\tHelper {helpWhoStr} {Script.NumberToString(propEx.TmUnitHelp)} {Script.NumberToString(propEx.NHelpRangeMul)}");
+                writer.WriteLine($"\t\t\tHelper {helpWhoStr} {Script.NumberToString(mover.TmUnitHelp)} {Script.NumberToString(mover.NHelpRangeMul)}");
             }
-            if (propEx.NBerserkHp != 0 || propEx.FBerserkDmgMul != 0)
-                writer.WriteLine($"\t\t\tBerserk {Script.NumberToString(propEx.NBerserkHp)} {Script.FloatToString(propEx.FBerserkDmgMul)}");
+            if (mover.NBerserkHp != 0 || mover.FBerserkDmgMul != 0)
+                writer.WriteLine($"\t\t\tBerserk {Script.NumberToString(mover.NBerserkHp)} {Script.FloatToString(mover.FBerserkDmgMul)}");
 
             writer.WriteLine("\t\t}");
         }
 
-        private void SavePropExAiMove(StreamWriter writer, MoverPropEx propEx)
+        private void SavePropExAiMove(StreamWriter writer, Mover mover)
         {
             writer.WriteLine("\t\t#MOVE");
             writer.WriteLine("\t\t{");
 
-            if (propEx.NLootProb != 0)
-                writer.WriteLine($"\t\t\tLoot d {propEx.NLootProb}");
+            if (mover.NLootProb != 0)
+                writer.WriteLine($"\t\t\tLoot d {mover.NLootProb}");
 
             writer.WriteLine("\t\t}");
         }
@@ -1579,97 +1814,93 @@ namespace eTools_Ultimate.Services
             string szNpcMark = "=";
             uint dwMadrigalGiftPoint = 0;
 
-            MoverProp moverProp = new(
-                        dwId: dwId,
-                        szName: szName,
-                        dwAi: (uint)dwAi,
-                        dwStr: dwStr,
-                        dwSta: dwSta,
-                        dwDex: dwDex,
-                        dwInt: dwInt,
-                        dwHR: dwHR,
-                        dwER: dwER,
-                        dwRace: dwRace,
-                        dwBelligerence: (uint)dwBelligerence,
-                        dwGender: dwGender,
-                        dwLevel: dwLevel,
-                        dwFlightLevel: dwFlightLevel,
-                        dwSize: dwSize,
-                        dwClass: (uint)dwClass,
-                        bIfParts: bIfParts,
-                        nChaotic: nChaotic,
-                        dwUseable: dwUseable,
-                        dwActionRadius: dwActionRadius,
-                        dwAtkMin: dwAtkMin,
-                        dwAtkMax: dwAtkMax,
-                        dwAtk1: dwAtk1,
-                        dwAtk2: dwAtk2,
-                        dwAtk3: dwAtk3,
-                        dwAtk4: dwAtk4,
-                        fFrame: fFrame,
-                        dwOrthograde: dwOrthograde,
-                        dwThrustRate: dwThrustRate,
-                        dwChestRate: dwChestRate,
-                        dwHeadRate: dwHeadRate,
-                        dwArmRate: dwArmRate,
-                        dwLegRate: dwLegRate,
-                        dwAttackSpeed: dwAttackSpeed,
-                        dwReAttackDelay: dwReAttackDelay,
-                        dwAddHp: dwAddHp,
-                        dwAddMp: dwAddMp,
-                        dwNaturalArmor: dwNaturalArmor,
-                        nAbrasion: nAbrasion,
-                        nHardness: nHardness,
-                        dwAdjAtkDelay: dwAdjAtkDelay,
-                        eElementType: eElementType,
-                        wElementAtk: wElementAtk,
-                        dwHideLevel: dwHideLevel,
-                        fSpeed: fSpeed,
-                        dwShelter: dwShelter,
-                        dwFlying: dwFlying,
-                        dwJumpIng: dwJumpIng,
-                        dwAirJump: dwAirJump,
-                        bTaming: bTaming,
-                        dwResisMgic: dwResisMgic,
-                        nResistElecricity: nResistElecricity,
-                        nResistFire: nResistFire,
-                        nResistWind: nResistWind,
-                        nResistWater: nResistWater,
-                        nResistEarth: nResistEarth,
-                        dwCash: dwCash,
-                        dwSourceMaterial: dwSourceMaterial,
-                        dwMaterialAmount: dwMaterialAmount,
-                        dwCohesion: dwCohesion,
-                        dwHoldingTime: dwHoldingTime,
-                        dwCorrectionValue: dwCorrectionValue,
-                        nExpValue: nExpValue,
-                        nFxpValue: nFxpValue,
-                        nBodyState: nBodyState,
-                        dwAddAbility: dwAddAbility,
-                        bKillable: bKillable,
-                        dwVirtItem1: dwVirtItem1,
-                        dwVirtItem2: dwVirtItem2,
-                        dwVirtItem3: dwVirtItem3,
-                        bVirtType1: bVirtType1,
-                        bVirtType2: bVirtType2,
-                        bVirtType3: bVirtType3,
-                        dwSndAtk1: dwSndAtk1,
-                        dwSndAtk2: dwSndAtk2,
-                        dwSndDie1: dwSndDie1,
-                        dwSndDie2: dwSndDie2,
-                        dwSndDmg1: dwSndDmg1,
-                        dwSndDmg2: dwSndDmg2,
-                        dwSndDmg3: dwSndDmg3,
-                        dwSndIdle1: dwSndIdle1,
-                        dwSndIdle2: dwSndIdle2,
-                        szComment: szComment,
-                        dwAreaColor: (uint)dwAreaColor,
-                        szNpcMark: szNpcMark,
-                        dwMadrigalGiftPoint: dwMadrigalGiftPoint
-                        );
-
-            MoverPropEx moverPropEx = new(
+            Mover mover = new(
                 dwId: dwId,
+                szName: szName,
+                dwAi: (uint)dwAi,
+                dwStr: dwStr,
+                dwSta: dwSta,
+                dwDex: dwDex,
+                dwInt: dwInt,
+                dwHR: dwHR,
+                dwER: dwER,
+                dwRace: dwRace,
+                dwBelligerence: (uint)dwBelligerence,
+                dwGender: dwGender,
+                dwLevel: dwLevel,
+                dwFlightLevel: dwFlightLevel,
+                dwSize: dwSize,
+                dwClass: (uint)dwClass,
+                bIfParts: bIfParts,
+                nChaotic: nChaotic,
+                dwUseable: dwUseable,
+                dwActionRadius: dwActionRadius,
+                dwAtkMin: dwAtkMin,
+                dwAtkMax: dwAtkMax,
+                dwAtk1: dwAtk1,
+                dwAtk2: dwAtk2,
+                dwAtk3: dwAtk3,
+                dwAtk4: dwAtk4,
+                fFrame: fFrame,
+                dwOrthograde: dwOrthograde,
+                dwThrustRate: dwThrustRate,
+                dwChestRate: dwChestRate,
+                dwHeadRate: dwHeadRate,
+                dwArmRate: dwArmRate,
+                dwLegRate: dwLegRate,
+                dwAttackSpeed: dwAttackSpeed,
+                dwReAttackDelay: dwReAttackDelay,
+                dwAddHp: dwAddHp,
+                dwAddMp: dwAddMp,
+                dwNaturalArmor: dwNaturalArmor,
+                nAbrasion: nAbrasion,
+                nHardness: nHardness,
+                dwAdjAtkDelay: dwAdjAtkDelay,
+                eElementType: eElementType,
+                wElementAtk: wElementAtk,
+                dwHideLevel: dwHideLevel,
+                fSpeed: fSpeed,
+                dwShelter: dwShelter,
+                dwFlying: dwFlying,
+                dwJumpIng: dwJumpIng,
+                dwAirJump: dwAirJump,
+                bTaming: bTaming,
+                dwResisMgic: dwResisMgic,
+                nResistElecricity: nResistElecricity,
+                nResistFire: nResistFire,
+                nResistWind: nResistWind,
+                nResistWater: nResistWater,
+                nResistEarth: nResistEarth,
+                dwCash: dwCash,
+                dwSourceMaterial: dwSourceMaterial,
+                dwMaterialAmount: dwMaterialAmount,
+                dwCohesion: dwCohesion,
+                dwHoldingTime: dwHoldingTime,
+                dwCorrectionValue: dwCorrectionValue,
+                nExpValue: nExpValue,
+                nFxpValue: nFxpValue,
+                nBodyState: nBodyState,
+                dwAddAbility: dwAddAbility,
+                bKillable: bKillable,
+                dwVirtItem1: dwVirtItem1,
+                dwVirtItem2: dwVirtItem2,
+                dwVirtItem3: dwVirtItem3,
+                bVirtType1: bVirtType1,
+                bVirtType2: bVirtType2,
+                bVirtType3: bVirtType3,
+                dwSndAtk1: dwSndAtk1,
+                dwSndAtk2: dwSndAtk2,
+                dwSndDie1: dwSndDie1,
+                dwSndDie2: dwSndDie2,
+                dwSndDmg1: dwSndDmg1,
+                dwSndDmg2: dwSndDmg2,
+                dwSndDmg3: dwSndDmg3,
+                dwSndIdle1: dwSndIdle1,
+                dwSndIdle2: dwSndIdle2,
+                szComment: szComment,
+                dwAreaColor: (uint)dwAreaColor,
+                szNpcMark: szNpcMark,
+                dwMadrigalGiftPoint: dwMadrigalGiftPoint,
                 bMeleeAttack: 0,
                 nLvCond: 0,
                 bRecvCond: 0,
@@ -1722,8 +1953,6 @@ namespace eTools_Ultimate.Services
                 dwMonsterTransformMonsterId: Constants.NullId
                 );
 
-            Mover mover = new(moverProp, moverPropEx);
-
             if (mover.Model is null)
                 modelsService.CreateModelByObject(mover);
 
@@ -1742,3 +1971,159 @@ namespace eTools_Ultimate.Services
         }
     }
 }
+
+internal record MoverProp(
+    string SzName,
+    uint DwAi,
+    uint DwStr,
+    uint DwSta,
+    uint DwDex,
+    uint DwInt,
+    uint DwHR,
+    uint DwER,
+    uint DwRace,
+    uint DwBelligerence,
+    uint DwGender,
+    uint DwLevel,
+    uint DwFlightLevel,
+    uint DwSize,
+    uint DwClass,
+    int BIfParts,
+    int NChaotic,
+    uint DwUseable,
+    uint DwActionRadius,
+    ulong DwAtkMin,
+    ulong DwAtkMax,
+    uint DwAtk1,
+    uint DwAtk2,
+    uint DwAtk3,
+    uint DwAtk4,
+    float FFrame,
+    uint DwOrthograde,
+    uint DwThrustRate,
+    uint DwChestRate,
+    uint DwHeadRate,
+    uint DwArmRate,
+    uint DwLegRate,
+    uint DwAttackSpeed,
+    uint DwReAttackDelay,
+    ulong DwAddHp,
+    uint DwAddMp,
+    uint DwNaturalArmor,
+    int NAbrasion,
+    int NHardness,
+    uint DwAdjAtkDelay,
+    int EElementType,
+    short WElementAtk,
+    uint DwHideLevel,
+    float FSpeed,
+    uint DwShelter,
+    uint DwFlying,
+    uint DwJumpIng,
+    uint DwAirJump,
+    uint BTaming,
+    uint DwResisMgic,
+    int NResistElecricity,
+    int NResistFire,
+    int NResistWind,
+    int NResistWater,
+    int NResistEarth,
+    uint DwCash,
+    uint DwSourceMaterial,
+    uint DwMaterialAmount,
+    uint DwCohesion,
+    uint DwHoldingTime,
+    uint DwCorrectionValue,
+    long NExpValue,
+    int NFxpValue,
+    uint NBodyState,
+    uint DwAddAbility,
+    uint BKillable,
+    uint DwVirtItem1,
+    uint DwVirtItem2,
+    uint DwVirtItem3,
+    uint BVirtType1,
+    uint BVirtType2,
+    uint BVirtType3,
+    uint DwSndAtk1,
+    uint DwSndAtk2,
+    uint DwSndDie1,
+    uint DwSndDie2,
+    uint DwSndDmg1,
+    uint DwSndDmg2,
+    uint DwSndDmg3,
+    uint DwSndIdle1,
+    uint DwSndIdle2,
+    string SzComment,
+    uint DwAreaColor,
+    string SzNpcMark,
+    uint DwMadrigalGiftPoint
+    );
+
+internal record MoverPropEx(
+    byte BMeleeAttack,
+    int NLvCond,
+    byte BRecvCond,
+    int NScanJob,
+    short NAttackFirstRange,
+    uint DwScanQuestId,
+    uint DwScanItemIdx,
+    int NScanChao,
+    int NRecvCondMe,
+    int NRecvCondHow,
+    int NRecvCondMp,
+    byte BRecvCondWho,
+    uint TmUnitHelp,
+    int NHelpRangeMul,
+    byte BHelpWho,
+    short NCallHelperMax,
+    int NHpCond,
+    byte BRangeAttack,
+    int NSummProb,
+    int NSummNum,
+    int NSummId,
+    int NBerserkHp,
+    float FBerserkDmgMul,
+    int NLoot,
+    int NLootProb,
+    short NEvasionHp,
+    short NEvasionSec,
+    short NRunawayHp,
+    short NCallHp,
+    short[] NCallHelperIdx,
+    short[] NCallHelperNum,
+    short[] BCallHelperParty,
+    short NAttackItemNear,
+    short NAttackItemFar,
+    short NAttackItem1,
+    short NAttackItem2,
+    short NAttackItem3,
+    short NAttackItem4,
+    short NAttackItemSec,
+    short NMagicReflection,
+    short NImmortality,
+    int BBlow,
+    short NChangeTargetRand,
+    short DwAttackMoveDelay,
+    short DwRunawayDelay,
+    uint DwDropItemGeneratorMax,
+    IEnumerable<DropItemProp> DropItems,
+    IEnumerable<DropKindProp> DropKinds,
+    float FMonsterTransformHpRate,
+    uint DwMonsterTransformMonsterId
+    );
+
+public record DropItemProp(
+    DropType DtType,
+    uint DwIndex,
+    uint DwProbability,
+    uint DwLevel,
+    uint DwNumber,
+    uint DwNumber2
+    );
+
+public record DropKindProp(
+    uint DwIk3,
+    short NMinUniq,
+    short NMaxUniq
+    );

@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Movers;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using eTools_Ultimate.Views.Dialogs;
@@ -74,9 +75,9 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
-        private async Task AddMoverAiBinding(KeyValuePair<MoverTypes, ObservableCollection<string>>? type)
+        private async Task AddMoverAiBinding(KeyValuePair<MoverType, ObservableCollection<string>>? type)
         {
-            if (type is not KeyValuePair<MoverTypes, ObservableCollection<string>> currentType)
+            if (type is not KeyValuePair<MoverType, ObservableCollection<string>> currentType)
                 return;
 
             if (!Settings.MoverTypesBindings.Contains(currentType))
@@ -100,9 +101,9 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (ai is not string currentAi)
                 return;
 
-            KeyValuePair<MoverTypes, ObservableCollection<string>>? type = Settings.MoverTypesBindings.Cast<KeyValuePair<MoverTypes, ObservableCollection<string>>?>().FirstOrDefault(x => x.HasValue && x.Value.Value.Contains(currentAi));
+            KeyValuePair<MoverType, ObservableCollection<string>>? type = Settings.MoverTypesBindings.Cast<KeyValuePair<MoverType, ObservableCollection<string>>?>().FirstOrDefault(x => x.HasValue && x.Value.Value.Contains(currentAi));
 
-            if (type is not KeyValuePair<MoverTypes, ObservableCollection<string>> currentType)
+            if (type is not KeyValuePair<MoverType, ObservableCollection<string>> currentType)
                 return;
 
             ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(

@@ -1,4 +1,4 @@
-﻿using eTools_Ultimate.Models;
+﻿using eTools_Ultimate.Models.Movers;
 using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using System;
 using System.Collections.Generic;
@@ -23,7 +23,7 @@ namespace eTools_Ultimate.Views.Dialogs
     /// </summary>
     public partial class AddMoverAiBindingDialog : ContentDialog
     {
-        public AddMoverAiBindingDialog(ContentPresenter? contentPresenter, MoverTypes moverType) : base(contentPresenter)
+        public AddMoverAiBindingDialog(ContentPresenter? contentPresenter, MoverType moverType) : base(contentPresenter)
         {
             DataContext = new AddMoverAiBindingDialogViewModel(moverType);
 

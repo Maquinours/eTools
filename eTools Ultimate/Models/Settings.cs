@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eTools_Ultimate.Models.Movers;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -43,12 +44,12 @@ namespace eTools_Ultimate.Models
         private string? _propMoverExFilePath;
         private bool _mover64BitHp = false;
         private bool _mover64BitAtk = false;
-        private readonly ReadOnlyDictionary<MoverTypes, ObservableCollection<string>> _moverTypesBindings = new(
-            new Dictionary<MoverTypes, ObservableCollection<string>>(){
-                { MoverTypes.NPC, new ObservableCollection<string> { "AII_NONE" } },
-                { MoverTypes.CHARACTER, new ObservableCollection<string> {  "AII_MOVER" } },
-                { MoverTypes.MONSTER, new ObservableCollection<string> { "AII_MONSTER", "AII_CLOCKWORKS", "AII_BIGMUSCLE", "AII_KRRR", "AII_BEAR", "AII_METEONYKER", "AII_AGGRO_NORMAL", "AII_PARTY_AGGRO_LEADER", "AII_PARTY_AGGRO_SUB", "AII_ARENA_REAPER" } },
-                { MoverTypes.PET,  new ObservableCollection<string> {"AII_PET", "AII_EGG"} }
+        private readonly ReadOnlyDictionary<MoverType, ObservableCollection<string>> _moverTypesBindings = new(
+            new Dictionary<MoverType, ObservableCollection<string>>(){
+                { MoverType.NPC, new ObservableCollection<string> { "AII_NONE" } },
+                { MoverType.CHARACTER, new ObservableCollection<string> {  "AII_MOVER" } },
+                { MoverType.MONSTER, new ObservableCollection<string> { "AII_MONSTER", "AII_CLOCKWORKS", "AII_BIGMUSCLE", "AII_KRRR", "AII_BEAR", "AII_METEONYKER", "AII_AGGRO_NORMAL", "AII_PARTY_AGGRO_LEADER", "AII_PARTY_AGGRO_SUB", "AII_ARENA_REAPER" } },
+                { MoverType.PET,  new ObservableCollection<string> {"AII_PET", "AII_EGG"} }
             });
         #endregion
 
@@ -186,7 +187,7 @@ namespace eTools_Ultimate.Models
             set => SetValue(ref _mover64BitAtk, value);
         }
 
-        public ReadOnlyDictionary<MoverTypes, ObservableCollection<string>> MoverTypesBindings => _moverTypesBindings;
+        public ReadOnlyDictionary<MoverType, ObservableCollection<string>> MoverTypesBindings => _moverTypesBindings;
         #endregion
 
         #region Items settings

@@ -1,4 +1,4 @@
-﻿using eTools_Ultimate.Models;
+﻿using eTools_Ultimate.Models.Movers;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.ViewModels.Controls.Dialogs
 {
-    public partial class AddMoverAiBindingDialogViewModel(MoverTypes moverType) : ObservableObject
+    public partial class AddMoverAiBindingDialogViewModel(MoverType moverType) : ObservableObject
     {
         private DefinesService _definesService = App.Services.GetRequiredService<DefinesService>();
         private SettingsService _settingsService = App.Services.GetRequiredService<SettingsService>();

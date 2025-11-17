@@ -1,4 +1,5 @@
 ﻿using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Movers;
 using Scan;
 using System;
 using System.Collections.Generic;
@@ -139,7 +140,7 @@ namespace eTools_Ultimate.Services
                                     if (scanner.EndOfStream)
                                         throw new InvalidOperationException("SettingsService::Load exception : Mover type AI bindings settings is incorrectly formated. (first infinite loop security)");
 
-                                    if (!Enum.TryParse(scanner.Token, out MoverTypes type))
+                                    if (!Enum.TryParse(scanner.Token, out MoverType type))
                                         throw new InvalidOperationException("SettingsService::Load exception : Mover type AI bindings settings is incorrectly formated. (token is not MoverTypes)");
 
                                     Settings.MoverTypesBindings[type].Clear();
@@ -239,7 +240,7 @@ namespace eTools_Ultimate.Services
                 writer.WriteLine(SettingsKeywords.Mover64BitHp);
             writer.WriteLine(SettingsKeywords.MoverTypeAiBindings);
             writer.WriteLine('[');
-            foreach (KeyValuePair<MoverTypes, ObservableCollection<string>> bind in Settings.MoverTypesBindings)
+            foreach (KeyValuePair<MoverType, ObservableCollection<string>> bind in Settings.MoverTypesBindings)
             {
                 writer.WriteLine($"\t{bind.Key}");
                 writer.WriteLine($"\t[");

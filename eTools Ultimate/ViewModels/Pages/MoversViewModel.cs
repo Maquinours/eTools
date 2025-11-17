@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Movers;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Controls.Dialogs;
@@ -546,7 +547,6 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (MoversView.CurrentItem is not Mover mover) return;
             mover.PropertyChanged -= CurrentMover_PropertyChanged;
-            mover.Prop.PropertyChanged -= CurrentMoverProp_PropertyChanged;
             if (mover.Model is not null)
             {
                 mover.Model.PropertyChanged -= CurrentMoverModel_PropertyChanged;
@@ -563,7 +563,6 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (MoversView.CurrentItem is Mover mover)
             {
                 mover.PropertyChanged += CurrentMover_PropertyChanged;
-                mover.Prop.PropertyChanged += CurrentMoverProp_PropertyChanged;
                 if (mover.Model is not null)
                 {
                     mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
@@ -597,7 +596,23 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (sender != mover)
                 throw new InvalidOperationException("MoversViewModel::CurrentMover_PropertyChanged exception: called with non current mover sender.");
 
-            if (e.PropertyName == nameof(Mover.Model))
+            if (e.PropertyName == nameof(Mover.DwId))
+            {
+                if (e is not PropertyChangedExtendedEventArgs extendedArgs)
+                    throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non PropertyChangedExtendedEventArgs.");
+                if (extendedArgs.OldValue is not int oldId)
+                    throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non int old DwId value.");
+                if (extendedArgs.NewValue is not int newId)
+                    throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non int new DwId value.");
+
+                string oldIdentifier = Script.NumberToString(oldId, definesService.ReversedMoverDefines);
+                string newIdentifier = Script.NumberToString(newId, definesService.ReversedMoverDefines);
+
+                string[] playerMoverIdentifiers = ["MI_MALE", "MI_FEMALE"];
+                if (playerMoverIdentifiers.Contains(oldIdentifier) || playerMoverIdentifiers.Contains(newIdentifier))
+                    LoadModel();
+            }
+            else if (e.PropertyName == nameof(Mover.Model))
             {
                 if (e is not PropertyChangedExtendedEventArgs extendedArgs) throw new InvalidOperationException("Model property changed args is not PropertyChangedExtendedEventArgs");
                 if (extendedArgs.OldValue is Model oldModel)
@@ -630,33 +645,6 @@ namespace eTools_Ultimate.ViewModels.Pages
                     Log.Error(ex, "Error during MoversViewModel motions directory watcher re-initialization.");
                 }
                 LoadModel();
-            }
-        }
-
-        private void CurrentMoverProp_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (sender is not MoverProp moverProp)
-                throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non MoverProp sender");
-            if (MoversView.CurrentItem is not Mover mover)
-                throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called when MoversView currentItem is not a mover");
-            if (moverProp != mover.Prop)
-                throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non current mover prop sender.");
-
-            if (e.PropertyName == nameof(Mover.Prop.DwId))
-            {
-                if (e is not PropertyChangedExtendedEventArgs extendedArgs)
-                    throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non PropertyChangedExtendedEventArgs.");
-                if (extendedArgs.OldValue is not int oldId)
-                    throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non int old DwId value.");
-                if (extendedArgs.NewValue is not int newId)
-                    throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non int new DwId value.");
-
-                string oldIdentifier = Script.NumberToString(oldId, definesService.ReversedMoverDefines);
-                string newIdentifier = Script.NumberToString(newId, definesService.ReversedMoverDefines);
-
-                string[] playerMoverIdentifiers = ["MI_MALE", "MI_FEMALE"];
-                if (playerMoverIdentifiers.Contains(oldIdentifier) || playerMoverIdentifiers.Contains(newIdentifier))
-                    LoadModel();
             }
         }
 
@@ -877,7 +865,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             Sound? newSound = soundsService.Sounds.FirstOrDefault(x => x.FilePath.Equals(filePath, StringComparison.OrdinalIgnoreCase));
             if (newSound is null) return;
-            mover.Prop.DwSndDmg2 = newSound.Prop.Id;
+            mover.DwSndDmg2 = newSound.Prop.Id;
         }
 
         [RelayCommand]
@@ -892,7 +880,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             Sound? newSound = soundsService.Sounds.FirstOrDefault(x => x.FilePath.Equals(filePath, StringComparison.OrdinalIgnoreCase));
             if (newSound is null) return;
-            mover.Prop.DwSndIdle1 = newSound.Prop.Id;
+            mover.DwSndIdle1 = newSound.Prop.Id;
         }
 
         [RelayCommand(CanExecute = nameof(CanOpenDropList))]
@@ -904,7 +892,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             dropListDialog.ShowAsync();
         }
 
-        private static bool CanOpenDropList(object? parameter) => parameter is Mover mover && mover.PropEx is not null && mover.Type == MoverTypes.MONSTER;
+        private static bool CanOpenDropList(object? parameter) => parameter is Mover mover && mover.Type == MoverType.MONSTER;
 
         [RelayCommand]
         private void AddMover()
@@ -1067,10 +1055,10 @@ namespace eTools_Ultimate.ViewModels.Pages
                 await Task.Run(() =>
                 {
                     HashSet<string> stringIdentifiers = [];
-                    foreach (MoverProp moverProp in moversService.Movers.Select(mover => mover.Prop))
+                    foreach (Mover mover in moversService.Movers)
                     {
-                        stringIdentifiers.Add(moverProp.SzName);
-                        stringIdentifiers.Add(moverProp.SzComment);
+                        stringIdentifiers.Add(mover.SzName);
+                        stringIdentifiers.Add(mover.SzComment);
                     }
                     Task.WaitAll(
                         Task.Run(moversService.Save),
@@ -1132,7 +1120,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             try
             {
-                System.Windows.Clipboard.SetText(mover.Prop.DwId.ToString());
+                System.Windows.Clipboard.SetText(mover.DwId.ToString());
 
                 snackbarService.Show(
                         title: localizer["ID copied"],
@@ -1160,7 +1148,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             try
             {
-                System.Windows.Clipboard.SetText(mover.Prop.SzName);
+                System.Windows.Clipboard.SetText(mover.SzName);
 
                 snackbarService.Show(
                         title: localizer["Name identifier copied"],

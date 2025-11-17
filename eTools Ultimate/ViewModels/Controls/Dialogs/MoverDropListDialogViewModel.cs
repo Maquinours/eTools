@@ -1,4 +1,5 @@
 ﻿using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Movers;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,35 +27,28 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
 
         public string Title => String.Format(App.Services.GetRequiredService<IStringLocalizer<Translations>>()["{0} drop list"], _mover.Name);
 
-        public DropItemGenerator DropItemGenerator => _mover.PropEx?.DropItemGenerator ?? throw new InvalidOperationException("_mover.PropEx is null");
+        public DropItemGenerator DropItemGenerator => _mover.DropItemGenerator;
         public ICollectionView DropListView => new ListCollectionView(_dropList);
         public List<KeyValuePair<int, string>> ItemIdentifiers => [.. _definesService.ReversedItemDefines];
         public List<KeyValuePair<int, string>> ItemKind3Identifiers => [.. _definesService.ReversedItemKind3Defines];
-        public IEnumerable<IMoverDrop> ComputedDrops => [.. _mover.PropEx?.DropItemGenerator.DropGolds ?? [], .. _mover.PropEx?.DropKindGenerator.DropKinds ?? [], .. _mover.PropEx?.DropItemGenerator.DropItems ?? []];
+        public IEnumerable<IMoverDrop> ComputedDrops => [.. _mover.DropItemGenerator.DropGolds, .. _mover.DropKindGenerator.DropKinds, .. _mover.DropItemGenerator.DropItems];
 
         public MoverDropListDialogViewModel(Mover mover)
         {
             _mover = mover;
             _dropList = new(ComputedDrops);
 
-            if (_mover.PropEx is null)
-                throw new InvalidOperationException("mover.PropEx is null");
-
-            _mover.PropEx.DropItemGenerator.DropGolds.CollectionChanged += DropGolds_CollectionChanged;
-            _mover.PropEx.DropItemGenerator.DropItems.CollectionChanged += DropItems_CollectionChanged;
-            _mover.PropEx.DropKindGenerator.DropKinds.CollectionChanged += DropKinds_CollectionChanged;
+            _mover.DropItemGenerator.DropGolds.CollectionChanged += DropGolds_CollectionChanged;
+            _mover.DropItemGenerator.DropItems.CollectionChanged += DropItems_CollectionChanged;
+            _mover.DropKindGenerator.DropKinds.CollectionChanged += DropKinds_CollectionChanged;
         }
 
         [RelayCommand]
         public void AddDropKind()
         {
-            if (_mover.PropEx is null)
-                throw new InvalidOperationException("mover.PropEx is null");
+            DropKind dropKind = new(_mover, Constants.NullId, (short)Math.Max(_mover.DwLevel - 5, 1), (short)Math.Max(_mover.DwLevel - 2, 1));
 
-            DropKindProp dropKindProp = new(Constants.NullId, (short)Math.Max(_mover.Prop.DwLevel - 5, 1), (short)Math.Max(_mover.Prop.DwLevel - 2, 1));
-            DropKind dropKind = new(_mover.PropEx, dropKindProp);
-
-            _mover.PropEx.DropKindGenerator.DropKinds.Add(dropKind);
+            _mover.DropKindGenerator.DropKinds.Add(dropKind);
 
             DropAdded?.Invoke(this, new(dropKind));
         }
@@ -62,13 +56,9 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
         [RelayCommand]
         public void AddDropItem()
         {
-            if (_mover.PropEx is null)
-                throw new InvalidOperationException("mover.PropEx is null");
+            DropItem dropItem = new(DropType.NORMAL, Constants.NullId, 0, 0, 1, 0);
 
-            DropItemProp dropItemProp = new(DropType.DROPTYPE_NORMAL, Constants.NullId, 0, 0, 1, 0);
-            DropItem dropItem = new(dropItemProp);
-
-            _mover.PropEx.DropItemGenerator.DropItems.Add(dropItem);
+            _mover.DropItemGenerator.DropItems.Add(dropItem);
 
             DropAdded?.Invoke(this, new(dropItem));
         }
@@ -76,13 +66,9 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
         [RelayCommand]
         public void AddDropGold()
         {
-            if (_mover.PropEx is null)
-                throw new InvalidOperationException("mover.PropEx is null");
+            DropGold dropGold = new(DropType.SEED, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0, 0);
 
-            DropItemProp dropItemProp = new(DropType.DROPTYPE_SEED, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, 0, 0);
-            DropGold dropGold = new(dropItemProp);
-
-            _mover.PropEx.DropItemGenerator.DropGolds.Add(dropGold);
+            _mover.DropItemGenerator.DropGolds.Add(dropGold);
 
             DropAdded?.Invoke(this, new(dropGold));
         }
@@ -90,19 +76,16 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
         [RelayCommand(CanExecute = nameof(CanRemoveDrop))]
         public void RemoveDrop(object? parameter)
         {
-            if (_mover.PropEx is null)
-                throw new InvalidOperationException("mover.PropEx is null");
-
             switch (parameter)
             {
                 case DropItem dropItem:
-                    _mover.PropEx.DropItemGenerator.DropItems.Remove(dropItem);
+                    _mover.DropItemGenerator.DropItems.Remove(dropItem);
                     break;
                 case DropGold dropGold:
-                    _mover.PropEx.DropItemGenerator.DropGolds.Remove(dropGold);
+                    _mover.DropItemGenerator.DropGolds.Remove(dropGold);
                     break;
                 case DropKind dropKind:
-                    _mover.PropEx.DropKindGenerator.DropKinds.Remove(dropKind);
+                    _mover.DropKindGenerator.DropKinds.Remove(dropKind);
                     break;
                 default:
                     throw new InvalidOperationException("drop is not a valid class");
@@ -115,7 +98,7 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
         {
             if (e.NewItems is not null)
                 _dropList.InsertRange(
-                    (_dropList.Select((item, index) => new { item, index }).LastOrDefault(x => x.item is DropKind)?.index ?? -1) + 1,
+                    (_dropList.Select((item, index) => new { item, index }).LastOrDefault(x => x.item is DropKind || x.item is DropGold)?.index ?? -1) + 1,
                     e.NewItems.Cast<DropKind>());
             if (e.OldItems is not null)
                 _dropList.RemoveRange(e.OldItems.Cast<DropKind>());
@@ -128,7 +111,7 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
         {
             if (e.NewItems is not null)
                 _dropList.InsertRange(
-                    (_dropList.Select((item, index) => new { item, index }).LastOrDefault(x => x.item is DropItem)?.index ?? -1) + 1,
+                    (_dropList.Select((item, index) => new { item, index }).LastOrDefault(x => x.item is DropItem || x.item is DropKind || x.item is DropGold)?.index ?? -1) + 1,
                     e.NewItems.Cast<DropItem>());
             if (e.OldItems is not null)
                 _dropList.RemoveRange(e.OldItems.Cast<DropItem>());
