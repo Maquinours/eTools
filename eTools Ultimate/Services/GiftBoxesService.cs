@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Items;
 using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
@@ -272,7 +273,7 @@ namespace eTools_Ultimate.Services
 
         public GiftBox NewGiftbox(Item item)
         {
-            GiftBoxProp prop = new(item.Prop.DwId);
+            GiftBoxProp prop = new(item.DwId);
             GiftBox giftbox = new(prop, []);
 
             GiftBoxes.Add(giftbox);

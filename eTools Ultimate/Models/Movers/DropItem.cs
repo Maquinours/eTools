@@ -1,4 +1,5 @@
 ﻿using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models.Items;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -84,7 +85,7 @@ namespace eTools_Ultimate.Models.Movers
 
             PropertyChanged += DropItem_PropertyChanged;
             itemsService.Items.CollectionChanged += ItemsService_Items_CollectionChanged;
-            itemsService.ItemPropPropertyChanged += ItemsService_ItemPropPropertyChanged;
+            itemsService.ItemPropertyChanged += ItemsService_ItemPropertyChanged;
         }
         #endregion
 
@@ -96,7 +97,7 @@ namespace eTools_Ultimate.Models.Movers
 
             PropertyChanged -= DropItem_PropertyChanged;
             itemsService.Items.CollectionChanged -= ItemsService_Items_CollectionChanged;
-            itemsService.ItemPropPropertyChanged -= ItemsService_ItemPropPropertyChanged;
+            itemsService.ItemPropertyChanged -= ItemsService_ItemPropertyChanged;
 
             GC.SuppressFinalize(this);
         }
@@ -121,9 +122,9 @@ namespace eTools_Ultimate.Models.Movers
         }
 
         #region Event handlers
-        private void ItemsService_ItemPropPropertyChanged(object? sender, ItemPropPropertyChangedEventArgs e)
+        private void ItemsService_ItemPropertyChanged(object? sender, ItemPropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ItemProp.DwId))
+            if (e.PropertyName == nameof(Item.DwId))
                 NotifyPropertyChanged(nameof(Item));
         }
 

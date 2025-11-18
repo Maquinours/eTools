@@ -1,4 +1,5 @@
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Items;
 using eTools_Ultimate.Models.Models;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
@@ -472,18 +473,18 @@ namespace eTools_Ultimate.ViewModels.Pages
                 int partsRideValue = definesService.Defines["PARTS_RIDE"];
                 foreach (Item item in itemsService.Items)
                 {
-                    if (item.Prop.DwItemKind3 == angelBuffIkValue)
+                    if (item.DwItemKind3 == angelBuffIkValue)
                     {
                         foreach (string fileFormat in Constants.AngelModelFilesFormats)
                         {
-                            string formatedFileName = string.Format(fileFormat, item.Prop.SzTextFileName);
+                            string formatedFileName = string.Format(fileFormat, item.SzTextFileName);
                             if (usedFilesWithTextures.TryGetValue(formatedFileName, out HashSet<int>? textureIndices))
                                 textureIndices.Add(0);
                             else
                                 usedFilesWithTextures.Add(formatedFileName, [0]);
                         }
                     }
-                    if (item.Prop.DwParts == partsRideValue)
+                    if (item.DwParts == partsRideValue)
                     {
                         foreach (string fileFormat in Constants.RideAnimationFilesFormats)
                         {

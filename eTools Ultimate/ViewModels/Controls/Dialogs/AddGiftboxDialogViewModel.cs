@@ -1,4 +1,4 @@
-﻿using eTools_Ultimate.Models;
+﻿using eTools_Ultimate.Models.Items;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -47,7 +47,7 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
         private bool FilterItem(object obj)
         {
             if (obj is not Item item) return false;
-            if (_giftBoxesService.GiftBoxes.Any(gb => gb.Prop.DwItem == item.Prop.DwId)) return false;
+            if (_giftBoxesService.GiftBoxes.Any(gb => gb.Prop.DwItem == item.DwId)) return false;
             if (string.IsNullOrEmpty(this.SearchText)) return true;
             return item.Name.Contains(this.SearchText, StringComparison.CurrentCultureIgnoreCase) || item.Identifier.Contains(this.SearchText, StringComparison.CurrentCultureIgnoreCase);
         }

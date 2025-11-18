@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
+    xmlns:itemModels="clr-namespace:eTools_Ultimate.Models.Items"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Dialogs"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:eTools_Ultimate.Models"
@@ -169,7 +170,7 @@
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type models:Item}">
+                        <DataTemplate DataType="{x:Type itemModels:Item}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -332,7 +333,7 @@
                                 </Grid>
                             </UniformGrid>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type models:Item}">
+                        <DataTemplate DataType="{x:Type itemModels:Item}">
                             <UniformGrid Columns="1">
                                 <Grid>
                                     <Grid.RowDefinitions>

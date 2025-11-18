@@ -812,6 +812,9 @@ namespace eTools_Ultimate.Models.Movers
             PropertyChanged -= Mover_PropertyChanged;
             App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged -= Strings_CollectionChanged;
 
+            DropItemGenerator.Dispose();
+            DropKindGenerator.Dispose();
+
             GC.SuppressFinalize(this);
         }
         #endregion

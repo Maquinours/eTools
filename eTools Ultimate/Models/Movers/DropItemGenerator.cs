@@ -7,7 +7,7 @@ using System.Text;
 
 namespace eTools_Ultimate.Models.Movers
 {
-    public class DropItemGenerator(uint dwMax, IEnumerable<DropGold> dropGolds, IEnumerable<DropItem> dropItems) : INotifyPropertyChanged
+    public class DropItemGenerator(uint dwMax, IEnumerable<DropGold> dropGolds, IEnumerable<DropItem> dropItems) : INotifyPropertyChanged, IDisposable
     {
         #region Fields
         private uint _dwMax = dwMax;
@@ -32,6 +32,21 @@ namespace eTools_Ultimate.Models.Movers
         #endregion
 
         #region Methods
+        #region Public methods
+        public void Dispose()
+        {
+            foreach (DropItem dropItem in DropItems)
+                dropItem.Dispose();
+            foreach (DropGold dropGold in DropGolds)
+                dropGold.Dispose();
+
+            DropItems.Clear();
+            DropGolds.Clear();
+
+            GC.SuppressFinalize(this);
+        }
+        #endregion
+
         #region Private methods
         private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
         {

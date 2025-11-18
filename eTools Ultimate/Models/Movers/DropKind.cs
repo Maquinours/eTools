@@ -1,4 +1,5 @@
 ﻿using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models.Items;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -43,7 +44,7 @@ namespace eTools_Ultimate.Models.Movers
                 short nMinUniq = MinUnique;
                 short nMaxUniq = MaxUnique;
 
-                return [.. App.Services.GetRequiredService<ItemsService>().Items.Where(item => item.Prop.DwItemKind3 == DwIk3 && item.Prop.DwItemRare >= nMinUniq && item.Prop.DwItemRare <= nMaxUniq)];
+                return [.. App.Services.GetRequiredService<ItemsService>().Items.Where(item => item.DwItemKind3 == DwIk3 && item.DwItemRare >= nMinUniq && item.DwItemRare <= nMaxUniq)];
             }
         }
 
@@ -74,9 +75,9 @@ namespace eTools_Ultimate.Models.Movers
             ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
 
             itemsService.Items.CollectionChanged += ItemsService_Items_CollectionChanged;
-            itemsService.ItemPropPropertyChanged += ItemsService_ItemPropPropertyChanged;
+            itemsService.ItemPropertyChanged += ItemsService_ItemPropertyChanged;
             PropertyChanged += DropKind_PropertyChanged;
-            mover.PropertyChanged += Mover_PropertyChanged;
+            _mover.PropertyChanged += Mover_PropertyChanged;
         }
         #endregion
 
@@ -87,8 +88,8 @@ namespace eTools_Ultimate.Models.Movers
             ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
 
             itemsService.Items.CollectionChanged -= ItemsService_Items_CollectionChanged;
-            itemsService.ItemPropPropertyChanged -= ItemsService_ItemPropPropertyChanged;
-
+            itemsService.ItemPropertyChanged -= ItemsService_ItemPropertyChanged;
+            PropertyChanged -= DropKind_PropertyChanged;
             _mover.PropertyChanged -= Mover_PropertyChanged;
 
             GC.SuppressFinalize(this);
@@ -132,9 +133,9 @@ namespace eTools_Ultimate.Models.Movers
             }
         }
 
-        private void ItemsService_ItemPropPropertyChanged(object? sender, ItemPropPropertyChangedEventArgs e)
+        private void ItemsService_ItemPropertyChanged(object? sender, ItemPropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(ItemProp.DwItemKind3))
+            if (e.PropertyName == nameof(Item.DwItemKind3))
                 NotifyPropertyChanged(nameof(Items));
         }
 

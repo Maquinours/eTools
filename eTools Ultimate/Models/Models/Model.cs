@@ -177,6 +177,11 @@ namespace eTools_Ultimate.Models.Models
             PropertyChanged -= Model_PropertyChanged;
             settings.PropertyChanged -= Settings_PropertyChanged;
 
+            foreach(ModelMotion motion in Motions)
+                motion.Dispose();
+
+            Motions.Clear();
+
             GC.SuppressFinalize(this);
         }
         #endregion

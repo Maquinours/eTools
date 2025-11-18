@@ -1,11 +1,11 @@
-﻿using eTools_Ultimate.Models;
-using eTools_Ultimate.Services;
+﻿using eTools_Ultimate.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Media;
 using Wpf.Ui.Abstractions.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
+using eTools_Ultimate.Models.Items;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {

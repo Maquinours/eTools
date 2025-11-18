@@ -24,6 +24,16 @@ namespace eTools_Ultimate.Models.Models
         #region Public methods
         public void Dispose()
         {
+            foreach(IModelItem child in Children)
+            {
+                if (child is not IDisposable disposableChild)
+                    throw new InvalidOperationException("child is not IDisposable");
+
+                disposableChild.Dispose();
+            }
+
+            Children.Clear();
+
             GC.SuppressFinalize(this);
         }
         #endregion

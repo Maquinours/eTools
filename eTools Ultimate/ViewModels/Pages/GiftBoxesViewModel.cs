@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Items;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Controls.Dialogs;
@@ -80,7 +81,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             {
                 if (contentDialog.DataContext is not AddGiftboxDialogViewModel contentDialogViewModel) throw new InvalidOperationException("GiftboxesViewModel::AddGiftbox exception : contentDialog.DataContext is not AddGiftboxDialogViewModel");
                 if (contentDialogViewModel.ItemsView.CurrentItem is not Item item) return;
-                if (giftBoxesService.GiftBoxes.Any(gb => gb.Prop.DwItem == item.Prop.DwId)) return;
+                if (giftBoxesService.GiftBoxes.Any(gb => gb.Prop.DwItem == item.DwId)) return;
 
                 GiftBox giftbox = giftBoxesService.NewGiftbox(item);
 
@@ -123,7 +124,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 int quantity = contentDialogViewModel.Quantity;
                 uint probability = (uint)(contentDialogViewModel.Probability / 100d * 1_000_000);
 
-                GiftBoxItemProp giftBoxItemProp = new(dwItem: item.Prop.DwId, dwProbability: probability, nNum: quantity);
+                GiftBoxItemProp giftBoxItemProp = new(dwItem: item.DwId, dwProbability: probability, nNum: quantity);
                 GiftBoxItem giftBoxItem = new(giftBoxItemProp);
 
                 giftbox.Items.Add(giftBoxItem);
