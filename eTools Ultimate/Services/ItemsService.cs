@@ -1,6 +1,7 @@
 ﻿using eTools_Ultimate.Exceptions;
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
@@ -89,8 +90,7 @@ namespace eTools_Ultimate.Services
 
             int itemModelType = _definesService.Defines["OT_ITEM"];
             Model[] itemModels = _modelsService.GetModelsByType(itemModelType);
-            Dictionary<uint, Model> itemModelsDictionary = itemModels.ToDictionary(x => x.Prop.DwIndex, x => x); // used to get better performance
-
+            Dictionary<uint, Model> itemModelsDictionary = itemModels.ToDictionary(x => x.DwIndex, x => x); // used to get better performance
 
             using (Script script = new())
             {

@@ -1,4 +1,5 @@
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Models;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Windows;
@@ -509,9 +510,9 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (model.ModelTypeIdentifier == "MODELTYPE_ANIMATED_MESH")
                     paths.Add(Path.ChangeExtension(model.Model3DFileName, ".chr"));
 
-                string partsPath = $"part_{model.Prop.SzPart}.o3d";
+                string partsPath = $"part_{model.SzPart}.o3d";
                 paths.Add(partsPath);
-                string[] parts = model.Prop.SzPart.Split('/');
+                string[] parts = model.SzPart.Split('/');
                 if (parts.Length > 1)
                 {
                     paths.Add($"part_{parts[0]}.o3d");
@@ -519,16 +520,16 @@ namespace eTools_Ultimate.ViewModels.Pages
                 }
                 foreach (ModelMotion motion in model.Motions)
                 {
-                    string filePath = $"{prefix}_{motion.Prop.SzMotion}.ani";
+                    string filePath = $"{prefix}_{motion.SzMotion}.ani";
                     paths.Add(filePath);
                 }
 
                 foreach (string path in paths)
                 {
                     if (usedFilesWithTextures.TryGetValue(path, out HashSet<int>? textureIndices))
-                        textureIndices.Add(model.Prop.NTextureEx);
+                        textureIndices.Add(model.NTextureEx);
                     else
-                        usedFilesWithTextures.Add(path, [model.Prop.NTextureEx]);
+                        usedFilesWithTextures.Add(path, [model.NTextureEx]);
                 }
 
                 ScanProgress = $"{localizer[$"Scanning models..."]} ({Math.Floor((i + 1d) / models.Length * 100)}%)";

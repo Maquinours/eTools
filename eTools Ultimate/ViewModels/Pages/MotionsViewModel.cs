@@ -1,5 +1,6 @@
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Models;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.Localization;
@@ -67,9 +68,9 @@ namespace eTools_Ultimate.ViewModels.Pages
                 ModelMotion[] maleMotions = [.. maleMoverModel.Motions];
                 ModelMotion[] femaleMotions = [.. femaleMoverModel.Motions];
 
-                ModelMotion[] common = [.. maleMotions.Where(m => femaleMotions.Any(f => f.Prop.IMotion == m.Prop.IMotion))];
+                ModelMotion[] common = [.. maleMotions.Where(m => femaleMotions.Any(f => f.IMotion == m.IMotion))];
 
-                string[] commonIdentifiers = [.. common.Select(x => definesService.ReversedMotionTypeDefines[(int)x.Prop.IMotion])];
+                string[] commonIdentifiers = [.. common.Select(x => definesService.ReversedMotionTypeDefines[(int)x.IMotion])];
 
                 return commonIdentifiers;
             }
@@ -222,12 +223,12 @@ namespace eTools_Ultimate.ViewModels.Pages
             uint moverId = (uint)definesService.Defines[moverIdentifier];
             Model? moverModel = modelsService.GetModelByTypeAndId(moverModelType, moverId);
             if (moverModel is null) return;
-            ModelMotion? modelMotion = moverModel.Motions.FirstOrDefault(m => m.Prop.IMotion == motionType);
+            ModelMotion? modelMotion = moverModel.Motions.FirstOrDefault(m => m.IMotion == motionType);
             if (modelMotion is null) return;
 
             string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
-            string root = $"mvr_{moverModel.Prop.SzName}";
-            string lowerMotionKey = modelMotion.Prop.SzMotion;
+            string root = $"mvr_{moverModel.SzName}";
+            string lowerMotionKey = modelMotion.SzMotion;
 
             string motionFile = $@"{modelsFolderPath}{root}_{lowerMotionKey}.ani";
 

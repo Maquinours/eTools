@@ -1,4 +1,5 @@
 ﻿using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models.Models;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Scan;
@@ -357,7 +358,7 @@ namespace eTools_Ultimate.Models.Movers
         #region Calculated properties
         public Model? Model => App.Services.GetRequiredService<ModelsService>().GetModelByObject(this);
 
-        public uint Id { get => DwId; set { if (value != this.Id) { DwId = value; Model?.Prop.DwIndex = value; } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
+        public uint Id { get => DwId; set { if (value != this.Id) { DwId = value; Model?.DwIndex = value; } } } // We don't notify changes cause Prop_PropertyChanged is already doing it
 
         public string Identifier
         {

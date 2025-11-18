@@ -1,5 +1,6 @@
 using DDSImageParser;
 using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models.Models;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -791,7 +792,7 @@ namespace eTools_Ultimate.Models
 
         public Model? Model { get => _model; set { _model = value; NotifyPropertyChanged(); } }
 
-        public uint Id { get => this.Prop.DwId; set { if (value != this.Id) { this.Prop.DwId = value; if (this.Model is not null) this.Model.Prop.DwIndex = value; } } }
+        public uint Id { get => Prop.DwId; set { if (value != Id) { Prop.DwId = value; Model?.DwIndex = value; } } }
 
         public string Identifier
         {
