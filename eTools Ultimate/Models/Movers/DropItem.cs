@@ -48,7 +48,15 @@ namespace eTools_Ultimate.Models.Movers
         #endregion
 
         #region Calculated properties
-        public Item? Item => App.Services.GetRequiredService<ItemsService>().Items.FirstOrDefault(x => x.Id == DwIndex);
+        public Item? Item
+        {
+            get
+            {
+                if (App.Services.GetRequiredService<ItemsService>().ItemsById.TryGetValue(DwIndex, out Item? item))
+                    return item;
+                return null;
+            }
+        }
 
         public string ItemIdentifier
         {
@@ -83,9 +91,8 @@ namespace eTools_Ultimate.Models.Movers
 
             ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
 
-            PropertyChanged += DropItem_PropertyChanged;
-            itemsService.Items.CollectionChanged += ItemsService_Items_CollectionChanged;
-            itemsService.ItemPropertyChanged += ItemsService_ItemPropertyChanged;
+            PropertyChanged += DropItem_PropertyChanged; 
+            itemsService.ItemsById.CollectionChanged += ItemsService_ItemsById_CollectionChanged;
         }
         #endregion
 
@@ -95,9 +102,8 @@ namespace eTools_Ultimate.Models.Movers
         {
             ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
 
-            PropertyChanged -= DropItem_PropertyChanged;
-            itemsService.Items.CollectionChanged -= ItemsService_Items_CollectionChanged;
-            itemsService.ItemPropertyChanged -= ItemsService_ItemPropertyChanged;
+            PropertyChanged -= DropItem_PropertyChanged; 
+            itemsService.ItemsById.CollectionChanged -= ItemsService_ItemsById_CollectionChanged;
 
             GC.SuppressFinalize(this);
         }
@@ -122,16 +128,6 @@ namespace eTools_Ultimate.Models.Movers
         }
 
         #region Event handlers
-        private void ItemsService_ItemPropertyChanged(object? sender, ItemPropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(Item.DwId))
-                NotifyPropertyChanged(nameof(Item));
-        }
-
-        private void ItemsService_Items_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-        {
-            NotifyPropertyChanged(nameof(Item));
-        }
 
         private void DropItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
@@ -145,6 +141,15 @@ namespace eTools_Ultimate.Models.Movers
                     NotifyPropertyChanged(nameof(ProbabilityPercent));
                     break;
             }
+        }
+
+        private void ItemsService_ItemsById_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (
+                (e.NewItems is not null && e.NewItems.Cast<KeyValuePair<uint, Item>>().Any(x => x.Key == DwIndex)) ||
+                (e.OldItems is not null && e.OldItems.Cast<KeyValuePair<uint, Item>>().Any(x => x.Key == DwIndex))
+                )
+                NotifyPropertyChanged(nameof(Item));
         }
         #endregion
         #endregion

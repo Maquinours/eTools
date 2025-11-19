@@ -32,7 +32,7 @@ namespace eTools_Ultimate.Models.Movers
         public uint DwProbability => _dwProbability;
         public uint DwLevel => _dwLevel;
         public uint DwNumber { get => _dwNumber; set => SetValue(ref _dwNumber, value); }
-        public uint DwNumber2 {get => _dwNumber2; set => SetValue(ref _dwNumber2, value); }
+        public uint DwNumber2 { get => _dwNumber2; set => SetValue(ref _dwNumber2, value); }
         #endregion
 
         #region Calculated properties
@@ -44,7 +44,8 @@ namespace eTools_Ultimate.Models.Movers
                 if (Script.TryGetNumberFromString(ItemIdentifier, out int val))
                 {
                     uint dwId = (uint)val;
-                    return App.Services.GetRequiredService<ItemsService>().Items.FirstOrDefault(x => x.Id == dwId);
+                    if (App.Services.GetRequiredService<ItemsService>().ItemsById.TryGetValue(dwId, out Item? item))
+                        return item;
                 }
                 return null;
             }
@@ -69,8 +70,7 @@ namespace eTools_Ultimate.Models.Movers
 
             ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
 
-            itemsService.Items.CollectionChanged += ItemsService_Items_CollectionChanged;
-            itemsService.ItemPropertyChanged += ItemsService_ItemPropertyChanged;
+            itemsService.ItemsById.CollectionChanged += ItemsService_ItemsById_CollectionChanged;
         }
         #endregion
 
@@ -79,8 +79,7 @@ namespace eTools_Ultimate.Models.Movers
         {
             ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
 
-            itemsService.Items.CollectionChanged -= ItemsService_Items_CollectionChanged;
-            itemsService.ItemPropertyChanged -= ItemsService_ItemPropertyChanged;
+            itemsService.ItemsById.CollectionChanged -= ItemsService_ItemsById_CollectionChanged;
 
             GC.SuppressFinalize(this);
         }
@@ -105,15 +104,16 @@ namespace eTools_Ultimate.Models.Movers
         }
 
         #region Event handlers
-        private void ItemsService_ItemPropertyChanged(object? sender, ItemPropertyChangedEventArgs e)
+        private void ItemsService_ItemsById_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Item.DwId))
-                NotifyPropertyChanged(nameof(Item));
-        }
-
-        private void ItemsService_Items_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-        {
-            NotifyPropertyChanged(nameof(Item));
+            if (Script.TryGetNumberFromString(ItemIdentifier, out int dwId))
+            {
+                if (
+                    (e.NewItems is not null && e.NewItems.Cast<KeyValuePair<uint, Item>>().Any(x => x.Key == dwId)) ||
+                    (e.OldItems is not null && e.OldItems.Cast<KeyValuePair<uint, Item>>().Any(x => x.Key == dwId))
+                    )
+                    NotifyPropertyChanged(nameof(Item));
+            }
         }
         #endregion
         #endregion

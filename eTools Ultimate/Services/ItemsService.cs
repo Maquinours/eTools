@@ -23,59 +23,145 @@ namespace eTools_Ultimate.Services
 
         private readonly ObservableCollection<Item> items = [];
         private readonly ObservableDictionary<uint, Item> _itemsById;
+        private readonly ObservableDictionary<(uint, uint), Item[]> _itemsByIk3AndRarity;
 
         public event EventHandler<ItemPropertyChangedEventArgs>? ItemPropertyChanged;
 
         public ObservableCollection<Item> Items => this.items;
         public ObservableDictionary<uint, Item> ItemsById => _itemsById;
+        public ObservableDictionary<(uint, uint), Item[]> ItemsByIk3AndRarity => _itemsByIk3AndRarity;
 
         public ItemsService(SettingsService settingsService, StringsService stringsService, DefinesService definesService, ModelsService modelsService)
         {
             _settings = settingsService.Settings;
             _definesService = definesService;
             _modelsService = modelsService;
+            _itemsById = new(Items.ToDictionary(x => x.DwId, x => x));
+            _itemsByIk3AndRarity = new(Items.GroupBy(x => (x.DwItemKind3, x.DwItemRare)).ToDictionary(x => x.Key, x => x.ToArray()));
 
             Items.CollectionChanged += Items_CollectionChanged;
         }
 
         private void Items_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (e.NewItems != null)
-            {
-                foreach (Item newItem in e.NewItems)
-                    newItem.PropertyChanged += Item_PropertyChanged;
-
-                ItemsById.AddRange(e.NewItems.Cast<Item>().Select(item => new KeyValuePair<uint, Item>(item.DwId, item)));
-            }
             if (e.OldItems != null)
             {
-                foreach (Item oldItem in e.OldItems)
+                Item[] oldItems = [.. e.OldItems.Cast<Item>()];
+
+                foreach (Item oldItem in oldItems)
                     oldItem.PropertyChanged -= Item_PropertyChanged;
 
-                ItemsById.RemoveRange(e.OldItems.Cast<Item>().Select(item => item.DwId));
+                ItemsById.RemoveRange(oldItems.Cast<Item>().Select(item => item.DwId));
+                foreach (IGrouping<(uint, uint), Item> group in oldItems.GroupBy(x => (x.DwItemKind3, x.DwItemRare)))
+                {
+                    if (ItemsByIk3AndRarity.TryGetValue(group.Key, out Item[]? items))
+                    {
+                        HashSet<Item> itemsToRemove = [.. group];
+                        IEnumerable<Item> newItems = items.Where(x => !itemsToRemove.Contains(x));
+                        if (newItems.Any())
+                            ItemsByIk3AndRarity[group.Key] = [.. newItems];
+                        else
+                            ItemsByIk3AndRarity.Remove(group.Key);
+                    }
+                    else throw new InvalidOperationException("ItemsByIk3 does not contain key for deletion");
+                }
+            }
+            if (e.NewItems != null)
+            {
+                Item[] newItems = [.. e.NewItems.Cast<Item>()];
+
+                foreach (Item newItem in newItems)
+                    newItem.PropertyChanged += Item_PropertyChanged;
+
+                ItemsById.AddRange(newItems.Select(item => new KeyValuePair<uint, Item>(item.DwId, item)));
+                foreach (IGrouping<(uint, uint), Item> group in newItems.GroupBy(x => (x.DwItemKind3, x.DwItemRare)))
+                {
+                    if (ItemsByIk3AndRarity.TryGetValue(group.Key, out Item[]? items))
+                        ItemsByIk3AndRarity[group.Key] = [.. items, .. group];
+                    else
+                        ItemsByIk3AndRarity[group.Key] = [.. group];
+                }
             }
         }
 
         private void Item_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (sender is not Item item) throw new InvalidOperationException("sender is not Item");
-            if(e.PropertyName is null) throw new InvalidOperationException("e.PropertyName is null");
+            if (e.PropertyName is null) throw new InvalidOperationException("e.PropertyName is null");
 
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 case nameof(Item.DwId):
-                    if (e is not PropertyChangedExtendedEventArgs extendedArgs)
-                        throw new InvalidOperationException("e is not PropertyChangedExtendedEventArgs");
-                    if (extendedArgs.OldValue is not uint oldValue || extendedArgs.NewValue is not uint newValue)
-                        throw new InvalidOperationException("extendedArgs.OldValue is not uint oldValue ||  extendedArgs.NewValue is not uint newValue");
-                    if (ItemsById[oldValue] != item)
-                        throw new InvalidOperationException("ItemsById[oldValue] != item");
-                    if (item.DwId != newValue)
-                        throw new InvalidOperationException("item.DwId != newValue");
+                    {
+                        if (e is not PropertyChangedExtendedEventArgs extendedArgs)
+                            throw new InvalidOperationException("e is not PropertyChangedExtendedEventArgs");
+                        if (extendedArgs.OldValue is not uint oldValue || extendedArgs.NewValue is not uint newValue)
+                            throw new InvalidOperationException("extendedArgs.OldValue is not uint oldValue ||  extendedArgs.NewValue is not uint newValue");
+                        if (ItemsById[oldValue] != item)
+                            throw new InvalidOperationException("ItemsById[oldValue] != item");
+                        if (item.DwId != newValue)
+                            throw new InvalidOperationException("item.DwId != newValue");
 
-                    ItemsById.Remove(oldValue);
-                    ItemsById.Add(newValue, item);
-                    break;
+                        ItemsById.Remove(oldValue);
+                        ItemsById.Add(newValue, item);
+                        break;
+                    }
+                case nameof(Item.DwItemKind3):
+                    {
+                        if (e is not PropertyChangedExtendedEventArgs extendedArgs)
+                            throw new InvalidOperationException("e is not PropertyChangedExtendedEventArgs");
+                        if (extendedArgs.OldValue is not uint oldValue || extendedArgs.NewValue is not uint newValue)
+                            throw new InvalidOperationException("extendedArgs.OldValue is not uint oldValue ||  extendedArgs.NewValue is not uint newValue");
+                        if (item.DwItemKind3 != newValue)
+                            throw new InvalidOperationException("item.DwId != newValue");
+
+                        // Deletion
+                        if (ItemsByIk3AndRarity.TryGetValue((oldValue, item.DwItemRare), out Item[]? oldIk3Items))
+                        {
+                            IEnumerable<Item> newItems = oldIk3Items.Where(x => x != item);
+                            if (newItems.Any())
+                                ItemsByIk3AndRarity[(oldValue, item.DwItemRare)] = [.. newItems];
+                            else
+                                ItemsByIk3AndRarity.Remove((oldValue, item.DwItemRare));
+                        }
+                        else throw new InvalidOperationException("ItemsByIk3 does not contain key for deletion");
+
+                        // Add
+                        if (ItemsByIk3AndRarity.TryGetValue((newValue, item.DwItemRare), out Item[]? newIk3Items))
+                            ItemsByIk3AndRarity[(newValue, item.DwItemRare)] = [.. newIk3Items, item];
+                        else
+                            ItemsByIk3AndRarity[(newValue, item.DwItemRare)] = [item];
+
+                        break;
+                    }
+                case nameof(Item.DwItemRare):
+                    {
+                        if (e is not PropertyChangedExtendedEventArgs extendedArgs)
+                            throw new InvalidOperationException("e is not PropertyChangedExtendedEventArgs");
+                        if (extendedArgs.OldValue is not uint oldValue || extendedArgs.NewValue is not uint newValue)
+                            throw new InvalidOperationException("extendedArgs.OldValue is not uint oldValue ||  extendedArgs.NewValue is not uint newValue");
+                        if (item.DwItemRare != newValue)
+                            throw new InvalidOperationException("item.DwId != newValue");
+
+                        // Deletion
+                        if (ItemsByIk3AndRarity.TryGetValue((item.DwItemKind3, oldValue), out Item[]? oldIk3Items))
+                        {
+                            IEnumerable<Item> newItems = oldIk3Items.Where(x => x != item);
+                            if (newItems.Any())
+                                ItemsByIk3AndRarity[(item.DwItemKind3, oldValue)] = [.. newItems];
+                            else
+                                ItemsByIk3AndRarity.Remove((item.DwItemKind3, oldValue));
+                        }
+                        else throw new InvalidOperationException("ItemsByIk3 does not contain key for deletion");
+
+                        // Add
+                        if (ItemsByIk3AndRarity.TryGetValue((item.DwItemKind3, newValue), out Item[]? newIk3Items))
+                            ItemsByIk3AndRarity[(item.DwItemKind3, newValue)] = [.. newIk3Items, item];
+                        else
+                            ItemsByIk3AndRarity[(item.DwItemKind3, newValue)] = [item];
+
+                        break;
+                    }
             }
 
             ItemPropertyChanged?.Invoke(this, new ItemPropertyChangedEventArgs(item, e.PropertyName));
@@ -97,7 +183,7 @@ namespace eTools_Ultimate.Services
         {
             this.ClearItems();
 
-            int itemModelType = _definesService.Defines["OT_ITEM"];
+            Dictionary<uint, Item> items = [];
 
             using Script script = new();
 
@@ -548,8 +634,11 @@ namespace eTools_Ultimate.Services
                     bIsLooksChangeMaterial: bIsLooksChangeMaterial
                     );
 
-                Items.Add(item);
+                items[item.DwId] = item;
             }
+
+            foreach (Item item in items.Values)
+                Items.Add(item);
         }
     }
 

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Data;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Data;
@@ -44,7 +45,17 @@ namespace eTools_Ultimate.Models.Movers
                 short nMinUniq = MinUnique;
                 short nMaxUniq = MaxUnique;
 
-                return [.. App.Services.GetRequiredService<ItemsService>().Items.Where(item => item.DwItemKind3 == DwIk3 && item.DwItemRare >= nMinUniq && item.DwItemRare <= nMaxUniq)];
+                ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
+
+                List<Item> result = [];
+
+                foreach (int unique in Enumerable.Range(nMinUniq, nMaxUniq - nMinUniq + 1))
+                {
+                    if (itemsService.ItemsByIk3AndRarity.TryGetValue((DwIk3, (uint)unique), out Item[]? items))
+                        result.AddRange(items);
+                }
+
+                return [.. result];
             }
         }
 
@@ -74,8 +85,7 @@ namespace eTools_Ultimate.Models.Movers
 
             ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
 
-            itemsService.Items.CollectionChanged += ItemsService_Items_CollectionChanged;
-            itemsService.ItemPropertyChanged += ItemsService_ItemPropertyChanged;
+            itemsService.ItemsByIk3AndRarity.CollectionChanged += ItemsService_ItemsByIk3AndRarity_CollectionChanged;
             PropertyChanged += DropKind_PropertyChanged;
             _mover.PropertyChanged += Mover_PropertyChanged;
         }
@@ -87,8 +97,7 @@ namespace eTools_Ultimate.Models.Movers
         {
             ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
 
-            itemsService.Items.CollectionChanged -= ItemsService_Items_CollectionChanged;
-            itemsService.ItemPropertyChanged -= ItemsService_ItemPropertyChanged;
+            itemsService.ItemsByIk3AndRarity.CollectionChanged -= ItemsService_ItemsByIk3AndRarity_CollectionChanged;
             PropertyChanged -= DropKind_PropertyChanged;
             _mover.PropertyChanged -= Mover_PropertyChanged;
 
@@ -133,15 +142,19 @@ namespace eTools_Ultimate.Models.Movers
             }
         }
 
-        private void ItemsService_ItemPropertyChanged(object? sender, ItemPropertyChangedEventArgs e)
+        private void ItemsService_ItemsByIk3AndRarity_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(Item.DwItemKind3))
-                NotifyPropertyChanged(nameof(Items));
-        }
+            short nMinUniq = MinUnique;
+            short nMaxUniq = MaxUnique;
 
-        private void ItemsService_Items_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
-        {
-            NotifyPropertyChanged(nameof(Items));
+            HashSet<(uint, uint)> possibleKeys = [.. Enumerable.Range(nMinUniq, nMaxUniq - nMinUniq + 1).Select(x => (DwIk3, (uint)x))];
+
+            if (
+                (e.OldItems is not null && e.OldItems.Cast<KeyValuePair<(uint, uint), Item>>().Any(x => possibleKeys.Contains(x.Key))) ||
+                (e.NewItems is not null && e.NewItems.Cast<KeyValuePair<(uint, uint), Item>>().Any(x => possibleKeys.Contains(x.Key)))
+                )
+                NotifyPropertyChanged(nameof(Items));
+
         }
         #endregion
         #endregion
