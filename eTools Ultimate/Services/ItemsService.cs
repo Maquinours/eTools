@@ -22,10 +22,12 @@ namespace eTools_Ultimate.Services
         private readonly ModelsService _modelsService;
 
         private readonly ObservableCollection<Item> items = [];
+        private readonly ObservableDictionary<uint, Item> _itemsById;
 
         public event EventHandler<ItemPropertyChangedEventArgs>? ItemPropertyChanged;
 
         public ObservableCollection<Item> Items => this.items;
+        public ObservableDictionary<uint, Item> ItemsById => _itemsById;
 
         public ItemsService(SettingsService settingsService, StringsService stringsService, DefinesService definesService, ModelsService modelsService)
         {
@@ -42,11 +44,15 @@ namespace eTools_Ultimate.Services
             {
                 foreach (Item newItem in e.NewItems)
                     newItem.PropertyChanged += Item_PropertyChanged;
+
+                ItemsById.AddRange(e.NewItems.Cast<Item>().Select(item => new KeyValuePair<uint, Item>(item.DwId, item)));
             }
             if (e.OldItems != null)
             {
                 foreach (Item oldItem in e.OldItems)
                     oldItem.PropertyChanged -= Item_PropertyChanged;
+
+                ItemsById.RemoveRange(e.OldItems.Cast<Item>().Select(item => item.DwId));
             }
         }
 
@@ -54,6 +60,23 @@ namespace eTools_Ultimate.Services
         {
             if (sender is not Item item) throw new InvalidOperationException("sender is not Item");
             if(e.PropertyName is null) throw new InvalidOperationException("e.PropertyName is null");
+
+            switch(e.PropertyName)
+            {
+                case nameof(Item.DwId):
+                    if (e is not PropertyChangedExtendedEventArgs extendedArgs)
+                        throw new InvalidOperationException("e is not PropertyChangedExtendedEventArgs");
+                    if (extendedArgs.OldValue is not uint oldValue || extendedArgs.NewValue is not uint newValue)
+                        throw new InvalidOperationException("extendedArgs.OldValue is not uint oldValue ||  extendedArgs.NewValue is not uint newValue");
+                    if (ItemsById[oldValue] != item)
+                        throw new InvalidOperationException("ItemsById[oldValue] != item");
+                    if (item.DwId != newValue)
+                        throw new InvalidOperationException("item.DwId != newValue");
+
+                    ItemsById.Remove(oldValue);
+                    ItemsById.Add(newValue, item);
+                    break;
+            }
 
             ItemPropertyChanged?.Invoke(this, new ItemPropertyChangedEventArgs(item, e.PropertyName));
         }
