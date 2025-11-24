@@ -44,8 +44,7 @@ namespace eTools_Ultimate.Models.Movers
                 if (Script.TryGetNumberFromString(ItemIdentifier, out int val))
                 {
                     uint dwId = (uint)val;
-                    if (App.Services.GetRequiredService<ItemsService>().ItemsById.TryGetValue(dwId, out Item? item))
-                        return item;
+                    return App.Services.GetRequiredService<ItemsService>().GetItemById(dwId);
                 }
                 return null;
             }

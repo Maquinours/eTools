@@ -174,9 +174,11 @@ namespace eTools_Ultimate.Services
             this.Items.Clear();
         }
 
-        public Item? GetItemById(int dwId)
+        public Item? GetItemById(uint dwId)
         {
-            return this.Items.FirstOrDefault(x => x.Id == dwId);
+            if(ItemsById.TryGetValue(dwId, out Item? item))
+                return item;
+            return null;
         }
 
         public void Load()

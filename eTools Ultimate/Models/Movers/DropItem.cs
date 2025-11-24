@@ -48,15 +48,7 @@ namespace eTools_Ultimate.Models.Movers
         #endregion
 
         #region Calculated properties
-        public Item? Item
-        {
-            get
-            {
-                if (App.Services.GetRequiredService<ItemsService>().ItemsById.TryGetValue(DwIndex, out Item? item))
-                    return item;
-                return null;
-            }
-        }
+        public Item? Item => App.Services.GetRequiredService<ItemsService>().GetItemById(DwIndex);
 
         public string ItemIdentifier
         {
