@@ -1,6 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.GiftBoxes;
 using eTools_Ultimate.Models.Items;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
@@ -66,7 +66,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private bool FilterItem(object obj)
         {
-            if (obj is not GiftBox giftbox) return false;
+            if (obj is not Giftbox giftbox) return false;
             if (string.IsNullOrEmpty(this.SearchText)) return true;
             Item? item = giftbox.Item;
             return item == null || item.Name.ToLower().Contains(this.SearchText.ToLower());
@@ -81,9 +81,9 @@ namespace eTools_Ultimate.ViewModels.Pages
             {
                 if (contentDialog.DataContext is not AddGiftboxDialogViewModel contentDialogViewModel) throw new InvalidOperationException("GiftboxesViewModel::AddGiftbox exception : contentDialog.DataContext is not AddGiftboxDialogViewModel");
                 if (contentDialogViewModel.ItemsView.CurrentItem is not Item item) return;
-                if (giftBoxesService.GiftBoxes.Any(gb => gb.Prop.DwItem == item.DwId)) return;
+                if (giftBoxesService.GiftBoxes.Any(gb => gb.DwItem == item.DwId)) return;
 
-                GiftBox giftbox = giftBoxesService.NewGiftbox(item);
+                Giftbox giftbox = giftBoxesService.NewGiftbox(item);
 
                 GiftboxesView.Refresh();
                 GiftboxesView.MoveCurrentTo(giftbox);
@@ -93,7 +93,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private async Task RemoveGiftbox()
         {
-            if (GiftboxesView.CurrentItem is not GiftBox giftbox) return;
+            if (GiftboxesView.CurrentItem is not Giftbox giftbox) return;
 
             ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
                  new SimpleContentDialogCreateOptions()
@@ -111,7 +111,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private async Task AddGiftboxItem()
         {
-            if (GiftboxesView.CurrentItem is not GiftBox giftbox) return;
+            if (GiftboxesView.CurrentItem is not Giftbox giftbox) return;
 
             var contentDialog = new AddGiftboxItemDialog(contentDialogService.GetDialogHost());
 
@@ -124,17 +124,16 @@ namespace eTools_Ultimate.ViewModels.Pages
                 int quantity = contentDialogViewModel.Quantity;
                 uint probability = (uint)(contentDialogViewModel.Probability / 100d * 1_000_000);
 
-                GiftBoxItemProp giftBoxItemProp = new(dwItem: item.DwId, dwProbability: probability, nNum: quantity);
-                GiftBoxItem giftBoxItem = new(giftBoxItemProp);
+                GiftboxItem giftBoxItem = new(dwItem: item.DwId, dwProbability: probability, nNum: quantity);
 
                 giftbox.Items.Add(giftBoxItem);
             }
         }
 
         [RelayCommand]
-        private async Task RemoveGiftboxItem(GiftBoxItem item)
+        private async Task RemoveGiftboxItem(GiftboxItem item)
         {
-            if (GiftboxesView.CurrentItem is not GiftBox giftbox) return;
+            if (GiftboxesView.CurrentItem is not Giftbox giftbox) return;
             if (!giftbox.Items.Contains(item)) return;
 
             ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
@@ -184,7 +183,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
-        private void CopyItemIdentifier(GiftBox giftbox)
+        private void CopyItemIdentifier(Giftbox giftbox)
         {
             try
             {
@@ -212,11 +211,11 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
-        private void CopyItemId(GiftBox giftbox)
+        private void CopyItemId(Giftbox giftbox)
         {
             try
             {
-                System.Windows.Clipboard.SetText(giftbox.Prop.DwItem.ToString());
+                System.Windows.Clipboard.SetText(giftbox.DwItem.ToString());
 
                 snackbarService.Show(
                         title: localizer["Item ID copied"],

@@ -1,5 +1,5 @@
 ﻿using eTools_Ultimate.Helpers;
-using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.GiftBoxes;
 using eTools_Ultimate.Models.Items;
 using Microsoft.Extensions.DependencyInjection;
 using Scan;
@@ -25,14 +25,14 @@ namespace eTools_Ultimate.Services
         GiftBox6
     };
 
-    public class GiftBoxesService(SettingsService settingsService)
+    public class GiftBoxesService(SettingsService settingsService, DefinesService definesService)
     {
-        private readonly ObservableCollection<GiftBox> _giftboxes = [];
-        public ObservableCollection<GiftBox> GiftBoxes => this._giftboxes;
+        private readonly ObservableCollection<Giftbox> _giftboxes = [];
+        public ObservableCollection<Giftbox> GiftBoxes => this._giftboxes;
 
         private void ClearGiftBoxes()
         {
-            foreach (GiftBox giftbox in this.GiftBoxes)
+            foreach (Giftbox giftbox in this.GiftBoxes)
                 giftbox.Dispose();
             this.GiftBoxes.Clear();
         }
@@ -51,7 +51,7 @@ namespace eTools_Ultimate.Services
                     if (script.EndOfStream) break;
 
                     uint dwGiftbox;
-                    List<GiftBoxItem> items = new();
+                    List<GiftboxItem> items = new();
 
                     switch (script.Token)
                     {
@@ -69,8 +69,7 @@ namespace eTools_Ultimate.Services
                                     uint probability = (uint)script.GetNumber() * 100;
                                     int num = script.GetNumber();
 
-                                    GiftBoxItemProp giftBoxItemProp = new(item, probability, num);
-                                    GiftBoxItem giftBoxItem = new(giftBoxItemProp);
+                                    GiftboxItem giftBoxItem = new(item, probability, num);
                                     items.Add(giftBoxItem);
                                 }
                                 break;
@@ -87,8 +86,7 @@ namespace eTools_Ultimate.Services
                                     uint probability = (uint)script.GetNumber();
                                     int num = script.GetNumber();
 
-                                    GiftBoxItemProp giftBoxItemProp = new(item, probability, num);
-                                    GiftBoxItem giftBoxItem = new(giftBoxItemProp);
+                                    GiftboxItem giftBoxItem = new(item, probability, num);
                                     items.Add(giftBoxItem);
                                 }
                                 break;
@@ -106,8 +104,7 @@ namespace eTools_Ultimate.Services
                                     int num = script.GetNumber();
                                     byte flag = unchecked((byte)script.GetNumber());
 
-                                    GiftBoxItemProp giftBoxItemProp = new(item, probability, num, flag);
-                                    GiftBoxItem giftBoxItem = new(giftBoxItemProp);
+                                    GiftboxItem giftBoxItem = new(item, probability, num, flag);
                                     items.Add(giftBoxItem);
                                 }
                                 break;
@@ -128,8 +125,7 @@ namespace eTools_Ultimate.Services
                                     byte flag = unchecked((byte)script.GetNumber());
                                     int span = script.GetNumber();
 
-                                    GiftBoxItemProp giftBoxItemProp = new(item, probability, num, flag, span);
-                                    GiftBoxItem giftBoxItem = new(giftBoxItemProp);
+                                    GiftboxItem giftBoxItem = new(item, probability, num, flag, span);
                                     items.Add(giftBoxItem);
                                 }
                                 break;
@@ -149,16 +145,14 @@ namespace eTools_Ultimate.Services
                                     int span = script.GetNumber();
                                     int abilityOption = script.GetNumber();
 
-                                    GiftBoxItemProp giftBoxItemProp = new(item, probability, num, flag, span, abilityOption);
-                                    GiftBoxItem giftBoxItem = new GiftBoxItem(giftBoxItemProp);
+                                    GiftboxItem giftBoxItem = new(item, probability, num, flag, span, abilityOption);
                                     items.Add(giftBoxItem);
                                 }
                                 break;
                             }
                         default: continue;
                     }
-                    GiftBoxProp giftBoxProp = new(dwGiftbox);
-                    GiftBox giftbox = new(giftBoxProp, items);
+                    Giftbox giftbox = new(dwGiftbox, items);
                     this.GiftBoxes.Add(giftbox);
                 }
             }
@@ -175,20 +169,19 @@ namespace eTools_Ultimate.Services
             writer.WriteLine("// ========================================");
             writer.WriteLine();
 
-            foreach (GiftBox giftBox in this.GiftBoxes)
+            foreach (Giftbox giftbox in GiftBoxes)
             {
-                GiftBoxProp prop = giftBox.Prop;
-                IEnumerable<GiftBoxItem> items = giftBox.Items;
+                IEnumerable<GiftboxItem> items = giftbox.Items;
 
-                GiftBoxType type = items.Any(x => x.Prop.NAbilityOption != 0) ? GiftBoxType.GiftBox6 :
-                                  items.Any(x => x.Prop.NSpan != 0) ? (items.Any(x => x.Prop.DwProbability % 100 != 0 && x.Prop.DwProbability % 10 == 0) ? GiftBoxType.GiftBox5 : GiftBoxType.GiftBox4) :
-                                  items.Any(x => x.Prop.NFlag != 0) ? GiftBoxType.GiftBox3 :
-                                  items.Any(x => x.Prop.DwProbability % 100 != 0) ? GiftBoxType.GiftBox2 :
+                GiftBoxType type = items.Any(x => x.NAbilityOption != 0) ? GiftBoxType.GiftBox6 :
+                                  items.Any(x => x.NSpan != 0) ? (items.Any(x => x.DwProbability % 100 != 0 && x.DwProbability % 10 == 0) ? GiftBoxType.GiftBox5 : GiftBoxType.GiftBox4) :
+                                  items.Any(x => x.NFlag != 0) ? GiftBoxType.GiftBox3 :
+                                  items.Any(x => x.DwProbability % 100 != 0) ? GiftBoxType.GiftBox2 :
                                   GiftBoxType.GiftBox;
 
                 writer.Write(type.ToString());
                 writer.Write('\t');
-                writer.Write(giftBox.Item?.Identifier ?? prop.DwItem.ToString(CultureInfo.InvariantCulture));
+                writer.Write(Script.NumberToString(giftbox.DwItem, definesService.ReversedItemDefines));
                 writer.WriteLine();
                 writer.WriteLine('{');
 
@@ -198,30 +191,30 @@ namespace eTools_Ultimate.Services
                     case GiftBoxType.GiftBox2:
                         {
                             ushort precision = (ushort)(type == GiftBoxType.GiftBox ? 100 : 1);
-                            foreach (GiftBoxItem item in items)
+                            foreach (GiftboxItem item in items)
                             {
                                 writer.Write('\t');
-                                writer.Write(item.Item?.Identifier ?? item.Prop.DwItem.ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.DwItem, definesService.ReversedItemDefines));
                                 writer.Write('\t');
-                                writer.Write((item.Prop.DwProbability / precision).ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.DwProbability / precision));
                                 writer.Write('\t');
-                                writer.Write(item.Prop.NNum.ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.NNum));
                                 writer.WriteLine();
                             }
                             break;
                         }
                     case GiftBoxType.GiftBox3:
                         {
-                            foreach (GiftBoxItem item in items)
+                            foreach (GiftboxItem item in items)
                             {
                                 writer.Write('\t');
-                                writer.Write(item.Item?.Identifier ?? item.Prop.DwItem.ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.DwItem, definesService.ReversedItemDefines));
                                 writer.Write('\t');
-                                writer.Write((item.Prop.DwProbability / 100).ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.DwProbability / 100));
                                 writer.Write('\t');
-                                writer.Write(item.Prop.NNum.ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.NNum));
                                 writer.Write('\t');
-                                writer.Write(item.Prop.NFlag.ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.NFlag));
                                 writer.WriteLine();
                             }
                             break;
@@ -230,38 +223,38 @@ namespace eTools_Ultimate.Services
                     case GiftBoxType.GiftBox5:
                         {
                             ushort precision = (ushort)(type == GiftBoxType.GiftBox4 ? 100 : 10);
-                            foreach (GiftBoxItem item in items)
+                            foreach (GiftboxItem item in items)
                             {
                                 writer.Write('\t');
-                                writer.Write(item.Item?.Identifier ?? item.Prop.DwItem.ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.DwItem, definesService.ReversedItemDefines));
                                 writer.Write('\t');
-                                writer.Write((item.Prop.DwProbability / precision).ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.DwProbability / precision));
                                 writer.Write('\t');
-                                writer.Write(item.Prop.NNum.ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.NNum));
                                 writer.Write('\t');
-                                writer.Write(item.Prop.NFlag.ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.NFlag));
                                 writer.Write('\t');
-                                writer.Write(item.Prop.NSpan.ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.NSpan));
                                 writer.WriteLine();
                             }
                             break;
                         }
                     case GiftBoxType.GiftBox6:
                         {
-                            foreach (GiftBoxItem item in items)
+                            foreach (GiftboxItem item in items)
                             {
                                 writer.Write('\t');
-                                writer.Write(item.Item?.Identifier ?? item.Prop.DwItem.ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.DwItem, definesService.ReversedItemDefines));
                                 writer.Write('\t');
-                                writer.Write((item.Prop.DwProbability / 10).ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.DwProbability / 10));
                                 writer.Write('\t');
-                                writer.Write(item.Prop.NNum.ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.NNum));
                                 writer.Write('\t');
-                                writer.Write(item.Prop.NFlag.ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.NFlag));
                                 writer.Write('\t');
-                                writer.Write(item.Prop.NSpan.ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.NSpan));
                                 writer.Write('\t');
-                                writer.Write(item.Prop.NAbilityOption.ToString(CultureInfo.InvariantCulture));
+                                writer.Write(Script.NumberToString(item.NAbilityOption));
                                 writer.WriteLine();
                             }
                             break;
@@ -271,17 +264,16 @@ namespace eTools_Ultimate.Services
             }
         }
 
-        public GiftBox NewGiftbox(Item item)
+        public Giftbox NewGiftbox(Item item)
         {
-            GiftBoxProp prop = new(item.DwId);
-            GiftBox giftbox = new(prop, []);
+            Giftbox giftbox = new(item.DwId, []);
 
             GiftBoxes.Add(giftbox);
 
             return giftbox;
         }
 
-        public void RemoveGiftbox(GiftBox giftbox)
+        public void RemoveGiftbox(Giftbox giftbox)
         {
             giftbox.Dispose();
 
