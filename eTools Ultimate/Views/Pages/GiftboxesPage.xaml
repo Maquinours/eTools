@@ -421,7 +421,7 @@
                                         Background="{DynamicResource ControlFillColorDefaultBrush}"
                                         BorderBrush="{DynamicResource ControlElevationBorderBrush}"
                                         Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                        Value="{Binding Prop.NNum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        Value="{Binding NNum, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

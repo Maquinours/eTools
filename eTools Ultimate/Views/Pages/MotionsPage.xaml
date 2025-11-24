@@ -196,7 +196,7 @@
                             <TextBox
                                 x:Name="MotionIconTextBox"
                                 Grid.Column="0"
-                                Text="{Binding Path=Prop.SzIconName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                Text="{Binding Path=SzIconName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <ui:Button
                                 Grid.Column="1"
                                 Height="36"
@@ -232,7 +232,7 @@
                         </StackPanel>
                         <ComboBox
                             Grid.Row="1"
-                            SelectedValue="{Binding SelectedItem.Prop.DwPlay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=MotionsListView}"
+                            SelectedValue="{Binding SelectedItem.DwPlay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ElementName=MotionsListView}"
                             SelectedValuePath="Tag">
                             <ComboBoxItem Content="{i18n:StringLocalizer 'One Time'}">
                                 <ComboBoxItem.Tag>
