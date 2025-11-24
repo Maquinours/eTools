@@ -1,5 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
-using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Accessories;
 using eTools_Ultimate.Models.Items;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
@@ -23,9 +23,9 @@ using Wpf.Ui.Extensions;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public class LevelAddedEventArgs(AccessoryAbilityOptionData level)
+    public class LevelAddedEventArgs(AccessoryAbilityOption level)
     {
-        public AccessoryAbilityOptionData Level { get; } = level;
+        public AccessoryAbilityOption Level { get; } = level;
     }
 
     public partial class AccessoriesViewModel(IContentDialogService contentDialogService, ISnackbarService snackbarService, IStringLocalizer<Translations> localizer, AccessoriesService accessoriesService, DefinesService definesService) : ObservableObject, INavigationAware
@@ -125,7 +125,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
-        private async Task DeleteAbilityOptionData(AccessoryAbilityOptionData abilityOptionData)
+        private async Task DeleteAbilityOptionData(AccessoryAbilityOption abilityOptionData)
         {
             if (AccessoriesView.CurrentItem is not Accessory accessory) return;
 
@@ -148,11 +148,11 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
-        private async Task DeleteDstData(AccessoryAbilityOptionDstData dstData)
+        private async Task DeleteDstData(AccessoryAbilityOptionDst dstData)
         {
             if (AccessoriesView.CurrentItem is not Accessory accessory) return;
 
-            AccessoryAbilityOptionData abilityOptionData = accessory.AbilityOptionData.First(x => x.DstData.Contains(dstData));
+            AccessoryAbilityOption abilityOptionData = accessory.AbilityOptionData.First(x => x.DstData.Contains(dstData));
 
             ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
                  new SimpleContentDialogCreateOptions()
@@ -171,9 +171,9 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
-        private void AddDstData(AccessoryAbilityOptionData abilityOptionData)
+        private void AddDstData(AccessoryAbilityOption abilityOptionData)
         {
-            AccessoryAbilityOptionDstData dstData = new(-1, 0);
+            AccessoryAbilityOptionDst dstData = new(-1, 0);
             abilityOptionData.DstData.Add(dstData);
         }
 
@@ -185,7 +185,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             int i;
             for (i = 0; accessory.AbilityOptionData.Where(x => x.NAbilityOption == i).Any(); i++) ;
 
-            AccessoryAbilityOptionData abilityOptionData = new(i, []);
+            AccessoryAbilityOption abilityOptionData = new(i, []);
             accessory.AbilityOptionData.Insert(i, abilityOptionData);
             LevelAdded?.Invoke(this, new LevelAddedEventArgs(abilityOptionData));
 
