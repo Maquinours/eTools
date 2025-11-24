@@ -30,6 +30,11 @@ namespace eTools_Ultimate.Models.Accessories
         #region Public methods
         public void Dispose()
         {
+            foreach(AccessoryAbilityOptionDst dst in DstData)
+                dst.Dispose();
+
+            DstData.Clear();
+
             GC.SuppressFinalize(this);
         }
         #endregion

@@ -51,6 +51,11 @@ namespace eTools_Ultimate.Models.Accessories
         {
             App.Services.GetRequiredService<ItemsService>().ItemsById.CollectionChanged -= ItemsService_ItemsById_CollectionChanged;
 
+            foreach(AccessoryAbilityOption option in AbilityOptionData)
+                option.Dispose();
+
+            AbilityOptionData.Clear();
+
             GC.SuppressFinalize(this);
         }
         #endregion
