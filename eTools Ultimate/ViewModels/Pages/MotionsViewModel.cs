@@ -1,6 +1,7 @@
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
 using eTools_Ultimate.Models.Models;
+using eTools_Ultimate.Models.Motions;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.Localization;
@@ -147,21 +148,26 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (MotionsView.CurrentItem is not Motion motion) return;
 
-            motion.Prop.PropertyChanged += MotionProp_PropertyChanged;
+            motion.PropertyChanged += CurrentMotion_PropertyChanged;
         }
 
         private void TeardownCurrentMotionWatchers()
         {
             if (MotionsView.CurrentItem is not Motion motion) return;
-            motion.Prop.PropertyChanged -= MotionProp_PropertyChanged;
+            motion.PropertyChanged -= CurrentMotion_PropertyChanged;
         }
 
-        private void MotionProp_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        private void CurrentMotion_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
+            if(MotionsView.CurrentItem is not Motion motion)
+                throw new InvalidOperationException("MotionsViewModel::CurrentMotion_PropertyChanged exception : Current item is not a Motion");
+            if(sender != motion)
+                throw new InvalidOperationException("MotionsViewModel::CurrentMotion_PropertyChanged exception : sender is not current motion");
+
             switch (e.PropertyName)
             {
-                case nameof(MotionProp.DwMotion):
-                case nameof(MotionProp.DwPlay):
+                case nameof(Motion.DwMotion):
+                case nameof(Motion.DwPlay):
                     PlayMotion();
                     break;
             }
@@ -210,7 +216,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             NativeMethods.StopMotion(D3dHost._native);
 
-            uint motionType = motion.Prop.DwMotion;
+            uint motionType = motion.DwMotion;
 
             string moverIdentifier = ModelPreviewGender switch
             {
@@ -245,7 +251,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             //    return;
             //}
 
-            NativeMethods.PlayMotion(D3dHost._native, motionFile, (int)motion.Prop.DwPlay); // TODO: change this to allow uint values
+            NativeMethods.PlayMotion(D3dHost._native, motionFile, (int)motion.DwPlay); // TODO: change this to allow uint values
 
             //Auto3DRendering = true;
         }
@@ -269,8 +275,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                     HashSet<string> stringIdentifiers = [];
                     foreach (Motion motion in motionsService.Motions)
                     {
-                        stringIdentifiers.Add(motion.Prop.SzName);
-                        stringIdentifiers.Add(motion.Prop.SzDesc);
+                        stringIdentifiers.Add(motion.SzName);
+                        stringIdentifiers.Add(motion.SzDesc);
                     }
 
                     motionsService.Save();
@@ -365,7 +371,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 !fileExtension.Equals(".dds"))
                 return;
 
-            motion.Prop.SzIconName = fileName;
+            motion.SzIconName = fileName;
         }
 
         [RelayCommand]
@@ -401,7 +407,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             try
             {
-                System.Windows.Clipboard.SetText(mover.Prop.DwId.ToString());
+                System.Windows.Clipboard.SetText(mover.DwId.ToString());
 
                 snackbarService.Show(
                         title: localizer["ID copied"],
@@ -429,7 +435,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             try
             {
-                System.Windows.Clipboard.SetText(motion.Prop.SzName);
+                System.Windows.Clipboard.SetText(motion.SzName);
 
                 snackbarService.Show(
                         title: localizer["Name identifier copied"],
@@ -485,7 +491,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             try
             {
-                System.Windows.Clipboard.SetText(motion.Prop.SzDesc);
+                System.Windows.Clipboard.SetText(motion.SzDesc);
 
                 snackbarService.Show(
                         title: localizer["Description identifier copied"],

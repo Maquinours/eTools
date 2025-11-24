@@ -1,138 +1,93 @@
-using DDSImageParser;
+﻿using DDSImageParser;
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileSystemGlobbing;
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Xml.Linq;
 
-namespace eTools_Ultimate.Models
+namespace eTools_Ultimate.Models.Motions
 {
-    public class MotionProp(int nVer, uint dwId, uint dwMotion, string szIconName, uint dwPlay, string szName, string szDesc) : INotifyPropertyChanged
-    {
-        private int _nVer = nVer;
-        private uint _dwId = dwId;
-        private uint _dwMotion = dwMotion;
-        private string _szIconName = szIconName;
-        private uint _dwPlay = dwPlay;
-        private string _szName = szName;
-        private string _szDesc = szDesc;
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public int NVer
-        {
-            get => this._nVer;
-            set => SetValue(ref this._nVer, value);
-        }
-        public uint DwId
-        {
-            get => this._dwId;
-            set => SetValue(ref this._dwId, value);
-        }
-        public uint DwMotion
-        {
-            get => this._dwMotion;
-            set => SetValue(ref this._dwMotion, value);
-        }
-        public string SzIconName
-        {
-            get => this._szIconName;
-            set => SetValue(ref this._szIconName, value);
-        }
-        public uint DwPlay
-        {
-            get => this._dwPlay;
-            set => SetValue(ref this._dwPlay, value);
-        }
-        public string SzName
-        {
-            get => this._szName;
-            set => SetValue(ref this._szName, value);
-        }
-        public string SzDesc
-        {
-            get => this._szDesc;
-            set => SetValue(ref this._szDesc, value);
-        }
-
-        private void NotifyPropertyChanged<T>(string propertyName, T oldValue, T newValue)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedExtendedEventArgs(propertyName, oldValue, newValue));
-        }
-        private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value))
-                return false;
-
-            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new Exception($"Motion SetValue with not safe to assign directly property {propertyName}");
-
-            T old = field;
-            field = value;
-            this.NotifyPropertyChanged(propertyName, old, value);
-            return true;
-        }
-    }
     public class Motion : INotifyPropertyChanged, IDisposable
     {
-        private readonly MotionProp _prop;
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public MotionProp Prop => _prop;
+        #region Fields
+        private int _nVer;
+        private uint _dwId;
+        private uint _dwMotion;
+        private string _szIconName;
+        private uint _dwPlay;
+        private string _szName;
+        private string _szDesc;
 
         private FileSystemWatcher _iconFileWatcher;
+        #endregion
 
+        #region Events
+        public event PropertyChangedEventHandler? PropertyChanged;
+        #endregion
+
+        #region Properties
+        #region Backing properties
+        public int NVer { get => _nVer; set => SetValue(ref _nVer, value); }
+        public uint DwId { get => _dwId; set => SetValue(ref _dwId, value); }
+        public uint DwMotion { get => _dwMotion; set => SetValue(ref _dwMotion, value); }
+        public string SzIconName { get => _szIconName; set => SetValue(ref _szIconName, value); }
+        public uint DwPlay { get => _dwPlay; set => SetValue(ref _dwPlay, value); }
+        public string SzName { get => _szName; set => SetValue(ref _szName, value); }
+        public string SzDesc { get => _szDesc; set => SetValue(ref _szDesc, value); }
+        #endregion
+
+        #region Calculated properties
         public string Identifier
         {
-            get => Script.NumberToString(Prop.DwId, App.Services.GetRequiredService<DefinesService>().ReversedMotionDefines);
+            get => Script.NumberToString(DwId, App.Services.GetRequiredService<DefinesService>().ReversedMotionDefines);
             set
             {
                 if (Script.TryGetNumberFromString(value, out int result))
-                    Prop.DwId = (uint)result;
+                    DwId = (uint)result;
             }
         }
 
         public string MotionIdentifier
         {
-            get => Script.NumberToString(Prop.DwMotion, App.Services.GetRequiredService<DefinesService>().ReversedMotionTypeDefines);
+            get => Script.NumberToString(DwMotion, App.Services.GetRequiredService<DefinesService>().ReversedMotionTypeDefines);
             set
             {
                 if (Script.TryGetNumberFromString(value, out int result))
-                    Prop.DwMotion = (uint)result;
+                    DwMotion = (uint)result;
             }
         }
 
         public string Name
         {
-            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzName) ?? Prop.SzName;
+            get => App.Services.GetRequiredService<StringsService>().GetString(SzName) ?? SzName;
             set
             {
                 StringsService stringsService = App.Services.GetRequiredService<StringsService>();
-                if (stringsService.HasString(Prop.SzName))
-                    stringsService.ChangeStringValue(Prop.SzName, value);
+                if (stringsService.HasString(SzName))
+                    stringsService.ChangeStringValue(SzName, value);
                 else
-                    Prop.SzName = value;
+                    SzName = value;
             }
         }
 
         public string Description
         {
-            get => App.Services.GetRequiredService<StringsService>().GetString(Prop.SzDesc) ?? Prop.SzDesc;
+            get => App.Services.GetRequiredService<StringsService>().GetString(SzDesc) ?? SzDesc;
             set
             {
                 StringsService stringsService = App.Services.GetRequiredService<StringsService>();
-                if (stringsService.HasString(Prop.SzDesc))
-                    stringsService.ChangeStringValue(Prop.SzDesc, value);
+                if (stringsService.HasString(SzDesc))
+                    stringsService.ChangeStringValue(SzDesc, value);
                 else
-                    Prop.SzDesc = value;
+                    SzDesc = value;
             }
         }
 
@@ -141,7 +96,7 @@ namespace eTools_Ultimate.Models
             get
             {
                 Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
-                return $"{settings.IconsFolderPath ?? settings.DefaultIconsFolderPath}{Prop.SzIconName}";
+                return $"{settings.IconsFolderPath ?? settings.DefaultIconsFolderPath}{SzIconName}";
             }
         }
 
@@ -171,19 +126,43 @@ namespace eTools_Ultimate.Models
                 return bitmapImage;
             }
         }
+        #endregion
+        #endregion
 
-        public Motion(MotionProp prop)
+        #region Constructors
+        public Motion(int nVer, uint dwId, uint dwMotion, string szIconName, uint dwPlay, string szName, string szDesc)
         {
-            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+            _nVer = nVer;
+            _dwId = dwId;
+            _dwMotion = dwMotion;
+            _szIconName = szIconName;
+            _dwPlay = dwPlay;
+            _szName = szName;
+            _szDesc = szDesc;
 
-            _prop = prop;
-            Prop.PropertyChanged += Prop_PropertyChanged;
-
-            settings.PropertyChanged += Settings_PropertyChanged;
-            App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged += Strings_CollectionChanged;
             SetupIconFileWatcher();
-        }
 
+            PropertyChanged += Motion_PropertyChanged;
+            App.Services.GetRequiredService<SettingsService>().Settings.PropertyChanged += Settings_PropertyChanged;
+            App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged += Strings_CollectionChanged;
+        }
+        #endregion
+
+        #region Methods
+        #region Public methods
+        public void Dispose()
+        {
+            _iconFileWatcher.Dispose();
+
+            PropertyChanged -= Motion_PropertyChanged;
+            App.Services.GetRequiredService<SettingsService>().Settings.PropertyChanged -= Settings_PropertyChanged;
+            App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged -= Strings_CollectionChanged;
+
+            GC.SuppressFinalize(this);
+        }
+        #endregion
+
+        #region Private methods
         [MemberNotNull(nameof(_iconFileWatcher))]
         private void SetupIconFileWatcher()
         {
@@ -203,6 +182,30 @@ namespace eTools_Ultimate.Models
             _iconFileWatcher.EnableRaisingEvents = true;
         }
 
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void NotifyPropertyChanged<T>(string propertyName, T oldValue, T newValue)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedExtendedEventArgs(propertyName, oldValue, newValue));
+        }
+
+        private bool SetValue<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+                return false;
+
+            if (!typeof(T).IsValueType && typeof(T) != typeof(string)) throw new Exception($"Motion SetValue with not safe to assign directly property {propertyName}");
+
+            T old = field;
+            field = value;
+            this.NotifyPropertyChanged(propertyName, old, value);
+            return true;
+        }
+
+        #region Event handlers
         private void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)
@@ -216,20 +219,23 @@ namespace eTools_Ultimate.Models
             }
         }
 
-        private void Prop_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        private void Motion_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
+            if (sender != this)
+                throw new InvalidOperationException("Motion::Motion_PropertyChanged exception : sender is not this");
+
             switch (e.PropertyName)
             {
-                case nameof(Prop.DwId):
+                case nameof(DwId):
                     NotifyPropertyChanged(nameof(Identifier));
                     break;
-                case nameof(Prop.SzName):
+                case nameof(SzName):
                     NotifyPropertyChanged(nameof(Name));
                     break;
-                case nameof(Prop.SzDesc):
+                case nameof(SzDesc):
                     NotifyPropertyChanged(nameof(Description));
                     break;
-                case nameof(Prop.SzIconName):
+                case nameof(SzIconName):
                     NotifyPropertyChanged(nameof(IconFilePath));
                     NotifyPropertyChanged(nameof(Icon));
                     SetupIconFileWatcher();
@@ -254,9 +260,9 @@ namespace eTools_Ultimate.Models
                         .Select(kvp => kvp.Key)];
 
 
-                    if (changedKeys.Contains(Prop.SzName))
+                    if (changedKeys.Contains(SzName))
                         NotifyPropertyChanged(nameof(Name));
-                    if (changedKeys.Contains(Prop.SzDesc))
+                    if (changedKeys.Contains(SzDesc))
                         NotifyPropertyChanged(nameof(Description));
                     break;
                 case System.Collections.Specialized.NotifyCollectionChangedAction.Reset:
@@ -265,20 +271,8 @@ namespace eTools_Ultimate.Models
                     break;
             }
         }
-
-        public void Dispose()
-        {
-            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
-
-            Prop.PropertyChanged -= Prop_PropertyChanged;
-            settings.PropertyChanged -= Settings_PropertyChanged;
-            App.Services.GetRequiredService<StringsService>().Strings.CollectionChanged -= Strings_CollectionChanged;
-            GC.SuppressFinalize(this);
-        }
-
-        private void NotifyPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        #endregion
+        #endregion
+        #endregion
     }
 }

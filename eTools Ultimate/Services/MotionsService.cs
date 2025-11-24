@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Motions;
 using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
@@ -53,8 +54,7 @@ namespace eTools_Ultimate.Services
                     string szName = script.GetToken();
                     string szDesc = script.GetToken();
 
-                    MotionProp prop = new(nVer, dwId, dwMotion, szIconName, dwPlay, szName, szDesc);
-                    Motion motion = new(prop);
+                    Motion motion = new(nVer, dwId, dwMotion, szIconName, dwPlay, szName, szDesc);
                     this.Motions.Add(motion);
                 }
             }
@@ -75,38 +75,35 @@ namespace eTools_Ultimate.Services
 
             foreach (Motion motion in this.Motions)
             {
-                MotionProp prop = motion.Prop;
-
-                writer.Write(prop.NVer.ToString(CultureInfo.InvariantCulture));
+                writer.Write(motion.NVer.ToString(CultureInfo.InvariantCulture));
                 writer.Write('\t');
                 writer.Write(motion.Identifier);
                 writer.Write('\t');
                 writer.Write(motion.MotionIdentifier);
                 writer.Write('\t');
                 writer.Write("\"\"\"");
-                writer.Write(prop.SzIconName);
+                writer.Write(motion.SzIconName);
                 writer.Write("\"\"\"");
                 writer.Write('\t');
-                writer.Write(prop.DwPlay.ToString(CultureInfo.InvariantCulture));
+                writer.Write(motion.DwPlay.ToString(CultureInfo.InvariantCulture));
                 writer.Write('\t');
-                writer.Write(!stringsService.HasString(prop.SzName) ? $"\"{prop.SzName}\"" : prop.SzName);
+                writer.Write(!stringsService.HasString(motion.SzName) ? $"\"{motion.SzName}\"" : motion.SzName);
                 writer.Write('\t'); 
-                writer.Write(!stringsService.HasString(prop.SzDesc) ? $"\"{prop.SzDesc}\"" : prop.SzDesc);
+                writer.Write(!stringsService.HasString(motion.SzDesc) ? $"\"{motion.SzDesc}\"" : motion.SzDesc);
                 writer.WriteLine();
             }
         }
 
         public Motion CreateMotion()
         {
-            uint dwId = Motions.MaxBy(x => x.Prop.DwId)?.Prop.DwId ?? 0 + 1;
+            uint dwId = Motions.MaxBy(x => x.DwId)?.DwId ?? 0 + 1;
 
             string szName = GetNextStringIdentifier();
             stringsService.AddString(szName, "");
             string szDesc = GetNextStringIdentifier();
             stringsService.AddString(szDesc, "");
 
-            MotionProp prop = new(nVer: settingsService.Settings.ResourcesVersion, dwId: dwId, dwMotion: 0, szIconName: "", dwPlay: 0, szName: szName, szDesc: szDesc);
-            Motion motion = new(prop);
+            Motion motion = new(nVer: settingsService.Settings.ResourcesVersion, dwId: dwId, dwMotion: 0, szIconName: "", dwPlay: 0, szName: szName, szDesc: szDesc);
 
             Motions.Add(motion);
 
