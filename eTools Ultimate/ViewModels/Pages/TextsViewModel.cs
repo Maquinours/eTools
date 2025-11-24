@@ -1,4 +1,4 @@
-﻿using eTools_Ultimate.Models;
+﻿using eTools_Ultimate.Models.Texts;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.Localization;
@@ -120,7 +120,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     HashSet<string> stringIdentifiers = [];
                     foreach (Text text in textsService.Texts)
-                        stringIdentifiers.Add(text.Prop.SzName);
+                        stringIdentifiers.Add(text.SzName);
 
                     textsService.Save();
                     stringsService.Save(settingsService.Settings.TextsTxtFilePath ?? settingsService.Settings.DefaultTextsTxtFilePath, [.. stringIdentifiers]);

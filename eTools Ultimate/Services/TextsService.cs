@@ -1,5 +1,5 @@
 ﻿using eTools_Ultimate.Helpers;
-using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Texts;
 using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
@@ -55,8 +55,7 @@ namespace eTools_Ultimate.Services
 
                     script.GetToken(); // "}"
 
-                    TextProp textProp = new(dwId, dwColor, szName);
-                    Text text = new(textProp);
+                    Text text = new(dwId, dwColor, szName);
 
                     this.Texts.Add(text);
                 }
@@ -77,7 +76,7 @@ namespace eTools_Ultimate.Services
 
             foreach (Text text in Texts)
             {
-                string hex = $"0x{text.Prop.DwColor:x8}";
+                string hex = $"0x{text.DwColor:x8}";
 
                 writer.Write(text.Identifier);
                 writer.Write('\t');
@@ -85,7 +84,7 @@ namespace eTools_Ultimate.Services
                 writer.WriteLine();
                 writer.WriteLine('{');
                 writer.Write('\t');
-                writer.Write(!stringsService.HasString(text.Prop.SzName) ? $"\"{text.Prop.SzName}\"" : text.Prop.SzName);
+                writer.Write(!stringsService.HasString(text.SzName) ? $"\"{text.SzName}\"" : text.SzName);
                 writer.WriteLine();
                 writer.WriteLine('}');
             }
@@ -93,13 +92,12 @@ namespace eTools_Ultimate.Services
 
         public Text AddText()
         {
-            uint dwId = Texts.MaxBy(x => x.Prop.DwId)?.Prop.DwId + 1 ?? 0;
+            uint dwId = Texts.MaxBy(x => x.DwId)?.DwId + 1 ?? 0;
 
             string szName = stringsService.GetNextStringIdentifier(STRING_ID_PREFIX);
             stringsService.GenerateNewString(szName);
 
-            TextProp textProp = new(dwId: dwId, dwColor: 0xFFFFFFFF, szName: szName);
-            Text text = new(textProp);
+            Text text = new(dwId: dwId, dwColor: 0xFFFFFFFF, szName: szName);
 
             this.Texts.Add(text);
             return text;
