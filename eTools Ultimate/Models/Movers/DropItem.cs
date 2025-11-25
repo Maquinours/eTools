@@ -120,7 +120,6 @@ namespace eTools_Ultimate.Models.Movers
         }
 
         #region Event handlers
-
         private void DropItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             switch (e.PropertyName)

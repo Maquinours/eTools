@@ -102,7 +102,9 @@
                     x:Name="DropListTreeView"
                     Background="Transparent"
                     BorderThickness="0"
-                    ItemsSource="{Binding DropListView}">
+                    ItemsSource="{Binding DropListView}"
+                    VirtualizingStackPanel.IsVirtualizing="True"
+                    VirtualizingStackPanel.VirtualizationMode="Recycling">
                     <TreeView.Resources>
                         <HierarchicalDataTemplate DataType="{x:Type moverModels:DropKind}" ItemsSource="{Binding Items}">
                             <StackPanel Orientation="Horizontal">
