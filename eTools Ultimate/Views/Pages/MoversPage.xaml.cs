@@ -33,6 +33,11 @@ namespace eTools_Ultimate.Views.Pages
         private void MoversListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MoversListView.ScrollIntoView(MoversListView.SelectedItem);
+
+            Dispatcher.Invoke(() =>
+            {
+                ContentScrollViewer?.ScrollToTop();
+            }, DispatcherPriority.Loaded);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -60,14 +65,14 @@ namespace eTools_Ultimate.Views.Pages
         {
             if (!_isMouseDragging) return;
             if (ViewModel.D3dHost is null) return;
-            
+
             Point mousePosition = e.GetPosition(null);
             Vector deltaPosition = _lastMousePosition - mousePosition;
 
             NativeMethods.RotateCamera(ViewModel.D3dHost._native, (int)(deltaPosition.X), (int)(deltaPosition.Y));
 
             _lastMousePosition = mousePosition;
-            if(!ViewModel.Auto3DRendering)
+            if (!ViewModel.Auto3DRendering)
                 ViewModel.D3dHost.Render();
         }
 
@@ -89,7 +94,6 @@ namespace eTools_Ultimate.Views.Pages
         private void MotionsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MotionsListView.ScrollIntoView(MotionsListView.SelectedItem);
-            Dispatcher.Invoke(ContentScrollViewer.ScrollToTop, DispatcherPriority.Render);
         }
     }
-} 
+}
