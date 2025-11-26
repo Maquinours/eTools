@@ -104,15 +104,96 @@
                     BorderThickness="0"
                     ItemsSource="{Binding DropListView}"
                     VirtualizingStackPanel.IsVirtualizing="True"
-                    VirtualizingStackPanel.VirtualizationMode="Recycling">
+                    VirtualizingStackPanel.VirtualizationMode="Standard">
+                    <TreeView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <local:MyVirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </TreeView.ItemsPanel>
+                    <TreeView.ItemContainerStyle>
+                        <Style BasedOn="{StaticResource {x:Type TreeViewItem}}" TargetType="TreeViewItem">
+                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                            <Style.Triggers>
+                                <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="True">
+                                    <Setter Property="ItemsPanel">
+                                        <Setter.Value>
+                                            <ItemsPanelTemplate>
+                                                <local:MyVirtualizingStackPanel />
+                                            </ItemsPanelTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TreeView.ItemContainerStyle>
                     <TreeView.Resources>
-                        <HierarchicalDataTemplate DataType="{x:Type moverModels:DropKind}" ItemsSource="{Binding Items}">
+                        <HierarchicalDataTemplate DataType="{x:Type viewmodels:DropKindTreeViewItem}" ItemsSource="{Binding DropItems}">
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Text="📁 " />
-                                <TextBlock Text="{Binding ItemKind3Identifier}" />
+                                <TextBlock Text="{Binding DropKind.ItemKind3Identifier}" />
                             </StackPanel>
                         </HierarchicalDataTemplate>
-                        <DataTemplate DataType="{x:Type moverModels:DropGold}">
+                        <DataTemplate DataType="{x:Type viewmodels:DropGoldTreeViewItem}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Width="32"
+                                    Height="32"
+                                    Margin="0,0,8,0"
+                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1">
+                                    <Image
+                                        Margin="2"
+                                        Source="{Binding DropGold.Item.Icon}"
+                                        Stretch="Uniform" />
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{Binding DropGold.Item.Name}" />
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding DropGold.ItemIdentifier}" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewmodels:DropItemTreeViewItem}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Width="32"
+                                    Height="32"
+                                    Margin="0,0,8,0"
+                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1">
+                                    <Image
+                                        Margin="2"
+                                        Source="{Binding DropItem.Item.Icon}"
+                                        Stretch="Uniform" />
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{Binding DropItem.Item.Name}" />
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding DropItem.ItemIdentifier}" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewmodels:ItemTreeViewItem}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -138,67 +219,7 @@
                                     <TextBlock
                                         FontSize="12"
                                         Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                        Text="{Binding ItemIdentifier}" />
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type moverModels:DropItem}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Border
-                                    Width="32"
-                                    Height="32"
-                                    Margin="0,0,8,0"
-                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                                    BorderThickness="1">
-                                    <Image
-                                        Margin="2"
-                                        Source="{Binding Item.Icon}"
-                                        Stretch="Uniform" />
-                                </Border>
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <TextBlock
-                                        FontWeight="SemiBold"
-                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                        Text="{Binding Item.Name}" />
-                                    <TextBlock
-                                        FontSize="12"
-                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                        Text="{Binding ItemIdentifier}" />
-                                </StackPanel>
-                            </Grid>
-                        </DataTemplate>
-                        <DataTemplate DataType="{x:Type itemModels:Item}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Border
-                                    Width="32"
-                                    Height="32"
-                                    Margin="0,0,8,0"
-                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                                    BorderThickness="1">
-                                    <Image
-                                        Margin="2"
-                                        Source="{Binding Icon}"
-                                        Stretch="Uniform" />
-                                </Border>
-                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                    <TextBlock
-                                        FontWeight="SemiBold"
-                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                                        Text="{Binding Name}" />
-                                    <TextBlock
-                                        FontSize="12"
-                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                        Text="{Binding Identifier}" />
+                                        Text="{Binding Item.Identifier}" />
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
@@ -208,7 +229,7 @@
             <StackPanel Grid.Column="2" Width="200">
                 <ContentControl Content="{Binding SelectedItem, ElementName=DropListTreeView}">
                     <ContentControl.Resources>
-                        <DataTemplate DataType="{x:Type moverModels:DropGold}">
+                        <DataTemplate DataType="{x:Type viewmodels:DropGoldTreeViewItem}">
                             <UniformGrid VerticalAlignment="Top" Columns="1">
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -220,7 +241,7 @@
                                         Grid.Row="1"
                                         Margin="0,5,0,0"
                                         ClearButtonEnabled="False"
-                                        Value="{Binding DwNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        Value="{Binding DropGold.DwNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </Grid>
                                 <Grid Margin="0,10,0,0">
                                     <Grid.RowDefinitions>
@@ -232,11 +253,11 @@
                                         Grid.Row="1"
                                         Margin="0,5,0,0"
                                         ClearButtonEnabled="False"
-                                        Value="{Binding DwNumber2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        Value="{Binding DropGold.DwNumber2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </Grid>
                             </UniformGrid>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type moverModels:DropItem}">
+                        <DataTemplate DataType="{x:Type viewmodels:DropItemTreeViewItem}">
                             <UniformGrid VerticalAlignment="Top" Columns="1">
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -249,7 +270,7 @@
                                         Margin="0,5,0,0"
                                         DisplayMemberPath="Value"
                                         OriginalItemsSource="{Binding DataContext.ItemIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ui:ContentDialog}}"
-                                        Text="{Binding ItemIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                        Text="{Binding DropItem.ItemIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                                 </Grid>
                                 <Grid Margin="0,10,0,0">
                                     <Grid.RowDefinitions>
@@ -261,7 +282,7 @@
                                         Grid.Row="1"
                                         Margin="0,5,0,0"
                                         ClearButtonEnabled="False"
-                                        Value="{Binding DwNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        Value="{Binding DropItem.DwNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </Grid>
                                 <Grid Margin="0,10,0,0">
                                     <Grid.RowDefinitions>
@@ -274,7 +295,7 @@
                                         Margin="0,5,0,0"
                                         ClearButtonEnabled="False"
                                         Cursor="Arrow"
-                                        Value="{Binding DwLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        Value="{Binding DropItem.DwLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </Grid>
                                 <Grid Margin="0,10,0,0">
                                     <Grid.RowDefinitions>
@@ -290,11 +311,11 @@
                                         Margin="0,5,0,0"
                                         ClearButtonEnabled="False"
                                         MaxDecimalPlaces="8"
-                                        Value="{Binding ProbabilityPercent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                        Value="{Binding DropItem.ProbabilityPercent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 </Grid>
                             </UniformGrid>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type moverModels:DropKind}">
+                        <DataTemplate DataType="{x:Type viewmodels:DropKindTreeViewItem}">
                             <UniformGrid Columns="1">
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -307,7 +328,7 @@
                                         Margin="0,5,0,0"
                                         DisplayMemberPath="Value"
                                         OriginalItemsSource="{Binding DataContext.ItemKind3Identifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ui:ContentDialog}}"
-                                        Text="{Binding ItemKind3Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                        Text="{Binding DropKind.ItemKind3Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                                 </Grid>
                                 <Grid Margin="0,10,0,0">
                                     <Grid.RowDefinitions>
@@ -319,7 +340,7 @@
                                         Grid.Row="1"
                                         Margin="0,5,0,0"
                                         IsEnabled="False"
-                                        Value="{Binding MinUnique, Mode=OneWay, UpdateSourceTrigger=LostFocus}" />
+                                        Value="{Binding DropKind.MinUnique, Mode=OneWay, UpdateSourceTrigger=LostFocus}" />
                                 </Grid>
                                 <Grid Margin="0,10,0,0">
                                     <Grid.RowDefinitions>
@@ -331,11 +352,11 @@
                                         Grid.Row="1"
                                         Margin="0,5,0,0"
                                         IsEnabled="False"
-                                        Value="{Binding MaxUnique, Mode=OneWay, UpdateSourceTrigger=LostFocus}" />
+                                        Value="{Binding DropKind.MaxUnique, Mode=OneWay, UpdateSourceTrigger=LostFocus}" />
                                 </Grid>
                             </UniformGrid>
                         </DataTemplate>
-                        <DataTemplate DataType="{x:Type itemModels:Item}">
+                        <DataTemplate DataType="{x:Type viewmodels:ItemTreeViewItem}">
                             <UniformGrid Columns="1">
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -349,7 +370,7 @@
                                         DisplayMemberPath="Value"
                                         IsEnabled="False"
                                         OriginalItemsSource="{Binding DataContext.ItemKind3Identifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ui:ContentDialog}}"
-                                        Text="{Binding ItemKind3Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                        Text="{Binding Item.ItemKind3Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                                 </Grid>
                                 <Grid Margin="0,10,0,0">
                                     <Grid.RowDefinitions>
@@ -361,7 +382,7 @@
                                         Grid.Row="1"
                                         Margin="0,5,0,0"
                                         IsEnabled="False"
-                                        Value="{Binding DwItemRare, Mode=OneWay, UpdateSourceTrigger=LostFocus}" />
+                                        Value="{Binding Item.DwItemRare, Mode=OneWay, UpdateSourceTrigger=LostFocus}" />
                                 </Grid>
                             </UniformGrid>
                         </DataTemplate>
