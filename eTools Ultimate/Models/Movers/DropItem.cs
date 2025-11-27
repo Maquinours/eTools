@@ -11,7 +11,7 @@ using System.Text;
 
 namespace eTools_Ultimate.Models.Movers
 {
-    public class DropItem : INotifyPropertyChanged, IDisposable, IMoverDrop
+    public class DropItem : INotifyPropertyChanged, IDisposable
     {
         #region Fields
         private readonly DropType _dtType;

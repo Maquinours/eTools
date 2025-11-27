@@ -13,7 +13,7 @@ using System.Windows.Data;
 
 namespace eTools_Ultimate.Models.Movers
 {
-    public class DropKind : INotifyPropertyChanged, IDisposable, IMoverDrop
+    public class DropKind : INotifyPropertyChanged, IDisposable
     {
         #region Fields
         private readonly Mover _mover;

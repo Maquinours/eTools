@@ -867,12 +867,13 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand(CanExecute = nameof(CanOpenDropList))]
-        private void OpenDropList(object? parameter)
+        private async Task OpenDropList(object? parameter)
         {
             if (parameter is not Mover mover) throw new InvalidOperationException("parameter is not Mover");
 
             MoverDropListDialog dropListDialog = new(contentDialogService.GetDialogHost(), mover);
-            dropListDialog.ShowAsync();
+
+            await dropListDialog.ShowAsync();
         }
 
         private static bool CanOpenDropList(object? parameter) => parameter is Mover mover && mover.Type == MoverType.MONSTER;

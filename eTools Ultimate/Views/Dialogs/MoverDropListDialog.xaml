@@ -104,7 +104,7 @@
                     BorderThickness="0"
                     ItemsSource="{Binding DropListView}"
                     VirtualizingStackPanel.IsVirtualizing="True"
-                    VirtualizingStackPanel.VirtualizationMode="Standard">
+                    VirtualizingStackPanel.VirtualizationMode="Standard" Loaded="DropListTreeView_Loaded">
                     <TreeView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <local:MyVirtualizingStackPanel />
@@ -113,6 +113,7 @@
                     <TreeView.ItemContainerStyle>
                         <Style BasedOn="{StaticResource {x:Type TreeViewItem}}" TargetType="TreeViewItem">
                             <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
                             <Style.Triggers>
                                 <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="True">
                                     <Setter Property="ItemsPanel">
