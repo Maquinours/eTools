@@ -60,6 +60,23 @@ namespace eTools_Ultimate.Models.Movers
             }
         }
 
+        public string Name
+        {
+            get
+            {
+                string itemName = "";
+
+                if (Item is Item item)
+                {
+                    itemName = item.Name;
+                    if (DwLevel > 0)
+                        itemName += $" +{DwLevel}";
+                }
+
+                return itemName;
+            }
+        }
+
         public double ProbabilityPercent
         {
             get => DwProbability / 3_000_000_000d * 100;
@@ -83,8 +100,9 @@ namespace eTools_Ultimate.Models.Movers
 
             ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
 
-            PropertyChanged += DropItem_PropertyChanged; 
+            PropertyChanged += DropItem_PropertyChanged;
             itemsService.ItemsById.CollectionChanged += ItemsService_ItemsById_CollectionChanged;
+            Item?.PropertyChanged += Item_PropertyChanged;
         }
         #endregion
 
@@ -94,8 +112,9 @@ namespace eTools_Ultimate.Models.Movers
         {
             ItemsService itemsService = App.Services.GetRequiredService<ItemsService>();
 
-            PropertyChanged -= DropItem_PropertyChanged; 
+            PropertyChanged -= DropItem_PropertyChanged;
             itemsService.ItemsById.CollectionChanged -= ItemsService_ItemsById_CollectionChanged;
+            Item?.PropertyChanged -= Item_PropertyChanged;
 
             GC.SuppressFinalize(this);
         }
@@ -131,15 +150,45 @@ namespace eTools_Ultimate.Models.Movers
                 case nameof(DwProbability):
                     NotifyPropertyChanged(nameof(ProbabilityPercent));
                     break;
+                case nameof(Item):
+                case nameof(DwLevel):
+                    NotifyPropertyChanged(nameof(Name));
+                    break;
+            }
+        }
+
+        private void Item_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (sender != Item)
+                throw new InvalidOperationException("sender != Item");
+
+            switch (e.PropertyName)
+            {
+                case nameof(Item.Name):
+                    NotifyPropertyChanged(nameof(Name));
+                    break;
             }
         }
 
         private void ItemsService_ItemsById_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
-            if (
-                (e.NewItems is not null && e.NewItems.Cast<KeyValuePair<uint, Item>>().Any(x => x.Key == DwIndex)) ||
-                (e.OldItems is not null && e.OldItems.Cast<KeyValuePair<uint, Item>>().Any(x => x.Key == DwIndex))
-                )
+            bool itemChanged = false;
+
+            if (e.OldItems is not null && e.OldItems.Cast<KeyValuePair<uint, Item>>().ToDictionary().TryGetValue(DwIndex, out Item? oldItem))
+            {
+                oldItem.PropertyChanged -= Item_PropertyChanged;
+                itemChanged = true;
+            }
+            if (e.NewItems is not null && e.NewItems.Cast<KeyValuePair<uint, Item>>().ToDictionary().TryGetValue(DwIndex, out Item? newItem))
+            {
+                if (newItem != Item)
+                    throw new InvalidOperationException("newItem != Item");
+
+                newItem.PropertyChanged += Item_PropertyChanged;
+                itemChanged = true;
+            }
+
+            if (itemChanged)
                 NotifyPropertyChanged(nameof(Item));
         }
         #endregion

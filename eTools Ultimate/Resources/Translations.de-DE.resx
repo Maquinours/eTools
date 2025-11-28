@@ -516,6 +516,235 @@
   <data name="The application could not find an important directory. This can happen when:" xml:space="preserve">
     <value>Die Anwendung konnte ein wichtiges Verzeichnis nicht finden. Dies kann passieren, wenn :</value>
   </data>
+  <data name="The directory path configured in the application settings is invalid." xml:space="preserve">
+    <value>Der in den Anwendungseinstellungen konfigurierte Verzeichnispfad ist ungültig.</value>
+  </data>
+  <data name="The directory has been moved or deleted." xml:space="preserve">
+    <value>Das Verzeichnis wurde verschoben oder gelöscht.</value>
+  </data>
+  <data name="There are insufficient permissions to access the directory." xml:space="preserve">
+    <value>Es sind nicht genügend Berechtigungen vorhanden, um auf das Verzeichnis zuzugreifen.</value>
+  </data>
+  <data name="A required directory was not found." xml:space="preserve">
+    <value>Ein erforderliches Verzeichnis wurde nicht gefunden.</value>
+  </data>
+  <data name="Directory not found" xml:space="preserve">
+    <value>Verzeichnis nicht gefunden</value>
+  </data>
+  <data name="A required file was not found." xml:space="preserve">
+    <value>Eine erforderliche Datei wurde nicht gefunden.</value>
+  </data>
+  <data name="The file path configured in the application settings is invalid." xml:space="preserve">
+    <value>Der in den Anwendungseinstellungen konfigurierte Dateipfad ist ungültig.</value>
+  </data>
+  <data name="The file has been moved, renamed or deleted." xml:space="preserve">
+    <value>Die Datei wurde verschoben, umbenannt oder gelöscht.</value>
+  </data>
+  <data name="There are insufficient permissions to access the file." xml:space="preserve">
+    <value>Es sind nicht genügend Berechtigungen vorhanden, um auf die Datei zuzugreifen.</value>
+  </data>
+  <data name="Incorrectly formatted file" xml:space="preserve">
+    <value>Falsch formatiert Datei</value>
+  </data>
+  <data name="A required file is incorrectly formatted." xml:space="preserve">
+    <value>Eine erforderliche Datei ist falsch formatiert.</value>
+  </data>
+  <data name="The application found a file, but it is not correctly formatted. This can happen when:" xml:space="preserve">
+    <value>Die Anwendung hat eine Datei gefunden, aber sie ist nicht korrekt formatiert. Dies kann passieren, wenn :</value>
+  </data>
+  <data name="The file has been manually edited and contains errors." xml:space="preserve">
+    <value>Die Datei wurde manuell bearbeitet und enthält Fehler.</value>
+  </data>
+  <data name="The file path does not point to the correct file." xml:space="preserve">
+    <value>Der Dateipfad zeigt nicht auf die richtige Datei.</value>
+  </data>
+  <data name="The configured resource version does not match your files' version." xml:space="preserve">
+    <value>Die konfigurierte Ressourcenversion stimmt nicht mit der Version Ihrer Dateien überein.</value>
+  </data>
+  <data name="Unknown error" xml:space="preserve">
+    <value>Unbekannter Fehler</value>
+  </data>
+  <data name="An unexpected error occurred." xml:space="preserve">
+    <value>Ein unerwarteter Fehler ist aufgetreten.</value>
+  </data>
+  <data name="An unexpected error occurred while loading. This can happen when:" xml:space="preserve">
+    <value>Beim Laden ist ein unerwarteter Fehler aufgetreten. Dies kann passieren, wenn :</value>
+  </data>
+  <data name="There is a bug in the application." xml:space="preserve">
+    <value>In der Anwendung gibt es einen Fehler.</value>
+  </data>
+  <data name="Open configuration" xml:space="preserve">
+    <value>Konfiguration öffnen</value>
+  </data>
+  <data name="Misc" xml:space="preserve">
+    <value>Verschiedenes</value>
+  </data>
+  <data name="Navigate to the misc tools page." xml:space="preserve">
+    <value>Navigiere zur Seite für verschiedene Tools.</value>
+  </data>
+  <data name="Misc Tools" xml:space="preserve">
+    <value>Verschiedene Tools</value>
+  </data>
+  <data name="Find and manage unused assets" xml:space="preserve">
+    <value>Finde und verwalte ungenutzte Assets</value>
+  </data>
+  <data name="Find Unused Models &amp; Textures" xml:space="preserve">
+    <value>Ungenutzte Modelle &amp; Texturen finden</value>
+  </data>
+  <data name="Scan dependencies and list assets not referenced anywhere" xml:space="preserve">
+    <value>Abhängigkeiten scannen und Assets auflisten, die nirgendwo referenziert werden</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Scanning for unused assets..." xml:space="preserve">
+    <value>Suche nach ungenutzten Assets...</value>
+  </data>
+  <data name="Scanning models..." xml:space="preserve">
+    <value>Scanne Modelle...</value>
+  </data>
+  <data name="Scanning textures..." xml:space="preserve">
+    <value>Scanne Texturen...</value>
+  </data>
+  <data name="Scanning sounds..." xml:space="preserve">
+    <value>Scanne Sounds...</value>
+  </data>
+  <data name="Scan completed. Found {0} unused assets." xml:space="preserve">
+    <value>Scan abgeschlossen. {0} ungenutzte Assets gefunden.</value>
+  </data>
+  <data name="Total Size Before" xml:space="preserve">
+    <value>Gesamtgröße Vorher</value>
+  </data>
+  <data name="After" xml:space="preserve">
+    <value>Nachher</value>
+  </data>
+  <data name="Scan Assets" xml:space="preserve">
+    <value>Assets scannen</value>
+  </data>
+  <data name="Select All" xml:space="preserve">
+    <value>Alle auswählen</value>
+  </data>
+  <data name="Clear Selection" xml:space="preserve">
+    <value>Auswahl löschen</value>
+  </data>
+  <data name="Delete Selected" xml:space="preserve">
+    <value>Ausgewählte löschen</value>
+  </data>
+  <data name="Search by name, path, or type..." xml:space="preserve">
+    <value>Suche nach Name, Pfad oder Typ...</value>
+  </data>
+  <data name="{0} assets found" xml:space="preserve">
+    <value>{0} Assets gefunden</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="File Name" xml:space="preserve">
+    <value>Dateiname</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>Pfad</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Größe</value>
+  </data>
+  <data name="Last Modified" xml:space="preserve">
+    <value>Zuletzt geändert</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Aktionen</value>
+  </data>
+  <data name="Scan completed" xml:space="preserve">
+    <value>Scan abgeschlossen</value>
+  </data>
+  <data name="Found {0} unused assets totaling {1}." xml:space="preserve">
+    <value>{0} ungenutzte Assets mit insgesamt {1} gefunden.</value>
+  </data>
+  <data name="Scan failed" xml:space="preserve">
+    <value>Scan fehlgeschlagen</value>
+  </data>
+  <data name="No selection" xml:space="preserve">
+    <value>Keine Auswahl</value>
+  </data>
+  <data name="Please select assets to delete." xml:space="preserve">
+    <value>Bitte wählen Sie Assets zum Löschen aus.</value>
+  </data>
+  <data name="Delete selected assets" xml:space="preserve">
+    <value>Ausgewählte Assets löschen</value>
+  </data>
+  <data name="Are you sure you want to delete {0} selected assets? This action cannot be undone." xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie {0} ausgewählte Assets löschen möchten? Diese Aktion kann möglicherweise nicht rückgängig gemacht werden.</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="Assets deleted" xml:space="preserve">
+    <value>Assets gelöscht</value>
+  </data>
+  <data name="Successfully deleted {0} assets, freeing {1}." xml:space="preserve">
+    <value>Erfolgreich {0} Assets gelöscht, {1} freigegeben.</value>
+  </data>
+  <data name="Deletion failed" xml:space="preserve">
+    <value>Löschen fehlgeschlagen</value>
+  </data>
+  <data name="Delete asset" xml:space="preserve">
+    <value>Asset löschen</value>
+  </data>
+  <data name="Are you sure you want to delete '{0}'? This action cannot be undone." xml:space="preserve">
+    <value>Sind Sie sicher, dass Sie '{0}' löschen möchten? Diese Aktion kann möglicherweise nicht rückgängig gemacht werden.</value>
+  </data>
+  <data name="Asset deleted" xml:space="preserve">
+    <value>Asset gelöscht</value>
+  </data>
+  <data name="Successfully deleted '{0}'." xml:space="preserve">
+    <value>Erfolgreich '{0}' gelöscht.</value>
+  </data>
+  <data name="Deletion Log" xml:space="preserve">
+    <value>Löschprotokoll</value>
+    <comment>Deletion log window title</comment>
+  </data>
+  <data name="View and restore deleted assets" xml:space="preserve">
+    <value>Gelöschte Assets anzeigen und wiederherstellen</value>
+    <comment>Deletion log window subtitle</comment>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Datum</value>
+    <comment>Date column header</comment>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Aktion</value>
+    <comment>Action column header</comment>
+  </data>
+  <data name="File Path" xml:space="preserve">
+    <value>Dateipfad</value>
+    <comment>File path column header</comment>
+  </data>
+  <data name="Target Path" xml:space="preserve">
+    <value>Zielpfad</value>
+    <comment>Target path column header</comment>
+  </data>
+  <data name="Deleted By" xml:space="preserve">
+    <value>Gelöscht von</value>
+    <comment>Deleted by column header</comment>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Aktualisieren</value>
+    <comment>Refresh button text</comment>
+  </data>
+  <data name="Filter by type..." xml:space="preserve">
+    <value>Nach Typ filtern...</value>
+    <comment>Filter ComboBox placeholder</comment>
+  </data>
+  <data name="Total: {0}" xml:space="preserve">
+    <value>Gesamt: {0}</value>
+    <comment>Total assets count</comment>
+  </data>
+  <data name="{0} drop list" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Willkommen</value>
     <comment>Welcome text on dashboard</comment>
@@ -704,16 +933,9 @@
     <value>%</value>
     <comment>Percentage column header</comment>
   </data>
-  <data name="Actions" xml:space="preserve">
-    <value>Aktionen</value>
-    <comment>Actions column header</comment>
-  </data>
   <data name="Edit" xml:space="preserve">
     <value>Bearbeiten</value>
     <comment>Edit button tooltip</comment>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Löschen</value>
   </data>
   <data name="Changelog" xml:space="preserve">
     <value>Änderungsprotokoll</value>
@@ -825,10 +1047,6 @@
     <value>Ignorieren</value>
     <comment>Ignore option</comment>
   </data>
-  <data name="Type" xml:space="preserve">
-    <value>Typ</value>
-    <comment>Type field label</comment>
-  </data>
   <data name="Exact Amount" xml:space="preserve">
     <value>Genaue Menge</value>
     <comment>Exact Amount option</comment>
@@ -931,10 +1149,6 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Beschreibung</value>
-  </data>
-  <data name="File Name" xml:space="preserve">
-    <value>Dateiname</value>
-    <comment>File Name field label</comment>
   </data>
   <data name="Item Icon" xml:space="preserve">
     <value>Gegenstands-Icon</value>
@@ -1215,10 +1429,6 @@
   <data name="Chaotic spawn key" xml:space="preserve">
     <value>Chaotischer Spawn-Schlüssel</value>
     <comment>Chaotic spawn key field label</comment>
-  </data>
-  <data name="Misc" xml:space="preserve">
-    <value>Sonstiges</value>
-    <comment>Misc section header</comment>
   </data>
   <data name="Casting time" xml:space="preserve">
     <value>Zauber-Zeit</value>
@@ -1597,10 +1807,6 @@
   <data name="Exit Application" xml:space="preserve">
     <value>Anwendung beenden</value>
     <comment>Error dialog button to close application</comment>
-  </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Abbrechen</value>
-    <comment>Cancel button text</comment>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
@@ -2155,230 +2361,7 @@
   <data name="Text displayed in game" xml:space="preserve">
     <value>Im Spiel angezeigter Text</value>
   </data>
-  <data name="The directory path configured in the application settings is invalid." xml:space="preserve">
-    <value>Der in den Anwendungseinstellungen konfigurierte Verzeichnispfad ist ungültig.</value>
-  </data>
-  <data name="The directory has been moved or deleted." xml:space="preserve">
-    <value>Das Verzeichnis wurde verschoben oder gelöscht.</value>
-  </data>
-  <data name="There are insufficient permissions to access the directory." xml:space="preserve">
-    <value>Es sind nicht genügend Berechtigungen vorhanden, um auf das Verzeichnis zuzugreifen.</value>
-  </data>
-  <data name="A required directory was not found." xml:space="preserve">
-    <value>Ein erforderliches Verzeichnis wurde nicht gefunden.</value>
-  </data>
-  <data name="Directory not found" xml:space="preserve">
-    <value>Verzeichnis nicht gefunden</value>
-  </data>
-  <data name="A required file was not found." xml:space="preserve">
-    <value>Eine erforderliche Datei wurde nicht gefunden.</value>
-  </data>
-  <data name="The file path configured in the application settings is invalid." xml:space="preserve">
-    <value>Der in den Anwendungseinstellungen konfigurierte Dateipfad ist ungültig.</value>
-  </data>
-  <data name="The file has been moved, renamed or deleted." xml:space="preserve">
-    <value>Die Datei wurde verschoben, umbenannt oder gelöscht.</value>
-  </data>
-  <data name="There are insufficient permissions to access the file." xml:space="preserve">
-    <value>Es sind nicht genügend Berechtigungen vorhanden, um auf die Datei zuzugreifen.</value>
-  </data>
-  <data name="Incorrectly formatted file" xml:space="preserve">
-    <value>Falsch formatiert Datei</value>
-  </data>
-  <data name="A required file is incorrectly formatted." xml:space="preserve">
-    <value>Eine erforderliche Datei ist falsch formatiert.</value>
-  </data>
-  <data name="The application found a file, but it is not correctly formatted. This can happen when:" xml:space="preserve">
-    <value>Die Anwendung hat eine Datei gefunden, aber sie ist nicht korrekt formatiert. Dies kann passieren, wenn :</value>
-  </data>
-  <data name="The file has been manually edited and contains errors." xml:space="preserve">
-    <value>Die Datei wurde manuell bearbeitet und enthält Fehler.</value>
-  </data>
-  <data name="The file path does not point to the correct file." xml:space="preserve">
-    <value>Der Dateipfad zeigt nicht auf die richtige Datei.</value>
-  </data>
-  <data name="The configured resource version does not match your files' version." xml:space="preserve">
-    <value>Die konfigurierte Ressourcenversion stimmt nicht mit der Version Ihrer Dateien überein.</value>
-  </data>
-  <data name="Unknown error" xml:space="preserve">
-    <value>Unbekannter Fehler</value>
-  </data>
-  <data name="An unexpected error occurred." xml:space="preserve">
-    <value>Ein unerwarteter Fehler ist aufgetreten.</value>
-  </data>
-  <data name="An unexpected error occurred while loading. This can happen when:" xml:space="preserve">
-    <value>Beim Laden ist ein unerwarteter Fehler aufgetreten. Dies kann passieren, wenn :</value>
-  </data>
-  <data name="There is a bug in the application." xml:space="preserve">
-    <value>In der Anwendung gibt es einen Fehler.</value>
-  </data>
-  <data name="Open configuration" xml:space="preserve">
-    <value>Konfiguration öffnen</value>
-  </data>
-  <data name="Misc" xml:space="preserve">
-    <value>Verschiedenes</value>
-  </data>
-  <data name="Navigate to the misc tools page." xml:space="preserve">
-    <value>Navigiere zur Seite für verschiedene Tools.</value>
-  </data>
-  <data name="Misc Tools" xml:space="preserve">
-    <value>Verschiedene Tools</value>
-  </data>
-  <data name="Find and manage unused assets" xml:space="preserve">
-    <value>Finde und verwalte ungenutzte Assets</value>
-  </data>
-  <data name="Find Unused Models &amp; Textures" xml:space="preserve">
-    <value>Ungenutzte Modelle &amp; Texturen finden</value>
-  </data>
-  <data name="Scan dependencies and list assets not referenced anywhere" xml:space="preserve">
-    <value>Abhängigkeiten scannen und Assets auflisten, die nirgendwo referenziert werden</value>
-  </data>
-  <data name="Status" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="Scanning for unused assets..." xml:space="preserve">
-    <value>Suche nach ungenutzten Assets...</value>
-  </data>
-  <data name="Scanning models..." xml:space="preserve">
-    <value>Scanne Modelle...</value>
-  </data>
-  <data name="Scanning textures..." xml:space="preserve">
-    <value>Scanne Texturen...</value>
-  </data>
-  <data name="Scanning sounds..." xml:space="preserve">
-    <value>Scanne Sounds...</value>
-  </data>
-  <data name="Scan completed. Found {0} unused assets." xml:space="preserve">
-    <value>Scan abgeschlossen. {0} ungenutzte Assets gefunden.</value>
-  </data>
-  <data name="Total Size Before" xml:space="preserve">
-    <value>Gesamtgröße Vorher</value>
-  </data>
-  <data name="After" xml:space="preserve">
-    <value>Nachher</value>
-  </data>
-  <data name="Scan Assets" xml:space="preserve">
-    <value>Assets scannen</value>
-  </data>
-  <data name="Select All" xml:space="preserve">
-    <value>Alle auswählen</value>
-  </data>
-  <data name="Clear Selection" xml:space="preserve">
-    <value>Auswahl löschen</value>
-  </data>
-  <data name="Delete Selected" xml:space="preserve">
-    <value>Ausgewählte löschen</value>
-  </data>
-  <data name="Search by name, path, or type..." xml:space="preserve">
-    <value>Suche nach Name, Pfad oder Typ...</value>
-  </data>
-  <data name="{0} assets found" xml:space="preserve">
-    <value>{0} Assets gefunden</value>
-  </data>
-  <data name="Type" xml:space="preserve">
-    <value>Typ</value>
-  </data>
-  <data name="File Name" xml:space="preserve">
-    <value>Dateiname</value>
-  </data>
-  <data name="Path" xml:space="preserve">
-    <value>Pfad</value>
-  </data>
-  <data name="Size" xml:space="preserve">
-    <value>Größe</value>
-  </data>
-  <data name="Last Modified" xml:space="preserve">
-    <value>Zuletzt geändert</value>
-  </data>
-  <data name="Actions" xml:space="preserve">
-    <value>Aktionen</value>
-  </data>
-  <data name="Scan completed" xml:space="preserve">
-    <value>Scan abgeschlossen</value>
-  </data>
-  <data name="Found {0} unused assets totaling {1}." xml:space="preserve">
-    <value>{0} ungenutzte Assets mit insgesamt {1} gefunden.</value>
-  </data>
-  <data name="Scan failed" xml:space="preserve">
-    <value>Scan fehlgeschlagen</value>
-  </data>
-  <data name="No selection" xml:space="preserve">
-    <value>Keine Auswahl</value>
-  </data>
-  <data name="Please select assets to delete." xml:space="preserve">
-    <value>Bitte wählen Sie Assets zum Löschen aus.</value>
-  </data>
-  <data name="Delete selected assets" xml:space="preserve">
-    <value>Ausgewählte Assets löschen</value>
-  </data>
-  <data name="Are you sure you want to delete {0} selected assets? This action cannot be undone." xml:space="preserve">
-    <value>Sind Sie sicher, dass Sie {0} ausgewählte Assets löschen möchten? Diese Aktion kann möglicherweise nicht rückgängig gemacht werden.</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Löschen</value>
-  </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Abbrechen</value>
-  </data>
-  <data name="Assets deleted" xml:space="preserve">
-    <value>Assets gelöscht</value>
-  </data>
-  <data name="Successfully deleted {0} assets, freeing {1}." xml:space="preserve">
-    <value>Erfolgreich {0} Assets gelöscht, {1} freigegeben.</value>
-  </data>
-  <data name="Deletion failed" xml:space="preserve">
-    <value>Löschen fehlgeschlagen</value>
-  </data>
-  <data name="Delete asset" xml:space="preserve">
-    <value>Asset löschen</value>
-  </data>
-  <data name="Are you sure you want to delete '{0}'? This action cannot be undone." xml:space="preserve">
-    <value>Sind Sie sicher, dass Sie '{0}' löschen möchten? Diese Aktion kann möglicherweise nicht rückgängig gemacht werden.</value>
-  </data>
-  <data name="Asset deleted" xml:space="preserve">
-    <value>Asset gelöscht</value>
-  </data>
-  <data name="Successfully deleted '{0}'." xml:space="preserve">
-    <value>Erfolgreich '{0}' gelöscht.</value>
-  </data>
-  <data name="Deletion Log" xml:space="preserve">
-    <value>Löschprotokoll</value>
-    <comment>Deletion log window title</comment>
-  </data>
-  <data name="View and restore deleted assets" xml:space="preserve">
-    <value>Gelöschte Assets anzeigen und wiederherstellen</value>
-    <comment>Deletion log window subtitle</comment>
-  </data>
-  <data name="Date" xml:space="preserve">
-    <value>Datum</value>
-    <comment>Date column header</comment>
-  </data>
-  <data name="Action" xml:space="preserve">
-    <value>Aktion</value>
-    <comment>Action column header</comment>
-  </data>
-  <data name="File Path" xml:space="preserve">
-    <value>Dateipfad</value>
-    <comment>File path column header</comment>
-  </data>
-  <data name="Target Path" xml:space="preserve">
-    <value>Zielpfad</value>
-    <comment>Target path column header</comment>
-  </data>
-  <data name="Deleted By" xml:space="preserve">
-    <value>Gelöscht von</value>
-    <comment>Deleted by column header</comment>
-  </data>
-  <data name="Refresh" xml:space="preserve">
-    <value>Aktualisieren</value>
-    <comment>Refresh button text</comment>
-  </data>
-  <data name="Filter by type..." xml:space="preserve">
-    <value>Nach Typ filtern...</value>
-    <comment>Filter ComboBox placeholder</comment>
-  </data>
-  <data name="Total: {0}" xml:space="preserve">
-    <value>Gesamt: {0}</value>
-    <comment>Total assets count</comment>
+  <data name="Add penyas drop" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
 </root>

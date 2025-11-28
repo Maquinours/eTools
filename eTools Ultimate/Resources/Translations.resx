@@ -813,4 +813,76 @@
     <value>Total: {0}</value>
     <comment>Total assets count</comment>
   </data>
+  <data name="{0} drop list" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Add item drops by kind" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Remove selected element" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Max drops" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Maximum number of items that can drop when this mover dies." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Minimum" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Maximum" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Minimum amount dropped" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Maximum amount dropped" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Item kind" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Minimum rarity" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Maximum rarity" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Add item drop" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Add penyas drop" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Kind of items to include. Items whose third kind does not match this value will be excluded." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Minimum rarity for an item to be included. This value is read-only and depends on the mover’s level." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Maximum rarity for an item to be included. This value is read-only and depends on the mover’s level." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Third kind of the item" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Rarity of the item" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Rarity" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Dropped item identifier" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Maximum quantity dropped" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Level of the dropped item" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Drop chance (in %)" xml:space="preserve">
+    <value />
+  </data>
 </root>

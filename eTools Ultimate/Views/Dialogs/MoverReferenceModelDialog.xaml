@@ -11,6 +11,7 @@
     Title="{i18n:StringLocalizer 'Select Reference Model'}"
     d:DataContext="{d:DesignInstance dialogViewModels:MoverReferenceModelViewModel,
                                      IsDesignTimeCreatable=False}"
+    CloseButtonText="{i18n:StringLocalizer 'Close'}"
     IsPrimaryButtonEnabled="True"
     PrimaryButtonText="{i18n:StringLocalizer 'Accept'}"
     mc:Ignorable="d">
