@@ -103,8 +103,9 @@
                     Background="Transparent"
                     BorderThickness="0"
                     ItemsSource="{Binding DropListView}"
+                    Loaded="DropListTreeView_Loaded"
                     VirtualizingStackPanel.IsVirtualizing="True"
-                    VirtualizingStackPanel.VirtualizationMode="Standard" Loaded="DropListTreeView_Loaded">
+                    VirtualizingStackPanel.VirtualizationMode="Standard">
                     <TreeView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <local:MyVirtualizingStackPanel />

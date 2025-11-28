@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Threading;
 
@@ -41,12 +42,13 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
             .. _mover.DropItemGenerator.DropItems.Select(x => new DropItemTreeViewItem(x))
             ];
 
-            _mover.DropItemGenerator.DropGolds.CollectionChanged += DropGolds_CollectionChanged;
-            _mover.DropItemGenerator.DropItems.CollectionChanged += DropItems_CollectionChanged;
-            _mover.DropKindGenerator.DropKinds.CollectionChanged += DropKinds_CollectionChanged;
-            _dropList.CollectionChanged += DropList_CollectionChanged;
+            CollectionChangedEventManager.AddHandler(_mover.DropItemGenerator.DropGolds, DropGolds_CollectionChanged);
+            CollectionChangedEventManager.AddHandler(_mover.DropItemGenerator.DropItems, DropItems_CollectionChanged);
+            CollectionChangedEventManager.AddHandler(_mover.DropKindGenerator.DropKinds, DropKinds_CollectionChanged);
+            CollectionChangedEventManager.AddHandler(_dropList, DropList_CollectionChanged);
+
             foreach (MoverDropTreeViewItem dropItem in _dropList)
-                dropItem.PropertyChanged += DropItem_PropertyChanged;
+                PropertyChangedEventManager.AddHandler(dropItem, DropItem_PropertyChanged, nameof(MoverDropTreeViewItem.IsSelected));
         }
 
         private void DropItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -72,17 +74,13 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
             {
                 MoverDropTreeViewItem[] newItems = [.. e.NewItems.Cast<MoverDropTreeViewItem>()];
                 foreach (MoverDropTreeViewItem newItem in newItems)
-                    newItem.PropertyChanged += DropItem_PropertyChanged;
+                    PropertyChangedEventManager.AddHandler(newItem, DropItem_PropertyChanged, nameof(MoverDropTreeViewItem.IsSelected));
             }
             if (e.OldItems != null)
             {
                 MoverDropTreeViewItem[] oldItems = [.. e.OldItems.Cast<MoverDropTreeViewItem>()];
-                foreach (MoverDropTreeViewItem newItem in oldItems)
-                {
-                    newItem.PropertyChanged -= DropItem_PropertyChanged;
-                    if (newItem is DropKindTreeViewItem newDropKindItem)
-                        newDropKindItem.Dispose();
-                }
+                foreach (MoverDropTreeViewItem oldItem in oldItems)
+                    PropertyChangedEventManager.RemoveHandler(oldItem, DropItem_PropertyChanged, nameof(MoverDropTreeViewItem.IsSelected));
             }
         }
 
@@ -117,12 +115,15 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
             {
                 case DropItemTreeViewItem dropItem:
                     _mover.DropItemGenerator.DropItems.Remove(dropItem.DropItem);
+                    dropItem.DropItem.Dispose();
                     break;
                 case DropGoldTreeViewItem dropGold:
                     _mover.DropItemGenerator.DropGolds.Remove(dropGold.DropGold);
+                    dropGold.DropGold.Dispose();
                     break;
                 case DropKindTreeViewItem dropKind:
                     _mover.DropKindGenerator.DropKinds.Remove(dropKind.DropKind);
+                    dropKind.DropKind.Dispose();
                     break;
                 default:
                     throw new InvalidOperationException("drop is not a valid class");
@@ -231,7 +232,7 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
         public DropItem DropItem { get; } = dropItem;
     }
 
-    public class DropKindTreeViewItem : MoverDropTreeViewItem, INotifyPropertyChanged, IDisposable
+    public class DropKindTreeViewItem : MoverDropTreeViewItem, INotifyPropertyChanged
     {
         public DropKind DropKind { get; }
         public ItemTreeViewItem[] DropItems => [.. DropKind.Items.Select(x => new ItemTreeViewItem(x))];
@@ -239,14 +240,8 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
         public DropKindTreeViewItem(DropKind dropKind)
         {
             DropKind = dropKind;
-            DropKind.PropertyChanged += DropKind_PropertyChanged;
-        }
 
-        public void Dispose()
-        {
-            DropKind.PropertyChanged -= DropKind_PropertyChanged;
-
-            GC.SuppressFinalize(this);
+            PropertyChangedEventManager.AddHandler(DropKind, DropKind_PropertyChanged, nameof(DropKind.Items));
         }
 
         private void DropKind_PropertyChanged(object? sender, PropertyChangedEventArgs e)

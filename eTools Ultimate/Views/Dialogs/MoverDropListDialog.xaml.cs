@@ -20,7 +20,9 @@ namespace eTools_Ultimate.Views.Dialogs
 
             InitializeComponent();
 
-            ((INotifyCollectionChanged)DropListTreeView.Items).CollectionChanged += DropListTreeView_Items_CollectionChanged;
+            CollectionChangedEventManager.AddHandler(DropListTreeView.Items, DropListTreeView_Items_CollectionChanged);
+
+            //((INotifyCollectionChanged)DropListTreeView.Items).CollectionChanged += DropListTreeView_Items_CollectionChanged;
         }
 
         private void DropListTreeView_Loaded(object sender, RoutedEventArgs e)
