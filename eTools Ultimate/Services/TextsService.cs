@@ -28,37 +28,27 @@ namespace eTools_Ultimate.Services
 
         public void Load()
         {
-            this.Clear();
+            Clear();
 
             string filePath = settingsService.Settings.TextsConfigFilePath ?? settingsService.Settings.DefaultTextsConfigFilePath;
 
-            using (Script script = new())
+            using Script script = new();
+
+            script.Load(filePath);
+
+            while (true)
             {
-                script.Load(filePath);
+                uint dwId = (uint)script.GetNumber();
+                if (script.EndOfStream) break;
 
-                while (true)
-                {
-                    uint dwId = (uint)script.GetNumber();
-                    if (script.EndOfStream) break;
-                    
-                    uint dwColor = (uint)script.GetNumber();
-                    script.GetToken(); // "{"
-                    string szName = script.GetToken();
+                uint dwColor = (uint)script.GetNumber();
+                script.GetToken(); // "{"
+                string szName = script.GetToken();
+                script.GetToken(); // "}"
 
-                    // If the string is not in the strings service, then we generate a new key for it.
-                    if (!stringsService.Strings.ContainsKey(szName))
-                    {
-                        string identifier = stringsService.GetNextStringIdentifier(STRING_ID_PREFIX);
-                        stringsService.AddString(identifier, szName);
-                        szName = identifier;
-                    }
+                Text text = new(dwId, dwColor, szName);
 
-                    script.GetToken(); // "}"
-
-                    Text text = new(dwId, dwColor, szName);
-
-                    this.Texts.Add(text);
-                }
+                Texts.Add(text);
             }
         }
 
