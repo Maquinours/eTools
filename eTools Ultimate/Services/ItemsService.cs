@@ -21,13 +21,11 @@ namespace eTools_Ultimate.Services
         private readonly DefinesService _definesService;
         private readonly ModelsService _modelsService;
 
-        private readonly ObservableCollection<Item> items = [];
+        private readonly WpfObservableRangeCollection<Item> _items = [];
         private readonly ObservableDictionary<uint, Item> _itemsById;
         private readonly ObservableDictionary<(uint, uint), Item[]> _itemsByIk3AndRarity;
 
-        public event EventHandler<ItemPropertyChangedEventArgs>? ItemPropertyChanged;
-
-        public ObservableCollection<Item> Items => this.items;
+        public WpfObservableRangeCollection<Item> Items => _items;
         public ObservableDictionary<uint, Item> ItemsById => _itemsById;
         public ObservableDictionary<(uint, uint), Item[]> ItemsByIk3AndRarity => _itemsByIk3AndRarity;
 
@@ -163,8 +161,6 @@ namespace eTools_Ultimate.Services
                         break;
                     }
             }
-
-            ItemPropertyChanged?.Invoke(this, new ItemPropertyChangedEventArgs(item, e.PropertyName));
         }
 
         private void ClearItems()
@@ -183,7 +179,7 @@ namespace eTools_Ultimate.Services
 
         public void Load()
         {
-            this.ClearItems();
+            ClearItems();
 
             Dictionary<uint, Item> items = [];
 
@@ -639,14 +635,7 @@ namespace eTools_Ultimate.Services
                 items[item.DwId] = item;
             }
 
-            foreach (Item item in items.Values)
-                Items.Add(item);
+            Items.AddRange(items.Values);
         }
-    }
-
-    public class ItemPropertyChangedEventArgs(Item item, string propertyName) : EventArgs
-    {
-        public Item Item { get; } = item;
-        public string PropertyName { get; } = propertyName;
     }
 }
