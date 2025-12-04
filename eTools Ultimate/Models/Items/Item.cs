@@ -18,7 +18,7 @@ using System.Xml.Linq;
 
 namespace eTools_Ultimate.Models.Items
 {
-    public class Item
+    public class Item : INotifyPropertyChanged
     {
         #region Fields
         private int _nVer;
