@@ -90,8 +90,8 @@ namespace eTools_Ultimate
                 // Top level pages
                 services.AddSingleton<DashboardPage>();
                 services.AddSingleton<DashboardViewModel>();
-                //services.AddSingleton<ItemsPage>();
-                //services.AddSingleton<ItemsViewModel>();
+                services.AddSingleton<ItemsPage>();
+                services.AddSingleton<ItemsViewModel>();
                 //services.AddSingleton<SkillPage>();
                 //services.AddSingleton<SkillsViewModel>();
                 //services.AddSingleton<QuestsPage>();

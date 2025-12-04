@@ -43,8 +43,16 @@ namespace eTools_Ultimate.Services
         public ReadOnlyDictionary<int, string> ReversedModelTypeDefines => ReversedDefines.GetValueOrDefault("MODELTYPE") ?? new(new Dictionary<int, string>());
         public ReadOnlyDictionary<int, string> ReversedModelDistantDefines => ReversedDefines.GetValueOrDefault("MD") ?? new(new Dictionary<int, string>());
         public ReadOnlyDictionary<int, string> ReversedAdditionalTextureDefines => ReversedDefines.GetValueOrDefault("ATEX") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedItemKind1Defines => ReversedDefines.GetValueOrDefault("IK1") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedItemKind2Defines => ReversedDefines.GetValueOrDefault("IK2") ?? new(new Dictionary<int, string>());
         public ReadOnlyDictionary<int, string> ReversedItemKind3Defines => ReversedDefines.GetValueOrDefault("IK3") ?? new(new Dictionary<int, string>());
         public ReadOnlyDictionary<int, string> ReversedBooleanDefines => new(Defines.Where(x => x.Key == "FALSE" || x.Key == "TRUE").ToDictionary(x => x.Value, x => x.Key));
+        public ReadOnlyDictionary<int, string> ReversedWorldDefines => ReversedDefines.GetValueOrDefault("WI") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedSexDefines => ReversedDefines.GetValueOrDefault("SEX") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedJobDefines => ReversedDefines.GetValueOrDefault("JOB") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedPartsDefines => ReversedDefines.GetValueOrDefault("PARTS") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedWeaponTypeDefines => ReversedDefines.GetValueOrDefault("WT") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedAttackRangeDefines => ReversedDefines.GetValueOrDefault("AR") ?? new(new Dictionary<int, string>());
 
         public void Load()
         {
@@ -71,7 +79,9 @@ namespace eTools_Ultimate.Services
                     }
                     string key = scanner.GetToken();
                     int value = scanner.GetNumber();
-                    if (scanner.Token.StartsWith('#')) continue;
+
+                    if (scanner.TokenType != TokenType.NUMBER && scanner.TokenType != TokenType.HEX) 
+                        continue;
 
                     tempDefines[key] = value;
 

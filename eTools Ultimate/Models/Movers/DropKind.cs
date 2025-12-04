@@ -150,8 +150,8 @@ namespace eTools_Ultimate.Models.Movers
             HashSet<(uint, uint)> possibleKeys = [.. Enumerable.Range(nMinUniq, nMaxUniq - nMinUniq + 1).Select(x => (DwIk3, (uint)x))];
 
             if (
-                (e.OldItems is not null && e.OldItems.Cast<KeyValuePair<(uint, uint), Item>>().Any(x => possibleKeys.Contains(x.Key))) ||
-                (e.NewItems is not null && e.NewItems.Cast<KeyValuePair<(uint, uint), Item>>().Any(x => possibleKeys.Contains(x.Key)))
+                (e.OldItems is not null && e.OldItems.Cast<KeyValuePair<(uint, uint), Item[]>>().Any(x => possibleKeys.Contains(x.Key))) ||
+                (e.NewItems is not null && e.NewItems.Cast<KeyValuePair<(uint, uint), Item[]>>().Any(x => possibleKeys.Contains(x.Key)))
                 )
                 NotifyPropertyChanged(nameof(Items));
 

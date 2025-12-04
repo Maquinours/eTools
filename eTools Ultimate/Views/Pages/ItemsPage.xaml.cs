@@ -19,7 +19,7 @@ namespace eTools_Ultimate.Views.Pages
         public ItemsPage(ItemsViewModel viewModel)
         {
             ViewModel = viewModel;
-            DataContext = this;
+            DataContext = viewModel;
 
             InitializeComponent();
         }

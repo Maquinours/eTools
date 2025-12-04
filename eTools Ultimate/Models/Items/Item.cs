@@ -422,7 +422,12 @@ namespace eTools_Ultimate.Models.Items
                 string filePath = $"{settings.ItemIconsFolderPath ?? settings.DefaultItemIconsFolderPath}{SzIcon}";
                 if (!File.Exists(filePath))
                     return null;
-                var bitmap = new DDSImage(File.OpenRead(filePath)).BitmapImage;
+
+                Bitmap bitmap;
+                if (Path.GetExtension(filePath).Equals(".dds", StringComparison.OrdinalIgnoreCase))
+                    bitmap = new DDSImage(File.OpenRead(filePath)).BitmapImage;
+                else
+                    bitmap = new(filePath);
 
                 // Bitmap to bitmap image
                 using var memory = new MemoryStream();
@@ -524,6 +529,16 @@ namespace eTools_Ultimate.Models.Items
             }
         }
 
+        public string BlinkwingWorldIdentifier
+        {
+            get => Script.NumberToString(DwWeaponType, App.Services.GetRequiredService<DefinesService>().ReversedWorldDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwWeaponType = (uint)val;
+            }
+        }
+
         public uint AbilityMinDurationDays
         {
             get => DwAbilityMin / 60 / 24;
@@ -576,6 +591,26 @@ namespace eTools_Ultimate.Models.Items
             set => DwSkillTime = SkillTimeMinutes * 60 * 1000 + SkillTimeSeconds * 1000 + value;
         }
 
+        public string ItemKind1Identifier
+        {
+            get => Script.NumberToString(DwItemKind1, App.Services.GetRequiredService<DefinesService>().ReversedItemKind1Defines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwItemKind1 = (uint)val;
+            }
+        }
+
+        public string ItemKind2Identifier
+        {
+            get => Script.NumberToString(DwItemKind2, App.Services.GetRequiredService<DefinesService>().ReversedItemKind2Defines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwItemKind2 = (uint)val;
+            }
+        }
+
         public string ItemKind3Identifier
         {
             get => Script.NumberToString(DwItemKind3, App.Services.GetRequiredService<DefinesService>().ReversedItemKind3Defines);
@@ -583,6 +618,157 @@ namespace eTools_Ultimate.Models.Items
             {
                 if (Script.TryGetNumberFromString(value, out int val))
                     DwItemKind3 = (uint)val;
+            }
+        }
+
+        public string SfxObjIdentifier
+        {
+            get => Script.NumberToString(DwSfxObj, App.Services.GetRequiredService<DefinesService>().ReversedSfxDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwSfxObj = (uint)val;
+            }
+        }
+
+        public string SfxObj3Identifier
+        {
+            get => Script.NumberToString(DwSfxObj3, App.Services.GetRequiredService<DefinesService>().ReversedSfxDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwSfxObj3 = (uint)val;
+            }
+        }
+
+        public bool Shopable
+        {
+            get => DwShopAble != unchecked((uint)-1);
+            set => DwShopAble = value ? 1 : unchecked((uint)-1);
+        }
+
+        public string ItemSexIdentifier
+        {
+            get => Script.NumberToString(DwItemSex, App.Services.GetRequiredService<DefinesService>().ReversedSexDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwItemSex = (uint)val;
+            }
+        }
+
+        public string ItemJobIdentifier
+        {
+            get => Script.NumberToString(DwItemJob, App.Services.GetRequiredService<DefinesService>().ReversedJobDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwItemJob = (uint)val;
+            }
+        }
+
+        public string PartsIdentifier
+        {
+            get => Script.NumberToString(DwParts, App.Services.GetRequiredService<DefinesService>().ReversedPartsDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwParts = (uint)val;
+            }
+        }
+
+        public string DestParam1Identifier
+        {
+            get => Script.NumberToString(DwDestParam1, App.Services.GetRequiredService<DefinesService>().ReversedDestDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwDestParam1 = (uint)val;
+            }
+        }
+        public string DestParam2Identifier
+        {
+            get => Script.NumberToString(DwDestParam2, App.Services.GetRequiredService<DefinesService>().ReversedDestDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwDestParam2 = (uint)val;
+            }
+        }
+        public string DestParam3Identifier
+        {
+            get => Script.NumberToString(DwDestParam3, App.Services.GetRequiredService<DefinesService>().ReversedDestDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwDestParam3 = (uint)val;
+            }
+        }
+        public string DestParam4Identifier
+        {
+            get => Script.NumberToString(DwDestParam4, App.Services.GetRequiredService<DefinesService>().ReversedDestDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwDestParam4 = (uint)val;
+            }
+        }
+        public string DestParam5Identifier
+        {
+            get => Script.NumberToString(DwDestParam5, App.Services.GetRequiredService<DefinesService>().ReversedDestDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwDestParam5 = (uint)val;
+            }
+        }
+        public string DestParam6Identifier
+        {
+            get => Script.NumberToString(DwDestParam6, App.Services.GetRequiredService<DefinesService>().ReversedDestDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwDestParam6 = (uint)val;
+            }
+        }
+
+        public string WeaponTypeIdentifier
+        {
+            get => Script.NumberToString(DwWeaponType, App.Services.GetRequiredService<DefinesService>().ReversedWeaponTypeDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwWeaponType = (uint)val;
+            }
+        }
+
+        public string AttackRangeIdentifier
+        {
+            get => Script.NumberToString(DwAttackRange, App.Services.GetRequiredService<DefinesService>().ReversedAttackRangeDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwAttackRange = (uint)val;
+            }
+        }
+
+        public string SoundAttack1Identifier
+        {
+            get => Script.NumberToString(DwSndAttack1, App.Services.GetRequiredService<DefinesService>().ReversedSoundDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwSndAttack1 = (uint)val;
+            }
+        }
+
+        public string SoundAttack2Identifier
+        {
+            get => Script.NumberToString(DwSndAttack2, App.Services.GetRequiredService<DefinesService>().ReversedSoundDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwSndAttack2 = (uint)val;
             }
         }
         #endregion
@@ -982,7 +1168,14 @@ namespace eTools_Ultimate.Models.Items
                 case nameof(SzCommand):
                     NotifyPropertyChanged(nameof(Description));
                     break;
+                case nameof(DwItemKind1):
+                    NotifyPropertyChanged(nameof(ItemKind1Identifier));
+                    break;
+                case nameof(DwItemKind2):
+                    NotifyPropertyChanged(nameof(ItemKind2Identifier));
+                    break;
                 case nameof(DwItemKind3):
+                    NotifyPropertyChanged(nameof(ItemKind2Identifier));
                     NotifyPropertyChanged(nameof(IsTownBlinkwing));
                     NotifyPropertyChanged(nameof(IsNormalBlinkwing));
                     break;
@@ -1004,6 +1197,54 @@ namespace eTools_Ultimate.Models.Items
                 case nameof(DwId):
                     NotifyPropertyChanged(nameof(Id));
                     NotifyPropertyChanged(nameof(Identifier));
+                    break;
+                case nameof(DwShopAble):
+                    NotifyPropertyChanged(nameof(Shopable));
+                    break;
+                case nameof(DwSfxObj):
+                    NotifyPropertyChanged(nameof(SfxObjIdentifier));
+                    break;
+                case nameof(DwSfxObj3):
+                    NotifyPropertyChanged(nameof(SfxObj3Identifier));
+                    break;
+                case nameof(DwItemSex):
+                    NotifyPropertyChanged(nameof(ItemSexIdentifier));
+                    break;
+                case nameof(DwItemJob):
+                    NotifyPropertyChanged(nameof(ItemJobIdentifier));
+                    break;
+                case nameof(DwParts):
+                    NotifyPropertyChanged(nameof(PartsIdentifier));
+                    break;
+                case nameof(DwDestParam1):
+                    NotifyPropertyChanged(nameof(DestParam1Identifier));
+                    break;
+                case nameof(DwDestParam2):
+                    NotifyPropertyChanged(nameof(DestParam2Identifier));
+                    break;
+                case nameof(DwDestParam3):
+                    NotifyPropertyChanged(nameof(DestParam3Identifier));
+                    break;
+                case nameof(DwDestParam4):
+                    NotifyPropertyChanged(nameof(DestParam4Identifier));
+                    break;
+                case nameof(DwDestParam5):
+                    NotifyPropertyChanged(nameof(DestParam5Identifier));
+                    break;
+                case nameof(DwDestParam6):
+                    NotifyPropertyChanged(nameof(DestParam6Identifier));
+                    break;
+                case nameof(DwWeaponType):
+                    NotifyPropertyChanged(nameof(WeaponTypeIdentifier));
+                    break;
+                case nameof(DwAttackRange):
+                    NotifyPropertyChanged(nameof(AttackRangeIdentifier));
+                    break;
+                case nameof(DwSndAttack1):
+                    NotifyPropertyChanged(nameof(SoundAttack1Identifier));
+                    break;
+                case nameof(DwSndAttack2):
+                    NotifyPropertyChanged(nameof(SoundAttack2Identifier));
                     break;
             }
         }

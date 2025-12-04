@@ -33,12 +33,12 @@ namespace eTools_Ultimate.ViewModels.Windows
                     //}
                 },
                 new NavigationViewItemSeparator(),
-                //new NavigationViewItem()
-                //{
-                //    Content = "Items",
-                //    Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Items.png", 25, 25),
-                //    TargetPageType = typeof(ItemsPage)
-                //},
+                new NavigationViewItem()
+                {
+                    Content = "Items",
+                    Icon = ImagesHelper.CreateHighQualityImageIcon("eTools Ultimate;component/Assets/Icons/Items.png", 25, 25),
+                    TargetPageType = typeof(ItemsPage)
+                },
                 new NavigationViewItem()
                 {
                     Content = localizer["Movers"],
