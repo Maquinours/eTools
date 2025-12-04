@@ -49,7 +49,7 @@ namespace eTools_Ultimate.Services
                 foreach (Item oldItem in oldItems)
                     oldItem.PropertyChanged -= Item_PropertyChanged;
 
-                ItemsById.RemoveRange(oldItems.Cast<Item>().Select(item => item.DwId));
+                ItemsById.RemoveRange(oldItems.Select(item => item.DwId));
                 foreach (IGrouping<(uint, uint), Item> group in oldItems.GroupBy(x => (x.DwItemKind3, x.DwItemRare)))
                 {
                     if (ItemsByIk3AndRarity.TryGetValue(group.Key, out Item[]? items))
