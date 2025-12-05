@@ -29,6 +29,8 @@ namespace eTools_Ultimate.ViewModels.Pages
         public string[] AttackRangeIdentifiers => [.. definesService.ReversedAttackRangeDefines.Values];
         public string[] SfxIdentifiers => [.. definesService.ReversedSfxDefines.Values];
         public string[] SoundIdentifiers => [.. definesService.ReversedSoundDefines.Values];
+        public string[] HandedIdentifiers => [.. definesService.ReversedHandedDefines.Values];
+        public bool HasExpandedDestValues => settingsService.Settings.ResourcesVersion >= 19 || settingsService.Settings.FilesFormat == FilesFormats.Florist;
 
         public string SearchText
         {

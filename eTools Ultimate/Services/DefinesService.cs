@@ -53,6 +53,7 @@ namespace eTools_Ultimate.Services
         public ReadOnlyDictionary<int, string> ReversedPartsDefines => ReversedDefines.GetValueOrDefault("PARTS") ?? new(new Dictionary<int, string>());
         public ReadOnlyDictionary<int, string> ReversedWeaponTypeDefines => ReversedDefines.GetValueOrDefault("WT") ?? new(new Dictionary<int, string>());
         public ReadOnlyDictionary<int, string> ReversedAttackRangeDefines => ReversedDefines.GetValueOrDefault("AR") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedHandedDefines => ReversedDefines.GetValueOrDefault("HD") ?? new(new Dictionary<int, string>());
 
         public void Load()
         {

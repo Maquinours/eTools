@@ -5,9 +5,10 @@
     xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
+    xmlns:itemModels="clr-namespace:eTools_Ultimate.Models.Items"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:models="clr-namespace:eTools_Ultimate.Models"
+    xmlns:selectors="clr-namespace:eTools_Ultimate.Selectors"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:viewmodels="clr-namespace:eTools_Ultimate.ViewModels.Pages"
@@ -23,7 +24,12 @@
     mc:Ignorable="d">
 
     <Page.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <converters:NumberFormatConverter x:Key="NumberFormatConverter" />
+        <converters:NullValueToBooleanConverter x:Key="NullValueToBooleanConverter" />
+
+        <selectors:ItemTemplateSelector x:Key="ItemTemplateSelector" />
+
         <!--  Common Styles  -->
         <Style x:Key="InfoIconStyle" TargetType="ui:SymbolIcon">
             <Setter Property="HorizontalAlignment" Value="Right" />
@@ -290,6 +296,7 @@
         <!--  DataTemplate: Equipment Section  -->
         <DataTemplate x:Key="EquipmentSectionTemplate">
             <StackPanel>
+                <Separator Margin="0,10,0,5" />
                 <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Equipment'}" />
                 <UniformGrid Columns="2">
                     <!--  Parts  -->
@@ -406,6 +413,7 @@
                             <ui:NumberBox
                                 Grid.Column="1"
                                 Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam1, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
                                 Value="{Binding NAdjParamVal1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
                     </Grid>
@@ -437,6 +445,7 @@
                             <ui:NumberBox
                                 Grid.Column="1"
                                 Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam2, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
                                 Value="{Binding NAdjParamVal2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
                     </Grid>
@@ -466,14 +475,15 @@
                                 OriginalItemsSource="{Binding DataContext.DestIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
                                 Text="{Binding DestParam3Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                             <ui:NumberBox
-                                x:Name="Effect3ValueTextBox"
                                 Grid.Column="1"
+                                Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam3, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
                                 Value="{Binding NAdjParamVal3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
                     </Grid>
 
                     <!--  Effect 4  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
+                    <Grid Style="{StaticResource FormFieldStyle}" Visibility="{Binding ViewModel.HasExpandedDestValues, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=Page}}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -499,12 +509,13 @@
                             <ui:NumberBox
                                 Grid.Column="1"
                                 Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam4, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
                                 Value="{Binding NAdjParamVal4, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
                     </Grid>
 
                     <!--  Effect 5  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
+                    <Grid Style="{StaticResource FormFieldStyle}" Visibility="{Binding ViewModel.HasExpandedDestValues, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=Page}}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -530,12 +541,13 @@
                             <ui:NumberBox
                                 Grid.Column="1"
                                 Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam5, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
                                 Value="{Binding NAdjParamVal5, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
                     </Grid>
 
                     <!--  Effect 6  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
+                    <Grid Style="{StaticResource FormFieldStyle}" Visibility="{Binding ViewModel.HasExpandedDestValues, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=Page}}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
@@ -561,6 +573,7 @@
                             <ui:NumberBox
                                 Grid.Column="1"
                                 Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam6, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
                                 Value="{Binding NAdjParamVal6, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
                     </Grid>
@@ -571,883 +584,219 @@
         <!--  DataTemplate: Weapon  -->
         <DataTemplate x:Key="WeaponSectionTemplate">
             <StackPanel>
-                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Weapon'}" />
-                <UniformGrid Columns="2">
-                    <!--  Type  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Type'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Type" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:AutoSuggestBox
-                            Grid.Row="1"
-                            OriginalItemsSource="{Binding DataContext.WeaponTypeIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
-                            Text="{Binding WeaponTypeIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                    </Grid>
-                    <!--  Attack range  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Attack range'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Range of attack" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:AutoSuggestBox
-                            Grid.Row="1"
-                            OriginalItemsSource="{Binding DataContext.AttackRangeIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
-                            Text="{Binding AttackRangeIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                    </Grid>
-                    <!--  Attack speed  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Attack speed'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Speed of attack" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:NumberBox Grid.Row="1" Value="{Binding FAttackSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    </Grid>
-                    <!--  Attack SFX  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Attack SFX'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Minimum attack value" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:AutoSuggestBox
-                            Grid.Row="1"
-                            OriginalItemsSource="{Binding DataContext.SfxIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
-                            Text="{Binding SfxObj3Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                    </Grid>
-                    <!--  Attack sound  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Attack sound'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Sound played when an attack occurs with this item'}" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                <ContentControl Content="{Binding}" ContentTemplate="{StaticResource EquipmentSectionTemplate}" />
+                <Separator Margin="0,10,0,5" />
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Weapon'}" />
+                    <UniformGrid Columns="2">
+                        <!--  Type  -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Type'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="Type" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
                             <ui:AutoSuggestBox
-                                Grid.Column="0"
-                                OriginalItemsSource="{Binding DataContext.SoundIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
-                                Text="{Binding SoundAttack1Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                            <ui:Button
-                                Grid.Column="1"
-                                Width="30"
-                                Height="32"
-                                Margin="5,0,5,0"
-                                Command="{Binding ViewModel.SelectSndAttack1FileCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
-                                Content="{i18n:StringLocalizer '...'}" />
-                            <ui:Button
-                                Grid.Column="2"
-                                Width="40"
-                                Height="32"
-                                Command="{Binding DataContext.PlaySoundCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
-                                CommandParameter="{Binding DwSndAttack1, Mode=OneWay}">
-                                <ui:SymbolIcon Symbol="Play24" />
-                            </ui:Button>
+                                Grid.Row="1"
+                                OriginalItemsSource="{Binding DataContext.WeaponTypeIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding WeaponTypeIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                         </Grid>
-                    </Grid>
-                    <!--  Critical attack sound  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Critical attack sound'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Sound played when a critical attack occurs with this item'}" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                        <!--  Handed  -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Handed'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="Handed" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
                             <ui:AutoSuggestBox
-                                Grid.Column="0"
-                                OriginalItemsSource="{Binding DataContext.SoundIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
-                                Text="{Binding SoundAttack2Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
-                            <ui:Button
-                                Grid.Column="1"
-                                Width="30"
-                                Height="32"
-                                Margin="5,0,5,0"
-                                Command="{Binding ViewModel.SelectSndAttack2FileCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
-                                Content="{i18n:StringLocalizer '...'}" />
-                            <ui:Button
-                                Grid.Column="2"
-                                Width="40"
-                                Height="32"
-                                Command="{Binding DataContext.PlaySoundCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
-                                CommandParameter="{Binding DwSndAttack2, Mode=OneWay}">
-                                <ui:SymbolIcon Symbol="Play24" />
-                            </ui:Button>
+                                Grid.Row="1"
+                                OriginalItemsSource="{Binding DataContext.HandedIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding HandedIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                         </Grid>
-                    </Grid>
-                    <!--  Minimum attack  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Minimum attack'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Minimum attack value" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="MinAttackTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Maximum attack  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Maximum attack'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Maximum attack value" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="MaxAttackTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Parts  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Parts'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Item parts specification" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="PartsTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Type  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Type'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Item type specification" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="TypeTextBox" Grid.Row="1" />
-                    </Grid>
-
-                    <!--  Effect 1  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 1'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="First effect applied by the item" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <ComboBox
-                                x:Name="Effect1ComboBox"
-                                Grid.Column="0"
-                                Margin="0,0,5,0" />
-                            <TextBox
-                                x:Name="Effect1ValueTextBox"
-                                Grid.Column="1"
-                                Margin="5,0,0,0" />
+                        <!--  Attack range  -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Attack range'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="Range of attack" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <ui:AutoSuggestBox
+                                Grid.Row="1"
+                                OriginalItemsSource="{Binding DataContext.AttackRangeIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding AttackRangeIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
                         </Grid>
-                    </Grid>
-
-                    <!--  Effect 2  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 2'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Second effect applied by the item" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <ComboBox
-                                x:Name="Effect2ComboBox"
-                                Grid.Column="0"
-                                Margin="0,0,5,0" />
-                            <TextBox
-                                x:Name="Effect2ValueTextBox"
-                                Grid.Column="1"
-                                Margin="5,0,0,0" />
+                        <!--  Attack speed  -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Attack speed'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="Speed of attack" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <ui:NumberBox Grid.Row="1" Value="{Binding FAttackSpeed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
-                    </Grid>
-
-                    <!--  Effect 3  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 3'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Third effect applied by the item" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <ComboBox
-                                x:Name="Effect3ComboBox"
-                                Grid.Column="0"
-                                Margin="0,0,5,0" />
-                            <TextBox
-                                x:Name="Effect3ValueTextBox"
-                                Grid.Column="1"
-                                Margin="5,0,0,0" />
+                        <!--  Minimum attack  -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Minimum attack'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="Minimum attack value" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <ui:NumberBox Grid.Row="1" Value="{Binding DwAbilityMin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
-                    </Grid>
-
-                    <!--  Effect 4  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 4'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Fourth effect applied by the item" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <ComboBox
-                                x:Name="Effect4ComboBox"
-                                Grid.Column="0"
-                                Margin="0,0,5,0" />
-                            <TextBox
-                                x:Name="Effect4ValueTextBox"
-                                Grid.Column="1"
-                                Margin="5,0,0,0" />
+                        <!--  Maximum attack  -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Maximum attack'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="Maximum attack value" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <ui:NumberBox Grid.Row="1" Value="{Binding DwAbilityMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
-                    </Grid>
-
-                    <!--  Effect 5  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 5'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Fifth effect applied by the item" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <ComboBox
-                                x:Name="Effect5ComboBox"
-                                Grid.Column="0"
-                                Margin="0,0,5,0" />
-                            <TextBox
-                                x:Name="Effect5ValueTextBox"
-                                Grid.Column="1"
-                                Margin="5,0,0,0" />
+                        <!--  Attack sound  -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Attack sound'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="{i18n:StringLocalizer 'Sound played when an attack occurs with this item'}" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ui:AutoSuggestBox
+                                    Grid.Column="0"
+                                    OriginalItemsSource="{Binding DataContext.SoundIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                    Text="{Binding SoundAttack1Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                <ui:Button
+                                    Grid.Column="1"
+                                    Width="30"
+                                    Height="32"
+                                    Margin="5,0,5,0"
+                                    Command="{Binding ViewModel.SelectSndAttack1FileCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                    Content="{i18n:StringLocalizer '...'}" />
+                                <ui:Button
+                                    Grid.Column="2"
+                                    Width="40"
+                                    Height="32"
+                                    Command="{Binding DataContext.PlaySoundCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                    CommandParameter="{Binding DwSndAttack1, Mode=OneWay}">
+                                    <ui:SymbolIcon Symbol="Play24" />
+                                </ui:Button>
+                            </Grid>
                         </Grid>
-                    </Grid>
-
-                    <!--  Effect 6  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 6'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Sixth effect applied by the item" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <Grid Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <ComboBox
-                                x:Name="Effect6ComboBox"
-                                Grid.Column="0"
-                                Margin="0,0,5,0" />
-                            <TextBox
-                                x:Name="Effect6ValueTextBox"
-                                Grid.Column="1"
-                                Margin="5,0,0,0" />
+                        <!--  Critical attack sound  -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Critical attack sound'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="{i18n:StringLocalizer 'Sound played when a critical attack occurs with this item'}" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <ui:AutoSuggestBox
+                                    Grid.Column="0"
+                                    OriginalItemsSource="{Binding DataContext.SoundIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                    Text="{Binding SoundAttack2Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                <ui:Button
+                                    Grid.Column="1"
+                                    Width="30"
+                                    Height="32"
+                                    Margin="5,0,5,0"
+                                    Command="{Binding ViewModel.SelectSndAttack2FileCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                    Content="{i18n:StringLocalizer '...'}" />
+                                <ui:Button
+                                    Grid.Column="2"
+                                    Width="40"
+                                    Height="32"
+                                    Command="{Binding DataContext.PlaySoundCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                    CommandParameter="{Binding DwSndAttack2, Mode=OneWay}">
+                                    <ui:SymbolIcon Symbol="Play24" />
+                                </ui:Button>
+                            </Grid>
                         </Grid>
-                    </Grid>
-
-                </UniformGrid>
-            </StackPanel>
-        </DataTemplate>
-
-        <!--  DataTemplate: Skill Triggers & Activation Section  -->
-        <DataTemplate x:Key="SkillTriggersSectionTemplate">
-            <StackPanel>
-                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Skill Triggers &amp; Activation'}" />
-                <UniformGrid Columns="2">
-                    <!--  Active skill ID  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Active skill ID'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="ID of the active skill" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="ActiveSkillIdTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Active skill level  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Active skill level'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Level of the active skill" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="ActiveSkillLevelTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Active skill activation rate (%)  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Active skill activation rate (%)'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Activation rate percentage of the skill" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="ActiveSkillActivationRateTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  MP required to use  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'MP required to use'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="MP required to use the skill" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="MPRequiredTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Required skills  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Required skills'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Skills required to use this item" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="RequiredSkillsTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Required skill levels  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Required skill levels'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Required levels for the skills" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="RequiredSkillLevelsTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Preparation type  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Preparation type'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Type of preparation for using the item" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ComboBox x:Name="PreparationTypeComboBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Preparation duration  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Preparation duration'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Duration of preparation" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="PreparationDurationTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Skill range  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Skill range'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Range of the skill" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="SkillRangeTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Animation motions when used  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Animation motions when used'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Animation motions when the item is used" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="AnimationMotionsTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Visual elemental effect  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Visual elemental effect'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Visual elemental effect of the item" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ComboBox x:Name="VisualElementalEffectComboBox" Grid.Row="1" />
-                    </Grid>
-                </UniformGrid>
-            </StackPanel>
-        </DataTemplate>
-
-        <!--  DataTemplate: Resistance & Alignment Section  -->
-        <DataTemplate x:Key="ResistanceAlignmentSectionTemplate">
-            <StackPanel>
-                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Resistance &amp; Alignment'}" />
-                <UniformGrid Columns="2">
-                    <!--  Electric resistance  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Electric resistance'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Resistance to electric damage" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="ElectricResistanceTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Fire resistance  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Fire resistance'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Resistance to fire damage" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="FireResistanceTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Wind resistance  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Wind resistance'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Resistance to wind damage" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="WindResistanceTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Water resistance  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Water resistance'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Resistance to water damage" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="WaterResistanceTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Earth resistance  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Earth resistance'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Resistance to earth damage" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="EarthResistanceTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Karma/alignment value  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Karma/alignment value'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Karma/alignment value of the item" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="KarmaAlignmentValueTextBox" Grid.Row="1" />
-                    </Grid>
-                </UniformGrid>
-            </StackPanel>
-        </DataTemplate>
-
-        <!--  DataTemplate: Crafting & Enhancement Section  -->
-        <DataTemplate x:Key="CraftingEnhancementSectionTemplate">
-            <StackPanel>
-                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Crafting &amp; Enhancement'}" />
-                <UniformGrid Columns="2">
-                    <!--  Smelting level  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Smelting level'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Smelting level of the item" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="SmeltingLevelTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Attribute smelting  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Attribute smelting'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Attribute smelting properties" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="AttributeSmeltingTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Gem smelting  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Gem smelting'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Gem smelting properties" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="GemSmeltingTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Number of piercing slots  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Number of piercing slots'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Number of piercing slots available" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <TextBox x:Name="PiercingSlotsTextBox" Grid.Row="1" />
-                    </Grid>
-                    <!--  Upgrade flag  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Upgrade flag'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Flag indicating if item can be upgraded" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:ToggleSwitch
-                            Grid.Row="1"
-                            IsChecked="False"
-                            OffContent="No"
-                            OnContent="Yes" />
-                    </Grid>
-                </UniformGrid>
-            </StackPanel>
-        </DataTemplate>
-
-
-
-        <!--  DataTemplate: Flags & Conditions Section  -->
-        <DataTemplate x:Key="FlagsConditionsSectionTemplate">
-            <StackPanel>
-                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Flags &amp; Conditions'}" />
-                <UniformGrid Columns="2">
-                    <!--  Enable item logging  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Enable item logging'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Whether to log item usage" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:ToggleSwitch
-                            Grid.Row="1"
-                            IsChecked="False"
-                            OffContent="No"
-                            OnContent="Yes" />
-                    </Grid>
-                    <!--  Charged item flag  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Charged item flag'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Whether the item is charged" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:ToggleSwitch
-                            Grid.Row="1"
-                            IsChecked="False"
-                            OffContent="No"
-                            OnContent="Yes" />
-                    </Grid>
-                    <!--  Bind reset allowed  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Bind reset allowed'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Whether bind reset is allowed" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:ToggleSwitch
-                            Grid.Row="1"
-                            IsChecked="False"
-                            OffContent="No"
-                            OnContent="Yes" />
-                    </Grid>
-                    <!--  Time-limited item  -->
-                    <Grid Style="{StaticResource FormFieldStyle}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0" Orientation="Horizontal">
-                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Time-limited item'}" />
-                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="Whether the item is time-limited" />
-                                </ui:SymbolIcon.ToolTip>
-                            </ui:SymbolIcon>
-                        </StackPanel>
-                        <ui:ToggleSwitch
-                            Grid.Row="1"
-                            IsChecked="False"
-                            OffContent="No"
-                            OnContent="Yes" />
-                    </Grid>
-                </UniformGrid>
+                        <!--  Attack SFX  -->
+                        <Grid Style="{StaticResource FormFieldStyle}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Attack SFX'}" />
+                                <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                    <ui:SymbolIcon.ToolTip>
+                                        <ToolTip Content="Minimum attack value" />
+                                    </ui:SymbolIcon.ToolTip>
+                                </ui:SymbolIcon>
+                            </StackPanel>
+                            <ui:AutoSuggestBox
+                                Grid.Row="1"
+                                OriginalItemsSource="{Binding DataContext.SfxIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding SfxObj3Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                        </Grid>
+                    </UniformGrid>
+                </StackPanel>
             </StackPanel>
         </DataTemplate>
 
@@ -1486,6 +835,7 @@
         <!--  DataTemplate: Blinkwing Section  -->
         <DataTemplate x:Key="BlinkwingSectionTemplate">
             <StackPanel>
+                <Separator Margin="0,10,0,5" />
                 <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Blinkwing'}" />
                 <UniformGrid Columns="2">
                     <!--  SFX  -->
@@ -2212,20 +1562,26 @@
                     <!--  Formulare  -->
                     <StackPanel Margin="20">
                         <ContentControl Content="{Binding ItemsView}" ContentTemplate="{StaticResource GeneralSectionTemplate}" />
-                        <Separator Margin="0,10,0,5" />
-                        <ContentControl Content="{Binding ItemsView}" ContentTemplate="{StaticResource EquipmentSectionTemplate}" />
-                        <Separator Margin="0,10,0,5" />
-                        <ContentControl Content="{Binding ItemsView}" ContentTemplate="{StaticResource WeaponSectionTemplate}" />
-                        <Separator Margin="0,10,0,5" />
-                        <ContentControl ContentTemplate="{StaticResource ResistanceAlignmentSectionTemplate}" />
-                        <Separator Margin="0,10,0,5" />
-                        <ContentControl Content="{Binding ItemsView}" ContentTemplate="{StaticResource BlinkwingSectionTemplate}" />
-                        <Separator Margin="0,10,0,5" />
-                        <ContentControl ContentTemplate="{StaticResource MiscSectionTemplate}" />
-                        <Separator Margin="0,10,0,5" />
-                        <ContentControl ContentTemplate="{StaticResource SoundSectionTemplate}" />
-                        <Separator Margin="0,10,0,5" />
-                        <ContentControl ContentTemplate="{StaticResource FlagsConditionsSectionTemplate}" />
+                        <ContentControl Content="{Binding ItemsView.CurrentItem}">
+                            <ContentControl.Style>
+                                <Style TargetType="ContentControl">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding ItemsView.CurrentItem.Type}" Value="{x:Static itemModels:ItemType.Equipment}">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource EquipmentSectionTemplate}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ItemsView.CurrentItem.Type}" Value="{x:Static itemModels:ItemType.Weapon}">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource WeaponSectionTemplate}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ItemsView.CurrentItem.Type}" Value="{x:Static itemModels:ItemType.Blinkwing}">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource BlinkwingSectionTemplate}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ItemsView.CurrentItem.Type}" Value="{x:Static itemModels:ItemType.Other}">
+                                            <Setter Property="Visibility" Value="Hidden" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ContentControl.Style>
+                        </ContentControl>
                     </StackPanel>
                 </Grid>
             </ScrollViewer>

@@ -771,6 +771,36 @@ namespace eTools_Ultimate.Models.Items
                     DwSndAttack2 = (uint)val;
             }
         }
+        public string HandedIdentifier
+        {
+            get => Script.NumberToString(DwHanded, App.Services.GetRequiredService<DefinesService>().ReversedHandedDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwHanded = (uint)val;
+            }
+        }
+
+        public ItemType Type
+        {
+            get
+            {
+                if (DwParts != Constants.NullId)
+                {
+                    return PartsIdentifier switch
+                    {
+                        "PARTS_RWEAPON" or "PARTS_LWEAPON" => ItemType.Weapon,
+                        _ => ItemType.Equipment,
+                    };
+                }
+
+                return ItemKind2Identifier switch
+                {
+                    "IK2_BLINKWING" => ItemType.Blinkwing,
+                    _ => ItemType.Other,
+                };
+            }
+        }
         #endregion
         #endregion
 
@@ -1173,6 +1203,7 @@ namespace eTools_Ultimate.Models.Items
                     break;
                 case nameof(DwItemKind2):
                     NotifyPropertyChanged(nameof(ItemKind2Identifier));
+                    NotifyPropertyChanged(nameof(Type));
                     break;
                 case nameof(DwItemKind3):
                     NotifyPropertyChanged(nameof(ItemKind2Identifier));
@@ -1215,6 +1246,7 @@ namespace eTools_Ultimate.Models.Items
                     break;
                 case nameof(DwParts):
                     NotifyPropertyChanged(nameof(PartsIdentifier));
+                    NotifyPropertyChanged(nameof(Type));
                     break;
                 case nameof(DwDestParam1):
                     NotifyPropertyChanged(nameof(DestParam1Identifier));
@@ -1245,6 +1277,9 @@ namespace eTools_Ultimate.Models.Items
                     break;
                 case nameof(DwSndAttack2):
                     NotifyPropertyChanged(nameof(SoundAttack2Identifier));
+                    break;
+                case nameof(DwHanded):
+                    NotifyPropertyChanged(nameof(HandedIdentifier));
                     break;
             }
         }
