@@ -2361,7 +2361,73 @@
   <data name="Text displayed in game" xml:space="preserve">
     <value>Im Spiel angezeigter Text</value>
   </data>
-  <data name="Add penyas drop" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
+  <data name="Add item drop" xml:space="preserve">
+    <value>Item Drop hinzufügen</value>
+  </data>
+  <data name="Add item drops by kind" xml:space="preserve">
+    <value>Item Drops nach Art hinzufügen</value>
+  </data>
+  <data name="Add penyas drop" xml:space="preserve">
+    <value>Penya Drop hinzufügen</value>
+  </data>
+  <data name="Remove selected element" xml:space="preserve">
+    <value>Ausgewähltes Element entfernen</value>
+  </data>
+  <data name="Max drops" xml:space="preserve">
+    <value>Max Drops</value>
+  </data>
+  <data name="Maximum number of items that can drop when this mover dies." xml:space="preserve">
+    <value>Maximale Anzahl von Gegenständen, die droppen können, wenn dieser Mover stirbt.</value>
+  </data>
+  <data name="Minimum" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="Minimum amount dropped" xml:space="preserve">
+    <value>Minimale Menge gedroppt</value>
+  </data>
+  <data name="Maximum" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="Maximum amount dropped" xml:space="preserve">
+    <value>Maximale Menge gedroppt</value>
+  </data>
+  <data name="Dropped item identifier" xml:space="preserve">
+    <value>Gedroppt-Item-Identifikator</value>
+  </data>
+  <data name="Maximum quantity dropped" xml:space="preserve">
+    <value>Maximale Menge gedroppt</value>
+  </data>
+  <data name="Level of the dropped item" xml:space="preserve">
+    <value>Level des gedroppten Gegenstands</value>
+  </data>
+  <data name="Drop chance (in %)" xml:space="preserve">
+    <value>Drop-Chance (in %)</value>
+  </data>
+  <data name="Item kind" xml:space="preserve">
+    <value>Item-Art</value>
+  </data>
+  <data name="Kind of items to include. Items whose third kind does not match this value will be excluded." xml:space="preserve">
+    <value>Art der einzuschließenden Gegenstände. Gegenstände, deren dritte Art nicht mit diesem Wert übereinstimmt, werden ausgeschlossen.</value>
+  </data>
+  <data name="Minimum rarity" xml:space="preserve">
+    <value>Minimale Seltenheit</value>
+  </data>
+  <data name="Minimum rarity for an item to be included. This value is read-only and depends on the mover's level." xml:space="preserve">
+    <value>Minimale Seltenheit, damit ein Gegenstand enthalten ist. Dieser Wert ist schreibgeschützt und hängt vom Level des Movers ab.</value>
+  </data>
+  <data name="Maximum rarity" xml:space="preserve">
+    <value>Maximale Seltenheit</value>
+  </data>
+  <data name="Maximum rarity for an item to be included. This value is read-only and depends on the mover's level." xml:space="preserve">
+    <value>Maximale Seltenheit, damit ein Gegenstand enthalten ist. Dieser Wert ist schreibgeschützt und hängt vom Level des Movers ab.</value>
+  </data>
+  <data name="Third kind of the item" xml:space="preserve">
+    <value>Dritte Art des Gegenstands</value>
+  </data>
+  <data name="Rarity" xml:space="preserve">
+    <value>Seltenheit</value>
+  </data>
+  <data name="Rarity of the item" xml:space="preserve">
+    <value>Seltenheit des Gegenstands</value>
   </data>
 </root>
