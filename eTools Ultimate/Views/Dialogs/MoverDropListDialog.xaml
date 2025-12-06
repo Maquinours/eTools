@@ -25,52 +25,45 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="0" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" VerticalAlignment="Bottom">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <ui:Button
-                    Grid.Column="0"
-                    Command="{Binding AddDropItemCommand}"
-                    FontSize="16"
-                    Icon="{ui:SymbolIcon Add24}"
-                    ToolTip="{i18n:StringLocalizer 'Add item drop'}" />
-                <ui:Button
-                    Grid.Column="1"
-                    Margin="10,0,0,0"
-                    Command="{Binding AddDropKindCommand}"
-                    FontSize="16"
-                    Icon="{ui:SymbolIcon FolderAdd24}"
-                    ToolTip="{i18n:StringLocalizer 'Add item drops by kind'}" />
-                <ui:Button
-                    Grid.Column="2"
-                    Margin="10,0,0,0"
-                    Command="{Binding AddDropGoldCommand}"
-                    FontSize="16"
-                    Icon="{ui:SymbolIcon Money24}"
-                    ToolTip="{i18n:StringLocalizer 'Add penyas drop'}" />
-                <ui:Button
-                    Grid.Column="3"
-                    Margin="10,0,0,0"
-                    Appearance="Danger"
-                    Command="{Binding RemoveDropCommand}"
-                    CommandParameter="{Binding SelectedItem, ElementName=DropListTreeView}"
-                    FontSize="16"
-                    Icon="{ui:SymbolIcon Delete24}"
-                    ToolTip="{i18n:StringLocalizer 'Remove selected element'}" />
-            </Grid>
-            <Grid
+            <ui:Button
+                Grid.Column="0"
+                Command="{Binding AddDropItemCommand}"
+                FontSize="16"
+                Icon="{ui:SymbolIcon Add24}"
+                ToolTip="{i18n:StringLocalizer 'Add item drop'}" />
+            <ui:Button
                 Grid.Column="1"
-                MinWidth="100"
-                HorizontalAlignment="Right">
+                Margin="10,0,0,0"
+                Command="{Binding AddDropKindCommand}"
+                FontSize="16"
+                Icon="{ui:SymbolIcon FolderAdd24}"
+                ToolTip="{i18n:StringLocalizer 'Add item drops by kind'}" />
+            <ui:Button
+                Grid.Column="2"
+                Margin="10,0,0,0"
+                Command="{Binding AddDropGoldCommand}"
+                FontSize="16"
+                Icon="{ui:SymbolIcon Money24}"
+                ToolTip="{i18n:StringLocalizer 'Add penyas drop'}" />
+            <ui:Button
+                Grid.Column="3"
+                Margin="10,0,0,0"
+                Appearance="Danger"
+                Command="{Binding RemoveDropCommand}"
+                CommandParameter="{Binding SelectedItem, ElementName=DropListTreeView}"
+                FontSize="16"
+                Icon="{ui:SymbolIcon Delete24}"
+                ToolTip="{i18n:StringLocalizer 'Remove selected element'}" />
+            <Grid Grid.Column="5" Width="300">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -100,6 +93,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Border
                 Grid.Column="0"
@@ -238,7 +232,10 @@
                     </TreeView.Resources>
                 </TreeView>
             </Border>
-            <StackPanel Grid.Column="2" Width="300">
+            <StackPanel
+                Grid.Column="2"
+                Width="300"
+                Margin="20,0,0,0">
                 <ContentControl Content="{Binding SelectedItem, ElementName=DropListTreeView}">
                     <ContentControl.Resources>
                         <DataTemplate DataType="{x:Type viewmodels:DropGoldTreeViewItem}">
