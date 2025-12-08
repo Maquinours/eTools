@@ -56,7 +56,7 @@ namespace eTools_Ultimate.ViewModels.Windows
         {
             (string text, Action loader)[] loadingSteps = [
                 ("Loading settings...", settingsService.Load),
-                ("Loading defines...", definesService.Load),
+                ("Loading definitions...", definesService.Load),
                 ("Loading strings...", stringsService.Load),
                 ("Loading models...", modelsService.Load),
                 ("Loading items...", itemsService.Load),
