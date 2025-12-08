@@ -191,6 +191,12 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
+        private void SelectPropMoverExFile()
+        {
+            settingsService.Settings.PropMoverExFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropMoverExFilePath ?? settingsService.Settings.DefaultPropMoverExFilePath, title: Resources.Texts.SelectMoverPropFile) ?? settingsService.Settings.PropMoverExFilePath;
+        }
+
+        [RelayCommand]
         private void SelectPropMoverTextFile()
         {
             settingsService.Settings.PropMoverTxtFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropMoverTxtFilePath ?? settingsService.Settings.DefaultPropMoverTxtFilePath, title: Resources.Texts.SelectMoverTextFile) ?? settingsService.Settings.PropMoverTxtFilePath;

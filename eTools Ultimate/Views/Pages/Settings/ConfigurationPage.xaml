@@ -696,11 +696,57 @@
                             </Button>
                         </Grid>
 
-                        <!--  Checkboxes für PropMover  -->
+                        <!--  PropMoverEx file  -->
                         <Grid
                             Grid.Row="1"
                             Grid.Column="0"
                             Margin="0,0,10,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Grid.Column="0"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Text="{i18n:StringLocalizer 'Prop ex file'}" />
+                            <Grid Grid.Column="1" Margin="0,0,8,0">
+                                <TextBox x:Name="PropMoverExFilePathTextbox" Text="{Binding Settings.PropMoverExFilePath, Mode=TwoWay}" />
+                                <TextBlock
+                                    Margin="10,0,10,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Foreground="DarkGray"
+                                    IsHitTestVisible="False"
+                                    Text="{Binding Settings.DefaultPropMoverExFilePath, Mode=OneWay}">
+                                    <TextBlock.Style>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Text, ElementName=PropMoverExFilePathTextbox}" Value="">
+                                                    <Setter Property="Visibility" Value="Visible" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Grid>
+                            <Button
+                                Grid.Column="2"
+                                Width="60"
+                                Height="35"
+                                HorizontalAlignment="Center"
+                                Command="{Binding SelectPropMoverExFileCommand}">
+                                <ui:SymbolIcon Symbol="FolderOpen20" />
+                            </Button>
+                        </Grid>
+
+                        <!--  Checkboxes für PropMover  -->
+                        <Grid
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Margin="10,0,0,10">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
