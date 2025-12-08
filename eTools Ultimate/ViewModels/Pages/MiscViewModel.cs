@@ -563,7 +563,6 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             HashSet<string> usedTextures = new(Constants.PredefinedUsedTexturesFolderFiles.Select(x => Path.Combine(texturesFolderPath, x)), StringComparer.OrdinalIgnoreCase);
 
-            Stopwatch stopwatch = Stopwatch.StartNew();
             for (int i = 0; i < usedModelFilesWithTextures.Count; i++)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -596,8 +595,6 @@ namespace eTools_Ultimate.ViewModels.Pages
                 }
                 ScanProgress = $"{localizer[$"Scanning textures..."]} ({Math.Floor((i + 1d) / usedModelFilesWithTextures.Count * 100)}%)";
             }
-            stopwatch.Stop();
-            System.Diagnostics.Debug.WriteLine($"Unused textures loading took {stopwatch.ElapsedMilliseconds}ms to run");
 
             List<string> allTextureFiles = [.. Directory.EnumerateFiles(texturesFolderPath, "*", SearchOption.TopDirectoryOnly)];
 
