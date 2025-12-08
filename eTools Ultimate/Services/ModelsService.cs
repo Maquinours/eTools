@@ -288,9 +288,9 @@ namespace eTools_Ultimate.Services
             List<Model> models = [];
             foreach (MainModelBrace brace in Models)
             {
-                foreach(IModelItem item in brace.Children)
+                foreach (IModelItem item in brace.Children)
                 {
-                     if (item is Model model)
+                    if (item is Model model)
                         models.Add(model);
                     else if (item is ModelBrace childBrace)
                         models.AddRange(GetModelsRecursively(childBrace));
@@ -299,17 +299,20 @@ namespace eTools_Ultimate.Services
             return [.. models];
         }
 
-        private void GetBracesRecursively(List<ModelBrace> braces, ModelBrace brace)
+        private static ModelBrace[] GetBracesRecursively(ModelBrace brace)
         {
+            List<ModelBrace> braces = [];
             braces.Add(brace);
             foreach (IModelItem child in brace.Children)
             {
                 if (child is ModelBrace childBrace)
-                    GetBracesRecursively(braces, childBrace);
+                    braces.AddRange(GetBracesRecursively(childBrace));
             }
+
+            return [.. braces];
         }
 
-        private Model[] GetModelsRecursively(ModelBrace brace)
+        private static Model[] GetModelsRecursively(ModelBrace brace)
         {
             List<Model> models = [];
             foreach (IModelItem child in brace.Children)
@@ -328,14 +331,10 @@ namespace eTools_Ultimate.Services
             foreach (MainModelBrace mainBrace in Models)
             {
                 if (mainBrace.IType != type) continue;
-                foreach (IModelItem item in mainBrace.Children)
-                {
-                    if (item is ModelBrace childBrace)
-                        GetBracesRecursively(braces, childBrace);
-                }
+                braces.AddRange(GetBracesRecursively(mainBrace));
             }
 
-            return braces.ToArray();
+            return [.. braces];
         }
 
         public Model[] GetModelsByType(int type)
@@ -344,26 +343,14 @@ namespace eTools_Ultimate.Services
             foreach (MainModelBrace mainBrace in Models)
             {
                 if (mainBrace.IType != type) continue;
-                foreach(IModelItem item in mainBrace.Children)
-                {
-                    if (item is Model model)
-                        models.Add(model);
-                    else if (item is ModelBrace childBrace)
-                        models.AddRange(GetModelsRecursively(childBrace));
-                }
+                models.AddRange(GetModelsRecursively(mainBrace));
             }
             return [.. models];
         }
 
         public ModelBrace GetBraceByModel(Model model)
         {
-            foreach (ModelBrace brace in GetBracesByType(model.DwType))
-            {
-                foreach (IModelItem tempModel in brace.Children)
-                    if (tempModel == model)
-                        return brace;
-            }
-            throw new InvalidOperationException("ModelsService::GetBraceByModel Exception : Model not found");
+            return GetBracesByType(model.DwType).FirstOrDefault(x => x.Children.Any(y => y == model)) ?? throw new InvalidOperationException("ModelsService::GetBraceByModel Exception : Model not found");
         }
 
         public Model? GetModelByTypeAndId(int type, uint id)
