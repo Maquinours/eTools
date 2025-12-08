@@ -29,6 +29,9 @@ namespace eTools_Ultimate.ViewModels.Windows
         {
             IStringLocalizer localizer = App.Services.GetRequiredService<IStringLocalizer<Translations>>();
 
+            if (exception is AggregateException aggregateException && aggregateException.InnerException != null)
+                exception = aggregateException.InnerException;
+
             if (exception is FileNotFoundException fileNotFoundException)
             {
                 _title = localizer["File not found"];
