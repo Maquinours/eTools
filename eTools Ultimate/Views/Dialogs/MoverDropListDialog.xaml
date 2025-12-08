@@ -63,7 +63,7 @@
                 FontSize="16"
                 Icon="{ui:SymbolIcon Delete24}"
                 ToolTip="{i18n:StringLocalizer 'Remove selected element'}" />
-            <Grid Grid.Column="5" Width="300">
+            <Grid Grid.Column="5" Width="100">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -232,10 +232,7 @@
                     </TreeView.Resources>
                 </TreeView>
             </Border>
-            <StackPanel
-                Grid.Column="2"
-                Width="300"
-                Margin="20,0,0,0">
+            <StackPanel Grid.Column="2" Width="300">
                 <ContentControl Content="{Binding SelectedItem, ElementName=DropListTreeView}">
                     <ContentControl.Resources>
                         <DataTemplate DataType="{x:Type viewmodels:DropGoldTreeViewItem}">
