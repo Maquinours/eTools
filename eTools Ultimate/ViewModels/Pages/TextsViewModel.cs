@@ -1,7 +1,9 @@
-﻿using eTools_Ultimate.Models.Texts;
+﻿using eTools_Ultimate.Models.Accessories;
+using eTools_Ultimate.Models.Texts;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.Localization;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -139,6 +141,123 @@ namespace eTools_Ultimate.ViewModels.Pages
                 snackbarService.Show(
                     title: localizer["Error saving texts"],
                     message: ex.Message,
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        private static bool CanCopyIdentifier(Text text) => text.Identifier != text.DwId.ToString();
+
+        [RelayCommand(CanExecute = nameof(CanCopyIdentifier))]
+        private void CopyIdentifier(Text text)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(text.Identifier);
+
+                snackbarService.Show(
+                        title: localizer["Identifier copied"],
+                        message: localizer["The identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying text identifier", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The identifier could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyId(Text text)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(text.DwId.ToString());
+
+                snackbarService.Show(
+                        title: localizer["ID copied"],
+                        message: localizer["The ID has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying text ID", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The ID could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        private static bool CanCopyTextIdentifier(Text text) => text.Name != text.SzName;
+
+        [RelayCommand(CanExecute = nameof(CanCopyTextIdentifier))]
+        private void CopyTextIdentifier(Text text)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(text.SzName ?? "");
+
+                snackbarService.Show(
+                        title: localizer["Text identifier copied"],
+                        message: localizer["The text identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying text text identifier", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The text identifier could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+
+        [RelayCommand]
+        private void CopyText(Text text)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(text.Name);
+
+                snackbarService.Show(
+                        title: localizer["Text copied"],
+                        message: localizer["The text has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying text text", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The text could not be copied to the clipboard."],
                     appearance: ControlAppearance.Danger,
                     icon: null,
                     timeout: TimeSpan.FromSeconds(3)

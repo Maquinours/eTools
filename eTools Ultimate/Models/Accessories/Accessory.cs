@@ -32,6 +32,8 @@ namespace eTools_Ultimate.Models.Accessories
 
         #region Calculated properties
         public Item? Item => App.Services.GetRequiredService<ItemsService>().GetItemById(DwItemId);
+
+        public string ItemIdentifier => Script.NumberToString(DwItemId, App.Services.GetRequiredService<DefinesService>().ReversedItemDefines);
         #endregion
         #endregion
 

@@ -1,5 +1,6 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.GiftBoxes;
 using eTools_Ultimate.Models.Models;
 using eTools_Ultimate.Models.Movers;
 using eTools_Ultimate.Resources;
@@ -1069,7 +1070,9 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        [RelayCommand]
+        private static bool CanCopyIdentifier(Mover mover) => mover.Identifier != mover.DwId.ToString();
+
+        [RelayCommand(CanExecute = nameof(CanCopyIdentifier))]
         private void CopyIdentifier(Mover mover)
         {
             try
@@ -1125,7 +1128,9 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        [RelayCommand]
+        private static bool CanCopyNameIdentifier(Mover mover) => mover.Name != mover.SzName;
+
+        [RelayCommand(CanExecute = nameof(CanCopyNameIdentifier))]
         private void CopyNameIdentifier(Mover mover)
         {
             try

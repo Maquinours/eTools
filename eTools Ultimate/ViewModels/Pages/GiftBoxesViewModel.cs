@@ -182,7 +182,9 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        [RelayCommand]
+        private static bool CanCopyItemIdentifier(Giftbox giftbox) => giftbox.ItemIdentifier != giftbox.DwItem.ToString();
+
+        [RelayCommand(CanExecute = nameof(CanCopyItemIdentifier))]
         private void CopyItemIdentifier(Giftbox giftbox)
         {
             try
@@ -231,6 +233,66 @@ namespace eTools_Ultimate.ViewModels.Pages
                 snackbarService.Show(
                     title: localizer["Copy failed"],
                     message: localizer["The item ID could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        private static bool CanCopyItemNameIdentifier(Giftbox giftbox) => giftbox.Item != null && giftbox.Item.Name != giftbox.Item.SzName;
+
+        [RelayCommand(CanExecute = nameof(CanCopyItemNameIdentifier))]
+        private void CopyItemNameIdentifier(Giftbox giftbox)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(giftbox.Item?.SzName ?? "");
+
+                snackbarService.Show(
+                        title: localizer["Item name identifier copied"],
+                        message: localizer["The item name identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying giftbox item name", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The item name could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        private static bool CanCopyItemName(Giftbox giftbox) => giftbox.Item != null;
+
+        [RelayCommand(CanExecute = nameof(CanCopyItemName))]
+        private void CopyItemName(Giftbox giftbox)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(giftbox.Item?.Name ?? "");
+
+                snackbarService.Show(
+                        title: localizer["Item name copied"],
+                        message: localizer["The item name has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying giftbox item name", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The item name could not be copied to the clipboard."],
                     appearance: ControlAppearance.Danger,
                     icon: null,
                     timeout: TimeSpan.FromSeconds(3)

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
 using eTools_Ultimate.Models.Accessories;
+using eTools_Ultimate.Models.GiftBoxes;
 using eTools_Ultimate.Models.Items;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
@@ -7,6 +8,7 @@ using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using eTools_Ultimate.Views.Dialogs;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -234,6 +236,124 @@ namespace eTools_Ultimate.ViewModels.Pages
                 snackbarService.Show(
                     title: localizer["Error saving accessories"],
                     message: ex.Message,
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        private static bool CanCopyItemIdentifier(Accessory accessory) => accessory.ItemIdentifier != accessory.DwItemId.ToString();
+
+        [RelayCommand(CanExecute = nameof(CanCopyItemIdentifier))]
+        private void CopyItemIdentifier(Accessory accessory)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(accessory.ItemIdentifier);
+
+                snackbarService.Show(
+                        title: localizer["Item identifier copied"],
+                        message: localizer["The item identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying accessory item identifier", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The item identifier could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyItemId(Accessory accessory)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(accessory.DwItemId.ToString());
+
+                snackbarService.Show(
+                        title: localizer["Item ID copied"],
+                        message: localizer["The item ID has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying accessory item ID", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The item ID could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        private static bool CanCopyItemNameIdentifier(Accessory accessory) => accessory.Item != null && accessory.Item.Name != accessory.Item.SzName;
+
+        [RelayCommand(CanExecute = nameof(CanCopyItemNameIdentifier))]
+        private void CopyItemNameIdentifier(Accessory accessory)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(accessory.Item?.SzName ?? "");
+
+                snackbarService.Show(
+                        title: localizer["Item name identifier copied"],
+                        message: localizer["The item name identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying accessory item name identifier", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The item name identifier could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        private static bool CanCopyItemName(Accessory accessory) => accessory.Item != null;
+
+        [RelayCommand(CanExecute = nameof(CanCopyItemName))]
+        private void CopyItemName(Accessory accessory)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(accessory.Item?.Name ?? "");
+
+                snackbarService.Show(
+                        title: localizer["Item name copied"],
+                        message: localizer["The item name has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying accessory item name", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The item name could not be copied to the clipboard."],
                     appearance: ControlAppearance.Danger,
                     icon: null,
                     timeout: TimeSpan.FromSeconds(3)

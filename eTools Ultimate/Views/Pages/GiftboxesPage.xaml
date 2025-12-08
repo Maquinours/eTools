@@ -166,6 +166,14 @@
                                     Command="{Binding CopyItemIdCommand}"
                                     CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
                                     Header="{i18n:StringLocalizer 'Copy item ID'}" />
+                                <MenuItem
+                                    Command="{Binding CopyItemNameIdentifierCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
+                                    Header="{i18n:StringLocalizer 'Copy name identifier'}" />
+                                <MenuItem
+                                    Command="{Binding CopyItemNameCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
+                                    Header="{i18n:StringLocalizer 'Copy name'}" />
                             </MenuItem>
                         </ContextMenu>
                     </ListView.ContextMenu>

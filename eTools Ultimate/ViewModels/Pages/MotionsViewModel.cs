@@ -2,6 +2,7 @@ using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
 using eTools_Ultimate.Models.Models;
 using eTools_Ultimate.Models.Motions;
+using eTools_Ultimate.Models.Movers;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.Localization;
@@ -374,7 +375,9 @@ namespace eTools_Ultimate.ViewModels.Pages
             motion.SzIconName = fileName;
         }
 
-        [RelayCommand]
+        private static bool CanCopyIdentifier(Motion motion) => motion.Identifier != motion.DwId.ToString();
+
+        [RelayCommand(CanExecute = nameof(CanCopyIdentifier))]
         private void CopyIdentifier(Motion motion)
         {
             try
@@ -430,7 +433,9 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        [RelayCommand]
+        private static bool CanCopyNameIdentifier(Motion motion) => motion.Name != motion.SzName;
+
+        [RelayCommand(CanExecute = nameof(CanCopyNameIdentifier))]
         private void CopyNameIdentifier(Motion motion)
         {
             try
@@ -486,7 +491,9 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        [RelayCommand]
+        private static bool CanCopyDescriptionIdentifier(Motion motion) => motion.Description != motion.SzDesc;
+
+        [RelayCommand(CanExecute = nameof(CanCopyDescriptionIdentifier))]
         private void CopyDescriptionIdentifier(Motion motion)
         {
             try

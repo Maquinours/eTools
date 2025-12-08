@@ -298,6 +298,7 @@ namespace eTools_Ultimate.Services
                 // Movers settings
                 case nameof(Settings.PropMoverFilePath):
                 case nameof(Settings.PropMoverTxtFilePath):
+                case nameof(Settings.PropMoverExFilePath):
                 case nameof(Settings.Mover64BitHp):
                 case nameof(Settings.Mover64BitAtk):
 
