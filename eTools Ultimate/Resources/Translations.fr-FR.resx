@@ -765,6 +765,57 @@
   <data name="Minimum" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
+  <data name="Minimum amount dropped" xml:space="preserve">
+    <value>Montant minimum droppé</value>
+  </data>
+  <data name="Maximum amount dropped" xml:space="preserve">
+    <value>Montant maximum droppé</value>
+  </data>
+  <data name="Item kind" xml:space="preserve">
+    <value>Type d'objet</value>
+  </data>
+  <data name="Minimum rarity" xml:space="preserve">
+    <value>Rareté minimale</value>
+  </data>
+  <data name="Maximum rarity" xml:space="preserve">
+    <value>Rareté maximale</value>
+  </data>
+  <data name="Add item drop" xml:space="preserve">
+    <value>Ajouter un drop d'objet</value>
+  </data>
+  <data name="Add penyas drop" xml:space="preserve">
+    <value>Ajouter un drop de penyas</value>
+  </data>
+  <data name="Kind of items to include. Items whose third kind does not match this value will be excluded." xml:space="preserve">
+    <value>Type d'objet à inclure. Les objets dont le troisième type ne correspond pas à cette valeur seront exclus.</value>
+  </data>
+  <data name="Minimum rarity for an item to be included. This value is read-only and depends on the mover’s level." xml:space="preserve">
+    <value>Rareté minimale pour qu'un objet soit inclus. Cette value est en lecture seule et dépend du niveau du mover.</value>
+  </data>
+  <data name="Maximum rarity for an item to be included. This value is read-only and depends on the mover’s level." xml:space="preserve">
+    <value>Rareté maximale pour qu'un objet soit inclus. Cette value est en lecture seule et dépend du niveau du mover.</value>
+  </data>
+  <data name="Third kind of the item" xml:space="preserve">
+    <value>Troisième type de l'objet</value>
+  </data>
+  <data name="Rarity of the item" xml:space="preserve">
+    <value>Rareté de l'objet</value>
+  </data>
+  <data name="Rarity" xml:space="preserve">
+    <value>Rareté</value>
+  </data>
+  <data name="Dropped item identifier" xml:space="preserve">
+    <value>Identifiant de l'objet droppé</value>
+  </data>
+  <data name="Maximum quantity dropped" xml:space="preserve">
+    <value>Quantité maximale droppée</value>
+  </data>
+  <data name="Level of the dropped item" xml:space="preserve">
+    <value>Niveau de l'objet droppé</value>
+  </data>
+  <data name="Drop chance (in %)" xml:space="preserve">
+    <value>Chance de drop (en %)</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Bienvenue</value>
     <comment>Welcome text on dashboard</comment>
@@ -2312,58 +2363,43 @@
   <data name="eTools Ultimate is a powerful editor for editing Flyff resource files." xml:space="preserve">
     <value>eTools Ultimate est un éditeur puissant pour l'édition de fichiers de ressources Flyff.</value>
   </data>
+  <data name="Loop" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="Add Attribute" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
   </data>
-  <data name="Minimum amount dropped" xml:space="preserve">
-    <value>Montant minimum droppé</value>
+  <data name="Loading settings..." xml:space="preserve">
+    <value>Chargement des paramètres...</value>
   </data>
-  <data name="Maximum amount dropped" xml:space="preserve">
-    <value>Montant maximum droppé</value>
+  <data name="Loading definitions..." xml:space="preserve">
+    <value>Chargement des définitions...</value>
   </data>
-  <data name="Item kind" xml:space="preserve">
-    <value>Type d'objet</value>
+  <data name="Loading models..." xml:space="preserve">
+    <value>Chargement des modèles...</value>
   </data>
-  <data name="Minimum rarity" xml:space="preserve">
-    <value>Rareté minimale</value>
+  <data name="Loading items..." xml:space="preserve">
+    <value>Chargement des objets...</value>
   </data>
-  <data name="Maximum rarity" xml:space="preserve">
-    <value>Rareté maximale</value>
+  <data name="Loading movers..." xml:space="preserve">
+    <value>Chargement des movers</value>
   </data>
-  <data name="Add item drop" xml:space="preserve">
-    <value>Ajouter un drop d'objet</value>
+  <data name="Loading sounds..." xml:space="preserve">
+    <value>Chargement des sons</value>
   </data>
-  <data name="Add penyas drop" xml:space="preserve">
-    <value>Ajouter un drop de penyas</value>
+  <data name="Loading texts..." xml:space="preserve">
+    <value>Chargement des textes...</value>
   </data>
-  <data name="Kind of items to include. Items whose third kind does not match this value will be excluded." xml:space="preserve">
-    <value>Type d'objet à inclure. Les objets dont le troisième type ne correspond pas à cette valeur seront exclus.</value>
+  <data name="Loading giftboxes..." xml:space="preserve">
+    <value>Chargement des boîtes cadeaux...</value>
   </data>
-  <data name="Minimum rarity for an item to be included. This value is read-only and depends on the mover’s level." xml:space="preserve">
-    <value>Rareté minimale pour qu'un objet soit inclus. Cette value est en lecture seule et dépend du niveau du mover.</value>
+  <data name="Loading motions..." xml:space="preserve">
+    <value>Chargement des animations...</value>
   </data>
-  <data name="Maximum rarity for an item to be included. This value is read-only and depends on the mover’s level." xml:space="preserve">
-    <value>Rareté maximale pour qu'un objet soit inclus. Cette value est en lecture seule et dépend du niveau du mover.</value>
+  <data name="Loading accessories..." xml:space="preserve">
+    <value>Chargement des accessoires...</value>
   </data>
-  <data name="Third kind of the item" xml:space="preserve">
-    <value>Troisième type de l'objet</value>
-  </data>
-  <data name="Rarity of the item" xml:space="preserve">
-    <value>Rareté de l'objet</value>
-  </data>
-  <data name="Rarity" xml:space="preserve">
-    <value>Rareté</value>
-  </data>
-  <data name="Dropped item identifier" xml:space="preserve">
-    <value>Identifiant de l'objet droppé</value>
-  </data>
-  <data name="Maximum quantity dropped" xml:space="preserve">
-    <value>Quantité maximale droppée</value>
-  </data>
-  <data name="Level of the dropped item" xml:space="preserve">
-    <value>Niveau de l'objet droppé</value>
-  </data>
-  <data name="Drop chance (in %)" xml:space="preserve">
-    <value>Chance de drop (en %)</value>
+  <data name="Loading strings..." xml:space="preserve">
+    <value>Chargement des chaînes de caractères...</value>
   </data>
 </root>

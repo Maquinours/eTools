@@ -885,4 +885,37 @@
   <data name="Drop chance (in %)" xml:space="preserve">
     <value />
   </data>
+  <data name="Loading settings..." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Loading definitions..." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Loading models..." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Loading items..." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Loading movers..." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Loading sounds..." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Loading texts..." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Loading giftboxes..." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Loading motions..." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Loading accessories..." xml:space="preserve">
+    <value />
+  </data>
+  <data name="Loading strings..." xml:space="preserve">
+    <value />
+  </data>
 </root>

@@ -1,7 +1,9 @@
 ﻿using eTools.Views.Windows;
+using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.Views.Pages;
 using eTools_Ultimate.Views.Windows;
+using Microsoft.Extensions.Localization;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -33,11 +35,12 @@ namespace eTools_Ultimate.ViewModels.Windows
         //ExchangesService exchangesService,
         //HonorsService honorsService,
         MotionsService motionsService,
-        AccessoriesService accessoriesService//,
+        AccessoriesService accessoriesService,
         //CoupleService coupleService,
         //TicketsService ticketsService,
         //PackItemsService packItemsService,
-        //TerrainsService terrainsService
+        //TerrainsService terrainsService,
+        IStringLocalizer<Translations> localizer
         ) : ObservableObject
     {
         [ObservableProperty]
@@ -63,7 +66,7 @@ namespace eTools_Ultimate.ViewModels.Windows
                 ("Loading movers...", moversService.Load),
                 //("Loading skills...", skillsService.Load),
                 //("Loading characters...", charactersService.Load),
-                ("Loading sounds config...", soundsService.Load),
+                ("Loading sounds...", soundsService.Load),
                 //("Loading musics config...", musicsService.Load),
                 ("Loading texts...", textsService.Load),
                 ("Loading giftboxes...", giftBoxesService.Load),
@@ -87,7 +90,7 @@ namespace eTools_Ultimate.ViewModels.Windows
 
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            LoadingText = text;
+                            LoadingText = localizer[text];
                         });
                         loader();
                         Application.Current.Dispatcher.Invoke(() =>
