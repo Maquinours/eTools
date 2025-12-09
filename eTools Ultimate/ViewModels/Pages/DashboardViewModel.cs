@@ -18,7 +18,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         public NavigationCard[] NavigationCards { get; } =
             [
-            new(localizer["Items"], localizer["Navigate to the items page."], "/eTools Ultimate;component/Assets/Icons/Items.png", typeof(ItemsPage)),
+            //new(localizer["Items"], localizer["Navigate to the items page."], "/eTools Ultimate;component/Assets/Icons/Items.png", typeof(ItemsPage)),
             new(localizer["Movers"], localizer["Navigate to the movers page."], "/eTools Ultimate;component/Assets/Icons/Movers.png", typeof(MoversPage)),
             //new(localizer["Skills"], localizer["Navigate to the skills page."], "/eTools Ultimate;component/Assets/Icons/Skills.png", typeof(SkillPage)),
             //new(localizer["Quests"], localizer["Navigate to the quests page."], "/eTools Ultimate;component/Assets/Icons/Quests.png", typeof(QuestsPage)),
