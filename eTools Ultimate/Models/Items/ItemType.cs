@@ -9,6 +9,8 @@ namespace eTools_Ultimate.Models.Items
         Equipment,
         Weapon,
         Blinkwing,
+        SpecialBuff,
+        Buff,
         Other
     }
 }

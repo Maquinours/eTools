@@ -21,7 +21,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         private ICollectionView _itemsView = CollectionViewSource.GetDefaultView(itemsService.Items);
 
-        public List<KeyValuePair<int, string>> ItemIdentifiers => [.. definesService.ReversedItemDefines];
+        public string[] ItemIdentifiers => [.. definesService.ReversedItemDefines.Values];
         public List<KeyValuePair<int, string>> JobIdentifiers => [.. definesService.ReversedJobDefines];
         public List<KeyValuePair<int, string>> PartsIdentifiers => [.. definesService.ReversedPartsDefines];
         public string[] DestIdentifiers => [.. definesService.ReversedDestDefines.Values];

@@ -633,6 +633,11 @@ namespace eTools_Ultimate.Services
                     );
 
                 items[item.DwId] = item;
+
+                if(item.ItemKind2Identifier == "IK2_BUFF_TOGIFT" && item.DwReferTarget1 != null)
+                {
+
+                }
             }
 
             Items.AddRange(items.Values);

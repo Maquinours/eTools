@@ -781,6 +781,16 @@ namespace eTools_Ultimate.Models.Items
             }
         }
 
+        public string ReferTarget1ItemIdentifier
+        {
+            get => Script.NumberToString(DwReferTarget1, App.Services.GetRequiredService<DefinesService>().ReversedItemDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwReferTarget1 = (uint)val;
+            }
+        }
+
         public ItemType Type
         {
             get
@@ -797,6 +807,8 @@ namespace eTools_Ultimate.Models.Items
                 return ItemKind2Identifier switch
                 {
                     "IK2_BLINKWING" => ItemType.Blinkwing,
+                    "IK2_BUFF2" => ItemType.SpecialBuff,
+                    "IK2_BUFF" or "IK2_BUFF_TOGIFT" => ItemType.Buff,
                     _ => ItemType.Other,
                 };
             }
