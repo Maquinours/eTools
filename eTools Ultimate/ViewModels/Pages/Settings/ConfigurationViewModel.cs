@@ -2,6 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Movers;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using eTools_Ultimate.Views.Dialogs;
@@ -74,9 +75,9 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         [RelayCommand]
-        private async Task AddMoverAiBinding(KeyValuePair<MoverTypes, ObservableCollection<string>>? type)
+        private async Task AddMoverAiBinding(KeyValuePair<MoverType, ObservableCollection<string>>? type)
         {
-            if (type is not KeyValuePair<MoverTypes, ObservableCollection<string>> currentType)
+            if (type is not KeyValuePair<MoverType, ObservableCollection<string>> currentType)
                 return;
 
             if (!Settings.MoverTypesBindings.Contains(currentType))
@@ -100,9 +101,9 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (ai is not string currentAi)
                 return;
 
-            KeyValuePair<MoverTypes, ObservableCollection<string>>? type = Settings.MoverTypesBindings.Cast<KeyValuePair<MoverTypes, ObservableCollection<string>>?>().FirstOrDefault(x => x.HasValue && x.Value.Value.Contains(currentAi));
+            KeyValuePair<MoverType, ObservableCollection<string>>? type = Settings.MoverTypesBindings.Cast<KeyValuePair<MoverType, ObservableCollection<string>>?>().FirstOrDefault(x => x.HasValue && x.Value.Value.Contains(currentAi));
 
-            if (type is not KeyValuePair<MoverTypes, ObservableCollection<string>> currentType)
+            if (type is not KeyValuePair<MoverType, ObservableCollection<string>> currentType)
                 return;
 
             ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
@@ -139,6 +140,12 @@ namespace eTools_Ultimate.ViewModels.Pages
         private void SelectIconsFolder()
         {
             settingsService.Settings.IconsFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.IconsFolderPath, title: Resources.Texts.SelectIconsFolder) ?? settingsService.Settings.IconsFolderPath;
+        }
+
+        [RelayCommand]
+        private void SelectModelsFolder()
+        {
+            settingsService.Settings.ModelsFolderPath = FileFolderSelector.SelectFolder(settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath, title: "Select models folder") ?? settingsService.Settings.ModelsFolderPath;
         }
 
         [RelayCommand]
@@ -181,6 +188,12 @@ namespace eTools_Ultimate.ViewModels.Pages
         private void SelectPropMoverFile()
         {
             settingsService.Settings.PropMoverFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropMoverFilePath ?? settingsService.Settings.DefaultPropMoverFilePath, title: Resources.Texts.SelectMoverPropFile) ?? settingsService.Settings.PropMoverFilePath;
+        }
+
+        [RelayCommand]
+        private void SelectPropMoverExFile()
+        {
+            settingsService.Settings.PropMoverExFilePath = FileFolderSelector.SelectFile(settingsService.Settings.PropMoverExFilePath ?? settingsService.Settings.DefaultPropMoverExFilePath, title: Resources.Texts.SelectMoverPropFile) ?? settingsService.Settings.PropMoverExFilePath;
         }
 
         [RelayCommand]

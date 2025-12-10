@@ -1,8 +1,12 @@
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Models;
+using eTools_Ultimate.Models.Motions;
+using eTools_Ultimate.Models.Movers;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.Localization;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -58,17 +62,17 @@ namespace eTools_Ultimate.ViewModels.Pages
             get
             {
                 int moverModelType = definesService.Defines["OT_MOVER"];
-                int maleMoverId = definesService.Defines["MI_MALE"];
-                int femaleMoverId = definesService.Defines["MI_FEMALE"];
+                uint maleMoverId = (uint)definesService.Defines["MI_MALE"];
+                uint femaleMoverId = (uint)definesService.Defines["MI_FEMALE"];
                 Model? maleMoverModel = modelsService.GetModelByTypeAndId(moverModelType, maleMoverId);
                 Model? femaleMoverModel = modelsService.GetModelByTypeAndId(moverModelType, maleMoverId);
                 if (maleMoverModel is null || femaleMoverModel is null) return [];
                 ModelMotion[] maleMotions = [.. maleMoverModel.Motions];
                 ModelMotion[] femaleMotions = [.. femaleMoverModel.Motions];
 
-                ModelMotion[] common = [.. maleMotions.Where(m => femaleMotions.Any(f => f.Prop.IMotion == m.Prop.IMotion))];
+                ModelMotion[] common = [.. maleMotions.Where(m => femaleMotions.Any(f => f.IMotion == m.IMotion))];
 
-                string[] commonIdentifiers = [.. common.Select(x => definesService.ReversedMotionTypeDefines[x.Prop.IMotion])];
+                string[] commonIdentifiers = [.. common.Select(x => definesService.ReversedMotionTypeDefines[(int)x.IMotion])];
 
                 return commonIdentifiers;
             }
@@ -145,21 +149,26 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (MotionsView.CurrentItem is not Motion motion) return;
 
-            motion.Prop.PropertyChanged += MotionProp_PropertyChanged;
+            motion.PropertyChanged += CurrentMotion_PropertyChanged;
         }
 
         private void TeardownCurrentMotionWatchers()
         {
             if (MotionsView.CurrentItem is not Motion motion) return;
-            motion.Prop.PropertyChanged -= MotionProp_PropertyChanged;
+            motion.PropertyChanged -= CurrentMotion_PropertyChanged;
         }
 
-        private void MotionProp_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        private void CurrentMotion_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
+            if(MotionsView.CurrentItem is not Motion motion)
+                throw new InvalidOperationException("MotionsViewModel::CurrentMotion_PropertyChanged exception : Current item is not a Motion");
+            if(sender != motion)
+                throw new InvalidOperationException("MotionsViewModel::CurrentMotion_PropertyChanged exception : sender is not current motion");
+
             switch (e.PropertyName)
             {
-                case nameof(MotionProp.DwMotion):
-                case nameof(MotionProp.DwPlay):
+                case nameof(Motion.DwMotion):
+                case nameof(Motion.DwPlay):
                     PlayMotion();
                     break;
             }
@@ -208,7 +217,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             NativeMethods.StopMotion(D3dHost._native);
 
-            int motionType = motion.Prop.DwMotion;
+            uint motionType = motion.DwMotion;
 
             string moverIdentifier = ModelPreviewGender switch
             {
@@ -218,15 +227,15 @@ namespace eTools_Ultimate.ViewModels.Pages
             };
 
             int moverModelType = definesService.Defines["OT_MOVER"];
-            int moverId = definesService.Defines[moverIdentifier];
+            uint moverId = (uint)definesService.Defines[moverIdentifier];
             Model? moverModel = modelsService.GetModelByTypeAndId(moverModelType, moverId);
             if (moverModel is null) return;
-            ModelMotion? modelMotion = moverModel.Motions.FirstOrDefault(m => m.Prop.IMotion == motionType);
+            ModelMotion? modelMotion = moverModel.Motions.FirstOrDefault(m => m.IMotion == motionType);
             if (modelMotion is null) return;
 
             string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
-            string root = $"mvr_{moverModel.Prop.SzName}";
-            string lowerMotionKey = modelMotion.Prop.SzMotion;
+            string root = $"mvr_{moverModel.SzName}";
+            string lowerMotionKey = modelMotion.SzMotion;
 
             string motionFile = $@"{modelsFolderPath}{root}_{lowerMotionKey}.ani";
 
@@ -243,7 +252,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             //    return;
             //}
 
-            NativeMethods.PlayMotion(D3dHost._native, motionFile, motion.Prop.DwPlay);
+            NativeMethods.PlayMotion(D3dHost._native, motionFile, (int)motion.DwPlay); // TODO: change this to allow uint values
 
             //Auto3DRendering = true;
         }
@@ -267,8 +276,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                     HashSet<string> stringIdentifiers = [];
                     foreach (Motion motion in motionsService.Motions)
                     {
-                        stringIdentifiers.Add(motion.Prop.SzName);
-                        stringIdentifiers.Add(motion.Prop.SzDesc);
+                        stringIdentifiers.Add(motion.SzName);
+                        stringIdentifiers.Add(motion.SzDesc);
                     }
 
                     motionsService.Save();
@@ -363,7 +372,181 @@ namespace eTools_Ultimate.ViewModels.Pages
                 !fileExtension.Equals(".dds"))
                 return;
 
-            motion.Prop.SzIconName = fileName;
+            motion.SzIconName = fileName;
+        }
+
+        private static bool CanCopyIdentifier(Motion motion) => motion.Identifier != motion.DwId.ToString();
+
+        [RelayCommand(CanExecute = nameof(CanCopyIdentifier))]
+        private void CopyIdentifier(Motion motion)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(motion.Identifier);
+
+                snackbarService.Show(
+                        title: localizer["Identifier copied"],
+                        message: localizer["The identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying motion identifier", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The identifier could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyId(Motion mover)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(mover.DwId.ToString());
+
+                snackbarService.Show(
+                        title: localizer["ID copied"],
+                        message: localizer["The ID has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying motion ID", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The ID could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        private static bool CanCopyNameIdentifier(Motion motion) => motion.Name != motion.SzName;
+
+        [RelayCommand(CanExecute = nameof(CanCopyNameIdentifier))]
+        private void CopyNameIdentifier(Motion motion)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(motion.SzName);
+
+                snackbarService.Show(
+                        title: localizer["Name identifier copied"],
+                        message: localizer["The name identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying motion name identifier", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The name identifier could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyName(Motion motion)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(motion.Name);
+
+                snackbarService.Show(
+                        title: localizer["Name copied"],
+                        message: localizer["The name has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying motion name", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The name could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        private static bool CanCopyDescriptionIdentifier(Motion motion) => motion.Description != motion.SzDesc;
+
+        [RelayCommand(CanExecute = nameof(CanCopyDescriptionIdentifier))]
+        private void CopyDescriptionIdentifier(Motion motion)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(motion.SzDesc);
+
+                snackbarService.Show(
+                        title: localizer["Description identifier copied"],
+                        message: localizer["The description identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying motion description identifier", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The description identifier could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyDescription(Motion motion)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(motion.Description);
+
+                snackbarService.Show(
+                        title: localizer["Description copied"],
+                        message: localizer["The description has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying motion description", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The description could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
         }
     }
 }

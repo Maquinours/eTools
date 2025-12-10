@@ -1,16 +1,17 @@
-using eTools_Ultimate.ViewModels.Pages;
-using System.Windows.Controls;
-using Wpf.Ui.Controls;
-using Wpf.Ui;
-using Wpf.Ui.Abstractions.Controls;
 using eTools_Ultimate.Helpers;
+using eTools_Ultimate.Models;
+using eTools_Ultimate.Services;
+using eTools_Ultimate.ViewModels.Pages;
+using eTools_Ultimate.Views.Dialogs;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
-using eTools_Ultimate.Models;
-using System.Runtime.InteropServices;
-using eTools_Ultimate.Services;
-using System.IO;
-using eTools_Ultimate.Views.Dialogs;
+using System.Windows.Threading;
+using Wpf.Ui;
+using Wpf.Ui.Abstractions.Controls;
+using Wpf.Ui.Controls;
 
 namespace eTools_Ultimate.Views.Pages
 {
@@ -32,6 +33,11 @@ namespace eTools_Ultimate.Views.Pages
         private void MoversListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MoversListView.ScrollIntoView(MoversListView.SelectedItem);
+
+            Dispatcher.Invoke(() =>
+            {
+                ContentScrollViewer?.ScrollToTop();
+            }, DispatcherPriority.Loaded);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
@@ -59,14 +65,14 @@ namespace eTools_Ultimate.Views.Pages
         {
             if (!_isMouseDragging) return;
             if (ViewModel.D3dHost is null) return;
-            
+
             Point mousePosition = e.GetPosition(null);
             Vector deltaPosition = _lastMousePosition - mousePosition;
 
             NativeMethods.RotateCamera(ViewModel.D3dHost._native, (int)(deltaPosition.X), (int)(deltaPosition.Y));
 
             _lastMousePosition = mousePosition;
-            if(!ViewModel.Auto3DRendering)
+            if (!ViewModel.Auto3DRendering)
                 ViewModel.D3dHost.Render();
         }
 
@@ -90,4 +96,4 @@ namespace eTools_Ultimate.Views.Pages
             MotionsListView.ScrollIntoView(MotionsListView.SelectedItem);
         }
     }
-} 
+}

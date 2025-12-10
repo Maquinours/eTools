@@ -1,4 +1,5 @@
 ﻿using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Movers;
 using Scan;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,7 @@ namespace eTools_Ultimate.Services
         // Movers settings
         internal const string PropMoverPath = "PropMoverPath";
         internal const string PropMoverTxtPath = "PropMoverTxtPath";
+        internal const string PropMoverExPath = "PropMoverExPath";
         internal const string Mover64BitHp = "Mover64BitHp";
         internal const string Mover64BitAtk = "Mover64BitAtk";
         internal const string MoverTypeAiBindings = "MoverTypeAiBindings";
@@ -118,6 +120,9 @@ namespace eTools_Ultimate.Services
                         case SettingsKeywords.PropMoverTxtPath:
                             Settings.PropMoverTxtFilePath = scanner.GetToken();
                             break;
+                        case SettingsKeywords.PropMoverExPath:
+                            Settings.PropMoverExFilePath = scanner.GetToken();
+                            break;
                         case SettingsKeywords.Mover64BitHp:
                             Settings.Mover64BitHp = true;
                             break;
@@ -135,7 +140,7 @@ namespace eTools_Ultimate.Services
                                     if (scanner.EndOfStream)
                                         throw new InvalidOperationException("SettingsService::Load exception : Mover type AI bindings settings is incorrectly formated. (first infinite loop security)");
 
-                                    if (!Enum.TryParse(scanner.Token, out MoverTypes type))
+                                    if (!Enum.TryParse(scanner.Token, out MoverType type))
                                         throw new InvalidOperationException("SettingsService::Load exception : Mover type AI bindings settings is incorrectly formated. (token is not MoverTypes)");
 
                                     Settings.MoverTypesBindings[type].Clear();
@@ -227,13 +232,15 @@ namespace eTools_Ultimate.Services
                 writer.WriteLine($"{SettingsKeywords.PropMoverPath}\t\"{Settings.PropMoverFilePath}\"");
             if (Settings.PropMoverTxtFilePath != null)
                 writer.WriteLine($"{SettingsKeywords.PropMoverTxtPath}\t\"{Settings.PropMoverTxtFilePath}\"");
+            if (Settings.PropMoverExFilePath != null)
+                writer.WriteLine($"{SettingsKeywords.PropMoverExPath}\t\"{Settings.PropMoverExFilePath}\"");
             if (Settings.Mover64BitAtk)
                 writer.WriteLine(SettingsKeywords.Mover64BitAtk);
             if (Settings.Mover64BitHp)
                 writer.WriteLine(SettingsKeywords.Mover64BitHp);
             writer.WriteLine(SettingsKeywords.MoverTypeAiBindings);
             writer.WriteLine('[');
-            foreach (KeyValuePair<MoverTypes, ObservableCollection<string>> bind in Settings.MoverTypesBindings)
+            foreach (KeyValuePair<MoverType, ObservableCollection<string>> bind in Settings.MoverTypesBindings)
             {
                 writer.WriteLine($"\t{bind.Key}");
                 writer.WriteLine($"\t[");
@@ -291,6 +298,7 @@ namespace eTools_Ultimate.Services
                 // Movers settings
                 case nameof(Settings.PropMoverFilePath):
                 case nameof(Settings.PropMoverTxtFilePath):
+                case nameof(Settings.PropMoverExFilePath):
                 case nameof(Settings.Mover64BitHp):
                 case nameof(Settings.Mover64BitAtk):
 

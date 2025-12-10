@@ -1,10 +1,14 @@
 ﻿using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.GiftBoxes;
+using eTools_Ultimate.Models.Models;
+using eTools_Ultimate.Models.Movers;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using eTools_Ultimate.Views.Dialogs;
 using Microsoft.Extensions.Localization;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -240,17 +244,38 @@ namespace eTools_Ultimate.ViewModels.Pages
             this._modelsDirectoryWatcher.Renamed += ModelFile_Changed;
             this._modelsDirectoryWatcher.Created += ModelFile_Changed;
             this._modelsDirectoryWatcher.Deleted += ModelFile_Changed;
-            InitializeModelsDirectoryWatcherPath();
+            try
+            {
+                InitializeModelsDirectoryWatcherPath();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error during MoversViewModel models directory watcher initialization.");
+            }
 
             this._motionDirectoryWatcher.Renamed += ModelMotionFile_Changed;
             this._motionDirectoryWatcher.Created += ModelMotionFile_Changed;
             this._motionDirectoryWatcher.Deleted += ModelMotionFile_Changed;
-            InitializeMotionsDirectoryWatcherPath();
+            try
+            {
+                InitializeMotionsDirectoryWatcherPath();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error during MoversViewModel motions directory watcher initialization.");
+            }
 
             this._texturesDirectoryWatcher.Renamed += ModelTextureFile_Changed;
             this._texturesDirectoryWatcher.Created += ModelTextureFile_Changed;
             this._texturesDirectoryWatcher.Deleted += ModelTextureFile_Changed;
-            InitializeTexturesDirectoryWatcherPath();
+            try
+            {
+                InitializeTexturesDirectoryWatcherPath();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error during MoversViewModel textures directory watcher initialization.");
+            }
 
             MoversView.CurrentChanging += CurrentMover_Changing;
             MoversView.CurrentChanged += CurrentMover_Changed;
@@ -261,11 +286,10 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (mover.Model is not null)
                 {
                     mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
-                    mover.Model.Prop.PropertyChanged += CurrentMoverModelProp_PropertyChanged;
                     mover.Model.MotionsView.CurrentChanging += MotionsView_CurrentChanging;
                     mover.Model.MotionsView.CurrentChanged += MotionsView_CurrentChanged;
                     if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
-                        currentMotion.Prop.PropertyChanged += CurrentMotionProp_PropertyChanged;
+                        currentMotion.PropertyChanged += CurrentMotion_PropertyChanged;
                 }
             }
 
@@ -290,14 +314,14 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private void InitializeMotionsDirectoryWatcherPath()
         {
-            this._motionDirectoryWatcher.EnableRaisingEvents = false;
+            _motionDirectoryWatcher.EnableRaisingEvents = false;
             if (MoversView.CurrentItem is not Mover mover) return;
             if (mover.Model is null) return;
             string? prefix = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
             if (prefix is null) return;
-            this._motionDirectoryWatcher.Path = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
-            this._motionDirectoryWatcher.Filter = $"{prefix}_*.ani";
-            this._motionDirectoryWatcher.EnableRaisingEvents = true;
+            _motionDirectoryWatcher.Path = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
+            _motionDirectoryWatcher.Filter = $"{prefix}_*.ani";
+            _motionDirectoryWatcher.EnableRaisingEvents = true;
         }
 
         private bool FilterItem(object obj)
@@ -399,9 +423,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (MoversView.CurrentItem is not Mover mover) return;
             if (mover.Model is null) return;
 
-
-
-            int textureEx = mover.Model.Prop.NTextureEx;
+            int textureEx = mover.Model.NTextureEx;
             NativeMethods.SetTextureEx(D3dHost._native, textureEx);
             if (!Auto3DRendering)
                 D3dHost.Render();
@@ -413,7 +435,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (MoversView.CurrentItem is not Mover mover) return;
             if (mover.Model is null) return;
 
-            float scale = mover.Model.Prop.FScale;
+            float scale = mover.Model.FScale;
             NativeMethods.SetScale(D3dHost._native, scale);
             if (!Auto3DRendering)
                 D3dHost.Render();
@@ -430,14 +452,35 @@ namespace eTools_Ultimate.ViewModels.Pages
                     {
                         OnPropertyChanged(nameof(ModelFilePossibilities));
                         OnPropertyChanged(nameof(ModelMotionFilePossibilities));
-                        InitializeModelsDirectoryWatcherPath();
-                        InitializeMotionsDirectoryWatcherPath();
+                        try
+                        {
+                            InitializeModelsDirectoryWatcherPath();
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error(ex, "Error during MoversViewModel models directory watcher re-initialization.");
+                        }
+                        try
+                        {
+                            InitializeMotionsDirectoryWatcherPath();
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error(ex, "Error during MoversViewModel motions directory watcher re-initialization.");
+                        }
                         break;
                     }
                 case nameof(Settings.TexturesFolderPath):
                 case nameof(Settings.DefaultTexturesFolderPath):
                     {
-                        InitializeTexturesDirectoryWatcherPath();
+                        try
+                        {
+                            InitializeTexturesDirectoryWatcherPath();
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error(ex, "Error during MoversViewModel textures directory watcher re-initialization.");
+                        }
                         OnPropertyChanged(nameof(ModelTexturesPossibilities));
                         break;
                     }
@@ -492,7 +535,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             string folder = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
             string? prefix = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
             if (prefix is null) return;
-            string suffix = currentMotion.Prop.SzMotion;
+            string suffix = currentMotion.SzMotion;
             string filePath = $"{folder}{prefix}_{suffix}.ani";
 
             if (e.FullPath == filePath || (e is RenamedEventArgs renamedEvent && renamedEvent.OldFullPath == filePath))
@@ -503,15 +546,13 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (MoversView.CurrentItem is not Mover mover) return;
             mover.PropertyChanged -= CurrentMover_PropertyChanged;
-            mover.Prop.PropertyChanged -= CurrentMoverProp_PropertyChanged;
             if (mover.Model is not null)
             {
                 mover.Model.PropertyChanged -= CurrentMoverModel_PropertyChanged;
-                mover.Model.Prop.PropertyChanged -= CurrentMoverModelProp_PropertyChanged;
                 mover.Model.MotionsView.CurrentChanging -= MotionsView_CurrentChanging;
                 mover.Model.MotionsView.CurrentChanged -= MotionsView_CurrentChanged;
                 if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
-                    currentMotion.Prop.PropertyChanged -= CurrentMotionProp_PropertyChanged;
+                    currentMotion.PropertyChanged -= CurrentMotion_PropertyChanged;
             }
         }
 
@@ -520,21 +561,26 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (MoversView.CurrentItem is Mover mover)
             {
                 mover.PropertyChanged += CurrentMover_PropertyChanged;
-                mover.Prop.PropertyChanged += CurrentMoverProp_PropertyChanged;
                 if (mover.Model is not null)
                 {
                     mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
-                    mover.Model.Prop.PropertyChanged += CurrentMoverModelProp_PropertyChanged;
                     mover.Model.MotionsView.CurrentChanging += MotionsView_CurrentChanging;
                     mover.Model.MotionsView.CurrentChanged += MotionsView_CurrentChanged;
                     if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
-                        currentMotion.Prop.PropertyChanged += CurrentMotionProp_PropertyChanged;
+                        currentMotion.PropertyChanged += CurrentMotion_PropertyChanged;
                 }
             }
 
             OnPropertyChanged(nameof(ModelTexturesPossibilities));
             OnPropertyChanged(nameof(ModelMotionFilePossibilities));
-            InitializeMotionsDirectoryWatcherPath();
+            try
+            {
+                InitializeMotionsDirectoryWatcherPath();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Error during MoversViewModel motions directory watcher re-initialization.");
+            }
             LoadModel();
         }
 
@@ -547,45 +593,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (sender != mover)
                 throw new InvalidOperationException("MoversViewModel::CurrentMover_PropertyChanged exception: called with non current mover sender.");
 
-            if (e.PropertyName == nameof(Mover.Model))
-            {
-                if (e is not PropertyChangedExtendedEventArgs extendedArgs) throw new InvalidOperationException("Model property changed args is not PropertyChangedExtendedEventArgs");
-                if (extendedArgs.OldValue is Model oldModel)
-                {
-                    oldModel.PropertyChanged -= CurrentMoverModel_PropertyChanged;
-                    oldModel.Prop.PropertyChanged -= CurrentMoverModelProp_PropertyChanged;
-                    oldModel.MotionsView.CurrentChanging -= MotionsView_CurrentChanging;
-                    oldModel.MotionsView.CurrentChanged -= MotionsView_CurrentChanged;
-                    if (oldModel.MotionsView.CurrentItem is ModelMotion currentMotion)
-                        currentMotion.Prop.PropertyChanged -= CurrentMotionProp_PropertyChanged;
-                }
-                if (extendedArgs.NewValue is Model newModel)
-                {
-                    newModel.PropertyChanged += CurrentMoverModel_PropertyChanged;
-                    newModel.Prop.PropertyChanged += CurrentMoverModelProp_PropertyChanged;
-                    newModel.MotionsView.CurrentChanging += MotionsView_CurrentChanging;
-                    newModel.MotionsView.CurrentChanged += MotionsView_CurrentChanged;
-                    if (newModel.MotionsView.CurrentItem is ModelMotion currentMotion)
-                        currentMotion.Prop.PropertyChanged += CurrentMotionProp_PropertyChanged;
-                }
-
-                OnPropertyChanged(nameof(ModelTexturesPossibilities));
-                OnPropertyChanged(nameof(ModelMotionFilePossibilities));
-                InitializeMotionsDirectoryWatcherPath();
-                LoadModel();
-            }
-        }
-
-        private void CurrentMoverProp_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (sender is not MoverProp moverProp)
-                throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non MoverProp sender");
-            if (MoversView.CurrentItem is not Mover mover)
-                throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called when MoversView currentItem is not a mover");
-            if (moverProp != mover.Prop)
-                throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non current mover prop sender.");
-
-            if (e.PropertyName == nameof(Mover.Prop.DwId))
+            if (e.PropertyName == nameof(Mover.DwId))
             {
                 if (e is not PropertyChangedExtendedEventArgs extendedArgs)
                     throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non PropertyChangedExtendedEventArgs.");
@@ -601,6 +609,38 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (playerMoverIdentifiers.Contains(oldIdentifier) || playerMoverIdentifiers.Contains(newIdentifier))
                     LoadModel();
             }
+            else if (e.PropertyName == nameof(Mover.Model))
+            {
+                if (e is not PropertyChangedExtendedEventArgs extendedArgs) throw new InvalidOperationException("Model property changed args is not PropertyChangedExtendedEventArgs");
+                if (extendedArgs.OldValue is Model oldModel)
+                {
+                    oldModel.PropertyChanged -= CurrentMoverModel_PropertyChanged;
+                    oldModel.MotionsView.CurrentChanging -= MotionsView_CurrentChanging;
+                    oldModel.MotionsView.CurrentChanged -= MotionsView_CurrentChanged;
+                    if (oldModel.MotionsView.CurrentItem is ModelMotion currentMotion)
+                        currentMotion.PropertyChanged -= CurrentMotion_PropertyChanged;
+                }
+                if (extendedArgs.NewValue is Model newModel)
+                {
+                    newModel.PropertyChanged += CurrentMoverModel_PropertyChanged;
+                    newModel.MotionsView.CurrentChanging += MotionsView_CurrentChanging;
+                    newModel.MotionsView.CurrentChanged += MotionsView_CurrentChanged;
+                    if (newModel.MotionsView.CurrentItem is ModelMotion currentMotion)
+                        currentMotion.PropertyChanged += CurrentMotion_PropertyChanged;
+                }
+
+                OnPropertyChanged(nameof(ModelTexturesPossibilities));
+                OnPropertyChanged(nameof(ModelMotionFilePossibilities));
+                try
+                {
+                    InitializeMotionsDirectoryWatcherPath();
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, "Error during MoversViewModel motions directory watcher re-initialization.");
+                }
+                LoadModel();
+            }
         }
 
         private void CurrentMoverModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -612,31 +652,27 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (model != mover.Model)
                 throw new InvalidOperationException("MoversViewModel::CurrentMoverModel_PropertyChanged exception: called with non current mover model sender.");
 
-            if (e.PropertyName == nameof(Mover.Model.Model3DFilePath))
+            switch (e.PropertyName)
             {
-                OnPropertyChanged(nameof(ModelTexturesPossibilities));
-                OnPropertyChanged(nameof(ModelMotionFilePossibilities));
-                InitializeMotionsDirectoryWatcherPath();
-                LoadModel();
-            }
-        }
-
-        private void CurrentMoverModelProp_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (sender is not ModelProp modelProp)
-                throw new InvalidOperationException("MoversViewModel::CurrentMoverModelProp_PropertyChanged exception: sender is not ModelProp");
-            if (MoversView.CurrentItem is not Mover mover)
-                throw new InvalidOperationException("MoversViewModel::CurrentMoverModelProp_PropertyChanged exception: called when MoversView currentItem is not a mover");
-            if (modelProp != mover.Model?.Prop)
-                throw new InvalidOperationException("MoversViewModel::CurrentMoverModelProp_PropertyChanged exception: called with non current mover model prop sender.");
-
-            if (e.PropertyName == nameof(Mover.Model.Prop.NTextureEx))
-            {
-                SetModelTexture();
-            }
-            else if (e.PropertyName == nameof(Mover.Model.Prop.FScale))
-            {
-                SetScale();
+                case nameof(Mover.Model.Model3DFilePath):
+                    OnPropertyChanged(nameof(ModelTexturesPossibilities));
+                    OnPropertyChanged(nameof(ModelMotionFilePossibilities));
+                    try
+                    {
+                        InitializeMotionsDirectoryWatcherPath();
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex, "Error during MoversViewModel motions directory watcher re-initialization.");
+                    }
+                    LoadModel();
+                    break;
+                case nameof(Mover.Model.NTextureEx):
+                    SetModelTexture();
+                    break;
+                case nameof(Mover.Model.FScale):
+                    SetScale();
+                    break;
             }
         }
 
@@ -651,7 +687,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanging exception: sender is not equal to mover model motions view");
 
             if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
-                currentMotion.Prop.PropertyChanged -= CurrentMotionProp_PropertyChanged;
+                currentMotion.PropertyChanged -= CurrentMotion_PropertyChanged;
             else if (mover.Model.MotionsView.CurrentItem != null)
                 throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanging exception: selected motion is neither ModelMotion nor null");
 
@@ -669,16 +705,16 @@ namespace eTools_Ultimate.ViewModels.Pages
                 throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanged exception: sender is not equal to mover model motions view");
 
             if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
-                currentMotion.Prop.PropertyChanged += CurrentMotionProp_PropertyChanged;
+                currentMotion.PropertyChanged += CurrentMotion_PropertyChanged;
             else if (mover.Model.MotionsView.CurrentItem != null)
                 throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanged exception: selected motion is neither ModelMotion nor null");
 
             StopMotion();
         }
 
-        private void CurrentMotionProp_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        private void CurrentMotion_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (sender is not ModelMotionProp motionProp)
+            if (sender is not ModelMotion modelMotion)
                 throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: sender is not ModelMotion");
             if (MoversView.CurrentItem is not Mover mover)
                 throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: MoversView.CurrentItem is not Mover");
@@ -686,10 +722,10 @@ namespace eTools_Ultimate.ViewModels.Pages
                 throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: mover.Model is null");
             if (mover.Model.MotionsView.CurrentItem is not ModelMotion motion)
                 throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: MotionsView.CurrentItem is not Motion");
-            if (motionProp != motion.Prop)
+            if (modelMotion != motion)
                 throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: sender is not selected motion prop");
 
-            if (e.PropertyName == nameof(ModelMotionProp.SzMotion))
+            if (e.PropertyName == nameof(ModelMotion.SzMotion))
                 StopMotion();
         }
         #endregion Event handlers
@@ -719,7 +755,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 )
                 return;
 
-            mover.Model.Prop.SzName = fileName.Substring(4);
+            mover.Model.SzName = fileName.Substring(4);
         }
 
         [RelayCommand]
@@ -787,8 +823,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                     }
                     NativeMethods.SetReferenceModel(D3dHost._native, referenceModel.Model3DFilePath);
                 }
-                NativeMethods.SetReferenceScale(D3dHost._native, referenceModel.Prop.FScale);
-                NativeMethods.SetReferenceTextureEx(D3dHost._native, referenceModel.Prop.NTextureEx);
+                NativeMethods.SetReferenceScale(D3dHost._native, referenceModel.FScale);
+                NativeMethods.SetReferenceTextureEx(D3dHost._native, referenceModel.NTextureEx);
                 if (!Auto3DRendering)
                     D3dHost.Render();
             }
@@ -813,7 +849,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             Sound? newSound = soundsService.Sounds.FirstOrDefault(x => x.FilePath.Equals(filePath, StringComparison.OrdinalIgnoreCase));
             if (newSound is null) return;
-            mover.Prop.DwSndDmg2 = newSound.Prop.Id;
+            mover.DwSndDmg2 = newSound.Prop.Id;
         }
 
         [RelayCommand]
@@ -828,8 +864,20 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             Sound? newSound = soundsService.Sounds.FirstOrDefault(x => x.FilePath.Equals(filePath, StringComparison.OrdinalIgnoreCase));
             if (newSound is null) return;
-            mover.Prop.DwSndIdle1 = newSound.Prop.Id;
+            mover.DwSndIdle1 = newSound.Prop.Id;
         }
+
+        [RelayCommand(CanExecute = nameof(CanOpenDropList))]
+        private async Task OpenDropList(object? parameter)
+        {
+            if (parameter is not Mover mover) throw new InvalidOperationException("parameter is not Mover");
+
+            MoverDropListDialog dropListDialog = new(contentDialogService.GetDialogHost(), mover);
+
+            await dropListDialog.ShowAsync();
+        }
+
+        private static bool CanOpenDropList(object? parameter) => parameter is Mover mover && mover.Type == MoverType.MONSTER;
 
         [RelayCommand]
         private void AddMover()
@@ -866,8 +914,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (MoversView.CurrentItem is not Mover mover) return;
             if (mover.Model is null) return;
 
-            ModelMotionProp motionProp = new(-1, "");
-            ModelMotion motion = new(motionProp);
+            ModelMotion motion = new(Constants.NullId, "");
             mover.Model.Motions.Add(motion);
             mover.Model.MotionsView.Refresh();
             mover.Model.MotionsView.MoveCurrentTo(motion);
@@ -903,7 +950,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (mover.Model is null) return;
 
             string folderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath; // Models folder path
-            string filterPrefix = $"{Constants.ModelFilenameRoot[mover.Model.Prop.DwType]}_{mover.Model.Prop.SzName}_"; // Filter prefix for motion files
+            string filterPrefix = $"{Constants.ModelFilenameRoot[mover.Model.DwType]}_{mover.Model.SzName}_"; // Filter prefix for motion files
             string filter = $"{filterPrefix}*.ani"; // Entire filter
             string[] filePossibilities = [.. Directory.GetFiles(folderPath, filter).Select(x => Path.GetFileNameWithoutExtension(x)[filterPrefix.Length..])]; // All .ani files for this model
             string[] motionTypeDefines = [.. definesService.ReversedMotionTypeDefines.Select(x => x.Value)]; // All motion type identifiers
@@ -916,12 +963,11 @@ namespace eTools_Ultimate.ViewModels.Pages
 
                 if (typeIdentifier is null) continue; // No valid motion type identifier found
 
-                int typeId = definesService.Defines[typeIdentifier]; // type ID from type identifier
+                uint typeId = (uint)definesService.Defines[typeIdentifier]; // type ID from type identifier
 
-                if (mover.Model.Motions.Any(x => x.Prop.IMotion == typeId)) continue; // Motion with this type already exists
+                if (mover.Model.Motions.Any(x => x.IMotion == typeId)) continue; // Motion with this type already exists
 
-                ModelMotionProp modelMotionProp = new(typeId, filePossibility);
-                ModelMotion modelMotion = new(modelMotionProp);
+                ModelMotion modelMotion = new(typeId, filePossibility);
                 mover.Model.Motions.Add(modelMotion);
                 generatedCount++;
             }
@@ -954,7 +1000,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
             string root = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
-            string lowerMotionKey = motion.Prop.SzMotion;
+            string lowerMotionKey = motion.SzMotion;
 
             string motionFile = $@"{modelsFolderPath}{root}_{lowerMotionKey}.ani";
 
@@ -992,16 +1038,16 @@ namespace eTools_Ultimate.ViewModels.Pages
                 await Task.Run(() =>
                 {
                     HashSet<string> stringIdentifiers = [];
-                    foreach (MoverProp moverProp in moversService.Movers.Select(mover => mover.Prop))
+                    foreach (Mover mover in moversService.Movers)
                     {
-                        stringIdentifiers.Add(moverProp.SzName);
-                        stringIdentifiers.Add(moverProp.SzComment);
+                        stringIdentifiers.Add(mover.SzName);
+                        stringIdentifiers.Add(mover.SzComment);
                     }
-
-                    moversService.Save();
-                    modelsService.Save();
-                    stringsService.Save(settingsService.Settings.PropMoverTxtFilePath ?? settingsService.Settings.DefaultPropMoverTxtFilePath, [.. stringIdentifiers]);
-
+                    Task.WaitAll(
+                        Task.Run(moversService.Save),
+                        Task.Run(modelsService.Save),
+                        Task.Run(() => stringsService.Save(settingsService.Settings.PropMoverTxtFilePath ?? settingsService.Settings.DefaultPropMoverTxtFilePath, [.. stringIdentifiers]))
+                        );
                 });
 
                 snackbarService.Show(
@@ -1017,6 +1063,122 @@ namespace eTools_Ultimate.ViewModels.Pages
                 snackbarService.Show(
                     title: localizer["Error saving movers and motions"],
                     message: ex.Message,
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        private static bool CanCopyIdentifier(Mover mover) => mover.Identifier != mover.DwId.ToString();
+
+        [RelayCommand(CanExecute = nameof(CanCopyIdentifier))]
+        private void CopyIdentifier(Mover mover)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(mover.Identifier);
+
+                snackbarService.Show(
+                        title: localizer["Identifier copied"],
+                        message: localizer["The identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying mover identifier", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The identifier could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyId(Mover mover)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(mover.DwId.ToString());
+
+                snackbarService.Show(
+                        title: localizer["ID copied"],
+                        message: localizer["The ID has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying mover ID", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The ID could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        private static bool CanCopyNameIdentifier(Mover mover) => mover.Name != mover.SzName;
+
+        [RelayCommand(CanExecute = nameof(CanCopyNameIdentifier))]
+        private void CopyNameIdentifier(Mover mover)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(mover.SzName);
+
+                snackbarService.Show(
+                        title: localizer["Name identifier copied"],
+                        message: localizer["The name identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying mover name identifier", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The name identifier could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyName(Mover mover)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(mover.Name);
+
+                snackbarService.Show(
+                        title: localizer["Name copied"],
+                        message: localizer["The name has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying mover name", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The name could not be copied to the clipboard."],
                     appearance: ControlAppearance.Danger,
                     icon: null,
                     timeout: TimeSpan.FromSeconds(3)

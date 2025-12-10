@@ -11,12 +11,12 @@ using System.Threading.Tasks;
 
 namespace eTools_Ultimate.Models
 {
-    public class SoundProp(int id, string szSoundFileName) : INotifyPropertyChanged
+    public class SoundProp(uint id, string szSoundFileName) : INotifyPropertyChanged
     {
-        private int _id = id;
+        private uint _id = id;
         private string _szSoundFileName = szSoundFileName;
 
-        public int Id
+        public uint Id
         {
             get => _id;
             set => SetValue(ref _id, value);
@@ -61,7 +61,7 @@ namespace eTools_Ultimate.Models
             set
             {
                 if (Script.TryGetNumberFromString(value, out int result))
-                    Prop.Id = result;
+                    Prop.Id = (uint)result;
             }
         }
         public string FilePath

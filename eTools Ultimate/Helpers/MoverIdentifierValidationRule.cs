@@ -30,7 +30,7 @@ namespace eTools_Ultimate.Helpers
             
             ICollectionView moversView = CollectionViewSource.GetDefaultView(moversService.Movers);
 
-            if (moversService.Movers.Any(x => x.Prop.DwId == id && x != moversView.CurrentItem))
+            if (moversService.Movers.Any(x => x.DwId == id && x != moversView.CurrentItem))
                 return new ValidationResult(false, localizer["This identifier is already taken by another mover."]);
 
             return new ValidationResult(true, null);

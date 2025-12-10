@@ -152,4 +152,79 @@
 }
 </value>
   </data>
+  <data name="Version_0_2_0" xml:space="preserve">
+    <value>{
+  "version": "0.2.0 (Alpha)",
+  "date": "2025-12-09",
+  "developerText": "Cette mise à jour introduit l’édition des listes de drops des movers, ajoute un outil pour détecter et supprimer les assets inutilisés, et apporte plusieurs améliorations de performance ainsi que diverses corrections.",
+  "categories": {
+    "added": [
+      {
+        "text": "Nouvelle page « Divers », permettant de détecter et supprimer les assets inutilisés",
+        "type": 0
+      },
+      {
+        "text": "Ajout d’un paramètre « Dossier de modèles » dans la page de configuration",
+        "type": 0
+      },
+      {
+        "text": "Ajout d’un paramètre « Fichier prop ex » dans la section « Movers » de la page de configuration",
+        "type": 0
+      },
+      {
+        "text": "Ajout de menus contextuels pour copier divers éléments dans les listes (movers, animations, boîtes-cadeaux, accessoires, textes)",
+        "type": 0
+      },
+      {
+        "text": "Ajout d’un bouton « Drop list » pour afficher et éditer les drops d’un mover",
+        "type": 0
+      },
+      {
+        "text": "Ajout d’un système de logs pour suivre les erreurs",
+        "type": 0
+      },
+      {
+        "text": "Ajout de diverses traductions",
+        "type": 0
+      }
+    ],
+    "changed": [
+      {
+        "text": "Les chemins par défaut des fichiers prop (items et movers) sont désormais adaptés au format Florist",
+        "type": 1
+      }
+    ],
+    "improved": [
+      {
+        "text": "Optimisation du chargement des définitions et des strings (jusqu’à 15 fois plus rapide)",
+        "type": 4
+      }
+
+    ],
+    "fixed": [
+      {
+        "text": "La fenêtre de mise à jour utilise désormais correctement le thème sélectionné",
+        "type": 3
+      },
+      {
+        "text": "La fenêtre d’erreur affiche maintenant un message approprié lorsqu’un dossier est introuvable",
+        "type": 3
+      },
+      {
+        "text": "L’application ne se ferme plus lorsqu’une mise à jour est déclinée",
+        "type": 3
+      },
+      {
+        "text": "Correction d’un crash lors du chargement des boîtes-cadeaux",
+        "type": 3
+      },
+      {
+        "text": "Correction de certains types de données pour les aligner avec ceux des clients Flyff",
+        "type": 3
+      }
+    ]
+  }
+}
+</value>
+  </data>
 </root>

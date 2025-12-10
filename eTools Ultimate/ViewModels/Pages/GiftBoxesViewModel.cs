@@ -1,12 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.GiftBoxes;
+using eTools_Ultimate.Models.Items;
 using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using eTools_Ultimate.Views.Dialogs;
 using eTools_Ultimate.Views.Pages;
 using Microsoft.Extensions.Localization;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -64,7 +66,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private bool FilterItem(object obj)
         {
-            if (obj is not GiftBox giftbox) return false;
+            if (obj is not Giftbox giftbox) return false;
             if (string.IsNullOrEmpty(this.SearchText)) return true;
             Item? item = giftbox.Item;
             return item == null || item.Name.ToLower().Contains(this.SearchText.ToLower());
@@ -79,9 +81,9 @@ namespace eTools_Ultimate.ViewModels.Pages
             {
                 if (contentDialog.DataContext is not AddGiftboxDialogViewModel contentDialogViewModel) throw new InvalidOperationException("GiftboxesViewModel::AddGiftbox exception : contentDialog.DataContext is not AddGiftboxDialogViewModel");
                 if (contentDialogViewModel.ItemsView.CurrentItem is not Item item) return;
-                if (giftBoxesService.GiftBoxes.Any(gb => gb.Prop.DwItem == item.Prop.DwId)) return;
+                if (giftBoxesService.GiftBoxes.Any(gb => gb.DwItem == item.DwId)) return;
 
-                GiftBox giftbox = giftBoxesService.NewGiftbox(item);
+                Giftbox giftbox = giftBoxesService.NewGiftbox(item);
 
                 GiftboxesView.Refresh();
                 GiftboxesView.MoveCurrentTo(giftbox);
@@ -91,7 +93,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private async Task RemoveGiftbox()
         {
-            if (GiftboxesView.CurrentItem is not GiftBox giftbox) return;
+            if (GiftboxesView.CurrentItem is not Giftbox giftbox) return;
 
             ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
                  new SimpleContentDialogCreateOptions()
@@ -109,7 +111,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private async Task AddGiftboxItem()
         {
-            if (GiftboxesView.CurrentItem is not GiftBox giftbox) return;
+            if (GiftboxesView.CurrentItem is not Giftbox giftbox) return;
 
             var contentDialog = new AddGiftboxItemDialog(contentDialogService.GetDialogHost());
 
@@ -120,19 +122,18 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (contentDialogViewModel.ItemsView.CurrentItem is not Item item) return;
 
                 int quantity = contentDialogViewModel.Quantity;
-                int probability = (int)(contentDialogViewModel.Probability / 100d * 1_000_000);
+                uint probability = (uint)(contentDialogViewModel.Probability / 100d * 1_000_000);
 
-                GiftBoxItemProp giftBoxItemProp = new(dwItem: item.Prop.DwId, dwProbability: probability, nNum: quantity);
-                GiftBoxItem giftBoxItem = new(giftBoxItemProp);
+                GiftboxItem giftBoxItem = new(dwItem: item.DwId, dwProbability: probability, nNum: quantity);
 
                 giftbox.Items.Add(giftBoxItem);
             }
         }
 
         [RelayCommand]
-        private async Task RemoveGiftboxItem(GiftBoxItem item)
+        private async Task RemoveGiftboxItem(GiftboxItem item)
         {
-            if (GiftboxesView.CurrentItem is not GiftBox giftbox) return;
+            if (GiftboxesView.CurrentItem is not Giftbox giftbox) return;
             if (!giftbox.Items.Contains(item)) return;
 
             ContentDialogResult result = await contentDialogService.ShowSimpleDialogAsync(
@@ -174,6 +175,124 @@ namespace eTools_Ultimate.ViewModels.Pages
                 snackbarService.Show(
                     title: localizer["Error saving giftboxes"],
                     message: ex.Message,
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        private static bool CanCopyItemIdentifier(Giftbox giftbox) => giftbox.ItemIdentifier != giftbox.DwItem.ToString();
+
+        [RelayCommand(CanExecute = nameof(CanCopyItemIdentifier))]
+        private void CopyItemIdentifier(Giftbox giftbox)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(giftbox.ItemIdentifier);
+
+                snackbarService.Show(
+                        title: localizer["Item identifier copied"],
+                        message: localizer["The item identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying giftbox item identifier", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The item identifier could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        [RelayCommand]
+        private void CopyItemId(Giftbox giftbox)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(giftbox.DwItem.ToString());
+
+                snackbarService.Show(
+                        title: localizer["Item ID copied"],
+                        message: localizer["The item ID has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying giftbox item ID", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The item ID could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        private static bool CanCopyItemNameIdentifier(Giftbox giftbox) => giftbox.Item != null && giftbox.Item.Name != giftbox.Item.SzName;
+
+        [RelayCommand(CanExecute = nameof(CanCopyItemNameIdentifier))]
+        private void CopyItemNameIdentifier(Giftbox giftbox)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(giftbox.Item?.SzName ?? "");
+
+                snackbarService.Show(
+                        title: localizer["Item name identifier copied"],
+                        message: localizer["The item name identifier has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying giftbox item name", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The item name could not be copied to the clipboard."],
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+        }
+
+        private static bool CanCopyItemName(Giftbox giftbox) => giftbox.Item != null;
+
+        [RelayCommand(CanExecute = nameof(CanCopyItemName))]
+        private void CopyItemName(Giftbox giftbox)
+        {
+            try
+            {
+                System.Windows.Clipboard.SetText(giftbox.Item?.Name ?? "");
+
+                snackbarService.Show(
+                        title: localizer["Item name copied"],
+                        message: localizer["The item name has been copied to the clipboard."],
+                        appearance: ControlAppearance.Success,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(3)
+                        );
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Error while copying giftbox item name", ex);
+                snackbarService.Show(
+                    title: localizer["Copy failed"],
+                    message: localizer["The item name could not be copied to the clipboard."],
                     appearance: ControlAppearance.Danger,
                     icon: null,
                     timeout: TimeSpan.FromSeconds(3)

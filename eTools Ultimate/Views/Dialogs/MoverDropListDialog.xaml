@@ -1,0 +1,510 @@
+﻿<ui:ContentDialog
+    x:Class="eTools_Ultimate.Views.Dialogs.MoverDropListDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
+    xmlns:itemModels="clr-namespace:eTools_Ultimate.Models.Items"
+    xmlns:local="clr-namespace:eTools_Ultimate.Views.Dialogs"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:eTools_Ultimate.Models"
+    xmlns:moverModels="clr-namespace:eTools_Ultimate.Models.Movers"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    xmlns:viewmodels="clr-namespace:eTools_Ultimate.ViewModels.Controls.Dialogs"
+    Title="{Binding Title}"
+    d:DataContext="{d:DesignInstance viewmodels:MoverDropListDialogViewModel,
+                                     IsDesignTimeCreatable=False}"
+    CloseButtonText="{i18n:StringLocalizer 'Close'}"
+    mc:Ignorable="d">
+    <ui:ContentDialog.Resources>
+        <Style BasedOn="{StaticResource {x:Type ui:ContentDialog}}" TargetType="{x:Type local:MoverDropListDialog}" />
+    </ui:ContentDialog.Resources>
+
+    <Grid Margin="20,0,20,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <ui:Button
+                Grid.Column="0"
+                Command="{Binding AddDropItemCommand}"
+                FontSize="16"
+                Icon="{ui:SymbolIcon Add24}"
+                ToolTip="{i18n:StringLocalizer 'Add item drop'}" />
+            <ui:Button
+                Grid.Column="1"
+                Margin="10,0,0,0"
+                Command="{Binding AddDropKindCommand}"
+                FontSize="16"
+                Icon="{ui:SymbolIcon FolderAdd24}"
+                ToolTip="{i18n:StringLocalizer 'Add item drops by kind'}" />
+            <ui:Button
+                Grid.Column="2"
+                Margin="10,0,0,0"
+                Command="{Binding AddDropGoldCommand}"
+                FontSize="16"
+                Icon="{ui:SymbolIcon Money24}"
+                ToolTip="{i18n:StringLocalizer 'Add penyas drop'}" />
+            <ui:Button
+                Grid.Column="3"
+                Margin="10,0,0,0"
+                Appearance="Danger"
+                Command="{Binding RemoveDropCommand}"
+                CommandParameter="{Binding SelectedItem, ElementName=DropListTreeView}"
+                FontSize="16"
+                Icon="{ui:SymbolIcon Delete24}"
+                ToolTip="{i18n:StringLocalizer 'Remove selected element'}" />
+            <Grid Grid.Column="5" Width="100">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                    <TextBlock Text="{i18n:StringLocalizer 'Max drops'}" />
+                    <ui:SymbolIcon
+                        Margin="5,0,0,0"
+                        FontSize="16"
+                        Symbol="Info20">
+                        <ui:SymbolIcon.ToolTip>
+                            <ToolTip Content="{i18n:StringLocalizer 'Maximum number of items that can drop when this mover dies.'}" />
+                        </ui:SymbolIcon.ToolTip>
+                    </ui:SymbolIcon>
+                </StackPanel>
+                <ui:NumberBox
+                    Grid.Row="1"
+                    Margin="0,5,0,0"
+                    ClearButtonEnabled="False"
+                    Value="{Binding DropItemGenerator.DwMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid>
+        </Grid>
+        <Grid
+            Grid.Row="1"
+            Height="300"
+            Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Border
+                Grid.Column="0"
+                Width="300"
+                Background="{DynamicResource ControlFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlElevationBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="4">
+                <TreeView
+                    x:Name="DropListTreeView"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ItemsSource="{Binding DropListView}"
+                    Loaded="DropListTreeView_Loaded"
+                    VirtualizingStackPanel.IsVirtualizing="True"
+                    VirtualizingStackPanel.VirtualizationMode="Standard">
+                    <TreeView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <local:MyVirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </TreeView.ItemsPanel>
+                    <TreeView.ItemContainerStyle>
+                        <Style BasedOn="{StaticResource {x:Type TreeViewItem}}" TargetType="TreeViewItem">
+                            <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                            <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}" />
+                            <Style.Triggers>
+                                <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="True">
+                                    <Setter Property="ItemsPanel">
+                                        <Setter.Value>
+                                            <ItemsPanelTemplate>
+                                                <local:MyVirtualizingStackPanel />
+                                            </ItemsPanelTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TreeView.ItemContainerStyle>
+                    <TreeView.Resources>
+                        <HierarchicalDataTemplate DataType="{x:Type viewmodels:DropKindTreeViewItem}" ItemsSource="{Binding DropItems}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="📁 " />
+                                <TextBlock Text="{Binding DropKind.ItemKind3Identifier}" />
+                            </StackPanel>
+                        </HierarchicalDataTemplate>
+                        <DataTemplate DataType="{x:Type viewmodels:DropGoldTreeViewItem}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Width="32"
+                                    Height="32"
+                                    Margin="0,0,8,0"
+                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1">
+                                    <Image
+                                        Margin="2"
+                                        Source="{Binding DropGold.Item.Icon}"
+                                        Stretch="Uniform" />
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{Binding DropGold.Item.Name}" />
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding DropGold.ItemIdentifier}" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewmodels:DropItemTreeViewItem}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Width="32"
+                                    Height="32"
+                                    Margin="0,0,8,0"
+                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1">
+                                    <Image
+                                        Margin="2"
+                                        Source="{Binding DropItem.Item.Icon}"
+                                        Stretch="Uniform" />
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{Binding DropItem.Name}" />
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding DropItem.ItemIdentifier}" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewmodels:ItemTreeViewItem}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    Width="32"
+                                    Height="32"
+                                    Margin="0,0,8,0"
+                                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                    BorderThickness="1">
+                                    <Image
+                                        Margin="2"
+                                        Source="{Binding Item.Icon}"
+                                        Stretch="Uniform" />
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                        Text="{Binding Item.Name}" />
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                        Text="{Binding Item.Identifier}" />
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </TreeView.Resources>
+                </TreeView>
+            </Border>
+            <StackPanel Grid.Column="2" Width="300">
+                <ContentControl Content="{Binding SelectedItem, ElementName=DropListTreeView}">
+                    <ContentControl.Resources>
+                        <DataTemplate DataType="{x:Type viewmodels:DropGoldTreeViewItem}">
+                            <UniformGrid VerticalAlignment="Top" Columns="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Text="{i18n:StringLocalizer 'Minimum'}" />
+                                        <ui:SymbolIcon
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Symbol="Info20">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="{i18n:StringLocalizer 'Minimum amount dropped'}" />
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <ui:NumberBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        ClearButtonEnabled="False"
+                                        Value="{Binding DropGold.DwNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Text="{i18n:StringLocalizer 'Maximum'}" />
+                                        <ui:SymbolIcon
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Symbol="Info20">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="{i18n:StringLocalizer 'Maximum amount dropped'}" />
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <ui:NumberBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        ClearButtonEnabled="False"
+                                        Value="{Binding DropGold.DwNumber2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                            </UniformGrid>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewmodels:DropItemTreeViewItem}">
+                            <UniformGrid VerticalAlignment="Top" Columns="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Text="{i18n:StringLocalizer 'Item'}" />
+                                        <ui:SymbolIcon
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Symbol="Info20">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="{i18n:StringLocalizer 'Dropped item identifier'}" />
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <ui:AutoSuggestBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        DisplayMemberPath="Value"
+                                        OriginalItemsSource="{Binding DataContext.ItemIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ui:ContentDialog}}"
+                                        Text="{Binding DropItem.ItemIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                </Grid>
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Text="{i18n:StringLocalizer 'Quantity'}" />
+                                        <ui:SymbolIcon
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Symbol="Info20">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="{i18n:StringLocalizer 'Maximum quantity dropped'}" />
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <ui:NumberBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        ClearButtonEnabled="False"
+                                        Value="{Binding DropItem.DwNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Text="{i18n:StringLocalizer 'Level'}" />
+                                        <ui:SymbolIcon
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Symbol="Info20">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="{i18n:StringLocalizer 'Level of the dropped item'}" />
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <ui:NumberBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        ClearButtonEnabled="False"
+                                        Cursor="Arrow"
+                                        Value="{Binding DropItem.DwLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock>
+                                            <Run Text="{i18n:StringLocalizer 'Probability'}" />
+                                            <Run Text="(%)" />
+                                        </TextBlock>
+                                        <ui:SymbolIcon
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Symbol="Info20">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="{i18n:StringLocalizer 'Drop chance (in %)'}" />
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <ui:NumberBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        ClearButtonEnabled="False"
+                                        MaxDecimalPlaces="8"
+                                        Value="{Binding DropItem.ProbabilityPercent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                </Grid>
+                            </UniformGrid>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewmodels:DropKindTreeViewItem}">
+                            <UniformGrid Columns="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Text="{i18n:StringLocalizer 'Item kind'}" />
+                                        <ui:SymbolIcon
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Symbol="Info20">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="{i18n:StringLocalizer 'Kind of items to include. Items whose third kind does not match this value will be excluded.'}" />
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <ui:AutoSuggestBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        DisplayMemberPath="Value"
+                                        OriginalItemsSource="{Binding DataContext.ItemKind3Identifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ui:ContentDialog}}"
+                                        Text="{Binding DropKind.ItemKind3Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                </Grid>
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Minimum rarity'}" />
+                                        <ui:SymbolIcon
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Symbol="Info20">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="{i18n:StringLocalizer 'Minimum rarity for an item to be included. This value is read-only and depends on the mover’s level.'}" />
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <ui:NumberBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        IsEnabled="False"
+                                        Value="{Binding DropKind.MinUnique, Mode=OneWay, UpdateSourceTrigger=LostFocus}" />
+                                </Grid>
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Maximum rarity'}" />
+                                        <ui:SymbolIcon
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Symbol="Info20">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="{i18n:StringLocalizer 'Maximum rarity for an item to be included. This value is read-only and depends on the mover’s level.'}" />
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <ui:NumberBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        IsEnabled="False"
+                                        Value="{Binding DropKind.MaxUnique, Mode=OneWay, UpdateSourceTrigger=LostFocus}" />
+                                </Grid>
+                            </UniformGrid>
+                        </DataTemplate>
+                        <DataTemplate DataType="{x:Type viewmodels:ItemTreeViewItem}">
+                            <UniformGrid Columns="1">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Item kind'}" />
+                                        <ui:SymbolIcon
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Symbol="Info20">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="{i18n:StringLocalizer 'Third kind of the item'}" />
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <ui:AutoSuggestBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        DisplayMemberPath="Value"
+                                        IsEnabled="False"
+                                        OriginalItemsSource="{Binding DataContext.ItemKind3Identifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ui:ContentDialog}}"
+                                        Text="{Binding Item.ItemKind3Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                </Grid>
+                                <Grid Margin="0,10,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                        <TextBlock Grid.Row="0" Text="{i18n:StringLocalizer 'Rarity'}" />
+                                        <ui:SymbolIcon
+                                            Margin="5,0,0,0"
+                                            FontSize="16"
+                                            Symbol="Info20">
+                                            <ui:SymbolIcon.ToolTip>
+                                                <ToolTip Content="{i18n:StringLocalizer 'Rarity of the item'}" />
+                                            </ui:SymbolIcon.ToolTip>
+                                        </ui:SymbolIcon>
+                                    </StackPanel>
+                                    <ui:NumberBox
+                                        Grid.Row="1"
+                                        Margin="0,5,0,0"
+                                        IsEnabled="False"
+                                        Value="{Binding Item.DwItemRare, Mode=OneWay, UpdateSourceTrigger=LostFocus}" />
+                                </Grid>
+                            </UniformGrid>
+                        </DataTemplate>
+                    </ContentControl.Resources>
+                </ContentControl>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</ui:ContentDialog>

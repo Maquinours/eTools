@@ -1,4 +1,5 @@
 ﻿using eTools_Ultimate.Exceptions;
+using eTools_Ultimate.Models;
 using eTools_Ultimate.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Scan;
@@ -105,27 +106,47 @@ namespace eTools_Ultimate.Helpers
 
 		public static string NumberToString(int number)
 		{
-			if (number == -1)
+			if ((uint)number == Constants.NullId)
 				return "=";
 			return number.ToString(CultureInfo.InvariantCulture);
 		}
-        public static string NumberToString(int number, Dictionary<int, string> reverseDefines)
+        public static string NumberToString(int number, IDictionary<int, string> reverseDefines)
         {
 			if (reverseDefines.TryGetValue(number, out string? result))
 				return result;
-            if (number == -1)
+            if ((uint)number == Constants.NullId)
+                return "=";
+            return number.ToString(CultureInfo.InvariantCulture);
+        }
+		public static string NumberToString(uint number)
+		{
+            if (number == Constants.NullId)
+                return "=";
+            return number.ToString(CultureInfo.InvariantCulture);
+        }
+        public static string NumberToString(uint number, IDictionary<int, string> reverseDefines)
+        {
+            if (reverseDefines.TryGetValue((int)number, out string? result))
+                return result;
+            if (number == Constants.NullId)
                 return "=";
             return number.ToString(CultureInfo.InvariantCulture);
         }
         public static string Int64ToString(long number)
         {
-            if (number == -1)
+            if (number == Constants.NullId)
+                return "=";
+            return number.ToString(CultureInfo.InvariantCulture);
+        }
+        public static string Int64ToString(ulong number)
+        {
+            if (number == Constants.NullId)
                 return "=";
             return number.ToString(CultureInfo.InvariantCulture);
         }
         public static string FloatToString(float number)
         {
-            if (number == -1f)
+            if (number == -1)
                 return "=";
             return number.ToString(CultureInfo.InvariantCulture);
         }
@@ -139,7 +160,7 @@ namespace eTools_Ultimate.Helpers
             }
 			if (str == "=")
 			{
-				number = -1;
+				number = unchecked((int)Constants.NullId);
 				return true;
 			}
 			if(Int32.TryParse(str, out result))

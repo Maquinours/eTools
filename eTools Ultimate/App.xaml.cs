@@ -11,6 +11,7 @@ using Lepo.i18n.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
@@ -89,8 +90,8 @@ namespace eTools_Ultimate
                 // Top level pages
                 services.AddSingleton<DashboardPage>();
                 services.AddSingleton<DashboardViewModel>();
-                //services.AddSingleton<ItemsPage>();
-                //services.AddSingleton<ItemsViewModel>();
+                services.AddSingleton<ItemsPage>();
+                services.AddSingleton<ItemsViewModel>();
                 //services.AddSingleton<SkillPage>();
                 //services.AddSingleton<SkillsViewModel>();
                 //services.AddSingleton<QuestsPage>();
@@ -114,6 +115,8 @@ namespace eTools_Ultimate
                 //services.AddSingleton<HonorsViewModel>();
                 services.AddSingleton<MotionsPage>();
                 services.AddSingleton<MotionsViewModel>();
+                services.AddSingleton<MiscPage>();
+                services.AddSingleton<MiscViewModel>();
                 //services.AddSingleton<WorldsPage>();
                 //services.AddSingleton<TicketsPage>();
                 //services.AddSingleton<ObjectsPage>();
@@ -173,6 +176,14 @@ namespace eTools_Ultimate
                 // Enable Global Mode since this is a client app
                 options.IsGlobalModeEnabled = true;
             });
+
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.File(
+                    $"{Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)}{Path.DirectorySeparatorChar}eTools{Path.DirectorySeparatorChar}Logs{Path.DirectorySeparatorChar}.log",
+                    rollingInterval: RollingInterval.Day
+                )
+                .WriteTo.Sentry()
+                .CreateLogger();
         }
 
         void App_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)

@@ -1,7 +1,10 @@
 ﻿using eTools.Views.Windows;
+using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
 using eTools_Ultimate.Views.Pages;
 using eTools_Ultimate.Views.Windows;
+using Microsoft.Extensions.Localization;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,11 +35,12 @@ namespace eTools_Ultimate.ViewModels.Windows
         //ExchangesService exchangesService,
         //HonorsService honorsService,
         MotionsService motionsService,
-        AccessoriesService accessoriesService//,
+        AccessoriesService accessoriesService,
         //CoupleService coupleService,
         //TicketsService ticketsService,
         //PackItemsService packItemsService,
-        //TerrainsService terrainsService
+        //TerrainsService terrainsService,
+        IStringLocalizer<Translations> localizer
         ) : ObservableObject
     {
         [ObservableProperty]
@@ -46,7 +50,7 @@ namespace eTools_Ultimate.ViewModels.Windows
         private double _loadingProgress = 0;
 
         [ObservableProperty]
-        private string _version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "1.0.0";
+        private string _version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? "1.0.0";
 
         public event EventHandler? Loaded;
 
@@ -55,14 +59,14 @@ namespace eTools_Ultimate.ViewModels.Windows
         {
             (string text, Action loader)[] loadingSteps = [
                 ("Loading settings...", settingsService.Load),
-                ("Loading defines...", definesService.Load),
+                ("Loading definitions...", definesService.Load),
                 ("Loading strings...", stringsService.Load),
                 ("Loading models...", modelsService.Load),
                 ("Loading items...", itemsService.Load),
                 ("Loading movers...", moversService.Load),
                 //("Loading skills...", skillsService.Load),
                 //("Loading characters...", charactersService.Load),
-                ("Loading sounds config...", soundsService.Load),
+                ("Loading sounds...", soundsService.Load),
                 //("Loading musics config...", musicsService.Load),
                 ("Loading texts...", textsService.Load),
                 ("Loading giftboxes...", giftBoxesService.Load),
@@ -86,7 +90,7 @@ namespace eTools_Ultimate.ViewModels.Windows
 
                         Application.Current.Dispatcher.Invoke(() =>
                         {
-                            LoadingText = text;
+                            LoadingText = localizer[text];
                         });
                         loader();
                         Application.Current.Dispatcher.Invoke(() =>
@@ -106,6 +110,9 @@ namespace eTools_Ultimate.ViewModels.Windows
             catch (Exception ex)
             {
                 Loaded?.Invoke(this, EventArgs.Empty);
+
+                Log.Error(ex, "An error occured while loading resources");
+
                 LoadingErrorWindow errorWindow = new(ex);
                 if (errorWindow.ShowDialog() == true)
                 {

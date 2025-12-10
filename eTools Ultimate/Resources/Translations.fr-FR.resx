@@ -200,6 +200,13 @@
     <value>RAM :</value>
     <comment>RAM requirement</comment>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Storage:" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="100 MB available space" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
   <data name="200 MB available space" xml:space="preserve">
     <value>200 MB d'espace disponible</value>
     <comment>Storage space requirement</comment>
@@ -207,6 +214,12 @@
   <data name="4 GB minimum, 8 GB recommended" xml:space="preserve">
     <value>4 GB minimum, 8 GB recommandé</value>
     <comment>RAM requirement with recommendation</comment>
+  </data>
+  <data name="Graphics:" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="DirectX 11 compatible" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
   <data name="Check for Updates" xml:space="preserve">
     <value>Vérifier les mises à jour</value>
@@ -499,6 +512,310 @@
   <data name="Latest updates and improvements" xml:space="preserve">
     <value>Dernières mises à jour et améliorations</value>
   </data>
+  <data name="Files format" xml:space="preserve">
+    <value>Format des fichiers</value>
+  </data>
+  <data name="Path concerned:" xml:space="preserve">
+    <value>Chemin concerné :</value>
+  </data>
+  <data name="The application could not find an important directory. This can happen when:" xml:space="preserve">
+    <value>L’application n’a pas pu trouver un dossier important. Cela peut se produire lorsque :</value>
+  </data>
+  <data name="The directory path configured in the application settings is invalid." xml:space="preserve">
+    <value>Le chemin du dossier configuré dans les paramètres de l’application est invalide.</value>
+  </data>
+  <data name="The directory has been moved or deleted." xml:space="preserve">
+    <value>Le dossier a été déplacé ou supprimé.</value>
+  </data>
+  <data name="There are insufficient permissions to access the directory." xml:space="preserve">
+    <value>Les autorisations sont insuffisantes pour accéder au dossier.</value>
+  </data>
+  <data name="A required directory was not found." xml:space="preserve">
+    <value>Un dossier requis est introuvable.</value>
+  </data>
+  <data name="Directory not found" xml:space="preserve">
+    <value>Dossier introuvable</value>
+  </data>
+  <data name="A required file was not found." xml:space="preserve">
+    <value>Un fichier requis est introuvable.</value>
+  </data>
+  <data name="The file path configured in the application settings is invalid." xml:space="preserve">
+    <value>Le chemin du fichier configuré dans les paramètres de l’application est invalide.</value>
+  </data>
+  <data name="The file has been moved, renamed or deleted." xml:space="preserve">
+    <value>Le fichier a été déplacé, renommé ou supprimé.</value>
+  </data>
+  <data name="There are insufficient permissions to access the file." xml:space="preserve">
+    <value>Les autorisations sont insuffisantes pour accéder au fichier.</value>
+  </data>
+  <data name="Incorrectly formatted file" xml:space="preserve">
+    <value>Fichier mal formaté</value>
+  </data>
+  <data name="A required file is incorrectly formatted." xml:space="preserve">
+    <value>Un fichier requis est mal formaté.</value>
+  </data>
+  <data name="The application found a file, but it is not correctly formatted. This can happen when:" xml:space="preserve">
+    <value>L’application a trouvé un fichier, mais il n’est pas correctement formaté. Cela peut se produire lorsque :</value>
+  </data>
+  <data name="The file has been manually edited and contains errors." xml:space="preserve">
+    <value>Le fichier a été modifié manuellement et contient des erreurs.</value>
+  </data>
+  <data name="The file path does not point to the correct file." xml:space="preserve">
+    <value>Le chemin du fichier ne pointe pas vers le fichier correct.</value>
+  </data>
+  <data name="The configured resource version does not match your files' version." xml:space="preserve">
+    <value>La version de la ressource configurée ne correspond pas à celle de vos fichiers.</value>
+  </data>
+  <data name="Unknown error" xml:space="preserve">
+    <value>Erreur inconnue</value>
+  </data>
+  <data name="An unexpected error occurred." xml:space="preserve">
+    <value>Une erreur inattendue est survenue.</value>
+  </data>
+  <data name="An unexpected error occurred while loading. This can happen when:" xml:space="preserve">
+    <value>Une erreur inattendue est survenue lors du chargement. Cela peut se produire lorsque :</value>
+  </data>
+  <data name="There is a bug in the application." xml:space="preserve">
+    <value>Il y a un bug dans l’application.</value>
+  </data>
+  <data name="Open configuration" xml:space="preserve">
+    <value>Ouvrir la configuration</value>
+  </data>
+  <data name="Misc" xml:space="preserve">
+    <value>Divers</value>
+  </data>
+  <data name="Navigate to the misc tools page." xml:space="preserve">
+    <value>Naviguer vers la page d'outils divers.</value>
+  </data>
+  <data name="Misc Tools" xml:space="preserve">
+    <value>Outils Divers</value>
+  </data>
+  <data name="Find and manage unused assets" xml:space="preserve">
+    <value>Trouver et gérer les ressources inutilisées</value>
+  </data>
+  <data name="Find Unused Models &amp; Textures" xml:space="preserve">
+    <value>Trouver les Modèles &amp; Textures Inutilisés</value>
+  </data>
+  <data name="Scan dependencies and list assets not referenced anywhere" xml:space="preserve">
+    <value>Scanner les dépendances et lister les ressources non référencées</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Statut</value>
+  </data>
+  <data name="Scanning for unused assets..." xml:space="preserve">
+    <value>Recherche de ressources inutilisées...</value>
+  </data>
+  <data name="Scanning models..." xml:space="preserve">
+    <value>Scan des modèles...</value>
+  </data>
+  <data name="Scanning textures..." xml:space="preserve">
+    <value>Scan des textures...</value>
+  </data>
+  <data name="Scanning sounds..." xml:space="preserve">
+    <value>Scan des sons...</value>
+  </data>
+  <data name="Scan completed. Found {0} unused assets." xml:space="preserve">
+    <value>Scan terminé. {0} ressources inutilisées trouvées.</value>
+  </data>
+  <data name="Total Size Before" xml:space="preserve">
+    <value>Taille Totale Avant</value>
+  </data>
+  <data name="After" xml:space="preserve">
+    <value>Après</value>
+  </data>
+  <data name="Scan Assets" xml:space="preserve">
+    <value>Scanner les Ressources</value>
+  </data>
+  <data name="Select All" xml:space="preserve">
+    <value>Tout Sélectionner</value>
+  </data>
+  <data name="Clear Selection" xml:space="preserve">
+    <value>Effacer la Sélection</value>
+  </data>
+  <data name="Delete Selected" xml:space="preserve">
+    <value>Supprimer la Sélection</value>
+  </data>
+  <data name="Search by name, path, or type..." xml:space="preserve">
+    <value>Rechercher par nom, chemin ou type...</value>
+  </data>
+  <data name="{0} assets found" xml:space="preserve">
+    <value>{0} ressources trouvées</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="File Name" xml:space="preserve">
+    <value>Nom du Fichier</value>
+  </data>
+  <data name="Path" xml:space="preserve">
+    <value>Chemin</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Taille</value>
+  </data>
+  <data name="Last Modified" xml:space="preserve">
+    <value>Dernière Modification</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="Scan completed" xml:space="preserve">
+    <value>Scan terminé</value>
+  </data>
+  <data name="Found {0} unused assets totaling {1}." xml:space="preserve">
+    <value>{0} ressources inutilisées trouvées totalisant {1}.</value>
+  </data>
+  <data name="Scan failed" xml:space="preserve">
+    <value>Échec du scan</value>
+  </data>
+  <data name="No selection" xml:space="preserve">
+    <value>Aucune sélection</value>
+  </data>
+  <data name="Please select assets to delete." xml:space="preserve">
+    <value>Veuillez sélectionner les ressources à supprimer.</value>
+  </data>
+  <data name="Delete selected assets" xml:space="preserve">
+    <value>Supprimer les ressources sélectionnées</value>
+  </data>
+  <data name="Are you sure you want to delete {0} selected assets? This action cannot be undone." xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer {0} ressources sélectionnées ? Cette action peut éventuellement ne pas être annulée.</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="Assets deleted" xml:space="preserve">
+    <value>Ressources supprimées</value>
+  </data>
+  <data name="Successfully deleted {0} assets, freeing {1}." xml:space="preserve">
+    <value>{0} ressources supprimées avec succès, libérant {1}.</value>
+  </data>
+  <data name="Deletion failed" xml:space="preserve">
+    <value>Échec de la suppression</value>
+  </data>
+  <data name="Delete asset" xml:space="preserve">
+    <value>Supprimer la ressource</value>
+  </data>
+  <data name="Are you sure you want to delete '{0}'? This action cannot be undone." xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer '{0}' ? Cette action peut éventuellement ne pas être annulée.</value>
+  </data>
+  <data name="Asset deleted" xml:space="preserve">
+    <value>Ressource supprimée</value>
+  </data>
+  <data name="Successfully deleted '{0}'." xml:space="preserve">
+    <value>'{0}' supprimé avec succès.</value>
+  </data>
+  <data name="Deletion Log" xml:space="preserve">
+    <value>Journal de suppression</value>
+    <comment>Deletion log window title</comment>
+  </data>
+  <data name="View and restore deleted assets" xml:space="preserve">
+    <value>Afficher et restaurer les ressources supprimées</value>
+    <comment>Deletion log window subtitle</comment>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+    <comment>Date column header</comment>
+  </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+    <comment>Action column header</comment>
+  </data>
+  <data name="File Path" xml:space="preserve">
+    <value>Chemin du fichier</value>
+    <comment>File path column header</comment>
+  </data>
+  <data name="Target Path" xml:space="preserve">
+    <value>Chemin cible</value>
+    <comment>Target path column header</comment>
+  </data>
+  <data name="Deleted By" xml:space="preserve">
+    <value>Supprimé par</value>
+    <comment>Deleted by column header</comment>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Actualiser</value>
+    <comment>Refresh button text</comment>
+  </data>
+  <data name="Filter by type..." xml:space="preserve">
+    <value>Filtrer par type...</value>
+    <comment>Filter ComboBox placeholder</comment>
+  </data>
+  <data name="Total: {0}" xml:space="preserve">
+    <value>Total : {0}</value>
+    <comment>Total assets count</comment>
+  </data>
+  <data name="{0} drop list" xml:space="preserve">
+    <value>Liste des drops de {0}</value>
+  </data>
+  <data name="Add item drops by kind" xml:space="preserve">
+    <value>Ajouter des drops d'objets par type</value>
+  </data>
+  <data name="Remove selected element" xml:space="preserve">
+    <value>Supprimer l'élément sélectionné</value>
+  </data>
+  <data name="Max drops" xml:space="preserve">
+    <value>Drops max</value>
+  </data>
+  <data name="Maximum number of items that can drop when this mover dies." xml:space="preserve">
+    <value>Nombre maximum d’objets pouvant être obtenus lorsque ce mover meurt.</value>
+  </data>
+  <data name="Minimum" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Minimum amount dropped" xml:space="preserve">
+    <value>Montant minimum droppé</value>
+  </data>
+  <data name="Maximum amount dropped" xml:space="preserve">
+    <value>Montant maximum droppé</value>
+  </data>
+  <data name="Item kind" xml:space="preserve">
+    <value>Type d'objet</value>
+  </data>
+  <data name="Minimum rarity" xml:space="preserve">
+    <value>Rareté minimale</value>
+  </data>
+  <data name="Maximum rarity" xml:space="preserve">
+    <value>Rareté maximale</value>
+  </data>
+  <data name="Add item drop" xml:space="preserve">
+    <value>Ajouter un drop d'objet</value>
+  </data>
+  <data name="Add penyas drop" xml:space="preserve">
+    <value>Ajouter un drop de penyas</value>
+  </data>
+  <data name="Kind of items to include. Items whose third kind does not match this value will be excluded." xml:space="preserve">
+    <value>Type d'objet à inclure. Les objets dont le troisième type ne correspond pas à cette valeur seront exclus.</value>
+  </data>
+  <data name="Minimum rarity for an item to be included. This value is read-only and depends on the mover’s level." xml:space="preserve">
+    <value>Rareté minimale pour qu'un objet soit inclus. Cette value est en lecture seule et dépend du niveau du mover.</value>
+  </data>
+  <data name="Maximum rarity for an item to be included. This value is read-only and depends on the mover’s level." xml:space="preserve">
+    <value>Rareté maximale pour qu'un objet soit inclus. Cette value est en lecture seule et dépend du niveau du mover.</value>
+  </data>
+  <data name="Third kind of the item" xml:space="preserve">
+    <value>Troisième type de l'objet</value>
+  </data>
+  <data name="Rarity of the item" xml:space="preserve">
+    <value>Rareté de l'objet</value>
+  </data>
+  <data name="Rarity" xml:space="preserve">
+    <value>Rareté</value>
+  </data>
+  <data name="Dropped item identifier" xml:space="preserve">
+    <value>Identifiant de l'objet droppé</value>
+  </data>
+  <data name="Maximum quantity dropped" xml:space="preserve">
+    <value>Quantité maximale droppée</value>
+  </data>
+  <data name="Level of the dropped item" xml:space="preserve">
+    <value>Niveau de l'objet droppé</value>
+  </data>
+  <data name="Drop chance (in %)" xml:space="preserve">
+    <value>Chance de drop (en %)</value>
+  </data>
   <data name="Welcome" xml:space="preserve">
     <value>Bienvenue</value>
     <comment>Welcome text on dashboard</comment>
@@ -687,16 +1004,9 @@
     <value>%</value>
     <comment>Percentage column header</comment>
   </data>
-  <data name="Actions" xml:space="preserve">
-    <value>Actions</value>
-    <comment>Actions column header</comment>
-  </data>
   <data name="Edit" xml:space="preserve">
     <value>Modifier</value>
     <comment>Edit button tooltip</comment>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Supprimer</value>
   </data>
   <data name="Changelog" xml:space="preserve">
     <value>Journal des modifications</value>
@@ -808,10 +1118,6 @@
     <value>Ignorer</value>
     <comment>Ignore option</comment>
   </data>
-  <data name="Type" xml:space="preserve">
-    <value>Type</value>
-    <comment>Type field label</comment>
-  </data>
   <data name="Exact Amount" xml:space="preserve">
     <value>Montant exact</value>
     <comment>Exact Amount option</comment>
@@ -914,10 +1220,6 @@
   </data>
   <data name="Description" xml:space="preserve">
     <value>Description</value>
-  </data>
-  <data name="File Name" xml:space="preserve">
-    <value>Nom de fichier</value>
-    <comment>File Name field label</comment>
   </data>
   <data name="Item Icon" xml:space="preserve">
     <value>Icône d'objet</value>
@@ -1198,10 +1500,6 @@
   <data name="Chaotic spawn key" xml:space="preserve">
     <value>Clé d'apparition chaotique</value>
     <comment>Chaotic spawn key field label</comment>
-  </data>
-  <data name="Misc" xml:space="preserve">
-    <value>Divers</value>
-    <comment>Misc section header</comment>
   </data>
   <data name="Casting time" xml:space="preserve">
     <value>Temps d'incantation</value>
@@ -1545,7 +1843,7 @@
     <value>Ouvrir l'éditeur d'événements de drop.</value>
     <comment>Drop Event navigation card description</comment>
   </data>
-  <data name="File Not Found" xml:space="preserve">
+  <data name="File not found" xml:space="preserve">
     <value>Fichier introuvable</value>
     <comment>Error dialog title for missing file</comment>
   </data>
@@ -1558,7 +1856,7 @@
     <comment>Error dialog section header</comment>
   </data>
   <data name="The application could not find an important file. This can happen when:" xml:space="preserve">
-    <value>L'application n'a pas pu trouver un fichier important. Cela peut arriver si :</value>
+    <value>L'application n'a pas pu trouver un fichier important. Cela peut se produire lorsque :</value>
     <comment>Error dialog explanation text</comment>
   </data>
   <data name="• The file was moved or deleted" xml:space="preserve">
@@ -1568,10 +1866,6 @@
   <data name="• The path is incorrect" xml:space="preserve">
     <value>• Le chemin n'est pas correct</value>
     <comment>Error dialog possible cause 2</comment>
-  </data>
-  <data name="• The file is corrupted" xml:space="preserve">
-    <value>• Le fichier est corrompu</value>
-    <comment>Error dialog possible cause 3</comment>
   </data>
   <data name="Missing file:" xml:space="preserve">
     <value>Fichier manquant :</value>
@@ -1584,10 +1878,6 @@
   <data name="Exit Application" xml:space="preserve">
     <value>Fermer l'application</value>
     <comment>Error dialog button to close application</comment>
-  </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Annuler</value>
-    <comment>Cancel button text</comment>
   </data>
   <data name="OK" xml:space="preserve">
     <value>OK</value>
@@ -2073,7 +2363,43 @@
   <data name="eTools Ultimate is a powerful editor for editing Flyff resource files." xml:space="preserve">
     <value>eTools Ultimate est un éditeur puissant pour l'édition de fichiers de ressources Flyff.</value>
   </data>
-  <data name="Files format" xml:space="preserve">
-    <value>Format des fichiers</value>
+  <data name="Loop" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Add Attribute" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="Loading settings..." xml:space="preserve">
+    <value>Chargement des paramètres...</value>
+  </data>
+  <data name="Loading definitions..." xml:space="preserve">
+    <value>Chargement des définitions...</value>
+  </data>
+  <data name="Loading models..." xml:space="preserve">
+    <value>Chargement des modèles...</value>
+  </data>
+  <data name="Loading items..." xml:space="preserve">
+    <value>Chargement des objets...</value>
+  </data>
+  <data name="Loading movers..." xml:space="preserve">
+    <value>Chargement des movers</value>
+  </data>
+  <data name="Loading sounds..." xml:space="preserve">
+    <value>Chargement des sons</value>
+  </data>
+  <data name="Loading texts..." xml:space="preserve">
+    <value>Chargement des textes...</value>
+  </data>
+  <data name="Loading giftboxes..." xml:space="preserve">
+    <value>Chargement des boîtes cadeaux...</value>
+  </data>
+  <data name="Loading motions..." xml:space="preserve">
+    <value>Chargement des animations...</value>
+  </data>
+  <data name="Loading accessories..." xml:space="preserve">
+    <value>Chargement des accessoires...</value>
+  </data>
+  <data name="Loading strings..." xml:space="preserve">
+    <value>Chargement des chaînes de caractères...</value>
   </data>
 </root>

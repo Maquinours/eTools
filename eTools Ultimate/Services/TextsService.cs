@@ -1,5 +1,5 @@
 ﻿using eTools_Ultimate.Helpers;
-using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Texts;
 using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
@@ -28,38 +28,27 @@ namespace eTools_Ultimate.Services
 
         public void Load()
         {
-            this.Clear();
+            Clear();
 
             string filePath = settingsService.Settings.TextsConfigFilePath ?? settingsService.Settings.DefaultTextsConfigFilePath;
 
-            using (Script script = new())
+            using Script script = new();
+
+            script.Load(filePath);
+
+            while (true)
             {
-                script.Load(filePath);
+                uint dwId = (uint)script.GetNumber();
+                if (script.EndOfStream) break;
 
-                while (true)
-                {
-                    int dwId = script.GetNumber();
-                    if (script.EndOfStream) break;
-                    
-                    int dwColor = script.GetNumber();
-                    script.GetToken(); // "{"
-                    string szName = script.GetToken();
+                uint dwColor = (uint)script.GetNumber();
+                script.GetToken(); // "{"
+                string szName = script.GetToken();
+                script.GetToken(); // "}"
 
-                    // If the string is not in the strings service, then we generate a new key for it.
-                    if (!stringsService.Strings.ContainsKey(szName))
-                    {
-                        string identifier = stringsService.GetNextStringIdentifier(STRING_ID_PREFIX);
-                        stringsService.AddString(identifier, szName);
-                        szName = identifier;
-                    }
+                Text text = new(dwId, dwColor, szName);
 
-                    script.GetToken(); // "}"
-
-                    TextProp textProp = new(dwId, dwColor, szName);
-                    Text text = new(textProp);
-
-                    this.Texts.Add(text);
-                }
+                Texts.Add(text);
             }
         }
 
@@ -77,7 +66,7 @@ namespace eTools_Ultimate.Services
 
             foreach (Text text in Texts)
             {
-                string hex = $"0x{text.Prop.DwColor:x8}";
+                string hex = $"0x{text.DwColor:x8}";
 
                 writer.Write(text.Identifier);
                 writer.Write('\t');
@@ -85,7 +74,7 @@ namespace eTools_Ultimate.Services
                 writer.WriteLine();
                 writer.WriteLine('{');
                 writer.Write('\t');
-                writer.Write(!stringsService.HasString(text.Prop.SzName) ? $"\"{text.Prop.SzName}\"" : text.Prop.SzName);
+                writer.Write(!stringsService.HasString(text.SzName) ? $"\"{text.SzName}\"" : text.SzName);
                 writer.WriteLine();
                 writer.WriteLine('}');
             }
@@ -93,13 +82,12 @@ namespace eTools_Ultimate.Services
 
         public Text AddText()
         {
-            int dwId = (Texts.MaxBy(x => x.Prop.DwId)?.Prop.DwId ?? -1) + 1;
+            uint dwId = Texts.MaxBy(x => x.DwId)?.DwId + 1 ?? 0;
 
             string szName = stringsService.GetNextStringIdentifier(STRING_ID_PREFIX);
             stringsService.GenerateNewString(szName);
 
-            TextProp textProp = new(dwId: dwId, dwColor: unchecked((int)0xFFFFFFFF), szName: szName);
-            Text text = new(textProp);
+            Text text = new(dwId: dwId, dwColor: 0xFFFFFFFF, szName: szName);
 
             this.Texts.Add(text);
             return text;

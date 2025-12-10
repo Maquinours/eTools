@@ -1,14 +1,18 @@
 ﻿using eTools_Ultimate.Exceptions;
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Items;
+using eTools_Ultimate.Models.Models;
+using eTools_Ultimate.Models.Movers;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
+using static System.Windows.Forms.DataFormats;
 
 namespace eTools_Ultimate.Services
 {
-    public class ModelsService(DefinesService definesService)
+    public class ModelsService(DefinesService definesService, SettingsService settingsService)
     {
         private readonly ObservableCollection<MainModelBrace> _models = [];
         public ObservableCollection<MainModelBrace> Models => _models;
@@ -27,50 +31,70 @@ namespace eTools_Ultimate.Services
             brace.Dispose();
         }
 
+        private void ClearMainBraceRecursively(MainModelBrace mainBrace)
+        {
+            foreach (IModelItem child in mainBrace.Children)
+            {
+                if (child is ModelBrace childBrace)
+                    ClearBraceRecursively(childBrace);
+                else if (child is Model childModel)
+                    childModel.Dispose();
+                else
+                    throw new InvalidOperationException("ModelsService::ClearMainBraceRecursively : child is neither ModelBrace nor Model");
+            }
+            mainBrace.Children.Clear();
+            mainBrace.Dispose();
+        }
+
         private void ClearModels()
         {
-            foreach (MainModelBrace brace in this.Models) // Avoid memory leaks
-                ClearBraceRecursively(brace);
-            this.Models.Clear();
+            foreach (MainModelBrace brace in Models) // Avoid memory leaks
+                ClearMainBraceRecursively(brace);
+            Models.Clear();
         }
 
         public void Load()
         {
             List<MainModelBrace> items = [];
 
-            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+            Settings settings = settingsService.Settings;
 
-            this.ClearModels();
+            ClearModels();
 
             // Maybe make it a settings property
-            string filePath = $"{settings.ResourcesFolderPath}mdlDyna.inc";
+            string[] filePaths = [
+                Path.Combine(settings.ResourcesFolderPath, "mdlDyna.inc"),
+                Path.Combine(settings.ResourcesFolderPath, "mdlObj.inc")
+            ];
 
-            using Script script = new();
-
-            script.Load(filePath);
-
-            while (true)
+            Parallel.ForEach(filePaths, filePath =>
             {
-                string szName = script.GetToken();
+                using Script script = new();
 
-                if (script.EndOfStream) break;
+                script.Load(filePath);
 
-                int iType = script.GetNumber();
+                while (true)
+                {
+                    string szName = script.GetToken();
 
-                script.GetToken(); // "{"
+                    if (script.EndOfStream) break;
 
-                script.GetToken(); // Load the next token for the LoadChildren function to work correctly
+                    uint iType = (uint)script.GetNumber();
 
-                IModelItem[] children = LoadChildren(script, filePath, iType);
+                    script.GetToken(); // "{"
 
-                MainModelBraceProp prop = new(szName, iType);
-                MainModelBrace brace = new(prop, children);
+                    script.GetToken(); // Load the next token for the LoadChildren function to work correctly
 
-                Models.Add(brace);
-            }
+                    IModelItem[] children = LoadChildren(script, filePath, iType);
+
+                    MainModelBrace brace = new(iType, szName, children);
+
+                    Models.Add(brace);
+                }
+            });
         }
 
-        private IModelItem[] LoadChildren(Script script, string filePath, int dwType)
+        private IModelItem[] LoadChildren(Script script, string filePath, uint dwType)
         {
             List<IModelItem> children = [];
 
@@ -83,29 +107,28 @@ namespace eTools_Ultimate.Services
                     throw new IncorrectlyFormattedFileException(filePath);
 
                 string szObject = script.Token;
-                int iObject = script.GetNumber();
+                uint iObject = (uint)script.GetNumber();
                 if (script.Token == "{") // Start of a new brace
                 {
                     script.GetToken();
                     IModelItem[] childBraceChildren = LoadChildren(script, filePath, dwType);
                     script.GetToken();
 
-                    ModelBraceProp childBraceProp = new(szObject);
-                    ModelBrace childBrace = new(childBraceProp, childBraceChildren);
+                    ModelBrace childBrace = new(szObject, childBraceChildren);
                     children.Add(childBrace);
                 }
                 else
                 {
-                    int dwModelType = script.GetNumber();
+                    uint dwModelType = (uint)script.GetNumber();
                     string szPart = script.GetToken();
-                    int bFly = script.GetNumber();
-                    int dwDistant = script.GetNumber();
-                    int bPick = script.GetNumber();
+                    byte bFly = (byte)script.GetNumber();
+                    byte dwDistant = (byte)script.GetNumber();
+                    byte bPick = (byte)script.GetNumber();
                     float fScale = script.GetFloat();
-                    int bTrans = script.GetNumber();
-                    int bShadow = script.GetNumber();
+                    byte bTrans = (byte)script.GetNumber();
+                    byte bShadow = (byte)script.GetNumber();
                     int nTextureEx = script.GetNumber();
-                    int bRenderFlag = script.GetNumber();
+                    byte bRenderFlag = (byte)script.GetNumber();
 
                     script.GetToken();
 
@@ -119,17 +142,16 @@ namespace eTools_Ultimate.Services
                             string szMotion = script.GetToken(); // motion name or }
                             if (script.Token == "}")
                                 break;
-                            int iMotion = script.GetNumber();
+                            uint iMotion = (uint)script.GetNumber();
 
-                            ModelMotionProp motionProp = new(iMotion, szMotion);
-                            ModelMotion motion = new(motionProp);
+                            ModelMotion motion = new(iMotion, szMotion);
 
                             childModelMotions.Add(motion);
                         }
                         script.GetToken();
                     }
 
-                    ModelProp childModelProp = new(
+                    Model childModel = new(
                         dwType: dwType,
                         dwIndex: iObject,
                         szName: szObject,
@@ -142,9 +164,9 @@ namespace eTools_Ultimate.Services
                         bTrans: bTrans,
                         bShadow: bShadow,
                         nTextureEx: nTextureEx,
-                        bRenderFlag: bRenderFlag
+                        bRenderFlag: bRenderFlag,
+                        motions: childModelMotions
                         );
-                    Model childModel = new(childModelProp, childModelMotions);
 
                     children.Add(childModel);
                 }
@@ -153,7 +175,7 @@ namespace eTools_Ultimate.Services
 
         public void Save()
         {
-            Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+            Settings settings = settingsService.Settings;
 
             // TODO: make it a settings property
             string filePath = $"{settings.ResourcesFolderPath}mdlDyna.inc";
@@ -167,11 +189,13 @@ namespace eTools_Ultimate.Services
 
             foreach (MainModelBrace mainBrace in Models)
             {
+                if (mainBrace.IType == 0) continue; // TODO: add a saving for mdlObj.inc (IType == 0)
+
                 writer.Write('"');
-                writer.Write(mainBrace.Prop.SzName);
+                writer.Write(mainBrace.SzName);
                 writer.Write('"');
                 writer.Write('\t');
-                writer.Write(Script.NumberToString(mainBrace.Prop.IType));
+                writer.Write(Script.NumberToString(mainBrace.IType));
                 writer.WriteLine();
                 writer.WriteLine('{');
 
@@ -188,7 +212,7 @@ namespace eTools_Ultimate.Services
             {
                 writer.Write(new string('\t', indentLevel));
                 writer.Write('"');
-                writer.Write(brace.Prop.SzName);
+                writer.Write(brace.SzName);
                 writer.Write('"');
                 writer.WriteLine();
                 writer.Write(new string('\t', indentLevel));
@@ -206,7 +230,7 @@ namespace eTools_Ultimate.Services
             {
                 writer.Write(new string('\t', indentLevel));
                 writer.Write('"');
-                writer.Write(model.Prop.SzName);
+                writer.Write(model.SzName);
                 writer.Write('"');
                 writer.Write('\t');
                 writer.Write(model.Identifier);
@@ -214,25 +238,25 @@ namespace eTools_Ultimate.Services
                 writer.Write(model.ModelTypeIdentifier);
                 writer.Write('\t');
                 writer.Write('"');
-                writer.Write(model.Prop.SzPart);
+                writer.Write(model.SzPart);
                 writer.Write('"');
                 writer.Write('\t');
-                writer.Write(Script.NumberToString(model.Prop.BFly));
+                writer.Write(Script.NumberToString(model.BFly));
                 writer.Write('\t');
                 writer.Write(model.DistantIdentifier);
                 writer.Write('\t');
-                writer.Write(Script.NumberToString(model.Prop.BPick));
+                writer.Write(Script.NumberToString(model.BPick));
                 writer.Write('\t');
-                writer.Write(Script.FloatToString(model.Prop.FScale));
+                writer.Write(Script.FloatToString(model.FScale));
                 writer.Write('f');
                 writer.Write('\t');
-                writer.Write(Script.NumberToString(model.Prop.BTrans));
+                writer.Write(Script.NumberToString(model.BTrans));
                 writer.Write('\t');
-                writer.Write(Script.NumberToString(model.Prop.BShadow));
+                writer.Write(Script.NumberToString(model.BShadow));
                 writer.Write('\t');
                 writer.Write(model.TextureExIdentifier);
                 writer.Write('\t');
-                writer.Write(Script.NumberToString(model.Prop.BRenderFlag));
+                writer.Write(Script.NumberToString(model.BRenderFlag));
                 writer.WriteLine();
 
                 if (model.Motions.Count > 0)
@@ -245,7 +269,7 @@ namespace eTools_Ultimate.Services
                     {
                         writer.Write(new string('\t', indentLevel + 1));
                         writer.Write('"');
-                        writer.Write(motion.Prop.SzMotion);
+                        writer.Write(motion.SzMotion);
                         writer.Write('"');
                         writer.Write('\t');
                         writer.Write(motion.MotionTypeIdentifier);
@@ -259,17 +283,36 @@ namespace eTools_Ultimate.Services
             }
         }
 
-        private void GetBracesRecursively(List<ModelBrace> braces, ModelBrace brace)
+        public Model[] GetModels()
         {
+            List<Model> models = [];
+            foreach (MainModelBrace brace in Models)
+            {
+                foreach (IModelItem item in brace.Children)
+                {
+                    if (item is Model model)
+                        models.Add(model);
+                    else if (item is ModelBrace childBrace)
+                        models.AddRange(GetModelsRecursively(childBrace));
+                }
+            }
+            return [.. models];
+        }
+
+        private static ModelBrace[] GetBracesRecursively(ModelBrace brace)
+        {
+            List<ModelBrace> braces = [];
             braces.Add(brace);
             foreach (IModelItem child in brace.Children)
             {
                 if (child is ModelBrace childBrace)
-                    GetBracesRecursively(braces, childBrace);
+                    braces.AddRange(GetBracesRecursively(childBrace));
             }
+
+            return [.. braces];
         }
 
-        private Model[] GetModelsRecursively(ModelBrace brace)
+        private static Model[] GetModelsRecursively(ModelBrace brace)
         {
             List<Model> models = [];
             foreach (IModelItem child in brace.Children)
@@ -282,16 +325,16 @@ namespace eTools_Ultimate.Services
             return [.. models];
         }
 
-        private ModelBrace[] GetBracesByType(int type)
+        private ModelBrace[] GetBracesByType(uint type)
         {
             List<ModelBrace> braces = [];
             foreach (MainModelBrace mainBrace in Models)
             {
-                if (mainBrace.Prop.IType != type) continue;
-                GetBracesRecursively(braces, mainBrace);
+                if (mainBrace.IType != type) continue;
+                braces.AddRange(GetBracesRecursively(mainBrace));
             }
 
-            return braces.ToArray();
+            return [.. braces];
         }
 
         public Model[] GetModelsByType(int type)
@@ -299,7 +342,7 @@ namespace eTools_Ultimate.Services
             List<Model> models = [];
             foreach (MainModelBrace mainBrace in Models)
             {
-                if (mainBrace.Prop.IType != type) continue;
+                if (mainBrace.IType != type) continue;
                 models.AddRange(GetModelsRecursively(mainBrace));
             }
             return [.. models];
@@ -307,24 +350,18 @@ namespace eTools_Ultimate.Services
 
         public ModelBrace GetBraceByModel(Model model)
         {
-            foreach (ModelBrace brace in GetBracesByType(model.Prop.DwType))
-            {
-                foreach (IModelItem tempModel in brace.Children)
-                    if (tempModel == model)
-                        return brace;
-            }
-            throw new InvalidOperationException("ModelsService::GetBraceByModel Exception : Model not found");
+            return GetBracesByType(model.DwType).FirstOrDefault(x => x.Children.Any(y => y == model)) ?? throw new InvalidOperationException("ModelsService::GetBraceByModel Exception : Model not found");
         }
 
-        public Model? GetModelByTypeAndId(int type, int id)
+        public Model? GetModelByTypeAndId(int type, uint id)
         {
-            return GetModelsByType(type).FirstOrDefault(model => model.Prop.DwIndex == id);
+            return GetModelsByType(type).FirstOrDefault(model => model.DwIndex == id);
         }
 
         public Model? GetModelByObject(object obj)
         {
             int? modelType;
-            int? objId;
+            uint? objId;
 
             switch (obj)
             {
@@ -353,12 +390,12 @@ namespace eTools_Ultimate.Services
             switch (obj)
             {
                 case Mover mover:
-                    int dwType = definesService.Defines["OT_MOVER"];
-                    int dwIndex = mover.Id;
-                    int dwModelType = definesService.Defines["MODELTYPE_ANIMATED_MESH"];
-                    int dwDistant = definesService.Defines["MD_MID"];
+                    uint dwType = (uint)definesService.Defines["OT_MOVER"];
+                    uint dwIndex = mover.Id;
+                    uint dwModelType = (uint)definesService.Defines["MODELTYPE_ANIMATED_MESH"];
+                    byte dwDistant = (byte)definesService.Defines["MD_MID"];
 
-                    ModelProp modelProp = new(
+                    Model model = new(
                         dwType: dwType,
                         dwIndex: dwIndex,
                         szName: "",
@@ -371,11 +408,11 @@ namespace eTools_Ultimate.Services
                         bTrans: 0,
                         bShadow: 1,
                         nTextureEx: 0,
-                        bRenderFlag: 1
+                        bRenderFlag: 1,
+                        motions: []
                         );
-                    Model model = new(modelProp, []);
 
-                    Models.First(x => x.Prop.IType == dwType).Children.Add(model);
+                    Models.First(x => x.IType == dwType).Children.Add(model);
 
                     return model;
                 default:

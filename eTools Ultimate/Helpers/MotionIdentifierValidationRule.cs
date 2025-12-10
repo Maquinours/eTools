@@ -30,7 +30,7 @@ namespace eTools_Ultimate.Helpers
 
             ICollectionView motionsView = CollectionViewSource.GetDefaultView(motionsService.Motions);
 
-            if (motionsService.Motions.Any(x => x.Prop.DwId == id && x != motionsView.CurrentItem))
+            if (motionsService.Motions.Any(x => x.DwId == id && x != motionsView.CurrentItem))
                 return new ValidationResult(false, localizer["This identifier is already taken by another motion."]);
 
             return new ValidationResult(true, null);

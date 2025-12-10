@@ -115,7 +115,7 @@
                             FontSize="13"
                             FontWeight="SemiBold"
                             Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                            Text="{i18n:StringLocalizer 'Affected file:'}" />
+                            Text="{i18n:StringLocalizer 'Path concerned:'}" />
                         <TextBlock
                             x:Name="ErrorMessageTextBox"
                             Margin="0,5,0,0"

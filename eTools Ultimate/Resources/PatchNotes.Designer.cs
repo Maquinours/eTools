@@ -19,7 +19,7 @@ namespace eTools_Ultimate.Resources {
     // à l'aide d'un outil, tel que ResGen ou Visual Studio.
     // Pour ajouter ou supprimer un membre, modifiez votre fichier .ResX, puis réexécutez ResGen
     // avec l'option /str ou régénérez votre projet VS.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class PatchNotes {
@@ -100,6 +100,27 @@ namespace eTools_Ultimate.Resources {
         internal static string Version_0_1_1 {
             get {
                 return ResourceManager.GetString("Version_0_1_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à {
+        ///  &quot;version&quot;: &quot;0.2.0 (Alpha)&quot;,
+        ///  &quot;date&quot;: &quot;2025-12-09&quot;,
+        ///  &quot;developerText&quot;: &quot;This update introduces editing of mover drop lists, adds a tool to detect and remove unused assets, and includes several performance improvements along with various fixes.&quot;,
+        ///  &quot;categories&quot;: {
+        ///    &quot;added&quot;: [
+        ///      {
+        ///        &quot;text&quot;: &quot;New “Misc” page, allowing detection and removal of unused assets&quot;,
+        ///        &quot;type&quot;: 0
+        ///      },
+        ///      {
+        ///        &quot;text&quot;: &quot;Added a “Models Folder” setting in the configuration page&quot;,
+        ///        &quot;type [le reste de la chaîne a été tronqué]&quot;;.
+        /// </summary>
+        internal static string Version_0_2_0 {
+            get {
+                return ResourceManager.GetString("Version_0_2_0", resourceCulture);
             }
         }
     }

@@ -11,7 +11,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 {
     public partial class AboutViewModel(ISnackbarService snackbarService, IStringLocalizer localizer) : ObservableObject
     {
-        public string AppVersion => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? throw new InvalidOperationException("AboutViewModel::AppVersion exception : result is null");
+        public string AppVersion => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString(3) ?? throw new InvalidOperationException("AboutViewModel::AppVersion exception : result is null");
 
         [RelayCommand]
         private async Task CheckForUpdates()

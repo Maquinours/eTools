@@ -132,6 +132,28 @@
                     ItemTemplate="{StaticResource TextItemTemplate}"
                     ItemsSource="{Binding TextsView}"
                     SelectionMode="Single">
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="{i18n:StringLocalizer 'Copy'}">
+                                <MenuItem
+                                    Command="{Binding CopyIdentifierCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
+                                    Header="{i18n:StringLocalizer 'Copy identifier'}" />
+                                <MenuItem
+                                    Command="{Binding CopyIdCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
+                                    Header="{i18n:StringLocalizer 'Copy ID'}" />
+                                <MenuItem
+                                    Command="{Binding CopyTextIdentifierCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
+                                    Header="{i18n:StringLocalizer 'Copy text identifier'}" />
+                                <MenuItem
+                                    Command="{Binding CopyTextCommand}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
+                                    Header="{i18n:StringLocalizer 'Copy text'}" />
+                            </MenuItem>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="Background" Value="Transparent" />

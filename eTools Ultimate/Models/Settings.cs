@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eTools_Ultimate.Models.Movers;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -40,14 +41,15 @@ namespace eTools_Ultimate.Models
         #region Movers settings
         private string? _propMoverFilePath;
         private string? _propMoverTxtFilePath;
+        private string? _propMoverExFilePath;
         private bool _mover64BitHp = false;
         private bool _mover64BitAtk = false;
-        private readonly ReadOnlyDictionary<MoverTypes, ObservableCollection<string>> _moverTypesBindings = new(
-            new Dictionary<MoverTypes, ObservableCollection<string>>(){
-                { MoverTypes.NPC, new ObservableCollection<string> { "AII_NONE" } },
-                { MoverTypes.CHARACTER, new ObservableCollection<string> {  "AII_MOVER" } },
-                { MoverTypes.MONSTER, new ObservableCollection<string> { "AII_MONSTER", "AII_CLOCKWORKS", "AII_BIGMUSCLE", "AII_KRRR", "AII_BEAR", "AII_METEONYKER", "AII_AGGRO_NORMAL", "AII_PARTY_AGGRO_LEADER", "AII_PARTY_AGGRO_SUB", "AII_ARENA_REAPER" } },
-                { MoverTypes.PET,  new ObservableCollection<string> {"AII_PET", "AII_EGG"} }
+        private readonly ReadOnlyDictionary<MoverType, ObservableCollection<string>> _moverTypesBindings = new(
+            new Dictionary<MoverType, ObservableCollection<string>>(){
+                { MoverType.NPC, new ObservableCollection<string> { "AII_NONE" } },
+                { MoverType.CHARACTER, new ObservableCollection<string> {  "AII_MOVER" } },
+                { MoverType.MONSTER, new ObservableCollection<string> { "AII_MONSTER", "AII_CLOCKWORKS", "AII_BIGMUSCLE", "AII_KRRR", "AII_BEAR", "AII_METEONYKER", "AII_AGGRO_NORMAL", "AII_PARTY_AGGRO_LEADER", "AII_PARTY_AGGRO_SUB", "AII_ARENA_REAPER" } },
+                { MoverType.PET,  new ObservableCollection<string> {"AII_PET", "AII_EGG"} }
             });
         #endregion
 
@@ -110,14 +112,14 @@ namespace eTools_Ultimate.Models
             get => _texturesFolderPath;
             set => SetFolderPathPropertyWithDefault(ref _texturesFolderPath, value, DefaultTexturesFolderPath);
         }
-        public string DefaultTexturesFolderPath => $"{ResourcesFolderPath}Model{Path.DirectorySeparatorChar}Texture{Path.DirectorySeparatorChar}";
+        public string DefaultTexturesFolderPath => $"{ClientFolderPath}Model{Path.DirectorySeparatorChar}Texture{Path.DirectorySeparatorChar}";
 
         public string? ModelsFolderPath
         {
             get => _modelsFolderPath;
             set => SetFolderPathPropertyWithDefault(ref _modelsFolderPath, value, DefaultModelsFolderPath);
         }
-        public string DefaultModelsFolderPath => $"{ResourcesFolderPath}Model{Path.DirectorySeparatorChar}";
+        public string DefaultModelsFolderPath => $"{ClientFolderPath}Model{Path.DirectorySeparatorChar}";
 
         public string? SoundsConfigFilePath
         {
@@ -146,7 +148,18 @@ namespace eTools_Ultimate.Models
             get => _propMoverFilePath;
             set => SetFilePathPropertyWithDefault(ref _propMoverFilePath, value, DefaultPropMoverFilePath);
         }
-        public string DefaultPropMoverFilePath => $"{ResourcesFolderPath}propMover.txt";
+        public string DefaultPropMoverFilePath {
+            get
+            {
+                string fileName = FilesFormat switch
+                {
+                    FilesFormats.Florist => "propMover.csv",
+                    _ => "propMover.txt"
+                };
+                
+                return Path.Combine(ResourcesFolderPath, fileName);
+            }
+        }
 
         public string? PropMoverTxtFilePath
         {
@@ -154,6 +167,13 @@ namespace eTools_Ultimate.Models
             set => SetFilePathPropertyWithDefault(ref _propMoverTxtFilePath, value, DefaultPropMoverTxtFilePath);
         }
         public string DefaultPropMoverTxtFilePath => $"{ResourcesFolderPath}propMover.txt.txt";
+
+        public string? PropMoverExFilePath
+        {
+            get => _propMoverExFilePath;
+            set => SetFilePathPropertyWithDefault(ref _propMoverExFilePath, value, DefaultPropMoverExFilePath);
+        }
+        public string DefaultPropMoverExFilePath => Path.Combine(ResourcesFolderPath, "propMoverEx.inc");
 
         public bool Mover64BitHp
         {
@@ -167,7 +187,7 @@ namespace eTools_Ultimate.Models
             set => SetValue(ref _mover64BitAtk, value);
         }
 
-        public ReadOnlyDictionary<MoverTypes, ObservableCollection<string>> MoverTypesBindings => _moverTypesBindings;
+        public ReadOnlyDictionary<MoverType, ObservableCollection<string>> MoverTypesBindings => _moverTypesBindings;
         #endregion
 
         #region Items settings
@@ -176,7 +196,17 @@ namespace eTools_Ultimate.Models
             get => _propItemFilePath;
             set => SetFilePathPropertyWithDefault(ref _propItemFilePath, value, DefaultPropItemFilePath);
         }
-        public string DefaultPropItemFilePath => $"{ResourcesFolderPath}{(ResourcesVersion >= 16 ? "Spec_Item" : "propItem")}.txt";
+        public string DefaultPropItemFilePath {
+            get
+            {
+                string fileName = FilesFormat switch
+                {
+                    FilesFormats.Florist => "propItem.csv",
+                    _ => ResourcesVersion >= 16 ? "Spec_Item.txt" : "propItem.txt"
+                };
+                return Path.Combine(ResourcesFolderPath, fileName);
+            }
+        }
 
         public string? PropItemTxtFilePath
         {
@@ -251,8 +281,6 @@ namespace eTools_Ultimate.Models
             switch (propertyName)
             {
                 case nameof(ResourcesFolderPath):
-                    NotifyPropertyChanged(nameof(DefaultTexturesFolderPath));
-                    NotifyPropertyChanged(nameof(DefaultModelsFolderPath));
                     NotifyPropertyChanged(nameof(DefaultPropMoverFilePath));
                     NotifyPropertyChanged(nameof(DefaultPropMoverTxtFilePath));
                     NotifyPropertyChanged(nameof(DefaultPropItemFilePath));
@@ -265,12 +293,18 @@ namespace eTools_Ultimate.Models
                     NotifyPropertyChanged(nameof(DefaultAccessoriesConfigFilePath));
                     break;
                 case nameof(ClientFolderPath):
+                    NotifyPropertyChanged(nameof(DefaultTexturesFolderPath));
+                    NotifyPropertyChanged(nameof(DefaultModelsFolderPath));
                     NotifyPropertyChanged(nameof(DefaultIconsFolderPath));
                     NotifyPropertyChanged(nameof(DefaultSoundsConfigFilePath));
                     NotifyPropertyChanged(nameof(DefaultSoundsFolderPath));
                     NotifyPropertyChanged(nameof(DefaultItemIconsFolderPath));
                     break;
                 case nameof(ResourcesVersion):
+                    NotifyPropertyChanged(nameof(DefaultPropItemFilePath));
+                    break;
+                case nameof(FilesFormat):
+                    NotifyPropertyChanged(nameof(DefaultPropMoverFilePath));
                     NotifyPropertyChanged(nameof(DefaultPropItemFilePath));
                     break;
             }

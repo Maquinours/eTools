@@ -13,21 +13,9 @@ using eTools_Ultimate.Services;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class SettingsViewModel(SettingsService settingsService) : ObservableObject, INavigationAware
+    public partial class SettingsViewModel(SettingsService settingsService, INavigationService navigationService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
-
-        [ObservableProperty]
-        private string _appVersion = String.Empty;
-
-        [ObservableProperty]
-        private ApplicationTheme _currentTheme = ApplicationTheme.Unknown;
-
-        [ObservableProperty]
-        private string _propFileName = string.Empty;
-
-        [ObservableProperty]
-        private string _textFileName = string.Empty;
 
         public Settings Settings => settingsService.Settings;
 
@@ -43,64 +31,25 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private void InitializeViewModel()
         {
-            CurrentTheme = ApplicationThemeManager.GetAppTheme();
-            AppVersion = $"UiDesktopApp1 - {GetAssemblyVersion()}";
-            PropFileName = "prop.inc";
-            TextFileName = "text.txt";
-
             _isInitialized = true;
-        }
-
-        private string GetAssemblyVersion()
-        {
-            return System.Reflection.Assembly.GetExecutingAssembly().GetName().Version?.ToString()
-                ?? String.Empty;
-        }
-
-        [RelayCommand]
-        private void OnChangeTheme(string parameter)
-        {
-            switch (parameter)
-            {
-                case "theme_light":
-                    if (CurrentTheme == ApplicationTheme.Light)
-                        break;
-
-                    ApplicationThemeManager.Apply(ApplicationTheme.Light);
-                    CurrentTheme = ApplicationTheme.Light;
-
-                    break;
-
-                default:
-                    if (CurrentTheme == ApplicationTheme.Dark)
-                        break;
-
-                    ApplicationThemeManager.Apply(ApplicationTheme.Dark);
-                    CurrentTheme = ApplicationTheme.Dark;
-
-                    break;
-            }
         }
 
         [RelayCommand]
         private void NavigateToResourcePath()
         {
-            var navigationService = App.Services.GetService(typeof(INavigationService)) as INavigationService;
-            navigationService?.Navigate(typeof(ConfigurationPage));
+            navigationService.Navigate(typeof(ConfigurationPage));
         }
 
         [RelayCommand]
         private void NavigateToPersonalization()
         {
-            var navigationService = App.Services.GetService(typeof(INavigationService)) as INavigationService;
-            navigationService?.Navigate(typeof(PersonalizationPage));
+            navigationService.Navigate(typeof(PersonalizationPage));
         }
 
         [RelayCommand]
         private void NavigateToAbout()
         {
-            var navigationService = App.Services.GetService(typeof(INavigationService)) as INavigationService;
-            navigationService?.Navigate(typeof(AboutPage));
+            navigationService.Navigate(typeof(AboutPage));
         }
     }
 }

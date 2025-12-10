@@ -1,6 +1,7 @@
 ﻿using eTools_Ultimate.Exceptions;
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Accessories;
 using Microsoft.Extensions.DependencyInjection;
 using Scan;
 using System;
@@ -16,10 +17,10 @@ namespace eTools_Ultimate.Services
 {
     public class AccessoriesService(SettingsService settingsService)
     {
-        private readonly ObservableCollection<int> _probabilities = [];
+        private readonly ObservableCollection<uint> _probabilities = [];
         private readonly ObservableCollection<Accessory> _accessories = [];
 
-        public ObservableCollection<int> Probabilities => this._probabilities;
+        public ObservableCollection<uint> Probabilities => this._probabilities;
         public ObservableCollection<Accessory> Accessories => this._accessories;
 
         private void ClearAccessories()
@@ -54,7 +55,7 @@ namespace eTools_Ultimate.Services
 
                                 while(true)
                                 {
-                                    int probability = script.GetNumber();
+                                    uint probability = (uint)script.GetNumber();
 
                                     if (script.Token == "}") break;
                                     if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
@@ -70,14 +71,14 @@ namespace eTools_Ultimate.Services
 
                                 while(true)
                                 {
-                                    int dwItemId = script.GetNumber();
+                                    uint dwItemId = (uint)script.GetNumber();
 
                                     if (script.Token == "}") break;
                                     if (script.EndOfStream) throw new IncorrectlyFormattedFileException(filePath);
 
                                     script.GetToken(); // "{"
 
-                                    List<AccessoryAbilityOptionData> abilityOptionData = [];
+                                    List<AccessoryAbilityOption> abilityOptionData = [];
 
                                     while(true)
                                     {
@@ -88,7 +89,7 @@ namespace eTools_Ultimate.Services
 
                                         script.GetToken(); // "{"
 
-                                        List<AccessoryAbilityOptionDstData> dstData = [];
+                                        List<AccessoryAbilityOptionDst> dstData = [];
 
                                         while(true)
                                         {
@@ -99,11 +100,11 @@ namespace eTools_Ultimate.Services
 
                                             int nAdj = script.GetNumber();
 
-                                            AccessoryAbilityOptionDstData dstDataItem = new(nDst, nAdj);
+                                            AccessoryAbilityOptionDst dstDataItem = new(nDst, nAdj);
                                             dstData.Add(dstDataItem);
                                         }
 
-                                        AccessoryAbilityOptionData abilityOptionDataItem = new(nAbilityOption, dstData);
+                                        AccessoryAbilityOption abilityOptionDataItem = new(nAbilityOption, dstData);
                                         abilityOptionData.Add(abilityOptionDataItem);
                                     }
 
@@ -156,13 +157,13 @@ namespace eTools_Ultimate.Services
                     writer.Write('\t');
                     writer.Write('{');
                     writer.WriteLine();
-                    foreach(AccessoryAbilityOptionData abilityOptionData in accessory.AbilityOptionData)
+                    foreach(AccessoryAbilityOption abilityOptionData in accessory.AbilityOptionData)
                     {
                         writer.Write("\t\t");
                         writer.Write(abilityOptionData.NAbilityOption.ToString(CultureInfo.InvariantCulture));
                         writer.Write('\t');
                         writer.Write('{');
-                        foreach(AccessoryAbilityOptionDstData dstData in abilityOptionData.DstData)
+                        foreach(AccessoryAbilityOptionDst dstData in abilityOptionData.DstData)
                         {
                             writer.Write('\t');
                             writer.Write(dstData.DestIdentifier);

@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Windows.Input;
 
 namespace eTools_Ultimate.Helpers
 {
@@ -47,27 +49,57 @@ namespace eTools_Ultimate.Helpers
 
         public new void Add(TKey key, TValue value)
         {
-            if (!base.ContainsKey(key))
+            var item = new KeyValuePair<TKey, TValue>(key, value);
+            base.Add(key, value);
+            this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, base.Keys.ToList().IndexOf(key)));
+            this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(Count)));
+        }
+
+        public void AddRange(IEnumerable<KeyValuePair<TKey, TValue>> items)
+        {
+            if (items.Any())
             {
-                var item = new KeyValuePair<TKey, TValue>(key, value);
-                base.Add(key, value);
-                this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, base.Keys.ToList().IndexOf(key)));
+                foreach (var item in items)
+                    base.Add(item.Key, item.Value);
+
+                this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, items, base.Keys.ToList().IndexOf(items.First().Key)));
                 this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(Count)));
             }
         }
 
         public new bool Remove(TKey key)
         {
-            TValue? value;
-            if (base.TryGetValue(key, out value))
+            if (base.TryGetValue(key, out TValue? value))
             {
-                var item = new KeyValuePair<TKey, TValue>(key, base[key]);
-                bool result = base.Remove(key);
-                this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, base.Keys.ToList().IndexOf(key)));
-                this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(Count)));
-                return result;
+                KeyValuePair<TKey, TValue> item = new(key, value);
+                if (base.Remove(key))
+                {
+                    this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, base.Keys.ToList().IndexOf(key)));
+                    this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(Count)));
+                    return true;
+                }
             }
             return false;
+        }
+
+        public void RemoveRange(IEnumerable<TKey> keys)
+        {
+            List<KeyValuePair<TKey, TValue>> items = [];
+            foreach (var key in keys)
+            {
+                if (base.TryGetValue(key, out TValue? value))
+                {
+                    KeyValuePair<TKey, TValue> item = new(key, value);
+                    if(base.Remove(key))
+                        items.Add(item);
+                }
+            }
+
+            if (items.Count != 0)
+            {
+                this.OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, items, base.Keys.ToList().IndexOf(items[0].Key)));
+                this.OnPropertyChanged(new PropertyChangedEventArgs(nameof(Count)));
+            }
         }
 
         public new void Clear()

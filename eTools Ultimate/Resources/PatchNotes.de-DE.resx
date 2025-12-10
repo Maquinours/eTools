@@ -152,4 +152,77 @@
 }
 </value>
   </data>
+  <data name="Version_0_2_0" xml:space="preserve">
+    <value>{
+  "version": "0.2.0 (Alpha)",
+  "date": "2025-12-09",
+  "developerText": "Dieses Update führt die Bearbeitung von Mover-Drop-Listen ein, ergänzt ein Tool zum Erkennen und Entfernen ungenutzter Assets und bringt mehrere Leistungsverbesserungen sowie verschiedene Fehlerkorrekturen.",
+  "categories": {
+    "added": [
+      {
+        "text": "Neue Seite „Verschiedenes“, zum Erkennen und Entfernen ungenutzter Assets",
+        "type": 0
+      },
+      {
+        "text": "Neuer Parameter „Modellordner“ in der Konfigurationsseite",
+        "type": 0
+      },
+      {
+        "text": "Neuer Parameter „prop ex-Datei“ im Abschnitt „Movers“ der Konfigurationsseite",
+        "type": 0
+      },
+      {
+        "text": "Kontextmenüs zum Kopieren verschiedener Elemente in den Listen für Movers, Animationen, Geschenkboxen, Accessoires und Texte hinzugefügt",
+        "type": 0
+      },
+      {
+        "text": "Neuer „Drop-Liste“-Button zum Anzeigen und Bearbeiten der Drop-Liste eines Movers",
+        "type": 0
+      },
+      {
+        "text": "Neues Log-System zur Fehlerverfolgung",
+        "type": 0
+      },
+      {
+        "text": "Verschiedene Übersetzungen hinzugefügt",
+        "type": 0
+      }
+    ],
+    "changed": [
+      {
+        "text": "Standardpfade für prop-Dateien (Items und Movers) werden nun automatisch angepasst, wenn das Florist-Format verwendet wird",
+        "type": 1
+      }
+    ],
+    "improved": [
+      {
+        "text": "Optimiertes Laden von Definitionen und Strings (bis zu 15-mal schneller)",
+        "type": 4
+      }
+    ],
+    "fixed": [
+      {
+        "text": "Das Update-Fenster verwendet nun korrekt das ausgewählte Theme",
+        "type": 3
+      },
+      {
+        "text": "Das Fehlerfenster zeigt nun eine passende Meldung an, wenn ein Ordner fehlt",
+        "type": 3
+      },
+      {
+        "text": "Die Anwendung schließt sich nicht mehr, wenn ein Update abgelehnt wird",
+        "type": 3
+      },
+      {
+        "text": "Ein Absturz beim Laden von Geschenkboxen wurde behoben",
+        "type": 3
+      },
+      {
+        "text": "Mehrere Datentypen wurden korrigiert, um sie an die von Flyff-Clients verwendeten Typen anzupassen",
+        "type": 3
+      }
+    ]
+  }
+}</value>
+  </data>
 </root>
