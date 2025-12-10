@@ -11,6 +11,14 @@ namespace eTools_Ultimate.Models.Items
         Blinkwing,
         SpecialBuff,
         Buff,
+        Consumable,
+        Furniture,
+        Papering,
+        GuildHouseFurniture,
+        GuildHousePapering,
+        GuildHouseNpc,
+        Pet,
+        BuffBead,
         Other
     }
 }

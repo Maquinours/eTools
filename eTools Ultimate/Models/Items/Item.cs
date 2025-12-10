@@ -15,6 +15,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace eTools_Ultimate.Models.Items
 {
@@ -791,6 +792,16 @@ namespace eTools_Ultimate.Models.Items
             }
         }
 
+        public string LinkKindMoverIdentifier
+        {
+            get => Script.NumberToString(DwLinkKind, App.Services.GetRequiredService<DefinesService>().ReversedMoverDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwLinkKind = (uint)val;
+            }
+        }
+
         public ItemType Type
         {
             get
@@ -809,7 +820,18 @@ namespace eTools_Ultimate.Models.Items
                     "IK2_BLINKWING" => ItemType.Blinkwing,
                     "IK2_BUFF2" => ItemType.SpecialBuff,
                     "IK2_BUFF" or "IK2_BUFF_TOGIFT" => ItemType.Buff,
-                    _ => ItemType.Other,
+                    "IK2_REFRESHER" or "IK2_POTION" or"IK2_FOOD" => ItemType.Consumable,
+                    "IK2_FURNITURE" => ItemType.Furniture,
+                    "IK2_PAPERING" => ItemType.Papering,
+                    "IK2_GUILDHOUSE_FURNITURE" => ItemType.GuildHouseFurniture,
+                    "IK2_GUILDHOUSE_PAPERING" => ItemType.GuildHousePapering,
+                    "IK2_GUILDHOUSE_NPC" => ItemType.GuildHouseNpc,
+                    _ => ItemKind3Identifier switch
+                    {
+                        "IK3_PET" or "IK3_SUMMON_NPC" => ItemType.Pet,
+                        "IK3_VIS" => ItemType.BuffBead,
+                        _ => ItemType.Other
+                    }
                 };
             }
         }
@@ -1292,6 +1314,12 @@ namespace eTools_Ultimate.Models.Items
                     break;
                 case nameof(DwHanded):
                     NotifyPropertyChanged(nameof(HandedIdentifier));
+                    break;
+                case nameof(DwReferTarget1):
+                    NotifyPropertyChanged(nameof(ReferTarget1ItemIdentifier));
+                    break;
+                case nameof(DwLinkKind):
+                    NotifyPropertyChanged(LinkKindMoverIdentifier);
                     break;
             }
         }
