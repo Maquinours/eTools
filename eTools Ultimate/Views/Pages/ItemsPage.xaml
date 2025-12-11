@@ -1784,6 +1784,98 @@
             </StackPanel>
         </DataTemplate>
 
+        <!--  DataTemplate: Papering  -->
+        <DataTemplate x:Key="PaperingSectionTemplate">
+            <StackPanel>
+                <Separator Margin="0,10,0,5" />
+                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Buff bead'}" />
+                <UniformGrid Columns="2">
+                    <!--  Duration  -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Duration (days, hours, minutes)'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Duration" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:NumberBox
+                                Grid.Column="0"
+                                ClearButtonEnabled="False"
+                                Minimum="0"
+                                SpinButtonPlacementMode="Inline"
+                                Value="{Binding AbilityMinDurationDays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <ui:NumberBox
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                ClearButtonEnabled="False"
+                                Maximum="59"
+                                Minimum="0"
+                                SpinButtonPlacementMode="Inline"
+                                Value="{Binding AbilityMinDurationHours, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <ui:NumberBox
+                                Grid.Column="2"
+                                Margin="5,0,0,0"
+                                ClearButtonEnabled="False"
+                                Maximum="59"
+                                Minimum="0"
+                                SpinButtonPlacementMode="Inline"
+                                Value="{Binding AbilityMinDurationMinutes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </Grid>
+                    <!--  Texture file name  -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Texture file name'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Texture file name" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" Text="{Binding SzTextFileName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <ui:Button
+                                Grid.Column="1"
+                                Height="36"
+                                Margin="5,0,0,0"
+                                Command="{Binding ViewModel.SelectPaperingTextureFileCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Content="..." />
+                            <Border
+                                Grid.Column="2"
+                                Width="32"
+                                Height="32"
+                                Margin="10,0,0,0"
+                                BorderThickness="1"
+                                Cursor="">
+                                <Image Margin="2" Source="{Binding PaperingTexture}" />
+                            </Border>
+                        </Grid>
+                    </Grid>
+                </UniformGrid>
+            </StackPanel>
+        </DataTemplate>
+
         <!--  DataTemplate for ListView Items  -->
         <DataTemplate x:Key="ItemListTemplate">
             <Grid Margin="4">
@@ -2573,6 +2665,9 @@
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding ItemsView.CurrentItem.Type}" Value="{x:Static itemModels:ItemType.BuffBead}">
                                             <Setter Property="ContentTemplate" Value="{StaticResource BuffBeadSectionTemplate}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ItemsView.CurrentItem.Type}" Value="{x:Static itemModels:ItemType.Papering}">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource PaperingSectionTemplate}" />
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding ItemsView.CurrentItem.Type}" Value="{x:Static itemModels:ItemType.Other}">
                                             <Setter Property="Visibility" Value="Hidden" />

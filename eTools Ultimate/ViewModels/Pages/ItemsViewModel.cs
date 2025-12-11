@@ -3,9 +3,11 @@ using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
 using eTools_Ultimate.Models.Items;
 using eTools_Ultimate.Models.Movers;
+using eTools_Ultimate.Properties;
 using eTools_Ultimate.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Windows.Data;
 using System.Windows.Media;
 using Wpf.Ui.Abstractions.Controls;
@@ -116,6 +118,27 @@ namespace eTools_Ultimate.ViewModels.Pages
             Sound? newSound = soundsService.Sounds.FirstOrDefault(x => x.FilePath.Equals(filePath, StringComparison.OrdinalIgnoreCase));
             if (newSound is null) return;
             item.DwSndAttack2 = newSound.Prop.Id;
+        }
+
+        [RelayCommand]
+        private void SelectPaperingTextureFile()
+        {
+            if (ItemsView.CurrentItem is not Item item) return;
+
+            string initialFolderPath = settingsService.Settings.TexturesFolderPath ?? settingsService.Settings.DefaultTexturesFolderPath;
+            string initialPath = Path.Combine(initialFolderPath, item.SzTextFileName);
+
+            string? filePath = FileFolderSelector.SelectFile(initialPath, "", "Images|*.png;*.jpg;*.jpeg;*.bmp;*.dds");
+
+            string? folderPath = Path.GetDirectoryName(filePath);
+            string? fileName = Path.GetFileName(filePath);
+            string? initialDirectoryPath = Path.GetDirectoryName(initialFolderPath);
+
+
+            if (folderPath == null || fileName == null || initialDirectoryPath == null || !folderPath.Equals(initialDirectoryPath, StringComparison.OrdinalIgnoreCase))
+                return;
+
+            item.SzTextFileName = fileName;
         }
     }
 }

@@ -835,6 +835,39 @@ namespace eTools_Ultimate.Models.Items
                 };
             }
         }
+
+        public ImageSource? PaperingTexture
+        {
+            get
+            {
+                Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
+
+                string filePath = Path.Combine(settings.TexturesFolderPath ?? settings.DefaultTexturesFolderPath, SzTextFileName);
+                if (!File.Exists(filePath))
+                    return null;
+
+                Bitmap bitmap;
+                if (Path.GetExtension(filePath).Equals(".dds", StringComparison.OrdinalIgnoreCase))
+                    bitmap = new DDSImage(File.OpenRead(filePath)).BitmapImage;
+                else
+                    bitmap = new(filePath);
+
+                // Bitmap to bitmap image
+                using var memory = new MemoryStream();
+
+                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
+                memory.Position = 0;
+
+                BitmapImage bitmapImage = new();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+
+                return bitmapImage;
+            }
+        }
         #endregion
         #endregion
 
@@ -1319,7 +1352,10 @@ namespace eTools_Ultimate.Models.Items
                     NotifyPropertyChanged(nameof(ReferTarget1ItemIdentifier));
                     break;
                 case nameof(DwLinkKind):
-                    NotifyPropertyChanged(LinkKindMoverIdentifier);
+                    NotifyPropertyChanged(nameof(LinkKindMoverIdentifier));
+                    break;
+                case nameof(SzTextFileName):
+                    NotifyPropertyChanged(nameof(PaperingTexture));
                     break;
             }
         }
