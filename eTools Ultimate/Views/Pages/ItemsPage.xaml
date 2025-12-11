@@ -1872,6 +1872,197 @@
                             </Border>
                         </Grid>
                     </Grid>
+                    <!--  Effect 1  -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 1'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="First effect applied by the item" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:AutoSuggestBox
+                                Grid.Column="0"
+                                Margin="0,0,5,0"
+                                OriginalItemsSource="{Binding DataContext.DestIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding DestParam1Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            <ui:NumberBox
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam1, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
+                                Value="{Binding NAdjParamVal1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </Grid>
+
+                    <!--  Effect 2  -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 2'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Second effect applied by the item" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:AutoSuggestBox
+                                Grid.Column="0"
+                                Margin="0,0,5,0"
+                                OriginalItemsSource="{Binding DataContext.DestIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding DestParam2Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            <ui:NumberBox
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam2, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
+                                Value="{Binding NAdjParamVal2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </Grid>
+
+                    <!--  Effect 3  -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 3'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Third effect applied by the item" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:AutoSuggestBox
+                                Grid.Column="0"
+                                Margin="0,0,5,0"
+                                OriginalItemsSource="{Binding DataContext.DestIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding DestParam3Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            <ui:NumberBox
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam3, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
+                                Value="{Binding NAdjParamVal3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </Grid>
+
+                    <!--  Effect 4  -->
+                    <Grid Style="{StaticResource FormFieldStyle}" Visibility="{Binding ViewModel.HasExpandedDestValues, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=Page}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 4'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Fourth effect applied by the item" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:AutoSuggestBox
+                                Grid.Column="0"
+                                Margin="0,0,5,0"
+                                OriginalItemsSource="{Binding DataContext.DestIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding DestParam4Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            <ui:NumberBox
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam4, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
+                                Value="{Binding NAdjParamVal4, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </Grid>
+
+                    <!--  Effect 5  -->
+                    <Grid Style="{StaticResource FormFieldStyle}" Visibility="{Binding ViewModel.HasExpandedDestValues, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=Page}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 5'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Fifth effect applied by the item" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:AutoSuggestBox
+                                Grid.Column="0"
+                                Margin="0,0,5,0"
+                                OriginalItemsSource="{Binding DataContext.DestIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding DestParam5Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            <ui:NumberBox
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam5, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
+                                Value="{Binding NAdjParamVal5, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </Grid>
+
+                    <!--  Effect 6  -->
+                    <Grid Style="{StaticResource FormFieldStyle}" Visibility="{Binding ViewModel.HasExpandedDestValues, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=Page}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 6'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Sixth effect applied by the item" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:AutoSuggestBox
+                                Grid.Column="0"
+                                Margin="0,0,5,0"
+                                OriginalItemsSource="{Binding DataContext.DestIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding DestParam5Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            <ui:NumberBox
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam6, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
+                                Value="{Binding NAdjParamVal6, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </Grid>
                 </UniformGrid>
             </StackPanel>
         </DataTemplate>
@@ -1944,6 +2135,197 @@
                             Grid.Row="1"
                             OriginalItemsSource="{Binding ViewModel.ControlIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
                             Text="{Binding LinkKindControlIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                    </Grid>
+                    <!--  Effect 1  -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 1'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="First effect applied by the item" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:AutoSuggestBox
+                                Grid.Column="0"
+                                Margin="0,0,5,0"
+                                OriginalItemsSource="{Binding DataContext.DestIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding DestParam1Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            <ui:NumberBox
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam1, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
+                                Value="{Binding NAdjParamVal1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </Grid>
+
+                    <!--  Effect 2  -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 2'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Second effect applied by the item" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:AutoSuggestBox
+                                Grid.Column="0"
+                                Margin="0,0,5,0"
+                                OriginalItemsSource="{Binding DataContext.DestIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding DestParam2Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            <ui:NumberBox
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam2, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
+                                Value="{Binding NAdjParamVal2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </Grid>
+
+                    <!--  Effect 3  -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 3'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Third effect applied by the item" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:AutoSuggestBox
+                                Grid.Column="0"
+                                Margin="0,0,5,0"
+                                OriginalItemsSource="{Binding DataContext.DestIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding DestParam3Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            <ui:NumberBox
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam3, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
+                                Value="{Binding NAdjParamVal3, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </Grid>
+
+                    <!--  Effect 4  -->
+                    <Grid Style="{StaticResource FormFieldStyle}" Visibility="{Binding ViewModel.HasExpandedDestValues, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=Page}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 4'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Fourth effect applied by the item" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:AutoSuggestBox
+                                Grid.Column="0"
+                                Margin="0,0,5,0"
+                                OriginalItemsSource="{Binding DataContext.DestIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding DestParam4Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            <ui:NumberBox
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam4, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
+                                Value="{Binding NAdjParamVal4, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </Grid>
+
+                    <!--  Effect 5  -->
+                    <Grid Style="{StaticResource FormFieldStyle}" Visibility="{Binding ViewModel.HasExpandedDestValues, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=Page}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 5'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Fifth effect applied by the item" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:AutoSuggestBox
+                                Grid.Column="0"
+                                Margin="0,0,5,0"
+                                OriginalItemsSource="{Binding DataContext.DestIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding DestParam5Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            <ui:NumberBox
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam5, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
+                                Value="{Binding NAdjParamVal5, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
+                    </Grid>
+
+                    <!--  Effect 6  -->
+                    <Grid Style="{StaticResource FormFieldStyle}" Visibility="{Binding ViewModel.HasExpandedDestValues, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}, RelativeSource={RelativeSource AncestorType=Page}}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Effect 6'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Sixth effect applied by the item" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <ui:AutoSuggestBox
+                                Grid.Column="0"
+                                Margin="0,0,5,0"
+                                OriginalItemsSource="{Binding DataContext.DestIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                Text="{Binding DestParam5Identifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            <ui:NumberBox
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                IsEnabled="{Binding DwDestParam6, Mode=OneWay, Converter={StaticResource NullValueToBooleanConverter}}"
+                                Value="{Binding NAdjParamVal6, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        </Grid>
                     </Grid>
                 </UniformGrid>
             </StackPanel>
