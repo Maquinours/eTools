@@ -33,6 +33,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         public string[] SoundIdentifiers => [.. definesService.ReversedSoundDefines.Values];
         public string[] HandedIdentifiers => [.. definesService.ReversedHandedDefines.Values];
         public string[] MoverIdentifiers => [.. definesService.ReversedMoverDefines.Values];
+        public string[] ControlIdentifiers => [.. definesService.ReversedControlDefines.Values];
         public bool HasExpandedDestValues => settingsService.Settings.ResourcesVersion >= 19 || settingsService.Settings.FilesFormat == FilesFormats.Florist;
 
         public string SearchText

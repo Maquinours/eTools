@@ -802,6 +802,16 @@ namespace eTools_Ultimate.Models.Items
             }
         }
 
+        public string LinkKindControlIdentifier
+        {
+            get => Script.NumberToString(DwLinkKind, App.Services.GetRequiredService<DefinesService>().ReversedControlDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwLinkKind = (uint)val;
+            }
+        }
+
         public ItemType Type
         {
             get
@@ -1353,6 +1363,7 @@ namespace eTools_Ultimate.Models.Items
                     break;
                 case nameof(DwLinkKind):
                     NotifyPropertyChanged(nameof(LinkKindMoverIdentifier));
+                    NotifyPropertyChanged(nameof(LinkKindControlIdentifier));
                     break;
                 case nameof(SzTextFileName):
                     NotifyPropertyChanged(nameof(PaperingTexture));
