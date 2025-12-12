@@ -811,6 +811,15 @@ namespace eTools_Ultimate.Models.Items
                     DwLinkKind = (uint)val;
             }
         }
+        public string SfxElementalIdentifier
+        {
+            get => Script.NumberToString(DwSfxElemental, App.Services.GetRequiredService<DefinesService>().ReversedElementalDefines);
+            set
+            {
+                if (Script.TryGetNumberFromString(value, out int val))
+                    DwSfxElemental = (uint)val;
+            }
+        }
 
         public ItemType Type
         {
@@ -825,21 +834,22 @@ namespace eTools_Ultimate.Models.Items
                     };
                 }
 
-                return ItemKind2Identifier switch
+                return ItemKind3Identifier switch
                 {
-                    "IK2_BLINKWING" => ItemType.Blinkwing,
-                    "IK2_BUFF2" => ItemType.SpecialBuff,
-                    "IK2_BUFF" or "IK2_BUFF_TOGIFT" => ItemType.Buff,
-                    "IK2_REFRESHER" or "IK2_POTION" or"IK2_FOOD" => ItemType.Consumable,
-                    "IK2_FURNITURE" => ItemType.Furniture,
-                    "IK2_PAPERING" => ItemType.Papering,
-                    "IK2_GUILDHOUSE_FURNITURE" => ItemType.GuildHouseFurniture,
-                    "IK2_GUILDHOUSE_PAPERING" => ItemType.GuildHousePapering,
-                    "IK2_GUILDHOUSE_NPC" => ItemType.GuildHouseNpc,
-                    _ => ItemKind3Identifier switch
+                    "IK3_PET" or "IK3_SUMMON_NPC" => ItemType.Pet,
+                    "IK3_VIS" => ItemType.BuffBead,
+                    "IK3_ANGEL_BUFF" => ItemType.Angel,
+                    _ => ItemKind2Identifier switch
                     {
-                        "IK3_PET" or "IK3_SUMMON_NPC" => ItemType.Pet,
-                        "IK3_VIS" => ItemType.BuffBead,
+                        "IK2_BLINKWING" => ItemType.Blinkwing,
+                        "IK2_BUFF2" => ItemType.SpecialBuff,
+                        "IK2_BUFF" or "IK2_BUFF_TOGIFT" => ItemType.Buff,
+                        "IK2_REFRESHER" or "IK2_POTION" or "IK2_FOOD" => ItemType.Consumable,
+                        "IK2_FURNITURE" => ItemType.Furniture,
+                        "IK2_PAPERING" => ItemType.Papering,
+                        "IK2_GUILDHOUSE_FURNITURE" => ItemType.GuildHouseFurniture,
+                        "IK2_GUILDHOUSE_PAPERING" => ItemType.GuildHousePapering,
+                        "IK2_GUILDHOUSE_NPC" => ItemType.GuildHouseNpc,
                         _ => ItemType.Other
                     }
                 };

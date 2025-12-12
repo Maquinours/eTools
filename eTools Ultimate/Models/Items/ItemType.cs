@@ -19,6 +19,7 @@ namespace eTools_Ultimate.Models.Items
         GuildHouseNpc,
         Pet,
         BuffBead,
+        Angel,
         Other
     }
 }

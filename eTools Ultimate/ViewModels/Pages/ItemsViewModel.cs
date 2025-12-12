@@ -7,6 +7,7 @@ using eTools_Ultimate.Properties;
 using eTools_Ultimate.Services;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -17,6 +18,8 @@ namespace eTools_Ultimate.ViewModels.Pages
     public partial class ItemsViewModel(ItemsService itemsService, DefinesService definesService, SoundsService soundsService, SettingsService settingsService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
+
+        private FileSystemWatcher _modelFilesWatcher;
 
         private string _searchText = string.Empty;
 
@@ -34,7 +37,33 @@ namespace eTools_Ultimate.ViewModels.Pages
         public string[] HandedIdentifiers => [.. definesService.ReversedHandedDefines.Values];
         public string[] MoverIdentifiers => [.. definesService.ReversedMoverDefines.Values];
         public string[] ControlIdentifiers => [.. definesService.ReversedControlDefines.Values];
+        public string[] AngelElementalIdentifiers => [.. definesService.ReversedElementalDefines.Values.Where(x => x.StartsWith("ELEMENTAL_ANGEL_"))];
         public bool HasExpandedDestValues => settingsService.Settings.ResourcesVersion >= 19 || settingsService.Settings.FilesFormat == FilesFormats.Florist;
+        public string[] AngelModelFileNamePossibilities
+        {
+            get
+            {
+                string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
+                string[] modelFiles = Directory.GetFiles(modelsFolderPath, "*.o3d", SearchOption.TopDirectoryOnly);
+
+                List<string> results = [];
+
+                foreach (string modelFile in modelFiles)
+                {
+                    string? modelFileNameWithoutExtension = Path.GetFileNameWithoutExtension(modelFile);
+                    if (modelFileNameWithoutExtension == null) continue;
+                    string[] requiredFiles = [
+                        Path.Combine(modelsFolderPath, $"{modelFileNameWithoutExtension}.o3d"),
+                        Path.Combine(modelsFolderPath, $"{modelFileNameWithoutExtension}.chr"),
+                        Path.Combine(modelsFolderPath, $"{modelFileNameWithoutExtension}_stand01.ani")
+                        ];
+                    if (requiredFiles.All(File.Exists))
+                        results.Add(modelFileNameWithoutExtension);
+                }
+
+                return [.. results];
+            }
+        }
 
         public string SearchText
         {
@@ -64,7 +93,27 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             ItemsView.Filter = new Predicate<object>(FilterItem);
 
+            InitializeModelsFileWatcher();
+
             _isInitialized = true;
+        }
+
+        [MemberNotNull(nameof(_modelFilesWatcher))]
+        private void InitializeModelsFileWatcher()
+        {
+            if (_modelFilesWatcher != null)
+                throw new InvalidOperationException("_modelFilesWatcher is not null");
+
+            string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
+
+            _modelFilesWatcher = new()
+            {
+                Path = Path.GetDirectoryName(modelsFolderPath) ?? throw new InvalidOperationException("Path.GetDirectoryName(iconFilePath) is null"),
+                NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName
+            };
+            _modelFilesWatcher.Changed += (_, __) => OnPropertyChanged(nameof(AngelModelFileNamePossibilities));
+            _modelFilesWatcher.Deleted += (_, __) => OnPropertyChanged(nameof(AngelModelFileNamePossibilities));
+            _modelFilesWatcher.Renamed += (_, __) => OnPropertyChanged(nameof(AngelModelFileNamePossibilities));
         }
 
         private bool FilterItem(object obj)

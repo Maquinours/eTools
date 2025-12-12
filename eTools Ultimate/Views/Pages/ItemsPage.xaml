@@ -3057,6 +3057,71 @@
             </StackPanel>
         </DataTemplate>
 
+
+        <!--  DataTemplate: Angel  -->
+        <DataTemplate x:Key="AngelSectionTemplate">
+            <StackPanel>
+                <Separator Margin="0,10,0,5" />
+                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Angel'}" />
+                <UniformGrid Columns="2">
+                    <!--  Type  -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Type'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="Type" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:AutoSuggestBox
+                            Grid.Row="1"
+                            OriginalItemsSource="{Binding ViewModel.AngelElementalIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                            Text="{Binding SfxElementalIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                    </Grid>
+                    <!--  3D model file  -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer '3D model file'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="3D model file" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:AutoSuggestBox
+                            Grid.Row="1"
+                            OriginalItemsSource="{Binding ViewModel.AngelModelFileNamePossibilities, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                            Text="{Binding SzTextFileName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                    </Grid>
+                    <!--  Required xp percent  -->
+                    <Grid Style="{StaticResource FormFieldStyle}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Required exp percent'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                <ui:SymbolIcon.ToolTip>
+                                    <ToolTip Content="'Required exp percent" />
+                                </ui:SymbolIcon.ToolTip>
+                            </ui:SymbolIcon>
+                        </StackPanel>
+                        <ui:NumberBox Grid.Row="1" Value="{Binding NAdjParamVal1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                </UniformGrid>
+            </StackPanel>
+        </DataTemplate>
+
         <!--  DataTemplate for ListView Items  -->
         <DataTemplate x:Key="ItemListTemplate">
             <Grid Margin="4">
@@ -3861,6 +3926,9 @@
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding ItemsView.CurrentItem.Type}" Value="{x:Static itemModels:ItemType.GuildHouseNpc}">
                                             <Setter Property="ContentTemplate" Value="{StaticResource GuildHouseNpcSectionTemplate}" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding ItemsView.CurrentItem.Type}" Value="{x:Static itemModels:ItemType.Angel}">
+                                            <Setter Property="ContentTemplate" Value="{StaticResource AngelSectionTemplate}" />
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding ItemsView.CurrentItem.Type}" Value="{x:Static itemModels:ItemType.Other}">
                                             <Setter Property="Visibility" Value="Hidden" />
