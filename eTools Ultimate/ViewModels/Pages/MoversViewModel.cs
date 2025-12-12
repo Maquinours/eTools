@@ -327,8 +327,8 @@ namespace eTools_Ultimate.ViewModels.Pages
         private bool FilterItem(object obj)
         {
             if (obj is not Mover mover) return false;
-            if (string.IsNullOrEmpty(this.SearchText)) return true;
-            return mover.Name.ToLower().Contains(this.SearchText.ToLower());
+            if (string.IsNullOrEmpty(SearchText)) return true;
+            return mover.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || mover.Identifier.Contains(SearchText, StringComparison.OrdinalIgnoreCase);
         }
 
         #region 3D model viewer methods
