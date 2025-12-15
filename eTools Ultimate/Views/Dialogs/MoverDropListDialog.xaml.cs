@@ -1,4 +1,5 @@
-﻿using eTools_Ultimate.Models.Movers;
+﻿using eTools_Ultimate.Models.Items;
+using eTools_Ultimate.Models.Movers;
 using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using System.Collections.Specialized;
 using System.Windows.Controls;
@@ -13,10 +14,12 @@ namespace eTools_Ultimate.Views.Dialogs
     /// </summary>
     public partial class MoverDropListDialog : ContentDialog
     {
+        public MoverDropListDialogViewModel ViewModel { get; }
         public MoverDropListDialog(ContentPresenter? contentPresenter, Mover mover) : base(contentPresenter)
         {
             MoverDropListDialogViewModel viewModel = new(mover);
             DataContext = viewModel;
+            ViewModel = viewModel;
 
             InitializeComponent();
 
@@ -146,6 +149,23 @@ namespace eTools_Ultimate.Views.Dialogs
             }
 
             return null;
+        }
+
+        private void DropItemItemIdentifierAutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput) return;
+
+            ViewModel.RefreshItemSuggestBox(args.Text);
+            args.Handled = true;
+        }
+
+        private void DropItemItemIdentifierAutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            if (sender.DataContext is not DropItemTreeViewItem dropItem) return;
+            if (args.SelectedItem is not Item selectedItem) return;
+
+            dropItem.DropItem.ItemIdentifier = selectedItem.Identifier;
+            args.Handled = true;
         }
     }
 

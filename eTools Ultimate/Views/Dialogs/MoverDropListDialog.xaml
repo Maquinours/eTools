@@ -302,11 +302,44 @@
                                         </ui:SymbolIcon>
                                     </StackPanel>
                                     <ui:AutoSuggestBox
+                                        x:Name="DropItemItemIdentifierAutoSuggestBox"
                                         Grid.Row="1"
                                         Margin="0,5,0,0"
-                                        DisplayMemberPath="Value"
-                                        OriginalItemsSource="{Binding DataContext.ItemIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ui:ContentDialog}}"
-                                        Text="{Binding DropItem.ItemIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                                        ItemsSource="{Binding DataContext.ItemSuggestions, Mode=OneWay, RelativeSource={RelativeSource AncestorType=ui:ContentDialog}}"
+                                        Text="{Binding DropItem.ItemIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" TextChanged="DropItemItemIdentifierAutoSuggestBox_TextChanged" SuggestionChosen="DropItemItemIdentifierAutoSuggestBox_SuggestionChosen">
+                                        <ui:AutoSuggestBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid Margin="4">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Border
+                                                        Width="32"
+                                                        Height="32"
+                                                        Margin="0,0,8,0"
+                                                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                                        BorderThickness="1">
+                                                        <Image
+                                                            Margin="2"
+                                                            Source="{Binding Icon}"
+                                                            Stretch="Uniform" />
+                                                    </Border>
+                                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                                        <TextBlock
+                                                            FontWeight="SemiBold"
+                                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                            Text="{Binding Name}" />
+                                                        <TextBlock
+                                                            FontSize="12"
+                                                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                            Text="{Binding Identifier}" />
+                                                    </StackPanel>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </ui:AutoSuggestBox.ItemTemplate>
+                                    </ui:AutoSuggestBox>
                                 </Grid>
                                 <Grid Margin="0,10,0,0">
                                     <Grid.RowDefinitions>
