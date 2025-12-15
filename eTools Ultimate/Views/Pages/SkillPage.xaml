@@ -2,14 +2,14 @@
     x:Class="eTools_Ultimate.Views.Pages.SkillPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
     xmlns:local="clr-namespace:eTools_Ultimate.Views.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:models="clr-namespace:eTools_Ultimate.Models"
-    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
-    xmlns:i18n="http://schemas.lepo.co/i18n/2022/xaml"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     Title="SkillPage"
     d:DataContext="{d:DesignInstance local:SkillPage,
                                      IsDesignTimeCreatable=False}"
@@ -22,435 +22,390 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <converters:NumberFormatConverter x:Key="NumberFormatConverter"/>
-        <!-- Common Styles -->
-        <Style x:Key="InfoIconStyle"
-                TargetType="ui:SymbolIcon">
-            <Setter Property="HorizontalAlignment"
-                    Value="Right"/>
-            <Setter Property="VerticalAlignment"
-                    Value="Center"/>
-            <Setter Property="FontSize"
-                    Value="16"/>
-            <Setter Property="Margin"
-                    Value="5,0,0,0"/>
-            <Setter Property="Foreground"
-                    Value="{DynamicResource TextFillColorSecondaryBrush}"/>
+        <!--  Common Styles  -->
+        <Style x:Key="InfoIconStyle" TargetType="ui:SymbolIcon">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Margin" Value="5,0,0,0" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
         </Style>
-        <Style x:Key="FormFieldStyle"
-                TargetType="Grid">
-            <Setter Property="Margin"
-                    Value="0,0,15,25"/>
+        <Style x:Key="FormFieldStyle" TargetType="Grid">
+            <Setter Property="Margin" Value="0,0,15,25" />
         </Style>
-        <Style x:Key="FieldLabelStyle"
-                TargetType="TextBlock">
-            <Setter Property="Margin"
-                    Value="0,0,0,5"/>
-            <Setter Property="FontWeight"
-                    Value="SemiBold"/>
+        <Style x:Key="FieldLabelStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,0,0,5" />
+            <Setter Property="FontWeight" Value="SemiBold" />
         </Style>
-        <Style x:Key="SectionHeaderStyle"
-                TargetType="TextBlock">
-            <Setter Property="FontSize"
-                    Value="24"/>
-            <Setter Property="FontWeight"
-                    Value="Bold"/>
-            <Setter Property="Margin"
-                    Value="0,15,0,15"/>
+        <Style x:Key="SectionHeaderStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="0,15,0,15" />
         </Style>
 
-        <!-- WPF UI Design System Resources -->
-        <SolidColorBrush x:Key="ControlElevationBorderBrush"
-                Color="#1A000000"/>
-        <SolidColorBrush x:Key="ControlFillColorDefaultBrush"
-                Color="#F3F3F3"/>
-        <SolidColorBrush x:Key="TextFillColorSecondaryBrush"
-                Color="#9E9E9E"/>
-        <SolidColorBrush x:Key="ApplicationBackgroundBrush"
-                Color="#FFFFFF"/>
+        <!--  WPF UI Design System Resources  -->
+        <SolidColorBrush x:Key="ControlElevationBorderBrush" Color="#1A000000" />
+        <SolidColorBrush x:Key="ControlFillColorDefaultBrush" Color="#F3F3F3" />
+        <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="#9E9E9E" />
+        <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="#FFFFFF" />
 
-        <!-- DataTemplate: Skill Basic Info Section -->
+        <!--  DataTemplate: Skill Basic Info Section  -->
         <DataTemplate x:Key="BasicInfoSectionTemplate">
             <StackPanel>
-                <TextBlock Text="{i18n:StringLocalizer 'Basic Information'}"
-                        Style="{StaticResource SectionHeaderStyle}"/>
+                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Basic Information'}" />
                 <UniformGrid Columns="2">
-                    <!-- ID -->
+                    <!--  ID  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'ID'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'ID'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Unique ID of the skill'}"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Unique ID of the skill'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="IdTextBox"
-                                Text="{Binding Prop.DwId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox
+                            x:Name="IdTextBox"
+                            Grid.Row="1"
+                            Text="{Binding Prop.DwId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
-                    <!-- Name -->
+                    <!--  Name  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Name'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Name'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Display name of the skill'}"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Display name of the skill'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="NameTextBox"
-                                Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox
+                            x:Name="NameTextBox"
+                            Grid.Row="1"
+                            Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
-                    <!-- Grade (Class Stage) -->
+                    <!--  Grade (Class Stage)  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Grade (Class Stage)'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Grade (Class Stage)'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Class stage, e.g. 1st, 2nd, 3rd'}"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Class stage, e.g. 1st, 2nd, 3rd'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="GradeComboBox"
-                                SelectedValuePath="Value"
-                                DisplayMemberPath="Key"
-                                Text="{Binding Prop.DwItemKind1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="{i18n:StringLocalizer '1st Grade'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer '2nd Grade'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer '3rd Grade'}"/>
+                        <ComboBox
+                            x:Name="GradeComboBox"
+                            Grid.Row="1"
+                            DisplayMemberPath="Key"
+                            SelectedValuePath="Value"
+                            Text="{Binding Prop.DwItemKind1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBoxItem Content="{i18n:StringLocalizer '1st Grade'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer '2nd Grade'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer '3rd Grade'}" />
                         </ComboBox>
                     </Grid>
-                    <!-- Job (Required Jobs) -->
+                    <!--  Job (Required Jobs)  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Job (Required Class)'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Job (Required Class)'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Required player class(es) for this skill'}"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Required player class(es) for this skill'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="JobComboBox"
-                                SelectedValuePath="Value"
-                                DisplayMemberPath="Key"
-                                Text="{Binding Prop.DwItemJob, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'All'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Warrior'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Magician'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Archer'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Acrobat'}"/>
+                        <ComboBox
+                            x:Name="JobComboBox"
+                            Grid.Row="1"
+                            DisplayMemberPath="Key"
+                            SelectedValuePath="Value"
+                            Text="{Binding Prop.DwItemJob, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'All'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Warrior'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Magician'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Archer'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Acrobat'}" />
                         </ComboBox>
                     </Grid>
-                    <!-- Secondary Type -->
+                    <!--  Secondary Type  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Secondary Type'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Secondary Type'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Secondary type of the skill'}"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Secondary type of the skill'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="SecondaryTypeComboBox"
-                                SelectedValuePath="Value"
-                                DisplayMemberPath="Key"
-                                Text="{Binding Prop.DwItemKind2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Passive'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Active'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Buff'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Debuff'}"/>
+                        <ComboBox
+                            x:Name="SecondaryTypeComboBox"
+                            Grid.Row="1"
+                            DisplayMemberPath="Key"
+                            SelectedValuePath="Value"
+                            Text="{Binding Prop.DwItemKind2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Passive'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Active'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Buff'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Debuff'}" />
                         </ComboBox>
                     </Grid>
-                    <!-- Max Level -->
+                    <!--  Max Level  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Maximum Level'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Maximum Level'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Maximum level of the skill'}"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Maximum level of the skill'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="MaxLevelNumberBox"
-                                Value="{Binding Prop.DwExpertMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="200"
-                                SpinButtonPlacementMode="Inline"/>
+                        <ui:NumberBox
+                            x:Name="MaxLevelNumberBox"
+                            Grid.Row="1"
+                            Maximum="200"
+                            Minimum="0"
+                            SpinButtonPlacementMode="Inline"
+                            Value="{Binding Prop.DwExpertMax, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                 </UniformGrid>
             </StackPanel>
         </DataTemplate>
 
-        <!-- DataTemplate: Skill Combat Details Section -->
+        <!--  DataTemplate: Skill Combat Details Section  -->
         <DataTemplate x:Key="CombatDetailsSectionTemplate">
             <StackPanel>
-                <TextBlock Text="{i18n:StringLocalizer 'Combat Details'}"
-                        Style="{StaticResource SectionHeaderStyle}"/>
+                <TextBlock Style="{StaticResource SectionHeaderStyle}" Text="{i18n:StringLocalizer 'Combat Details'}" />
                 <UniformGrid Columns="2">
-                    <!-- Range -->
+                    <!--  Range  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Range'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Range'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Range of the skill in units'}"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Range of the skill in units'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <TextBox Grid.Row="1"
-                                x:Name="RangeTextBox"
-                                Text="{Binding Prop.DwAttackRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox
+                            x:Name="RangeTextBox"
+                            Grid.Row="1"
+                            Text="{Binding Prop.DwAttackRange, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
-                    <!-- Weapon Type -->
+                    <!--  Weapon Type  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Weapon Type'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Weapon Type'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Required weapon type for the skill'}"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Required weapon type for the skill'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="WeaponTypeComboBox"
-                                SelectedValuePath="Value"
-                                DisplayMemberPath="Key"
-                                Text="{Binding Prop.DwLinkKind, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'None'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Sword'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Axe'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Bow'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Staff'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Any'}"/>
+                        <ComboBox
+                            x:Name="WeaponTypeComboBox"
+                            Grid.Row="1"
+                            DisplayMemberPath="Key"
+                            SelectedValuePath="Value"
+                            Text="{Binding Prop.DwLinkKind, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'None'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Sword'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Axe'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Bow'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Staff'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Any'}" />
                         </ComboBox>
                     </Grid>
-                    <!-- Type -->
+                    <!--  Type  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Type'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Type'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Skill type/category'}"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Skill type/category'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="TypeComboBox"
-                                SelectedValuePath="Value"
-                                Text="{Binding Prop.eItemType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Normal'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Buff'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Debuff'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'AOE'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Heal'}"/>
+                        <ComboBox
+                            x:Name="TypeComboBox"
+                            Grid.Row="1"
+                            SelectedValuePath="Value"
+                            Text="{Binding Prop.eItemType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Normal'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Buff'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Debuff'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'AOE'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Heal'}" />
                         </ComboBox>
                     </Grid>
-                    <!-- Cooldown -->
+                    <!--  Cooldown  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Cooldown (Sec.)'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Cooldown (Sec.)'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Cooldown time in seconds'}"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Cooldown time in seconds'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ui:NumberBox Grid.Row="1"
-                                x:Name="CooldownNumberBox"
-                                Value="{Binding Prop.DwSkillReady, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
-                                Minimum="0"
-                                Maximum="999999"
-                                SpinButtonPlacementMode="Inline"/>
+                        <ui:NumberBox
+                            x:Name="CooldownNumberBox"
+                            Grid.Row="1"
+                            Maximum="999999"
+                            Minimum="0"
+                            SpinButtonPlacementMode="Inline"
+                            Value="{Binding Prop.DwSkillReady, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
-                    <!-- Target -->
+                    <!--  Target  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Target'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Target'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Possible targets of the skill (e.g. self, party)'}"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Possible targets of the skill (e.g. self, party)'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="TargetComboBox"
-                                SelectedValuePath="Value"
-                                DisplayMemberPath="Key"
-                                Text="{Binding Prop.DwExeTarget, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Self'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Single Target'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Party'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Enemy Party'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'All'}"/>
+                        <ComboBox
+                            x:Name="TargetComboBox"
+                            Grid.Row="1"
+                            DisplayMemberPath="Key"
+                            SelectedValuePath="Value"
+                            Text="{Binding Prop.DwExeTarget, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Self'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Single Target'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Party'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Enemy Party'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'All'}" />
                         </ComboBox>
                     </Grid>
-                    <!-- Target Requirement -->
+                    <!--  Target Requirement  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Target Requirement'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Target Requirement'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Condition to use the skill'}"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Condition to use the skill'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="TargetRequirementComboBox"
-                                SelectedValuePath="Value"
-                                DisplayMemberPath="Key"
-                                Text="{Binding Prop.DwUseChance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Anytime'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'In Combat'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Out of Combat'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'HP below 50%'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'HP below 30%'}"/>
+                        <ComboBox
+                            x:Name="TargetRequirementComboBox"
+                            Grid.Row="1"
+                            DisplayMemberPath="Key"
+                            SelectedValuePath="Value"
+                            Text="{Binding Prop.DwUseChance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Anytime'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'In Combat'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Out of Combat'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'HP below 50%'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'HP below 30%'}" />
                         </ComboBox>
                     </Grid>
-                    <!-- Spell Region -->
+                    <!--  Spell Region  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <StackPanel Grid.Row="0"
-                                Orientation="Horizontal">
-                            <TextBlock Text="{i18n:StringLocalizer 'Spell Region'}"
-                                    Style="{StaticResource FieldLabelStyle}"/>
-                            <ui:SymbolIcon Symbol="Info20"
-                                    Style="{StaticResource InfoIconStyle}">
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Spell Region'}" />
+                            <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
                                 <ui:SymbolIcon.ToolTip>
-                                    <ToolTip Content="{i18n:StringLocalizer 'Effect area of the skill (AOE or single target)'}"/>
+                                    <ToolTip Content="{i18n:StringLocalizer 'Effect area of the skill (AOE or single target)'}" />
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <ComboBox Grid.Row="1"
-                                x:Name="SpellRegionComboBox"
-                                SelectedValuePath="Value"
-                                DisplayMemberPath="Key"
-                                Text="{Binding Prop.DwSpellRegion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'Single Target'}"/>
-                            <ComboBoxItem Content="{i18n:StringLocalizer 'AOE Target'}"/>
+                        <ComboBox
+                            x:Name="SpellRegionComboBox"
+                            Grid.Row="1"
+                            DisplayMemberPath="Key"
+                            SelectedValuePath="Value"
+                            Text="{Binding Prop.DwSpellRegion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'Single Target'}" />
+                            <ComboBoxItem Content="{i18n:StringLocalizer 'AOE Target'}" />
                         </ComboBox>
                     </Grid>
                 </UniformGrid>
             </StackPanel>
         </DataTemplate>
-        
-        <!-- DataTemplate for ListView Items -->
+
+        <!--  DataTemplate for ListView Items  -->
         <DataTemplate x:Key="SkillListTemplate">
             <Grid Margin="4">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Border Width="32"
-                        Height="32"
-                        Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                        BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                        BorderThickness="1"
-                        Margin="0,0,8,0">
-                    <Image Stretch="Uniform"
-                            Margin="2"
-                            Source="{Binding Icon}"/>
+                <Border
+                    Width="32"
+                    Height="32"
+                    Margin="0,0,8,0"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                    BorderThickness="1">
+                    <Image
+                        Margin="2"
+                        Source="{Binding Icon}"
+                        Stretch="Uniform" />
                 </Border>
-                <StackPanel Grid.Column="1"
-                        VerticalAlignment="Center">
-                    <TextBlock Text="{Binding Name}"
-                            FontWeight="SemiBold"
-                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"/>
-                    <TextBlock Text="{Binding Identifier}"
-                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                            FontSize="12"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock
+                        FontWeight="SemiBold"
+                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                        Text="{Binding Name}" />
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                        Text="{Binding Identifier}" />
                 </StackPanel>
             </Grid>
         </DataTemplate>
@@ -458,63 +413,59 @@
 
     <Grid x:Name="RootGrid">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="3*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Left Side - ListView -->
+        <!--  Left Side - ListView  -->
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <!-- Search Bar -->
-            <Border Grid.Row="0"
-                    BorderThickness="1,1,1,0"
-                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    Margin="0,0,10,0">
-                <ui:TextBox 
-                            PlaceholderText="{i18n:StringLocalizer 'Suche...'}"
-                            Icon="Search24"
-                            BorderThickness="0"
-                            Margin="10,10,10,10"
-                            Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <!--  Search Bar  -->
+            <Border
+                Grid.Row="0"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,1,1,0">
+                <ui:TextBox
+                    Margin="10,10,10,10"
+                    BorderThickness="0"
+                    Icon="Search24"
+                    PlaceholderText="{i18n:StringLocalizer 'Suche...'}"
+                    Text="{Binding ViewModel.SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             </Border>
 
-            <!-- Skill List -->
-            <Border Grid.Row="1"
-                    BorderThickness="1,0,1,1"
-                    BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
-                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
-                    Margin="0,0,10,0">
-                <ListView x:Name="SkillsListView"
-                          BorderThickness="0"
-                          Background="Transparent"
-                          ItemTemplate="{StaticResource SkillListTemplate}"
-                          SelectionChanged="SkillsListView_SelectionChanged"
-                          ItemsSource="{Binding ViewModel.SkillsView}"
-                          IsSynchronizedWithCurrentItem="True">
+            <!--  Skill List  -->
+            <Border
+                Grid.Row="1"
+                Margin="0,0,10,0"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                BorderThickness="1,0,1,1">
+                <ListView
+                    x:Name="SkillsListView"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    IsSynchronizedWithCurrentItem="True"
+                    ItemTemplate="{StaticResource SkillListTemplate}"
+                    ItemsSource="{Binding ViewModel.SkillsView}"
+                    SelectionChanged="SkillsListView_SelectionChanged">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
-                            <Setter Property="Background"
-                                    Value="Transparent"/>
-                            <Setter Property="BorderBrush"
-                                    Value="{DynamicResource ControlStrokeColorDefaultBrush}"/>
+                            <Setter Property="Background" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
                             <Style.Triggers>
-                                <Trigger Property="IsMouseOver"
-                                        Value="True">
-                                    <Setter Property="Background"
-                                            Value="{DynamicResource ControlFillColorSecondaryBrush}"/>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorSecondaryBrush}" />
                                 </Trigger>
-                                <Trigger Property="IsSelected"
-                                        Value="True">
-                                    <Setter Property="Background"
-                                            Value="{DynamicResource ControlFillColorDefaultBrush}"/>
-                                    <Setter Property="Foreground"
-                                            Value="{DynamicResource TextFillColorPrimaryBrush}"/>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="{DynamicResource ControlFillColorDefaultBrush}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorPrimaryBrush}" />
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -523,33 +474,46 @@
             </Border>
         </Grid>
 
-        <!-- Separator -->
-        <GridSplitter Grid.Column="1"
-                      Width="10"
-                      HorizontalAlignment="Center"
-                      VerticalAlignment="Stretch"
-                      Background="Transparent">
+        <!--  Separator  -->
+        <GridSplitter
+            Grid.Column="1"
+            Width="10"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Stretch"
+            Background="Transparent">
             <GridSplitter.Template>
                 <ControlTemplate TargetType="{x:Type GridSplitter}">
                     <Grid Background="Transparent">
-                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
-                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
-                            <Rectangle Width="2" Height="20" Fill="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,2"/>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
+                            <Rectangle
+                                Width="2"
+                                Height="20"
+                                Margin="0,2,0,2"
+                                Fill="{DynamicResource TextFillColorSecondaryBrush}" />
                         </StackPanel>
                     </Grid>
                 </ControlTemplate>
             </GridSplitter.Template>
         </GridSplitter>
 
-        <!-- Right Side - Form -->
+        <!--  Right Side - Form  -->
         <Grid Grid.Column="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
-            
+
             <!--  Add und Delete Buttons oben rechts  -->
             <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
@@ -561,50 +525,51 @@
                     Grid.Column="1"
                     Margin="0,10,30,10"
                     Orientation="Horizontal">
-                    <ui:Button
-                             ToolTip="{i18n:StringLocalizer 'Undo'}">
-                        <ui:SymbolIcon Symbol="ArrowUndo24"/>
+                    <ui:Button ToolTip="{i18n:StringLocalizer 'Undo'}">
+                        <ui:SymbolIcon Symbol="ArrowUndo24" />
+                    </ui:Button>
+                    <ui:Button Margin="10,0,10,0" ToolTip="{i18n:StringLocalizer 'Redo'}">
+                        <ui:SymbolIcon Symbol="ArrowRedo24" />
                     </ui:Button>
                     <ui:Button
-                             Margin="10,0,10,0"
-                             ToolTip="{i18n:StringLocalizer 'Redo'}">
-                        <ui:SymbolIcon Symbol="ArrowRedo24"/>
-                    </ui:Button>
-                    <ui:Button x:Name="SaveButton" 
-                             Content="{i18n:StringLocalizer 'Save'}" 
-                             Margin="0,0,10,0"
-                             Click="SaveButton_Click"/>
-                    <ui:Button x:Name="ExpertButton" 
-                             Content="{i18n:StringLocalizer 'Expert'}" 
-                             Appearance="Secondary"
-                             Margin="0,0,10,0"/>
-                    <ui:Button x:Name="AddButton" 
-                             Content="{i18n:StringLocalizer 'Add'}" 
-                             Background="#2F70AF"
-                             Margin="0,0,10,0"
-                             Click="AddButton_Click"/>
-                    <ui:Button x:Name="DeleteButton" 
-                             Content="{i18n:StringLocalizer 'Delete'}" 
-                             Background="#FD292F"
-                             Click="DeleteButton_Click"/>
+                        x:Name="SaveButton"
+                        Margin="0,0,10,0"
+                        Click="SaveButton_Click"
+                        Content="{i18n:StringLocalizer 'Save'}" />
+                    <ui:Button
+                        x:Name="ExpertButton"
+                        Margin="0,0,10,0"
+                        Appearance="Secondary"
+                        Content="{i18n:StringLocalizer 'Expert'}" />
+                    <ui:Button
+                        x:Name="AddButton"
+                        Margin="0,0,10,0"
+                        Background="#2F70AF"
+                        Click="AddButton_Click"
+                        Content="{i18n:StringLocalizer 'Add'}" />
+                    <ui:Button
+                        x:Name="DeleteButton"
+                        Background="#FD292F"
+                        Click="DeleteButton_Click"
+                        Content="{i18n:StringLocalizer 'Delete'}" />
                 </StackPanel>
             </Grid>
-            
+
             <!--  Separator  -->
             <Separator
                 Grid.Row="1"
                 Margin="0,0,0,0"
                 Background="{DynamicResource ControlStrokeColorDefaultBrush}" />
-            
-            <!-- Scrollable Content -->
+
+            <!--  Scrollable Content  -->
             <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
                 <Grid>
-                    <!-- Formulare -->
-                <StackPanel Margin="20">
-                    <ContentControl Content="{Binding ViewModel}" ContentTemplate="{StaticResource BasicInfoSectionTemplate}"/>
-                    <Separator Margin="0,10,0,5"/>
-                    <ContentControl Content="{Binding ViewModel}" ContentTemplate="{StaticResource CombatDetailsSectionTemplate}"/>
-                </StackPanel>
+                    <!--  Formulare  -->
+                    <StackPanel Margin="20">
+                        <ContentControl Content="{Binding ViewModel}" ContentTemplate="{StaticResource BasicInfoSectionTemplate}" />
+                        <Separator Margin="0,10,0,5" />
+                        <ContentControl Content="{Binding ViewModel}" ContentTemplate="{StaticResource CombatDetailsSectionTemplate}" />
+                    </StackPanel>
                 </Grid>
             </ScrollViewer>
         </Grid>

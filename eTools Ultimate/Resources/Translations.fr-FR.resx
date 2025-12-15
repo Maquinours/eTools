@@ -690,7 +690,7 @@
     <value>Ressources supprimées</value>
   </data>
   <data name="Successfully deleted {0} assets, freeing {1}." xml:space="preserve">
-    <value>{0} ressources supprimées avec succès, libérant {1}.</value>
+    <value>{0} ressource{1} supprimée{1} avec succès, libérant {2}.</value>
   </data>
   <data name="Deletion failed" xml:space="preserve">
     <value>Échec de la suppression</value>
@@ -815,6 +815,39 @@
   </data>
   <data name="Drop chance (in %)" xml:space="preserve">
     <value>Chance de drop (en %)</value>
+  </data>
+  <data name="Loading settings..." xml:space="preserve">
+    <value>Chargement des paramètres...</value>
+  </data>
+  <data name="Loading definitions..." xml:space="preserve">
+    <value>Chargement des définitions...</value>
+  </data>
+  <data name="Loading models..." xml:space="preserve">
+    <value>Chargement des modèles...</value>
+  </data>
+  <data name="Loading items..." xml:space="preserve">
+    <value>Chargement des objets...</value>
+  </data>
+  <data name="Loading movers..." xml:space="preserve">
+    <value>Chargement des movers</value>
+  </data>
+  <data name="Loading sounds..." xml:space="preserve">
+    <value>Chargement des sons</value>
+  </data>
+  <data name="Loading texts..." xml:space="preserve">
+    <value>Chargement des textes...</value>
+  </data>
+  <data name="Loading giftboxes..." xml:space="preserve">
+    <value>Chargement des boîtes cadeaux...</value>
+  </data>
+  <data name="Loading motions..." xml:space="preserve">
+    <value>Chargement des animations...</value>
+  </data>
+  <data name="Loading accessories..." xml:space="preserve">
+    <value>Chargement des accessoires...</value>
+  </data>
+  <data name="Loading strings..." xml:space="preserve">
+    <value>Chargement des chaînes de caractères...</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Bienvenue</value>
@@ -2368,38 +2401,5 @@
   </data>
   <data name="Add Attribute" type="System.Resources.ResXNullRef, System.Windows.Forms">
     <value />
-  </data>
-  <data name="Loading settings..." xml:space="preserve">
-    <value>Chargement des paramètres...</value>
-  </data>
-  <data name="Loading definitions..." xml:space="preserve">
-    <value>Chargement des définitions...</value>
-  </data>
-  <data name="Loading models..." xml:space="preserve">
-    <value>Chargement des modèles...</value>
-  </data>
-  <data name="Loading items..." xml:space="preserve">
-    <value>Chargement des objets...</value>
-  </data>
-  <data name="Loading movers..." xml:space="preserve">
-    <value>Chargement des movers</value>
-  </data>
-  <data name="Loading sounds..." xml:space="preserve">
-    <value>Chargement des sons</value>
-  </data>
-  <data name="Loading texts..." xml:space="preserve">
-    <value>Chargement des textes...</value>
-  </data>
-  <data name="Loading giftboxes..." xml:space="preserve">
-    <value>Chargement des boîtes cadeaux...</value>
-  </data>
-  <data name="Loading motions..." xml:space="preserve">
-    <value>Chargement des animations...</value>
-  </data>
-  <data name="Loading accessories..." xml:space="preserve">
-    <value>Chargement des accessoires...</value>
-  </data>
-  <data name="Loading strings..." xml:space="preserve">
-    <value>Chargement des chaînes de caractères...</value>
   </data>
 </root>

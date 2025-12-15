@@ -60,6 +60,8 @@ namespace eTools_Ultimate.Services
 
         public void Save(string filePath, string[] stringIdentifiers)
         {
+            stringIdentifiers.Sort();
+
             using StreamWriter writer = new StreamWriter(filePath, false, Encoding.UTF8);
             foreach (string identifier in stringIdentifiers)
             {
