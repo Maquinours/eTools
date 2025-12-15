@@ -1,14 +1,17 @@
-﻿using eTools_Ultimate.Services;
+﻿using eTools_Ultimate.Models;
+using eTools_Ultimate.Models.Items;
+using eTools_Ultimate.Models.Movers;
+using eTools_Ultimate.Services;
+using eTools_Ultimate.ViewModels.Controls.Dialogs;
 using eTools_Ultimate.ViewModels.Pages;
-using System.Collections.ObjectModel;
-using Wpf.Ui.Abstractions.Controls;
-using eTools_Ultimate.Models;
-using System.ComponentModel;
-using System.Windows.Data;
-using System.Windows.Controls;
-using System.Windows;
-using Wpf.Ui.Controls;
 using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using Wpf.Ui.Abstractions.Controls;
+using Wpf.Ui.Controls;
 
 namespace eTools_Ultimate.Views.Pages
 {
@@ -128,6 +131,54 @@ namespace eTools_Ultimate.Views.Pages
                 
                 Console.WriteLine($"Error: {ex.Message}\n{ex.StackTrace}");
             }
+        }
+
+        private void BuffGiftedItemAutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput) return;
+
+            ViewModel.RefreshBuffGiftedItemSuggestions(args.Text);
+            args.Handled = true;
+        }
+
+        private void BuffGiftedItemAutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            if (args.SelectedItem is not Item selectedItem) return;
+
+            sender.Text = selectedItem.Identifier;
+            args.Handled = true;
+        }
+
+        private void PetMoverAutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput) return;
+
+            ViewModel.RefreshPetMoverSuggestions(args.Text);
+            args.Handled = true;
+        }
+
+        private void PetMoverAutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            if (args.SelectedItem is not Mover selectedMover) return;
+
+            sender.Text = selectedMover.Identifier;
+            args.Handled = true;
+        }
+
+        private void GuildHouseNpcMoverAutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput) return;
+
+            ViewModel.RefreshGuildHouseNpcMoverSuggestions(args.Text);
+            args.Handled = true;
+        }
+
+        private void GuildHouseNpcMoverAutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            if (args.SelectedItem is not Mover selectedMover) return;
+
+            sender.Text = selectedMover.Identifier;
+            args.Handled = true;
         }
     }
 }
