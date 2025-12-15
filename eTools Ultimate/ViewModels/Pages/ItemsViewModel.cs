@@ -15,7 +15,7 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class ItemsViewModel(ItemsService itemsService, DefinesService definesService, SoundsService soundsService, SettingsService settingsService) : ObservableObject, INavigationAware
+    public partial class ItemsViewModel(ItemsService itemsService, MoversService moversService, CharactersService charactersService, DefinesService definesService, SoundsService soundsService, SettingsService settingsService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -26,6 +26,18 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         private ICollectionView _itemsView = CollectionViewSource.GetDefaultView(itemsService.Items);
 
+        [ObservableProperty]
+        private Item[] _buffGiftedItemSuggestions = [];
+
+        [ObservableProperty]
+        private Mover[] _petMoverSuggestions = [];
+
+        [ObservableProperty]
+        private Mover[] _guildHouseNpcMoverSuggestions = [];
+
+        [ObservableProperty]
+        private Character[] _guildHouseNpcCharacterSuggestions = [];
+
         public string[] ItemIdentifiers => [.. definesService.ReversedItemDefines.Values];
         public List<KeyValuePair<int, string>> JobIdentifiers => [.. definesService.ReversedJobDefines];
         public List<KeyValuePair<int, string>> PartsIdentifiers => [.. definesService.ReversedPartsDefines];
@@ -35,7 +47,6 @@ namespace eTools_Ultimate.ViewModels.Pages
         public string[] SfxIdentifiers => [.. definesService.ReversedSfxDefines.Values];
         public string[] SoundIdentifiers => [.. definesService.ReversedSoundDefines.Values];
         public string[] HandedIdentifiers => [.. definesService.ReversedHandedDefines.Values];
-        public string[] MoverIdentifiers => [.. definesService.ReversedMoverDefines.Values];
         public string[] ControlIdentifiers => [.. definesService.ReversedControlDefines.Values];
         public string[] AngelElementalIdentifiers => [.. definesService.ReversedElementalDefines.Values.Where(x => x.StartsWith("ELEMENTAL_ANGEL_"))];
         public bool HasExpandedDestValues => settingsService.Settings.ResourcesVersion >= 19 || settingsService.Settings.FilesFormat == FilesFormats.Florist;
@@ -120,6 +131,58 @@ namespace eTools_Ultimate.ViewModels.Pages
             return item.Name.Contains(lowerSearch, StringComparison.OrdinalIgnoreCase)
                 //|| DefinesService.Instance.Defines.FirstOrDefault(x => x.Key.StartsWith("II_") && x.Value == item.Id).Key.Contains(lowerSearch, StringComparison.OrdinalIgnoreCase)
                 ;
+        }
+
+        public void RefreshBuffGiftedItemSuggestions(string searchText)
+        {
+            List<Item> newSuggestions = [];
+
+            foreach (Item item in itemsService.Items)
+            {
+                if (item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase) || item.Identifier.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                    newSuggestions.Add(item);
+            }
+
+            BuffGiftedItemSuggestions = [.. newSuggestions];
+        }
+
+        public void RefreshPetMoverSuggestions(string searchText)
+        {
+            List<Mover> newSuggestions = [];
+
+            foreach (Mover mover in moversService.Movers)
+            {
+                if (mover.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase) || mover.Identifier.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                    newSuggestions.Add(mover);
+            }
+
+            PetMoverSuggestions = [.. newSuggestions];
+        }
+
+        public void RefreshGuildHouseNpcMoverSuggestions(string searchText)
+        {
+            List<Mover> newSuggestions = [];
+
+            foreach (Mover mover in moversService.Movers)
+            {
+                if (mover.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase) || mover.Identifier.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                    newSuggestions.Add(mover);
+            }
+
+            GuildHouseNpcMoverSuggestions = [.. newSuggestions];
+        }
+
+        public void RefreshGuildHouseNpcCharacterSuggestions(string searchText)
+        {
+            List<Character> newSuggestions = [];
+
+            foreach (Character character in charactersService.Characters)
+            {
+                if (character.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase) || character.Id.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                    newSuggestions.Add(character);
+            }
+
+            GuildHouseNpcCharacterSuggestions = [.. newSuggestions];
         }
 
         [RelayCommand]

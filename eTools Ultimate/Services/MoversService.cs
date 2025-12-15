@@ -655,6 +655,48 @@ namespace eTools_Ultimate.Services
                 float fMonsterTransformHpRate = 0.0f;
                 uint dwMonsterTransformMonsterId = Constants.NullId;
 
+                if(propExs.TryGetValue(dwId, out MoverPropEx? oldPropEx))
+                {
+                    bMeleeAttack = oldPropEx.BMeleeAttack;
+                    nLvCond = oldPropEx.NLvCond;
+                    bRecvCond = oldPropEx.BRecvCond;
+                    nScanJob = oldPropEx.NScanJob;
+                    dwScanQuestId = oldPropEx.DwScanQuestId;
+                    dwScanItemIdx = oldPropEx.DwScanItemIdx;
+                    nScanChao = oldPropEx.NScanChao;
+                    nRecvCondMe = oldPropEx.NRecvCondMe;
+                    nRecvCondHow = oldPropEx.NRecvCondHow;
+                    nRecvCondMp = oldPropEx.NRecvCondMp;
+                    bRecvCondWho = oldPropEx.BRecvCondWho;
+                    tmUnitHelp = oldPropEx.TmUnitHelp;
+                    nHelpRangeMul = oldPropEx.NHelpRangeMul;
+                    bHelpWho = oldPropEx.BHelpWho;
+                    nHpCond = oldPropEx.NHpCond;
+                    bRangeAttack = oldPropEx.BRangeAttack;
+                    nSummProb = oldPropEx.NSummProb;
+                    nSummNum = oldPropEx.NSummNum;
+                    nSummId = oldPropEx.NSummId;
+                    nBerserkHp = oldPropEx.NBerserkHp;
+                    fBerserkDmgMul = oldPropEx.FBerserkDmgMul;
+                    nLoot = oldPropEx.NLoot;
+                    nLootProb = oldPropEx.NLootProb;
+                    nAttackItemNear = oldPropEx.NAttackItemNear;
+                    nAttackItemFar = oldPropEx.NAttackItemFar;
+                    nAttackItem1 = oldPropEx.NAttackItem1;
+                    nAttackItem2 = oldPropEx.NAttackItem2;
+                    nAttackItem3 = oldPropEx.NAttackItem3;
+                    nAttackItem4 = oldPropEx.NAttackItem4;
+                    nAttackItemSec = oldPropEx.NAttackItemSec;
+                    nMagicReflection = oldPropEx.NMagicReflection;
+                    nImmortality = oldPropEx.NImmortality;
+                    bBlow = oldPropEx.BBlow;
+                    dwDropItemGeneratorMax = oldPropEx.DwDropItemGeneratorMax;
+                    dropItems = [..oldPropEx.DropItems];
+                    dropKinds = [..oldPropEx.DropKinds];
+                    fMonsterTransformHpRate = oldPropEx.FMonsterTransformHpRate;
+                    dwMonsterTransformMonsterId = oldPropEx.DwMonsterTransformMonsterId;
+                }
+
                 script.GetToken(); // {
 
                 while (true)
@@ -889,7 +931,7 @@ namespace eTools_Ultimate.Services
                     DwMonsterTransformMonsterId: dwMonsterTransformMonsterId
                     );
 
-                propExs.Add(dwId, propEx);
+                propExs[dwId] = propEx;
             }
 
             return propExs;

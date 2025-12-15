@@ -26,6 +26,11 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
 
         private readonly DefinesService _definesService = App.Services.GetRequiredService<DefinesService>();
 
+        private readonly ItemsService _itemsService = App.Services.GetRequiredService<ItemsService>();
+
+        [ObservableProperty]
+        private Item[] _itemSuggestions = [];
+
         public string Title => String.Format(App.Services.GetRequiredService<IStringLocalizer<Translations>>()["{0} drop list"], _mover.Name);
 
         public DropItemGenerator DropItemGenerator => _mover.DropItemGenerator;
@@ -42,6 +47,8 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
             .. _mover.DropItemGenerator.DropItems.Select(x => new DropItemTreeViewItem(x))
             ];
 
+            //ItemSuggestions.Filter = new Predicate<object>(FilterItem);
+
             CollectionChangedEventManager.AddHandler(_mover.DropItemGenerator.DropGolds, DropGolds_CollectionChanged);
             CollectionChangedEventManager.AddHandler(_mover.DropItemGenerator.DropItems, DropItems_CollectionChanged);
             CollectionChangedEventManager.AddHandler(_mover.DropKindGenerator.DropKinds, DropKinds_CollectionChanged);
@@ -50,6 +57,28 @@ namespace eTools_Ultimate.ViewModels.Controls.Dialogs
             foreach (MoverDropTreeViewItem dropItem in _dropList)
                 PropertyChangedEventManager.AddHandler(dropItem, DropItem_PropertyChanged, nameof(MoverDropTreeViewItem.IsSelected));
         }
+
+        //[RelayCommand]
+        public void RefreshItemSuggestBox(string searchText)
+        {
+            List<Item> newSuggestions = [];
+
+            foreach (Item item in _itemsService.Items)
+            {
+                if (item.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase) || item.Identifier.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                    newSuggestions.Add(item);
+            }
+
+            ItemSuggestions = [.. newSuggestions];
+        }
+
+        //private bool FilterItem(object obj)
+        //{
+        //    if (obj is not Motion motion) return false;
+        //    //if (string.IsNullOrEmpty(this.SearchText)) return true;
+        //    return true;
+        //    //return motion.Name.ToLower().Contains(this.SearchText.ToLower());
+        //}
 
         private void DropItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {

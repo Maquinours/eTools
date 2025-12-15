@@ -65,7 +65,7 @@ namespace eTools_Ultimate
                 services.AddSingleton<ItemsService>();
                 services.AddSingleton<MoversService>();
                 //services.AddSingleton<SkillsService>();
-                //services.AddSingleton<CharactersService>();
+                services.AddSingleton<CharactersService>();
                 services.AddSingleton<SoundsService>();
                 //services.AddSingleton<MusicsService>();
                 services.AddSingleton<TextsService>();

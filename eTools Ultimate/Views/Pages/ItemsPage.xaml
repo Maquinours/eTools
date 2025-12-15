@@ -25,7 +25,6 @@
 
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <converters:NumberFormatConverter x:Key="NumberFormatConverter" />
         <converters:NullValueToBooleanConverter x:Key="NullValueToBooleanConverter" />
 
         <selectors:ItemTemplateSelector x:Key="ItemTemplateSelector" />
@@ -1228,9 +1227,45 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:AutoSuggestBox
+                            x:Name="BuffGiftedItemAutoSuggestBox"
                             Grid.Row="1"
-                            OriginalItemsSource="{Binding ViewModel.ItemIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
-                            Text="{Binding ReferTarget1ItemIdentifier, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            ItemsSource="{Binding ViewModel.BuffGiftedItemSuggestions, RelativeSource={RelativeSource AncestorType=Page}}"
+                            SuggestionChosen="BuffGiftedItemAutoSuggestBox_SuggestionChosen"
+                            Text="{Binding ReferTarget1ItemIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                            TextChanged="BuffGiftedItemAutoSuggestBox_TextChanged">
+                            <ui:AutoSuggestBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Border
+                                            Width="32"
+                                            Height="32"
+                                            Margin="0,0,8,0"
+                                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                            BorderThickness="1">
+                                            <Image
+                                                Margin="2"
+                                                Source="{Binding Icon}"
+                                                Stretch="Uniform" />
+                                        </Border>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock
+                                                FontWeight="SemiBold"
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                Text="{Binding Name}" />
+                                            <TextBlock
+                                                FontSize="12"
+                                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                Text="{Binding Identifier}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ui:AutoSuggestBox.ItemTemplate>
+                        </ui:AutoSuggestBox>
                     </Grid>
                 </UniformGrid>
             </StackPanel>
@@ -1515,9 +1550,30 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:AutoSuggestBox
+                            x:Name="PetMoverAutoSuggestBox"
                             Grid.Row="1"
-                            OriginalItemsSource="{Binding ViewModel.MoverIdentifiers, RelativeSource={RelativeSource AncestorType=Page}}"
-                            Text="{Binding LinkKindMoverIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            ItemsSource="{Binding ViewModel.PetMoverSuggestions, RelativeSource={RelativeSource AncestorType=Page}}"
+                            SuggestionChosen="PetMoverAutoSuggestBox_SuggestionChosen"
+                            Text="{Binding LinkKindMoverIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                            TextChanged="PetMoverAutoSuggestBox_TextChanged">
+                            <ui:AutoSuggestBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        Margin="4"
+                                        VerticalAlignment="Center">
+                                        <TextBlock
+                                            FontWeight="SemiBold"
+                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                            Text="{Binding Name}" />
+                                        <TextBlock
+                                            FontSize="12"
+                                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                            Text="{Binding Identifier}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ui:AutoSuggestBox.ItemTemplate>
+                        </ui:AutoSuggestBox>
                     </Grid>
                 </UniformGrid>
             </StackPanel>
@@ -3033,9 +3089,30 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:AutoSuggestBox
+                            x:Name="GuildHouseNpcMoverAutoSuggestBox"
                             Grid.Row="1"
-                            OriginalItemsSource="{Binding ViewModel.MoverIdentifiers, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
-                            Text="{Binding LinkKindMoverIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                            ItemsSource="{Binding ViewModel.GuildHouseNpcMoverSuggestions, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                            SuggestionChosen="GuildHouseNpcMoverAutoSuggestBox_SuggestionChosen"
+                            Text="{Binding LinkKindMoverIdentifier, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                            TextChanged="GuildHouseNpcMoverAutoSuggestBox_TextChanged">
+                            <ui:AutoSuggestBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel
+                                        Grid.Column="1"
+                                        Margin="4"
+                                        VerticalAlignment="Center">
+                                        <TextBlock
+                                            FontWeight="SemiBold"
+                                            Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                            Text="{Binding Name}" />
+                                        <TextBlock
+                                            FontSize="12"
+                                            Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                            Text="{Binding Identifier}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ui:AutoSuggestBox.ItemTemplate>
+                        </ui:AutoSuggestBox>
                     </Grid>
                     <!--  Character key  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -3051,7 +3128,47 @@
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <TextBox Grid.Row="1" Text="{Binding SzTextFileName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                        <ui:AutoSuggestBox
+                            x:Name="GuildHouseNpcCharacterAutoSuggestBox"
+                            Grid.Row="1"
+                            ItemsSource="{Binding ViewModel.GuildHouseNpcCharacterSuggestions, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                            SuggestionChosen="GuildHouseNpcCharacterAutoSuggestBox_SuggestionChosen"
+                            Text="{Binding SzTextFileName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                            TextChanged="GuildHouseNpcCharacterAutoSuggestBox_TextChanged">
+                            <ui:AutoSuggestBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Border
+                                            Width="32"
+                                            Height="32"
+                                            Margin="0,0,8,0"
+                                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                            BorderThickness="1">
+                                            <Image
+                                                Margin="2"
+                                                RenderOptions.BitmapScalingMode="HighQuality"
+                                                Source="{Binding Icon}"
+                                                Stretch="Uniform" />
+                                        </Border>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock
+                                                FontWeight="SemiBold"
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                Text="{Binding Name}" />
+                                            <TextBlock
+                                                FontSize="12"
+                                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                Text="{Binding Id}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ui:AutoSuggestBox.ItemTemplate>
+                        </ui:AutoSuggestBox>
                     </Grid>
                 </UniformGrid>
             </StackPanel>

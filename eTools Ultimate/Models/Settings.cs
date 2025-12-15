@@ -76,6 +76,12 @@ namespace eTools_Ultimate.Models
         #region Accessories settings
         private string? _accessoriesConfigFilePath;
         #endregion
+
+        #region Characters settings
+        private string? _charactersConfigFilePath;
+        private string? _charactersTxtFilePath;
+        private string? _characterIconsFolderPath;
+        #endregion
         #endregion
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -271,6 +277,29 @@ namespace eTools_Ultimate.Models
             set => SetFilePathPropertyWithDefault(ref _accessoriesConfigFilePath, value, DefaultAccessoriesConfigFilePath);
         }
         public string DefaultAccessoriesConfigFilePath => $"{ResourcesFolderPath}accessory.inc";
+        #endregion
+
+        #region Characters settings
+        public string? CharactersConfigFilePath
+        {
+            get => _charactersConfigFilePath;
+            set => SetFilePathPropertyWithDefault(ref _charactersConfigFilePath, value, DefaultCharactersConfigFilePath);
+        }
+        public string DefaultCharactersConfigFilePath => Path.Combine(ResourcesFolderPath, "character.inc");
+
+        public string? CharactersTxtFilePath
+        {
+            get => _charactersTxtFilePath;
+            set => SetFilePathPropertyWithDefault(ref _charactersTxtFilePath, value, DefaultCharactersTxtFilePath);
+        }
+        public string DefaultCharactersTxtFilePath => Path.Combine(ResourcesFolderPath, "character.txt.txt");
+
+        public string? CharacterIconsFolderPath
+        {
+            get => _characterIconsFolderPath;
+            set => SetFolderPathPropertyWithDefault(ref _characterIconsFolderPath, value, DefaultCharacterIconsFolderPath);
+        }
+        public string DefaultCharacterIconsFolderPath => $"{ClientFolderPath}Char{Path.DirectorySeparatorChar}";
         #endregion
         #endregion
 

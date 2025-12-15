@@ -320,9 +320,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
                             UnusedAsset asset = selectedAssets[i];
 
-                            //Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(asset.FilePath, Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
-
-                            await Task.Delay(50);
+                            Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(asset.FilePath, Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
 
                             Application.Current.Dispatcher.Invoke(() =>
                             {
@@ -392,42 +390,33 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             if (result == ContentDialogResult.Primary)
             {
-                // TODO: reimplement this
-                //try
-                //{
-                //    if (File.Exists(asset.FilePath))
-                //    {
-                //        if (File.Exists(destPath))
-                //        {
-                //            destPath = Path.Combine(BinPath, $"{Path.GetFileNameWithoutExtension(asset.FilePath)}_{DateTime.Now.Ticks}{Path.GetExtension(asset.FilePath)}");
-                //        }
-                //        File.Move(asset.FilePath, destPath);
-                //        File.AppendAllText(LogPath, $"{DateTime.Now}: Moved {asset.FilePath} to {destPath} by {Environment.MachineName}\n");
-                //        TotalSizeAfter -= asset.FileSize;
-                //        OnPropertyChanged(nameof(TotalSizeAfterFormatted));
-                //        UnusedAssets.Remove(asset);
-                //        UnusedAssetsView?.Refresh();
+                try
+                {
+                    Microsoft.VisualBasic.FileIO.FileSystem.DeleteFile(asset.FilePath, Microsoft.VisualBasic.FileIO.UIOption.OnlyErrorDialogs, Microsoft.VisualBasic.FileIO.RecycleOption.SendToRecycleBin);
 
-                //        snackbarService.Show(
-                //            title: localizer["Asset moved"],
-                //            message: string.Format(localizer["Successfully moved '{0}' to bin."], asset.FileName),
-                //            appearance: ControlAppearance.Success,
-                //            icon: null,
-                //            timeout: TimeSpan.FromSeconds(2)
-                //        );
-                //    }
-                //}
-                //catch (Exception ex)
-                //{
-                //    Log.Error(ex, "Error deleting asset: {FilePath}", asset.FilePath);
-                //    snackbarService.Show(
-                //        title: localizer["Deletion failed"],
-                //        message: ex.Message,
-                //        appearance: ControlAppearance.Danger,
-                //        icon: null,
-                //        timeout: TimeSpan.FromSeconds(3)
-                //    );
-                //}
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        UnusedAssets.Remove(asset);
+                    });
+                    snackbarService.Show(
+                            title: localizer["Asset deleted"],
+                            message: string.Format(localizer["Successfully deleted {0} asset{1}, freeing {2}."], 1, "", FormatFileSize(asset.FileSize)),
+                            appearance: ControlAppearance.Success,
+                            icon: null,
+                            timeout: TimeSpan.FromSeconds(3)
+                        );
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, "Error during asset deletion");
+                    snackbarService.Show(
+                        title: localizer["Deletion failed"],
+                        message: ex.Message,
+                        appearance: ControlAppearance.Danger,
+                        icon: null,
+                        timeout: TimeSpan.FromSeconds(5)
+                    );
+                }
             }
         }
 

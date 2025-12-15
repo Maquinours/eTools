@@ -25,7 +25,7 @@ namespace eTools_Ultimate.Services
                 settingsService.Settings.PropItemTxtFilePath ?? settingsService.Settings.DefaultPropItemTxtFilePath,
                 //settingsService.Settings.PropSkillTxtFilePath ?? settingsService.Settings.DefaultPropSkillTxtFilePath,
                 settingsService.Settings.TextsTxtFilePath ?? settingsService.Settings.DefaultTextsTxtFilePath,
-                //settingsService.Settings.CharactersStringsFilePath ?? settingsService.Settings.DefaultCharactersStringsFilePath,
+                settingsService.Settings.CharactersTxtFilePath ?? settingsService.Settings.DefaultCharactersTxtFilePath,
                 //settingsService.Settings.HonorsTxtFilePath ?? settingsService.Settings.DefaultHonorsTxtFilePath,
                 settingsService.Settings.MotionsTxtFilePath ?? settingsService.Settings.DefaultMotionsTxtFilePath
                 ];
@@ -60,6 +60,8 @@ namespace eTools_Ultimate.Services
 
         public void Save(string filePath, string[] stringIdentifiers)
         {
+            stringIdentifiers.Sort();
+
             using StreamWriter writer = new StreamWriter(filePath, false, Encoding.UTF8);
             foreach (string identifier in stringIdentifiers)
             {
