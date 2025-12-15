@@ -180,5 +180,21 @@ namespace eTools_Ultimate.Views.Pages
             sender.Text = selectedMover.Identifier;
             args.Handled = true;
         }
+
+        private void GuildHouseNpcCharacterAutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason != AutoSuggestionBoxTextChangeReason.UserInput) return;
+
+            ViewModel.RefreshGuildHouseNpcCharacterSuggestions(args.Text);
+            args.Handled = true;
+        }
+
+        private void GuildHouseNpcCharacterAutoSuggestBox_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            if (args.SelectedItem is not Character selectedMover) return;
+
+            sender.Text = selectedMover.Id;
+            args.Handled = true;
+        }
     }
 }

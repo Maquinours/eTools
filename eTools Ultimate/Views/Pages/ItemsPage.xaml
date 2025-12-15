@@ -3128,7 +3128,47 @@
                                 </ui:SymbolIcon.ToolTip>
                             </ui:SymbolIcon>
                         </StackPanel>
-                        <TextBox Grid.Row="1" Text="{Binding SzTextFileName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" />
+                        <ui:AutoSuggestBox
+                            x:Name="GuildHouseNpcCharacterAutoSuggestBox"
+                            Grid.Row="1"
+                            ItemsSource="{Binding ViewModel.GuildHouseNpcCharacterSuggestions, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                            SuggestionChosen="GuildHouseNpcCharacterAutoSuggestBox_SuggestionChosen"
+                            Text="{Binding SzTextFileName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                            TextChanged="GuildHouseNpcCharacterAutoSuggestBox_TextChanged">
+                            <ui:AutoSuggestBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Border
+                                            Width="32"
+                                            Height="32"
+                                            Margin="0,0,8,0"
+                                            Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                                            BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                            BorderThickness="1">
+                                            <Image
+                                                Margin="2"
+                                                RenderOptions.BitmapScalingMode="HighQuality"
+                                                Source="{Binding Icon}"
+                                                Stretch="Uniform" />
+                                        </Border>
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock
+                                                FontWeight="SemiBold"
+                                                Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                                                Text="{Binding Name}" />
+                                            <TextBlock
+                                                FontSize="12"
+                                                Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                                Text="{Binding Id}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </DataTemplate>
+                            </ui:AutoSuggestBox.ItemTemplate>
+                        </ui:AutoSuggestBox>
                     </Grid>
                 </UniformGrid>
             </StackPanel>

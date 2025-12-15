@@ -15,7 +15,7 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class ItemsViewModel(ItemsService itemsService, MoversService moversService, DefinesService definesService, SoundsService soundsService, SettingsService settingsService) : ObservableObject, INavigationAware
+    public partial class ItemsViewModel(ItemsService itemsService, MoversService moversService, CharactersService charactersService, DefinesService definesService, SoundsService soundsService, SettingsService settingsService) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -34,6 +34,9 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         [ObservableProperty]
         private Mover[] _guildHouseNpcMoverSuggestions = [];
+
+        [ObservableProperty]
+        private Character[] _guildHouseNpcCharacterSuggestions = [];
 
         public string[] ItemIdentifiers => [.. definesService.ReversedItemDefines.Values];
         public List<KeyValuePair<int, string>> JobIdentifiers => [.. definesService.ReversedJobDefines];
@@ -159,6 +162,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             PetMoverSuggestions = [.. newSuggestions];
         }
+
         public void RefreshGuildHouseNpcMoverSuggestions(string searchText)
         {
             List<Mover> newSuggestions = [];
@@ -170,6 +174,19 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
 
             GuildHouseNpcMoverSuggestions = [.. newSuggestions];
+        }
+
+        public void RefreshGuildHouseNpcCharacterSuggestions(string searchText)
+        {
+            List<Character> newSuggestions = [];
+
+            foreach (Character character in charactersService.Characters)
+            {
+                if (character.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase) || character.Id.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                    newSuggestions.Add(character);
+            }
+
+            GuildHouseNpcCharacterSuggestions = [.. newSuggestions];
         }
 
         [RelayCommand]
