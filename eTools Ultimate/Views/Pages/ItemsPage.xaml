@@ -25,7 +25,6 @@
 
     <Page.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <converters:NumberFormatConverter x:Key="NumberFormatConverter" />
         <converters:NullValueToBooleanConverter x:Key="NullValueToBooleanConverter" />
 
         <selectors:ItemTemplateSelector x:Key="ItemTemplateSelector" />
