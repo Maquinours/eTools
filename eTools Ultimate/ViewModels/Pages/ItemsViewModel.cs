@@ -52,11 +52,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     string? modelFileNameWithoutExtension = Path.GetFileNameWithoutExtension(modelFile);
                     if (modelFileNameWithoutExtension == null) continue;
-                    string[] requiredFiles = [
-                        Path.Combine(modelsFolderPath, $"{modelFileNameWithoutExtension}.o3d"),
-                        Path.Combine(modelsFolderPath, $"{modelFileNameWithoutExtension}.chr"),
-                        Path.Combine(modelsFolderPath, $"{modelFileNameWithoutExtension}_stand01.ani")
-                        ];
+                    string[] requiredFiles = [..Constants.AngelModelFilesFormats.Select(x => Path.Combine(modelsFolderPath, String.Format(x, modelFileNameWithoutExtension)))];
                     if (requiredFiles.All(File.Exists))
                         results.Add(modelFileNameWithoutExtension);
                 }
