@@ -127,7 +127,7 @@ namespace eTools_Ultimate.Resources {
         /// <summary>
         ///   Recherche une chaîne localisée semblable à {
         ///  &quot;version&quot;: &quot;0.2.1 (Alpha)&quot;,
-        ///  &quot;date&quot;: &quot;2025-12-12&quot;,
+        ///  &quot;date&quot;: &quot;2025-12-15&quot;,
         ///  &quot;developerText&quot;: &quot;This update mainly focuses on bug fixes and stability improvements following the 0.2.0 release.&quot;,
         ///  &quot;categories&quot;: {
         ///    &quot;added&quot;: [
