@@ -227,4 +227,40 @@
 }
 </value>
   </data>
+  <data name="Version_0_2_1" xml:space="preserve">
+    <value>{
+  "version": "0.2.1 (Alpha)",
+  "date": "2025-12-12",
+  "developerText": "Cette mise à jour se concentre principalement sur des corrections de bugs et des améliorations de stabilité suite à la version 0.2.0.",
+  "categories": {
+    "added": [
+      {
+        "text": "Ajout de traductions manquantes",
+        "type": 0
+      }
+    ],
+    "changed": [
+      {
+        "text": "Les entrées des fichiers .txt sont désormais sauvegardées dans l’ordre alphabétique de leur clé",
+        "type": 1
+      }
+    ],
+    "fixed": [
+      {
+        "text": "Les assets inutilisés peuvent désormais être correctement supprimés via les boutons « Supprimer »",
+        "type": 3
+      },
+      {
+        "text": "Correction d’un crash lorsqu’un mover était défini plusieurs fois dans le fichier propMoverEx",
+        "type": 3
+      },
+      {
+        "text": "Correction d’un problème où certains champs de la page des movers restaient à 0 et ne pouvaient pas être modifiés",
+        "type": 3
+      }
+    ]
+  }
+}
+</value>
+  </data>
 </root>

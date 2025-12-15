@@ -750,7 +750,7 @@
     <comment>Assets deleted notification title</comment>
   </data>
   <data name="Successfully deleted {0} assets, freeing {1}." xml:space="preserve">
-    <value>Successfully deleted {0} assets, freeing {1}.</value>
+    <value>Successfully deleted {0} asset{1}, freeing {2}.</value>
     <comment>Assets deleted notification message</comment>
   </data>
   <data name="Deletion failed" xml:space="preserve">

@@ -31,7 +31,6 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <converters:NumberFormatConverter x:Key="NumberFormatConverter" />
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
         <!--  Common Styles  -->
         <Style x:Key="InfoIconStyle" TargetType="ui:SymbolIcon">
@@ -227,7 +226,7 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Penya, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Penya, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Minimum="0"
                                 Maximum="2147483647"
                                 SpinButtonPlacementMode="Inline"/>
@@ -254,7 +253,7 @@
                             </ui:SymbolIcon>
                         </StackPanel>
                         <ui:NumberBox Grid.Row="1"
-                                Value="{Binding Duration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+                                Value="{Binding Duration, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                 Minimum="0"
                                 Maximum="999999"
                                 SpinButtonPlacementMode="Inline"/>
@@ -377,7 +376,7 @@
                             <ui:NumberBox
                                 Grid.Row="1"
                                 SpinButtonPlacementMode="Inline"
-                                Value="{Binding DwLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                                Value="{Binding DwLevel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                         </Grid>
 
                         <!--  EXP Value  -->
@@ -467,7 +466,7 @@
                         <ui:NumberBox
                             Grid.Row="1"
                             SpinButtonPlacementMode="Inline"
-                            Value="{Binding DwAddMp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                            Value="{Binding DwAddMp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
                     <!--  Action Radius  -->
@@ -490,7 +489,7 @@
         </ui:SymbolIcon>
     </StackPanel>
     <ui:NumberBox Grid.Row="1"
-            Value="{Binding ActionRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+            Value="{Binding ActionRadius, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Minimum="0"
             Maximum="1000"
             SpinButtonPlacementMode="Inline"/>
@@ -553,7 +552,7 @@
                         <ui:NumberBox
                             Grid.Row="1"
                             SpinButtonPlacementMode="Inline"
-                            Value="{Binding DwStr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                            Value="{Binding DwStr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
                     <!--  STA  -->
@@ -573,7 +572,7 @@
                         <ui:NumberBox
                             Grid.Row="1"
                             SpinButtonPlacementMode="Inline"
-                            Value="{Binding DwSta, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                            Value="{Binding DwSta, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
                     <!--  DEX  -->
@@ -593,7 +592,7 @@
                         <ui:NumberBox
                             Grid.Row="1"
                             SpinButtonPlacementMode="Inline"
-                            Value="{Binding DwDex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                            Value="{Binding DwDex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
                     <!--  INT  -->
@@ -613,7 +612,7 @@
                         <ui:NumberBox
                             Grid.Row="1"
                             SpinButtonPlacementMode="Inline"
-                            Value="{Binding DwInt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                            Value="{Binding DwInt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
                     <!--  Hit Rate  -->
@@ -633,7 +632,7 @@
                         <ui:NumberBox
                             Grid.Row="1"
                             SpinButtonPlacementMode="Inline"
-                            Value="{Binding DwHR, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                            Value="{Binding DwHR, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
                     <!--  Evasion Rate  -->
@@ -653,7 +652,7 @@
                         <ui:NumberBox
                             Grid.Row="1"
                             SpinButtonPlacementMode="Inline"
-                            Value="{Binding DwER, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                            Value="{Binding DwER, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
                     <!--  Attack Delay  -->
@@ -673,7 +672,7 @@
                         <ui:NumberBox
                             Grid.Row="1"
                             SpinButtonPlacementMode="Inline"
-                            Value="{Binding DwReAttackDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                            Value="{Binding DwReAttackDelay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                     <!--  Armor  -->
                     <Grid Style="{StaticResource FormFieldStyle}">
@@ -692,7 +691,7 @@
                         <ui:NumberBox
                             Grid.Row="1"
                             SpinButtonPlacementMode="Inline"
-                            Value="{Binding DwNaturalArmor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                            Value="{Binding DwNaturalArmor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
                     <!--  Abrasion  -->
@@ -715,7 +714,7 @@
         </ui:SymbolIcon>
     </StackPanel>
     <ui:NumberBox Grid.Row="1"
-            Value="{Binding Abrasion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+            Value="{Binding Abrasion, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Minimum="0"
             Maximum="100"
             SpinButtonPlacementMode="Inline"/>
@@ -741,7 +740,7 @@
         </ui:SymbolIcon>
     </StackPanel>
     <ui:NumberBox Grid.Row="1"
-            Value="{Binding Hardness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}"
+            Value="{Binding Hardness, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Minimum="0"
             Maximum="100"
             SpinButtonPlacementMode="Inline"/>
@@ -764,7 +763,7 @@
                         <ui:NumberBox
                             Grid.Row="1"
                             SpinButtonPlacementMode="Inline"
-                            Value="{Binding DwResisMgic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                            Value="{Binding DwResisMgic, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
                     <!--  Resistance Electricity  -->
@@ -784,7 +783,7 @@
                         <ui:NumberBox
                             Grid.Row="1"
                             SpinButtonPlacementMode="Inline"
-                            Value="{Binding NResistElecricity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                            Value="{Binding NResistElecricity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
                     <!--  Resistance Fire  -->
@@ -804,7 +803,7 @@
                         <ui:NumberBox
                             Grid.Row="1"
                             SpinButtonPlacementMode="Inline"
-                            Value="{Binding NResistFire, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                            Value="{Binding NResistFire, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
                     <!--  Resistance Wind  -->
@@ -824,7 +823,7 @@
                         <ui:NumberBox
                             Grid.Row="1"
                             SpinButtonPlacementMode="Inline"
-                            Value="{Binding NResistWind, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                            Value="{Binding NResistWind, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
                     <!--  Resistance Water  -->
@@ -844,7 +843,7 @@
                         <ui:NumberBox
                             Grid.Row="1"
                             SpinButtonPlacementMode="Inline"
-                            Value="{Binding NResistWater, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                            Value="{Binding NResistWater, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
 
                     <!--  Resistance Earth  -->
@@ -864,7 +863,7 @@
                         <ui:NumberBox
                             Grid.Row="1"
                             SpinButtonPlacementMode="Inline"
-                            Value="{Binding NResistEarth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource NumberFormatConverter}}" />
+                            Value="{Binding NResistEarth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                     <Grid Style="{StaticResource FormFieldStyle}">
                         <Grid.RowDefinitions>

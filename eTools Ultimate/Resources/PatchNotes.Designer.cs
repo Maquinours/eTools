@@ -123,5 +123,33 @@ namespace eTools_Ultimate.Resources {
                 return ResourceManager.GetString("Version_0_2_0", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à {
+        ///  &quot;version&quot;: &quot;0.2.1 (Alpha)&quot;,
+        ///  &quot;date&quot;: &quot;2025-12-12&quot;,
+        ///  &quot;developerText&quot;: &quot;This update mainly focuses on bug fixes and stability improvements following the 0.2.0 release.&quot;,
+        ///  &quot;categories&quot;: {
+        ///    &quot;added&quot;: [
+        ///      {
+        ///        &quot;text&quot;: &quot;Added missing translations&quot;,
+        ///        &quot;type&quot;: 0
+        ///      }
+        ///    ],
+        ///    &quot;changed&quot;: [
+        ///      {
+        ///        &quot;text&quot;: &quot;Text entries in .txt files are now saved in alphabetical order based on their keys&quot;,
+        ///        &quot;type&quot;: 1
+        ///      }
+        ///    ],
+        ///    &quot;fixed&quot;: [
+        ///      {
+        ///        &quot;text&quot;:  [le reste de la chaîne a été tronqué]&quot;;.
+        /// </summary>
+        internal static string Version_0_2_1 {
+            get {
+                return ResourceManager.GetString("Version_0_2_1", resourceCulture);
+            }
+        }
     }
 }

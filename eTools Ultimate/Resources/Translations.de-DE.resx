@@ -685,7 +685,7 @@
     <value>Assets gelöscht</value>
   </data>
   <data name="Successfully deleted {0} assets, freeing {1}." xml:space="preserve">
-    <value>Erfolgreich {0} Assets gelöscht, {1} freigegeben.</value>
+    <value>Erfolgreich {0} Asset{1} gelöscht, {2} freigegeben.</value>
   </data>
   <data name="Deletion failed" xml:space="preserve">
     <value>Löschen fehlgeschlagen</value>
@@ -807,6 +807,39 @@
   </data>
   <data name="Drop chance (in %)" xml:space="preserve">
     <value>Drop-Chance (in %)</value>
+  </data>
+  <data name="Loading settings..." xml:space="preserve">
+    <value>Einstellungen werden geladen...</value>
+  </data>
+  <data name="Loading definitions..." xml:space="preserve">
+    <value>Definitionen werden geladen...</value>
+  </data>
+  <data name="Loading models..." xml:space="preserve">
+    <value>Modelle werden geladen...</value>
+  </data>
+  <data name="Loading items..." xml:space="preserve">
+    <value>Objekte werden geladen...</value>
+  </data>
+  <data name="Loading movers..." xml:space="preserve">
+    <value>Mover werden geladen…</value>
+  </data>
+  <data name="Loading sounds..." xml:space="preserve">
+    <value>Sounds werden geladen...</value>
+  </data>
+  <data name="Loading texts..." xml:space="preserve">
+    <value>Texte werden geladen...</value>
+  </data>
+  <data name="Loading giftboxes..." xml:space="preserve">
+    <value>Geschenkboxen werden geladen...</value>
+  </data>
+  <data name="Loading motions..." xml:space="preserve">
+    <value>Bewegungen werden geladen...</value>
+  </data>
+  <data name="Loading accessories..." xml:space="preserve">
+    <value>Accessoires werden geladen...</value>
+  </data>
+  <data name="Loading strings..." xml:space="preserve">
+    <value>Zeichenketten werden geladen...</value>
   </data>
   <data name="Welcome" xml:space="preserve">
     <value>Willkommen</value>
@@ -2429,38 +2462,5 @@
   </data>
   <data name="Maximum rarity for an item to be included. This value is read-only and depends on the mover's level." xml:space="preserve">
     <value>Maximale Seltenheit, damit ein Gegenstand enthalten ist. Dieser Wert ist schreibgeschützt und hängt vom Level des Movers ab.</value>
-  </data>
-  <data name="Loading settings..." xml:space="preserve">
-    <value>Einstellungen werden geladen...</value>
-  </data>
-  <data name="Loading definitions..." xml:space="preserve">
-    <value>Definitionen werden geladen...</value>
-  </data>
-  <data name="Loading models..." xml:space="preserve">
-    <value>Modelle werden geladen...</value>
-  </data>
-  <data name="Loading items..." xml:space="preserve">
-    <value>Objekte werden geladen...</value>
-  </data>
-  <data name="Loading movers..." xml:space="preserve">
-    <value>Mover werden geladen…</value>
-  </data>
-  <data name="Loading sounds..." xml:space="preserve">
-    <value>Sounds werden geladen...</value>
-  </data>
-  <data name="Loading texts..." xml:space="preserve">
-    <value>Texte werden geladen...</value>
-  </data>
-  <data name="Loading giftboxes..." xml:space="preserve">
-    <value>Geschenkboxen werden geladen...</value>
-  </data>
-  <data name="Loading motions..." xml:space="preserve">
-    <value>Bewegungen werden geladen...</value>
-  </data>
-  <data name="Loading accessories..." xml:space="preserve">
-    <value>Accessoires werden geladen...</value>
-  </data>
-  <data name="Loading strings..." xml:space="preserve">
-    <value>Zeichenketten werden geladen...</value>
   </data>
 </root>
