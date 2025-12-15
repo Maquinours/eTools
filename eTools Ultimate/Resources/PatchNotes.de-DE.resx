@@ -225,4 +225,40 @@
   }
 }</value>
   </data>
+  <data name="Version_0_2_1" xml:space="preserve">
+    <value>{
+  "version": "0.2.1 (Alpha)",
+  "date": "2025-12-12",
+  "developerText": "Dieses Update konzentriert sich hauptsächlich auf Fehlerbehebungen und Stabilitätsverbesserungen nach der Version 0.2.0.",
+  "categories": {
+    "added": [
+      {
+        "text": "Fehlende Übersetzungen hinzugefügt",
+        "type": 0
+      }
+    ],
+    "changed": [
+      {
+        "text": "Einträge in .txt-Dateien werden nun alphabetisch nach ihrem Schlüssel gespeichert",
+        "type": 1
+      }
+    ],
+    "fixed": [
+      {
+        "text": "Nicht verwendete Assets können nun korrekt über die „Löschen“-Buttons entfernt werden",
+        "type": 3
+      },
+      {
+        "text": "Absturz behoben, der auftrat, wenn ein Mover mehrfach in der propMoverEx-Datei definiert war",
+        "type": 3
+      },
+      {
+        "text": "Problem behoben, bei dem einige Felder auf der Movers-Seite auf 0 festgesetzt waren und nicht bearbeitet werden konnten",
+        "type": 3
+      }
+    ]
+  }
+}
+</value>
+  </data>
 </root>

@@ -262,4 +262,40 @@
   }
 }</value>
   </data>
+  <data name="Version_0_2_1" xml:space="preserve">
+    <value>{
+  "version": "0.2.1 (Alpha)",
+  "date": "2025-12-12",
+  "developerText": "This update mainly focuses on bug fixes and stability improvements following the 0.2.0 release.",
+  "categories": {
+    "added": [
+      {
+        "text": "Added missing translations",
+        "type": 0
+      }
+    ],
+    "changed": [
+      {
+        "text": "Text entries in .txt files are now saved in alphabetical order based on their keys",
+        "type": 1
+      }
+    ],
+    "fixed": [
+      {
+        "text": "Unused assets can now be correctly deleted using the \"Delete\" buttons",
+        "type": 3
+      },
+      {
+        "text": "Fixed a crash occurring when a mover was defined multiple times in the propMoverEx file",
+        "type": 3
+      },
+      {
+        "text": "Fixed an issue where some fields in the movers page were stuck at 0 and could not be edited",
+        "type": 3
+      }
+    ]
+  }
+}
+</value>
+  </data>
 </root>
