@@ -10,7 +10,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	<StartupObject>eTools_Ultimate.App</StartupObject>
-	<AssemblyVersion>0.2.0.0</AssemblyVersion>
+	<AssemblyVersion>0.2.1.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
