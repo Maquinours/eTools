@@ -193,7 +193,7 @@ namespace eTools_Ultimate.Views.Pages
         {
             if (args.SelectedItem is not Character selectedMover) return;
 
-            sender.Text = selectedMover.Id;
+            sender.Text = selectedMover.SzKey;
             args.Handled = true;
         }
     }

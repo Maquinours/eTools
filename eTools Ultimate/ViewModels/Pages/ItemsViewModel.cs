@@ -178,7 +178,7 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             foreach (Character character in charactersService.Characters)
             {
-                if (character.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase) || character.Id.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                if (character.Name.Contains(searchText, StringComparison.OrdinalIgnoreCase) || character.SzKey.Contains(searchText, StringComparison.OrdinalIgnoreCase))
                     newSuggestions.Add(character);
             }
 

@@ -56,24 +56,42 @@ namespace eTools_Ultimate.Models
 
     public class Character
     {
-        private string _id;
-        private string _name; // IDS_
+        private string _szKey;
+        private string _strName;
         //private List<CharacterEquip> _equips;
         //private int? _dwMusicId;
         //private int? _nStructure;
-        private string? _szChar;
+        private string _szChar;
         //private string _szDialog;
         //private string _szDlgQuest;
         //private List<string> _menus;
 
-        public string Id
+        public string SzKey
         {
-            get => this._id;
+            get => _szKey;
+        }
+
+        public string StrName
+        {
+            get => _strName;
+        }
+
+        public string SzChar
+        {
+            get => _szChar;
         }
 
         public string Name
         {
-            get => App.Services.GetRequiredService<StringsService>().Strings.ContainsKey(this._name) ? App.Services.GetRequiredService<StringsService>().GetString(this._name) : "";
+            get => App.Services.GetRequiredService<StringsService>().GetString(StrName) ?? StrName;
+            //set
+            //{
+            //    StringsService stringsService = App.Services.GetRequiredService<StringsService>();
+            //    if (stringsService.HasString(StrName))
+            //        stringsService.ChangeStringValue(StrName, value);
+            //    else
+            //        StrName = value;
+            //}
         }
 
         public ImageSource? Icon
@@ -83,65 +101,36 @@ namespace eTools_Ultimate.Models
                 StringsService stringsService = App.Services.GetRequiredService<StringsService>();
                 Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
 
-                if (_szChar == null) return null;
+                if (SzChar == null) return null;
 
-                string fileName = App.Services.GetRequiredService<StringsService>().GetString(_szChar) ?? _szChar;
+                string fileName = App.Services.GetRequiredService<StringsService>().GetString(SzChar) ?? SzChar;
                 string filePath = Path.Combine(settings.CharacterIconsFolderPath ?? settings.DefaultCharacterIconsFolderPath, fileName);
                 if (!File.Exists(filePath))
-                {
                     return null;
-                    //using (var ms = new MemoryStream(ItemsEditor.Resources.Images.NotFoundImage))
-                    //{
-                    //    return Image.FromStream(ms);
-                    //}
-                }
+
                 SixLabors.ImageSharp.Image image = SixLabors.ImageSharp.Image.Load<Rgba32>(filePath);
-                //using (MemoryStream ms = new MemoryStream())
-                //{
-                //    image.Save(ms, JpegFormat.Instance);
-                //    using (MemoryStream ms2 = new MemoryStream(ms.ToArray()))
-                //    {
-                //        global::System.Drawing.Image returnImage = global::System.Drawing.Image.FromStream(ms);
-                //        Bitmap bitmap = new Bitmap(returnImage);
-                using (var memory = new MemoryStream())
-                {
-                    image.Save(memory, PngFormat.Instance);
-                    memory.Position = 0;
 
-                    var bitmapImage = new BitmapImage();
-                    bitmapImage.BeginInit();
-                    bitmapImage.StreamSource = memory;
-                    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                    bitmapImage.EndInit();
-                    bitmapImage.Freeze();
-                    return bitmapImage;
-                }
-                //    }
-                //}
-                //var bitmap = new DDSImage(File.OpenRead(filePath)).BitmapImage;
+                using var memory = new MemoryStream();
 
-                //// Bitmap to bitmap image
-                //using (var memory = new MemoryStream())
-                //{
-                //    bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Png);
-                //    memory.Position = 0;
+                image.Save(memory, PngFormat.Instance);
+                memory.Position = 0;
 
-                //    var bitmapImage = new BitmapImage();
-                //    bitmapImage.BeginInit();
-                //    bitmapImage.StreamSource = memory;
-                //    bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-                //    bitmapImage.EndInit();
-                //    bitmapImage.Freeze();
-                //    return bitmapImage;
-                //}
+                var bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.StreamSource = memory;
+                bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapImage.EndInit();
+                bitmapImage.Freeze();
+
+                return bitmapImage;
             }
         }
 
-        internal Character(string id, string name, string? szChar)
+        public Character(string szKey, string szName, string szChar)
         {
-            this._id = id;
-            this._name = name;
-            this._szChar = szChar;
+            _szKey = szKey;
+            _strName = szName;
+            _szChar = szChar;
         }
     }
 }

@@ -32,11 +32,11 @@ namespace eTools_Ultimate.Services
                 script.Load(filePath);
                 while (true)
                 {
-                    string id = script.GetToken();
+                    string szKey = script.GetToken();
 
                     if (script.EndOfStream) break;
 
-                    string name = string.Empty;
+                    string strName = string.Empty;
                     List<CharacterEquip> equips = new();
                     CharacterFigure? figure = null;
                     CharacterMusic? music = null;
@@ -84,13 +84,13 @@ namespace eTools_Ultimate.Services
                             case "m_szName":
                                 {
                                     script.GetToken(); // =
-                                    name = script.GetToken();
+                                    strName = script.GetToken();
                                     break;
                                 }
                             case "SetName":
                                 {
                                     script.GetToken(); // (
-                                    name = script.GetToken();
+                                    strName = script.GetToken();
                                     script.GetToken(); // )
                                     script.GetToken(); // ;
                                     break;
@@ -311,7 +311,7 @@ namespace eTools_Ultimate.Services
                                 }
                         }
                     }
-                    Character character = new Character(id, name, szChar);
+                    Character character = new(szKey, strName, szChar);
                     this.Characters.Add(character);
                 }
                 List<Character> characters = this.Characters.Where(x => x.Name == "").ToList();

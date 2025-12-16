@@ -3163,7 +3163,7 @@
                                             <TextBlock
                                                 FontSize="12"
                                                 Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                                                Text="{Binding Id}" />
+                                                Text="{Binding SzKey}" />
                                         </StackPanel>
                                     </Grid>
                                 </DataTemplate>
