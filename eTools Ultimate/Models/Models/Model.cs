@@ -107,6 +107,75 @@ namespace eTools_Ultimate.Models.Models
             }
         }
 
+        public string MalePart
+        {
+            get
+            {
+                string[] partsFileNames = SzPart.Split('/');
+
+                return partsFileNames[0];
+            }
+            set
+            {
+                string[] partsFileNames = SzPart.Split('/');
+                partsFileNames[0] = value;
+                SzPart = String.Join("/", partsFileNames);
+            }
+        }
+
+        public string FemalePart
+        {
+            get
+            {
+                string[] partsFileNames = SzPart.Split('/');
+
+                return partsFileNames.Length == 1 ? partsFileNames[0] : String.Join("/", partsFileNames.Where((x, i) => i != 0));
+            }
+            set
+            {
+                string[] partsFileNames = SzPart.Split('/');
+                if (partsFileNames.Length == 1)
+                    partsFileNames[0] = value;
+                else
+                {
+                    partsFileNames = [..partsFileNames.Where((x, i) => i < 2)];
+                    partsFileNames[1] = value;
+                }
+                SzPart = String.Join("/", partsFileNames);
+            }
+        }
+
+        public string MalePartModel3DFileName
+        {
+            get
+            {
+                string fileName = "part_";
+                string[] partsFileNames = SzPart.Split('/');
+
+                fileName += partsFileNames[0];
+                fileName += ".o3d";
+
+                return fileName;
+            }
+        }
+
+        public string FemalePartModel3DFileName
+        {
+            get
+            {
+                string fileName = "part_";
+                string[] partsFileNames = SzPart.Split('/');
+
+                if (partsFileNames.Length == 0)
+                    fileName += partsFileNames[0];
+                else
+                    fileName += partsFileNames[1];
+                fileName += ".o3d";
+
+                return fileName;
+            }
+        }
+
         public string TypeIdentifier => Script.NumberToString(DwType, App.Services.GetRequiredService<DefinesService>().ReversedObjectTypeDefines);
 
         public string Identifier
@@ -177,7 +246,7 @@ namespace eTools_Ultimate.Models.Models
             PropertyChanged -= Model_PropertyChanged;
             settings.PropertyChanged -= Settings_PropertyChanged;
 
-            foreach(ModelMotion motion in Motions)
+            foreach (ModelMotion motion in Motions)
                 motion.Dispose();
 
             Motions.Clear();

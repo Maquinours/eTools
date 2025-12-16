@@ -67,6 +67,11 @@ namespace eTools_Ultimate.Helpers
             });
         }
 
+        public void Zoom(float delta)
+        {
+            NativeMethods.ZoomCamera(_native, delta);
+        }
+
         public void Dispose()
         {
             // Cleanup if needed

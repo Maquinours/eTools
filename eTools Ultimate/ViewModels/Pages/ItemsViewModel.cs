@@ -2,9 +2,12 @@
 using eTools_Ultimate.Helpers;
 using eTools_Ultimate.Models;
 using eTools_Ultimate.Models.Items;
+using eTools_Ultimate.Models.Models;
 using eTools_Ultimate.Models.Movers;
 using eTools_Ultimate.Properties;
+using eTools_Ultimate.Resources;
 using eTools_Ultimate.Services;
+using Microsoft.Extensions.Localization;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -15,7 +18,7 @@ using Wpf.Ui.Abstractions.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class ItemsViewModel(ItemsService itemsService, MoversService moversService, CharactersService charactersService, DefinesService definesService, SoundsService soundsService, SettingsService settingsService) : ObservableObject, INavigationAware
+    public partial class ItemsViewModel(ItemsService itemsService, MoversService moversService, CharactersService charactersService, DefinesService definesService, SoundsService soundsService, SettingsService settingsService, IStringLocalizer<Translations> localizer) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -37,6 +40,18 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         [ObservableProperty]
         private Character[] _guildHouseNpcCharacterSuggestions = [];
+
+        public ItemD3DImageHost? D3DHost
+        {
+            get; private set
+            {
+                if (field == value)
+                    return;
+
+                field = value;
+                OnPropertyChanged(nameof(D3DHost));
+            }
+        } = null;
 
         public string[] ItemIdentifiers => [.. definesService.ReversedItemDefines.Values];
         public List<KeyValuePair<int, string>> JobIdentifiers => [.. definesService.ReversedJobDefines];
@@ -63,12 +78,62 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     string? modelFileNameWithoutExtension = Path.GetFileNameWithoutExtension(modelFile);
                     if (modelFileNameWithoutExtension == null) continue;
-                    string[] requiredFiles = [..Constants.AngelModelFilesFormats.Select(x => Path.Combine(modelsFolderPath, String.Format(x, modelFileNameWithoutExtension)))];
+                    string[] requiredFiles = [.. Constants.AngelModelFilesFormats.Select(x => Path.Combine(modelsFolderPath, String.Format(x, modelFileNameWithoutExtension)))];
                     if (requiredFiles.All(File.Exists))
                         results.Add(modelFileNameWithoutExtension);
                 }
 
                 return [.. results];
+            }
+        }
+
+        public string[] ModelFilePossibilities
+        {
+            get
+            {
+                string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
+                if (string.IsNullOrEmpty(modelsFolderPath) || !Directory.Exists(modelsFolderPath))
+                    return [];
+                return [.. Directory.GetFiles(modelsFolderPath, "item_*.o3d", SearchOption.TopDirectoryOnly).Select(x => Path.GetFileNameWithoutExtension(x).Substring(5))];
+            }
+        }
+
+        public int[] ModelTexturePossibilities
+        {
+            get
+            {
+                string texturesFolderPath = settingsService.Settings.TexturesFolderPath ?? settingsService.Settings.DefaultTexturesFolderPath;
+
+                if (D3DHost == null || string.IsNullOrEmpty(texturesFolderPath) || !Directory.Exists(texturesFolderPath))
+                    return [];
+
+                List<int> availableAdditionalTextures = [];
+                if (D3DHost.MaterialTextures.Length > 0)
+                {
+                    string textureFile = D3DHost.MaterialTextures[0];
+                    var pattern = $"{textureFile}-et??.dds";
+                    string[] files = [.. Directory.GetFiles(texturesFolderPath, pattern, SearchOption.TopDirectoryOnly).Select(x => Path.GetFileNameWithoutExtension(x))];
+                    foreach (string file in files)
+                    {
+                        string fileName = file;
+                        if (int.TryParse(fileName.AsSpan(fileName.Length - 2), out int index))
+                            availableAdditionalTextures.Add(index);
+                    }
+                    for (int i = availableAdditionalTextures.Count - 1; i >= 0; i--)
+                    {
+                        int textureIndex = availableAdditionalTextures[i];
+                        foreach (string materialTextureFile in D3DHost.MaterialTextures)
+                        {
+                            if (!File.Exists($"{texturesFolderPath}{materialTextureFile}-et{textureIndex:D2}.dds"))
+                            {
+                                availableAdditionalTextures.Remove(textureIndex);
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                return [0, .. availableAdditionalTextures];
             }
         }
 
@@ -100,9 +165,48 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             ItemsView.Filter = new Predicate<object>(FilterItem);
 
+            ItemsView.CurrentChanged += ItemsView_CurrentChanged;
+            ItemsView.CurrentChanging += ItemsView_CurrentChanging;
+
             InitializeModelsFileWatcher();
 
             _isInitialized = true;
+        }
+
+        private void ItemsView_CurrentChanging(object sender, CurrentChangingEventArgs e)
+        {
+            if (sender != ItemsView)
+                throw new InvalidOperationException("sender != ItemsView");
+
+            if (ItemsView.CurrentItem is Item currentItem)
+                currentItem.PropertyChanged -= CurrentItem_PropertyChanged;
+        }
+
+        private void ItemsView_CurrentChanged(object? sender, EventArgs e)
+        {
+            if(sender != ItemsView)
+                throw new InvalidOperationException("sender != ItemsView");
+
+            if (ItemsView.CurrentItem is Item currentItem)
+            {
+                currentItem.PropertyChanged += CurrentItem_PropertyChanged;
+                D3DHost?.CurrentModel = currentItem.Model;
+            }
+        }
+
+        private void CurrentItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (ItemsView.CurrentItem is not Item currentItem)
+                throw new InvalidOperationException("ItemsView.CurrentItem is not Item");
+            if (sender != currentItem)
+                throw new InvalidOperationException("sender != currentItem");
+
+            switch (e.PropertyName)
+            {
+                case nameof(Item.Model):
+                    D3DHost?.CurrentModel = currentItem.Model;
+                    break;
+            }
         }
 
         [MemberNotNull(nameof(_modelFilesWatcher))]
@@ -121,6 +225,33 @@ namespace eTools_Ultimate.ViewModels.Pages
             _modelFilesWatcher.Changed += (_, __) => OnPropertyChanged(nameof(AngelModelFileNamePossibilities));
             _modelFilesWatcher.Deleted += (_, __) => OnPropertyChanged(nameof(AngelModelFileNamePossibilities));
             _modelFilesWatcher.Renamed += (_, __) => OnPropertyChanged(nameof(AngelModelFileNamePossibilities));
+        }
+
+        public void InitializeD3DHost(nint hwnd)
+        {
+            D3DHost = new(hwnd, localizer);
+            D3DHost.Initialize(hwnd);
+            D3DHost.BindBackBuffer();
+
+            D3DHost.PropertyChanged += D3DHost_PropertyChanged;
+
+            if (ItemsView.CurrentItem is Item currentItem && currentItem.Model is Model currentModel)
+                D3DHost.CurrentModel = currentModel;
+        }
+
+        private void D3DHost_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (sender != D3DHost)
+                throw new InvalidOperationException("sender != D3DHost");
+            if (D3DHost is null)
+                throw new InvalidOperationException("D3DHost is null");
+
+            switch(e.PropertyName)
+            {
+                case nameof(D3DHost.MaterialTextures):
+                    OnPropertyChanged(nameof(ModelTexturePossibilities));
+                    break;
+            }
         }
 
         private bool FilterItem(object obj)
