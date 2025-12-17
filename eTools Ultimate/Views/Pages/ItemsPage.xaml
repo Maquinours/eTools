@@ -3347,7 +3347,13 @@
                                     VerticalAlignment="Top"
                                     Panel.ZIndex="1"
                                     Orientation="Horizontal">
-                                    <ui:Button Command="{Binding ShowReferenceModelContentDialogCommand}" ToolTip="{i18n:StringLocalizer 'Reference Model'}">
+                                    <ui:Button Command="{Binding ViewModel.RenderLootModelCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}" ToolTip="{i18n:StringLocalizer 'View loot model'}">
+                                        <ui:SymbolIcon Symbol="ImageReflection24" />
+                                    </ui:Button>
+                                    <ui:Button Command="{Binding ViewModel.RenderMalePartModelCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}" ToolTip="{i18n:StringLocalizer 'View male part model'}">
+                                        <ui:SymbolIcon Symbol="ImageReflection24" />
+                                    </ui:Button>
+                                    <ui:Button Command="{Binding ViewModel.RenderFemalePartModelCommand, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}" ToolTip="{i18n:StringLocalizer 'View female part model'}">
                                         <ui:SymbolIcon Symbol="ImageReflection24" />
                                     </ui:Button>
                                 </StackPanel>
@@ -3391,11 +3397,120 @@
                                 </Grid>
                             </Grid>
 
+                            <!--  Use part  -->
+                            <Grid Style="{StaticResource FormFieldStyle}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Use part'}" />
+                                    <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                        <ui:SymbolIcon.ToolTip>
+                                            <ToolTip Content="{i18n:StringLocalizer 'Use part'}" />
+                                        </ui:SymbolIcon.ToolTip>
+                                    </ui:SymbolIcon>
+                                </StackPanel>
+                                <CheckBox Grid.Row="1" IsChecked="{Binding IsPartsFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            </Grid>
+
+                            <!--  Male part  -->
+                            <Grid Visibility="{Binding IsPartsFile, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Grid.Style>
+                                    <Style BasedOn="{StaticResource FormFieldStyle}" TargetType="Grid">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ItemSexIdentifier}" Value="SEX_MALE">
+                                                <Setter Property="IsEnabled" Value="True" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ItemSexIdentifier}" Value="=">
+                                                <Setter Property="IsEnabled" Value="True" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Male part'}" />
+                                    <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                        <ui:SymbolIcon.ToolTip>
+                                            <ToolTip Content="{i18n:StringLocalizer 'Model scale factor'}" />
+                                        </ui:SymbolIcon.ToolTip>
+                                    </ui:SymbolIcon>
+                                </StackPanel>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <ui:AutoSuggestBox
+                                        Grid.Row="1"
+                                        OriginalItemsSource="{Binding ViewModel.ModelPartFilePossibilities, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                        Text="{Binding Model.MalePart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ui:Button
+                                        Grid.Column="1"
+                                        Width="30"
+                                        Height="32"
+                                        Margin="5,0,0,0"
+                                        Command="{Binding DataContext.SelectMalePartModelFileCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                        Content="{i18n:StringLocalizer '...'}" />
+                                </Grid>
+                            </Grid>
+
+                            <!--  Female part  -->
+                            <Grid Visibility="{Binding IsPartsFile, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <Grid.Style>
+                                    <Style BasedOn="{StaticResource FormFieldStyle}" TargetType="Grid">
+                                        <Setter Property="IsEnabled" Value="False" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ItemSexIdentifier}" Value="SEX_FEMALE">
+                                                <Setter Property="IsEnabled" Value="True" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ItemSexIdentifier}" Value="=">
+                                                <Setter Property="IsEnabled" Value="True" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Grid.Style>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Female part'}" />
+                                    <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
+                                        <ui:SymbolIcon.ToolTip>
+                                            <ToolTip Content="{i18n:StringLocalizer 'Model scale factor'}" />
+                                        </ui:SymbolIcon.ToolTip>
+                                    </ui:SymbolIcon>
+                                </StackPanel>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <ui:AutoSuggestBox
+                                        Grid.Row="1"
+                                        OriginalItemsSource="{Binding ViewModel.ModelPartFilePossibilities, Mode=OneWay, RelativeSource={RelativeSource AncestorType=Page}}"
+                                        Text="{Binding Model.FemalePart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    <ui:Button
+                                        Grid.Column="1"
+                                        Width="30"
+                                        Height="32"
+                                        Margin="5,0,0,0"
+                                        Command="{Binding DataContext.SelectFemalePartModelFileCommand, RelativeSource={RelativeSource AncestorType=Page}}"
+                                        Content="{i18n:StringLocalizer '...'}" />
+                                </Grid>
+                            </Grid>
+
                             <!--  Scale  -->
                             <Grid Style="{StaticResource FormFieldStyle}">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="32" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <StackPanel Grid.Row="0" Orientation="Horizontal">
                                     <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Scale'}" />
@@ -3411,47 +3526,10 @@
                                     Value="{Binding Model.FScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             </Grid>
 
-                            <!--  Male part  -->
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Male part'}" />
-                                    <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="{i18n:StringLocalizer 'Model scale factor'}" />
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <TextBox Grid.Row="1" Text="{Binding Model.MalePart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            </Grid>
-
-                            <!--  Female part  -->
-                            <Grid Style="{StaticResource FormFieldStyle}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                    <TextBlock Style="{StaticResource FieldLabelStyle}" Text="{i18n:StringLocalizer 'Female part'}" />
-                                    <ui:SymbolIcon Style="{StaticResource InfoIconStyle}" Symbol="Info20">
-                                        <ui:SymbolIcon.ToolTip>
-                                            <ToolTip Content="{i18n:StringLocalizer 'Model scale factor'}" />
-                                        </ui:SymbolIcon.ToolTip>
-                                    </ui:SymbolIcon>
-                                </StackPanel>
-                                <TextBox Grid.Row="1" Text="{Binding Model.FemalePart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            </Grid>
-                        </UniformGrid>
-
-                        <!--  Second Row  -->
-                        <UniformGrid Columns="2">
                             <!--  Texture  -->
                             <Grid Style="{StaticResource FormFieldStyle}">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <StackPanel Grid.Row="0" Orientation="Horizontal">

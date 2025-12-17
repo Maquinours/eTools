@@ -12,6 +12,13 @@ using System.Text;
 
 namespace eTools_Ultimate.Helpers
 {
+    public enum RenderingItem
+    {
+        Loot,
+        MalePart,
+        FemalePart
+    }
+
     [ObservableObject]
     public partial class ItemD3DImageHost(IntPtr hwnd, IStringLocalizer<Translations> localizer) : D3DImageHost(hwnd)
     {
@@ -31,11 +38,26 @@ namespace eTools_Ultimate.Helpers
             }
         }
 
+        public Item? CurrentItem
+        {
+            get;
+            set
+            {
+                if (value == field)
+                    return;
+
+                field?.PropertyChanged -= CurrentItem_PropertyChanged;
+                field = value;
+                field?.PropertyChanged += CurrentItem_PropertyChanged;
+
+                CurrentModel = value?.Model;
+            }
+        }
 
         public Model? CurrentModel
         {
             get => field;
-            set
+            private set
             {
                 if (value == field)
                     return;
@@ -48,19 +70,33 @@ namespace eTools_Ultimate.Helpers
 
                 Clear();
 
+                RenderingItem = RenderingItem.Loot;
+
                 if (value is not null)
                 {
                     value.PropertyChanged += CurrentModel_PropertyChanged;
 
                     LoadModel();
-                    SetModelTexture();
-                    SetScale();
-                    Zoom(720);
                 }
                 else
                     Error = localizer["This item has no model associated."];
             }
         }
+
+        public RenderingItem RenderingItem
+        {
+            get;
+            set
+            {
+                if (value == field)
+                    return;
+                field = value;
+                OnPropertyChanged();
+
+                Clear();
+                LoadModel();
+            }
+        } = RenderingItem.Loot;
 
         public string[] MaterialTextures
         {
@@ -73,6 +109,19 @@ namespace eTools_Ultimate.Helpers
                 OnPropertyChanged();
             }
         } = [];
+
+        private void CurrentItem_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (sender != CurrentItem) throw new InvalidOperationException("sender != CurrentItem");
+            if (CurrentItem == null) throw new InvalidOperationException("CurrentItem == null");
+
+            switch (e.PropertyName)
+            {
+                case nameof(Item.Model):
+                    CurrentModel = CurrentItem.Model;
+                    break;
+            }
+        }
 
         private void CurrentModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
@@ -87,25 +136,26 @@ namespace eTools_Ultimate.Helpers
                     SetScale();
                     break;
                 case nameof(Model.Model3DFilePath):
-                    Clear();
-                    LoadModel();
+                    if (RenderingItem == RenderingItem.Loot)
+                    {
+                        Clear();
+                        LoadModel();
+                    }
                     break;
-            }
-        }
-
-        public void SetCurrentModel(Model? model)
-        {
-            if (model == CurrentModel)
-                return;
-
-            CurrentModel = model;
-
-            Clear();
-
-            if (model is not null)
-            {
-                LoadModel();
-
+                case nameof(Model.MalePartModel3DFilePath):
+                    if (RenderingItem == RenderingItem.MalePart)
+                    {
+                        Clear();
+                        LoadModel();
+                    }
+                    break;
+                case nameof(Model.FemalePartModel3DFilePath):
+                    if (RenderingItem == RenderingItem.FemalePart)
+                    {
+                        Clear();
+                        LoadModel();
+                    }
+                    break;
             }
         }
 
@@ -126,10 +176,20 @@ namespace eTools_Ultimate.Helpers
                 return;
             }
 
-            NativeMethods.LoadModel(_native, CurrentModel.Model3DFilePath);
+            string filePath = RenderingItem switch
+            {
+                RenderingItem.Loot => CurrentModel.Model3DFilePath,
+                RenderingItem.MalePart => CurrentModel.MalePartModel3DFilePath,
+                RenderingItem.FemalePart => CurrentModel.FemalePartModel3DFilePath,
+                _ => throw new NotImplementedException(),
+            };
+
+            NativeMethods.LoadModel(_native, filePath);
 
             SetModelTexture();
             SetScale();
+
+            Zoom(720);
 
             Render();
 
@@ -158,6 +218,11 @@ namespace eTools_Ultimate.Helpers
 
         private void RefreshMaterialTextures()
         {
+            MaterialTextures = [];
+
+            if(RenderingItem != RenderingItem.Loot)
+                return;
+
             int texturesLength = NativeMethods.GetMaterialTexturesSize(_native);
 
             List<string> textureFiles = [];

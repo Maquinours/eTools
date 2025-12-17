@@ -98,6 +98,17 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
+        public string[] ModelPartFilePossibilities
+        {
+            get
+            {
+                string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
+                if (string.IsNullOrEmpty(modelsFolderPath) || !Directory.Exists(modelsFolderPath))
+                    return [];
+                return [.. Directory.GetFiles(modelsFolderPath, "part_*.o3d", SearchOption.TopDirectoryOnly).Select(x => Path.GetFileNameWithoutExtension(x).Substring(5))];
+            }
+        }
+
         public int[] ModelTexturePossibilities
         {
             get
@@ -166,47 +177,21 @@ namespace eTools_Ultimate.ViewModels.Pages
             ItemsView.Filter = new Predicate<object>(FilterItem);
 
             ItemsView.CurrentChanged += ItemsView_CurrentChanged;
-            ItemsView.CurrentChanging += ItemsView_CurrentChanging;
 
             InitializeModelsFileWatcher();
 
             _isInitialized = true;
         }
 
-        private void ItemsView_CurrentChanging(object sender, CurrentChangingEventArgs e)
+        private void ItemsView_CurrentChanged(object? sender, EventArgs e)
         {
             if (sender != ItemsView)
                 throw new InvalidOperationException("sender != ItemsView");
 
             if (ItemsView.CurrentItem is Item currentItem)
-                currentItem.PropertyChanged -= CurrentItem_PropertyChanged;
-        }
-
-        private void ItemsView_CurrentChanged(object? sender, EventArgs e)
-        {
-            if(sender != ItemsView)
-                throw new InvalidOperationException("sender != ItemsView");
-
-            if (ItemsView.CurrentItem is Item currentItem)
-            {
-                currentItem.PropertyChanged += CurrentItem_PropertyChanged;
-                D3DHost?.CurrentModel = currentItem.Model;
-            }
-        }
-
-        private void CurrentItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (ItemsView.CurrentItem is not Item currentItem)
-                throw new InvalidOperationException("ItemsView.CurrentItem is not Item");
-            if (sender != currentItem)
-                throw new InvalidOperationException("sender != currentItem");
-
-            switch (e.PropertyName)
-            {
-                case nameof(Item.Model):
-                    D3DHost?.CurrentModel = currentItem.Model;
-                    break;
-            }
+                D3DHost?.CurrentItem = currentItem;
+            else if (ItemsView.CurrentItem is null)
+                D3DHost?.CurrentItem = null;
         }
 
         [MemberNotNull(nameof(_modelFilesWatcher))]
@@ -235,8 +220,8 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             D3DHost.PropertyChanged += D3DHost_PropertyChanged;
 
-            if (ItemsView.CurrentItem is Item currentItem && currentItem.Model is Model currentModel)
-                D3DHost.CurrentModel = currentModel;
+            if (ItemsView.CurrentItem is Item currentItem)
+                D3DHost.CurrentItem = currentItem;
         }
 
         private void D3DHost_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -246,7 +231,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (D3DHost is null)
                 throw new InvalidOperationException("D3DHost is null");
 
-            switch(e.PropertyName)
+            switch (e.PropertyName)
             {
                 case nameof(D3DHost.MaterialTextures):
                     OnPropertyChanged(nameof(ModelTexturePossibilities));
@@ -258,10 +243,8 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (obj is not Item item) return false;
             if (string.IsNullOrEmpty(this.SearchText)) return true;
-            string lowerSearch = this.SearchText.ToLower();
-            return item.Name.Contains(lowerSearch, StringComparison.OrdinalIgnoreCase)
-                //|| DefinesService.Instance.Defines.FirstOrDefault(x => x.Key.StartsWith("II_") && x.Value == item.Id).Key.Contains(lowerSearch, StringComparison.OrdinalIgnoreCase)
-                ;
+
+            return item.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || item.Identifier.Contains(SearchText, StringComparison.OrdinalIgnoreCase);
         }
 
         public void RefreshBuffGiftedItemSuggestions(string searchText)
@@ -379,6 +362,105 @@ namespace eTools_Ultimate.ViewModels.Pages
                 return;
 
             item.SzTextFileName = fileName;
+        }
+
+        [RelayCommand]
+        private void SelectModelFile()
+        {
+            if (ItemsView.CurrentItem is not Item item) return;
+            if (item.Model is null) return;
+
+            string? filePath = FileFolderSelector.SelectFile(item.Model.Model3DFilePath, eTools_Ultimate.Resources.Texts.SelectMoverModelFile, $"{eTools_Ultimate.Resources.Texts.Mover3DFile}|item_*.o3d");
+
+            string? directoryPath = Path.GetDirectoryName(filePath);
+            string? fileName = Path.GetFileNameWithoutExtension(filePath);
+            string? fileExtension = Path.GetExtension(filePath);
+            string? modelsFolderPath = Path.GetDirectoryName(settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath);
+
+            if (
+                filePath is null ||
+                directoryPath is null ||
+                fileName is null ||
+                fileExtension is null ||
+                !directoryPath.Equals(modelsFolderPath, StringComparison.OrdinalIgnoreCase) ||
+                !fileName.StartsWith("item_", StringComparison.OrdinalIgnoreCase) ||
+                !fileExtension.Equals(".o3d", StringComparison.OrdinalIgnoreCase)
+                )
+                return;
+
+            item.Model.SzName = fileName.Substring(5);
+        }
+
+        [RelayCommand]
+        private void SelectMalePartModelFile()
+        {
+            if (ItemsView.CurrentItem is not Item item) return;
+            if (item.Model is null) return;
+
+            string? filePath = FileFolderSelector.SelectFile(item.Model.MalePartModel3DFilePath, eTools_Ultimate.Resources.Texts.SelectMoverModelFile, $"{eTools_Ultimate.Resources.Texts.Mover3DFile}|part_*.o3d");
+
+            string? directoryPath = Path.GetDirectoryName(filePath);
+            string? fileName = Path.GetFileNameWithoutExtension(filePath);
+            string? fileExtension = Path.GetExtension(filePath);
+            string? modelsFolderPath = Path.GetDirectoryName(settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath);
+
+            if (
+                filePath is null ||
+                directoryPath is null ||
+                fileName is null ||
+                fileExtension is null ||
+                !directoryPath.Equals(modelsFolderPath, StringComparison.OrdinalIgnoreCase) ||
+                !fileName.StartsWith("part_", StringComparison.OrdinalIgnoreCase) ||
+                !fileExtension.Equals(".o3d", StringComparison.OrdinalIgnoreCase)
+                )
+                return;
+
+            item.Model.MalePart = fileName.Substring(5);
+        }
+
+        [RelayCommand]
+        private void SelectFemalePartModelFile()
+        {
+            if (ItemsView.CurrentItem is not Item item) return;
+            if (item.Model is null) return;
+
+            string? filePath = FileFolderSelector.SelectFile(item.Model.FemalePartModel3DFilePath, eTools_Ultimate.Resources.Texts.SelectMoverModelFile, $"{eTools_Ultimate.Resources.Texts.Mover3DFile}|part_*.o3d");
+
+            string? directoryPath = Path.GetDirectoryName(filePath);
+            string? fileName = Path.GetFileNameWithoutExtension(filePath);
+            string? fileExtension = Path.GetExtension(filePath);
+            string? modelsFolderPath = Path.GetDirectoryName(settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath);
+
+            if (
+                filePath is null ||
+                directoryPath is null ||
+                fileName is null ||
+                fileExtension is null ||
+                !directoryPath.Equals(modelsFolderPath, StringComparison.OrdinalIgnoreCase) ||
+                !fileName.StartsWith("part_", StringComparison.OrdinalIgnoreCase) ||
+                !fileExtension.Equals(".o3d", StringComparison.OrdinalIgnoreCase)
+                )
+                return;
+
+            item.Model.FemalePart = fileName.Substring(5);
+        }
+
+        [RelayCommand]
+        private void RenderLootModel()
+        {
+            D3DHost?.RenderingItem = RenderingItem.Loot;
+        }
+
+        [RelayCommand]
+        private void RenderMalePartModel()
+        {
+            D3DHost?.RenderingItem = RenderingItem.MalePart;
+        }
+
+        [RelayCommand]
+        private void RenderFemalePartModel()
+        {
+            D3DHost?.RenderingItem = RenderingItem.FemalePart;
         }
     }
 }

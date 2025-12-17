@@ -117,9 +117,13 @@ namespace eTools_Ultimate.Models.Models
             }
             set
             {
-                string[] partsFileNames = SzPart.Split('/');
-                partsFileNames[0] = value;
-                SzPart = String.Join("/", partsFileNames);
+                string val = value.Replace("/", "");
+                string femalePart = FemalePart;
+
+                if(val == femalePart)
+                    SzPart = val;
+                else
+                    SzPart = $"{val}/{femalePart}";
             }
         }
 
@@ -133,46 +137,40 @@ namespace eTools_Ultimate.Models.Models
             }
             set
             {
-                string[] partsFileNames = SzPart.Split('/');
-                if (partsFileNames.Length == 1)
-                    partsFileNames[0] = value;
+                string malePart = MalePart;
+
+                if (value == malePart)
+                    SzPart = value;
                 else
-                {
-                    partsFileNames = [..partsFileNames.Where((x, i) => i < 2)];
-                    partsFileNames[1] = value;
-                }
-                SzPart = String.Join("/", partsFileNames);
+                    SzPart = $"{malePart}/{value}";
             }
         }
 
-        public string MalePartModel3DFileName
+        public string MalePartModel3DFilePath
         {
             get
             {
-                string fileName = "part_";
-                string[] partsFileNames = SzPart.Split('/');
+                Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
 
-                fileName += partsFileNames[0];
-                fileName += ".o3d";
+                string modelsFolderPath = settings.ModelsFolderPath ?? settings.DefaultModelsFolderPath;
 
-                return fileName;
+                string fileName = $"part_{MalePart}.o3d";
+
+                return Path.Combine(modelsFolderPath, fileName);
             }
         }
 
-        public string FemalePartModel3DFileName
+        public string FemalePartModel3DFilePath
         {
             get
             {
-                string fileName = "part_";
-                string[] partsFileNames = SzPart.Split('/');
+                Settings settings = App.Services.GetRequiredService<SettingsService>().Settings;
 
-                if (partsFileNames.Length == 0)
-                    fileName += partsFileNames[0];
-                else
-                    fileName += partsFileNames[1];
-                fileName += ".o3d";
+                string modelsFolderPath = settings.ModelsFolderPath ?? settings.DefaultModelsFolderPath;
 
-                return fileName;
+                string fileName = $"part_{FemalePart}.o3d";
+
+                return Path.Combine(modelsFolderPath, fileName);
             }
         }
 
@@ -290,6 +288,12 @@ namespace eTools_Ultimate.Models.Models
                     NotifyPropertyChanged(nameof(Model3DFileName));
                     NotifyPropertyChanged(nameof(Model3DFilePath));
                     // Add handles to settings path
+                    break;
+                case nameof(SzPart):
+                    NotifyPropertyChanged(nameof(MalePart));
+                    NotifyPropertyChanged(nameof(FemalePart));
+                    NotifyPropertyChanged(nameof(MalePartModel3DFilePath));
+                    NotifyPropertyChanged(nameof(FemalePartModel3DFilePath));
                     break;
             }
         }

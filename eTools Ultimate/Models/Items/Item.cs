@@ -888,6 +888,12 @@ namespace eTools_Ultimate.Models.Items
                 return bitmapImage;
             }
         }
+
+        public bool IsPartsFile
+        {
+            get => BPartsFile == 1u;
+            set => BPartsFile = value ? 1u : 0u;
+        }
         #endregion
         #endregion
 
@@ -1377,6 +1383,9 @@ namespace eTools_Ultimate.Models.Items
                     break;
                 case nameof(SzTextFileName):
                     NotifyPropertyChanged(nameof(PaperingTexture));
+                    break;
+                case nameof(BPartsFile):
+                    NotifyPropertyChanged(nameof(IsPartsFile));
                     break;
             }
         }
