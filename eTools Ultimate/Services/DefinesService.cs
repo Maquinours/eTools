@@ -74,23 +74,23 @@ namespace eTools_Ultimate.Services
                 scanner.GetToken();
                 while (!scanner.EndOfStream)
                 {
-                    if (scanner.Token != "#define")
+                    if (scanner.Token == "#define")
                     {
-                        scanner.GetToken();
-                        continue;
+                        string key = scanner.GetToken();
+                        int value = scanner.GetNumber();
+
+                        if (scanner.TokenType != TokenType.NUMBER && scanner.TokenType != TokenType.HEX)
+                            continue;
+
+                        tempDefines[key] = value;
+
+                        string reversedDefineIndex = key.Split('_')[0];
+                        if (!tempReversedDefines.ContainsKey(reversedDefineIndex))
+                            tempReversedDefines[reversedDefineIndex] = [];
+                        tempReversedDefines[reversedDefineIndex][value] = key;
                     }
-                    string key = scanner.GetToken();
-                    int value = scanner.GetNumber();
-
-                    if (scanner.TokenType != TokenType.NUMBER && scanner.TokenType != TokenType.HEX) 
-                        continue;
-
-                    tempDefines[key] = value;
-
-                    string reversedDefineIndex = key.Split('_')[0];
-                    if (!tempReversedDefines.ContainsKey(reversedDefineIndex))
-                        tempReversedDefines[reversedDefineIndex] = [];
-                    tempReversedDefines[reversedDefineIndex][value] = key;
+                    else if (scanner.Token == "{")
+                        break;
 
                     scanner.GetToken();
                 }
