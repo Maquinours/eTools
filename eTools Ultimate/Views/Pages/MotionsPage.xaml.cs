@@ -35,8 +35,8 @@ namespace eTools_Ultimate.Views.Pages
         {
             var hwnd = new WindowInteropHelper(Window.GetWindow(this)).Handle;
 
-            D3DImageHost d3dHost = ViewModel.InitializeD3DHost(hwnd);
-            DxImage.Source = d3dHost;
+            //D3DImageHost d3dHost = ViewModel.InitializeD3DHost(hwnd);
+            //DxImage.Source = d3dHost;
         }
 
         private void DxImage_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -57,13 +57,13 @@ namespace eTools_Ultimate.Views.Pages
             Point mousePosition = e.GetPosition(null);
             Vector deltaPosition = _lastMousePosition - mousePosition;
 
-            int w = NativeMethods.GetSurfaceWidth(ViewModel.D3dHost._native);
-            int h = NativeMethods.GetSurfaceHeight(ViewModel.D3dHost._native);
+            //int w = NativeMethods.GetSurfaceWidth(ViewModel.D3dHost._native);
+            //int h = NativeMethods.GetSurfaceHeight(ViewModel.D3dHost._native);
 
             //double transformX = w / DxImage.ActualWidth;
             //double transformY = h / DxImage.ActualHeight;
 
-            NativeMethods.RotateCamera(ViewModel.D3dHost._native, (int)(deltaPosition.X), (int)(deltaPosition.Y));
+            //NativeMethods.RotateCamera(ViewModel.D3dHost._native, (int)(deltaPosition.X), (int)(deltaPosition.Y));
 
             _lastMousePosition = mousePosition;
         }
@@ -71,7 +71,7 @@ namespace eTools_Ultimate.Views.Pages
         private void DxImage_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
             if (ViewModel.D3dHost is null) return;
-            NativeMethods.ZoomCamera(ViewModel.D3dHost._native, e.Delta);
+            //NativeMethods.ZoomCamera(ViewModel.D3dHost._native, e.Delta);
             e.Handled = true;
         }
     }

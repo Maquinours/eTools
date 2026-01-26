@@ -1,0 +1,60 @@
+﻿<UserControl
+    x:Class="eTools_Ultimate.Views.Controls.Mover3DImage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:eTools_Ultimate.Views.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+    d:DataContext="{d:DesignInstance local:Mover3DImage,
+                                     IsDesignTimeCreatable=False}"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Loaded="UserControl_Loaded"
+    mc:Ignorable="d">
+    <Grid>
+        <Image
+            x:Name="DxImage"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            MouseRightButtonDown="DxImage_MouseRightButtonDown"
+            MouseWheel="DxImage_MouseWheel"
+            Stretch="UniformToFill" />
+        <Border
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Background="{DynamicResource LayerFillColorDefaultBrush}"
+            Opacity="0.95">
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Error, Mode=OneWay, RelativeSource={RelativeSource AncestorType=UserControl}}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <ui:SymbolIcon
+                    Margin="0,0,0,10"
+                    FontSize="48"
+                    Foreground="{DynamicResource SystemFillColorCautionBrush}"
+                    Symbol="Warning24" />
+                <TextBlock
+                    Margin="0,0,0,10"
+                    HorizontalAlignment="Center"
+                    FontSize="16"
+                    FontWeight="SemiBold"
+                    Foreground="{DynamicResource TextFillColorPrimaryBrush}"
+                    Text="{Binding Error.Title, Mode=OneWay, RelativeSource={RelativeSource AncestorType=UserControl}}" />
+                <TextBlock
+                    MaxWidth="250"
+                    Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                    Text="{Binding Error.Description, Mode=OneWay, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

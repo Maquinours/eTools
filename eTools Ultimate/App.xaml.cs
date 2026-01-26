@@ -143,6 +143,8 @@ namespace eTools_Ultimate
                 services.AddSingleton<eTools_Ultimate.Views.Pages.ChangeLog.ChangeLogView>();
                 services.AddSingleton<eTools_Ultimate.ViewModels.Pages.ChangeLog.ChangeLogViewModel>();
 
+                services.AddSingleton<GlobalMouseHookService>();
+
                 // Localizers
                 services.AddStringLocalizer(b =>
                 {
@@ -212,6 +214,7 @@ namespace eTools_Ultimate
         /// </summary>
         private async void OnStartup(object sender, StartupEventArgs e)
         {
+            //Services.GetRequiredService<GlobalMouseHookService>().Start();
             await _host.StartAsync();
         }
 
@@ -220,6 +223,7 @@ namespace eTools_Ultimate
         /// </summary>
         private async void OnExit(object sender, ExitEventArgs e)
         {
+            //Services.GetRequiredService<GlobalMouseHookService>().Stop();
             await _host.StopAsync();
 
             _host.Dispose();

@@ -34,19 +34,10 @@ namespace eTools_Ultimate.ViewModels.Pages
         #region Properties
         private bool _isInitialized = false;
 
-        public D3DImageHost? D3dHost { get; private set; } = null;
-
-        [ObservableProperty]
-        private bool _auto3DRendering = false;
-
         [ObservableProperty]
         private ICollectionView _moversView = CollectionViewSource.GetDefaultView(moversService.Movers);
 
         private string _searchText = string.Empty;
-
-        private string[] _object3DMaterialTextures = [];
-
-        private string? _modelViewerError = null;
 
         #region File system watchers
         private FileSystemWatcher _modelsDirectoryWatcher = new()
@@ -106,22 +97,6 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        public string? ModelViewerError
-        {
-            get => _modelViewerError;
-            set
-            {
-                if (_modelViewerError != value)
-                {
-                    _modelViewerError = value;
-                    OnPropertyChanged(nameof(ModelViewerError));
-                    OnPropertyChanged(nameof(HasModelViewerError));
-                }
-            }
-        }
-
-        public bool HasModelViewerError => ModelViewerError is not null;
-
         public string[] ModelFilePossibilities
         {
             get
@@ -135,17 +110,17 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         public string[] Object3DMaterialTextures
         {
-            get => _object3DMaterialTextures;
+            get;
             set
             {
-                if (_object3DMaterialTextures != value)
+                if (field != value)
                 {
-                    _object3DMaterialTextures = value;
+                    field = value;
                     OnPropertyChanged(nameof(Object3DMaterialTextures));
                     OnPropertyChanged(nameof(ModelTexturesPossibilities));
                 }
             }
-        }
+        } = [];
 
         public int[] ModelTexturesPossibilities
         {
@@ -160,7 +135,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (Object3DMaterialTextures.Length > 0)
                 {
                     string textureFile = Object3DMaterialTextures[0];
-                    var pattern = $"{textureFile}-et??.dds";
+                    var pattern = $"{Path.GetFileNameWithoutExtension(textureFile)}-et??{Path.GetExtension(textureFile)}";
                     string[] files = [.. Directory.GetFiles(texturesFolderPath, pattern, SearchOption.TopDirectoryOnly).Select(x => Path.GetFileNameWithoutExtension(x))];
                     foreach (string file in files)
                     {
@@ -173,7 +148,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                         int textureIndex = availableAdditionalTextures[i];
                         foreach (string materialTextureFile in Object3DMaterialTextures)
                         {
-                            if (!File.Exists($"{texturesFolderPath}{materialTextureFile}-et{textureIndex:D2}.dds"))
+                            if (!File.Exists($"{texturesFolderPath}{Path.GetFileNameWithoutExtension(materialTextureFile)}-et{textureIndex:D2}{Path.GetExtension(materialTextureFile)}"))
                             {
                                 availableAdditionalTextures.Remove(textureIndex);
                                 break;
@@ -202,12 +177,14 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        public List<KeyValuePair<int, string>> MoverIdentifiers => definesService.ReversedMoverDefines.ToList();
-        public List<KeyValuePair<int, string>> BelligerenceIdentifiers => definesService.ReversedBelligerenceDefines.ToList();
-        public List<KeyValuePair<int, string>> AiIdentifiers => definesService.ReversedAiDefines.ToList();
-        public List<KeyValuePair<int, string>> MotionIdentifiers => definesService.ReversedMotionTypeDefines.ToList();
-        public List<KeyValuePair<int, string>> SoundIdentifiers => definesService.ReversedSoundDefines.ToList();
-        public List<KeyValuePair<int, string>> RankIdentifiers => definesService.ReversedRankDefines.ToList();
+        public Mover3DModelViewerConfig ModelViewerConfig { get; } = new();
+
+        public List<KeyValuePair<int, string>> MoverIdentifiers => [.. definesService.ReversedMoverDefines];
+        public List<KeyValuePair<int, string>> BelligerenceIdentifiers => [.. definesService.ReversedBelligerenceDefines];
+        public List<KeyValuePair<int, string>> AiIdentifiers => [.. definesService.ReversedAiDefines];
+        public List<KeyValuePair<int, string>> MotionIdentifiers => [.. definesService.ReversedMotionTypeDefines];
+        public List<KeyValuePair<int, string>> SoundIdentifiers => [.. definesService.ReversedSoundDefines];
+        public List<KeyValuePair<int, string>> RankIdentifiers => [.. definesService.ReversedRankDefines];
         #endregion Fields
 
         public Task OnNavigatedToAsync()
@@ -219,21 +196,6 @@ namespace eTools_Ultimate.ViewModels.Pages
         }
 
         public Task OnNavigatedFromAsync() => Task.CompletedTask;
-
-        public D3DImageHost InitializeD3DHost(nint hwnd)
-        {
-            D3dHost = new D3DImageHost(hwnd);
-            D3dHost.Initialize(hwnd);
-            D3dHost.BindBackBuffer();
-            LoadModel();
-            return D3dHost;
-        }
-
-        private void CompositionTarget_Rendering(object? sender, EventArgs e)
-        {
-            if (Auto3DRendering && D3dHost is not null)
-                D3dHost.Render();
-        }
 
         private void InitializeViewModel()
         {
@@ -286,14 +248,9 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (mover.Model is not null)
                 {
                     mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
-                    mover.Model.MotionsView.CurrentChanging += MotionsView_CurrentChanging;
                     mover.Model.MotionsView.CurrentChanged += MotionsView_CurrentChanged;
-                    if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
-                        currentMotion.PropertyChanged += CurrentMotion_PropertyChanged;
                 }
             }
-
-            CompositionTarget.Rendering += CompositionTarget_Rendering;
 
             _isInitialized = true;
         }
@@ -330,117 +287,6 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (string.IsNullOrEmpty(SearchText)) return true;
             return mover.Name.Contains(SearchText, StringComparison.OrdinalIgnoreCase) || mover.Identifier.Contains(SearchText, StringComparison.OrdinalIgnoreCase);
         }
-
-        #region 3D model viewer methods
-        private void LoadModel()
-        {
-            Auto3DRendering = false;
-            ModelViewerError = null;
-            if (D3dHost is null) return;
-            NativeMethods.DeleteModel(D3dHost._native); // Clear the previous model if any
-            NativeMethods.DeleteReferenceModel(D3dHost._native); // Clear the reference model if any
-            D3dHost.Render();
-            if (MoversView.CurrentItem is not Mover mover) return;
-
-            if (mover.Model is null)
-            {
-                ModelViewerError = localizer["No model associated with the selected mover."];
-                return;
-            }
-
-
-            if (mover.Identifier == "MI_MALE" || mover.Identifier == "MI_FEMALE")
-            {
-                string[] parts = mover.Identifier switch
-                {
-                    "MI_MALE" => [
-                        "Part_maleHair06.o3d",
-                        "Part_maleHead01.o3d",
-                        "Part_maleHand.o3d",
-                        "Part_maleLower.o3d",
-                        "Part_maleUpper.o3d",
-                        "Part_maleFoot.o3d",
-                    ],
-                    "MI_FEMALE" => [
-                        "Part_femaleHair06.o3d",
-                        "Part_femaleHead01.o3d",
-                        "Part_femaleHand.o3d",
-                        "Part_femaleLower.o3d",
-                        "Part_femaleUpper.o3d",
-                        "Part_femaleFoot.o3d",
-                    ],
-                    _ => throw new InvalidOperationException($"MoverViewModel::LoadModel exception : mover model is loaded like player but is not player. Identifier => {mover.Identifier}")
-                };
-                string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
-                string[] partsPath = [.. parts.Select(part => $"{modelsFolderPath}{part}")];
-
-                foreach (string partPath in partsPath)
-                {
-                    if (!File.Exists(partPath))
-                    {
-                        ModelViewerError = String.Format(localizer["Unable to find file: {0}"], partPath);
-                        return;
-                    }
-                }
-
-                foreach (string partPath in partsPath)
-                {
-                    NativeMethods.SetParts(D3dHost._native, partPath);
-                }
-            }
-            else
-            {
-                if (!File.Exists(mover.Model.Model3DFilePath))
-                {
-                    ModelViewerError = String.Format(localizer["Unable to find file: {0}"], mover.Model.Model3DFilePath);
-                    return;
-                }
-                //CompositionTarget.Rendering -= CompositionTarget_Rendering;
-                NativeMethods.LoadModel(D3dHost._native, mover.Model.Model3DFilePath);
-            }
-
-            SetModelTexture();
-            SetScale();
-
-            int texturesLength = NativeMethods.GetMaterialTexturesSize(D3dHost._native);
-
-            List<string> textureFiles = [];
-            for (int i = 0; i < texturesLength; i++)
-            {
-                IntPtr textureName = NativeMethods.GetMaterialTexture(D3dHost._native, i);
-                string? texture = Marshal.PtrToStringAnsi(textureName);
-                texture = Path.GetFileNameWithoutExtension(texture);
-                if (texture is not null)
-                    textureFiles.Add(texture);
-            }
-            Object3DMaterialTextures = [.. textureFiles];
-            D3dHost.Render();
-        }
-
-        private void SetModelTexture()
-        {
-            if (D3dHost is null) return;
-            if (MoversView.CurrentItem is not Mover mover) return;
-            if (mover.Model is null) return;
-
-            int textureEx = mover.Model.NTextureEx;
-            NativeMethods.SetTextureEx(D3dHost._native, textureEx);
-            if (!Auto3DRendering)
-                D3dHost.Render();
-        }
-
-        private void SetScale()
-        {
-            if (D3dHost is null) return;
-            if (MoversView.CurrentItem is not Mover mover) return;
-            if (mover.Model is null) return;
-
-            float scale = mover.Model.FScale;
-            NativeMethods.SetScale(D3dHost._native, scale);
-            if (!Auto3DRendering)
-                D3dHost.Render();
-        }
-        #endregion 3D model viewer methods
 
         #region Event handlers
         private void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -490,15 +336,6 @@ namespace eTools_Ultimate.ViewModels.Pages
         private void ModelFile_Changed(object sender, FileSystemEventArgs e)
         {
             OnPropertyChanged(nameof(ModelFilePossibilities));
-            if (MoversView.CurrentItem is not Mover mover) return;
-            if (mover.Model is null) return;
-
-            string modelPath = mover.Model.Model3DFilePath;
-
-            if (e.FullPath == modelPath || (e is RenamedEventArgs renamedArgs && renamedArgs.OldFullPath == modelPath))
-            {
-                LoadModel();
-            }
         }
 
         private void ModelTextureFile_Changed(object sender, FileSystemEventArgs e)
@@ -549,11 +386,10 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (mover.Model is not null)
             {
                 mover.Model.PropertyChanged -= CurrentMoverModel_PropertyChanged;
-                mover.Model.MotionsView.CurrentChanging -= MotionsView_CurrentChanging;
                 mover.Model.MotionsView.CurrentChanged -= MotionsView_CurrentChanged;
-                if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
-                    currentMotion.PropertyChanged -= CurrentMotion_PropertyChanged;
             }
+
+            StopMotion();
         }
 
         private void CurrentMover_Changed(object? sender, EventArgs e)
@@ -564,10 +400,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (mover.Model is not null)
                 {
                     mover.Model.PropertyChanged += CurrentMoverModel_PropertyChanged;
-                    mover.Model.MotionsView.CurrentChanging += MotionsView_CurrentChanging;
                     mover.Model.MotionsView.CurrentChanged += MotionsView_CurrentChanged;
-                    if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
-                        currentMotion.PropertyChanged += CurrentMotion_PropertyChanged;
                 }
             }
 
@@ -581,7 +414,6 @@ namespace eTools_Ultimate.ViewModels.Pages
             {
                 Log.Error(ex, "Error during MoversViewModel motions directory watcher re-initialization.");
             }
-            LoadModel();
         }
 
         private void CurrentMover_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -593,40 +425,18 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (sender != mover)
                 throw new InvalidOperationException("MoversViewModel::CurrentMover_PropertyChanged exception: called with non current mover sender.");
 
-            if (e.PropertyName == nameof(Mover.DwId))
-            {
-                if (e is not PropertyChangedExtendedEventArgs extendedArgs)
-                    throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non PropertyChangedExtendedEventArgs.");
-                if (extendedArgs.OldValue is not int oldId)
-                    throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non int old DwId value.");
-                if (extendedArgs.NewValue is not int newId)
-                    throw new InvalidOperationException("MoversViewModel::CurrentMoverProp_PropertyChanged exception: called with non int new DwId value.");
-
-                string oldIdentifier = Script.NumberToString(oldId, definesService.ReversedMoverDefines);
-                string newIdentifier = Script.NumberToString(newId, definesService.ReversedMoverDefines);
-
-                string[] playerMoverIdentifiers = ["MI_MALE", "MI_FEMALE"];
-                if (playerMoverIdentifiers.Contains(oldIdentifier) || playerMoverIdentifiers.Contains(newIdentifier))
-                    LoadModel();
-            }
-            else if (e.PropertyName == nameof(Mover.Model))
+            if (e.PropertyName == nameof(Mover.Model))
             {
                 if (e is not PropertyChangedExtendedEventArgs extendedArgs) throw new InvalidOperationException("Model property changed args is not PropertyChangedExtendedEventArgs");
                 if (extendedArgs.OldValue is Model oldModel)
                 {
                     oldModel.PropertyChanged -= CurrentMoverModel_PropertyChanged;
-                    oldModel.MotionsView.CurrentChanging -= MotionsView_CurrentChanging;
                     oldModel.MotionsView.CurrentChanged -= MotionsView_CurrentChanged;
-                    if (oldModel.MotionsView.CurrentItem is ModelMotion currentMotion)
-                        currentMotion.PropertyChanged -= CurrentMotion_PropertyChanged;
                 }
                 if (extendedArgs.NewValue is Model newModel)
                 {
                     newModel.PropertyChanged += CurrentMoverModel_PropertyChanged;
-                    newModel.MotionsView.CurrentChanging += MotionsView_CurrentChanging;
                     newModel.MotionsView.CurrentChanged += MotionsView_CurrentChanged;
-                    if (newModel.MotionsView.CurrentItem is ModelMotion currentMotion)
-                        currentMotion.PropertyChanged += CurrentMotion_PropertyChanged;
                 }
 
                 OnPropertyChanged(nameof(ModelTexturesPossibilities));
@@ -639,7 +449,6 @@ namespace eTools_Ultimate.ViewModels.Pages
                 {
                     Log.Error(ex, "Error during MoversViewModel motions directory watcher re-initialization.");
                 }
-                LoadModel();
             }
         }
 
@@ -665,33 +474,8 @@ namespace eTools_Ultimate.ViewModels.Pages
                     {
                         Log.Error(ex, "Error during MoversViewModel motions directory watcher re-initialization.");
                     }
-                    LoadModel();
-                    break;
-                case nameof(Mover.Model.NTextureEx):
-                    SetModelTexture();
-                    break;
-                case nameof(Mover.Model.FScale):
-                    SetScale();
                     break;
             }
-        }
-
-        private void MotionsView_CurrentChanging(object sender, CurrentChangingEventArgs e)
-        {
-            if (sender is not ICollectionView motionsView) throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanging exception: sender is not ICollectionView");
-            if (MoversView.CurrentItem is not Mover mover)
-                throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanging exception: MoversView.CurrentItem is not Mover");
-            if (mover.Model is null)
-                throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanging exception: mover.Model is null");
-            if (motionsView != mover.Model.MotionsView)
-                throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanging exception: sender is not equal to mover model motions view");
-
-            if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
-                currentMotion.PropertyChanged -= CurrentMotion_PropertyChanged;
-            else if (mover.Model.MotionsView.CurrentItem != null)
-                throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanging exception: selected motion is neither ModelMotion nor null");
-
-            StopMotion();
         }
 
         private void MotionsView_CurrentChanged(object? sender, EventArgs e)
@@ -704,29 +488,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (motionsView != mover.Model.MotionsView)
                 throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanged exception: sender is not equal to mover model motions view");
 
-            if (mover.Model.MotionsView.CurrentItem is ModelMotion currentMotion)
-                currentMotion.PropertyChanged += CurrentMotion_PropertyChanged;
-            else if (mover.Model.MotionsView.CurrentItem != null)
-                throw new InvalidOperationException("MoversViewModel::MotionsView_CurrentChanged exception: selected motion is neither ModelMotion nor null");
-
             StopMotion();
-        }
-
-        private void CurrentMotion_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if (sender is not ModelMotion modelMotion)
-                throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: sender is not ModelMotion");
-            if (MoversView.CurrentItem is not Mover mover)
-                throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: MoversView.CurrentItem is not Mover");
-            if (mover.Model is null)
-                throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: mover.Model is null");
-            if (mover.Model.MotionsView.CurrentItem is not ModelMotion motion)
-                throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: MotionsView.CurrentItem is not Motion");
-            if (modelMotion != motion)
-                throw new InvalidOperationException("MoversViewModel::CurrentMotion_PropertyChanged exception: sender is not selected motion prop");
-
-            if (e.PropertyName == nameof(ModelMotion.SzMotion))
-                StopMotion();
         }
         #endregion Event handlers
 
@@ -761,72 +523,14 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private async Task ShowReferenceModelContentDialog()
         {
-            if (D3dHost is null) return;
-
             MoverReferenceModelDialog contentDialog = new(contentDialogService.GetDialogHost());
 
             if (await contentDialog.ShowAsync() == ContentDialogResult.Primary)
             {
-                NativeMethods.DeleteReferenceModel(D3dHost._native);
-                if (!Auto3DRendering)
-                    D3dHost.Render();
-
                 if (contentDialog.DataContext is not MoverReferenceModelViewModel contentDialogViewModel) return;
                 if (contentDialogViewModel.MoversView.CurrentItem is not Mover referenceMover) return;
-                if (referenceMover.Model is not Model referenceModel) return;
 
-                if (referenceMover.Identifier == "MI_MALE" || referenceMover.Identifier == "MI_FEMALE")
-                {
-                    string[] parts = referenceMover.Identifier switch
-                    {
-                        "MI_MALE" => [
-                            "Part_maleHair06.o3d",
-                            "Part_maleHead01.o3d",
-                            "Part_maleHand.o3d",
-                            "Part_maleLower.o3d",
-                            "Part_maleUpper.o3d",
-                            "Part_maleFoot.o3d",
-                    ],
-                        "MI_FEMALE" => [
-                            "Part_femaleHair06.o3d",
-                            "Part_femaleHead01.o3d",
-                            "Part_femaleHand.o3d",
-                            "Part_femaleLower.o3d",
-                            "Part_femaleUpper.o3d",
-                            "Part_femaleFoot.o3d",
-                    ],
-                        _ => throw new InvalidOperationException($"MoverViewModel::ShowReferenceModelContentDialog exception : mover model is loaded like player but is not player. Identifier => {referenceMover.Identifier}")
-                    };
-                    string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
-                    string[] partsPath = [.. parts.Select(part => $"{modelsFolderPath}{part}")];
-
-                    foreach (string partPath in partsPath)
-                    {
-                        if (!File.Exists(partPath))
-                        {
-                            ModelViewerError = $"Part model file not found: {partPath}";
-                            return;
-                        }
-                    }
-
-                    foreach (string partPath in partsPath)
-                    {
-                        NativeMethods.SetReferenceParts(D3dHost._native, partPath);
-                    }
-                }
-                else
-                {
-                    if (!File.Exists(referenceMover.Model.Model3DFilePath))
-                    {
-                        ModelViewerError = $"Model file not found: {referenceMover.Model.Model3DFilePath}";
-                        return;
-                    }
-                    NativeMethods.SetReferenceModel(D3dHost._native, referenceModel.Model3DFilePath);
-                }
-                NativeMethods.SetReferenceScale(D3dHost._native, referenceModel.FScale);
-                NativeMethods.SetReferenceTextureEx(D3dHost._native, referenceModel.NTextureEx);
-                if (!Auto3DRendering)
-                    D3dHost.Render();
+                ModelViewerConfig.ReferenceMover = referenceMover;
             }
         }
 
@@ -993,41 +697,17 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private void PlayMotion()
         {
-            if (D3dHost is null) return;
             if (MoversView.CurrentItem is not Mover mover) return;
             if (mover.Model is null) return;
             if (mover.Model.MotionsView.CurrentItem is not ModelMotion motion) return;
 
-            string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
-            string root = Path.GetFileNameWithoutExtension(mover.Model.Model3DFilePath);
-            string lowerMotionKey = motion.SzMotion;
-
-            string motionFile = $@"{modelsFolderPath}{root}_{lowerMotionKey}.ani";
-
-            if (!File.Exists(motionFile))
-            {
-                snackbarService.Show(
-                title: localizer["Unable to play motion"],
-                message: String.Format(localizer["Unable to find file: {0}"], motionFile),
-                appearance: ControlAppearance.Danger,
-                icon: null,
-                timeout: TimeSpan.FromSeconds(3)
-                );
-                return;
-            }
-
-            NativeMethods.PlayMotion(D3dHost._native, motionFile);
-
-            Auto3DRendering = true;
+            ModelViewerConfig.PlayedMotion = motion;
         }
 
         [RelayCommand]
         private void StopMotion()
         {
-            if (D3dHost is null) return;
-            NativeMethods.StopMotion(D3dHost._native);
-            Auto3DRendering = false;
-            D3dHost.Render();
+            ModelViewerConfig.PlayedMotion = null;
         }
 
         [RelayCommand]
@@ -1186,5 +866,14 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
         #endregion
+    }
+
+    public sealed partial class Mover3DModelViewerConfig : ObservableObject
+    {
+        [ObservableProperty]
+        private Mover? _referenceMover = null;
+
+        [ObservableProperty]
+        private ModelMotion? _playedMotion = null;
     }
 }

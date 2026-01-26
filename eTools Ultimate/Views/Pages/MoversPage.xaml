@@ -2,6 +2,7 @@
     x:Class="eTools_Ultimate.Views.Pages.MoversPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:eTools_Ultimate.Views.Controls"
     xmlns:converters="clr-namespace:eTools_Ultimate.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
@@ -24,9 +25,6 @@
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-    Loaded="Page_Loaded"
-    MouseMove="Page_MouseMove"
-    MouseRightButtonUp="Page_MouseRightButtonUp"
     ScrollViewer.CanContentScroll="False"
     mc:Ignorable="d">
 
@@ -957,36 +955,6 @@
                     Text="{Binding Identifier}" />
             </StackPanel>
         </DataTemplate>
-
-        <!--  Model Warning Template  -->
-        <DataTemplate x:Key="ModelWarningTemplate">
-            <Border
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Background="{DynamicResource LayerFillColorDefaultBrush}"
-                Opacity="0.95">
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <ui:SymbolIcon
-                        Margin="0,0,0,10"
-                        FontSize="48"
-                        Foreground="{DynamicResource SystemFillColorCautionBrush}"
-                        Symbol="Warning24" />
-                    <TextBlock
-                        Margin="0,0,0,10"
-                        HorizontalAlignment="Center"
-                        FontSize="16"
-                        FontWeight="SemiBold"
-                        Foreground="{DynamicResource TextFillColorPrimaryBrush}"
-                        Text="{i18n:StringLocalizer 'No Model Available'}" />
-                    <TextBlock
-                        MaxWidth="250"
-                        Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                        Text="{Binding Path=ModelViewerError, Mode=OneWay}"
-                        TextAlignment="Center"
-                        TextWrapping="Wrap" />
-                </StackPanel>
-            </Border>
-        </DataTemplate>
     </Page.Resources>
 
     <Grid x:Name="RootGrid">
@@ -1619,17 +1587,11 @@
                                         BorderThickness="1"
                                         CornerRadius="4">
                                         <Grid>
-                                            <Image
-                                                x:Name="DxImage"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                MouseRightButtonDown="DxImage_MouseRightButtonDown"
-                                                MouseWheel="DxImage_MouseWheel"
-                                                Stretch="UniformToFill" />
-                                            <ContentControl
-                                                Content="{Binding}"
-                                                ContentTemplate="{StaticResource ModelWarningTemplate}"
-                                                Visibility="{Binding HasModelViewerError, Converter={StaticResource BoolToVis}}" />
+                                            <controls:Mover3DImage
+                                                MaterialTextures="{Binding Object3DMaterialTextures, Mode=OneWayToSource}"
+                                                Mover="{Binding MoversView.CurrentItem, Mode=OneWay}"
+                                                PlayedMotion="{Binding ModelViewerConfig.PlayedMotion, Mode=TwoWay}"
+                                                ReferenceMover="{Binding ModelViewerConfig.ReferenceMover, Mode=OneWay}" />
                                             <StackPanel
                                                 Margin="0,5,5,0"
                                                 HorizontalAlignment="Right"
@@ -1639,14 +1601,12 @@
                                                 <ui:Button Margin="0,0,5,0">
                                                     <ui:Button.Style>
                                                         <Style BasedOn="{StaticResource {x:Type ui:Button}}" TargetType="ui:Button">
+                                                            <Setter Property="ToolTip" Value="{i18n:StringLocalizer 'Stop current motion'}" />
+                                                            <Setter Property="Command" Value="{Binding StopMotionCommand, Mode=OneWay}" />
                                                             <Style.Triggers>
-                                                                <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="False">
+                                                                <DataTrigger Binding="{Binding DataContext.ModelViewerConfig.PlayedMotion, RelativeSource={RelativeSource AncestorType=Page}}" Value="{x:Null}">
                                                                     <Setter Property="ToolTip" Value="{i18n:StringLocalizer 'Play selected motion'}" />
                                                                     <Setter Property="Command" Value="{Binding PlayMotionCommand, Mode=OneWay}" />
-                                                                </DataTrigger>
-                                                                <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="True">
-                                                                    <Setter Property="ToolTip" Value="{i18n:StringLocalizer 'Stop current motion'}" />
-                                                                    <Setter Property="Command" Value="{Binding StopMotionCommand, Mode=OneWay}" />
                                                                 </DataTrigger>
                                                                 <DataTrigger Binding="{Binding MoversView.CurrentItem.Model.MotionsView.CurrentItem}" Value="{x:Null}">
                                                                     <Setter Property="IsEnabled" Value="False" />
@@ -1657,12 +1617,10 @@
                                                     <ui:SymbolIcon>
                                                         <ui:SymbolIcon.Style>
                                                             <Style TargetType="ui:SymbolIcon">
+                                                                <Setter Property="Symbol" Value="Stop24" />
                                                                 <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="False">
+                                                                    <DataTrigger Binding="{Binding DataContext.ModelViewerConfig.PlayedMotion, RelativeSource={RelativeSource AncestorType=Page}}" Value="{x:Null}">
                                                                         <Setter Property="Symbol" Value="Play24" />
-                                                                    </DataTrigger>
-                                                                    <DataTrigger Binding="{Binding DataContext.Auto3DRendering, RelativeSource={RelativeSource AncestorType=Page}}" Value="True">
-                                                                        <Setter Property="Symbol" Value="Stop24" />
                                                                     </DataTrigger>
                                                                 </Style.Triggers>
                                                             </Style>

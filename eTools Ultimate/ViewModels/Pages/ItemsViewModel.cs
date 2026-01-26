@@ -41,17 +41,17 @@ namespace eTools_Ultimate.ViewModels.Pages
         [ObservableProperty]
         private Character[] _guildHouseNpcCharacterSuggestions = [];
 
-        public ItemD3DImageHost? D3DHost
-        {
-            get; private set
-            {
-                if (field == value)
-                    return;
+        //public ItemD3DImageHost? D3DHost
+        //{
+        //    get; private set
+        //    {
+        //        if (field == value)
+        //            return;
 
-                field = value;
-                OnPropertyChanged(nameof(D3DHost));
-            }
-        } = null;
+        //        field = value;
+        //        OnPropertyChanged(nameof(D3DHost));
+        //    }
+        //} = null;
 
         public string[] ItemIdentifiers => [.. definesService.ReversedItemDefines.Values];
         public List<KeyValuePair<int, string>> JobIdentifiers => [.. definesService.ReversedJobDefines];
@@ -115,34 +115,34 @@ namespace eTools_Ultimate.ViewModels.Pages
             {
                 string texturesFolderPath = settingsService.Settings.TexturesFolderPath ?? settingsService.Settings.DefaultTexturesFolderPath;
 
-                if (D3DHost == null || string.IsNullOrEmpty(texturesFolderPath) || !Directory.Exists(texturesFolderPath))
-                    return [];
+                //if (D3DHost == null || string.IsNullOrEmpty(texturesFolderPath) || !Directory.Exists(texturesFolderPath))
+                //    return [];
 
                 List<int> availableAdditionalTextures = [];
-                if (D3DHost.MaterialTextures.Length > 0)
-                {
-                    string textureFile = D3DHost.MaterialTextures[0];
-                    var pattern = $"{textureFile}-et??.dds";
-                    string[] files = [.. Directory.GetFiles(texturesFolderPath, pattern, SearchOption.TopDirectoryOnly).Select(x => Path.GetFileNameWithoutExtension(x))];
-                    foreach (string file in files)
-                    {
-                        string fileName = file;
-                        if (int.TryParse(fileName.AsSpan(fileName.Length - 2), out int index))
-                            availableAdditionalTextures.Add(index);
-                    }
-                    for (int i = availableAdditionalTextures.Count - 1; i >= 0; i--)
-                    {
-                        int textureIndex = availableAdditionalTextures[i];
-                        foreach (string materialTextureFile in D3DHost.MaterialTextures)
-                        {
-                            if (!File.Exists($"{texturesFolderPath}{materialTextureFile}-et{textureIndex:D2}.dds"))
-                            {
-                                availableAdditionalTextures.Remove(textureIndex);
-                                break;
-                            }
-                        }
-                    }
-                }
+                //if (D3DHost.MaterialTextures.Length > 0)
+                //{
+                //    string textureFile = D3DHost.MaterialTextures[0];
+                //    var pattern = $"{textureFile}-et??.dds";
+                //    string[] files = [.. Directory.GetFiles(texturesFolderPath, pattern, SearchOption.TopDirectoryOnly).Select(x => Path.GetFileNameWithoutExtension(x))];
+                //    foreach (string file in files)
+                //    {
+                //        string fileName = file;
+                //        if (int.TryParse(fileName.AsSpan(fileName.Length - 2), out int index))
+                //            availableAdditionalTextures.Add(index);
+                //    }
+                //    for (int i = availableAdditionalTextures.Count - 1; i >= 0; i--)
+                //    {
+                //        int textureIndex = availableAdditionalTextures[i];
+                //        foreach (string materialTextureFile in D3DHost.MaterialTextures)
+                //        {
+                //            if (!File.Exists($"{texturesFolderPath}{materialTextureFile}-et{textureIndex:D2}.dds"))
+                //            {
+                //                availableAdditionalTextures.Remove(textureIndex);
+                //                break;
+                //            }
+                //        }
+                //    }
+                //}
 
                 return [0, .. availableAdditionalTextures];
             }
@@ -188,10 +188,10 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (sender != ItemsView)
                 throw new InvalidOperationException("sender != ItemsView");
 
-            if (ItemsView.CurrentItem is Item currentItem)
-                D3DHost?.CurrentItem = currentItem;
-            else if (ItemsView.CurrentItem is null)
-                D3DHost?.CurrentItem = null;
+            //if (ItemsView.CurrentItem is Item currentItem)
+            //    D3DHost?.CurrentItem = currentItem;
+            //else if (ItemsView.CurrentItem is null)
+            //    D3DHost?.CurrentItem = null;
         }
 
         [MemberNotNull(nameof(_modelFilesWatcher))]
@@ -214,29 +214,29 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         public void InitializeD3DHost(nint hwnd)
         {
-            D3DHost = new(hwnd, localizer);
-            D3DHost.Initialize(hwnd);
-            D3DHost.BindBackBuffer();
+            //D3DHost = new(hwnd, localizer);
+            //D3DHost.Initialize(hwnd);
+            //D3DHost.BindBackBuffer();
 
-            D3DHost.PropertyChanged += D3DHost_PropertyChanged;
+            //D3DHost.PropertyChanged += D3DHost_PropertyChanged;
 
-            if (ItemsView.CurrentItem is Item currentItem)
-                D3DHost.CurrentItem = currentItem;
+            //if (ItemsView.CurrentItem is Item currentItem)
+            //    D3DHost.CurrentItem = currentItem;
         }
 
         private void D3DHost_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (sender != D3DHost)
-                throw new InvalidOperationException("sender != D3DHost");
-            if (D3DHost is null)
-                throw new InvalidOperationException("D3DHost is null");
+            //if (sender != D3DHost)
+            //    throw new InvalidOperationException("sender != D3DHost");
+            //if (D3DHost is null)
+            //    throw new InvalidOperationException("D3DHost is null");
 
-            switch (e.PropertyName)
-            {
-                case nameof(D3DHost.MaterialTextures):
-                    OnPropertyChanged(nameof(ModelTexturePossibilities));
-                    break;
-            }
+            //switch (e.PropertyName)
+            //{
+            //    case nameof(D3DHost.MaterialTextures):
+            //        OnPropertyChanged(nameof(ModelTexturePossibilities));
+            //        break;
+            //}
         }
 
         private bool FilterItem(object obj)
@@ -448,19 +448,19 @@ namespace eTools_Ultimate.ViewModels.Pages
         [RelayCommand]
         private void RenderLootModel()
         {
-            D3DHost?.RenderingItem = RenderingItem.Loot;
+            //D3DHost?.RenderingItem = RenderingItem.Loot;
         }
 
         [RelayCommand]
         private void RenderMalePartModel()
         {
-            D3DHost?.RenderingItem = RenderingItem.MalePart;
+            //D3DHost?.RenderingItem = RenderingItem.MalePart;
         }
 
         [RelayCommand]
         private void RenderFemalePartModel()
         {
-            D3DHost?.RenderingItem = RenderingItem.FemalePart;
+            //D3DHost?.RenderingItem = RenderingItem.FemalePart;
         }
     }
 }

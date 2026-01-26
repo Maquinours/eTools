@@ -218,12 +218,12 @@ namespace eTools_Ultimate.Views.Pages
 
         private void ModelViewerImage_MouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
-            if (ViewModel.D3DHost is null) return;
+            //if (ViewModel.D3DHost is null) return;
 
-            ViewModel.D3DHost.Zoom(e.Delta);
+            //ViewModel.D3DHost.Zoom(e.Delta);
 
             //if (!ViewModel.Auto3DRendering)
-            ViewModel.D3DHost.Render();
+            //ViewModel.D3DHost.Render();
 
             e.Handled = true;
         }
@@ -231,16 +231,16 @@ namespace eTools_Ultimate.Views.Pages
         private void Page_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (!_isMouseDragging) return;
-            if (ViewModel.D3DHost is null) return;
+            //if (ViewModel.D3DHost is null) return;
 
             Point mousePosition = e.GetPosition(null);
             Vector deltaPosition = _lastMousePosition - mousePosition;
 
-            NativeMethods.RotateCamera(ViewModel.D3DHost._native, (int)(deltaPosition.X), (int)(deltaPosition.Y));
+            //NativeMethods.RotateCamera(ViewModel.D3DHost._native, (int)(deltaPosition.X), (int)(deltaPosition.Y));
 
             _lastMousePosition = mousePosition;
             //if (!ViewModel.Auto3DRendering)
-            ViewModel.D3DHost.Render();
+            //ViewModel.D3DHost.Render();
         }
 
         private void Page_MouseRightButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)

@@ -111,23 +111,23 @@ namespace eTools_Ultimate.ViewModels.Pages
             _isInitialized = true;
         }
 
-        public D3DImageHost InitializeD3DHost(nint hwnd)
-        {
-            D3dHost = new D3DImageHost(hwnd);
-            D3dHost.Initialize(hwnd);
-            D3dHost.BindBackBuffer();
+        //public D3DImageHost InitializeD3DHost(nint hwnd)
+        //{
+        //    D3dHost = new D3DImageHost(hwnd);
+        //    D3dHost.Initialize(hwnd);
+        //    D3dHost.BindBackBuffer();
 
-            CompositionTarget.Rendering += CompositionTarget_Rendering;
-            MotionsView.CurrentChanging += MotionsView_CurrentChanging;
-            MotionsView.CurrentChanged += MotionsView_CurrentChanged;
+        //    CompositionTarget.Rendering += CompositionTarget_Rendering;
+        //    MotionsView.CurrentChanging += MotionsView_CurrentChanging;
+        //    MotionsView.CurrentChanged += MotionsView_CurrentChanged;
 
-            LoadModel();
-            PlayMotion();
+        //    LoadModel();
+        //    PlayMotion();
 
-            SetupCurrentMotionWatchers();
+        //    SetupCurrentMotionWatchers();
 
-            return D3dHost;
-        }
+        //    return D3dHost;
+        //}
 
         private void CompositionTarget_Rendering(object? sender, EventArgs e)
         {
@@ -178,7 +178,7 @@ namespace eTools_Ultimate.ViewModels.Pages
         {
             if (D3dHost is null) return;
 
-            NativeMethods.DeleteModel(D3dHost._native);
+            //NativeMethods.DeleteModel(D3dHost._native);
             string[] parts = ModelPreviewGender switch
             {
                 ModelGender.MALE => [
@@ -205,9 +205,9 @@ namespace eTools_Ultimate.ViewModels.Pages
 
             foreach (string partPath in partsPath)
             {
-                NativeMethods.SetParts(D3dHost._native, partPath);
+                //NativeMethods.SetParts(D3dHost._native, partPath);
             }
-            NativeMethods.ZoomCamera(D3dHost._native, 720); // zoom in
+            //NativeMethods.ZoomCamera(D3dHost._native, 720); // zoom in
         }
 
         private void PlayMotion()
@@ -215,7 +215,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             if (D3dHost is null) return;
             if (MotionsView.CurrentItem is not Motion motion) return;
 
-            NativeMethods.StopMotion(D3dHost._native);
+            //NativeMethods.StopMotion(D3dHost._native);
 
             uint motionType = motion.DwMotion;
 
@@ -252,7 +252,7 @@ namespace eTools_Ultimate.ViewModels.Pages
             //    return;
             //}
 
-            NativeMethods.PlayMotion(D3dHost._native, motionFile, (int)motion.DwPlay); // TODO: change this to allow uint values
+            //NativeMethods.PlayMotion(D3dHost._native, motionFile, (int)motion.DwPlay); // TODO: change this to allow uint values
 
             //Auto3DRendering = true;
         }
