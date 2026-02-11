@@ -36,23 +36,6 @@ namespace eTools_Ultimate.ViewModels.Pages
 
         private string _searchText = string.Empty;
 
-        private ModelGender _modelPreviewGender = ModelGender.MALE;
-
-        private ModelGender ModelPreviewGender
-        {
-            get => _modelPreviewGender;
-            set
-            {
-                if (_modelPreviewGender != value)
-                {
-                    _modelPreviewGender = value;
-                    OnPropertyChanged(nameof(ModelPreviewGender));
-                    LoadModel();
-                    PlayMotion();
-                }
-            }
-        }
-
         [ObservableProperty]
         private ICollectionView _motionsView = CollectionViewSource.GetDefaultView(motionsService.Motions);
 
@@ -78,8 +61,6 @@ namespace eTools_Ultimate.ViewModels.Pages
             }
         }
 
-        public D3DImageHost? D3dHost { get; private set; } = null;
-
         public string SearchText
         {
             get => _searchText;
@@ -88,7 +69,7 @@ namespace eTools_Ultimate.ViewModels.Pages
                 if (_searchText != value)
                 {
                     _searchText = value;
-                    OnPropertyChanged(nameof(this.SearchText));
+                    OnPropertyChanged(nameof(SearchText));
                     MotionsView.Refresh();
                 }
             }
@@ -111,151 +92,6 @@ namespace eTools_Ultimate.ViewModels.Pages
             _isInitialized = true;
         }
 
-        //public D3DImageHost InitializeD3DHost(nint hwnd)
-        //{
-        //    D3dHost = new D3DImageHost(hwnd);
-        //    D3dHost.Initialize(hwnd);
-        //    D3dHost.BindBackBuffer();
-
-        //    CompositionTarget.Rendering += CompositionTarget_Rendering;
-        //    MotionsView.CurrentChanging += MotionsView_CurrentChanging;
-        //    MotionsView.CurrentChanged += MotionsView_CurrentChanged;
-
-        //    LoadModel();
-        //    PlayMotion();
-
-        //    SetupCurrentMotionWatchers();
-
-        //    return D3dHost;
-        //}
-
-        private void CompositionTarget_Rendering(object? sender, EventArgs e)
-        {
-            D3dHost?.Render();
-        }
-
-        private void MotionsView_CurrentChanging(object sender, CurrentChangingEventArgs e)
-        {
-            TeardownCurrentMotionWatchers();
-        }
-
-        private void MotionsView_CurrentChanged(object? sender, EventArgs e)
-        {
-            PlayMotion();
-            SetupCurrentMotionWatchers();
-        }
-
-        private void SetupCurrentMotionWatchers()
-        {
-            if (MotionsView.CurrentItem is not Motion motion) return;
-
-            motion.PropertyChanged += CurrentMotion_PropertyChanged;
-        }
-
-        private void TeardownCurrentMotionWatchers()
-        {
-            if (MotionsView.CurrentItem is not Motion motion) return;
-            motion.PropertyChanged -= CurrentMotion_PropertyChanged;
-        }
-
-        private void CurrentMotion_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            if(MotionsView.CurrentItem is not Motion motion)
-                throw new InvalidOperationException("MotionsViewModel::CurrentMotion_PropertyChanged exception : Current item is not a Motion");
-            if(sender != motion)
-                throw new InvalidOperationException("MotionsViewModel::CurrentMotion_PropertyChanged exception : sender is not current motion");
-
-            switch (e.PropertyName)
-            {
-                case nameof(Motion.DwMotion):
-                case nameof(Motion.DwPlay):
-                    PlayMotion();
-                    break;
-            }
-        }
-
-        private void LoadModel()
-        {
-            if (D3dHost is null) return;
-
-            //NativeMethods.DeleteModel(D3dHost._native);
-            string[] parts = ModelPreviewGender switch
-            {
-                ModelGender.MALE => [
-                    "Part_maleHair06.o3d",
-                        "Part_maleHead01.o3d",
-                        "Part_maleHand.o3d",
-                        "Part_maleLower.o3d",
-                        "Part_maleUpper.o3d",
-                        "Part_maleFoot.o3d",
-                    ],
-                ModelGender.FEMALE => [
-                    "Part_femaleHair06.o3d",
-                        "Part_femaleHead01.o3d",
-                        "Part_femaleHand.o3d",
-                        "Part_femaleLower.o3d",
-                        "Part_femaleUpper.o3d",
-                        "Part_femaleFoot.o3d",
-                    ],
-                _ => throw new InvalidOperationException("MotionsViewModel::LoadModel exception : ModelPreviewGender is neither MALE nor FEMALE")
-            };
-
-            string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
-            string[] partsPath = [.. parts.Select(part => $"{modelsFolderPath}{part}")];
-
-            foreach (string partPath in partsPath)
-            {
-                //NativeMethods.SetParts(D3dHost._native, partPath);
-            }
-            //NativeMethods.ZoomCamera(D3dHost._native, 720); // zoom in
-        }
-
-        private void PlayMotion()
-        {
-            if (D3dHost is null) return;
-            if (MotionsView.CurrentItem is not Motion motion) return;
-
-            //NativeMethods.StopMotion(D3dHost._native);
-
-            uint motionType = motion.DwMotion;
-
-            string moverIdentifier = ModelPreviewGender switch
-            {
-                ModelGender.MALE => "MI_MALE",
-                ModelGender.FEMALE => "MI_FEMALE",
-                _ => throw new InvalidOperationException("MotionsViewModel::PlayMotion exception : ModelPreviewGender is neither MALE nor FEMALE")
-            };
-
-            int moverModelType = definesService.Defines["OT_MOVER"];
-            uint moverId = (uint)definesService.Defines[moverIdentifier];
-            Model? moverModel = modelsService.GetModelByTypeAndId(moverModelType, moverId);
-            if (moverModel is null) return;
-            ModelMotion? modelMotion = moverModel.Motions.FirstOrDefault(m => m.IMotion == motionType);
-            if (modelMotion is null) return;
-
-            string modelsFolderPath = settingsService.Settings.ModelsFolderPath ?? settingsService.Settings.DefaultModelsFolderPath;
-            string root = $"mvr_{moverModel.SzName}";
-            string lowerMotionKey = modelMotion.SzMotion;
-
-            string motionFile = $@"{modelsFolderPath}{root}_{lowerMotionKey}.ani";
-
-            //if (!File.Exists(motionFile))
-            //{
-            //    snackbarService.Show(
-            //    title: "Unable to play motion",
-            //    message: $"Motion file not found : {motionFile}",
-            //    appearance: ControlAppearance.Danger,
-            //    icon: null,
-            //    timeout: TimeSpan.FromSeconds(3)
-            //    );
-            //    //ModelViewerError = $"Motion file not found: {motionFile}";
-            //    return;
-            //}
-
-            //NativeMethods.PlayMotion(D3dHost._native, motionFile, (int)motion.DwPlay); // TODO: change this to allow uint values
-
-            //Auto3DRendering = true;
-        }
 
         private bool FilterItem(object obj)
         {
@@ -302,23 +138,6 @@ namespace eTools_Ultimate.ViewModels.Pages
                     timeout: TimeSpan.FromSeconds(3)
                     );
             }
-        }
-
-        [RelayCommand]
-        private void ChangeModelPreviewGender()
-        {
-            ModelPreviewGender = ModelPreviewGender switch
-            {
-                ModelGender.MALE => ModelGender.FEMALE,
-                ModelGender.FEMALE => ModelGender.MALE,
-                _ => throw new InvalidOperationException("MotionsViewModel::ChangeModelPreviewGender exception : ModelPreviewGender is neither MALE nor FEMALE")
-            };
-        }
-
-        [RelayCommand]
-        private void PlayModelPreviewMotion()
-        {
-            PlayMotion();
         }
 
         [RelayCommand]

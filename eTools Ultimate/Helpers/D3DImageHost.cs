@@ -146,9 +146,9 @@ namespace eTools_Ultimate.Helpers
             NativeMethods.RotateCamera(_native, x, y);
         }
 
-        public void PlayMotion(string filePath)
+        public void PlayMotion(string filePath, int dwPlay = 2)
         {
-            NativeMethods.PlayMotion(_native, filePath);
+            NativeMethods.PlayMotion(_native, filePath, dwPlay);
         }
 
         public void StopMotion()

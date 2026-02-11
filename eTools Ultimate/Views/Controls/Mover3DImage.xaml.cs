@@ -204,12 +204,12 @@ namespace eTools_Ultimate.Views.Controls
 
         private void OnPlayedMotionChanged(ModelMotion? oldMotion, ModelMotion? newMotion)
         {
-            if(PlayedMotion != newMotion)
+            if (PlayedMotion != newMotion)
                 throw new InvalidOperationException("PlayedMotion != newMotion");
 
             if (oldMotion != null)
                 oldMotion.PropertyChanged -= OnPlayedMotionPropertyChanged;
-            if (newMotion != null) 
+            if (newMotion != null)
                 newMotion.PropertyChanged += OnPlayedMotionPropertyChanged;
 
             PlayMotion();
@@ -420,30 +420,29 @@ namespace eTools_Ultimate.Views.Controls
         {
             _d3dHost.StopMotion();
 
-            if (PlayedMotion != null)
+            if (PlayedMotion == null) return;
+
+            if (Model == null || !Model.Motions.Contains(PlayedMotion))
+                throw new InvalidOperationException("Model.Motions does not contains PlayedMotion");
+
+            string modelsFolderPath = _settingsService.Settings.ModelsFolderPath ?? _settingsService.Settings.DefaultModelsFolderPath;
+            string root = Path.GetFileNameWithoutExtension(Model.Model3DFilePath);
+            string lowerMotionKey = PlayedMotion.SzMotion;
+
+            string motionFilePath = Path.Combine(modelsFolderPath, $"{root}_{lowerMotionKey}.ani");
+
+            if (!File.Exists(motionFilePath))
             {
-                if (Model == null || !Model.Motions.Contains(PlayedMotion))
-                    throw new InvalidOperationException("Model.Motions does not contains PlayedMotion");
-
-                string modelsFolderPath = _settingsService.Settings.ModelsFolderPath ?? _settingsService.Settings.DefaultModelsFolderPath;
-                string root = Path.GetFileNameWithoutExtension(Model.Model3DFilePath);
-                string lowerMotionKey = PlayedMotion.SzMotion;
-
-                string motionFilePath = Path.Combine(modelsFolderPath, $"{root}_{lowerMotionKey}.ani");
-
-                if (!File.Exists(motionFilePath))
-                {
-                    _snackbarService.Show(
-                    title: _localizer["Unable to play motion"],
-                    message: String.Format(_localizer["Motion file {0} could not be found."], motionFilePath),
-                    appearance: ControlAppearance.Danger,
-                    icon: null,
-                    timeout: TimeSpan.FromSeconds(2)
-                    );
-                }
-
-                _d3dHost.PlayMotion(motionFilePath);
+                _snackbarService.Show(
+                title: _localizer["Unable to play motion"],
+                message: String.Format(_localizer["Motion file {0} could not be found."], motionFilePath),
+                appearance: ControlAppearance.Danger,
+                icon: null,
+                timeout: TimeSpan.FromSeconds(2)
+                );
             }
+
+            _d3dHost.PlayMotion(motionFilePath);
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -452,7 +451,7 @@ namespace eTools_Ultimate.Views.Controls
             {
                 var window = Window.GetWindow(this);
                 if (window == null)
-                    return; 
+                    return;
 
                 nint hwnd = new WindowInteropHelper(window).Handle;
 
