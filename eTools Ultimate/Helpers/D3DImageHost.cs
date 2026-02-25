@@ -14,6 +14,8 @@ namespace eTools_Ultimate.Helpers
         private IntPtr _surfacePointer;
         private readonly IntPtr _native;
 
+        public event EventHandler? Initialized;
+
         public bool IsInitialized { get; set; } = false;
 
         public D3DImageHost()
@@ -27,7 +29,10 @@ namespace eTools_Ultimate.Helpers
             if (!NativeMethods.InitializeEnvironment(hwnd, _native))
                 System.Diagnostics.Debug.WriteLine("Failed to initialize environment");
             else
+            {
                 IsInitialized = true;
+                Initialized?.Invoke(this, EventArgs.Empty);
+            }
         }
 
 

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "eTools Ultimate": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

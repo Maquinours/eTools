@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -31,24 +32,15 @@ namespace eTools_Ultimate.Views.Controls
     /// <summary>
     /// Logique d'interaction pour Motion3DImage.xaml
     /// </summary>
-    [ObservableObject]
-    public partial class Motion3DImage : UserControl
+    public partial class Motion3DImage : UserControl, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         private readonly ISnackbarService _snackbarService = App.Services.GetRequiredService<ISnackbarService>();
         private readonly IStringLocalizer<Translations> _localizer = App.Services.GetRequiredService<IStringLocalizer<Translations>>();
         private readonly SettingsService _settingsService = App.Services.GetRequiredService<SettingsService>();
         private readonly DefinesService _definesService = App.Services.GetRequiredService<DefinesService>();
         private readonly ModelsService _modelsService = App.Services.GetRequiredService<ModelsService>();
-
-        private readonly D3DImageHost _d3dHost = new();
-
-        private System.Windows.Point _lastMousePosition;
-
-        [ObservableProperty]
-        private Model3DImageError? _error = null;
-
-        [ObservableProperty]
-        private Gender _modelGender = Gender.Male;
 
         public static readonly DependencyProperty MotionProperty = DependencyProperty.Register(
             nameof(Motion),
@@ -63,16 +55,47 @@ namespace eTools_Ultimate.Views.Controls
             set => SetValue(MotionProperty, value);
         }
 
+        public D3DImageHost D3DHost { get; } = new();
+
+        public Model3DImageError? Error
+        {
+            get;
+            private set
+            {
+                if (field == value) return;
+                field = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Error)));
+            }
+        } = null;
+
+        private Gender ModelGender
+        {
+            get;
+            set
+            {
+                if (field == value) return;
+                field = value;
+                LoadModel();
+            }
+        } = Gender.Male;
+
         public Motion3DImage()
         {
             InitializeComponent();
+
+            D3DHost.Initialized += D3DHost_Initialized;
+        }
+
+        private void D3DHost_Initialized(object? sender, EventArgs e)
+        {
+            LoadModel();
         }
 
         private void LoadModel()
         {
-            if (!_d3dHost.IsInitialized) return;
+            if (!D3DHost.IsInitialized) return;
 
-            _d3dHost.Clear();
+            D3DHost.Clear();
 
             string[] parts = ModelGender switch
             {
@@ -99,18 +122,18 @@ namespace eTools_Ultimate.Views.Controls
             string[] partsPath = [.. parts.Select(part => $"{modelsFolderPath}{part}")];
 
             foreach (string partPath in partsPath)
-                _d3dHost.SetParts(partPath);
+                D3DHost.SetParts(partPath);
 
-            _d3dHost.Zoom(720);
+            D3DHost.Zoom(720);
 
             PlayMotion();
         }
 
         private void PlayMotion()
         {
-            if (!_d3dHost.IsInitialized) return;
+            if (!D3DHost.IsInitialized) return;
 
-            _d3dHost.StopMotion();
+            D3DHost.StopMotion();
 
             if (Motion == null) return;
 
@@ -182,75 +205,7 @@ namespace eTools_Ultimate.Views.Controls
                 return;
             }
 
-            _d3dHost.PlayMotion(motionFile, (int)Motion.DwPlay);
-        }
-
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (!_d3dHost.IsInitialized)
-            {
-                var window = Window.GetWindow(this);
-                if (window == null)
-                    return;
-
-                nint hwnd = new WindowInteropHelper(window).Handle;
-
-                _d3dHost.Initialize(hwnd);
-                _d3dHost.BindBackBuffer();
-                DxImage.Source = _d3dHost;
-                LoadModel();
-                CompositionTarget.Rendering += CompositionTarget_Rendering;
-            }
-        }
-
-        private void CompositionTarget_Rendering(object? sender, EventArgs e)
-        {
-            _d3dHost.Render();
-        }
-
-        partial void OnModelGenderChanged(Gender value)
-        {
-            LoadModel();
-        }
-
-        private void DxImage_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var window = Window.GetWindow((DependencyObject)sender);
-            var posInWindow = e.GetPosition(window);
-
-            _lastMousePosition = window.PointToScreen(posInWindow);
-
-            Mouse.Capture(this);
-
-            MouseMove += OnMouseMove;
-            MouseRightButtonUp += OnMouseRightButtonUp;
-        }
-
-        private void OnMouseMove(object sender, MouseEventArgs e)
-        {
-            var window = Window.GetWindow((DependencyObject)sender);
-            var posInWindow = e.GetPosition(window);
-            var mousePosition = window.PointToScreen(posInWindow);
-
-            Vector deltaPosition = _lastMousePosition - mousePosition;
-
-            _lastMousePosition = mousePosition;
-
-            _d3dHost.RotateCamera((int)deltaPosition.X, (int)deltaPosition.Y);
-        }
-
-        private void OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            MouseMove -= OnMouseMove;
-            MouseRightButtonUp -= OnMouseRightButtonUp;
-
-            Mouse.Capture(null);
-        }
-
-        private void DxImage_MouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            _d3dHost.Zoom(e.Delta);
-            e.Handled = true;
+            D3DHost.PlayMotion(motionFile, (int)Motion.DwPlay);
         }
 
         private static void OnMotionChanged(

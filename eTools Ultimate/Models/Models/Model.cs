@@ -304,6 +304,8 @@ namespace eTools_Ultimate.Models.Models
             {
                 case nameof(Settings.ModelsFolderPath):
                     NotifyPropertyChanged(nameof(Model3DFilePath));
+                    NotifyPropertyChanged(nameof(MalePartModel3DFilePath));
+                    NotifyPropertyChanged(nameof(FemalePartModel3DFilePath));
                     break;
             }
         }

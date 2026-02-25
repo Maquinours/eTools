@@ -32,13 +32,9 @@ namespace eTools_Ultimate.Views.Controls
     [ObservableObject]
     public partial class Mover3DImage : UserControl
     {
-        private readonly D3DImageHost _d3dHost = new();
-
-        private readonly SettingsService _settingsService;
-        private readonly IStringLocalizer<Translations> _localizer;
-        private readonly ISnackbarService _snackbarService;
-
-        private System.Windows.Point _lastMousePosition;
+        private readonly SettingsService _settingsService = App.Services.GetRequiredService<SettingsService>();
+        private readonly IStringLocalizer<Translations> _localizer = App.Services.GetRequiredService<IStringLocalizer<Translations>>();
+        private readonly ISnackbarService _snackbarService = App.Services.GetRequiredService<ISnackbarService>();
 
         [ObservableProperty]
         private Model3DImageError? _error = null;
@@ -89,6 +85,10 @@ namespace eTools_Ultimate.Views.Controls
             set => SetValue(PlayedMotionProperty, value);
         }
 
+
+        public D3DImageHost D3DHost { get; } = new();
+
+
         public string[] MaterialTextures
         {
             get => (string[])GetValue(MaterialTexturesProperty);
@@ -135,11 +135,9 @@ namespace eTools_Ultimate.Views.Controls
 
         public Mover3DImage()
         {
-            _settingsService = App.Services.GetRequiredService<SettingsService>();
-            _localizer = App.Services.GetRequiredService<IStringLocalizer<Translations>>();
-            _snackbarService = App.Services.GetRequiredService<ISnackbarService>();
-
             InitializeComponent();
+
+            D3DHost.Initialized += D3DHost_Initialized;
         }
 
         private static void OnMoverChanged(
@@ -228,10 +226,10 @@ namespace eTools_Ultimate.Views.Controls
                     LoadModel();
                     break;
                 case nameof(Model.NTextureEx):
-                    _d3dHost.SetModelTexture(Model.NTextureEx);
+                    D3DHost.SetModelTexture(Model.NTextureEx);
                     break;
                 case nameof(Model.FScale):
-                    _d3dHost.SetScale(Model.FScale);
+                    D3DHost.SetScale(Model.FScale);
                     break;
             }
         }
@@ -249,10 +247,10 @@ namespace eTools_Ultimate.Views.Controls
                     LoadReferenceModel();
                     break;
                 case nameof(ReferenceModel.NTextureEx):
-                    _d3dHost.SetReferenceModelTexture(ReferenceModel.NTextureEx);
+                    D3DHost.SetReferenceModelTexture(ReferenceModel.NTextureEx);
                     break;
                 case nameof(ReferenceModel.FScale):
-                    _d3dHost.SetReferenceScale(ReferenceModel.FScale);
+                    D3DHost.SetReferenceScale(ReferenceModel.FScale);
                     break;
             }
         }
@@ -274,9 +272,9 @@ namespace eTools_Ultimate.Views.Controls
 
         private void LoadModel()
         {
-            if (!_d3dHost.IsInitialized) return;
+            if (!D3DHost.IsInitialized) return;
 
-            _d3dHost.Clear();
+            D3DHost.Clear();
 
             Error = null;
 
@@ -322,7 +320,7 @@ namespace eTools_Ultimate.Views.Controls
                 }
 
                 foreach (string partPath in partsPath)
-                    _d3dHost.SetParts(partPath);
+                    D3DHost.SetParts(partPath);
             }
             else
             {
@@ -333,21 +331,21 @@ namespace eTools_Ultimate.Views.Controls
                     return;
                 }
                 //CompositionTarget.Rendering -= CompositionTarget_Rendering;
-                _d3dHost.LoadModel(Model.Model3DFilePath);
+                D3DHost.LoadModel(Model.Model3DFilePath);
             }
 
-            _d3dHost.SetModelTexture(Model.NTextureEx);
-            _d3dHost.SetScale(Model.FScale);
+            D3DHost.SetModelTexture(Model.NTextureEx);
+            D3DHost.SetScale(Model.FScale);
             PlayMotion();
 
-            MaterialTextures = _d3dHost.GetMaterialTextures();
+            MaterialTextures = D3DHost.GetMaterialTextures();
         }
 
         public void LoadReferenceModel()
         {
-            if (!_d3dHost.IsInitialized) return;
+            if (!D3DHost.IsInitialized) return;
 
-            _d3dHost.DeleteReferenceModel();
+            D3DHost.DeleteReferenceModel();
 
             if (ReferenceMover is null) return;
             if (ReferenceModel is null) return;
@@ -393,7 +391,7 @@ namespace eTools_Ultimate.Views.Controls
                 }
 
                 foreach (string partPath in partsPath)
-                    _d3dHost.SetReferenceParts(partPath);
+                    D3DHost.SetReferenceParts(partPath);
             }
             else
             {
@@ -409,16 +407,16 @@ namespace eTools_Ultimate.Views.Controls
                     //ModelViewerError = $"Model file not found: {referenceMover.Model.Model3DFilePath}";
                     return;
                 }
-                _d3dHost.SetReferenceModel(ReferenceModel.Model3DFilePath);
+                D3DHost.SetReferenceModel(ReferenceModel.Model3DFilePath);
             }
 
-            _d3dHost.SetReferenceModelTexture(ReferenceModel.NTextureEx);
-            _d3dHost.SetReferenceScale(ReferenceModel.FScale);
+            D3DHost.SetReferenceModelTexture(ReferenceModel.NTextureEx);
+            D3DHost.SetReferenceScale(ReferenceModel.FScale);
         }
 
         private void PlayMotion()
         {
-            _d3dHost.StopMotion();
+            D3DHost.StopMotion();
 
             if (PlayedMotion == null) return;
 
@@ -442,70 +440,12 @@ namespace eTools_Ultimate.Views.Controls
                 );
             }
 
-            _d3dHost.PlayMotion(motionFilePath);
+            D3DHost.PlayMotion(motionFilePath);
         }
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        private void D3DHost_Initialized(object? sender, EventArgs e)
         {
-            if (!_d3dHost.IsInitialized)
-            {
-                var window = Window.GetWindow(this);
-                if (window == null)
-                    return;
-
-                nint hwnd = new WindowInteropHelper(window).Handle;
-
-                _d3dHost.Initialize(hwnd);
-                _d3dHost.BindBackBuffer();
-                DxImage.Source = _d3dHost;
-                LoadModel();
-                CompositionTarget.Rendering += CompositionTarget_Rendering;
-            }
-        }
-
-        private void CompositionTarget_Rendering(object? sender, EventArgs e)
-        {
-            _d3dHost.Render();
-        }
-
-        private void DxImage_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var window = Window.GetWindow((DependencyObject)sender);
-            var posInWindow = e.GetPosition(window);
-
-            _lastMousePosition = window.PointToScreen(posInWindow);
-
-            Mouse.Capture(this);
-
-            MouseMove += OnMouseMove;
-            MouseRightButtonUp += OnMouseRightButtonUp;
-        }
-
-        private void OnMouseMove(object sender, MouseEventArgs e)
-        {
-            var window = Window.GetWindow((DependencyObject)sender);
-            var posInWindow = e.GetPosition(window);
-            var mousePosition = window.PointToScreen(posInWindow);
-
-            Vector deltaPosition = _lastMousePosition - mousePosition;
-
-            _lastMousePosition = mousePosition;
-
-            _d3dHost.RotateCamera((int)deltaPosition.X, (int)deltaPosition.Y);
-        }
-
-        private void OnMouseRightButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            MouseMove -= OnMouseMove;
-            MouseRightButtonUp -= OnMouseRightButtonUp;
-
-            Mouse.Capture(null);
-        }
-
-        private void DxImage_MouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            _d3dHost.Zoom(e.Delta);
-            e.Handled = true;
+            LoadModel();
         }
     }
 
