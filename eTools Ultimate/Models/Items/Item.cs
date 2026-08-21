@@ -839,6 +839,7 @@ namespace eTools_Ultimate.Models.Items
                     "IK3_PET" or "IK3_SUMMON_NPC" => ItemType.Pet,
                     "IK3_VIS" => ItemType.BuffBead,
                     "IK3_ANGEL_BUFF" => ItemType.Angel,
+                    "IK3_EGG" => ItemType.Egg,
                     _ => ItemKind2Identifier switch
                     {
                         "IK2_BLINKWING" => ItemType.Blinkwing,

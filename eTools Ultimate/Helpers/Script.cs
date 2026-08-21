@@ -60,7 +60,7 @@ namespace eTools_Ultimate.Helpers
 			return -1;
         }
 
-        public override string GetToken(bool bComma = false)
+		public override string GetToken(bool bComma = false)
         {
             base.GetToken(bComma);
 
@@ -146,7 +146,7 @@ namespace eTools_Ultimate.Helpers
         }
         public static string FloatToString(float number)
         {
-            if (number == -1)
+            if (number == -1f)
                 return "=";
             return number.ToString(CultureInfo.InvariantCulture);
         }

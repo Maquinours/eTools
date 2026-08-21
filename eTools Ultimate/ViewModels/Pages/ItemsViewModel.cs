@@ -14,11 +14,13 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Windows.Data;
 using System.Windows.Media;
+using Wpf.Ui;
 using Wpf.Ui.Abstractions.Controls;
+using Wpf.Ui.Controls;
 
 namespace eTools_Ultimate.ViewModels.Pages
 {
-    public partial class ItemsViewModel(ItemsService itemsService, MoversService moversService, CharactersService charactersService, DefinesService definesService, SoundsService soundsService, SettingsService settingsService, IStringLocalizer<Translations> localizer) : ObservableObject, INavigationAware
+    public partial class ItemsViewModel(ItemsService itemsService, MoversService moversService, CharactersService charactersService, DefinesService definesService, SoundsService soundsService, SettingsService settingsService, ModelsService modelsService, StringsService stringsService, ISnackbarService snackbarService, IStringLocalizer<Translations> localizer) : ObservableObject, INavigationAware
     {
         private bool _isInitialized = false;
 
@@ -443,6 +445,46 @@ namespace eTools_Ultimate.ViewModels.Pages
                 return;
 
             item.Model.FemalePart = fileName.Substring(5);
+        }
+
+        [RelayCommand]
+        private async Task Save()
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    HashSet<string> stringIdentifiers = [];
+                    foreach (Item item in itemsService.Items)
+                    {
+                        stringIdentifiers.Add(item.SzName);
+                        stringIdentifiers.Add(item.SzCommand);
+                    }
+                    Task.WaitAll(
+                        Task.Run(itemsService.Save),
+                        Task.Run(modelsService.Save),
+                        Task.Run(() => stringsService.Save(settingsService.Settings.PropItemTxtFilePath ?? settingsService.Settings.DefaultPropItemTxtFilePath, [.. stringIdentifiers]))
+                        );
+                });
+
+                snackbarService.Show(
+                    title: localizer["Items and motions saved"],
+                    message: localizer["Items and motions have been successfully saved."],
+                    appearance: ControlAppearance.Success,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
+            catch (Exception ex)
+            {
+                snackbarService.Show(
+                    title: localizer["Error saving items and motions"],
+                    message: ex.Message,
+                    appearance: ControlAppearance.Danger,
+                    icon: null,
+                    timeout: TimeSpan.FromSeconds(3)
+                    );
+            }
         }
 
         [RelayCommand]

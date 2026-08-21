@@ -55,6 +55,23 @@ namespace eTools_Ultimate.Services
         public ReadOnlyDictionary<int, string> ReversedAttackRangeDefines => ReversedDefines.GetValueOrDefault("AR") ?? new(new Dictionary<int, string>());
         public ReadOnlyDictionary<int, string> ReversedHandedDefines => ReversedDefines.GetValueOrDefault("HD") ?? new(new Dictionary<int, string>());
         public ReadOnlyDictionary<int, string> ReversedElementalDefines => ReversedDefines.GetValueOrDefault("ELEMENTAL") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedElementalTypeDefines => ReversedDefines.GetValueOrDefault("") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedAttackOrderDefines => ReversedDefines.GetValueOrDefault("AS") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedCharacterStateDefines => ReversedDefines.GetValueOrDefault("CHS") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedExecutionTargetDefines => ReversedDefines.GetValueOrDefault("EXT") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedWhenUseItemDefines => ReversedDefines.GetValueOrDefault("WUI") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedSpellRegionDefines => ReversedDefines.GetValueOrDefault("SRO") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedEquipmentTypeDefines => new(
+            (ReversedDefines.GetValueOrDefault("WEAPON") ?? new(new Dictionary<int, string>()))
+            .Concat(ReversedDefines.GetValueOrDefault("ARMOR") ?? new(new Dictionary<int, string>()))
+            .ToDictionary(kv => kv.Key, kv => kv.Value)
+            );
+        public ReadOnlyDictionary<int, string> ReversedComboStyleDefines => ReversedDefines.GetValueOrDefault("CT") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedItemSkillTargetDefines => ReversedDefines.GetValueOrDefault("IST") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedItemGradeDefines => ReversedDefines.GetValueOrDefault("ITEM_GRADE") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedItemType1Defines => ReversedDefines.GetValueOrDefault("TYPE1") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedItemType2Defines => ReversedDefines.GetValueOrDefault("TYPE2") ?? new(new Dictionary<int, string>());
+        public ReadOnlyDictionary<int, string> ReversedPkDefines => ReversedDefines.GetValueOrDefault("PK") ?? new(new Dictionary<int, string>());
 
         public void Load()
         {
@@ -84,10 +101,23 @@ namespace eTools_Ultimate.Services
 
                         tempDefines[key] = value;
 
-                        string reversedDefineIndex = key.Split('_')[0];
-                        if (!tempReversedDefines.ContainsKey(reversedDefineIndex))
-                            tempReversedDefines[reversedDefineIndex] = [];
-                        tempReversedDefines[reversedDefineIndex][value] = key;
+                        string[] splittedKey = key.Split('_');
+                        for(int i = 0; i < splittedKey.Length - 1; i++)
+                        {
+                            if (splittedKey[i] == string.Empty && i < splittedKey.Length - 2)
+                                continue;
+
+                            string reversedDefineIndex = string.Join("_", splittedKey.Where((x, j) => j <= i));
+
+                            if (!tempReversedDefines.ContainsKey(reversedDefineIndex))
+                                tempReversedDefines[reversedDefineIndex] = [];
+                            tempReversedDefines[reversedDefineIndex][value] = key;
+                        }
+
+                        //string reversedDefineIndex = key.Split('_')[0];
+                        //if (!tempReversedDefines.ContainsKey(reversedDefineIndex))
+                        //    tempReversedDefines[reversedDefineIndex] = [];
+                        //tempReversedDefines[reversedDefineIndex][value] = key;
                     }
                     else if (scanner.Token == "{")
                         break;

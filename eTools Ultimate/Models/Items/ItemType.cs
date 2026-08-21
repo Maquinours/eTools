@@ -20,6 +20,7 @@ namespace eTools_Ultimate.Models.Items
         Pet,
         BuffBead,
         Angel,
+        Egg,
         Other
     }
 }

@@ -132,7 +132,7 @@ namespace eTools_Ultimate.Views.Controls
         {
             if (Model != newModel)
                 throw new InvalidOperationException("Mover != newMover");
-            if (Model.TypeIdentifier != "OT_ITEM")
+            if (Model != null && Model.TypeIdentifier != "OT_ITEM")
                 throw new InvalidOperationException("Model.TypeIdentifier != \"OT_ITEM\"");
 
             LoadModel();
